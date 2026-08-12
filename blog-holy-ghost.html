@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teaching Your Child to Recognize the Spirit — Little Scripture Travelers</title>
+  <meta name="description" content="Why bedtime is the perfect classroom — and how a quiet story and a parent's testimony can teach a child what revelation feels like." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .article-hero {
+      background-image: url('images/hero-bg.jpg');
+      background-size: cover;
+      background-position: center top;
+      position: relative;
+      padding: var(--space-24) var(--space-6) var(--space-20);
+      text-align: center;
+    }
+    .article-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(7,17,46,0.82) 0%, rgba(7,17,46,0.52) 50%, rgba(7,17,46,0.88) 100%);
+      z-index: 1;
+    }
+    .article-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .article-tag {
+      font-family: 'Anton', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-4);
+      display: block;
+    }
+    .article-hero h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+      color: #fff;
+      line-height: 1.12;
+      margin-bottom: var(--space-5);
+      text-shadow: 0 2px 24px rgba(0,0,0,0.65);
+    }
+    .article-hero .subtitle {
+      font-family: 'Nunito', sans-serif;
+      font-style: italic;
+      color: rgba(255,255,255,0.84);
+      font-size: 1.15rem;
+      line-height: 1.65;
+      max-width: 640px;
+      margin: 0 auto var(--space-5);
+    }
+    .article-hero .byline {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.04em;
+    }
+
+    /* Body */
+    .article-section {
+      background: linear-gradient(180deg, #07112e 0%, #0d1b4b 55%, #07112e 100%);
+      padding: var(--space-20) var(--space-6);
+    }
+    .article-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--gold);
+      text-decoration: none;
+      margin-bottom: var(--space-10);
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .back-link:hover { opacity: 1; }
+
+    .article-body p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.83);
+      font-size: 1.07rem;
+      line-height: 1.87;
+      margin-bottom: 1.75rem;
+    }
+    .article-body h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.55rem;
+      color: var(--gold);
+      margin-top: 3.5rem;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(245,197,24,0.18);
+    }
+    .article-body strong { color: #fff; }
+    .article-body em { color: rgba(255,255,255,0.9); }
+
+    /* Opening pull quote */
+    .opening-quote {
+      border-left: 3px solid var(--gold);
+      margin: 2rem 0 2.5rem;
+      padding: 1.25rem 1.75rem;
+      background: rgba(245,197,24,0.05);
+      border-radius: 0 12px 12px 0;
+    }
+    .opening-quote p {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.75;
+      margin: 0 0 0.5rem;
+    }
+    .opening-quote p:last-child {
+      margin: 0;
+    }
+
+    /* Phrases card */
+    .phrases-card {
+      background: rgba(13,27,75,0.7);
+      border: 1px solid rgba(244,200,66,0.2);
+      border-radius: 18px;
+      padding: 2rem 2.25rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .phrases-card h3 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin: 0 0 1.25rem;
+    }
+    .phrases-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .phrases-list li {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.83);
+      font-size: 1.05rem;
+      line-height: 1.72;
+      padding: 0.85rem 1.25rem;
+      background: rgba(244,200,66,0.05);
+      border-left: 2px solid rgba(244,200,66,0.4);
+      border-radius: 0 10px 10px 0;
+      font-style: italic;
+    }
+
+    /* Rhythm card */
+    .rhythm-card {
+      background: rgba(13,27,75,0.7);
+      border: 1px solid rgba(244,200,66,0.2);
+      border-radius: 18px;
+      padding: 2rem 2.25rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .rhythm-card h3 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin: 0 0 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(244,200,66,0.15);
+    }
+    .rhythm-row {
+      margin-bottom: 1.25rem;
+    }
+    .rhythm-row:last-child {
+      margin-bottom: 0;
+    }
+    .rhythm-label {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .rhythm-row p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.78);
+      font-size: 1rem;
+      line-height: 1.72;
+      margin: 0;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: rgba(244,200,66,0.07);
+      border: 1px solid rgba(244,200,66,0.22);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      margin: 2.25rem 0;
+    }
+    .highlight-box p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.88);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      margin: 0;
+    }
+    .highlight-box p strong {
+      color: var(--gold);
+    }
+
+    /* Mission box */
+    .mission-box {
+      background: linear-gradient(135deg, rgba(13,27,75,0.9) 0%, rgba(26,44,107,0.7) 100%);
+      border: 1px solid rgba(244,200,66,0.25);
+      border-radius: 18px;
+      padding: 2.25rem 2.5rem;
+      margin: 3rem 0;
+      text-align: center;
+    }
+    .mission-eyebrow {
+      font-family: 'Anton', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .mission-headline {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.45rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .mission-box p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.78);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* Disclaimer */
+    .disclaimer-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 2.5rem 0;
+    }
+    .disclaimer-box p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* Article CTA */
+    .article-cta {
+      background: linear-gradient(135deg, rgba(13,27,75,0.9) 0%, rgba(26,44,107,0.7) 100%);
+      border: 1px solid rgba(244,200,66,0.3);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      margin: 3.5rem 0 1rem;
+    }
+    .article-cta h3 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .article-cta p {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    /* Social share */
+    .social-share {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin: 2.5rem 0 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .social-share span {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+    }
+    .social-share a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid #f4c842;
+      color: #f4c842;
+      transition: background 0.2s, color 0.2s;
+    }
+    .social-share a:hover {
+      background: #f4c842;
+      color: #07112e;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo-link" aria-label="Little Scripture Travelers Home">
+        <div class="logo-mark">
+          <img src="images/logo-badge.jpg" alt="Little Scripture Travelers" width="52" height="52" style="border-radius:50%;" />
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Little Scripture<br>Travelers</span>
+          <span class="logo-sub">Bedtime Stories</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <ul role="list">
+          <li class="has-dropdown">
+            <a href="index.html" class="nav-link-parent">Home <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="index.html#inside" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">What's Inside</span>
+                  <span class="nav-dropdown-item-desc">Stories, characters, and how it all works</span>
+                </a>
+                <a href="index.html#how" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">How It Works</span>
+                  <span class="nav-dropdown-item-desc">Three simple steps to start tonight</span>
+                </a>
+                <a href="index.html#vision" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Vision</span>
+                  <span class="nav-dropdown-item-desc">Why we built Little Scripture Travelers</span>
+                </a>
+                <a href="index.html#ways" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Subscription Plans</span>
+                  <span class="nav-dropdown-item-desc">Find the plan that fits your family</span>
+                </a>
+                <a href="index.html#travelers" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Meet the Travelers</span>
+                  <span class="nav-dropdown-item-desc">Beau, Scout, Willow &amp; Wren</span>
+                </a>
+                <a href="index.html#story" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Story</span>
+                  <span class="nav-dropdown-item-desc">How a dad in Utah started this journey</span>
+                </a>
+                <a href="index.html#blog" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">From the Blog</span>
+                  <span class="nav-dropdown-item-desc">Faith &amp; parenting inspiration</span>
+                </a>
+                <a href="index.html#books" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Books</span>
+                  <span class="nav-dropdown-item-desc">48 illustrated scripture stories</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="travelers.html" class="nav-link-parent">Meet the Travelers <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="travelers.html#bo" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Beau &mdash; The Brave</span>
+                  <span class="nav-dropdown-item-desc">Bold, courageous, and always ready to act</span>
+                </a>
+                <a href="travelers.html#scout" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scout &mdash; The Seeker</span>
+                  <span class="nav-dropdown-item-desc">Curious, thoughtful, always asking why</span>
+                </a>
+                <a href="travelers.html#willow" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Willow &mdash; The Warm</span>
+                  <span class="nav-dropdown-item-desc">Gentle, kind-hearted, full of love</span>
+                </a>
+                <a href="travelers.html#wren" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Wren &mdash; The Wonderer</span>
+                  <span class="nav-dropdown-item-desc">Imaginative, quiet, and full of wonder</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="books.html" class="nav-link-parent">Books <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="books.html#featured" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Featured Book</span>
+                  <span class="nav-dropdown-item-desc">This month's illustrated scripture story</span>
+                </a>
+                <a href="books.html#volumes" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Four Volumes</span>
+                  <span class="nav-dropdown-item-desc">Old &amp; New Testament, BoM, Church History</span>
+                </a>
+                <a href="books.html#formats" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Book Formats</span>
+                  <span class="nav-dropdown-item-desc">Kindle and paperback on Amazon</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="/subscribe.html#plans" class="nav-dropdown-item">Try the First 7 Days Free</a>
+                <a href="subscribe.html#plans" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Choose a Plan</span>
+                  <span class="nav-dropdown-item-desc">The Lantern, Compass, Knapsack, or Caravan</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="watch.html" class="nav-link-parent">Watch <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="watch.html#latest" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Latest Video</span>
+                  <span class="nav-dropdown-item-desc">Watch scripture stories come alive on YouTube</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="our-story.html" class="nav-link-parent">Our Story <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="our-story.html#how-it-started" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">How It Started</span>
+                  <span class="nav-dropdown-item-desc">A dad, a bedtime story, and a big idea</span>
+                </a>
+                <a href="our-story.html#cta" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Start the Journey</span>
+                  <span class="nav-dropdown-item-desc">Join families building faith one night at a time</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="blog.html" class="nav-link-parent">Blog <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="blog-proclaim-liberty.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Proclaim Liberty</span>
+                  <span class="nav-dropdown-item-desc">Faith, freedom, and America's founding</span>
+                </a>
+                <a href="blog-holy-ghost.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Recognize the Spirit</span>
+                  <span class="nav-dropdown-item-desc">Teaching your child to feel the Holy Ghost</span>
+                </a>
+                <a href="blog-quietest-revolution.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Quietest Revolution</span>
+                  <span class="nav-dropdown-item-desc">How bedtime stories change hearts</span>
+                </a>
+                <a href="blog-product-toolkit.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Lantern Toolkit</span>
+                  <span class="nav-dropdown-item-desc">Everything inside your subscription</span>
+                </a>
+                <a href="blog-scripture-routine.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scripture Bedtime Routine</span>
+                  <span class="nav-dropdown-item-desc">How to start &mdash; even on busy nights</span>
+                </a>
+                <a href="blog-scripture-last-thing.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scripture Last Thing</span>
+                  <span class="nav-dropdown-item-desc">Why scripture at bedtime matters most</span>
+                </a>
+                <a href="blog-feeling-path.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Feeling Path</span>
+                  <span class="nav-dropdown-item-desc">Helping children feel, not just hear, scripture</span>
+                </a>
+                <a href="blog-heart-behind-pages.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Roots Before the Storm</span>
+                  <span class="nav-dropdown-item-desc">Building faith before the world pulls them away</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="virtue-library.html" class="nav-link-parent">Virtue Library</a>
+          </li>
+        </ul>
+      </nav>
+
+      <a href="/subscribe.html#plans" class="btn btn-gold nav-cta">Try the First 7 Days Free</a>
+
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+            <ul role="list">
+        <li class="has-dropdown">
+          <a href="index.html" class="nav-link-parent">Home <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="index.html#inside">What's Inside</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#vision">Our Vision</a></li>
+            <li><a href="index.html#ways">Subscription Plans</a></li>
+            <li><a href="index.html#travelers">Meet the Travelers</a></li>
+            <li><a href="index.html#story">Our Story</a></li>
+            <li><a href="index.html#blog">From the Blog</a></li>
+            <li><a href="index.html#books">Our Books</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="travelers.html" class="nav-link-parent">Meet the Travelers <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="travelers.html#bo">Beau &mdash; The Brave</a></li>
+            <li><a href="travelers.html#scout">Scout &mdash; The Seeker</a></li>
+            <li><a href="travelers.html#willow">Willow &mdash; The Warm</a></li>
+            <li><a href="travelers.html#wren">Wren &mdash; The Wonderer</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="books.html" class="nav-link-parent">Books <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="books.html#featured">Featured Book</a></li>
+            <li><a href="books.html#volumes">Four Volumes</a></li>
+            <li><a href="books.html#formats">Book Formats</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;">Try the First 7 Days Free</a></li>
+            <li><a href="subscribe.html#plans">Choose a Plan</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="watch.html" class="nav-link-parent">Watch <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="watch.html#latest">Latest Video</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="our-story.html" class="nav-link-parent">Our Story <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="our-story.html#how-it-started">How It Started</a></li>
+            <li><a href="our-story.html#cta">Start the Journey</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="blog.html" class="nav-link-parent">Blog <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="blog-proclaim-liberty.html">Proclaim Liberty</a></li>
+            <li><a href="blog-holy-ghost.html">Recognize the Spirit</a></li>
+            <li><a href="blog-quietest-revolution.html">The Quietest Revolution</a></li>
+            <li><a href="blog-product-toolkit.html">The Lantern Toolkit</a></li>
+            <li><a href="blog-scripture-routine.html">Scripture Bedtime Routine</a></li>
+            <li><a href="blog-scripture-last-thing.html">Scripture Last Thing</a></li>
+            <li><a href="blog-feeling-path.html">The Feeling Path</a></li>
+            <li><a href="blog-heart-behind-pages.html">Roots Before the Storm</a></li>
+          </ul>
+        </li>
+        <li><a href="virtue-library.html">Virtue Library</a></li>
+        <li><a href="/subscribe.html#plans" class="btn btn-gold">Try the First 7 Days Free</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ★ AMERICA 250 CELEBRATION RIBBON ★ -->
+  <!-- Hero -->
+  <header class="article-hero">
+    <div class="article-hero-content">
+      <span class="article-tag">Faith &amp; Family</span>
+      <h1>Teaching Your Child to Recognize the Spirit</h1>
+      <p class="subtitle">Why bedtime is the perfect classroom &mdash; and how a quiet story and a parent&rsquo;s testimony can teach a child what revelation feels like.</p>
+      <p class="byline">By Levi Lewis &nbsp;&middot;&nbsp; Little Scripture Travelers</p>
+    </div>
+  </header>
+
+  <!-- Article Body -->
+  <section class="article-section">
+    <div class="article-inner">
+
+      <a href="blog.html" class="back-link">&#8592; Back to Blog</a>
+
+      <div class="article-body">
+
+        <!-- Opening pull quote: Nelson Holy Ghost quote -->
+        <div class="opening-quote">
+          <p>&ldquo;In coming days, it will not be possible to survive spiritually without the guiding, directing, comforting, and constant influence of the Holy Ghost. My beloved brothers and sisters, I plead with you to increase your spiritual capacity to receive revelation.&rdquo;</p>
+          <cite style="display:block;margin-top:0.6rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.92rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson</cite>
+        </div>
+
+        <h2>&ldquo;I Took That Personally&rdquo;</h2>
+
+        <p>I heard that quote a few years ago and it stopped me cold. Not the way a conference talk sometimes stops you and then you forget it by Tuesday &mdash; really stopped me. I sat with it for days.</p>
+
+        <p>I&rsquo;m a dad. I have two little girls. They are small and warm and they still think I can fix everything. And I know &mdash; I know in the place a parent knows things &mdash; that one day they are going to face things I cannot fix, cannot explain, and cannot protect them from. The world is already getting louder. The pressures on their faith are going to be real and personal and relentless in ways I can&rsquo;t fully predict.</p>
+
+        <p>President Nelson didn&rsquo;t say that as a hypothetical. He said &ldquo;it will not be possible to survive spiritually&rdquo; without the Holy Ghost. That&rsquo;s a strong word. <em>Survive.</em></p>
+
+        <p>So I took it as a parent. Not just as a member. Not just as someone who wants to be a better person. As a father sitting in Monticello, Utah, with two small daughters who are going to grow up in whatever world is coming &mdash; and who need more than my advice. They need a relationship with the Spirit that is theirs. Personal. Practiced. Real.</p>
+
+        <p>That&rsquo;s what I want to talk about today. And it turns out bedtime is one of the best places in the world to build it.</p>
+
+        <h2>You Can&rsquo;t Teach What You Don&rsquo;t Model</h2>
+
+        <p>Here&rsquo;s the honest truth about the Spirit at bedtime: most of what happens is about the <em>parent</em> first.</p>
+
+        <p>When you slow down, soften the room, put the phone away, and sit beside your child with something sacred &mdash; you change the spiritual temperature in that space. Children feel that. They don&rsquo;t have words for it yet, but they feel it. The room is different. You are different. Something is present that wasn&rsquo;t there a moment ago.</p>
+
+        <p>And when you, as the parent, open your mouth and share something true from your own heart &mdash; even three halting sentences about what you believe and why &mdash; your child is watching every word of it. A parent&rsquo;s testimony, quietly spoken at bedtime, is one of the most powerful spiritual experiences a small child will ever witness. Not because it&rsquo;s polished. Because it&rsquo;s real. And the Spirit confirms real things.</p>
+
+        <p>So before we talk about teaching children to recognize the Spirit, we have to say the most important thing plainly: <strong>parents go first.</strong> You don&rsquo;t teach this with a lesson. You model it. You slow down, you show up spiritually present, and then you open your mouth and say something true. The teaching happens in the watching.</p>
+
+        <h2>What Does It Actually Feel Like?</h2>
+
+        <p>This is the practical problem every parent runs into the moment they try to take it seriously. How do you explain the Holy Ghost to a four-year-old?</p>
+
+        <p>The answer, I&rsquo;ve found, is that you mostly don&rsquo;t. You don&rsquo;t explain it &mdash; you create the conditions for it, and then you <em>name it</em> when it shows up.</p>
+
+        <p>The Spirit is not a theological concept for a small child. It&rsquo;s a feeling. It&rsquo;s warm. It&rsquo;s peaceful. It feels like something settling &mdash; like the room got a little quieter inside your chest. It feels like you want to be good. It feels like you&rsquo;re not alone. It can feel like a small brightness, or a kind of stillness, or sometimes just a simple calm after something that was hard.</p>
+
+        <p>Describe it simply. Use words your child already understands. &ldquo;Does your heart feel warm right now?&rdquo; &ldquo;Do you feel peaceful?&rdquo; &ldquo;It&rsquo;s quiet and good in here, isn&rsquo;t it?&rdquo;</p>
+
+        <p>Then let them come to their own words over time. The goal isn&rsquo;t for them to learn your description. The goal is for them to have enough experiences that they build their own language for it &mdash; the way you eventually build your own language for anything you&rsquo;ve felt many times.</p>
+
+        <h2>Why the Last Ten Minutes Matter So Much</h2>
+
+        <p>There is something the sleep researchers keep finding that I think is enormously relevant for spiritual parents: the brain is most receptive right at the edges of sleep.</p>
+
+        <p>In those few minutes as a child is drifting &mdash; drowsy, still, heart rate falling &mdash; their mind is unusually open. What they hear last tends to stick in a way that the noise of midday simply doesn&rsquo;t. This is partly why fears and worries can feel so big at bedtime. But it&rsquo;s also why beauty and truth and peace land so deeply there.</p>
+
+        <p>The last thing your child hears before sleep is not just the last thing &mdash; it&rsquo;s often the thing that stays. It marinates in them overnight. It is there when they wake up.</p>
+
+        <p>This is not an accident of design. It is an opportunity. And the Little Scripture Travelers bedtime routine was built specifically to close the day by leaving a child in that calm, open, receptive state &mdash; the one where the Spirit has the most room, and where what is true can settle quietly into a small heart.</p>
+
+        <h2>How the Lantern Routine Invites the Spirit</h2>
+
+        <p>Every Little Scripture Travelers story follows the same six-step rhythm. We call it the Lantern routine, and each step was designed intentionally &mdash; not just to make a good bedtime story, but to create the spiritual conditions we&rsquo;re talking about here.</p>
+
+        <div class="rhythm-card">
+          <h3>The Six-Step Lantern Rhythm</h3>
+          <div class="rhythm-row">
+            <div class="rhythm-label">Story</div>
+            <p>A short, warm scripture story. Simple words. Real people. Something a child can picture. The story slows the room and opens the imagination &mdash; and imagination, in the right direction, opens the heart.</p>
+          </div>
+          <div class="rhythm-row">
+            <div class="rhythm-label">Feel</div>
+            <p>The Feeling Moment. Your child walks through one emotion from the story &mdash; spotting it, naming it, finding it in their own chest. This slows them further and turns their attention inward and gentle.</p>
+          </div>
+          <div class="rhythm-row">
+            <div class="rhythm-label">Remember</div>
+            <p>A simple truth drawn from the story. One sentence your child can carry into tomorrow. This is the still, small thing that lands in that open, pre-sleep mind.</p>
+          </div>
+          <div class="rhythm-row">
+            <div class="rhythm-label">Prompt</div>
+            <p>A gentle question that invites your child to connect the story to their own life. Not a quiz &mdash; just a door. Sometimes they walk through it. Sometimes they just smile and close their eyes. Both are fine.</p>
+          </div>
+          <div class="rhythm-row">
+            <div class="rhythm-label">Testify</div>
+            <p>This is the step where the Spirit most often comes. A simple prompt invites the parent to share something real &mdash; a few words of testimony, something you believe, something you felt. The child listens. The room is quiet. And something holy tends to happen in that quiet. This is the most important step in the whole rhythm.</p>
+          </div>
+          <div class="rhythm-row">
+            <div class="rhythm-label">Lullaby</div>
+            <p>A closing song to seal it all. The child drifts off warm, peaceful, held &mdash; in that exactly-right state where what is good can take root.</p>
+          </div>
+        </div>
+
+        <p>The whole rhythm is about twelve to fifteen minutes. It is not elaborate. It does not require you to be a perfect teacher or a polished speaker. It just requires you to show up, slow down, and open your mouth for a moment at the Testify step. That moment is where the teaching about the Holy Ghost actually happens &mdash; not in explanation, but in experience.</p>
+
+        <h2>What to Say When You Feel It</h2>
+
+        <p>One of the most practical things a parent can do is be ready, in the moment, to name the Spirit when it arrives. Because it does arrive &mdash; often quietly, often briefly &mdash; and if you don&rsquo;t name it, it passes without being registered.</p>
+
+        <p>You don&rsquo;t need a long speech. A single sentence, said quietly and honestly, is enough. The goal is just to make the invisible visible, just for a moment, so your child&rsquo;s brain has something to attach to the feeling they&rsquo;re already having.</p>
+
+        <div class="phrases-card">
+          <h3>Words You Can Use In the Moment</h3>
+          <ul class="phrases-list">
+            <li>&ldquo;Did you feel that? That warm, peaceful feeling &mdash; that&rsquo;s the Holy Ghost.&rdquo;</li>
+            <li>&ldquo;My heart feels full right now. That&rsquo;s how I know this is true.&rdquo;</li>
+            <li>&ldquo;It feels quiet and good in here. That&rsquo;s what the Spirit feels like.&rdquo;</li>
+            <li>&ldquo;Remember this feeling. You can come back to it.&rdquo;</li>
+          </ul>
+        </div>
+
+        <p>That last one &mdash; <em>&ldquo;remember this feeling&rdquo;</em> &mdash; is something I come back to again and again. We are not just teaching our children to recognize the Spirit tonight. We are giving them a memory they can reach back to when they are older and the world is harder and they need to know what they&rsquo;re looking for.</p>
+
+        <!-- Mid-article pull quote -->
+        <div class="pull-quote">
+          <p>&ldquo;In coming days, it will not be possible to survive spiritually without the guiding, directing, comforting, and constant influence of the Holy Ghost. My beloved brothers and sisters, I plead with you to increase your spiritual capacity to receive revelation.&rdquo;</p>
+          <cite style="display:block;margin-top:0.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson</cite>
+          <p class="pull-quote-context" style="font-family:'Nunito',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Lantern routine was built specifically to create the spiritual conditions where the Holy Ghost can be felt &mdash; and named &mdash; at the close of every single day.</p>
+        </div>
+
+        <h2>Building the Pattern, Night by Night</h2>
+
+        <p>Recognition is not instant. It is not one experience. It is not the one beautiful night where you both felt something and you said the right thing and it was clear and memorable and sweet.</p>
+
+        <p>It is <em>hundreds</em> of nights. Most of them ordinary. Most of them ending with a child who is half asleep before the lullaby is done and a parent who is tired and wondering if any of it stuck.</p>
+
+        <p>It stuck.</p>
+
+        <p>The goal isn&rsquo;t one spiritual experience. The goal is a thousand small ones &mdash; so ordinary, so woven into the texture of your child&rsquo;s childhood, that when they are fifteen and something shakes their faith, or when they are twenty-two and facing a decision that really matters, they don&rsquo;t have to search for something new. They don&rsquo;t have to wonder if they&rsquo;ve ever felt the Spirit. They <em>know.</em> They know exactly what they&rsquo;re looking for, because they&rsquo;ve felt it a thousand times at bedtime, in the dark, beside a parent who believed.</p>
+
+        <p>That is the whole long game. Building a library of remembered feeling. Night by night. Story by story. Testimony by testimony.</p>
+
+        <div class="highlight-box">
+          <p>President Nelson was talking about something coming. Something real. <strong>The preparation for it doesn&rsquo;t happen in one big spiritual event &mdash; it happens in the accumulation of a thousand quiet ones.</strong> Bedtime is where you build the library, one page at a time.</p>
+        </div>
+
+        <h2>A Note to the Parent Who Feels Inadequate</h2>
+
+        <p>I want to speak to this one directly, because I know it&rsquo;s the thing that keeps a lot of good parents from even trying.</p>
+
+        <p>You don&rsquo;t have to have a polished testimony. You don&rsquo;t have to have the right words. You don&rsquo;t have to feel like your faith is strong enough to be worth sharing. You don&rsquo;t have to be certain about every single thing before you open your mouth at the Testify step.</p>
+
+        <p>A wavering, honest, three-sentence testimony &mdash; &ldquo;I don&rsquo;t know everything, but I know I feel something when we talk about Jesus. I know this family is something I&rsquo;m grateful for. I know this feels right&rdquo; &mdash; is one of the most powerful things your child will ever witness.</p>
+
+        <p>The Spirit confirms truth. You don&rsquo;t manufacture that feeling. You just have to say something true. And something real about what you actually believe and feel is always true, even when it&rsquo;s simple, even when it&rsquo;s uncertain, even when it&rsquo;s quiet.</p>
+
+        <p>Your child doesn&rsquo;t need a prophet at bedtime. They have those on Sundays. What they need at bedtime is their <em>parent</em> &mdash; the person they love most in the world &mdash; saying something real from their own heart. That is irreplaceable. No book, no leader, no program gives them that. Only you can.</p>
+
+        <p>So just show up. Sit beside them. Read the story. And when the Testify step comes, open your mouth and say one true thing. That&rsquo;s the whole job.</p>
+
+        <!-- Closing pull quote -->
+        <div class="pull-quote">
+          <p>&ldquo;The joy we feel has little to do with the circumstances of our lives and everything to do with the focus of our lives.&rdquo;</p>
+          <cite style="display:block;margin-top:0.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson</cite>
+          <p class="pull-quote-context" style="font-family:'Nunito',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">And helping our children focus &mdash; not on fear, not on the noise, but on the still small voice &mdash; is the most important work a parent can do.</p>
+        </div>
+
+        <!-- Social Share -->
+        <div class="social-share">
+          <span>Share:</span>
+          <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Share on Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/scripturetravelers" aria-label="Share on Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://x.com/LittleScriveek" aria-label="Share on X" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://pin.it/3iCIxLDGB" aria-label="Share on Pinterest" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          </a>
+        </div>
+
+        <!-- Mission Box -->
+        <div class="mission-box">
+          <span class="mission-eyebrow">Our Mission</span>
+          <div class="mission-headline">Preventive care for a child&rsquo;s heart &mdash; one small story a night.</div>
+          <p>Little Scripture Travelers helps ordinary, faithful families turn the quiet minutes before sleep into a nightly rhythm that grows resilient, rooted children &mdash; weaving scripture, story, movement, and a parent&rsquo;s own testimony into hearts strong enough to weather whatever comes. Preventive by design: building roots in the calm, before the storm.</p>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer-box">
+          <p>Little Scripture Travelers books are educational and preventive tools designed to build resilience and protective habits. They are not therapy, diagnosis, or treatment, and they are not a substitute for professional help. A child showing signs of an anxiety disorder, depression, or other mental-health concern deserves the care of a qualified professional &mdash; and prevention and treatment are partners, not rivals. The faith elements in this post reflect my own family&rsquo;s beliefs and testimony. I&rsquo;ve tried to share them honestly, and not to claim more than my own experience shows.</p>
+        </div>
+
+        <!-- CTA -->
+        <div class="article-cta">
+          <h3>Start Tonight</h3>
+          <p>Every Lantern story closes with a Testify step &mdash; a simple prompt that invites you to share something real from your own heart. That quiet moment is where the Spirit comes. Start tonight with a free story.</p>
+          <a href="/subscribe.html#plans" class="btn-gold">Try the First 7 Days Free</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+          <img src="images/logo-badge.jpg" alt="Little Scripture Travelers" width="40" height="40" style="border-radius:50%;object-fit:cover;" />
+          <div>
+            <div class="logo-name" style="font-size:0.9rem;">Little Scripture Travelers</div>
+            <div class="logo-sub" style="font-size:0.7rem;">Bedtime Stories</div>
+          </div>
+        </div>
+        <p>Helping little ones feel the Spirit &mdash; one bedtime story at a time.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Watch &amp; Read</h4>
+        <ul role="list">
+          <li><a href="https://www.youtube.com/@LittleScriptureTravelers" target="_blank" rel="noopener">YouTube Channel</a></li>
+          <li><a href="https://www.amazon.com/Follows-Scripture-Travelers-Bedtime-Stories/dp/B0H3ZDCFSR/ref=tmm_pap_swatch_0" target="_blank" rel="noopener">Books on Amazon</a></li>
+          <li><a href="https://a.co/d/0gLYJdit" target="_blank" rel="noopener">Kindle Editions</a></li>
+          <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;">Try the First 7 Days Free</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Subscribe</h4>
+        <ul role="list">
+          <li><a href="/subscribe.html#plans">The Lantern</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul role="list">
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="travelers.html">Meet the Travelers</a></li>
+          <li><a href="blog.html">Why Bedtime Scripture</a></li>
+          <li><a href="mailto:littlescripturetravelers@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-manage">
+        <h4>Manage Subscriptions</h4>
+        <ul role="list">
+          <li><button type="button" class="btn-cancel-sub footer-cancel-link" aria-haspopup="dialog">Cancel Subscription</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom" style="flex-direction:column;align-items:center;text-align:center;">
+      <div class="social-links" style="justify-content:center;margin-bottom:0.75rem;gap:0.75rem;">
+        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07112e"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.14a8.16 8.16 0 0 0 4.77 1.52V7.21a4.85 4.85 0 0 1-1-.52z"/></svg>
+        </a>
+        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        </a>
+      </div>
+      <p style="margin-top:1rem;">We do not lecture. We do not pile on rules. We tell what happened &mdash; a beginning, a worry, and a hopeful ending &mdash; in the smallest words that still carry the meaning.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">&copy; 2026 Little Scripture Travelers</p>
+      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.15);font-size:0.72rem;line-height:1.5;color:#9aa6c0;text-align:center;">
+        <p style="margin:0 0 0.6rem;">Little Scripture Travelers Bedtime Stories, LLC is an independent creative endeavor. It is not affiliated with, made by, sponsored by, approved by, or endorsed by The Church of Jesus Christ of Latter-day Saints or Intellectual Reserve, Inc. All stories, illustrations, characters, lullabies, and opinions are solely those of Little Scripture Travelers and do not represent the Church.</p>
+        <p style="margin:0;">&ldquo;Come, Follow Me,&rdquo; the name of The Church of Jesus Christ of Latter-day Saints, and related names and logos are trademarks of Intellectual Reserve, Inc.; any reference to them here is for identification purposes only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Legacy mobile nav toggle — the current header replaced it, so guard for absence
+    const toggle = document.getElementById('navToggle');
+    const mobile = document.getElementById('navMobile');
+    if (toggle && mobile) {
+      toggle.addEventListener('click', () => {
+        mobile.classList.toggle('open');
+        toggle.textContent = mobile.classList.contains('open') ? '\u2715' : '\u2630';
+      });
+    }
+    window.addEventListener('scroll', () => {
+      const navEl = document.getElementById('nav');
+      if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 40);
+    });
+  </script>
+  <script src="main.js"></script>
+
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+</script></body>
+</html>

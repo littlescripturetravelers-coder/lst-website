@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Feeling Path — Little Scripture Travelers</title>
+  <meta name="description" content="Helping your child name a feeling — then keep walking home. A look at the emotional heart of every Little Scripture Travelers story: what it is, why I built it, and the research that stands behind it." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .article-hero {
+      background-image: url('images/hero-bg.jpg');
+      background-size: cover;
+      background-position: center top;
+      position: relative;
+      padding: var(--space-24) var(--space-6) var(--space-20);
+      text-align: center;
+    }
+    .article-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(7,17,46,0.82) 0%, rgba(7,17,46,0.52) 50%, rgba(7,17,46,0.88) 100%);
+      z-index: 1;
+    }
+    .article-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .article-tag {
+      font-family: 'Anton', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-4);
+      display: block;
+    }
+    .article-hero h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+      color: #fff;
+      line-height: 1.12;
+      margin-bottom: var(--space-5);
+      text-shadow: 0 2px 24px rgba(0,0,0,0.65);
+    }
+    .article-hero .subtitle {
+      font-family: 'Nunito', sans-serif;
+      font-style: italic;
+      color: rgba(255,255,255,0.84);
+      font-size: 1.15rem;
+      line-height: 1.65;
+      max-width: 640px;
+      margin: 0 auto var(--space-5);
+    }
+    .article-hero .byline {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.04em;
+    }
+
+    /* Body */
+    .article-section {
+      background: linear-gradient(180deg, #07112e 0%, #0d1b4b 55%, #07112e 100%);
+      padding: var(--space-20) var(--space-6);
+    }
+    .article-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--gold);
+      text-decoration: none;
+      margin-bottom: var(--space-10);
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .back-link:hover { opacity: 1; }
+
+    .article-body p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.83);
+      font-size: 1.07rem;
+      line-height: 1.87;
+      margin-bottom: 1.75rem;
+    }
+    .article-body h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.55rem;
+      color: var(--gold);
+      margin-top: 3.5rem;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(245,197,24,0.18);
+    }
+    .article-body strong { color: #fff; }
+    .article-body em { color: rgba(255,255,255,0.9); }
+
+    /* Opening pull quote */
+    .opening-quote {
+      border-left: 3px solid var(--gold);
+      margin: 2rem 0 2.5rem;
+      padding: 1.25rem 1.75rem;
+      background: rgba(245,197,24,0.05);
+      border-radius: 0 12px 12px 0;
+    }
+    .opening-quote p {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Five stones card */
+    .stones-card {
+      background: rgba(13,27,75,0.7);
+      border: 1px solid rgba(244,200,66,0.2);
+      border-radius: 18px;
+      padding: 2rem 2.25rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .stones-card h3 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin: 0 0 1.25rem;
+    }
+    .stones-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .stones-list li {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.83);
+      font-size: 1.05rem;
+      line-height: 1.72;
+      padding-left: 1rem;
+      border-left: 2px solid rgba(244,200,66,0.3);
+    }
+    .stones-list li strong {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: rgba(244,200,66,0.07);
+      border: 1px solid rgba(244,200,66,0.22);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      margin: 2.25rem 0;
+    }
+    .highlight-box p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.88);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      margin: 0;
+    }
+    .highlight-box p strong {
+      color: var(--gold);
+    }
+
+    /* Toolkit card */
+    .toolkit-card {
+      background: rgba(13,27,75,0.7);
+      border: 1px solid rgba(244,200,66,0.2);
+      border-radius: 18px;
+      padding: 2rem 2.25rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .toolkit-card h3 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin: 0 0 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(244,200,66,0.15);
+    }
+    .toolkit-row {
+      margin-bottom: 1.25rem;
+    }
+    .toolkit-row:last-child {
+      margin-bottom: 0;
+    }
+    .toolkit-label {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+    .toolkit-row p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.78);
+      font-size: 1rem;
+      line-height: 1.72;
+      margin: 0;
+    }
+    .toolkit-row p em {
+      color: rgba(255,255,255,0.88);
+    }
+
+    /* Author credentials box */
+    .credentials-box {
+      background: rgba(7,17,46,0.6);
+      border: 1px solid rgba(244,200,66,0.18);
+      border-radius: 16px;
+      padding: 1.75rem 2rem;
+      margin: 3rem 0;
+    }
+    .credentials-box h3 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: var(--gold);
+      margin: 0 0 1.1rem;
+    }
+    .credentials-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .credentials-box li {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.97rem;
+      line-height: 1.72;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .credentials-box li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.65rem;
+      top: 0.45rem;
+    }
+    .credentials-box li strong { color: #fff; }
+
+    /* Mission box */
+    .mission-box {
+      background: linear-gradient(135deg, rgba(13,27,75,0.9) 0%, rgba(26,44,107,0.7) 100%);
+      border: 1px solid rgba(244,200,66,0.25);
+      border-radius: 18px;
+      padding: 2.25rem 2.5rem;
+      margin: 3rem 0;
+      text-align: center;
+    }
+    .mission-eyebrow {
+      font-family: 'Anton', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .mission-headline {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.45rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .mission-box p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.78);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* Disclaimer */
+    .disclaimer-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 2.5rem 0;
+    }
+    .disclaimer-box p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* Research citations */
+    .research-section {
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .research-section h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 1.5rem;
+    }
+    .cite-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .cite-list li {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.87rem;
+      line-height: 1.7;
+      padding-left: 1.25rem;
+      border-left: 2px solid rgba(255,255,255,0.1);
+    }
+    .cite-list li strong { color: rgba(255,255,255,0.7); }
+    .cite-list li em { font-style: italic; }
+
+    /* Article CTA */
+    .article-cta {
+      background: linear-gradient(135deg, rgba(13,27,75,0.9) 0%, rgba(26,44,107,0.7) 100%);
+      border: 1px solid rgba(244,200,66,0.3);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      margin: 3.5rem 0 1rem;
+    }
+    .article-cta h3 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .article-cta p {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    /* Social share */
+    .social-share {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin: 2.5rem 0 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .social-share span {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+    }
+    .social-share a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid #f4c842;
+      color: #f4c842;
+      transition: background 0.2s, color 0.2s;
+    }
+    .social-share a:hover {
+      background: #f4c842;
+      color: #07112e;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo-link" aria-label="Little Scripture Travelers Home">
+        <div class="logo-mark">
+          <img src="images/logo-badge.jpg" alt="Little Scripture Travelers" width="52" height="52" style="border-radius:50%;" />
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Little Scripture<br>Travelers</span>
+          <span class="logo-sub">Bedtime Stories</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <ul role="list">
+          <li class="has-dropdown">
+            <a href="index.html" class="nav-link-parent">Home <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="index.html#inside" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">What's Inside</span>
+                  <span class="nav-dropdown-item-desc">Stories, characters, and how it all works</span>
+                </a>
+                <a href="index.html#how" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">How It Works</span>
+                  <span class="nav-dropdown-item-desc">Three simple steps to start tonight</span>
+                </a>
+                <a href="index.html#vision" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Vision</span>
+                  <span class="nav-dropdown-item-desc">Why we built Little Scripture Travelers</span>
+                </a>
+                <a href="index.html#ways" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Subscription Plans</span>
+                  <span class="nav-dropdown-item-desc">Find the plan that fits your family</span>
+                </a>
+                <a href="index.html#travelers" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Meet the Travelers</span>
+                  <span class="nav-dropdown-item-desc">Beau, Scout, Willow &amp; Wren</span>
+                </a>
+                <a href="index.html#story" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Story</span>
+                  <span class="nav-dropdown-item-desc">How a dad in Utah started this journey</span>
+                </a>
+                <a href="index.html#blog" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">From the Blog</span>
+                  <span class="nav-dropdown-item-desc">Faith &amp; parenting inspiration</span>
+                </a>
+                <a href="index.html#books" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Books</span>
+                  <span class="nav-dropdown-item-desc">48 illustrated scripture stories</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="travelers.html" class="nav-link-parent">Meet the Travelers <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="travelers.html#bo" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Beau &mdash; The Brave</span>
+                  <span class="nav-dropdown-item-desc">Bold, courageous, and always ready to act</span>
+                </a>
+                <a href="travelers.html#scout" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scout &mdash; The Seeker</span>
+                  <span class="nav-dropdown-item-desc">Curious, thoughtful, always asking why</span>
+                </a>
+                <a href="travelers.html#willow" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Willow &mdash; The Warm</span>
+                  <span class="nav-dropdown-item-desc">Gentle, kind-hearted, full of love</span>
+                </a>
+                <a href="travelers.html#wren" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Wren &mdash; The Wonderer</span>
+                  <span class="nav-dropdown-item-desc">Imaginative, quiet, and full of wonder</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="books.html" class="nav-link-parent">Books <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="books.html#featured" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Featured Book</span>
+                  <span class="nav-dropdown-item-desc">This month's illustrated scripture story</span>
+                </a>
+                <a href="books.html#volumes" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Four Volumes</span>
+                  <span class="nav-dropdown-item-desc">Old &amp; New Testament, BoM, Church History</span>
+                </a>
+                <a href="books.html#formats" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Book Formats</span>
+                  <span class="nav-dropdown-item-desc">Kindle and paperback on Amazon</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="/subscribe.html#plans" class="nav-dropdown-item">Try the First 7 Days Free</a>
+                <a href="subscribe.html#plans" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Choose a Plan</span>
+                  <span class="nav-dropdown-item-desc">The Lantern, Compass, Knapsack, or Caravan</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="watch.html" class="nav-link-parent">Watch <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="watch.html#latest" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Latest Video</span>
+                  <span class="nav-dropdown-item-desc">Watch scripture stories come alive on YouTube</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="our-story.html" class="nav-link-parent">Our Story <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="our-story.html#how-it-started" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">How It Started</span>
+                  <span class="nav-dropdown-item-desc">A dad, a bedtime story, and a big idea</span>
+                </a>
+                <a href="our-story.html#cta" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Start the Journey</span>
+                  <span class="nav-dropdown-item-desc">Join families building faith one night at a time</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="blog.html" class="nav-link-parent">Blog <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="blog-proclaim-liberty.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Proclaim Liberty</span>
+                  <span class="nav-dropdown-item-desc">Faith, freedom, and America's founding</span>
+                </a>
+                <a href="blog-holy-ghost.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Recognize the Spirit</span>
+                  <span class="nav-dropdown-item-desc">Teaching your child to feel the Holy Ghost</span>
+                </a>
+                <a href="blog-quietest-revolution.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Quietest Revolution</span>
+                  <span class="nav-dropdown-item-desc">How bedtime stories change hearts</span>
+                </a>
+                <a href="blog-product-toolkit.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Lantern Toolkit</span>
+                  <span class="nav-dropdown-item-desc">Everything inside your subscription</span>
+                </a>
+                <a href="blog-scripture-routine.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scripture Bedtime Routine</span>
+                  <span class="nav-dropdown-item-desc">How to start &mdash; even on busy nights</span>
+                </a>
+                <a href="blog-scripture-last-thing.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scripture Last Thing</span>
+                  <span class="nav-dropdown-item-desc">Why scripture at bedtime matters most</span>
+                </a>
+                <a href="blog-feeling-path.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Feeling Path</span>
+                  <span class="nav-dropdown-item-desc">Helping children feel, not just hear, scripture</span>
+                </a>
+                <a href="blog-heart-behind-pages.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Roots Before the Storm</span>
+                  <span class="nav-dropdown-item-desc">Building faith before the world pulls them away</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="virtue-library.html" class="nav-link-parent">Virtue Library</a>
+          </li>
+        </ul>
+      </nav>
+
+      <a href="/subscribe.html#plans" class="btn btn-gold nav-cta">Try the First 7 Days Free</a>
+
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+            <ul role="list">
+        <li class="has-dropdown">
+          <a href="index.html" class="nav-link-parent">Home <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="index.html#inside">What's Inside</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#vision">Our Vision</a></li>
+            <li><a href="index.html#ways">Subscription Plans</a></li>
+            <li><a href="index.html#travelers">Meet the Travelers</a></li>
+            <li><a href="index.html#story">Our Story</a></li>
+            <li><a href="index.html#blog">From the Blog</a></li>
+            <li><a href="index.html#books">Our Books</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="travelers.html" class="nav-link-parent">Meet the Travelers <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="travelers.html#bo">Beau &mdash; The Brave</a></li>
+            <li><a href="travelers.html#scout">Scout &mdash; The Seeker</a></li>
+            <li><a href="travelers.html#willow">Willow &mdash; The Warm</a></li>
+            <li><a href="travelers.html#wren">Wren &mdash; The Wonderer</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="books.html" class="nav-link-parent">Books <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="books.html#featured">Featured Book</a></li>
+            <li><a href="books.html#volumes">Four Volumes</a></li>
+            <li><a href="books.html#formats">Book Formats</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;">Try the First 7 Days Free</a></li>
+            <li><a href="subscribe.html#plans">Choose a Plan</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="watch.html" class="nav-link-parent">Watch <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="watch.html#latest">Latest Video</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="our-story.html" class="nav-link-parent">Our Story <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="our-story.html#how-it-started">How It Started</a></li>
+            <li><a href="our-story.html#cta">Start the Journey</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="blog.html" class="nav-link-parent">Blog <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="blog-proclaim-liberty.html">Proclaim Liberty</a></li>
+            <li><a href="blog-holy-ghost.html">Recognize the Spirit</a></li>
+            <li><a href="blog-quietest-revolution.html">The Quietest Revolution</a></li>
+            <li><a href="blog-product-toolkit.html">The Lantern Toolkit</a></li>
+            <li><a href="blog-scripture-routine.html">Scripture Bedtime Routine</a></li>
+            <li><a href="blog-scripture-last-thing.html">Scripture Last Thing</a></li>
+            <li><a href="blog-feeling-path.html">The Feeling Path</a></li>
+            <li><a href="blog-heart-behind-pages.html">Roots Before the Storm</a></li>
+          </ul>
+        </li>
+        <li><a href="virtue-library.html">Virtue Library</a></li>
+        <li><a href="/subscribe.html#plans" class="btn btn-gold">Try the First 7 Days Free</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ★ AMERICA 250 CELEBRATION RIBBON ★ -->
+  <!-- Hero -->
+  <header class="article-hero">
+    <div class="article-hero-content">
+      <span class="article-tag">Child Development &middot; Emotional Health</span>
+      <h1>The Feeling Path</h1>
+      <p class="subtitle">Helping your child name a feeling &mdash; then keep walking home</p>
+      <p class="byline">By Levi Lewis &nbsp;&middot;&nbsp; Provisional CFLE (NCFR, 2011) &nbsp;&middot;&nbsp; B.S. Behavioral Health Sciences</p>
+    </div>
+  </header>
+
+  <!-- Article Body -->
+  <section class="article-section">
+    <div class="article-inner">
+
+      <a href="blog.html" class="back-link">&#8592; Back to Blog</a>
+
+      <div class="article-body">
+
+        <div class="opening-quote">
+          <p>A look at the emotional heart of every Little Scripture Travelers story: what it is, why I built it, and the research that stands behind it.</p>
+        </div>
+
+        <p>It&rsquo;s bedtime. The day is almost done. And then a shoe is on the wrong foot, or the cup is the wrong color, and suddenly your sweet child is crying like the world has ended.</p>
+
+        <p>You know the feeling is bigger than the problem. A tiny spark has somehow become a bonfire. And in that moment you face a choice every parent meets a hundred times a week: do you try to make the feeling disappear, or do you try to teach your child something about it?</p>
+
+        <p>I built the Little Scripture Travelers stories around a simple belief: <strong>a feeling is real, and a feeling is good &mdash; but a feeling is not a home.</strong> A feeling is more like weather. It blows in, it tells you something true (&ldquo;it&rsquo;s cold &mdash; bring a coat&rdquo;), and then it passes. You feel the storm. You don&rsquo;t build your house inside it.</p>
+
+        <p>The part of the book where I teach this is called the <strong>Feeling Moment</strong>, and the little path a child walks through it is called the <strong>Feeling Path.</strong></p>
+
+        <h2>What the Feeling Path Is</h2>
+
+        <p>Every Travelers story has the same gentle rhythm each night, and near the middle of that rhythm sits the Feeling Moment &mdash; the place where the feeling inside the scripture story becomes a feeling your child can recognize in their own chest.</p>
+
+        <p>Inside that moment, your child crosses five small stepping stones. The same five, every single night. I call them the <strong>five stones</strong>, because a path only gets worn in by walking it again and again:</p>
+
+        <div class="stones-card">
+          <h3>The Five Stones</h3>
+          <ul class="stones-list">
+            <li><strong>Spot</strong> &mdash; We notice the feeling in the character first. What does their face do? What does their body do? It&rsquo;s far easier to see a feeling in someone else before you can see it in yourself.</li>
+            <li><strong>Name</strong> &mdash; We give the feeling a plain word &mdash; happy, sad, mad, scared, worried, frustrated &mdash; and we notice where it rings in the body. I tell children the body is like a doorbell: it rings first, before the brain even finds the word.</li>
+            <li><strong>Find</strong> &mdash; Now your child looks inward for a moment: <em>Have I felt that? Where do I feel it?</em> The hot face of mad. The flippy tummy of scared.</li>
+            <li><strong>Fork</strong> &mdash; This is the heart of the whole thing. A feeling is a <em>fork in the road.</em> It can drive us &mdash; grab the wheel and steer us straight into trouble &mdash; or we can hold it and choose the wise path anyway. We show your child which fork the character took.</li>
+            <li><strong>Calm</strong> &mdash; Finally, your child borrows one small calm-down tool &mdash; smell the soup, balloon belly, a hug, a slow turtle, a word out loud, talking to Heavenly Father &mdash; done <em>with</em> you, and always ending in one slow breath.</li>
+          </ul>
+        </div>
+
+        <p>Spot, Name, Find, Fork, Calm. That&rsquo;s the whole path. It&rsquo;s short on purpose, because little ones learn by repetition, not by lectures.</p>
+
+        <h2>The One Idea That Holds It All Together</h2>
+
+        <p>Here is the distinction I care about most, and the reason I designed it the way I did.</p>
+
+        <p>There is a world of difference between <strong>knowing a feeling and drowning in it.</strong></p>
+
+        <p>Picture two windows. One is a mirror &mdash; it only ever shows you yourself. The other looks out on the road ahead, the people walking it with you, the home you&rsquo;re heading toward. A healthy child needs to glance in the mirror &mdash; <em>oh, I&rsquo;m scared</em> &mdash; and then look back out the window and keep walking.</p>
+
+        <p>The trouble starts when a child is taught to stand in front of the mirror all day. To pick the feeling up, turn it over, study it, talk about it, and sit in it &mdash; without ever looking back out the window. That doesn&rsquo;t make the feeling smaller. It slowly makes the feeling the whole room.</p>
+
+        <div class="highlight-box">
+          <p>So the Feeling Path teaches the opposite habit: <strong>notice the feeling, name it, and then move.</strong> We never pretend it isn&rsquo;t there. We never tell a child their feelings are bad &mdash; I&rsquo;m careful never to do that. But we also don&rsquo;t move in. We learn a feeling the way you&rsquo;d read a road sign: look at it, understand it, and keep driving. Know it, then adapt, then go forward.</p>
+        </div>
+
+        <h2>Why Staring Inward Can Hurt</h2>
+
+        <p>I want to be honest and humble about the research here, because some of it is still young &mdash; but it points in a direction worth paying attention to.</p>
+
+        <p>A number of scholars have started to ask whether our well-meaning culture of &ldquo;talk about all your feelings, all the time&rdquo; might sometimes backfire. Lucy Foulkes at Oxford has written about what she calls <em>prevalence inflation</em> &mdash; the idea that teaching people to label ordinary, passing discomfort as a symptom or a disorder can make that discomfort feel bigger and stick around longer.[1][2] When we hand a child a heavy word for a light feeling, the word can start to weigh more than the feeling ever did.</p>
+
+        <p>That same caution shows up in the school research. Several careful reviews have found that some classroom emotional programs simply didn&rsquo;t help &mdash; and that a number of the strongest studies showed at least one negative effect, with the children most at risk sometimes faring worse.[4][5][7] That doesn&rsquo;t mean teaching children about feelings is a mistake. It means <em>how</em> we teach it matters enormously.</p>
+
+        <p>And here the research gets clearer. When you set two habits side by side &mdash; <strong>reappraisal</strong> (notice the feeling, then gently rethink it and redirect) versus <strong>rumination</strong> (circle the same feeling over and over) &mdash; reappraisal tends to improve nearly every outcome, while rumination tends to make things worse.[14][15] The Fork stone is reappraisal in a child&rsquo;s language. The mirror-maze I worry about is rumination by accident.</p>
+
+        <h2>Where Social-and-Emotional Learning Can Go Sideways</h2>
+
+        <p>Most schools today teach some version of <strong>social-and-emotional learning</strong> &mdash; usually shortened to <strong>SEL</strong> &mdash; the class time set aside for naming feelings, calming down, and getting along with others. And I want to be fair, because there is real good in it. One of the largest recent reviews &mdash; ninety studies covering more than twenty thousand children &mdash; found that students who went through a quality SEL program came away with stronger social and emotional skills, better behavior, and even better grades.[29] Those gains are real, and I&rsquo;m grateful for them. Children <em>should</em> learn the names of their feelings. That&rsquo;s the whole point of Spot, Name, and Find, and it&rsquo;s the part of SEL the Feeling Path keeps without apology.</p>
+
+        <p>Here is where I&rsquo;ll be honest, though. SEL has spread into nearly every American school over the very same decade that children&rsquo;s mental health has been sliding &mdash; the steep decline began around 2012 and has continued since.[30] I want to be careful with that timing: it is <em>not</em> proof that SEL caused the decline, and I won&rsquo;t pretend it is. Most researchers who study this point somewhere else entirely &mdash; above all to the arrival of the smartphone and always-on social media in those same years &mdash; as the likelier driver, and even that link is still being argued over.[31] But the overlap does say something humbler and, I think, more useful: teaching a child to notice and name feelings, <em>by itself</em>, has not been enough to turn the tide.</p>
+
+        <p>And there&rsquo;s a sharper caution underneath it. Some of this work has quietly slipped from <em>noticing</em> a feeling into <em>living in</em> it &mdash; daily mood check-ins, endless journaling, asking children to scan and report their inner weather again and again. When it tips that far, the research suggests it can backfire. A 2025 paper in <em>The Lancet Regional Health &ndash; Americas</em> &mdash; which names SEL directly &mdash; warned that universal programs can pathologize ordinary ups and downs and &ldquo;reinforce self-monitoring,&rdquo; and that raising children&rsquo;s awareness of distress without giving them coping skills and support may actually deepen it.[7] And reviews of school emotional and mental-health programs more broadly have found a real share producing at least one negative effect, with some of the most vulnerable children coming out worse.[4][5] Even inside the field there&rsquo;s real disagreement about how this work ought to be done.[20]</p>
+
+        <p>So what&rsquo;s missing? The leading frameworks do name &ldquo;responsible decision-making&rdquo; as one of their core goals; on paper, the steering wheel is already there. My concern isn&rsquo;t the blueprint &mdash; it&rsquo;s where the weight tends to land once it reaches a real classroom: heavy on noticing, naming, and expressing feelings, and much lighter on the harder, older work of taking a feeling as <em>information</em>, holding it against what you <em>value</em>, and letting reason choose the next step.[8][11][12] A feeling named but never steered just leaves a child parked at the feeling, staring at it. That isn&rsquo;t strength. That&rsquo;s a stall.</p>
+
+        <div class="highlight-box">
+          <p>This is the whole design of the Feeling Path, and it&rsquo;s where I&rsquo;ll plant my flag: <strong>keep the good half of SEL, and add back the half that builds strength.</strong> Spot, Name, Find give a child the vocabulary and body-awareness that SEL is right to teach. Fork and Calm are the steering wheel &mdash; the place where the feeling becomes a signal, a value becomes the guide, and the child takes the faithful step.</p>
+        </div>
+
+        <h2>Looking In, or Looking Out &mdash; The Question I Wish Someone Would Study</h2>
+
+        <p>Here is what the science does show. A large body of work &mdash; including a meta-analysis that pooled more than two hundred findings &mdash; has found that self-focused attention, especially the kind where a person keeps turning inward and churning over their own feelings, is reliably tied to depression and anxiety.[32] The psychologists Ethan Kross and Ozlem Ayduk spent years mapping two different ways of facing a hard feeling: <em>immersed</em> &mdash; reliving it from the inside, which tends to feed rumination and distress &mdash; and <em>distanced</em> &mdash; stepping back to watch it like a fly on the wall, which lowers the distress and, strikingly, helps a person reason more wisely about what to do next.[33] Put plainly: getting stuck staring inward tends to hurt, while learning to step back and look outward tends to help.</p>
+
+        <p>Now here is where I stop, because honesty demands it. Two limits, said out loud. First, most of that research was done with adults and teenagers, not little children &mdash; so applying it to a three-year-old is a reasoned inference about which direction to point a child, not a proven claim about preschoolers. Second, and bigger: no study I can find has tested whether SEL, as it is actually practiced in classrooms, nudges children toward that harmful inward kind of attention. That link is a fair worry, not a proven fact, and I won&rsquo;t dress it up as more.</p>
+
+        <p>But set them side by side, and I think reasonable people on every side of this debate should be able to agree on one thing: <em>this is worth studying.</em> If we are going to ask tens of millions of children to spend school time turning attention to their own feelings, we ought to know &mdash; from real evidence &mdash; whether the way we do it leaves them looking inward in the way that hurts, or outward in the way that heals. As best I can tell, that study simply hasn&rsquo;t been done. It should be.</p>
+
+        <p>And that, in the end, is why the Feeling Path is shaped the way it is. It will not leave a child staring inward. It names the feeling &mdash; and then, in nearly the same breath, turns the child back outward and forward: toward a value, toward a wise choice, toward the next faithful step. That turn outward is the old Stoic move, and it is the one the research keeps tying to a steadier, healthier mind.[8][11][12][33]</p>
+
+        <h2>The Compass: Why I Use Scripture</h2>
+
+        <p>If a feeling is weather, then something has to be the compass.</p>
+
+        <p>When the wind of a big feeling spins a child around, the question at the Fork is always the same: <em>which way is the right way?</em> A feeling can&rsquo;t answer that. A feeling only tells you the weather. You need a fixed point to steer by.</p>
+
+        <p>For our family &mdash; and for many Christian and Latter-day Saint families &mdash; that fixed point is the scriptures. They tell us what matters: love, courage, honesty, kindness, faith, forgiveness. So when Beau feels afraid, or Willow&rsquo;s heart aches for someone, or Wren has to wait, the feeling is never the ruler. The value is the ruler, and the value comes from God&rsquo;s word. The feeling is just the weather along the road home.</p>
+
+        <p>This is also why I leaned on an old, well-worn idea. The Stoics &mdash; and the modern psychology that has gone back and tested their thinking &mdash; taught a simple sequence: notice the emotion, understand it as information, then choose your response by what you value, not by what you feel.[8][11][12] And notice the order, because this is where people misread the Stoics: the feeling is named and felt <em>first</em>, then steered. This was never a stiff upper lip or bottling things up &mdash; our children name the feeling out loud every single night. Stoicism isn&rsquo;t pretending you feel nothing; it&rsquo;s deciding the feeling won&rsquo;t be the one driving. That is almost exactly the Feeling Path. The only thing I&rsquo;ve added is <em>whose</em> values we steer by. For us, that&rsquo;s the Lord&rsquo;s.</p>
+
+
+        <div class="pull-quote">
+          <p>&ldquo;In coming days, it will not be possible to survive spiritually without the guiding, directing, comforting, and constant influence of the Holy Ghost. My beloved brothers and sisters, I plead with you to increase your spiritual capacity to receive revelation.&rdquo;</p>
+          <cite style="display:block;margin-top:0.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">— President Russell M. Nelson</cite>
+          <p class="pull-quote-context" style="font-family:'Nunito',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Feeling Path was built so that scripture &mdash; and the Spirit that attends it &mdash; is the compass your child steers by. Not just emotional intelligence. A relationship with God that they feel at the close of every day.</p>
+        </div>
+
+        <div class="pull-quote">
+          <p>&ldquo;In coming days, it will not be possible to survive spiritually without the guiding, directing, comforting, and constant influence of the Holy Ghost. My beloved brothers and sisters, I plead with you to increase your spiritual capacity to receive revelation.&rdquo;</p>
+          <cite style="display:block;margin-top:0.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">— President Russell M. Nelson</cite>
+          <p class="pull-quote-context" style="font-family:'Nunito',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Feeling Path was built so that scripture &mdash; and the Spirit that attends it &mdash; is the compass your child steers by. Not just emotional intelligence. A relationship with God that they feel at the close of every day.</p>
+        </div>
+        <h2>A Word for the Grown-Ups: This One Is for You First</h2>
+
+        <p>Here is something I want to say plainly, parent to parent.</p>
+
+        <p><strong>The Feeling Path is a tool for you before it is ever a tool for your child.</strong></p>
+
+        <p>There are two reasons. The first is the one every flight attendant tells us: put on your own oxygen mask first. You cannot hand a child a calm you don&rsquo;t have. When <em>you</em> learn to spot your own feeling at bedtime &mdash; the tiredness, the short fuse &mdash; name it, see the fork, and take one slow breath, your child is watching the whole thing. That <em>is</em> the lesson. Most of what our children learn about feelings, they learn while standing next to us as we feel our own.</p>
+
+        <p>The second reason is simply how little brains are built. A three-year-old cannot yet steer a big emotion on their own &mdash; the part of the brain that does that work is still under construction, and will be for years. So at this age we aren&rsquo;t really teaching a child to regulate themselves tonight. We are doing two things instead: <strong>lending them our calm now</strong> &mdash; this is called co-regulation, where your steady heartbeat becomes theirs &mdash; and <strong>planting the tools now,</strong> so that years from now, when their brain is finally ready, the path is already worn in and they can walk it themselves. We&rsquo;re not asking a toddler to master this. We&rsquo;re handing them the map early, so the road feels familiar when they&rsquo;re old enough to drive it.</p>
+
+        <h2>The Toolkit Card</h2>
+
+        <div class="toolkit-card">
+          <h3>The Feeling Path &mdash; In Plain Terms</h3>
+          <div class="toolkit-row">
+            <div class="toolkit-label">The tool</div>
+            <p>The Feeling Path &mdash; the emotional heart of every Little Scripture Travelers bedtime story (the Feeling Moment).</p>
+          </div>
+          <div class="toolkit-row">
+            <div class="toolkit-label">What it is</div>
+            <p>Five small steps a child walks each night &mdash; <em>Spot, Name, Find, Fork, Calm</em> &mdash; attached to the one feeling that lives inside that night&rsquo;s scripture story.</p>
+          </div>
+          <div class="toolkit-row">
+            <div class="toolkit-label">Its purpose</div>
+            <p>To teach a child, gently and through repetition, how to recognize a feeling, understand it as a signal, and choose a wise response &mdash; guided by the values in scripture &mdash; rather than being ruled by the feeling.</p>
+          </div>
+          <div class="toolkit-row">
+            <div class="toolkit-label">What it does for the child</div>
+            <p>Builds an emotional vocabulary, a body-awareness habit (the &ldquo;doorbell&rdquo;), and a simple, repeatable way to move <em>through</em> a feeling instead of getting stuck in it. It also gives them brave and tender models &mdash; the Travelers &mdash; to copy.</p>
+          </div>
+          <div class="toolkit-row">
+            <div class="toolkit-label">The problem it solves for the parent</div>
+            <p>It turns the hardest moments &mdash; the meltdown, the fear, the frustration &mdash; into a calm, familiar script you both already know, so you&rsquo;re not inventing a response from scratch at the end of a long day. And it quietly gives <em>you</em> a tool for your own feelings, too.</p>
+          </div>
+          <div class="toolkit-row">
+            <div class="toolkit-label">The research behind it</div>
+            <p>The naming step draws on long-standing work in emotion science showing that putting a feeling into words can take some of its heat out. The Fork step is <em>cognitive reappraisal</em>, which consistently outperforms rumination.[14][15] The whole &ldquo;notice it, accept it, then act on your values&rdquo; shape is the backbone of Acceptance and Commitment Therapy, one of the better-studied modern approaches, including with children.[13] The ancient version of the very same idea is Stoicism &mdash; the founders of cognitive behavioral therapy, Aaron Beck and Albert Ellis, both traced their methods straight back to the Stoics; Beck&rsquo;s foundational 1979 treatment manual says so in plain words.[8][11][12]</p>
+          </div>
+        </div>
+
+        <h2>Why I Call This a Preventive Tool</h2>
+
+        <p>My background is in behavioral health and family science, in the prevention tradition: the part of the field that focuses on building a child&rsquo;s strengths early and upstream, before problems have a chance to take root. I&rsquo;m not a clinician, and I&rsquo;m not a researcher presenting findings of my own. I&rsquo;m a father and a curriculum writer who has tried to read the science honestly and build something faithful on top of it. I was trained to think less like the ambulance at the bottom of the cliff and more like the fence at the top.</p>
+
+        <p>Most help for our feelings arrives <em>after</em> the fall. After the meltdown hardens into a pattern. After the worry settles in as a habit. After a child is already hurting and we&rsquo;re scrambling to respond. That kind of help matters, and thank goodness for it. But the Feeling Path is trying to be the fence &mdash; the small, steady thing at the top of the cliff that keeps the fall from happening in the first place.</p>
+
+        <p>That&rsquo;s why we practice it where we do: in the <em>calm</em> of bedtime, with a warm light and a parent close by, long before the big feeling ever hits. A child can&rsquo;t learn a new path in the middle of a storm &mdash; the storm is too loud. But walk the same five stones together every quiet night, and the path gets worn in. Then, years from now, when a real storm comes, their feet already know the way.</p>
+
+        <p>I&rsquo;ll stay careful about what I claim we&rsquo;re preventing. It isn&rsquo;t any one diagnosis, and a bedtime book can&rsquo;t promise that. What we&rsquo;re working to prevent are the habits that tend to grow into trouble down the road &mdash; being ruled by big feelings, running from hard things, and circling endlessly inside one&rsquo;s own head.[15][26] Those are the patterns the research keeps tying to anxiety and low moods later in life, while the opposite habits &mdash; name it, steer by your values, take the next faithful step &mdash; are the ones tied to resilience.[14][16][17] Planting those early, inside a ritual a child already loves, is the quiet, upstream bet this whole tool is making.</p>
+
+        <p>Prevention rarely looks dramatic. Most nights it just looks like a parent and a child, a small light, and the same gentle path, walked one more time.</p>
+
+        <h2>The Honest Fine Print</h2>
+
+        <p>A few things I never want to overpromise.</p>
+
+        <p>This is a learning tool and a relationship tool &mdash; not therapy, and not a diagnosis or a treatment. If your child is truly struggling, some children need more help than a bedtime book can give, and reaching for that help is a sign of love, not of failure.</p>
+
+        <p>And what we&rsquo;re building here is a habit, not a guarantee. I can&rsquo;t promise you an outcome. What I can tell you is that the shape of the Feeling Path matches what the careful research keeps pointing toward, and that I&rsquo;ve worked hard to stay on the right side of one line &mdash; teaching children to <em>know</em> a feeling and keep walking, never to sit down and live inside it.</p>
+
+        <p>I built this, so I&rsquo;m plainly not a neutral party &mdash; of course I believe in it. That&rsquo;s exactly why I&rsquo;ve tried to mark my opinions as opinions, to say out loud where the evidence is strong and where it runs thin, and to name every study so you can go check it yourself rather than take my word for it. If I&rsquo;ve earned your trust here, I&rsquo;d rather earn it that way than any other.</p>
+
+
+        <div class="pull-quote">
+          <p>&ldquo;The joy we feel has little to do with the circumstances of our lives and everything to do with the focus of our lives.&rdquo;</p>
+          <cite style="display:block;margin-top:0.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">— President Russell M. Nelson</cite>
+          <p class="pull-quote-context" style="font-family:'Nunito',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Feeling Path is not just about emotions. It is about giving a child a steady, outward focus &mdash; values, scripture, and the Lord &mdash; so that feelings become weather they can walk through, not walls they are trapped behind.</p>
+        </div>
+        <h2>And So, Back to Bedtime</h2>
+
+        <p>The next time the shoe is on the wrong foot and the little bonfire flares, I hope you&rsquo;ll have something steady in your hands. You&rsquo;ll spot it. You&rsquo;ll name it. You&rsquo;ll find it together. You&rsquo;ll see the fork. And you&rsquo;ll take one slow breath, side by side &mdash; and then turn the page toward home.</p>
+
+        <p>That&rsquo;s the whole hope of the Feeling Path: not children who never feel storms, but children &mdash; and parents &mdash; who know how to walk through them.</p>
+
+        <!-- Social Share -->
+        <div class="social-share">
+          <span>Share:</span>
+          <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Share on Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/scripturetravelers" aria-label="Share on Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://x.com/LittleScriveek" aria-label="Share on X" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://pin.it/3iCIxLDGB" aria-label="Share on Pinterest" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          </a>
+        </div>
+
+        <!-- Credentials -->
+        <div class="credentials-box">
+          <h3>My Background</h3>
+          <ul>
+            <li><strong>B.S. Behavioral Health Sciences &mdash; Family Studies &amp; Human Development.</strong> Behavioral health is the study of how habits, environments, and relationships shape a person&rsquo;s mental and emotional health, and how to strengthen them early. My emphasis in family studies and human development means I was trained specifically in how young children grow and how families become the soil that growth happens in.</li>
+            <li><strong>Provisional CFLE (NCFR, 2011) &mdash; grounded in the discipline of family life education.</strong> I hold a Provisional Certified Family Life Educator certification issued by the National Council on Family Relations. The CFLE framework is built entirely on prevention: equipping families with knowledge and skills before problems take root, rather than treating after. That preventive philosophy is not a marketing angle &mdash; it is the discipline I was credentialed in, and it is stitched into every page of these books. (My certification lapsed after a thirteen-year career break; I am currently working toward re-certification.)</li>
+            <li><strong>A background in child-development research.</strong> The Feeling Path &mdash; built on reappraisal, co-regulation, and Stoic-rooted values steering &mdash; is drawn from peer-reviewed work, and these books were built to honor it rather than merely borrow its vocabulary.</li>
+            <li><strong>A father using these with his own children.</strong> Every part of this was tested at my own bedside, with my own kids, on ordinary tired Tuesdays &mdash; not in a boardroom.</li>
+          </ul>
+        </div>
+
+        <div class="mission-box">
+          <span class="mission-eyebrow">Our Mission</span>
+          <div class="mission-headline">Preventive care for a child&rsquo;s heart &mdash; one small story a night.</div>
+          <p>Little Scripture Travelers helps ordinary, faithful families turn the quiet minutes before sleep into a nightly rhythm that grows resilient, rooted children &mdash; weaving scripture, story, movement, and a parent&rsquo;s own testimony into hearts strong enough to weather whatever comes. Preventive by design: building roots in the calm, before the storm.</p>
+        </div>
+
+        <div class="disclaimer-box">
+          <p>Little Scripture Travelers books are educational and preventive tools designed to build resilience and protective habits. They are not therapy, diagnosis, or treatment, and they are not a substitute for professional help. A child showing signs of an anxiety disorder, depression, or other mental-health concern deserves the care of a qualified professional &mdash; and prevention and treatment are partners, not rivals. The research summarized here is described in plain language; full citations are below. Note: much of this research was conducted with older children and adults, and the faith elements reflect my own family&rsquo;s beliefs rather than something the studies set out to test. I&rsquo;ve tried to represent it carefully, and not to claim more than it shows.</p>
+        </div>
+
+        <!-- Research Citations -->
+        <div class="research-section">
+          <h2>A Few of the Studies Behind This</h2>
+          <ul class="cite-list">
+            <li><strong>[1] Prevalence inflation</strong> &mdash; Foulkes, L. <em>The problem with mental health awareness</em> (2024). University of Oxford repository (ora.ox.ac.uk).</li>
+            <li><strong>[2] Mental health awareness and reported problems</strong> &mdash; Foulkes, L. &amp; Andrews, J. L. <em>Are mental health awareness efforts contributing to the rise in reported mental health problems?</em> New Ideas in Psychology (ScienceDirect).</li>
+            <li><strong>[4] School-based mental health programs</strong> &mdash; <em>Examining the Evidence about School-Based Mental Health Programs.</em> Issues in Mental Health Nursing (Taylor &amp; Francis).</li>
+            <li><strong>[5] Iatrogenic harm in school interventions</strong> &mdash; Foulkes, L. &amp; Stringaris, A. <em>Do no harm: can school mental health interventions cause iatrogenic harm?</em> BJPsych Bulletin (2023).</li>
+            <li><strong>[7] The Lancet warning on prescriptive emotionality</strong> &mdash; <em>The fine line between the cure and the illness: the risks of prescriptive emotionality and sociality for youth mental health.</em> The Lancet Regional Health &ndash; Americas (2025).</li>
+            <li><strong>[8] CBT and Stoicism</strong> &mdash; Beck, A. T., Rush, A. J., Shaw, B. F. &amp; Emery, G. <em>Cognitive Therapy of Depression</em> (1979). The foundational CBT manual, which traces the method&rsquo;s origins to the Stoic philosophers.</li>
+            <li><strong>[11] Western origins of mindfulness and CBT</strong> &mdash; <em>The Western origins of mindfulness therapy in ancient Rome.</em> A peer-reviewed account of how Ellis and Beck explicitly credited Stoicism (PMC).</li>
+            <li><strong>[12] Stoicism and modern psychotherapy</strong> &mdash; <em>The lineage of positive psychology and cognitive behavioral modalities: How Stoicism inspired modern psychotherapy.</em> Discover Psychology / Springer Nature (2024).</li>
+            <li><strong>[13] Acceptance and Commitment Therapy</strong> &mdash; <em>An Overview of Research on Acceptance and Commitment Therapy.</em> Utah State University.</li>
+            <li><strong>[14] Cognitive reappraisal vs. rumination</strong> &mdash; <em>Cognitive Reappraisal and Acceptance: Effects on Emotion Regulation.</em> PMC.</li>
+            <li><strong>[15] Reflecting on rumination</strong> &mdash; Watkins, E. &amp; Roberts, H. <em>Reflecting on rumination.</em> University of Wisconsin.</li>
+            <li><strong>[16] Early-life predictors of resilience</strong> &mdash; <em>Early-life predictors of resilience and related outcomes.</em> d-nb.info.</li>
+            <li><strong>[17] Early-life adversity and later mental health</strong> &mdash; <em>Early-life adversity and later-life mental health: a conditional process analysis.</em> Frontiers.</li>
+            <li><strong>[20] SEL under scrutiny</strong> &mdash; <em>Teaching social-emotional learning is under attack.</em> American Psychological Association.</li>
+            <li><strong>[26] Trait acceptance and rumination</strong> &mdash; <em>Trait acceptance predicts fewer daily negative emotions through less stressor-related rumination.</em> PMC.</li>
+            <li><strong>[29] SEL meta-analysis</strong> &mdash; <em>A systematic review and meta-analysis of the effects of universal school-based SEL programs.</em> ScienceDirect.</li>
+            <li><strong>[30] Youth mental health trends</strong> &mdash; <em>Youth Risk Behavior Survey Data Summary &amp; Trends Report, 2013&ndash;2023.</em> U.S. Centers for Disease Control and Prevention.</li>
+            <li><strong>[31] Social media and youth mental health</strong> &mdash; <em>Social Media and Youth Mental Health: The U.S. Surgeon General&rsquo;s Advisory</em> (2023). U.S. Department of Health and Human Services.</li>
+            <li><strong>[32] Self-focused attention and negative affect</strong> &mdash; Mor, N. &amp; Winquist, J. <em>Self-focused attention and negative affect: a meta-analysis.</em> Psychological Bulletin (2002). PubMed.</li>
+            <li><strong>[33] Self-distancing</strong> &mdash; Kross, E. &amp; Ayduk, O. <em>Making Meaning out of Negative Experiences by Self-Distancing</em> (Current Directions in Psychological Science) and <em>Self-Distancing: Theory, Research, and Current Directions.</em></li>
+          </ul>
+        </div>
+
+        <!-- CTA -->
+        <div class="article-cta">
+          <h3>Start Tonight</h3>
+          <p>Every story walks the same five stones. Give your child the path — start your free 7-day trial tonight.</p>
+          <a href="/subscribe.html#plans" class="btn-gold">Try the First 7 Days Free</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+          <img src="images/logo-badge.jpg" alt="Little Scripture Travelers" width="40" height="40" style="border-radius:50%;object-fit:cover;" />
+          <div>
+            <div class="logo-name" style="font-size:0.9rem;">Little Scripture Travelers</div>
+            <div class="logo-sub" style="font-size:0.7rem;">Bedtime Stories</div>
+          </div>
+        </div>
+        <p>Helping little ones feel the Spirit &mdash; one bedtime story at a time.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Watch &amp; Read</h4>
+        <ul role="list">
+          <li><a href="https://www.youtube.com/@LittleScriptureTravelers" target="_blank" rel="noopener">YouTube Channel</a></li>
+          <li><a href="https://www.amazon.com/Follows-Scripture-Travelers-Bedtime-Stories/dp/B0H3ZDCFSR/ref=tmm_pap_swatch_0" target="_blank" rel="noopener">Books on Amazon</a></li>
+          <li><a href="https://a.co/d/0gLYJdit" target="_blank" rel="noopener">Kindle Editions</a></li>
+          <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;">Try the First 7 Days Free</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Subscribe</h4>
+        <ul role="list">
+          <li><a href="/subscribe.html#plans">The Lantern</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul role="list">
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="travelers.html">Meet the Travelers</a></li>
+          <li><a href="blog.html">Why Bedtime Scripture</a></li>
+          <li><a href="mailto:littlescripturetravelers@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-manage">
+        <h4>Manage Subscriptions</h4>
+        <ul role="list">
+          <li><button type="button" class="btn-cancel-sub footer-cancel-link" aria-haspopup="dialog">Cancel Subscription</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom" style="flex-direction:column;align-items:center;text-align:center;">
+      <div class="social-links" style="justify-content:center;margin-bottom:0.75rem;gap:0.75rem;">
+        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07112e"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.14a8.16 8.16 0 0 0 4.77 1.52V7.21a4.85 4.85 0 0 1-1-.52z"/></svg>
+        </a>
+        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        </a>
+      </div>
+      <p style="margin-top:1rem;">We do not lecture. We do not pile on rules. We tell what happened &mdash; a beginning, a worry, and a hopeful ending &mdash; in the smallest words that still carry the meaning.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">&copy; 2026 Little Scripture Travelers</p>
+      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.15);font-size:0.72rem;line-height:1.5;color:#9aa6c0;text-align:center;">
+        <p style="margin:0 0 0.6rem;">Little Scripture Travelers Bedtime Stories, LLC is an independent creative endeavor. It is not affiliated with, made by, sponsored by, approved by, or endorsed by The Church of Jesus Christ of Latter-day Saints or Intellectual Reserve, Inc. All stories, illustrations, characters, lullabies, and opinions are solely those of Little Scripture Travelers and do not represent the Church.</p>
+        <p style="margin:0;">&ldquo;Come, Follow Me,&rdquo; the name of The Church of Jesus Christ of Latter-day Saints, and related names and logos are trademarks of Intellectual Reserve, Inc.; any reference to them here is for identification purposes only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Legacy mobile nav toggle — the current header replaced it, so guard for absence
+    const toggle = document.getElementById('navToggle');
+    const mobile = document.getElementById('navMobile');
+    if (toggle && mobile) {
+      toggle.addEventListener('click', () => {
+        mobile.classList.toggle('open');
+        toggle.textContent = mobile.classList.contains('open') ? '\u2715' : '\u2630';
+      });
+    }
+    window.addEventListener('scroll', () => {
+      const navEl = document.getElementById('nav');
+      if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 40);
+    });
+  </script>
+  <script src="main.js"></script>
+
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+</script></body>
+</html>

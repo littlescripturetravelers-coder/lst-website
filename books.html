@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Our Books — Little Scripture Travelers Bedtime Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+<style>
+  :root {
+    --navy-deep: #0a1a4a;
+    --navy-mid: #142560;
+    --navy-light: #1d3478;
+    --gold: #f4c842;
+    --gold-soft: #ffd97a;
+    --gold-glow: rgba(244, 200, 66, 0.4);
+    --cream: #f8f1dd;
+    --cream-soft: #e8e4d3;
+    --sky-blue: #7cc4f0;
+
+    /* Volume colors */
+    --ot-green: #5a8a3a;
+    --ot-green-deep: #3d6024;
+    --nt-red: #a44a28;
+    --nt-red-deep: #7a3318;
+    --bom-teal: #2a8a8a;
+    --bom-teal-deep: #1a6868;
+    --dc-purple: #6a48a8;
+    --dc-purple-deep: #4a2d7a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--navy-deep);
+    color: var(--cream);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  /* ===== STARRY SKY ===== */
+  .sky-bg {
+    position: relative;
+    background: linear-gradient(180deg, #0a1a4a 0%, #142560 50%, #1d3478 100%);
+    overflow: hidden;
+  }
+
+  .sky-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+      radial-gradient(1px 1px at 60px 70px, #fff, transparent),
+      radial-gradient(1px 1px at 100px 50px, var(--gold-soft), transparent),
+      radial-gradient(2px 2px at 140px 90px, #fff, transparent),
+      radial-gradient(1px 1px at 180px 40px, #fff, transparent),
+      radial-gradient(1px 1px at 220px 110px, var(--gold-soft), transparent),
+      radial-gradient(2px 2px at 280px 30px, #fff, transparent),
+      radial-gradient(1px 1px at 320px 80px, #fff, transparent),
+      radial-gradient(1px 1px at 360px 60px, #fff, transparent),
+      radial-gradient(2px 2px at 400px 100px, var(--gold-soft), transparent);
+    background-repeat: repeat;
+    background-size: 420px 140px;
+    opacity: 0.7;
+    animation: twinkle 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.9; }
+  }
+
+  .cloud {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(124, 196, 240, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ===== NAVIGATION ===== */
+  
+
+  
+
+  
+
+  .logo img.logo-badge {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 16px var(--gold-glow);
+  }
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  .nav-mobile-list {
+    display: none;
+    flex-direction: column;
+    background: rgba(10,26,74,0.98);
+    border-top: 1px solid rgba(244,200,66,0.2);
+    padding: 0.5rem 0;
+    list-style: none;
+  }
+
+  .nav-mobile-list.open { display: flex; }
+
+  .nav-mobile-list a {
+    display: block;
+    color: var(--cream);
+    text-decoration: none;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.75rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nav-mobile-list a:hover,
+  .nav-mobile-list a.active {
+    color: var(--gold);
+    background: rgba(244,200,66,0.06);
+  }
+
+  /* ===== PAGE HERO ===== */
+  .page-hero {
+    position: relative;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .page-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  .breadcrumb {
+    color: var(--sky-blue);
+    font-size: 0.9rem;
+    font-family: 'Fredoka', sans-serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .breadcrumb a {
+    color: var(--sky-blue);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb a:hover { color: var(--gold); }
+
+  .page-hero h1 {
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+    color: var(--cream);
+  }
+
+  .page-hero h1 .accent {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .page-hero-subhead {
+    font-family: 'Fredoka', sans-serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    font-weight: 400;
+    color: var(--gold-soft);
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .page-hero-body {
+    font-size: 1.05rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--cream-soft);
+    line-height: 1.7;
+  }
+
+  /* ===== FEATURED BOOK — JUNE ===== */
+  .featured-book {
+    padding: 5rem 2rem;
+    background: linear-gradient(180deg, #07112e 0%, #0d1b4b 50%, #07112e 100%);
+    position: relative;
+  }
+
+  .featured-book-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .featured-book-cover {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(244,200,66,0.15);
+    border: 3px solid var(--gold);
+  }
+
+  .featured-book-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .featured-book-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: var(--gold);
+    color: var(--navy-deep);
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+  }
+
+  .featured-book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .featured-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .featured-book-info h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: var(--cream);
+    line-height: 1.15;
+  }
+
+  .featured-book-info h2 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .featured-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .featured-meta-pill {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(244,200,66,0.25);
+    border-radius: 20px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.8rem;
+    color: var(--cream-soft);
+    font-family: 'Fredoka', sans-serif;
+    letter-spacing: 0.08em;
+  }
+
+  .featured-book-info p {
+    color: var(--cream-soft);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+
+  .featured-scripture {
+    background: rgba(244,200,66,0.1);
+    border-left: 4px solid var(--gold);
+    padding: 1rem 1.25rem;
+    border-radius: 0 10px 10px 0;
+    font-style: italic;
+    color: var(--gold-soft);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .featured-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .btn-featured-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: var(--gold);
+    color: var(--navy-deep);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 8px 30px var(--gold-glow);
+    transition: all 0.25s;
+    max-width: 340px;
+  }
+
+  .btn-featured-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px var(--gold-glow);
+    background: var(--gold-soft);
+  }
+
+  .btn-featured-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: transparent;
+    color: var(--gold);
+    border: 2px solid rgba(244,200,66,0.5);
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.25s;
+    max-width: 340px;
+  }
+
+  .btn-featured-secondary:hover {
+    background: rgba(244,200,66,0.1);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* ===== SERIES AT A GLANCE ===== */
+  .glance {
+    padding: 4rem 2rem 6rem;
+    position: relative;
+  }
+
+  .glance-strip {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .glance-card {
+    background: linear-gradient(180deg, rgba(29, 52, 120, 0.5) 0%, rgba(20, 37, 96, 0.5) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    position: relative;
+  }
+
+  .glance-color-band {
+    width: 60px;
+    height: 6px;
+    border-radius: 3px;
+    margin: 0 auto 1rem;
+  }
+
+  .glance-card.ot .glance-color-band { background: var(--ot-green); }
+  .glance-card.nt .glance-color-band { background: var(--nt-red); }
+  .glance-card.bom .glance-color-band { background: var(--bom-teal); }
+  .glance-card.dc .glance-color-band { background: var(--dc-purple); }
+
+  .glance-card h3 {
+    color: var(--gold);
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .glance-card p {
+    color: var(--cream-soft);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  /* Series shelf */
+  .series-shelf-wrap {
+    max-width: 1200px;
+    margin: 3rem auto 1rem;
+    position: relative;
+    z-index: 2;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 50px rgba(244,200,66,0.1);
+    border: 2px solid rgba(244,200,66,0.3);
+  }
+
+  .series-shelf-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .glance-tagline {
+    text-align: center;
+    margin-top: 3rem;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--sky-blue);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ===== SECTION HEADERS ===== */
+  .section-header {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-eyebrow {
+    display: inline-block;
+    color: var(--gold);
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin-bottom: 1rem;
+  }
+
+  .section-header h2 {
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    margin-bottom: 1rem;
+    color: var(--cream);
+  }
+
+  .section-header p {
+    color: var(--cream-soft);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  /* ===== INSIDE EACH STORY ===== */
+  .anatomy {
+    padding: 6rem 2rem;
+    background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-mid) 50%, var(--navy-deep) 100%);
+    position: relative;
+  }
+
+  .pages-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .story-page {
+    background: var(--cream);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    transition: transform 0.3s;
+    border: 3px solid var(--gold);
+  }
+
+  .story-page:hover { transform: translateY(-8px) rotate(-1deg); }
+
+  .story-page-banner {
+    background: var(--navy-deep);
+    color: var(--cream);
+    padding: 0.6rem 1rem;
+    text-align: center;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    position: relative;
+  }
+
+  .story-page-banner::before,
+  .story-page-banner::after { content: '★'; color: var(--gold); position: absolute; top: 50%; transform: translateY(-50%); }
+  .story-page-banner::before { left: 0.75rem; }
+  .story-page-banner::after { right: 0.75rem; }
+
+  .story-page-content { padding: 1.25rem; color: var(--navy-deep); }
+
+  .story-page-illustration {
+    aspect-ratio: 16/10;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .story-page-illustration svg { width: 50%; height: 50%; opacity: 0.5; }
+
+  .story-page.page-1 .story-page-illustration { background: linear-gradient(135deg, #6b4520, #3d2810); color: var(--gold); }
+  .story-page.page-2 .story-page-illustration { background: linear-gradient(135deg, #c89060, #8b6840); color: var(--cream); }
+  .story-page.page-3 .story-page-illustration { background: linear-gradient(135deg, #7ba840, var(--ot-green)); color: var(--cream); }
+  .story-page.page-4 .story-page-illustration { background: linear-gradient(135deg, #6a4d3a, #4a3520); color: var(--gold); }
+
+  .story-page-tag {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    color: white;
+  }
+
+  .story-page.page-1 .story-page-tag { background: var(--navy-mid); }
+  .story-page.page-2 .story-page-tag { background: var(--ot-green); }
+  .story-page.page-3 .story-page-tag { background: var(--ot-green-deep); }
+  .story-page.page-4 .story-page-tag { background: var(--navy-mid); }
+
+  .story-page h4 { color: var(--navy-deep); font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .story-page p { color: #555; font-size: 0.85rem; line-height: 1.5; }
+
+  .story-page-quote {
+    background: rgba(244, 200, 66, 0.15);
+    border-left: 3px solid var(--gold);
+    padding: 0.6rem 0.75rem;
+    margin-top: 0.75rem;
+    font-style: italic;
+    color: var(--navy-deep);
+    font-size: 0.8rem;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .anatomy-footer {
+    text-align: center;
+    max-width: 720px;
+    margin: 3.5rem auto 0;
+    color: var(--cream-soft);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    position: relative;
+    z-index: 2;
+  }
+
+  .anatomy-footer em { color: var(--gold-soft); font-style: italic; }
+
+  /* ===== VOLUME SELECTOR ===== */
+  .volumes { padding: 6rem 2rem; position: relative; }
+
+  .volume-tabs {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .volume-tab {
+    border-radius: 20px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Volume tabs with real cover images */
+  .volume-tab { overflow: hidden; }
+  .volume-tab.ot { background: var(--ot-green-deep); }
+  .volume-tab.nt { background: var(--nt-red-deep); }
+  .volume-tab.bom { background: var(--bom-teal-deep); }
+  .volume-tab.dc { background: var(--dc-purple-deep); }
+
+  .volume-tab-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+
+  .volume-tab:hover .volume-tab-bg { transform: scale(1.06); }
+
+  .volume-tab::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.65) 100%);
+    z-index: 1;
+  }
+
+  .volume-tab:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+  .volume-tab.active { border-color: var(--gold); box-shadow: 0 0 30px var(--gold-glow), 0 20px 50px rgba(0,0,0,0.5); transform: translateY(-4px); }
+
+  .volume-tab-content { position: relative; z-index: 3; }
+
+  .volume-roman {
+    display: inline-block;
+    background: rgba(244, 200, 66, 0.95);
+    color: var(--navy-deep);
+    padding: 0.3rem 0.85rem;
+    border-radius: 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+
+  .volume-tab h3 { color: white; font-size: 1.3rem; margin-bottom: 0.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+  .volume-tab p { color: rgba(255,255,255,0.85); font-size: 0.85rem; margin: 0; }
+
+  .volume-tab .book-count {
+    display: inline-block;
+    margin-top: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0,0,0,0.25);
+    border-radius: 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.75rem;
+    color: white;
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== BOOKS GRID ===== */
+  .books-section {
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .volume-intro {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 2px solid var(--gold);
+    background: rgba(29, 52, 120, 0.4);
+    backdrop-filter: blur(8px);
+  }
+
+  .volume-intro h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--gold); margin-bottom: 0.75rem; }
+  .volume-intro p { color: var(--cream-soft); max-width: 680px; margin: 0 auto; line-height: 1.7; }
+
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .book-card {
+    background: linear-gradient(180deg, rgba(29, 52, 120, 0.6) 0%, rgba(20, 37, 96, 0.6) 100%);
+    border-radius: 16px;
+    overflow: visible;
+    transition: transform 0.25s, box-shadow 0.25s;
+    border: 2px solid transparent;
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .book-card:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+
+  .book-cover {
+    aspect-ratio: 3/4;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 14px 14px 0 0;
+  }
+
+  /* Real cover image styling */
+  .book-cover.has-image { aspect-ratio: unset; max-height: 200px; border-radius: 14px 14px 0 0; overflow: hidden; }
+  .book-cover.has-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .book-cover.ot { background: linear-gradient(160deg, var(--ot-green) 0%, var(--ot-green-deep) 100%); }
+  .book-cover.nt { background: linear-gradient(160deg, var(--nt-red) 0%, var(--nt-red-deep) 100%); }
+  .book-cover.bom { background: linear-gradient(160deg, var(--bom-teal) 0%, var(--bom-teal-deep) 100%); }
+  .book-cover.dc { background: linear-gradient(160deg, var(--dc-purple) 0%, var(--dc-purple-deep) 100%); }
+
+  .book-cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(2px 2px at 60px 70px, rgba(255, 217, 122, 0.6), transparent),
+      radial-gradient(1px 1px at 100px 50px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 140px 100px, rgba(255, 217, 122, 0.4), transparent),
+      radial-gradient(1px 1px at 80px 20px, rgba(255,255,255,0.4), transparent);
+    background-repeat: repeat;
+    background-size: 160px 130px;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* No star overlay on real image covers */
+  .book-cover.has-image::before { display: none; }
+
+  /* Month label overlay for coming-soon cards using volume cover */
+  .book-cover-coming-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 1rem 0.75rem;
+    background: linear-gradient(to top, rgba(5,12,35,0.92) 60%, transparent);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 2;
+  }
+  .book-cover-coming-label .book-month {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.15rem;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+  }
+
+  .book-cover-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: white;
+  }
+
+  .book-month { font-family: 'Fredoka', sans-serif; font-size: 1.8rem; font-weight: 600; line-height: 1; margin-bottom: 0.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+  .book-cover-divider { width: 30px; height: 2px; background: var(--gold); margin: 0.5rem auto; }
+  .book-volume-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin-bottom: 0.85rem; }
+
+  .book-mini-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 0.5rem;
+    border-radius: 50%;
+    background: rgba(244, 200, 66, 0.2);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .book-mini-icon svg { width: 28px; height: 28px; color: var(--gold); }
+
+  .book-status-corner {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    z-index: 3;
+  }
+
+  .book-status-corner.available { background: var(--gold); color: var(--navy-deep); }
+  .book-status-corner.coming { background: rgba(0,0,0,0.5); color: var(--cream); border: 1px solid var(--gold); }
+
+  .book-info { padding: 1.25rem 1.25rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .book-actions { margin-top: auto; }
+
+  .book-number { display: block; font-size: 0.8rem; color: var(--sky-blue); margin-bottom: 0.25rem; letter-spacing: 0.1em; }
+  .book-title { color: var(--cream); font-family: 'Fredoka', sans-serif; font-size: 1.05rem; font-weight: 500; margin-bottom: 0.85rem; }
+
+  .book-actions { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .book-btn {
+    display: block;
+    text-align: center;
+    padding: 0.55rem 0.75rem;
+    border-radius: 30px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .book-btn.primary { background: var(--gold); color: var(--navy-deep); }
+  .book-btn.primary:hover { background: var(--gold-soft); }
+  .book-btn.secondary { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+  .book-btn.secondary:hover { background: rgba(244, 200, 66, 0.15); }
+  .book-btn.disabled { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); cursor: not-allowed; }
+  .book-btn.notify { background: transparent; color: var(--sky-blue); border: 1px solid var(--sky-blue); }
+  .book-btn.notify:hover { background: rgba(124, 196, 240, 0.15); }
+
+  /* ===== FORMAT OPTIONS ===== */
+  .formats {
+    padding: 6rem 2rem;
+    background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy-deep) 100%);
+    position: relative;
+  }
+
+  .formats-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .format-card {
+    background: linear-gradient(180deg, rgba(29, 52, 120, 0.5) 0%, rgba(20, 37, 96, 0.5) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    backdrop-filter: blur(6px);
+  }
+
+  .format-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.25rem;
+    background: radial-gradient(circle, var(--gold-soft) 0%, var(--gold) 70%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px var(--gold-glow);
+  }
+
+  .format-icon svg { width: 36px; height: 36px; color: var(--navy-deep); }
+  .format-card h3 { font-size: 1.4rem; color: var(--gold); margin-bottom: 0.75rem; }
+  .format-card p { color: var(--cream-soft); line-height: 1.6; margin-bottom: 1.25rem; min-height: 60px; }
+
+  .format-tag {
+    display: inline-block;
+    background: rgba(124, 196, 240, 0.15);
+    color: var(--sky-blue);
+    padding: 0.3rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Fredoka', sans-serif;
+    margin-bottom: 1rem;
+  }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta { padding: 7rem 2rem; text-align: center; position: relative; }
+  .final-cta-content { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
+  .final-cta h2 { font-size: clamp(2rem, 4.5vw, 3rem); color: var(--cream); margin-bottom: 1.25rem; }
+  .final-cta p { font-size: 1.15rem; color: var(--cream-soft); margin-bottom: 2.5rem; line-height: 1.7; }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy-deep);
+    padding: 1.1rem 2.5rem;
+    border-radius: 50px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    text-decoration: none;
+    box-shadow: 0 8px 30px var(--gold-glow);
+    transition: all 0.25s;
+    border: 2px solid var(--gold-soft);
+    margin: 0 0.5rem 0.5rem;
+  }
+
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px var(--gold-glow); }
+
+  .btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    border: 2px solid var(--gold);
+    transition: all 0.25s;
+    margin: 0 0.5rem 0.5rem;
+  }
+
+  .btn-secondary:hover { background: var(--gold); color: var(--navy-deep); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #050d2c;
+    padding: 4rem 2rem 2rem;
+    border-top: 2px solid var(--gold);
+  }
+
+  .footer-container { max-width: 1200px; margin: 0 auto; }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand p { color: var(--cream-soft); margin-top: 1rem; font-size: 0.95rem; line-height: 1.7; }
+  .footer-col h4 { color: var(--gold); font-size: 1.05rem; margin-bottom: 1rem; font-family: 'Fredoka', sans-serif; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.65rem; }
+  .footer-col ul a { color: var(--cream-soft); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(244, 200, 66, 0.2);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .copyright { color: var(--cream-soft); font-size: 0.85rem; }
+  .social { display: flex; gap: 0.75rem; }
+
+  .social a {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(244, 200, 66, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid var(--gold);
+  }
+
+  .social a:hover { background: var(--gold); color: var(--navy-deep); }
+
+  /* footer logo */
+  .footer-logo-img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gold);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1000px) {
+    .featured-book-inner { grid-template-columns: 280px 1fr; gap: 2.5rem; }
+  }
+
+  @media (max-width: 900px) {
+    
+    
+    .featured-book-inner { grid-template-columns: 1fr; max-width: 480px; }
+    .glance-strip { grid-template-columns: repeat(2, 1fr); }
+    .pages-grid { grid-template-columns: repeat(2, 1fr); }
+    .volume-tabs { grid-template-columns: repeat(2, 1fr); }
+    .formats-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    
+    .glance-strip { grid-template-columns: 1fr; }
+    .pages-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .featured-book-inner { grid-template-columns: 1fr; }
+  }
+</style>
+  <!-- ★ HEADER OVERRIDE — force canonical nav layout ★ -->
+  <style>
+    /* Force site-header to horizontal bar layout */
+    .site-header { position: sticky; top: 0; z-index: 500; background: var(--navy-deep, #07112e); border-bottom: 1px solid rgba(244,200,66,0.15); overflow: visible !important; }
+    .header-inner { display: flex !important; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; height: 72px; overflow: visible !important; }
+    .logo-link { display: flex !important; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .logo-mark { display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; flex-shrink: 0; }
+    .logo-mark img { border-radius: 50%; object-fit: cover; }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-name { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1.05rem; color: #f4c842; line-height: 1.15; }
+    .logo-sub { font-family: 'Nunito', sans-serif; font-size: 0.68rem; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; text-transform: uppercase; }
+    .main-nav { display: flex !important; overflow: visible !important; }
+    /* CRITICAL: only the top-level nav ul gets flex-row — NOT .nav-dropdown */
+    .main-nav > ul { display: flex !important; flex-direction: row !important; list-style: none; gap: 0.25rem; margin: 0; padding: 0; overflow: visible !important; }
+    .main-nav > ul > li { display: block; position: relative; }
+    .main-nav > ul > li > a { font-family: 'Fredoka', sans-serif; font-weight: 500; font-size: 0.95rem; color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.4rem 0.6rem; border-radius: 6px; transition: color 0.2s; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
+    .main-nav > ul > li > a:hover { color: #f4c842; }
+    /* Dropdown panels — full-width, hidden via visibility, shown via .open */
+    @media (min-width: 901px) { .nav-dropdown { display: none !important; } }
+    .nav-dropdown-panel { display: block !important; visibility: hidden !important; pointer-events: none !important; position: fixed !important; left: 0 !important; right: 0 !important; z-index: 10000 !important; background: #0d1b4b !important; border-top: 2px solid #f4c842 !important; border-bottom: 1px solid rgba(244,200,66,0.2) !important; box-shadow: 0 12px 40px rgba(0,0,0,0.5) !important; padding: 1.75rem 0 !important; }
+    .main-nav li.has-dropdown.open > .nav-dropdown-panel { visibility: visible !important; pointer-events: auto !important; }
+    .nav-dropdown-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid !important; grid-template-columns: repeat(auto-fill, minmax(240px, 320px)) !important; justify-content: start !important; gap: 0.5rem 3rem !important; }
+    .nav-dropdown-item { display: block !important; padding: 0.85rem 1.1rem !important; min-width: 0 !important; border-radius: 8px !important; text-decoration: none !important; transition: background 0.15s !important; }
+    .nav-dropdown-item:hover { background: rgba(244,200,66,0.1) !important; }
+    .nav-dropdown-item-title { display: block !important; font-family: 'Fredoka', sans-serif !important; font-weight: 600 !important; font-size: 1rem !important; color: #f4c842 !important; margin-bottom: 0.3rem !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+    .nav-dropdown-item-desc { display: block !important; font-family: 'Nunito', sans-serif !important; font-size: 0.82rem !important; color: rgba(255,255,255,0.65) !important; line-height: 1.4 !important; word-break: break-word !important; }
+    .nav-dropdown > li { display: block !important; width: 100% !important; }
+    .nav-dropdown > li > a { display: block !important; padding: 0.55rem 1.1rem !important; font-family: 'Nunito', sans-serif !important; font-size: 0.9rem !important; font-weight: 600 !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; white-space: nowrap !important; }
+    .nav-dropdown > li > a:hover { background: rgba(244,200,66,0.12) !important; color: #f4c842 !important; }
+    .nav-arrow { display: inline-block !important; font-size: 0.6rem; opacity: 0.7; transition: transform 0.2s; }
+    .main-nav li.has-dropdown.open .nav-arrow { transform: rotate(180deg); }
+    .nav-cta { margin-left: 1rem; flex-shrink: 0; background: #f4c842; color: #07112e; font-family: 'Fredoka', sans-serif; font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+    .nav-cta:hover { background: #ffe066; }
+    .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+    .mobile-menu-btn span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; }
+    .mobile-nav { display: none; }
+    .mobile-nav.open { display: block; background: #07112e; padding: 1rem 1.5rem; border-top: 1px solid rgba(244,200,66,0.2); }
+    .mobile-nav > ul { list-style: none; display: flex !important; flex-direction: column !important; gap: 0.75rem; padding: 0; margin: 0; }
+    .mobile-nav > ul > li > a { color: rgba(255,255,255,0.85); text-decoration: none; font-family: 'Fredoka', sans-serif; font-size: 1.05rem; }
+    @media (max-width: 900px) {
+      .main-nav { display: none !important; }
+      .nav-cta.nav-cta { display: none; }
+      .mobile-menu-btn { display: flex !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo-link" aria-label="Little Scripture Travelers Home">
+        <div class="logo-mark">
+          <img src="images/logo-badge.jpg" alt="Little Scripture Travelers" width="52" height="52" style="border-radius:50%;" />
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Little Scripture<br>Travelers</span>
+          <span class="logo-sub">Bedtime Stories</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <ul role="list">
+          <li class="has-dropdown">
+            <a href="index.html" class="nav-link-parent">Home <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="index.html#inside" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">What's Inside</span>
+                  <span class="nav-dropdown-item-desc">Stories, characters, and how it all works</span>
+                </a>
+                <a href="index.html#how" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">How It Works</span>
+                  <span class="nav-dropdown-item-desc">Three simple steps to start tonight</span>
+                </a>
+                <a href="index.html#vision" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Vision</span>
+                  <span class="nav-dropdown-item-desc">Why we built Little Scripture Travelers</span>
+                </a>
+                <a href="index.html#ways" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Subscription Plans</span>
+                  <span class="nav-dropdown-item-desc">Find the plan that fits your family</span>
+                </a>
+                <a href="index.html#travelers" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Meet the Travelers</span>
+                  <span class="nav-dropdown-item-desc">Beau, Scout, Willow &amp; Wren</span>
+                </a>
+                <a href="index.html#story" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Story</span>
+                  <span class="nav-dropdown-item-desc">How a dad in Utah started this journey</span>
+                </a>
+                <a href="index.html#blog" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">From the Blog</span>
+                  <span class="nav-dropdown-item-desc">Faith &amp; parenting inspiration</span>
+                </a>
+                <a href="index.html#books" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Books</span>
+                  <span class="nav-dropdown-item-desc">48 illustrated scripture stories</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="travelers.html" class="nav-link-parent">Meet the Travelers <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="travelers.html#bo" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Beau &mdash; The Brave</span>
+                  <span class="nav-dropdown-item-desc">Bold, courageous, and always ready to act</span>
+                </a>
+                <a href="travelers.html#scout" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scout &mdash; The Seeker</span>
+                  <span class="nav-dropdown-item-desc">Curious, thoughtful, always asking why</span>
+                </a>
+                <a href="travelers.html#willow" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Willow &mdash; The Warm</span>
+                  <span class="nav-dropdown-item-desc">Gentle, kind-hearted, full of love</span>
+                </a>
+                <a href="travelers.html#wren" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Wren &mdash; The Wonderer</span>
+                  <span class="nav-dropdown-item-desc">Imaginative, quiet, and full of wonder</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="books.html" class="nav-link-parent">Books <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="books.html#featured" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Featured Book</span>
+                  <span class="nav-dropdown-item-desc">This month's illustrated scripture story</span>
+                </a>
+                <a href="books.html#volumes" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Four Volumes</span>
+                  <span class="nav-dropdown-item-desc">Old &amp; New Testament, BoM, Church History</span>
+                </a>
+                <a href="books.html#formats" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Book Formats</span>
+                  <span class="nav-dropdown-item-desc">Kindle and paperback on Amazon</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="/subscribe.html#plans" class="nav-dropdown-item">Try the First 7 Days Free</a>
+                <a href="subscribe.html#plans" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Choose a Plan</span>
+                  <span class="nav-dropdown-item-desc">The Lantern, Compass, Knapsack, or Caravan</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="watch.html" class="nav-link-parent">Watch <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="watch.html#latest" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Latest Video</span>
+                  <span class="nav-dropdown-item-desc">Watch scripture stories come alive on YouTube</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="our-story.html" class="nav-link-parent">Our Story <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="our-story.html#how-it-started" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">How It Started</span>
+                  <span class="nav-dropdown-item-desc">A dad, a bedtime story, and a big idea</span>
+                </a>
+                <a href="our-story.html#cta" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Start the Journey</span>
+                  <span class="nav-dropdown-item-desc">Join families building faith one night at a time</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="blog.html" class="nav-link-parent">Blog <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="blog-proclaim-liberty.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Proclaim Liberty</span>
+                  <span class="nav-dropdown-item-desc">Faith, freedom, and America's founding</span>
+                </a>
+                <a href="blog-holy-ghost.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Recognize the Spirit</span>
+                  <span class="nav-dropdown-item-desc">Teaching your child to feel the Holy Ghost</span>
+                </a>
+                <a href="blog-quietest-revolution.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Quietest Revolution</span>
+                  <span class="nav-dropdown-item-desc">How bedtime stories change hearts</span>
+                </a>
+                <a href="blog-product-toolkit.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Lantern Toolkit</span>
+                  <span class="nav-dropdown-item-desc">Everything inside your subscription</span>
+                </a>
+                <a href="blog-scripture-routine.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scripture Bedtime Routine</span>
+                  <span class="nav-dropdown-item-desc">How to start &mdash; even on busy nights</span>
+                </a>
+                <a href="blog-scripture-last-thing.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scripture Last Thing</span>
+                  <span class="nav-dropdown-item-desc">Why scripture at bedtime matters most</span>
+                </a>
+                <a href="blog-feeling-path.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Feeling Path</span>
+                  <span class="nav-dropdown-item-desc">Helping children feel, not just hear, scripture</span>
+                </a>
+                <a href="blog-heart-behind-pages.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Roots Before the Storm</span>
+                  <span class="nav-dropdown-item-desc">Building faith before the world pulls them away</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="virtue-library.html" class="nav-link-parent">Virtue Library</a>
+          </li>
+        </ul>
+      </nav>
+
+      <a href="/subscribe.html#plans" class="btn btn-gold nav-cta">Try the First 7 Days Free</a>
+
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+            <ul role="list">
+        <li class="has-dropdown">
+          <a href="index.html" class="nav-link-parent">Home <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="index.html#inside">What's Inside</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#vision">Our Vision</a></li>
+            <li><a href="index.html#ways">Subscription Plans</a></li>
+            <li><a href="index.html#travelers">Meet the Travelers</a></li>
+            <li><a href="index.html#story">Our Story</a></li>
+            <li><a href="index.html#blog">From the Blog</a></li>
+            <li><a href="index.html#books">Our Books</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="travelers.html" class="nav-link-parent">Meet the Travelers <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="travelers.html#bo">Beau &mdash; The Brave</a></li>
+            <li><a href="travelers.html#scout">Scout &mdash; The Seeker</a></li>
+            <li><a href="travelers.html#willow">Willow &mdash; The Warm</a></li>
+            <li><a href="travelers.html#wren">Wren &mdash; The Wonderer</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="books.html" class="nav-link-parent">Books <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="books.html#featured">Featured Book</a></li>
+            <li><a href="books.html#volumes">Four Volumes</a></li>
+            <li><a href="books.html#formats">Book Formats</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;">Try the First 7 Days Free</a></li>
+            <li><a href="subscribe.html#plans">Choose a Plan</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="watch.html" class="nav-link-parent">Watch <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="watch.html#latest">Latest Video</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="our-story.html" class="nav-link-parent">Our Story <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="our-story.html#how-it-started">How It Started</a></li>
+            <li><a href="our-story.html#cta">Start the Journey</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="blog.html" class="nav-link-parent">Blog <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="blog-proclaim-liberty.html">Proclaim Liberty</a></li>
+            <li><a href="blog-holy-ghost.html">Recognize the Spirit</a></li>
+            <li><a href="blog-quietest-revolution.html">The Quietest Revolution</a></li>
+            <li><a href="blog-product-toolkit.html">The Lantern Toolkit</a></li>
+            <li><a href="blog-scripture-routine.html">Scripture Bedtime Routine</a></li>
+            <li><a href="blog-scripture-last-thing.html">Scripture Last Thing</a></li>
+            <li><a href="blog-feeling-path.html">The Feeling Path</a></li>
+            <li><a href="blog-heart-behind-pages.html">Roots Before the Storm</a></li>
+          </ul>
+        </li>
+        <li><a href="virtue-library.html">Virtue Library</a></li>
+        <li><a href="/subscribe.html#plans" class="btn btn-gold">Try the First 7 Days Free</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ★ AMERICA 250 CELEBRATION RIBBON ★ -->
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero sky-bg">
+  
+  
+
+  <div class="page-hero-content">
+    <p class="breadcrumb"><a href="index.html">Home</a> &nbsp;✦&nbsp; Our Books</p>
+    <h1>48 Books. <span class="accent">One Timeless Journey.</span></h1>
+    <p class="page-hero-subhead">Four Volumes ✦ One Story for Every Night ✦ A Sacred Bedtime Adventure</p>
+    <p class="page-hero-body">Little Scripture Travelers is a complete four-volume bedtime journey through the scriptures — designed to be read one story per night, year-round, alongside the Come, Follow Me curriculum. Each monthly book holds 28 to 35 nightly stories, beautifully illustrated and gently structured so that scripture becomes the quietest, sweetest part of your child's day.</p>
+  </div>
+</section>
+
+<!-- ===== FEATURED BOOK — AUGUST ===== -->
+<section class="featured-book" style="background: linear-gradient(135deg, #1a3320 0%, #0d2218 100%); border-top: 2px solid var(--gold);">
+  <div class="featured-book-inner">
+    <div class="featured-book-cover">
+      <img src="images/book-cover-august.jpg" alt="I Will Trust and Sing — Little Scripture Travelers August Book" />
+      <span class="featured-book-badge" style="background:var(--gold); color:#07112e;">✦ New — August</span>
+    </div>
+    <div class="featured-book-info">
+      <span class="featured-tag">✦ THE OLD TESTAMENT VOLUME · BOOK 8 OF 12</span>
+      <h2>I Will Trust <em>and Sing</em></h2>
+      <div class="featured-meta">
+        <span class="featured-meta-pill">August · Old Testament</span>
+        <span class="featured-meta-pill">Book 8 of 48</span>
+        <span class="featured-meta-pill">Ezra · Nehemiah · Esther · Job · Psalms</span>
+        <span class="featured-meta-pill">Paperback &amp; Kindle</span>
+      </div>
+      <p>Book 8 of the Old Testament volume — Beau, Scout, Willow, and Wren journey through the quiet courage of Ezra, Nehemiah, Esther, Job, and the songs of Psalms. Five weeks of stories that teach little hearts to trust and sing, even in hard moments. Available now in paperback and on Kindle.</p>
+      <div class="featured-actions">
+        <a href="https://a.co/d/03skwG4k" target="_blank" rel="noopener" class="btn-featured-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+          Read on Kindle — Amazon
+        </a>
+        <a href="https://www.amazon.com/dp/B0HC53FHHP/ref=tmm_pap_swatch_0" target="_blank" rel="noopener" class="btn-featured-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
+          Paperback — Amazon
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED BOOK — JUNE ===== -->
+<section class="featured-book" id="featured">
+  <div class="featured-book-inner">
+    <div class="featured-book-cover">
+      <img src="images/book-cover-june.jpg" alt="A Heart That Follows the Lord — Little Scripture Travelers June Book" />
+      <span class="featured-book-badge">✦ Available Now</span>
+    </div>
+    <div class="featured-book-info">
+      <span class="featured-tag">✦ THE OLD TESTAMENT VOLUME · BOOK 6 OF 12</span>
+      <h2>A Heart That Follows <em>the Lord</em></h2>
+      <div class="featured-meta">
+        <span class="featured-meta-pill">June · Old Testament</span>
+        <span class="featured-meta-pill">Book 6 of 48</span>
+        <span class="featured-meta-pill">28–31 Nightly Stories</span>
+        <span class="featured-meta-pill">Kindle &amp; Paperback</span>
+      </div>
+      <p>Join Beau, Scout, Willow, and Wren as they journey through June's Old Testament stories — exploring the faith, courage, and devotion of Israel's greatest heroes. Each night closes with a gentle reminder: Heavenly Father placed a heart inside your child that already wants to follow Him.</p>
+      <div class="featured-scripture">"I will give you a new heart and put a new spirit in you." — Ezekiel 36:26</div>
+      <div class="featured-actions">
+        <a href="https://a.co/d/0gLYJdit" target="_blank" rel="noopener" class="btn-featured-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+          Read on Kindle — Amazon
+        </a>
+        <a href="https://www.amazon.com/Follows-Scripture-Travelers-Bedtime-Stories/dp/B0H3ZDCFSR/ref=tmm_pap_swatch_0" target="_blank" rel="noopener" class="btn-featured-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
+          Buy Paperback — Amazon
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED BOOK — JULY ===== -->
+<section class="featured-book" style="background: linear-gradient(135deg, #0d1b4b 0%, #07112e 100%); border-top: 2px solid var(--gold);">
+  <div class="featured-book-inner">
+    <div class="featured-book-cover">
+      <img src="images/book-cover-july.jpg" alt="There Is a Prophet in Israel — Little Scripture Travelers July Book" />
+      <span class="featured-book-badge" style="background:var(--gold); color:#07112e;">✦ Now Available</span>
+    </div>
+    <div class="featured-book-info">
+      <span class="featured-tag">✦ THE OLD TESTAMENT VOLUME · BOOK 7 OF 12</span>
+      <h2>There Is a Prophet <em>in Israel</em></h2>
+      <div class="featured-meta">
+        <span class="featured-meta-pill">July · Old Testament</span>
+        <span class="featured-meta-pill">Book 7 of 48</span>
+        <span class="featured-meta-pill">Kindle &amp; Paperback</span>
+      </div>
+      <p>Book 7 of the Old Testament volume is here — available now on Kindle and in paperback on Amazon. Follow Beau, Scout, Willow, and Wren through July's scripture stories, one gentle night at a time.</p>
+      <div class="featured-actions">
+        <a href="https://a.co/d/03yPEh1D" target="_blank" rel="noopener" class="btn-featured-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+          Read on Kindle — Amazon
+        </a>
+        <a href="https://www.amazon.com/dp/B0H745TTNZ" target="_blank" rel="noopener" class="btn-featured-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
+          Buy Paperback &mdash; Amazon
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERIES AT A GLANCE ===== -->
+<section class="glance sky-bg">
+  
+
+  <div class="section-header">
+    <span class="section-eyebrow">✦ The Complete Series ✦</span>
+    <h2>Four volumes. Four years. One sacred rhythm.</h2>
+    <p>The series follows the Come, Follow Me four-year curriculum cycle — so as your family studies each book of scripture together at church, your child journeys through the same scriptures every night at bedtime.</p>
+  </div>
+
+  <div class="glance-strip">
+    <div class="glance-card ot">
+      
+      <h3>The Old Testament</h3>
+      <p>12 Monthly Books</p>
+    </div>
+    <div class="glance-card nt">
+      
+      <h3>The New Testament</h3>
+      <p>12 Monthly Books</p>
+    </div>
+    <div class="glance-card bom">
+      
+      <h3>The Book of Mormon</h3>
+      <p>12 Monthly Books</p>
+    </div>
+    <div class="glance-card dc">
+      
+      <h3>Doctrine &amp; Covenants</h3>
+      <p>12 Monthly Books</p>
+    </div>
+  </div>
+
+  <!-- Series shelf photo -->
+  <div class="series-shelf-wrap">
+    <img src="images/series-shelf.jpg" alt="The complete Little Scripture Travelers series — 48 books across 4 volumes displayed on a shelf" class="series-shelf-img" />
+  </div>
+
+  <p class="glance-tagline">~ One small story. One big love. ~</p>
+</section>
+
+<!-- ===== INSIDE EACH STORY ===== -->
+<section class="anatomy">
+  <div class="section-header">
+    <span class="section-eyebrow">✦ Inside Each Story ✦</span>
+    <h2>Every nightly story is a four-page bedtime liturgy</h2>
+    <p>Most children's bibles tell the story and stop there. Ours invite your child to <em>feel</em> the story, <em>remember</em> the lesson, and <em>discuss</em> it with you — across four carefully designed pages that make scripture a complete bedtime moment.</p>
+  </div>
+
+  <div class="pages-grid">
+    <div class="story-page page-1">
+      <div class="story-page-banner">Week 2 · Night 1</div>
+      <div class="story-page-content">
+        <div class="story-page-illustration">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm6 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm5 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+        </div>
+        <span class="story-page-tag">Page 1 · The Anchor</span>
+        <h4>The Travel Chest Opens</h4>
+        <p>Each story begins with the four Travelers gathered around the glowing Travel Chest. Tonight's story title, scripture reference, and week night are introduced — a quiet, magical signal that bedtime scripture time has begun.</p>
+        <div class="story-page-quote">"Story 1 — Israel Wants a King" (1 Samuel 8)</div>
+      </div>
+    </div>
+
+    <div class="story-page page-2">
+      <div class="story-page-banner">Week 2 · Night 1 · Tonight's Story</div>
+      <div class="story-page-content">
+        <div class="story-page-illustration">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
+        </div>
+        <span class="story-page-tag">Page 2 · The Story</span>
+        <h4>Tonight's Scripture, Retold</h4>
+        <p>The scripture story is told in gentle, child-friendly language across alternating illustrations and text. The Travelers appear within the scenes — walking beside Samuel, Esther, Nephi, or whoever the story belongs to that night.</p>
+        <div class="story-page-quote">"The prophet Samuel was getting old. The people came and said, 'We want a king like all the other nations have!'"</div>
+      </div>
+    </div>
+
+    <div class="story-page page-3">
+      <div class="story-page-banner">Week 2 · Night 1 · Feeling · Remember</div>
+      <div class="story-page-content">
+        <div class="story-page-illustration">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+        <span class="story-page-tag">Page 3 · Feel It · Remember It</span>
+        <h4>A Feeling Moment + Remember This</h4>
+        <p>A short "Move · Imagine · Connect" activity lets little hands and hearts experience the story. Then "Remember This, Sweet Boys &amp; Girls" gently lands the lesson — turning scripture into a feeling your child can carry into sleep.</p>
+        <div class="story-page-quote">"Stand up tall like you're a king with a crown. Now bow down low. Close your eyes and think of three blessings you already have."</div>
+      </div>
+    </div>
+
+    <div class="story-page page-4">
+      <div class="story-page-banner">Week 2 · Night 2 · Prompt · Experience</div>
+      <div class="story-page-content">
+        <div class="story-page-illustration">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 0H4v2h16V0zM4 24h16v-2H4v2zM20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 11H6v-.99c0-2 4-3.08 6-3.08s6 1.08 6 3.08V18z"/></svg>
+        </div>
+        <span class="story-page-tag">Page 4 · Parent Connection</span>
+        <h4>Parent Prompt + Parent Experience</h4>
+        <p>A simple discussion question for the child, followed by an optional space for the parent to share a real-life testimony. This is where bedtime becomes generational — where your testimony enters your child's heart.</p>
+        <div class="story-page-quote">"Why did Israel want a king? Was this what Heavenly Father wanted?"</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="anatomy-footer">This four-page rhythm repeats <em>28 to 35 times per month</em>, depending on how many nights are in the month. By the end of one year, your child will have journeyed through an entire volume of scripture — story by story, feeling by feeling, prayer by prayer.</p>
+</section>
+
+<!-- ===== CHOOSE YOUR VOLUME ===== -->
+<section class="volumes sky-bg" id="volumes">
+  
+  
+
+  <div class="section-header">
+    <span class="section-eyebrow">✦ Browse the Series ✦</span>
+    <h2>Choose your volume</h2>
+    <p>Tap any volume below to see the full year of monthly books, their status, and where to find each one.</p>
+  </div>
+
+  <div class="volume-tabs">
+    <div class="volume-tab ot active" data-volume="ot" onclick="selectVolume('ot')">
+      
+      <div class="volume-tab-content">
+        <span class="volume-roman">VOLUME I</span>
+        <h3>The Old Testament</h3>
+        <p>The world's most treasured beginnings</p>
+        <span class="book-count">12 Books</span>
+      </div>
+    </div>
+    <div class="volume-tab nt" data-volume="nt" onclick="selectVolume('nt')">
+      
+      <div class="volume-tab-content">
+        <span class="volume-roman">VOLUME II</span>
+        <h3>The New Testament</h3>
+        <p>The life and love of the Savior</p>
+        <span class="book-count">12 Books</span>
+      </div>
+    </div>
+    <div class="volume-tab bom" data-volume="bom" onclick="selectVolume('bom')">
+      
+      <div class="volume-tab-content">
+        <span class="volume-roman">VOLUME III</span>
+        <h3>The Book of Mormon</h3>
+        <p>Another testament of Jesus Christ</p>
+        <span class="book-count">12 Books</span>
+      </div>
+    </div>
+    <div class="volume-tab dc" data-volume="dc" onclick="selectVolume('dc')">
+      
+      <div class="volume-tab-content">
+        <span class="volume-roman">VOLUME IV</span>
+        <h3>Doctrine &amp; Covenants</h3>
+        <p>Modern revelations for our day</p>
+        <span class="book-count">12 Books</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="books-section" id="books-section">
+    <div class="volume-intro" id="volume-intro"></div>
+    <div class="books-grid" id="books-grid"></div>
+  </div>
+</section>
+
+<!-- ===== FORMAT OPTIONS ===== -->
+<section class="formats" id="formats">
+  <div class="section-header">
+    <span class="section-eyebrow">✦ Three Ways to Read ✦</span>
+    <h2>Paperback, digital, or nightly email</h2>
+    <p>Choose the format that fits your family's bedtime — or layer them together.</p>
+  </div>
+
+  <div class="formats-grid">
+    <div class="format-card">
+      <div class="format-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+      </div>
+      <span class="format-tag">Keepsake Quality</span>
+      <h3>Paperback Books</h3>
+      <p>Beautifully illustrated paperback editions — the kind your child will pull off the shelf for years and pass down to their own little ones.</p>
+      <a href="https://www.amazon.com/Follows-Scripture-Travelers-Bedtime-Stories/dp/B0H3ZDCFSR/ref=tmm_pap_swatch_0" target="_blank" rel="noopener" class="book-btn primary">Buy Paperback on Amazon</a>
+    </div>
+
+    <div class="format-card">
+      <div class="format-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+      </div>
+      <span class="format-tag">Read Anywhere</span>
+      <h3>Kindle Editions</h3>
+      <p>Every book is also available as a Kindle digital edition — perfect for travel nights, grandparent visits, or families who love bedtime stories on their devices.</p>
+      <a href="https://a.co/d/0j1BSvHF" target="_blank" rel="noopener" class="book-btn primary">Shop Kindle on Amazon</a>
+    </div>
+
+    <div class="format-card">
+      <div class="format-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+      </div>
+      <span class="format-tag">7-Day Free Trial</span>
+      <h3>Nightly Email Story</h3>
+      <p>Your scripture story, lullaby, and parent prompt arrive in your inbox each morning at 5 AM Mountain Standard Time (Denver) — giving you time to read it first, reflect on the parent prompt, and come to bedtime ready to share from the heart.</p>
+      <a href="/subscribe.html#plans" class="book-btn primary">Try the First 7 Days Free</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta sky-bg">
+  
+
+  <div class="final-cta-content">
+    <h2>Begin the journey tonight.</h2>
+    <p>Books 6 &amp; 7 of the Old Testament volume are available now on Amazon. Start with tonight's free nightly story, and we'll let you know the moment new books are ready to ship.</p>
+    <a href="/subscribe.html#plans" class="btn-primary">Try the First 7 Days Free</a>
+    <a href="subscribe.html" class="btn-secondary">See Subscription Plans</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+          <img src="images/logo-badge.jpg" alt="Little Scripture Travelers" width="40" height="40" style="border-radius:50%;object-fit:cover;" />
+          <div>
+            <div class="logo-name" style="font-size:0.9rem;">Little Scripture Travelers</div>
+            <div class="logo-sub" style="font-size:0.7rem;">Bedtime Stories</div>
+          </div>
+        </div>
+        <p>Helping little ones feel the Spirit — one bedtime story at a time.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Watch &amp; Read</h4>
+        <ul role="list">
+          <li><a href="https://www.youtube.com/@LittleScriptureTravelers" target="_blank" rel="noopener">YouTube Channel</a></li>
+          <li><a href="https://www.amazon.com/Follows-Scripture-Travelers-Bedtime-Stories/dp/B0H3ZDCFSR/ref=tmm_pap_swatch_0" target="_blank" rel="noopener">Books on Amazon</a></li>
+          <li><a href="https://a.co/d/0j1BSvHF" target="_blank" rel="noopener">Kindle Editions</a></li>
+          <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;">Try the First 7 Days Free</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Subscribe</h4>
+        <ul role="list">
+          <li><a href="/subscribe.html#plans">The Lantern</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul role="list">
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="travelers.html">Meet the Travelers</a></li>
+          <li><a href="blog.html">Why Bedtime Scripture</a></li>
+          <li><a href="mailto:littlescripturetravelers@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-manage">
+        <h4>Manage Subscriptions</h4>
+        <ul role="list">
+          <li><button type="button" class="btn-cancel-sub footer-cancel-link" aria-haspopup="dialog">Cancel Subscription</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom" style="flex-direction:column;align-items:center;text-align:center;">
+      <div class="social-links" style="justify-content:center;margin-bottom:0.75rem;gap:0.75rem;">
+        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07112e"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.14a8.16 8.16 0 0 0 4.77 1.52V7.21a4.85 4.85 0 0 1-1-.52z"/></svg>
+        </a>
+        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        </a>
+      </div>
+      <p style="margin-top:1rem;">We do not lecture. We do not pile on rules. We tell what happened — a beginning, a worry, and a hopeful ending — in the smallest words that still carry the meaning.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">© 2026 Little Scripture Travelers</p>
+      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.15);font-size:0.72rem;line-height:1.5;color:#9aa6c0;text-align:center;">
+        <p style="margin:0 0 0.6rem;">Little Scripture Travelers Bedtime Stories, LLC is an independent creative endeavor. It is not affiliated with, made by, sponsored by, approved by, or endorsed by The Church of Jesus Christ of Latter-day Saints or Intellectual Reserve, Inc. All stories, illustrations, characters, lullabies, and opinions are solely those of Little Scripture Travelers and do not represent the Church.</p>
+        <p style="margin:0;">&ldquo;Come, Follow Me,&rdquo; the name of The Church of Jesus Christ of Latter-day Saints, and related names and logos are trademarks of Intellectual Reserve, Inc.; any reference to them here is for identification purposes only.</p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+/* =====================================================================
+   BOOKS DATA — Edit book status here as new books launch on Amazon.
+   To mark available: change status to 'available' and add Amazon URLs.
+   ===================================================================== */
+const months = ['January','February','March','April','May','June',
+                'July','August','September','October','November','December'];
+
+const volumeData = {
+  ot: {
+    name: 'The Old Testament',
+    roman: 'VOLUME I',
+    color: 'ot',
+    intro: 'The Old Testament volume travels through twelve months of foundational scripture — from Adam and Eve in the garden, to Noah\'s ark, to David\'s courage, to Esther\'s quiet bravery. These are the world\'s most treasured beginnings, told gently for little hearts.',
+    startBookNumber: 1,
+    volumeCover: 'images/cover-ot.jpg'
+  },
+  nt: {
+    name: 'The New Testament',
+    roman: 'VOLUME II',
+    color: 'nt',
+    intro: 'The New Testament volume walks your child through twelve months with the Savior — from the manger to the miracles, from the Beatitudes to the empty tomb. Every story closes with the warmth of Christ\'s love.',
+    startBookNumber: 13,
+    volumeCover: 'images/cover-nt.jpg'
+  },
+  bom: {
+    name: 'The Book of Mormon',
+    roman: 'VOLUME III',
+    color: 'bom',
+    intro: 'The Book of Mormon volume journeys through twelve months of Another Testament of Jesus Christ — from Lehi\'s family, to Nephi\'s courage, to Captain Moroni\'s title of liberty, to the Savior\'s visit to the Americas.',
+    startBookNumber: 25,
+    volumeCover: 'images/cover-bom.jpg'
+  },
+  dc: {
+    name: 'Doctrine & Covenants',
+    roman: 'VOLUME IV',
+    color: 'dc',
+    intro: 'The Doctrine &amp; Covenants volume travels through twelve months of modern revelation — from the Sacred Grove, to the early Saints\' journey westward, to the prophecies and promises given for our day.',
+    startBookNumber: 37,
+    volumeCover: 'images/cover-dc.jpg'
+  }
+};
+
+/* ======================================================
+   UPDATE HERE when new books become available on Amazon.
+   June (index 5) and July (index 6) and August (index 7) are marked available.
+   ====================================================== */
+const books = {
+  ot: [
+    { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // January
+    { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // February
+    { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // March
+    { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // April
+    { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // May
+    { status: 'available', title: 'A Heart That Follows the Lord', amazonHardcover: 'https://www.amazon.com/Follows-Scripture-Travelers-Bedtime-Stories/dp/B0H3ZDCFSR/ref=tmm_pap_swatch_0', amazonKindle: 'https://a.co/d/0gLYJdit', coverImage: 'images/book-cover-june.jpg' }, // June ✅
+    { status: 'available', title: 'There Is a Prophet in Israel', amazonHardcover: 'https://www.amazon.com/dp/B0H745TTNZ', amazonKindle: 'https://a.co/d/03yPEh1D', coverImage: 'images/book-cover-july.jpg' }, // July ✅
+    { status: 'available', title: 'I Will Trust and Sing', amazonHardcover: 'https://www.amazon.com/dp/B0HC53FHHP/ref=tmm_pap_swatch_0', amazonKindle: 'https://a.co/d/03skwG4k', coverImage: 'images/book-cover-august.jpg' }, // August ✅
+    { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // September
+    { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // October
+    { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // November
+    { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // December
+  ],
+  nt:  Array(12).fill(null).map(() => ({ status: 'coming', amazonHardcover: '', amazonKindle: '' })),
+  bom: Array(12).fill(null).map(() => ({ status: 'coming', amazonHardcover: '', amazonKindle: '' })),
+  dc:  Array(12).fill(null).map(() => ({ status: 'coming', amazonHardcover: '', amazonKindle: '' })),
+};
+
+function renderBooks(volumeKey) {
+  const volume = volumeData[volumeKey];
+  const bookList = books[volumeKey];
+  const introEl = document.getElementById('volume-intro');
+  const gridEl = document.getElementById('books-grid');
+
+  introEl.innerHTML = `<h3>${volume.name}</h3><p>${volume.intro}</p>`;
+
+  gridEl.innerHTML = bookList.map((book, idx) => {
+    const month = months[idx];
+    const bookOfTwelve = idx + 1;
+    const bookOfFortyEight = volume.startBookNumber + idx;
+    const isAvailable = book.status === 'available';
+
+    let coverHTML = '';
+    if (isAvailable && book.coverImage) {
+      coverHTML = `
+        <div class="book-cover has-image ${volume.color}">
+          <span class="book-status-corner available">Available</span>
+          <img src="${book.coverImage}" alt="${month} — ${volume.name}" />
+        </div>`;
+    } else if (volume.volumeCover) {
+      coverHTML = `
+        <div class="book-cover has-image ${volume.color}">
+          <span class="book-status-corner ${isAvailable ? 'available' : 'coming'}">${isAvailable ? 'Available' : 'Coming Soon'}</span>
+          <img src="${volume.volumeCover}" alt="${volume.name} — ${month}" />
+          <div class="book-cover-coming-label">
+            <div class="book-month">${month}</div>
+          </div>
+        </div>`;
+    } else {
+      coverHTML = `
+        <div class="book-cover ${volume.color}">
+          <span class="book-status-corner ${isAvailable ? 'available' : 'coming'}">${isAvailable ? 'Available' : 'Coming Soon'}</span>
+          <div class="book-cover-content">
+            <div class="book-mini-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 21 12 16.5 5.79 21l2.39-7.15L2 9.36h7.61L12 2z"/></svg>
+            </div>
+            <div class="book-month">${month}</div>
+            
+            <div class="book-volume-label">${volume.name}</div>
+          </div>
+        </div>`;
+    }
+
+    let actionsHTML = isAvailable && book.kindleOnly
+      ? `<span class="book-btn disabled">Paperback — Coming Soon</span>
+         <a href="${book.amazonKindle}" target="_blank" rel="noopener" class="book-btn secondary">Kindle &amp; Kindle Unlimited</a>`
+      : isAvailable
+      ? `<a href="${book.amazonHardcover}" target="_blank" rel="noopener" class="book-btn primary">Buy Paperback</a>
+         <a href="${book.amazonKindle}" target="_blank" rel="noopener" class="book-btn secondary">Kindle Edition</a>`
+      : `<span class="book-btn disabled">Paperback — Coming Soon</span>
+         <span class="book-btn disabled">Kindle — Coming Soon</span>`;
+
+    return `
+      <div class="book-card">
+        ${coverHTML}
+        <div class="book-info">
+          <span class="book-number">Book ${bookOfTwelve} of 12 ✦ ${bookOfFortyEight} of 48</span>
+          <h4 class="book-title">${book.title ? book.title : month + ' ✦ ' + volume.name}</h4>
+          ${book.title ? `<p class="book-subtitle" style="font-family:'Nunito',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.55);margin:-0.5rem 0 0.75rem;">${month} &middot; ${volume.name}</p>` : ''}
+          <div class="book-actions">${actionsHTML}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function selectVolume(volumeKey) {
+  document.querySelectorAll('.volume-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.volume === volumeKey);
+  });
+  renderBooks(volumeKey);
+  document.getElementById('books-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Initial render
+renderBooks('ot');
+
+// Legacy mobile nav toggle — the current header replaced it, so guard for absence
+const mobileBtn = document.getElementById('mobileBtn');
+if (mobileBtn) {
+  mobileBtn.addEventListener('click', function() {
+    const menu = document.getElementById('mobileMenu');
+    if (!menu) return;
+    menu.classList.toggle('open');
+    this.textContent = menu.classList.contains('open') ? '✕' : '☰';
+  });
+}
+</script>
+
+  <script src="main.js"></script>
+
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+</script></body>
+</html>

@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Virtue Library &mdash; Little Scripture Travelers</title>
+  <meta name="description" content="A searchable catalog of the virtues and principles taught in every Little Scripture Travelers story. Look up what your child needs today and find the scripture stories that teach it." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: linear-gradient(160deg,#07112e,#0d1b4b 50%,#0a1640);
+      padding: 4.5rem 1.25rem 3.25rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content:""; position:absolute; inset:0;
+      background-image:
+        radial-gradient(1.6px 1.6px at 12% 22%, rgba(255,255,255,.85) 50%, transparent 50%),
+        radial-gradient(1.3px 1.3px at 78% 16%, rgba(255,255,255,.7) 50%, transparent 50%),
+        radial-gradient(1.9px 1.9px at 62% 68%, rgba(245,197,24,.75) 50%, transparent 50%),
+        radial-gradient(1.2px 1.2px at 30% 78%, rgba(255,255,255,.6) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 88% 56%, rgba(255,255,255,.55) 50%, transparent 50%),
+        radial-gradient(1.1px 1.1px at 45% 34%, rgba(245,197,24,.6) 50%, transparent 50%);
+      pointer-events:none;
+    }
+    .page-hero-content { position:relative; z-index:1; max-width:56rem; margin:0 auto; }
+    .page-eyebrow {
+      display:inline-block; font-family:'Anton',sans-serif; font-size:.75rem;
+      letter-spacing:.16em; text-transform:uppercase; color:#F5C518; margin-bottom:1rem;
+    }
+    .page-hero h1 {
+      font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+      font-size:clamp(2rem,5.2vw,3.35rem); line-height:1.1; margin:0 0 1rem;
+    }
+    .page-hero .subtitle {
+      color:rgba(255,255,255,.86); font-size:clamp(1rem,2vw,1.18rem);
+      line-height:1.65; max-width:44rem; margin:0 auto;
+    }
+    .star-divider { margin:1.75rem auto 0; display:flex; align-items:center; justify-content:center; gap:.9rem; max-width:16rem; }
+    .star-divider::before, .star-divider::after {
+      content:""; flex:1; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(245,197,24,.65),transparent);
+    }
+    .star-divider span { color:#F5C518; font-size:1rem; }
+
+    /* ===== FRAMING / INTRO ===== */
+    .vl-frame { background:#fdfcf8; padding:3.25rem 1.25rem; }
+    .vl-frame-inner { max-width:52rem; margin:0 auto; }
+    .vl-frame p { font-size:1.06rem; line-height:1.78; color:#2c3550; margin:0 0 1.15rem; }
+    .vl-frame p:last-child { margin-bottom:0; }
+    .vl-lede {
+      font-family:'Fredoka',sans-serif; font-weight:500;
+      font-size:clamp(1.22rem,2.5vw,1.55rem) !important;
+      line-height:1.5 !important; color:#0d1b4b !important; margin:0 0 1.4rem;
+    }
+    .vl-prayer {
+      margin-top:2rem; padding:1.5rem 1.65rem;
+      background:linear-gradient(135deg,rgba(13,27,75,.045),rgba(245,197,24,.09));
+      border-left:4px solid #F5C518; border-radius:.65rem;
+    }
+    .vl-prayer p { margin:0; font-size:1.02rem; line-height:1.72; color:#1a2c6b; }
+    .vl-prayer strong { color:#0d1b4b; }
+
+    /* ===== GROWTH METER ===== */
+    .vl-growth { max-width:52rem; margin:2.25rem auto 0; text-align:center; }
+    .vl-growth-label {
+      font-family:'Anton',sans-serif; font-size:.72rem; letter-spacing:.15em;
+      text-transform:uppercase; color:#1a2c6b; opacity:.72; margin-bottom:.7rem;
+    }
+    .vl-bar { height:12px; background:rgba(13,27,75,.1); border-radius:99px; overflow:hidden; }
+    .vl-bar-fill {
+      height:100%; border-radius:99px;
+      background:linear-gradient(90deg,#1a2c6b,#F5C518);
+      transition:width 1.1s cubic-bezier(.22,1,.36,1);
+    }
+    .vl-growth-note { margin-top:.7rem; font-size:.92rem; color:#4a5578; }
+
+    /* ===== SEARCH SHELL ===== */
+    .vl-tool { background:linear-gradient(180deg,#07112e,#0a1640); padding:3rem 1.25rem 4rem; }
+    .vl-tool-inner { max-width:74rem; margin:0 auto; }
+    .vl-axes { display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin-bottom:1.6rem; }
+    .vl-axis {
+      font-family:'Fredoka',sans-serif; font-weight:500; font-size:.95rem;
+      padding:.62rem 1.25rem; border-radius:99px; cursor:pointer;
+      background:rgba(255,255,255,.07); color:rgba(255,255,255,.8);
+      border:1.5px solid rgba(255,255,255,.15); transition:all .2s ease;
+    }
+    .vl-axis:hover { background:rgba(255,255,255,.13); color:#fff; }
+    .vl-axis[aria-selected="true"] {
+      background:#F5C518; color:#07112e; border-color:#F5C518; font-weight:600;
+    }
+    .vl-searchrow { display:flex; gap:.7rem; max-width:42rem; margin:0 auto 1.1rem; flex-wrap:wrap; }
+    .vl-search {
+      flex:1 1 16rem; padding:.85rem 1.15rem; border-radius:99px;
+      border:1.5px solid rgba(255,255,255,.2); background:rgba(255,255,255,.96);
+      font-family:'Nunito',sans-serif; font-size:1rem; color:#07112e;
+    }
+    .vl-search:focus { outline:none; border-color:#F5C518; box-shadow:0 0 0 3px rgba(245,197,24,.28); }
+    .vl-stage {
+      padding:.85rem 1.15rem; border-radius:99px; border:1.5px solid rgba(255,255,255,.2);
+      background:rgba(255,255,255,.96); font-family:'Nunito',sans-serif; font-size:.98rem; color:#07112e;
+    }
+    .vl-count {
+      text-align:center; font-size:.92rem; color:rgba(255,255,255,.62);
+      margin-bottom:1.6rem; min-height:1.2em;
+    }
+
+    /* ===== CARD GRIDS ===== */
+    .vl-grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(16.5rem,1fr)); }
+    .vl-card {
+      background:rgba(255,255,255,.055); border:1.5px solid rgba(255,255,255,.12);
+      border-radius:1rem; padding:1.35rem 1.4rem; cursor:pointer;
+      transition:transform .22s ease, border-color .22s ease, background .22s ease;
+      text-align:left; width:100%; font-family:inherit;
+    }
+    .vl-card:hover {
+      transform:translateY(-3px); border-color:rgba(245,197,24,.55);
+      background:rgba(255,255,255,.09);
+    }
+    .vl-card:focus-visible { outline:2px solid #F5C518; outline-offset:3px; }
+    .vl-cat {
+      font-family:'Anton',sans-serif; font-size:.63rem; letter-spacing:.14em;
+      text-transform:uppercase; color:#F5C518; display:block; margin-bottom:.55rem;
+    }
+    .vl-card h3 {
+      font-family:'Fredoka',sans-serif; font-weight:600; font-size:1.13rem;
+      color:#fff; margin:0 0 .5rem; line-height:1.28;
+    }
+    .vl-card p { font-size:.92rem; line-height:1.6; color:rgba(255,255,255,.72); margin:0; max-width:none; }
+    .vl-tally {
+      display:inline-block; margin-top:.85rem; font-size:.78rem; font-weight:700;
+      color:#07112e; background:#F5C518; padding:.24rem .68rem; border-radius:99px;
+    }
+    .vl-tally.zero { background:rgba(255,255,255,.16); color:rgba(255,255,255,.7); }
+    .vl-empty { text-align:center; padding:3rem 1rem; color:rgba(255,255,255,.6); }
+    .vl-empty strong { display:block; font-family:'Fredoka',sans-serif; font-size:1.2rem; color:#fff; margin-bottom:.5rem; }
+
+    /* ===== DETAIL PANEL ===== */
+    .vl-back {
+      background:none; border:none; cursor:pointer; color:#F5C518;
+      font-family:'Fredoka',sans-serif; font-weight:500; font-size:.95rem;
+      padding:.4rem 0; margin-bottom:1.1rem; display:inline-flex; align-items:center; gap:.45rem;
+    }
+    .vl-back:hover { text-decoration:underline; }
+    .vl-detail-head {
+      background:rgba(255,255,255,.055); border:1.5px solid rgba(245,197,24,.3);
+      border-radius:1rem; padding:1.75rem 1.85rem; margin-bottom:1.6rem;
+    }
+    .vl-detail-head h2 {
+      font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+      font-size:clamp(1.5rem,3.4vw,2.05rem); margin:0 0 .7rem; line-height:1.2;
+    }
+    .vl-def { font-size:1.04rem; line-height:1.72; color:rgba(255,255,255,.85); margin:0; max-width:46rem; }
+    .vl-stories { display:grid; gap:.9rem; }
+    .vl-story {
+      display:block; width:100%; text-align:left; font-family:inherit; cursor:pointer;
+      background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.11);
+      border-radius:.9rem; padding:1.2rem 1.35rem; transition:all .2s ease;
+    }
+    .vl-story:hover { border-color:rgba(245,197,24,.5); background:rgba(255,255,255,.085); transform:translateX(3px); }
+    .vl-story:focus-visible { outline:2px solid #F5C518; outline-offset:3px; }
+    .vl-story-top { display:flex; flex-wrap:wrap; align-items:baseline; gap:.6rem; margin-bottom:.45rem; }
+    .vl-story h4 { font-family:'Fredoka',sans-serif; font-weight:600; font-size:1.06rem; color:#fff; margin:0; }
+    .vl-ref { font-size:.82rem; color:#F5C518; font-weight:700; }
+    .vl-loc { font-size:.78rem; color:rgba(255,255,255,.5); }
+    .vl-note { font-size:.93rem; line-height:1.62; color:rgba(255,255,255,.74); margin:0; max-width:none; }
+    .vl-chips { display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.75rem; }
+    .vl-chip {
+      font-size:.72rem; font-weight:700; padding:.2rem .6rem; border-radius:99px;
+      background:rgba(245,197,24,.16); color:#F5C518; border:1px solid rgba(245,197,24,.3);
+      /* Chips are flex items, so without this a two-word virtue like
+         "Keeping Promises" gets squeezed and wraps inside its own pill. */
+      flex:0 0 auto; white-space:nowrap;
+    }
+
+    /* ===== STORY MODAL ===== */
+    .vl-modal {
+      position:fixed; inset:0; z-index:9000; display:none;
+      align-items:flex-start; justify-content:center;
+      background:rgba(4,8,22,.82); backdrop-filter:blur(5px);
+      padding:2rem 1rem; overflow-y:auto;
+    }
+    .vl-modal.open { display:flex; }
+    .vl-modal-box {
+      background:#fdfcf8; border-radius:1.15rem; max-width:44rem; width:100%;
+      padding:2.25rem 2.35rem 2.5rem; position:relative;
+      box-shadow:0 30px 80px rgba(0,0,0,.5); margin:auto;
+    }
+    .vl-close {
+      position:absolute; top:.9rem; right:1rem; background:rgba(13,27,75,.08);
+      border:none; width:2.2rem; height:2.2rem; border-radius:50%; cursor:pointer;
+      font-size:1.15rem; color:#0d1b4b; line-height:1;
+    }
+    .vl-close:hover { background:rgba(13,27,75,.16); }
+    .vl-modal-eyebrow {
+      font-family:'Anton',sans-serif; font-size:.68rem; letter-spacing:.15em;
+      text-transform:uppercase; color:#1a2c6b; opacity:.75; display:block; margin-bottom:.6rem;
+    }
+    .vl-modal-box h3 {
+      font-family:'Fredoka',sans-serif; font-weight:600; color:#0d1b4b;
+      font-size:clamp(1.35rem,3.2vw,1.85rem); margin:0 0 .3rem; line-height:1.22; padding-right:2rem;
+    }
+    .vl-modal-ref { font-size:.95rem; font-weight:700; color:#8a6d00; margin:0 0 1.5rem; }
+    .vl-sec { margin-bottom:1.5rem; }
+    .vl-sec-label {
+      font-family:'Anton',sans-serif; font-size:.68rem; letter-spacing:.14em;
+      text-transform:uppercase; color:#1a2c6b; opacity:.7; margin-bottom:.5rem;
+    }
+    .vl-sec p { font-size:1rem; line-height:1.75; color:#2c3550; margin:0 0 .85rem; }
+    .vl-sec p:last-child { margin-bottom:0; }
+    .vl-box {
+      padding:1.15rem 1.3rem; border-radius:.7rem;
+      background:linear-gradient(135deg,rgba(13,27,75,.05),rgba(245,197,24,.1));
+      border-left:4px solid #F5C518;
+    }
+    .vl-box p { color:#1a2c6b; }
+    .vl-modal-foot { border-top:1px solid rgba(13,27,75,.12); padding-top:1.25rem; margin-top:.5rem; }
+    .vl-modal-foot p { font-size:.88rem; color:#5a6480; line-height:1.6; margin:0 0 .9rem; }
+    .vl-btn {
+      display:inline-block; background:#F5C518; color:#07112e; font-family:'Fredoka',sans-serif;
+      font-weight:600; font-size:.95rem; padding:.7rem 1.5rem; border-radius:99px;
+      text-decoration:none; border:none; cursor:pointer;
+      /* Keep "Get the September Book" on one line instead of breaking
+         after the month. */
+      white-space:nowrap; width:auto; max-width:100%;
+    }
+    .vl-btn:hover { background:#f4c842; }
+
+    /* ===== ACCESS GATE ===== */
+    /* Locked story panel shown to non-subscribers inside the story modal */
+    .vl-locked {
+      background:linear-gradient(180deg,#0d1b4b,#07112e); border-radius:1rem;
+      padding:1.6rem 1.5rem 1.75rem; text-align:center; margin:1.4rem 0 .5rem;
+      border:1px solid rgba(245,197,24,.28);
+    }
+    .vl-locked .vl-sec-label { color:#F5C518 !important; margin-bottom:.6rem; }
+    .vl-locked p {
+      color:rgba(255,255,255,.86) !important; font-size:.97rem; line-height:1.7;
+      margin:0 auto 1.15rem !important; max-width:30rem;
+    }
+    .vl-locked .vl-btn { margin:0 auto; }
+    .vl-locked-alt { font-size:.86rem !important; color:rgba(255,255,255,.6) !important; margin:1rem 0 0 !important; }
+    .vl-link {
+      background:none; border:none; padding:0; font:inherit; color:#F5C518;
+      text-decoration:underline; cursor:pointer;
+    }
+    .vl-link:hover { color:#fff; }
+    .vl-freebie {
+      max-width:46rem; margin:2rem auto 0; padding:1.15rem 1.4rem;
+      background:rgba(245,197,24,.1); border:1.5px solid rgba(245,197,24,.4);
+      border-radius:.9rem; font-family:'Nunito',sans-serif; font-size:1rem;
+      line-height:1.75; color:#28304f; text-align:center;
+    }
+    .vl-freebie strong { color:#0d1b4b; }
+
+    /* ===== SIGNED-IN STRIP ===== */
+    .vl-who {
+      background:#0a1640; border-top:1px solid rgba(245,197,24,.22);
+      color:rgba(255,255,255,.82); font-family:'Nunito',sans-serif; font-size:.9rem;
+      padding:.7rem 1.25rem; text-align:center; line-height:1.6;
+    }
+    .vl-who strong { color:#fff; }
+    .vl-who .vl-link { margin-left:.35rem; }
+
+    /* ===== TEASER + SIGN-IN INSIDE A STORY ===== */
+    .vl-teaser { position:relative; }
+    .vl-teaser p {
+      margin:0; color:#3a4260; font-size:1rem; line-height:1.85;
+      font-style:italic;
+    }
+    .vl-loading { color:#5b6480; font-size:.95rem; }
+
+    .vl-si-form { margin:.35rem 0 0; text-align:left; }
+    .vl-si-label {
+      display:block; font-family:'Anton',sans-serif; font-size:.66rem; letter-spacing:.14em;
+      text-transform:uppercase; color:rgba(255,255,255,.62); margin:0 0 .4rem;
+    }
+    .vl-si-input {
+      display:block; width:100%; box-sizing:border-box; padding:.78rem 1.05rem;
+      border-radius:.7rem; border:1.5px solid rgba(255,255,255,.24);
+      background:rgba(255,255,255,.97); font-family:'Nunito',sans-serif;
+      font-size:1rem; color:#07112e; margin:0 0 .7rem;
+    }
+    .vl-si-input:focus { outline:none; border-color:#F5C518; box-shadow:0 0 0 3px rgba(245,197,24,.3); }
+    .vl-si-code {
+      letter-spacing:.5em; text-align:center; font-size:1.3rem; font-weight:700;
+      font-family:'Courier New',monospace;
+    }
+    .vl-si-btn { width:100%; text-align:center; }
+    .vl-si-btn[disabled] { opacity:.65; cursor:default; }
+    .vl-si-msg {
+      font-size:.88rem; line-height:1.6; margin:.7rem 0 0 !important;
+      color:rgba(255,255,255,.72); min-height:1.2em;
+    }
+    .vl-si-msg.is-good { color:#bff0c8; }
+    .vl-si-msg.is-bad  { color:#ffb4b4; }
+
+    /* ===== FREE BADGE ON A STORY CARD ===== */
+    .vl-free {
+      display:inline-block; font-family:'Anton',sans-serif; font-size:.6rem;
+      letter-spacing:.12em; text-transform:uppercase; color:#07112e;
+      background:#F5C518; border-radius:99px; padding:.2rem .55rem;
+      margin-left:.5rem; vertical-align:middle;
+    }
+
+    /* ===== STAGE STRIP ===== */
+    .vl-stages { background:#fdfcf8; padding:3.25rem 1.25rem; }
+    .vl-stages-inner { max-width:74rem; margin:0 auto; }
+    .vl-stage-grid { display:grid; gap:.9rem; grid-template-columns:repeat(auto-fill,minmax(15rem,1fr)); margin-top:1.75rem; }
+    .vl-stage-card {
+      border:1.5px solid rgba(13,27,75,.14); border-radius:.9rem;
+      padding:1.25rem 1.35rem; background:#fff;
+    }
+    .vl-stage-card.on { border-color:#F5C518; background:linear-gradient(135deg,#fff,rgba(245,197,24,.07)); }
+    .vl-stage-card h4 {
+      font-family:'Fredoka',sans-serif; font-weight:600; font-size:1.05rem;
+      color:#0d1b4b; margin:0 0 .15rem;
+    }
+    .vl-stage-ages { font-size:.82rem; font-weight:700; color:#8a6d00; margin:0 0 .6rem !important; }
+    .vl-stage-card p { font-size:.9rem; line-height:1.6; color:#4a5578; margin:0; max-width:none; }
+    .vl-stage-badge {
+      display:inline-block; font-family:'Anton',sans-serif; font-size:.6rem; letter-spacing:.12em;
+      text-transform:uppercase; padding:.2rem .55rem; border-radius:99px; margin-bottom:.7rem;
+    }
+    .vl-stage-badge.live { background:#F5C518; color:#07112e; }
+    .vl-stage-badge.soon { background:rgba(13,27,75,.1); color:#1a2c6b; }
+
+    @media (max-width:600px) {
+      .vl-modal-box { padding:2rem 1.4rem 2.25rem; }
+      .vl-searchrow { flex-direction:column; }
+      .vl-stage { width:100%; }
+    }
+    @media (min-width:901px) { .nav-dropdown { display:none !important; } }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo-link" aria-label="Little Scripture Travelers Home">
+        <div class="logo-mark">
+          <img src="images/logo-badge.jpg" alt="Little Scripture Travelers" width="52" height="52" style="border-radius:50%;" />
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Little Scripture<br>Travelers</span>
+          <span class="logo-sub">Bedtime Stories</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <ul role="list">
+          <li class="has-dropdown">
+            <a href="index.html" class="nav-link-parent">Home <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="index.html#inside" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">What's Inside</span>
+                  <span class="nav-dropdown-item-desc">Stories, characters, and how it all works</span>
+                </a>
+                <a href="index.html#how" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">How It Works</span>
+                  <span class="nav-dropdown-item-desc">Three simple steps to start tonight</span>
+                </a>
+                <a href="index.html#vision" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Vision</span>
+                  <span class="nav-dropdown-item-desc">Why we built Little Scripture Travelers</span>
+                </a>
+                <a href="index.html#ways" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Subscription Plans</span>
+                  <span class="nav-dropdown-item-desc">Find the plan that fits your family</span>
+                </a>
+                <a href="index.html#travelers" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Meet the Travelers</span>
+                  <span class="nav-dropdown-item-desc">Beau, Scout, Willow &amp; Wren</span>
+                </a>
+                <a href="index.html#story" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Story</span>
+                  <span class="nav-dropdown-item-desc">How a dad in Utah started this journey</span>
+                </a>
+                <a href="index.html#blog" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">From the Blog</span>
+                  <span class="nav-dropdown-item-desc">Faith &amp; parenting inspiration</span>
+                </a>
+                <a href="index.html#books" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Books</span>
+                  <span class="nav-dropdown-item-desc">48 illustrated scripture stories</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="travelers.html" class="nav-link-parent">Meet the Travelers <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="travelers.html#bo" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Beau &mdash; The Brave</span>
+                  <span class="nav-dropdown-item-desc">Bold, courageous, and always ready to act</span>
+                </a>
+                <a href="travelers.html#scout" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scout &mdash; The Seeker</span>
+                  <span class="nav-dropdown-item-desc">Curious, thoughtful, always asking why</span>
+                </a>
+                <a href="travelers.html#willow" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Willow &mdash; The Warm</span>
+                  <span class="nav-dropdown-item-desc">Gentle, kind-hearted, full of love</span>
+                </a>
+                <a href="travelers.html#wren" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Wren &mdash; The Wonderer</span>
+                  <span class="nav-dropdown-item-desc">Imaginative, quiet, and full of wonder</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="books.html" class="nav-link-parent">Books <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="books.html#featured" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Featured Book</span>
+                  <span class="nav-dropdown-item-desc">This month's illustrated scripture story</span>
+                </a>
+                <a href="books.html#volumes" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Four Volumes</span>
+                  <span class="nav-dropdown-item-desc">Old &amp; New Testament, BoM, Church History</span>
+                </a>
+                <a href="books.html#formats" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Book Formats</span>
+                  <span class="nav-dropdown-item-desc">Kindle and paperback on Amazon</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="/subscribe.html#plans" class="nav-dropdown-item">Try the First 7 Days Free</a>
+                <a href="subscribe.html#plans" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Choose a Plan</span>
+                  <span class="nav-dropdown-item-desc">The Lantern, Compass, Knapsack, or Caravan</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="watch.html" class="nav-link-parent">Watch <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="watch.html#latest" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Latest Video</span>
+                  <span class="nav-dropdown-item-desc">Watch scripture stories come alive on YouTube</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="our-story.html" class="nav-link-parent">Our Story <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="our-story.html#how-it-started" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">How It Started</span>
+                  <span class="nav-dropdown-item-desc">A dad, a bedtime story, and a big idea</span>
+                </a>
+                <a href="our-story.html#cta" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Start the Journey</span>
+                  <span class="nav-dropdown-item-desc">Join families building faith one night at a time</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="blog.html" class="nav-link-parent">Blog <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="blog-proclaim-liberty.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Proclaim Liberty</span>
+                  <span class="nav-dropdown-item-desc">Faith, freedom, and America's founding</span>
+                </a>
+                <a href="blog-holy-ghost.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Recognize the Spirit</span>
+                  <span class="nav-dropdown-item-desc">Teaching your child to feel the Holy Ghost</span>
+                </a>
+                <a href="blog-quietest-revolution.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Quietest Revolution</span>
+                  <span class="nav-dropdown-item-desc">How bedtime stories change hearts</span>
+                </a>
+                <a href="blog-product-toolkit.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Lantern Toolkit</span>
+                  <span class="nav-dropdown-item-desc">Everything inside your subscription</span>
+                </a>
+                <a href="blog-scripture-routine.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scripture Bedtime Routine</span>
+                  <span class="nav-dropdown-item-desc">How to start &mdash; even on busy nights</span>
+                </a>
+                <a href="blog-scripture-last-thing.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scripture Last Thing</span>
+                  <span class="nav-dropdown-item-desc">Why scripture at bedtime matters most</span>
+                </a>
+                <a href="blog-feeling-path.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Feeling Path</span>
+                  <span class="nav-dropdown-item-desc">Helping children feel, not just hear, scripture</span>
+                </a>
+                <a href="blog-heart-behind-pages.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Roots Before the Storm</span>
+                  <span class="nav-dropdown-item-desc">Building faith before the world pulls them away</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="virtue-library.html" class="nav-link-parent">Virtue Library</a>
+          </li>
+        </ul>
+      </nav>
+
+      <a href="/subscribe.html#plans" class="btn btn-gold nav-cta">Try the First 7 Days Free</a>
+
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+            <ul role="list">
+        <li class="has-dropdown">
+          <a href="index.html" class="nav-link-parent">Home <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="index.html#inside">What's Inside</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#vision">Our Vision</a></li>
+            <li><a href="index.html#ways">Subscription Plans</a></li>
+            <li><a href="index.html#travelers">Meet the Travelers</a></li>
+            <li><a href="index.html#story">Our Story</a></li>
+            <li><a href="index.html#blog">From the Blog</a></li>
+            <li><a href="index.html#books">Our Books</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="travelers.html" class="nav-link-parent">Meet the Travelers <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="travelers.html#bo">Beau &mdash; The Brave</a></li>
+            <li><a href="travelers.html#scout">Scout &mdash; The Seeker</a></li>
+            <li><a href="travelers.html#willow">Willow &mdash; The Warm</a></li>
+            <li><a href="travelers.html#wren">Wren &mdash; The Wonderer</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="books.html" class="nav-link-parent">Books <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="books.html#featured">Featured Book</a></li>
+            <li><a href="books.html#volumes">Four Volumes</a></li>
+            <li><a href="books.html#formats">Book Formats</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;">Try the First 7 Days Free</a></li>
+            <li><a href="subscribe.html#plans">Choose a Plan</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="watch.html" class="nav-link-parent">Watch <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="watch.html#latest">Latest Video</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="our-story.html" class="nav-link-parent">Our Story <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="our-story.html#how-it-started">How It Started</a></li>
+            <li><a href="our-story.html#cta">Start the Journey</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="blog.html" class="nav-link-parent">Blog <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="blog-proclaim-liberty.html">Proclaim Liberty</a></li>
+            <li><a href="blog-holy-ghost.html">Recognize the Spirit</a></li>
+            <li><a href="blog-quietest-revolution.html">The Quietest Revolution</a></li>
+            <li><a href="blog-product-toolkit.html">The Lantern Toolkit</a></li>
+            <li><a href="blog-scripture-routine.html">Scripture Bedtime Routine</a></li>
+            <li><a href="blog-scripture-last-thing.html">Scripture Last Thing</a></li>
+            <li><a href="blog-feeling-path.html">The Feeling Path</a></li>
+            <li><a href="blog-heart-behind-pages.html">Roots Before the Storm</a></li>
+          </ul>
+        </li>
+        <li><a href="virtue-library.html">Virtue Library</a></li>
+        <li><a href="/subscribe.html#plans" class="btn btn-gold">Try the First 7 Days Free</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <header class="page-hero">
+    <div class="page-hero-content">
+      <span class="page-eyebrow">&#10022; STORY CATALOG &#10022;</span>
+      <h1>The Virtue Library</h1>
+      <p class="subtitle">Your child is standing in front of you with a real problem. Look up what they need tonight &mdash; and find the scripture story that teaches it.</p>
+      <div class="star-divider"><span>&#10022;</span></div>
+    </div>
+  </header>
+
+  <!-- Framing -->
+  <section class="vl-frame">
+    <div class="vl-frame-inner">
+      <p class="vl-lede">Knowledge is power.</p>
+      <p>When a hard moment arrives &mdash; the lie, the shoving match over a toy, the tears at the bedroom door &mdash; most of us reach for the same three or four stories we happen to remember. This library exists so you never have to teach from memory alone.</p>
+      <p>Every story in the Little Scripture Travelers series is tagged with the virtues and principles it teaches. Look up what your child is facing today, and you'll get every story you can use to teach it &mdash; straight from the scriptures, in a loving way, at a level a small child can actually hold.</p>
+      <div class="vl-prayer">
+        <p><strong>But knowing is only the beginning.</strong> No catalog can tell you what your child's heart needs tonight. This is a tool, not a substitute &mdash; it has got to be a prayerful endeavor, worked by the parent, for each individual child. You are the one who knows them. Ask Heavenly Father, and then use what you find here to teach with.</p>
+      </div>
+
+      <p class="vl-freebie"><strong>Three complete stories are free.</strong> Browsing is open to everyone &mdash; and when you find one you want to read tonight, sign in with your email and we&rsquo;ll send you a code. Three stories open right up, no card, no subscription.</p>
+
+      <div class="vl-growth">
+        <div class="vl-growth-label">A Growing Library</div>
+        <div class="vl-bar"><div class="vl-bar-fill" id="vl-bar" style="width:0%"></div></div>
+        <p class="vl-growth-note" id="vl-growth-note">Loading&hellip;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who's signed in (filled in by virtue-library.js) -->
+  <div class="vl-who" id="vl-who" hidden></div>
+
+  <!-- The Tool -->
+  <section class="vl-tool" id="vl-tool">
+    <div class="vl-tool-inner">
+
+      <div id="vl-browse">
+        <div class="vl-axes" role="tablist" aria-label="Search the library by">
+          <button class="vl-axis" role="tab" data-axis="virtue"    aria-selected="true">By Virtue or Principle</button>
+          <button class="vl-axis" role="tab" data-axis="situation" aria-selected="false">By Life Situation</button>
+          <button class="vl-axis" role="tab" data-axis="feeling"   aria-selected="false">By Feeling</button>
+          <button class="vl-axis" role="tab" data-axis="traveler"  aria-selected="false">By Traveler</button>
+          <button class="vl-axis" role="tab" data-axis="scripture" aria-selected="false">By Scripture</button>
+        </div>
+
+        <div class="vl-searchrow">
+          <input type="search" class="vl-search" id="vl-search" placeholder="Search the library&hellip;" aria-label="Search the library" />
+          <select class="vl-stage" id="vl-stage-filter" aria-label="Filter by child's stage"></select>
+        </div>
+
+        <p class="vl-count" id="vl-count"></p>
+        <div class="vl-grid" id="vl-results"></div>
+      </div>
+
+      <div id="vl-detail" hidden></div>
+    </div>
+  </section>
+
+  <!-- Development Stages -->
+  <section class="vl-stages">
+    <div class="vl-stages-inner">
+      <h2 class="section-heading-center">Built to Grow With Your Child</h2>
+      <p style="text-align:center;max-width:44rem;margin:.85rem auto 0;font-size:1.02rem;line-height:1.72;color:#4a5578;">The library starts where the stories start &mdash; ages one through five. As the series grows through each stage of child and adolescent development, the same virtues will carry forward with stories written for who your child is becoming.</p>
+      <div class="vl-stage-grid" id="vl-stage-grid"></div>
+    </div>
+  </section>
+
+  <!-- Story Modal -->
+  <div class="vl-modal" id="vl-modal" role="dialog" aria-modal="true" aria-labelledby="vl-modal-title">
+    <div class="vl-modal-box">
+      <button class="vl-close" id="vl-close" aria-label="Close story">&#10005;</button>
+      <div id="vl-modal-body"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+          <img src="images/logo-badge.jpg" alt="Little Scripture Travelers" width="40" height="40" style="border-radius:50%;object-fit:cover;" />
+          <div>
+            <div class="logo-name" style="font-size:0.9rem;">Little Scripture Travelers</div>
+            <div class="logo-sub" style="font-size:0.7rem;">Bedtime Stories</div>
+          </div>
+        </div>
+        <p>Helping little ones feel the Spirit &mdash; one bedtime story at a time.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Watch &amp; Read</h4>
+        <ul role="list">
+          <li><a href="https://www.youtube.com/@LittleScriptureTravelers" target="_blank" rel="noopener">YouTube Channel</a></li>
+          <li><a href="https://www.amazon.com/Follows-Scripture-Travelers-Bedtime-Stories/dp/B0H3ZDCFSR/ref=tmm_pap_swatch_0" target="_blank" rel="noopener">Books on Amazon</a></li>
+          <li><a href="https://a.co/d/0gLYJdit" target="_blank" rel="noopener">Kindle Editions</a></li>
+          <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;">Try the First 7 Days Free</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Subscribe</h4>
+        <ul role="list">
+          <li><a href="/subscribe.html#plans">The Lantern</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul role="list">
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="travelers.html">Meet the Travelers</a></li>
+          <li><a href="blog.html">Why Bedtime Scripture</a></li>
+          <li><a href="mailto:littlescripturetravelers@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-manage">
+        <h4>Manage Subscriptions</h4>
+        <ul role="list">
+          <li><button type="button" class="btn-cancel-sub footer-cancel-link" aria-haspopup="dialog">Cancel Subscription</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom" style="flex-direction:column;align-items:center;text-align:center;">
+      <div class="social-links" style="justify-content:center;margin-bottom:0.75rem;gap:0.75rem;">
+        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07112e"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.14a8.16 8.16 0 0 0 4.77 1.52V7.21a4.85 4.85 0 0 1-1-.52z"/></svg>
+        </a>
+        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        </a>
+      </div>
+      <p style="margin-top:1rem;">We do not lecture. We do not pile on rules. We tell what happened &mdash; a beginning, a worry, and a hopeful ending &mdash; in the smallest words that still carry the meaning.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">&copy; 2026 Little Scripture Travelers</p>
+      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.15);font-size:0.72rem;line-height:1.5;color:#9aa6c0;text-align:center;">
+        <p style="margin:0 0 0.6rem;">Little Scripture Travelers Bedtime Stories, LLC is an independent creative endeavor. It is not affiliated with, made by, sponsored by, approved by, or endorsed by The Church of Jesus Christ of Latter-day Saints or Intellectual Reserve, Inc. All stories, illustrations, characters, lullabies, and opinions are solely those of Little Scripture Travelers and do not represent the Church.</p>
+        <p style="margin:0;">&ldquo;Come, Follow Me,&rdquo; the name of The Church of Jesus Christ of Latter-day Saints, and related names and logos are trademarks of Intellectual Reserve, Inc.; any reference to them here is for identification purposes only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/virtue-library.js"></script>
+  <script src="virtue-library.js"></script>
+  <script src="main.js"></script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+</script></body>
+</html>

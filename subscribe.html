@@ -1,0 +1,2469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subscribe — Little Scripture Travelers</title>
+  <meta name="description" content="Join the Little Scripture Travelers family. Choose a subscription plan and receive stories, lullabies, and printables every month." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .page-hero {
+      background-image: url('images/hero-bg.jpg');
+      background-size: cover;
+      background-position: center top;
+      position: relative;
+      padding: var(--space-24) var(--space-6) var(--space-16);
+      text-align: center;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(7,17,46,0.72) 0%, rgba(7,17,46,0.45) 50%, rgba(7,17,46,0.75) 100%);
+      z-index: 1;
+    }
+    .page-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .page-hero h1 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: #fff;
+      margin-bottom: var(--space-4);
+      text-shadow: 0 2px 16px rgba(0,0,0,0.6);
+    }
+    .page-hero p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.88);
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* ── Subscribe section ── */
+    .subscribe-section {
+      background: linear-gradient(180deg, #07112e 0%, #0d1b4b 60%, #07112e 100%);
+      padding: var(--space-20) var(--space-6);
+    }
+    .subscribe-section .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .subscribe-section .section-title {
+      text-align: center;
+      margin-bottom: var(--space-4);
+    }
+    .subscribe-section .section-subtitle {
+      text-align: center;
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.72);
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin: 0 auto var(--space-12);
+      line-height: 1.7;
+    }
+
+    /* ── Tier cards ── */
+    .tiers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: var(--space-6);
+      align-items: stretch;
+    }
+    .tier-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(245,197,24,0.2);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8) var(--space-6) var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .tier-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(245,197,24,0.1);
+    }
+    .tier-card.featured {
+      border-color: var(--gold);
+      background: rgba(245,197,24,0.06);
+      box-shadow: 0 0 40px rgba(245,197,24,0.15);
+    }
+    .tier-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: #07112e;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .tier-icon {
+      font-size: 2.4rem;
+      text-align: center;
+    }
+    .tier-name {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.35rem;
+      color: var(--gold);
+      text-align: center;
+    }
+    .tier-price {
+      text-align: center;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: #fff;
+      line-height: 1;
+    }
+    .tier-price span {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+    }
+    .tier-perks {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+    .tier-perks li {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+      padding: var(--space-2) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-2);
+      position: relative;
+    }
+    .tier-perks li:last-child { border-bottom: none; }
+    .tier-perks li::before {
+      content: '✦';
+      color: var(--gold);
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      margin-top: 3px;
+    }
+    .btn-tier {
+      display: block;
+      background: var(--gold);
+      color: #07112e;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      text-align: center;
+      transition: opacity 0.2s, transform 0.2s;
+      margin-top: var(--space-2);
+    }
+    .btn-tier:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-tier-outline {
+      display: block;
+      background: transparent;
+      color: var(--gold);
+      border: 2px solid rgba(245,197,24,0.5);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      margin-top: var(--space-2);
+    }
+    .btn-tier-outline:hover {
+      background: rgba(245,197,24,0.08);
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+
+    /* ── Product research section ── */
+    :root {
+      --space-5: 1.25rem;
+      --space-7: 1.75rem;
+      --space-14: 3.5rem;
+    }
+    .research-section {
+      background: linear-gradient(180deg, #07112e 0%, #060e25 100%);
+      padding: var(--space-20) var(--space-6);
+      border-top: 1px solid rgba(245,197,24,0.12);
+    }
+    .research-section .section-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .research-intro {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto var(--space-12);
+    }
+    .research-intro p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.72);
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    /* Accordion */
+    .product-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .product-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(245,197,24,0.15);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+    .product-item.open {
+      border-color: rgba(245,197,24,0.4);
+    }
+    .product-trigger {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-6) var(--space-7);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      text-align: left;
+    }
+    .product-trigger:hover .product-trigger-name {
+      color: var(--gold);
+    }
+    .product-trigger-emoji {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .product-trigger-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .product-trigger-name {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #fff;
+      transition: color 0.2s;
+      display: block;
+    }
+    .product-trigger-tier {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem;
+      color: rgba(245,197,24,0.7);
+      display: block;
+      margin-top: 2px;
+    }
+    .product-trigger-chevron {
+      font-size: 1rem;
+      color: rgba(245,197,24,0.6);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .product-item.open .product-trigger-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Accordion body */
+    .product-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .product-item.open .product-body {
+      max-height: 1200px;
+    }
+    .product-body-inner {
+      padding: 0 var(--space-7) var(--space-7);
+      padding-left: calc(var(--space-7) + 1.8rem + var(--space-4));
+    }
+    .product-divider {
+      height: 1px;
+      background: rgba(245,197,24,0.1);
+      margin-bottom: var(--space-6);
+    }
+    .product-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+    @media (max-width: 600px) {
+      .product-cols { grid-template-columns: 1fr; }
+      .product-body-inner { padding-left: var(--space-6); }
+    }
+    .product-col-label {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-3);
+      display: block;
+    }
+    .product-col p {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.75;
+      margin: 0;
+    }
+    .research-strip {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(245,197,24,0.1);
+      border-radius: 10px;
+      padding: var(--space-4) var(--space-5);
+    }
+    .research-strip-label {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,197,24,0.6);
+      margin-bottom: var(--space-3);
+      display: block;
+    }
+    .research-strip ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+    .research-strip ul li a {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(245,197,24,0.8);
+      text-decoration: none;
+      background: rgba(245,197,24,0.07);
+      border: 1px solid rgba(245,197,24,0.2);
+      border-radius: 999px;
+      padding: 3px 12px;
+      transition: background 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .research-strip ul li a:hover {
+      background: rgba(245,197,24,0.18);
+      color: var(--gold);
+    }
+
+    /* Stack-together callout */
+    .stack-callout {
+      background: rgba(245,197,24,0.05);
+      border: 1px solid rgba(245,197,24,0.2);
+      border-radius: 16px;
+      padding: var(--space-8) var(--space-8);
+      margin-top: var(--space-12);
+      text-align: center;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .stack-callout h3 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: var(--space-4);
+    }
+    .stack-callout p {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.75;
+      margin-bottom: 1.75rem;
+    }
+    .stack-callout p:last-child { margin-bottom: 0; }
+
+    /* ── Free story band ── */
+    .free-band {
+      background: rgba(245,197,24,0.07);
+      border-top: 1px solid rgba(245,197,24,0.18);
+      border-bottom: 1px solid rgba(245,197,24,0.18);
+      padding: var(--space-12) var(--space-6);
+      text-align: center;
+    }
+    .free-band h2 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: var(--gold);
+      margin-bottom: var(--space-3);
+    }
+    .free-band p {
+      font-family: 'Nunito', sans-serif;
+      color: rgba(255,255,255,0.78);
+      max-width: 500px;
+      margin: 0 auto var(--space-6);
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+  /* ── FAQ Section ── */
+  .faq-section {
+    padding: var(--space-20) var(--space-6);
+    background: rgba(255,255,255,0.02);
+  }
+  .faq-section .section-title {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .faq-section .section-subtitle {
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    margin-bottom: var(--space-10);
+  }
+  .faq-list {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .faq-item:first-child {
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-align: left;
+    padding: 1.2rem 2.5rem 1.2rem 0;
+    cursor: pointer;
+    position: relative;
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+  .faq-question:hover { color: var(--gold); }
+  .faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    color: var(--gold);
+    font-weight: 300;
+    transition: transform 0.25s;
+    line-height: 1;
+  }
+  .faq-item.open .faq-question::after {
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.2s ease;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 400px;
+  }
+  .faq-answer p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.97rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    padding: 0 0 1.2rem 0;
+    margin: 0;
+  }
+  .faq-answer a { color: var(--gold); text-decoration: underline; }
+
+  /* ── Perk Hover Popups ── */
+  .tier-perks li.has-preview {
+    position: relative;
+    cursor: default;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  .tier-perks li.has-preview:hover .perk-label { color: var(--gold); }
+  .perk-label { flex: 1; }
+  .perk-eye {
+    font-size: 0.85rem;
+    opacity: 0.45;
+    flex-shrink: 0;
+    cursor: pointer;
+    margin-top: 2px;
+    transition: opacity 0.15s;
+  }
+  .tier-perks li.has-preview:hover .perk-eye { opacity: 1; }
+  .perk-popup {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 8px);
+    width: 280px;
+    max-height: 320px;
+    overflow-y: auto;
+    background: #0d1b4b;
+    border: 1.5px solid var(--gold);
+    border-radius: 14px;
+    padding: 12px 14px 14px;
+    z-index: 500;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) transparent;
+  }
+  .perk-popup::-webkit-scrollbar { width: 4px; }
+  .perk-popup::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+  .perk-popup::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 24px;
+    border: 7px solid transparent;
+    border-top-color: var(--gold);
+  }
+  .tier-perks li.has-preview:hover .perk-popup { display: block; }
+  .tier-card:nth-child(3) .perk-popup,
+  .tier-card:nth-child(4) .perk-popup { left: auto; right: 0; }
+  .tier-card:nth-child(3) .perk-popup::after,
+  .tier-card:nth-child(4) .perk-popup::after { left: auto; right: 24px; }
+  .perk-popup-media {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    cursor: zoom-in;
+  }
+  .perk-popup-media img,
+  .perk-popup-media video {
+    width: 100%; height: 130px;
+    object-fit: cover; display: block; border-radius: 8px;
+  }
+  .perk-popup-placeholder {
+    width: 100%; height: 110px;
+    border: 2px dashed rgba(244,200,66,0.3); border-radius: 8px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.3rem; color: rgba(255,255,255,0.3); font-size: 1.5rem;
+  }
+  .perk-popup-placeholder small {
+    font-family: 'Nunito', sans-serif; font-size: 0.65rem;
+    color: rgba(255,255,255,0.25); text-align: center; line-height: 1.4;
+  }
+  .perk-popup-name {
+    display: block; font-family: 'Fredoka', sans-serif; font-weight: 600;
+    font-size: 0.95rem; color: var(--gold); margin-bottom: 4px;
+  }
+  .perk-popup-desc {
+    font-family: 'Nunito', sans-serif; font-size: 0.8rem;
+    color: rgba(255,255,255,0.72); line-height: 1.55; margin: 0;
+  }
+  /* Expand modal */
+  .perk-expand-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(4,8,20,0.88); z-index: 9000;
+    align-items: center; justify-content: center;
+    padding: 1.5rem; backdrop-filter: blur(6px);
+  }
+  .perk-expand-overlay.open { display: flex; }
+  .perk-expand-box {
+    background: linear-gradient(150deg, #0d1b4b 0%, #07112e 100%);
+    border: 2px solid var(--gold); border-radius: 18px;
+    width: 100%; max-width: 540px; overflow: hidden;
+    position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.65);
+    animation: pePopIn 0.22s ease;
+  }
+  @keyframes pePopIn {
+    from { opacity:0; transform:scale(0.95) translateY(16px); }
+    to   { opacity:1; transform:scale(1) translateY(0); }
+  }
+  .perk-expand-close {
+    position: absolute; top: 12px; right: 14px;
+    background: rgba(255,255,255,0.12); border: none; color: #fff;
+    font-size: 1rem; width: 30px; height: 30px; border-radius: 50%;
+    cursor: pointer; z-index: 10; line-height: 30px; text-align: center;
+  }
+  .perk-expand-close:hover { background: rgba(255,255,255,0.22); }
+  .perk-expand-media {
+    width: 100%; min-height: 240px; background: rgba(255,255,255,0.03);
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 1px solid rgba(244,200,66,0.2); overflow: hidden;
+  }
+  .perk-expand-media img, .perk-expand-media video {
+    width: 100%; max-height: 300px; object-fit: cover; display: block;
+  }
+  .perk-expand-media-empty {
+    display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+    color: rgba(255,255,255,0.22); padding: 2.5rem;
+    font-family: 'Nunito', sans-serif; font-size: 0.8rem; text-align: center;
+  }
+  .perk-expand-media-empty span { font-size: 3rem; opacity: 0.25; }
+  .perk-expand-body { padding: 1.5rem 2rem 2rem; text-align: center; }
+  .perk-expand-name {
+    font-family: 'Fredoka', sans-serif; font-weight: 600;
+    font-size: 1.5rem; color: var(--gold); margin-bottom: 0.6rem;
+  }
+  .perk-expand-desc {
+    font-family: 'Nunito', sans-serif; font-size: 0.95rem;
+    color: rgba(255,255,255,0.78); line-height: 1.7; margin: 0;
+  }
+
+  /* ── Toolkit info inside perk popup ─────────────────── */
+    .perk-toolkit {
+      margin-top: 10px;
+      border-top: 1px solid rgba(244,200,66,0.25);
+      padding-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .perk-toolkit-row { }
+    .perk-toolkit-label {
+      display: block;
+      font-family: 'Anton', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold, #f4c842);
+      margin-bottom: 2px;
+    }
+    .perk-toolkit-row p {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .perk-research-source {
+      display: inline;
+      font-size: 0.65rem;
+      color: rgba(244,200,66,0.65);
+      font-style: italic;
+    }
+
+  /* ── Family persona tagline ───────────────────────────────── */
+  .plan-persona, .tier-persona {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.55;
+    margin: 0 0 8px 0;
+    font-style: italic;
+    border-left: 2px solid var(--gold, #f4c842);
+    padding-left: 10px;
+  }
+
+  /* ── Coming Soon tier treatment ──────────────────────────── */
+  .plan-card.plan-coming-soon,
+  .tier-card.coming-soon {
+    opacity: 0.62;
+    filter: grayscale(18%);
+    pointer-events: none;        /* disable hover effects on card */
+  }
+  /* Re-enable pointer events on the button only */
+  .plan-card.plan-coming-soon .btn-coming-soon,
+  .tier-card.coming-soon .btn-coming-soon {
+    pointer-events: auto;
+  }
+  .plan-coming-soon-badge,
+  .tier-coming-soon-badge {
+    display: inline-block;
+    background: rgba(244,200,66,0.15);
+    border: 1.5px solid var(--gold, #f4c842);
+    color: var(--gold, #f4c842);
+    font-family: 'Anton', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+  .btn-coming-soon {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    border-radius: 999px;
+    border: 1.5px solid var(--gold, #f4c842);
+    background: transparent;
+    color: var(--gold, #f4c842);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    pointer-events: auto;
+  }
+  .btn-coming-soon:hover {
+    background: var(--gold, #f4c842);
+    color: #07112e;
+  }
+
+  /* ── Content Protection ───────────────────────────── */
+  .lst-protected {
+    position: relative;
+    display: block;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .lst-protected img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+    display: block;
+    width: 100%;
+  }
+  .lst-protected::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='110'%3E%3Ctext transform='rotate(-30 110 55)' x='5' y='70' font-size='13' fill='rgba(255%2C255%2C255%2C0.38)' font-family='Arial%2Csans-serif' font-weight='bold'%3E%C2%A9 Little Scripture Travelers%3C/text%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 220px 110px;
+    pointer-events: auto;
+    z-index: 2;
+    border-radius: inherit;
+  }
+  @media print {
+    #storyRich,
+    #lullabyRich,
+    #lullabyLightbox,
+    #storyFlipperOverlay,
+    #storyFlipperOverlay2,
+    .perk-expand-overlay,
+    #emailLightbox,
+    #idxExpandOverlay { display: none !important; }
+  }
+
+  /* Watermark on hover thumbnail previews */
+  .perk-popup-media {
+    position: relative;
+  }
+  .perk-popup-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='110'%3E%3Ctext transform='rotate(-30 110 55)' x='5' y='70' font-size='13' fill='rgba(255%2C255%2C255%2C0.38)' font-family='Arial%2Csans-serif' font-weight='bold'%3E%C2%A9 Little Scripture Travelers%3C/text%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 220px 110px;
+    pointer-events: auto;
+    z-index: 3;
+    border-radius: 8px;
+  }
+  .perk-popup-media img,
+  .perk-popup-media video {
+    pointer-events: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+</style>
+</head>
+<body class="subpage-body">
+
+  <!-- ── Navigation ── -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo-link" aria-label="Little Scripture Travelers Home">
+        <div class="logo-mark">
+          <img src="images/logo-badge.jpg" alt="Little Scripture Travelers" width="52" height="52" style="border-radius:50%;" />
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Little Scripture<br>Travelers</span>
+          <span class="logo-sub">Bedtime Stories</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <ul role="list">
+          <li class="has-dropdown">
+            <a href="index.html" class="nav-link-parent">Home <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="index.html#inside" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">What's Inside</span>
+                  <span class="nav-dropdown-item-desc">Stories, characters, and how it all works</span>
+                </a>
+                <a href="index.html#how" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">How It Works</span>
+                  <span class="nav-dropdown-item-desc">Three simple steps to start tonight</span>
+                </a>
+                <a href="index.html#vision" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Vision</span>
+                  <span class="nav-dropdown-item-desc">Why we built Little Scripture Travelers</span>
+                </a>
+                <a href="index.html#ways" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Subscription Plans</span>
+                  <span class="nav-dropdown-item-desc">Find the plan that fits your family</span>
+                </a>
+                <a href="index.html#travelers" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Meet the Travelers</span>
+                  <span class="nav-dropdown-item-desc">Beau, Scout, Willow &amp; Wren</span>
+                </a>
+                <a href="index.html#story" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Story</span>
+                  <span class="nav-dropdown-item-desc">How a dad in Utah started this journey</span>
+                </a>
+                <a href="index.html#blog" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">From the Blog</span>
+                  <span class="nav-dropdown-item-desc">Faith &amp; parenting inspiration</span>
+                </a>
+                <a href="index.html#books" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Our Books</span>
+                  <span class="nav-dropdown-item-desc">48 illustrated scripture stories</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="travelers.html" class="nav-link-parent">Meet the Travelers <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="travelers.html#bo" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Beau &mdash; The Brave</span>
+                  <span class="nav-dropdown-item-desc">Bold, courageous, and always ready to act</span>
+                </a>
+                <a href="travelers.html#scout" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scout &mdash; The Seeker</span>
+                  <span class="nav-dropdown-item-desc">Curious, thoughtful, always asking why</span>
+                </a>
+                <a href="travelers.html#willow" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Willow &mdash; The Warm</span>
+                  <span class="nav-dropdown-item-desc">Gentle, kind-hearted, full of love</span>
+                </a>
+                <a href="travelers.html#wren" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Wren &mdash; The Wonderer</span>
+                  <span class="nav-dropdown-item-desc">Imaginative, quiet, and full of wonder</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="books.html" class="nav-link-parent">Books <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="books.html#featured" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Featured Book</span>
+                  <span class="nav-dropdown-item-desc">This month's illustrated scripture story</span>
+                </a>
+                <a href="books.html#volumes" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Four Volumes</span>
+                  <span class="nav-dropdown-item-desc">Old &amp; New Testament, BoM, Church History</span>
+                </a>
+                <a href="books.html#formats" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Book Formats</span>
+                  <span class="nav-dropdown-item-desc">Kindle and paperback on Amazon</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="/subscribe.html#plans" class="nav-dropdown-item">Try the First 7 Days Free</a>
+                <a href="subscribe.html#plans" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Choose a Plan</span>
+                  <span class="nav-dropdown-item-desc">The Lantern, Compass, Knapsack, or Caravan</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="watch.html" class="nav-link-parent">Watch <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="watch.html#latest" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Latest Video</span>
+                  <span class="nav-dropdown-item-desc">Watch scripture stories come alive on YouTube</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="our-story.html" class="nav-link-parent">Our Story <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="our-story.html#how-it-started" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">How It Started</span>
+                  <span class="nav-dropdown-item-desc">A dad, a bedtime story, and a big idea</span>
+                </a>
+                <a href="our-story.html#cta" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Start the Journey</span>
+                  <span class="nav-dropdown-item-desc">Join families building faith one night at a time</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="has-dropdown">
+            <a href="blog.html" class="nav-link-parent">Blog <span class="nav-arrow">▾</span></a>
+            <div class="nav-dropdown-panel">
+              <div class="nav-dropdown-inner">
+                <a href="blog-proclaim-liberty.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Proclaim Liberty</span>
+                  <span class="nav-dropdown-item-desc">Faith, freedom, and America's founding</span>
+                </a>
+                <a href="blog-holy-ghost.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Recognize the Spirit</span>
+                  <span class="nav-dropdown-item-desc">Teaching your child to feel the Holy Ghost</span>
+                </a>
+                <a href="blog-quietest-revolution.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Quietest Revolution</span>
+                  <span class="nav-dropdown-item-desc">How bedtime stories change hearts</span>
+                </a>
+                <a href="blog-product-toolkit.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Bigger Than It Looks</span>
+                  <span class="nav-dropdown-item-desc">Everything inside your subscription</span>
+                </a>
+                <a href="blog-scripture-routine.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scripture Bedtime Routine</span>
+                  <span class="nav-dropdown-item-desc">How to start &mdash; even on busy nights</span>
+                </a>
+                <a href="blog-scripture-last-thing.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Scripture Last Thing</span>
+                  <span class="nav-dropdown-item-desc">Why scripture at bedtime matters most</span>
+                </a>
+                <a href="blog-feeling-path.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">The Feeling Path</span>
+                  <span class="nav-dropdown-item-desc">Helping children feel, not just hear, scripture</span>
+                </a>
+                <a href="blog-heart-behind-pages.html" class="nav-dropdown-item">
+                  <span class="nav-dropdown-item-title">Roots Before the Storm</span>
+                  <span class="nav-dropdown-item-desc">Building faith before the world pulls them away</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="virtue-library.html" class="nav-link-parent">Virtue Library</a>
+          </li>
+        </ul>
+      </nav>
+
+      <a href="/subscribe.html#plans" class="btn btn-gold nav-cta">Try the First 7 Days Free</a>
+
+      <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+            <ul role="list">
+        <li class="has-dropdown">
+          <a href="index.html" class="nav-link-parent">Home <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="index.html#inside">What's Inside</a></li>
+            <li><a href="index.html#how">How It Works</a></li>
+            <li><a href="index.html#vision">Our Vision</a></li>
+            <li><a href="index.html#ways">Subscription Plans</a></li>
+            <li><a href="index.html#travelers">Meet the Travelers</a></li>
+            <li><a href="index.html#story">Our Story</a></li>
+            <li><a href="index.html#blog">From the Blog</a></li>
+            <li><a href="index.html#books">Our Books</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="travelers.html" class="nav-link-parent">Meet the Travelers <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="travelers.html#bo">Beau &mdash; The Brave</a></li>
+            <li><a href="travelers.html#scout">Scout &mdash; The Seeker</a></li>
+            <li><a href="travelers.html#willow">Willow &mdash; The Warm</a></li>
+            <li><a href="travelers.html#wren">Wren &mdash; The Wonderer</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="books.html" class="nav-link-parent">Books <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="books.html#featured">Featured Book</a></li>
+            <li><a href="books.html#volumes">Four Volumes</a></li>
+            <li><a href="books.html#formats">Book Formats</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;">Try the First 7 Days Free</a></li>
+            <li><a href="subscribe.html#plans">Choose a Plan</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="watch.html" class="nav-link-parent">Watch <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="watch.html#latest">Latest Video</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="our-story.html" class="nav-link-parent">Our Story <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="our-story.html#how-it-started">How It Started</a></li>
+            <li><a href="our-story.html#cta">Start the Journey</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="blog.html" class="nav-link-parent">Blog <span class="nav-arrow">&#9662;</span></a>
+          <ul class="nav-dropdown">
+            <li><a href="blog-proclaim-liberty.html">Proclaim Liberty</a></li>
+            <li><a href="blog-holy-ghost.html">Recognize the Spirit</a></li>
+            <li><a href="blog-quietest-revolution.html">The Quietest Revolution</a></li>
+            <li><a href="blog-product-toolkit.html">Bigger Than It Looks</a></li>
+            <li><a href="blog-scripture-routine.html">Scripture Bedtime Routine</a></li>
+            <li><a href="blog-scripture-last-thing.html">Scripture Last Thing</a></li>
+            <li><a href="blog-feeling-path.html">The Feeling Path</a></li>
+            <li><a href="blog-heart-behind-pages.html">Roots Before the Storm</a></li>
+          </ul>
+        </li>
+        <li><a href="virtue-library.html">Virtue Library</a></li>
+        <li><a href="/subscribe.html#plans" class="btn btn-gold">Try the First 7 Days Free</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ★ AMERICA 250 CELEBRATION RIBBON ★ -->
+  <!-- ── Page Hero ── -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <h1>Join the Journey</h1>
+      <div class="star-divider">✦ &nbsp; ✦ &nbsp; ✦</div>
+      <p>Choose a subscription and receive new scripture stories, lullabies, and printables — delivered straight to your family every month.</p>
+    </div>
+  </section>
+
+  <!-- ── Free Trial Band ── -->
+  <section class="free-band" id="free">
+    <h2>Try The Lantern Free for 7 Days</h2>
+    <p>No commitment. Cancel anytime. Get a nightly scripture story delivered to your inbox every morning at 5&nbsp;AM.</p>
+
+    <div style="max-width:420px;margin:1.75rem auto 0;text-align:center;">
+      <a href="/subscribe.html#plans" style="
+        display:inline-block;
+        background:var(--gold,#f4c842);color:#07112e;
+        font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.15rem;
+        border:none;border-radius:50px;padding:0.9rem 2.25rem;
+        cursor:pointer;text-decoration:none;
+      ">Try the First 7 Days Free</a>
+      <p style="font-family:'Nunito',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.45);text-align:center;margin:0.75rem 0 0;">
+        Join other LDS and Christian families. Cancel anytime.
+      </p>
+    </div>
+    </section>
+
+
+
+  <!-- ── Tiers ── -->
+  <section class="subscribe-section" id="plans">
+    <div class="section-inner">
+      <h2 class="section-title">Choose Your Plan</h2>
+      <p class="section-subtitle">All plans are managed securely through Payhip. Cancel anytime.</p>
+
+      <div class="tiers-grid">
+
+        <!-- Lantern -->
+        <div class="tier-card">
+          <div class="tier-icon">🏮</div>
+          <div class="tier-name">The Lantern</div>
+          <div class="tier-price">$10.99<span>/mo</span></div>
+          <div class="tier-price-note" style="font-size:0.9rem;color:rgba(255,255,255,0.72);margin-top:2px;">or <strong style="color:var(--gold,#f4c842);">$98.91/year</strong> — 3 months free</div>
+          <p class="tier-persona">Best for families beginning a bedtime scripture routine — one quiet story and a soothing lullaby is all you need to start building a lifelong habit.</p>
+          <ul class="tier-perks">
+            <li class="has-preview" data-product="email">
+              <span class="perk-label">The 5 AM Email &mdash; tonight's story, the key scripture, and 3 questions to ponder all day so you can share your own or your ancestors' stories at bedtime</span>
+              <span class="perk-eye" title="Preview this product">&#128065;</span>
+              <div class="perk-popup">
+                  <div class="perk-popup-media" data-product="email" style="cursor:zoom-in;">
+                    <img src="images/email-preview/email-card.jpg" alt="The 5 AM Email preview" style="width:100%;height:130px;object-fit:cover;object-position:top;border-radius:8px;display:block;">
+                    <div style="text-align:center;font-family:'Nunito',sans-serif;font-size:0.65rem;color:rgba(244,200,66,0.7);margin-top:4px;">Click to read a real one, start to finish &#8599;</div>
+                  </div>
+                <strong class="perk-popup-name">The 5 AM Email</strong>
+                <p class="perk-popup-desc">Arrives by 5 AM Mountain Standard Time every morning with tonight's story in a nutshell, the background behind it, the main gospel principle, the key scripture, a one-tap link to the illustrated story PDF, and three questions in <em>A Parent's Heart</em> to carry with you all day.</p>
+                <div class="perk-toolkit">
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; What it gives you</span>
+                    <p>The whole evening handed to you before breakfast &mdash; the story, the principle, the verse, and something of your own to say, hours before bedtime arrives.</p>
+                  </div>
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; Problem it solves</span>
+                    <p>Bedtime lands when you are most depleted. Reading the three questions at 5 AM means you have had all day to ponder, so you walk in with <em>your</em> story and your ancestors' stories ready &mdash; not scrambling for something to say.</p>
+                  </div>
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; Research behind it</span>
+                    <p>Researchers at Emory University's Family Narratives Lab found that children in families who told coherent, emotionally open stories about hard family moments had better self-esteem, stronger social competence, higher-quality friendships, and less anxiety and stress. The third question asks about a grandparent or ancestor for exactly this reason. <span class='perk-research-source'>(Fivush &amp; Duke, Emory University)</span></p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="has-preview" data-product="story">
+              <span class="perk-label">Nightly Scripture Story & PDF — delivered to your inbox by 5 AM Mountain Standard Time (Denver) every morning</span>
+              <span class="perk-eye" title="Preview this product">👁</span>
+              <div class="perk-popup">
+                <div class="perk-popup-media" data-product="story" style="cursor:zoom-in;">
+                  <img src="images/story-pdf/page-06.jpg" alt="Story preview" style="width:100%;height:130px;object-fit:cover;border-radius:8px;display:block;">
+                  <div style="text-align:center;font-family:'Nunito',sans-serif;font-size:0.65rem;color:rgba(244,200,66,0.7);margin-top:4px;">Click to flip through all 12 pages ↗</div>
+                </div>
+                <strong class="perk-popup-name">Nightly Scripture Story & PDF</strong>
+                <p class="perk-popup-desc">A 5–10 minute illustrated bedtime story featuring Beau, Scout, Willow, and Wren — delivered to your inbox by 5 AM Mountain Standard Time (Denver) every morning as a beautifully formatted PDF, ready to read on any device or print for a binder.</p>
+                <div class="perk-toolkit">
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; What it gives you</span>
+                    <p>Gives parents a ready-made bedtime routine with zero prep — story, reflection moment, and parent prompt all included.</p>
+                  </div>
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; Problem it solves</span>
+                    <p>No more wondering <em>what should I teach tonight?</em> You walk in with the story already written and the Remember moment already there.</p>
+                  </div>
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; Research behind it</span>
+                    <p>Researchers at Ohio State estimated that reading one picture book a day gives a child about 78,000 words of exposure a year, and that children from literacy-rich homes hear roughly 1.4 million more words before kindergarten than children who are never read to. When that reading is scripture in your voice, you are stacking literacy growth on testimony-building on secure attachment — all in ten minutes. <span class='perk-research-source'><a href='https://ehe.osu.edu/news/listing/importance-reading-kids-daily-0' target='_blank' rel='noopener'>(Logan et al., Ohio State University)</a></span></p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="has-preview" data-product="lullaby">
+              <span class="perk-label">The Lantern Lullaby — Little Scripture Travelers' signature lullaby, the same comforting song every night</span>
+              <span class="perk-eye" title="Preview this product">👁</span>
+              <div class="perk-popup">
+                <div class="perk-popup-media" data-product="lullaby" style="cursor:zoom-in;">
+                  <!-- MEDIA: lullaby -->
+                  <img src="images/lullaby-sheet.jpg" alt="A Little Travelers' Lullaby — full lyrics" style="width:100%;border-radius:8px;display:block;">
+                  <div style="text-align:center;font-family:'Nunito',sans-serif;font-size:0.65rem;color:rgba(244,200,66,0.7);margin-top:4px;">Click to view full lullaby sheet ↗</div>
+                </div>
+                <strong class="perk-popup-name">The Lantern Lullaby</strong>
+                <p class="perk-popup-desc">Little Scripture Travelers' signature lullaby — includes the full printable lyrics and a sung audio recording. The same comforting song every night, so your child always knows bedtime is here.</p>
+                <div class="perk-toolkit">
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; What it gives you</span>
+                    <p>Gives parents a consistent, science-backed wind-down cue that does the calming work so you don't have to.</p>
+                  </div>
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; Problem it solves</span>
+                    <p>Bedtime resistance — no more nagging or negotiating. The same song each night signals <em>it's time to rest, you are safe</em> before a single word is said.</p>
+                  </div>
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; Research behind it</span>
+                    <p>In a study of 144 infants published in <em>Nature Human Behaviour</em>, babies relaxed measurably — slower heart rate and reduced arousal — when they heard lullabies, even ones from unfamiliar cultures in languages they had never heard. The same song at the same time each night becomes a cue the body reads as safety. <span class='perk-research-source'><a href='https://pmc.ncbi.nlm.nih.gov/articles/PMC8220405/' target='_blank' rel='noopener'>(Bainbridge et al., Nature Human Behaviour)</a></span></p>
+                  </div>
+                </div>
+              </div>
+            </li>
+              <li class="has-preview" data-product="library">
+                <span class="perk-label">The Virtue Library &mdash; every story tagged by the virtue it teaches, so you can look up what tonight needs</span>
+                <span class="perk-eye" title="Preview">&#128065;</span>
+                <div class="perk-popup">
+                  <div class="perk-popup-media" data-product="library" style="cursor:zoom-in;">
+                    <img src="images/virtue-library-preview.jpg" alt="The Virtue Library — every story tagged by the virtue it teaches" style="width:100%;height:130px;object-fit:cover;object-position:top;border-radius:8px;display:block;">
+                    <div style="text-align:center;font-family:'Nunito',sans-serif;font-size:0.65rem;color:rgba(244,200,66,0.7);margin-top:4px;">Click to look through the whole library &#8599;</div>
+                  </div>
+                  <strong class="perk-popup-name">The Virtue Library</strong>
+                  <p class="perk-popup-desc">Every story in the series, tagged by the virtue it teaches, the life situation it fits, the feeling underneath it, the Traveler who guides it, and the scripture it comes from. Your child is standing in front of you with a real problem &mdash; look up what they need tonight and the story is already there.</p>
+                <div class="perk-toolkit">
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; What it gives you</span>
+                    <p>Tonight's story in about ten seconds. Ninety-one stories catalogued across thirty-six virtues, searchable five different ways &mdash; by virtue, by life situation, by feeling, by Traveler, or by scripture &mdash; and growing every month as the series is written.</p>
+                  </div>
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; Problem it solves</span>
+                    <p>The hard moment has already arrived &mdash; the lie, the shoving match over a toy, the tears at the bedroom door &mdash; and you are reaching for whichever three or four stories you happen to remember. This means you never have to teach from memory alone.</p>
+                  </div>
+                  <div class="perk-toolkit-row">
+                    <span class="perk-toolkit-label">&#10022; Research behind it</span>
+                    <p>Researchers testing whether storybooks actually shift children's moral beliefs found that most did not &mdash; abstract fables about talking animals changed very little. Stories worked when they were <em>directly applicable to the situation the child was already dealing with</em>. That finding is the entire reason this library is organized by the problem in front of you tonight instead of by book order. <span class='perk-research-source'><a href='https://www.psychologytoday.com/us/blog/moral-boundaries/202010/do-children-learn-moral-lessons-storybooks' target='_blank' rel='noopener'>(Psychology Today, on children's moral learning from storybooks)</a></span></p>
+                  </div>
+                </div>
+                </div>
+              </li>
+          </ul>
+          <div class="tier-cta-group" style="display:flex;flex-direction:column;gap:0.6rem;">
+            <a href="https://payhip.com/b/e7N6r" target="_blank" rel="noopener" class="btn-tier-outline">Monthly · Try the First 7 Days Free</a>
+            <a href="https://payhip.com/b/34fmR" target="_blank" rel="noopener" class="btn-tier-outline">Yearly · Try the First 7 Days Free</a>
+          </div>
+        </div>
+
+        <!-- Compass -->
+        <div class="tier-card coming-soon">
+          <div class="tier-icon">🧭</div>
+          <div class="tier-name">The Compass</div>
+          <div class="tier-price"><span class="tier-coming-soon-badge">Coming Soon</span></div>
+          
+          <ul class="tier-perks">
+            <li style="list-style:none;text-align:center;padding:1rem 0;color:rgba(255,255,255,0.45);font-family:'Nunito',sans-serif;font-size:0.85rem;">
+              🔒 Products revealed at launch
+            </li>
+          </ul>
+          <a href="https://gmail.us18.list-manage.com/subscribe/post?u=1269518e0e790bb0b9c6dff78&id=a6978c55f7&f_id=0033abe6f0" target="_blank" rel="noopener" class="btn-coming-soon">Notify Me When Live</a>
+        </div>
+
+        <!-- Knapsack -->
+        <div class="tier-card coming-soon">
+          <div class="tier-icon">🎒</div>
+          <div class="tier-name">The Knapsack</div>
+          <div class="tier-price"><span class="tier-coming-soon-badge">Coming Soon</span></div>
+          
+          <ul class="tier-perks">
+            <li style="list-style:none;text-align:center;padding:1rem 0;color:rgba(255,255,255,0.45);font-family:'Nunito',sans-serif;font-size:0.85rem;">
+              🔒 Products revealed at launch
+            </li>
+          </ul>
+          <a href="https://gmail.us18.list-manage.com/subscribe/post?u=1269518e0e790bb0b9c6dff78&id=a6978c55f7&f_id=0033abe6f0" target="_blank" rel="noopener" class="btn-coming-soon">Notify Me When Live</a>
+        </div>
+
+        <!-- Caravan -->
+        <div class="tier-card coming-soon">
+          <div class="tier-icon">🚐</div>
+          <div class="tier-name">The Caravan</div>
+          <div class="tier-price"><span class="tier-coming-soon-badge">Coming Soon</span></div>
+          
+          <ul class="tier-perks">
+            <li style="list-style:none;text-align:center;padding:1rem 0;color:rgba(255,255,255,0.45);font-family:'Nunito',sans-serif;font-size:0.85rem;">
+              🔒 Products revealed at launch
+            </li>
+          </ul>
+          <a href="https://gmail.us18.list-manage.com/subscribe/post?u=1269518e0e790bb0b9c6dff78&id=a6978c55f7&f_id=0033abe6f0" target="_blank" rel="noopener" class="btn-coming-soon">Notify Me When Live</a>
+        </div>
+
+      </div>      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+      <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+          <img src="images/logo-badge.jpg" alt="Little Scripture Travelers" width="40" height="40" style="border-radius:50%;object-fit:cover;" />
+          <div>
+            <div class="logo-name" style="font-size:0.9rem;">Little Scripture Travelers</div>
+            <div class="logo-sub" style="font-size:0.7rem;">Bedtime Stories</div>
+          </div>
+        </div>
+        <p>Helping little ones feel the Spirit — one bedtime story at a time.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Watch &amp; Read</h4>
+        <ul role="list">
+          <li><a href="https://www.youtube.com/@LittleScriptureTravelers" target="_blank" rel="noopener">YouTube Channel</a></li>
+          <li><a href="https://www.amazon.com/Follows-Scripture-Travelers-Bedtime-Stories/dp/B0H3ZDCFSR/ref=tmm_pap_swatch_0" target="_blank" rel="noopener">Books on Amazon</a></li>
+          <li><a href="https://a.co/d/0gLYJdit" target="_blank" rel="noopener">Kindle Editions</a></li>
+          <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;">Try the First 7 Days Free</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Subscribe</h4>
+        <ul role="list">
+          <li><a href="/subscribe.html#plans">The Lantern</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul role="list">
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="travelers.html">Meet the Travelers</a></li>
+          <li><a href="blog.html">Why Bedtime Scripture</a></li>
+          <li><a href="mailto:littlescripturetravelers@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-manage">
+        <h4>Manage Subscriptions</h4>
+        <ul role="list">
+          <li><button type="button" class="btn-cancel-sub footer-cancel-link" aria-haspopup="dialog">Cancel Subscription</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom" style="flex-direction:column;align-items:center;text-align:center;">
+      <div class="social-links" style="justify-content:center;margin-bottom:0.75rem;gap:0.75rem;">
+        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07112e"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.14a8.16 8.16 0 0 0 4.77 1.52V7.21a4.85 4.85 0 0 1-1-.52z"/></svg>
+        </a>
+        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        </a>
+      </div>
+      <p style="margin-top:1rem;">We do not lecture. We do not pile on rules. We tell what happened — a beginning, a worry, and a hopeful ending — in the smallest words that still carry the meaning.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">© 2026 Little Scripture Travelers</p>
+      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.15);font-size:0.72rem;line-height:1.5;color:#9aa6c0;text-align:center;">
+        <p style="margin:0 0 0.6rem;">Little Scripture Travelers Bedtime Stories, LLC is an independent creative endeavor. It is not affiliated with, made by, sponsored by, approved by, or endorsed by The Church of Jesus Christ of Latter-day Saints or Intellectual Reserve, Inc. All stories, illustrations, characters, lullabies, and opinions are solely those of Little Scripture Travelers and do not represent the Church.</p>
+        <p style="margin:0;">&ldquo;Come, Follow Me,&rdquo; the name of The Church of Jesus Christ of Latter-day Saints, and related names and logos are trademarks of Intellectual Reserve, Inc.; any reference to them here is for identification purposes only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Legacy mobile nav toggle — the current header replaced it, so guard for absence
+    const toggle = document.getElementById('navToggle');
+    const mobile = document.getElementById('navMobile');
+    if (toggle && mobile) {
+      toggle.addEventListener('click', () => {
+        mobile.classList.toggle('open');
+        toggle.textContent = mobile.classList.contains('open') ? '✕' : '☰';
+      });
+    }
+    window.addEventListener('scroll', () => {
+      const navEl = document.getElementById('nav');
+      if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // FAQ toggle
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        item.classList.toggle('open');
+      });
+    });
+
+    // Accordion
+    document.querySelectorAll('.product-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.product-item');
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.product-item').forEach(el => {
+          el.classList.remove('open');
+          el.querySelector('.product-trigger').setAttribute('aria-expanded', 'false');
+        });
+        // Toggle clicked
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+  <!-- Lullaby full-view modal -->
+  <div id="lullabyLightbox" style="
+    display:none;position:fixed;inset:0;z-index:9999;
+    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    align-items:center;justify-content:center;padding:1rem;
+  ">
+    <div style="
+      position:relative;width:100%;max-width:680px;
+      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      border:2px solid var(--gold,#f4c842);border-radius:18px;
+      overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
+      display:flex;flex-direction:column;max-height:90vh;
+    ">
+      <!-- Header -->
+      <div style="
+        display:flex;align-items:center;justify-content:space-between;
+        padding:0.9rem 1.2rem;border-bottom:1px solid rgba(244,200,66,0.2);
+        flex-shrink:0;
+      ">
+        <div style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;color:var(--gold,#f4c842);">The Lantern Lullaby</div>
+        <button id="lullabyLightboxClose" aria-label="Close" style="
+          background:rgba(255,255,255,0.1);border:none;color:#fff;
+          width:28px;height:28px;border-radius:50%;cursor:pointer;
+          font-size:0.85rem;line-height:28px;text-align:center;
+        ">✕</button>
+      </div>
+      <!-- Scrollable sheet image -->
+      <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:1rem;">
+        <!-- What's included badges -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9835; Sung Audio Recording Included</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#128196; Printable Lyrics</span>
+        </div>
+        <div class="lst-protected" style="border-radius:10px;overflow:hidden;"><img src="images/lullaby-sheet.jpg" alt="A Little Travelers' Lullaby — full lyrics" style="border-radius:10px;"></div>
+        <div style="background:rgba(244,200,66,0.07);border:1px solid rgba(244,200,66,0.2);border-radius:10px;padding:0.85rem 1rem;margin-top:1rem;">
+          <p style="font-family:'Nunito',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.65;margin:0;">
+            <strong style="color:#f4c842;">What you get:</strong> The full printable lyrics sheet above and a sung audio recording of the lullaby &mdash; the same comforting song every night, so your child knows exactly what to expect at bedtime.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Perk expand modal -->
+  <div class="perk-expand-overlay" id="perkExpandOverlay" aria-hidden="true">
+    <div class="perk-expand-box">
+      <button class="perk-expand-close" id="perkExpandClose" aria-label="Close">✕</button>
+      
+      <div class="perk-expand-body">
+        
+        <p class="perk-expand-desc" id="perkExpandDesc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    // ─────────────────────────────────────────────────────
+    // PRODUCT MEDIA
+    // To add your image for a product, change mediaHTML to:
+    //   '<img src="images/YOURFILE.jpg" alt="Product">'
+    // To add a video:
+    //   '<video src="images/YOURFILE.mp4" autoplay muted loop playsinline></video>'
+    // ─────────────────────────────────────────────────────
+    const MEDIA = {
+      story:   { name: 'Nightly Scripture Story & PDF', desc: 'A 5–10 minute illustrated bedtime story featuring Beau, Scout, Willow, and Wren — delivered to your inbox by 5 AM Mountain Standard Time (Denver) every morning as a beautifully formatted PDF, ready to read on any device or print for a binder.',  mediaHTML: '' },
+      lullaby: { name: 'The Lantern Lullaby',                desc: 'Little Scripture Travelers\' signature lullaby — the same comforting song every night, with printable lyrics and a sung audio version to ease little ones into sleep.',                 mediaHTML: '' },
+      nightlullaby: { name: 'Nightly Lullaby', desc: 'A new lullaby each night, written to match that night\'s scripture story — so the song and the lesson close out bedtime together.', mediaHTML: '' },
+      chart:   { name: 'Weekly Scripture Chart',         desc: 'A single printable page with all five stories for the week — key scriptures and themes. Perfect for the fridge or Family Home Evening.',   mediaHTML: '' },
+      coloring:{ name: 'Monthly Coloring Book',          desc: 'Printable coloring pages featuring scenes from that month’s stories — perfect for church bags, quiet time, or coloring after bedtime.',    mediaHTML: '' },
+      cards:   { name: 'Scripture & Character Cards',    desc: 'Printable trading card-style sheets with that week’s scripture figures and the four Travelers. Kids can collect and quiz each other.',      mediaHTML: '' },
+      spotit:  { name: 'Monthly Spot-It Game',           desc: 'A printable Spot-It-style matching game with scripture characters and symbols. Print, cut, and play — great for family night.',              mediaHTML: '' },
+      comic:   { name: 'Monthly Comic Book',             desc: 'A full printable comic book each month with vivid illustrated panels retelling the scripture stories — great for reluctant readers.',        mediaHTML: '' },
+      alerts:  { name: 'Exclusive Amazon Sale Alerts',   desc: 'Caravan subscribers are the only ones notified when the physical books go on sale on Amazon — nobody else gets this.',                      mediaHTML: '' }
+    };
+
+    const EMPTY_MEDIA = '<div class="perk-expand-media-empty"><span>🖼️</span><p>Image or video preview coming soon.<br>Send your file and it will be added here.</p></div>';
+
+    const overlay   = document.getElementById('perkExpandOverlay');
+    const closeBtn  = document.getElementById('perkExpandClose');
+    const mediaEl   = document.getElementById('perkExpandMedia');
+    const nameEl    = document.getElementById('perkExpandName');
+    const descEl    = document.getElementById('perkExpandDesc');
+
+    function openExpand(key) {
+      const p = MEDIA[key];
+      if (!p) return;
+      nameEl.textContent  = p.name;
+      descEl.textContent  = p.desc;
+      mediaEl.innerHTML   = p.mediaHTML || EMPTY_MEDIA;
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    // Click on media thumbnail → expand
+    // story → PDF flipper, lullaby → lullaby lightbox, everything else → perk expand modal
+    document.querySelectorAll('.perk-popup-media').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (el.dataset.product === 'story') {
+          // Let the PDF flipper script handle it
+          return;
+        }
+        if (el.dataset.product === 'lullaby') {
+          // Let the lullaby lightbox script handle it
+          return;
+        }
+        if (el.dataset.product === 'email') {
+          // Let the 5 AM email lightbox script handle it
+          return;
+        }
+        if (el.dataset.product === 'library') {
+          // Let the Virtue Library lightbox script handle it
+          return;
+        }
+        openExpand(el.dataset.product);
+      });
+    });
+
+    // Close
+    function closeExpand() {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+    closeBtn.addEventListener('click', closeExpand);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeExpand(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeExpand(); });
+  })();
+  </script>
+
+  <!-- ── PDF Story Flipper Modal ─────────────────────────────────────── -->
+  <div id="storyFlipperOverlay2" style="
+    display:none;position:fixed;inset:0;z-index:9999;
+    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    align-items:center;justify-content:center;padding:1rem;
+  ">
+    <div style="
+      position:relative;width:100%;max-width:680px;
+      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      border:2px solid var(--gold,#f4c842);border-radius:18px;
+      overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
+      display:flex;flex-direction:column;max-height:90vh;
+    ">
+      <!-- Header -->
+      <div style="
+        display:flex;align-items:center;justify-content:space-between;
+        padding:0.9rem 1.2rem;border-bottom:1px solid rgba(244,200,66,0.2);
+        flex-shrink:0;
+      ">
+        <div style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;color:var(--gold,#f4c842);">
+          Ezra Loves the Scriptures — Sample Story
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span id="sfPageCounter2" style="font-family:'Nunito',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.55);">Page 1 of 12</span>
+          <button id="sfClose2" aria-label="Close" style="
+            background:rgba(255,255,255,0.1);border:none;color:#fff;
+            width:28px;height:28px;border-radius:50%;cursor:pointer;
+            font-size:0.85rem;line-height:28px;text-align:center;
+          ">✕</button>
+        </div>
+      </div>
+      <!-- Page image -->
+      <div style="flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000;min-height:0;">
+        <div class="lst-protected" style="max-width:100%;max-height:100%;display:flex;align-items:center;justify-content:center;width:100%;height:100%;"><img id="sfPageImg2" src="" alt="Story page" style="max-width:100%;max-height:100%;object-fit:contain;display:block;transition:opacity 0.2s;pointer-events:none;-webkit-user-drag:none;-webkit-touch-callout:none;user-select:none;"/></div>
+      </div>
+      <!-- Nav bar -->
+      <div style="
+        display:flex;align-items:center;justify-content:center;gap:1rem;
+        padding:0.9rem 1.2rem;border-top:1px solid rgba(244,200,66,0.2);
+        flex-shrink:0;
+      ">
+        <button id="sfPrev2" style="
+          background:rgba(244,200,66,0.12);border:1.5px solid rgba(244,200,66,0.4);
+          color:var(--gold,#f4c842);border-radius:999px;
+          padding:0.45rem 1.2rem;font-family:'Nunito',sans-serif;
+          font-weight:700;font-size:0.85rem;cursor:pointer;
+          transition:background 0.15s;
+        ">← Prev</button>
+        <!-- Thumbnail strip -->
+        <div id="sfStrip2" style="display:flex;gap:6px;overflow-x:auto;flex:1;padding:0 4px;scrollbar-width:none;"></div>
+        <button id="sfNext2" style="
+          background:rgba(244,200,66,0.12);border:1.5px solid rgba(244,200,66,0.4);
+          color:var(--gold,#f4c842);border-radius:999px;
+          padding:0.45rem 1.2rem;font-family:'Nunito',sans-serif;
+          font-weight:700;font-size:0.85rem;cursor:pointer;
+          transition:background 0.15s;
+        ">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var PAGES = [
+    "images/story-pdf/page-01.jpg",
+    "images/story-pdf/page-02.jpg",
+    "images/story-pdf/page-03.jpg",
+    "images/story-pdf/page-04.jpg",
+    "images/story-pdf/page-05.jpg",
+    "images/story-pdf/page-06.jpg",
+    "images/story-pdf/page-07.jpg",
+    "images/story-pdf/page-08.jpg",
+    "images/story-pdf/page-09.jpg",
+    "images/story-pdf/page-10.jpg",
+    "images/story-pdf/page-11.jpg",
+    "images/story-pdf/page-12.jpg"
+  ];
+    var cur = 0;
+    var overlay = document.getElementById('storyFlipperOverlay2');
+    var img     = document.getElementById('sfPageImg2');
+    var counter = document.getElementById('sfPageCounter2');
+    var strip   = document.getElementById('sfStrip2');
+    var prevBtn = document.getElementById('sfPrev2');
+    var nextBtn = document.getElementById('sfNext2');
+    var closeBtn= document.getElementById('sfClose2');
+
+    // Build thumbnail strip
+    PAGES.forEach(function(src, i){
+      var th = document.createElement('img');
+      th.src = src;
+      th.alt = 'Page ' + (i+1);
+      th.style.cssText = 'height:44px;width:auto;border-radius:4px;cursor:pointer;flex-shrink:0;opacity:0.55;border:1.5px solid transparent;transition:opacity 0.15s,border-color 0.15s;';
+      th.addEventListener('click', function(){ go(i); });
+      strip.appendChild(th);
+    });
+
+    function go(n){
+      cur = Math.max(0, Math.min(PAGES.length-1, n));
+      img.style.opacity = '0';
+      setTimeout(function(){
+        img.src = PAGES[cur];
+        img.style.opacity = '1';
+      }, 100);
+      counter.textContent = 'Page ' + (cur+1) + ' of ' + PAGES.length;
+      prevBtn.style.opacity = cur===0 ? '0.35' : '1';
+      nextBtn.style.opacity = cur===PAGES.length-1 ? '0.35' : '1';
+      // highlight active thumb
+      Array.from(strip.children).forEach(function(th,i){
+        th.style.opacity = i===cur ? '1' : '0.55';
+        th.style.borderColor = i===cur ? 'var(--gold,#f4c842)' : 'transparent';
+      });
+      // scroll strip to keep active thumb visible
+      var activeThumb = strip.children[cur];
+      if(activeThumb) activeThumb.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+    }
+
+    function openFlipper(startPage){
+      go(startPage||0);
+      overlay.style.display='flex';
+      document.body.style.overflow='hidden';
+    }
+    function closeFlipper(){
+      overlay.style.display='none';
+      document.body.style.overflow='';
+    }
+
+    prevBtn.addEventListener('click', function(){ go(cur-1); });
+    nextBtn.addEventListener('click', function(){ go(cur+1); });
+    closeBtn.addEventListener('click', closeFlipper);
+    overlay.addEventListener('click', function(e){ if(e.target===overlay) closeFlipper(); });
+
+    // Touch swipe support for mobile
+    var touchStartX = 0;
+    overlay.addEventListener('touchstart', function(e){ touchStartX = e.touches[0].clientX; }, {passive:true});
+    overlay.addEventListener('touchend', function(e){
+      var diff = touchStartX - e.changedTouches[0].clientX;
+      if(Math.abs(diff) > 40){
+        if(diff > 0) go(cur+1);
+        else go(cur-1);
+      }
+    }, {passive:true});
+
+    document.addEventListener('keydown', function(e){
+      if(overlay.style.display==='flex'){
+        if(e.key==='ArrowLeft'||e.key==='ArrowUp') go(cur-1);
+        if(e.key==='ArrowRight'||e.key==='ArrowDown') go(cur+1);
+        if(e.key==='Escape') closeFlipper();
+      }
+    });
+
+    // Hook: any click on a perk-popup-media[data-product="story"] opens the flipper
+    document.addEventListener('click', function(e){
+      var media = e.target.closest('.perk-popup-media[data-product="story"]');
+      if(media){ e.stopPropagation(); openFlipper(0); }
+    });
+
+    // Expose globally so subscribe page script can also open it
+    window.openStoryFlipper2 = openFlipper;
+  })();
+  </script>
+
+  <script>
+  // ── Lullaby lightbox ────────────────────────────────────
+  (function(){
+    var lb  = document.getElementById('lullabyLightbox');
+    var cls = document.getElementById('lullabyLightboxClose');
+    function openLullaby(){ lb.style.display='flex'; document.body.style.overflow='hidden'; }
+    function closeLullaby(){ lb.style.display='none'; document.body.style.overflow=''; }
+    // Attach directly to each lullaby media element (avoids stopPropagation blocking)
+    document.querySelectorAll('.perk-popup-media[data-product="lullaby"]').forEach(function(el){
+      el.style.cursor = 'zoom-in';
+      el.addEventListener('click', function(e){
+        e.stopPropagation();
+        openLullaby();
+      });
+    });
+    cls.addEventListener('click', closeLullaby);
+    lb.addEventListener('click', function(e){ if(e.target===lb) closeLullaby(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLullaby(); });
+  })();
+  </script>
+
+
+  <script>
+  /* ── LST Content Protection ── */
+  (function(){
+    var SELECTORS = [
+      '#lullabyLightbox img',
+      '#storyFlipperOverlay img',
+      '#storyFlipperOverlay2 img',
+      '#idxExpandOverlay img',
+      '.perk-expand-overlay img'
+    ];
+    SELECTORS.forEach(function(sel){
+      document.querySelectorAll(sel).forEach(function(el){
+        el.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+        el.addEventListener('dragstart',   function(e){ e.preventDefault(); });
+        el.style.webkitUserDrag = 'none';
+        el.style.webkitTouchCallout = 'none';
+        el.style.userSelect = 'none';
+        el.style.pointerEvents = 'none';
+      });
+    });
+    // Block context menu on the lightbox overlays themselves
+    ['lullabyLightbox','storyFlipperOverlay','storyFlipperOverlay2','idxExpandOverlay'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+    });
+  })();
+  </script>
+
+  <script src="main.js"></script>
+
+  <!-- ★ CANCEL SUBSCRIPTION MODAL ★ -->
+
+  <!-- ── 5 AM Email Lightbox ──────────────────────────────────────────── -->
+
+  <div id="storyRich" role="dialog" aria-modal="true" aria-label="Nightly Scripture Story and PDF preview" style="
+    display:none;position:fixed;inset:0;z-index:9995;
+    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    align-items:center;justify-content:center;padding:1rem;
+  ">
+    <div style="
+      position:relative;width:100%;max-width:780px;
+      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      border:2px solid var(--gold,#f4c842);border-radius:18px;
+      overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
+      display:flex;flex-direction:column;max-height:92vh;
+    ">
+      <div style="
+        display:flex;align-items:center;justify-content:space-between;gap:1rem;
+        padding:0.9rem 1.2rem;border-bottom:1px solid rgba(244,200,66,0.2);flex-shrink:0;
+      ">
+        <div style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;color:var(--gold,#f4c842);">Tonight's Story &amp; PDF</div>
+        <button id="storyRichClose" aria-label="Close" style="
+          background:rgba(255,255,255,0.1);border:none;color:#fff;
+          width:28px;height:28px;border-radius:50%;cursor:pointer;
+          font-size:0.85rem;line-height:28px;text-align:center;flex-shrink:0;
+        ">&#x2715;</button>
+      </div>
+
+      <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:1rem;">
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; In Your Inbox by 5 AM</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; 12 Illustrated Pages</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Read or Print Anywhere</span>
+        </div>
+
+        <p style="font-family:'Nunito',sans-serif;font-size:0.92rem;color:rgba(255,255,255,0.82);line-height:1.7;margin:0 0 1.1rem;">
+          Every night has its own story &mdash; a 5&ndash;10 minute illustrated chapter following Beau, Scout, Willow, and Wren through the scriptures. It is written so a young child can follow it and a parent can teach from it, and it arrives as a finished PDF: ready to read from your phone in a dark room, or printed for a binder on the shelf.
+        </p>
+
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
+          <div style="font-family:'Anton',sans-serif;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; What's inside every story</div>
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The scripture story retold</strong> &mdash; the night's chapter told in scene and dialogue a young child can actually picture.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Beau, Scout, Willow, and Wren</strong> &mdash; the same four travelers every night, so your child always has someone to walk in beside.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Full-page illustrations</strong> &mdash; artwork on nearly every page, drawn to hold a tired child's attention at the end of a long day.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The Remember moment</strong> &mdash; near the end the story pauses and names the principle out loud, in one sentence a child can repeat.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">A question to ask</strong> &mdash; one prompt before the lights go off, so the story turns into a conversation instead of a monologue.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Print-ready formatting</strong> &mdash; clean margins and page order for a home binder &mdash; or read straight from the screen, no printer needed.</span></li>
+          </ul>
+        </div>
+
+        <div id="storyRichStage" style="overflow:auto;-webkit-overflow-scrolling:touch;border-radius:10px;cursor:zoom-in;">
+          <div class="lst-protected" style="border-radius:10px;overflow:hidden;display:inline-block;min-width:100%;">
+            <img id="storyRichImg" src="images/story-pdf/page-07.jpg" alt="An illustrated story spread from a Little Scripture Travelers bedtime story" loading="lazy" data-nat="1242" style="width:100%;max-width:none;border-radius:10px;display:block;">
+          </div>
+        </div>
+        <p id="storyRichHint" style="max-width:none;width:100%;font-family:'Nunito',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.5);text-align:center;margin:0.55rem 0 0;">Tap the page to enlarge &middot; tap again to fit</p>
+
+        <button type="button" id="storyRichCta" style="
+          display:block;width:100%;margin-top:0.9rem;padding:0.75rem 1.5rem;
+          background:var(--gold,#f4c842);color:#07112e;border:none;border-radius:999px;
+          font-family:'Nunito',sans-serif;font-weight:900;font-size:0.95rem;cursor:pointer;
+        ">Flip through all 12 pages &rarr;</button>
+
+        <div style="background:rgba(244,200,66,0.07);border:1px solid rgba(244,200,66,0.28);border-radius:12px;padding:1rem 1.1rem;margin-top:1.2rem;">
+          <div style="font-family:'Anton',sans-serif;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; Why a story, and why the same four travelers</div>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">A principle explained to a four-year-old tends to slide off. The same principle <em>lived</em> by a character they know sticks, because the child watches someone their own size make the choice and feel what comes of it.</p>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">That is why the cast never changes. Beau, Scout, Willow, and Wren show up every single night, so your child is not meeting strangers at bedtime &mdash; they are catching up with friends. The routine does the heavy lifting, and the story does the teaching, so you can simply read and be present.</p>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
+            There is a measurable side to this too. Researchers at Ohio State estimated that reading one picture book a day gives a child about 78,000 words of exposure a year, and that children from literacy-rich homes hear roughly 1.4 million more words before kindergarten than children who are never read to. <a href="https://ehe.osu.edu/news/listing/importance-reading-kids-daily-0" target="_blank" rel="noopener" style="color:#f4c842;text-decoration:underline;">(Logan et al., Ohio State University)</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="lullabyRich" role="dialog" aria-modal="true" aria-label="The Lantern Lullaby preview" style="
+    display:none;position:fixed;inset:0;z-index:9995;
+    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    align-items:center;justify-content:center;padding:1rem;
+  ">
+    <div style="
+      position:relative;width:100%;max-width:780px;
+      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      border:2px solid var(--gold,#f4c842);border-radius:18px;
+      overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
+      display:flex;flex-direction:column;max-height:92vh;
+    ">
+      <div style="
+        display:flex;align-items:center;justify-content:space-between;gap:1rem;
+        padding:0.9rem 1.2rem;border-bottom:1px solid rgba(244,200,66,0.2);flex-shrink:0;
+      ">
+        <div style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;color:var(--gold,#f4c842);">The Lantern Lullaby</div>
+        <button id="lullabyRichClose" aria-label="Close" style="
+          background:rgba(255,255,255,0.1);border:none;color:#fff;
+          width:28px;height:28px;border-radius:50%;cursor:pointer;
+          font-size:0.85rem;line-height:28px;text-align:center;flex-shrink:0;
+        ">&#x2715;</button>
+      </div>
+
+      <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:1rem;">
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; The Same Song Every Night</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Printable Lyrics Sheet</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Sung Audio Recording</span>
+        </div>
+
+        <p style="font-family:'Nunito',sans-serif;font-size:0.92rem;color:rgba(255,255,255,0.82);line-height:1.7;margin:0 0 1.1rem;">
+          One song, sung the same way every night. Not a new tune to learn each week &mdash; the same familiar melody, until your child stops hearing a song and starts hearing <em>the day is over and you are safe</em>.
+        </p>
+
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
+          <div style="font-family:'Anton',sans-serif;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; What comes with the lullaby</div>
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The full lyrics</strong> &mdash; every verse, set large and clean enough to read by a nightlight.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">A sung recording</strong> &mdash; for the nights you have no voice left &mdash; press play and let it carry the room.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">A printable sheet</strong> &mdash; tape it inside a closet door or slip it into the bedtime binder.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The same song every night</strong> &mdash; no rotation and no new words. The repetition is the entire point.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Written for the Travelers</strong> &mdash; the same world as the stories, so the song closes what the story opened.</span></li>
+          </ul>
+        </div>
+
+        <div id="lullabyRichStage" style="overflow:auto;-webkit-overflow-scrolling:touch;border-radius:10px;cursor:zoom-in;">
+          <div class="lst-protected" style="border-radius:10px;overflow:hidden;display:inline-block;min-width:100%;">
+            <img id="lullabyRichImg" src="images/lullaby-sheet.jpg" alt="A Little Travelers' Lullaby — full printable lyrics sheet" loading="lazy" data-nat="828" style="width:100%;max-width:none;border-radius:10px;display:block;">
+          </div>
+        </div>
+        <p id="lullabyRichHint" style="max-width:none;width:100%;font-family:'Nunito',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.5);text-align:center;margin:0.55rem 0 0;">Tap the lyrics sheet to enlarge &middot; tap again to fit</p>
+
+
+        <div style="background:rgba(244,200,66,0.07);border:1px solid rgba(244,200,66,0.28);border-radius:12px;padding:1rem 1.1rem;margin-top:1.2rem;">
+          <div style="font-family:'Anton',sans-serif;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; Why the same song every night</div>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">A lullaby is not background music. It is a signal. Sung at the same point in the same order every night, it becomes something the body learns to answer before a single word of instruction is spoken &mdash; which is why bedtime resistance so often fades once the song is fixed.</p>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">Nothing to negotiate, nothing to announce. The song starts, and the room changes.</p>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
+            This is not just sentiment. In a study of 144 infants published in <em>Nature Human Behaviour</em>, babies relaxed measurably &mdash; slower heart rate and reduced arousal &mdash; when they heard lullabies, including lullabies from unfamiliar cultures in languages they had never heard. The calming appears to be built into what a lullaby is. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8220405/" target="_blank" rel="noopener" style="color:#f4c842;text-decoration:underline;">(Bainbridge et al., Nature Human Behaviour)</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── The Virtue Library Lightbox ───────────────────────────────────── -->
+  <div id="libraryRich" role="dialog" aria-modal="true" aria-label="The Virtue Library preview" style="
+    display:none;position:fixed;inset:0;z-index:9995;
+    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    align-items:center;justify-content:center;padding:1rem;
+  ">
+    <div style="
+      position:relative;width:100%;max-width:780px;
+      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      border:2px solid var(--gold,#f4c842);border-radius:18px;
+      overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
+      display:flex;flex-direction:column;max-height:92vh;
+    ">
+      <div style="
+        display:flex;align-items:center;justify-content:space-between;gap:1rem;
+        padding:0.9rem 1.2rem;border-bottom:1px solid rgba(244,200,66,0.2);flex-shrink:0;
+      ">
+        <div style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;color:var(--gold,#f4c842);">The Virtue Library</div>
+        <button id="libraryRichClose" aria-label="Close" style="
+          background:rgba(255,255,255,0.1);border:none;color:#fff;
+          width:28px;height:28px;border-radius:50%;cursor:pointer;
+          font-size:0.85rem;line-height:28px;text-align:center;flex-shrink:0;
+        ">&#x2715;</button>
+      </div>
+
+      <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:1rem;">
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; 91 Stories, 36 Virtues</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Five Ways to Search</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; 3 Stories Free</span>
+        </div>
+
+        <p style="font-family:'Nunito',sans-serif;font-size:0.92rem;color:rgba(255,255,255,0.82);line-height:1.7;margin:0 0 1.1rem;">
+          Most of us reach for the same three or four stories we happen to remember. This is the catalogue behind the whole series &mdash; every story tagged by what it teaches, so you can look up the thing your child is actually facing and walk into the room already holding the right one.
+        </p>
+
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
+          <div style="font-family:'Anton',sans-serif;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; Five ways to look something up</div>
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">By virtue or principle</strong> &mdash; thirty-six of them, from Courage and Obedience to Keeping Promises and Repentance.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">By life situation</strong> &mdash; the twenty moments that actually happen: a lie, a lost temper, a first day, a hard goodbye.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">By feeling</strong> &mdash; start from what your child is feeling tonight rather than from what you want to teach.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">By Traveler</strong> &mdash; every story Beau, Scout, Willow, or Wren carries, for the child who has picked a favorite.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">By scripture</strong> &mdash; go the other direction and find the story that belongs to the verse you are already reading.</span></li>
+          </ul>
+        </div>
+
+        <div id="libraryRichStage" style="overflow:auto;-webkit-overflow-scrolling:touch;border-radius:10px;cursor:zoom-in;">
+          <div class="lst-protected" style="border-radius:10px;overflow:hidden;display:inline-block;min-width:100%;">
+            <img id="libraryRichImg" src="images/virtue-library-preview.jpg" alt="The Virtue Library — virtues and principles, each with the number of stories that teach it" loading="lazy" data-nat="1200" style="width:100%;max-width:none;border-radius:10px;display:block;">
+          </div>
+        </div>
+        <p id="libraryRichHint" style="max-width:none;width:100%;font-family:'Nunito',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.5);text-align:center;margin:0.55rem 0 0;">Tap the library to enlarge &middot; tap again to fit</p>
+
+        <a href="virtue-library.html" style="
+          display:block;text-align:center;margin:1rem 0 0;
+          background:var(--gold,#f4c842);color:#07112e;
+          font-family:'Nunito',sans-serif;font-weight:900;font-size:0.95rem;
+          padding:0.7rem 1.5rem;border-radius:999px;text-decoration:none;
+        ">Browse the whole library &#8599;</a>
+
+        <div style="background:rgba(244,200,66,0.07);border:1px solid rgba(244,200,66,0.28);border-radius:12px;padding:1rem 1.1rem;margin-top:1.2rem;">
+          <div style="font-family:'Anton',sans-serif;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; Why it is organized this way</div>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">Knowing is only the beginning. No catalogue can tell you what your child's heart needs tonight &mdash; this is a tool, not a substitute. You are the one who knows them. Ask Heavenly Father, and then use what you find here to teach with.</p>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">Browsing is open to everyone, and three complete stories are free &mdash; no card, no subscription. The Lantern opens all ninety-one.</p>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
+            Researchers testing whether storybooks actually shift children's moral beliefs found that most did not &mdash; abstract fables about talking animals changed very little. Stories worked when they were directly applicable to the situation the child was already dealing with. That is the entire reason this library is organized by the problem in front of you tonight instead of by book order. <a href="https://www.psychologytoday.com/us/blog/moral-boundaries/202010/do-children-learn-moral-lessons-storybooks" target="_blank" rel="noopener" style="color:#f4c842;text-decoration:underline;">(Psychology Today, on children's moral learning from storybooks)</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+  /* Rich preview modals for Story + Lullaby — match the 5 AM Email treatment */
+  (function(){
+    function wire(pid, natW, hintNoun){
+      var lb  = document.getElementById(pid);
+      var cls = document.getElementById(pid + 'Close');
+      if(!lb || !cls) return null;
+      var stage = lb.querySelector('div[style*="overflow-y"]');
+      var zs = document.getElementById(pid + 'Stage');
+      var zi = document.getElementById(pid + 'Img');
+      var zh = document.getElementById(pid + 'Hint');
+      var zoomed = false;
+      var FIT  = 'Tap the ' + hintNoun + ' to enlarge \u00b7 tap again to fit';
+      var ZOOM = 'Scroll or drag to move around \u00b7 tap to fit again';
+      function setZoom(on){
+        if(!zs || !zi) return;
+        zoomed = on;
+        zi.style.width = on ? (natW + 'px') : '100%';
+        zs.style.cursor = on ? 'zoom-out' : 'zoom-in';
+        if(zh) zh.textContent = on ? ZOOM : FIT;
+        if(!on){ zs.scrollLeft = 0; }
+      }
+      if(zs){ zs.addEventListener('click', function(e){ e.stopPropagation(); setZoom(!zoomed); }); }
+      function open(){ lb.style.display = 'flex'; document.body.style.overflow = 'hidden'; if(stage) stage.scrollTop = 0; }
+      function close(){ lb.style.display = 'none'; document.body.style.overflow = ''; setZoom(false); }
+      cls.addEventListener('click', close);
+      lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && lb.style.display === 'flex') close();
+      });
+      return { open: open, close: close };
+    }
+
+    var story   = wire('storyRich', 1242, 'page');
+    var lullaby = wire('lullabyRich', 828, 'lyrics sheet');
+    var library = wire('libraryRich', 1200, 'library');
+    if(story)   window.openStoryRich   = story.open;
+    if(lullaby) window.openLullabyRich = lullaby.open;
+    if(library) window.openLibraryRich = library.open;
+
+    /* Story modal CTA -> hand off to the existing page flipper */
+    var cta = document.getElementById('storyRichCta');
+    if(cta){
+      cta.addEventListener('click', function(e){
+        e.stopPropagation();
+        if(story) story.close();
+        var f = window.openStoryFlipper || window.openStoryFlipper2;
+        if(typeof f === 'function') f(0);
+      });
+    }
+
+    /* Capture-phase intercept: route every story/lullaby preview trigger to the rich modal
+       instead of the older bare viewers, without touching those scripts. */
+    document.addEventListener('click', function(e){
+      var t = e.target;
+      if(!t || !t.closest) return;
+      if(t.closest('#storyRich') || t.closest('#lullabyRich') || t.closest('#libraryRich')) return;
+      var hit = t.closest('.perk-popup-media[data-product="story"], .home-peek[data-peek="story"], .tier-perks li[data-product="story"] .perk-popup-media');
+      if(hit && story){ e.preventDefault(); e.stopPropagation(); story.open(); return; }
+      hit = t.closest('.perk-popup-media[data-product="lullaby"], .home-peek[data-peek="lullaby"], .tier-perks li[data-product="lullaby"] .perk-popup-media');
+      if(hit && lullaby){ e.preventDefault(); e.stopPropagation(); lullaby.open(); return; }
+      hit = t.closest('.perk-popup-media[data-product="library"], .home-peek[data-peek="library"], .tier-perks li[data-product="library"] .perk-popup-media');
+      if(hit && library){ e.preventDefault(); e.stopPropagation(); library.open(); return; }
+    }, true);
+  })();
+  </script>
+  <div id="emailLightbox" role="dialog" aria-modal="true" aria-label="The 5 AM Email preview" style="
+    display:none;position:fixed;inset:0;z-index:9999;
+    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    align-items:center;justify-content:center;padding:1rem;
+  ">
+    <div style="
+      position:relative;width:100%;max-width:780px;
+      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      border:2px solid var(--gold,#f4c842);border-radius:18px;
+      overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
+      display:flex;flex-direction:column;max-height:92vh;
+    ">
+      <div style="
+        display:flex;align-items:center;justify-content:space-between;gap:1rem;
+        padding:0.9rem 1.2rem;border-bottom:1px solid rgba(244,200,66,0.2);flex-shrink:0;
+      ">
+        <div style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;color:var(--gold,#f4c842);">The 5&nbsp;AM Email</div>
+        <button id="emailLightboxClose" aria-label="Close" style="
+          background:rgba(255,255,255,0.1);border:none;color:#fff;
+          width:28px;height:28px;border-radius:50%;cursor:pointer;
+          font-size:0.85rem;line-height:28px;text-align:center;flex-shrink:0;
+        ">&#x2715;</button>
+      </div>
+
+      <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:1rem;">
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Arrives by 5 AM Mountain</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; 3 Questions for You</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Story PDF Inside</span>
+        </div>
+
+        <p style="font-family:'Nunito',sans-serif;font-size:0.92rem;color:rgba(255,255,255,0.82);line-height:1.7;margin:0 0 1.1rem;">
+          Every morning by <strong style="color:#f4c842;">5 AM Mountain Standard Time</strong> this is waiting in your inbox &mdash; long before anyone needs anything from you. Here is a real one, start to finish.
+        </p>
+
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
+          <div style="font-family:'Anton',sans-serif;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; What's inside every morning</div>
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The story in a nutshell</strong> &mdash; tonight's whole story summarized in a paragraph, so you know where bedtime is headed before the day begins.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">A little background for you</strong> &mdash; the history, place, and setting behind the story, written for the parent rather than the child.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The Heart of Tonight's Story</strong> &mdash; the main gospel principle, plus the key lesson stated simply enough for a young child.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Key Scripture</strong> &mdash; the verse of the day and exactly which chapter to open if you want to read it together.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">A Parent's Heart</strong> &mdash; three questions to carry with you all day (more on these below).</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Read tonight's story</strong> &mdash; one tap to the full illustrated PDF, ready to read on any device or print for a binder.</span></li>
+          </ul>
+        </div>
+
+        <div id="emailZoomStage" style="overflow:auto;-webkit-overflow-scrolling:touch;border-radius:10px;cursor:zoom-in;">
+          <div class="lst-protected" style="border-radius:10px;overflow:hidden;display:inline-block;min-width:100%;">
+            <img id="emailZoomImg" src="images/email-preview/email-full.jpg" alt="A real 5 AM email from Little Scripture Travelers — Book 8, Week 1, Day 4: Ezra Loves the Scriptures" loading="lazy" style="width:100%;max-width:none;border-radius:10px;display:block;">
+          </div>
+        </div>
+        <p id="emailZoomHint" style="max-width:none;width:100%;font-family:'Nunito',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.5);text-align:center;margin:0.55rem 0 0;">Tap the email to enlarge &middot; tap again to fit</p>
+
+        <div style="background:rgba(244,200,66,0.07);border:1px solid rgba(244,200,66,0.28);border-radius:12px;padding:1rem 1.1rem;margin-top:1.2rem;">
+          <div style="font-family:'Anton',sans-serif;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; Why the three questions come at 5 AM</div>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">
+            The three questions in <em>A Parent's Heart</em> are not a quiz for your child. They are for <strong style="color:#f4c842;">you</strong>, and they arrive early on purpose &mdash; so they can sit with you through the whole day.
+          </p>
+          <ul style="list-style:none;padding:0;margin:0 0 0.9rem;">
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.65;padding:0.3rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;font-weight:700;flex-shrink:0;">1.</span><span>A moment from <strong style="color:#fff;">your own life</strong> when you lived what tonight's story teaches.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.65;padding:0.3rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;font-weight:700;flex-shrink:0;">2.</span><span>What that principle <strong style="color:#fff;">actually feels like</strong> on a hard day &mdash; something your child can recognize in you.</span></li>
+            <li style="font-family:'Nunito',sans-serif;font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.65;padding:0.3rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;font-weight:700;flex-shrink:0;">3.</span><span>A <strong style="color:#fff;">grandparent or ancestor</strong> who lived it before you were born, and how their example still reaches your family.</span></li>
+          </ul>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">
+            You read them over breakfast and let them turn over quietly while you work, drive, and fold laundry. By the time the lights go low, you are not simply reading a story to your child &mdash; you are telling them about the time <em>your</em> grandmother held on, and the scripture story has become your family's story too.
+          </p>
+          <p style="font-family:'Nunito',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
+            This is the part parents tell us they did not expect. Researchers at Emory University's Family Narratives Lab found that children in families who told coherent, emotionally open stories about hard family moments had better self-esteem, stronger social competence, higher-quality friendships, and less anxiety and stress. <a href="https://news.emory.edu/stories/2020/04/how-family-stories-help-children-weather-hard-times" target="_blank" rel="noopener" style="color:#f4c842;text-decoration:underline;">(Fivush &amp; Duke, Emory University)</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var lb  = document.getElementById('emailLightbox');
+    var cls = document.getElementById('emailLightboxClose');
+    if(!lb || !cls) return;
+    var stage = lb.querySelector('div[style*="overflow-y"]');
+    function openEmail(){
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      if(stage) stage.scrollTop = 0;
+    }
+    var stageZ = document.getElementById('emailZoomStage');
+    var imgZ   = document.getElementById('emailZoomImg');
+    var hintZ  = document.getElementById('emailZoomHint');
+    var zoomed = false;
+    var FIT_HINT  = 'Tap the email to enlarge \u00b7 tap again to fit';
+    var ZOOM_HINT = 'Scroll or drag to move around \u00b7 tap to fit again';
+    function setZoom(on){
+      if(!stageZ || !imgZ) return;
+      zoomed = on;
+      imgZ.style.width  = on ? '1080px' : '100%';
+      stageZ.style.cursor = on ? 'zoom-out' : 'zoom-in';
+      if(hintZ) hintZ.textContent = on ? ZOOM_HINT : FIT_HINT;
+      if(!on){ stageZ.scrollLeft = 0; }
+    }
+    if(stageZ){
+      stageZ.addEventListener('click', function(e){
+        e.stopPropagation();
+        setZoom(!zoomed);
+      });
+    }
+    function closeEmail(){
+      lb.style.display = 'none';
+      document.body.style.overflow = '';
+      setZoom(false);
+    }
+    cls.addEventListener('click', closeEmail);
+    lb.addEventListener('click', function(e){ if(e.target === lb) closeEmail(); });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && lb.style.display === 'flex') closeEmail();
+    });
+    document.querySelectorAll('.perk-popup-media[data-product="email"]').forEach(function(el){
+      el.style.cursor = 'zoom-in';
+      el.addEventListener('click', function(e){ e.stopPropagation(); openEmail(); });
+    });
+    window.openEmailLightbox = openEmail;
+  })();
+  </script>
+
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+</script></body>
+</html>
