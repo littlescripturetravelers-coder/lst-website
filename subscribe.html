@@ -1213,8 +1213,8 @@
               </li>
           </ul>
           <div class="tier-cta-group" style="display:flex;flex-direction:column;gap:0.6rem;">
-            <a href="https://payhip.com/b/e7N6r" target="_blank" rel="noopener" class="btn-tier-outline">Monthly · Try the First 7 Days Free</a>
-            <a href="https://payhip.com/b/34fmR" target="_blank" rel="noopener" class="btn-tier-outline">Yearly · Try the First 7 Days Free</a>
+            <a href="https://payhip.com/b/e7N6r" rel="noopener" class="btn-tier-outline" onclick="return openTrialSignup('monthly')">Monthly · Try the First 7 Days Free</a>
+            <a href="https://payhip.com/b/34fmR" rel="noopener" class="btn-tier-outline" onclick="return openTrialSignup('annual')">Yearly · Try the First 7 Days Free</a>
           </div>
         </div>
 
@@ -2468,5 +2468,23 @@
   });
 })();
 
-</script></body>
+</script>
+
+<!-- Free-week signup: creates the app login, then sends to Payhip for the card -->
+<div id="trial-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(7,17,46,0.88);align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:#0d1b3f;border:1px solid rgba(245,197,24,0.35);border-radius:16px;max-width:430px;width:100%;padding:1.6rem;font-family:'Nunito',sans-serif;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+    <div style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.35rem;color:#f4c842;">Start your free week</div>
+    <p id="ts-plan" style="font-size:0.85rem;color:rgba(255,255,255,0.7);margin:0.25rem 0 1rem;"></p>
+    <input id="ts-name" placeholder="First name" autocomplete="given-name" style="width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;">
+    <input id="ts-email" type="email" placeholder="Email" autocomplete="email" style="width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;">
+    <input id="ts-pw" type="password" placeholder="Create a password (6+ characters)" autocomplete="new-password" style="width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.5rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;">
+    <p style="font-size:0.8rem;color:rgba(255,255,255,0.62);line-height:1.5;margin:0.2rem 0 0.6rem;">Next, add your card on our secure checkout (Payhip). <b style="color:#fff;">You won't be charged for 7 days</b>, and you can cancel anytime. Please use this same email at checkout so your subscription connects to your account.</p>
+    <div id="ts-err" style="color:#e0607a;font-size:0.85rem;min-height:18px;margin-bottom:0.4rem;"></div>
+    <button id="ts-submit" onclick="submitTrialSignup()" class="btn-tier-outline" style="width:100%;cursor:pointer;">Continue to secure checkout &rarr;</button>
+    <button onclick="closeTrialSignup()" style="width:100%;background:none;border:none;color:rgba(255,255,255,0.55);margin-top:0.6rem;cursor:pointer;font-size:0.9rem;">Cancel</button>
+  </div>
+</div>
+<script src="js/vendor/supabase.js"></script>
+<script src="js/lst-signup.js"></script>
+</body>
 </html>
