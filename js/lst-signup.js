@@ -22,6 +22,7 @@
     d.innerHTML =
       '<div style="background:#0d1b3f;border:1px solid rgba(245,197,24,0.35);border-radius:16px;max-width:430px;width:100%;padding:1.6rem;font-family:\'Nunito\',sans-serif;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
         '<div style="font-family:\'Fredoka\',sans-serif;font-weight:600;font-size:1.35rem;color:#f4c842;">Start your free week</div>' +
+        '<div style="display:inline-block;background:rgba(245,197,24,0.16);border:1px solid rgba(245,197,24,0.45);color:#f4c842;font-weight:800;font-size:0.8rem;letter-spacing:0.02em;padding:0.28rem 0.75rem;border-radius:999px;margin:0.45rem 0 0.15rem;">&#10024; 7 DAYS FREE &middot; No charge today</div>' +
         '<div id="ts-plans" style="display:flex;gap:0.5rem;margin:0.7rem 0 0.9rem;">' +
           '<button type="button" data-plan="monthly" onclick="setTrialPlan(\'monthly\')" class="ts-plan-btn">Monthly<span>$10.99/mo</span></button>' +
           '<button type="button" data-plan="annual" onclick="setTrialPlan(\'annual\')" class="ts-plan-btn">Yearly<span>$98.91/yr · 3 mo free</span></button>' +
