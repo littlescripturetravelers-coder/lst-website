@@ -2,7 +2,7 @@
 
 **Repo:** `littlescripturetravelers-coder/lst-website`
 **Live:** https://www.littlescripturetravelers.com (Vercel, auto-deploys on push to `main`)
-**Last updated:** 2026-08-19 (session 3)
+**Last updated:** 2026-08-19 (session 4)
 **Owner:** Levi Lewis (non-technical founder, littlescripturetravelers@gmail.com). Claude builds and ships everything.
 
 > **This file is the source of truth, not the chat.** Chats get lost. Update this file at the end of
@@ -78,6 +78,10 @@ js/lst-signup.js        # THE signup popup (see §4)
 js/lst-auth.js          # THE website login — Supabase, same account as the app (§11)
 js/lst-family-stories.js# Family Stories section on the Virtue Library (§11)
 sql/                    # migrations for Levi to paste into the Supabase SQL editor
+                        #   ...-accounts-and-family-stories.sql  (run 1st)
+                        #   ...b-admin-access.sql                (run 2nd — makes Levi admin)
+                        #   ...c-family-story-tags.sql           (run 3rd)
+reset-password.html     # where the "forgot password" email link lands
 js/vendor/supabase.js   # vendored Supabase JS client
 images/                 # + subfolders: cancel-steps/, email-preview/, story-pdf/
 downloads/              # lst-payhip-and-signin-setup.pdf
@@ -292,10 +296,44 @@ system.
 website writes rows as **`kind = 'history'` with `entry_date` left NULL**, and uses `year` instead.
 Keep that rule if you touch this table.
 
+### Family Stories — the five doors and the two kinds
+- Family stories are tagged and looked up **exactly the five ways the scripture stories are**:
+  By Virtue or Principle, By Life Situation, By Feeling, By Traveler, By Scripture.
+- **The tag lists are read live from `window.LST_LIBRARY`.** When Levi adds a month of stories that
+  introduces new virtues, situations or feelings, they appear in the family-story tagger and the
+  lookup doors automatically. Nothing in `js/lst-family-stories.js` needs editing.
+- **By Scripture** derives the book from the typed reference ("Ruth 1" → Ruth), falling back to the
+  linked library story's `scriptureBook`.
+- **Two kinds of family story, shown together and filterable** (Levi's call):
+  - `kind = 'journal'` — a **Parent's Heart** answer written in the app after a night's story,
+    already tied to that scripture story.
+  - `kind = 'history'` — a story the parent sat down and wrote on the website.
+  The filter only appears when both kinds exist. Sorting uses `entry_date` for journal rows and
+  `year` for history rows, done in the page so it doesn't depend on a `created_at` column.
+- **There is deliberately NO "By Emotion" axis.** Levi asked for one, then confirmed emotions are
+  already the Feeling category — a sixth door would list the same 24 items twice. Don't re-add it.
+
+### Admin access — Levi never pays
+`profiles.is_admin` makes an account count as a subscriber. It's enforced in
+`public.lst_is_subscriber()`, the same function the story paywall uses, so it's a real unlock and
+not a client-side one. `LSTAuth.isAdmin()` exposes it, and the Family Stories bar shows an "admin"
+badge. Run `sql/2026-08-19b-admin-access.sql` and set the email in step 4 to the OWNER account.
+
+### Password reset
+There was no way to recover an account from the website. `LSTAuth.resetPassword()` +
+"Forgot your password?" in the sign-in box → emails a link to `reset-password.html`, which lets them
+set a new one. **Supabase needs `https://www.littlescripturetravelers.com/reset-password.html` in
+its allowed redirect URLs** (Authentication → URL Configuration) or the link will bounce.
+
 ### ⚠️ Not finished
 - **The SQL has to be run** (`sql/2026-08-19-website-accounts-and-family-stories.sql`). Until then
   the Family Stories section will show a load error and subscriber detection returns "free".
 - **`story_texts` is empty** — nobody can read a full story yet regardless of subscription. Needs
   `api/_lib/stories-full.json` from Levi's computer.
 - The timeline still keeps its added family stories in memory only.
+- **The app should write Parent's Heart answers into `family_stories` with `kind='journal'`** and the
+  same tag columns. Until it does, the website's "From the daily stories" filter has nothing to show.
+  That is app-side work — belongs in the app chat.
+- **FamilySearch import** (pull ancestors' events onto the Family Story layer and the timeline) is
+  still a roadmap item, pending FamilySearch's approval. Don't build or advertise it yet.
 
