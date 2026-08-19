@@ -224,11 +224,6 @@ update public.profiles
     where lower(email) = lower('littlescripturetravelers@gmail.com')
  );
 
--- Check it worked — this should print one row with is_admin = true:
-select u.email, p.is_admin
-  from public.profiles p
-  join auth.users u on u.id = p.id
- where p.is_admin = true;
 
 -- ---------------------------------------------------------------------
 -- PART 3 — tagging family stories the same way scripture stories are
@@ -243,3 +238,18 @@ alter table public.family_stories add column if not exists scripture  text;
 create index if not exists family_stories_virtues_idx    on public.family_stories using gin (virtues);
 create index if not exists family_stories_situations_idx on public.family_stories using gin (situations);
 create index if not exists family_stories_feelings_idx   on public.family_stories using gin (feelings);
+
+
+-- ---------------------------------------------------------------------
+-- DID IT WORK?
+--
+-- This is the last thing that runs, so its answer is what shows in the
+-- Results panel below. You want ONE row, with your email and true.
+--
+-- No rows? Your account doesn't exist yet — sign up on the website once,
+-- then run this file again.
+-- ---------------------------------------------------------------------
+select u.email as "your email", p.is_admin as "admin?"
+  from public.profiles p
+  join auth.users u on u.id = p.id
+ where p.is_admin = true;
