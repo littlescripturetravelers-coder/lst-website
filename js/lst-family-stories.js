@@ -13,10 +13,16 @@
    Rows live in Supabase `family_stories`, keyed to the signed-in user, so
    the same stories reach the app and the Sacred World Timeline.
 
-   Entries written here are `kind = 'history'` and deliberately leave
-   `entry_date` NULL — the app's own Family Stories are a one-per-day
-   journal keyed on that column, and these must not collide with it. A
-   family can have twenty ancestors born in the same year.
+   Two sorts of family story live here, shown together and filterable:
+
+     kind = 'journal'  a Parent's Heart answer written in the app after a
+                       night's story — already tied to that scripture story
+     kind = 'history'  a story the parent sat down and wrote here
+
+   Stories written here are 'history' and deliberately leave `entry_date`
+   NULL, because the app's journal entries are one-per-day keyed on that
+   column and these must not collide with them. A family can have twenty
+   ancestors born in the same year.
 
    Mount with: LSTFamilyStories.mount("lst-family")
 */
@@ -37,6 +43,7 @@
   var loaded = false;
   var editing = null;          // row being edited, {} for a new one
   var axis = "virtue";
+  var kindFilter = "";         // "" = both | "journal" | "history"
   var value = "";              // "" = show everything on this axis
   var loadError = "";
 
@@ -110,12 +117,12 @@
   function sb() { return window.LSTAuth ? window.LSTAuth.client() : null; }
 
   /* ------------------------------------------------------------------ data */
-  var COLS = "id,title,person,year,body,virtues,situations,feelings,traveler,scripture,story_id,kind";
+  var COLS = "id,title,person,year,body,virtues,situations,feelings,traveler,scripture,story_id,kind,entry_date";
 
   function load() {
     var c = sb();
     if (!c || !window.LSTAuth.signedIn()) { rows = []; loaded = true; return Promise.resolve(); }
-    return c.from(TABLE).select(COLS).eq("kind", "history").order("year", { ascending: true })
+    return c.from(TABLE).select(COLS)
       .then(function (res) {
         loaded = true;
         if (res.error) {
@@ -124,7 +131,7 @@
           return;
         }
         loadError = "";
-        rows = res.data || [];
+        rows = (res.data || []).slice().sort(sortRows);
       })
       .catch(function () { loaded = true; loadError = "We couldn't reach the server just now."; });
   }
@@ -134,7 +141,7 @@
     if (!c || !u) return Promise.reject(new Error("not signed in"));
     var payload = {
       user_id: u.id,
-      kind: "history",
+      kind: rec.kind || "history",
       title: rec.title,
       person: rec.person || null,
       year: rec.year === "" || rec.year == null ? null : parseInt(rec.year, 10),
@@ -150,6 +157,17 @@
     return c.from(TABLE).insert(payload);
   }
 
+  function isJournal(r) { return (r.kind || "journal") === "journal"; }
+
+  /* Newest first, using whichever date a row actually carries: a Parent's
+     Heart answer has entry_date, a written family story has a year. */
+  function sortKey(r) {
+    if (r.entry_date) return String(r.entry_date);
+    if (r.year != null) return String(r.year) + "-99-99";
+    return "0000-00-00";
+  }
+  function sortRows(a, b) { return sortKey(b).localeCompare(sortKey(a)); }
+
   function remove(id) {
     var c = sb();
     if (!c) return Promise.reject(new Error("no client"));
@@ -162,7 +180,7 @@
       '<div class="fs-empty">' +
         '<div class="fs-empty-i">&#10022;</div>' +
         '<h3>Your family has stories too</h3>' +
-        '<p>The library above holds the scripture stories. This is where your own go &mdash; the ancestor who kept a promise, the grandmother whose faith held, the night a prayer was answered. Tag them by virtue, life situation, feeling, traveler and scripture, exactly like the scripture stories, and look them up the same five ways.</p>' +
+        '<p>The library above holds the scripture stories. This is where your own go &mdash; the answers you write after a night&rsquo;s story, and the ones you sit down and write yourself: the ancestor who kept a promise, the grandmother whose faith held. Tag them by virtue, life situation, feeling, traveler and scripture, exactly like the scripture stories, and look them up the same five ways.</p>' +
         '<p class="fs-empty-note">Your stories are private to your family, and they reach the app and the Sacred World Timeline too.</p>' +
         '<button type="button" class="fs-btn fs-btn-gold" id="fs-signin">Sign in to start</button>' +
       '</div>';
@@ -213,16 +231,18 @@
     return '' +
       '<article class="fs-card">' +
         '<div class="fs-card-head">' +
-          "<h3>" + esc(r.title || "Untitled") + "</h3>" +
+          "<h3>" + esc(r.title || (isJournal(r) ? "Parent\u2019s Heart" : "Untitled")) + "</h3>" +
           '<div class="fs-card-acts">' +
             '<button type="button" class="fs-icon" data-edit="' + esc(r.id) + '" aria-label="Edit">&#9998;</button>' +
             '<button type="button" class="fs-icon" data-del="' + esc(r.id) + '" aria-label="Delete">&#128465;</button>' +
           "</div>" +
         "</div>" +
         '<p class="fs-meta">' +
-          (r.person ? esc(r.person) : "") +
-          (r.person && r.year ? " &middot; " : "") + (r.year ? esc(r.year) : "") +
-          (ref ? (r.person || r.year ? " &middot; " : "") + esc(ref) : "") +
+          (isJournal(r)
+            ? '<span class="fs-src fs-src-j">Parent&rsquo;s Heart</span>'
+            : '<span class="fs-src fs-src-h">Written by you</span>') +
+          [ r.person, (r.entry_date || r.year), ref ]
+            .filter(Boolean).map(esc).join(" &middot; ") +
         "</p>" +
         (r.body ? '<p class="fs-body">' + esc(r.body) + "</p>" : "") +
         chips(r) +
@@ -303,9 +323,15 @@
 
   /* --------------------------------------------------------------- browsing */
   /* Every value on the current axis that at least one family story carries. */
+  function visibleRows() {
+    return kindFilter ? rows.filter(function (r) {
+      return (r.kind || "journal") === kindFilter;
+    }) : rows;
+  }
+
   function valuesOnAxis() {
     var counts = {};
-    rows.forEach(function (r) {
+    visibleRows().forEach(function (r) {
       tagsOn(r, axis).forEach(function (v) {
         if (!v) return;
         counts[v] = (counts[v] || 0) + 1;
@@ -316,6 +342,21 @@
     }).map(function (id) {
       return { id: id, n: counts[id], label: axisLabel(axis, id) };
     });
+  }
+
+  function kindBar() {
+    var nJ = rows.filter(isJournal).length;
+    var nH = rows.length - nJ;
+    if (!nJ || !nH) return "";        /* only one sort present — no need to choose */
+    function b(id, label, n) {
+      return '<button type="button" class="fs-kind' + (kindFilter === id ? " on" : "") +
+        '" data-kind="' + id + '">' + label + ' <span class="fs-val-n">' + n + "</span></button>";
+    }
+    return '<div class="fs-kinds">' +
+      b("", "All", rows.length) +
+      b("journal", "From the daily stories", nJ) +
+      b("history", "Stories I wrote", nH) +
+      "</div>";
   }
 
   function axisTabs() {
@@ -357,21 +398,22 @@
         "</div>";
     }
 
+    var base = visibleRows();
     var shown = value
-      ? rows.filter(function (r) { return tagsOn(r, axis).indexOf(value) !== -1; })
-      : rows;
+      ? base.filter(function (r) { return tagsOn(r, axis).indexOf(value) !== -1; })
+      : base;
 
     var body = shown.length
       ? '<div class="fs-grid">' + shown.map(cardView).join("") + "</div>"
       : '<p class="fs-note">No family stories tagged that way yet.</p>';
 
-    var untagged = rows.filter(function (r) { return !tagsOn(r, axis).length; }).length;
+    var untagged = base.filter(function (r) { return !tagsOn(r, axis).length; }).length;
     var note = (!value && untagged)
-      ? '<p class="fs-note fs-note-sm">' + untagged + " of your " + rows.length +
+      ? '<p class="fs-note fs-note-sm">' + untagged + " of your " + base.length +
         " stories have nothing on this axis yet &mdash; open one and add a tag." + "</p>"
       : "";
 
-    return head + axisTabs() + valueBar() + note + body;
+    return head + kindBar() + axisTabs() + valueBar() + note + body;
   }
 
   /* ---------------------------------------------------------------- render */
@@ -398,6 +440,13 @@
     var so = document.getElementById("fs-signout");
     if (so) so.addEventListener("click", function () { window.LSTAuth.signOut(); });
 
+    root.querySelectorAll("[data-kind]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        kindFilter = this.getAttribute("data-kind");
+        value = "";
+        render();
+      });
+    });
     root.querySelectorAll("[data-axis]").forEach(function (b) {
       b.addEventListener("click", function () {
         axis = this.getAttribute("data-axis");
