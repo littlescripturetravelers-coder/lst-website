@@ -2,7 +2,7 @@
 
 **Repo:** `littlescripturetravelers-coder/lst-website`
 **Live:** https://www.littlescripturetravelers.com (Vercel, auto-deploys on push to `main`)
-**Last updated:** 2026-08-19 (session 5)
+**Last updated:** 2026-08-19 (session 6)
 **Owner:** Levi Lewis (non-technical founder, littlescripturetravelers@gmail.com). Claude builds and ships everything.
 
 > **This file is the source of truth, not the chat.** Chats get lost. Update this file at the end of
@@ -229,9 +229,21 @@ Then, **at the end of the session**, update this file (status, gotchas, next tas
   page** — it would kill that page's scrolling and cover the site nav. Link to it, don't embed it
   (an iframe would work if a preview is ever wanted).
 
-**What the tool is:** a pan/zoom timeline, 4000 BC → 2030, 142 events, built by Levi. Self-contained
-vanilla JS — no build step, no libraries. Only external calls are Google Fonts and OpenStreetMap
-tiles for the per-event map.
+**What the tool is (VERSION 6, installed 2026-08-19):** a pan/zoom timeline, 4000 BC → 2030, built
+by Levi. Self-contained vanilla JS — no build step, no libraries. ~4,800 lines. Only external calls
+are Google Fonts and OpenStreetMap tiles for the per-event map.
+
+Version 6 replaced the original wholesale. It adds empires, wars, trade routes, famous people,
+migrations, explorations and Christian history as layers; **eighteen** layers behind a slide-out
+`☰ Layers` panel (they used to be chips across the top); four modes — **Hand** (dims all but the
+events where His hand shows), **Prophecy** (arcs from prophecy to fulfilment), **Seeds** (truths
+placed in cultures before missionaries came), **Chain** (a 21-link animated walk from fire to the
+First Vision); and three panels — **Prophecy Tracker** (27 fulfilled prophecies with confidence
+ratings), **World Faiths Chart** (15 traditions from their own sources), **My Family History**
+(add events, pioneer ancestors, a FamilySearch tab).
+
+**Family events now persist in `localStorage`** — on the device only, not the account, and not
+shared with the app or the Virtue Library. That sync is still the open task.
 
 **Data model** (all inline near the top of `timeline-explore.html`):
 - `EVS` — the events. Each has `l` (layer), `y` (year), `t` (title), `de` (description), `sc`
@@ -258,12 +270,27 @@ freedom, counter (Counterfeit/Shadow — **off by default**, heavier teen/adult 
 — ancestors placed at their real moment in history, so you can see how the family formed and what
 your people lived through. This is the bridge to the app's Family Stories (see §6, item 1).
 
-**Edits made to Levi's original file when it was brought into the repo** (it is otherwise verbatim):
-meta description added; the header wordmark now links back to `index.html`; OpenStreetMap attribution
-added over the map canvas (their tile policy requires it).
+**Edits made to Levi's file when it is brought into the repo** (otherwise verbatim — re-apply these
+to any future version he sends):
+1. meta description added;
+2. the header wordmark links back to `index.html`;
+3. OpenStreetMap attribution over the map canvas (their tile policy requires it).
 
-**Known gap:** "Add Story" and photo upload do **not** persist — no localStorage, no backend. Anything
-a visitor adds is gone on refresh. Levi chose account-saving over device-saving. See §6 item 1.
+**Two defects fixed in the v6 upload** (watch for them recurring in a v7):
+- The Prophecy, Seeds and Chain buttons were each in the header **twice**. `getElementById` only
+  finds the first, so the second set never lit when toggled. Duplicate run removed.
+- `PROPHECIES` was declared **twice**; the later block silently won, making the earlier one dead
+  code that also dated Malachi to 600 BC against its own "written c. 430 BC" text. Stale block
+  removed, note left in its place.
+
+**`timeline.html` (the explainer) must be updated whenever the tool changes** — it names specific
+controls, lists all eighteen layers, and describes each mode. A stale explainer sends people looking
+for buttons that aren't there.
+
+**Known gap:** family entries persist on the **device** (localStorage) but not to the account, so they
+do not reach the app, the Virtue Library, or another device. Levi wants account-saving — see §6 item 1.
+The FamilySearch tab currently only links out to familysearch.org and describes what the integration
+would do; there is no actual integration, and there must not be one until FamilySearch approves.
 
 ---
 
