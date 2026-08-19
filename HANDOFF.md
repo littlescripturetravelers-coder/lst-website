@@ -2,7 +2,7 @@
 
 **Repo:** `littlescripturetravelers-coder/lst-website`
 **Live:** https://www.littlescripturetravelers.com (Vercel, auto-deploys on push to `main`)
-**Last updated:** 2026-08-19 (session 2)
+**Last updated:** 2026-08-19 (session 3)
 **Owner:** Levi Lewis (non-technical founder, littlescripturetravelers@gmail.com). Claude builds and ships everything.
 
 > **This file is the source of truth, not the chat.** Chats get lost. Update this file at the end of
@@ -75,6 +75,9 @@ blog-*.html             # 9 posts, each a full standalone page
 main.js                 # shared site JS (nav, misc UI)
 style.css               # ALL shared styling — one file, site-wide
 js/lst-signup.js        # THE signup popup (see §4)
+js/lst-auth.js          # THE website login — Supabase, same account as the app (§11)
+js/lst-family-stories.js# Family Stories section on the Virtue Library (§11)
+sql/                    # migrations for Levi to paste into the Supabase SQL editor
 js/vendor/supabase.js   # vendored Supabase JS client
 images/                 # + subfolders: cancel-steps/, email-preview/, story-pdf/
 downloads/              # lst-payhip-and-signin-setup.pdf
@@ -127,6 +130,9 @@ are explore links to `travelers.html` / content pages, on purpose.
 - ✅ **Sacred World Timeline shipped** — see §10 for the full picture. `timeline.html` (explainer,
   site-styled, owns the nav link) + `timeline-explore.html` (the tool). "Timeline" added to the
   desktop AND mobile nav on all 20 content pages.
+- ✅ **Website login + Family Stories** — see §11. The Virtue Library now uses the same Supabase
+  account as the app, and has a Family Stories section tagged with the same 36 virtues.
+  **⚠️ Needs the SQL in `sql/` run before it works** — see §11.
 - ✅ **Privacy policy page** (`privacy.html`) — required for App Store + Google Play.
 - ✅ **Google Search Console verification** — HTML file + homepage meta tag.
 - ✅ **Pricing updated site-wide** — $10.99/mo, $98.91/yr, 7-day trial wording.
@@ -134,18 +140,16 @@ are explore links to `travelers.html` / content pages, on purpose.
 
 ## 6. STATUS — PENDING / next up
 
-1. **Shared family record across app + website + timeline + Virtue Library.** This is the big one,
-   and Levi has confirmed it's the direction. Today the timeline's "Add Story" entries vanish on
-   refresh, and the app's Family Stories are local-only. The goal is ONE `family_stories` record
-   behind the user's account that powers: the app's Family Stories, the timeline's Family Story
-   layer, and the virtues those stories teach in the Virtue Library. Blockers/needs:
-   - The website currently has **no signed-in state at all** — the signup popup creates an account
-     and hands off to Payhip, but there is no login UI on the site. That has to be built first.
-   - `family_stories` needs schema work (columns traveler/travelers/situations/custom, `entry_date`
-     is date-typed, unique(user_id, entry_date) for upsert) — **Levi must paste that SQL into the
-     Supabase SQL editor himself**, so it needs to be written out click-by-click for him.
-   - The timeline page already tells visitors this is coming — see the "Coming next" note in the
-     family-history section of `timeline.html`. Don't leave that promise dangling too long.
+1. **Finish the shared family record.** Website half is BUILT (§11) but two things remain:
+   - **Levi must run `sql/2026-08-19-website-accounts-and-family-stories.sql`** in the Supabase SQL
+     editor. Nothing works until he does. Click-by-click: Supabase → SQL Editor → New query → paste
+     the whole file → Run.
+   - **Load the story text.** `story_texts` is empty, so subscribers still can't read a full story.
+     The text is in `api/_lib/stories-full.json` on Levi's computer (referenced by
+     `data/virtue-library.js`, never committed). Get that file from him, then load the 91 rows.
+   - **Wire the timeline's Family Story layer** to the same `family_stories` table (it currently
+     keeps added stories in memory only). The app's Family Stories should move to it too — but that
+     is app-side work for the app chat.
 2. **YouTube "how to use the timeline" video section on the home page.** Levi wants a home-page
    section showing a walkthrough video of the timeline. **Waiting on the video URL** — it may not be
    recorded yet. When it lands, follow the existing `watch-section` iframe pattern in `index.html`,
@@ -253,4 +257,45 @@ added over the map canvas (their tile policy requires it).
 
 **Known gap:** "Add Story" and photo upload do **not** persist — no localStorage, no backend. Anything
 a visitor adds is gone on refresh. Levi chose account-saving over device-saving. See §6 item 1.
+
+---
+
+## 11. Website login + Family Stories (built 2026-08-19)
+
+### The discovery that started it
+`virtue-library.js` shipped with a full sign-in UI (its own token session, a six-digit email code,
+tiers, free-story unlocks) pointed at `/api/library`. **That server was never written and has never
+existed in this repo.** So on the live site the Virtue Library sign-in was dead and no story could
+be read. Levi chose to fix it by moving to the app's login rather than building a second account
+system.
+
+### How it works now
+- **`js/lst-auth.js`** is the one login for the whole website. It uses the **same Supabase account
+  as the app** — the account `lst-signup.js` already creates at trial signup. Exposes
+  `LSTAuth.signedIn()`, `.isSubscriber()`, `.openSignIn()`, `.ready()`, `.onChange()`, `.signOut()`.
+- Subscription status comes from the `subscriptions` table (statuses `trialing`/`trial`/`active`/
+  `past_due` count as unlocked, so a family in their Payhip free week gets the full library). It
+  matches on `user_id` and falls back to **email**, because the Payhip webhook keys rows by email.
+- **`lst-signup.js` now shares the same client** via `window.LST_SB`. Don't undo that — two Supabase
+  auth clients on one page fight over the stored session.
+- **The paywall is now enforced by Postgres, not JavaScript.** Story text lives in `story_texts`
+  with an RLS policy that returns a row only to a subscriber (or to anyone for a free story).
+  Editing the page's JavaScript gets a reader nothing.
+- **`js/lst-family-stories.js`** renders the Family Stories section into `#lst-family` on
+  `virtue-library.html`. Stories are tagged with the same 36 virtues as the scripture stories, can be
+  linked to a specific scripture story, and each card surfaces the scripture stories teaching the
+  same virtue ("Read alongside…"). That cross-link is the whole reason it lives on this page.
+
+### The one schema subtlety worth remembering
+`family_stories` is shared with the app, whose Family Stories are a **one-per-day journal** keyed on
+`entry_date`. Family *history* entries are many-per-year and must never collide with that. So the
+website writes rows as **`kind = 'history'` with `entry_date` left NULL**, and uses `year` instead.
+Keep that rule if you touch this table.
+
+### ⚠️ Not finished
+- **The SQL has to be run** (`sql/2026-08-19-website-accounts-and-family-stories.sql`). Until then
+  the Family Stories section will show a load error and subscriber detection returns "free".
+- **`story_texts` is empty** — nobody can read a full story yet regardless of subscription. Needs
+  `api/_lib/stories-full.json` from Levi's computer.
+- The timeline still keeps its added family stories in memory only.
 
