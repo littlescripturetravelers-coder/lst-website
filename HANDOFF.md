@@ -2,7 +2,7 @@
 
 **Repo:** `littlescripturetravelers-coder/lst-website`
 **Live:** https://www.littlescripturetravelers.com (Vercel, auto-deploys on push to `main`)
-**Last updated:** 2026-08-19 (session 4)
+**Last updated:** 2026-08-19 (session 5)
 **Owner:** Levi Lewis (non-technical founder, littlescripturetravelers@gmail.com). Claude builds and ships everything.
 
 > **This file is the source of truth, not the chat.** Chats get lost. Update this file at the end of
@@ -82,6 +82,7 @@ sql/                    # migrations for Levi to paste into the Supabase SQL edi
                         #   ...b-admin-access.sql                (run 2nd — makes Levi admin)
                         #   ...c-family-story-tags.sql           (run 3rd)
 reset-password.html     # where the "forgot password" email link lands
+cancel.html             # how to cancel, with the direct Payhip link (§12)
 js/vendor/supabase.js   # vendored Supabase JS client
 images/                 # + subfolders: cancel-steps/, email-preview/, story-pdf/
 downloads/              # lst-payhip-and-signin-setup.pdf
@@ -137,6 +138,8 @@ are explore links to `travelers.html` / content pages, on purpose.
 - ✅ **Website login + Family Stories** — see §11. The Virtue Library now uses the same Supabase
   account as the app, and has a Family Stories section tagged with the same 36 virtues.
   **⚠️ Needs the SQL in `sql/` run before it works** — see §11.
+- ✅ **Cancelling made findable** — `cancel.html`, linked from every footer and the signed-in strip.
+  See §12.
 - ✅ **Privacy policy page** (`privacy.html`) — required for App Store + Google Play.
 - ✅ **Google Search Console verification** — HTML file + homepage meta tag.
 - ✅ **Pricing updated site-wide** — $10.99/mo, $98.91/yr, 7-day trial wording.
@@ -347,4 +350,32 @@ Two things tripped him up, worth remembering when writing any future migration f
   That is app-side work — belongs in the app chat.
 - **FamilySearch import** (pull ancestors' events onto the Family Story layer and the timeline) is
   still a roadmap item, pending FamilySearch's approval. Don't build or advertise it yet.
+
+---
+
+## 12. Cancelling, and the "Free" tags
+
+### cancel.html
+Levi's rule: cancelling must be **obvious and easy**, never something a family has to hunt for or
+email about. The page leads with the direct link and only then explains.
+
+- **The direct link is** `https://payhip.com/LittleScriptureTravelersBedtimeStories/b-account` —
+  the customer's Payhip account page, where the Cancel button lives. Same URL the footer modal uses.
+- Linked from **every page's footer** ("How to Cancel"), and from the **signed-in strip** on the
+  Virtue Library and the Family Stories bar ("Manage or cancel").
+- Uses the screenshots in `images/cancel-steps/`, which existed in the repo but were only wired into
+  the footer modal in `main.js`.
+- **The older footer modal still works** and is unchanged — `main.js` injects it site-wide from the
+  `.btn-cancel-sub` button. Both routes now exist on purpose; don't delete one assuming it is a
+  duplicate.
+- The page states three things deliberately: payments stop immediately, the account and any family
+  stories are NOT deleted, and cancelling inside the free week means never being charged while still
+  keeping the week.
+
+### The "Free" tags
+The three sample stories are tagged "Free" in the catalog. That tag is now **hidden from anyone who
+can already read everything** (`isSubscriber()`, which includes admins) — it was noise for them, and
+its absence is a quiet confirmation that they are signed in and unlocked. **Signed-in free readers
+still see it**, because for them it says which three they may open. Verified both ways in a browser:
+29 stories listed, 1 Free badge as a free reader, 0 as a subscriber.
 
