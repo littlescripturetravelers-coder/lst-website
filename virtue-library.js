@@ -278,7 +278,11 @@
             var vv = byId(VIRTUES, vid);
             return '<span class="vl-chip">' + esc(vv ? vv.name : vid) + "</span>";
           }).join("");
-          var freeTag = (((L.meta && L.meta.freeStoryIds) || []).indexOf(s.id) !== -1)
+          /* A subscriber (or admin) can read everything, so flagging three of
+             them as "Free" is noise — and its absence is a quiet signal that
+             they are signed in and unlocked. Free readers still see it, since
+             for them it says which ones they may open. */
+          var freeTag = (!isSubscriber() && ((L.meta && L.meta.freeStoryIds) || []).indexOf(s.id) !== -1)
             ? '<span class="vl-free">Free</span>' : "";
           return '<button class="vl-story" data-story="' + esc(s.id) + '">' +
             '<span class="vl-story-top"><h4>' + esc(s.title) + freeTag + "</h4>" +
@@ -344,6 +348,7 @@
       : "Signed in as <strong>" + esc(sessionEmail()) + "</strong> &middot; " +
         freeIds().length + " free stories unlocked";
     strip.innerHTML = "<span>" + label + "</span>" +
+      ' <a class="vl-link" href="cancel.html">Manage or cancel</a>' +
       ' <button type="button" class="vl-link" id="vl-signout">Sign out</button>';
     var so = el("vl-signout");
     if (so) so.addEventListener("click", signOut);

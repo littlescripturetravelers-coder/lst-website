@@ -385,6 +385,7 @@
         '<button type="button" class="fs-btn fs-btn-gold" id="fs-add">+ Add a family story</button>' +
         '<span class="fs-who">Signed in as ' + esc(window.LSTAuth.email() || "") +
           (window.LSTAuth.isAdmin && window.LSTAuth.isAdmin() ? ' <span class="fs-admin">admin</span>' : "") +
+          ' &middot; <a class="fs-link" href="cancel.html">manage or cancel</a>' +
           ' &middot; <button type="button" class="fs-link" id="fs-signout">sign out</button></span>' +
       "</div>";
 
