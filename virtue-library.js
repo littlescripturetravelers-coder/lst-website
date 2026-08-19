@@ -312,94 +312,38 @@
   }
 
   /* =====================================================================
-     SESSION  —  email sign-in. The server decides what may be read; nothing
-     here is trusted, and the story text is never in a public file.
+     SESSION  —  the site-wide app login (js/lst-auth.js, Supabase).
+
+     This is the SAME account the Little Scripture Travelers app uses, so a
+     family signs in once and their subscription — and their family stories —
+     are recognised in both places.
+
+     Nothing here decides what may be read. The story text lives in the
+     `story_texts` table behind a row-level-security policy that only lets a
+     subscriber (or anyone, for the free stories) select it. A reader who
+     edits this file still gets nothing back.
      ===================================================================== */
-  var SKEY = "lst_vl_session";
+  function auth() { return window.LSTAuth || null; }
+  function signedIn() { return !!(auth() && auth().signedIn()); }
+  function isSubscriber() { return !!(auth() && auth().isSubscriber()); }
+  function sessionEmail() { return auth() ? auth().email() : ""; }
 
-  var API = (function () {
-    var h = location.hostname;
-    if (/(^|\.)littlescripturetravelers\.com$/i.test(h) || h === "localhost" || h === "127.0.0.1") {
-      return "/api/library";
-    }
-    /* Preview builds have no server of their own, so they talk to the live one. */
-    return "https://www.littlescripturetravelers.com/api/library";
-  })();
-
-  var SESSION = null;
-
-  function loadSession() {
-    try { SESSION = JSON.parse(localStorage.getItem(SKEY) || "null"); }
-    catch (e) { SESSION = null; }
-    return SESSION;
-  }
-  function saveSession(s) {
-    SESSION = s;
-    try {
-      if (s) localStorage.setItem(SKEY, JSON.stringify(s));
-      else localStorage.removeItem(SKEY);
-    } catch (e) {}
-  }
-  function signedIn() { return !!(SESSION && SESSION.token); }
-  function isSubscriber() { return !!(SESSION && SESSION.tier === "subscriber"); }
-  function freeIds() {
-    if (SESSION && SESSION.freeStoryIds && SESSION.freeStoryIds.length) return SESSION.freeStoryIds;
-    return (L.meta && L.meta.freeStoryIds) || [];
-  }
+  function freeIds() { return (L.meta && L.meta.freeStoryIds) || []; }
   function isFree(sid) { return freeIds().indexOf(sid) !== -1; }
 
-  function api(path, opts) {
-    opts = opts || {};
-    var headers = opts.headers || {};
-    if (SESSION && SESSION.token) headers.Authorization = "Bearer " + SESSION.token;
-    if (opts.body) headers["Content-Type"] = "application/json";
-    return fetch(API + path, {
-      method: opts.method || "GET",
-      headers: headers,
-      body: opts.body ? JSON.stringify(opts.body) : undefined
-    }).then(function (r) {
-      return r.json().catch(function () { return {}; }).then(function (j) {
-        return { status: r.status, ok: r.ok, data: j };
-      });
-    });
-  }
-
-  /* Re-check on load so a subscription started (or cancelled) since the last
-     visit is reflected without the parent doing anything. */
-  function refreshSession() {
-    if (!signedIn()) return Promise.resolve();
-    return api("/me").then(function (r) {
-      if (r.status === 401) { saveSession(null); return; }
-      if (r.ok && r.data && r.data.signedIn) {
-        SESSION.tier = r.data.tier;
-        SESSION.email = r.data.email;
-        SESSION.freeStoryIds = r.data.freeStoryIds || [];
-        saveSession(SESSION);
-      }
-    }).catch(function () { /* offline — fall back to what we stored */ });
-  }
-
-  function signOut() {
-    saveSession(null);
-    updateSignInStrip();
-    closeStory();
-    renderBrowse();
-  }
+  function signOut() { if (auth()) auth().signOut(); }
 
   /* The little line at the top of the page showing who is signed in. */
   function updateSignInStrip() {
     var strip = el("vl-who");
     if (!strip) return;
-    if (!signedIn()) {
-      strip.hidden = true;
-      return;
-    }
+    if (!signedIn()) { strip.hidden = true; return; }
     strip.hidden = false;
     var label = isSubscriber()
-      ? "Signed in as <strong>" + esc(SESSION.email) + "</strong> &middot; full library unlocked"
-      : "Signed in as <strong>" + esc(SESSION.email) + "</strong> &middot; " +
+      ? "Signed in as <strong>" + esc(sessionEmail()) + "</strong> &middot; full library unlocked"
+      : "Signed in as <strong>" + esc(sessionEmail()) + "</strong> &middot; " +
         freeIds().length + " free stories unlocked";
-    strip.innerHTML = '<span>' + label + '</span>' +
+    strip.innerHTML = "<span>" + label + "</span>" +
       ' <button type="button" class="vl-link" id="vl-signout">Sign out</button>';
     var so = el("vl-signout");
     if (so) so.addEventListener("click", signOut);
@@ -501,45 +445,25 @@
         "</div>";
     }
 
-    /* Not signed in yet. */
+    /* Not signed in yet — one login for the app and the website. */
     var pitch = isFree(s.id)
-      ? "<p><strong>This story is free.</strong> Pop in your email and we\u2019ll send you a " +
-        "six-digit code so you can read it tonight" +
+      ? "<p><strong>This story is free.</strong> Sign in with your Little Scripture " +
+        "Travelers account and read it tonight" +
         (words ? " \u2014 all " + words + " words" : "") + ", plus " + (FREE_N - 1) + " more.</p>"
-      : "<p><strong>Read " + FREE_N + " complete stories free.</strong> Pop in your email and we\u2019ll " +
-        "send you a six-digit code. This particular one comes with The Lantern, " +
+      : "<p><strong>Read " + FREE_N + " complete stories free.</strong> Sign in with your " +
+        "Little Scripture Travelers account. This particular one comes with The Lantern, " +
         "along with all " + total + " stories in the library.</p>";
 
     return '<div class="vl-locked">' + pitch +
-      '<form id="vl-si-form" class="vl-si-form" novalidate>' +
-        '<div id="vl-si-step1">' +
-          '<label class="vl-si-label" for="vl-si-email">Your email</label>' +
-          '<input id="vl-si-email" class="vl-si-input" type="email" name="email" ' +
-                 'autocomplete="email" inputmode="email" placeholder="you@example.com" required>' +
-          '<button type="submit" class="vl-btn vl-si-btn">Email Me My Code</button>' +
-        "</div>" +
-        '<div id="vl-si-step2" hidden>' +
-          '<label class="vl-si-label" for="vl-si-code">Six-digit code</label>' +
-          '<input id="vl-si-code" class="vl-si-input vl-si-code" type="text" name="code" ' +
-                 'autocomplete="one-time-code" inputmode="numeric" maxlength="6" ' +
-                 'placeholder="000000">' +
-          '<button type="submit" class="vl-btn vl-si-btn">Open My Story</button>' +
-          '<p class="vl-locked-alt"><button type="button" class="vl-link" id="vl-si-again">' +
-            "Send it again</button></p>" +
-        "</div>" +
-      "</form>" +
-      '<p class="vl-si-msg" id="vl-si-msg" role="status" aria-live="polite"></p>' +
-      '<p class="vl-locked-alt">Already subscribed? Use the same email you subscribed with ' +
+      '<button type="button" class="vl-btn" id="vl-si-open">Sign In</button>' +
+      '<p class="vl-locked-alt">No account yet? ' +
+      '<button type="button" class="vl-link" id="vl-si-join">Start your free week</button></p>' +
+      '<p class="vl-locked-alt">Use the same email you subscribed with ' +
       "and the whole library opens.</p>" +
       "</div>";
   }
 
   function wireUnlock(s) {
-    var form = el("vl-si-form");
-    var msg = el("vl-si-msg");
-    var step1 = el("vl-si-step1"), step2 = el("vl-si-step2");
-    var pending = "";
-
     /* Jump straight to one of the free stories. */
     var jumps = document.querySelectorAll("#vl-modal-body [data-free]");
     for (var i = 0; i < jumps.length; i++) {
@@ -547,74 +471,40 @@
         openStory(this.getAttribute("data-free"));
       });
     }
-    if (!form) return;
 
-    function say(text, kind) {
-      if (!msg) return;
-      msg.textContent = text || "";
-      msg.className = "vl-si-msg" + (kind ? " is-" + kind : "");
-    }
-
-    function askForCode(email, btn) {
-      say("Sending your code\u2026");
-      api("/request-code", { method: "POST", body: { email: email } })
-        .then(function (r) {
-          if (btn) { btn.disabled = false; btn.textContent = "Email Me My Code"; }
-          if (r.ok) {
-            pending = email;
-            step1.hidden = true;
-            step2.hidden = false;
-            var ci = el("vl-si-code"); if (ci) ci.focus();
-            say("Code sent to " + email + ". It works for 15 minutes \u2014 check your junk folder if it\u2019s shy.", "good");
-          } else {
-            say((r.data && r.data.message) || "We couldn\u2019t send that code. Please try again.", "bad");
-          }
-        })
-        .catch(function () {
-          if (btn) { btn.disabled = false; btn.textContent = "Email Me My Code"; }
-          say("We couldn\u2019t reach the server. Please check your connection and try again.", "bad");
-        });
-    }
-
-    form.addEventListener("submit", function (ev) {
-      ev.preventDefault();
-
-      if (!step2.hidden) {
-        var code = (el("vl-si-code").value || "").replace(/\D/g, "");
-        if (code.length !== 6) { say("Please type all six digits.", "bad"); return; }
-        say("Checking\u2026");
-        api("/verify-code", { method: "POST", body: { email: pending, code: code } })
-          .then(function (r) {
-            if (r.ok && r.data && r.data.token) {
-              saveSession({
-                token: r.data.token, email: r.data.email,
-                tier: r.data.tier, freeStoryIds: r.data.freeStoryIds || []
-              });
-              updateSignInStrip();
-              renderBrowse();
-              openStory(s.id);   /* land them on what they came for */
-            } else {
-              say((r.data && r.data.message) || "That code didn\u2019t work.", "bad");
-            }
-          })
-          .catch(function () { say("We couldn\u2019t reach the server. Please try again.", "bad"); });
-        return;
-      }
-
-      var email = (el("vl-si-email").value || "").trim();
-      if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email)) {
-        say("That doesn\u2019t look like an email address yet.", "bad");
-        return;
-      }
-      var btn = form.querySelector("#vl-si-step1 .vl-si-btn");
-      if (btn) { btn.disabled = true; btn.textContent = "Sending\u2026"; }
-      askForCode(email, btn);
+    var open = el("vl-si-open");
+    if (open) open.addEventListener("click", function () {
+      if (auth()) auth().openSignIn("Sign in to read the whole story.");
     });
 
-    var again = el("vl-si-again");
-    if (again) again.addEventListener("click", function () {
-      if (pending) askForCode(pending, null);
+    var join = el("vl-si-join");
+    if (join) join.addEventListener("click", function () {
+      if (typeof window.openTrialSignup === "function") window.openTrialSignup("monthly");
+      else window.location.href = "subscribe.html#plans";
     });
+  }
+
+  /* Fetch the gated story text. Postgres decides: the RLS policy on
+     `story_texts` only returns a row to a subscriber, or to anyone for a
+     free story. No row back means not allowed, so we show the teaser. */
+  function fetchStoryText(sid) {
+    var c = auth() ? auth().client() : null;
+    if (!c) return Promise.resolve(null);
+    return c.from("story_texts")
+      .select("id,story,fork,remember_this,prompt")
+      .eq("id", sid)
+      .limit(1)
+      .then(function (res) {
+        if (res.error || !res.data || !res.data.length) return null;
+        var r = res.data[0];
+        return {
+          story: r.story,
+          fork: r.fork,
+          rememberThis: r.remember_this,
+          prompt: r.prompt
+        };
+      })
+      .catch(function () { return null; });
   }
 
   function openStory(sid) {
@@ -627,8 +517,10 @@
       el("vl-modal-body").innerHTML = storyHead(s) + inner + storyFoot(s);
     }
 
+    var mayRead = isSubscriber() || (signedIn() && isFree(sid));
+
     /* Show something instantly, then fill in the story if they may read it. */
-    if (isSubscriber() || (signedIn() && isFree(sid))) {
+    if (mayRead) {
       paint('<div class="vl-sec"><p class="vl-loading">Opening the story\u2026</p></div>');
     } else {
       paint(storyTeaser(s) + unlockPanel(s));
@@ -640,23 +532,15 @@
     document.body.style.overflow = "hidden";
     el("vl-close").focus();
 
-    if (!signedIn()) return;
+    if (!mayRead) return;
 
-    api("/story?id=" + encodeURIComponent(sid)).then(function (r) {
+    fetchStoryText(sid).then(function (data) {
       if (currentStory !== sid) return;              /* they moved on */
-      if (r.ok && r.data && r.data.story) {
-        if (r.data.tier && SESSION && r.data.tier !== SESSION.tier) {
-          SESSION.tier = r.data.tier; saveSession(SESSION); updateSignInStrip(); renderBrowse();
-        }
-        paint(storyFull(s, r.data));
-        return;
-      }
-      if (r.status === 401) { saveSession(null); updateSignInStrip(); }
-      if (r.status === 402 && r.data && r.data.tier && SESSION) {
-        SESSION.tier = r.data.tier; saveSession(SESSION); updateSignInStrip();
-      }
-      paint(storyTeaser(s) + unlockPanel(s));
-      wireUnlock(s);
+      if (data && data.story) { paint(storyFull(s, data)); return; }
+      /* Allowed to read, but the text is not in the library yet. */
+      paint(storyTeaser(s) +
+        '<div class="vl-locked"><p>The full text of this one is not loaded yet. ' +
+        "It is on its way \u2014 every story in the library is being added.</p></div>");
     }).catch(function () {
       if (currentStory !== sid) return;
       paint(storyTeaser(s) +
@@ -681,9 +565,16 @@
     var t = el("vl-tool");   if (t) t.hidden = false;
     var g = el("vl-gate");   if (g) g.hidden = true;
 
-    loadSession();
-    updateSignInStrip();
-    refreshSession().then(function () {
+    if (!auth()) return;   /* js/lst-auth.js missing — catalog still browsable */
+
+    auth().ready(function () {
+      updateSignInStrip();
+      renderBrowse();
+      if (currentStory) openStory(currentStory);
+    });
+
+    /* Signing in or out anywhere on the page repaints the library. */
+    auth().onChange(function () {
       updateSignInStrip();
       renderBrowse();
       if (currentStory) openStory(currentStory);
@@ -752,6 +643,13 @@
       else if (state.view) backToBrowse();
     });
   }
+
+  /* Let other modules (the family-stories section) open a story. */
+  window.LSTVirtueLibrary = {
+    openStory: function (id) { openStory(id); },
+    isSubscriber: isSubscriber,
+    signedIn: signedIn
+  };
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

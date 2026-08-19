@@ -6,7 +6,13 @@
   var SUPA_URL = "https://rdbvktqgrwhjucocobua.supabase.co";
   var SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkYnZrdHFncndoanVjb2NvYnVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwNDAwMzEsImV4cCI6MjEwMTYxNjAzMX0.1PJVCfeK6dIFWeBvdsC13HPQ8173BHEok0Qq6l7mfC4";
   var PAYHIP = { monthly: "https://payhip.com/b/e7N6r", annual: "https://payhip.com/b/34fmR" };
-  var sb = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPA_URL, SUPA_KEY) : null;
+  /* Share the one client lst-auth.js sets up, so the page never runs two auth
+     clients against the same stored session. Falls back to its own if this
+     page doesn't load lst-auth.js. */
+  var sb = window.LST_SB
+    || ((window.supabase && window.supabase.createClient)
+          ? (window.LST_SB = window.supabase.createClient(SUPA_URL, SUPA_KEY))
+          : null);
   var plan = "monthly";
   function el(id) { return document.getElementById(id); }
   var IN = "width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;font-family:'Nunito',sans-serif;";
