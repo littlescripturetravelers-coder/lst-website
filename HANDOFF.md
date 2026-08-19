@@ -2,7 +2,7 @@
 
 **Repo:** `littlescripturetravelers-coder/lst-website`
 **Live:** https://www.littlescripturetravelers.com (Vercel, auto-deploys on push to `main`)
-**Last updated:** 2026-08-19
+**Last updated:** 2026-08-19 (session 2)
 **Owner:** Levi Lewis (non-technical founder, littlescripturetravelers@gmail.com). Claude builds and ships everything.
 
 > **This file is the source of truth, not the chat.** Chats get lost. Update this file at the end of
@@ -68,6 +68,8 @@ watch.html              # video page
 virtue-library.html     # + virtue-library.js and data/virtue-library.js (content data)
 spiritual-tracker.html  # tracker tool
 privacy.html            # privacy policy (required by App Store + Google Play)
+timeline.html           # Sacred World Timeline — the EXPLAINER page (this is the nav link)
+timeline-explore.html   # the full-viewport interactive timeline tool itself
 blog.html               # blog index — nav dropdown + the post-card list
 blog-*.html             # 9 posts, each a full standalone page
 main.js                 # shared site JS (nav, misc UI)
@@ -122,6 +124,9 @@ are explore links to `travelers.html` / content pages, on purpose.
   (intergenerational narrative) → "companion, not competition" → signature. Linked from `blog.html` in
   **both** the nav dropdown and the post-card list. *(Was listed as "in progress" in the old handoff —
   it is finished and pushed.)*
+- ✅ **Sacred World Timeline shipped** — see §10 for the full picture. `timeline.html` (explainer,
+  site-styled, owns the nav link) + `timeline-explore.html` (the tool). "Timeline" added to the
+  desktop AND mobile nav on all 20 content pages.
 - ✅ **Privacy policy page** (`privacy.html`) — required for App Store + Google Play.
 - ✅ **Google Search Console verification** — HTML file + homepage meta tag.
 - ✅ **Pricing updated site-wide** — $10.99/mo, $98.91/yr, 7-day trial wording.
@@ -129,13 +134,27 @@ are explore links to `travelers.html` / content pages, on purpose.
 
 ## 6. STATUS — PENDING / next up
 
-1. **World timeline page — BLOCKED, waiting on Levi.** He created an educational "world timeline" and
-   wants it on the site, but the details were lost when a previous chat died. **Do not invent the
-   content.** Ask him: (a) what is it exactly — scripture chronology, Church history, world history
-   alongside scripture? (b) what form is it in now — document, spreadsheet, HTML, notes? (c) where
-   should it live — its own page, a blog post, or a section of an existing page? Get the source
-   material first.
-2. Nothing else outstanding on the website.
+1. **Shared family record across app + website + timeline + Virtue Library.** This is the big one,
+   and Levi has confirmed it's the direction. Today the timeline's "Add Story" entries vanish on
+   refresh, and the app's Family Stories are local-only. The goal is ONE `family_stories` record
+   behind the user's account that powers: the app's Family Stories, the timeline's Family Story
+   layer, and the virtues those stories teach in the Virtue Library. Blockers/needs:
+   - The website currently has **no signed-in state at all** — the signup popup creates an account
+     and hands off to Payhip, but there is no login UI on the site. That has to be built first.
+   - `family_stories` needs schema work (columns traveler/travelers/situations/custom, `entry_date`
+     is date-typed, unique(user_id, entry_date) for upsert) — **Levi must paste that SQL into the
+     Supabase SQL editor himself**, so it needs to be written out click-by-click for him.
+   - The timeline page already tells visitors this is coming — see the "Coming next" note in the
+     family-history section of `timeline.html`. Don't leave that promise dangling too long.
+2. **YouTube "how to use the timeline" video section on the home page.** Levi wants a home-page
+   section showing a walkthrough video of the timeline. **Waiting on the video URL** — it may not be
+   recorded yet. When it lands, follow the existing `watch-section` iframe pattern in `index.html`,
+   and remember to add it to all three index variants.
+3. **FamilySearch integration (FUTURE — needs their approval).** Levi wants the timeline to connect
+   to a user's FamilySearch account and pull family-tree events onto the Family Story layer
+   automatically, with the user able to add/remove. He does **not** have approval yet. Do NOT build
+   this and do NOT advertise it on the site until FamilySearch approves — publicly promising an
+   integration before approval is a bad idea. This is a roadmap item, not a task.
 
 *(App-side work — Android Play release, Apple entitlements, trial enforcement in the app — is tracked
 in the app chat / `lst-app` repo, not here.)*
@@ -186,3 +205,52 @@ Paste this:
 > section 6. The app is handled in a different chat; don't do app work here."
 
 Then, **at the end of the session**, update this file (status, gotchas, next tasks), commit, push.
+
+---
+
+## 10. The Sacred World Timeline — how it's put together
+
+**Two files, on purpose:**
+- `timeline.html` — the explainer. Normal site page (header, footer, signup wiring). **This is what
+  the nav links to** and what Google should index.
+- `timeline-explore.html` — the tool. A full-viewport app that sets `overflow:hidden` on html/body
+  and positions its chrome `fixed` at z-index 300–700. **It can never be pasted inline into another
+  page** — it would kill that page's scrolling and cover the site nav. Link to it, don't embed it
+  (an iframe would work if a preview is ever wanted).
+
+**What the tool is:** a pan/zoom timeline, 4000 BC → 2030, 142 events, built by Levi. Self-contained
+vanilla JS — no build step, no libraries. Only external calls are Google Fonts and OpenStreetMap
+tiles for the per-event map.
+
+**Data model** (all inline near the top of `timeline-explore.html`):
+- `EVS` — the events. Each has `l` (layer), `y` (year), `t` (title), `de` (description), `sc`
+  (scripture refs), `co`/`ch` (how it points to Christ), `lat`/`lng` (map), `trav` (which traveler),
+  and `conf`.
+- `conf` is the honesty flag: `confirmed` (evidence exists) / `believed` (held by faith) / `debated`
+  (scholars disagree). **This matters to Levi** — the timeline must stay factual, and anything not
+  established gets marked `debated` rather than asserted. Keep that discipline when adding events.
+- `ERAS` (10 eras, Creation → Today), `WARS` (spans), `PATH` (the guided-tour event ids),
+  `LC`/`LN` (layer colors and names).
+
+**The eleven layers:** gospel, world, arch (biblical evidence), bom, church, family, invent, faith,
+freedom, counter (Counterfeit/Shadow — **off by default**, heavier teen/adult material), war.
+
+**The editorial thesis** (Levi's, reflected in the explainer copy — preserve it):
+1. Christ is the center of time; the Atonement is the pivot the whole timeline is built around.
+2. Light and knowledge compound — freedom produces progress and invention, which move the work forward.
+3. There is opposition in all things — every advance gets turned against people too.
+4. Where freedom is taken, progress stops, and you can see it in that region of the world.
+5. Everything must be factual. It should lead people to truth on its own evidence; if the evidence
+   doesn't support something, it doesn't get claimed.
+
+**It's also a family history tool.** The Family Story layer is meant to hold the user's own genealogy
+— ancestors placed at their real moment in history, so you can see how the family formed and what
+your people lived through. This is the bridge to the app's Family Stories (see §6, item 1).
+
+**Edits made to Levi's original file when it was brought into the repo** (it is otherwise verbatim):
+meta description added; the header wordmark now links back to `index.html`; OpenStreetMap attribution
+added over the map canvas (their tile policy requires it).
+
+**Known gap:** "Add Story" and photo upload do **not** persist — no localStorage, no backend. Anything
+a visitor adds is gone on refresh. Levi chose account-saving over device-saving. See §6 item 1.
+
