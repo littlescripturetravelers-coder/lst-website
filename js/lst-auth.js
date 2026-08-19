@@ -36,6 +36,7 @@
 
   var user = null;         // { id, email } once resolved
   var tier = null;         // "subscriber" | "free" | null when signed out
+  var admin = false;       // owner/admin accounts never need a subscription
   var resolved = false;    // have we finished the first session check?
   var readyCbs = [];
   var changeCbs = [];
@@ -52,8 +53,21 @@
      with Payhip. We try user_id first and fall back to email, because rows
      written before a person had an app login are keyed by email only.
      --------------------------------------------------------------------- */
+  /* Admins (Levi, and anyone else flagged in profiles.is_admin) get the whole
+     library without paying. The database agrees — lst_is_subscriber() returns
+     true for them too, so this is not a client-side-only unlock. */
+  function lookupAdmin() {
+    if (!sb || !user) { admin = false; return Promise.resolve(false); }
+    return sb.from("profiles").select("is_admin").eq("id", user.id).limit(1)
+      .then(function (res) {
+        admin = !!(!res.error && res.data && res.data[0] && res.data[0].is_admin);
+        return admin;
+      })
+      .catch(function () { admin = false; return false; });
+  }
+
   function lookupTier() {
-    if (!sb || !user) { tier = null; return Promise.resolve(null); }
+    if (!sb || !user) { tier = null; admin = false; return Promise.resolve(null); }
 
     function readRows(res) {
       if (res.error || !res.data || !res.data.length) return null;
@@ -72,7 +86,12 @@
         return sb.from("subscriptions").select("status").eq("email", user.email)
           .then(function (r2) { return readRows(r2) || "free"; });
       })
-      .then(function (t) { tier = t; return t; })
+      .then(function (t) {
+        return lookupAdmin().then(function (isAdmin) {
+          tier = isAdmin ? "subscriber" : t;
+          return tier;
+        });
+      })
       .catch(function () { tier = "free"; return tier; });
   }
 
@@ -112,7 +131,10 @@
         '<input id="lst-auth-pw" type="password" placeholder="Password" autocomplete="current-password" style="' + IN + '">' +
         '<div id="lst-auth-err" style="color:#e0607a;font-size:0.85rem;min-height:18px;margin-bottom:0.4rem;"></div>' +
         '<button id="lst-auth-go" style="width:100%;cursor:pointer;background:#f4c842;color:#07112e;border:none;font-family:\'Nunito\',sans-serif;font-weight:900;font-size:1rem;padding:0.8rem;border-radius:999px;">Sign in</button>' +
-        '<p style="font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.55;margin:0.9rem 0 0;text-align:center;">' +
+        '<p style="font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.55;margin:0.75rem 0 0;text-align:center;">' +
+          '<button type="button" id="lst-auth-forgot" style="background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:0.82rem;text-decoration:underline;padding:0;">Forgot your password?</button>' +
+        '</p>' +
+        '<p style="font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.55;margin:0.45rem 0 0;text-align:center;">' +
           'No account yet? <button type="button" id="lst-auth-join" style="background:none;border:none;color:#f4c842;font-weight:800;cursor:pointer;font-size:0.82rem;text-decoration:underline;padding:0;">Start your free week</button>' +
         '</p>' +
         '<button id="lst-auth-cancel" style="width:100%;background:none;border:none;color:rgba(255,255,255,0.55);margin-top:0.5rem;cursor:pointer;font-size:0.9rem;">Cancel</button>' +
@@ -129,6 +151,20 @@
     });
     el("lst-auth-pw").addEventListener("keydown", function (e) {
       if (e.key === "Enter") submit();
+    });
+    el("lst-auth-forgot").addEventListener("click", function () {
+      var email = (el("lst-auth-email").value || "").trim();
+      var err = el("lst-auth-err");
+      if (!email) { err.textContent = "Type your email above first, then tap this."; return; }
+      err.textContent = "Sending a reset link\u2026";
+      API.resetPassword(email).then(function (res) {
+        err.style.color = (res && res.error) ? "#e0607a" : "#9ae6b4";
+        err.textContent = (res && res.error)
+          ? res.error.message
+          : "Check your email for a link to set a new password.";
+      }).catch(function () {
+        err.textContent = "We couldn't send that just now. Please try again.";
+      });
     });
   }
 
@@ -170,6 +206,7 @@
     email: function () { return user ? user.email : null; },
     signedIn: function () { return !!user; },
     isSubscriber: function () { return tier === "subscriber"; },
+    isAdmin: function () { return admin; },
     tier: function () { return tier; },
     resolved: function () { return resolved; },
 
@@ -198,10 +235,18 @@
       if (m) m.style.display = "none";
     },
 
+    /* Emails a reset link back to the page they were on. */
+    resetPassword: function (email) {
+      if (!sb) return Promise.reject(new Error("no client"));
+      return sb.auth.resetPasswordForEmail(email, {
+        redirectTo: location.origin + "/reset-password.html"
+      });
+    },
+
     signOut: function () {
       if (!sb) return Promise.resolve();
       return sb.auth.signOut().then(function () {
-        user = null; tier = null;
+        user = null; tier = null; admin = false;
         announce();
       });
     }

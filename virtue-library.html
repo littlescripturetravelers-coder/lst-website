@@ -416,6 +416,43 @@
     .fs-vopt input { accent-color:#F5C518; margin:0; }
     .fs-err { color:#e0607a; font-size:.87rem; min-height:1.1rem; margin-bottom:.5rem; }
     .fs-acts { display:flex; gap:.6rem; flex-wrap:wrap; }
+    .fs-hint { font-weight:400; color:rgba(255,255,255,.45); font-size:.8rem; }
+    .fs-admin { background:rgba(245,197,24,.18); border:1px solid rgba(245,197,24,.45);
+      color:#F5C518; font-size:.68rem; font-weight:800; padding:.08rem .4rem;
+      border-radius:999px; text-transform:uppercase; letter-spacing:.05em; }
+
+    /* lookup axes — same five doors as the library above */
+    .fs-axes { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:.9rem;
+      border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:.9rem; }
+    .fs-axis { font-family:'Nunito',sans-serif; font-weight:800; font-size:.85rem;
+      cursor:pointer; padding:.45rem .85rem; border-radius:999px;
+      border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.05);
+      color:rgba(255,255,255,.7); }
+    .fs-axis.on { background:rgba(245,197,24,.16); border-color:#F5C518; color:#F5C518; }
+
+    .fs-vals { display:flex; flex-wrap:wrap; gap:.35rem; margin-bottom:1.1rem; }
+    .fs-val { font-family:'Nunito',sans-serif; font-weight:700; font-size:.8rem;
+      cursor:pointer; padding:.3rem .7rem; border-radius:999px;
+      border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04);
+      color:rgba(255,255,255,.68); }
+    .fs-val.on { background:#F5C518; border-color:#F5C518; color:#07112e; }
+    .fs-val-n { opacity:.6; font-size:.72rem; }
+
+    .fs-chip-feel { background:rgba(91,211,220,.14); border-color:rgba(91,211,220,.38); color:#5BD3DC; }
+    .fs-chip-sit  { background:rgba(244,114,182,.13); border-color:rgba(244,114,182,.38); color:#F472B6; }
+    .fs-chip-trav { background:rgba(123,198,126,.14); border-color:rgba(123,198,126,.4); color:#7BC67E; }
+
+    .fs-det { border:1px solid rgba(255,255,255,.14); border-radius:.6rem;
+      padding:.6rem .8rem; margin-bottom:.55rem; background:rgba(255,255,255,.03); }
+    .fs-det summary { cursor:pointer; font-size:.86rem; font-weight:800;
+      color:rgba(255,255,255,.82); list-style:none; }
+    .fs-det summary::-webkit-details-marker { display:none; }
+    .fs-det summary::before { content:"\25B8"; display:inline-block; margin-right:.45rem;
+      transition:transform .15s; color:#F5C518; }
+    .fs-det[open] summary::before { transform:rotate(90deg); }
+    .fs-det-n { color:rgba(255,255,255,.35); font-weight:600; font-size:.76rem; }
+    .fs-det .fs-vopts { margin-top:.65rem; }
+    .fs-note-sm { font-size:.85rem; color:rgba(255,255,255,.45); text-align:left; padding:0 0 .8rem; }
   </style>
 </head>
 <body>
