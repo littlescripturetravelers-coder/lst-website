@@ -4,33 +4,36 @@
    The growing catalog behind virtue-library.html.
 
    ***************************************************************************
-   READ THIS FIRST — the library now lives in TWO files
+   READ THIS FIRST — a story lives in TWO PLACES (updated 2026-08-19)
    ***************************************************************************
-   THIS file is PUBLIC. Anyone on the internet can download it. It holds only
+   THIS FILE IS PUBLIC. Anyone on the internet can download it. It holds only
    what we are happy for a stranger to read: titles, scriptures, virtues,
    teaching notes, and a 40-word teaser.
 
-   The actual story text lives in    api/_lib/stories-full.json
-   which is PRIVATE. Vercel never serves anything under api/ as a file, so it
-   can only be read through /api/library/story once the reader has signed in
-   and been checked. That is what makes the paywall real.
+   THE STORY TEXT LIVES IN SUPABASE, in the table `story_texts`. A row is
+   returned only to a subscriber (or to anyone, for a free story) because of a
+   row-level-security policy on that table. Postgres enforces the paywall, so
+   editing the website's JavaScript gets a reader nothing.
 
-   NEVER paste story text, the Feeling Moment (fork), Remember This, or the
-   Parent Prompt into this file. If you do, the story becomes free to everyone.
+   *** NEVER paste story text, the Feeling Moment (fork), Remember This, or  ***
+   *** the Parent Prompt into THIS file. Doing so makes it free to everyone. ***
+
+   (Historical note: this used to describe api/_lib/stories-full.json and a
+   server at /api/library. That server was never built and no longer exists.
+   Ignore any older instructions mentioning it.)
 
    ---------------------------------------------------------------------------
-   HOW TO ADD A NEW STORY  (do this once per night you write)
+   HOW TO ADD STORIES — the whole job is two halves
    ---------------------------------------------------------------------------
-   EASIEST WAY — let the helper do both files for you:
+   HALF 1 (public, here): add one object to the `stories` array below.
+   HALF 2 (private, Supabase): insert the text into `story_texts`.
+              A ready-made template is in  sql/TEMPLATE-add-story-text.sql
+              Levi pastes the finished SQL into the Supabase SQL editor.
 
-       python3 add_story.py my-new-story.json
+   The `id` must be IDENTICAL in both halves — that is the only thing tying
+   them together.
 
-   There is a blank template to copy at  story-template.json.
-   The helper writes the public half here and the private half into
-   api/_lib/stories-full.json, then checks nothing leaked.
-
-   BY HAND — add one object to the `stories` array below using these fields
-   (note: NO story / fork / rememberThis / prompt here):
+   FIELDS for half 1 (note: NO story / fork / rememberThis / prompt here):
 
      id            "b9-w1-n1"          book / week / night — must be unique
      title         "The Happy Little Tree"
@@ -51,15 +54,26 @@
      teachingNote   "Reach for this when..."   ONE sentence, written to the parent
      stages         ["toddler","preschool"]    which stages this story serves
 
-   ...then add the private half to api/_lib/stories-full.json, keyed by the
-   same id:  { "story": ["para 1","para 2"], "fork": "...",
-               "rememberThis": "...", "prompt": "..." }
+   ...then write half 2 as SQL, keyed by the SAME id — see
+   sql/TEMPLATE-add-story-text.sql for a fill-in-the-blanks version:
+
+       insert into public.story_texts (id, story, fork, remember_this, prompt)
+       values ('b9-w1-n1',
+               '["para 1","para 2"]'::jsonb,
+               'The Feeling Moment...', 'Remember this...', 'Parent prompt...')
+       on conflict (id) do update set
+         story = excluded.story, fork = excluded.fork,
+         remember_this = excluded.remember_this, prompt = excluded.prompt;
 
    ---------------------------------------------------------------------------
    HOW TO CHANGE WHICH STORIES ARE FREE
    ---------------------------------------------------------------------------
-   Edit FREE_STORY_IDS in  api/_lib/core.js  (the server decides this — the
-   list in `meta` below is only used to label the cards).
+   Two places, and BOTH matter:
+     1. `meta.freeStoryIds` below — labels the cards as "Free".
+     2. `story_texts.is_free` in Supabase — actually unlocks the text:
+            update public.story_texts set is_free = true  where id in (...);
+            update public.story_texts set is_free = false where id not in (...);
+   Number 2 is the one that decides. Keep them in step.
 
    ---------------------------------------------------------------------------
    HOW TO ADD A NEW VIRTUE  (only when a story teaches something uncovered)
