@@ -325,9 +325,20 @@ There was no way to recover an account from the website. `LSTAuth.resetPassword(
 set a new one. **Supabase needs `https://www.littlescripturetravelers.com/reset-password.html` in
 its allowed redirect URLs** (Authentication → URL Configuration) or the link will bounce.
 
+### ✅ The migration HAS been run (2026-08-19)
+Levi ran `sql/RUN-THIS-ONE-FILE.sql` (all three migrations combined) in the Supabase SQL editor and
+it confirmed `littlescripturetravelers@gmail.com` → `is_admin = true`. **Don't ask him to run it
+again.** If a later change needs more schema, write a NEW file — never edit that one.
+
+Two things tripped him up, worth remembering when writing any future migration for him:
+1. He pasted the *file name* into the editor the first time. Say "open the file, select all, copy
+   the text inside it" — and attach the file rather than pointing at a path.
+2. The editor's button says **"Run selected"** whenever any text is highlighted, and then runs only
+   the highlight. Tell him to press Ctrl+A first so "Run selected" covers the whole file.
+3. Supabase shows only the LAST statement's result, so always end a migration with a confirmation
+   `select` that proves it worked.
+
 ### ⚠️ Not finished
-- **The SQL has to be run** (`sql/2026-08-19-website-accounts-and-family-stories.sql`). Until then
-  the Family Stories section will show a load error and subscriber detection returns "free".
 - **`story_texts` is empty** — nobody can read a full story yet regardless of subscription. Needs
   `api/_lib/stories-full.json` from Levi's computer.
 - The timeline still keeps its added family stories in memory only.
