@@ -161,12 +161,6 @@ are explore links to `travelers.html` / content pages, on purpose.
    section showing a walkthrough video of the timeline. **Waiting on the video URL** — it may not be
    recorded yet. When it lands, follow the existing `watch-section` iframe pattern in `index.html`,
    and remember to add it to all three index variants.
-3. **FamilySearch integration (FUTURE — needs their approval).** Levi wants the timeline to connect
-   to a user's FamilySearch account and pull family-tree events onto the Family Story layer
-   automatically, with the user able to add/remove. He does **not** have approval yet. Do NOT build
-   this and do NOT advertise it on the site until FamilySearch approves — publicly promising an
-   integration before approval is a bad idea. This is a roadmap item, not a task.
-
 *(App-side work — Android Play release, Apple entitlements, trial enforcement in the app — is tracked
 in the app chat / `lst-app` repo, not here.)*
 
@@ -240,7 +234,7 @@ events where His hand shows), **Prophecy** (arcs from prophecy to fulfilment), *
 placed in cultures before missionaries came), **Chain** (a 21-link animated walk from fire to the
 First Vision); and three panels — **Prophecy Tracker** (27 fulfilled prophecies with confidence
 ratings), **World Faiths Chart** (15 traditions from their own sources), **My Family History**
-(add events, pioneer ancestors, a FamilySearch tab).
+(add events, pioneer ancestors).
 
 **Family events now persist in `localStorage`** — on the device only, not the account, and not
 shared with the app or the Virtue Library. That sync is still the open task.
@@ -289,8 +283,9 @@ for buttons that aren't there.
 
 **Known gap:** family entries persist on the **device** (localStorage) but not to the account, so they
 do not reach the app, the Virtue Library, or another device. Levi wants account-saving — see §6 item 1.
-The FamilySearch tab currently only links out to familysearch.org and describes what the integration
-would do; there is no actual integration, and there must not be one until FamilySearch approves.
+**Do not add any third-party genealogy-service integration or mention one anywhere on the site.**
+Levi asked for every reference stripped (2026-08-19) because he does not know whether such a
+partnership will ever be possible, and he does not want the site implying one that may never exist.
 
 ---
 
@@ -375,8 +370,8 @@ Two things tripped him up, worth remembering when writing any future migration f
 - **The app should write Parent's Heart answers into `family_stories` with `kind='journal'`** and the
   same tag columns. Until it does, the website's "From the daily stories" filter has nothing to show.
   That is app-side work — belongs in the app chat.
-- **FamilySearch import** (pull ancestors' events onto the Family Story layer and the timeline) is
-  still a roadmap item, pending FamilySearch's approval. Don't build or advertise it yet.
+- **No third-party genealogy integration.** Every mention was removed at Levi's request — he can't
+  promise a partnership he may never get. Families type their own ancestors in. Don't reintroduce it.
 
 ---
 

@@ -378,19 +378,6 @@ body.hand-active .hand-label{display:block;}
   border-radius:8px;background:rgba(244,114,182,.1);border:1px solid rgba(244,114,182,.25);
   color:#F472B6;font-size:8px;font-weight:700;margin-top:6px;}
 
-/* FAMILYSEARCH CONNECT */
-.fs-connect{background:linear-gradient(135deg,rgba(52,211,153,.08),rgba(52,211,153,.03));
-  border:1px solid rgba(52,211,153,.2);border-radius:12px;padding:20px;text-align:center;margin-bottom:16px;}
-.fs-logo{font-size:36px;margin-bottom:8px;}
-.fs-title{font-family:Fredoka,sans-serif;font-weight:700;font-size:16px;color:#34D399;margin-bottom:6px;}
-.fs-desc{font-size:11px;color:rgba(255,255,255,.55);line-height:1.65;margin-bottom:14px;}
-.fs-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;
-  background:linear-gradient(135deg,rgba(52,211,153,.2),rgba(52,211,153,.1));
-  border:1px solid rgba(52,211,153,.4);border-radius:10px;
-  color:#34D399;font-family:Fredoka,sans-serif;font-weight:700;font-size:12px;cursor:pointer;}
-.fs-btn:hover{background:rgba(52,211,153,.25);}
-.fs-coming{font-size:9px;color:rgba(255,255,255,.25);margin-top:8px;}
-
 /* PIONEER TRACKER */
 .pioneer-card{background:rgba(245,197,24,.04);border:1px solid rgba(245,197,24,.15);
   border-radius:10px;padding:12px 14px;margin-bottom:10px;}
@@ -667,19 +654,6 @@ body.hand-active .hand-label{display:block;}
   border-radius:8px;background:rgba(244,114,182,.1);border:1px solid rgba(244,114,182,.25);
   color:#F472B6;font-size:8px;font-weight:700;margin-top:6px;}
 
-/* FAMILYSEARCH CONNECT */
-.fs-connect{background:linear-gradient(135deg,rgba(52,211,153,.08),rgba(52,211,153,.03));
-  border:1px solid rgba(52,211,153,.2);border-radius:12px;padding:20px;text-align:center;margin-bottom:16px;}
-.fs-logo{font-size:36px;margin-bottom:8px;}
-.fs-title{font-family:Fredoka,sans-serif;font-weight:700;font-size:16px;color:#34D399;margin-bottom:6px;}
-.fs-desc{font-size:11px;color:rgba(255,255,255,.55);line-height:1.65;margin-bottom:14px;}
-.fs-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;
-  background:linear-gradient(135deg,rgba(52,211,153,.2),rgba(52,211,153,.1));
-  border:1px solid rgba(52,211,153,.4);border-radius:10px;
-  color:#34D399;font-family:Fredoka,sans-serif;font-weight:700;font-size:12px;cursor:pointer;}
-.fs-btn:hover{background:rgba(52,211,153,.25);}
-.fs-coming{font-size:9px;color:rgba(255,255,255,.25);margin-top:8px;}
-
 /* PIONEER TRACKER */
 .pioneer-card{background:rgba(245,197,24,.04);border:1px solid rgba(245,197,24,.15);
   border-radius:10px;padding:12px 14px;margin-bottom:10px;}
@@ -898,7 +872,6 @@ body.hand-active .hand-label{display:block;}
     <div class="fh-tab on" onclick="fhTab('add',this)">&#10022; Add Event</div>
     <div class="fh-tab" onclick="fhTab('my',this)">&#128106; My Family Events</div>
     <div class="fh-tab" onclick="fhTab('pioneers',this)">&#127795; Pioneer Ancestors</div>
-    <div class="fh-tab" onclick="fhTab('connect',this)">&#127760; FamilySearch</div>
   </div>
   <div id="fh-body"></div>
 </div>
@@ -2727,7 +2700,7 @@ var FULFILLED_PROPHECIES=[
    written:"c. 430 BC",fulfilled:"April 3, 1836",gap:"~2,266 years",
    prophecy:"Malachi 4:5-6 — Behold, I will send you Elijah the prophet before the coming of the great and dreadful day of the LORD: And he shall turn the heart of the fathers to the children, and the heart of the children to their fathers, lest I come and smite the earth with a curse.",
    fulfillment:"D&C 110:13-16 — After this vision had closed, another great and glorious vision burst upon us; for Elijah the prophet, who was taken to heaven without tasting death, stood before us, and said: Behold, the time has fully come, which was spoken of by the mouth of Malachi — testifying that he (Elijah) should be sent before the great and dreadful day of the Lord come — to turn the hearts of the fathers to the children and the children to the fathers, lest the whole earth be smitten with a curse — therefore the keys of this dispensation are committed into your hands.",
-   evidence:"The result of Elijah's coming is visible: the worldwide family history and genealogy movement — FamilySearch, Ancestry, and millions of people researching ancestors — reflects the turning of hearts. Latter-day Saint temple work for the dead is the specific fulfillment. This is documented in Church history.",
+   evidence:"The result of Elijah's coming is visible: the worldwide family history and genealogy movement — millions of people researching their ancestors — reflects the turning of hearts. Latter-day Saint temple work for the dead is the specific fulfillment. This is documented in Church history.",
    debateNote:"Jewish tradition: Elijah appears at every Passover Seder and will literally return before the Messiah. Most Christians interpret John the Baptist as the Elijah who was to come (Matthew 11:14). Latter-day Saints accept both — John the Baptist fulfilled this for Christ's first coming; Elijah himself appeared in 1836 for the Restoration. Others do not accept the 1836 appearance as historical."},
 
   {id:"fp026",conf:"majority",cat:"modern",color:"#C084FC",
@@ -4462,7 +4435,6 @@ function fhTab(tab,btn){
   if(tab==="add")buildAddForm(body);
   else if(tab==="my")buildMyEvents(body);
   else if(tab==="pioneers")buildPioneers(body);
-  else if(tab==="connect")buildFSConnect(body);
 }
 
 function buildAddForm(body){
@@ -4598,7 +4570,7 @@ function buildPioneers(body){
   // Instructions
   var inst=document.createElement("div");
   inst.style.cssText="background:rgba(245,197,24,.05);border:1px solid rgba(245,197,24,.15);border-radius:9px;padding:12px 14px;margin-bottom:14px;font-size:10.5px;color:rgba(255,255,255,.6);line-height:1.7;";
-  inst.innerHTML="&#127795; <b style='color:#F5C518;'>The Pioneer Migration (1847-1869)</b> is already on the timeline. Your pioneer ancestors walked that same path. Add their names here and they will appear as dots on the Migration layer — connected to the Pioneer Migration span bar.<br><br>If you have pioneer ancestors you already know about from family records or FamilySearch add them below.";
+  inst.innerHTML="&#127795; <b style='color:#F5C518;'>The Pioneer Migration (1847-1869)</b> is already on the timeline. Your pioneer ancestors walked that same path. Add their names here and they will appear as dots on the Migration layer — connected to the Pioneer Migration span bar.<br><br>If you have pioneer ancestors you already know about from family records add them below.";
   body.appendChild(inst);
 
   // Add pioneer form
@@ -4636,7 +4608,7 @@ function buildPioneers(body){
   } else {
     var note=document.createElement("div");
     note.style.cssText="text-align:center;padding:20px;font-size:10px;color:rgba(255,255,255,.3);";
-    note.innerHTML="No pioneer ancestors added yet. If you have LDS pioneer ancestry add them above — or connect FamilySearch to find them automatically.";
+    note.innerHTML="No pioneer ancestors added yet. If you have pioneer ancestry add them above.";
     body.appendChild(note);
   }
 }
@@ -4666,41 +4638,6 @@ function addPioneerAncestor(){
   fhTab("pioneers",tabs[2]);
   for(var i=0;i<tabs.length;i++)tabs[i].classList.remove("on");
   tabs[2].classList.add("on");
-}
-
-function buildFSConnect(body){
-  // FamilySearch connection panel
-  var connect=document.createElement("div");connect.className="fs-connect";
-  connect.innerHTML="<div class='fs-logo'>&#127760;</div><div class='fs-title'>Connect to FamilySearch</div><div class='fs-desc'>FamilySearch is The Church of Jesus Christ of Latter-day Saints free family history service with over 7 billion records. Connecting will allow this timeline to pull your family tree and place your ancestors automatically on the timeline — pioneer crossings, temple sealings, conversion dates, and more.</div><div class='fs-btn' onclick='initFSConnect()'>&#127760; Connect FamilySearch Account</div><div class='fs-coming'>Coming in the LST App — available now for web testing</div>";
-  body.appendChild(connect);
-
-  // What it will do
-  var whatItDoes=document.createElement("div");
-  whatItDoes.style.cssText="margin-top:16px;";
-  whatItDoes.innerHTML="<div style='font-family:Fredoka,sans-serif;font-weight:700;font-size:13px;color:#34D399;margin-bottom:10px;'>What FamilySearch Connection Will Do</div>";
-  var features=[
-    ["&#127795;","Find Your Pioneer Ancestors","Automatically identify ancestors who crossed the plains and place them on the Pioneer Migration layer with their crossing year and company"],
-    ["&#9962;","Place Conversion Events","Find when your family first joined the Church and mark it on the Church History layer"],
-    ["&#127963;","Temple Sealings","Mark when your family lines were sealed in temples on the timeline"],
-    ["&#128246;","Immigration History","Find when your ancestors immigrated from their home countries and place them on the Migration layer"],
-    ["&#128100;","Connect to World Events","Place your ancestors in context — if your great-grandfather was born in Germany in 1935, the timeline will show WWII happening around him"],
-    ["&#10022;","The Spirit of Elijah","Turning the hearts of children to their fathers — exactly as Malachi prophesied — by connecting your family history to the grand story of Heavenly Father's dealings with His children"]
-  ];
-  for(var i=0;i<features.length;i++){
-    var f=features[i];
-    var fd=document.createElement("div");
-    fd.style.cssText="display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);";
-    fd.innerHTML="<div style='font-size:20px;flex-shrink:0;'>"+f[0]+"</div><div><div style='font-family:Fredoka,sans-serif;font-weight:700;font-size:12px;color:#34D399;margin-bottom:2px;'>"+f[1]+"</div><div style='font-size:10px;color:rgba(255,255,255,.5);line-height:1.55;'>"+f[2]+"</div></div>";
-    whatItDoes.appendChild(fd);
-  }
-  body.appendChild(whatItDoes);
-}
-
-function initFSConnect(){
-  // OAuth flow placeholder - full implementation in LST App
-  var url="https://www.familysearch.org/platform/login";
-  toast("&#127760; Opening FamilySearch — full integration available in the LST App");
-  window.open("https://www.familysearch.org","_blank");
 }
 
 </script>
