@@ -752,9 +752,29 @@ properly, that is one `alter table profiles add column family_circle jsonb` away
 ## 17. The LST Library and the owner's controls (built 2026-08-25)
 
 ### The names, as of now
-The member bar has eight doors:
+The member bar has **six** doors — **one per verb**:
 
-`The Morning Lantern · LST Library · Bedtime Stories · Virtue Library · The Lantern Archive · Family Stories · Journal · Timeline`
+| Door | The verb |
+|---|---|
+| The Morning Lantern | read tonight's |
+| The LST Library | browse everything |
+| Virtue Library | find what I need |
+| Family Stories | keep our own |
+| Journal | write |
+| Timeline | explore |
+
+**⚠️ Do not add a seventh without checking it is a new verb.** It briefly had
+eight, and four of them — LST Library, Bedtime Stories, Virtue Library, The
+Lantern Archive — all read as "a collection of stories". A family cannot tell
+those apart, opens one, and never tries the rest. **A new book is a shelf in
+the LST Library, not a tab.**
+
+`bedtime-stories.html` and `archive.html` are shelves of the Library now. They keep their names and
+their files; only their door moved. `main.js` lights the Library in the bar for them (and for
+`story.html` / `lullaby.html`), so a page reached through it never leaves the row unlit.
+
+**The Virtue Library stayed top-level on purpose.** It is not another shelf — it is the only place
+that answers *"my child is frightened tonight, what do I read?"* Different question, own door.
 
 Renamed at Levi's request: **Tonight's Story → The Morning Lantern** (`tonight.html`) and
 **Story Archive → The Lantern Archive** (`archive.html`). **Filenames deliberately unchanged** so
@@ -766,8 +786,9 @@ nothing already linked, bookmarked or indexed breaks. Don't "tidy" them.
 | **Bedtime Stories** (`bedtime-stories.html`) | the written series, all 91 | `data/virtue-library.js` + `story_texts` |
 | **LST Library** (`lst-library.html`) | what has actually been *sent* | `daily_content` |
 
-The LST Library has three shelves: the nightly **picture books**, **The Signature Lantern Lullaby**
-(from `data/lantern-lullaby.js`, §16), and **Daily Lullabies**.
+The LST Library has five shelves: **Bedtime Stories** (the written series), **Picture Books** (the
+nightly illustrated ones), **The Signature Lantern Lullaby** (from `data/lantern-lullaby.js`, §16),
+**Daily Lullabies**, and **The Lantern Archive**.
 
 ### ⚠️ Nothing on the LST Library is kept by hand
 Its shelves are built from `daily_content`, the same table the app publishes into. That is the whole
