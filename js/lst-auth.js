@@ -22,7 +22,11 @@
 
   /* Statuses that mean "let them read". Payhip's 7-day trial lands as
      `trialing`, so a family in their free week gets the full library. */
-  var OPEN_STATUSES = ["trialing", "trial", "active", "past_due"];
+  /* Kept in step with the app's own database rule on daily_content, which
+     opens for 'trialing', 'active' and 'grandfathered'. We also honour
+     'trial' and 'past_due' on the website so a card that failed this morning
+     doesn't lock a family out of the library mid-week. */
+  var OPEN_STATUSES = ["trialing", "trial", "active", "grandfathered", "past_due"];
 
   /* One shared client for the whole page. lst-signup.js picks this up too, so
      we never end up with two auth clients fighting over the same session. */

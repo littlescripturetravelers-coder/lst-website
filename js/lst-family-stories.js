@@ -10,8 +10,10 @@
    of stories adds virtues, situations or feelings, they appear here on the
    next page load with nothing to change in this file.
 
-   Rows live in Supabase `family_stories`, keyed to the signed-in user, so
-   the same stories reach the app and the Sacred World Timeline.
+   Rows live in Supabase `family_stories`, keyed to the signed-in user, and
+   every read and write goes through js/lst-app-data.js, which speaks the
+   app's exact column shape. That is what makes a story written here show up
+   in the app, and one written in the app show up here.
 
    Two sorts of family story live here, shown together and filterable:
 
@@ -102,8 +104,8 @@
         .match(/^([0-9]?\s*[A-Za-z][A-Za-z\s.]*?)(?:\s+\d|$)/);
       if (m) return m[1].replace(/\s+/g, " ").trim();
     }
-    if (r.story_id) {
-      var s = storyById(r.story_id);
+    if (r.storyId) {
+      var s = storyById(r.storyId);
       if (s && s.scriptureBook) return s.scriptureBook;
     }
     return "";
@@ -117,44 +119,20 @@
   function sb() { return window.LSTAuth ? window.LSTAuth.client() : null; }
 
   /* ------------------------------------------------------------------ data */
-  var COLS = "id,title,person,year,body,virtues,situations,feelings,traveler,scripture,story_id,kind,entry_date";
-
   function load() {
-    var c = sb();
-    if (!c || !window.LSTAuth.signedIn()) { rows = []; loaded = true; return Promise.resolve(); }
-    return c.from(TABLE).select(COLS)
-      .then(function (res) {
-        loaded = true;
-        if (res.error) {
-          rows = [];
-          loadError = res.error.message || "We couldn't load your family stories.";
-          return;
-        }
-        loadError = "";
-        rows = (res.data || []).slice().sort(sortRows);
-      })
-      .catch(function () { loaded = true; loadError = "We couldn't reach the server just now."; });
+    if (!window.LSTData || !window.LSTAuth || !window.LSTAuth.signedIn()) {
+      rows = []; loaded = true; return Promise.resolve();
+    }
+    return window.LSTData.familyStories.list()
+      .then(function (list) { loaded = true; loadError = ""; rows = list; })
+      .catch(function (e) {
+        loaded = true; rows = [];
+        loadError = (e && e.message) || "We couldn't load your family stories.";
+      });
   }
 
   function save(rec) {
-    var c = sb(), u = window.LSTAuth.user();
-    if (!c || !u) return Promise.reject(new Error("not signed in"));
-    var payload = {
-      user_id: u.id,
-      kind: rec.kind || "history",
-      title: rec.title,
-      person: rec.person || null,
-      year: rec.year === "" || rec.year == null ? null : parseInt(rec.year, 10),
-      body: rec.body || null,
-      virtues:    rec.virtues    && rec.virtues.length    ? rec.virtues    : null,
-      situations: rec.situations && rec.situations.length ? rec.situations : null,
-      feelings:   rec.feelings   && rec.feelings.length   ? rec.feelings   : null,
-      traveler:   rec.traveler   || null,
-      scripture:  rec.scripture  || null,
-      story_id:   rec.story_id   || null
-    };
-    if (rec.id) return c.from(TABLE).update(payload).eq("id", rec.id);
-    return c.from(TABLE).insert(payload);
+    return window.LSTData.familyStories.save(rec);
   }
 
   function isJournal(r) { return (r.kind || "journal") === "journal"; }
@@ -162,16 +140,14 @@
   /* Newest first, using whichever date a row actually carries: a Parent's
      Heart answer has entry_date, a written family story has a year. */
   function sortKey(r) {
-    if (r.entry_date) return String(r.entry_date);
+    if (r.date) return String(r.date);
     if (r.year != null) return String(r.year) + "-99-99";
     return "0000-00-00";
   }
   function sortRows(a, b) { return sortKey(b).localeCompare(sortKey(a)); }
 
   function remove(id) {
-    var c = sb();
-    if (!c) return Promise.reject(new Error("no client"));
-    return c.from(TABLE).delete().eq("id", id);
+    return window.LSTData.familyStories.remove(id);
   }
 
   /* ----------------------------------------------------------------- views */
@@ -211,7 +187,7 @@
     var hits = [], all = stories();
     for (var i = 0; i < all.length && hits.length < 3; i++) {
       var s = all[i];
-      if (s.id === r.story_id) continue;
+      if (s.id === r.storyId) continue;
       var sv = s.virtues || [];
       var match = false;
       for (var j = 0; j < wantV.length && !match; j++) if (sv.indexOf(wantV[j]) !== -1) match = true;
@@ -226,7 +202,7 @@
   }
 
   function cardView(r) {
-    var linked = r.story_id ? storyById(r.story_id) : null;
+    var linked = r.storyId ? storyById(r.storyId) : null;
     var ref = r.scripture || (linked ? linked.scripture : "");
     return '' +
       '<article class="fs-card">' +
@@ -241,10 +217,14 @@
           (isJournal(r)
             ? '<span class="fs-src fs-src-j">Parent&rsquo;s Heart</span>'
             : '<span class="fs-src fs-src-h">Written by you</span>') +
-          [ r.person, (r.entry_date || r.year), ref ]
+          [ r.person, (r.date || r.year), ref ]
             .filter(Boolean).map(esc).join(" &middot; ") +
         "</p>" +
-        (r.body ? '<p class="fs-body">' + esc(r.body) + "</p>" : "") +
+        (r.answers && r.answers.length
+          ? '<div class="fs-body">' + r.answers.map(function (a) {
+              return '<p class="fs-qa"><span>' + esc(a.q || "") + "</span>" + esc(a.a || "") + "</p>";
+            }).join("") + "</div>"
+          : (r.body ? '<p class="fs-body">' + esc(r.body) + "</p>" : "")) +
         chips(r) +
         (linked ? '<p class="fs-linked">Linked to <button type="button" class="fs-link" data-story="' +
           esc(linked.id) + '">' + esc(linked.title) + "</button></p>" : "") +
@@ -273,7 +253,7 @@
     var sOpts = '<option value="">&mdash; none &mdash;</option>';
     for (var k = 0; k < all.length; k++) {
       sOpts += '<option value="' + esc(all[k].id) + '"' +
-        (all[k].id === rec.story_id ? " selected" : "") + ">" +
+        (all[k].id === rec.storyId ? " selected" : "") + ">" +
         esc(all[k].title) + " (" + esc(all[k].scripture || "") + ")</option>";
     }
     var tOpts = '<option value="">&mdash; none &mdash;</option>';
@@ -525,7 +505,7 @@
         person: (document.getElementById("fs-person").value || "").trim(),
         year: (document.getElementById("fs-year").value || "").trim(),
         body: (document.getElementById("fs-body").value || "").trim(),
-        story_id: document.getElementById("fs-story").value || "",
+        storyId: document.getElementById("fs-story").value || "",
         traveler: document.getElementById("fs-trav").value || "",
         scripture: (document.getElementById("fs-scripture").value || "").trim(),
         virtues: picked("fs-virtues"),
@@ -569,7 +549,7 @@
       return rows.filter(function (r) { return tagsOn(r, a).indexOf(v) !== -1; });
     },
     forStory: function (id) {
-      return rows.filter(function (r) { return r.story_id === id; });
+      return rows.filter(function (r) { return r.storyId === id; });
     },
     all: function () { return rows.slice(); }
   };

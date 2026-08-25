@@ -1,0 +1,255 @@
+/* THE SHARED RECORD — one place where the website speaks the app's language.
+
+   The website and the app sign into the same Supabase account and read the
+   same tables. This file is the only place on the website that knows the
+   SHAPE of those tables, so when the app changes a column there is exactly
+   one file here to change — not a dozen pages.
+
+   THE RULE: the app is the authority on shape. It ships to phones and sits
+   behind App Store review; the website redeploys in seconds. So when the two
+   disagree, the website conforms. Never "fix" a mismatch by changing what
+   the app writes.
+
+   Shapes, taken from the app's own migrations (lst-app/supabase/migrations):
+
+     family_stories   user_id, entry_date (date), story_title, scripture,
+                      answers  jsonb  [{q,a}]
+                      virtues  jsonb  [{id,name}]     <- objects, NOT strings
+                      traveler, travelers, situations, custom
+                      upserted by the app on (user_id, entry_date)
+
+     journal_entries  id TEXT (made by the client so it works offline),
+                      user_id, entry_date (date), body, source,
+                      place, lat, lon, photos jsonb
+
+     daily_content    publish_date (date, unique), title, scripture, traveler,
+                      virtues jsonb, story_text, story_html, narration_url,
+                      published_at
+
+   Reading is forgiving on purpose: earlier website builds wrote virtues as
+   plain strings and the title into `title` instead of `story_title`, so both
+   are still understood. Writing is strict — always the app's shape.
+*/
+(function () {
+
+  function sb() { return window.LSTAuth ? window.LSTAuth.client() : null; }
+  function uid() {
+    var u = window.LSTAuth && window.LSTAuth.user();
+    return u ? u.id : null;
+  }
+  function ready() { return !!(sb() && uid()); }
+
+  /* An id the app would accept: text, made here, unique enough offline. */
+  function newId(prefix) {
+    return (prefix || "w") + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+
+  function today() {
+    var d = new Date();
+    return d.getFullYear() + "-" +
+      String(d.getMonth() + 1).padStart(2, "0") + "-" +
+      String(d.getDate()).padStart(2, "0");
+  }
+
+  /* ------------------------------------------------------------- virtues
+     The app stores [{id,name}]. The website's pickers work in ids. These
+     translate, and tolerate the plain-string rows older website builds left
+     behind. Names come from the Virtue Library catalog when it is loaded. */
+  function virtueName(id) {
+    var lib = window.LST_LIBRARY;
+    if (lib && lib.virtues) {
+      for (var i = 0; i < lib.virtues.length; i++) {
+        if (lib.virtues[i].id === id) return lib.virtues[i].name || lib.virtues[i].label || id;
+      }
+    }
+    return id;
+  }
+  function virtuesToApp(ids) {
+    return (ids || []).map(function (v) {
+      if (v && typeof v === "object") return { id: v.id, name: v.name || virtueName(v.id) };
+      return { id: v, name: virtueName(v) };
+    });
+  }
+  function virtuesToIds(v) {
+    return (v || []).map(function (x) {
+      return (x && typeof x === "object") ? x.id : x;
+    }).filter(Boolean);
+  }
+
+  /* ======================================================== FAMILY STORIES */
+  var family = {
+    /* Everything this account has, newest first. */
+    list: function () {
+      if (!ready()) return Promise.resolve([]);
+      return sb().from("family_stories").select("*")
+        .order("entry_date", { ascending: false })
+        .then(function (res) {
+          if (res.error) throw new Error(res.error.message);
+          return (res.data || []).map(family.fromRow).sort(function (a, b) {
+            return String(b.sortKey).localeCompare(String(a.sortKey));
+          });
+        });
+    },
+
+    /* One row as the website likes to think about it. Understands both the
+       app's shape and what earlier website builds wrote. */
+    fromRow: function (r) {
+      return {
+        id: r.id,
+        date: r.entry_date || null,
+        title: r.story_title || r.title || "",     // `title` = older website rows
+        scripture: r.scripture || "",
+        answers: Array.isArray(r.answers) ? r.answers : [],
+        body: r.body || "",                        // website free-written text
+        virtues: virtuesToIds(r.virtues),
+        traveler: r.traveler || "",
+        travelers: r.travelers || [],
+        situations: r.situations || [],
+        feelings: r.feelings || [],
+        custom: r.custom || [],
+        person: r.person || "",
+        year: r.year == null ? null : r.year,
+        storyId: r.story_id || "",
+        kind: r.kind || (r.entry_date ? "journal" : "history"),
+        sortKey: r.entry_date || (r.year != null ? String(r.year) + "-99-99" : "0000-00-00")
+      };
+    },
+
+    /* Writes the app's shape. A story written here is `history`: it leaves
+       entry_date NULL so it can never collide with the app's one-per-day
+       upsert on (user_id, entry_date). */
+    save: function (rec) {
+      if (!ready()) return Promise.reject(new Error("not signed in"));
+      var row = {
+        user_id: uid(),
+        kind: rec.kind || "history",
+        story_title: rec.title || null,
+        scripture: rec.scripture || null,
+        virtues: virtuesToApp(rec.virtues),
+        traveler: rec.traveler || null,
+        situations: rec.situations && rec.situations.length ? rec.situations : null,
+        feelings: rec.feelings && rec.feelings.length ? rec.feelings : null,
+        body: rec.body || null,
+        person: rec.person || null,
+        year: (rec.year === "" || rec.year == null) ? null : parseInt(rec.year, 10),
+        story_id: rec.storyId || null,
+        updated_at: new Date().toISOString()
+      };
+      if (rec.id) return sb().from("family_stories").update(row).eq("id", rec.id);
+      return sb().from("family_stories").insert(row);
+    },
+
+    remove: function (id) {
+      if (!ready()) return Promise.reject(new Error("not signed in"));
+      return sb().from("family_stories").delete().eq("id", id);
+    }
+  };
+
+  /* ================================================================ JOURNAL
+     The app's personal journal. Same table, same shape, both directions. */
+  var journal = {
+    list: function () {
+      if (!ready()) return Promise.resolve([]);
+      return sb().from("journal_entries").select("*")
+        .order("entry_date", { ascending: false }).limit(2000)
+        .then(function (res) {
+          if (res.error) throw new Error(res.error.message);
+          return (res.data || []).map(journal.fromRow);
+        });
+    },
+
+    fromRow: function (r) {
+      return {
+        id: r.id,
+        date: r.entry_date,
+        body: r.body || "",
+        source: r.source || "",
+        place: r.place || "",
+        lat: (r.lat === null || r.lat === undefined) ? null : Number(r.lat),
+        lon: (r.lon === null || r.lon === undefined) ? null : Number(r.lon),
+        photos: Array.isArray(r.photos) ? r.photos : [],
+        created: r.created_at,
+        updated: r.updated_at
+      };
+    },
+
+    /* Upserts on the id, exactly as the app does, so saving the same entry
+       twice edits it rather than duplicating it. New entries written here get
+       a "w" id so it is obvious later which side wrote them. */
+    save: function (e) {
+      if (!ready()) return Promise.reject(new Error("not signed in"));
+      var row = {
+        id: e.id || newId("w"),
+        user_id: uid(),
+        entry_date: e.date || today(),
+        body: e.body || "",
+        source: e.source || "website",
+        place: e.place || null,
+        lat: (e.lat === null || e.lat === undefined || e.lat === "") ? null : Number(e.lat),
+        lon: (e.lon === null || e.lon === undefined || e.lon === "") ? null : Number(e.lon),
+        photos: Array.isArray(e.photos) ? e.photos : [],
+        updated_at: new Date().toISOString()
+      };
+      return sb().from("journal_entries").upsert(row, { onConflict: "id" })
+        .then(function (res) {
+          /* A journal table made before photos and places existed: keep the
+             writing rather than losing it to a column that isn't there. */
+          if (res.error && /place|lat|lon|photos|column/i.test(res.error.message || "")) {
+            delete row.place; delete row.lat; delete row.lon; delete row.photos;
+            return sb().from("journal_entries").upsert(row, { onConflict: "id" });
+          }
+          return res;
+        });
+    },
+
+    remove: function (id) {
+      if (!ready()) return Promise.reject(new Error("not signed in"));
+      return sb().from("journal_entries").delete().eq("id", id);
+    }
+  };
+
+  /* ================================================================ ARCHIVE
+     Past daily stories. The database decides who may read these: its rule
+     wants a subscriptions row for this account with an open status, or an
+     admin. If a family sees nothing here, that rule is why — not this code. */
+  var archive = {
+    list: function (limit) {
+      if (!ready()) return Promise.resolve([]);
+      return sb().from("daily_content")
+        .select("id,publish_date,title,scripture,traveler,virtues,story_text,narration_url,published_at,book,week,night")
+        .not("published_at", "is", null)
+        .order("publish_date", { ascending: false })
+        .limit(limit || 400)
+        .then(function (res) {
+          if (res.error) throw new Error(res.error.message);
+          return (res.data || []).map(archive.fromRow);
+        });
+    },
+
+    fromRow: function (r) {
+      return {
+        id: r.id,
+        date: r.publish_date,
+        title: r.title || "",
+        scripture: r.scripture || "",
+        traveler: r.traveler || "",
+        virtues: virtuesToIds(r.virtues),
+        text: r.story_text || "",
+        audio: r.narration_url || "",
+        book: r.book, week: r.week, night: r.night
+      };
+    }
+  };
+
+  window.LSTData = {
+    familyStories: family,
+    journal: journal,
+    archive: archive,
+    newId: newId,
+    today: today,
+    virtueName: virtueName,
+    virtuesToApp: virtuesToApp,
+    virtuesToIds: virtuesToIds,
+    ready: ready
+  };
+})();

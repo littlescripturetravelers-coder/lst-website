@@ -1,0 +1,125 @@
+-- =====================================================================
+-- LITTLE SCRIPTURE TRAVELERS — make the website mirror the app
+-- Run date: 2026-08-25
+--
+-- Copy EVERYTHING in this file, paste it into the Supabase SQL Editor,
+-- press Ctrl+A then Run. Not the file name — the contents.
+--
+-- It only ADDS things. Nothing is deleted or emptied. Safe to run twice.
+--
+-- WHAT IT DOES
+--   1. Lets the website read and write your journal (same journal as the app).
+--   2. Adds the few extra columns the website's family stories use, alongside
+--      the app's — neither side loses anything.
+--   3. Creates a private storage bucket for journal photos, so pictures can
+--      finally follow you between phone and website once the app uploads them.
+--
+-- WHEN IT FINISHES it prints one row per table so you can see it worked.
+-- =====================================================================
+
+
+-- ---------------------------------------------------------------------
+-- PART 1 — the journal
+-- The app already made this table. These lines only fill in anything an
+-- older copy is missing, so the website can read and write the same rows.
+-- ---------------------------------------------------------------------
+create table if not exists public.journal_entries (
+  id          text primary key,
+  user_id     uuid not null references auth.users(id) on delete cascade,
+  entry_date  date not null,
+  body        text not null default '',
+  source      text,
+  created_at  timestamptz default now(),
+  updated_at  timestamptz default now()
+);
+
+alter table public.journal_entries add column if not exists place   text;
+alter table public.journal_entries add column if not exists lat     double precision;
+alter table public.journal_entries add column if not exists lon     double precision;
+alter table public.journal_entries add column if not exists photos  jsonb not null default '[]'::jsonb;
+
+alter table public.journal_entries enable row level security;
+
+drop policy if exists "own journal" on public.journal_entries;
+create policy "own journal" on public.journal_entries
+  for all to authenticated
+  using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+create index if not exists journal_entries_user_date
+  on public.journal_entries (user_id, entry_date);
+
+
+-- ---------------------------------------------------------------------
+-- PART 2 — family stories
+-- The app writes story_title, answers and virtues. The website adds a few
+-- of its own for stories you write yourself (an ancestor's name, a year,
+-- free-written text). Both sets live side by side.
+-- ---------------------------------------------------------------------
+alter table public.family_stories add column if not exists kind        text default 'journal';
+alter table public.family_stories add column if not exists body        text;
+alter table public.family_stories add column if not exists person      text;
+alter table public.family_stories add column if not exists year        integer;
+alter table public.family_stories add column if not exists story_id    text;
+alter table public.family_stories add column if not exists situations  text[];
+alter table public.family_stories add column if not exists feelings    text[];
+alter table public.family_stories add column if not exists travelers   text[];
+alter table public.family_stories add column if not exists custom      text[];
+
+create index if not exists family_stories_user_kind
+  on public.family_stories (user_id, kind);
+
+
+-- ---------------------------------------------------------------------
+-- PART 3 — journal photos
+-- A private bucket. Each family can only reach their own folder, which is
+-- named after their account id. Nobody can browse anyone else's pictures,
+-- and none of it is public on the internet.
+-- ---------------------------------------------------------------------
+insert into storage.buckets (id, name, public)
+values ('journal-photos', 'journal-photos', false)
+on conflict (id) do nothing;
+
+drop policy if exists "own journal photos read"   on storage.objects;
+drop policy if exists "own journal photos write"  on storage.objects;
+drop policy if exists "own journal photos update" on storage.objects;
+drop policy if exists "own journal photos delete" on storage.objects;
+
+create policy "own journal photos read" on storage.objects
+  for select to authenticated
+  using (bucket_id = 'journal-photos'
+         and (storage.foldername(name))[1] = auth.uid()::text);
+
+create policy "own journal photos write" on storage.objects
+  for insert to authenticated
+  with check (bucket_id = 'journal-photos'
+              and (storage.foldername(name))[1] = auth.uid()::text);
+
+create policy "own journal photos update" on storage.objects
+  for update to authenticated
+  using (bucket_id = 'journal-photos'
+         and (storage.foldername(name))[1] = auth.uid()::text);
+
+create policy "own journal photos delete" on storage.objects
+  for delete to authenticated
+  using (bucket_id = 'journal-photos'
+         and (storage.foldername(name))[1] = auth.uid()::text);
+
+
+-- ---------------------------------------------------------------------
+-- DID IT WORK?
+-- Last thing that runs, so this is what shows in the Results panel.
+-- You want three rows, all saying yes.
+-- ---------------------------------------------------------------------
+select 'journal table ready' as "what",
+       case when exists (select 1 from information_schema.columns
+                         where table_name='journal_entries' and column_name='photos')
+            then 'yes' else 'NO' end as "ok?"
+union all
+select 'family story columns ready',
+       case when exists (select 1 from information_schema.columns
+                         where table_name='family_stories' and column_name='kind')
+            then 'yes' else 'NO' end
+union all
+select 'photo bucket ready',
+       case when exists (select 1 from storage.buckets where id='journal-photos')
+            then 'yes' else 'NO' end;
