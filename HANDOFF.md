@@ -81,6 +81,8 @@ js/lst-app-data.js      # THE shared record — the ONE file that knows the app'
 js/lst-journal.js       # the app's journal, on the website
 js/lst-archive.js       # every published daily story
 js/lst-tonight.js       # tonight's story + lullaby, same row the phone reads (§14)
+js/lst-read.js          # THE reader — turns the app's three pasted pages into
+                        #   website-native flowing content (§15)
 js/lst-gate.js          # the 7-days-free invitation on the members' pages (§14)
 js/lst-account.js       # account page
 tonight.html / family-stories.html / journal.html / archive.html / account.html
@@ -607,3 +609,69 @@ now a **pointer** to that page — mounting the same module twice is two copies 
 ### Bug found on the way
 `virtue-library.html` mounted `LSTFamilyStories` but never loaded `js/lst-app-data.js`, so
 `window.LSTData` was undefined and the section could never have loaded a single story. Fixed.
+
+---
+
+## 15. Reading the night on the website (built 2026-08-25)
+
+### What Levi asked for
+> "Do the stories and lullaby's in an easy to read and flowable way on my website... how the text and
+> headers are in the other pages of the website but all the same information and working the same way
+> as the app." And then, plainly: **"I want the app setup to stay the exact same as it is but I want
+> the website to read like a website would."**
+
+So: **never change the app for this.** The website conforms, as always (§13).
+
+### The problem
+A night carries three whole HTML pages in `daily_content` — `story_html`, `book_html`, `song_html`.
+The app opens each in a frame, as the page it is. Right for a phone; wrong here. A foreign page
+dropped inside ours brings its own fonts, colours and line width and fights everything around it.
+
+### `js/lst-read.js` — the one file that reads them apart
+`LSTRead.story(html, text)` · `.book(html)` · `.song(html)`. Each returns website markup in `rd-*`
+classes, styled in `style.css`.
+
+Where the content actually lives:
+- **devotional** — in the markup, read by class
+- **picture book** — in a `STORY = {...}` object inside the page's script
+- **lullaby** — in a `LULLABY = {...}` object inside the page's script
+
+The last two *have* to come from the object: the lullaby page builds its verses with JavaScript at
+load time, so its markup is an empty box.
+
+**Nothing is executed.** A small literal reader understands strings, numbers, arrays and objects and
+nothing else — it cannot call a function or reach a variable, so a bad paste yields a bad object,
+never an action. Do not "simplify" it to `eval` or `new Function`.
+
+### ⚠️ The Morning Lantern is not shaped like the app's parser assumes
+This cost real time and will again. The app's own `parseStory` looks for "in a nutshell", "A little
+background", "Main Gospel Principle" in `<p>` tags. **The real published Lantern has none of that.**
+It has:
+
+- **four `.edition` blocks — the same night written at four depths**, ids `tab-quick`, `tab-medium`,
+  `tab-deep`, `tab-superdeep`, only one marked `active`
+- writing in `.card` blocks: `.card-label`, `.card-title`, body in `.bt` / `.bt-white`
+- `.verse-text`, `.quote-text` + `.quote-attr`, `.prompt-q`, `.heart-q`, `.atonement-q`,
+  `.conf-speaker` / `.conf-date` / `.conf-talk-title` / `.conf-body`, `.chips`, `.pills`,
+  `.traveler-name` / `.traveler-motto`, `.weekly-block`
+
+The website reads that structure and **offers the four depths as a chooser** — which is what a
+website would do with them. The app's older shape is kept as a fallback. A card class the reader
+does not know still gets its text through as paragraphs, so a new kind of card appears rather than
+vanishing.
+
+**Bold and links inside body text are kept on purpose** — they carry meaning (the Hebrew word a Word
+Study is about, the scripture link). Inline tags are held to an allowlist; `href` to http/mailto only.
+
+### Carried over from the app
+Text size (remembered per device in `localStorage`) and read-aloud (`speechSynthesis`). Both matter
+more at bedtime than they look on a desk.
+
+### The archive too
+`archive.html` lists nights without the heavy HTML columns, then fetches the full row through
+`LSTData.archive.full(date)` only for the night somebody opens — and renders it exactly like
+tonight's, depth chooser included.
+
+### Gotcha that bit
+`esc(x.join(" &middot; "))` escapes the separator too, so `&middot;` reached the page as literal
+text. Escape each piece, then join with the entity.
