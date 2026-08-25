@@ -1,4 +1,4 @@
-/* WHAT THE NIGHT LEAVES BEHIND — the writing half of Tonight's Story.
+/* WHAT THE NIGHT LEAVES BEHIND — the writing half of The Morning Lantern.
 
    The app's Lantern does not only give a family the night; it gives them
    somewhere to put what the night produced. Three things, and this file is

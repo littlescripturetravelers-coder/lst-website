@@ -56,7 +56,7 @@
       '</div>';
   }
 
-  /* An entry written from Tonight's Story carries its category in `source`,
+  /* An entry written from The Morning Lantern carries its category in `source`,
      as "website:gratitude". Anything else with no "website" prefix came from
      the phone. */
   function kindOf(src) {

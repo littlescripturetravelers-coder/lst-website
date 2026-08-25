@@ -1,7 +1,7 @@
 /* THE GATE — the 7-days-free invitation on the members' pages.
 
    The members' pages are open to everyone. A visitor who is not a subscriber
-   can land on Tonight's Story, the Virtue Library, the Journal, Family
+   can land on The Morning Lantern, the Virtue Library, the Journal, Family
    Stories or the Archive, look at the top of the page, and see for themselves
    what the night is. The moment they try to USE the page — scroll it, tap it,
    press a key — the invitation arrives: your first seven days are free.

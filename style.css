@@ -2505,3 +2505,117 @@ cite strong { color: var(--gold); display: block; }
   .hq-panel { margin-left: 0; padding: .9rem; }
   .hq-sel { flex: 1 1 100%; }
 }
+
+/* ============================================================================
+   BEDTIME STORIES — the shelf.
+
+   Laid out the way a library is: covers you look along and pick from, with
+   the title underneath, rather than a list of lines. Two rows of choosing —
+   the books first, then the stories inside them — and a tile opens the story.
+
+   Behaviour in js/lst-bedtime.js.
+   ========================================================================= */
+
+/* ------------------------------------------------------------- the books */
+.bs-shelfrow {
+  display: grid; gap: 1rem; margin: 0 0 2.2rem;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+}
+.bs-cover {
+  display: flex; flex-direction: column; gap: .1rem; text-align: left;
+  background: none; border: none; padding: 0; cursor: pointer;
+  font-family: inherit;
+}
+.bs-cover-art {
+  display: block; width: 100%; aspect-ratio: 1 / 1;
+  border-radius: .7rem; margin-bottom: .55rem;
+  background-color: #0f2158; background-size: cover; background-position: center;
+  border: 2px solid rgba(255,255,255,.12);
+  box-shadow: 0 6px 20px rgba(0,0,0,.4);
+  transition: border-color .18s, transform .14s, box-shadow .18s;
+}
+.bs-cover-all {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.4rem;
+  background: linear-gradient(160deg,#12266b,#0a1640);
+}
+.bs-cover:hover .bs-cover-art {
+  border-color: rgba(245,197,24,.6); transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.5);
+}
+.bs-cover.on .bs-cover-art { border-color: #F5C518; }
+.bs-cover.on .bs-label { color: #F5C518; }
+
+/* ----------------------------------------------------------- the stories */
+.bs-grid {
+  display: grid; gap: 1rem; margin-bottom: .5rem;
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+}
+.bs-tile {
+  display: flex; flex-direction: column; gap: .1rem; text-align: left;
+  background: none; border: none; padding: 0; cursor: pointer;
+  font-family: inherit;
+}
+.bs-art {
+  position: relative; display: block; width: 100%; aspect-ratio: 1 / 1;
+  border-radius: .6rem; margin-bottom: .5rem; overflow: hidden;
+  background-color: #12266b; background-size: cover; background-position: center;
+  border: 1.5px solid rgba(255,255,255,.13);
+  box-shadow: 0 5px 16px rgba(0,0,0,.35);
+  transition: border-color .18s, transform .14s, box-shadow .18s;
+}
+/* A wash over the art so the same cover can carry many stories and each
+   tile still reads as its own thing. */
+.bs-art::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(7,17,46,.15) 0%, rgba(7,17,46,.72) 100%);
+}
+.bs-tile:hover .bs-art {
+  border-color: rgba(245,197,24,.6); transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.5);
+}
+.bs-stamp {
+  position: absolute; left: .4rem; bottom: .4rem; z-index: 2;
+  font-family: 'Anton', sans-serif; font-size: .66rem; letter-spacing: .1em;
+  color: #F5C518; background: rgba(7,17,46,.8);
+  border: 1px solid rgba(245,197,24,.4); border-radius: 999px;
+  padding: .1rem .45rem;
+}
+.bs-free {
+  position: absolute; right: .4rem; top: .4rem; z-index: 2;
+  font-family: 'Nunito', sans-serif; font-size: .58rem; font-weight: 900;
+  letter-spacing: .06em; color: #07112e; background: #F5C518;
+  border-radius: 999px; padding: .1rem .45rem;
+}
+
+.bs-label {
+  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #fff;
+  font-size: .92rem; line-height: 1.25;
+}
+.bs-tile:hover .bs-label, .bs-cover:hover .bs-label { color: #F5C518; }
+.bs-sub { color: rgba(255,255,255,.5); font-size: .76rem; line-height: 1.35; }
+
+/* ------------------------------------------------------------- the rest */
+.bs-bar {
+  display: flex; align-items: center; gap: .8rem; flex-wrap: wrap;
+  margin-bottom: 1.8rem; padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.bs-search { max-width: 20rem; margin-top: 0 !important; }
+.bs-count { color: rgba(255,255,255,.45); font-size: .85rem; margin-left: auto; }
+.bs-shelf {
+  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #F5C518;
+  font-size: 1.12rem; line-height: 1.3; margin: 2.2rem 0 1rem;
+}
+.bs-shelf:first-of-type { margin-top: 0; }
+.bs-month {
+  font-family: 'Anton', sans-serif; font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.4); margin-left: .5rem;
+  vertical-align: middle;
+}
+
+@media (max-width: 560px) {
+  .bs-grid { grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); gap: .7rem; }
+  .bs-shelfrow { grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); gap: .7rem; }
+  .bs-label { font-size: .85rem; }
+}

@@ -227,7 +227,7 @@
 
     if (n.bookHtml) {
       items.push({ ico: "&#128214;", href: "story.html" + d, primary: true,
-        title: "Tonight&rsquo;s Story",
+        title: "Tonight&rsquo;s Bedtime Story",
         sub: [n.book ? "Book " + n.book : "", n.week ? "Week " + n.week : "",
               n.night ? "Night " + n.night : "", n.title]
              .filter(Boolean).map(esc).join(" &middot; ") });
@@ -265,7 +265,7 @@
       '<p class="rd-aside">Everything you write here is in the app too, and gathered in ' +
         '<a href="family-stories.html">your family&rsquo;s stories</a> and ' +
         '<a href="journal.html">your journal</a>. ' +
-        'Every night we have sent is in <a href="archive.html">the archive</a>.</p>';
+        'Every night we have sent is in <a href="archive.html">The Lantern Archive</a>.</p>';
   }
 
   /* The Lantern carries the same night written four ways — quick through to

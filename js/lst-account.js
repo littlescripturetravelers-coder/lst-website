@@ -55,7 +55,7 @@
 
       '<div class="mp-bar" style="margin-top:1.25rem;">' +
         '<a class="mp-btn" href="journal.html" style="text-decoration:none;">&#128366; My Journal</a>' +
-        '<a class="mp-btn" href="archive.html" style="text-decoration:none;">&#128218; Story Archive</a>' +
+        '<a class="mp-btn" href="archive.html" style="text-decoration:none;">&#128218; The Lantern Archive</a>' +
         '<a class="mp-btn" href="virtue-library.html#family-stories" style="text-decoration:none;">&#128106; Family Stories</a>' +
       "</div>" +
 

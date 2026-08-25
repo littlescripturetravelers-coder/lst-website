@@ -150,7 +150,7 @@
   function listView() {
     var head =
       '<div class="mp-bar">' +
-        '<input class="mp-in-f" id="a-q" style="max-width:18rem;margin-top:0;" placeholder="Search the archive…" value="' + esc(q) + '">' +
+        '<input class="mp-in-f" id="a-q" style="max-width:18rem;margin-top:0;" placeholder="Search the Lantern Archive…" value="' + esc(q) + '">' +
         '<span class="mp-who">' + rows.length + (rows.length === 1 ? " story" : " stories") +
           " &middot; signed in as " + esc(auth().email() || "") + "</span>" +
       "</div>";
@@ -175,7 +175,7 @@
       root.innerHTML = signedOutView();
       var si = document.getElementById("a-signin");
       if (si) si.addEventListener("click", function () {
-        auth().openSignIn("Sign in to read the archive.");
+        auth().openSignIn("Sign in to read The Lantern Archive.");
       });
       return;
     }

@@ -1,6 +1,6 @@
 /* ONE PIECE OF THE NIGHT, ON ITS OWN PAGE.
 
-   Tonight's Story lists the night's resources the way the app does, and each
+   The Morning Lantern lists the night's resources the way the app does, and each
    one opens a page of its own:
 
      story.html?date=YYYY-MM-DD      the picture book
@@ -42,7 +42,7 @@
     return parseInt(p[2], 10) + " " + (MONTHS[parseInt(p[1], 10) - 1] || p[1]) + " " + p[0];
   }
 
-  /* Text size, the same setting Tonight's Story keeps — set it once and it
+  /* Text size, the same setting The Morning Lantern keeps — set it once and it
      holds wherever you read. */
   var SIZES = [0.92, 1, 1.12, 1.28, 1.45];
   var sizeIx = 1;
@@ -75,7 +75,7 @@
   function toolsView() {
     return '' +
       '<div class="rd-tools">' +
-        '<a class="rd-tool" href="tonight.html" style="text-decoration:none;">&larr; Tonight&rsquo;s Story</a>' +
+        '<a class="rd-tool" href="tonight.html" style="text-decoration:none;">&larr; The Morning Lantern</a>' +
         '<span class="rd-tool-lbl" style="margin-left:.6rem;">Text size</span>' +
         '<button type="button" class="rd-tool" id="o-smaller" aria-label="Smaller text">&minus;</button>' +
         '<button type="button" class="rd-tool" id="o-bigger" aria-label="Bigger text">A+</button>' +
@@ -103,7 +103,7 @@
       '<div class="mp-empty">' +
         "<h3>Nothing to open here</h3>" +
         "<p>Either this night hasn&rsquo;t been published, or this account&rsquo;s subscription isn&rsquo;t open.</p>" +
-        '<a class="mp-btn mp-btn-gold" href="tonight.html" style="text-decoration:none;display:inline-block;">Back to Tonight&rsquo;s Story</a>' +
+        '<a class="mp-btn mp-btn-gold" href="tonight.html" style="text-decoration:none;display:inline-block;">Back to The Morning Lantern</a>' +
       "</div>";
   }
 
@@ -153,7 +153,7 @@
     var b = (n.bookHtml && window.LSTRead) ? window.LSTRead.book(n.bookHtml) : { ok: false };
     if (!b.ok) {
       return '<div class="mp-empty"><h3>No picture book for this night</h3>' +
-        '<p>The devotional and the story are on <a href="tonight.html">Tonight&rsquo;s Story</a>.</p></div>';
+        '<p>Tonight&rsquo;s reading is on <a href="tonight.html">The Morning Lantern</a>.</p></div>';
     }
     var stamp = [b.night, b.reference].filter(Boolean).map(esc).join(" &middot; ");
     return '<div class="rd">' + toolsView() +
