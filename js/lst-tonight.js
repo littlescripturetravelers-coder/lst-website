@@ -11,10 +11,35 @@
    are shown a real sample night from the free stories, plainly labelled,
    and js/lst-gate.js invites them in.
 
+   The three pasted pages a night carries — the devotional, the picture book
+   and the lullaby — are not shown as the pages they are. js/lst-read.js reads
+   them apart and hands back their pieces, and they are set here in the
+   website's own type: one comfortable column, headings that match the rest of
+   the site, and the story itself given the most room.
+
+   Two things carried over from the app because they matter at bedtime: the
+   text size (kept, so a family sets it once) and read-aloud.
+
    Mount with: LSTTonight.mount("lst-tonight")
 */
 (function () {
   var root = null, night = null, loaded = false, loadError = "", openBook = false;
+  var depth = 0;          /* which reading depth of the night is showing */
+
+  /* Text size, remembered on this device. The app has the same idea in its
+     settings; a family that needs bigger letters needs them every night. */
+  var SIZES = [0.92, 1, 1.12, 1.28, 1.45];
+  var sizeIx = 1;
+  try {
+    var kept = parseInt(localStorage.getItem("lst:read:size"), 10);
+    if (kept >= 0 && kept < SIZES.length) sizeIx = kept;
+  } catch (e) {}
+  function applySize() {
+    if (!root) return;
+    var box = root.querySelector(".rd");
+    if (box) box.style.setProperty("--rd-size", (1.06 * SIZES[sizeIx]).toFixed(3) + "rem");
+    try { localStorage.setItem("lst:read:size", String(sizeIx)); } catch (e) {}
+  }
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -35,23 +60,39 @@
            (MONTHS[parseInt(p[1], 10) - 1] || p[1]) + " " + p[0];
   }
 
-  /* Levi pastes this HTML into the app's admin screen himself, so it is his
-     own writing and not a stranger's. It still gets its script tags and its
-     on-anything attributes taken off before it goes on the page: a story is
-     words and pictures, and nothing in one has any business running. */
-  function safeHtml(html) {
-    var box = document.createElement("div");
-    box.innerHTML = String(html || "");
-    box.querySelectorAll("script,iframe,object,embed,form").forEach(function (n) { n.remove(); });
-    box.querySelectorAll("*").forEach(function (n) {
-      for (var i = n.attributes.length - 1; i >= 0; i--) {
-        var a = n.attributes[i].name;
-        if (/^on/i.test(a) || (a === "href" && /^\s*javascript:/i.test(n.getAttribute(a) || ""))) {
-          n.removeAttribute(a);
-        }
-      }
-    });
-    return box.innerHTML;
+  /* Read-aloud, the way the app does it: the browser's own voice, reading
+     what is actually on the screen. Stops when the page changes under it. */
+  var speaking = false;
+  function readableText() {
+    var box = root && root.querySelector(".rd-body");
+    if (!box) return "";
+    return (box.innerText || "")
+      .replace(/[\u2605\u2606\u2726\u00b7]/g, " ")
+      .replace(/\n{2,}/g, ". ")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+  }
+  function stopReading() {
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+    speaking = false;
+  }
+  function toggleRead() {
+    var synth = window.speechSynthesis;
+    if (!synth) return;
+    if (speaking) { stopReading(); render(); return; }
+    var words = readableText();
+    if (!words) return;
+    var u = new SpeechSynthesisUtterance(words);
+    u.rate = 0.95; u.pitch = 1;
+    var voices = synth.getVoices() || [];
+    for (var i = 0; i < voices.length; i++) {
+      if (/^en/i.test(voices[i].lang || "")) { u.voice = voices[i]; break; }
+    }
+    u.onend = u.onerror = function () { speaking = false; render(); };
+    synth.cancel();
+    synth.speak(u);
+    speaking = true;
+    render();
   }
 
   function paragraphs(text) {
@@ -131,61 +172,117 @@
       "</div>" + peekView();
   }
 
-  function lullabyView(n) {
-    var bits = "";
-    if (n.songHtml) bits += '<div class="mp-story">' + safeHtml(n.songHtml) + "</div>";
-    if (n.songAudio) {
-      bits += '<audio controls preload="none" src="' + esc(n.songAudio) +
-              '" style="width:100%;margin:.4rem 0 .8rem;"></audio>';
-    }
-    var links = [];
-    if (n.songLink) links.push('<a href="' + esc(n.songLink) + '" target="_blank" rel="noopener">Listen to the song</a>');
-    if (n.lyricsLink) links.push('<a href="' + esc(n.lyricsLink) + '" target="_blank" rel="noopener">Words to sing along</a>');
-    if (links.length) bits += '<p class="mp-text">' + links.join(" &middot; ") + "</p>";
-    if (!bits) return "";
-    return '<p class="mp-sub">&#127925; Tonight&rsquo;s lullaby</p>' + bits;
+  /* -------------------------------------------------------------- the night
+     Three readers, one column. Each section only appears if the night
+     actually carries it, so a light night simply reads shorter. */
+  function toolsView() {
+    var canSpeak = !!window.speechSynthesis;
+    return '' +
+      '<div class="rd-tools">' +
+        '<span class="rd-tool-lbl">Text size</span>' +
+        '<button type="button" class="rd-tool" id="t-smaller" aria-label="Smaller text">&minus;</button>' +
+        '<button type="button" class="rd-tool" id="t-bigger" aria-label="Bigger text">A+</button>' +
+        (canSpeak
+          ? '<button type="button" class="rd-tool' + (speaking ? " on" : "") + ' rd-spacer" id="t-read">' +
+              (speaking ? "&#9209; Stop reading" : "&#128266; Read it to me") + "</button>"
+          : "") +
+      "</div>";
   }
 
-  function nightView(n) {
+  function headView(n) {
     var stamp = [];
     if (n.book) stamp.push("Book " + n.book);
     if (n.week) stamp.push("Week " + n.week);
     if (n.night) stamp.push("Night " + n.night);
 
-    var story = n.html ? '<div class="mp-story">' + safeHtml(n.html) + "</div>"
-              : n.text ? '<div class="mp-story">' + paragraphs(n.text) + "</div>"
-              : '<p class="mp-note">The text of tonight&rsquo;s story hasn&rsquo;t been added yet.</p>';
-
     return '' +
-      '<article class="mp-card">' +
-        '<p class="mp-meta">' + esc(prettyDate(n.date)) +
-          (stamp.length ? " &middot; " + esc(stamp.join(" &middot; ")) : "") + "</p>" +
-        "<h2 style=\"font-family:'Fredoka',sans-serif;font-weight:600;color:#fff;font-size:clamp(1.4rem,4vw,1.9rem);margin:.15rem 0 .5rem;line-height:1.2;\">" +
-          esc(n.title || "Tonight&rsquo;s story") + "</h2>" +
-        (n.scripture ? '<p class="mp-meta">' + esc(n.scripture) + "</p>" : "") +
-        (n.traveler ? '<p class="mp-text" style="margin:.2rem 0 .6rem;color:rgba(255,255,255,.65);font-size:.9rem;">Carried by ' +
-          esc(n.traveler) + "</p>" : "") +
-        (virtueChips(n.virtues) ? '<div style="margin:.5rem 0 1.1rem;">' + virtueChips(n.virtues) + "</div>" : "") +
+      '<p class="mp-meta">' + esc(prettyDate(n.date)) +
+        (stamp.length ? " &middot; " + stamp.map(esc).join(" &middot; ") : "") + "</p>" +
+      "<h2 style=\"font-family:'Fredoka',sans-serif;font-weight:600;color:#fff;font-size:clamp(1.5rem,4.4vw,2.15rem);margin:.15rem 0 .55rem;line-height:1.18;\">" +
+        (n.title ? esc(n.title) : "Tonight&rsquo;s story") + "</h2>" +
+      (n.scripture ? '<p class="mp-meta">' + esc(n.scripture) + "</p>" : "") +
+      (n.traveler ? '<p style="margin:.2rem 0 .7rem;color:rgba(255,255,255,.6);font-size:.9rem;">Carried by ' +
+        esc(n.traveler) + "</p>" : "") +
+      (virtueChips(n.virtues) ? '<div style="margin:.5rem 0 1.4rem;">' + virtueChips(n.virtues) + "</div>" : "");
+  }
 
-        (n.audio ? '<p class="mp-sub">&#128266; Read to us</p><audio controls preload="none" src="' +
-          esc(n.audio) + '" style="width:100%;margin-bottom:.6rem;"></audio>' : "") +
+  function narrationView(n) {
+    if (!n.audio) return "";
+    return '<h3 class="rd-label" style="margin-top:0;">&#128266; Tonight&rsquo;s narration</h3>' +
+      '<audio controls preload="none" src="' + esc(n.audio) +
+      '" style="width:100%;margin-bottom:1.8rem;"></audio>';
+  }
 
-        '<p class="mp-sub">&#128214; The story</p>' + story +
+  function bookView(n) {
+    if (!n.bookHtml) return "";
+    var head = '<h3 class="rd-label">&#128214; The picture book</h3>' +
+      '<button type="button" class="mp-btn" id="t-book" style="margin-bottom:1.4rem;">' +
+        (openBook ? "Close the book" : "Open the picture book") + "</button>";
+    if (!openBook) return head;
+    var b = window.LSTRead ? window.LSTRead.book(n.bookHtml) : { ok: false };
+    if (!b.ok) return head + '<p class="mp-note">This one&rsquo;s book didn&rsquo;t come through.</p>';
+    return head +
+      (b.night || b.reference
+        ? '<p class="mp-meta">' + [b.night, b.reference].filter(Boolean).map(esc).join(" &middot; ") + "</p>"
+        : "") +
+      b.html;
+  }
 
-        (n.bookHtml
-          ? '<p class="mp-sub">&#128214; The picture book</p>' +
-            '<button type="button" class="mp-btn" id="t-book">' +
-              (openBook ? "Close the book" : "Open the page-turning book") + "</button>" +
-            (openBook ? '<div class="mp-story" style="margin-top:1rem;">' + safeHtml(n.bookHtml) + "</div>" : "")
-          : "") +
+  function songView(n) {
+    var sources = [];
+    if (n.songLink) sources.push('<a href="' + esc(n.songLink) + '" target="_blank" rel="noopener">Listen to the song</a>');
+    if (n.lyricsLink) sources.push('<a href="' + esc(n.lyricsLink) + '" target="_blank" rel="noopener">Words to sing along</a>');
 
-        lullabyView(n) +
+    var l = (n.songHtml && window.LSTRead) ? window.LSTRead.song(n.songHtml) : { ok: false };
+    if (!l.ok && !n.songAudio && !sources.length) return "";
 
-        '<p class="mp-sub">Keep it</p>' +
-        '<p class="mp-text">Write what your child said tonight in <a href="journal.html">your journal</a>, ' +
-          'or tag it into <a href="family-stories.html">your family&rsquo;s stories</a>. ' +
-          'Every night we have sent is in <a href="archive.html">the archive</a>.</p>' +
-      "</article>";
+    return '<h3 class="rd-label">&#127925; Tonight&rsquo;s lullaby</h3>' +
+      (l.title ? "<h4 style=\"font-family:'Fredoka',sans-serif;font-weight:600;color:#fff;font-size:1.3rem;margin:0 0 .4rem;line-height:1.25;\">" +
+        esc(l.title) + "</h4>" : "") +
+      (l.subtitle ? '<p style="color:rgba(255,255,255,.62);font-style:italic;margin:0 0 1.2rem;line-height:1.7;">' +
+        esc(l.subtitle) + "</p>" : "") +
+      (n.songAudio ? '<audio controls preload="none" src="' + esc(n.songAudio) +
+        '" style="width:100%;margin:0 0 1.4rem;"></audio>' : "") +
+      (l.jump || "") +
+      (l.html || "") +
+      (sources.length ? '<p class="rd-aside">' + sources.join(" &middot; ") + "</p>" : "");
+  }
+
+  function keepView() {
+    return '<h3 class="rd-label" style="margin-top:2.4rem;">Keep it</h3>' +
+      '<p class="rd-aside" style="margin-top:0 !important;">Write what your child said tonight in ' +
+        '<a href="journal.html">your journal</a>, or tag it into ' +
+        '<a href="family-stories.html">your family&rsquo;s stories</a>. ' +
+        'Every night we have sent is in <a href="archive.html">the archive</a>.</p>';
+  }
+
+  /* The Lantern carries the same night written four ways — quick through to
+     the whole study. Offer the choice only when the night really has one. */
+  function depthsView(eds) {
+    if (!eds || eds.length < 2) return "";
+    return '<div class="rd-depths" role="group" aria-label="How deep to read">' +
+      eds.map(function (e, i) {
+        return '<button type="button" class="rd-depth' + (i === depth ? " on" : "") +
+          '" data-depth="' + i + '"' + (i === depth ? ' aria-current="true"' : "") + ">" +
+          esc(e.label) + (e.note ? "<small>" + esc(e.note) + "</small>" : "") + "</button>";
+      }).join("") + "</div>";
+  }
+
+  function nightView(n) {
+    var told = window.LSTRead ? window.LSTRead.story(n.html, n.text) : { ok: false, html: "", editions: [] };
+    var eds = told.editions || [];
+    if (depth >= eds.length) depth = 0;
+
+    var body = eds.length ? eds[depth].html
+      : told.ok ? told.html
+      : (n.text ? '<section class="rd-card rd-telling"><h3 class="rd-label">Tonight&rsquo;s story</h3>' +
+          paragraphs(n.text) + "</section>"
+        : '<p class="mp-note">The text of tonight&rsquo;s story hasn&rsquo;t been added yet.</p>');
+
+    return '<div class="rd">' + headView(n) + toolsView() +
+      '<div class="rd-body">' + depthsView(eds) +
+        narrationView(n) + body + bookView(n) + songView(n) + keepView() +
+      "</div></div>";
   }
 
   /* ---------------------------------------------------------------- render */
@@ -205,9 +302,41 @@
     if (!night) { root.innerHTML = lockedView(); return; }
 
     root.innerHTML = nightView(night);
+    applySize();
+
     var b = document.getElementById("t-book");
-    if (b) b.addEventListener("click", function () { openBook = !openBook; render(); });
+    if (b) b.addEventListener("click", function () {
+      stopReading();
+      openBook = !openBook;
+      render();
+      var again = document.getElementById("t-book");
+      if (again && openBook) again.scrollIntoView({ block: "center", behavior: "smooth" });
+    });
+
+    var small = document.getElementById("t-smaller");
+    if (small) small.addEventListener("click", function () {
+      if (sizeIx > 0) { sizeIx--; applySize(); }
+    });
+    var big = document.getElementById("t-bigger");
+    if (big) big.addEventListener("click", function () {
+      if (sizeIx < SIZES.length - 1) { sizeIx++; applySize(); }
+    });
+    var rd = document.getElementById("t-read");
+    if (rd) rd.addEventListener("click", toggleRead);
+
+    root.querySelectorAll("[data-depth]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        stopReading();
+        depth = parseInt(this.getAttribute("data-depth"), 10) || 0;
+        var y = window.scrollY;
+        render();
+        window.scrollTo(0, y);      /* stay where you were reading */
+      });
+    });
   }
+
+  window.addEventListener("pagehide", stopReading);
+  window.addEventListener("beforeunload", stopReading);
 
   window.LSTTonight = {
     mount: function (elm) {
@@ -217,7 +346,8 @@
         if (auth().signedIn()) load().then(render); else render();
       });
       auth().onChange(function () {
-        loaded = false; openBook = false;
+        stopReading();
+        loaded = false; openBook = false; depth = 0;
         if (auth().signedIn()) { render(); load().then(render); }
         else { night = null; loaded = true; render(); }
       });

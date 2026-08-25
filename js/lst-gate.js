@@ -67,7 +67,7 @@
       '<div class="lg-box">' +
         '<button type="button" class="lg-x" id="lg-x" aria-label="Close">&times;</button>' +
         '<span class="lg-eyebrow">Your first 7 days are free</span>' +
-        "<h2>" + esc(cfg.title || "Keep going &mdash; the first week is free") + "</h2>" +
+        "<h2>" + (cfg.title ? esc(cfg.title) : "Keep going &mdash; the first week is free") + "</h2>" +
         "<p>" + (cfg.blurb ||
           "Little Scripture Travelers sends one short scripture story every night, " +
           "written for ages 1&ndash;5. Start tonight; you are not charged for seven days.") + "</p>" +

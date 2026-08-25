@@ -6,10 +6,16 @@
    flag. If a family sees nothing, that rule is the reason — which is also
    why editing this file gets a reader precisely nothing.
 
+   The list is deliberately light — titles and dates only. The moment somebody
+   opens a night, its full row is fetched (the two big HTML columns included)
+   and read apart by js/lst-read.js, so a past night reads exactly like
+   tonight's does rather than like a database row.
+
    Mount with: LSTArchive.mount("lst-archive")
 */
 (function () {
-  var root = null, rows = [], loaded = false, loadError = "", open = null, q = "";
+  var root = null, rows = [], loaded = false, loadError = "", open = null, q = "", opening = false;
+  var depth = 0;          /* which reading depth of the open night is showing */
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -63,25 +69,73 @@
   }
 
   function storyView(r) {
-    var chips = (r.virtues || []).map(function (v) {
-      return '<span class="mp-badge mp-badge-w">' + esc(window.LSTData.virtueName(v)) + "</span>";
-    }).join("");
-    var paras = String(r.text || "").split(/\n\s*\n/).filter(Boolean)
-      .map(function (p) { return "<p>" + esc(p.trim()) + "</p>"; }).join("");
-    return '' +
-      '<article class="mp-card">' +
-        '<div class="mp-card-head">' +
-          "<h3>" + esc(r.title || "Untitled") + "</h3>" +
-          '<button type="button" class="mp-icon" id="a-close" aria-label="Back">&#10005;</button>' +
-        "</div>" +
-        '<p class="mp-meta">' + esc(prettyDate(r.date)) +
-          (r.scripture ? " &middot; " + esc(r.scripture) : "") + "</p>" +
-        (chips ? '<div style="margin-bottom:.8rem;">' + chips + "</div>" : "") +
+    var head =
+      '<div class="mp-card-head">' +
+        "<h3>" + esc(r.title || "Untitled") + "</h3>" +
+        '<button type="button" class="mp-icon" id="a-close" aria-label="Back">&#10005;</button>' +
+      "</div>" +
+      '<p class="mp-meta">' + esc(prettyDate(r.date)) +
+        (r.scripture ? " &middot; " + esc(r.scripture) : "") + "</p>" +
+      (virtueChips(r) ? '<div style="margin:.6rem 0 1.2rem;">' + virtueChips(r) + "</div>" : "");
+
+    if (opening) {
+      return '<article class="mp-card">' + head +
+        '<p class="mp-note">Opening that night&hellip;</p></article>';
+    }
+
+    var told = window.LSTRead ? window.LSTRead.story(r.html, r.text) : { ok: false, html: "", editions: [] };
+    var eds = told.editions || [];
+    if (depth >= eds.length) depth = 0;
+
+    /* A night is written at several depths. The archive offers the same
+       choice tonight's page does, or nothing at all if there is no choice. */
+    var depths = eds.length > 1
+      ? '<div class="rd-depths" role="group" aria-label="How deep to read">' +
+          eds.map(function (e, i) {
+            return '<button type="button" class="rd-depth' + (i === depth ? " on" : "") +
+              '" data-depth="' + i + '">' + esc(e.label) +
+              (e.note ? "<small>" + esc(e.note) + "</small>" : "") + "</button>";
+          }).join("") + "</div>"
+      : "";
+
+    var body = eds.length ? eds[depth].html
+      : told.ok ? told.html
+      : (r.text ? '<section class="rd-card rd-telling">' + paragraphs(r.text) + "</section>"
+        : '<p class="mp-note">The text of this one hasn&rsquo;t been added yet.</p>');
+
+    var song = "";
+    if (r.songHtml && window.LSTRead) {
+      var l = window.LSTRead.song(r.songHtml);
+      if (l.ok) {
+        song = '<h3 class="rd-label" style="margin-top:2.2rem;">&#127925; That night&rsquo;s lullaby</h3>' +
+          (l.title ? "<h4 style=\"font-family:'Fredoka',sans-serif;font-weight:600;color:#fff;font-size:1.25rem;margin:0 0 .9rem;\">" +
+            esc(l.title) + "</h4>" : "") +
+          (l.jump || "") + l.html;
+      }
+    }
+
+    return '<article class="mp-card rd">' + head +
+      '<div class="rd-body">' + depths +
         (r.audio ? '<audio controls preload="none" src="' + esc(r.audio) +
-           '" style="width:100%;margin-bottom:1rem;"></audio>' : "") +
-        (paras ? '<div class="mp-text">' + paras + "</div>"
-               : '<p class="mp-note">The text of this one hasn&rsquo;t been added yet.</p>') +
-      "</article>";
+           '" style="width:100%;margin-bottom:1.6rem;"></audio>' : "") +
+        body +
+        (r.songAudio ? '<h3 class="rd-label" style="margin-top:2.2rem;">&#127925; That night&rsquo;s song</h3>' +
+           '<audio controls preload="none" src="' + esc(r.songAudio) +
+           '" style="width:100%;"></audio>' : "") +
+        song +
+      "</div></article>";
+  }
+
+  function virtueChips(r) {
+    return (r.virtues || []).map(function (v) {
+      return '<span class="mp-badge mp-badge-w">' +
+        esc(window.LSTData ? window.LSTData.virtueName(v) : v) + "</span>";
+    }).join("");
+  }
+
+  function paragraphs(t) {
+    return String(t || "").split(/\n\s*\n/).filter(Boolean)
+      .map(function (p) { return "<p>" + esc(p.trim()) + "</p>"; }).join("");
   }
 
   function rowView(r) {
@@ -130,7 +184,15 @@
     if (open) {
       root.innerHTML = storyView(open);
       var c = document.getElementById("a-close");
-      if (c) c.addEventListener("click", function () { open = null; render(); });
+      if (c) c.addEventListener("click", function () { open = null; depth = 0; render(); });
+      root.querySelectorAll("[data-depth]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          depth = parseInt(this.getAttribute("data-depth"), 10) || 0;
+          var y = window.scrollY;
+          render();
+          window.scrollTo(0, y);
+        });
+      });
       return;
     }
 
@@ -151,8 +213,23 @@
         for (var i = 0; i < rows.length; i++) {
           if (String(rows[i].id) === id) { open = rows[i]; break; }
         }
+        if (!open) return;
+        depth = 0;
         render();
         window.scrollTo({ top: root.offsetTop - 80, behavior: "smooth" });
+
+        /* The list left the heavy columns behind. Fetch them now, and only
+           for the one night somebody actually wants to read. */
+        if (open.html === undefined && window.LSTData) {
+          opening = true;
+          render();
+          var want = open.date;
+          window.LSTData.archive.full(want).then(function (full) {
+            opening = false;
+            if (full && open && open.date === want) open = full;
+            render();
+          }).catch(function () { opening = false; render(); });
+        }
       });
     });
   }

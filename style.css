@@ -2092,3 +2092,250 @@ cite strong { color: var(--gold); display: block; }
   vertical-align:middle; }
 .fs-src-j { background:rgba(91,211,220,.16); border:1px solid rgba(91,211,220,.4); color:#5BD3DC; }
 .fs-src-h { background:rgba(245,197,24,.14); border:1px solid rgba(245,197,24,.38); color:#F5C518; }
+
+
+/* ============================================================================
+   READING THE NIGHT — the devotional, the picture book and the lullaby, set
+   in the website's own type rather than in whatever the pasted page brought
+   with it. Markup comes from js/lst-read.js.
+
+   The measure is the point. A bedtime story is read aloud, often one-handed,
+   often in the dark, and a line that runs the full width of a laptop is a
+   line a tired parent loses their place in. Everything here is held to a
+   comfortable reading width and given room to breathe.
+   ========================================================================= */
+
+.rd { --rd-size: 1.06rem; }
+.rd-body { max-width: 40rem; margin: 0 auto; }
+
+/* The reading controls: text size, and read-aloud. Both are things the app
+   has, and both matter more at bedtime than they look on a desk. */
+.rd-tools {
+  display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+  margin-bottom: 1.6rem; padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.rd-tool {
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .86rem;
+  cursor: pointer; padding: .45rem .85rem; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06);
+  color: #fff; line-height: 1;
+}
+.rd-tool:hover { border-color: rgba(245,197,24,.5); color: #F5C518; }
+.rd-tool.on { background: #F5C518; color: #07112e; border-color: #F5C518; }
+.rd-tool-lbl {
+  font-family: 'Anton', sans-serif; font-size: .66rem; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.45); margin-right: .1rem;
+}
+.rd-tools .rd-spacer { margin-left: auto; }
+
+/* Each part of the night is a quiet card, not a box shouting for attention. */
+.rd-card {
+  background: rgba(255,255,255,.045);
+  border: 1px solid rgba(255,255,255,.11);
+  border-left: 3px solid rgba(255,255,255,.16);
+  border-radius: .85rem;
+  padding: 1.35rem 1.5rem;
+  margin-bottom: 1.15rem;
+}
+.rd-card > :last-child { margin-bottom: 0; }
+.rd-label {
+  font-family: 'Anton', sans-serif; font-size: .7rem; letter-spacing: .15em;
+  text-transform: uppercase; color: #F5C518;
+  margin: 0 0 .85rem; font-weight: 400;
+}
+.rd-card p {
+  color: rgba(255,255,255,.86);
+  font-size: var(--rd-size); line-height: 1.85; margin: 0 0 .95rem;
+}
+.rd-card p b, .rd-card li b { color: #fff; font-weight: 800; }
+
+.rd-heart { border-left-color: #F5C518; background: rgba(245,197,24,.055); }
+.rd-heart .rd-label { color: #F5C518; }
+.rd-scripture { border-left-color: #5BD3DC; background: rgba(91,211,220,.055); }
+.rd-scripture .rd-label { color: #5BD3DC; }
+.rd-ref {
+  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #5BD3DC;
+  font-size: 1.02rem !important; margin-bottom: .5rem !important;
+}
+.rd-verse {
+  margin: 0 0 1rem; padding: .1rem 0 .1rem 1.05rem;
+  border-left: 3px solid rgba(91,211,220,.45);
+  color: rgba(255,255,255,.9); font-style: italic;
+  font-size: var(--rd-size); line-height: 1.8;
+}
+
+/* The telling itself — the part that actually gets read out loud. It earns
+   a little more size and a little more air than everything around it. */
+.rd-telling { border-left-color: #F5C518; }
+.rd-telling p { font-size: calc(var(--rd-size) * 1.08); line-height: 1.95; }
+
+.rd-list { margin: 0; padding-left: 1.15rem; }
+.rd-list li {
+  color: rgba(255,255,255,.86);
+  font-size: var(--rd-size); line-height: 1.8; margin-bottom: .55rem;
+}
+.rd-list ul { margin: .4rem 0 .2rem; padding-left: 1.1rem; }
+.rd-list ul li { color: rgba(255,255,255,.68); font-size: calc(var(--rd-size) * .94); }
+
+.rd-qs { margin: 0; padding-left: 1.3rem; }
+.rd-qs li {
+  color: rgba(255,255,255,.88); font-size: var(--rd-size);
+  line-height: 1.8; margin-bottom: .85rem; padding-left: .2rem;
+}
+.rd-qs li::marker { color: #F5C518; font-weight: 900; }
+.rd-aside {
+  color: rgba(255,255,255,.55) !important;
+  font-size: .9rem !important; line-height: 1.65 !important;
+  margin: 1rem 0 0 !important;
+}
+.rd-aside a { color: #F5C518; }
+
+/* --------------------------------------------------------- the picture book
+   Turned pages become a scroll. Same pictures, same words, same order. */
+.rd-beat { margin: 0 0 2.4rem; }
+.rd-img {
+  display: block; width: 100%; height: auto;
+  border-radius: .9rem; margin: 0 0 1.15rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+.rd-beat p {
+  color: rgba(255,255,255,.88);
+  font-size: calc(var(--rd-size) * 1.08); line-height: 1.95; margin: 0 0 1rem;
+}
+.rd-cover { margin-bottom: 2.8rem; }
+.rd-moment {
+  background: rgba(245,197,24,.06);
+  border: 1px solid rgba(245,197,24,.2);
+  border-radius: .95rem; padding: 1.4rem 1.5rem;
+}
+.rd-moment h3 {
+  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #F5C518;
+  font-size: 1.2rem; margin: 0 0 .9rem; line-height: 1.25;
+}
+.rd-eyebrow {
+  font-family: 'Anton', sans-serif !important; font-size: .66rem !important;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: rgba(245,197,24,.75) !important; margin: 0 0 .4rem !important;
+}
+
+/* ------------------------------------------------------------- the lullaby
+   Set to be sung from: stanzas kept whole, the chorus written out in full
+   every time it comes round, and a row of links so you can jump to the verse
+   you are on without scrolling with a sleeping child on your arm. */
+.rd-jump {
+  display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1.6rem;
+}
+.rd-jump a {
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .82rem;
+  color: rgba(255,255,255,.72); text-decoration: none;
+  padding: .3rem .7rem; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.04);
+}
+.rd-jump a:hover { color: #F5C518; border-color: rgba(245,197,24,.45); }
+
+.rd-part { margin: 0 0 1.8rem; scroll-margin-top: 130px; }
+.rd-part-label {
+  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #F5C518;
+  font-size: 1.05rem; margin: 0 0 .7rem; line-height: 1.3;
+}
+.rd-tag {
+  font-family: 'Anton', sans-serif; font-size: .58rem; letter-spacing: .12em;
+  text-transform: uppercase; color: #5BD3DC; vertical-align: middle;
+  border: 1px solid rgba(91,211,220,.4); background: rgba(91,211,220,.12);
+  border-radius: 999px; padding: .12rem .45rem; margin-left: .4rem;
+}
+.rd-stanza {
+  color: rgba(255,255,255,.9);
+  font-size: calc(var(--rd-size) * 1.06); line-height: 2.05;
+  margin: 0 0 1.15rem;
+}
+.rd-chorus {
+  border-left: 3px solid rgba(91,211,220,.5);
+  padding: .1rem 0 .1rem 1.1rem;
+}
+.rd-chorus .rd-part-label { color: #5BD3DC; }
+.rd-chorus .rd-stanza { color: rgba(255,255,255,.82); font-style: italic; }
+
+/* The word being read aloud, so a parent can look up and find their place. */
+.rd-speaking { background: rgba(245,197,24,.22); border-radius: .2rem; }
+
+@media (max-width: 600px) {
+  .rd-card { padding: 1.15rem 1.15rem; }
+  .rd-moment { padding: 1.15rem 1.15rem; }
+}
+
+/* The questions a parent sits with, and the paragraph on the Atonement that
+   closes them — the part of the night written for the grown-up, not the child. */
+.rd-q {
+  color: rgba(255,255,255,.9) !important;
+  font-size: var(--rd-size) !important; line-height: 1.8 !important;
+  margin: 0 0 .85rem !important; padding-left: .95rem;
+  border-left: 2px solid rgba(245,197,24,.4);
+}
+.rd-q strong { color: #F5C518; }
+.rd-atone {
+  color: rgba(255,255,255,.84) !important; line-height: 1.85 !important;
+  margin: 1.1rem 0 0 !important; padding: 1rem 1.1rem;
+  background: rgba(91,211,220,.08); border-radius: .6rem;
+  border: 1px solid rgba(91,211,220,.22);
+}
+.rd-atone strong { color: #5BD3DC; }
+.rd-atone em { color: #fff; font-style: italic; }
+
+/* Who said it, and where it came from. */
+.rd-who {
+  font-family: 'Fredoka', sans-serif !important; font-weight: 600;
+  color: #fff !important; font-size: 1.05rem !important; margin: 0 0 .2rem !important;
+}
+.rd-motto {
+  color: #F5C518 !important; font-style: italic;
+  margin: 0 0 .35rem !important; line-height: 1.6 !important;
+}
+.rd-when {
+  color: rgba(255,255,255,.5) !important; font-size: .85rem !important;
+  margin: 0 0 .9rem !important;
+}
+.rd-attr {
+  color: rgba(255,255,255,.6) !important; font-size: .9rem !important;
+  line-height: 1.65 !important; margin: -.4rem 0 1rem !important;
+}
+
+.rd-quote { border-left-color: #E8A23C; background: rgba(232,162,60,.05); }
+.rd-quote .rd-label { color: #E8A23C; }
+.rd-conf { border-left-color: #F5C518; background: rgba(245,197,24,.045); }
+.rd-study { border-left-color: #5BD3DC; background: rgba(91,211,220,.045); }
+.rd-study .rd-label { color: #5BD3DC; }
+.rd-traveler { border-left-color: #E879F9; background: rgba(232,121,249,.05); }
+.rd-traveler .rd-label { color: #E879F9; }
+.rd-traveler .rd-motto { color: #E879F9 !important; }
+
+.rd-card h4 {
+  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #fff;
+  font-size: 1.18rem; line-height: 1.3; margin: 0 0 .85rem;
+}
+.rd-card a { color: #F5C518; }
+.rd-card a:hover { color: #ffd84a; }
+
+/* ------------------------------------------------------- how deep to read
+   The Lantern carries the same night at four depths. On a phone the app
+   switches between them; here they are simply offered. */
+.rd-depths {
+  display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1.6rem;
+}
+.rd-depth {
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .84rem;
+  cursor: pointer; text-align: left; line-height: 1.25;
+  padding: .5rem .9rem; border-radius: .7rem;
+  border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.78);
+}
+.rd-depth small {
+  display: block; font-weight: 400; font-size: .72rem;
+  color: rgba(255,255,255,.42); margin-top: .1rem;
+}
+.rd-depth:hover { border-color: rgba(245,197,24,.45); color: #fff; }
+.rd-depth.on {
+  background: #F5C518; color: #07112e; border-color: #F5C518;
+}
+.rd-depth.on small { color: rgba(7,17,46,.7); }
