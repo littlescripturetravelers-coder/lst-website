@@ -159,28 +159,22 @@ are explore links to `travelers.html` / content pages, on purpose.
 
 ## 6. STATUS — PENDING / next up
 
-1. **Levi must run `sql/2026-08-25-mirror-the-app.sql`** in the Supabase SQL editor — the journal
-   table + its policies, the website's extra family-story columns, and the daily_content read rule
-   that lets an admin see the nightly story. **Nothing in §13 (journal, archive, account) works
-   until he does.**
-   Click-by-click: Supabase → SQL Editor → New query → open the file, Ctrl+A, Ctrl+C → paste →
-   Ctrl+A in the editor → Run. *(The earlier §11 migration is already run — see §11.)*
-2. **Hand two files to the app chat**, both in `docs/`:
+1. **Hand two files to the app chat**, both in `docs/`:
    - `FOR-THE-APP-CHAT-remove-photos.md` — the website half of removing photos is shipped; the app
      still has the picker. Leads with the thing that must not happen: **do not drop the `photos`
      column** (§13).
    - `FOR-THE-APP-CHAT-timeline-duplicate.md` — `www/timeline.html` declares `PROPHECIES` twice
      again. Fixed on the website for the second time; it will come back a third unless the app is
      fixed (§10).
-3. **Load the story text.** `story_texts` is empty, so subscribers still can't read a full story.
+2. **Load the story text.** `story_texts` is empty, so subscribers still can't read a full story.
    The text is in `api/_lib/stories-full.json` on Levi's computer (referenced by
    `data/virtue-library.js`, never committed). Get that file from him, then load the 91 rows.
-4. **Wire the timeline's Family Story layer** to the same `family_stories` table. It keeps added
+3. **Wire the timeline's Family Story layer** to the same `family_stories` table. It keeps added
    stories in `localStorage`, on that device only — so they reach neither the app, the account, nor
    the family-stories page. Now that `family-stories.html` and `js/lst-app-data.js` exist, this is
    a much smaller job than it was: the timeline's family panel needs to read and write through
    `LSTData.familyStories` instead of its own storage.
-5. **YouTube "how to use the timeline" video section on the home page.** Levi wants a home-page
+4. **YouTube "how to use the timeline" video section on the home page.** Levi wants a home-page
    section showing a walkthrough video of the timeline. **Waiting on the video URL** — it may not be
    recorded yet. When it lands, follow the existing `watch-section` iframe pattern in `index.html`,
    and remember to add it to all three index variants.
@@ -509,10 +503,16 @@ published story; **gated by the database's own policy, not by JavaScript** — i
 a family sees nothing, it's the subscription rule), `account.html`. All three
 are `noindex` and linked from a "My Account" nav dropdown on all 25 pages.
 
-### ⚠️ Needs Levi to run
+### ✅ The migration HAS been run (2026-08-25)
 `sql/2026-08-25-mirror-the-app.sql` — journal table + policies, the website's
-extra family-story columns, and removal of the `journal-photos` storage bucket.
-**Nothing in §13 works until this is run.**
+extra family-story columns, and the `daily_content` read rule rewritten to use
+`lst_is_subscriber()` so an admin sees the nightly story. Levi ran it and all
+four confirmation rows came back **yes**. Do not ask him to run it again.
+
+Both migrations are now run: this one and the §11 one. **There is no pending
+SQL.** If something on a members' page is empty, the cause is missing content
+(`story_texts` is still empty, and `daily_content` needs published nights) —
+not a missing migration.
 
 ### Photos — decided against, on purpose (25 Aug 2026)
 Levi: *"for now we just don't include photo uploads with the family stories and
