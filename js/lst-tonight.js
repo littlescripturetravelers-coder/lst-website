@@ -291,7 +291,7 @@
           paragraphs(n.text) + "</section>"
         : '<p class="mp-note">The text of tonight&rsquo;s story hasn&rsquo;t been added yet.</p>');
 
-    return '<div class="rd">' + headView(n) + toolsView() +
+    return '<div class="rd">' + headView(n) + '<div id="lst-admin"></div>' + toolsView() +
       '<div class="rd-body">' + depthsView(eds) +
         narrationView(n) + resourcesView(n) + body + keepView() +
       "</div></div>";
@@ -327,6 +327,13 @@
     });
     var rd = document.getElementById("t-read");
     if (rd) rd.addEventListener("click", toggleRead);
+
+    /* The owner's controls, if it is the owner looking. */
+    if (window.LSTAdmin) {
+      window.LSTAdmin.strip(document.getElementById("lst-admin"), night, function (what) {
+        if (what === "deleted") { night = null; loaded = false; load().then(render); }
+      });
+    }
 
     /* Every question on the page becomes something you can answer, and the
        two writing cards go in below the night. */

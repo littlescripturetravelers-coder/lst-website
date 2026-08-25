@@ -2619,3 +2619,67 @@ cite strong { color: var(--gold); display: block; }
   .bs-shelfrow { grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); gap: .7rem; }
   .bs-label { font-size: .85rem; }
 }
+
+/* --------------------------------------------------- THE LST LIBRARY hub
+   Three collections rather than ninety-one stories, so the tiles are given
+   room to be looked at rather than scanned. Everything else on this page
+   reuses the Bedtime Stories shelf. */
+.lb-hub { grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1.4rem; }
+.lb-big .bs-cover-art { border-width: 2px; }
+.lb-big .bs-label { font-size: 1.08rem; }
+.lb-big .bs-sub { font-size: .82rem; }
+
+.lb-head { margin-bottom: 1.8rem; }
+.lb-head h2 {
+  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #fff;
+  font-size: clamp(1.4rem,4vw,1.9rem); line-height: 1.2; margin: 1rem 0 .5rem;
+}
+.lb-head p { color: rgba(255,255,255,.68); line-height: 1.7; margin: 0; }
+
+/* The night a tile belongs to, opposite its week-and-night stamp. */
+.bs-when {
+  position: absolute; right: .4rem; bottom: .4rem; z-index: 2;
+  font-family: 'Anton', sans-serif; font-size: .62rem; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(255,255,255,.85);
+  background: rgba(7,17,46,.75); border-radius: 999px; padding: .1rem .45rem;
+}
+/* A tile that is a link rather than a button still lays out the same. */
+a.bs-tile { text-decoration: none; }
+
+/* ------------------------------------------------------- THE OWNER'S STRIP
+   Only Levi ever sees this. Deliberately plain and slightly apart from the
+   page around it, so it never reads as something a family is meant to touch.
+   Behaviour in js/lst-admin.js. */
+.ad-strip {
+  background: rgba(224,96,122,.07);
+  border: 1px dashed rgba(224,96,122,.4);
+  border-radius: .7rem; padding: .8rem 1rem; margin: 0 0 1.6rem;
+}
+.ad-row { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+.ad-tag {
+  font-family: 'Anton', sans-serif; font-size: .6rem; letter-spacing: .15em;
+  text-transform: uppercase; color: #e0607a;
+  border: 1px solid rgba(224,96,122,.45); border-radius: 999px; padding: .12rem .5rem;
+}
+.ad-what { color: rgba(255,255,255,.6); font-size: .85rem; margin-right: auto; }
+.ad-btn {
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .8rem;
+  cursor: pointer; padding: .4rem .8rem; border-radius: 999px;
+  background: rgba(255,255,255,.06); color: #fff;
+  border: 1px solid rgba(255,255,255,.2);
+}
+.ad-btn:hover { border-color: rgba(245,197,24,.5); color: #F5C518; }
+.ad-danger { border-color: rgba(224,96,122,.5); color: #e0607a; }
+.ad-danger:hover { background: #e0607a; color: #07112e; border-color: #e0607a; }
+
+.ad-panel { margin-top: .9rem; padding-top: .9rem; border-top: 1px dashed rgba(224,96,122,.3); }
+.ad-hint { color: rgba(255,255,255,.55); font-size: .85rem; line-height: 1.6; margin: 0 0 .8rem; }
+.ad-vs { display: flex; flex-wrap: wrap; gap: .35rem; }
+.ad-v {
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .8rem;
+  padding: .28rem .65rem; border-radius: 999px; cursor: pointer;
+  background: rgba(255,255,255,.05); color: rgba(255,255,255,.7);
+  border: 1px solid rgba(255,255,255,.15);
+}
+.ad-v:hover { border-color: rgba(245,197,24,.5); color: #fff; }
+.ad-v.on { background: #F5C518; color: #07112e; border-color: #F5C518; }

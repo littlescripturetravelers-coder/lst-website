@@ -351,6 +351,33 @@
       return n;
     },
 
+    /* WHICH nights carry a given piece, without dragging the piece itself
+       across. Asking for `publish_date` where `book_html is not null` sends
+       back a list of dates and nothing else — a few hundred bytes, where the
+       books themselves are megabytes of pictures.
+
+       This is what lets the LST Library fill its shelves accurately the
+       moment a night is published, with no second place to keep in step. */
+    nightsWith: function (column) {
+      if (!ready()) return Promise.resolve([]);
+      return sb().from("daily_content")
+        .select("publish_date,title,scripture,book,week,night")
+        .not("published_at", "is", null)
+        .not(column, "is", null)
+        .lte("publish_date", today())
+        .order("publish_date", { ascending: false })
+        .limit(500)
+        .then(function (res) {
+          if (res.error) throw new Error(res.error.message);
+          return (res.data || []).map(function (r) {
+            return {
+              date: r.publish_date, title: r.title || "", scripture: r.scripture || "",
+              book: r.book, week: r.week, night: r.night
+            };
+          });
+        });
+    },
+
     list: function (limit) {
       if (!ready()) return Promise.resolve([]);
       return sb().from("daily_content")
@@ -362,6 +389,28 @@
           if (res.error) throw new Error(res.error.message);
           return (res.data || []).map(archive.fromRow);
         });
+    },
+
+    /* ------------------------------------------------------ admin only
+       The app has granted admins full control of `daily_content` since its
+       third migration ("admins manage content", FOR ALL). So these need no
+       new permission — but Postgres is still the one deciding. A family who
+       calls them gets an error, not a deleted night.
+
+       Levi asked for these because he is testing, and a test night he cannot
+       remove is a test night that ends up in front of a paying family. */
+    remove: function (date) {
+      if (!ready() || !date) return Promise.reject(new Error("no night given"));
+      return sb().from("daily_content").delete().eq("publish_date", date);
+    },
+
+    /* Retag a night. The app stores virtues as [{id,name}] objects, so this
+       goes through the same translation everything else does. */
+    setVirtues: function (date, ids) {
+      if (!ready() || !date) return Promise.reject(new Error("no night given"));
+      return sb().from("daily_content")
+        .update({ virtues: virtuesToApp(ids || []) })
+        .eq("publish_date", date);
     },
 
     fromRow: function (r) {

@@ -115,6 +115,7 @@
     }
 
     return '<article class="mp-card rd">' + head +
+      '<div id="lst-admin"></div>' +
       '<div class="rd-body">' + depths +
         (r.audio ? '<audio controls preload="none" src="' + esc(r.audio) +
            '" style="width:100%;margin-bottom:1.6rem;"></audio>' : "") +
@@ -185,6 +186,11 @@
       root.innerHTML = storyView(open);
       var c = document.getElementById("a-close");
       if (c) c.addEventListener("click", function () { open = null; depth = 0; render(); });
+      if (window.LSTAdmin) {
+        window.LSTAdmin.strip(document.getElementById("lst-admin"), open, function (what) {
+          if (what === "deleted") { open = null; loaded = false; load().then(render); }
+        });
+      }
       root.querySelectorAll("[data-depth]").forEach(function (b) {
         b.addEventListener("click", function () {
           depth = parseInt(this.getAttribute("data-depth"), 10) || 0;
