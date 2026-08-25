@@ -401,12 +401,20 @@
   });
 })();
 
-/* The member bar tells you which of the six you are looking at. Done here
-   rather than by hand in 27 files, so a new page can never forget. */
+/* The member bar tells you which door you came through. Done here rather
+   than by hand in 30 files, so a new page can never forget.
+
+   The LST Library has shelves that are pages of their own — the written
+   series, the archive, a single story or lullaby. None of those are in the
+   bar any more, so the bar lights up the Library instead: you did come
+   through that door, and a row with nothing lit reads as being lost. */
 (function () {
   var here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  var SHELVES = ['bedtime-stories.html', 'archive.html', 'story.html', 'lullaby.html'];
+  var mark = SHELVES.indexOf(here) !== -1 ? 'lst-library.html' : here;
+
   document.querySelectorAll('.member-bar a').forEach(function (a) {
     var to = (a.getAttribute('href') || '').split('#')[0].toLowerCase();
-    if (to && to === here) a.setAttribute('aria-current', 'page');
+    if (to && to === mark) a.setAttribute('aria-current', 'page');
   });
 })();

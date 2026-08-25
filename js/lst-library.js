@@ -1,11 +1,24 @@
-/* THE LST LIBRARY — everything a subscription opens, on one shelf.
+/* THE LST LIBRARY — everything we have made, on one shelf.
 
-   Three collections, laid out the way Bedtime Stories is: covers you look
-   along and pick from.
+   Five collections, laid out the way a library is: covers you look along and
+   pick from.
 
-     Bedtime Stories            every night's picture book
+     Bedtime Stories            the written series, all of it
+     Picture Books              every night's illustrated story
      The Signature Lullaby      A Little Travelers' Lullaby, always there
      Daily Lullabies            every night's own lullaby
+     The Lantern Archive        every Morning Lantern we have sent
+
+   WHY THIS IS THE HUB. The header used to carry four doors that all sounded
+   like collections of stories — LST Library, Bedtime Stories, Virtue Library,
+   The Lantern Archive — and a family arriving for the first time could not
+   tell which to open. The browsing ones live here now, as shelves. What is
+   left in the header is one door per VERB: read tonight's, browse everything,
+   find what I need, keep our own, write, explore.
+
+   The Virtue Library deliberately did NOT move here. It is not another shelf;
+   it is the only place that answers "my child is frightened tonight, what do
+   I read?" — a different question, so a different door.
 
    NOTHING HERE IS KEPT BY HAND. The shelves are built from `daily_content`,
    the same table The Morning Lantern is published into. Publish a night in
@@ -77,35 +90,43 @@
   function hubView() {
     var nBooks = books ? books.length : 0;
     var nSongs = songs ? songs.length : 0;
+    var series = (window.LST_LIBRARY && window.LST_LIBRARY.stories || []).length;
 
-    function tile(id, art, title, sub, extra) {
-      return '<button type="button" class="bs-cover lb-big" data-go="' + id + '">' +
-        '<span class="bs-cover-art' + (extra || "") + '"' +
-          (art ? ' style="background-image:url(' + esc(art) + ')"' : "") + ">" +
-          (art ? "" : "&#127925;") + "</span>" +
+    function tile(go, href, art, title, sub, glyph) {
+      var attrs = href ? ('href="' + esc(href) + '"') : ('type="button" data-go="' + go + '"');
+      var tag = href ? "a" : "button";
+      return "<" + tag + ' class="bs-cover lb-big" ' + attrs + ">" +
+        '<span class="bs-cover-art"' + (art ? ' style="background-image:url(' + esc(art) + ')"' : ' data-glyph="1"') + ">" +
+          (art ? "" : (glyph || "")) + "</span>" +
         '<span class="bs-label">' + title + "</span>" +
         '<span class="bs-sub">' + sub + "</span>" +
-      "</button>";
+      "</" + tag + ">";
     }
 
     return '<div class="bs-shelfrow lb-hub">' +
-      tile("books", books && books.length ? artFor(books[0]) : "images/cover-ot.jpg",
+      tile(null, "bedtime-stories.html", "images/book-cover-june.jpg",
         "Bedtime Stories",
+        (series ? series + " stories" : "The written series") + " &middot; the whole series") +
+      tile("books", null, books && books.length ? artFor(books[0]) : "images/cover-ot.jpg",
+        "Picture Books",
         signedIn()
-          ? (nBooks + (nBooks === 1 ? " picture book" : " picture books"))
-          : "Every night&rsquo;s picture book") +
-      tile("lantern", "images/lullaby-sheet.jpg",
+          ? (nBooks + (nBooks === 1 ? " illustrated night" : " illustrated nights"))
+          : "Every night&rsquo;s illustrated story") +
+      tile(null, "lullaby.html?which=lantern", "images/lullaby-sheet.jpg",
         "The Signature Lantern Lullaby",
         "A Little Travelers&rsquo; Lullaby &middot; always here") +
-      tile("lullabies", "images/sky-star.jpg",
+      tile("lullabies", null, "images/sky-star.jpg",
         "Daily Lullabies",
         signedIn()
           ? (nSongs + (nSongs === 1 ? " lullaby" : " lullabies"))
           : "One for every night") +
+      tile(null, "archive.html", "images/hero-bg.jpg",
+        "The Lantern Archive",
+        "Every Morning Lantern we have sent") +
     "</div>" +
-    '<p class="rd-aside">Everything here fills itself. Publish a night in the app and its story ' +
-      'and its lullaby are on these shelves straight away. Looking for the whole written series ' +
-      'instead? That is <a href="bedtime-stories.html">Bedtime Stories</a>.</p>';
+    '<p class="rd-aside">These shelves fill themselves. Publish a night in the app and its story ' +
+      'and its lullaby are here straight away. Looking for a story by what your child needs ' +
+      'tonight instead? That is <a href="virtue-library.html">the Virtue Library</a>.</p>';
   }
 
   /* --------------------------------------------------------------- shelves */
@@ -125,9 +146,9 @@
   function shelfView(kind) {
     var rows = kind === "books" ? books : songs;
     var where = kind === "books" ? "story.html" : "lullaby.html";
-    var name = kind === "books" ? "Bedtime Stories" : "Daily Lullabies";
+    var name = kind === "books" ? "Picture Books" : "Daily Lullabies";
     var blurb = kind === "books"
-      ? "Every night&rsquo;s picture book, newest first. Each one opens on its own page."
+      ? "Every night&rsquo;s illustrated story, newest first. Each one opens on its own page."
       : "Every night&rsquo;s own lullaby, newest first &mdash; the words to sing after the story.";
 
     var head =
