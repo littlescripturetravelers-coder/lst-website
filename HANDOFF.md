@@ -84,6 +84,10 @@ js/lst-tonight.js       # tonight's story + lullaby, same row the phone reads (�
 js/lst-read.js          # THE reader — turns the app's three pasted pages into
                         #   website-native flowing content (§15)
 js/lst-keep.js          # the writing half — answers, family circle, journal (§16)
+js/lst-bedtime.js       # Bedtime Stories — the written series as a shelf (§17)
+js/lst-library.js       # THE LST LIBRARY — what has been sent, auto-shelved (§17)
+js/lst-admin.js         # Levi's own controls: retag a night, delete a night (§17)
+bedtime-stories.html / lst-library.html
 js/lst-open.js          # story.html / lullaby.html, one piece of the night (§16)
 data/lantern-lullaby.js # ⚠️ 2nd copy of the app's signature lullaby words (§16)
 story.html / lullaby.html
@@ -742,3 +746,58 @@ properly, that is one `alter table profiles add column family_circle jsonb` away
   so after two switches one Save fired three times. Guarded with `data-hq-wired`.
 - The `1.` in front of a question was being stored as part of the question text. Stripped — the
   number is layout, not question.
+
+---
+
+## 17. The LST Library and the owner's controls (built 2026-08-25)
+
+### The names, as of now
+The member bar has eight doors:
+
+`The Morning Lantern · LST Library · Bedtime Stories · Virtue Library · The Lantern Archive · Family Stories · Journal · Timeline`
+
+Renamed at Levi's request: **Tonight's Story → The Morning Lantern** (`tonight.html`) and
+**Story Archive → The Lantern Archive** (`archive.html`). **Filenames deliberately unchanged** so
+nothing already linked, bookmarked or indexed breaks. Don't "tidy" them.
+
+### The two libraries are different things — keep them apart
+| Page | What it is | Where its content comes from |
+|---|---|---|
+| **Bedtime Stories** (`bedtime-stories.html`) | the written series, all 91 | `data/virtue-library.js` + `story_texts` |
+| **LST Library** (`lst-library.html`) | what has actually been *sent* | `daily_content` |
+
+The LST Library has three shelves: the nightly **picture books**, **The Signature Lantern Lullaby**
+(from `data/lantern-lullaby.js`, §16), and **Daily Lullabies**.
+
+### ⚠️ Nothing on the LST Library is kept by hand
+Its shelves are built from `daily_content`, the same table the app publishes into. That is the whole
+point: publish a night and it is on the shelf. **Never introduce a second list of what exists** —
+it would fall behind the first week Levi published something.
+
+How it knows what a night carries without downloading it:
+
+```js
+LSTData.archive.nightsWith("book_html")   // dates only — a few hundred bytes
+LSTData.archive.nightsWith("song_html")
+```
+
+PostgREST returns just `publish_date` for rows where that column is not null. The books are megabytes
+of base64 pictures and are fetched only when somebody opens one. Don't replace this with a `select("*")`.
+
+### The owner's controls — `js/lst-admin.js`
+A strip under any night, on The Morning Lantern and in the Archive, **for Levi alone**: retag the
+night's virtues, or delete the night.
+
+**No migration was needed and none should be added.** The app's own `0003_admin_publish.sql` already
+grants admins `FOR ALL` on `daily_content` and everyone else nothing. **Postgres is the lock; hiding
+the buttons is courtesy.** A family who called `LSTData.archive.remove()` from the console gets an
+error, not a deleted night.
+
+Deleting a night takes the Lantern, the picture book and the lullaby with it, from the website *and*
+the app, with no undo. So it asks twice — a plain confirm, then it makes him type the date. Both
+paths are tested.
+
+### Tagging Levi's books
+He asked me to tag the daily stories with virtues and said he must be able to edit them later. The
+editing half is the strip above. The tagging half happens when a book is added (see
+`docs/HOW-TO-SEND-ME-YOUR-BOOKS.md`) — propose tags from the story, show him, let him correct.
