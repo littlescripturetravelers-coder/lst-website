@@ -2,7 +2,7 @@
 
 **Repo:** `littlescripturetravelers-coder/lst-website`
 **Live:** https://www.littlescripturetravelers.com (Vercel, auto-deploys on push to `main`)
-**Last updated:** 2026-08-19 (session 6)
+**Last updated:** 2026-08-25 (session 7)
 **Owner:** Levi Lewis (non-technical founder, littlescripturetravelers@gmail.com). Claude builds and ships everything.
 
 > **This file is the source of truth, not the chat.** Chats get lost. Update this file at the end of
@@ -76,6 +76,13 @@ main.js                 # shared site JS (nav, misc UI)
 style.css               # ALL shared styling — one file, site-wide
 js/lst-signup.js        # THE signup popup (see §4)
 js/lst-auth.js          # THE website login — Supabase, same account as the app (§11)
+js/lst-app-data.js      # THE shared record — the ONE file that knows the app's
+                        #   column shapes. Change it here when the app changes. (§13)
+js/lst-journal.js       # the app's journal, on the website
+js/lst-archive.js       # every published daily story
+js/lst-account.js       # account page
+journal.html / archive.html / account.html
+docs/FOR-THE-APP-CHAT-photo-sync.md   # hand this to the app chat
 js/lst-family-stories.js# Family Stories section on the Virtue Library (§11)
 sql/                    # migrations for Levi to paste into the Supabase SQL editor
                         #   ...-accounts-and-family-stories.sql  (run 1st)
@@ -400,4 +407,68 @@ can already read everything** (`isSubscriber()`, which includes admins) — it w
 its absence is a quiet confirmation that they are signed in and unlocked. **Signed-in free readers
 still see it**, because for them it says which three they may open. Verified both ways in a browser:
 29 stories listed, 1 Free badge as a free reader, 0 as a subscriber.
+
+---
+
+## 13. Mirroring the app (built 2026-08-25)
+
+Levi's goal: the website should be the app. Same login, same saved things, and
+changes on one side showing on the other.
+
+### The truth about "changes propagate automatically"
+**Content does. Code does not.** New daily stories, new virtues, anything that
+lives in a shared table appears on both sides with nothing to deploy. But a new
+app *screen* is not a new website page — somebody builds that. The way to keep
+Levi's wish mostly true is to **never keep two copies of the same thing**.
+
+### The bug this uncovered — read this before touching family stories
+The app and the website were writing the same table in **different shapes**:
+
+| | App writes | Website used to write |
+|---|---|---|
+| title | `story_title` | `title` |
+| the writing | `answers` jsonb `[{q,a}]` | `body` text |
+| virtues | `[{id,name}]` **objects** | `["courage"]` **strings** |
+
+Same drawer, different handwriting — neither side could read the other. Fixed by
+making the **website conform to the app**.
+
+> **THE RULE: the app is the authority on shape.** It ships to phones and sits
+> behind App Store review; the website redeploys in seconds. When the two
+> disagree, change the website. Never "fix" it by changing what the app writes.
+
+### `js/lst-app-data.js` is the only file that knows the shapes
+Everything goes through it — `LSTData.familyStories`, `.journal`, `.archive`.
+It **reads forgivingly** (older website rows with `title`/string-virtues still
+work) and **writes strictly** in the app's shape. When the app adds a column,
+this is the one file to update.
+
+Shapes are documented in its header, taken from `lst-app/supabase/migrations/`.
+**To re-check them, read that repo** — it can be attached read-only with
+`add_repo` + a shallow clone. Reading the app to mirror it is website work;
+*changing* the app is still the app chat's job.
+
+### The pages
+`journal.html` (both directions with the app's journal), `archive.html` (every
+published story; **gated by the database's own policy, not by JavaScript** — if
+a family sees nothing, it's the subscription rule), `account.html`. All three
+are `noindex` and linked from a "My Account" nav dropdown on all 25 pages.
+
+### ⚠️ Needs Levi to run
+`sql/2026-08-25-mirror-the-app.sql` — journal table + policies, the website's
+extra family-story columns, and the private `journal-photos` storage bucket.
+
+### Photos
+The app **never uploads images** — only filenames sync, so the website says
+"kept on the phone you added them from". The bucket and its per-account security
+rules now exist; the app half is written up in
+`docs/FOR-THE-APP-CHAT-photo-sync.md`. Once the app uploads, the website shows
+them with no further work.
+
+### Loose ends
+- `subscribe.html` has a stray `</div>` that **predates all of this**. Browsers
+  ignore it; left alone deliberately.
+- The website's Virtue Library catalog (`data/virtue-library.js`, 36 virtues) is
+  still a **separate copy** from whatever the app tags stories with. That is the
+  next two-copies problem to solve if Levi wants true one-source content.
 
