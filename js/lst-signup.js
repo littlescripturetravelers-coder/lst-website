@@ -5,6 +5,21 @@
 (function () {
   var SUPA_URL = "https://rdbvktqgrwhjucocobua.supabase.co";
   var SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkYnZrdHFncndoanVjb2NvYnVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwNDAwMzEsImV4cCI6MjEwMTYxNjAzMX0.1PJVCfeK6dIFWeBvdsC13HPQ8173BHEok0Qq6l7mfC4";
+  /* ======================================================== THE PRICES
+     ⚠️ CHANGING A NUMBER HERE DOES NOT CHANGE WHAT ANYONE IS CHARGED.
+     Payhip charges whatever the Payhip product is set to. These are the
+     words on the website; the product page is the till. Change both, or a
+     family reads one price and is billed another.
+
+     The plain-English list of every other place a price is written down is
+     in HANDOFF.md §18.
+     ================================================================== */
+  var PRICE = {
+    monthly:  "$6.99",
+    annual:   "$49",
+    perMonth: "$4.08",          // what $49/year works out at
+    saving:   "$35"             // $83.88 a year at monthly, less $49
+  };
   var PAYHIP = { monthly: "https://payhip.com/b/e7N6r", annual: "https://payhip.com/b/34fmR" };
   /* Share the one client lst-auth.js sets up, so the page never runs two auth
      clients against the same stored session. Falls back to its own if this
@@ -13,14 +28,18 @@
     || ((window.supabase && window.supabase.createClient)
           ? (window.LST_SB = window.supabase.createClient(SUPA_URL, SUPA_KEY))
           : null);
-  var plan = "monthly";
+  /* Annual unless a button explicitly asks for monthly. Most families take
+     whichever plan the screen already had selected, and the yearly one is
+     both better for them and far better for a daily-content subscription
+     that lives or dies on people staying. */
+  var plan = "annual";
   function el(id) { return document.getElementById(id); }
   var IN = "width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;font-family:'Nunito',sans-serif;";
 
   function injectModal() {
     if (el("trial-modal")) return;
     var st = document.createElement("style");
-    st.textContent = ".ts-plan-btn{flex:1;padding:0.6rem 0.4rem;border-radius:10px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:#fff;font-family:'Nunito',sans-serif;font-size:0.92rem;font-weight:700;cursor:pointer;line-height:1.25;text-align:center;}.ts-plan-btn span{display:block;font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.6);margin-top:2px;}.ts-plan-btn.on{border-color:#f4c842;background:rgba(245,197,24,0.14);}.ts-plan-btn.on span{color:#f4c842;}";
+    st.textContent = ".ts-plan-btn{flex:1;padding:0.6rem 0.4rem;border-radius:10px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:#fff;font-family:'Nunito',sans-serif;font-size:0.92rem;font-weight:700;cursor:pointer;line-height:1.25;text-align:center;}.ts-plan-btn span{display:block;font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.6);margin-top:2px;}.ts-plan-btn.on{border-color:#f4c842;background:rgba(245,197,24,0.14);}.ts-plan-btn.on span{color:#f4c842;}.ts-plan-btn{position:relative;}.ts-plan-best{flex:1.35;padding-top:1.15rem;}.ts-best-tag{position:absolute;top:-0.55rem;left:50%;transform:translateX(-50%);background:#f4c842;color:#07112e;font-size:0.6rem;font-weight:900;letter-spacing:0.06em;text-transform:uppercase;padding:0.12rem 0.5rem;border-radius:999px;white-space:nowrap;}";
     document.head.appendChild(st);
     var d = document.createElement("div");
     d.id = "trial-modal";
@@ -30,8 +49,11 @@
         '<div style="font-family:\'Fredoka\',sans-serif;font-weight:600;font-size:1.35rem;color:#f4c842;">Start your free week</div>' +
         '<div style="display:inline-block;background:rgba(245,197,24,0.16);border:1px solid rgba(245,197,24,0.45);color:#f4c842;font-weight:800;font-size:0.8rem;letter-spacing:0.02em;padding:0.28rem 0.75rem;border-radius:999px;margin:0.45rem 0 0.15rem;">&#10024; 7 DAYS FREE &middot; No charge today</div>' +
         '<div id="ts-plans" style="display:flex;gap:0.5rem;margin:0.7rem 0 0.9rem;">' +
-          '<button type="button" data-plan="monthly" onclick="setTrialPlan(\'monthly\')" class="ts-plan-btn">Monthly<span>$10.99/mo</span></button>' +
-          '<button type="button" data-plan="annual" onclick="setTrialPlan(\'annual\')" class="ts-plan-btn">Yearly<span>$98.91/yr · 3 mo free</span></button>' +
+          '<button type="button" data-plan="annual" onclick="setTrialPlan(\'annual\')" class="ts-plan-btn ts-plan-best">' +
+            '<b class="ts-best-tag">Best value</b>Yearly<span>' + PRICE.annual + '/yr &middot; just ' +
+            PRICE.perMonth + ' a month</span></button>' +
+          '<button type="button" data-plan="monthly" onclick="setTrialPlan(\'monthly\')" class="ts-plan-btn">Monthly<span>' +
+            PRICE.monthly + '/mo</span></button>' +
         '</div>' +
         '<input id="ts-name" placeholder="First name" autocomplete="given-name" style="' + IN + '">' +
         '<input id="ts-email" type="email" placeholder="Email" autocomplete="email" style="' + IN + '">' +
@@ -57,7 +79,7 @@
   window.openTrialSignup = function (p) {
     if (!sb) return true; // library failed to load -> let the link go straight to Payhip
     injectModal();
-    setTrialPlan(p || "monthly");
+    setTrialPlan(p || "annual");
     el("ts-err").textContent = "";
     el("trial-modal").style.display = "flex";
     setTimeout(function () { var n = el("ts-name"); if (n) n.focus(); }, 60);

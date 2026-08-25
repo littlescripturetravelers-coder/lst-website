@@ -179,6 +179,25 @@
       margin-top: var(--space-2);
     }
     .btn-tier:hover { opacity: 0.88; transform: translateY(-1px); }
+    /* The yearly plan is the one that suits a family and the one the
+       business needs, so it is the solid button and monthly is the outline
+       beneath it. */
+    .btn-tier-gold {
+      display: block;
+      background: var(--gold);
+      color: #07112e;
+      border: 2px solid var(--gold);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: var(--space-2);
+    }
+    .btn-tier-gold:hover { background: #ffd84a; transform: translateY(-1px); }
     .btn-tier-outline {
       display: block;
       background: transparent;
@@ -901,8 +920,8 @@
             <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">▾</span></a>
             <div class="nav-dropdown-panel">
               <div class="nav-dropdown-inner">
-                <a href="/subscribe.html#plans" class="nav-dropdown-item" onclick="return openTrialSignup('monthly')">Try the First 7 Days Free</a>
-                <a href="subscribe.html#plans" class="nav-dropdown-item" onclick="return openTrialSignup('monthly')">
+                <a href="/subscribe.html#plans" class="nav-dropdown-item" onclick="return openTrialSignup()">Try the First 7 Days Free</a>
+                <a href="subscribe.html#plans" class="nav-dropdown-item" onclick="return openTrialSignup()">
                   <span class="nav-dropdown-item-title">Choose a Plan</span>
                   <span class="nav-dropdown-item-desc">The Lantern, Compass, Knapsack, or Caravan</span>
                 </a>
@@ -996,7 +1015,7 @@
         </ul>
       </nav>
 
-      <a href="/subscribe.html#plans" class="btn btn-gold nav-cta" onclick="return openTrialSignup('monthly')">Try the First 7 Days Free</a>
+      <a href="/subscribe.html#plans" class="btn btn-gold nav-cta" onclick="return openTrialSignup()">Try the First 7 Days Free</a>
 
       <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
         <span></span><span></span><span></span>
@@ -1054,8 +1073,8 @@
         <li class="has-dropdown">
           <a href="subscribe.html" class="nav-link-parent">Subscribe <span class="nav-arrow">&#9662;</span></a>
           <ul class="nav-dropdown">
-            <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;" onclick="return openTrialSignup('monthly')">Try the First 7 Days Free</a></li>
-            <li><a href="subscribe.html#plans" onclick="return openTrialSignup('monthly')">Choose a Plan</a></li>
+            <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;" onclick="return openTrialSignup()">Try the First 7 Days Free</a></li>
+            <li><a href="subscribe.html#plans" onclick="return openTrialSignup()">Choose a Plan</a></li>
           </ul>
         </li>
         <li class="has-dropdown">
@@ -1091,7 +1110,7 @@
         <li><a href="journal.html">Journal</a></li>
         <li><a href="timeline.html">Timeline</a></li>
         <li><a href="account.html">My Account</a></li>
-        <li><a href="/subscribe.html#plans" class="btn btn-gold" onclick="return openTrialSignup('monthly')">Try the First 7 Days Free</a></li>
+        <li><a href="/subscribe.html#plans" class="btn btn-gold" onclick="return openTrialSignup()">Try the First 7 Days Free</a></li>
       </ul>
     </div>
   </header>
@@ -1118,7 +1137,7 @@
         font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.15rem;
         border:none;border-radius:50px;padding:0.9rem 2.25rem;
         cursor:pointer;text-decoration:none;
-      " onclick="return openTrialSignup('monthly')">Try the First 7 Days Free</a>
+      " onclick="return openTrialSignup()">Try the First 7 Days Free</a>
       <p style="font-family:'Nunito',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.45);text-align:center;margin:0.75rem 0 0;">
         Join other LDS and Christian families. Cancel anytime.
       </p>
@@ -1130,6 +1149,8 @@
   <!-- ── Tiers ── -->
   <section class="subscribe-section" id="plans">
     <div class="section-inner">
+      <!-- Draws nothing unless data/founding-offer.js is switched on. -->
+      <div id="lst-founding"></div>
       <h2 class="section-title">Choose Your Plan</h2>
       <p class="section-subtitle">All plans are managed securely through Payhip. Cancel anytime.</p>
 
@@ -1139,8 +1160,9 @@
         <div class="tier-card">
           <div class="tier-icon">🏮</div>
           <div class="tier-name">The Lantern</div>
-          <div class="tier-price">$10.99<span>/mo</span></div>
-          <div class="tier-price-note" style="font-size:0.9rem;color:rgba(255,255,255,0.72);margin-top:2px;">or <strong style="color:var(--gold,#f4c842);">$98.91/year</strong> — 3 months free</div>
+          <div class="tier-price">$49<span>/year</span></div>
+          <div class="tier-price-note" style="font-size:0.95rem;color:var(--gold,#f4c842);font-weight:800;margin-top:2px;">just $4.08 a month</div>
+          <div class="tier-price-note" style="font-size:0.88rem;color:rgba(255,255,255,0.68);margin-top:4px;">or <strong style="color:#fff;">$6.99/month</strong> &mdash; yearly saves you $35</div>
           <p class="tier-persona">Best for families beginning a bedtime scripture routine — one quiet story and a soothing lullaby is all you need to start building a lifelong habit.</p>
           <ul class="tier-perks">
             <li class="has-preview" data-product="email">
@@ -1250,8 +1272,8 @@
               </li>
           </ul>
           <div class="tier-cta-group" style="display:flex;flex-direction:column;gap:0.6rem;">
-            <a href="https://payhip.com/b/e7N6r" rel="noopener" class="btn-tier-outline" onclick="return openTrialSignup('monthly')">Monthly · Try the First 7 Days Free</a>
-            <a href="https://payhip.com/b/34fmR" rel="noopener" class="btn-tier-outline" onclick="return openTrialSignup('annual')">Yearly · Try the First 7 Days Free</a>
+            <a href="https://payhip.com/b/34fmR" rel="noopener" class="btn-tier-gold" onclick="return openTrialSignup('annual')">Yearly &middot; $49 &mdash; Try the First 7 Days Free</a>
+            <a href="https://payhip.com/b/e7N6r" rel="noopener" class="btn-tier-outline" onclick="return openTrialSignup('monthly')">Monthly &middot; $6.99 &mdash; Try the First 7 Days Free</a>
           </div>
         </div>
 
@@ -1321,7 +1343,7 @@
           <li><a href="https://www.youtube.com/@LittleScriptureTravelers" target="_blank" rel="noopener">YouTube Channel</a></li>
           <li><a href="https://www.amazon.com/Follows-Scripture-Travelers-Bedtime-Stories/dp/B0H3ZDCFSR/ref=tmm_pap_swatch_0" target="_blank" rel="noopener">Books on Amazon</a></li>
           <li><a href="https://a.co/d/0gLYJdit" target="_blank" rel="noopener">Kindle Editions</a></li>
-          <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;" onclick="return openTrialSignup('monthly')">Try the First 7 Days Free</a></li>
+          <li><a href="/subscribe.html#plans" style="color:inherit;text-decoration:none;" onclick="return openTrialSignup()">Try the First 7 Days Free</a></li>
         </ul>
       </div>
 
@@ -2509,6 +2531,8 @@
 </script>
 
 <script src="js/vendor/supabase.js"></script>
+<script src="data/founding-offer.js"></script>
+<script src="js/lst-founding.js"></script>
 <script src="js/lst-signup.js"></script>
 </body>
 </html>

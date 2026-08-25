@@ -38,8 +38,8 @@ Plain HTML + one shared `style.css` + a few vanilla JS files. Vercel serves the 
 | Thing | Value |
 |---|---|
 | Supabase project ref | `rdbvktqgrwhjucocobua` → `https://rdbvktqgrwhjucocobua.supabase.co` |
-| Payhip — Monthly | `https://payhip.com/b/e7N6r` — $10.99/mo |
-| Payhip — Yearly | `https://payhip.com/b/34fmR` — $98.91/yr (3 months free) |
+| Payhip — Monthly | `https://payhip.com/b/e7N6r` — **$6.99/mo** (see §18) |
+| Payhip — Yearly | `https://payhip.com/b/34fmR` — **$49/yr** — the default plan (see §18) |
 | Free trial | 7 days, card up front, **already ON** in Payhip for both products |
 | Mailchimp audience | `a6978c55f7`, subscriber tag **`Lantern Subscribers`** |
 | Hosting | Vercel, GitHub auto-deploy from `main` |
@@ -87,6 +87,8 @@ js/lst-keep.js          # the writing half — answers, family circle, journal (
 js/lst-bedtime.js       # Bedtime Stories — the written series as a shelf (§17)
 js/lst-library.js       # THE LST LIBRARY — what has been sent, auto-shelved (§17)
 js/lst-admin.js         # Levi's own controls: retag a night, delete a night (§17)
+js/lst-founding.js      # Founding Family band — dark unless a real link is set (§18)
+data/founding-offer.js  # ⚠️ the switch for that offer (§18)
 bedtime-stories.html / lst-library.html
 js/lst-open.js          # story.html / lullaby.html, one piece of the night (§16)
 data/lantern-lullaby.js # ⚠️ 2nd copy of the app's signature lullaby words (§16)
@@ -162,7 +164,7 @@ are explore links to `travelers.html` / content pages, on purpose.
   See §12.
 - ✅ **Privacy policy page** (`privacy.html`) — required for App Store + Google Play.
 - ✅ **Google Search Console verification** — HTML file + homepage meta tag.
-- ✅ **Pricing updated site-wide** — $10.99/mo, $98.91/yr, 7-day trial wording.
+- ✅ **Pricing updated site-wide** — $6.99/mo, $49/yr, annual default, 7-day trial wording (§18).
 - ✅ **"App coming soon" announcement banner** on all pages.
 
 ## 6. STATUS — PENDING / next up
@@ -822,3 +824,47 @@ paths are tested.
 He asked me to tag the daily stories with virtues and said he must be able to edit them later. The
 editing half is the strip above. The tagging half happens when a book is added (see
 `docs/HOW-TO-SEND-ME-YOUR-BOOKS.md`) — propose tags from the story, show him, let him correct.
+
+---
+
+## 18. The prices (changed 2026-08-25)
+
+**$6.99/month · $49/year.** Yearly is the default everywhere and is shown first, bigger, with
+*"just $4.08 a month"* spelled out beside it. Trial unchanged at 7 days.
+
+### ⚠️ THE WEBSITE IS NOT THE TILL
+Changing a number in this repo changes what a family **reads**. Payhip charges whatever the **Payhip
+product** is set to. Both have to be changed or a family reads one price and is billed another —
+which is the single worst bug this site could have. **Whenever a price changes, say so plainly and
+give Levi the Payhip steps in the same message.**
+
+### Every place a price is written down
+Nine spots, five files. Change all of them together:
+
+| File | What is there |
+|---|---|
+| `js/lst-signup.js` | the `PRICE` block at the top — the popup builds its buttons from it |
+| `subscribe.html` | the tier card, and the two plan buttons (`btn-tier-gold` / `btn-tier-outline`) |
+| `index.html`, `index-july.html`, `index-default.html` | the plan card — **all three, they drift** |
+
+Check with: `grep -rn "6\.99\|\$49" --include=*.html --include=*.js .`
+
+### Why yearly is the default, and how
+`openTrialSignup()` with **no argument** = annual. There are ~250 generic CTAs on the site and they
+all call it that way now. **Only one button on the whole site names a plan** — the Monthly one on
+`subscribe.html`. If you ever see `openTrialSignup('monthly')` anywhere else, it is a mistake: it
+forces the worse plan on a family who never asked for it.
+
+### The Founding Family offer — built, deliberately dark
+`data/founding-offer.js` + `js/lst-founding.js`, mounted on `subscribe.html`.
+
+**It draws nothing unless `active: true` AND `link` matches a real `https://payhip.com/b/…` URL.**
+Both conditions, every time. That guard exists because a banner promising $39 that leads to a $49
+checkout is worse than no banner at all. To switch on: Levi creates the Payhip product, sends the
+link, and it is two lines in `data/founding-offer.js`.
+
+### Things only Levi can do (do not promise these are done)
+1. Change the two Payhip product prices.
+2. Create the Founding Family product.
+3. **Move existing subscribers down** to the new price. Early supporters discovering newcomers pay
+   less is how you lose the people you can least afford to lose.

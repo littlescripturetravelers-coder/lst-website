@@ -2683,3 +2683,33 @@ a.bs-tile { text-decoration: none; }
 }
 .ad-v:hover { border-color: rgba(245,197,24,.5); color: #fff; }
 .ad-v.on { background: #F5C518; color: #07112e; border-color: #F5C518; }
+
+/* ------------------------------------------------ THE FOUNDING FAMILY BAND
+   Only ever drawn when data/founding-offer.js is switched on and carries a
+   real checkout link. See js/lst-founding.js. */
+.ff-band {
+  background: linear-gradient(120deg, rgba(245,197,24,.16), rgba(245,197,24,.07));
+  border: 1px solid rgba(245,197,24,.45);
+  border-radius: 1rem; padding: 1.1rem 1.3rem; margin: 0 0 2rem;
+}
+.ff-in { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.ff-tag {
+  font-family: 'Anton', sans-serif; font-size: .7rem; letter-spacing: .15em;
+  text-transform: uppercase; color: #07112e; background: #F5C518;
+  border-radius: 999px; padding: .25rem .7rem; flex-shrink: 0;
+}
+.ff-words {
+  flex: 1; min-width: 14rem; color: rgba(255,255,255,.85);
+  font-size: .98rem; line-height: 1.6;
+}
+.ff-words strong { color: #F5C518; font-weight: 900; }
+.ff-left {
+  display: inline-block; color: #5BD3DC; font-weight: 800; font-size: .88rem;
+}
+.ff-go {
+  flex-shrink: 0; font-family: 'Nunito', sans-serif; font-weight: 900;
+  font-size: .95rem; text-decoration: none;
+  background: #F5C518; color: #07112e;
+  padding: .65rem 1.2rem; border-radius: 999px;
+}
+.ff-go:hover { background: #ffd84a; }
