@@ -400,3 +400,13 @@
     if (modal && modal.classList.contains("open")) closeModal();
   });
 })();
+
+/* The member bar tells you which of the six you are looking at. Done here
+   rather than by hand in 27 files, so a new page can never forget. */
+(function () {
+  var here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  document.querySelectorAll('.member-bar a').forEach(function (a) {
+    var to = (a.getAttribute('href') || '').split('#')[0].toLowerCase();
+    if (to && to === here) a.setAttribute('aria-current', 'page');
+  });
+})();

@@ -28,7 +28,11 @@
 
      daily_content    publish_date (date, unique), title, scripture, traveler,
                       virtues jsonb, story_text, story_html, narration_url,
-                      published_at
+                      published_at, book, week, night,
+                      book_html    the page-turning story book, kept apart
+                                   from story_html, which is the devotional
+                      song_html, song_audio_url, song_url, lyrics_url,
+                                   lantern_url, story_link
 
    Reading is forgiving on purpose: earlier website builds wrote virtues as
    plain strings and the title into `title` instead of `story_title`, so both
@@ -217,6 +221,58 @@
      wants a subscriptions row for this account with an open status, or an
      admin. If a family sees nothing here, that rule is why — not this code. */
   var archive = {
+    /* TONIGHT — the newest published night on or before today. Exactly what
+       the app's Today screen asks for, including the "or before" part: it
+       keeps a family reading last night's story rather than showing them an
+       empty screen when a day gets skipped or a time zone disagrees.
+
+       `select("*")` on purpose. Postgres rejects a whole select for one
+       column it doesn't know, and this row has picked up new columns over
+       time (book_html, song_html, song_audio_url). A star never goes stale. */
+    tonight: function () {
+      if (!ready()) return Promise.resolve(null);
+      return sb().from("daily_content").select("*")
+        .not("published_at", "is", null)
+        .lte("publish_date", today())
+        .order("publish_date", { ascending: false })
+        .limit(1)
+        .then(function (res) {
+          if (res.error) throw new Error(res.error.message);
+          var row = (res.data || [])[0];
+          return row ? archive.fromFullRow(row) : null;
+        });
+    },
+
+    /* One night in full — the two big HTML columns included. Fetched only
+       when somebody actually opens that night. */
+    full: function (date) {
+      if (!ready() || !date) return Promise.resolve(null);
+      return sb().from("daily_content").select("*")
+        .eq("publish_date", date)
+        .not("published_at", "is", null)
+        .limit(1)
+        .then(function (res) {
+          if (res.error) throw new Error(res.error.message);
+          var row = (res.data || [])[0];
+          return row ? archive.fromFullRow(row) : null;
+        });
+    },
+
+    /* Everything a night carries. Named the same way the app names it, so
+       the two files can be read side by side. */
+    fromFullRow: function (r) {
+      var n = archive.fromRow(r);
+      n.html = r.story_html || "";
+      n.bookHtml = r.book_html || "";
+      n.songHtml = r.song_html || "";
+      n.songAudio = r.song_audio_url || "";
+      n.songLink = r.song_url || "";
+      n.lyricsLink = r.lyrics_url || "";
+      n.lanternLink = r.lantern_url || "";
+      n.storyLink = r.story_link || "";
+      return n;
+    },
+
     list: function (limit) {
       if (!ready()) return Promise.resolve([]);
       return sb().from("daily_content")

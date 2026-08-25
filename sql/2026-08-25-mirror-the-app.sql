@@ -13,8 +13,11 @@
 --      the app's — neither side loses anything.
 --   3. Removes the journal photo bucket, if an earlier run of this file
 --      created one. Photos are not a feature for now.
+--   4. Lets YOU (the admin) read the nightly story and the archive without
+--      paying. Right now the rule only lets people through who have a paid
+--      row, so your own account sees an empty shelf.
 --
--- WHEN IT FINISHES it prints three rows, all saying yes.
+-- WHEN IT FINISHES it prints four rows, all saying yes.
 -- =====================================================================
 
 
@@ -89,9 +92,30 @@ delete from storage.buckets where id = 'journal-photos';
 
 
 -- ---------------------------------------------------------------------
+-- PART 4 — the nightly story and the archive
+-- The app made this rule back at the beginning, and it asks a narrow
+-- question: "does this person have a paid row?" You are the owner and you
+-- have no paid row, so it says no to you, and Tonight's Story and the
+-- archive come back empty on your own account.
+--
+-- lst_is_subscriber() asks the wider question the rest of the site already
+-- asks: paid, trialing, matched by email, or the admin. Swapping it in only
+-- ever lets MORE of the right people through — no paying family loses
+-- anything, and the app keeps working exactly as it does today.
+-- ---------------------------------------------------------------------
+alter table public.daily_content enable row level security;
+
+drop policy if exists "subscribers read published" on public.daily_content;
+create policy "subscribers read published"
+  on public.daily_content for select
+  to authenticated
+  using (published_at is not null and public.lst_is_subscriber());
+
+
+-- ---------------------------------------------------------------------
 -- DID IT WORK?
 -- Last thing that runs, so this is what shows in the Results panel.
--- You want three rows, all saying yes.
+-- You want four rows, all saying yes.
 -- ---------------------------------------------------------------------
 select 'journal table ready' as "what",
        case when exists (select 1 from information_schema.columns
@@ -105,4 +129,11 @@ select 'family story columns ready',
 union all
 select 'photo bucket gone',
        case when exists (select 1 from storage.buckets where id='journal-photos')
-            then 'NO' else 'yes' end;
+            then 'NO' else 'yes' end
+union all
+select 'you can read tonight''s story',
+       case when exists (select 1 from pg_policies
+                         where tablename = 'daily_content'
+                           and policyname = 'subscribers read published'
+                           and qual like '%lst_is_subscriber%')
+            then 'yes' else 'NO' end;

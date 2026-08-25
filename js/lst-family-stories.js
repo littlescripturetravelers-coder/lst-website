@@ -156,7 +156,7 @@
       '<div class="fs-empty">' +
         '<div class="fs-empty-i">&#10022;</div>' +
         '<h3>Your family has stories too</h3>' +
-        '<p>The library above holds the scripture stories. This is where your own go &mdash; the answers you write after a night&rsquo;s story, and the ones you sit down and write yourself: the ancestor who kept a promise, the grandmother whose faith held. Tag them by virtue, life situation, feeling, traveler and scripture, exactly like the scripture stories, and look them up the same five ways.</p>' +
+        '<p>The <a href="virtue-library.html">Virtue Library</a> holds the scripture stories. This is where your own go &mdash; the answers you write after a night&rsquo;s story, and the ones you sit down and write yourself: the ancestor who kept a promise, the grandmother whose faith held. Tag them by virtue, life situation, feeling, traveler and scripture, exactly like the scripture stories, and look them up the same five ways.</p>' +
         '<p class="fs-empty-note">Your stories are private to your family, and they reach the app and the Sacred World Timeline too.</p>' +
         '<button type="button" class="fs-btn fs-btn-gold" id="fs-signin">Sign in to start</button>' +
       '</div>';
