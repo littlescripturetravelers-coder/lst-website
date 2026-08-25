@@ -11,11 +11,14 @@
    are shown a real sample night from the free stories, plainly labelled,
    and js/lst-gate.js invites them in.
 
-   The three pasted pages a night carries — the devotional, the picture book
-   and the lullaby — are not shown as the pages they are. js/lst-read.js reads
-   them apart and hands back their pieces, and they are set here in the
-   website's own type: one comfortable column, headings that match the rest of
-   the site, and the story itself given the most room.
+   This page is the DEVOTIONAL and nothing else. The picture book and the
+   lullaby each have a page of their own — story.html and lullaby.html, opened
+   from the resource links near the top — because printing all three down one
+   page meant a family scrolled past the whole lullaby to reach the questions.
+
+   js/lst-read.js reads the devotional apart and hands back its pieces, and
+   they are set here in the website's own type: one comfortable column,
+   headings that match the rest of the site, and the story given the most room.
 
    Two things carried over from the app because they matter at bedtime: the
    text size (kept, so a family sets it once) and read-aloud.
@@ -23,7 +26,7 @@
    Mount with: LSTTonight.mount("lst-tonight")
 */
 (function () {
-  var root = null, night = null, loaded = false, loadError = "", openBook = false;
+  var root = null, night = null, loaded = false, loadError = "";
   var depth = 0;          /* which reading depth of the night is showing */
 
   /* Text size, remembered on this device. The app has the same idea in its
@@ -213,41 +216,6 @@
       '" style="width:100%;margin-bottom:1.8rem;"></audio>';
   }
 
-  function bookView(n) {
-    if (!n.bookHtml) return "";
-    var head = '<h3 class="rd-label">&#128214; The picture book</h3>' +
-      '<button type="button" class="mp-btn" id="t-book" style="margin-bottom:1.4rem;">' +
-        (openBook ? "Close the book" : "Open the picture book") + "</button>";
-    if (!openBook) return head;
-    var b = window.LSTRead ? window.LSTRead.book(n.bookHtml) : { ok: false };
-    if (!b.ok) return head + '<p class="mp-note">This one&rsquo;s book didn&rsquo;t come through.</p>';
-    return head +
-      (b.night || b.reference
-        ? '<p class="mp-meta">' + [b.night, b.reference].filter(Boolean).map(esc).join(" &middot; ") + "</p>"
-        : "") +
-      b.html;
-  }
-
-  function songView(n) {
-    var sources = [];
-    if (n.songLink) sources.push('<a href="' + esc(n.songLink) + '" target="_blank" rel="noopener">Listen to the song</a>');
-    if (n.lyricsLink) sources.push('<a href="' + esc(n.lyricsLink) + '" target="_blank" rel="noopener">Words to sing along</a>');
-
-    var l = (n.songHtml && window.LSTRead) ? window.LSTRead.song(n.songHtml) : { ok: false };
-    if (!l.ok && !n.songAudio && !sources.length) return "";
-
-    return '<h3 class="rd-label">&#127925; Tonight&rsquo;s lullaby</h3>' +
-      (l.title ? "<h4 style=\"font-family:'Fredoka',sans-serif;font-weight:600;color:#fff;font-size:1.3rem;margin:0 0 .4rem;line-height:1.25;\">" +
-        esc(l.title) + "</h4>" : "") +
-      (l.subtitle ? '<p style="color:rgba(255,255,255,.62);font-style:italic;margin:0 0 1.2rem;line-height:1.7;">' +
-        esc(l.subtitle) + "</p>" : "") +
-      (n.songAudio ? '<audio controls preload="none" src="' + esc(n.songAudio) +
-        '" style="width:100%;margin:0 0 1.4rem;"></audio>' : "") +
-      (l.jump || "") +
-      (l.html || "") +
-      (sources.length ? '<p class="rd-aside">' + sources.join(" &middot; ") + "</p>" : "");
-  }
-
   /* ----------------------------------------------------- tonight's resources
      The app's Lantern shows three buttons here, and their links point at
      files that live inside the app bundle — they cannot work on the website.
@@ -325,7 +293,7 @@
 
     return '<div class="rd">' + headView(n) + toolsView() +
       '<div class="rd-body">' + depthsView(eds) +
-        narrationView(n) + resourcesView(n) + body + bookView(n) + songView(n) + keepView() +
+        narrationView(n) + resourcesView(n) + body + keepView() +
       "</div></div>";
   }
 
@@ -348,14 +316,6 @@
     root.innerHTML = nightView(night);
     applySize();
 
-    var b = document.getElementById("t-book");
-    if (b) b.addEventListener("click", function () {
-      stopReading();
-      openBook = !openBook;
-      render();
-      var again = document.getElementById("t-book");
-      if (again && openBook) again.scrollIntoView({ block: "center", behavior: "smooth" });
-    });
 
     var small = document.getElementById("t-smaller");
     if (small) small.addEventListener("click", function () {
@@ -398,7 +358,7 @@
       });
       auth().onChange(function () {
         stopReading();
-        loaded = false; openBook = false; depth = 0;
+        loaded = false; depth = 0;
         if (auth().signedIn()) { render(); load().then(render); }
         else { night = null; loaded = true; render(); }
       });
