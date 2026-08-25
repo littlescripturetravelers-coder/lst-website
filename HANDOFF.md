@@ -2,7 +2,7 @@
 
 **Repo:** `littlescripturetravelers-coder/lst-website`
 **Live:** https://www.littlescripturetravelers.com (Vercel, auto-deploys on push to `main`)
-**Last updated:** 2026-08-25 (session 7)
+**Last updated:** 2026-08-25 (session 8)
 **Owner:** Levi Lewis (non-technical founder, littlescripturetravelers@gmail.com). Claude builds and ships everything.
 
 > **This file is the source of truth, not the chat.** Chats get lost. Update this file at the end of
@@ -80,9 +80,12 @@ js/lst-app-data.js      # THE shared record — the ONE file that knows the app'
                         #   column shapes. Change it here when the app changes. (§13)
 js/lst-journal.js       # the app's journal, on the website
 js/lst-archive.js       # every published daily story
+js/lst-tonight.js       # tonight's story + lullaby, same row the phone reads (§14)
+js/lst-gate.js          # the 7-days-free invitation on the members' pages (§14)
 js/lst-account.js       # account page
-journal.html / archive.html / account.html
-docs/FOR-THE-APP-CHAT-remove-photos.md # hand this to the app chat
+tonight.html / family-stories.html / journal.html / archive.html / account.html
+docs/FOR-THE-APP-CHAT-remove-photos.md      # hand these to the app chat
+docs/FOR-THE-APP-CHAT-timeline-duplicate.md #   "     "    "   "   "   " 
 js/lst-family-stories.js# Family Stories section on the Virtue Library (§11)
 sql/                    # migrations for Levi to paste into the Supabase SQL editor
                         #   ...-accounts-and-family-stories.sql  (run 1st)
@@ -159,14 +162,21 @@ are explore links to `travelers.html` / content pages, on purpose.
    `journal-photos` bucket. **Nothing in §13 (journal, archive, account) works until he does.**
    Click-by-click: Supabase → SQL Editor → New query → open the file, Ctrl+A, Ctrl+C → paste →
    Ctrl+A in the editor → Run. *(The earlier §11 migration is already run — see §11.)*
-2. **Hand `docs/FOR-THE-APP-CHAT-remove-photos.md` to the app chat.** The website half of removing
-   photos is shipped; the app still has the picker. That file leads with the thing that must not
-   happen: **do not drop the `photos` column** (§13).
+2. **Hand two files to the app chat**, both in `docs/`:
+   - `FOR-THE-APP-CHAT-remove-photos.md` — the website half of removing photos is shipped; the app
+     still has the picker. Leads with the thing that must not happen: **do not drop the `photos`
+     column** (§13).
+   - `FOR-THE-APP-CHAT-timeline-duplicate.md` — `www/timeline.html` declares `PROPHECIES` twice
+     again. Fixed on the website for the second time; it will come back a third unless the app is
+     fixed (§10).
 3. **Load the story text.** `story_texts` is empty, so subscribers still can't read a full story.
    The text is in `api/_lib/stories-full.json` on Levi's computer (referenced by
    `data/virtue-library.js`, never committed). Get that file from him, then load the 91 rows.
-4. **Wire the timeline's Family Story layer** to the same `family_stories` table (it currently
-   keeps added stories in memory only).
+4. **Wire the timeline's Family Story layer** to the same `family_stories` table. It keeps added
+   stories in `localStorage`, on that device only — so they reach neither the app, the account, nor
+   the family-stories page. Now that `family-stories.html` and `js/lst-app-data.js` exist, this is
+   a much smaller job than it was: the timeline's family panel needs to read and write through
+   `LSTData.familyStories` instead of its own storage.
 5. **YouTube "how to use the timeline" video section on the home page.** Levi wants a home-page
    section showing a walkthrough video of the timeline. **Waiting on the video URL** — it may not be
    recorded yet. When it lands, follow the existing `watch-section` iframe pattern in `index.html`,
@@ -233,18 +243,32 @@ Then, **at the end of the session**, update this file (status, gotchas, next tas
   page** — it would kill that page's scrolling and cover the site nav. Link to it, don't embed it
   (an iframe would work if a preview is ever wanted).
 
-**What the tool is (VERSION 6, installed 2026-08-19):** a pan/zoom timeline, 4000 BC → 2030, built
-by Levi. Self-contained vanilla JS — no build step, no libraries. ~4,800 lines. Only external calls
-are Google Fonts and OpenStreetMap tiles for the per-event map.
+**What the tool is (the APP's version, installed 2026-08-25):** a pan/zoom timeline, 4000 BC → 2030,
+built by Levi. Self-contained vanilla JS — no build step, no libraries. ~9,000 lines. Only external
+calls are Google Fonts and OpenStreetMap tiles for the per-event map.
 
-Version 6 replaced the original wholesale. It adds empires, wars, trade routes, famous people,
-migrations, explorations and Christian history as layers; **eighteen** layers behind a slide-out
-`☰ Layers` panel (they used to be chips across the top); four modes — **Hand** (dims all but the
-events where His hand shows), **Prophecy** (arcs from prophecy to fulfilment), **Seeds** (truths
-placed in cultures before missionaries came), **Chain** (a 21-link animated walk from fire to the
-First Vision); and three panels — **Prophecy Tracker** (27 fulfilled prophecies with confidence
-ratings), **World Faiths Chart** (15 traditions from their own sources), **My Family History**
-(add events, pioneer ancestors).
+**It is now the app's file, adapted — not a separate website build.** `lst-app/www/timeline.html` is
+the source. When Levi says "match the app", copy that file and re-apply the four adaptations below.
+Do NOT hand-port features across; the two would drift again within a session.
+
+**88 events across 33 layers** (v6 had 63 across 18). Controls moved: three round buttons top-LEFT
+(🔍 search, 👁 views+modes, ☰ layers), a 📚 Studies button bottom-left, era buttons along the
+bottom. The old header rows still exist in the markup but are hidden (`#hdr,#hdr2{display:none}`)
+because the app draws its own chrome — their controls were re-homed into the sheets as the very
+same elements, so ids and handlers still work. **`togglePath()` survives with no button**: the
+guided tour is now 🎤 Narrate, with four scripted tours.
+
+**Five studies** behind 📚: Study Library, World Faiths Chart, Prophecy Tracker, Faith & Freedom
+(four patterns, each with an honest caution), My Family History.
+
+Five modes, all under 👁: **Hand** (dims all but the events where His hand shows), **Prophecy**
+(arcs from prophecy to fulfilment), **Seeds** (16 truths placed in cultures before missionaries
+came), **Chain** (a 21-link animated walk from fire to the First Vision), **Narrate** (four scripted
+tours). ↔ / ↕ swap whether time runs across or down; down is the phone-friendly one.
+
+**`counter` (Counterfeits) is still off by default** — check this on every future upload. It is
+heavier teen/adult material and the website is public. The switch is in the visibility map beside
+`var LANES`, not in `LANES` itself.
 
 **Family events now persist in `localStorage`** — on the device only, not the account, and not
 shared with the app or the Virtue Library. That sync is still the open task.
@@ -274,22 +298,28 @@ freedom, counter (Counterfeit/Shadow — **off by default**, heavier teen/adult 
 — ancestors placed at their real moment in history, so you can see how the family formed and what
 your people lived through. This is the bridge to the app's Family Stories (see §6, item 1).
 
-**Edits made to Levi's file when it is brought into the repo** (otherwise verbatim — re-apply these
-to any future version he sends):
-1. meta description added;
-2. the header wordmark links back to `index.html`;
-3. OpenStreetMap attribution over the map canvas (their tile policy requires it).
+**THE FOUR ADAPTATIONS — re-apply every single time the app's file is copied in:**
+1. meta description added (the app file has none; this page should be indexed);
+2. `fonts-embed.css` → the Google Fonts link (that file is 405 KB of embedded fonts and lives only
+   in the app repo);
+3. OpenStreetMap attribution over the map canvas (their tile policy requires it);
+4. **a way home** — a `←` link to `index.html` as the first button in `#tl-fab`. The app hides both
+   header rows because it draws its own navigation; on the website there is nothing around this
+   page, so without this a visitor is stranded.
 
-**Two defects fixed in the v6 upload** (watch for them recurring in a v7):
-- The Prophecy, Seeds and Chain buttons were each in the header **twice**. `getElementById` only
-  finds the first, so the second set never lit when toggled. Duplicate run removed.
-- `PROPHECIES` was declared **twice**; the later block silently won, making the earlier one dead
-  code that also dated Malachi to 600 BC against its own "written c. 430 BC" text. Stale block
-  removed, note left in its place.
+**The defect that keeps coming back — check for it on EVERY upload:**
+- `PROPHECIES` declared **twice**. The later block silently wins; the earlier is dead code that
+  dates Malachi to 600 BC against its own "written c. 430 BC" text. Fixed in v6, back again in the
+  app's current file, removed again here. Written up for the app chat in
+  `docs/FOR-THE-APP-CHAT-timeline-duplicate.md`. **Fix it in the app** or it returns a third time.
+- (v6 also had the Prophecy/Seeds/Chain buttons in the header twice, so the second set never lit.
+  That one has NOT recurred — the current file has no duplicate ids at all.)
 
 **`timeline.html` (the explainer) must be updated whenever the tool changes** — it names specific
-controls, lists all eighteen layers, and describes each mode. A stale explainer sends people looking
-for buttons that aren't there.
+controls, lists all thirty-three layers, and describes each mode. A stale explainer sends people
+looking for buttons that aren't there, which is exactly what happened this time: it still said
+Layers was in the top right, still said "eighteen", and still told people to tap a ✦ Path button
+that no longer exists. **Check it against the running tool, not against memory.**
 
 **Known gap:** family entries persist on the **device** (localStorage) but not to the account, so they
 do not reach the app, the Virtue Library, or another device. Levi wants account-saving — see §6 item 1.
@@ -491,3 +521,69 @@ build a paid storage tier; just turn it back on.
   still a **separate copy** from whatever the app tags stories with. That is the
   next two-copies problem to solve if Levi wants true one-source content.
 
+---
+
+## 14. The member bar, and the 7-days-free gate (built 2026-08-25)
+
+### What Levi asked for
+> "I need to also have in the header as one of the pages journal. I also need tonight's story and
+> family stories all in the header that you click and it takes you to their own page... I would like
+> all of those to be accessible but once they try to scroll or use the page have a pop up that says
+> 7 days free with the subscribe button."
+
+### The header now has two rows
+The top row is unchanged marketing navigation. Below it, `.member-bar` — **the product**:
+
+`Tonight's Story · Virtue Library · Family Stories · Journal · Story Archive · Timeline`
+
+**Why a second row and not six more items up top.** The top row is capped at `--content-wide`
+(1300px) and was **already spilling past it** before any of this — at 1280 and 1440 the
+"Try the First 7 Days Free" button hung off the right edge of the page. Adding six names made it
+worse by 570px. Measured at eight widths from 1100 to 1920; nothing overflows now. Moving those six
+out actually left the top row **shorter than it was** (8 items, was 10).
+
+On a phone the member bar stays visible and scrolls sideways — one fewer tap than the hamburger.
+`main.js` marks the current page with `aria-current="page"`, matched on filename, so a new page can
+never forget to highlight itself.
+
+### The gate — `js/lst-gate.js`
+Arm it on a page and it waits. The moment somebody who is not a subscriber scrolls, clicks or
+presses a key, the invitation appears: the free week, four things it opens, and a **Start the free
+week** button that goes through `openTrialSignup('monthly')` — never straight to Payhip, because
+that popup is what carries the email into checkout (§4).
+
+**It is NOT the paywall.** Postgres decided long before this file ran; closing the box hands nobody
+a story. It exists to explain, not to lock.
+
+- Subscribers, trialers and admins **never** see it — it disarms itself the instant `LSTAuth` says so.
+- Once per page per browser session (`sessionStorage`). An invitation, not a pestering.
+- The header, the sign-in button and anything marked `data-gate-free` don't trigger it.
+
+Armed on: `tonight.html`, `family-stories.html`, `journal.html`, `archive.html`,
+`virtue-library.html`. **Not** on `account.html` — you cannot ask somebody to subscribe on the page
+where they manage their subscription.
+
+### Tonight's Story — `tonight.html` + `js/lst-tonight.js`
+The same `daily_content` row the phone reads: newest published night **on or before** today, so a
+skipped day shows last night rather than an empty screen. Title, scripture, traveler, virtues,
+narration, the story, the page-turning book, and the lullaby.
+
+A visitor who is not signed in sees a **real sample night** built from the library's free shelf and
+its public teaser — plainly labelled "A sample night". There is no trimmed-down real story to show,
+because the database hands back nothing at all.
+
+`story_html` and `book_html` are Levi's own markup from the app's admin screen, but they still get
+their `<script>`, `<iframe>`, `<form>` and every `on*` attribute stripped before going on the page.
+
+### Family Stories has its own page
+`family-stories.html`. The section on `virtue-library.html` keeps its `#family-stories` anchor but is
+now a **pointer** to that page — mounting the same module twice is two copies to keep in step.
+
+### Two CSS blocks moved into `style.css`
+- The `mp-*` member-page rules were pasted **identically into three files**. One copy now.
+- The `fs-*` family-story rules were trapped inside `virtue-library.html`, where the new page could
+  not reach them — which is why Family Stories rendered completely unstyled on its own page at first.
+
+### Bug found on the way
+`virtue-library.html` mounted `LSTFamilyStories` but never loaded `js/lst-app-data.js`, so
+`window.LSTData` was undefined and the section could never have loaded a single story. Fixed.
