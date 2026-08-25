@@ -11,10 +11,10 @@
 --   1. Lets the website read and write your journal (same journal as the app).
 --   2. Adds the few extra columns the website's family stories use, alongside
 --      the app's — neither side loses anything.
---   3. Creates a private storage bucket for journal photos, so pictures can
---      finally follow you between phone and website once the app uploads them.
+--   3. Removes the journal photo bucket, if an earlier run of this file
+--      created one. Photos are not a feature for now.
 --
--- WHEN IT FINISHES it prints one row per table so you can see it worked.
+-- WHEN IT FINISHES it prints three rows, all saying yes.
 -- =====================================================================
 
 
@@ -70,39 +70,22 @@ create index if not exists family_stories_user_kind
 
 
 -- ---------------------------------------------------------------------
--- PART 3 — journal photos
--- A private bucket. Each family can only reach their own folder, which is
--- named after their account id. Nobody can browse anyone else's pictures,
--- and none of it is public on the internet.
+-- PART 3 — undo the photo bucket
+-- Photos are not a feature for now. If you ran an earlier version of this
+-- file that created a photo bucket, these lines take it back out. If you
+-- never ran it, they do nothing at all.
+--
+-- The `photos` COLUMN on journal_entries is deliberately left alone: app
+-- versions already on phones write it on every save, and removing it would
+-- break their journals.
 -- ---------------------------------------------------------------------
-insert into storage.buckets (id, name, public)
-values ('journal-photos', 'journal-photos', false)
-on conflict (id) do nothing;
-
 drop policy if exists "own journal photos read"   on storage.objects;
 drop policy if exists "own journal photos write"  on storage.objects;
 drop policy if exists "own journal photos update" on storage.objects;
 drop policy if exists "own journal photos delete" on storage.objects;
 
-create policy "own journal photos read" on storage.objects
-  for select to authenticated
-  using (bucket_id = 'journal-photos'
-         and (storage.foldername(name))[1] = auth.uid()::text);
-
-create policy "own journal photos write" on storage.objects
-  for insert to authenticated
-  with check (bucket_id = 'journal-photos'
-              and (storage.foldername(name))[1] = auth.uid()::text);
-
-create policy "own journal photos update" on storage.objects
-  for update to authenticated
-  using (bucket_id = 'journal-photos'
-         and (storage.foldername(name))[1] = auth.uid()::text);
-
-create policy "own journal photos delete" on storage.objects
-  for delete to authenticated
-  using (bucket_id = 'journal-photos'
-         and (storage.foldername(name))[1] = auth.uid()::text);
+delete from storage.objects where bucket_id = 'journal-photos';
+delete from storage.buckets where id = 'journal-photos';
 
 
 -- ---------------------------------------------------------------------
@@ -120,6 +103,6 @@ select 'family story columns ready',
                          where table_name='family_stories' and column_name='kind')
             then 'yes' else 'NO' end
 union all
-select 'photo bucket ready',
+select 'photo bucket gone',
        case when exists (select 1 from storage.buckets where id='journal-photos')
-            then 'yes' else 'NO' end;
+            then 'NO' else 'yes' end;

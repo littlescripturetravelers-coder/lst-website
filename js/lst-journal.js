@@ -4,10 +4,11 @@
    the app's exact column shape. Write an entry here and it is on the phone;
    write one on the phone and it is here.
 
-   Photos: the app keeps the pictures themselves on the phone and syncs only
-   their names, so an entry written there may list photos this page cannot
-   show. It says so plainly rather than showing broken frames. Once the app
-   uploads to storage (see sql/ for the bucket), this page will show them.
+   Photos are deliberately not part of this. The website neither shows nor
+   attaches them. It does still carry the `photos` value through untouched on
+   save, because older app versions on phones still write that column, and
+   blanking it from here would wipe an entry's photo list out from under the
+   phone that holds the actual pictures.
 
    Mount with: LSTJournal.mount("lst-journal")
 */
@@ -55,14 +56,6 @@
       '</div>';
   }
 
-  function photoNote(r) {
-    if (!r.photos || !r.photos.length) return "";
-    var n = r.photos.length;
-    return '<p class="mp-meta" style="color:rgba(255,255,255,.45);font-weight:400;">&#128247; ' +
-      n + (n === 1 ? " photo" : " photos") +
-      " &mdash; kept on the phone you added " + (n === 1 ? "it" : "them") + " from</p>";
-  }
-
   function cardView(r) {
     var where = r.place ? esc(r.place) : "";
     var fromApp = (r.source || "") !== "website";
@@ -81,7 +74,6 @@
           (where ? "&#128205; " + where : "") +
         "</p>" +
         '<p class="mp-text">' + esc(r.body) + "</p>" +
-        photoNote(r) +
       "</article>";
   }
 
@@ -184,7 +176,7 @@
         place: (document.getElementById("j-place").value || "").trim(),
         body: body,
         lat: editing.lat, lon: editing.lon,   /* never lose the map pin the app set */
-        photos: editing.photos || [],         /* nor the photo list */
+        photos: editing.photos || [],         /* carried through, never shown */
         source: editing.source || "website"
       };
 

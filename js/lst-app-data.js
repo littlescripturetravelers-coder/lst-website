@@ -22,6 +22,10 @@
                       user_id, entry_date (date), body, source,
                       place, lat, lon, photos jsonb
 
+   Photos are not a website feature. The column is still read and written
+   verbatim because app versions already on phones write it on every save —
+   dropping it, or blanking it from here, would break or erase their entries.
+
      daily_content    publish_date (date, unique), title, scripture, traveler,
                       virtues jsonb, story_text, story_html, narration_url,
                       published_at
