@@ -83,6 +83,10 @@ js/lst-archive.js       # every published daily story
 js/lst-tonight.js       # tonight's story + lullaby, same row the phone reads (§14)
 js/lst-read.js          # THE reader — turns the app's three pasted pages into
                         #   website-native flowing content (§15)
+js/lst-keep.js          # the writing half — answers, family circle, journal (§16)
+js/lst-open.js          # story.html / lullaby.html, one piece of the night (§16)
+data/lantern-lullaby.js # ⚠️ 2nd copy of the app's signature lullaby words (§16)
+story.html / lullaby.html
 js/lst-gate.js          # the 7-days-free invitation on the members' pages (§14)
 js/lst-account.js       # account page
 tonight.html / family-stories.html / journal.html / archive.html / account.html
@@ -675,3 +679,66 @@ tonight's, depth chooser included.
 ### Gotcha that bit
 `esc(x.join(" &middot; "))` escapes the separator too, so `&middot;` reached the page as literal
 text. Escape each piece, then join with the entity.
+
+---
+
+## 16. The writing half of the night (built 2026-08-25)
+
+### What Levi asked for
+> "I would like the two lullabies and the story to all be links on the tonight's story tab that you
+> click and it opens up a new web page... Also for the Parent's Heart for Tonight it needs to have
+> the same functionality as the app where it has expandable buttons where you can type in your
+> answers and tag them and save them and have them uploaded to your family library. Also at the
+> bottom of the webpage it needs to be set up exactly like the app."
+
+And again, the standing rule: **the app does not change. The website conforms.**
+
+### The resource links — `story.html`, `lullaby.html`
+The Lantern's three buttons point at files inside the app bundle
+(`travelers-lullaby.html`, `a-brand-new-song.html`) that **can never resolve on the website**. So
+`js/lst-tonight.js` does not use their hrefs — it rebuilds the same three from what the night
+carries:
+
+| Button | Opens |
+|---|---|
+| Tonight's Story | `story.html?date=…` — the picture book, unfolded down the page |
+| Tonight's Lullaby | `lullaby.html?date=…` — that night's lullaby |
+| The Lantern Lullaby | `lullaby.html?which=lantern` (or `lantern_url` if the night sets one) |
+
+Both pages are `js/lst-open.js`. With no `?date` they show tonight.
+
+**⚠️ `data/lantern-lullaby.js` is a SECOND COPY** of the app's `www/lullaby-lantern.html` words. The
+signature lullaby belongs to no night, so it is in no database row. If it changes in the app, change
+it here too. It is deliberately **public** — a lullaby to sing is not something to lock away.
+
+### A Parent's Heart — `js/lst-keep.js`
+Every `.rd-q` the reader produces grows a `+`. It opens an answer box with the night's own tags
+already on it (story, scripture, traveler, virtues), room for your own, and a row of your family to
+mark whose answer it is. Drafts survive in `localStorage`; they clear on save.
+
+**Saving goes to `family_stories` as `answers: [{q,a}]`** — the app's exact shape — via
+`LSTData.familyStories.saveAnswer()`.
+
+**⚠️ It must never set `entry_date`.** The app upserts its own journal rows on
+`(user_id, entry_date)`; a website row carrying tonight's date would be silently overwritten the
+next time a parent answered on their phone. The night is recorded in **`story_id = "night:<date>"`**
+instead, which is also how a second answer finds the first row and appends to it rather than making
+another. One row per person per night.
+
+### The foot of the page
+**Our Family Circle** and **the Study Journal** (all eleven categories, copied from the app's
+`JR_KINDS`). Journal entries go to `journal_entries` with the category in `source` as
+`"website:<key>"`; `js/lst-journal.js` reads that back as a badge, and its "From the app" test is
+now `!/^website/` rather than `!== "website"`.
+
+**The family circle is the one thing still on the device.** There is no table for it and adding one
+would mean another migration. It only names people so answers can be attributed; the answers
+themselves are all account-backed. It tops itself up from every `person` that has ever had a story
+saved, so a second device fills in rather than starting bare. *If Levi ever wants it to sync
+properly, that is one `alter table profiles add column family_circle jsonb` away.*
+
+### Two bugs worth remembering
+- `enhance()` attached its click handler on **every** render. The page redraws on each depth switch,
+  so after two switches one Save fired three times. Guarded with `data-hq-wired`.
+- The `1.` in front of a question was being stored as part of the question text. Stripped — the
+  number is layout, not question.
