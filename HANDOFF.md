@@ -82,7 +82,7 @@ js/lst-journal.js       # the app's journal, on the website
 js/lst-archive.js       # every published daily story
 js/lst-account.js       # account page
 journal.html / archive.html / account.html
-docs/FOR-THE-APP-CHAT-photo-sync.md   # hand this to the app chat
+docs/FOR-THE-APP-CHAT-remove-photos.md # hand this to the app chat
 js/lst-family-stories.js# Family Stories section on the Virtue Library (§11)
 sql/                    # migrations for Levi to paste into the Supabase SQL editor
                         #   ...-accounts-and-family-stories.sql  (run 1st)
@@ -154,17 +154,20 @@ are explore links to `travelers.html` / content pages, on purpose.
 
 ## 6. STATUS — PENDING / next up
 
-1. **Finish the shared family record.** Website half is BUILT (§11) but two things remain:
-   - **Levi must run `sql/2026-08-19-website-accounts-and-family-stories.sql`** in the Supabase SQL
-     editor. Nothing works until he does. Click-by-click: Supabase → SQL Editor → New query → paste
-     the whole file → Run.
-   - **Load the story text.** `story_texts` is empty, so subscribers still can't read a full story.
-     The text is in `api/_lib/stories-full.json` on Levi's computer (referenced by
-     `data/virtue-library.js`, never committed). Get that file from him, then load the 91 rows.
-   - **Wire the timeline's Family Story layer** to the same `family_stories` table (it currently
-     keeps added stories in memory only). The app's Family Stories should move to it too — but that
-     is app-side work for the app chat.
-2. **YouTube "how to use the timeline" video section on the home page.** Levi wants a home-page
+1. **Levi must run `sql/2026-08-25-mirror-the-app.sql`** in the Supabase SQL editor — the journal
+   table + its policies, the website's extra family-story columns, and deleting the now-unwanted
+   `journal-photos` bucket. **Nothing in §13 (journal, archive, account) works until he does.**
+   Click-by-click: Supabase → SQL Editor → New query → open the file, Ctrl+A, Ctrl+C → paste →
+   Ctrl+A in the editor → Run. *(The earlier §11 migration is already run — see §11.)*
+2. **Hand `docs/FOR-THE-APP-CHAT-remove-photos.md` to the app chat.** The website half of removing
+   photos is shipped; the app still has the picker. That file leads with the thing that must not
+   happen: **do not drop the `photos` column** (§13).
+3. **Load the story text.** `story_texts` is empty, so subscribers still can't read a full story.
+   The text is in `api/_lib/stories-full.json` on Levi's computer (referenced by
+   `data/virtue-library.js`, never committed). Get that file from him, then load the 91 rows.
+4. **Wire the timeline's Family Story layer** to the same `family_stories` table (it currently
+   keeps added stories in memory only).
+5. **YouTube "how to use the timeline" video section on the home page.** Levi wants a home-page
    section showing a walkthrough video of the timeline. **Waiting on the video URL** — it may not be
    recorded yet. When it lands, follow the existing `watch-section` iframe pattern in `index.html`,
    and remember to add it to all three index variants.
@@ -456,14 +459,30 @@ are `noindex` and linked from a "My Account" nav dropdown on all 25 pages.
 
 ### ⚠️ Needs Levi to run
 `sql/2026-08-25-mirror-the-app.sql` — journal table + policies, the website's
-extra family-story columns, and the private `journal-photos` storage bucket.
+extra family-story columns, and removal of the `journal-photos` storage bucket.
+**Nothing in §13 works until this is run.**
 
-### Photos
-The app **never uploads images** — only filenames sync, so the website says
-"kept on the phone you added them from". The bucket and its per-account security
-rules now exist; the app half is written up in
-`docs/FOR-THE-APP-CHAT-photo-sync.md`. Once the app uploads, the website shows
-them with no further work.
+### Photos — decided against, on purpose (25 Aug 2026)
+Levi: *"for now we just don't include photo uploads with the family stories and
+journals. That is something we can do later if my customers want that. So do
+away with that in the app and website."*
+
+So: the website neither shows nor attaches photos, and the storage bucket is
+deleted by the migration above.
+
+⚠️ **The `photos` column stays.** Do not drop it. App versions already on
+phones write `photos` on every journal save (verified in the app's
+`www/js/backend.js`), so dropping the column would break saving for families
+who haven't updated. `js/lst-app-data.js` and `js/lst-journal.js` therefore
+read and write the value through **untouched** — blanking it from the website
+would erase a phone's own photo list out from under it.
+
+The app half of the removal is written up in
+`docs/FOR-THE-APP-CHAT-remove-photos.md` — hand that file to the app chat.
+
+If Levi ever asks for photos back: storage is cheap enough not to charge for
+(20,000 subscribers ≈ $54/mo against ≈ $219,800/mo of revenue — 0.025%). Don't
+build a paid storage tier; just turn it back on.
 
 ### Loose ends
 - `subscribe.html` has a stray `</div>` that **predates all of this**. Browsers
