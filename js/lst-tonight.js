@@ -248,11 +248,55 @@
       (sources.length ? '<p class="rd-aside">' + sources.join(" &middot; ") + "</p>" : "");
   }
 
+  /* ----------------------------------------------------- tonight's resources
+     The app's Lantern shows three buttons here, and their links point at
+     files that live inside the app bundle — they cannot work on the website.
+     So the same three are built from what the night actually carries, each
+     opening a page of its own. */
+  function resourcesView(n) {
+    var d = n.date ? "?date=" + encodeURIComponent(n.date) : "";
+    var items = [];
+
+    if (n.bookHtml) {
+      items.push({ ico: "&#128214;", href: "story.html" + d, primary: true,
+        title: "Tonight&rsquo;s Story",
+        sub: [n.book ? "Book " + n.book : "", n.week ? "Week " + n.week : "",
+              n.night ? "Night " + n.night : "", n.title]
+             .filter(Boolean).map(esc).join(" &middot; ") });
+    }
+    if (n.songHtml || n.songAudio) {
+      items.push({ ico: "&#127925;", href: "lullaby.html" + d,
+        title: "Tonight&rsquo;s Lullaby &mdash; Lyrics &amp; Music",
+        sub: esc(n.title || "The song for this night") });
+    }
+    /* The signature lullaby belongs to no night. If the night names one, use
+       that link; otherwise the website has its own copy of the words. */
+    items.push({ ico: "&#127926;",
+      href: /^https?:/i.test(n.lanternLink || "") ? n.lanternLink : "lullaby.html?which=lantern",
+      external: /^https?:/i.test(n.lanternLink || ""),
+      title: "The Lantern Lullaby &mdash; Lyrics &amp; Music",
+      sub: "Our signature Old Testament lullaby" });
+
+    if (!items.length) return "";
+
+    return '<h3 class="rd-label" style="margin-top:2.4rem;">&#127769; Tonight&rsquo;s resources</h3>' +
+      '<div class="rd-kit">' + items.map(function (it) {
+        return '<a class="rd-kit-btn' + (it.primary ? " rd-kit-primary" : "") + '" href="' +
+          esc(it.href) + '" target="_blank" rel="noopener">' +
+          '<span class="rd-kit-ico">' + it.ico + "</span>" +
+          "<span><span class=\"rd-kit-title\">" + it.title + "</span>" +
+          (it.sub ? '<span class="rd-kit-sub">' + it.sub + "</span>" : "") + "</span>" +
+          '<span class="rd-kit-arrow">&#8599;</span></a>';
+      }).join("") + "</div>";
+  }
+
   function keepView() {
-    return '<h3 class="rd-label" style="margin-top:2.4rem;">Keep it</h3>' +
-      '<p class="rd-aside" style="margin-top:0 !important;">Write what your child said tonight in ' +
-        '<a href="journal.html">your journal</a>, or tag it into ' +
-        '<a href="family-stories.html">your family&rsquo;s stories</a>. ' +
+    /* js/lst-keep.js fills this: the Family Circle and the Study Journal,
+       the same two the app puts at the foot of a night. */
+    return '<div id="lst-keep"></div>' +
+      '<p class="rd-aside">Everything you write here is in the app too, and gathered in ' +
+        '<a href="family-stories.html">your family&rsquo;s stories</a> and ' +
+        '<a href="journal.html">your journal</a>. ' +
         'Every night we have sent is in <a href="archive.html">the archive</a>.</p>';
   }
 
@@ -281,7 +325,7 @@
 
     return '<div class="rd">' + headView(n) + toolsView() +
       '<div class="rd-body">' + depthsView(eds) +
-        narrationView(n) + body + bookView(n) + songView(n) + keepView() +
+        narrationView(n) + resourcesView(n) + body + bookView(n) + songView(n) + keepView() +
       "</div></div>";
   }
 
@@ -323,6 +367,13 @@
     });
     var rd = document.getElementById("t-read");
     if (rd) rd.addEventListener("click", toggleRead);
+
+    /* Every question on the page becomes something you can answer, and the
+       two writing cards go in below the night. */
+    if (window.LSTKeep) {
+      window.LSTKeep.enhance(root, night);
+      window.LSTKeep.bottom("lst-keep", night);
+    }
 
     root.querySelectorAll("[data-depth]").forEach(function (b) {
       b.addEventListener("click", function () {

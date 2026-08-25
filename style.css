@@ -2339,3 +2339,169 @@ cite strong { color: var(--gold); display: block; }
   background: #F5C518; color: #07112e; border-color: #F5C518;
 }
 .rd-depth.on small { color: rgba(7,17,46,.7); }
+
+/* --------------------------------------------------- tonight's resources
+   The three doors the app puts at the top of a night: the story, the
+   night's lullaby, and the signature one. Each opens a page of its own. */
+.rd-kit { display: grid; grid-template-columns: 1fr; gap: .55rem; margin: 0 0 2rem; }
+.rd-kit-btn {
+  display: flex; align-items: center; gap: .8rem;
+  background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,255,255,.13);
+  border-radius: .8rem; padding: .85rem 1rem; text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+.rd-kit-btn:hover { background: rgba(245,197,24,.12); border-color: rgba(245,197,24,.4); }
+.rd-kit-primary { background: rgba(245,197,24,.12); border-color: rgba(245,197,24,.4); }
+.rd-kit-primary:hover { background: rgba(245,197,24,.22); }
+.rd-kit-ico { font-size: 1.25rem; line-height: 1; flex-shrink: 0; }
+.rd-kit-title {
+  display: block; font-family: 'Fredoka', sans-serif; font-weight: 600;
+  font-size: 1rem; color: #fff; line-height: 1.25;
+}
+.rd-kit-primary .rd-kit-title { color: #F5C518; }
+.rd-kit-sub {
+  display: block; font-size: .82rem; color: rgba(255,255,255,.55);
+  line-height: 1.35; margin-top: .12rem;
+}
+.rd-kit-primary .rd-kit-sub { color: rgba(245,197,24,.65); }
+.rd-kit-arrow { margin-left: auto; color: rgba(255,255,255,.35); flex-shrink: 0; }
+.rd-kit-btn:hover .rd-kit-arrow { color: #F5C518; }
+
+/* ============================================================================
+   WHAT THE NIGHT LEAVES BEHIND — the writing half of Tonight's Story.
+   Answer panels on every question, the Family Circle, the Study Journal.
+   Behaviour in js/lst-keep.js.
+   ========================================================================= */
+
+/* A question you can open. The plus turns into a cross when it is open. */
+.hq-q { position: relative; padding-right: 2.6rem !important; cursor: default; }
+.hq-plus {
+  position: absolute; top: .35rem; right: .3rem;
+  width: 1.65rem; height: 1.65rem; border-radius: 50%;
+  border: none; background: #F5C518; color: #07112e;
+  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.05rem;
+  line-height: 1; cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .22s cubic-bezier(.22,1,.36,1), background .18s;
+}
+.hq-plus:hover { background: #ffd84a; }
+.hq-q.hq-open .hq-plus { background: rgba(255,255,255,.16); color: #fff; transform: rotate(45deg); }
+
+.hq-panel {
+  margin: .5rem 0 1.1rem .95rem;
+  padding: 1rem 1.1rem 1.1rem;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(245,197,24,.22);
+  border-radius: .7rem;
+  animation: hqIn .18s ease;
+}
+@keyframes hqIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+.hq-saved {
+  color: rgba(255,255,255,.6) !important; font-size: .88rem !important;
+  font-style: italic; line-height: 1.6 !important; margin: 0 0 .7rem !important;
+}
+.hq-text {
+  width: 100%; box-sizing: border-box; min-height: 5.5rem;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.2); border-radius: .55rem;
+  padding: .65rem .8rem; color: #fff;
+  font-family: 'Nunito', sans-serif; font-size: .97rem; line-height: 1.65;
+  resize: vertical; outline: none;
+}
+.hq-text:focus { border-color: rgba(91,211,220,.7); }
+.hq-text::placeholder { color: rgba(255,255,255,.35); }
+
+.hq-sec {
+  font-family: 'Anton', sans-serif; font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.42);
+  margin: 1rem 0 .5rem;
+}
+.hq-tags, .hq-whos { display: flex; flex-wrap: wrap; gap: .35rem; }
+.hq-tag {
+  display: inline-flex; align-items: center; gap: .2rem;
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .74rem;
+  padding: .2rem .55rem; border-radius: 999px;
+}
+.hq-auto { background: rgba(245,197,24,.13); border: 1px solid rgba(245,197,24,.32); color: #F5C518; }
+.hq-mine { background: rgba(91,211,220,.13); border: 1px solid rgba(91,211,220,.32); color: #5BD3DC; }
+.hq-x {
+  background: none; border: none; color: inherit; opacity: .6;
+  cursor: pointer; font-size: .9rem; line-height: 1; padding: 0 .1rem;
+}
+.hq-x:hover { opacity: 1; }
+
+.hq-tagadd, .fam-add { display: flex; gap: .4rem; margin-top: .5rem; flex-wrap: wrap; }
+.hq-in {
+  flex: 1; min-width: 8rem; box-sizing: border-box;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.2); border-radius: .5rem;
+  padding: .5rem .7rem; color: #fff;
+  font-family: 'Nunito', sans-serif; font-size: .9rem; outline: none;
+}
+.hq-in:focus { border-color: rgba(91,211,220,.7); }
+.hq-in::placeholder { color: rgba(255,255,255,.35); }
+.hq-sel { flex: 0 0 8rem; }
+.hq-sel option { background: #0d1b4b; color: #fff; }
+
+.hq-who {
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .82rem;
+  padding: .3rem .7rem; border-radius: 999px; cursor: pointer;
+  background: rgba(255,255,255,.05); color: rgba(255,255,255,.75);
+  border: 1px solid rgba(255,255,255,.18);
+}
+.hq-who:hover { border-color: rgba(245,197,24,.5); color: #fff; }
+.hq-who.on { background: #F5C518; color: #07112e; border-color: #F5C518; }
+
+.hq-btn {
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .88rem;
+  cursor: pointer; padding: .5rem 1rem; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06); color: #fff;
+}
+.hq-btn:hover { border-color: rgba(245,197,24,.5); color: #F5C518; }
+.hq-btn-gold { background: #F5C518; color: #07112e; border-color: #F5C518; }
+.hq-btn-gold:hover { background: #ffd84a; color: #07112e; }
+
+.hq-acts { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; margin-top: 1rem; }
+.hq-note { color: #5BD3DC; font-size: .85rem; font-weight: 700; }
+.hq-hint { color: rgba(255,255,255,.45); font-size: .87rem; line-height: 1.6; }
+
+/* ------------------------------------------------------- the family circle */
+.hq-bottom { margin-top: 2.6rem; }
+.fam-list { display: flex; flex-direction: column; gap: .45rem; margin: .9rem 0 0; }
+.fam-row {
+  display: flex; align-items: center; gap: .7rem;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+  border-radius: .6rem; padding: .55rem .75rem;
+}
+.fam-dot {
+  width: 2rem; height: 2rem; border-radius: 50%; flex-shrink: 0;
+  background: #F5C518; color: #07112e;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: .95rem;
+}
+.fam-meta { flex: 1; min-width: 0; }
+.fam-name {
+  display: block; font-family: 'Fredoka', sans-serif; font-weight: 600;
+  color: #fff; font-size: .98rem; line-height: 1.2;
+}
+.fam-role {
+  display: block; font-size: .68rem; font-weight: 800; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(255,255,255,.4); margin-top: .1rem;
+}
+
+/* -------------------------------------------------------- the study journal */
+.jr-kinds { display: flex; flex-wrap: wrap; gap: .35rem; margin: .9rem 0 .9rem; }
+.jr-kind {
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .82rem;
+  padding: .35rem .75rem; border-radius: 999px; cursor: pointer;
+  background: rgba(255,255,255,.05); color: rgba(255,255,255,.75);
+  border: 1px solid rgba(255,255,255,.16);
+}
+.jr-kind:hover { border-color: rgba(245,197,24,.5); color: #fff; }
+.jr-kind.on { background: #F5C518; color: #07112e; border-color: #F5C518; }
+
+@media (max-width: 600px) {
+  .hq-panel { margin-left: 0; padding: .9rem; }
+  .hq-sel { flex: 1 1 100%; }
+}

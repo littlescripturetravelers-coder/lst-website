@@ -56,9 +56,22 @@
       '</div>';
   }
 
+  /* An entry written from Tonight's Story carries its category in `source`,
+     as "website:gratitude". Anything else with no "website" prefix came from
+     the phone. */
+  function kindOf(src) {
+    var m = /^website:(\w+)/.exec(String(src || ""));
+    if (!m || !window.LSTKeep) return null;
+    for (var i = 0; i < window.LSTKeep.kinds.length; i++) {
+      if (window.LSTKeep.kinds[i].key === m[1]) return window.LSTKeep.kinds[i];
+    }
+    return null;
+  }
+
   function cardView(r) {
     var where = r.place ? esc(r.place) : "";
-    var fromApp = (r.source || "") !== "website";
+    var fromApp = !/^website/.test(r.source || "");
+    var kind = kindOf(r.source);
     return '' +
       '<article class="mp-card">' +
         '<div class="mp-card-head">' +
@@ -71,6 +84,7 @@
         '<p class="mp-meta">' +
           '<span class="mp-badge' + (fromApp ? "" : " mp-badge-w") + '">' +
             (fromApp ? "From the app" : "Written here") + "</span>" +
+          (kind ? '<span class="mp-badge">' + kind.ico + " " + esc(kind.label) + "</span>" : "") +
           (where ? "&#128205; " + where : "") +
         "</p>" +
         '<p class="mp-text">' + esc(r.body) + "</p>" +

@@ -13,7 +13,7 @@
    Shapes, taken from the app's own migrations (lst-app/supabase/migrations):
 
      family_stories   user_id, entry_date (date), story_title, scripture,
-                      answers  jsonb  [{q,a}]
+                      answers  jsonb  [{q,a}]   <- Parent's Heart answers
                       virtues  jsonb  [{id,name}]     <- objects, NOT strings
                       traveler, travelers, situations, custom
                       upserted by the app on (user_id, entry_date)
@@ -150,6 +150,84 @@
     remove: function (id) {
       if (!ready()) return Promise.reject(new Error("not signed in"));
       return sb().from("family_stories").delete().eq("id", id);
+    },
+
+    /* ------------------------------------------- a Parent's Heart answer
+       The app keeps a night's answers in ONE row, as `answers: [{q,a}]`.
+       This does the same, so an answer written on the website reads in the
+       app exactly like one written on the phone.
+
+       It deliberately does NOT set entry_date. The app upserts its own
+       journal rows on (user_id, entry_date); a website row carrying tonight's
+       date would be silently overwritten the next time a parent answered on
+       their phone. The night is recorded in story_id instead, which is what
+       ties the answers together and what a second answer looks itself up by.
+
+       Pass `person` to attribute the answer to somebody in particular — that
+       is how a child's own words are kept as their story rather than yours. */
+    saveAnswer: function (night, question, answer, extra) {
+      if (!ready()) return Promise.reject(new Error("not signed in"));
+      extra = extra || {};
+      var key = "night:" + (night.date || night.id || "");
+      var who = extra.person || "";
+
+      var find = sb().from("family_stories").select("*")
+        .eq("story_id", key).eq("kind", "journal");
+
+      return find.then(function (res) {
+        var rows = (res && res.data) || [];
+        var mine = null;
+        for (var i = 0; i < rows.length; i++) {
+          /* One row per person per night: yours, and one for each child. */
+          if ((rows[i].person || "") === who) { mine = rows[i]; break; }
+        }
+
+        var answers = (mine && Array.isArray(mine.answers)) ? mine.answers.slice() : [];
+        var replaced = false;
+        for (var j = 0; j < answers.length; j++) {
+          if (answers[j] && answers[j].q === question) {
+            answers[j] = { q: question, a: answer };
+            replaced = true;
+            break;
+          }
+        }
+        if (!replaced) answers.push({ q: question, a: answer });
+
+        var custom = (mine && Array.isArray(mine.custom)) ? mine.custom.slice() : [];
+        (extra.tags || []).forEach(function (t) {
+          if (t && custom.indexOf(t) === -1) custom.push(t);
+        });
+
+        var row = {
+          user_id: uid(),
+          kind: "journal",
+          story_title: night.title || null,
+          scripture: night.scripture || null,
+          traveler: night.traveler || null,
+          virtues: virtuesToApp(night.virtues || []),
+          answers: answers,
+          custom: custom.length ? custom : null,
+          person: who || null,
+          story_id: key,
+          updated_at: new Date().toISOString()
+        };
+
+        if (mine) return sb().from("family_stories").update(row).eq("id", mine.id);
+        return sb().from("family_stories").insert(row);
+      });
+    },
+
+    /* Everything already written for one night, so a panel can open showing
+       what was said last time rather than an empty box. */
+    answersFor: function (night) {
+      if (!ready()) return Promise.resolve([]);
+      var key = "night:" + (night.date || night.id || "");
+      return sb().from("family_stories").select("*")
+        .eq("story_id", key).eq("kind", "journal")
+        .then(function (res) {
+          if (res.error) return [];
+          return (res.data || []).map(family.fromRow);
+        });
     }
   };
 
