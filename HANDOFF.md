@@ -158,8 +158,9 @@ are explore links to `travelers.html` / content pages, on purpose.
 ## 6. STATUS — PENDING / next up
 
 1. **Levi must run `sql/2026-08-25-mirror-the-app.sql`** in the Supabase SQL editor — the journal
-   table + its policies, the website's extra family-story columns, and deleting the now-unwanted
-   `journal-photos` bucket. **Nothing in §13 (journal, archive, account) works until he does.**
+   table + its policies, the website's extra family-story columns, and the daily_content read rule
+   that lets an admin see the nightly story. **Nothing in §13 (journal, archive, account) works
+   until he does.**
    Click-by-click: Supabase → SQL Editor → New query → open the file, Ctrl+A, Ctrl+C → paste →
    Ctrl+A in the editor → Run. *(The earlier §11 migration is already run — see §11.)*
 2. **Hand two files to the app chat**, both in `docs/`:
@@ -201,6 +202,25 @@ in the app chat / `lst-app` repo, not here.)*
   editing 9 files. Adding a post = copy an existing post file (see §8).
 - **No build step.** Don't add one, don't add `node_modules`. Push = deploy.
 - **`.gitignore`** covers `node_modules/`, `.DS_Store`, `.vercel`.
+
+---
+
+### ⚠️ Supabase will not let SQL delete from the storage tables
+A first attempt at this migration ended with `ERROR: 42501: Direct deletion from storage tables is
+not allowed. Use the Storage API instead.` — a Supabase trigger (`storage.protect_delete()`), there
+so files never end up orphaned behind the database. **`delete from storage.objects` / `storage.buckets`
+will always fail.** Buckets go through the Storage screen in the dashboard, by hand.
+
+Worse, the SQL editor runs the file as one transaction, so that one line rolled back the whole
+migration and nothing else landed either. Anything touching `storage.*` in a migration belongs
+inside `do $$ begin begin ... exception when others then null; end; end $$;` so it can never take
+the rest of the file down with it.
+
+**Migrations can be tested for real before Levi ever sees them.** This container has Postgres 16:
+`service postgresql start`, build a small stand-in for the `auth`/`storage` schemas and the app's
+tables, create the `authenticated` role, then run the file with `--single-transaction`. That is how
+this one was fixed — including reproducing Supabase's own delete guard to prove the fix survives it.
+Do this every time. Levi's SQL editor should not be where a migration is first executed.
 
 ---
 

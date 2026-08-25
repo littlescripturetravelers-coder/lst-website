@@ -11,8 +11,8 @@
 --   1. Lets the website read and write your journal (same journal as the app).
 --   2. Adds the few extra columns the website's family stories use, alongside
 --      the app's — neither side loses anything.
---   3. Removes the journal photo bucket, if an earlier run of this file
---      created one. Photos are not a feature for now.
+--   3. Checks whether a leftover journal photo bucket exists. Photos are
+--      not a feature for now.
 --   4. Lets YOU (the admin) read the nightly story and the archive without
 --      paying. Right now the rule only lets people through who have a paid
 --      row, so your own account sees an empty shelf.
@@ -73,22 +73,33 @@ create index if not exists family_stories_user_kind
 
 
 -- ---------------------------------------------------------------------
--- PART 3 — undo the photo bucket
--- Photos are not a feature for now. If you ran an earlier version of this
--- file that created a photo bucket, these lines take it back out. If you
--- never ran it, they do nothing at all.
+-- PART 3 — the photo bucket
+-- Photos are not a feature for now.
+--
+-- This part used to try to delete the bucket here. Supabase refuses that
+-- on purpose: it will not let SQL delete from the storage tables, because
+-- that would leave the actual files orphaned behind the database. Files
+-- have to go through the Storage screen instead. So this part now only
+-- LOOKS, and the last section tells you what it found.
 --
 -- The `photos` COLUMN on journal_entries is deliberately left alone: app
 -- versions already on phones write it on every save, and removing it would
 -- break their journals.
+--
+-- Dropping the old access rules IS allowed, and is wrapped so that it can
+-- never stop the rest of this file from finishing.
 -- ---------------------------------------------------------------------
-drop policy if exists "own journal photos read"   on storage.objects;
-drop policy if exists "own journal photos write"  on storage.objects;
-drop policy if exists "own journal photos update" on storage.objects;
-drop policy if exists "own journal photos delete" on storage.objects;
-
-delete from storage.objects where bucket_id = 'journal-photos';
-delete from storage.buckets where id = 'journal-photos';
+do $$
+begin
+  begin
+    execute 'drop policy if exists "own journal photos read"   on storage.objects';
+    execute 'drop policy if exists "own journal photos write"  on storage.objects';
+    execute 'drop policy if exists "own journal photos update" on storage.objects';
+    execute 'drop policy if exists "own journal photos delete" on storage.objects';
+  exception when others then
+    null;   -- not there, or not ours to drop. Either way, carry on.
+  end;
+end $$;
 
 
 -- ---------------------------------------------------------------------
@@ -127,9 +138,9 @@ select 'family story columns ready',
                          where table_name='family_stories' and column_name='kind')
             then 'yes' else 'NO' end
 union all
-select 'photo bucket gone',
+select 'no leftover photo bucket',
        case when exists (select 1 from storage.buckets where id='journal-photos')
-            then 'NO' else 'yes' end
+            then 'there is one - see the note at the bottom' else 'yes' end
 union all
 select 'you can read tonight''s story',
        case when exists (select 1 from pg_policies
@@ -137,3 +148,18 @@ select 'you can read tonight''s story',
                            and policyname = 'subscribers read published'
                            and qual like '%lst_is_subscriber%')
             then 'yes' else 'NO' end;
+
+
+-- ---------------------------------------------------------------------
+-- IF THE THIRD ROW DID NOT SAY "yes"
+-- It means a bucket called journal-photos is still sitting in Storage.
+-- Nothing on the website or in the app uses it, so it is not breaking
+-- anything - it is just clutter. To clear it out:
+--
+--   Supabase -> Storage (in the left sidebar)
+--   -> click journal-photos
+--   -> delete any files inside it
+--   -> then use the "..." menu beside the bucket name and delete the bucket
+--
+-- The other three rows are the ones that matter.
+-- ---------------------------------------------------------------------
