@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <title>Lullaby &mdash; Lyrics &amp; Music &mdash; Little Scripture Travelers</title>
   <meta name="description" content="Tonight&rsquo;s lullaby, and A Little Travelers&rsquo; Lullaby &mdash; words to sing at bedtime, from Little Scripture Travelers." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -405,5 +408,27 @@
   <script>LSTOpen.mount("lst-open", "song");</script>
   <script src="main.js"></script>
   <script src="js/lst-signup.js"></script>
+  <script src="js/lst-signed-in.js"></script>
+  <!-- Both lullabies come with a subscription. ⚠️ See the warning at the top
+       of js/lst-members-only.js — the words are in the page, so this turns
+       people away rather than locking them out. -->
+  <script src="js/lst-members-only.js"></script>
+  <script>
+    LSTMembers.guard({
+      what: "The lullabies",
+      eyebrow: "Comes with The Lantern",
+      blurb: "The words and the music to sing your little one to sleep — " +
+             "a new lullaby with every night, and A Little Travelers’ Lullaby " +
+             "whenever you want it. Your first seven days are free.",
+      lines: [
+        "Every night’s lullaby, with the words to sing",
+        "A Little Travelers’ Lullaby, with its music",
+        "Play on repeat, with a sleep timer that fades out",
+        "And a new scripture story every night"
+      ],
+      back: "index.html",
+      backLabel: "Back to the website"
+    });
+  </script>
 </body>
 </html>

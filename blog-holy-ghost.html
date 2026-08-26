@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <title>Teaching Your Child to Recognize the Spirit — Little Scripture Travelers</title>
   <meta name="description" content="Why bedtime is the perfect classroom — and how a quiet story and a parent's testimony can teach a child what revelation feels like." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,7 +35,7 @@
       margin: 0 auto;
     }
     .article-tag {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.75rem;
       font-weight: 400;
       letter-spacing: 0.14em;
@@ -42,7 +45,7 @@
       display: block;
     }
     .article-hero h1 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 700;
       font-size: clamp(2.2rem, 5.5vw, 3.4rem);
       color: #fff;
@@ -51,7 +54,7 @@
       text-shadow: 0 2px 24px rgba(0,0,0,0.65);
     }
     .article-hero .subtitle {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-style: italic;
       color: rgba(255,255,255,0.84);
       font-size: 1.15rem;
@@ -60,7 +63,7 @@
       margin: 0 auto var(--space-5);
     }
     .article-hero .byline {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.85rem;
       color: rgba(255,255,255,0.55);
       letter-spacing: 0.04em;
@@ -79,7 +82,7 @@
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.9rem;
       color: var(--gold);
@@ -91,14 +94,14 @@
     .back-link:hover { opacity: 1; }
 
     .article-body p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.83);
       font-size: 1.07rem;
       line-height: 1.87;
       margin-bottom: 1.75rem;
     }
     .article-body h2 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.55rem;
       color: var(--gold);
@@ -119,7 +122,7 @@
       border-radius: 0 12px 12px 0;
     }
     .opening-quote p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 1.15rem;
       font-style: italic;
       color: rgba(255,255,255,0.9);
@@ -139,7 +142,7 @@
       margin: 2rem 0 2.5rem;
     }
     .phrases-card h3 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.15rem;
       color: var(--gold);
@@ -154,7 +157,7 @@
       gap: 1.1rem;
     }
     .phrases-list li {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.83);
       font-size: 1.05rem;
       line-height: 1.72;
@@ -174,7 +177,7 @@
       margin: 2rem 0 2.5rem;
     }
     .rhythm-card h3 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.2rem;
       color: var(--gold);
@@ -189,7 +192,7 @@
       margin-bottom: 0;
     }
     .rhythm-label {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 800;
       font-size: 0.9rem;
       color: var(--gold);
@@ -198,7 +201,7 @@
       letter-spacing: 0.06em;
     }
     .rhythm-row p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.78);
       font-size: 1rem;
       line-height: 1.72;
@@ -214,7 +217,7 @@
       margin: 2.25rem 0;
     }
     .highlight-box p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.88);
       font-size: 1.08rem;
       line-height: 1.8;
@@ -234,7 +237,7 @@
       text-align: center;
     }
     .mission-eyebrow {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.72rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -243,7 +246,7 @@
       margin-bottom: 0.75rem;
     }
     .mission-headline {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.45rem;
       color: #fff;
@@ -251,7 +254,7 @@
       line-height: 1.3;
     }
     .mission-box p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.78);
       font-size: 1rem;
       line-height: 1.8;
@@ -268,8 +271,8 @@
       margin: 2.5rem 0;
     }
     .disclaimer-box p {
-      font-family: 'Nunito', sans-serif;
-      color: rgba(255,255,255,0.5);
+      font-family: var(--font-body);
+      color: rgba(255,255,255,0.55);
       font-size: 0.85rem;
       line-height: 1.7;
       margin: 0;
@@ -285,7 +288,7 @@
       margin: 3.5rem 0 1rem;
     }
     .article-cta h3 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.6rem;
       color: #fff;
@@ -308,9 +311,9 @@
       border-top: 1px solid rgba(255,255,255,0.1);
     }
     .social-share span {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.55);
     }
     .social-share a {
       display: inline-flex;
@@ -330,7 +333,7 @@
   </style>
 </head>
 <body>
-<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family:'Nunito',sans-serif;font-size:0.9rem;line-height:1.5;">
+<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
   <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">Coming soon —</strong> the Little Scripture Travelers app: access all your digital products &amp; lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
@@ -651,7 +654,7 @@
         <!-- Opening pull quote: Nelson Holy Ghost quote -->
         <div class="opening-quote">
           <p>&ldquo;In coming days, it will not be possible to survive spiritually without the guiding, directing, comforting, and constant influence of the Holy Ghost. My beloved brothers and sisters, I plead with you to increase your spiritual capacity to receive revelation.&rdquo;</p>
-          <cite style="display:block;margin-top:0.6rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.92rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson</cite>
+          <cite style="display:block;margin-top:0.6rem;font-family: var(--font-display);font-weight:600;font-size:0.92rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson</cite>
         </div>
 
         <h2>&ldquo;I Took That Personally&rdquo;</h2>
@@ -753,8 +756,8 @@
         <!-- Mid-article pull quote -->
         <div class="pull-quote">
           <p>&ldquo;In coming days, it will not be possible to survive spiritually without the guiding, directing, comforting, and constant influence of the Holy Ghost. My beloved brothers and sisters, I plead with you to increase your spiritual capacity to receive revelation.&rdquo;</p>
-          <cite style="display:block;margin-top:0.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson</cite>
-          <p class="pull-quote-context" style="font-family:'Nunito',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Lantern routine was built specifically to create the spiritual conditions where the Holy Ghost can be felt &mdash; and named &mdash; at the close of every single day.</p>
+          <cite style="display:block;margin-top:0.5rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson</cite>
+          <p class="pull-quote-context" style="font-family: var(--font-body);font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Lantern routine was built specifically to create the spiritual conditions where the Holy Ghost can be felt &mdash; and named &mdash; at the close of every single day.</p>
         </div>
 
         <h2>Building the Pattern, Night by Night</h2>
@@ -790,8 +793,8 @@
         <!-- Closing pull quote -->
         <div class="pull-quote">
           <p>&ldquo;The joy we feel has little to do with the circumstances of our lives and everything to do with the focus of our lives.&rdquo;</p>
-          <cite style="display:block;margin-top:0.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson</cite>
-          <p class="pull-quote-context" style="font-family:'Nunito',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">And helping our children focus &mdash; not on fear, not on the noise, but on the still small voice &mdash; is the most important work a parent can do.</p>
+          <cite style="display:block;margin-top:0.5rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson</cite>
+          <p class="pull-quote-context" style="font-family: var(--font-body);font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">And helping our children focus &mdash; not on fear, not on the noise, but on the still small voice &mdash; is the most important work a parent can do.</p>
         </div>
 
         <!-- Social Share -->
@@ -1255,6 +1258,8 @@
 })();
 
 </script><script src="js/vendor/supabase.js"></script>
+<script src="js/lst-auth.js"></script>
 <script src="js/lst-signup.js"></script>
+  <script src="js/lst-signed-in.js"></script>
 </body>
 </html>

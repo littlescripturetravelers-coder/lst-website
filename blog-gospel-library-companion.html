@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <title>The Gospel Library Is Amazing — And There's Still One Thing It Can't Do for Your Kids — Little Scripture Travelers</title>
   <meta name="description" content="The Gospel Library and The Friend are extraordinary — but there's one thing the Church's resources were never built to do for our children. Here's the gap, and why we made Little Scripture Travelers to fill it." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,7 +35,7 @@
       margin: 0 auto;
     }
     .article-tag {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.75rem;
       font-weight: 400;
       letter-spacing: 0.14em;
@@ -42,7 +45,7 @@
       display: block;
     }
     .article-hero h1 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 700;
       font-size: clamp(2.2rem, 5.5vw, 3.4rem);
       color: #fff;
@@ -51,7 +54,7 @@
       text-shadow: 0 2px 24px rgba(0,0,0,0.65);
     }
     .article-hero .subtitle {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-style: italic;
       color: rgba(255,255,255,0.84);
       font-size: 1.15rem;
@@ -60,7 +63,7 @@
       margin: 0 auto var(--space-5);
     }
     .article-hero .byline {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.85rem;
       color: rgba(255,255,255,0.55);
       letter-spacing: 0.04em;
@@ -79,7 +82,7 @@
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.9rem;
       color: var(--gold);
@@ -91,14 +94,14 @@
     .back-link:hover { opacity: 1; }
 
     .article-body p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.83);
       font-size: 1.07rem;
       line-height: 1.87;
       margin-bottom: 1.75rem;
     }
     .article-body h2 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.55rem;
       color: var(--gold);
@@ -119,7 +122,7 @@
       border-radius: 0 12px 12px 0;
     }
     .opening-quote p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-style: italic;
       font-size: 1.12rem !important;
       color: rgba(255,255,255,0.92) !important;
@@ -136,7 +139,7 @@
       margin: 2.5rem 0;
     }
     .part-label {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.68rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -146,14 +149,14 @@
       display: block;
     }
     .part-title {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 700;
       font-size: 1.35rem;
       color: #fff;
       margin-bottom: 1.25rem;
     }
     .research-label {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.65rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -163,7 +166,7 @@
       display: block;
     }
     .part-card p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.8);
       font-size: 1.02rem;
       line-height: 1.82;
@@ -176,7 +179,7 @@
       margin: 1.25rem 0;
     }
     .picture-it-label {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.62rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -186,7 +189,7 @@
       display: block;
     }
     .picture-it p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-style: italic;
       color: rgba(255,255,255,0.78) !important;
       font-size: 0.97rem !important;
@@ -194,15 +197,15 @@
       margin: 0 !important;
     }
     .builds-label {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.62rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.55);
       margin-right: 0.5rem;
     }
     .builds-text {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.97rem;
       color: rgba(255,255,255,0.7);
       font-style: italic;
@@ -219,7 +222,7 @@
       gap: 0.75rem;
     }
     .summary-list li {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 1.05rem;
       color: rgba(255,255,255,0.83);
       line-height: 1.6;
@@ -244,7 +247,7 @@
       margin: 3rem 0;
     }
     .credentials-box h3 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.2rem;
       color: var(--gold);
@@ -259,7 +262,7 @@
       gap: 1rem;
     }
     .credentials-box li {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 1rem;
       color: rgba(255,255,255,0.82);
       line-height: 1.65;
@@ -286,7 +289,7 @@
       text-align: center;
     }
     .mission-eyebrow {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.68rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -296,7 +299,7 @@
       display: block;
     }
     .mission-headline {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 700;
       font-size: 1.5rem;
       color: var(--gold);
@@ -304,7 +307,7 @@
       line-height: 1.25;
     }
     .mission-box p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.8);
       font-size: 1.02rem;
       line-height: 1.8;
@@ -320,9 +323,9 @@
       margin: 3rem 0;
     }
     .disclaimer-box p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.82rem !important;
-      color: rgba(255,255,255,0.5) !important;
+      color: rgba(255,255,255,0.55) !important;
       line-height: 1.65 !important;
       margin: 0 !important;
     }
@@ -334,7 +337,7 @@
       border-top: 1px solid rgba(245,197,24,0.18);
     }
     .research-section h2 {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 900;
       font-size: 0.85rem;
       color: var(--gold);
@@ -354,7 +357,7 @@
       gap: 0.85rem;
     }
     .cite-list li {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.87rem;
       color: rgba(255,255,255,0.58);
       line-height: 1.65;
@@ -380,14 +383,14 @@
       border-radius: 16px;
     }
     .article-cta h3 {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.5rem;
       color: #fff;
       margin-bottom: 0.75rem;
     }
     .article-cta p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.72);
       font-size: 1rem;
       margin-bottom: 1.5rem !important;
@@ -399,7 +402,7 @@
       display: inline-block;
       background: var(--gold);
       color: #07112e;
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 900;
       font-size: 1rem;
       padding: 0.8rem 2.25rem;
@@ -419,7 +422,7 @@
   </style>
 </head>
 <body class="subpage-body">
-<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family:'Nunito',sans-serif;font-size:0.9rem;line-height:1.5;">
+<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
   <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">Coming soon —</strong> the Little Scripture Travelers app: access all your digital products &amp; lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
@@ -1236,6 +1239,8 @@
 })();
 
 </script><script src="js/vendor/supabase.js"></script>
+<script src="js/lst-auth.js"></script>
 <script src="js/lst-signup.js"></script>
+  <script src="js/lst-signed-in.js"></script>
 </body>
 </html>

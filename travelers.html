@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 <title>Meet the Travelers — Little Scripture Travelers Bedtime Stories</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -767,7 +770,7 @@
   }
   .virtue-extended-item .verse-ref {
     font-style: italic;
-    color: rgba(232, 228, 211, 0.55);
+    color: rgba(232, 228, 211, 0.65);
     font-size: 0.86rem;
   }
 
@@ -833,13 +836,13 @@
     .logo-mark { display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; flex-shrink: 0; }
     .logo-mark img { border-radius: 50%; object-fit: cover; }
     .logo-text { display: flex; flex-direction: column; }
-    .logo-name { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1.05rem; color: #f4c842; line-height: 1.15; }
-    .logo-sub { font-family: 'Nunito', sans-serif; font-size: 0.68rem; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; text-transform: uppercase; }
+    .logo-name { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: #f4c842; line-height: 1.15; }
+    .logo-sub { font-family: var(--font-body); font-size: 0.68rem; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; text-transform: uppercase; }
     .main-nav { display: flex !important; overflow: visible !important; }
     /* CRITICAL: only the top-level nav ul gets flex-row — NOT .nav-dropdown */
     .main-nav > ul { display: flex !important; flex-direction: row !important; list-style: none; gap: 0.25rem; margin: 0; padding: 0; overflow: visible !important; }
     .main-nav > ul > li { display: block; position: relative; }
-    .main-nav > ul > li > a { font-family: 'Fredoka', sans-serif; font-weight: 500; font-size: 0.95rem; color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.4rem 0.6rem; border-radius: 6px; transition: color 0.2s; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
+    .main-nav > ul > li > a { font-family: var(--font-display); font-weight: 500; font-size: 0.95rem; color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.4rem 0.6rem; border-radius: 6px; transition: color 0.2s; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
     .main-nav > ul > li > a:hover { color: #f4c842; }
     /* Dropdown panels — full-width, hidden via visibility, shown via .open */
     @media (min-width: 901px) { .nav-dropdown { display: none !important; } }
@@ -848,21 +851,21 @@
     .nav-dropdown-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid !important; grid-template-columns: repeat(auto-fill, minmax(240px, 320px)) !important; justify-content: start !important; gap: 0.5rem 3rem !important; }
     .nav-dropdown-item { display: block !important; padding: 0.85rem 1.1rem !important; min-width: 0 !important; border-radius: 8px !important; text-decoration: none !important; transition: background 0.15s !important; }
     .nav-dropdown-item:hover { background: rgba(244,200,66,0.1) !important; }
-    .nav-dropdown-item-title { display: block !important; font-family: 'Fredoka', sans-serif !important; font-weight: 600 !important; font-size: 1rem !important; color: #f4c842 !important; margin-bottom: 0.3rem !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
-    .nav-dropdown-item-desc { display: block !important; font-family: 'Nunito', sans-serif !important; font-size: 0.82rem !important; color: rgba(255,255,255,0.65) !important; line-height: 1.4 !important; word-break: break-word !important; }
+    .nav-dropdown-item-title { display: block !important; font-family: var(--font-display) !important; font-weight: 600 !important; font-size: 1rem !important; color: #f4c842 !important; margin-bottom: 0.3rem !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+    .nav-dropdown-item-desc { display: block !important; font-family: var(--font-body) !important; font-size: 0.82rem !important; color: rgba(255,255,255,0.65) !important; line-height: 1.4 !important; word-break: break-word !important; }
     .nav-dropdown > li { display: block !important; width: 100% !important; }
-    .nav-dropdown > li > a { display: block !important; padding: 0.55rem 1.1rem !important; font-family: 'Nunito', sans-serif !important; font-size: 0.9rem !important; font-weight: 600 !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; white-space: nowrap !important; }
+    .nav-dropdown > li > a { display: block !important; padding: 0.55rem 1.1rem !important; font-family: var(--font-body) !important; font-size: 0.9rem !important; font-weight: 600 !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; white-space: nowrap !important; }
     .nav-dropdown > li > a:hover { background: rgba(244,200,66,0.12) !important; color: #f4c842 !important; }
     .nav-arrow { display: inline-block !important; font-size: 0.6rem; opacity: 0.7; transition: transform 0.2s; }
     .main-nav li.has-dropdown.open .nav-arrow { transform: rotate(180deg); }
-    .nav-cta { margin-left: 1rem; flex-shrink: 0; background: #f4c842; color: #07112e; font-family: 'Fredoka', sans-serif; font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+    .nav-cta { margin-left: 1rem; flex-shrink: 0; background: #f4c842; color: #07112e; font-family: var(--font-display); font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 999px; text-decoration: none; white-space: nowrap; }
     .nav-cta:hover { background: #ffe066; }
     .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
     .mobile-menu-btn span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; }
     .mobile-nav { display: none; }
     .mobile-nav.open { display: block; background: #07112e; padding: 1rem 1.5rem; border-top: 1px solid rgba(244,200,66,0.2); }
     .mobile-nav > ul { list-style: none; display: flex !important; flex-direction: column !important; gap: 0.75rem; padding: 0; margin: 0; }
-    .mobile-nav > ul > li > a { color: rgba(255,255,255,0.85); text-decoration: none; font-family: 'Fredoka', sans-serif; font-size: 1.05rem; }
+    .mobile-nav > ul > li > a { color: rgba(255,255,255,0.85); text-decoration: none; font-family: var(--font-display); font-size: 1.05rem; }
     @media (max-width: 900px) {
       .main-nav { display: none !important; }
       .nav-cta.nav-cta { display: none; }
@@ -871,7 +874,7 @@
   </style>
 </head>
 <body>
-<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family:'Nunito',sans-serif;font-size:0.9rem;line-height:1.5;">
+<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
   <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">Coming soon —</strong> the Little Scripture Travelers app: access all your digital products &amp; lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
@@ -1275,7 +1278,7 @@
       <div class="character-detail virtue-extended">
         <h4>Extended Virtue — Obedience</h4>
         <p>Obedience is courage's quiet twin — it takes real bravery to follow God when the path is hard or doesn't make sense yet. Beau already lives "I will go and do"; obedience is that courage pointed at God's word.</p>
-        <p class="virtue-extended-item" style="background:none;border:none;padding:0;"><span class="verse-ref" style="color:rgba(232,228,211,0.55);font-style:italic;font-size:0.88rem;">Naaman dipping seven times in the Jordan (2 Kings 5) · "If ye love me, keep my commandments" (John 14:15)</span></p>
+        <p class="virtue-extended-item" style="background:none;border:none;padding:0;"><span class="verse-ref" style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">Naaman dipping seven times in the Jordan (2 Kings 5) · "If ye love me, keep my commandments" (John 14:15)</span></p>
       </div>
       <p class="scripture-tag">✦ "Be strong and of a good courage." — Joshua 1:9</p>
     </div>
@@ -1312,7 +1315,7 @@
       <div class="character-detail virtue-extended">
         <h4>Extended Virtue — Hope</h4>
         <p>Hope is curiosity aimed at the future. Scout's "what could it be?" is the very posture of hope — leaning forward, expecting that God has something good waiting to be found.</p>
-        <p><span style="color:rgba(232,228,211,0.55);font-style:italic;font-size:0.88rem;">"They that wait upon the Lord… shall mount up with wings as eagles" (Isaiah 40:31) · the wise men following the star</span></p>
+        <p><span style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">"They that wait upon the Lord… shall mount up with wings as eagles" (Isaiah 40:31) · the wise men following the star</span></p>
       </div>
       <p class="scripture-tag">✦ "Ask, and it shall be given you; seek, and ye shall find." — Matthew 7:7</p>
     </div>
@@ -1349,9 +1352,9 @@
       <div class="character-detail virtue-extended">
         <h4>Extended Virtues — Forgiveness &amp; Gratitude</h4>
         <p><strong style="color:var(--gold);">Forgiveness</strong> is compassion grown all the way up — the hardest, most loving thing a tender heart can do.</p>
-        <p><span style="color:rgba(232,228,211,0.55);font-style:italic;font-size:0.88rem;">Joseph forgiving his brothers (Genesis 45, 50) · "Father, forgive them" (Luke 23:34)</span></p>
+        <p><span style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">Joseph forgiving his brothers (Genesis 45, 50) · "Father, forgive them" (Luke 23:34)</span></p>
         <p style="margin-top:0.75rem;"><strong style="color:var(--gold);">Gratitude</strong> is love noticing what it's been given — the warm overflow of a thankful heart.</p>
-        <p><span style="color:rgba(232,228,211,0.55);font-style:italic;font-size:0.88rem;">The one leper who turned back to say thank you (Luke 17:15–16)</span></p>
+        <p><span style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">The one leper who turned back to say thank you (Luke 17:15–16)</span></p>
       </div>
       <p class="scripture-tag">✦ "Be ye kind one to another, tenderhearted." — Ephesians 4:32</p>
     </div>
@@ -1388,9 +1391,9 @@
       <div class="character-detail virtue-extended">
         <h4>Extended Virtues — Humility &amp; Patience</h4>
         <p><strong style="color:var(--gold);">Humility</strong> is where wisdom begins — the one who pauses to ponder knows they don't know everything, and bows before God.</p>
-        <p><span style="color:rgba(232,228,211,0.55);font-style:italic;font-size:0.88rem;">"With the lowly is wisdom" (Proverbs 11:2)</span></p>
+        <p><span style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">"With the lowly is wisdom" (Proverbs 11:2)</span></p>
         <p style="margin-top:0.75rem;"><strong style="color:var(--gold);">Patience</strong> is the wisdom to wait and trust God's timing instead of rushing ahead.</p>
-        <p><span style="color:rgba(232,228,211,0.55);font-style:italic;font-size:0.88rem;">"Wait on the Lord" (Psalm 27:14) · "Let patience have her perfect work" (James 1:4)</span></p>
+        <p><span style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">"Wait on the Lord" (Psalm 27:14) · "Let patience have her perfect work" (James 1:4)</span></p>
       </div>
       <p class="scripture-tag">✦ "Be still, and know that I am God." — Psalm 46:10</p>
     </div>
@@ -1883,6 +1886,8 @@
 })();
 
 </script><script src="js/vendor/supabase.js"></script>
+<script src="js/lst-auth.js"></script>
 <script src="js/lst-signup.js"></script>
+  <script src="js/lst-signed-in.js"></script>
 </body>
 </html>

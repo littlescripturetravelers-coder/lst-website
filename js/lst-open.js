@@ -91,9 +91,8 @@
         "<p>It comes with The Lantern, and the first seven days are free.</p>" +
         '<button type="button" class="mp-btn mp-btn-gold" id="o-signin">Sign in</button>' +
         (kind === "song"
-          ? '<p class="mp-note" style="padding:.9rem 0 0;font-size:.9rem;">Or sing ' +
-            '<a href="lullaby.html?which=lantern">A Little Travelers&rsquo; Lullaby</a>, ' +
-            "which is free to everyone.</p>"
+          ? '<p class="mp-note" style="padding:.9rem 0 0;font-size:.9rem;">' +
+            'A Little Travelers&rsquo; Lullaby comes with a subscription too.</p>'
           : "") +
       "</div>";
   }
@@ -108,7 +107,7 @@
   }
 
   function head(title, sub) {
-    return "<h2 style=\"font-family:'Fredoka',sans-serif;font-weight:600;color:#fff;" +
+    return "<h2 style=\"font-family: var(--font-display);font-weight:600;color:#fff;" +
       "font-size:clamp(1.5rem,4.4vw,2.15rem);margin:0 0 .5rem;line-height:1.2;\">" +
       esc(title) + "</h2>" +
       (sub ? '<p class="mp-meta">' + esc(sub) + "</p>" : "");

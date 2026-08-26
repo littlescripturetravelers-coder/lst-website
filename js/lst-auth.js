@@ -118,7 +118,7 @@
   /* ===================================================================
      SIGN-IN MODAL — builds itself, so a page only needs this script.
      =================================================================== */
-  var IN = "width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;font-family:'Nunito',sans-serif;";
+  var IN = "width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;font-family: var(--font-body);";
 
   function el(id) { return document.getElementById(id); }
 

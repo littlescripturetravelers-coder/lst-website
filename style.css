@@ -645,7 +645,7 @@ h2 {
   pointer-events: auto;
 }
 .plan-preview-title {
-  font-family: 'Fredoka', sans-serif;
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: 1rem;
   color: var(--gold);
@@ -668,13 +668,13 @@ h2 {
   gap: 0.1rem;
 }
 .plan-preview-item .pi-name {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.8rem;
   color: #fff;
 }
 .plan-preview-item .pi-desc {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
   color: rgba(255,255,255,0.65);
   line-height: 1.45;
@@ -682,7 +682,7 @@ h2 {
 .plan-preview-cta {
   margin-top: auto;
   text-align: center;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--gold);
   font-weight: 700;
@@ -715,8 +715,8 @@ h2 {
   align-items: center;
   justify-content: center;
   gap: 0.3rem;
-  color: rgba(255,255,255,0.3);
-  font-family: 'Nunito', sans-serif;
+  color: rgba(255,255,255,0.55);
+  font-family: var(--font-body);
   font-size: 0.7rem;
   text-align: center;
   padding: 0.5rem;
@@ -1015,7 +1015,7 @@ cite strong { color: var(--gold); display: block; }
   border: 2px solid rgba(245,197,24,0.5);
 }
 .nav-brand {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-weight: 900;
   font-size: 0.88rem;
   color: #fff;
@@ -1032,7 +1032,7 @@ cite strong { color: var(--gold); display: block; }
   list-style: none;
 }
 .nav-links a {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.9rem;
   color: rgba(255,255,255,0.82);
@@ -1074,7 +1074,7 @@ cite strong { color: var(--gold); display: block; }
 .nav-mobile.open { display: flex; }
 .nav-mobile a {
   display: block;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1rem;
   color: rgba(255,255,255,0.82);
@@ -1106,7 +1106,7 @@ cite strong { color: var(--gold); display: block; }
   gap: var(--space-10);
 }
 .footer-brand p {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: rgba(255,255,255,0.55);
   line-height: 1.65;
@@ -1121,7 +1121,7 @@ cite strong { color: var(--gold); display: block; }
   border: 2px solid rgba(245,197,24,0.35);
 }
 .footer-col h4, .footer-links h4 {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-weight: 900;
   font-size: 0.8rem;
   letter-spacing: 0.1em;
@@ -1136,7 +1136,7 @@ cite strong { color: var(--gold); display: block; }
   gap: var(--space-2);
 }
 .footer-col a, .footer-links a {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: rgba(255,255,255,0.6);
   text-decoration: none;
@@ -1149,9 +1149,9 @@ cite strong { color: var(--gold); display: block; }
   text-align: center;
 }
 .footer-bottom p {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.55);
 }
 
 /* Sub-page star-divider */
@@ -1304,7 +1304,7 @@ cite strong { color: var(--gold); display: block; }
   letter-spacing: 4px;
 }
 .patriot-ribbon-text {
-  font-family: 'Fredoka', sans-serif;
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: clamp(0.78rem, 2vw, 0.95rem);
   color: #fff;
@@ -1368,7 +1368,7 @@ cite strong { color: var(--gold); display: block; }
 }
 .nav-dropdown-item-title {
   display: block;
-  font-family: 'Fredoka', sans-serif;
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: 1rem;
   color: #f4c842;
@@ -1379,7 +1379,7 @@ cite strong { color: var(--gold); display: block; }
 }
 .nav-dropdown-item-desc {
   display: block;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.82rem;
   color: rgba(255,255,255,0.65);
   line-height: 1.4;
@@ -1438,7 +1438,7 @@ cite strong { color: var(--gold); display: block; }
     display: flex;
   }
   .mobile-nav .nav-dropdown li a {
-    font-family: 'Nunito', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.88rem;
     font-weight: 600;
     color: rgba(255,255,255,0.75);
@@ -1462,8 +1462,8 @@ cite strong { color: var(--gold); display: block; }
   background: transparent;
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 50px;
-  color: rgba(255,255,255,0.45);
-  font-family: 'Nunito', sans-serif;
+  color: rgba(255,255,255,0.55);
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.03em;
@@ -1473,7 +1473,7 @@ cite strong { color: var(--gold); display: block; }
 }
 .btn-cancel-sub:hover,
 .btn-cancel-sub:focus {
-  border-color: rgba(255,255,255,0.45);
+  border-color: rgba(255,255,255,0.55);
   color: rgba(255,255,255,0.75);
   outline: none;
 }
@@ -1510,7 +1510,7 @@ cite strong { color: var(--gold); display: block; }
   right: 1.1rem;
   background: none;
   border: none;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.55);
   font-size: 1.6rem;
   line-height: 1;
   cursor: pointer;
@@ -1524,7 +1524,7 @@ cite strong { color: var(--gold); display: block; }
   margin-bottom: 0.75rem;
 }
 .cancel-modal-title {
-  font-family: 'Fredoka', sans-serif;
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: 1.35rem;
   color: #f4c842;
@@ -1532,14 +1532,14 @@ cite strong { color: var(--gold); display: block; }
   margin: 0 0 0.6rem;
 }
 .cancel-modal-intro {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: rgba(255,255,255,0.65);
   text-align: center;
   margin-bottom: 1.25rem;
 }
 .cancel-modal-steps {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.92rem;
   color: rgba(255,255,255,0.85);
   line-height: 1.6;
@@ -1564,7 +1564,7 @@ cite strong { color: var(--gold); display: block; }
   border-radius: 50%;
   background: #f4c842;
   color: #07112e;
-  font-family: 'Fredoka', sans-serif;
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.85rem;
   display: flex;
@@ -1592,9 +1592,9 @@ cite strong { color: var(--gold); display: block; }
 .cancel-step-shot.is-narrow { max-width: 250px; }
 .cancel-step-cap {
   display: block;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.76rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.55);
   line-height: 1.45;
   margin-top: 0.4rem;
 }
@@ -1648,7 +1648,7 @@ cite strong { color: var(--gold); display: block; }
   cursor: zoom-out;
 }
 .shot-lightbox-cap {
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   color: rgba(255,255,255,0.7);
   text-align: center;
@@ -1667,7 +1667,7 @@ cite strong { color: var(--gold); display: block; }
   line-height: 1;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   transition: color 0.15s;
 }
 .shot-lightbox-close:hover { color: #f4c842; }
@@ -1675,9 +1675,9 @@ cite strong { color: var(--gold); display: block; }
   position: absolute;
   top: 1.35rem;
   left: 1.25rem;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.55);
 }
 @media (max-width: 600px) {
   .shot-lightbox img { max-height: 66vh; }
@@ -1689,7 +1689,7 @@ cite strong { color: var(--gold); display: block; }
   border-left: 3px solid #f4c842;
   border-radius: 6px;
   padding: 0.85rem 1rem;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.88rem;
   color: rgba(255,255,255,0.75);
   line-height: 1.55;
@@ -1704,7 +1704,7 @@ cite strong { color: var(--gold); display: block; }
   border: 2px solid rgba(244,200,66,0.4);
   border-radius: 50px;
   color: rgba(255,255,255,0.55);
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 700;
   text-decoration: none;
@@ -1723,7 +1723,7 @@ cite strong { color: var(--gold); display: block; }
   border: 0;
   padding: 0;
   margin: 0;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 400;
   letter-spacing: normal;
@@ -1747,9 +1747,9 @@ cite strong { color: var(--gold); display: block; }
     .mp-hero { background:linear-gradient(160deg,#07112e,#0d1b4b 50%,#0a1640);
       padding:3.25rem 1.25rem 2.5rem; text-align:center; }
     .mp-hero-in { max-width:46rem; margin:0 auto; }
-    .mp-eyebrow { display:inline-block; font-family:'Anton',sans-serif; font-size:.72rem;
+    .mp-eyebrow { display:inline-block; font-family: var(--font-accent); font-size:.72rem;
       letter-spacing:.16em; text-transform:uppercase; color:#F5C518; margin-bottom:.85rem; }
-    .mp-hero h1 { font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+    .mp-hero h1 { font-family: var(--font-display); font-weight:600; color:#fff;
       font-size:clamp(1.8rem,4.6vw,2.7rem); margin:0 0 .85rem; line-height:1.15; }
     .mp-hero p { color:rgba(255,255,255,.82); line-height:1.7; font-size:1.02rem; margin:0; }
 
@@ -1759,20 +1759,20 @@ cite strong { color: var(--gold); display: block; }
 
     .mp-bar { display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; margin-bottom:1.4rem; }
     .mp-who { color:rgba(255,255,255,.55); font-size:.85rem; margin-left:auto; }
-    .mp-btn { font-family:'Nunito',sans-serif; font-weight:800; font-size:.94rem; cursor:pointer;
+    .mp-btn { font-family: var(--font-body); font-weight:800; font-size:.94rem; cursor:pointer;
       padding:.6rem 1.15rem; border-radius:999px; border:1px solid rgba(255,255,255,.25);
       background:rgba(255,255,255,.06); color:#fff; }
     .mp-btn-gold { background:#F5C518; color:#07112e; border-color:#F5C518; }
     .mp-link { background:none; border:none; color:#F5C518; font-weight:700; cursor:pointer;
       padding:0; font-size:inherit; font-family:inherit; text-decoration:underline; }
-    .mp-icon { background:none; border:none; color:rgba(255,255,255,.5); cursor:pointer;
+    .mp-icon { background:none; border:none; color:rgba(255,255,255,0.55); cursor:pointer;
       font-size:1rem; padding:.2rem .35rem; border-radius:.35rem; }
     .mp-icon:hover { color:#F5C518; background:rgba(255,255,255,.07); }
 
     .mp-card { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.13);
       border-radius:.85rem; padding:1.2rem 1.3rem; margin-bottom:1rem; }
     .mp-card-head { display:flex; gap:.6rem; align-items:flex-start; }
-    .mp-card-head h3 { flex:1; font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+    .mp-card-head h3 { flex:1; font-family: var(--font-display); font-weight:600; color:#fff;
       font-size:1.05rem; margin:0; line-height:1.3; }
     .mp-meta { color:#5BD3DC; font-size:.82rem; font-weight:700; margin:.3rem 0 .6rem; }
     .mp-text { color:rgba(255,255,255,.82); font-size:.97rem; line-height:1.7; margin:0;
@@ -1781,7 +1781,7 @@ cite strong { color: var(--gold); display: block; }
     .mp-empty { text-align:center; background:rgba(255,255,255,.04);
       border:1px dashed rgba(255,255,255,.18); border-radius:1rem; padding:2.5rem 1.5rem; }
     .mp-empty-i { font-size:1.8rem; color:#F5C518; margin-bottom:.6rem; }
-    .mp-empty h3 { font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+    .mp-empty h3 { font-family: var(--font-display); font-weight:600; color:#fff;
       font-size:1.25rem; margin:0 0 .7rem; }
     .mp-empty p { color:rgba(255,255,255,.75); line-height:1.7; max-width:34rem;
       margin:0 auto .9rem; font-size:.97rem; }
@@ -1790,7 +1790,7 @@ cite strong { color: var(--gold); display: block; }
 
     .mp-form { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14);
       border-radius:.9rem; padding:1.5rem; margin-bottom:1.25rem; }
-    .mp-form h3 { font-family:'Fredoka',sans-serif; font-weight:600; color:#F5C518;
+    .mp-form h3 { font-family: var(--font-display); font-weight:600; color:#F5C518;
       font-size:1.15rem; margin:0 0 1.1rem; }
     .mp-l { display:block; color:rgba(255,255,255,.8); font-size:.88rem; font-weight:700;
       margin-bottom:.9rem; }
@@ -1798,13 +1798,13 @@ cite strong { color: var(--gold); display: block; }
     .mp-row .mp-l { flex:1; min-width:11rem; }
     .mp-in-f { width:100%; box-sizing:border-box; margin-top:.35rem; padding:.6rem .75rem;
       border-radius:.5rem; border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.07);
-      color:#fff; font-family:'Nunito',sans-serif; font-size:.95rem; font-weight:400; }
+      color:#fff; font-family: var(--font-body); font-size:.95rem; font-weight:400; }
     .mp-ta { resize:vertical; line-height:1.65; }
     .mp-err { color:#e0607a; font-size:.87rem; min-height:1.1rem; margin-bottom:.5rem; }
     .mp-acts { display:flex; gap:.6rem; flex-wrap:wrap; }
-    .mp-hint { font-weight:400; color:rgba(255,255,255,.45); font-size:.8rem; }
-    .mp-badge { display:inline-block; font-size:.68rem; font-weight:800; letter-spacing:.04em;
-      text-transform:uppercase; padding:.1rem .45rem; border-radius:999px; margin-right:.5rem;
+    .mp-hint { font-weight:400; color:rgba(255,255,255,0.55); font-size:.8rem; }
+    .mp-badge { display:inline-block; font-size:.74rem; font-weight:800; letter-spacing:.04em;
+      text-transform:uppercase; padding:.14rem .55rem; border-radius:999px; margin-right:.5rem;
       background:rgba(91,211,220,.16); border:1px solid rgba(91,211,220,.4); color:#5BD3DC; }
     .mp-badge-w { background:rgba(245,197,24,.14); border-color:rgba(245,197,24,.38); color:#F5C518; }
 
@@ -1814,7 +1814,7 @@ cite strong { color: var(--gold); display: block; }
 .mp-story { color:rgba(255,255,255,.86); font-size:1.03rem; line-height:1.8; }
 .mp-story p { margin:0 0 1.05rem; }
 .mp-story h1, .mp-story h2, .mp-story h3 {
-  font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+  font-family: var(--font-display); font-weight:600; color:#fff;
   font-size:1.15rem; margin:1.6rem 0 .7rem; line-height:1.3; }
 .mp-story em, .mp-story i { color:#F5C518; font-style:italic; }
 .mp-story strong, .mp-story b { color:#fff; }
@@ -1826,7 +1826,7 @@ cite strong { color: var(--gold); display: block; }
   font-style:italic; }
 
 /* A pale strip that names what part of the night you are looking at. */
-.mp-sub { font-family:'Anton',sans-serif; font-size:.72rem; letter-spacing:.16em;
+.mp-sub { font-family: var(--font-accent); font-size:.72rem; letter-spacing:.16em;
   text-transform:uppercase; color:#F5C518; margin:2.2rem 0 .9rem;
   padding-top:1.6rem; border-top:1px solid rgba(255,255,255,.12); }
 .mp-sub:first-child { margin-top:0; padding-top:0; border-top:0; }
@@ -1845,12 +1845,12 @@ cite strong { color: var(--gold); display: block; }
   padding:2.1rem 1.7rem 1.7rem; box-shadow:0 24px 60px rgba(0,0,0,.55);
   max-height:calc(100vh - 2.5rem); overflow-y:auto; }
 .lg-x { position:absolute; top:.5rem; right:.65rem; background:none; border:none;
-  color:rgba(255,255,255,.45); font-size:1.5rem; line-height:1; cursor:pointer;
+  color:rgba(255,255,255,0.55); font-size:1.5rem; line-height:1; cursor:pointer;
   padding:.25rem .45rem; border-radius:.4rem; }
 .lg-x:hover { color:#F5C518; background:rgba(255,255,255,.07); }
-.lg-eyebrow { display:inline-block; font-family:'Anton',sans-serif; font-size:.68rem;
+.lg-eyebrow { display:inline-block; font-family: var(--font-accent); font-size:.68rem;
   letter-spacing:.17em; text-transform:uppercase; color:#F5C518; margin-bottom:.8rem; }
-.lg-box h2 { font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+.lg-box h2 { font-family: var(--font-display); font-weight:600; color:#fff;
   font-size:clamp(1.4rem,4.4vw,1.85rem); line-height:1.2; margin:0 0 .75rem; }
 .lg-box p { color:rgba(255,255,255,.8); line-height:1.65; font-size:.98rem;
   margin:0 0 1.1rem; }
@@ -1860,12 +1860,12 @@ cite strong { color: var(--gold); display: block; }
   margin-bottom:.45rem; padding-left:1.5rem; position:relative; }
 .lg-list li::before { content:"\2713"; position:absolute; left:0; color:#F5C518;
   font-weight:900; }
-.lg-cta { display:block; width:100%; box-sizing:border-box; font-family:'Nunito',sans-serif;
+.lg-cta { display:block; width:100%; box-sizing:border-box; font-family: var(--font-body);
   font-weight:900; font-size:1.02rem; cursor:pointer; padding:.85rem 1.2rem;
   border-radius:999px; border:none; background:#F5C518; color:#07112e;
   text-decoration:none; }
 .lg-cta:hover { background:#ffd84a; }
-.lg-fine { color:rgba(255,255,255,.5); font-size:.8rem; line-height:1.5;
+.lg-fine { color:rgba(255,255,255,0.55); font-size:.8rem; line-height:1.5;
   margin:.9rem 0 0; }
 .lg-fine button { background:none; border:none; color:#F5C518; font:inherit;
   font-weight:800; cursor:pointer; padding:0; text-decoration:underline; }
@@ -1967,9 +1967,9 @@ cite strong { color: var(--gold); display: block; }
 .fs-section { background:linear-gradient(160deg,#07112e,#0d1b4b); padding:3.5rem 1.25rem; }
 .fs-inner { max-width:60rem; margin:0 auto; }
 .fs-head { text-align:center; margin-bottom:2.25rem; }
-.fs-eyebrow { display:inline-block; font-family:'Anton',sans-serif; font-size:.72rem;
+.fs-eyebrow { display:inline-block; font-family: var(--font-accent); font-size:.72rem;
   letter-spacing:.16em; text-transform:uppercase; color:#F5C518; margin-bottom:.85rem; }
-.fs-head h2 { font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+.fs-head h2 { font-family: var(--font-display); font-weight:600; color:#fff;
   font-size:clamp(1.7rem,4vw,2.4rem); margin:0 0 .85rem; }
 .fs-lede { color:rgba(255,255,255,.78); line-height:1.7; max-width:42rem; margin:0 auto; font-size:1.02rem; }
 .fs-lede em { color:#F5C518; font-style:normal; font-weight:700; }
@@ -1977,13 +1977,13 @@ cite strong { color: var(--gold); display: block; }
 .fs-bar { display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; margin-bottom:1.4rem; }
 .fs-who { color:rgba(255,255,255,.55); font-size:.85rem; margin-left:auto; }
 
-.fs-btn { font-family:'Nunito',sans-serif; font-weight:800; font-size:.94rem; cursor:pointer;
+.fs-btn { font-family: var(--font-body); font-weight:800; font-size:.94rem; cursor:pointer;
   padding:.6rem 1.15rem; border-radius:999px; border:1px solid rgba(255,255,255,.25);
   background:rgba(255,255,255,.06); color:#fff; }
 .fs-btn-gold { background:#F5C518; color:#07112e; border-color:#F5C518; }
 .fs-link { background:none; border:none; color:#F5C518; font-weight:700; cursor:pointer;
   padding:0; font-size:inherit; font-family:inherit; text-decoration:underline; }
-.fs-icon { background:none; border:none; color:rgba(255,255,255,.5); cursor:pointer;
+.fs-icon { background:none; border:none; color:rgba(255,255,255,0.55); cursor:pointer;
   font-size:1rem; padding:.2rem .35rem; border-radius:.35rem; }
 .fs-icon:hover { color:#F5C518; background:rgba(255,255,255,.07); }
 
@@ -1991,36 +1991,36 @@ cite strong { color: var(--gold); display: block; }
 .fs-card { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.13);
   border-radius:.85rem; padding:1.2rem 1.3rem; }
 .fs-card-head { display:flex; gap:.6rem; align-items:flex-start; }
-.fs-card-head h3 { flex:1; font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+.fs-card-head h3 { flex:1; font-family: var(--font-display); font-weight:600; color:#fff;
   font-size:1.08rem; margin:0; line-height:1.3; }
 .fs-card-acts { display:flex; gap:.15rem; flex-shrink:0; }
 .fs-meta { color:#5BD3DC; font-size:.82rem; font-weight:700; margin:.3rem 0 .6rem; }
 .fs-body { color:rgba(255,255,255,.8); font-size:.95rem; line-height:1.65; margin:0 0 .8rem;
   white-space:pre-wrap; }
 .fs-qa { margin:0 0 .55rem; white-space:normal; }
-.fs-qa span { display:block; font-size:.8rem; font-weight:800; color:rgba(255,255,255,.42);
+.fs-qa span { display:block; font-size:.8rem; font-weight:800; color:rgba(255,255,255,0.55);
   margin-bottom:.15rem; }
 .fs-chips { display:flex; flex-wrap:wrap; gap:.35rem; margin-bottom:.6rem; }
 .fs-chip { background:rgba(245,197,24,.14); border:1px solid rgba(245,197,24,.35);
   color:#F5C518; font-size:.74rem; font-weight:800; padding:.16rem .55rem; border-radius:999px; }
 .fs-linked, .fs-companion { color:rgba(255,255,255,.6); font-size:.84rem; line-height:1.55; margin:.35rem 0 0; }
-.fs-companion span { color:rgba(255,255,255,.4); }
+.fs-companion span { color:rgba(255,255,255,0.55); }
 
 .fs-empty { text-align:center; background:rgba(255,255,255,.04);
   border:1px dashed rgba(255,255,255,.18); border-radius:1rem; padding:2.5rem 1.5rem; }
 .fs-empty-sm { padding:1.75rem 1.25rem; }
 .fs-empty-i { font-size:1.8rem; color:#F5C518; margin-bottom:.6rem; }
-.fs-empty h3 { font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+.fs-empty h3 { font-family: var(--font-display); font-weight:600; color:#fff;
   font-size:1.25rem; margin:0 0 .7rem; }
 .fs-empty p { color:rgba(255,255,255,.75); line-height:1.7; max-width:34rem;
   margin:0 auto .9rem; font-size:.97rem; }
-.fs-empty-note { color:rgba(255,255,255,.45) !important; font-size:.85rem !important; }
+.fs-empty-note { color:rgba(255,255,255,0.55) !important; font-size:.85rem !important; }
 .fs-note { color:rgba(255,255,255,.6); text-align:center; padding:1.25rem; }
 .fs-note-warn { color:#e0607a; }
 
 .fs-form { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14);
   border-radius:.9rem; padding:1.5rem; }
-.fs-form h3 { font-family:'Fredoka',sans-serif; font-weight:600; color:#F5C518;
+.fs-form h3 { font-family: var(--font-display); font-weight:600; color:#F5C518;
   font-size:1.15rem; margin:0 0 1.1rem; }
 .fs-l { display:block; color:rgba(255,255,255,.8); font-size:.88rem; font-weight:700;
   margin-bottom:.9rem; }
@@ -2030,7 +2030,7 @@ cite strong { color: var(--gold); display: block; }
 .fs-row .fs-l-sm { flex:0 0 7.5rem; }
 .fs-in { width:100%; box-sizing:border-box; margin-top:.35rem; padding:.6rem .75rem;
   border-radius:.5rem; border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.07);
-  color:#fff; font-family:'Nunito',sans-serif; font-size:.95rem; font-weight:400; }
+  color:#fff; font-family: var(--font-body); font-size:.95rem; font-weight:400; }
 .fs-ta { resize:vertical; line-height:1.6; }
 .fs-filter { width:auto; margin-top:0; }
 .fs-vopts { display:flex; flex-wrap:wrap; gap:.35rem; }
@@ -2042,7 +2042,7 @@ cite strong { color: var(--gold); display: block; }
 .fs-vopt input { accent-color:#F5C518; margin:0; }
 .fs-err { color:#e0607a; font-size:.87rem; min-height:1.1rem; margin-bottom:.5rem; }
 .fs-acts { display:flex; gap:.6rem; flex-wrap:wrap; }
-.fs-hint { font-weight:400; color:rgba(255,255,255,.45); font-size:.8rem; }
+.fs-hint { font-weight:400; color:rgba(255,255,255,0.55); font-size:.8rem; }
 .fs-admin { background:rgba(245,197,24,.18); border:1px solid rgba(245,197,24,.45);
   color:#F5C518; font-size:.68rem; font-weight:800; padding:.08rem .4rem;
   border-radius:999px; text-transform:uppercase; letter-spacing:.05em; }
@@ -2050,14 +2050,14 @@ cite strong { color: var(--gold); display: block; }
 /* lookup axes — same five doors as the library above */
 .fs-axes { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:.9rem;
   border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:.9rem; }
-.fs-axis { font-family:'Nunito',sans-serif; font-weight:800; font-size:.85rem;
+.fs-axis { font-family: var(--font-body); font-weight:800; font-size:.85rem;
   cursor:pointer; padding:.45rem .85rem; border-radius:999px;
   border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.05);
   color:rgba(255,255,255,.7); }
 .fs-axis.on { background:rgba(245,197,24,.16); border-color:#F5C518; color:#F5C518; }
 
 .fs-vals { display:flex; flex-wrap:wrap; gap:.35rem; margin-bottom:1.1rem; }
-.fs-val { font-family:'Nunito',sans-serif; font-weight:700; font-size:.8rem;
+.fs-val { font-family: var(--font-body); font-weight:700; font-size:.8rem;
   cursor:pointer; padding:.3rem .7rem; border-radius:999px;
   border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04);
   color:rgba(255,255,255,.68); }
@@ -2076,12 +2076,12 @@ cite strong { color: var(--gold); display: block; }
 .fs-det summary::before { content:"\25B8"; display:inline-block; margin-right:.45rem;
   transition:transform .15s; color:#F5C518; }
 .fs-det[open] summary::before { transform:rotate(90deg); }
-.fs-det-n { color:rgba(255,255,255,.35); font-weight:600; font-size:.76rem; }
+.fs-det-n { color:rgba(255,255,255,0.55); font-weight:600; font-size:.76rem; }
 .fs-det .fs-vopts { margin-top:.65rem; }
-.fs-note-sm { font-size:.85rem; color:rgba(255,255,255,.45); text-align:left; padding:0 0 .8rem; }
+.fs-note-sm { font-size:.85rem; color:rgba(255,255,255,0.55); text-align:left; padding:0 0 .8rem; }
 
 .fs-kinds { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:.9rem; }
-.fs-kind { font-family:'Nunito',sans-serif; font-weight:700; font-size:.82rem;
+.fs-kind { font-family: var(--font-body); font-weight:700; font-size:.82rem;
   cursor:pointer; padding:.35rem .8rem; border-radius:.5rem;
   border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04);
   color:rgba(255,255,255,.7); }
@@ -2116,7 +2116,7 @@ cite strong { color: var(--gold); display: block; }
   border-bottom: 1px solid rgba(255,255,255,.1);
 }
 .rd-tool {
-  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .86rem;
+  font-family: var(--font-body); font-weight: 800; font-size: .86rem;
   cursor: pointer; padding: .45rem .85rem; border-radius: 999px;
   border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06);
   color: #fff; line-height: 1;
@@ -2124,8 +2124,8 @@ cite strong { color: var(--gold); display: block; }
 .rd-tool:hover { border-color: rgba(245,197,24,.5); color: #F5C518; }
 .rd-tool.on { background: #F5C518; color: #07112e; border-color: #F5C518; }
 .rd-tool-lbl {
-  font-family: 'Anton', sans-serif; font-size: .66rem; letter-spacing: .14em;
-  text-transform: uppercase; color: rgba(255,255,255,.45); margin-right: .1rem;
+  font-family: var(--font-accent); font-size: .66rem; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55); margin-right: .1rem;
 }
 .rd-tools .rd-spacer { margin-left: auto; }
 
@@ -2140,7 +2140,7 @@ cite strong { color: var(--gold); display: block; }
 }
 .rd-card > :last-child { margin-bottom: 0; }
 .rd-label {
-  font-family: 'Anton', sans-serif; font-size: .7rem; letter-spacing: .15em;
+  font-family: var(--font-accent); font-size: .7rem; letter-spacing: .15em;
   text-transform: uppercase; color: #F5C518;
   margin: 0 0 .85rem; font-weight: 400;
 }
@@ -2155,7 +2155,7 @@ cite strong { color: var(--gold); display: block; }
 .rd-scripture { border-left-color: #5BD3DC; background: rgba(91,211,220,.055); }
 .rd-scripture .rd-label { color: #5BD3DC; }
 .rd-ref {
-  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #5BD3DC;
+  font-family: var(--font-display); font-weight: 600; color: #5BD3DC;
   font-size: 1.02rem !important; margin-bottom: .5rem !important;
 }
 .rd-verse {
@@ -2210,11 +2210,11 @@ cite strong { color: var(--gold); display: block; }
   border-radius: .95rem; padding: 1.4rem 1.5rem;
 }
 .rd-moment h3 {
-  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #F5C518;
+  font-family: var(--font-display); font-weight: 600; color: #F5C518;
   font-size: 1.2rem; margin: 0 0 .9rem; line-height: 1.25;
 }
 .rd-eyebrow {
-  font-family: 'Anton', sans-serif !important; font-size: .66rem !important;
+  font-family: var(--font-accent) !important; font-size: .66rem !important;
   letter-spacing: .15em; text-transform: uppercase;
   color: rgba(245,197,24,.75) !important; margin: 0 0 .4rem !important;
 }
@@ -2227,7 +2227,7 @@ cite strong { color: var(--gold); display: block; }
   display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1.6rem;
 }
 .rd-jump a {
-  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .82rem;
+  font-family: var(--font-body); font-weight: 700; font-size: .82rem;
   color: rgba(255,255,255,.72); text-decoration: none;
   padding: .3rem .7rem; border-radius: 999px;
   border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.04);
@@ -2236,14 +2236,14 @@ cite strong { color: var(--gold); display: block; }
 
 .rd-part { margin: 0 0 1.8rem; scroll-margin-top: 130px; }
 .rd-part-label {
-  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #F5C518;
+  font-family: var(--font-display); font-weight: 600; color: #F5C518;
   font-size: 1.05rem; margin: 0 0 .7rem; line-height: 1.3;
 }
 .rd-tag {
-  font-family: 'Anton', sans-serif; font-size: .58rem; letter-spacing: .12em;
+  font-family: var(--font-accent); font-size: .72rem; letter-spacing: .1em;
   text-transform: uppercase; color: #5BD3DC; vertical-align: middle;
   border: 1px solid rgba(91,211,220,.4); background: rgba(91,211,220,.12);
-  border-radius: 999px; padding: .12rem .45rem; margin-left: .4rem;
+  border-radius: 999px; padding: .16rem .55rem; margin-left: .4rem;
 }
 .rd-stanza {
   color: rgba(255,255,255,.9);
@@ -2285,7 +2285,7 @@ cite strong { color: var(--gold); display: block; }
 
 /* Who said it, and where it came from. */
 .rd-who {
-  font-family: 'Fredoka', sans-serif !important; font-weight: 600;
+  font-family: var(--font-display) !important; font-weight: 600;
   color: #fff !important; font-size: 1.05rem !important; margin: 0 0 .2rem !important;
 }
 .rd-motto {
@@ -2293,7 +2293,7 @@ cite strong { color: var(--gold); display: block; }
   margin: 0 0 .35rem !important; line-height: 1.6 !important;
 }
 .rd-when {
-  color: rgba(255,255,255,.5) !important; font-size: .85rem !important;
+  color: rgba(255,255,255,0.55) !important; font-size: .85rem !important;
   margin: 0 0 .9rem !important;
 }
 .rd-attr {
@@ -2311,7 +2311,7 @@ cite strong { color: var(--gold); display: block; }
 .rd-traveler .rd-motto { color: #E879F9 !important; }
 
 .rd-card h4 {
-  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #fff;
+  font-family: var(--font-display); font-weight: 600; color: #fff;
   font-size: 1.18rem; line-height: 1.3; margin: 0 0 .85rem;
 }
 .rd-card a { color: #F5C518; }
@@ -2324,7 +2324,7 @@ cite strong { color: var(--gold); display: block; }
   display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1.6rem;
 }
 .rd-depth {
-  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .84rem;
+  font-family: var(--font-body); font-weight: 800; font-size: .84rem;
   cursor: pointer; text-align: left; line-height: 1.25;
   padding: .5rem .9rem; border-radius: .7rem;
   border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.05);
@@ -2332,7 +2332,7 @@ cite strong { color: var(--gold); display: block; }
 }
 .rd-depth small {
   display: block; font-weight: 400; font-size: .72rem;
-  color: rgba(255,255,255,.42); margin-top: .1rem;
+  color: rgba(255,255,255,0.55); margin-top: .1rem;
 }
 .rd-depth:hover { border-color: rgba(245,197,24,.45); color: #fff; }
 .rd-depth.on {
@@ -2355,7 +2355,7 @@ cite strong { color: var(--gold); display: block; }
 .rd-kit-primary:hover { background: rgba(245,197,24,.22); }
 .rd-kit-ico { font-size: 1.25rem; line-height: 1; flex-shrink: 0; }
 .rd-kit-title {
-  display: block; font-family: 'Fredoka', sans-serif; font-weight: 600;
+  display: block; font-family: var(--font-display); font-weight: 600;
   font-size: 1rem; color: #fff; line-height: 1.25;
 }
 .rd-kit-primary .rd-kit-title { color: #F5C518; }
@@ -2364,7 +2364,7 @@ cite strong { color: var(--gold); display: block; }
   line-height: 1.35; margin-top: .12rem;
 }
 .rd-kit-primary .rd-kit-sub { color: rgba(245,197,24,.65); }
-.rd-kit-arrow { margin-left: auto; color: rgba(255,255,255,.35); flex-shrink: 0; }
+.rd-kit-arrow { margin-left: auto; color: rgba(255,255,255,0.55); flex-shrink: 0; }
 .rd-kit-btn:hover .rd-kit-arrow { color: #F5C518; }
 
 /* ============================================================================
@@ -2379,7 +2379,7 @@ cite strong { color: var(--gold); display: block; }
   position: absolute; top: .35rem; right: .3rem;
   width: 1.65rem; height: 1.65rem; border-radius: 50%;
   border: none; background: #F5C518; color: #07112e;
-  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.05rem;
+  font-family: var(--font-body); font-weight: 900; font-size: 1.05rem;
   line-height: 1; cursor: pointer; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   transition: transform .22s cubic-bezier(.22,1,.36,1), background .18s;
@@ -2406,21 +2406,21 @@ cite strong { color: var(--gold); display: block; }
   background: rgba(255,255,255,.07);
   border: 1px solid rgba(255,255,255,.2); border-radius: .55rem;
   padding: .65rem .8rem; color: #fff;
-  font-family: 'Nunito', sans-serif; font-size: .97rem; line-height: 1.65;
+  font-family: var(--font-body); font-size: .97rem; line-height: 1.65;
   resize: vertical; outline: none;
 }
 .hq-text:focus { border-color: rgba(91,211,220,.7); }
-.hq-text::placeholder { color: rgba(255,255,255,.35); }
+.hq-text::placeholder { color: rgba(255,255,255,0.55); }
 
 .hq-sec {
-  font-family: 'Anton', sans-serif; font-size: .62rem; letter-spacing: .14em;
-  text-transform: uppercase; color: rgba(255,255,255,.42);
+  font-family: var(--font-accent); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
   margin: 1rem 0 .5rem;
 }
 .hq-tags, .hq-whos { display: flex; flex-wrap: wrap; gap: .35rem; }
 .hq-tag {
   display: inline-flex; align-items: center; gap: .2rem;
-  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .74rem;
+  font-family: var(--font-body); font-weight: 700; font-size: .74rem;
   padding: .2rem .55rem; border-radius: 999px;
 }
 .hq-auto { background: rgba(245,197,24,.13); border: 1px solid rgba(245,197,24,.32); color: #F5C518; }
@@ -2437,15 +2437,15 @@ cite strong { color: var(--gold); display: block; }
   background: rgba(255,255,255,.07);
   border: 1px solid rgba(255,255,255,.2); border-radius: .5rem;
   padding: .5rem .7rem; color: #fff;
-  font-family: 'Nunito', sans-serif; font-size: .9rem; outline: none;
+  font-family: var(--font-body); font-size: .9rem; outline: none;
 }
 .hq-in:focus { border-color: rgba(91,211,220,.7); }
-.hq-in::placeholder { color: rgba(255,255,255,.35); }
+.hq-in::placeholder { color: rgba(255,255,255,0.55); }
 .hq-sel { flex: 0 0 8rem; }
 .hq-sel option { background: #0d1b4b; color: #fff; }
 
 .hq-who {
-  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .82rem;
+  font-family: var(--font-body); font-weight: 700; font-size: .82rem;
   padding: .3rem .7rem; border-radius: 999px; cursor: pointer;
   background: rgba(255,255,255,.05); color: rgba(255,255,255,.75);
   border: 1px solid rgba(255,255,255,.18);
@@ -2454,7 +2454,7 @@ cite strong { color: var(--gold); display: block; }
 .hq-who.on { background: #F5C518; color: #07112e; border-color: #F5C518; }
 
 .hq-btn {
-  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .88rem;
+  font-family: var(--font-body); font-weight: 800; font-size: .88rem;
   cursor: pointer; padding: .5rem 1rem; border-radius: 999px;
   border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06); color: #fff;
 }
@@ -2464,7 +2464,7 @@ cite strong { color: var(--gold); display: block; }
 
 .hq-acts { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; margin-top: 1rem; }
 .hq-note { color: #5BD3DC; font-size: .85rem; font-weight: 700; }
-.hq-hint { color: rgba(255,255,255,.45); font-size: .87rem; line-height: 1.6; }
+.hq-hint { color: rgba(255,255,255,0.55); font-size: .87rem; line-height: 1.6; }
 
 /* ------------------------------------------------------- the family circle */
 .hq-bottom { margin-top: 2.6rem; }
@@ -2478,22 +2478,22 @@ cite strong { color: var(--gold); display: block; }
   width: 2rem; height: 2rem; border-radius: 50%; flex-shrink: 0;
   background: #F5C518; color: #07112e;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: .95rem;
+  font-family: var(--font-display); font-weight: 600; font-size: .95rem;
 }
 .fam-meta { flex: 1; min-width: 0; }
 .fam-name {
-  display: block; font-family: 'Fredoka', sans-serif; font-weight: 600;
+  display: block; font-family: var(--font-display); font-weight: 600;
   color: #fff; font-size: .98rem; line-height: 1.2;
 }
 .fam-role {
   display: block; font-size: .68rem; font-weight: 800; letter-spacing: .1em;
-  text-transform: uppercase; color: rgba(255,255,255,.4); margin-top: .1rem;
+  text-transform: uppercase; color: rgba(255,255,255,0.55); margin-top: .1rem;
 }
 
 /* -------------------------------------------------------- the study journal */
 .jr-kinds { display: flex; flex-wrap: wrap; gap: .35rem; margin: .9rem 0 .9rem; }
 .jr-kind {
-  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .82rem;
+  font-family: var(--font-body); font-weight: 700; font-size: .82rem;
   padding: .35rem .75rem; border-radius: 999px; cursor: pointer;
   background: rgba(255,255,255,.05); color: rgba(255,255,255,.75);
   border: 1px solid rgba(255,255,255,.16);
@@ -2576,24 +2576,24 @@ cite strong { color: var(--gold); display: block; }
 }
 .bs-stamp {
   position: absolute; left: .4rem; bottom: .4rem; z-index: 2;
-  font-family: 'Anton', sans-serif; font-size: .66rem; letter-spacing: .1em;
+  font-family: var(--font-accent); font-size: .66rem; letter-spacing: .1em;
   color: #F5C518; background: rgba(7,17,46,.8);
   border: 1px solid rgba(245,197,24,.4); border-radius: 999px;
   padding: .1rem .45rem;
 }
 .bs-free {
   position: absolute; right: .4rem; top: .4rem; z-index: 2;
-  font-family: 'Nunito', sans-serif; font-size: .58rem; font-weight: 900;
+  font-family: var(--font-body); font-size: .58rem; font-weight: 900;
   letter-spacing: .06em; color: #07112e; background: #F5C518;
   border-radius: 999px; padding: .1rem .45rem;
 }
 
 .bs-label {
-  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #fff;
+  font-family: var(--font-display); font-weight: 600; color: #fff;
   font-size: .92rem; line-height: 1.25;
 }
 .bs-tile:hover .bs-label, .bs-cover:hover .bs-label { color: #F5C518; }
-.bs-sub { color: rgba(255,255,255,.5); font-size: .76rem; line-height: 1.35; }
+.bs-sub { color: rgba(255,255,255,0.55); font-size: .76rem; line-height: 1.35; }
 
 /* ------------------------------------------------------------- the rest */
 .bs-bar {
@@ -2602,15 +2602,15 @@ cite strong { color: var(--gold); display: block; }
   border-bottom: 1px solid rgba(255,255,255,.1);
 }
 .bs-search { max-width: 20rem; margin-top: 0 !important; }
-.bs-count { color: rgba(255,255,255,.45); font-size: .85rem; margin-left: auto; }
+.bs-count { color: rgba(255,255,255,0.55); font-size: .85rem; margin-left: auto; }
 .bs-shelf {
-  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #F5C518;
+  font-family: var(--font-display); font-weight: 600; color: #F5C518;
   font-size: 1.12rem; line-height: 1.3; margin: 2.2rem 0 1rem;
 }
 .bs-shelf:first-of-type { margin-top: 0; }
 .bs-month {
-  font-family: 'Anton', sans-serif; font-size: .62rem; letter-spacing: .14em;
-  text-transform: uppercase; color: rgba(255,255,255,.4); margin-left: .5rem;
+  font-family: var(--font-accent); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55); margin-left: .5rem;
   vertical-align: middle;
 }
 
@@ -2631,7 +2631,7 @@ cite strong { color: var(--gold); display: block; }
 
 .lb-head { margin-bottom: 1.8rem; }
 .lb-head h2 {
-  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #fff;
+  font-family: var(--font-display); font-weight: 600; color: #fff;
   font-size: clamp(1.4rem,4vw,1.9rem); line-height: 1.2; margin: 1rem 0 .5rem;
 }
 .lb-head p { color: rgba(255,255,255,.68); line-height: 1.7; margin: 0; }
@@ -2639,7 +2639,7 @@ cite strong { color: var(--gold); display: block; }
 /* The night a tile belongs to, opposite its week-and-night stamp. */
 .bs-when {
   position: absolute; right: .4rem; bottom: .4rem; z-index: 2;
-  font-family: 'Anton', sans-serif; font-size: .62rem; letter-spacing: .1em;
+  font-family: var(--font-accent); font-size: .62rem; letter-spacing: .1em;
   text-transform: uppercase; color: rgba(255,255,255,.85);
   background: rgba(7,17,46,.75); border-radius: 999px; padding: .1rem .45rem;
 }
@@ -2657,13 +2657,13 @@ a.bs-tile { text-decoration: none; }
 }
 .ad-row { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
 .ad-tag {
-  font-family: 'Anton', sans-serif; font-size: .6rem; letter-spacing: .15em;
+  font-family: var(--font-accent); font-size: .6rem; letter-spacing: .15em;
   text-transform: uppercase; color: #e0607a;
   border: 1px solid rgba(224,96,122,.45); border-radius: 999px; padding: .12rem .5rem;
 }
 .ad-what { color: rgba(255,255,255,.6); font-size: .85rem; margin-right: auto; }
 .ad-btn {
-  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .8rem;
+  font-family: var(--font-body); font-weight: 800; font-size: .8rem;
   cursor: pointer; padding: .4rem .8rem; border-radius: 999px;
   background: rgba(255,255,255,.06); color: #fff;
   border: 1px solid rgba(255,255,255,.2);
@@ -2676,7 +2676,7 @@ a.bs-tile { text-decoration: none; }
 .ad-hint { color: rgba(255,255,255,.55); font-size: .85rem; line-height: 1.6; margin: 0 0 .8rem; }
 .ad-vs { display: flex; flex-wrap: wrap; gap: .35rem; }
 .ad-v {
-  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .8rem;
+  font-family: var(--font-body); font-weight: 700; font-size: .8rem;
   padding: .28rem .65rem; border-radius: 999px; cursor: pointer;
   background: rgba(255,255,255,.05); color: rgba(255,255,255,.7);
   border: 1px solid rgba(255,255,255,.15);
@@ -2694,7 +2694,7 @@ a.bs-tile { text-decoration: none; }
 }
 .ff-in { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .ff-tag {
-  font-family: 'Anton', sans-serif; font-size: .7rem; letter-spacing: .15em;
+  font-family: var(--font-accent); font-size: .7rem; letter-spacing: .15em;
   text-transform: uppercase; color: #07112e; background: #F5C518;
   border-radius: 999px; padding: .25rem .7rem; flex-shrink: 0;
 }
@@ -2707,7 +2707,7 @@ a.bs-tile { text-decoration: none; }
   display: inline-block; color: #5BD3DC; font-weight: 800; font-size: .88rem;
 }
 .ff-go {
-  flex-shrink: 0; font-family: 'Nunito', sans-serif; font-weight: 900;
+  flex-shrink: 0; font-family: var(--font-body); font-weight: 900;
   font-size: .95rem; text-decoration: none;
   background: #F5C518; color: #07112e;
   padding: .65rem 1.2rem; border-radius: 999px;
@@ -2723,7 +2723,7 @@ a.bs-tile { text-decoration: none; }
   text-align: center;
 }
 .sm-after h3 {
-  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #fff;
+  font-family: var(--font-display); font-weight: 600; color: #fff;
   font-size: 1.4rem; line-height: 1.25; margin: 0 0 .8rem;
 }
 .sm-after > p {
@@ -2731,7 +2731,7 @@ a.bs-tile { text-decoration: none; }
   max-width: 34rem; margin: 0 auto 1.4rem;
 }
 .sm-fine {
-  color: rgba(255,255,255,.5) !important; font-size: .88rem !important;
+  color: rgba(255,255,255,0.55) !important; font-size: .88rem !important;
   line-height: 1.65 !important; max-width: 30rem; margin: 1rem auto 0 !important;
 }
 .sm-fine a { color: rgba(255,255,255,.7); }
@@ -2757,7 +2757,7 @@ a.bs-tile { text-decoration: none; }
 .pl-play:active { transform: scale(.94); }
 .pl-mid { flex: 1; min-width: 0; }
 .pl-title {
-  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #fff;
+  font-family: var(--font-display); font-weight: 600; color: #fff;
   font-size: 1rem; line-height: 1.25; margin-bottom: .35rem;
 }
 .pl-seek {
@@ -2780,7 +2780,7 @@ a.bs-tile { text-decoration: none; }
 }
 .pl-time {
   display: flex; justify-content: space-between;
-  color: rgba(255,255,255,.45); font-size: .78rem; margin-top: .1rem;
+  color: rgba(255,255,255,0.55); font-size: .78rem; margin-top: .1rem;
 }
 .pl-left { color: #5BD3DC; font-weight: 700; }
 
@@ -2791,11 +2791,11 @@ a.bs-tile { text-decoration: none; }
 }
 .pl-sep { width: .3rem; }
 .pl-lbl {
-  font-family: 'Anton', sans-serif; font-size: .62rem; letter-spacing: .14em;
-  text-transform: uppercase; color: rgba(255,255,255,.4); margin-right: .1rem;
+  font-family: var(--font-accent); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55); margin-right: .1rem;
 }
 .pl-chip {
-  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .8rem;
+  font-family: var(--font-body); font-weight: 700; font-size: .8rem;
   padding: .3rem .7rem; border-radius: 999px; cursor: pointer;
   background: rgba(255,255,255,.05); color: rgba(255,255,255,.7);
   border: 1px solid rgba(255,255,255,.16);
@@ -2808,3 +2808,127 @@ a.bs-tile { text-decoration: none; }
   .pl-chip { font-size: .75rem; padding: .28rem .6rem; }
   .pl-lbl { width: 100%; margin-bottom: .2rem; }
 }
+
+/* ------------------------------------------------------------ MEMBERS ONLY
+   The screen in front of the timeline and the lullabies. It covers the page
+   completely and stops it scrolling underneath, because a page you can read
+   round the edges of is not shut. See js/lst-members-only.js — and note the
+   warning in that file about what this is and is not. */
+html.mo-shut, html.mo-shut body { overflow: hidden !important; }
+
+.mo-veil {
+  position: fixed; inset: 0; z-index: 99990;
+  display: flex; align-items: center; justify-content: center; padding: 1.25rem;
+  background: linear-gradient(165deg, rgba(7,17,46,.97), rgba(10,22,64,.99));
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  overflow-y: auto;
+}
+.mo-box {
+  width: 100%; max-width: 30rem; text-align: center;
+  background: linear-gradient(165deg,#0f2158,#0a1640);
+  border: 1px solid rgba(245,197,24,.42); border-radius: 1.1rem;
+  padding: 2.2rem 1.8rem 1.8rem; box-shadow: 0 24px 60px rgba(0,0,0,.55);
+  font-family: var(--font-body);
+}
+.mo-eyebrow {
+  display: inline-block; font-family: var(--font-accent); font-size: .68rem;
+  letter-spacing: .17em; text-transform: uppercase; color: #F5C518;
+  margin-bottom: .85rem;
+}
+.mo-box h2 {
+  font-family: var(--font-display); font-weight: 600; color: #fff;
+  font-size: clamp(1.4rem,4.4vw,1.9rem); line-height: 1.2; margin: 0 0 .8rem;
+}
+.mo-box p { color: rgba(255,255,255,.8); line-height: 1.65; font-size: .98rem; margin: 0 0 1.1rem; }
+.mo-list { list-style: none; margin: 0 0 1.4rem; padding: 0; text-align: left; display: inline-block; }
+.mo-list li {
+  color: rgba(255,255,255,.85); font-size: .94rem; line-height: 1.5;
+  margin-bottom: .45rem; padding-left: 1.5rem; position: relative;
+}
+.mo-list li::before { content: "\2713"; position: absolute; left: 0; color: #F5C518; font-weight: 900; }
+.mo-cta {
+  display: block; width: 100%; box-sizing: border-box;
+  font-weight: 900; font-size: 1.02rem; cursor: pointer;
+  padding: .85rem 1.2rem; border-radius: 999px; border: none;
+  background: #F5C518; color: #07112e; text-decoration: none;
+}
+.mo-cta:hover { background: #ffd84a; }
+.mo-fine { color: rgba(255,255,255,0.55) !important; font-size: .85rem !important; line-height: 1.9 !important; margin: .9rem 0 0 !important; }
+.mo-fine button, .mo-fine a { background: none; border: none; color: #F5C518; font: inherit; font-weight: 800; cursor: pointer; padding: 0; text-decoration: underline; }
+
+/* ============================================================================
+   THE SECOND FRONT DOOR — bible-bedtime-stories.html
+
+   Same product, same price, same footer. A different first sentence, for a
+   family who has never heard of Come, Follow Me and would not know what it
+   meant. Nothing here is hidden: "Where we're coming from" is one click away
+   from this page, as it is from the other one.
+   ========================================================================= */
+.bb-hero {
+  background: linear-gradient(165deg,#07112e,#0d1b4b 55%,#0a1640);
+  padding: 4.5rem 1.25rem 3.5rem; text-align: center;
+}
+.bb-hero-in { max-width: 48rem; margin: 0 auto; }
+.bb-hero h1 {
+  font-family: var(--font-display); font-weight: 600; color: #fff;
+  font-size: clamp(2rem,5.2vw,3.1rem); line-height: 1.18; margin: 0 0 1.2rem;
+}
+.bb-hero h1 em { color: #F5C518; font-style: italic; }
+.bb-sub {
+  color: rgba(255,255,255,.84); font-size: clamp(1.02rem,2.2vw,1.2rem);
+  line-height: 1.7; max-width: 38rem; margin: 0 auto 1.9rem;
+}
+.bb-acts {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1.1rem; flex-wrap: wrap; margin-bottom: 1.2rem;
+}
+.bb-second {
+  color: rgba(255,255,255,.72); font-weight: 700; font-size: .96rem;
+  text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.25);
+}
+.bb-second:hover { color: #F5C518; border-color: rgba(245,197,24,.6); }
+.bb-note { color: rgba(255,255,255,0.55); font-size: .88rem; line-height: 1.6; margin: 0; }
+
+.bb-band { background: linear-gradient(180deg,#0a1640,#07112e); padding: 3.5rem 1.25rem; }
+.bb-alt { background: linear-gradient(180deg,#07112e,#0d1b4b 60%,#07112e); }
+.bb-in { max-width: 58rem; margin: 0 auto; text-align: center; }
+.bb-narrow { max-width: 40rem; }
+.bb-eyebrow {
+  display: inline-block; font-family: var(--font-accent); font-size: .7rem;
+  letter-spacing: .17em; text-transform: uppercase; color: #F5C518; margin-bottom: .9rem;
+}
+.bb-band h2 {
+  font-family: var(--font-display); font-weight: 600; color: #fff;
+  font-size: clamp(1.6rem,3.6vw,2.3rem); line-height: 1.22; margin: 0 0 1rem;
+}
+.bb-band p {
+  color: rgba(255,255,255,.78); line-height: 1.8; font-size: 1.02rem;
+  max-width: 38rem; margin: 0 auto 1.2rem;
+}
+.bb-lead { color: rgba(255,255,255,.9) !important; font-size: 1.1rem !important; }
+/* Links in the copy go gold; a gold BUTTON keeps its dark text, or the
+   label disappears into the button. */
+.bb-band a:not(.btn) { color: #F5C518; }
+.bb-fine { color: rgba(255,255,255,0.55) !important; font-size: .9rem !important; margin-top: 1.6rem !important; }
+
+.bb-three {
+  display: grid; gap: 1.6rem; margin-top: 2.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+.bb-one { text-align: left; }
+.bb-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.2rem; height: 2.2rem; border-radius: 50%;
+  background: rgba(245,197,24,.14); border: 1px solid rgba(245,197,24,.45);
+  color: #F5C518; font-family: var(--font-accent); font-size: .95rem;
+  margin-bottom: .8rem;
+}
+.bb-one h3 {
+  font-family: var(--font-display); font-weight: 600; color: #fff;
+  font-size: 1.12rem; line-height: 1.3; margin: 0 0 .55rem;
+}
+.bb-one p { margin: 0; font-size: .97rem; max-width: none; }
+
+/* A subscriber's header keeps its button, but it goes somewhere useful
+   instead of trying to sell them what they already have. */
+.lst-member-cta { white-space: nowrap; }

@@ -108,7 +108,7 @@
       var l = window.LSTRead.song(r.songHtml);
       if (l.ok) {
         song = '<h3 class="rd-label" style="margin-top:2.2rem;">&#127925; That night&rsquo;s lullaby</h3>' +
-          (l.title ? "<h4 style=\"font-family:'Fredoka',sans-serif;font-weight:600;color:#fff;font-size:1.25rem;margin:0 0 .9rem;\">" +
+          (l.title ? "<h4 style=\"font-family: var(--font-display);font-weight:600;color:#fff;font-size:1.25rem;margin:0 0 .9rem;\">" +
             esc(l.title) + "</h4>" : "") +
           (l.jump || "") + l.html;
       }

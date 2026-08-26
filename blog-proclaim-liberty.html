@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <title>Proclaim Liberty — Little Scripture Travelers</title>
   <meta name="description" content="For the 250th birthday of the United States of America. The story of a nation built on a Book — and the heart that still won't quit." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -37,7 +40,7 @@
       margin: 0 auto;
     }
     .article-tag {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.75rem;
       font-weight: 400;
       letter-spacing: 0.14em;
@@ -47,7 +50,7 @@
       display: block;
     }
     .article-hero h1 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 700;
       font-size: clamp(2.3rem, 5.5vw, 3.6rem);
       color: #fff;
@@ -56,7 +59,7 @@
       text-shadow: 0 2px 28px rgba(0,0,0,0.8);
     }
     .article-hero .subtitle {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-style: italic;
       color: rgba(255,255,255,0.88);
       font-size: 1.12rem;
@@ -65,7 +68,7 @@
       margin: 0 auto var(--space-5);
     }
     .article-hero .byline {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.85rem;
       color: rgba(255,255,255,0.55);
       letter-spacing: 0.04em;
@@ -94,7 +97,7 @@
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.9rem;
       color: var(--gold);
@@ -106,7 +109,7 @@
     .back-link:hover { opacity: 1; }
 
     .article-body p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.83);
       font-size: 1.07rem;
       line-height: 1.87;
@@ -115,7 +118,7 @@
 
     /* ── RED section headings ──────────────────────────── */
     .article-body h2 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.6rem;
       color: #c8102e;
@@ -137,7 +140,7 @@
       border-radius: 0 12px 12px 0;
     }
     .opening-quote p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 1.18rem;
       font-style: italic;
       color: rgba(255,255,255,0.92);
@@ -154,7 +157,7 @@
       border-radius: 0 12px 12px 0;
     }
     .pull-quote p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 1.12rem;
       font-style: italic;
       color: rgba(255,255,255,0.9);
@@ -164,9 +167,9 @@
     .pull-quote cite {
       display: block;
       margin-top: 0.6rem;
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.82rem;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.55);
       font-style: normal;
     }
 
@@ -200,7 +203,7 @@
       text-align: center;
     }
     .verse-card .verse-text {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.35rem;
       color: #fff;
@@ -208,9 +211,9 @@
       margin-bottom: 0.6rem;
     }
     .verse-card .verse-ref {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.88rem;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.55);
       letter-spacing: 0.06em;
     }
 
@@ -223,7 +226,7 @@
       margin: 2.25rem 0;
     }
     .highlight-box p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.9);
       font-size: 1.08rem;
       line-height: 1.82;
@@ -241,7 +244,7 @@
       margin: 3.5rem 0 1rem;
     }
     .closing-eyebrow {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.72rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -250,7 +253,7 @@
       margin-bottom: 0.75rem;
     }
     .closing-box h3 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.65rem;
       color: #fff;
@@ -258,7 +261,7 @@
       line-height: 1.25;
     }
     .closing-box p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.8);
       font-size: 1rem;
       line-height: 1.8;
@@ -277,9 +280,9 @@
       border-top: 1px solid rgba(255,255,255,0.1);
     }
     .social-share span {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.55);
     }
     .social-share a {
       display: inline-flex;
@@ -297,7 +300,7 @@
   </style>
 </head>
 <body>
-<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family:'Nunito',sans-serif;font-size:0.9rem;line-height:1.5;">
+<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
   <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">Coming soon —</strong> the Little Scripture Travelers app: access all your digital products &amp; lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
@@ -794,8 +797,8 @@
 
         <div class="pull-quote">
           <p>&ldquo;The joy we feel has little to do with the circumstances of our lives and everything to do with the focus of our lives.&rdquo;</p>
-          <cite style="display:block;margin-top:0.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">— President Russell M. Nelson</cite>
-          <p class="pull-quote-context" style="font-family:'Nunito',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">America&rsquo;s 250 years &mdash; and everything these stories are built to give a child &mdash; are about exactly this: not removing hardship, but giving the heart a place to stand inside it. A focus that outlasts every storm.</p>
+          <cite style="display:block;margin-top:0.5rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">— President Russell M. Nelson</cite>
+          <p class="pull-quote-context" style="font-family: var(--font-body);font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">America&rsquo;s 250 years &mdash; and everything these stories are built to give a child &mdash; are about exactly this: not removing hardship, but giving the heart a place to stand inside it. A focus that outlasts every storm.</p>
         </div>
         <!-- Closing CTA -->
         <div class="closing-box">
@@ -1230,6 +1233,8 @@
 })();
 
 </script><script src="js/vendor/supabase.js"></script>
+<script src="js/lst-auth.js"></script>
 <script src="js/lst-signup.js"></script>
+  <script src="js/lst-signed-in.js"></script>
 </body>
 </html>

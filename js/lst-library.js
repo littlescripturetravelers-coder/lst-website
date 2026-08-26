@@ -187,7 +187,7 @@
         '<p class="mp-note" style="padding:.9rem 0 0;font-size:.9rem;">Already a subscriber? ' +
           '<button type="button" class="mp-link" id="lb-signin">Sign in</button></p>' +
         '<p class="mp-note" style="padding:.4rem 0 0;font-size:.9rem;">' +
-          'A Little Travelers&rsquo; Lullaby is <a href="lullaby.html?which=lantern">free to everyone</a>.</p>' +
+          'Read one first &mdash; <a href="sample.html">a whole bedtime story, free</a>.</p>' +
       "</div>";
   }
 

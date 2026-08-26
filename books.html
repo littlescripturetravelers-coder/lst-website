@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 <title>Our Books — Little Scripture Travelers Bedtime Stories</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +24,7 @@
     --sky-blue: #7cc4f0;
 
     /* Volume colors */
-    --ot-green: #5a8a3a;
+    --ot-green: #4e7a31;
     --ot-green-deep: #3d6024;
     --nt-red: #a44a28;
     --nt-red-deep: #7a3318;
@@ -35,7 +38,7 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Nunito', sans-serif;
+    font-family: var(--font-body);
     background: var(--navy-deep);
     color: var(--cream);
     line-height: 1.6;
@@ -43,7 +46,7 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-weight: 600;
     letter-spacing: -0.01em;
   }
@@ -140,7 +143,7 @@
     display: block;
     color: var(--cream);
     text-decoration: none;
-    font-family: 'Nunito', sans-serif;
+    font-family: var(--font-body);
     font-weight: 600;
     font-size: 1rem;
     padding: 0.75rem 2rem;
@@ -171,7 +174,7 @@
   .breadcrumb {
     color: var(--sky-blue);
     font-size: 0.9rem;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
@@ -198,7 +201,7 @@
   }
 
   .page-hero-subhead {
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(1.1rem, 2.2vw, 1.5rem);
     font-weight: 400;
     color: var(--gold-soft);
@@ -252,7 +255,7 @@
     left: 1rem;
     background: var(--gold);
     color: var(--navy-deep);
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: 0.75rem;
     letter-spacing: 0.15em;
@@ -272,7 +275,7 @@
     align-items: center;
     gap: 0.5rem;
     color: var(--gold);
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.85rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -302,7 +305,7 @@
     padding: 0.35rem 0.9rem;
     font-size: 0.8rem;
     color: var(--cream-soft);
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     letter-spacing: 0.08em;
   }
 
@@ -339,7 +342,7 @@
     color: var(--navy-deep);
     padding: 1rem 2rem;
     border-radius: 50px;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-weight: 600;
     font-size: 1.1rem;
     text-decoration: none;
@@ -364,7 +367,7 @@
     border: 2px solid rgba(244,200,66,0.5);
     padding: 0.9rem 2rem;
     border-radius: 50px;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-weight: 600;
     font-size: 1rem;
     text-decoration: none;
@@ -449,7 +452,7 @@
   .glance-tagline {
     text-align: center;
     margin-top: 3rem;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-size: 1.3rem;
     font-style: italic;
     color: var(--sky-blue);
@@ -469,7 +472,7 @@
   .section-eyebrow {
     display: inline-block;
     color: var(--gold);
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-weight: 500;
     font-size: 0.85rem;
     text-transform: uppercase;
@@ -522,7 +525,7 @@
     color: var(--cream);
     padding: 0.6rem 1rem;
     text-align: center;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.7rem;
     letter-spacing: 0.1em;
     position: relative;
@@ -557,7 +560,7 @@
     display: inline-block;
     padding: 0.3rem 0.75rem;
     border-radius: 20px;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.7rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -658,7 +661,7 @@
     color: var(--navy-deep);
     padding: 0.3rem 0.85rem;
     border-radius: 20px;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-weight: 600;
     font-size: 0.75rem;
     letter-spacing: 0.15em;
@@ -674,7 +677,7 @@
     padding: 0.25rem 0.75rem;
     background: rgba(0,0,0,0.25);
     border-radius: 20px;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.75rem;
     color: white;
     letter-spacing: 0.1em;
@@ -794,7 +797,7 @@
     color: white;
   }
 
-  .book-month { font-family: 'Fredoka', sans-serif; font-size: 1.8rem; font-weight: 600; line-height: 1; margin-bottom: 0.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+  .book-month { font-family: var(--font-display); font-size: 1.8rem; font-weight: 600; line-height: 1; margin-bottom: 0.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
   .book-cover-divider { width: 30px; height: 2px; background: var(--gold); margin: 0.5rem auto; }
   .book-volume-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin-bottom: 0.85rem; }
 
@@ -818,7 +821,7 @@
     right: 0.75rem;
     padding: 0.3rem 0.7rem;
     border-radius: 20px;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.65rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -832,7 +835,7 @@
   .book-actions { margin-top: auto; }
 
   .book-number { display: block; font-size: 0.8rem; color: var(--sky-blue); margin-bottom: 0.25rem; letter-spacing: 0.1em; }
-  .book-title { color: var(--cream); font-family: 'Fredoka', sans-serif; font-size: 1.05rem; font-weight: 500; margin-bottom: 0.85rem; }
+  .book-title { color: var(--cream); font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; margin-bottom: 0.85rem; }
 
   .book-actions { display: flex; flex-direction: column; gap: 0.5rem; }
 
@@ -841,7 +844,7 @@
     text-align: center;
     padding: 0.55rem 0.75rem;
     border-radius: 30px;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-size: 0.85rem;
     font-weight: 500;
     text-decoration: none;
@@ -852,7 +855,7 @@
   .book-btn.primary:hover { background: var(--gold-soft); }
   .book-btn.secondary { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
   .book-btn.secondary:hover { background: rgba(244, 200, 66, 0.15); }
-  .book-btn.disabled { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); cursor: not-allowed; }
+  .book-btn.disabled { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.55); cursor: not-allowed; }
   .book-btn.notify { background: transparent; color: var(--sky-blue); border: 1px solid var(--sky-blue); }
   .book-btn.notify:hover { background: rgba(124, 196, 240, 0.15); }
 
@@ -907,7 +910,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     margin-bottom: 1rem;
   }
 
@@ -923,7 +926,7 @@
     color: var(--navy-deep);
     padding: 1.1rem 2.5rem;
     border-radius: 50px;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-weight: 600;
     font-size: 1.15rem;
     text-decoration: none;
@@ -941,7 +944,7 @@
     color: var(--gold);
     padding: 1rem 2rem;
     border-radius: 50px;
-    font-family: 'Fredoka', sans-serif;
+    font-family: var(--font-display);
     font-weight: 500;
     text-decoration: none;
     border: 2px solid var(--gold);
@@ -968,7 +971,7 @@
   }
 
   .footer-brand p { color: var(--cream-soft); margin-top: 1rem; font-size: 0.95rem; line-height: 1.7; }
-  .footer-col h4 { color: var(--gold); font-size: 1.05rem; margin-bottom: 1rem; font-family: 'Fredoka', sans-serif; }
+  .footer-col h4 { color: var(--gold); font-size: 1.05rem; margin-bottom: 1rem; font-family: var(--font-display); }
   .footer-col ul { list-style: none; }
   .footer-col ul li { margin-bottom: 0.65rem; }
   .footer-col ul a { color: var(--cream-soft); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
@@ -1045,13 +1048,13 @@
     .logo-mark { display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; flex-shrink: 0; }
     .logo-mark img { border-radius: 50%; object-fit: cover; }
     .logo-text { display: flex; flex-direction: column; }
-    .logo-name { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1.05rem; color: #f4c842; line-height: 1.15; }
-    .logo-sub { font-family: 'Nunito', sans-serif; font-size: 0.68rem; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; text-transform: uppercase; }
+    .logo-name { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: #f4c842; line-height: 1.15; }
+    .logo-sub { font-family: var(--font-body); font-size: 0.68rem; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; text-transform: uppercase; }
     .main-nav { display: flex !important; overflow: visible !important; }
     /* CRITICAL: only the top-level nav ul gets flex-row — NOT .nav-dropdown */
     .main-nav > ul { display: flex !important; flex-direction: row !important; list-style: none; gap: 0.25rem; margin: 0; padding: 0; overflow: visible !important; }
     .main-nav > ul > li { display: block; position: relative; }
-    .main-nav > ul > li > a { font-family: 'Fredoka', sans-serif; font-weight: 500; font-size: 0.95rem; color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.4rem 0.6rem; border-radius: 6px; transition: color 0.2s; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
+    .main-nav > ul > li > a { font-family: var(--font-display); font-weight: 500; font-size: 0.95rem; color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.4rem 0.6rem; border-radius: 6px; transition: color 0.2s; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
     .main-nav > ul > li > a:hover { color: #f4c842; }
     /* Dropdown panels — full-width, hidden via visibility, shown via .open */
     @media (min-width: 901px) { .nav-dropdown { display: none !important; } }
@@ -1060,21 +1063,21 @@
     .nav-dropdown-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid !important; grid-template-columns: repeat(auto-fill, minmax(240px, 320px)) !important; justify-content: start !important; gap: 0.5rem 3rem !important; }
     .nav-dropdown-item { display: block !important; padding: 0.85rem 1.1rem !important; min-width: 0 !important; border-radius: 8px !important; text-decoration: none !important; transition: background 0.15s !important; }
     .nav-dropdown-item:hover { background: rgba(244,200,66,0.1) !important; }
-    .nav-dropdown-item-title { display: block !important; font-family: 'Fredoka', sans-serif !important; font-weight: 600 !important; font-size: 1rem !important; color: #f4c842 !important; margin-bottom: 0.3rem !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
-    .nav-dropdown-item-desc { display: block !important; font-family: 'Nunito', sans-serif !important; font-size: 0.82rem !important; color: rgba(255,255,255,0.65) !important; line-height: 1.4 !important; word-break: break-word !important; }
+    .nav-dropdown-item-title { display: block !important; font-family: var(--font-display) !important; font-weight: 600 !important; font-size: 1rem !important; color: #f4c842 !important; margin-bottom: 0.3rem !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+    .nav-dropdown-item-desc { display: block !important; font-family: var(--font-body) !important; font-size: 0.82rem !important; color: rgba(255,255,255,0.65) !important; line-height: 1.4 !important; word-break: break-word !important; }
     .nav-dropdown > li { display: block !important; width: 100% !important; }
-    .nav-dropdown > li > a { display: block !important; padding: 0.55rem 1.1rem !important; font-family: 'Nunito', sans-serif !important; font-size: 0.9rem !important; font-weight: 600 !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; white-space: nowrap !important; }
+    .nav-dropdown > li > a { display: block !important; padding: 0.55rem 1.1rem !important; font-family: var(--font-body) !important; font-size: 0.9rem !important; font-weight: 600 !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; white-space: nowrap !important; }
     .nav-dropdown > li > a:hover { background: rgba(244,200,66,0.12) !important; color: #f4c842 !important; }
     .nav-arrow { display: inline-block !important; font-size: 0.6rem; opacity: 0.7; transition: transform 0.2s; }
     .main-nav li.has-dropdown.open .nav-arrow { transform: rotate(180deg); }
-    .nav-cta { margin-left: 1rem; flex-shrink: 0; background: #f4c842; color: #07112e; font-family: 'Fredoka', sans-serif; font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+    .nav-cta { margin-left: 1rem; flex-shrink: 0; background: #f4c842; color: #07112e; font-family: var(--font-display); font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 999px; text-decoration: none; white-space: nowrap; }
     .nav-cta:hover { background: #ffe066; }
     .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
     .mobile-menu-btn span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; }
     .mobile-nav { display: none; }
     .mobile-nav.open { display: block; background: #07112e; padding: 1rem 1.5rem; border-top: 1px solid rgba(244,200,66,0.2); }
     .mobile-nav > ul { list-style: none; display: flex !important; flex-direction: column !important; gap: 0.75rem; padding: 0; margin: 0; }
-    .mobile-nav > ul > li > a { color: rgba(255,255,255,0.85); text-decoration: none; font-family: 'Fredoka', sans-serif; font-size: 1.05rem; }
+    .mobile-nav > ul > li > a { color: rgba(255,255,255,0.85); text-decoration: none; font-family: var(--font-display); font-size: 1.05rem; }
     @media (max-width: 900px) {
       .main-nav { display: none !important; }
       .nav-cta.nav-cta { display: none; }
@@ -1083,7 +1086,7 @@
   </style>
 </head>
 <body>
-<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family:'Nunito',sans-serif;font-size:0.9rem;line-height:1.5;">
+<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
   <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">Coming soon —</strong> the Little Scripture Travelers app: access all your digital products &amp; lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
@@ -1911,7 +1914,7 @@ function renderBooks(volumeKey) {
         <div class="book-info">
           <span class="book-number">Book ${bookOfTwelve} of 12 ✦ ${bookOfFortyEight} of 48</span>
           <h4 class="book-title">${book.title ? book.title : month + ' ✦ ' + volume.name}</h4>
-          ${book.title ? `<p class="book-subtitle" style="font-family:'Nunito',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.55);margin:-0.5rem 0 0.75rem;">${month} &middot; ${volume.name}</p>` : ''}
+          ${book.title ? `<p class="book-subtitle" style="font-family: var(--font-body);font-size:0.8rem;color:rgba(255,255,255,0.55);margin:-0.5rem 0 0.75rem;">${month} &middot; ${volume.name}</p>` : ''}
           <div class="book-actions">${actionsHTML}</div>
         </div>
       </div>`;
@@ -2271,6 +2274,8 @@ if (mobileBtn) {
 })();
 
 </script><script src="js/vendor/supabase.js"></script>
+<script src="js/lst-auth.js"></script>
 <script src="js/lst-signup.js"></script>
+  <script src="js/lst-signed-in.js"></script>
 </body>
 </html>

@@ -29,7 +29,7 @@
     return '<div style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;padding:.85rem 0;' +
       'border-bottom:1px solid rgba(255,255,255,.08);">' +
       '<span style="font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;' +
-      'color:rgba(255,255,255,.42);min-width:9rem;">' + label + "</span>" +
+      'color:rgba(255,255,255,0.55);min-width:9rem;">' + label + "</span>" +
       '<span style="color:#fff;font-size:1rem;flex:1;">' + value + "</span>" +
       (extra || "") + "</div>";
   }

@@ -144,7 +144,7 @@
     return '' +
       '<article class="mp-card" id="lst-peek">' +
         '<p class="mp-meta">A sample night &middot; this is what arrives every evening</p>' +
-        "<h3 style=\"font-family:'Fredoka',sans-serif;font-weight:600;color:#fff;font-size:1.35rem;margin:.2rem 0 .5rem;\">" +
+        "<h3 style=\"font-family: var(--font-display);font-weight:600;color:#fff;font-size:1.35rem;margin:.2rem 0 .5rem;\">" +
           esc(s ? s.title : "One short story, every night") + "</h3>" +
         (s && s.scripture ? '<p class="mp-meta">' + esc(s.scripture) + "</p>" : "") +
         (chips ? '<div style="margin:.6rem 0 1rem;">' + chips + "</div>" : "") +
@@ -201,7 +201,7 @@
     return '' +
       '<p class="mp-meta">' + esc(prettyDate(n.date)) +
         (stamp.length ? " &middot; " + stamp.map(esc).join(" &middot; ") : "") + "</p>" +
-      "<h2 style=\"font-family:'Fredoka',sans-serif;font-weight:600;color:#fff;font-size:clamp(1.5rem,4.4vw,2.15rem);margin:.15rem 0 .55rem;line-height:1.18;\">" +
+      "<h2 style=\"font-family: var(--font-display);font-weight:600;color:#fff;font-size:clamp(1.5rem,4.4vw,2.15rem);margin:.15rem 0 .55rem;line-height:1.18;\">" +
         (n.title ? esc(n.title) : "Tonight&rsquo;s story") + "</h2>" +
       (n.scripture ? '<p class="mp-meta">' + esc(n.scripture) + "</p>" : "") +
       (n.traveler ? '<p style="margin:.2rem 0 .7rem;color:rgba(255,255,255,.6);font-size:.9rem;">Carried by ' +

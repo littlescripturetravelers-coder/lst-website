@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <title>The Virtue Library &mdash; Little Scripture Travelers</title>
   <meta name="description" content="A searchable catalog of the virtues and principles taught in every Little Scripture Travelers story. Look up what your child needs today and find the scripture stories that teach it." />
 
@@ -33,11 +36,11 @@
     }
     .page-hero-content { position:relative; z-index:1; max-width:56rem; margin:0 auto; }
     .page-eyebrow {
-      display:inline-block; font-family:'Anton',sans-serif; font-size:.75rem;
+      display:inline-block; font-family: var(--font-accent); font-size:.75rem;
       letter-spacing:.16em; text-transform:uppercase; color:#F5C518; margin-bottom:1rem;
     }
     .page-hero h1 {
-      font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+      font-family: var(--font-display); font-weight:600; color:#fff;
       font-size:clamp(2rem,5.2vw,3.35rem); line-height:1.1; margin:0 0 1rem;
     }
     .page-hero .subtitle {
@@ -57,7 +60,7 @@
     .vl-frame p { font-size:1.06rem; line-height:1.78; color:#2c3550; margin:0 0 1.15rem; }
     .vl-frame p:last-child { margin-bottom:0; }
     .vl-lede {
-      font-family:'Fredoka',sans-serif; font-weight:500;
+      font-family: var(--font-display); font-weight:500;
       font-size:clamp(1.22rem,2.5vw,1.55rem) !important;
       line-height:1.5 !important; color:#0d1b4b !important; margin:0 0 1.4rem;
     }
@@ -72,7 +75,7 @@
     /* ===== GROWTH METER ===== */
     .vl-growth { max-width:52rem; margin:2.25rem auto 0; text-align:center; }
     .vl-growth-label {
-      font-family:'Anton',sans-serif; font-size:.72rem; letter-spacing:.15em;
+      font-family: var(--font-accent); font-size:.72rem; letter-spacing:.15em;
       text-transform:uppercase; color:#1a2c6b; opacity:.72; margin-bottom:.7rem;
     }
     .vl-bar { height:12px; background:rgba(13,27,75,.1); border-radius:99px; overflow:hidden; }
@@ -88,7 +91,7 @@
     .vl-tool-inner { max-width:74rem; margin:0 auto; }
     .vl-axes { display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin-bottom:1.6rem; }
     .vl-axis {
-      font-family:'Fredoka',sans-serif; font-weight:500; font-size:.95rem;
+      font-family: var(--font-display); font-weight:500; font-size:.95rem;
       padding:.62rem 1.25rem; border-radius:99px; cursor:pointer;
       background:rgba(255,255,255,.07); color:rgba(255,255,255,.8);
       border:1.5px solid rgba(255,255,255,.15); transition:all .2s ease;
@@ -101,12 +104,12 @@
     .vl-search {
       flex:1 1 16rem; padding:.85rem 1.15rem; border-radius:99px;
       border:1.5px solid rgba(255,255,255,.2); background:rgba(255,255,255,.96);
-      font-family:'Nunito',sans-serif; font-size:1rem; color:#07112e;
+      font-family: var(--font-body); font-size:1rem; color:#07112e;
     }
     .vl-search:focus { outline:none; border-color:#F5C518; box-shadow:0 0 0 3px rgba(245,197,24,.28); }
     .vl-stage {
       padding:.85rem 1.15rem; border-radius:99px; border:1.5px solid rgba(255,255,255,.2);
-      background:rgba(255,255,255,.96); font-family:'Nunito',sans-serif; font-size:.98rem; color:#07112e;
+      background:rgba(255,255,255,.96); font-family: var(--font-body); font-size:.98rem; color:#07112e;
     }
     .vl-count {
       text-align:center; font-size:.92rem; color:rgba(255,255,255,.62);
@@ -127,11 +130,11 @@
     }
     .vl-card:focus-visible { outline:2px solid #F5C518; outline-offset:3px; }
     .vl-cat {
-      font-family:'Anton',sans-serif; font-size:.63rem; letter-spacing:.14em;
+      font-family: var(--font-accent); font-size:.63rem; letter-spacing:.14em;
       text-transform:uppercase; color:#F5C518; display:block; margin-bottom:.55rem;
     }
     .vl-card h3 {
-      font-family:'Fredoka',sans-serif; font-weight:600; font-size:1.13rem;
+      font-family: var(--font-display); font-weight:600; font-size:1.13rem;
       color:#fff; margin:0 0 .5rem; line-height:1.28;
     }
     .vl-card p { font-size:.92rem; line-height:1.6; color:rgba(255,255,255,.72); margin:0; max-width:none; }
@@ -141,12 +144,12 @@
     }
     .vl-tally.zero { background:rgba(255,255,255,.16); color:rgba(255,255,255,.7); }
     .vl-empty { text-align:center; padding:3rem 1rem; color:rgba(255,255,255,.6); }
-    .vl-empty strong { display:block; font-family:'Fredoka',sans-serif; font-size:1.2rem; color:#fff; margin-bottom:.5rem; }
+    .vl-empty strong { display:block; font-family: var(--font-display); font-size:1.2rem; color:#fff; margin-bottom:.5rem; }
 
     /* ===== DETAIL PANEL ===== */
     .vl-back {
       background:none; border:none; cursor:pointer; color:#F5C518;
-      font-family:'Fredoka',sans-serif; font-weight:500; font-size:.95rem;
+      font-family: var(--font-display); font-weight:500; font-size:.95rem;
       padding:.4rem 0; margin-bottom:1.1rem; display:inline-flex; align-items:center; gap:.45rem;
     }
     .vl-back:hover { text-decoration:underline; }
@@ -155,7 +158,7 @@
       border-radius:1rem; padding:1.75rem 1.85rem; margin-bottom:1.6rem;
     }
     .vl-detail-head h2 {
-      font-family:'Fredoka',sans-serif; font-weight:600; color:#fff;
+      font-family: var(--font-display); font-weight:600; color:#fff;
       font-size:clamp(1.5rem,3.4vw,2.05rem); margin:0 0 .7rem; line-height:1.2;
     }
     .vl-def { font-size:1.04rem; line-height:1.72; color:rgba(255,255,255,.85); margin:0; max-width:46rem; }
@@ -168,9 +171,9 @@
     .vl-story:hover { border-color:rgba(245,197,24,.5); background:rgba(255,255,255,.085); transform:translateX(3px); }
     .vl-story:focus-visible { outline:2px solid #F5C518; outline-offset:3px; }
     .vl-story-top { display:flex; flex-wrap:wrap; align-items:baseline; gap:.6rem; margin-bottom:.45rem; }
-    .vl-story h4 { font-family:'Fredoka',sans-serif; font-weight:600; font-size:1.06rem; color:#fff; margin:0; }
+    .vl-story h4 { font-family: var(--font-display); font-weight:600; font-size:1.06rem; color:#fff; margin:0; }
     .vl-ref { font-size:.82rem; color:#F5C518; font-weight:700; }
-    .vl-loc { font-size:.78rem; color:rgba(255,255,255,.5); }
+    .vl-loc { font-size:.78rem; color:rgba(255,255,255,0.55); }
     .vl-note { font-size:.93rem; line-height:1.62; color:rgba(255,255,255,.74); margin:0; max-width:none; }
     .vl-chips { display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.75rem; }
     .vl-chip {
@@ -201,17 +204,17 @@
     }
     .vl-close:hover { background:rgba(13,27,75,.16); }
     .vl-modal-eyebrow {
-      font-family:'Anton',sans-serif; font-size:.68rem; letter-spacing:.15em;
+      font-family: var(--font-accent); font-size:.68rem; letter-spacing:.15em;
       text-transform:uppercase; color:#1a2c6b; opacity:.75; display:block; margin-bottom:.6rem;
     }
     .vl-modal-box h3 {
-      font-family:'Fredoka',sans-serif; font-weight:600; color:#0d1b4b;
+      font-family: var(--font-display); font-weight:600; color:#0d1b4b;
       font-size:clamp(1.35rem,3.2vw,1.85rem); margin:0 0 .3rem; line-height:1.22; padding-right:2rem;
     }
     .vl-modal-ref { font-size:.95rem; font-weight:700; color:#8a6d00; margin:0 0 1.5rem; }
     .vl-sec { margin-bottom:1.5rem; }
     .vl-sec-label {
-      font-family:'Anton',sans-serif; font-size:.68rem; letter-spacing:.14em;
+      font-family: var(--font-accent); font-size:.68rem; letter-spacing:.14em;
       text-transform:uppercase; color:#1a2c6b; opacity:.7; margin-bottom:.5rem;
     }
     .vl-sec p { font-size:1rem; line-height:1.75; color:#2c3550; margin:0 0 .85rem; }
@@ -225,7 +228,7 @@
     .vl-modal-foot { border-top:1px solid rgba(13,27,75,.12); padding-top:1.25rem; margin-top:.5rem; }
     .vl-modal-foot p { font-size:.88rem; color:#5a6480; line-height:1.6; margin:0 0 .9rem; }
     .vl-btn {
-      display:inline-block; background:#F5C518; color:#07112e; font-family:'Fredoka',sans-serif;
+      display:inline-block; background:#F5C518; color:#07112e; font-family: var(--font-display);
       font-weight:600; font-size:.95rem; padding:.7rem 1.5rem; border-radius:99px;
       text-decoration:none; border:none; cursor:pointer;
       /* Keep "Get the September Book" on one line instead of breaking
@@ -256,7 +259,7 @@
     .vl-freebie {
       max-width:46rem; margin:2rem auto 0; padding:1.15rem 1.4rem;
       background:rgba(245,197,24,.1); border:1.5px solid rgba(245,197,24,.4);
-      border-radius:.9rem; font-family:'Nunito',sans-serif; font-size:1rem;
+      border-radius:.9rem; font-family: var(--font-body); font-size:1rem;
       line-height:1.75; color:#28304f; text-align:center;
     }
     .vl-freebie strong { color:#0d1b4b; }
@@ -264,7 +267,7 @@
     /* ===== SIGNED-IN STRIP ===== */
     .vl-who {
       background:#0a1640; border-top:1px solid rgba(245,197,24,.22);
-      color:rgba(255,255,255,.82); font-family:'Nunito',sans-serif; font-size:.9rem;
+      color:rgba(255,255,255,.82); font-family: var(--font-body); font-size:.9rem;
       padding:.7rem 1.25rem; text-align:center; line-height:1.6;
     }
     .vl-who strong { color:#fff; }
@@ -280,13 +283,13 @@
 
     .vl-si-form { margin:.35rem 0 0; text-align:left; }
     .vl-si-label {
-      display:block; font-family:'Anton',sans-serif; font-size:.66rem; letter-spacing:.14em;
+      display:block; font-family: var(--font-accent); font-size:.66rem; letter-spacing:.14em;
       text-transform:uppercase; color:rgba(255,255,255,.62); margin:0 0 .4rem;
     }
     .vl-si-input {
       display:block; width:100%; box-sizing:border-box; padding:.78rem 1.05rem;
       border-radius:.7rem; border:1.5px solid rgba(255,255,255,.24);
-      background:rgba(255,255,255,.97); font-family:'Nunito',sans-serif;
+      background:rgba(255,255,255,.97); font-family: var(--font-body);
       font-size:1rem; color:#07112e; margin:0 0 .7rem;
     }
     .vl-si-input:focus { outline:none; border-color:#F5C518; box-shadow:0 0 0 3px rgba(245,197,24,.3); }
@@ -305,7 +308,7 @@
 
     /* ===== FREE BADGE ON A STORY CARD ===== */
     .vl-free {
-      display:inline-block; font-family:'Anton',sans-serif; font-size:.6rem;
+      display:inline-block; font-family: var(--font-accent); font-size:.6rem;
       letter-spacing:.12em; text-transform:uppercase; color:#07112e;
       background:#F5C518; border-radius:99px; padding:.2rem .55rem;
       margin-left:.5rem; vertical-align:middle;
@@ -313,6 +316,9 @@
 
     /* ===== STAGE STRIP ===== */
     .vl-stages { background:#fdfcf8; padding:3.25rem 1.25rem; }
+    /* this strip is cream, and the site-wide heading is white — without this
+       the heading is invisible on it */
+    .vl-stages .section-heading-center { color:#0d1b4b; }
     .vl-stages-inner { max-width:74rem; margin:0 auto; }
     .vl-stage-grid { display:grid; gap:.9rem; grid-template-columns:repeat(auto-fill,minmax(15rem,1fr)); margin-top:1.75rem; }
     .vl-stage-card {
@@ -321,13 +327,13 @@
     }
     .vl-stage-card.on { border-color:#F5C518; background:linear-gradient(135deg,#fff,rgba(245,197,24,.07)); }
     .vl-stage-card h4 {
-      font-family:'Fredoka',sans-serif; font-weight:600; font-size:1.05rem;
+      font-family: var(--font-display); font-weight:600; font-size:1.05rem;
       color:#0d1b4b; margin:0 0 .15rem;
     }
     .vl-stage-ages { font-size:.82rem; font-weight:700; color:#8a6d00; margin:0 0 .6rem !important; }
     .vl-stage-card p { font-size:.9rem; line-height:1.6; color:#4a5578; margin:0; max-width:none; }
     .vl-stage-badge {
-      display:inline-block; font-family:'Anton',sans-serif; font-size:.6rem; letter-spacing:.12em;
+      display:inline-block; font-family: var(--font-accent); font-size:.6rem; letter-spacing:.12em;
       text-transform:uppercase; padding:.2rem .55rem; border-radius:99px; margin-bottom:.7rem;
     }
     .vl-stage-badge.live { background:#F5C518; color:#07112e; }
@@ -343,7 +349,7 @@
   </style>
 </head>
 <body>
-<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family:'Nunito',sans-serif;font-size:0.9rem;line-height:1.5;">
+<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
   <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">Coming soon —</strong> the Little Scripture Travelers app: access all your digital products &amp; lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
@@ -1160,5 +1166,6 @@
 })();
 
 </script><script src="js/lst-signup.js"></script>
+  <script src="js/lst-signed-in.js"></script>
 </body>
 </html>

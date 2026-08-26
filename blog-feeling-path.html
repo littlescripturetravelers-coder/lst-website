@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <title>The Feeling Path — Little Scripture Travelers</title>
   <meta name="description" content="Helping your child name a feeling — then keep walking home. A look at the emotional heart of every Little Scripture Travelers story: what it is, why I built it, and the research that stands behind it." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,7 +35,7 @@
       margin: 0 auto;
     }
     .article-tag {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.75rem;
       font-weight: 400;
       letter-spacing: 0.14em;
@@ -42,7 +45,7 @@
       display: block;
     }
     .article-hero h1 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 700;
       font-size: clamp(2.2rem, 5.5vw, 3.4rem);
       color: #fff;
@@ -51,7 +54,7 @@
       text-shadow: 0 2px 24px rgba(0,0,0,0.65);
     }
     .article-hero .subtitle {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-style: italic;
       color: rgba(255,255,255,0.84);
       font-size: 1.15rem;
@@ -60,7 +63,7 @@
       margin: 0 auto var(--space-5);
     }
     .article-hero .byline {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.85rem;
       color: rgba(255,255,255,0.55);
       letter-spacing: 0.04em;
@@ -79,7 +82,7 @@
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.9rem;
       color: var(--gold);
@@ -91,14 +94,14 @@
     .back-link:hover { opacity: 1; }
 
     .article-body p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.83);
       font-size: 1.07rem;
       line-height: 1.87;
       margin-bottom: 1.75rem;
     }
     .article-body h2 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.55rem;
       color: var(--gold);
@@ -119,7 +122,7 @@
       border-radius: 0 12px 12px 0;
     }
     .opening-quote p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 1.15rem;
       font-style: italic;
       color: rgba(255,255,255,0.9);
@@ -136,7 +139,7 @@
       margin: 2rem 0 2.5rem;
     }
     .stones-card h3 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.15rem;
       color: var(--gold);
@@ -151,7 +154,7 @@
       gap: 1.1rem;
     }
     .stones-list li {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.83);
       font-size: 1.05rem;
       line-height: 1.72;
@@ -172,7 +175,7 @@
       margin: 2.25rem 0;
     }
     .highlight-box p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.88);
       font-size: 1.08rem;
       line-height: 1.8;
@@ -191,7 +194,7 @@
       margin: 2rem 0 2.5rem;
     }
     .toolkit-card h3 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.2rem;
       color: var(--gold);
@@ -206,14 +209,14 @@
       margin-bottom: 0;
     }
     .toolkit-label {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 800;
       font-size: 0.9rem;
       color: #fff;
       margin-bottom: 0.25rem;
     }
     .toolkit-row p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.78);
       font-size: 1rem;
       line-height: 1.72;
@@ -232,7 +235,7 @@
       margin: 3rem 0;
     }
     .credentials-box h3 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.15rem;
       color: var(--gold);
@@ -247,7 +250,7 @@
       gap: 0.9rem;
     }
     .credentials-box li {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.78);
       font-size: 0.97rem;
       line-height: 1.72;
@@ -274,7 +277,7 @@
       text-align: center;
     }
     .mission-eyebrow {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.72rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -283,7 +286,7 @@
       margin-bottom: 0.75rem;
     }
     .mission-headline {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.45rem;
       color: #fff;
@@ -291,7 +294,7 @@
       line-height: 1.3;
     }
     .mission-box p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.78);
       font-size: 1rem;
       line-height: 1.8;
@@ -308,8 +311,8 @@
       margin: 2.5rem 0;
     }
     .disclaimer-box p {
-      font-family: 'Nunito', sans-serif;
-      color: rgba(255,255,255,0.5);
+      font-family: var(--font-body);
+      color: rgba(255,255,255,0.55);
       font-size: 0.85rem;
       line-height: 1.7;
       margin: 0;
@@ -322,7 +325,7 @@
       border-top: 1px solid rgba(255,255,255,0.1);
     }
     .research-section h2 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.3rem;
       color: rgba(255,255,255,0.6);
@@ -337,8 +340,8 @@
       gap: 1rem;
     }
     .cite-list li {
-      font-family: 'Nunito', sans-serif;
-      color: rgba(255,255,255,0.5);
+      font-family: var(--font-body);
+      color: rgba(255,255,255,0.55);
       font-size: 0.87rem;
       line-height: 1.7;
       padding-left: 1.25rem;
@@ -357,7 +360,7 @@
       margin: 3.5rem 0 1rem;
     }
     .article-cta h3 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.6rem;
       color: #fff;
@@ -380,9 +383,9 @@
       border-top: 1px solid rgba(255,255,255,0.1);
     }
     .social-share span {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.55);
     }
     .social-share a {
       display: inline-flex;
@@ -402,7 +405,7 @@
   </style>
 </head>
 <body>
-<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family:'Nunito',sans-serif;font-size:0.9rem;line-height:1.5;">
+<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
   <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">Coming soon —</strong> the Little Scripture Travelers app: access all your digital products &amp; lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
@@ -812,14 +815,14 @@
 
         <div class="pull-quote">
           <p>&ldquo;In coming days, it will not be possible to survive spiritually without the guiding, directing, comforting, and constant influence of the Holy Ghost. My beloved brothers and sisters, I plead with you to increase your spiritual capacity to receive revelation.&rdquo;</p>
-          <cite style="display:block;margin-top:0.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">— President Russell M. Nelson</cite>
-          <p class="pull-quote-context" style="font-family:'Nunito',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Feeling Path was built so that scripture &mdash; and the Spirit that attends it &mdash; is the compass your child steers by. Not just emotional intelligence. A relationship with God that they feel at the close of every day.</p>
+          <cite style="display:block;margin-top:0.5rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">— President Russell M. Nelson</cite>
+          <p class="pull-quote-context" style="font-family: var(--font-body);font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Feeling Path was built so that scripture &mdash; and the Spirit that attends it &mdash; is the compass your child steers by. Not just emotional intelligence. A relationship with God that they feel at the close of every day.</p>
         </div>
 
         <div class="pull-quote">
           <p>&ldquo;In coming days, it will not be possible to survive spiritually without the guiding, directing, comforting, and constant influence of the Holy Ghost. My beloved brothers and sisters, I plead with you to increase your spiritual capacity to receive revelation.&rdquo;</p>
-          <cite style="display:block;margin-top:0.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">— President Russell M. Nelson</cite>
-          <p class="pull-quote-context" style="font-family:'Nunito',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Feeling Path was built so that scripture &mdash; and the Spirit that attends it &mdash; is the compass your child steers by. Not just emotional intelligence. A relationship with God that they feel at the close of every day.</p>
+          <cite style="display:block;margin-top:0.5rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">— President Russell M. Nelson</cite>
+          <p class="pull-quote-context" style="font-family: var(--font-body);font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Feeling Path was built so that scripture &mdash; and the Spirit that attends it &mdash; is the compass your child steers by. Not just emotional intelligence. A relationship with God that they feel at the close of every day.</p>
         </div>
         <h2>A Word for the Grown-Ups: This One Is for You First</h2>
 
@@ -886,8 +889,8 @@
 
         <div class="pull-quote">
           <p>&ldquo;The joy we feel has little to do with the circumstances of our lives and everything to do with the focus of our lives.&rdquo;</p>
-          <cite style="display:block;margin-top:0.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">— President Russell M. Nelson</cite>
-          <p class="pull-quote-context" style="font-family:'Nunito',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Feeling Path is not just about emotions. It is about giving a child a steady, outward focus &mdash; values, scripture, and the Lord &mdash; so that feelings become weather they can walk through, not walls they are trapped behind.</p>
+          <cite style="display:block;margin-top:0.5rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">— President Russell M. Nelson</cite>
+          <p class="pull-quote-context" style="font-family: var(--font-body);font-size:0.82rem;color:rgba(255,255,255,0.55);margin-top:0.6rem;font-style:normal;line-height:1.5;">The Feeling Path is not just about emotions. It is about giving a child a steady, outward focus &mdash; values, scripture, and the Lord &mdash; so that feelings become weather they can walk through, not walls they are trapped behind.</p>
         </div>
         <h2>And So, Back to Bedtime</h2>
 
@@ -1392,6 +1395,8 @@
 })();
 
 </script><script src="js/vendor/supabase.js"></script>
+<script src="js/lst-auth.js"></script>
 <script src="js/lst-signup.js"></script>
+  <script src="js/lst-signed-in.js"></script>
 </body>
 </html>

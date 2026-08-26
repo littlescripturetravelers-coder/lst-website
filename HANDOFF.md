@@ -868,3 +868,120 @@ link, and it is two lines in `data/founding-offer.js`.
 2. Create the Founding Family product.
 3. **Move existing subscribers down** to the new price. Early supporters discovering newcomers pay
    less is how you lose the people you can least afford to lose.
+
+---
+
+## 19. The second front door, the two doors, and hiding the sell (built 2026-08-26)
+
+### What Levi asked for
+Three things in one go:
+1. A second landing page for a family who has never heard of *Come, Follow Me*, with the
+   headline *"Bedtime Bible stories, in the smallest words that still carry the meaning."*
+2. The Sacred World Timeline and the lullabies put behind the Lantern subscription.
+3. **"Anything about subscription or free should not be shown once someone signs in."**
+
+### The second front door — `bible-bedtime-stories.html`
+Same product, same price, same footer, same Lantern. A different first sentence.
+
+It says *Bible* and it does not say *LDS* — not because anything is hidden, but because
+"Come, Follow Me" means nothing to a family who has never used it. **"Where we're coming
+from" is one click away from this page**, exactly as it is from `index.html`. If anyone ever
+proposes removing that link to improve conversion, the answer is no: a family who finds out
+later feels tricked, and rightly.
+
+`sample.html` is the page it sends people to first — *"Don't take our word for it. Read one."*
+
+### ⚠️ The two doors are NOT a paywall — read this before describing them to anyone
+`js/lst-members-only.js`, on `timeline-explore.html` and `lullaby.html`.
+
+The nightly story, the archive and the library are guarded **by Postgres**: `lst_is_subscriber()`
+decides, and a non-subscriber's browser never receives the words at all. That is a real lock.
+
+**The timeline and the lullabies are not that.** Their content is written into those two files,
+so it is already in the visitor's browser before the door appears. What `lst-members-only.js`
+does is *put a door in front of a room the visitor is already standing in*. It turns people
+away; it does not lock them out. Anyone who opens View Source can read past it.
+
+That is an acceptable trade for now — it costs nothing and nearly everyone respects a closed
+door — but **never tell Levi, or a customer, that this content is locked.** If it ever has to
+be truly private, the words must move into Supabase behind RLS, the way the nights did.
+
+The copy in `js/lst-members-only.js` carries this same warning at the top of the file.
+
+**Every string you pass to `LSTMembers.guard()` is plain text.** It is escaped on the way in,
+so write a real `—` and a real `’`, never `&mdash;` or `&rsquo;`. (It used to escape the bullets
+but not the blurb, which is how `Every night&rsquo;s lullaby` reached a real screen.)
+
+### Hiding the sell from people who already bought — `js/lst-signed-in.js`
+On all 35 real pages. Once `LSTAuth` says the visitor is a subscriber, everything selling the
+subscription is removed: the header CTA, the Subscribe menu, every "7 days free" button, and
+anything marked `data-selling="1"`.
+
+Two things **always stay**, whatever state the visitor is in:
+- `cancel.html` and every link to it
+- `.footer-col-manage` and `.btn-cancel-sub`
+
+A subscriber who cannot find the way out is a complaint, a chargeback, and a bad review. Do not
+let a future tidy-up sweep those into the "selling" list.
+
+The header keeps a button, but it goes somewhere useful: **Tonight's Lantern** → `tonight.html`.
+
+`localStorage["lst:wasSubscriber"]` is applied immediately on load so the sell does not flash
+up for half a second before auth resolves. It is a **display hint only** — never treat it as
+proof of anything. Postgres decides who is a subscriber.
+
+## 20. The reading pass (2026-08-26)
+
+### What Levi asked for
+> "Make sure everything is in my branding fonts and any medicine boxes you click to get access
+> to please also make sure that the words in it are readable. The example you showed me had a
+> yellow pill box that you couldn't read the words in it."
+
+### The yellow pill box
+It was **"Best value"** on the yearly plan in the signup popup (`js/lst-signup.js`,
+`.ts-best-tag`). Dark navy on gold — the colours were fine — but set at `0.6rem`, which is
+9.6px. It is now `0.72rem` with more padding, and the button above it gained room to hold it.
+
+### How this was checked, and how to check it again
+Two scripts in the session scratchpad, both driving headless Chromium with the **real** Fredoka,
+Nunito and Anton served from disk (earlier screenshots in this project had the webfonts blocked,
+which is why they looked wrong):
+
+- `brand.mjs` — walks every element with visible text on all 36 pages and reports (a) anything
+  not set in a brand face, (b) anything below WCAG AA contrast **against what is actually
+  painted behind it**, (c) any HTML entity that reached the screen as literal text.
+- `boxes.mjs` — the same test on the boxes that only exist after a click: the signup popup, the
+  journal gate, both members-only doors, the Lantern gate.
+
+Both now report **0**. Two traps worth remembering if you rebuild them:
+1. Compositing two translucent layers must keep the result's alpha. Getting that wrong turned
+   `rgba(255,255,255,.16)` into opaque white and produced 274 false failures.
+2. If any ancestor has a `background-image`, the colour behind the text is unknowable from
+   computed style. Say so and skip, or you will "fix" gold-on-gold text that was navy on gold.
+   (`.lst-mark` on the timeline is exactly this: dark navy on a gold radial gradient.)
+
+### What actually changed
+- **Fonts.** Every one of **1,245** `font-family` declarations now points at `--font-display`,
+  `--font-body` or `--font-accent` instead of naming the face directly. Same fonts; the
+  difference is the fallback while Google Fonts is still loading — 'Arial Rounded MT Bold'
+  rather than plain Arial for headings, so the page looks like itself on first paint.
+  `timeline-explore.html` repeats the three variables in its own `:root` so it stands alone.
+- **Muted text has a floor.** 196 declarations of `color: rgba(255,255,255, …)` below `0.55`
+  were raised to `0.55`. The footer's legal line, at `0.35`, was the largest single offender —
+  it appeared on every page.
+- **An invisible heading.** "Built to Grow With Your Child" on `virtue-library.html` was white
+  on the cream stage strip: 1.03:1, effectively not there. It is navy now.
+- **A favicon, at last.** No page declared one, so every tab showed a blank square. `favicon.ico`
+  plus `images/favicon-32.png` and `images/apple-touch-icon.png`, cut from the logo badge and
+  linked on all 36 pages.
+- **Small things made readable**: the lullaby's "Chorus" tag, the virtue badges on the Lantern,
+  the cancel-page captions, the privacy date, the Old-Testament page tag, the YouTube button.
+- **The timeline's controls.** The era bar (Creation → Today) was 7.5px; it is 11px, and it
+  still sits on one row at desktop width and wraps to a tidy two on a tablet. The zoom and
+  reset glyphs went from 10px to 15px inside their 34px buttons.
+
+### What was deliberately left alone
+`timeline-explore.html` is the app's own file, and Levi said the app stays as it is. Everything
+in it except the era bar and the zoom buttons — the faint layer chrome, the 7px legend headings,
+the white glyphs on the coloured event dots — is untouched. If he ever wants the whole timeline
+made easier to read, that is a separate decision and a separate conversation with the app chat.

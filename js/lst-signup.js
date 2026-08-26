@@ -34,12 +34,12 @@
      that lives or dies on people staying. */
   var plan = "annual";
   function el(id) { return document.getElementById(id); }
-  var IN = "width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;font-family:'Nunito',sans-serif;";
+  var IN = "width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;font-family: var(--font-body);";
 
   function injectModal() {
     if (el("trial-modal")) return;
     var st = document.createElement("style");
-    st.textContent = ".ts-plan-btn{flex:1;padding:0.6rem 0.4rem;border-radius:10px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:#fff;font-family:'Nunito',sans-serif;font-size:0.92rem;font-weight:700;cursor:pointer;line-height:1.25;text-align:center;}.ts-plan-btn span{display:block;font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.6);margin-top:2px;}.ts-plan-btn.on{border-color:#f4c842;background:rgba(245,197,24,0.14);}.ts-plan-btn.on span{color:#f4c842;}.ts-plan-btn{position:relative;}.ts-plan-best{flex:1.35;padding-top:1.15rem;}.ts-best-tag{position:absolute;top:-0.55rem;left:50%;transform:translateX(-50%);background:#f4c842;color:#07112e;font-size:0.6rem;font-weight:900;letter-spacing:0.06em;text-transform:uppercase;padding:0.12rem 0.5rem;border-radius:999px;white-space:nowrap;}";
+    st.textContent = ".ts-plan-btn{flex:1;padding:0.6rem 0.4rem;border-radius:10px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:#fff;font-family: var(--font-body);font-size:0.92rem;font-weight:700;cursor:pointer;line-height:1.25;text-align:center;}.ts-plan-btn span{display:block;font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.6);margin-top:2px;}.ts-plan-btn.on{border-color:#f4c842;background:rgba(245,197,24,0.14);}.ts-plan-btn.on span{color:#f4c842;}.ts-plan-btn{position:relative;}.ts-plan-best{flex:1.35;padding-top:1.35rem;}.ts-best-tag{position:absolute;top:-0.6rem;left:50%;transform:translateX(-50%);background:#f4c842;color:#07112e;font-family: var(--font-body);font-size:0.72rem;font-weight:900;letter-spacing:0.03em;text-transform:uppercase;padding:0.2rem 0.7rem;border-radius:999px;white-space:nowrap;}";
     document.head.appendChild(st);
     var d = document.createElement("div");
     d.id = "trial-modal";

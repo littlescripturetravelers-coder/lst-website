@@ -8,7 +8,9 @@
    website sings exactly what the app sings. If it changes in the app, change
    it here too — this is a second copy, and second copies drift.
 
-   Read by js/lst-read.js through lullaby.html?which=lantern
+   Read by js/lst-read.js through lullaby.html?which=lantern, which is behind
+   the subscription — see js/lst-members-only.js, and the warning in it about
+   what that does and does not do.
 */
 window.LST_LANTERN_LULLABY = {
   title: "A Little Travelers' Lullaby",

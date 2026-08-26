@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <title>Bigger Than It Looks — Little Scripture Travelers</title>
   <meta name="description" content="What’s really behind the 5 pages of a nightly scripture story — the research and purpose built into every step of the Little Scripture Travelers routine." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -37,7 +40,7 @@
       margin: 0 auto;
     }
     .article-tag {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.75rem;
       font-weight: 400;
       letter-spacing: 0.14em;
@@ -47,7 +50,7 @@
       display: block;
     }
     .article-hero h1 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 700;
       font-size: clamp(2rem, 5vw, 3.2rem);
       color: #fff;
@@ -56,7 +59,7 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.6);
     }
     .article-hero .subtitle {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-style: italic;
       color: rgba(255,255,255,0.82);
       font-size: 1.15rem;
@@ -74,7 +77,7 @@
       margin: 0 auto;
     }
     .article-body p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.83);
       font-size: 1.07rem;
       line-height: 1.85;
@@ -102,14 +105,14 @@
       line-height: 1;
     }
     .product-block-header h2 {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.35rem;
       color: #fff;
       margin: 0;
     }
     .product-tier-badge {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.1em;
@@ -127,7 +130,7 @@
       margin-top: var(--space-4);
     }
     .product-why h3, .product-solves h3 {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 800;
       font-size: 0.82rem;
       letter-spacing: 0.1em;
@@ -136,7 +139,7 @@
       margin-bottom: var(--space-2);
     }
     .product-why p, .product-solves p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.97rem !important;
       color: rgba(255,255,255,0.78) !important;
       line-height: 1.75 !important;
@@ -152,14 +155,14 @@
       margin-top: var(--space-12);
     }
     .stack-block h2 {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.4rem;
       color: var(--gold);
       margin-bottom: var(--space-5);
     }
     .stack-block p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 1rem !important;
       color: rgba(255,255,255,0.8) !important;
       line-height: 1.8 !important;
@@ -174,7 +177,7 @@
       border-top: 1px solid rgba(245,197,24,0.2);
     }
     .research-section h2 {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.2rem;
       color: var(--gold);
@@ -184,12 +187,12 @@
     }
     .research-group { margin-bottom: var(--space-8); }
     .research-group h3 {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 800;
       font-size: 0.82rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.55);
       margin-bottom: var(--space-3);
     }
     .cite-list {
@@ -201,7 +204,7 @@
       gap: var(--space-2);
     }
     .cite-list li {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.88rem;
       color: rgba(255,255,255,0.6);
       line-height: 1.65;
@@ -227,7 +230,7 @@
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.9rem;
       color: var(--gold);
@@ -246,14 +249,14 @@
       border-radius: var(--radius-lg);
     }
     .article-cta h3 {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.5rem;
       color: #fff;
       margin-bottom: var(--space-3);
     }
     .article-cta p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.72);
       font-size: 1rem;
       margin-bottom: var(--space-6) !important;
@@ -265,7 +268,7 @@
       display: inline-block;
       background: var(--gold);
       color: #07112e;
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 900;
       font-size: 1rem;
       padding: 0.75rem 2rem;
@@ -291,7 +294,7 @@
       border-radius: 0 12px 12px 0;
     }
     .opening-quote p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-size: 1.1rem;
       font-style: italic;
       color: rgba(255,255,255,0.9);
@@ -316,7 +319,7 @@
       gap: 1.25rem;
     }
     .stones-list li {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.83);
       font-size: 1.02rem;
       line-height: 1.75;
@@ -334,7 +337,7 @@
       margin: 2rem 0;
     }
     .highlight-box p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.9);
       font-size: 1.15rem !important;
       line-height: 1.75 !important;
@@ -351,7 +354,7 @@
       margin: 3rem 0;
     }
     .credentials-box h3 {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.15rem;
       color: var(--gold);
@@ -366,7 +369,7 @@
       gap: 0.9rem;
     }
     .credentials-box li {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.78);
       font-size: 0.97rem;
       line-height: 1.72;
@@ -393,7 +396,7 @@
       text-align: center;
     }
     .mission-eyebrow {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-accent);
       font-size: 0.72rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -402,7 +405,7 @@
       margin-bottom: 0.75rem;
     }
     .mission-headline {
-      font-family: 'Fredoka', sans-serif;
+      font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.45rem;
       color: #fff;
@@ -410,7 +413,7 @@
       line-height: 1.3;
     }
     .mission-box p {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       color: rgba(255,255,255,0.78);
       font-size: 1rem !important;
       line-height: 1.8 !important;
@@ -427,10 +430,10 @@
       flex-wrap: wrap;
     }
     .social-share span {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.55);
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
@@ -450,7 +453,7 @@
   </style>
 </head>
 <body class="subpage-body">
-<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family:'Nunito',sans-serif;font-size:0.9rem;line-height:1.5;">
+<div class="app-coming-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
   <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">Coming soon —</strong> the Little Scripture Travelers app: access all your digital products &amp; lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
@@ -756,7 +759,7 @@
       <span class="article-tag">Faith &amp; Family &nbsp;&middot;&nbsp; Research &amp; Products</span>
       <h1>Bigger Than It Looks</h1>
       <p class="subtitle">What&rsquo;s behind the 5 pages of a nightly story &mdash; the research and purpose built into every step.</p>
-      <p style="font-family:'Nunito',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.5);margin-top:1rem;">By Levi Lewis &middot; Little Scripture Travelers</p>
+      <p style="font-family: var(--font-body);font-size:0.88rem;color:rgba(255,255,255,0.55);margin-top:1rem;">By Levi Lewis &middot; Little Scripture Travelers</p>
     </div>
   </section>
 
@@ -774,7 +777,7 @@
 
         <div class="opening-quote">
           <p>&ldquo;In coming days, it will not be possible to survive spiritually without the guiding, directing, comforting, and constant influence of the Holy Ghost. My beloved brothers and sisters, I plead with you to increase your spiritual capacity to receive revelation.&rdquo;</p>
-          <cite style="display:block;margin-top:0.75rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson, April 2018 General Conference</cite>
+          <cite style="display:block;margin-top:0.75rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson, April 2018 General Conference</cite>
         </div>
 
         <p>Read that word again: <strong>survive.</strong> Not thrive, not do a little better. Survive. He said it as a warning and an invitation, and I took it as a father. My daughters are going to grow up in a louder, harder world than the one I grew up in, and one day they&rsquo;ll face things I can&rsquo;t fix or explain or protect them from. What they&rsquo;ll need isn&rsquo;t more of my advice. They&rsquo;ll need a relationship with the Spirit that is <em>theirs</em> &mdash; personal, practiced, and real long before the storm.</p>
@@ -783,7 +786,7 @@
 
         <div class="opening-quote">
           <p>&ldquo;The joy we feel has little to do with the circumstances of our lives and everything to do with the focus of our lives.&rdquo;</p>
-          <cite style="display:block;margin-top:0.75rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson, October 2016 General Conference</cite>
+          <cite style="display:block;margin-top:0.75rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson, October 2016 General Conference</cite>
         </div>
 
         <p>That one reframed everything for me. If joy is a matter of focus rather than circumstance, then the most valuable thing I can give my kids isn&rsquo;t a smoother life &mdash; it&rsquo;s a trained focus. A heart that knows where to look when things get hard.</p>
@@ -1079,7 +1082,7 @@
         </div>
 
         <div class="disclaimer-box" style="background:rgba(7,17,46,0.6);border:1px solid rgba(244,200,66,0.18);border-radius:16px;padding:1.75rem 2rem;margin:2rem 0;">
-          <p style="font-family:'Nunito',sans-serif;color:rgba(255,255,255,0.65);font-size:0.88rem;line-height:1.75;margin:0;">Little Scripture Travelers books are educational and preventive tools designed to build resilience and healthy habits. They are not therapy, diagnosis, or treatment, and are not a substitute for professional help. A child showing signs of an anxiety disorder, depression, or another mental-health concern deserves the care of a qualified professional &mdash; prevention and treatment are partners, not rivals. The faith elements in this post reflect my own family&rsquo;s beliefs and testimony, shared honestly and without claiming more than my own experience shows.</p>
+          <p style="font-family: var(--font-body);color:rgba(255,255,255,0.65);font-size:0.88rem;line-height:1.75;margin:0;">Little Scripture Travelers books are educational and preventive tools designed to build resilience and healthy habits. They are not therapy, diagnosis, or treatment, and are not a substitute for professional help. A child showing signs of an anxiety disorder, depression, or another mental-health concern deserves the care of a qualified professional &mdash; prevention and treatment are partners, not rivals. The faith elements in this post reflect my own family&rsquo;s beliefs and testimony, shared honestly and without claiming more than my own experience shows.</p>
         </div>
 
         <!-- Social Share -->
@@ -1535,6 +1538,8 @@
 })();
 
 </script><script src="js/vendor/supabase.js"></script>
+<script src="js/lst-auth.js"></script>
 <script src="js/lst-signup.js"></script>
+  <script src="js/lst-signed-in.js"></script>
 </body>
 </html>
