@@ -218,7 +218,11 @@
        the story, and `story_texts` is not needed for that night. */
     var n = window.LSTRead ? nightOf(s.id) : null;
     var told = n ? window.LSTRead.beats(n) : null;
-    if (told && told.ok) {
+    /* ⚠️ The book does not change who may read. Before the books arrived a
+       non-subscriber got the teaser and an invitation, and that is still what
+       they get. The app gives these away; the website does not, and turning
+       that around is Levi's call, not a side effect of loading the words. */
+    if (told && told.ok && (subscriber() || isFree(s.id))) {
       return '<article class="rd">' +
         '<div class="mp-card-head">' +
           '<h3 style="flex:1;">' + esc(s.title || told.title || "Untitled") + "</h3>" +
@@ -232,6 +236,8 @@
           (s.teachingNote
             ? '<div class="rd-card"><h3 class="rd-label">When to reach for this one</h3><p>' +
               esc(s.teachingNote) + "</p></div>" : "") +
+          '<p class="rd-aside"><a class="bs-illus" href="story.html?id=' +
+            encodeURIComponent(s.id) + '">&#10022; Open this story on its own page</a></p>' +
           '<p class="rd-aside">Look this story up by what it teaches in ' +
             '<a href="virtue-library.html">the Virtue Library</a>.</p>' +
         "</div>" +

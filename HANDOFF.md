@@ -1319,3 +1319,33 @@ directly above a button that opens the whole thing. Where the night exists it no
 on the website and points at the button. **Any future "not available" copy has to ask `hasNight()`
 first.**
 
+## 27. Every story has a page of its own (2026-08-26)
+
+> "All the stories need to be on there not in the html format that goes with the app but an html
+> format that goes well with the a website ... it should match all the others already loaded."
+
+`story.html?id=b6-w1-n7` opens any of the 91 nights as a page in its own right — the same page
+tonight's picture book already uses, so it wears the site's header, its type and its navy, and the
+hero takes the story's name, the book's name and its teaser. `js/lst-open.js` does it: a night from
+`data/book-*.js` drawn by `LSTRead.beats()`, the same reader as tonight's story.
+
+The shelf still opens a story in place, and now also offers **"Open this story on its own page"**.
+The Virtue Library's button points at the page.
+
+### ⚠️ THE STORIES ARE NO LONGER BEHIND A REAL PAYWALL — say this plainly
+Before the books came over, story text lived in `story_texts` and **Postgres** decided who got it.
+A non-subscriber's browser never received the words.
+
+`data/book-june.js`, `-july.js` and `-august.js` are **ordinary public files**. Anyone can open one
+and read all 91 stories. What stands in front of them now is JavaScript — the same kind of door as
+the timeline and the lullabies (§19), and it must never be described as a lock.
+
+The gate itself is kept honestly: `storyView()` in `js/lst-bedtime.js` and `render()` in
+`js/lst-open.js` both check `subscriber() || isFree(id)` **before** drawing a single beat, so the
+behaviour a family sees is exactly what it was — teaser and an invitation for a visitor, the whole
+story for a subscriber. Verified both ways, on both routes.
+
+**This was a side effect of loading the words, not a decision.** Levi has been told. If he wants a
+real lock back, the words have to move into Supabase behind RLS — the pictures can stay public,
+since a picture without its story sells nothing.
+

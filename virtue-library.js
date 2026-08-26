@@ -400,7 +400,7 @@
     var here = hasNight(s.id);
     h.push('<div class="vl-modal-foot"><p>Find this story on <strong>Week ' + s.week +
       ", Night " + s.night + "</strong> of <em>" + esc(s.bookTitle) + "</em>.</p>" +
-      (here ? '<a class="vl-btn" href="bedtime-stories.html?story=' + encodeURIComponent(s.id) +
+      (here ? '<a class="vl-btn" href="story.html?id=' + encodeURIComponent(s.id) +
         '">&#128214; Read it in Bedtime Stories</a>' : "") +
       (bk && bk.amazon ? '<a class="vl-btn' + (here ? " vl-btn-quiet" : "") + '" href="' + esc(bk.amazon) +
         '" target="_blank" rel="noopener">Get the ' + esc(s.month) + " Book</a>" : "") +

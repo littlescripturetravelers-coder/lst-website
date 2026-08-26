@@ -149,6 +149,96 @@
       "</div></div>";
   }
 
+  /* A night of a month's book, on a page of its own.
+
+       story.html?id=b6-w1-n7
+
+     The nightly picture book comes out of the database; these come out of
+     data/book-*.js, which tools/extract-book.py wrote from the app's own
+     pages. Different source, SAME reader — so a night of the June book is set
+     in the same type, on the same page, as tonight's story. */
+  function wantedNight() {
+    var m = String(window.location.search || "").match(/[?&]id=([^&]+)/);
+    if (!m) return null;
+    var id = decodeURIComponent(m[1]);
+    var books = [window.LST_BOOK_JUNE, window.LST_BOOK_JULY, window.LST_BOOK_AUGUST];
+    for (var i = 0; i < books.length; i++) {
+      var b = books[i];
+      if (!b) continue;
+      for (var j = 0; j < b.length; j++) if (b[j].id === id) return b[j];
+    }
+    return null;
+  }
+
+  function catalogEntry(id) {
+    var all = (window.LST_LIBRARY && window.LST_LIBRARY.stories) || [];
+    for (var i = 0; i < all.length; i++) if (all[i].id === id) return all[i];
+    return null;
+  }
+
+  function mayReadShelf(n) {
+    var free = (window.LST_LIBRARY && window.LST_LIBRARY.meta &&
+                window.LST_LIBRARY.meta.freeStoryIds) || [];
+    if (free.indexOf(n.id) !== -1) return true;
+    var a = auth();
+    return !!(a && a.signedIn() && (a.isSubscriber() || (a.isAdmin && a.isAdmin())));
+  }
+
+  function shelfLockedView(n) {
+    var c = catalogEntry(n.id) || {};
+    return '<div class="mp-empty">' +
+      '<div class="mp-empty-i">&#128214;</div>' +
+      "<h3>" + esc(c.title || n.title || "This story") + "</h3>" +
+      (c.teaser ? "<p>" + esc(c.teaser) + "</p>" : "") +
+      "<p>The whole story, with its pictures, comes with The Lantern &mdash; " +
+      "and the first seven days are free.</p>" +
+      '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" ' +
+      'style="text-decoration:none;display:inline-block;" ' +
+      "onclick=\"return openTrialSignup('monthly')\">Start the free week</a>" +
+      '<p class="mp-note" style="padding:.9rem 0 0;">Already a subscriber? ' +
+      '<button type="button" class="mp-link" id="o-signin">Sign in</button></p>' +
+      "</div>";
+  }
+
+  function dressForShelf(n) {
+    var c = catalogEntry(n.id) || {};
+    var title = n.title || c.title || "";
+    if (!title) return;
+    var plain = window.LSTRead ? window.LSTRead.decode(title) : title;
+    document.title = plain + " \u2014 Little Scripture Travelers";
+    var h1 = document.querySelector(".mp-hero h1");
+    if (h1) h1.textContent = plain;
+    var eye = document.querySelector(".mp-hero .mp-eyebrow");
+    if (eye && c.bookTitle) eye.textContent = "\uD83D\uDCD6 " + String(c.bookTitle).toUpperCase();
+    var sub = document.querySelector(".mp-hero p");
+    if (sub) sub.textContent = c.teaser
+      ? String(c.teaser)
+      : "One of the bedtime stories, with its pictures, laid out to read straight down the page.";
+  }
+
+  function shelfNightView(n) {
+    var told = window.LSTRead ? window.LSTRead.beats(n) : { ok: false };
+    if (!told.ok) {
+      return '<div class="mp-empty"><h3>That story isn&rsquo;t here</h3>' +
+        '<p>Look along the shelf in <a href="bedtime-stories.html">Bedtime Stories</a>.</p></div>';
+    }
+    var c = catalogEntry(n.id) || {};
+    var ref = function (t) { return (window.LSTRefs && t) ? window.LSTRefs.text(t) : esc(t); };
+    var stamp = [c.bookTitle, n.night, c.scripture || n.reference].filter(Boolean).map(ref).join(" &middot; ");
+    return '<div class="rd">' + toolsView() +
+      '<div class="rd-body">' +
+        head(told.title || c.title || "A bedtime story", "") +
+        (stamp ? '<p class="mp-meta">' + stamp + "</p>" : "") +
+        '<div style="margin-top:1.6rem;">' + told.html + "</div>" +
+        (c.teachingNote
+          ? '<div class="rd-card"><h3 class="rd-label">When to reach for this one</h3><p>' +
+            esc(c.teachingNote) + "</p></div>" : "") +
+        '<p class="rd-aside">Back to the shelf in ' +
+          '<a href="bedtime-stories.html">Bedtime Stories</a>, or look this one up by what it ' +
+          'teaches in <a href="virtue-library.html">the Virtue Library</a>.</p>' +
+      "</div></div>";
+  }
+
   function bookView(n) {
     var b = (n.bookHtml && window.LSTRead) ? window.LSTRead.book(n.bookHtml) : { ok: false };
     if (!b.ok) {
@@ -169,6 +259,19 @@
     if (!root) return;
 
     if (wantsLantern()) { root.innerHTML = lanternView(); wire(); return; }
+
+    var shelf = wantedNight();
+    /* Same rule as the shelf: the words being on the website does not mean they
+       are free. Signed-out or not subscribing, this page says so. */
+    if (shelf && !mayReadShelf(shelf)) { root.innerHTML = shelfLockedView(shelf); wire(); return; }
+    if (shelf) {
+      root.innerHTML = shelfNightView(shelf);
+      /* The page's own hero says "Tonight's Story", which this is not. A story
+         opened by name should be named, in the tab and at the top. */
+      dressForShelf(shelf);
+      wire();
+      return;
+    }
 
     if (!auth() || !auth().signedIn()) {
       root.innerHTML = signedOutView();
@@ -225,6 +328,11 @@
       kind = which === "song" ? "song" : "book";
       if (!root) return;
       if (wantsLantern()) { render(); return; }
+      if (wantedNight()) {
+        render();
+        if (auth()) { auth().ready(render); auth().onChange(render); }
+        return;
+      }
       if (!auth()) return;
       auth().ready(function () {
         if (auth().signedIn()) load().then(render); else render();
