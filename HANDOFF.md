@@ -985,3 +985,42 @@ Both now report **0**. Two traps worth remembering if you rebuild them:
 in it except the era bar and the zoom buttons — the faint layer chrome, the 7px legend headings,
 the white glyphs on the coloured event dots — is untouched. If he ever wants the whole timeline
 made easier to read, that is a separate decision and a separate conversation with the app chat.
+
+## 21. The website is the delivery, not the inbox (changed 2026-08-26)
+
+### What Levi asked for
+> "In the front of my website it still talks about what you get is an email each morning. Please
+> remove that and say something to the extent that you get the same products as before but instead
+> of an email you are able to get all of those through the website or through our app."
+
+### What changed
+Every promise that the subscription is **delivered by email** is gone — 30 of them, across the
+three front pages, `subscribe.html`, `books.html`, `bible-bedtime-stories.html`,
+`spiritual-tracker.html` and five blog closers.
+
+The **5 AM Mountain (Denver)** timing stays everywhere it appeared. Only the channel changed:
+*"waiting on the website and in the app by 5 AM"* instead of *"delivered to your inbox by 5 AM"*.
+
+Named changes worth knowing about:
+- The homepage section **"WHAT ARRIVES IN YOUR INBOX"** is now **"WHAT IS WAITING EACH MORNING"**.
+- The bullet **"No app, no screen time — everything arrives by email"** is now
+  **"On the website or in the app — the same story either way"**. It was the copy most directly
+  contradicted by the app existing.
+- The third doorway card, **"Subscribe by Email"**, is now **"Subscribe to The Lantern"**, and its
+  **envelope icon is an open book** — an envelope is a picture of a promise we no longer make.
+- The perk badge **"★ In Your Inbox by 5 AM"** is now **"★ Ready by 5 AM"**.
+
+### Two mentions of email were deliberately kept
+Both are the **newsletter**, not the subscription, and both are still genuinely email:
+- `index.html` (and the two variants) — *"Free scripture story sent straight to your inbox"* in the
+  "Join the Journey" block, which is the Mailchimp lead form.
+- `blog.html` — *"new blog posts … delivered directly to your inbox every week"*.
+
+If Levi ever stops sending those, they have to come out too. They are the only two left.
+
+### ⚠️ The banner still says the app is "coming soon"
+`app-coming-banner`, at the top of **20 pages**, reads *"📱 Coming soon — the Little Scripture
+Travelers app…"*. The new copy says a subscriber can read tonight's story **in the app**. Both
+cannot be true at once. Levi has been asked which it is; **do not change the banner on a guess** —
+promising an app that is not on the App Store yet is worse than the copy being a little stale.
+
