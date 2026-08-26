@@ -169,20 +169,78 @@
     return null;
   }
 
+  /* ------------------------------------------------- THE SHUT DOOR
+     What a family sees when the database will not give them the story.
+
+     A wall persuades nobody. This is built to do the persuading instead, and
+     everything on it is public — the cover, the taster the catalog already
+     carries, and a whole story given away elsewhere. Not one word of THIS
+     story is here; there is nothing to leak, because nothing arrived.
+
+     The order is deliberate:
+       the book it is       — the cover, so it looks like something real
+       a taste              — the opening, in the catalog already
+       the cut              — said plainly, not hidden
+       proof                — a WHOLE story, free, no sign-up. The strongest
+                              thing we have: "don't take our word for it"
+       what it costs        — and that the first week is not charged
+       the way out          — cancelling in two clicks, said before they ask
+       the quiet door       — already a subscriber? sign in
+  */
+  function coverOf(id) {
+    return (window.LST_BOOK_COVERS || {})[id] || "";
+  }
+
   function shelfLockedView(id) {
     var c = catalogEntry(id) || {};
-    return '<div class="mp-empty">' +
-      '<div class="mp-empty-i">&#128214;</div>' +
-      "<h3>" + esc(c.title || "This story") + "</h3>" +
-      (c.teaser ? "<p>" + esc(c.teaser) + "</p>" : "") +
-      "<p>The whole story, with its pictures, comes with The Lantern &mdash; " +
-      "and the first seven days are free.</p>" +
-      '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" ' +
-      'style="text-decoration:none;display:inline-block;" ' +
-      "onclick=\"return openTrialSignup('monthly')\">Start the free week</a>" +
-      '<p class="mp-note" style="padding:.9rem 0 0;">Already a subscriber? ' +
-      '<button type="button" class="mp-link" id="o-signin">Sign in</button></p>' +
-      "</div>";
+    var art = coverOf(id);
+    var count = ((window.LST_LIBRARY && window.LST_LIBRARY.stories) || []).length;
+    return '<div class="lk">' +
+      (art ? '<img class="lk-cover" src="' + esc(art) + '" alt="" loading="lazy">' : "") +
+      '<div class="lk-in">' +
+        (c.bookTitle ? '<p class="lk-eyebrow">' + esc(c.bookTitle) +
+          (c.week ? " &middot; Week " + esc(c.week) + ", Night " + esc(c.night) : "") + "</p>" : "") +
+        "<h2>" + esc(c.title || "This story") + "</h2>" +
+        (c.scripture ? '<p class="lk-ref">' +
+          ((window.LSTRefs) ? window.LSTRefs.text(c.scripture) : esc(c.scripture)) + "</p>" : "") +
+        (c.teaser ? '<p class="lk-taste">' + esc(c.teaser) + "</p>" : "") +
+        '<p class="lk-cut">The rest of it &mdash; and the pictures that go with it &mdash; ' +
+          "comes with The Lantern.</p>" +
+
+        '<div class="lk-proof">' +
+          "<h3>Don&rsquo;t take our word for it. Read one.</h3>" +
+          "<p>A whole night, free, with nothing to join &mdash; the pictures, the words, and " +
+          "something to do together at the end.</p>" +
+          '<a class="lk-read" href="sample.html">Read a whole story now &rarr;</a>' +
+        "</div>" +
+
+        '<ul class="lk-list">' +
+          "<li><b>" + count + " stories</b> to read whenever you like</li>" +
+          "<li><b>A new one every night</b>, waiting by 5&nbsp;AM Mountain</li>" +
+          "<li>A lullaby to sing afterwards, with a sleep timer</li>" +
+          "<li>Your family&rsquo;s own stories, kept alongside them</li>" +
+        "</ul>" +
+
+        '<a class="mp-btn mp-btn-gold lk-go" href="subscribe.html#plans" ' +
+          'onclick="return openTrialSignup()">Start the free week</a>' +
+        '<p class="lk-fine">Your first seven days are free. ' +
+          'Cancel any time in two clicks &mdash; <a href="cancel.html">here is how</a>.</p>' +
+        '<p class="lk-fine">Already a subscriber? ' +
+          '<button type="button" class="mp-link" id="o-signin">Sign in</button></p>' +
+      "</div></div>";
+  }
+
+  function dressFromCatalog(id) {
+    var c = catalogEntry(id) || {};
+    if (!c.title) return;
+    document.title = c.title + " \u2014 Little Scripture Travelers";
+    var h1 = document.querySelector(".mp-hero h1");
+    if (h1) h1.textContent = c.title;
+    var eye = document.querySelector(".mp-hero .mp-eyebrow");
+    if (eye && c.bookTitle) eye.textContent = "\uD83D\uDCD6 " + String(c.bookTitle).toUpperCase();
+    var sub = document.querySelector(".mp-hero p");
+    if (sub) sub.textContent = c.teachingNote ||
+      "One of the bedtime stories, with its pictures, laid out to read straight down the page.";
   }
 
   function dressForShelf(n) {
@@ -250,7 +308,14 @@
          nothing, this reader is not allowed the story and the words never
          reached the page to begin with. */
       if (!shelfAsked) { root.innerHTML = '<p class="mp-note">Opening&hellip;</p>'; return; }
-      if (!shelfNight) { root.innerHTML = shelfLockedView(wantedId); wire(); return; }
+      if (!shelfNight) {
+        root.innerHTML = shelfLockedView(wantedId);
+        /* Name the page even when the story is shut. A visitor who lands here
+           from a search should see the story's name, not "Tonight's Story". */
+        dressFromCatalog(wantedId);
+        wire();
+        return;
+      }
       root.innerHTML = shelfNightView(shelfNight);
       /* The page's own hero says "Tonight's Story", which this is not. A story
          opened by name should be named, in the tab and at the top. */

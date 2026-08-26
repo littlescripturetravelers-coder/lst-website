@@ -207,6 +207,32 @@
     return head + out;
   }
 
+  function lockedPitch(s) {
+    var art = (window.LST_BOOK_COVERS || {})[s.id] || "";
+    var count = stories().length;
+    return '<div class="lk">' +
+      (art ? '<img class="lk-cover" src="' + esc(art) + '" alt="" loading="lazy">' : "") +
+      '<div class="lk-in">' +
+        (s.teaser ? '<p class="lk-taste">' + esc(s.teaser) + "</p>" : "") +
+        '<p class="lk-cut">The rest of it &mdash; and the pictures that go with it &mdash; ' +
+          "comes with The Lantern.</p>" +
+        '<div class="lk-proof">' +
+          "<h3>Don&rsquo;t take our word for it. Read one.</h3>" +
+          "<p>A whole night, free, with nothing to join.</p>" +
+          '<a class="lk-read" href="sample.html">Read a whole story now &rarr;</a>' +
+        "</div>" +
+        '<ul class="lk-list">' +
+          "<li><b>" + count + " stories</b> to read whenever you like</li>" +
+          "<li><b>A new one every night</b>, waiting by 5&nbsp;AM Mountain</li>" +
+          "<li>A lullaby to sing afterwards, with a sleep timer</li>" +
+        "</ul>" +
+        '<a class="mp-btn mp-btn-gold lk-go" href="subscribe.html#plans" ' +
+          'onclick="return openTrialSignup()">Start the free week</a>' +
+        '<p class="lk-fine">Your first seven days are free. Cancel any time in two clicks ' +
+          '&mdash; <a href="cancel.html">here is how</a>.</p>' +
+      "</div></div>";
+  }
+
   function storyView(s) {
     /* The book's own night, if this book has been brought over. It carries the
        whole thing — the story in illustrated turns, the Traveler, the Feeling
@@ -240,19 +266,18 @@
     }
 
     var locked = !text || !text.story;
+    /* The shut door is a page of its own, and it is built to persuade rather
+       than to apologise — see the note beside shelfLockedView in
+       js/lst-open.js. Everything on it is public: the cover, the taster the
+       catalog carries, and a whole story given away on sample.html. Not one
+       word of THIS story is in it. */
     var body = locked
-      ? '<div class="rd-card rd-telling">' +
-          (s.teaser ? "<p>" + esc(s.teaser) + "</p>" : "") +
-          '<p class="rd-aside">' +
-            (subscriber()
-              ? "The words of this one haven&rsquo;t been added yet."
-              : "The rest of this story comes with The Lantern &mdash; and the first seven days are free.") +
-          "</p>" +
-          (subscriber() ? "" :
-            '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" ' +
-            'style="text-decoration:none;display:inline-block;margin-top:.4rem;" ' +
-            'onclick="return openTrialSignup(\'monthly\')">Start the free week</a>') +
-        "</div>"
+      ? (subscriber()
+          ? '<div class="rd-card rd-telling">' +
+              (s.teaser ? "<p>" + esc(s.teaser) + "</p>" : "") +
+              '<p class="rd-aside">The words of this one haven&rsquo;t been added yet.</p>' +
+            "</div>"
+          : lockedPitch(s))
       : '<div class="rd-card rd-telling"><h3 class="rd-label">The story</h3>' + paras(text.story) + "</div>" +
         (text.fork ? '<div class="rd-card rd-heart"><h3 class="rd-label">&#10022; The feeling moment</h3>' +
           paras(text.fork) + "</div>" : "") +

@@ -1402,3 +1402,42 @@ python3 tools/book-to-sql.py                                       # writes sql/
 thing to ship** — `tools/book-to-sql.py` reads it and then it must be deleted, or the words are
 public again.
 
+## 29. The shut door, built to persuade (2026-08-26)
+
+> "Do a taster or tease I guess and invite. Sorry ... or whatever converts subscribers more."
+
+He left the shape to me. A wall persuades nobody, so the locked story is now a page with a job.
+`shelfLockedView()` in `js/lst-open.js` and `lockedPitch()` in `js/lst-bedtime.js`; `.lk-*` in
+`style.css`.
+
+**In this order, and the order is the argument:**
+
+| | Why it is there |
+|---|---|
+| the story's **cover** | it looks like a real book, not an error |
+| the **taster** the catalog already carries | the writing sells itself better than a description of it |
+| **the cut**, said plainly | see below |
+| **a whole story, free, no sign-up** → `sample.html` | the strongest thing we have — *"Don't take our word for it. Read one."* |
+| **91 stories · a new one every night · the lullaby** | the value, counted, not adjectived |
+| **Start the free week** | one action |
+| **cancel in two clicks, here is how** | answered before they have to ask |
+| *already a subscriber? sign in* | quiet, last |
+
+### Two things not to "improve"
+1. **The cut is said in words, not faded out.** A gradient over text pretends there is more to see
+   and reads as a trick. Say it and move on.
+2. **Giving a whole story away is the point, not a leak.** A parent will not be argued into
+   trusting a bedtime story; they read one and decide.
+
+### Nothing on that page is private
+The cover comes from **`data/book-covers.js`** — 91 lines of picture paths, no words. The taster is
+the catalog's, already public. The free story is `sample.html`, published on purpose. **Not one word
+of the shut story is in the page**, which the wall test proves: a marker planted in the story text
+never appears in the HTML for a visitor or for someone signed in but not paying.
+
+`tools/extract-book.py` should rebuild `data/book-covers.js` when a new book comes over.
+
+### The subscriber's own "not yet"
+A subscriber whose story genuinely has no words still sees the plain *"The words of this one
+haven't been added yet"* — they are not sold something they have already bought.
+
