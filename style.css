@@ -2713,3 +2713,25 @@ a.bs-tile { text-decoration: none; }
   padding: .65rem 1.2rem; border-radius: 999px;
 }
 .ff-go:hover { background: #ffd84a; }
+
+/* ------------------------------------------------------ THE SAMPLE NIGHT
+   The page you hand somebody who isn't sure yet. Everything above the ask
+   is the story; the ask waits until they have finished reading it. */
+.sm-after {
+  margin-top: 3rem; padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,.14);
+  text-align: center;
+}
+.sm-after h3 {
+  font-family: 'Fredoka', sans-serif; font-weight: 600; color: #fff;
+  font-size: 1.4rem; line-height: 1.25; margin: 0 0 .8rem;
+}
+.sm-after > p {
+  color: rgba(255,255,255,.78); line-height: 1.8; font-size: 1.02rem;
+  max-width: 34rem; margin: 0 auto 1.4rem;
+}
+.sm-fine {
+  color: rgba(255,255,255,.5) !important; font-size: .88rem !important;
+  line-height: 1.65 !important; max-width: 30rem; margin: 1rem auto 0 !important;
+}
+.sm-fine a { color: rgba(255,255,255,.7); }
