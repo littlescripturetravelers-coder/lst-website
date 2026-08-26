@@ -37,6 +37,7 @@ precise rather than approximate.
 
 | Code | Date | What changed |
 |---|---|---|
+| `b12cf6a` | 26 Aug | **The Bible landing page, the timeline/lullaby doors, the sell hidden from subscribers — and the reading pass (fonts, contrast, favicon)** |
 | `635af0d` | 26 Aug | The lullaby's music, repeat and the sleep timer |
 | `5e12396` | 26 Aug | The free sample night, and the logo made 98% smaller |
 | `2887f61` | 25 Aug | "Where we're coming from" on Our Story |
@@ -93,3 +94,15 @@ git checkout <hash> -- .       # bring those files back as a new change
 
 Prefer that over `git reset --hard`, which throws away history Levi may still
 want. Always tell him plainly what was put back and what was kept.
+
+---
+
+## About `b12cf6a` — it holds two different things
+
+That one code covers both the new pages/doors **and** the reading pass (bigger
+"Best value" pill, brand-font fallbacks, brighter footer text, the favicon, the
+timeline's era bar at 11px). They went in together.
+
+If you like the new pages but want the reading pass undone — or the other way
+round — **say which half and I will take just that half back out.** Don't undo
+the whole code for one of them.
