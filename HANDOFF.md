@@ -1095,16 +1095,30 @@ sample sentence showing the links in context. Nothing on the website links to it
 `noindex`. If Levi reports a book that lands on "page not found", the fix is one `slug` in the
 `BOOKS` table.
 
-### Where the links go, and how to change it
-One word, `WHERE`, at the top of `js/lst-refs.js`:
-- `"gospel-library"` (**current**) — everything to the Church's study site, which carries the KJV.
-- `"bible-neutral"` — Bible chapters open on Bible Gateway in the King James Version; only the
-  Book of Mormon, Doctrine and Covenants and Pearl of Great Price stay on the Church's site,
-  because they exist nowhere else.
+### Where the links go — it depends which door the family came through
+Two front doors, two kinds of family, two right answers. Set by `WHERE` in `js/lst-refs.js`, which
+is now decided per page load rather than fixed:
 
-That switch exists because of `bible-bedtime-stories.html`. A family arriving through the Bible
-front door may not expect churchofjesuschrist.org on the other end of a link. It is Levi's call,
-not a developer's, and it is deliberately one word rather than a code change.
+| Family | How it is decided | Bible chapters open on |
+|---|---|---|
+| Came through `index.html` | that page declares `gospel-library` | the Gospel Library |
+| Came through `bible-bedtime-stories.html` | that page declares `bible` | Bible Gateway (KJV) |
+| Read on into the sample, the Lantern, the archive | the door is remembered for the browser | wherever their door said |
+| No door remembered at all | the default | the Gospel Library |
+
+A page says which it is with `<meta name="lst:scripture-links" content="bible">` (or
+`gospel-library`), and declaring it also **sets** the door, so a Latter-day Saint family who
+happened to land on the Bible page is put back on the Gospel Library the moment they visit the
+main site.
+
+**The Book of Mormon, the Doctrine and Covenants and the Pearl of Great Price always go to the
+Church's site**, in either mode, because they exist nowhere else. That rule lives in `chapterUrl`.
+
+### ⚠️ The site does not know anyone's religion, and must not pretend to
+Nobody is asked their faith, and nothing is inferred from a name or an email address. The **only**
+signal is which front door the browser came through. If anyone ever proposes guessing — from a
+surname, a location, a mailing list — the answer is no. Getting it wrong tells a family you think
+you know something about them that you do not.
 
 ### Where it is wired in
 `js/lst-read.js` (every article, both the four-depth Lantern and the older simple shape),
@@ -1118,4 +1132,41 @@ inside it would fight the card for the tap), and `js/lst-sample.js`.
 `.rd-sref` in `style.css`. Inside a sentence the link **inherits its colour** and shows a dotted
 underline, going gold on hover — a coloured link in every verse would speckle the page. A talk
 title and its date are their own line, so those are gold.
+
+## 23. The Payhip links changed (2026-08-26)
+
+Levi moved to Payhip's newer shape: **one product, two pricing plans**, with the plan in the query
+string rather than a product code in the path.
+
+| Plan | Link |
+|---|---|
+| Monthly | `https://payhip.com/order?link=1MNVZ&pricing_plan=PAWg3bbPWK` |
+| Yearly | `https://payhip.com/order?link=1MNVZ&pricing_plan=91zw8xxyBL` |
+
+They are in `js/lst-signup.js` (`PAYHIP`) and on the two buttons in `subscribe.html`.
+
+### ⚠️ This nearly broke the one thing that must not break
+The old links had no query string, so the popup handed the email over with
+`PAYHIP[plan] + "?email=" + …`. Against a link that **already** carries `?link=…&pricing_plan=…`,
+that second `?` would have been swallowed into the pricing_plan value: the wrong plan charged, and
+the email never arriving — which is the §4 contract, since Payhip and Mailchimp are matched to a
+family **by email**.
+
+There is now a `withEmail()` that joins with `&` when the URL already has a `?`. **Never go back to
+string-concatenating a `?` onto a checkout link.** Verified by driving the real popup and reading
+the URL the browser is actually sent to:
+
+```
+annual  → https://payhip.com/order?link=1MNVZ&pricing_plan=91zw8xxyBL&email=family%2Btest%40example.com
+monthly → https://payhip.com/order?link=1MNVZ&pricing_plan=PAWg3bbPWK&email=family%2Btest%40example.com
+```
+
+`js/lst-founding.js` only recognised the old `/b/XXXXX` shape and would have silently refused to
+draw the Founding banner for a plan-style link. Its guard now accepts both.
+
+### Still only Levi can confirm
+`payhip.com` is blocked from the build machine, so **the prices and the trial on those two plans
+were not checked** — only that the links are well formed and carry the right plan and email. The
+website says **$6.99** and **$49** with a **7-day trial**. If Payhip says anything else, the
+website is lying to a family at the moment they reach for a card.
 

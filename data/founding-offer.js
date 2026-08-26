@@ -11,13 +11,16 @@
    the link — and nothing else on the website needs to change.
 
    To switch it on:
-     1. In Payhip, create a new subscription product at the founding price.
-     2. Copy its link (it looks like https://payhip.com/b/XXXXX).
+     1. In Payhip, create a new subscription product at the founding price,
+        with the 7-day trial on.
+     2. Copy its link. Payhip writes them two ways and both work here:
+          https://payhip.com/b/XXXXX
+          https://payhip.com/order?link=XXXXX&pricing_plan=YYYYY
      3. Paste it below and set active to true.
 */
 window.LST_FOUNDING = {
   active: false,                 // ⚠️ leave false until the link below is real
-  link:   "",                    // https://payhip.com/b/XXXXX
+  link:   "",                    // the whole link, copied from Payhip
   price:  "$39",                 // the founding yearly price
   normal: "$49",                 // what it is compared against
   seats:  500,                   // how many families the offer is open to

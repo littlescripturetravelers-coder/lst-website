@@ -20,7 +20,10 @@
     var o = window.LST_FOUNDING;
 
     /* Both conditions, every time. Neither one alone is enough. */
-    if (!o || !o.active || !/^https:\/\/payhip\.com\/b\/\w+/.test(o.link || "")) {
+    /* Payhip writes links two ways now: the old /b/XXXXX and the newer
+       /order?link=…&pricing_plan=…. Both are real; anything else is not. */
+    var PAYHIP_LINK = /^https:\/\/payhip\.com\/(b\/\w+|order\?[\w=&%.-]*link=\w+)/;
+    if (!o || !o.active || !PAYHIP_LINK.test(o.link || "")) {
       host.innerHTML = "";
       return;
     }

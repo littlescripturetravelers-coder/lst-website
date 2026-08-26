@@ -20,7 +20,25 @@
     perMonth: "$4.08",          // what $49/year works out at
     saving:   "$35"             // $83.88 a year at monthly, less $49
   };
-  var PAYHIP = { monthly: "https://payhip.com/b/e7N6r", annual: "https://payhip.com/b/34fmR" };
+  /* ⚠️ THE ONE THING THAT MUST NOT BREAK
+     Payhip and Mailchimp are matched to a family BY EMAIL. The address typed
+     into the box above is handed to checkout in the URL, and every downstream
+     thing — the subscription record, the Lantern Subscribers tag, whether the
+     website lets them in — hangs off the two matching. See HANDOFF.md §4.
+
+     These are Payhip's newer plan links: one product, two pricing plans, and
+     the plan chosen in the query string. That is why the email is joined with
+     `withEmail` below and never with a bare "?" — a second "?" would be read
+     as part of the pricing_plan value, the wrong plan would be charged, and
+     the email would never arrive. */
+  var PAYHIP = {
+    monthly: "https://payhip.com/order?link=1MNVZ&pricing_plan=PAWg3bbPWK",
+    annual:  "https://payhip.com/order?link=1MNVZ&pricing_plan=91zw8xxyBL"
+  };
+
+  function withEmail(url, email) {
+    return url + (url.indexOf("?") === -1 ? "?" : "&") + "email=" + encodeURIComponent(email);
+  }
   /* Share the one client lst-auth.js sets up, so the page never runs two auth
      clients against the same stored session. Falls back to its own if this
      page doesn't load lst-auth.js. */
@@ -114,7 +132,7 @@
       return;
     }
     try { localStorage.setItem("lst_signup_email", email); } catch (e) {}
-    window.location.href = PAYHIP[plan] + "?email=" + encodeURIComponent(email);
+    window.location.href = withEmail(PAYHIP[plan], email);
   };
 
   if (document.readyState !== "loading") injectModal();

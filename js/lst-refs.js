@@ -32,17 +32,52 @@
   "use strict";
 
   /* ------------------------------------------------------------- WHERE
-     Levi's audience is LDS families first, and Christian families we are
-     working to welcome. The Gospel Library is the natural home for both — it
-     carries the King James Bible — and it keeps every link on one site.
+     Two front doors, two kinds of family, two different right answers.
 
-     If a link to churchofjesuschrist.org ever feels like the wrong doorstep
-     for a family arriving through bible-bedtime-stories.html, change this one
-     word to "bible-neutral". Bible chapters will then open on Bible Gateway
-     in the King James Version, and only the Book of Mormon, the Doctrine and
-     Covenants and the Pearl of Great Price will point at the Church's site,
-     because those exist nowhere else. */
-  var WHERE = "gospel-library";
+     A Latter-day Saint family belongs in the Gospel Library: it is where
+     their scriptures live, it carries the King James Bible, and it is the app
+     already open on their phone. A family who found us through
+     bible-bedtime-stories.html may never have heard of it, and a link to
+     churchofjesuschrist.org under a Bible verse is a doorstep they did not
+     expect. They get Bible Gateway, in the King James Version.
+
+     ⚠️ THE WEBSITE DOES NOT KNOW ANYONE'S RELIGION, AND MUST NOT PRETEND TO.
+     Nobody is asked, nothing is inferred from a name or an address. Which
+     front door the family walked through is the only signal there is, and it
+     is the only one this uses.
+
+       1. A page can say so outright, with
+          <meta name="lst:scripture-links" content="bible">
+       2. Otherwise, the last front door this browser came through is
+          remembered, so a family who arrived through the Bible page keeps
+          Bible Gateway as they read on into the sample and the Lantern.
+       3. Otherwise — and this is nearly everyone — the Gospel Library.
+
+     The Book of Mormon, the Doctrine and Covenants and the Pearl of Great
+     Price ALWAYS go to the Church's site whichever mode is on, because they
+     exist nowhere else. That is in chapterUrl, not here. */
+  var DOOR_KEY = "lst:door";
+
+  function declared() {
+    var m = document.querySelector('meta[name="lst:scripture-links"]');
+    var v = m ? String(m.getAttribute("content") || "").trim().toLowerCase() : "";
+    if (v === "bible" || v === "bible-neutral") return "bible-neutral";
+    if (v === "gospel-library" || v === "lds") return "gospel-library";
+    return "";
+  }
+
+  /* A page that declares its door also sets it, so the choice follows the
+     reader through the rest of the site. Storage can be off; that is fine,
+     the reader just gets the default from then on. */
+  var WHERE = (function () {
+    var said = declared();
+    try {
+      if (said) { localStorage.setItem(DOOR_KEY, said); return said; }
+      var kept = localStorage.getItem(DOOR_KEY);
+      if (kept === "bible-neutral" || kept === "gospel-library") return kept;
+    } catch (e) {}
+    return said || "gospel-library";
+  })();
 
   /* ------------------------------------------------------- the books
      slug is the Church's own, e.g. .../study/scriptures/nt/philip/4.
@@ -342,6 +377,13 @@
     talkSearchUrl: talkSearchUrl,
     conferenceUrl: conferenceUrl,
     where: function () { return WHERE; },
+    /* Deliberate override, remembered for this browser. Used by the little
+       chooser under the links; also handy for checking either mode by hand. */
+    setWhere: function (w) {
+      WHERE = (w === "bible" || w === "bible-neutral") ? "bible-neutral" : "gospel-library";
+      try { localStorage.setItem(DOOR_KEY, WHERE); } catch (e) {}
+      return WHERE;
+    },
     /* exposed so a checking page can list every book's link in one go */
     books: BOOKS,
     chapterUrl: chapterUrl
