@@ -37,6 +37,7 @@ precise rather than approximate.
 
 | Code | Date | What changed |
 |---|---|---|
+| `28a48eb` | 26 Aug | **The 91 stories moved behind Postgres — a real lock** (run the three SQL files) |
 | `f369f35` | 26 Aug | Every story on a page of its own &mdash; **and the stories stopped being truly locked** |
 | `2f45c75` | 26 Aug | **June and July join August — all 91 stories on the website** — and the Virtue Library links to them |
 | `4867157` | 26 Aug | **The August book — all 35 stories with their pictures, reading like the Morning Lantern** |
