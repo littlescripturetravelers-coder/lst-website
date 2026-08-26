@@ -37,6 +37,7 @@ precise rather than approximate.
 
 | Code | Date | What changed |
 |---|---|---|
+| `5f05232` | 26 Aug | The banner explains the move: it was an email at 5 AM, it is the website and app now |
 | `61d6459` | 26 Aug | The site stops promising an email each morning — it is the website and the app now |
 | `b12cf6a` | 26 Aug | **The Bible landing page, the timeline/lullaby doors, the sell hidden from subscribers — and the reading pass (fonts, contrast, favicon)** |
 | `635af0d` | 26 Aug | The lullaby's music, repeat and the sleep timer |
