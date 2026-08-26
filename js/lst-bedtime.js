@@ -24,8 +24,28 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+
+  /* A scripture reference, turned into a link if js/lst-refs.js is loaded and
+     left as plain escaped text if it is not. */
+  function sref(s) {
+    return (window.LSTRefs && s) ? window.LSTRefs.text(s) : esc(s);
+  }
   function auth() { return window.LSTAuth; }
   function lib() { return window.LST_LIBRARY || {}; }
+  /* The illustrated pages the app chat builds for a month's book — see
+     data/book-pages.js, and the warning there that they are PUBLIC files. */
+  /* A month's book, extracted from the app's own night pages into the website's
+     shape by tools/extract-book.py. One entry per night: the words, and the
+     pictures as real files. Drawn by the same reader as the Morning Lantern. */
+  function nightOf(id) {
+    var books = [window.LST_BOOK_AUGUST];
+    for (var i = 0; i < books.length; i++) {
+      var b = books[i];
+      if (!b) continue;
+      for (var j = 0; j < b.length; j++) if (b[j].id === id) return b[j];
+    }
+    return null;
+  }
   function stories() { return lib().stories || []; }
   function freeIds() { return (lib().meta && lib().meta.freeStoryIds) || []; }
   function isFree(id) { return freeIds().indexOf(id) !== -1; }
@@ -180,7 +200,8 @@
         lastBook = s.book;
         var b = bs.filter(function (x) { return x.n === s.book; })[0] || {};
         out += '<h3 class="bs-shelf">' + esc(b.title || ("Book " + s.book)) +
-          (b.month ? ' <span class="bs-month">' + esc(b.month) + "</span>" : "") + "</h3>" +
+          (b.month ? ' <span class="bs-month">' + esc(b.month) + "</span>" : "") +
+          "</h3>" +
           '<div class="bs-grid">';
       }
       out += tileView(s);
@@ -191,6 +212,32 @@
   }
 
   function storyView(s) {
+    /* The book's own night, if this book has been brought over. It carries the
+       whole thing — the story in illustrated turns, the Traveler, the Feeling
+       Moment, Remember This and the parent's page — so where it exists it IS
+       the story, and `story_texts` is not needed for that night. */
+    var n = window.LSTRead ? nightOf(s.id) : null;
+    var told = n ? window.LSTRead.beats(n) : null;
+    if (told && told.ok) {
+      return '<article class="rd">' +
+        '<div class="mp-card-head">' +
+          '<h3 style="flex:1;">' + esc(s.title || told.title || "Untitled") + "</h3>" +
+          '<button type="button" class="mp-icon" id="bs-close" aria-label="Back to the shelf">&#10005;</button>' +
+        "</div>" +
+        '<p class="mp-meta">' +
+          [s.bookTitle, n.night, s.scripture || n.reference].filter(Boolean).map(sref).join(" &middot; ") +
+        "</p>" +
+        (chips(s) ? '<div style="margin:.6rem 0 1.4rem;">' + chips(s) + "</div>" : "") +
+        '<div class="rd-body">' + told.html +
+          (s.teachingNote
+            ? '<div class="rd-card"><h3 class="rd-label">When to reach for this one</h3><p>' +
+              esc(s.teachingNote) + "</p></div>" : "") +
+          '<p class="rd-aside">Look this story up by what it teaches in ' +
+            '<a href="virtue-library.html">the Virtue Library</a>.</p>' +
+        "</div>" +
+      "</article>";
+    }
+
     var locked = !text || !text.story;
     var body = locked
       ? '<div class="rd-card rd-telling">' +

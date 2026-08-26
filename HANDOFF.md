@@ -1170,13 +1170,17 @@ were not checked** — only that the links are well formed and carry the right p
 website says **$6.99** and **$49** with a **7-day trial**. If Payhip says anything else, the
 website is lying to a family at the moment they reach for a card.
 
-## 24. The library stories have no words yet — anywhere (found 2026-08-26)
+## 24. ~~The library stories have no words yet~~ — WRONG, see §25 (2026-08-26)
 
 ### What Levi asked for
 > "I need all the stories under resources in the app and then under bedtimes stories and then
 > under August book to be placed into my website."
 
-### There was nothing to copy
+### ⚠️ THIS SECTION IS WRONG. It is kept only so the mistake is on the record.
+The clone of `lst-app` this was written from was a day out of date. The app chat had already
+shipped all 35 August nights. **Read §25 instead.**
+
+### What it wrongly claimed
 The app does not hold those stories either. `openStory()` in `lst-app/www/index.html` shows the
 title, scripture, virtue, teaching note and teaser — then a card reading *"The full illustrated
 story lives in <book>. We're bringing the whole library into the app so you'll read every story
@@ -1209,4 +1213,60 @@ already fixed by the catalog — `b8-w1-n1` through `b8-w5-n7` — so they must 
 `docs/FOR-THE-APP-CHAT-library-story-text.md` carries the app half: once `story_texts` holds the
 words, the app can replace its "coming soon" card by reading the same table, with the same warning
 about the jsonb array, and a note that its demo checkout still shows the old $10.99 / $98.91.
+
+## 25. The August book, read the website's way (built 2026-08-26)
+
+### I was wrong in §24, and the check that would have caught it
+I told Levi the app had no story text. He said he had looked and it did. He was right: my clone of
+`lst-app` was one commit stale, and `fff56c7` — *"Every night of the August book is in the app and
+on the website"* — had already landed.
+
+**Always `git fetch` the app before reasoning about what is in it.** The app's default branch is
+`master`, not `main`; `git fetch origin main` fails with "couldn't find remote ref" and it is easy
+to read that as "nothing new".
+
+### What the app actually has
+`lst-app/www/stories/aug-01-*.html` … `aug-35-*.html` plus `august.html`, a contents page. Each
+night's page carries a **`STORY = {...}` object** — the very same shape as `data/sample-night.js`,
+which `js/lst-read.js` has always known how to draw.
+
+### What Levi asked for, and what was built
+His first instruction was to put those stories on the website. The obvious move — copy the pages —
+was **built and then thrown away**, because his next message was clear:
+
+> "You need to correct it so they show up well on the website. So they match the writing and
+> everything on the website and then have the images. Just like the morning lanterns looks."
+
+So the website does not serve the app's pages. It takes the words and the pictures out of them:
+
+- **`tools/extract-book.py`** reads the app's night pages and writes `data/book-august.js`
+  (108 KB, all 35 nights, 9,608 words) plus **241 real .jpg files** in `images/book/`. The
+  pictures come out of the base64 because a browser can cache a file and cannot cache a string —
+  12.8 MB on disk, ~380 KB for the night a family actually opens, lazily.
+- **`LSTRead.beats(night)`** is a new door into the reader that takes an already-extracted object.
+  `book(html)` is now one line: `beats(objectNamed(html, "STORY"))`. Same beats, same output.
+- A night opened from **Bedtime Stories** is drawn by that, so it carries the same eyebrows and
+  headings as the Morning Lantern — *Scripture Traveler of the Night*, *A Feeling Moment*,
+  *Remember This*, *Parent Prompt*, *Parent Experience* — in the website's own type.
+
+### Where a night comes from now
+`storyView()` in `js/lst-bedtime.js` looks for the book first. **Where the book has a night, that
+night IS the story, and `story_texts` is not consulted for it.** `story_texts` remains the path for
+any story a book has not been extracted for.
+
+### Rebuilding it, and next month
+```
+python3 tools/extract-book.py ../lst-app/www/stories august 8
+```
+Never edit `data/book-august.js` by hand — the app's page is the one source of truth, and a hand
+edit is lost the next time the tool runs. For September: fetch the app, run the tool with the new
+month and book number, add one `<script src="data/book-september.js">` beside the August one, and
+add the array to `nightOf()` in `js/lst-bedtime.js`.
+
+### Two small things found in the book's own data
+- Every night is exactly **9 beats** — cover, two story turns, five moments, and a closing beat.
+- **One beat is empty**: `b8-w2-n5`'s *Parent Experience* has neither words nor a picture, and the
+  book's closing beat never has either. `beats()` now skips any beat that would draw nothing,
+  because a heading over an empty space reads as a fault rather than as a quiet moment. The app
+  presumably still draws them — worth a look from that side.
 

@@ -592,14 +592,28 @@
   /* ========================================================= THE BOOK
      The picture book, unfolded down the page instead of turned one screen at
      a time. Same pictures, same words, same order. */
-  function book(html) {
-    var s = objectNamed(html, "STORY");
+  /* A book's night, from the object itself.
+
+     `book()` below digs a STORY out of a pasted page; the month's books arrive
+     already extracted (data/book-august.js, built by tools/extract-book.py), so
+     they come straight in here. Same beats, same output, same look — a night of
+     the August book reads exactly like the Morning Lantern, because it is drawn
+     by the same few lines. */
+  function beats(s) {
     if (!s || !s.beats || !s.beats.length) return { ok: false, html: "" };
 
     var out = "";
     s.beats.forEach(function (b) {
       var img = safeImg(b.img, b.alt);
-      var words = (b.text || []).map(function (t) { return "<p>" + text(t) + "</p>"; }).join("");
+      var words = (b.text || []).map(function (t) {
+        return String(t == null ? "" : t).trim() ? "<p>" + text(t) + "</p>" : "";
+      }).join("");
+
+      /* A beat with no words and no picture draws an empty card with a heading
+         over nothing, which reads as a fault rather than as a quiet moment. The
+         book's closing beat is one of these by design; so is the occasional
+         Parent Experience the book leaves blank. */
+      if (!img && !words) return;
 
       if (b.type === "cover") {
         out += '<section class="rd-beat rd-cover">' + img + "</section>";
@@ -622,6 +636,10 @@
       reference: tidy(s.reference),
       html: out
     };
+  }
+
+  function book(html) {
+    return beats(objectNamed(html, "STORY"));
   }
 
   /* ======================================================= THE LULLABY
@@ -691,6 +709,7 @@
   window.LSTRead = {
     story: story,
     book: book,
+    beats: beats,
     song: song,
     parseStory: parseStory,
     objectNamed: objectNamed,

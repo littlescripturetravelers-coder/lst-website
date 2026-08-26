@@ -2959,3 +2959,20 @@ html.mo-shut, html.mo-shut body { overflow: hidden !important; }
 /* The talk title and its date are their own line, so they can be gold. */
 .rd-motto .rd-sref, .rd-when .rd-sref { color: var(--gold); border-bottom-color: rgba(245,197,24,.45); }
 .rd-motto .rd-sref:hover, .rd-when .rd-sref:hover { border-bottom-color: var(--gold); }
+
+/* ------------------------------------------- THE ILLUSTRATED BOOK PAGES
+   A month's book has a whole page for every night, copied from the app (see
+   data/book-pages.js). Two ways in: the whole book from the shelf heading,
+   and one night from the story that is open. */
+.bs-whole {
+  font-family: var(--font-body); font-size: .8rem; font-weight: 800;
+  letter-spacing: 0; text-transform: none; color: var(--gold);
+  text-decoration: none; margin-left: .7rem; white-space: nowrap;
+  border-bottom: 1px solid rgba(245,197,24,.4);
+}
+.bs-whole:hover { border-bottom-color: var(--gold); }
+.bs-illus {
+  display: inline-block; font-weight: 800; color: var(--gold);
+  text-decoration: none; border-bottom: 1px solid rgba(245,197,24,.45);
+}
+.bs-illus:hover { border-bottom-color: var(--gold); }
