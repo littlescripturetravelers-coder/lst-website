@@ -1018,9 +1018,22 @@ Both are the **newsletter**, not the subscription, and both are still genuinely 
 
 If Levi ever stops sending those, they have to come out too. They are the only two left.
 
-### ⚠️ The banner still says the app is "coming soon"
-`app-coming-banner`, at the top of **20 pages**, reads *"📱 Coming soon — the Little Scripture
-Travelers app…"*. The new copy says a subscriber can read tonight's story **in the app**. Both
-cannot be true at once. Levi has been asked which it is; **do not change the banner on a guess** —
-promising an app that is not on the App Store yet is worse than the copy being a little stale.
+### The banner is now the notice that the email is ending
+`app-move-banner` (it was `app-coming-banner`; nothing in CSS or JS targets the class, so the
+name was changed to match what it says), at the top of the same **20 pages**:
 
+> 📱 **A change for our families —** your story has always arrived by email at 5 AM Mountain.
+> We are moving it all onto the website and into the app: the nightly story and lullabies,
+> the Virtue Library, and your Family Story Library, all in one place.
+
+That is Levi's own framing, asked for directly: *"something to the extent saying we have had it
+as an email at 5 AM Mountain but we are moving it all into the app and website."* It resolves what
+used to be a contradiction — the body copy says where the story now lives, and the banner says why
+it moved.
+
+**It must stay visible to subscribers.** `js/lst-signed-in.js` hides things that sell a
+subscription; this sells nothing, and paying families are precisely the people who need to know
+their 5 AM email is stopping. It carries none of the selling markers (`.nav-cta`,
+`[onclick*="openTrialSignup"]`, `[data-selling="1"]`), so it is safe today — keep it that way.
+
+Take the banner down once the move is finished and no one is still waiting on an email.
