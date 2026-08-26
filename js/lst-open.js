@@ -122,11 +122,13 @@
        have carried. */
     var l = window.LSTRead.song("LULLABY = " + JSON.stringify(data));
     if (!l.ok) return '<p class="mp-note">The lullaby didn&rsquo;t load. Please refresh.</p>';
+    var track = (data.song && data.song.url) || "";
     return '<div class="rd">' + toolsView() +
       '<div class="rd-body">' +
         head(l.title || "A Little Travelers&rsquo; Lullaby", "") +
         (l.subtitle ? '<p style="color:rgba(255,255,255,.62);font-style:italic;margin:0 0 1.4rem;line-height:1.7;">' +
           esc(l.subtitle) + "</p>" : "") +
+        (track ? '<div id="lst-player"></div>' : "") +
         (l.jump || "") + l.html +
       "</div></div>";
   }
@@ -142,8 +144,7 @@
         head(l.title || n.title || "Tonight&rsquo;s lullaby", prettyDate(n.date)) +
         (l.subtitle ? '<p style="color:rgba(255,255,255,.62);font-style:italic;margin:0 0 1.4rem;line-height:1.7;">' +
           esc(l.subtitle) + "</p>" : "") +
-        (n.songAudio ? '<audio controls preload="none" src="' + esc(n.songAudio) +
-          '" style="width:100%;margin:0 0 1.6rem;"></audio>' : "") +
+        (n.songAudio ? '<div id="lst-player"></div>' : "") +
         (l.jump || "") + (l.html || "") +
         '<p class="rd-aside">Or sing <a href="lullaby.html?which=lantern">A Little Travelers&rsquo; Lullaby</a>, the one that fits any night.</p>' +
       "</div></div>";
@@ -186,8 +187,29 @@
     wire();
   }
 
+  /* The player is built after the page is drawn, because it needs its own
+     element to exist first. Repeat and the sleep timer live in it. */
+  function wirePlayer() {
+    var host = document.getElementById("lst-player");
+    if (!host || !window.LSTPlayer) return;
+
+    if (wantsLantern()) {
+      var d = window.LST_LANTERN_LULLABY || {};
+      var url = (d.song && d.song.url) || "";
+      if (url) window.LSTPlayer.mount(host, { src: url, title: d.title || "A Little Travelers' Lullaby" });
+      return;
+    }
+    if (night && night.songAudio) {
+      window.LSTPlayer.mount(host, {
+        src: night.songAudio,
+        title: night.title ? night.title + " — tonight's lullaby" : "Tonight's lullaby"
+      });
+    }
+  }
+
   function wire() {
     applySize();
+    wirePlayer();
     var small = document.getElementById("o-smaller");
     if (small) small.addEventListener("click", function () {
       if (sizeIx > 0) { sizeIx--; applySize(); }

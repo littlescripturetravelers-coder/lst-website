@@ -17,7 +17,8 @@ window.LST_LANTERN_LULLABY = {
   /* where the song lives once you've uploaded it.
      url can be the song's page in the app, or the mp3 itself.
      id is optional — pass it if your player looks songs up by id. */
-  song: { url: "", id: "", title: "A Little Travelers' Lullaby" },
+  /* The music. It only downloads when somebody presses play. */
+  song: { url: "audio/hush-little-traveler.mp3", id: "", title: "A Little Travelers' Lullaby" },
   theme: "auto",
   backUrl: "morning-lantern-2026-07-28-come-celebrate-with-god.html",
 
