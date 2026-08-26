@@ -369,6 +369,18 @@
     return h.join("");
   }
 
+  /* Whether this story's night has been brought over from the app's book — see
+     data/book-*.js. Without it the shelf would only have a teaser to show. */
+  function hasNight(id) {
+    var books = [window.LST_BOOK_JUNE, window.LST_BOOK_JULY, window.LST_BOOK_AUGUST];
+    for (var i = 0; i < books.length; i++) {
+      var b = books[i];
+      if (!b) continue;
+      for (var j = 0; j < b.length; j++) if (b[j].id === id) return true;
+    }
+    return false;
+  }
+
   function storyFoot(s) {
     var h = [];
     if (s.virtues && s.virtues.length) {
@@ -381,9 +393,16 @@
     }
     var bk = byId(L.books || [], s.book) ||
              (L.books || []).filter(function (b) { return b.book === s.book; })[0];
+    /* Two ways to have this story tonight: read it here, or hold the book.
+       The reading one goes first — it costs nothing and it is already paid for.
+       The link only appears where the night really has been brought over, so it
+       can never send a family to a story that is not there. */
+    var here = hasNight(s.id);
     h.push('<div class="vl-modal-foot"><p>Find this story on <strong>Week ' + s.week +
       ", Night " + s.night + "</strong> of <em>" + esc(s.bookTitle) + "</em>.</p>" +
-      (bk && bk.amazon ? '<a class="vl-btn" href="' + esc(bk.amazon) +
+      (here ? '<a class="vl-btn" href="bedtime-stories.html?story=' + encodeURIComponent(s.id) +
+        '">&#128214; Read it in Bedtime Stories</a>' : "") +
+      (bk && bk.amazon ? '<a class="vl-btn' + (here ? " vl-btn-quiet" : "") + '" href="' + esc(bk.amazon) +
         '" target="_blank" rel="noopener">Get the ' + esc(s.month) + " Book</a>" : "") +
       "</div>");
     return h.join("");
@@ -542,10 +561,14 @@
     fetchStoryText(sid).then(function (data) {
       if (currentStory !== sid) return;              /* they moved on */
       if (data && data.story) { paint(storyFull(s, data)); return; }
-      /* Allowed to read, but the text is not in the library yet. */
-      paint(storyTeaser(s) +
-        '<div class="vl-locked"><p>The full text of this one is not loaded yet. ' +
-        "It is on its way \u2014 every story in the library is being added.</p></div>");
+      /* Allowed to read, but `story_texts` has nothing. Two different truths:
+         where the book has been brought over the story IS on the website, and
+         saying "not loaded yet" over a button that opens it would be a lie. */
+      paint(storyTeaser(s) + (hasNight(sid)
+        ? '<div class="vl-locked"><p>The whole story &mdash; with its pictures &mdash; ' +
+          "is on the website. Open it in Bedtime Stories, just below.</p></div>"
+        : '<div class="vl-locked"><p>The full text of this one is not loaded yet. ' +
+          "It is on its way \u2014 every story in the library is being added.</p></div>"));
     }).catch(function () {
       if (currentStory !== sid) return;
       paint(storyTeaser(s) +

@@ -1270,3 +1270,52 @@ add the array to `nightOf()` in `js/lst-bedtime.js`.
   because a heading over an empty space reads as a fault rather than as a quiet moment. The app
   presumably still draws them — worth a look from that side.
 
+## 26. All three books, and the way between the two libraries (2026-08-26)
+
+### June and July joined August
+The app chat shipped them the same day (`ea86983` June, `078a42b` July). Extracted the same way:
+
+```
+python3 tools/extract-book.py ../lst-app/www/stories june 6
+python3 tools/extract-book.py ../lst-app/www/stories july 7
+```
+
+| Book | Nights | Data | Pictures |
+|---|---|---|---|
+| June — *A Heart That Follows the Lord* | 28 | `data/book-june.js` 77 KB | 166 |
+| July — *There Is a Prophet in Israel* | 28 | `data/book-july.js` 73 KB | 168 |
+| August — *I Will Trust and Sing* | 35 | `data/book-august.js` 108 KB | 241 |
+
+**91 nights, and the catalog has 91 stories. Every id matches, none duplicated, none missing** — the
+tool derives the id from the app's own `w<week>n<night>`, so a mismatch would mean the two sides
+have genuinely drifted, not that a pairing was guessed. Worth re-running that count after any
+future book: `nights === catalog.length && every catalog story has a night`.
+
+`nightOf()` in `js/lst-bedtime.js` reads all three arrays; the three pages that show stories load
+all three data files.
+
+### A story can be opened by address now
+`bedtime-stories.html?story=b6-w1-n7` opens straight onto that night. One function, `openStory(id)`,
+does it whether the reader tapped a tile or arrived by link, and it selects that story's book so the
+shelf underneath makes sense.
+
+**Where the book has a night, `story_texts` is not fetched at all** — the words are already here.
+
+### The two libraries now point at each other
+> "in the virtue library where you click on a story and you are able to see the book ... there also
+> needs to be a button for the story that is stored on the website under bedtime stories."
+
+`storyFoot()` in **`virtue-library.js`** (root, not `js/`) now draws two buttons: **📖 Read it in
+Bedtime Stories** in gold, and *Get the … Book* as the quiet outline beside it. Reading it first is
+deliberate: it costs nothing and the family has already paid for it.
+
+**The button only appears where the night really exists** (`hasNight(id)`). It can never send
+someone to a story that is not there.
+
+### ⚠️ A message that became a lie, and was caught
+The modal used to say *"The full text of this one is not loaded yet"* whenever `story_texts` came
+back empty — which is now every story, because the books bypass that table. It would have sat
+directly above a button that opens the whole thing. Where the night exists it now says the story is
+on the website and points at the button. **Any future "not available" copy has to ask `hasNight()`
+first.**
+

@@ -38,7 +38,7 @@
      shape by tools/extract-book.py. One entry per night: the words, and the
      pictures as real files. Drawn by the same reader as the Morning Lantern. */
   function nightOf(id) {
-    var books = [window.LST_BOOK_AUGUST];
+    var books = [window.LST_BOOK_JUNE, window.LST_BOOK_JULY, window.LST_BOOK_AUGUST];
     for (var i = 0; i < books.length; i++) {
       var b = books[i];
       if (!b) continue;
@@ -314,19 +314,32 @@
     });
 
     root.querySelectorAll("[data-story]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        var id = this.getAttribute("data-story");
-        var found = stories().filter(function (s) { return s.id === id; })[0];
-        if (!found) return;
-        open = found; text = null; loadingText = true;
-        render();
-        window.scrollTo({ top: root.offsetTop - 90, behavior: "smooth" });
-        fetchText(id).then(function (t) {
-          loadingText = false;
-          if (open && open.id === id) { text = t; render(); }
-        });
-      });
+      b.addEventListener("click", function () { openStory(this.getAttribute("data-story"), true); });
     });
+  }
+
+  /* Opening one story, however the reader got here — a tap on the shelf, or an
+     address carrying ?story=, which is how the Virtue Library sends them. */
+  function openStory(id, scroll) {
+    var found = stories().filter(function (s) { return s.id === id; })[0];
+    if (!found) return false;
+    book = String(found.book);              /* show the shelf it belongs to */
+    open = found; text = null; loadingText = true;
+    render();
+    if (scroll && root) window.scrollTo({ top: root.offsetTop - 90, behavior: "smooth" });
+    /* Where the book has been brought over the words are already here; only a
+       story without one needs Supabase. */
+    if (nightOf(id) && window.LSTRead) { loadingText = false; render(); return true; }
+    fetchText(id).then(function (t) {
+      loadingText = false;
+      if (open && open.id === id) { text = t; render(); }
+    });
+    return true;
+  }
+
+  function asked() {
+    var m = String(window.location.search || "").match(/[?&]story=([^&]+)/);
+    return m ? decodeURIComponent(m[1]) : "";
   }
 
   window.LSTBedtime = {
@@ -334,6 +347,9 @@
       root = typeof elm === "string" ? document.getElementById(elm) : elm;
       if (!root) return;
       render();
+      /* bedtime-stories.html?story=b8-w5-n1 opens straight onto that night. */
+      var want = asked();
+      if (want) openStory(want, true);
       if (auth()) {
         auth().ready(render);
         auth().onChange(function () {

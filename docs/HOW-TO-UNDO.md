@@ -37,6 +37,7 @@ precise rather than approximate.
 
 | Code | Date | What changed |
 |---|---|---|
+| `NEXT` | 26 Aug | **June and July join August — all 91 stories on the website** — and the Virtue Library links to them |
 | `4867157` | 26 Aug | **The August book — all 35 stories with their pictures, reading like the Morning Lantern** |
 | `15044e8` | 26 Aug | Story text renders as real paragraphs when it is loaded (nothing visible yet) |
 | `e3616ce` | 26 Aug | **The new Payhip checkout links**, and scripture links that follow the family's own front door |

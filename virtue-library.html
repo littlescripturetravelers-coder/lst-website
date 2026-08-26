@@ -236,6 +236,17 @@
       white-space:nowrap; width:auto; max-width:100%;
     }
     .vl-btn:hover { background:#f4c842; }
+    /* Two buttons now: reading it here is the gold one, the book is the
+       outline beside it. Both wrap onto their own line on a phone. */
+    .vl-modal-foot .vl-btn + .vl-btn { margin-left:.6rem; }
+    .vl-btn-quiet {
+      background:transparent; color:#1a2c6b; border:1.5px solid rgba(13,27,75,.28);
+    }
+    .vl-btn-quiet:hover { background:rgba(13,27,75,.06); }
+    @media (max-width:520px) {
+      .vl-modal-foot .vl-btn { display:block; text-align:center; white-space:normal; }
+      .vl-modal-foot .vl-btn + .vl-btn { margin:.6rem 0 0; }
+    }
 
     /* ===== ACCESS GATE ===== */
     /* Locked story panel shown to non-subscribers inside the story modal */
@@ -820,6 +831,8 @@
   </footer>
 
   <script src="data/virtue-library.js"></script>
+  <script src="data/book-june.js"></script>
+  <script src="data/book-july.js"></script>
   <script src="data/book-august.js"></script>
   <script src="js/vendor/supabase.js"></script>
   <script src="js/lst-refs.js"></script>
