@@ -1349,3 +1349,56 @@ story for a subscriber. Verified both ways, on both routes.
 real lock back, the words have to move into Supabase behind RLS — the pictures can stay public,
 since a picture without its story sells nothing.
 
+## 28. The stories are behind Postgres now (2026-08-26)
+
+> "I want all the stories to be behind the pay wall. You should not see them unless you subscribe."
+
+§27 warned that putting the words in `data/book-*.js` had taken them out from behind Postgres.
+Levi's answer was immediate, and this is it.
+
+### What changed
+- **`data/book-june.js`, `-july.js`, `-august.js` are deleted.** They were public files holding all
+  91 stories. Nothing on the website reads them any more.
+- **`sql/book-june.sql`, `book-july.sql`, `book-august.sql`** put the same 91 nights into a new
+  table, `book_nights`, carrying **the same policy `story_texts` already uses**:
+  `using (is_free or public.lst_is_subscriber())`, `to authenticated`, RLS on.
+- **`LSTData.bookNights.one(id)`** in `js/lst-app-data.js` is the only way in. No reply means not
+  allowed, and there is nothing on the page to hide because the words never arrived.
+- `js/lst-bedtime.js` and `js/lst-open.js` both ask it and draw whatever comes back.
+
+**Every one of those SQL files was run against a real Postgres before Levi saw it** — all three, in
+two different orders, twice over: 91 nights, 3 free, no duplication, RLS on, policy present.
+
+### The gate is not JavaScript any more
+The old check was `subscriber() || isFree(id)` in the page. That is gone, and good riddance: it
+guarded words that were already in the browser. **Do not add a check like that back.** The rule is
+now: ask the database, draw what it gives you. Verified from three sides — subscriber, signed in
+but not paying, and signed out — on both routes, with a stub that answers the way the policy does.
+The marker text never appears in the page's HTML for the two who may not have it.
+
+### `data/books-online.js` — public on purpose
+A list of book numbers, `[6, 7, 8]`, and nothing else. The Virtue Library needs to know whether to
+offer "read it here" **before** anyone signs in, and asking the database would tell a visitor
+nothing. It carries no words. Add the number when a new book is brought over.
+
+### ⚠️ Until Levi runs the SQL, the stories are not on the website
+A subscriber opening one sees "this comes with The Lantern". That is the right way round — nobody
+can read them free while he gets to it — but it does mean **the shelf is emptier than it was for a
+few hours.** `docs/LOCK-THE-STORIES.md` has the click-by-click.
+
+### ⚠️ The pictures are still public files
+`images/book/*.jpg` are ordinary files. A guessed address shows an illustration — with no story
+beside it, and the same art is in the books on Amazon. Levi has been told plainly. Locking them
+means Supabase Storage and signed URLs, which costs load time at bedtime; his call, not assumed.
+
+### The whole path, for the next book
+```
+python3 tools/extract-book.py ../lst-app/www/stories september 9   # words + pictures out of the app
+python3 tools/book-to-sql.py                                       # writes sql/book-*.sql for all books
+# run sql/book-september.sql in Supabase
+# add 9 to data/books-online.js
+```
+`tools/extract-book.py` still writes `data/book-<month>.js`. **That file is a staging post, not a
+thing to ship** — `tools/book-to-sql.py` reads it and then it must be deleted, or the words are
+public again.
+

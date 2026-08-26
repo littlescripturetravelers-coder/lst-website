@@ -428,7 +428,52 @@
     }
   };
 
+  /* ------------------------------------------------------ THE BOOKS
+     A night of a month's book. The words used to sit in data/book-*.js, which
+     is a public file — anyone could open one and read all ninety-one stories.
+     They live in `book_nights` now, under the same rule as story_texts: a row
+     is handed to a subscriber, or to anyone for a story marked free, and to
+     nobody else. Postgres decides, so no reply here means not allowed, and
+     nothing this file does can change that.
+
+     `beats` is jsonb — an ARRAY — so it comes back as a real array. See the
+     note in js/lst-read.js about what happens if it is treated as a string.
+
+     sql/book-june.sql, book-july.sql, book-august.sql put them there. */
+  var bookNights = {
+    one: function (id) {
+      var c = sb();
+      if (!c || !id) return Promise.resolve(null);
+      return c.from("book_nights")
+        .select("id,book,night,title,reference,beats")
+        .eq("id", id).limit(1)
+        .then(function (res) {
+          if (res.error || !res.data || !res.data.length) return null;
+          var r = res.data[0];
+          return {
+            id: r.id, book: r.book, night: r.night || "",
+            title: r.title || "", reference: r.reference || "",
+            beats: Array.isArray(r.beats) ? r.beats : []
+          };
+        })
+        .catch(function () { return null; });
+    },
+    /* Which nights exist at all — ids only, so it stays small. Used to decide
+       whether to offer "read it here" without asking for any words. */
+    ids: function () {
+      var c = sb();
+      if (!c) return Promise.resolve([]);
+      return c.from("book_nights").select("id")
+        .then(function (res) {
+          if (res.error || !res.data) return [];
+          return res.data.map(function (r) { return r.id; });
+        })
+        .catch(function () { return []; });
+    }
+  };
+
   window.LSTData = {
+    bookNights: bookNights,
     familyStories: family,
     journal: journal,
     archive: archive,

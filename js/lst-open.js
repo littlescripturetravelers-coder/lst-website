@@ -157,18 +157,11 @@
      data/book-*.js, which tools/extract-book.py wrote from the app's own
      pages. Different source, SAME reader — so a night of the June book is set
      in the same type, on the same page, as tonight's story. */
-  function wantedNight() {
+  var wantedId = (function () {
     var m = String(window.location.search || "").match(/[?&]id=([^&]+)/);
-    if (!m) return null;
-    var id = decodeURIComponent(m[1]);
-    var books = [window.LST_BOOK_JUNE, window.LST_BOOK_JULY, window.LST_BOOK_AUGUST];
-    for (var i = 0; i < books.length; i++) {
-      var b = books[i];
-      if (!b) continue;
-      for (var j = 0; j < b.length; j++) if (b[j].id === id) return b[j];
-    }
-    return null;
-  }
+    return m ? decodeURIComponent(m[1]) : "";
+  })();
+  var shelfNight = null, shelfAsked = false;
 
   function catalogEntry(id) {
     var all = (window.LST_LIBRARY && window.LST_LIBRARY.stories) || [];
@@ -176,19 +169,11 @@
     return null;
   }
 
-  function mayReadShelf(n) {
-    var free = (window.LST_LIBRARY && window.LST_LIBRARY.meta &&
-                window.LST_LIBRARY.meta.freeStoryIds) || [];
-    if (free.indexOf(n.id) !== -1) return true;
-    var a = auth();
-    return !!(a && a.signedIn() && (a.isSubscriber() || (a.isAdmin && a.isAdmin())));
-  }
-
-  function shelfLockedView(n) {
-    var c = catalogEntry(n.id) || {};
+  function shelfLockedView(id) {
+    var c = catalogEntry(id) || {};
     return '<div class="mp-empty">' +
       '<div class="mp-empty-i">&#128214;</div>' +
-      "<h3>" + esc(c.title || n.title || "This story") + "</h3>" +
+      "<h3>" + esc(c.title || "This story") + "</h3>" +
       (c.teaser ? "<p>" + esc(c.teaser) + "</p>" : "") +
       "<p>The whole story, with its pictures, comes with The Lantern &mdash; " +
       "and the first seven days are free.</p>" +
@@ -260,15 +245,16 @@
 
     if (wantsLantern()) { root.innerHTML = lanternView(); wire(); return; }
 
-    var shelf = wantedNight();
-    /* Same rule as the shelf: the words being on the website does not mean they
-       are free. Signed-out or not subscribing, this page says so. */
-    if (shelf && !mayReadShelf(shelf)) { root.innerHTML = shelfLockedView(shelf); wire(); return; }
-    if (shelf) {
-      root.innerHTML = shelfNightView(shelf);
+    if (wantedId) {
+      /* The database decides. Until it answers, say so; when it answers with
+         nothing, this reader is not allowed the story and the words never
+         reached the page to begin with. */
+      if (!shelfAsked) { root.innerHTML = '<p class="mp-note">Opening&hellip;</p>'; return; }
+      if (!shelfNight) { root.innerHTML = shelfLockedView(wantedId); wire(); return; }
+      root.innerHTML = shelfNightView(shelfNight);
       /* The page's own hero says "Tonight's Story", which this is not. A story
          opened by name should be named, in the tab and at the top. */
-      dressForShelf(shelf);
+      dressForShelf(shelfNight);
       wire();
       return;
     }
@@ -328,9 +314,18 @@
       kind = which === "song" ? "song" : "book";
       if (!root) return;
       if (wantsLantern()) { render(); return; }
-      if (wantedNight()) {
-        render();
-        if (auth()) { auth().ready(render); auth().onChange(render); }
+      if (wantedId) {
+        var ask = function () {
+          shelfAsked = false; shelfNight = null; render();
+          var go = (window.LSTData && window.LSTData.bookNights)
+            ? window.LSTData.bookNights.one(wantedId) : Promise.resolve(null);
+          go.then(function (n) {
+            shelfNight = (n && n.beats && n.beats.length) ? n : null;
+            shelfAsked = true;
+            render();
+          });
+        };
+        if (auth()) { auth().ready(ask); auth().onChange(ask); } else { shelfAsked = true; render(); }
         return;
       }
       if (!auth()) return;

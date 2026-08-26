@@ -32,19 +32,15 @@
   }
   function auth() { return window.LSTAuth; }
   function lib() { return window.LST_LIBRARY || {}; }
-  /* The illustrated pages the app chat builds for a month's book — see
-     data/book-pages.js, and the warning there that they are PUBLIC files. */
-  /* A month's book, extracted from the app's own night pages into the website's
-     shape by tools/extract-book.py. One entry per night: the words, and the
-     pictures as real files. Drawn by the same reader as the Morning Lantern. */
-  function nightOf(id) {
-    var books = [window.LST_BOOK_JUNE, window.LST_BOOK_JULY, window.LST_BOOK_AUGUST];
-    for (var i = 0; i < books.length; i++) {
-      var b = books[i];
-      if (!b) continue;
-      for (var j = 0; j < b.length; j++) if (b[j].id === id) return b[j];
-    }
-    return null;
+  /* A month's book. The words are in `book_nights` in Supabase, behind the
+     same rule as everything else a subscription buys — no reply means not
+     allowed, and nothing here can change that. `night` holds whatever the
+     database last handed back for the story that is open. */
+  var night = null;
+
+  function loadNight(id) {
+    if (!window.LSTData || !window.LSTData.bookNights) return Promise.resolve(null);
+    return window.LSTData.bookNights.one(id);
   }
   function stories() { return lib().stories || []; }
   function freeIds() { return (lib().meta && lib().meta.freeStoryIds) || []; }
@@ -216,13 +212,12 @@
        whole thing — the story in illustrated turns, the Traveler, the Feeling
        Moment, Remember This and the parent's page — so where it exists it IS
        the story, and `story_texts` is not needed for that night. */
-    var n = window.LSTRead ? nightOf(s.id) : null;
+    /* The database decides. If it handed back a night, this reader is allowed
+       it; if it handed back nothing, they are not, and there is nothing here
+       to hide because the words never arrived. */
+    var n = (night && night.id === s.id && window.LSTRead) ? night : null;
     var told = n ? window.LSTRead.beats(n) : null;
-    /* ⚠️ The book does not change who may read. Before the books arrived a
-       non-subscriber got the teaser and an invitation, and that is still what
-       they get. The app gives these away; the website does not, and turning
-       that around is Levi's call, not a side effect of loading the words. */
-    if (told && told.ok && (subscriber() || isFree(s.id))) {
+    if (told && told.ok) {
       return '<article class="rd">' +
         '<div class="mp-card-head">' +
           '<h3 style="flex:1;">' + esc(s.title || told.title || "Untitled") + "</h3>" +
@@ -298,7 +293,7 @@
       root.innerHTML = storyView(open);
       var c = document.getElementById("bs-close");
       if (c) c.addEventListener("click", function () {
-        open = null; text = null; render();
+        open = null; text = null; night = null; render();
         window.scrollTo({ top: root.offsetTop - 90, behavior: "smooth" });
       });
       return;
@@ -330,15 +325,18 @@
     var found = stories().filter(function (s) { return s.id === id; })[0];
     if (!found) return false;
     book = String(found.book);              /* show the shelf it belongs to */
-    open = found; text = null; loadingText = true;
+    open = found; text = null; night = null; loadingText = true;
     render();
     if (scroll && root) window.scrollTo({ top: root.offsetTop - 90, behavior: "smooth" });
-    /* Where the book has been brought over the words are already here; only a
-       story without one needs Supabase. */
-    if (nightOf(id) && window.LSTRead) { loadingText = false; render(); return true; }
-    fetchText(id).then(function (t) {
-      loadingText = false;
-      if (open && open.id === id) { text = t; render(); }
+    loadNight(id).then(function (n) {
+      if (!open || open.id !== id) return;       /* they moved on */
+      if (n && n.beats && n.beats.length) { night = n; loadingText = false; render(); return; }
+      /* No night of a book — the older path, a story whose text is in
+         story_texts. Same gate, same silence when it is not allowed. */
+      return fetchText(id).then(function (t) {
+        loadingText = false;
+        if (open && open.id === id) { text = t; render(); }
+      });
     });
     return true;
   }
@@ -359,8 +357,8 @@
       if (auth()) {
         auth().ready(render);
         auth().onChange(function () {
-          if (open) { text = null; loadingText = true; render();
-            fetchText(open.id).then(function (t) { loadingText = false; text = t; render(); });
+          if (open) { var id = open.id; night = null; text = null; loadingText = true; render();
+            openStory(id, false);
           } else render();
         });
       }

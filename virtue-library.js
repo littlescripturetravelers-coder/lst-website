@@ -369,14 +369,15 @@
     return h.join("");
   }
 
-  /* Whether this story's night has been brought over from the app's book — see
-     data/book-*.js. Without it the shelf would only have a teaser to show. */
+  /* Whether this story can be read on the website — i.e. whether its book has
+     been brought over. The words themselves are in Supabase behind the
+     subscription; this only asks which books exist, from data/books-online.js,
+     so the invitation still shows to someone who has not signed in yet. */
   function hasNight(id) {
-    var books = [window.LST_BOOK_JUNE, window.LST_BOOK_JULY, window.LST_BOOK_AUGUST];
-    for (var i = 0; i < books.length; i++) {
-      var b = books[i];
-      if (!b) continue;
-      for (var j = 0; j < b.length; j++) if (b[j].id === id) return true;
+    var online = window.LST_BOOKS_ONLINE || [];
+    var all = (window.LST_LIBRARY && window.LST_LIBRARY.stories) || [];
+    for (var i = 0; i < all.length; i++) {
+      if (all[i].id === id) return online.indexOf(all[i].book) !== -1;
     }
     return false;
   }
