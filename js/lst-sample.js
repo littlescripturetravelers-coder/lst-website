@@ -29,6 +29,12 @@
     });
   }
 
+  /* A scripture reference, turned into a link if js/lst-refs.js is loaded and
+     left as plain escaped text if it is not. */
+  function sref(s) {
+    return (window.LSTRefs && s) ? window.LSTRefs.text(s) : esc(s);
+  }
+
   /* Text size, the same setting the members' pages keep. A grandparent
      reading this on a phone should be able to make it bigger here too. */
   var SIZES = [0.92, 1, 1.12, 1.28, 1.45];
@@ -53,7 +59,7 @@
       "</div>" +
       '<div class="rd-body">' +
         (book.reference
-          ? '<p class="mp-meta">' + esc(book.reference) +
+          ? '<p class="mp-meta">' + sref(book.reference) +
             (book.night ? " &middot; " + esc(book.night) : "") + "</p>"
           : "") +
         book.html +

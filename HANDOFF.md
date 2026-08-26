@@ -1037,3 +1037,85 @@ their 5 AM email is stopping. It carries none of the selling markers (`.nav-cta`
 `[onclick*="openTrialSignup"]`, `[data-selling="1"]`), so it is safe today — keep it that way.
 
 Take the banner down once the move is finished and no one is still waiting on an email.
+
+## 22. Scriptures and talks are links now (built 2026-08-26)
+
+### What Levi asked for
+> "All the scriptures listed throughout the morning lanterns need to have links to the scripture
+> chapters or verses. They also need links to the talks or sermons listed."
+
+### `js/lst-refs.js` — the one file that does it
+It runs **last**, on the finished HTML the reader has already built. That is the whole design:
+`js/lst-read.js` does not have to know a card contains a scripture, and a card Levi invents next
+month gets its references linked without anyone touching this file.
+
+Three rules it will not break, and they are in the file's own header:
+1. **It never touches text already inside an `<a>`.** Some Lanterns carry Levi's own links; his win.
+2. **It only ever wraps text in a link.** Not one character of what he wrote is changed, moved or
+   dropped. Run it twice and the output is identical — the second pass sees the first pass's links
+   and skips them. Both properties are asserted in the test below.
+3. **A reference it does not recognise is left as plain text.** A wrong link is worse than no link:
+   it sends a parent to the wrong verse, in front of their child, at bedtime.
+
+### What it understands
+Book names and the abbreviations Levi actually writes, across the Old Testament, New Testament,
+Book of Mormon, Doctrine and Covenants and Pearl of Great Price — with verses, ranges and
+semicolon lists:
+
+| He writes | It links to |
+|---|---|
+| `John 14:15` | nt/john/14, anchored at verse 15 |
+| `Alma 32:21-27` | bofm/alma/32, verses 21–27 |
+| `D&C 121:7–8` | dc-testament/dc/121 |
+| `Psalms 102–103; 110; 116–119` | **six separate links**, each on its own chapter |
+| `Joseph Smith—History 1:17` | pgp/js-h/1 (any dash matches any dash) |
+
+**Two traps that cost real debugging, so do not undo them:**
+- Names are matched **longest first**. Without it, `1 John 4:8` links to John.
+- A semicolon list **stops at the next book name**. `3 Nephi 11; 4 Nephi 1:15` was reading the "4"
+  as another chapter of 3 Nephi — a link that looked right and went to the wrong book.
+
+### The talks
+A conference talk **cannot be deep-linked from its title**: the Church's URL for it carries an id
+we do not have, and a guessed id produces a link that looks right and 404s. So:
+- the **talk title** links to a search of general conference, which finds it;
+- the **date**, when a month and year can be read out of it, links to that conference itself.
+
+Both are addresses we can be sure of. These are built in `js/lst-read.js` from the card's own
+`.conf-speaker` / `.conf-talk-title` / `.conf-date`, not guessed out of prose.
+
+### ⚠️ The links could not be opened from the build machine
+`churchofjesuschrist.org` is blocked by this environment's network policy, so **every URL here was
+written from the published Gospel Library scheme, not fetched and confirmed.** The scheme is
+long-standing and the shapes were checked against each other, but a single wrong book slug would
+produce one dead link.
+
+**`link-check.html`** exists for exactly that: one link for every book on a single page, plus a
+sample sentence showing the links in context. Nothing on the website links to it and it carries
+`noindex`. If Levi reports a book that lands on "page not found", the fix is one `slug` in the
+`BOOKS` table.
+
+### Where the links go, and how to change it
+One word, `WHERE`, at the top of `js/lst-refs.js`:
+- `"gospel-library"` (**current**) — everything to the Church's study site, which carries the KJV.
+- `"bible-neutral"` — Bible chapters open on Bible Gateway in the King James Version; only the
+  Book of Mormon, Doctrine and Covenants and Pearl of Great Price stay on the Church's site,
+  because they exist nowhere else.
+
+That switch exists because of `bible-bedtime-stories.html`. A family arriving through the Bible
+front door may not expect churchofjesuschrist.org on the other end of a link. It is Levi's call,
+not a developer's, and it is deliberately one word rather than a code change.
+
+### Where it is wired in
+`js/lst-read.js` (every article, both the four-depth Lantern and the older simple shape),
+`js/lst-tonight.js` (the night's reference line and the sample card),
+`js/lst-archive.js` (**the opened night only** — the list card is itself a click target, and a link
+inside it would fight the card for the tap), and `js/lst-sample.js`.
+`js/lst-refs.js` loads **before** those on `tonight.html`, `archive.html`, `story.html`,
+`lullaby.html` and `sample.html`. If it fails to load, every one of them falls back to plain text.
+
+### Style
+`.rd-sref` in `style.css`. Inside a sentence the link **inherits its colour** and shows a dotted
+underline, going gold on hover — a coloured link in every verse would speckle the page. A talk
+title and its date are their own line, so those are gold.
+

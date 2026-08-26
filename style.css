@@ -2932,3 +2932,30 @@ html.mo-shut, html.mo-shut body { overflow: hidden !important; }
 /* A subscriber's header keeps its button, but it goes somewhere useful
    instead of trying to sell them what they already have. */
 .lst-member-cta { white-space: nowrap; }
+
+/* ------------------------------------------------- SCRIPTURES AND TALKS
+   Every reference in a Morning Lantern is a link now (js/lst-refs.js). They
+   sit inside sentences, verses, headings and the meta line under a title, so
+   they cannot carry a colour of their own without speckling the page — they
+   inherit it, and show a dotted underline instead. On hover they go gold, the
+   way every other link on this site does. */
+.rd-sref {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+  /* the dotted rule sits tight under short references; give it air */
+  padding-bottom: 1px;
+  transition: color .18s, border-color .18s;
+}
+.rd-sref:hover,
+.rd-sref:focus-visible {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+  border-bottom-style: solid;
+}
+/* Inside a verse the words are already set apart; a dotted rule under every
+   reference in the quotation is noise. */
+.rd-verse .rd-sref { border-bottom-color: rgba(255,255,255,.3); }
+/* The talk title and its date are their own line, so they can be gold. */
+.rd-motto .rd-sref, .rd-when .rd-sref { color: var(--gold); border-bottom-color: rgba(245,197,24,.45); }
+.rd-motto .rd-sref:hover, .rd-when .rd-sref:hover { border-bottom-color: var(--gold); }

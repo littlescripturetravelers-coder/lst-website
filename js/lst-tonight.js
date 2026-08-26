@@ -49,6 +49,12 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+
+  /* A scripture reference, turned into a link if js/lst-refs.js is loaded and
+     left as plain escaped text if it is not. */
+  function sref(s) {
+    return (window.LSTRefs && s) ? window.LSTRefs.text(s) : esc(s);
+  }
   function auth() { return window.LSTAuth; }
 
   var MONTHS = ["January","February","March","April","May","June",
@@ -146,7 +152,7 @@
         '<p class="mp-meta">A sample night &middot; this is what arrives every evening</p>' +
         "<h3 style=\"font-family: var(--font-display);font-weight:600;color:#fff;font-size:1.35rem;margin:.2rem 0 .5rem;\">" +
           esc(s ? s.title : "One short story, every night") + "</h3>" +
-        (s && s.scripture ? '<p class="mp-meta">' + esc(s.scripture) + "</p>" : "") +
+        (s && s.scripture ? '<p class="mp-meta">' + sref(s.scripture) + "</p>" : "") +
         (chips ? '<div style="margin:.6rem 0 1rem;">' + chips + "</div>" : "") +
         '<div class="mp-story">' + (s && s.teaser ? "<p>" + esc(s.teaser) + "</p>"
           : "<p>A beginning, a worry, and a hopeful ending &mdash; in the smallest words that still carry the meaning.</p>") + "</div>" +
@@ -203,7 +209,7 @@
         (stamp.length ? " &middot; " + stamp.map(esc).join(" &middot; ") : "") + "</p>" +
       "<h2 style=\"font-family: var(--font-display);font-weight:600;color:#fff;font-size:clamp(1.5rem,4.4vw,2.15rem);margin:.15rem 0 .55rem;line-height:1.18;\">" +
         (n.title ? esc(n.title) : "Tonight&rsquo;s story") + "</h2>" +
-      (n.scripture ? '<p class="mp-meta">' + esc(n.scripture) + "</p>" : "") +
+      (n.scripture ? '<p class="mp-meta">' + sref(n.scripture) + "</p>" : "") +
       (n.traveler ? '<p style="margin:.2rem 0 .7rem;color:rgba(255,255,255,.6);font-size:.9rem;">Carried by ' +
         esc(n.traveler) + "</p>" : "") +
       (virtueChips(n.virtues) ? '<div style="margin:.5rem 0 1.4rem;">' + virtueChips(n.virtues) + "</div>" : "");

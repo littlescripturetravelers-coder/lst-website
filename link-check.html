@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex,nofollow">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <title>Link check &mdash; Little Scripture Travelers</title>
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background:#07112e; color:#fff; font-family: var(--font-body); }
+    .lc-wrap { max-width:60rem; margin:0 auto; padding:2.5rem 1.25rem 4rem; }
+    .lc-wrap h1 { font-family: var(--font-display); font-weight:600; font-size:clamp(1.7rem,4vw,2.4rem);
+      margin:0 0 .8rem; line-height:1.2; }
+    .lc-wrap p { color:rgba(255,255,255,.8); line-height:1.75; max-width:44rem; margin:0 0 1rem; }
+    .lc-note { border-left:3px solid #F5C518; padding:.9rem 1.1rem; background:rgba(245,197,24,.07);
+      border-radius:0 .6rem .6rem 0; margin:1.5rem 0 2rem; }
+    .lc-wrap h2 { font-family: var(--font-accent); font-size:.82rem; letter-spacing:.16em;
+      text-transform:uppercase; color:#F5C518; margin:2.2rem 0 .9rem; }
+    .lc-grid { display:grid; gap:.5rem; grid-template-columns:repeat(auto-fill,minmax(15rem,1fr)); margin:0; padding:0; list-style:none; }
+    .lc-grid a { display:block; padding:.55rem .75rem; border-radius:.5rem; text-decoration:none;
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+      color:rgba(255,255,255,.92); font-size:.95rem; }
+    .lc-grid a:hover { border-color:#F5C518; color:#F5C518; }
+    .lc-sample { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1);
+      border-radius:.8rem; padding:1.1rem 1.25rem; line-height:1.9; }
+  </style>
+</head>
+<body>
+  <div class="lc-wrap">
+    <h1>Every scripture link, on one page</h1>
+    <p>
+      The Morning Lantern turns each scripture reference into a link. This page lists one link
+      for every book, so they can all be checked at once. <strong>Nothing links to this page</strong>
+      &mdash; it is a workbench, not part of the website.
+    </p>
+    <div class="lc-note">
+      <p style="margin:0;">
+        <strong style="color:#F5C518;">What to do:</strong> open a handful from each group below,
+        especially any book you use often. Every one should land on that book&rsquo;s first chapter.
+        If one lands on a &ldquo;page not found&rdquo;, tell me which book it was and I will correct it.
+      </p>
+    </div>
+
+    <h2>&#10022; A sentence, as a reader sees it</h2>
+    <div class="lc-sample" id="lc-sample">
+      Naaman washed seven times in the Jordan (2 Kings 5), and Alma taught the same patience in
+      Alma 32:21-27. Compare Psalms 102&ndash;103; 110; 116&ndash;119. See also 3 Nephi 11;
+      4 Nephi 1:15, and D&amp;C 121:7&ndash;8, with Moses 1:39 and John 14:15.
+    </div>
+
+    <div id="lc-books"></div>
+  </div>
+
+  <script src="js/lst-refs.js"></script>
+  <script>
+    (function () {
+      var R = window.LSTRefs;
+      var sample = document.getElementById("lc-sample");
+      sample.innerHTML = R.link(sample.innerHTML);
+
+      var VOLS = [
+        ["ot", "Old Testament"], ["nt", "New Testament"], ["bofm", "Book of Mormon"],
+        ["dc-testament", "Doctrine and Covenants"], ["pgp", "Pearl of Great Price"]
+      ];
+      var out = "";
+      VOLS.forEach(function (v) {
+        var rows = R.books.filter(function (b) { return b.vol === v[0]; }).map(function (b) {
+          /* the name as it would be written, not the slug */
+          var name = b.names[0].replace(/(^|\s|-)([a-z])/g, function (_, a, c) { return a + c.toUpperCase(); });
+          return '<li><a href="' + R.chapterUrl(b, 1, "") + '" target="_blank" rel="noopener">' +
+            name + " 1</a></li>";
+        }).join("");
+        out += "<h2>&#10022; " + v[1] + "</h2><ul class=\"lc-grid\">" + rows + "</ul>";
+      });
+      document.getElementById("lc-books").innerHTML = out;
+    })();
+  </script>
+</body>
+</html>

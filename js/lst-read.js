@@ -327,9 +327,27 @@
       var date = card.querySelector(".conf-date");
       var ttl = card.querySelector(".conf-talk-title");
       [speaker, date, ttl].forEach(function (e) { if (e) seen.push(e); });
-      out += '<p class="rd-who">' + esc(tidy(speaker.textContent)) + "</p>" +
-        (ttl ? '<p class="rd-motto">' + esc(tidy(ttl.textContent)) + "</p>" : "") +
-        (date ? '<p class="rd-when">' + esc(tidy(date.textContent)) + "</p>" : "");
+      /* The talk is linked from the pieces the card already gives us, rather
+         than guessed at out of prose. Its title goes to a search of general
+         conference, which finds it; the date goes to that conference itself.
+         The Church's own URL for a talk carries an id we do not have, and a
+         guessed id would 404 — see the note in js/lst-refs.js. */
+      var who = tidy(speaker.textContent);
+      var tt = ttl ? tidy(ttl.textContent) : "";
+      var dt = date ? tidy(date.textContent) : "";
+      var R = window.LSTRefs;
+      var conf = R && dt ? R.conferenceUrl(dt) : "";
+      out += '<p class="rd-who">' + esc(who) + "</p>" +
+        (tt ? '<p class="rd-motto">' + (R
+              ? '<a class="rd-sref" href="' + esc(R.talkSearchUrl(tt, who)) +
+                '" target="_blank" rel="noopener" title="Find this talk on the Church\u2019s site">' +
+                esc(tt) + "</a>"
+              : esc(tt)) + "</p>" : "") +
+        (dt ? '<p class="rd-when">' + (conf
+              ? '<a class="rd-sref" href="' + esc(conf) +
+                '" target="_blank" rel="noopener" title="Open this general conference">' +
+                esc(dt) + "</a>"
+              : esc(dt)) + "</p>" : "");
       var talk = card.querySelector(".conf-talk");
       if (talk) seen.push(talk);
     }
@@ -528,6 +546,14 @@
      Returns { ok, editions:[{label,note,html}], html } — `editions` present
      only when the paste really does carry more than one depth, so the page
      shows a depth chooser exactly when there is a choice to make. */
+  /* Scripture references become links here, once, on the finished article.
+     Doing it last means every card — including one whose class this file has
+     never seen — gets linked without knowing anything about it. If
+     js/lst-refs.js has not loaded, the words stay exactly as they were. */
+  function linked(h) {
+    return (window.LSTRefs && h) ? window.LSTRefs.link(h) : h;
+  }
+
   function story(html, storyText) {
     var told = { ok: false, editions: [], html: "" };
     if (!html && !storyText) return told;
@@ -544,6 +570,7 @@
           told.editions.push({ label: d.label || "This night", note: d.note || "", html: body });
         });
         if (told.editions.length) {
+          told.editions.forEach(function (e) { e.html = linked(e.html); });
           told.ok = true;
           told.html = told.editions[0].html;
           return told;
@@ -557,7 +584,7 @@
         body = card("Tonight&rsquo;s story", paras(storyText), "rd-telling");
       }
       told.ok = !!body;
-      told.html = body;
+      told.html = linked(body);
       return told;
     } catch (e) { return told; }
   }

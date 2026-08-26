@@ -22,6 +22,12 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+
+  /* A scripture reference, turned into a link if js/lst-refs.js is loaded and
+     left as plain escaped text if it is not. */
+  function sref(s) {
+    return (window.LSTRefs && s) ? window.LSTRefs.text(s) : esc(s);
+  }
   function auth() { return window.LSTAuth; }
 
   var MONTHS = ["January","February","March","April","May","June",
@@ -75,7 +81,7 @@
         '<button type="button" class="mp-icon" id="a-close" aria-label="Back">&#10005;</button>' +
       "</div>" +
       '<p class="mp-meta">' + esc(prettyDate(r.date)) +
-        (r.scripture ? " &middot; " + esc(r.scripture) : "") + "</p>" +
+        (r.scripture ? " &middot; " + sref(r.scripture) : "") + "</p>" +
       (virtueChips(r) ? '<div style="margin:.6rem 0 1.2rem;">' + virtueChips(r) + "</div>" : "");
 
     if (opening) {
