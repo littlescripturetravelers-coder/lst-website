@@ -84,9 +84,19 @@
       .catch(function () { return null; });
   }
 
+  /* `story_texts.story` is jsonb — an ARRAY of paragraphs — so PostgREST hands
+     back a real array. The other three columns are plain text. Take either:
+     String(["a","b"]) is "a,b", which would run a whole story together into one
+     comma-spliced paragraph the first time real text was loaded. */
   function paras(t) {
-    return String(t || "").split(/\n\s*\n/).filter(function (p) { return p.trim(); })
-      .map(function (p) { return "<p>" + esc(p.trim()).replace(/\n/g, "<br>") + "</p>"; }).join("");
+    var list = Array.isArray(t)
+      ? t
+      : String(t == null ? "" : t).split(/\n\s*\n/);
+    return list
+      .map(function (p) { return String(p == null ? "" : p).trim(); })
+      .filter(Boolean)
+      .map(function (p) { return "<p>" + esc(p).replace(/\n/g, "<br>") + "</p>"; })
+      .join("");
   }
 
   /* ----------------------------------------------------------------- views */

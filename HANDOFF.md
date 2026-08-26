@@ -1170,3 +1170,43 @@ were not checked** — only that the links are well formed and carry the right p
 website says **$6.99** and **$49** with a **7-day trial**. If Payhip says anything else, the
 website is lying to a family at the moment they reach for a card.
 
+## 24. The library stories have no words yet — anywhere (found 2026-08-26)
+
+### What Levi asked for
+> "I need all the stories under resources in the app and then under bedtimes stories and then
+> under August book to be placed into my website."
+
+### There was nothing to copy
+The app does not hold those stories either. `openStory()` in `lst-app/www/index.html` shows the
+title, scripture, virtue, teaching note and teaser — then a card reading *"The full illustrated
+story lives in <book>. We're bringing the whole library into the app so you'll read every story
+right here — coming soon."*
+
+`lst-app/www/data/virtue-library.js` is the **same metadata-only catalog** the website has. The
+words for all 91 stories have never existed anywhere but Levi's book manuscripts. Both sides show
+a teaser for the same reason.
+
+**The August catalog half was already complete** before he asked: book 8, *I Will Trust and Sing*,
+35 stories across 5 weeks, every one carrying virtues, stages, a teaching note and a teaser, all
+ids unique. It shows on the shelf with its cover. Only `story_texts` is empty.
+
+### ⚠️ A bug that would have appeared the moment the text was loaded
+`story_texts.story` is **jsonb — an array of paragraphs**, so PostgREST returns a real JavaScript
+array. `paras()` in `js/lst-bedtime.js` did `String(t).split(/\n\s*\n/)`, and `String(["a","b"])`
+is `"a,b"` — every story would have rendered as **one comma-spliced paragraph**, and it would have
+looked like Levi's writing was at fault rather than the code. It now takes an array or a string.
+Verified by serving a jsonb array through the real page: three paragraphs, all four sections.
+
+**The other three columns — `fork`, `remember_this`, `prompt` — are plain text.** Only `story` is
+an array. Do not "tidy" that inconsistency without changing the table.
+
+### What actually has to happen
+Levi sends the August book. `docs/HOW-TO-SEND-ME-YOUR-BOOKS.md` already describes the job. For a
+book whose cards exist, only half 2 is left: one SQL file built from
+`sql/TEMPLATE-add-story-text.sql`, 35 blocks, pasted into the Supabase SQL editor once. The ids are
+already fixed by the catalog — `b8-w1-n1` through `b8-w5-n7` — so they must match exactly.
+
+`docs/FOR-THE-APP-CHAT-library-story-text.md` carries the app half: once `story_texts` holds the
+words, the app can replace its "coming soon" card by reading the same table, with the same warning
+about the jsonb array, and a note that its demo checkout still shows the old $10.99 / $98.91.
+
