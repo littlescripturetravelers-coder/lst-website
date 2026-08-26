@@ -28,17 +28,30 @@ worry about it.
 
 ---
 
-## Named restore points
+## Restore points
 
-These are moments deliberately marked as "the site was fine here". Claude can
-return to any of them exactly.
+Every one of these is a moment the site actually existed in, and Claude can
+put it back exactly. Newest first. The short code beside each one is how the
+change is stored; you never need to type it, but it is what makes this
+precise rather than approximate.
 
-| Name | What the site was like |
-|---|---|
-| `before-lullaby-player` | Before the lullaby music, the repeat and sleep timer, and the second landing page. Prices were already $6.99/$49; the sample night was already live. |
+| Code | Date | What changed |
+|---|---|---|
+| `635af0d` | 26 Aug | The lullaby's music, repeat and the sleep timer |
+| `5e12396` | 26 Aug | The free sample night, and the logo made 98% smaller |
+| `2887f61` | 25 Aug | "Where we're coming from" on Our Story |
+| `1700115` | 25 Aug | **Prices to $6.99 / $49, yearly made the default** |
+| `1ad9b4a` | 25 Aug | The header cut from eight doors to six |
+| `bb07fee` | 25 Aug | The LST Library, and your own delete/retag controls |
+| `4145a27` | 25 Aug | Bedtime Stories, and the two renames |
+| `420b008` | 25 Aug | The picture book and lullaby taken off the Lantern page |
 
-More get added as we go. Ask for one any time — *"mark this as a good point"* —
-and it becomes a place you can always come back to.
+**To go back to how things were before one of those**, name the row above it.
+So *"put the prices back to how they were"* means going back to `471f15c`,
+the change immediately before the price change.
+
+Ask for a marker any time — *"mark this as a good point"* — and Claude will
+note it here with a name you chose.
 
 ---
 
@@ -66,11 +79,16 @@ go out separately.
 
 ## For whoever is reading this in a future chat
 
-The restore points are git tags in this repository. `git tag -l` lists them.
+The codes above are commit hashes on `origin/main`. **Tag pushes are blocked
+by this environment's git proxy** (`send-pack: unexpected disconnect`), which
+is why restore points are recorded here as hashes rather than as git tags —
+a local-only tag would vanish when the container is reclaimed. Keep this
+table up to date; it is the only durable record.
+
 To return the working tree to one without losing what came after:
 
 ```
-git checkout <tag> -- .        # bring those files back as a new change
+git checkout <hash> -- .       # bring those files back as a new change
 ```
 
 Prefer that over `git reset --hard`, which throws away history Levi may still
