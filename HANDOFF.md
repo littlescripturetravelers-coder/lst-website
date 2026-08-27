@@ -1456,9 +1456,24 @@ note and teaser for each. **The catalogue is now 119 stories.**
 usually an image rather than a lesson. Every tag was checked against the real vocabularies: 0 invalid
 virtues, feelings, stages, travelers.
 
-### ⚠️ September has no Amazon link, so it shows no Buy button
-`books[9]` carries `{ book, month, title }` and no `amazon`. **Do not invent one.** When Levi sends
-the September paperback URL it is one field, and the button appears by itself.
+### September's paperback is not published yet — and the page says so
+Levi (2026-08-26): *"September hasn't been published yet. That is why I can't provide that link."*
+
+`books[9]` carries `"paperback": "coming"`. `bookBlock()` in `js/lst-story-foot.js` has three states:
+
+| `books[n]` says | what a parent sees |
+|---|---|
+| a real `amazon` / `paper` link | **Buy the paperback on Amazon** |
+| `"paperback": "coming"` | *"The book of this one is coming"* — it is written, not printed yet, and every night is here to read meanwhile |
+| nothing at all | nothing drawn |
+
+The middle state exists because silence is worse than waiting: a parent who has just loved a story
+and finds nothing about a book concludes there isn't one.
+
+**When September is published: replace `"coming"` with the real URL. One field, and the Buy button
+appears by itself.** Never put a guessed Amazon URL there — it sends a family to somebody else's
+book. `books.html` is hand-written and does not read this array, so it promises nothing about
+September either.
 
 ### The foot of a story — `js/lst-story-foot.js`
 > "link those stories to the virtues and family memories that are connected to them ... it should

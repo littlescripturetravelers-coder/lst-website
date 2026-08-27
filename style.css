@@ -3096,3 +3096,7 @@ html.mo-shut, html.mo-shut body { overflow: hidden !important; }
   border-radius: 999px; font-size: .96rem;
 }
 .sf-paper:hover { background: #ffd84a; }
+/* A book that is written but not printed yet says so, quietly — no button,
+   because there is nothing to buy. */
+.sf-soon { background: rgba(91,211,220,.07); border-color: rgba(91,211,220,.24); }
+.sf-soon .sf-h { color: #5BD3DC; }

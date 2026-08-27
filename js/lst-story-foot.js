@@ -94,13 +94,37 @@
   }
 
   /* ---------------------------------------------------------------- the book */
+  /* Three states, and only one of them is a button.
+
+       a real link   the paperback is out — Buy it
+       "coming"      the book is written but not published yet. Say so: a parent
+                     who has just loved a story and finds nothing about a book
+                     concludes there isn't one, which is worse than waiting.
+       nothing       we know of no book at all — draw nothing.
+
+     A guessed Amazon URL sends a family to somebody else's book. Never. */
   function bookBlock(s) {
     var b = bookOf(s.book);
-    var link = b && (b.paper || b.amazon);
-    if (!link) return "";
+    if (!b) return "";
+    var link = b.paper || b.amazon ||
+               (b.paperback && b.paperback !== "coming" ? b.paperback : "");
+    var soon = !link && (b.paperback === "coming");
+    if (!link && !soon) return "";
+
+    var name = esc(s.bookTitle || b.title || "the book");
+    if (soon) {
+      return '<section class="sf-block sf-buy sf-soon">' +
+        '<h3 class="sf-h">The book of this one is coming</h3>' +
+        "<p class=\"sf-sub\">This story belongs to <em>" + name + "</em>, " +
+        (b.month ? esc(b.month) + "&rsquo;s book" : "the month&rsquo;s book") +
+        ", which is written but not printed yet. Every night of it is already " +
+        "here to read while you wait.</p>" +
+        '<a class="sf-go" href="bedtime-stories.html">Read the rest of the month &rarr;</a>' +
+        "</section>";
+    }
     return '<section class="sf-block sf-buy">' +
       '<h3 class="sf-h">Hold it in your hands</h3>' +
-      "<p class=\"sf-sub\">This story is printed in <em>" + esc(s.bookTitle || b.title || "the book") +
+      "<p class=\"sf-sub\">This story is printed in <em>" + name +
       "</em> &mdash; the whole month, illustrated, on paper.</p>" +
       '<a class="sf-paper" href="' + esc(link) + '" target="_blank" rel="noopener">' +
       "Buy the paperback on Amazon &rarr;</a></section>";
