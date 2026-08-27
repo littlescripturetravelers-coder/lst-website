@@ -13,4 +13,4 @@
    tools/book-to-sql.py, run the new sql/book-<month>.sql in Supabase, and add
    its number here.
 */
-window.LST_BOOKS_ONLINE = [6, 7, 8];
+window.LST_BOOKS_ONLINE = [6, 7, 8, 9];

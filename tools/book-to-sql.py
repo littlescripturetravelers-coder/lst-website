@@ -76,7 +76,7 @@ create policy "read book night"
 """
 
 def main():
-    books = [("june", 6), ("july", 7), ("august", 8)]
+    books = [("june", 6), ("july", 7), ("august", 8), ("september", 9)]
     made = []
     for month, num in books:
         nights = load(month)
@@ -124,8 +124,27 @@ def main():
         p = os.path.join(ROOT, "sql", "book-%s.sql" % month)
         io.open(p, "w", encoding="utf-8").write(body)
         made.append((p, len(nights), os.path.getsize(p)))
+    # ---- and one file with the lot, so there is a single thing to paste
+    parts, total = [], 0
+    for i, (p, n, sz) in enumerate(made):
+        txt = io.open(p, encoding="utf-8").read()
+        if i:                      # only the first needs the table and the policy
+            txt = txt[txt.index("-- ---------------------------------------------------------------------\n--  "):]
+        # every file ends with the same two blocks; keep them once, at the end
+        for marker in ["-- ---------------------------------------------------------------------\n-- WHICH STORIES ARE FREE",
+                       "-- ---------------------------------------------------------------------\n-- DID IT WORK?"]:
+            if marker in txt:
+                txt = txt[:txt.index(marker)]
+        parts.append(txt.rstrip() + "\n")
+        total += n
+    tail = io.open(made[-1][0], encoding="utf-8").read()
+    tail = tail[tail.index("-- ---------------------------------------------------------------------\n-- WHICH STORIES ARE FREE"):]
+    allp = os.path.join(ROOT, "sql", "ALL-THE-BOOKS.sql")
+    io.open(allp, "w", encoding="utf-8").write("\n".join(parts) + "\n" + tail)
+    made.append((allp, total, os.path.getsize(allp)))
+
     for p, n, sz in made:
-        print("%-28s %2d nights  %6.0f KB" % (os.path.relpath(p, ROOT), n, sz / 1024.0))
+        print("%-30s %3d nights  %6.0f KB" % (os.path.relpath(p, ROOT), n, sz / 1024.0))
 
 if __name__ == "__main__":
     main()

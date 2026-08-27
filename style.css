@@ -3043,3 +3043,56 @@ html.mo-shut, html.mo-shut body { overflow: hidden !important; }
   .lk { grid-template-columns: 1fr; padding: 1.15rem; gap: 1.2rem; }
   .lk-cover { max-width: 13rem; margin: 0 auto; }
 }
+
+/* ------------------------------------------------------- THE FOOT OF A STORY
+   Where a night joins up with the rest: what it teaches, the family's own
+   memories that carry the same virtues, and the book it is printed in.
+   See js/lst-story-foot.js. */
+.sf { margin-top: 2.4rem; display: grid; gap: 1.1rem; }
+.sf-block {
+  background: rgba(255,255,255,.045);
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: .95rem; padding: 1.25rem 1.35rem;
+}
+.sf-h {
+  font-family: var(--font-display); font-weight: 600; color: #F5C518;
+  font-size: 1.08rem; line-height: 1.3; margin: 0 0 .3rem;
+}
+.sf-sub { color: rgba(255,255,255,.7); font-size: .95rem; line-height: 1.7; margin: 0 0 1rem; }
+.sf-sub em { color: rgba(255,255,255,.88); font-style: italic; }
+
+.sf-chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.sf-chip {
+  display: inline-block; text-decoration: none;
+  font-family: var(--font-body); font-size: .88rem; font-weight: 800;
+  color: #5BD3DC; background: rgba(91,211,220,.1);
+  border: 1px solid rgba(91,211,220,.35); border-radius: 999px;
+  padding: .34rem .8rem;
+}
+.sf-chip:hover { background: rgba(91,211,220,.2); color: #fff; }
+
+.sf-mem { list-style: none; margin: 0 0 1rem; padding: 0; }
+.sf-mem li + li { margin-top: .5rem; }
+.sf-mem a {
+  display: block; text-decoration: none; border-radius: .6rem;
+  padding: .65rem .85rem; background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+}
+.sf-mem a:hover { border-color: rgba(245,197,24,.45); }
+.sf-mem b { display: block; color: #fff; font-size: .98rem; line-height: 1.35; }
+.sf-when { display: block; color: rgba(255,255,255,.5); font-size: .82rem; margin-top: .15rem; }
+.sf-shared { display: block; color: #5BD3DC; font-size: .82rem; margin-top: .2rem; }
+
+.sf-go {
+  display: inline-block; color: #F5C518; font-weight: 800; text-decoration: none;
+  border-bottom: 1px solid rgba(245,197,24,.45); font-size: .93rem;
+}
+.sf-go:hover { border-bottom-color: #F5C518; }
+
+.sf-buy { background: rgba(245,197,24,.07); border-color: rgba(245,197,24,.26); }
+.sf-paper {
+  display: inline-block; background: var(--gold); color: #07112e;
+  font-weight: 900; text-decoration: none; padding: .7rem 1.4rem;
+  border-radius: 999px; font-size: .96rem;
+}
+.sf-paper:hover { background: #ffd84a; }

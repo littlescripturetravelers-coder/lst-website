@@ -1441,3 +1441,47 @@ never appears in the HTML for a visitor or for someone signed in but not paying.
 A subscriber whose story genuinely has no words still sees the plain *"The words of this one
 haven't been added yet"* — they are not sold something they have already bought.
 
+## 30. September, and a story joined up to everything else (2026-08-26)
+
+### September — book 9, *Wonderful Is His Way*, 28 nights
+Extracted from the app the same way (`b73149f`). Psalms, Proverbs, Ecclesiastes, Isaiah.
+
+**The catalogue did not have September at all** — neither the website's nor the app's. So the 28
+entries in `data/virtue-library.js` are new: virtues, primary virtue, feeling, stages, teaching
+note and teaser for each. **The catalogue is now 119 stories.**
+
+**The virtue tags are mine, and Levi is meant to correct them.** He asked for that
+("I trust you. I need to be able to edit those in the future"). Each was chosen from the night's own
+**Remember This** — the line the book itself says the night is for — rather than the title, which is
+usually an image rather than a lesson. Every tag was checked against the real vocabularies: 0 invalid
+virtues, feelings, stages, travelers.
+
+### ⚠️ September has no Amazon link, so it shows no Buy button
+`books[9]` carries `{ book, month, title }` and no `amazon`. **Do not invent one.** When Levi sends
+the September paperback URL it is one field, and the button appears by itself.
+
+### The foot of a story — `js/lst-story-foot.js`
+> "link those stories to the virtues and family memories that are connected to them ... it should
+> give you the option to look up the story and connect to them and then it should also have a link
+> to the paperback book to buy it."
+
+Under every story, three blocks:
+
+| | |
+|---|---|
+| **What this story teaches** | each virtue is a link to `virtue-library.html?virtue=<id>`, which now opens straight onto that virtue — the deep link is new, in `virtue-library.js` |
+| **Your family's own stories** | the family's memories that share a virtue with this story, from `family_stories`. Empty is not a blank: it invites them to write one |
+| **Hold it in your hands** | the paperback, **only where `books[].amazon` is real** |
+
+The memories are the family's own — RLS on `family_stories` ties them to the account, so one family
+never sees another's, and signed out the block is simply not drawn.
+
+### One file to paste now, not four
+`sql/ALL-THE-BOOKS.sql` — 119 nights, 366 KB, all four books, the table and the policy once.
+Run against real Postgres twice: 6→28, 7→28, 8→35, 9→28, 3 free, RLS on, policy present.
+The per-book files are still there if one book ever needs redoing alone.
+
+### ⚠️ Subscribers still see teasers until that file is run
+Levi reported it and it is exactly this: `book_nights` is empty in his project. Nothing on the
+website can fix it — the words only exist in that file and in the app.
+

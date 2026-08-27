@@ -257,10 +257,9 @@
           (s.teachingNote
             ? '<div class="rd-card"><h3 class="rd-label">When to reach for this one</h3><p>' +
               esc(s.teachingNote) + "</p></div>" : "") +
+          '<div id="sf-host"></div>' +
           '<p class="rd-aside"><a class="bs-illus" href="story.html?id=' +
             encodeURIComponent(s.id) + '">&#10022; Open this story on its own page</a></p>' +
-          '<p class="rd-aside">Look this story up by what it teaches in ' +
-            '<a href="virtue-library.html">the Virtue Library</a>.</p>' +
         "</div>" +
       "</article>";
     }
@@ -316,6 +315,7 @@
 
     if (open) {
       root.innerHTML = storyView(open);
+      if (window.LSTStoryFoot) window.LSTStoryFoot.mount(document.getElementById("sf-host"), open);
       var c = document.getElementById("bs-close");
       if (c) c.addEventListener("click", function () {
         open = null; text = null; night = null; render();

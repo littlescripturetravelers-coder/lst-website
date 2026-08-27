@@ -613,12 +613,38 @@
   /* =====================================================================
      WIRING
      ===================================================================== */
+  /* virtue-library.html?virtue=courage opens straight onto that virtue. It is
+     how a story links back to what it teaches — see js/lst-story-foot.js. The
+     same shape works for the other four doors. */
+  function asked() {
+    var q = String(window.location.search || "");
+    var kinds = ["virtue", "situation", "feeling", "traveler", "scripture"];
+    for (var i = 0; i < kinds.length; i++) {
+      var m = q.match(new RegExp("[?&]" + kinds[i] + "=([^&]+)"));
+      if (m) return { kind: kinds[i], id: decodeURIComponent(m[1]) };
+    }
+    return null;
+  }
+
   function init() {
     renderGrowth();
     renderStages();
     renderStageFilter();
     renderBrowse();
     initGate();
+
+    var want = asked();
+    if (want) {
+      var tab = document.querySelector('.vl-axis[data-axis="' + want.kind + '"]');
+      if (tab) {
+        document.querySelectorAll(".vl-axis").forEach(function (x) {
+          x.setAttribute("aria-selected", x === tab ? "true" : "false");
+        });
+        state.axis = want.kind;
+        renderBrowse();
+      }
+      renderDetail(want.kind, want.id);
+    }
 
     document.querySelectorAll(".vl-axis").forEach(function (b) {
       b.addEventListener("click", function () {

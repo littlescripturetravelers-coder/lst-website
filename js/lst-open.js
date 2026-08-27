@@ -276,9 +276,9 @@
         (c.teachingNote
           ? '<div class="rd-card"><h3 class="rd-label">When to reach for this one</h3><p>' +
             esc(c.teachingNote) + "</p></div>" : "") +
+        '<div id="sf-host"></div>' +
         '<p class="rd-aside">Back to the shelf in ' +
-          '<a href="bedtime-stories.html">Bedtime Stories</a>, or look this one up by what it ' +
-          'teaches in <a href="virtue-library.html">the Virtue Library</a>.</p>' +
+          '<a href="bedtime-stories.html">Bedtime Stories</a>.</p>' +
       "</div></div>";
   }
 
@@ -317,6 +317,11 @@
         return;
       }
       root.innerHTML = shelfNightView(shelfNight);
+      /* the virtues, the family's own memories, and the book it is printed in */
+      if (window.LSTStoryFoot) {
+        window.LSTStoryFoot.mount(document.getElementById("sf-host"),
+                                  catalogEntry(shelfNight.id) || {});
+      }
       /* The page's own hero says "Tonight's Story", which this is not. A story
          opened by name should be named, in the tab and at the top. */
       dressForShelf(shelfNight);
