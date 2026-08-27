@@ -37,6 +37,7 @@ precise rather than approximate.
 
 | Code | Date | What changed |
 |---|---|---|
+| `2a29ddc` | 26 Aug | **September added (119 stories)**, and every story linked to its virtues, your family's memories and the book |
 | `b9d7fb5` | 26 Aug | The locked story became a page built to win subscribers |
 | `28a48eb` | 26 Aug | **The 91 stories moved behind Postgres — a real lock** (run the three SQL files) |
 | `f369f35` | 26 Aug | Every story on a page of its own &mdash; **and the stories stopped being truly locked** |
