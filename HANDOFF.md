@@ -1500,3 +1500,63 @@ The per-book files are still there if one book ever needs redoing alone.
 Levi reported it and it is exactly this: `book_nights` is empty in his project. Nothing on the
 website can fix it — the words only exist in that file and in the app.
 
+## 31. The Morning Lantern in five editions (2026-08-28)
+
+> "I am now including different faiths in the morning lantern ... when people sign up or subscribe
+> ... enter their faith and then they receive the morning lantern for that faith."
+
+From Levi's **Faith Pack Guide**: `lds`, `catholic`, `evangelical`, `baptist`, `methodist`.
+`data/faiths.js` holds them. **Adding is free; renaming an id orphans every family and every night
+already carrying it.**
+
+### ⚠️ The app does not have faith yet — I checked, on current master
+There is no `faith` column and no per-faith publishing in `lst-app`. So the website was built to
+work **before** the app catches up, not to wait for it:
+
+| what the database says | what a family gets |
+|---|---|
+| their edition exists | their edition |
+| their edition is not written for that night | the `lds` one — a real Lantern |
+| they never said, or preferred not to say | the `lds` one |
+| **there is no `faith` column at all** | the `lds` one, by asking again without it |
+
+That last row is why this shipped today. All five were tested against a stubbed database.
+
+**A family must never be shown an empty page because their edition is late.** Five editions will
+not always land together. Keep the fallbacks.
+
+### `sql/2026-08-28-faith-editions.sql`
+Adds `profiles.faith` (null allowed) and `daily_content.faith` (`not null default 'lds'`, so every
+night that already existed stays what it was).
+
+**⚠️ It also drops the `unique` on `publish_date` alone and makes it `(publish_date, faith)`.**
+Without that, publishing the Catholic edition for a date would replace the Latter-day Saint one.
+**The app upserts on `publish_date` and must move to the pair** — that, and an edition picker on
+the admin screen, are in `docs/FOR-THE-APP-CHAT-faith-editions.md`. Until then the app keeps
+publishing `lds` and nothing breaks.
+
+Run against real Postgres, twice, with a pre-existing night: it kept `lds`, five editions then
+shared one date, and a duplicate `(date, faith)` was still refused.
+
+### Where the family is asked
+The signup popup, between the password and the checkout note. **"Prefer not to say" is a real
+option** and means the `lds` edition. Saved to `profiles.faith` after the account exists, and a
+failure there never blocks checkout — a family who paid and lost the answer can change it on My
+Account; a family who could not pay has nothing.
+
+Changeable any time on **My Account**, which reads the database before offering the choice so a
+family is never shown the wrong answer as if it were theirs.
+
+### ⚠️ What faith is for, and only for
+Choosing which Lantern to send. **Not pricing, not a mailing list, not who may read what** —
+`lst_is_subscriber()` still decides that and was not touched. The signup screen says so. If it is
+ever wanted for anything else: ask Levi, and tell families on the screen where they answer.
+
+### ⚠️ A near miss worth remembering
+Writing this section, a `cd /home/user/lst-app` earlier in the same shell command left the working
+directory in the **app** repo, and the `git add -A && git commit` that followed landed there — 53
+lines appended to the app's HANDOFF.md. It was never pushed (the app's branch is `master`, so the
+push to `main` failed) and was reset away; `lst-app` is byte-identical to its origin again.
+**Never chain a `cd` into another repo with a commit in the same command.** This chat is website
+only.
+

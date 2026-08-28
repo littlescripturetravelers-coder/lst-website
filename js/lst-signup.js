@@ -54,6 +54,33 @@
   function el(id) { return document.getElementById(id); }
   var IN = "width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;font-family: var(--font-body);";
 
+  /* WHICH EDITION OF THE LANTERN THIS FAMILY GETS.
+
+     The Lantern now comes in five voices — see data/faiths.js. Asking here is
+     the only chance we get, because it changes what arrives the very next
+     morning.
+
+     ⚠️ Nobody is made to answer. "Prefer not to say" is a real option and it
+     is not a trick: it means the Latter-day Saint edition, the one that has
+     always existed. The answer is used for one thing — which Lantern to send.
+     Never for pricing, never for a mailing list, never for who may read what.
+     If it is ever wanted for anything else, ask Levi first, and tell the
+     family on this screen before they answer. */
+  function faiths() { return window.LST_FAITHS || []; }
+
+  function faithField() {
+    var list = faiths();
+    if (!list.length) return "";                 /* data/faiths.js not loaded */
+    return '<label for="ts-faith" style="display:block;font-size:0.86rem;color:rgba(255,255,255,0.8);margin:0.35rem 0 0.3rem;">' +
+      'Which tradition is your family? <span style="color:rgba(255,255,255,0.5);">We write the Lantern in your own voice.</span></label>' +
+      '<select id="ts-faith" style="' + IN + 'appearance:auto;">' +
+        list.map(function (f) {
+          return '<option value="' + f.id + '">' + f.name + '</option>';
+        }).join("") +
+        '<option value="">Prefer not to say</option>' +
+      "</select>";
+  }
+
   function injectModal() {
     if (el("trial-modal")) return;
     var st = document.createElement("style");
@@ -76,6 +103,7 @@
         '<input id="ts-name" placeholder="First name" autocomplete="given-name" style="' + IN + '">' +
         '<input id="ts-email" type="email" placeholder="Email" autocomplete="email" style="' + IN + '">' +
         '<input id="ts-pw" type="password" placeholder="Create a password (6+ characters)" autocomplete="new-password" style="' + IN + '">' +
+        faithField() +
         '<p style="font-size:0.8rem;color:rgba(255,255,255,0.62);line-height:1.5;margin:0.2rem 0 0.6rem;">Next, add your card on our secure checkout (Payhip). <b style="color:#fff;">You won\'t be charged for 7 days</b>, and you can cancel anytime. Please use this same email at checkout so your subscription connects to your account.</p>' +
         '<div id="ts-err" style="color:#e0607a;font-size:0.85rem;min-height:18px;margin-bottom:0.4rem;"></div>' +
         '<button id="ts-submit" onclick="submitTrialSignup()" style="width:100%;cursor:pointer;background:#f4c842;color:#07112e;border:none;font-family:\'Nunito\',sans-serif;font-weight:900;font-size:1rem;padding:0.8rem;border-radius:999px;">Continue to secure checkout &rarr;</button>' +
@@ -131,7 +159,20 @@
       err.textContent = "Something went wrong. Please try again.";
       return;
     }
+    /* Which Lantern this family gets. Saved after the account exists, and a
+       failure here never blocks checkout — a family who paid and lost their
+       answer can change it on My Account, whereas a family who could not pay
+       has nothing at all. */
+    var faithEl = el("ts-faith");
+    var faith = faithEl ? faithEl.value : "";
     try { localStorage.setItem("lst_signup_email", email); } catch (e) {}
+    try { if (faith) localStorage.setItem("lst_signup_faith", faith); } catch (e) {}
+    if (faith) {
+      try {
+        var uid = res && res.data && res.data.user && res.data.user.id;
+        if (uid) await sb.from("profiles").upsert({ id: uid, faith: faith });
+      } catch (e) {}
+    }
     window.location.href = withEmail(PAYHIP[plan], email);
   };
 

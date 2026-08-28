@@ -309,31 +309,72 @@
        time (book_html, song_html, song_audio_url). A star never goes stale. */
     tonight: function () {
       if (!ready()) return Promise.resolve(null);
-      return sb().from("daily_content").select("*")
-        .not("published_at", "is", null)
-        .lte("publish_date", today())
-        .order("publish_date", { ascending: false })
-        .limit(1)
-        .then(function (res) {
-          if (res.error) throw new Error(res.error.message);
+      var tries = editionOrder();
+      function ask(i) {
+        if (i >= tries.length) return Promise.resolve(null);
+        var q = sb().from("daily_content").select("*")
+          .not("published_at", "is", null)
+          .lte("publish_date", today())
+          .eq("faith", tries[i])
+          .order("publish_date", { ascending: false })
+          .limit(1);
+        return q.then(function (res) {
+          /* A database that has not had the faith migration yet answers with
+             an error about the column. Ask again without it rather than
+             showing a family nothing. */
+          if (res.error) return i === 0 ? plainTonight() : null;
           var row = (res.data || [])[0];
-          return row ? archive.fromFullRow(row) : null;
+          if (row) return archive.fromFullRow(row);
+          return ask(i + 1);
         });
+      }
+      function plainTonight() {
+        return sb().from("daily_content").select("*")
+          .not("published_at", "is", null)
+          .lte("publish_date", today())
+          .order("publish_date", { ascending: false })
+          .limit(1)
+          .then(function (res) {
+            if (res.error) throw new Error(res.error.message);
+            var row = (res.data || [])[0];
+            return row ? archive.fromFullRow(row) : null;
+          });
+      }
+      return ask(0);
     },
 
     /* One night in full — the two big HTML columns included. Fetched only
        when somebody actually opens that night. */
     full: function (date) {
       if (!ready() || !date) return Promise.resolve(null);
-      return sb().from("daily_content").select("*")
-        .eq("publish_date", date)
-        .not("published_at", "is", null)
-        .limit(1)
-        .then(function (res) {
-          if (res.error) throw new Error(res.error.message);
-          var row = (res.data || [])[0];
-          return row ? archive.fromFullRow(row) : null;
-        });
+      /* The family's own edition of this night, falling back the same way
+         tonight() does — a night that exists beats the right voice. */
+      var tries = editionOrder();
+      function ask(i) {
+        if (i >= tries.length) return plain();
+        return sb().from("daily_content").select("*")
+          .eq("publish_date", date)
+          .eq("faith", tries[i])
+          .not("published_at", "is", null)
+          .limit(1)
+          .then(function (res) {
+            if (res.error) return i === 0 ? plain() : null;
+            var row = (res.data || [])[0];
+            return row ? archive.fromFullRow(row) : ask(i + 1);
+          });
+      }
+      function plain() {
+        return sb().from("daily_content").select("*")
+          .eq("publish_date", date)
+          .not("published_at", "is", null)
+          .limit(1)
+          .then(function (res) {
+            if (res.error) throw new Error(res.error.message);
+            var row = (res.data || [])[0];
+            return row ? archive.fromFullRow(row) : null;
+          });
+      }
+      return ask(0);
     },
 
     /* Everything a night carries. Named the same way the app names it, so
@@ -428,6 +469,76 @@
     }
   };
 
+
+  /* ------------------------------------------------------ THE EDITION
+     The Morning Lantern comes in five voices now (data/faiths.js). Which one
+     a family gets is `profiles.faith`; which one a night IS is
+     `daily_content.faith`. See sql/2026-08-28-faith-editions.sql.
+
+     ⚠️ A FAMILY MUST NEVER BE SHOWN AN EMPTY PAGE BECAUSE THEIR EDITION IS NOT
+     WRITTEN YET. Levi is publishing five editions from one admin screen and
+     they will not always land together. So every read asks for the family's
+     own edition first and falls back to the one that has always existed. A
+     Catholic family on a night with no Catholic edition gets the Latter-day
+     Saint one, which is a real Lantern, rather than nothing at all.
+
+     The faith is remembered per browser so the first paint does not wait on a
+     round trip. It is a display hint only — it decides which night is asked
+     for, never who may read it. Postgres still answers that. */
+  var FAITH_KEY = "lst:faith";
+  var myFaith = null;
+
+  function faithDefault() { return window.LST_FAITH_DEFAULT || "lds"; }
+
+  function knownFaith(v) {
+    var list = window.LST_FAITHS || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === v) return v;
+    return "";
+  }
+
+  function faithNow() {
+    if (myFaith) return myFaith;
+    try {
+      var kept = knownFaith(localStorage.getItem(FAITH_KEY));
+      if (kept) { myFaith = kept; return kept; }
+    } catch (e) {}
+    return faithDefault();
+  }
+
+  /* Asked once, when the account is known. */
+  function loadFaith() {
+    var c = sb();
+    var a = window.LSTAuth;
+    var u = (a && a.user && a.user()) || null;
+    if (!c || !u || !u.id) return Promise.resolve(faithNow());
+    return c.from("profiles").select("faith").eq("id", u.id).limit(1)
+      .then(function (res) {
+        var v = knownFaith(res && res.data && res.data[0] && res.data[0].faith);
+        myFaith = v || faithDefault();
+        try { localStorage.setItem(FAITH_KEY, myFaith); } catch (e) {}
+        return myFaith;
+      })
+      .catch(function () { return faithNow(); });
+  }
+
+  function setFaith(v) {
+    var c = sb();
+    var a = window.LSTAuth;
+    var u = (a && a.user && a.user()) || null;
+    myFaith = knownFaith(v) || faithDefault();
+    try { localStorage.setItem(FAITH_KEY, myFaith); } catch (e) {}
+    if (!c || !u || !u.id) return Promise.resolve(myFaith);
+    return c.from("profiles").upsert({ id: u.id, faith: knownFaith(v) ? v : null })
+      .then(function () { return myFaith; })
+      .catch(function () { return myFaith; });
+  }
+
+  /* The editions to try, best first. Always ends at the one that exists. */
+  function editionOrder() {
+    var mine = faithNow(), fall = faithDefault();
+    return mine === fall ? [fall] : [mine, fall];
+  }
+
   /* ------------------------------------------------------ THE BOOKS
      A night of a month's book. The words used to sit in data/book-*.js, which
      is a public file — anyone could open one and read all ninety-one stories.
@@ -473,6 +584,7 @@
   };
 
   window.LSTData = {
+    faith: { now: faithNow, load: loadFaith, set: setFaith, order: editionOrder },
     bookNights: bookNights,
     familyStories: family,
     journal: journal,

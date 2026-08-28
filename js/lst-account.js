@@ -34,6 +34,31 @@
       (extra || "") + "</div>";
   }
 
+  /* WHICH EDITION OF THE LANTERN THIS FAMILY GETS.
+
+     Asked at signup, changeable here — because a family who answered in a
+     hurry, or joined before there were five editions, should not be stuck with
+     the wrong voice. It changes what arrives tomorrow morning, nothing else:
+     not the price, not what they may read. */
+  function faithPicker() {
+    var list = window.LST_FAITHS || [];
+    if (!list.length || !window.LSTData || !window.LSTData.faith) {
+      return "The Morning Lantern, every morning.";
+    }
+    var mine = window.LSTData.faith.now();
+    return '<select id="ac-faith" style="background:rgba(255,255,255,.07);color:#fff;' +
+      'border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:.45rem .6rem;' +
+      "font-family:var(--font-body);font-size:.95rem;\">" +
+      list.map(function (f) {
+        return '<option value="' + f.id + '"' + (f.id === mine ? " selected" : "") + ">" +
+          esc(f.name) + "</option>";
+      }).join("") + "</select>" +
+      '<span id="ac-faith-said" style="color:#F5C518;font-size:.85rem;margin-left:.6rem;"></span>' +
+      '<p style="color:rgba(255,255,255,.55);font-size:.85rem;line-height:1.6;margin:.45rem 0 0;">' +
+      "The story is the same for every family. This chooses whose Bible is quoted " +
+      "and whose teachers are heard. It takes effect with tomorrow&rsquo;s Lantern.</p>";
+  }
+
   function signedInView() {
     var a = auth();
     var isAdmin = a.isAdmin && a.isAdmin();
@@ -51,6 +76,7 @@
         row("Subscription", status) +
         row("Your things", "Journal, family stories and subscription are shared with the app &mdash; " +
             "sign in there with this same email and everything is already waiting.") +
+        row("Your Lantern", faithPicker()) +
       "</div>" +
 
       '<div class="mp-bar" style="margin-top:1.25rem;">' +
@@ -79,6 +105,20 @@
     root.innerHTML = signedInView();
     var out = document.getElementById("ac-out");
     if (out) out.addEventListener("click", function () { auth().signOut(); });
+
+    var fs = document.getElementById("ac-faith");
+    if (fs && window.LSTData && window.LSTData.faith) {
+      /* Read what the database actually has before offering to change it, so a
+         family is never shown the wrong answer as if it were theirs. */
+      window.LSTData.faith.load().then(function (v) { if (fs.value !== v) fs.value = v; });
+      fs.addEventListener("change", function () {
+        var said = document.getElementById("ac-faith-said");
+        if (said) said.textContent = "Saving\u2026";
+        window.LSTData.faith.set(fs.value).then(function () {
+          if (said) said.textContent = "\u2713 Saved";
+        });
+      });
+    }
   }
 
   window.LSTAccount = {
