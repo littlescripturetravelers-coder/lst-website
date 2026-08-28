@@ -37,6 +37,7 @@ precise rather than approximate.
 
 | Code | Date | What changed |
 |---|---|---|
+| `4f8a87f` | 28 Aug | **The Lantern in five editions** — faith asked at signup, changeable on My Account |
 | `826b3fe` | 26 Aug | September's book says "coming" instead of showing nothing |
 | `2a29ddc` | 26 Aug | **September added (119 stories)**, and every story linked to its virtues, your family's memories and the book |
 | `b9d7fb5` | 26 Aug | The locked story became a page built to win subscribers |
