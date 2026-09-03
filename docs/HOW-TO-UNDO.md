@@ -37,6 +37,7 @@ precise rather than approximate.
 
 | Code | Date | What changed |
 |---|---|---|
+| `eda7ee1` | 3 Sep | **The three themes — Traditional, Dark and Light**, choosable in the header, the phone menu and My Account |
 | `4f8a87f` | 28 Aug | **The Lantern in five editions** — faith asked at signup, changeable on My Account |
 | `826b3fe` | 26 Aug | September's book says "coming" instead of showing nothing |
 | `2a29ddc` | 26 Aug | **September added (119 stories)**, and every story linked to its virtues, your family's memories and the book |
@@ -119,3 +120,23 @@ timeline's era bar at 11px). They went in together.
 If you like the new pages but want the reading pass undone — or the other way
 round — **say which half and I will take just that half back out.** Don't undo
 the whole code for one of them.
+
+---
+
+## About `eda7ee1` — the themes
+
+This one code covers three things that went in together:
+
+1. **The three themes and the control** — the dots in the header, the row at the
+   foot of the phone menu, and the written-out row on My Account.
+2. **The colour sweep behind them.** Roughly two and a half thousand hard-coded
+   colours across 44 files became tokens, so a word that reads on navy also
+   reads on paper. This is what makes Light possible at all; it cannot be taken
+   back on its own.
+3. **Four legibility fixes that were wrong in Traditional too** — the traveler
+   captions, the red headings on the Fourth of July article, the Mailchimp
+   privacy line, and the white-on-gold subscribe button in the phone menu.
+
+If you want the themes gone but the legibility fixes kept — or the other way
+round — **say which and I will take just that part back out.** Undoing the whole
+code would put the four faults back.
