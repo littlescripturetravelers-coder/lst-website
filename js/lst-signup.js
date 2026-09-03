@@ -52,7 +52,7 @@
      that lives or dies on people staying. */
   var plan = "annual";
   function el(id) { return document.getElementById(id); }
-  var IN = "width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;font-family: var(--font-body);";
+  var IN = "width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid var(--edge-22);background:var(--fill-06);color:var(--ink);font-size:1rem;font-family: var(--font-body);";
 
   /* WHICH EDITION OF THE LANTERN THIS FAMILY GETS.
 
@@ -71,8 +71,8 @@
   function faithField() {
     var list = faiths();
     if (!list.length) return "";                 /* data/faiths.js not loaded */
-    return '<label for="ts-faith" style="display:block;font-size:0.86rem;color:rgba(255,255,255,0.8);margin:0.35rem 0 0.3rem;">' +
-      'Which tradition is your family? <span style="color:rgba(255,255,255,0.5);">We write the Lantern in your own voice.</span></label>' +
+    return '<label for="ts-faith" style="display:block;font-size:0.86rem;color:var(--ink-78);margin:0.35rem 0 0.3rem;">' +
+      'Which tradition is your family? <span style="color:var(--ink-55);">We write the Lantern in your own voice.</span></label>' +
       '<select id="ts-faith" style="' + IN + 'appearance:auto;">' +
         list.map(function (f) {
           return '<option value="' + f.id + '">' + f.name + '</option>';
@@ -84,15 +84,15 @@
   function injectModal() {
     if (el("trial-modal")) return;
     var st = document.createElement("style");
-    st.textContent = ".ts-plan-btn{flex:1;padding:0.6rem 0.4rem;border-radius:10px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:#fff;font-family: var(--font-body);font-size:0.92rem;font-weight:700;cursor:pointer;line-height:1.25;text-align:center;}.ts-plan-btn span{display:block;font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.6);margin-top:2px;}.ts-plan-btn.on{border-color:#f4c842;background:rgba(245,197,24,0.14);}.ts-plan-btn.on span{color:#f4c842;}.ts-plan-btn{position:relative;}.ts-plan-best{flex:1.35;padding-top:1.35rem;}.ts-best-tag{position:absolute;top:-0.6rem;left:50%;transform:translateX(-50%);background:#f4c842;color:#07112e;font-family: var(--font-body);font-size:0.72rem;font-weight:900;letter-spacing:0.03em;text-transform:uppercase;padding:0.2rem 0.7rem;border-radius:999px;white-space:nowrap;}";
+    st.textContent = ".ts-plan-btn{flex:1;padding:0.6rem 0.4rem;border-radius:10px;border:1px solid var(--edge-22);background:var(--fill-06);color:var(--ink);font-family: var(--font-body);font-size:0.92rem;font-weight:700;cursor:pointer;line-height:1.25;text-align:center;}.ts-plan-btn span{display:block;font-size:0.72rem;font-weight:600;color:var(--ink-62);margin-top:2px;}.ts-plan-btn.on{border-color:var(--gold-ink);background:rgba(245,197,24,0.14);}.ts-plan-btn.on span{color:var(--gold-ink);}.ts-plan-btn{position:relative;}.ts-plan-best{flex:1.35;padding-top:1.35rem;}.ts-best-tag{position:absolute;top:-0.6rem;left:50%;transform:translateX(-50%);background:#f4c842;color:#07112e;font-family: var(--font-body);font-size:0.72rem;font-weight:900;letter-spacing:0.03em;text-transform:uppercase;padding:0.2rem 0.7rem;border-radius:999px;white-space:nowrap;}";
     document.head.appendChild(st);
     var d = document.createElement("div");
     d.id = "trial-modal";
-    d.style.cssText = "display:none;position:fixed;inset:0;z-index:99999;background:rgba(7,17,46,0.88);align-items:center;justify-content:center;padding:1rem;";
+    d.style.cssText = "display:none;position:fixed;inset:0;z-index:99999;background:rgba(var(--rgb-navy-deep), 0.88);align-items:center;justify-content:center;padding:1rem;";
     d.innerHTML =
-      '<div style="background:#0d1b3f;border:1px solid rgba(245,197,24,0.35);border-radius:16px;max-width:430px;width:100%;padding:1.6rem;font-family:\'Nunito\',sans-serif;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
-        '<div style="font-family:\'Fredoka\',sans-serif;font-weight:600;font-size:1.35rem;color:#f4c842;">Start your free week</div>' +
-        '<div style="display:inline-block;background:rgba(245,197,24,0.16);border:1px solid rgba(245,197,24,0.45);color:#f4c842;font-weight:800;font-size:0.8rem;letter-spacing:0.02em;padding:0.28rem 0.75rem;border-radius:999px;margin:0.45rem 0 0.15rem;">&#10024; 7 DAYS FREE &middot; No charge today</div>' +
+      '<div style="background:var(--page-2);border:1px solid rgba(245,197,24,0.35);border-radius:16px;max-width:430px;width:100%;padding:1.6rem;font-family:\'Nunito\',sans-serif;color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
+        '<div style="font-family:\'Fredoka\',sans-serif;font-weight:600;font-size:1.35rem;color:var(--gold-ink);">Start your free week</div>' +
+        '<div style="display:inline-block;background:rgba(245,197,24,0.16);border:1px solid rgba(245,197,24,0.45);color:var(--gold-ink);font-weight:800;font-size:0.8rem;letter-spacing:0.02em;padding:0.28rem 0.75rem;border-radius:999px;margin:0.45rem 0 0.15rem;">&#10024; 7 DAYS FREE &middot; No charge today</div>' +
         '<div id="ts-plans" style="display:flex;gap:0.5rem;margin:0.7rem 0 0.9rem;">' +
           '<button type="button" data-plan="annual" onclick="setTrialPlan(\'annual\')" class="ts-plan-btn ts-plan-best">' +
             '<b class="ts-best-tag">Best value</b>Yearly<span>' + PRICE.annual + '/yr &middot; just ' +
@@ -104,10 +104,10 @@
         '<input id="ts-email" type="email" placeholder="Email" autocomplete="email" style="' + IN + '">' +
         '<input id="ts-pw" type="password" placeholder="Create a password (6+ characters)" autocomplete="new-password" style="' + IN + '">' +
         faithField() +
-        '<p style="font-size:0.8rem;color:rgba(255,255,255,0.62);line-height:1.5;margin:0.2rem 0 0.6rem;">Next, add your card on our secure checkout (Payhip). <b style="color:#fff;">You won\'t be charged for 7 days</b>, and you can cancel anytime. Please use this same email at checkout so your subscription connects to your account.</p>' +
-        '<div id="ts-err" style="color:#e0607a;font-size:0.85rem;min-height:18px;margin-bottom:0.4rem;"></div>' +
+        '<p style="font-size:0.8rem;color:var(--ink-62);line-height:1.5;margin:0.2rem 0 0.6rem;">Next, add your card on our secure checkout (Payhip). <b style="color:var(--ink);">You won\'t be charged for 7 days</b>, and you can cancel anytime. Please use this same email at checkout so your subscription connects to your account.</p>' +
+        '<div id="ts-err" style="color:var(--warn-ink);font-size:0.85rem;min-height:18px;margin-bottom:0.4rem;"></div>' +
         '<button id="ts-submit" onclick="submitTrialSignup()" style="width:100%;cursor:pointer;background:#f4c842;color:#07112e;border:none;font-family:\'Nunito\',sans-serif;font-weight:900;font-size:1rem;padding:0.8rem;border-radius:999px;">Continue to secure checkout &rarr;</button>' +
-        '<button onclick="closeTrialSignup()" style="width:100%;background:none;border:none;color:rgba(255,255,255,0.55);margin-top:0.6rem;cursor:pointer;font-size:0.9rem;">Cancel</button>' +
+        '<button onclick="closeTrialSignup()" style="width:100%;background:none;border:none;color:var(--ink-55);margin-top:0.6rem;cursor:pointer;font-size:0.9rem;">Cancel</button>' +
       '</div>';
     d.addEventListener("click", function (e) { if (e.target === d) closeTrialSignup(); });
     document.body.appendChild(d);

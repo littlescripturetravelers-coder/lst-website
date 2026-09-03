@@ -86,7 +86,7 @@
           const id = entry.target.id;
           navLinks.forEach(link => {
             link.style.color = link.getAttribute('href') === `#${id}`
-              ? 'var(--gold)'
+              ? 'var(--gold-ink)'
               : 'var(--white-90)';
           });
         }

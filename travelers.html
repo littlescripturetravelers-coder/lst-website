@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="js/lst-theme.js"></script>
 <style>
   :root {
     --font-display: 'Fredoka', 'Trebuchet MS', sans-serif;
@@ -24,6 +25,7 @@
     --gold-glow: rgba(244, 200, 66, 0.4);
     --cream: #f8f1dd;
     --cream-soft: #e8e4d3;
+    --cream-dim: rgba(232,228,211,0.65);
     --sky-blue: #7cc4f0;
     --sky-blue-soft: #a8d8f5;
     --courage: #ff8d63;
@@ -35,6 +37,32 @@
     --wonder: #b89cf0;
     --wonder-soft: #d4c5f8;
   }
+
+  /* ---- LIGHT: this page keeps its own palette, so it needs its own flip.
+     Cream and sky are inks here; on paper they have to become navy and
+     deep-water blue or the words vanish. See style.css for the full story. */
+  html[data-theme="light"] {
+    --cream:      #16244d;
+    --cream-soft: #38486f;
+    --cream-dim:  rgba(27,45,95,0.78);
+    --sky-blue:   #0d5c8a;
+    --gold-soft:  #7a5c00;
+  }
+
+  /* …and back again inside anything that stays dark whatever the theme. */
+  html[data-theme="light"] .on-photo,
+  html[data-theme="light"] .on-dark {
+    --cream:      #f8f1dd;
+    --cream-soft: #e8e4d3;
+    --cream-dim:  rgba(232,228,211,0.65);
+    --sky-blue:   #7cc4f0;
+    --gold-soft:  #ffd97a;
+  }
+  html[data-theme="light"] .prompt.bo     { color: #a3390d; }
+  html[data-theme="light"] .prompt.scout  { color: #0f5f7d; }
+  html[data-theme="light"] .prompt.willow { color: #9d2f57; }
+  html[data-theme="light"] .prompt.wren   { color: #57399c; }
+
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: 80px; }
@@ -56,7 +84,7 @@
   /* ===== STARRY BACKGROUND ===== */
   .sky-bg {
     position: relative;
-    background: linear-gradient(180deg, #0a1a4a 0%, #142560 50%, #1d3478 100%);
+    background: linear-gradient(180deg, var(--page-2) 0%, var(--page-3) 50%, var(--page-3) 100%);
     overflow: hidden;
   }
 
@@ -67,14 +95,14 @@
     background-image:
       radial-gradient(2px 2px at 20px 30px, #fff, transparent),
       radial-gradient(1px 1px at 60px 70px, #fff, transparent),
-      radial-gradient(1px 1px at 100px 50px, var(--gold-soft), transparent),
+      radial-gradient(1px 1px at 100px 50px, #ffd97a, transparent),
       radial-gradient(2px 2px at 140px 90px, #fff, transparent),
       radial-gradient(1px 1px at 180px 40px, #fff, transparent),
-      radial-gradient(1px 1px at 220px 110px, var(--gold-soft), transparent),
+      radial-gradient(1px 1px at 220px 110px, #ffd97a, transparent),
       radial-gradient(2px 2px at 280px 30px, #fff, transparent),
       radial-gradient(1px 1px at 320px 80px, #fff, transparent),
       radial-gradient(1px 1px at 360px 60px, #fff, transparent),
-      radial-gradient(2px 2px at 400px 100px, var(--gold-soft), transparent);
+      radial-gradient(2px 2px at 400px 100px, #ffd97a, transparent);
     background-repeat: repeat;
     background-size: 420px 140px;
     opacity: 0.7;
@@ -153,7 +181,7 @@
   }
 
   .breadcrumb a { color: var(--sky-blue); text-decoration: none; }
-  .breadcrumb a:hover { color: var(--gold); }
+  .breadcrumb a:hover { color: var(--gold-ink); }
 
   .page-hero h1 {
     font-size: clamp(2.4rem, 5.5vw, 4rem);
@@ -162,7 +190,7 @@
     color: var(--cream);
   }
 
-  .page-hero h1 .accent { color: var(--gold); font-style: italic; }
+  .page-hero h1 .accent { color: var(--gold-ink); font-style: italic; }
 
   .page-hero-subhead {
     font-family: var(--font-display);
@@ -223,7 +251,7 @@
     object-position: center top;
   }
 
-  .constellation-card h3 { font-size: 1.3rem; color: var(--gold); margin-bottom: 0.25rem; }
+  .constellation-card h3 { font-size: 1.3rem; color: var(--gold-ink); margin-bottom: 0.25rem; }
   .constellation-card .tag { color: var(--cream-soft); font-size: 0.85rem; font-style: italic; }
 
   /* ===== CHARACTER SECTION ===== */
@@ -313,7 +341,7 @@
   /* Decorative stars */
   .character-decorative-star {
     position: absolute;
-    color: var(--gold);
+    color: var(--gold-ink);
     opacity: 0.7;
     pointer-events: none;
   }
@@ -334,7 +362,7 @@
 
   .character-content h2 {
     font-size: clamp(2.4rem, 4.5vw, 3.4rem);
-    color: var(--gold);
+    color: var(--gold-ink);
     line-height: 1;
     margin-bottom: 0.5rem;
   }
@@ -366,7 +394,7 @@
   }
 
   .character-detail {
-    background: rgba(29, 52, 120, 0.4);
+    background: rgba(var(--rgb-navy-royal), 0.4);
     border-left: 3px solid var(--gold);
     border-radius: 0 16px 16px 0;
     padding: 1.5rem 1.5rem 1.5rem 1.75rem;
@@ -375,7 +403,7 @@
   }
 
   .character-detail h4 {
-    color: var(--gold);
+    color: var(--gold-ink);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.2em;
@@ -411,7 +439,7 @@
 
   .section-eyebrow {
     display: inline-block;
-    color: var(--gold);
+    color: var(--gold-ink);
     font-family: var(--font-accent);
     font-weight: 400;
     font-size: 0.78rem;
@@ -434,7 +462,7 @@
   }
 
   .virtue {
-    background: linear-gradient(180deg, rgba(29, 52, 120, 0.5), rgba(20, 37, 96, 0.5));
+    background: linear-gradient(180deg, rgba(var(--rgb-navy-royal), 0.5), rgba(var(--rgb-navy-ocean), 0.5));
     border: 2px solid var(--gold);
     border-radius: 20px;
     padding: 1.5rem;
@@ -456,7 +484,7 @@
   .virtue-willow { background: var(--warm); }
   .virtue-wren { background: var(--wonder); }
 
-  .virtue h4 { font-size: 1.15rem; color: var(--gold); margin-bottom: 0.4rem; display: flex; align-items: center; }
+  .virtue h4 { font-size: 1.15rem; color: var(--gold-ink); margin-bottom: 0.4rem; display: flex; align-items: center; }
   .virtue p { font-size: 0.95rem; color: var(--cream-soft); text-align: left; }
 
   /* ===== LEVI NOTE ===== */
@@ -481,7 +509,7 @@
     font-family: var(--font-display);
     font-size: 1.4rem;
     font-style: italic;
-    color: var(--gold);
+    color: var(--gold-ink);
     margin-top: 2rem;
   }
 
@@ -503,7 +531,7 @@
     z-index: 2;
   }
 
-  .activity-card h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); color: var(--gold); margin-bottom: 1rem; }
+  .activity-card h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); color: var(--gold-ink); margin-bottom: 1rem; }
   .activity-card > p { color: var(--cream); font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.7; }
 
   .activity-prompts {
@@ -516,7 +544,7 @@
 
   .prompt {
     padding: 1.25rem;
-    background: rgba(10, 26, 74, 0.5);
+    background: rgba(var(--rgb-navy-sea), 0.5);
     border-radius: 12px;
     border-left: 3px solid currentColor;
   }
@@ -545,7 +573,7 @@
   .btn-primary {
     display: inline-block;
     background: var(--gold);
-    color: var(--navy-deep);
+    color: var(--on-gold);
     padding: 1.1rem 2.5rem;
     border-radius: 50px;
     font-family: var(--font-display);
@@ -563,7 +591,7 @@
   .btn-secondary {
     display: inline-block;
     background: transparent;
-    color: var(--gold);
+    color: var(--gold-ink);
     padding: 1rem 2rem;
     border-radius: 50px;
     font-family: var(--font-display);
@@ -574,11 +602,11 @@
     margin: 0 0.5rem 0.5rem;
   }
 
-  .btn-secondary:hover { background: var(--gold); color: var(--navy-deep); }
+  .btn-secondary:hover { background: var(--gold); color: var(--on-gold); }
 
   /* ===== FOOTER ===== */
   footer {
-    background: #050d2c;
+    background: var(--page);
     padding: 4rem 2rem 2rem;
     border-top: 2px solid var(--gold);
   }
@@ -597,14 +625,14 @@
 
   .footer-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
   .footer-logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--gold); }
-  .footer-logo-text { font-family: var(--font-display); font-size: 0.9rem; color: var(--gold); line-height: 1.2; }
+  .footer-logo-text { font-family: var(--font-display); font-size: 0.9rem; color: var(--gold-ink); line-height: 1.2; }
   .footer-logo-text span { display: block; font-size: 0.7rem; color: var(--cream-soft); }
 
-  .footer-col h4 { color: var(--gold); font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 1rem; }
+  .footer-col h4 { color: var(--gold-ink); font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 1rem; }
   .footer-col ul { list-style: none; }
   .footer-col ul li { margin-bottom: 0.65rem; }
   .footer-col ul a { color: var(--cream-soft); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
-  .footer-col ul a:hover { color: var(--gold); }
+  .footer-col ul a:hover { color: var(--gold-ink); }
 
   .footer-bottom {
     border-top: 1px solid rgba(244, 200, 66, 0.2);
@@ -624,12 +652,12 @@
     border-radius: 50%;
     background: rgba(244, 200, 66, 0.15);
     display: flex; align-items: center; justify-content: center;
-    color: var(--gold);
+    color: var(--gold-ink);
     text-decoration: none;
     transition: all 0.2s;
     border: 1px solid var(--gold);
   }
-  .social a:hover { background: var(--gold); color: var(--navy-deep); }
+  .social a:hover { background: var(--gold); color: var(--on-gold); }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
@@ -678,7 +706,7 @@
   .pull-quote {
     font-family: var(--font-display);
     font-size: clamp(1.2rem, 3vw, 1.55rem);
-    color: var(--gold);
+    color: var(--gold-ink);
     line-height: 1.35;
     border-left: 4px solid var(--gold);
     padding: 0.5rem 0 0.5rem 1.5rem;
@@ -711,7 +739,7 @@
   }
   .why-bullets li strong { color: var(--cream); }
   .analogy-box {
-    background: rgba(29, 52, 120, 0.4);
+    background: rgba(var(--rgb-navy-royal), 0.4);
     border: 1px solid rgba(244, 200, 66, 0.25);
     border-radius: 18px;
     padding: 1.75rem 2rem;
@@ -735,7 +763,7 @@
   }
   .research-note {
     font-size: 0.88rem !important;
-    color: rgba(232, 228, 211, 0.6) !important;
+    color: var(--cream-dim) !important;
     font-style: italic;
     border-top: 1px solid rgba(244, 200, 66, 0.12);
     padding-top: 1rem;
@@ -747,7 +775,7 @@
     margin-top: 0.5rem;
   }
   .virtue-extended-item {
-    background: rgba(29, 52, 120, 0.3);
+    background: rgba(var(--rgb-navy-royal), 0.3);
     border-left: 3px solid var(--gold-soft);
     border-radius: 0 12px 12px 0;
     padding: 1.1rem 1.4rem;
@@ -756,7 +784,7 @@
   .virtue-extended-label {
     font-family: var(--font-display);
     font-weight: 600;
-    color: var(--gold);
+    color: var(--gold-ink);
     font-size: 1rem;
     display: block;
     margin-bottom: 0.3rem;
@@ -799,7 +827,7 @@
     .why-four-grid { grid-template-columns: 1fr; }
   }
   .why-four-card {
-    background: rgba(29, 52, 120, 0.4);
+    background: rgba(var(--rgb-navy-royal), 0.4);
     border: 1px solid rgba(244, 200, 66, 0.2);
     border-radius: 16px;
     padding: 1.25rem 1.25rem 1.1rem;
@@ -807,7 +835,7 @@
   }
   .why-four-card strong {
     font-family: var(--font-display);
-    color: var(--gold);
+    color: var(--gold-ink);
     font-size: 1rem;
     display: block;
     margin-bottom: 0.4rem;
@@ -830,32 +858,32 @@
   <!-- ★ HEADER OVERRIDE — force canonical nav layout ★ -->
   <style>
     /* Force site-header to horizontal bar layout */
-    .site-header { position: sticky; top: 0; z-index: 500; background: var(--navy-deep, #07112e); border-bottom: 1px solid rgba(244,200,66,0.15); overflow: visible !important; }
+    .site-header { position: sticky; top: 0; z-index: 500; background: var(--navy-deep, var(--page)); border-bottom: 1px solid rgba(244,200,66,0.15); overflow: visible !important; }
     .header-inner { display: flex !important; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; height: 72px; overflow: visible !important; }
     .logo-link { display: flex !important; align-items: center; gap: 0.75rem; text-decoration: none; }
     .logo-mark { display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; flex-shrink: 0; }
     .logo-mark img { border-radius: 50%; object-fit: cover; }
     .logo-text { display: flex; flex-direction: column; }
-    .logo-name { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: #f4c842; line-height: 1.15; }
-    .logo-sub { font-family: var(--font-body); font-size: 0.68rem; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; text-transform: uppercase; }
+    .logo-name { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: var(--gold-ink); line-height: 1.15; }
+    .logo-sub { font-family: var(--font-body); font-size: 0.68rem; color: var(--ink-62); letter-spacing: 0.06em; text-transform: uppercase; }
     .main-nav { display: flex !important; overflow: visible !important; }
     /* CRITICAL: only the top-level nav ul gets flex-row — NOT .nav-dropdown */
     .main-nav > ul { display: flex !important; flex-direction: row !important; list-style: none; gap: 0.25rem; margin: 0; padding: 0; overflow: visible !important; }
     .main-nav > ul > li { display: block; position: relative; }
-    .main-nav > ul > li > a { font-family: var(--font-display); font-weight: 500; font-size: 0.95rem; color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.4rem 0.6rem; border-radius: 6px; transition: color 0.2s; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
-    .main-nav > ul > li > a:hover { color: #f4c842; }
+    .main-nav > ul > li > a { font-family: var(--font-display); font-weight: 500; font-size: 0.95rem; color: var(--ink-85); text-decoration: none; padding: 0.4rem 0.6rem; border-radius: 6px; transition: color 0.2s; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
+    .main-nav > ul > li > a:hover { color: var(--gold-ink); }
     /* Dropdown panels — full-width, hidden via visibility, shown via .open */
     @media (min-width: 901px) { .nav-dropdown { display: none !important; } }
-    .nav-dropdown-panel { display: block !important; visibility: hidden !important; pointer-events: none !important; position: fixed !important; left: 0 !important; right: 0 !important; z-index: 10000 !important; background: #0d1b4b !important; border-top: 2px solid #f4c842 !important; border-bottom: 1px solid rgba(244,200,66,0.2) !important; box-shadow: 0 12px 40px rgba(0,0,0,0.5) !important; padding: 1.75rem 0 !important; }
+    .nav-dropdown-panel { display: block !important; visibility: hidden !important; pointer-events: none !important; position: fixed !important; left: 0 !important; right: 0 !important; z-index: 10000 !important; background: var(--page-2) !important; border-top: 2px solid #f4c842 !important; border-bottom: 1px solid rgba(244,200,66,0.2) !important; box-shadow: 0 12px 40px rgba(0,0,0,0.5) !important; padding: 1.75rem 0 !important; }
     .main-nav li.has-dropdown.open > .nav-dropdown-panel { visibility: visible !important; pointer-events: auto !important; }
     .nav-dropdown-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid !important; grid-template-columns: repeat(auto-fill, minmax(240px, 320px)) !important; justify-content: start !important; gap: 0.5rem 3rem !important; }
     .nav-dropdown-item { display: block !important; padding: 0.85rem 1.1rem !important; min-width: 0 !important; border-radius: 8px !important; text-decoration: none !important; transition: background 0.15s !important; }
     .nav-dropdown-item:hover { background: rgba(244,200,66,0.1) !important; }
-    .nav-dropdown-item-title { display: block !important; font-family: var(--font-display) !important; font-weight: 600 !important; font-size: 1rem !important; color: #f4c842 !important; margin-bottom: 0.3rem !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
-    .nav-dropdown-item-desc { display: block !important; font-family: var(--font-body) !important; font-size: 0.82rem !important; color: rgba(255,255,255,0.65) !important; line-height: 1.4 !important; word-break: break-word !important; }
+    .nav-dropdown-item-title { display: block !important; font-family: var(--font-display) !important; font-weight: 600 !important; font-size: 1rem !important; color: var(--gold-ink) !important; margin-bottom: 0.3rem !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+    .nav-dropdown-item-desc { display: block !important; font-family: var(--font-body) !important; font-size: 0.82rem !important; color: var(--ink-62) !important; line-height: 1.4 !important; word-break: break-word !important; }
     .nav-dropdown > li { display: block !important; width: 100% !important; }
-    .nav-dropdown > li > a { display: block !important; padding: 0.55rem 1.1rem !important; font-family: var(--font-body) !important; font-size: 0.9rem !important; font-weight: 600 !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; white-space: nowrap !important; }
-    .nav-dropdown > li > a:hover { background: rgba(244,200,66,0.12) !important; color: #f4c842 !important; }
+    .nav-dropdown > li > a { display: block !important; padding: 0.55rem 1.1rem !important; font-family: var(--font-body) !important; font-size: 0.9rem !important; font-weight: 600 !important; color: var(--ink-85) !important; text-decoration: none !important; white-space: nowrap !important; }
+    .nav-dropdown > li > a:hover { background: rgba(244,200,66,0.12) !important; color: var(--gold-ink) !important; }
     .nav-arrow { display: inline-block !important; font-size: 0.6rem; opacity: 0.7; transition: transform 0.2s; }
     .main-nav li.has-dropdown.open .nav-arrow { transform: rotate(180deg); }
     .nav-cta { margin-left: 1rem; flex-shrink: 0; background: #f4c842; color: #07112e; font-family: var(--font-display); font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 999px; text-decoration: none; white-space: nowrap; }
@@ -863,9 +891,10 @@
     .mobile-menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
     .mobile-menu-btn span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; }
     .mobile-nav { display: none; }
-    .mobile-nav.open { display: block; background: #07112e; padding: 1rem 1.5rem; border-top: 1px solid rgba(244,200,66,0.2); }
+    .mobile-nav.open { display: block; background: var(--page); padding: 1rem 1.5rem; border-top: 1px solid rgba(244,200,66,0.2); }
     .mobile-nav > ul { list-style: none; display: flex !important; flex-direction: column !important; gap: 0.75rem; padding: 0; margin: 0; }
-    .mobile-nav > ul > li > a { color: rgba(255,255,255,0.85); text-decoration: none; font-family: var(--font-display); font-size: 1.05rem; }
+    .mobile-nav > ul > li > a:not(.btn) { color: var(--ink-85); text-decoration: none; font-family: var(--font-display); font-size: 1.05rem; }
+    .mobile-nav > ul > li > a.btn { text-decoration: none; font-family: var(--font-display); font-size: 1.05rem; }
     @media (max-width: 900px) {
       .main-nav { display: none !important; }
       .nav-cta.nav-cta { display: none; }
@@ -874,8 +903,8 @@
   </style>
 </head>
 <body>
-<div class="app-move-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
-  <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">A change for our families —</strong> your story has always arrived by email at 5&nbsp;AM Mountain. We are moving it all onto the website and into the app: the nightly story and lullabies, the Virtue Library, and your Family Story Library, all in one place.
+<div class="app-move-banner" role="note" style="background:linear-gradient(90deg,var(--page),var(--page-2));border-bottom:1px solid rgba(245,197,24,0.35);color:var(--ink);text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
+  <span style="font-size:1.05rem;">📱</span> <strong style="color:var(--gold-ink);">A change for our families —</strong> your story has always arrived by email at 5&nbsp;AM Mountain. We are moving it all onto the website and into the app: the nightly story and lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
   <header class="site-header" id="site-header">
@@ -1278,7 +1307,7 @@
       <div class="character-detail virtue-extended">
         <h4>Extended Virtue — Obedience</h4>
         <p>Obedience is courage's quiet twin — it takes real bravery to follow God when the path is hard or doesn't make sense yet. Beau already lives "I will go and do"; obedience is that courage pointed at God's word.</p>
-        <p class="virtue-extended-item" style="background:none;border:none;padding:0;"><span class="verse-ref" style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">Naaman dipping seven times in the Jordan (2 Kings 5) · "If ye love me, keep my commandments" (John 14:15)</span></p>
+        <p class="virtue-extended-item" style="background:none;border:none;padding:0;"><span class="verse-ref" style="color:var(--cream-dim);font-style:italic;font-size:0.88rem;">Naaman dipping seven times in the Jordan (2 Kings 5) · "If ye love me, keep my commandments" (John 14:15)</span></p>
       </div>
       <p class="scripture-tag">✦ "Be strong and of a good courage." — Joshua 1:9</p>
     </div>
@@ -1315,7 +1344,7 @@
       <div class="character-detail virtue-extended">
         <h4>Extended Virtue — Hope</h4>
         <p>Hope is curiosity aimed at the future. Scout's "what could it be?" is the very posture of hope — leaning forward, expecting that God has something good waiting to be found.</p>
-        <p><span style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">"They that wait upon the Lord… shall mount up with wings as eagles" (Isaiah 40:31) · the wise men following the star</span></p>
+        <p><span style="color:var(--cream-dim);font-style:italic;font-size:0.88rem;">"They that wait upon the Lord… shall mount up with wings as eagles" (Isaiah 40:31) · the wise men following the star</span></p>
       </div>
       <p class="scripture-tag">✦ "Ask, and it shall be given you; seek, and ye shall find." — Matthew 7:7</p>
     </div>
@@ -1351,10 +1380,10 @@
       </div>
       <div class="character-detail virtue-extended">
         <h4>Extended Virtues — Forgiveness &amp; Gratitude</h4>
-        <p><strong style="color:var(--gold);">Forgiveness</strong> is compassion grown all the way up — the hardest, most loving thing a tender heart can do.</p>
-        <p><span style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">Joseph forgiving his brothers (Genesis 45, 50) · "Father, forgive them" (Luke 23:34)</span></p>
-        <p style="margin-top:0.75rem;"><strong style="color:var(--gold);">Gratitude</strong> is love noticing what it's been given — the warm overflow of a thankful heart.</p>
-        <p><span style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">The one leper who turned back to say thank you (Luke 17:15–16)</span></p>
+        <p><strong style="color:var(--gold-ink);">Forgiveness</strong> is compassion grown all the way up — the hardest, most loving thing a tender heart can do.</p>
+        <p><span style="color:var(--cream-dim);font-style:italic;font-size:0.88rem;">Joseph forgiving his brothers (Genesis 45, 50) · "Father, forgive them" (Luke 23:34)</span></p>
+        <p style="margin-top:0.75rem;"><strong style="color:var(--gold-ink);">Gratitude</strong> is love noticing what it's been given — the warm overflow of a thankful heart.</p>
+        <p><span style="color:var(--cream-dim);font-style:italic;font-size:0.88rem;">The one leper who turned back to say thank you (Luke 17:15–16)</span></p>
       </div>
       <p class="scripture-tag">✦ "Be ye kind one to another, tenderhearted." — Ephesians 4:32</p>
     </div>
@@ -1390,10 +1419,10 @@
       </div>
       <div class="character-detail virtue-extended">
         <h4>Extended Virtues — Humility &amp; Patience</h4>
-        <p><strong style="color:var(--gold);">Humility</strong> is where wisdom begins — the one who pauses to ponder knows they don't know everything, and bows before God.</p>
-        <p><span style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">"With the lowly is wisdom" (Proverbs 11:2)</span></p>
-        <p style="margin-top:0.75rem;"><strong style="color:var(--gold);">Patience</strong> is the wisdom to wait and trust God's timing instead of rushing ahead.</p>
-        <p><span style="color:rgba(232,228,211,0.65);font-style:italic;font-size:0.88rem;">"Wait on the Lord" (Psalm 27:14) · "Let patience have her perfect work" (James 1:4)</span></p>
+        <p><strong style="color:var(--gold-ink);">Humility</strong> is where wisdom begins — the one who pauses to ponder knows they don't know everything, and bows before God.</p>
+        <p><span style="color:var(--cream-dim);font-style:italic;font-size:0.88rem;">"With the lowly is wisdom" (Proverbs 11:2)</span></p>
+        <p style="margin-top:0.75rem;"><strong style="color:var(--gold-ink);">Patience</strong> is the wisdom to wait and trust God's timing instead of rushing ahead.</p>
+        <p><span style="color:var(--cream-dim);font-style:italic;font-size:0.88rem;">"Wait on the Lord" (Psalm 27:14) · "Let patience have her perfect work" (James 1:4)</span></p>
       </div>
       <p class="scripture-tag">✦ "Be still, and know that I am God." — Psalm 46:10</p>
     </div>
@@ -1528,28 +1557,28 @@
 
     <div class="footer-bottom" style="flex-direction:column;align-items:center;text-align:center;">
       <div class="social-links" style="justify-content:center;margin-bottom:0.75rem;gap:0.75rem;">
-        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
-        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
         </a>
-        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
-        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07112e"/></svg>
         </a>
-        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.14a8.16 8.16 0 0 0 4.77 1.52V7.21a4.85 4.85 0 0 1-1-.52z"/></svg>
         </a>
-        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
         </a>
       </div>
       <p style="margin-top:1rem;">We do not lecture. We do not pile on rules. We tell what happened — a beginning, a worry, and a hopeful ending — in the smallest words that still carry the meaning.</p>
       <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">© 2026 Little Scripture Travelers</p>
-      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.15);font-size:0.72rem;line-height:1.5;color:#9aa6c0;text-align:center;">
+      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid var(--edge-12);font-size:0.72rem;line-height:1.5;color:var(--ink-62);text-align:center;">
         <p style="margin:0 0 0.6rem;">Little Scripture Travelers Bedtime Stories, LLC is an independent creative endeavor. It is not affiliated with, made by, sponsored by, approved by, or endorsed by The Church of Jesus Christ of Latter-day Saints or Intellectual Reserve, Inc. All stories, illustrations, characters, lullabies, and opinions are solely those of Little Scripture Travelers and do not represent the Church.</p>
         <p style="margin:0;">&ldquo;Come, Follow Me,&rdquo; the name of The Church of Jesus Christ of Latter-day Saints, and related names and logos are trademarks of Intellectual Reserve, Inc.; any reference to them here is for identification purposes only.</p>
       </div>

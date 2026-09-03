@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
+  <script src="js/lst-theme.js"></script>
   <style>
     .page-hero {
       background-image: url('images/hero-bg.jpg');
@@ -27,7 +28,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(7,17,46,0.72) 0%, rgba(7,17,46,0.45) 50%, rgba(7,17,46,0.75) 100%);
+      background: linear-gradient(to bottom, rgba(var(--rgb-navy-deep), 0.72) 0%, rgba(var(--rgb-navy-deep), 0.45) 50%, rgba(var(--rgb-navy-deep), 0.75) 100%);
       z-index: 1;
     }
     .page-hero-content {
@@ -40,20 +41,20 @@
       font-family: var(--font-body);
       font-weight: 900;
       font-size: clamp(2.2rem, 5vw, 3.5rem);
-      color: #fff;
+      color: var(--ink);
       margin-bottom: var(--space-4);
       text-shadow: 0 2px 16px rgba(0,0,0,0.6);
     }
     .page-hero p {
       font-family: var(--font-body);
-      color: rgba(255,255,255,0.88);
+      color: var(--ink-85);
       font-size: 1.1rem;
       line-height: 1.7;
     }
 
     /* ── Subscribe section ── */
     .subscribe-section {
-      background: linear-gradient(180deg, #07112e 0%, #0d1b4b 60%, #07112e 100%);
+      background: linear-gradient(180deg, var(--page) 0%, var(--page-2) 60%, var(--page) 100%);
       padding: var(--space-20) var(--space-6);
     }
     .subscribe-section .section-inner {
@@ -67,7 +68,7 @@
     .subscribe-section .section-subtitle {
       text-align: center;
       font-family: var(--font-body);
-      color: rgba(255,255,255,0.72);
+      color: var(--ink-70);
       font-size: 1.05rem;
       max-width: 580px;
       margin: 0 auto var(--space-12);
@@ -82,7 +83,7 @@
       align-items: stretch;
     }
     .tier-card {
-      background: rgba(255,255,255,0.04);
+      background: var(--fill-04);
       border: 1px solid rgba(245,197,24,0.2);
       border-radius: var(--radius-lg);
       padding: var(--space-8) var(--space-6) var(--space-8);
@@ -97,7 +98,7 @@
       box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(245,197,24,0.1);
     }
     .tier-card.featured {
-      border-color: var(--gold);
+      border-color: var(--gold-ink);
       background: rgba(245,197,24,0.06);
       box-shadow: 0 0 40px rgba(245,197,24,0.15);
     }
@@ -125,7 +126,7 @@
       font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.35rem;
-      color: var(--gold);
+      color: var(--gold-ink);
       text-align: center;
     }
     .tier-price {
@@ -133,13 +134,13 @@
       font-family: var(--font-body);
       font-weight: 900;
       font-size: 2rem;
-      color: #fff;
+      color: var(--ink);
       line-height: 1;
     }
     .tier-price span {
       font-size: 0.9rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.55);
+      color: var(--ink-55);
     }
     .tier-perks {
       list-style: none;
@@ -150,10 +151,10 @@
     .tier-perks li {
       font-family: var(--font-body);
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.8);
+      color: var(--ink-78);
       line-height: 1.5;
       padding: var(--space-2) 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid var(--edge-08);
       display: flex;
       align-items: flex-start;
       gap: var(--space-2);
@@ -162,7 +163,7 @@
     .tier-perks li:last-child { border-bottom: none; }
     .tier-perks li::before {
       content: '✦';
-      color: var(--gold);
+      color: var(--gold-ink);
       flex-shrink: 0;
       font-size: 0.7rem;
       margin-top: 3px;
@@ -204,7 +205,7 @@
     .btn-tier-outline {
       display: block;
       background: transparent;
-      color: var(--gold);
+      color: var(--gold-ink);
       border: 2px solid rgba(245,197,24,0.5);
       font-family: var(--font-body);
       font-weight: 900;
@@ -218,7 +219,7 @@
     }
     .btn-tier-outline:hover {
       background: rgba(245,197,24,0.08);
-      border-color: var(--gold);
+      border-color: var(--gold-ink);
       transform: translateY(-1px);
     }
 
@@ -229,7 +230,7 @@
       --space-14: 3.5rem;
     }
     .research-section {
-      background: linear-gradient(180deg, #07112e 0%, #060e25 100%);
+      background: linear-gradient(180deg, var(--page) 0%, var(--page) 100%);
       padding: var(--space-20) var(--space-6);
       border-top: 1px solid rgba(245,197,24,0.12);
     }
@@ -244,7 +245,7 @@
     }
     .research-intro p {
       font-family: var(--font-body);
-      color: rgba(255,255,255,0.72);
+      color: var(--ink-70);
       font-size: 1.05rem;
       line-height: 1.75;
     }
@@ -256,7 +257,7 @@
       gap: var(--space-3);
     }
     .product-item {
-      background: rgba(255,255,255,0.03);
+      background: var(--fill-04);
       border: 1px solid rgba(245,197,24,0.15);
       border-radius: 14px;
       overflow: hidden;
@@ -277,7 +278,7 @@
       text-align: left;
     }
     .product-trigger:hover .product-trigger-name {
-      color: var(--gold);
+      color: var(--gold-ink);
     }
     .product-trigger-emoji {
       font-size: 1.8rem;
@@ -292,20 +293,20 @@
       font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.1rem;
-      color: #fff;
+      color: var(--ink);
       transition: color 0.2s;
       display: block;
     }
     .product-trigger-tier {
       font-family: var(--font-body);
       font-size: 0.82rem;
-      color: rgba(245,197,24,0.7);
+      color: var(--gold-ink-70);
       display: block;
       margin-top: 2px;
     }
     .product-trigger-chevron {
       font-size: 1rem;
-      color: rgba(245,197,24,0.6);
+      color: var(--gold-ink-60);
       transition: transform 0.3s ease;
       flex-shrink: 0;
     }
@@ -347,19 +348,19 @@
       font-size: 0.72rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--gold-ink);
       margin-bottom: var(--space-3);
       display: block;
     }
     .product-col p {
       font-family: var(--font-body);
       font-size: 0.92rem;
-      color: rgba(255,255,255,0.78);
+      color: var(--ink-78);
       line-height: 1.75;
       margin: 0;
     }
     .research-strip {
-      background: rgba(255,255,255,0.03);
+      background: var(--fill-04);
       border: 1px solid rgba(245,197,24,0.1);
       border-radius: 10px;
       padding: var(--space-4) var(--space-5);
@@ -370,7 +371,7 @@
       font-size: 0.7rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(245,197,24,0.6);
+      color: var(--gold-ink-60);
       margin-bottom: var(--space-3);
       display: block;
     }
@@ -385,7 +386,7 @@
     .research-strip ul li a {
       font-family: var(--font-body);
       font-size: 0.8rem;
-      color: rgba(245,197,24,0.8);
+      color: var(--gold-ink-80);
       text-decoration: none;
       background: rgba(245,197,24,0.07);
       border: 1px solid rgba(245,197,24,0.2);
@@ -396,7 +397,7 @@
     }
     .research-strip ul li a:hover {
       background: rgba(245,197,24,0.18);
-      color: var(--gold);
+      color: var(--gold-ink);
     }
 
     /* Stack-together callout */
@@ -415,13 +416,13 @@
       font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.2rem;
-      color: var(--gold);
+      color: var(--gold-ink);
       margin-bottom: var(--space-4);
     }
     .stack-callout p {
       font-family: var(--font-body);
       font-size: 0.95rem;
-      color: rgba(255,255,255,0.75);
+      color: var(--ink-78);
       line-height: 1.75;
       margin-bottom: 1.75rem;
     }
@@ -439,12 +440,12 @@
       font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.6rem;
-      color: var(--gold);
+      color: var(--gold-ink);
       margin-bottom: var(--space-3);
     }
     .free-band p {
       font-family: var(--font-body);
-      color: rgba(255,255,255,0.78);
+      color: var(--ink-78);
       max-width: 500px;
       margin: 0 auto var(--space-6);
       font-size: 1rem;
@@ -453,19 +454,19 @@
   /* ── FAQ Section ── */
   .faq-section {
     padding: var(--space-20) var(--space-6);
-    background: rgba(255,255,255,0.02);
+    background: var(--fill-04);
   }
   .faq-section .section-title {
     font-family: var(--font-display);
     font-weight: 600;
     font-size: clamp(1.6rem, 3vw, 2.2rem);
-    color: var(--gold);
+    color: var(--gold-ink);
     text-align: center;
     margin-bottom: 0.5rem;
   }
   .faq-section .section-subtitle {
     text-align: center;
-    color: rgba(255,255,255,0.6);
+    color: var(--ink-62);
     font-family: var(--font-body);
     font-size: 1rem;
     margin-bottom: var(--space-10);
@@ -478,16 +479,16 @@
     gap: 0;
   }
   .faq-item {
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid var(--edge-12);
   }
   .faq-item:first-child {
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid var(--edge-12);
   }
   .faq-question {
     width: 100%;
     background: none;
     border: none;
-    color: #fff;
+    color: var(--ink);
     font-family: var(--font-body);
     font-weight: 700;
     font-size: 1.05rem;
@@ -498,7 +499,7 @@
     line-height: 1.4;
     transition: color 0.2s;
   }
-  .faq-question:hover { color: var(--gold); }
+  .faq-question:hover { color: var(--gold-ink); }
   .faq-question::after {
     content: '+';
     position: absolute;
@@ -506,7 +507,7 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: 1.4rem;
-    color: var(--gold);
+    color: var(--gold-ink);
     font-weight: 300;
     transition: transform 0.25s;
     line-height: 1;
@@ -525,12 +526,12 @@
   .faq-answer p {
     font-family: var(--font-body);
     font-size: 0.97rem;
-    color: rgba(255,255,255,0.75);
+    color: var(--ink-78);
     line-height: 1.7;
     padding: 0 0 1.2rem 0;
     margin: 0;
   }
-  .faq-answer a { color: var(--gold); text-decoration: underline; }
+  .faq-answer a { color: var(--gold-ink); text-decoration: underline; }
 
   /* ── Perk Hover Popups ── */
   .tier-perks li.has-preview {
@@ -540,7 +541,7 @@
     align-items: flex-start;
     gap: 0.4rem;
   }
-  .tier-perks li.has-preview:hover .perk-label { color: var(--gold); }
+  .tier-perks li.has-preview:hover .perk-label { color: var(--gold-ink); }
   .perk-label { flex: 1; }
   .perk-eye {
     font-size: 0.85rem;
@@ -559,14 +560,14 @@
     width: 280px;
     max-height: 320px;
     overflow-y: auto;
-    background: #0d1b4b;
+    background: var(--page-2);
     border: 1.5px solid var(--gold);
     border-radius: 14px;
     padding: 12px 14px 14px;
     z-index: 500;
     box-shadow: 0 12px 40px rgba(0,0,0,0.55);
     scrollbar-width: thin;
-    scrollbar-color: var(--gold) transparent;
+    scrollbar-color: var(--gold-ink) transparent;
   }
   .perk-popup::-webkit-scrollbar { width: 4px; }
   .perk-popup::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
@@ -576,7 +577,7 @@
     top: 100%;
     left: 24px;
     border: 7px solid transparent;
-    border-top-color: var(--gold);
+    border-top-color: var(--gold-ink);
   }
   .tier-perks li.has-preview:hover .perk-popup { display: block; }
   .tier-card:nth-child(3) .perk-popup,
@@ -599,30 +600,30 @@
     width: 100%; height: 110px;
     border: 2px dashed rgba(244,200,66,0.3); border-radius: 8px;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.3rem; color: rgba(255,255,255,0.55); font-size: 1.5rem;
+    gap: 0.3rem; color: var(--ink-55); font-size: 1.5rem;
   }
   .perk-popup-placeholder small {
     font-family: var(--font-body); font-size: 0.65rem;
-    color: rgba(255,255,255,0.55); text-align: center; line-height: 1.4;
+    color: var(--ink-55); text-align: center; line-height: 1.4;
   }
   .perk-popup-name {
     display: block; font-family: var(--font-display); font-weight: 600;
-    font-size: 0.95rem; color: var(--gold); margin-bottom: 4px;
+    font-size: 0.95rem; color: var(--gold-ink); margin-bottom: 4px;
   }
   .perk-popup-desc {
     font-family: var(--font-body); font-size: 0.8rem;
-    color: rgba(255,255,255,0.72); line-height: 1.55; margin: 0;
+    color: var(--ink-70); line-height: 1.55; margin: 0;
   }
   /* Expand modal */
   .perk-expand-overlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(4,8,20,0.88); z-index: 9000;
+    background: rgba(var(--rgb-navy-pitch), 0.88); z-index: 9000;
     align-items: center; justify-content: center;
     padding: 1.5rem; backdrop-filter: blur(6px);
   }
   .perk-expand-overlay.open { display: flex; }
   .perk-expand-box {
-    background: linear-gradient(150deg, #0d1b4b 0%, #07112e 100%);
+    background: linear-gradient(150deg, var(--page-2) 0%, var(--page) 100%);
     border: 2px solid var(--gold); border-radius: 18px;
     width: 100%; max-width: 540px; overflow: hidden;
     position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.65);
@@ -634,13 +635,13 @@
   }
   .perk-expand-close {
     position: absolute; top: 12px; right: 14px;
-    background: rgba(255,255,255,0.12); border: none; color: #fff;
+    background: var(--fill-12); border: none; color: var(--ink);
     font-size: 1rem; width: 30px; height: 30px; border-radius: 50%;
     cursor: pointer; z-index: 10; line-height: 30px; text-align: center;
   }
-  .perk-expand-close:hover { background: rgba(255,255,255,0.22); }
+  .perk-expand-close:hover { background: var(--fill-16); }
   .perk-expand-media {
-    width: 100%; min-height: 240px; background: rgba(255,255,255,0.03);
+    width: 100%; min-height: 240px; background: var(--fill-04);
     display: flex; align-items: center; justify-content: center;
     border-bottom: 1px solid rgba(244,200,66,0.2); overflow: hidden;
   }
@@ -649,18 +650,18 @@
   }
   .perk-expand-media-empty {
     display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
-    color: rgba(255,255,255,0.55); padding: 2.5rem;
+    color: var(--ink-55); padding: 2.5rem;
     font-family: var(--font-body); font-size: 0.8rem; text-align: center;
   }
   .perk-expand-media-empty span { font-size: 3rem; opacity: 0.25; }
   .perk-expand-body { padding: 1.5rem 2rem 2rem; text-align: center; }
   .perk-expand-name {
     font-family: var(--font-display); font-weight: 600;
-    font-size: 1.5rem; color: var(--gold); margin-bottom: 0.6rem;
+    font-size: 1.5rem; color: var(--gold-ink); margin-bottom: 0.6rem;
   }
   .perk-expand-desc {
     font-family: var(--font-body); font-size: 0.95rem;
-    color: rgba(255,255,255,0.78); line-height: 1.7; margin: 0;
+    color: var(--ink-78); line-height: 1.7; margin: 0;
   }
 
   /* ── Toolkit info inside perk popup ─────────────────── */
@@ -679,20 +680,20 @@
       font-size: 0.6rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--gold, #f4c842);
+      color: var(--gold-ink);
       margin-bottom: 2px;
     }
     .perk-toolkit-row p {
       font-family: var(--font-body);
       font-size: 0.72rem;
-      color: rgba(255,255,255,0.75);
+      color: var(--ink-78);
       line-height: 1.55;
       margin: 0;
     }
     .perk-research-source {
       display: inline;
       font-size: 0.65rem;
-      color: rgba(244,200,66,0.65);
+      color: var(--gold-ink-65);
       font-style: italic;
     }
 
@@ -700,7 +701,7 @@
   .plan-persona, .tier-persona {
     font-family: var(--font-body);
     font-size: 0.78rem;
-    color: rgba(255,255,255,0.65);
+    color: var(--ink-62);
     line-height: 1.55;
     margin: 0 0 8px 0;
     font-style: italic;
@@ -725,7 +726,7 @@
     display: inline-block;
     background: rgba(244,200,66,0.15);
     border: 1.5px solid var(--gold, #f4c842);
-    color: var(--gold, #f4c842);
+    color: var(--gold-ink);
     font-family: var(--font-accent);
     font-size: 0.7rem;
     letter-spacing: 0.14em;
@@ -741,7 +742,7 @@
     border-radius: 999px;
     border: 1.5px solid var(--gold, #f4c842);
     background: transparent;
-    color: var(--gold, #f4c842);
+    color: var(--gold-ink);
     font-family: var(--font-body);
     font-weight: 700;
     font-size: 0.9rem;
@@ -819,8 +820,8 @@
 </style>
 </head>
 <body class="subpage-body">
-<div class="app-move-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
-  <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">A change for our families —</strong> your story has always arrived by email at 5&nbsp;AM Mountain. We are moving it all onto the website and into the app: the nightly story and lullabies, the Virtue Library, and your Family Story Library, all in one place.
+<div class="app-move-banner" role="note" style="background:linear-gradient(90deg,var(--page),var(--page-2));border-bottom:1px solid rgba(245,197,24,0.35);color:var(--ink);text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
+  <span style="font-size:1.05rem;">📱</span> <strong style="color:var(--gold-ink);">A change for our families —</strong> your story has always arrived by email at 5&nbsp;AM Mountain. We are moving it all onto the website and into the app: the nightly story and lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
   <!-- ── Navigation ── -->
@@ -1120,7 +1121,7 @@
 
   <!-- ★ AMERICA 250 CELEBRATION RIBBON ★ -->
   <!-- ── Page Hero ── -->
-  <section class="page-hero">
+  <section class="page-hero on-photo">
     <div class="page-hero-content">
       <h1>Join the Journey</h1>
       <div class="star-divider">✦ &nbsp; ✦ &nbsp; ✦</div>
@@ -1141,7 +1142,7 @@
         border:none;border-radius:50px;padding:0.9rem 2.25rem;
         cursor:pointer;text-decoration:none;
       " onclick="return openTrialSignup()">Try the First 7 Days Free</a>
-      <p style="font-family: var(--font-body);font-size:0.78rem;color:rgba(255,255,255,0.55);text-align:center;margin:0.75rem 0 0;">
+      <p style="font-family: var(--font-body);font-size:0.78rem;color:var(--ink-55);text-align:center;margin:0.75rem 0 0;">
         Join other LDS and Christian families. Cancel anytime.
       </p>
     </div>
@@ -1164,8 +1165,8 @@
           <div class="tier-icon">🏮</div>
           <div class="tier-name">The Lantern</div>
           <div class="tier-price">$49<span>/year</span></div>
-          <div class="tier-price-note" style="font-size:0.95rem;color:var(--gold,#f4c842);font-weight:800;margin-top:2px;">just $4.08 a month</div>
-          <div class="tier-price-note" style="font-size:0.88rem;color:rgba(255,255,255,0.68);margin-top:4px;">or <strong style="color:#fff;">$6.99/month</strong> &mdash; yearly saves you $35</div>
+          <div class="tier-price-note" style="font-size:0.95rem;color:var(--gold-ink);font-weight:800;margin-top:2px;">just $4.08 a month</div>
+          <div class="tier-price-note" style="font-size:0.88rem;color:var(--ink-70);margin-top:4px;">or <strong style="color:var(--ink);">$6.99/month</strong> &mdash; yearly saves you $35</div>
           <p class="tier-persona">Best for families beginning a bedtime scripture routine — one quiet story and a soothing lullaby is all you need to start building a lifelong habit.</p>
           <ul class="tier-perks">
             <li class="has-preview" data-product="email">
@@ -1174,7 +1175,7 @@
               <div class="perk-popup">
                   <div class="perk-popup-media" data-product="email" style="cursor:zoom-in;">
                     <img src="images/email-preview/email-card.jpg" alt="The 5 AM Email preview" style="width:100%;height:130px;object-fit:cover;object-position:top;border-radius:8px;display:block;">
-                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:rgba(244,200,66,0.7);margin-top:4px;">Click to read a real one, start to finish &#8599;</div>
+                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to read a real one, start to finish &#8599;</div>
                   </div>
                 <strong class="perk-popup-name">The 5 AM Email</strong>
                 <p class="perk-popup-desc">Ready by 5 AM Mountain Standard Time every morning with tonight's story in a nutshell, the background behind it, the main gospel principle, the key scripture, a one-tap link to the illustrated story PDF, and three questions in <em>A Parent's Heart</em> to carry with you all day.</p>
@@ -1200,7 +1201,7 @@
               <div class="perk-popup">
                 <div class="perk-popup-media" data-product="story" style="cursor:zoom-in;">
                   <img src="images/story-pdf/page-06.jpg" alt="Story preview" style="width:100%;height:130px;object-fit:cover;border-radius:8px;display:block;">
-                  <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:rgba(244,200,66,0.7);margin-top:4px;">Click to flip through all 12 pages ↗</div>
+                  <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to flip through all 12 pages ↗</div>
                 </div>
                 <strong class="perk-popup-name">Nightly Scripture Story & PDF</strong>
                 <p class="perk-popup-desc">A 5–10 minute illustrated bedtime story featuring Beau, Scout, Willow, and Wren — waiting on the website and in the app by 5 AM Mountain Standard Time (Denver) every morning, with a beautifully formatted PDF ready to read on any device or print for a binder.</p>
@@ -1227,7 +1228,7 @@
                 <div class="perk-popup-media" data-product="lullaby" style="cursor:zoom-in;">
                   <!-- MEDIA: lullaby -->
                   <img src="images/lullaby-sheet.jpg" alt="A Little Travelers' Lullaby — full lyrics" style="width:100%;border-radius:8px;display:block;">
-                  <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:rgba(244,200,66,0.7);margin-top:4px;">Click to view full lullaby sheet ↗</div>
+                  <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to view full lullaby sheet ↗</div>
                 </div>
                 <strong class="perk-popup-name">The Lantern Lullaby</strong>
                 <p class="perk-popup-desc">Little Scripture Travelers' signature lullaby — includes the full printable lyrics and a sung audio recording. The same comforting song every night, so your child always knows bedtime is here.</p>
@@ -1253,7 +1254,7 @@
                 <div class="perk-popup">
                   <div class="perk-popup-media" data-product="library" style="cursor:zoom-in;">
                     <img src="images/virtue-library-preview.jpg" alt="The Virtue Library — every story tagged by the virtue it teaches" style="width:100%;height:130px;object-fit:cover;object-position:top;border-radius:8px;display:block;">
-                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:rgba(244,200,66,0.7);margin-top:4px;">Click to look through the whole library &#8599;</div>
+                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to look through the whole library &#8599;</div>
                   </div>
                   <strong class="perk-popup-name">The Virtue Library</strong>
                   <p class="perk-popup-desc">Every story in the series, tagged by the virtue it teaches, the life situation it fits, the feeling underneath it, the Traveler who guides it, and the scripture it comes from. Your child is standing in front of you with a real problem &mdash; look up what they need tonight and the story is already there.</p>
@@ -1287,7 +1288,7 @@
           <div class="tier-price"><span class="tier-coming-soon-badge">Coming Soon</span></div>
           
           <ul class="tier-perks">
-            <li style="list-style:none;text-align:center;padding:1rem 0;color:rgba(255,255,255,0.55);font-family: var(--font-body);font-size:0.85rem;">
+            <li style="list-style:none;text-align:center;padding:1rem 0;color:var(--ink-55);font-family: var(--font-body);font-size:0.85rem;">
               🔒 Products revealed at launch
             </li>
           </ul>
@@ -1301,7 +1302,7 @@
           <div class="tier-price"><span class="tier-coming-soon-badge">Coming Soon</span></div>
           
           <ul class="tier-perks">
-            <li style="list-style:none;text-align:center;padding:1rem 0;color:rgba(255,255,255,0.55);font-family: var(--font-body);font-size:0.85rem;">
+            <li style="list-style:none;text-align:center;padding:1rem 0;color:var(--ink-55);font-family: var(--font-body);font-size:0.85rem;">
               🔒 Products revealed at launch
             </li>
           </ul>
@@ -1315,7 +1316,7 @@
           <div class="tier-price"><span class="tier-coming-soon-badge">Coming Soon</span></div>
           
           <ul class="tier-perks">
-            <li style="list-style:none;text-align:center;padding:1rem 0;color:rgba(255,255,255,0.55);font-family: var(--font-body);font-size:0.85rem;">
+            <li style="list-style:none;text-align:center;padding:1rem 0;color:var(--ink-55);font-family: var(--font-body);font-size:0.85rem;">
               🔒 Products revealed at launch
             </li>
           </ul>
@@ -1378,28 +1379,28 @@
 
     <div class="footer-bottom" style="flex-direction:column;align-items:center;text-align:center;">
       <div class="social-links" style="justify-content:center;margin-bottom:0.75rem;gap:0.75rem;">
-        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
-        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
         </a>
-        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
-        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07112e"/></svg>
         </a>
-        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.14a8.16 8.16 0 0 0 4.77 1.52V7.21a4.85 4.85 0 0 1-1-.52z"/></svg>
         </a>
-        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
         </a>
       </div>
       <p style="margin-top:1rem;">We do not lecture. We do not pile on rules. We tell what happened — a beginning, a worry, and a hopeful ending — in the smallest words that still carry the meaning.</p>
       <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">© 2026 Little Scripture Travelers</p>
-      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.15);font-size:0.72rem;line-height:1.5;color:#9aa6c0;text-align:center;">
+      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid var(--edge-12);font-size:0.72rem;line-height:1.5;color:var(--ink-62);text-align:center;">
         <p style="margin:0 0 0.6rem;">Little Scripture Travelers Bedtime Stories, LLC is an independent creative endeavor. It is not affiliated with, made by, sponsored by, approved by, or endorsed by The Church of Jesus Christ of Latter-day Saints or Intellectual Reserve, Inc. All stories, illustrations, characters, lullabies, and opinions are solely those of Little Scripture Travelers and do not represent the Church.</p>
         <p style="margin:0;">&ldquo;Come, Follow Me,&rdquo; the name of The Church of Jesus Christ of Latter-day Saints, and related names and logos are trademarks of Intellectual Reserve, Inc.; any reference to them here is for identification purposes only.</p>
       </div>
@@ -1451,12 +1452,12 @@
   <!-- Lullaby full-view modal -->
   <div id="lullabyLightbox" style="
     display:none;position:fixed;inset:0;z-index:9999;
-    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    background:rgba(var(--rgb-navy-pitch), 0.93);backdrop-filter:blur(8px);
     align-items:center;justify-content:center;padding:1rem;
   ">
     <div style="
       position:relative;width:100%;max-width:680px;
-      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      background:linear-gradient(150deg,var(--page-2),var(--page));
       border:2px solid var(--gold,#f4c842);border-radius:18px;
       overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
       display:flex;flex-direction:column;max-height:90vh;
@@ -1469,7 +1470,7 @@
       ">
         <div style="font-family: var(--font-display);font-weight:600;font-size:1rem;color:var(--gold,#f4c842);">The Lantern Lullaby</div>
         <button id="lullabyLightboxClose" aria-label="Close" style="
-          background:rgba(255,255,255,0.1);border:none;color:#fff;
+          background:var(--fill-12);border:none;color:var(--ink);
           width:28px;height:28px;border-radius:50%;cursor:pointer;
           font-size:0.85rem;line-height:28px;text-align:center;
         ">✕</button>
@@ -1478,13 +1479,13 @@
       <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:1rem;">
         <!-- What's included badges -->
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9835; Sung Audio Recording Included</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#128196; Printable Lyrics</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9835; Sung Audio Recording Included</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#128196; Printable Lyrics</span>
         </div>
         <div class="lst-protected" style="border-radius:10px;overflow:hidden;"><img src="images/lullaby-sheet.jpg" alt="A Little Travelers' Lullaby — full lyrics" style="border-radius:10px;"></div>
         <div style="background:rgba(244,200,66,0.07);border:1px solid rgba(244,200,66,0.2);border-radius:10px;padding:0.85rem 1rem;margin-top:1rem;">
-          <p style="font-family: var(--font-body);font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.65;margin:0;">
-            <strong style="color:#f4c842;">What you get:</strong> The full printable lyrics sheet above and a sung audio recording of the lullaby &mdash; the same comforting song every night, so your child knows exactly what to expect at bedtime.
+          <p style="font-family: var(--font-body);font-size:0.88rem;color:var(--ink-78);line-height:1.65;margin:0;">
+            <strong style="color:var(--gold-ink);">What you get:</strong> The full printable lyrics sheet above and a sung audio recording of the lullaby &mdash; the same comforting song every night, so your child knows exactly what to expect at bedtime.
           </p>
         </div>
       </div>
@@ -1581,12 +1582,12 @@
   <!-- ── PDF Story Flipper Modal ─────────────────────────────────────── -->
   <div id="storyFlipperOverlay2" style="
     display:none;position:fixed;inset:0;z-index:9999;
-    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    background:rgba(var(--rgb-navy-pitch), 0.93);backdrop-filter:blur(8px);
     align-items:center;justify-content:center;padding:1rem;
   ">
     <div style="
       position:relative;width:100%;max-width:680px;
-      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      background:linear-gradient(150deg,var(--page-2),var(--page));
       border:2px solid var(--gold,#f4c842);border-radius:18px;
       overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
       display:flex;flex-direction:column;max-height:90vh;
@@ -1601,9 +1602,9 @@
           Ezra Loves the Scriptures — Sample Story
         </div>
         <div style="display:flex;align-items:center;gap:0.75rem;">
-          <span id="sfPageCounter2" style="font-family: var(--font-body);font-size:0.8rem;color:rgba(255,255,255,0.55);">Page 1 of 12</span>
+          <span id="sfPageCounter2" style="font-family: var(--font-body);font-size:0.8rem;color:var(--ink-55);">Page 1 of 12</span>
           <button id="sfClose2" aria-label="Close" style="
-            background:rgba(255,255,255,0.1);border:none;color:#fff;
+            background:var(--fill-12);border:none;color:var(--ink);
             width:28px;height:28px;border-radius:50%;cursor:pointer;
             font-size:0.85rem;line-height:28px;text-align:center;
           ">✕</button>
@@ -1797,12 +1798,12 @@
 
   <div id="storyRich" role="dialog" aria-modal="true" aria-label="Nightly Scripture Story and PDF preview" style="
     display:none;position:fixed;inset:0;z-index:9995;
-    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    background:rgba(var(--rgb-navy-pitch), 0.93);backdrop-filter:blur(8px);
     align-items:center;justify-content:center;padding:1rem;
   ">
     <div style="
       position:relative;width:100%;max-width:780px;
-      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      background:linear-gradient(150deg,var(--page-2),var(--page));
       border:2px solid var(--gold,#f4c842);border-radius:18px;
       overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
       display:flex;flex-direction:column;max-height:92vh;
@@ -1813,7 +1814,7 @@
       ">
         <div style="font-family: var(--font-display);font-weight:600;font-size:1rem;color:var(--gold,#f4c842);">Tonight's Story &amp; PDF</div>
         <button id="storyRichClose" aria-label="Close" style="
-          background:rgba(255,255,255,0.1);border:none;color:#fff;
+          background:var(--fill-12);border:none;color:var(--ink);
           width:28px;height:28px;border-radius:50%;cursor:pointer;
           font-size:0.85rem;line-height:28px;text-align:center;flex-shrink:0;
         ">&#x2715;</button>
@@ -1822,24 +1823,24 @@
       <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:1rem;">
 
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Ready by 5 AM</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; 12 Illustrated Pages</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Read or Print Anywhere</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; Ready by 5 AM</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; 12 Illustrated Pages</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; Read or Print Anywhere</span>
         </div>
 
-        <p style="font-family: var(--font-body);font-size:0.92rem;color:rgba(255,255,255,0.82);line-height:1.7;margin:0 0 1.1rem;">
+        <p style="font-family: var(--font-body);font-size:0.92rem;color:var(--ink-85);line-height:1.7;margin:0 0 1.1rem;">
           Every night has its own story &mdash; a 5&ndash;10 minute illustrated chapter following Beau, Scout, Willow, and Wren through the scriptures. It is written so a young child can follow it and a parent can teach from it, and it arrives as a finished PDF: ready to read from your phone in a dark room, or printed for a binder on the shelf.
         </p>
 
-        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
-          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; What's inside every story</div>
+        <div style="background:var(--fill-04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
+          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:0.7rem;">&#10022; What's inside every story</div>
           <ul style="list-style:none;padding:0;margin:0;">
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The scripture story retold</strong> &mdash; the night's chapter told in scene and dialogue a young child can actually picture.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Beau, Scout, Willow, and Wren</strong> &mdash; the same four travelers every night, so your child always has someone to walk in beside.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Full-page illustrations</strong> &mdash; artwork on nearly every page, drawn to hold a tired child's attention at the end of a long day.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The Remember moment</strong> &mdash; near the end the story pauses and names the principle out loud, in one sentence a child can repeat.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">A question to ask</strong> &mdash; one prompt before the lights go off, so the story turns into a conversation instead of a monologue.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Print-ready formatting</strong> &mdash; clean margins and page order for a home binder &mdash; or read straight from the screen, no printer needed.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">The scripture story retold</strong> &mdash; the night's chapter told in scene and dialogue a young child can actually picture.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">Beau, Scout, Willow, and Wren</strong> &mdash; the same four travelers every night, so your child always has someone to walk in beside.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">Full-page illustrations</strong> &mdash; artwork on nearly every page, drawn to hold a tired child's attention at the end of a long day.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">The Remember moment</strong> &mdash; near the end the story pauses and names the principle out loud, in one sentence a child can repeat.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">A question to ask</strong> &mdash; one prompt before the lights go off, so the story turns into a conversation instead of a monologue.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">Print-ready formatting</strong> &mdash; clean margins and page order for a home binder &mdash; or read straight from the screen, no printer needed.</span></li>
           </ul>
         </div>
 
@@ -1848,7 +1849,7 @@
             <img id="storyRichImg" src="images/story-pdf/page-07.jpg" alt="An illustrated story spread from a Little Scripture Travelers bedtime story" loading="lazy" data-nat="1242" style="width:100%;max-width:none;border-radius:10px;display:block;">
           </div>
         </div>
-        <p id="storyRichHint" style="max-width:none;width:100%;font-family: var(--font-body);font-size:0.72rem;color:rgba(255,255,255,0.55);text-align:center;margin:0.55rem 0 0;">Tap the page to enlarge &middot; tap again to fit</p>
+        <p id="storyRichHint" style="max-width:none;width:100%;font-family: var(--font-body);font-size:0.72rem;color:var(--ink-55);text-align:center;margin:0.55rem 0 0;">Tap the page to enlarge &middot; tap again to fit</p>
 
         <button type="button" id="storyRichCta" style="
           display:block;width:100%;margin-top:0.9rem;padding:0.75rem 1.5rem;
@@ -1857,11 +1858,11 @@
         ">Flip through all 12 pages &rarr;</button>
 
         <div style="background:rgba(244,200,66,0.07);border:1px solid rgba(244,200,66,0.28);border-radius:12px;padding:1rem 1.1rem;margin-top:1.2rem;">
-          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; Why a story, and why the same four travelers</div>
-          <p style="font-family: var(--font-body);font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">A principle explained to a four-year-old tends to slide off. The same principle <em>lived</em> by a character they know sticks, because the child watches someone their own size make the choice and feel what comes of it.</p>
-          <p style="font-family: var(--font-body);font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">That is why the cast never changes. Beau, Scout, Willow, and Wren show up every single night, so your child is not meeting strangers at bedtime &mdash; they are catching up with friends. The routine does the heavy lifting, and the story does the teaching, so you can simply read and be present.</p>
-          <p style="font-family: var(--font-body);font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
-            There is a measurable side to this too. Researchers at Ohio State estimated that reading one picture book a day gives a child about 78,000 words of exposure a year, and that children from literacy-rich homes hear roughly 1.4 million more words before kindergarten than children who are never read to. <a href="https://ehe.osu.edu/news/listing/importance-reading-kids-daily-0" target="_blank" rel="noopener" style="color:#f4c842;text-decoration:underline;">(Logan et al., Ohio State University)</a>
+          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:0.7rem;">&#10022; Why a story, and why the same four travelers</div>
+          <p style="font-family: var(--font-body);font-size:0.88rem;color:var(--ink-78);line-height:1.7;margin:0 0 0.8rem;">A principle explained to a four-year-old tends to slide off. The same principle <em>lived</em> by a character they know sticks, because the child watches someone their own size make the choice and feel what comes of it.</p>
+          <p style="font-family: var(--font-body);font-size:0.88rem;color:var(--ink-78);line-height:1.7;margin:0 0 0.8rem;">That is why the cast never changes. Beau, Scout, Willow, and Wren show up every single night, so your child is not meeting strangers at bedtime &mdash; they are catching up with friends. The routine does the heavy lifting, and the story does the teaching, so you can simply read and be present.</p>
+          <p style="font-family: var(--font-body);font-size:0.78rem;color:var(--ink-55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
+            There is a measurable side to this too. Researchers at Ohio State estimated that reading one picture book a day gives a child about 78,000 words of exposure a year, and that children from literacy-rich homes hear roughly 1.4 million more words before kindergarten than children who are never read to. <a href="https://ehe.osu.edu/news/listing/importance-reading-kids-daily-0" target="_blank" rel="noopener" style="color:var(--gold-ink);text-decoration:underline;">(Logan et al., Ohio State University)</a>
           </p>
         </div>
 
@@ -1871,12 +1872,12 @@
 
   <div id="lullabyRich" role="dialog" aria-modal="true" aria-label="The Lantern Lullaby preview" style="
     display:none;position:fixed;inset:0;z-index:9995;
-    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    background:rgba(var(--rgb-navy-pitch), 0.93);backdrop-filter:blur(8px);
     align-items:center;justify-content:center;padding:1rem;
   ">
     <div style="
       position:relative;width:100%;max-width:780px;
-      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      background:linear-gradient(150deg,var(--page-2),var(--page));
       border:2px solid var(--gold,#f4c842);border-radius:18px;
       overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
       display:flex;flex-direction:column;max-height:92vh;
@@ -1887,7 +1888,7 @@
       ">
         <div style="font-family: var(--font-display);font-weight:600;font-size:1rem;color:var(--gold,#f4c842);">The Lantern Lullaby</div>
         <button id="lullabyRichClose" aria-label="Close" style="
-          background:rgba(255,255,255,0.1);border:none;color:#fff;
+          background:var(--fill-12);border:none;color:var(--ink);
           width:28px;height:28px;border-radius:50%;cursor:pointer;
           font-size:0.85rem;line-height:28px;text-align:center;flex-shrink:0;
         ">&#x2715;</button>
@@ -1896,23 +1897,23 @@
       <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:1rem;">
 
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; The Same Song Every Night</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Printable Lyrics Sheet</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Sung Audio Recording</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; The Same Song Every Night</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; Printable Lyrics Sheet</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; Sung Audio Recording</span>
         </div>
 
-        <p style="font-family: var(--font-body);font-size:0.92rem;color:rgba(255,255,255,0.82);line-height:1.7;margin:0 0 1.1rem;">
+        <p style="font-family: var(--font-body);font-size:0.92rem;color:var(--ink-85);line-height:1.7;margin:0 0 1.1rem;">
           One song, sung the same way every night. Not a new tune to learn each week &mdash; the same familiar melody, until your child stops hearing a song and starts hearing <em>the day is over and you are safe</em>.
         </p>
 
-        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
-          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; What comes with the lullaby</div>
+        <div style="background:var(--fill-04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
+          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:0.7rem;">&#10022; What comes with the lullaby</div>
           <ul style="list-style:none;padding:0;margin:0;">
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The full lyrics</strong> &mdash; every verse, set large and clean enough to read by a nightlight.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">A sung recording</strong> &mdash; for the nights you have no voice left &mdash; press play and let it carry the room.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">A printable sheet</strong> &mdash; tape it inside a closet door or slip it into the bedtime binder.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The same song every night</strong> &mdash; no rotation and no new words. The repetition is the entire point.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Written for the Travelers</strong> &mdash; the same world as the stories, so the song closes what the story opened.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">The full lyrics</strong> &mdash; every verse, set large and clean enough to read by a nightlight.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">A sung recording</strong> &mdash; for the nights you have no voice left &mdash; press play and let it carry the room.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">A printable sheet</strong> &mdash; tape it inside a closet door or slip it into the bedtime binder.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">The same song every night</strong> &mdash; no rotation and no new words. The repetition is the entire point.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">Written for the Travelers</strong> &mdash; the same world as the stories, so the song closes what the story opened.</span></li>
           </ul>
         </div>
 
@@ -1921,15 +1922,15 @@
             <img id="lullabyRichImg" src="images/lullaby-sheet.jpg" alt="A Little Travelers' Lullaby — full printable lyrics sheet" loading="lazy" data-nat="828" style="width:100%;max-width:none;border-radius:10px;display:block;">
           </div>
         </div>
-        <p id="lullabyRichHint" style="max-width:none;width:100%;font-family: var(--font-body);font-size:0.72rem;color:rgba(255,255,255,0.55);text-align:center;margin:0.55rem 0 0;">Tap the lyrics sheet to enlarge &middot; tap again to fit</p>
+        <p id="lullabyRichHint" style="max-width:none;width:100%;font-family: var(--font-body);font-size:0.72rem;color:var(--ink-55);text-align:center;margin:0.55rem 0 0;">Tap the lyrics sheet to enlarge &middot; tap again to fit</p>
 
 
         <div style="background:rgba(244,200,66,0.07);border:1px solid rgba(244,200,66,0.28);border-radius:12px;padding:1rem 1.1rem;margin-top:1.2rem;">
-          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; Why the same song every night</div>
-          <p style="font-family: var(--font-body);font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">A lullaby is not background music. It is a signal. Sung at the same point in the same order every night, it becomes something the body learns to answer before a single word of instruction is spoken &mdash; which is why bedtime resistance so often fades once the song is fixed.</p>
-          <p style="font-family: var(--font-body);font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">Nothing to negotiate, nothing to announce. The song starts, and the room changes.</p>
-          <p style="font-family: var(--font-body);font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
-            This is not just sentiment. In a study of 144 infants published in <em>Nature Human Behaviour</em>, babies relaxed measurably &mdash; slower heart rate and reduced arousal &mdash; when they heard lullabies, including lullabies from unfamiliar cultures in languages they had never heard. The calming appears to be built into what a lullaby is. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8220405/" target="_blank" rel="noopener" style="color:#f4c842;text-decoration:underline;">(Bainbridge et al., Nature Human Behaviour)</a>
+          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:0.7rem;">&#10022; Why the same song every night</div>
+          <p style="font-family: var(--font-body);font-size:0.88rem;color:var(--ink-78);line-height:1.7;margin:0 0 0.8rem;">A lullaby is not background music. It is a signal. Sung at the same point in the same order every night, it becomes something the body learns to answer before a single word of instruction is spoken &mdash; which is why bedtime resistance so often fades once the song is fixed.</p>
+          <p style="font-family: var(--font-body);font-size:0.88rem;color:var(--ink-78);line-height:1.7;margin:0 0 0.8rem;">Nothing to negotiate, nothing to announce. The song starts, and the room changes.</p>
+          <p style="font-family: var(--font-body);font-size:0.78rem;color:var(--ink-55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
+            This is not just sentiment. In a study of 144 infants published in <em>Nature Human Behaviour</em>, babies relaxed measurably &mdash; slower heart rate and reduced arousal &mdash; when they heard lullabies, including lullabies from unfamiliar cultures in languages they had never heard. The calming appears to be built into what a lullaby is. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8220405/" target="_blank" rel="noopener" style="color:var(--gold-ink);text-decoration:underline;">(Bainbridge et al., Nature Human Behaviour)</a>
           </p>
         </div>
 
@@ -1941,12 +1942,12 @@
   <!-- ── The Virtue Library Lightbox ───────────────────────────────────── -->
   <div id="libraryRich" role="dialog" aria-modal="true" aria-label="The Virtue Library preview" style="
     display:none;position:fixed;inset:0;z-index:9995;
-    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    background:rgba(var(--rgb-navy-pitch), 0.93);backdrop-filter:blur(8px);
     align-items:center;justify-content:center;padding:1rem;
   ">
     <div style="
       position:relative;width:100%;max-width:780px;
-      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      background:linear-gradient(150deg,var(--page-2),var(--page));
       border:2px solid var(--gold,#f4c842);border-radius:18px;
       overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
       display:flex;flex-direction:column;max-height:92vh;
@@ -1957,7 +1958,7 @@
       ">
         <div style="font-family: var(--font-display);font-weight:600;font-size:1rem;color:var(--gold,#f4c842);">The Virtue Library</div>
         <button id="libraryRichClose" aria-label="Close" style="
-          background:rgba(255,255,255,0.1);border:none;color:#fff;
+          background:var(--fill-12);border:none;color:var(--ink);
           width:28px;height:28px;border-radius:50%;cursor:pointer;
           font-size:0.85rem;line-height:28px;text-align:center;flex-shrink:0;
         ">&#x2715;</button>
@@ -1966,23 +1967,23 @@
       <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:1rem;">
 
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; 91 Stories, 36 Virtues</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Five Ways to Search</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; 3 Stories Free</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; 91 Stories, 36 Virtues</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; Five Ways to Search</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; 3 Stories Free</span>
         </div>
 
-        <p style="font-family: var(--font-body);font-size:0.92rem;color:rgba(255,255,255,0.82);line-height:1.7;margin:0 0 1.1rem;">
+        <p style="font-family: var(--font-body);font-size:0.92rem;color:var(--ink-85);line-height:1.7;margin:0 0 1.1rem;">
           Most of us reach for the same three or four stories we happen to remember. This is the catalogue behind the whole series &mdash; every story tagged by what it teaches, so you can look up the thing your child is actually facing and walk into the room already holding the right one.
         </p>
 
-        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
-          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; Five ways to look something up</div>
+        <div style="background:var(--fill-04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
+          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:0.7rem;">&#10022; Five ways to look something up</div>
           <ul style="list-style:none;padding:0;margin:0;">
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">By virtue or principle</strong> &mdash; thirty-six of them, from Courage and Obedience to Keeping Promises and Repentance.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">By life situation</strong> &mdash; the twenty moments that actually happen: a lie, a lost temper, a first day, a hard goodbye.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">By feeling</strong> &mdash; start from what your child is feeling tonight rather than from what you want to teach.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">By Traveler</strong> &mdash; every story Beau, Scout, Willow, or Wren carries, for the child who has picked a favorite.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">By scripture</strong> &mdash; go the other direction and find the story that belongs to the verse you are already reading.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">By virtue or principle</strong> &mdash; thirty-six of them, from Courage and Obedience to Keeping Promises and Repentance.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">By life situation</strong> &mdash; the twenty moments that actually happen: a lie, a lost temper, a first day, a hard goodbye.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">By feeling</strong> &mdash; start from what your child is feeling tonight rather than from what you want to teach.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">By Traveler</strong> &mdash; every story Beau, Scout, Willow, or Wren carries, for the child who has picked a favorite.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">By scripture</strong> &mdash; go the other direction and find the story that belongs to the verse you are already reading.</span></li>
           </ul>
         </div>
 
@@ -1991,7 +1992,7 @@
             <img id="libraryRichImg" src="images/virtue-library-preview.jpg" alt="The Virtue Library — virtues and principles, each with the number of stories that teach it" loading="lazy" data-nat="1200" style="width:100%;max-width:none;border-radius:10px;display:block;">
           </div>
         </div>
-        <p id="libraryRichHint" style="max-width:none;width:100%;font-family: var(--font-body);font-size:0.72rem;color:rgba(255,255,255,0.55);text-align:center;margin:0.55rem 0 0;">Tap the library to enlarge &middot; tap again to fit</p>
+        <p id="libraryRichHint" style="max-width:none;width:100%;font-family: var(--font-body);font-size:0.72rem;color:var(--ink-55);text-align:center;margin:0.55rem 0 0;">Tap the library to enlarge &middot; tap again to fit</p>
 
         <a href="virtue-library.html" style="
           display:block;text-align:center;margin:1rem 0 0;
@@ -2001,11 +2002,11 @@
         ">Browse the whole library &#8599;</a>
 
         <div style="background:rgba(244,200,66,0.07);border:1px solid rgba(244,200,66,0.28);border-radius:12px;padding:1rem 1.1rem;margin-top:1.2rem;">
-          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; Why it is organized this way</div>
-          <p style="font-family: var(--font-body);font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">Knowing is only the beginning. No catalogue can tell you what your child's heart needs tonight &mdash; this is a tool, not a substitute. You are the one who knows them. Ask Heavenly Father, and then use what you find here to teach with.</p>
-          <p style="font-family: var(--font-body);font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">Browsing is open to everyone, and three complete stories are free &mdash; no card, no subscription. The Lantern opens all ninety-one.</p>
-          <p style="font-family: var(--font-body);font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
-            Researchers testing whether storybooks actually shift children's moral beliefs found that most did not &mdash; abstract fables about talking animals changed very little. Stories worked when they were directly applicable to the situation the child was already dealing with. That is the entire reason this library is organized by the problem in front of you tonight instead of by book order. <a href="https://www.psychologytoday.com/us/blog/moral-boundaries/202010/do-children-learn-moral-lessons-storybooks" target="_blank" rel="noopener" style="color:#f4c842;text-decoration:underline;">(Psychology Today, on children's moral learning from storybooks)</a>
+          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:0.7rem;">&#10022; Why it is organized this way</div>
+          <p style="font-family: var(--font-body);font-size:0.88rem;color:var(--ink-78);line-height:1.7;margin:0 0 0.8rem;">Knowing is only the beginning. No catalogue can tell you what your child's heart needs tonight &mdash; this is a tool, not a substitute. You are the one who knows them. Ask Heavenly Father, and then use what you find here to teach with.</p>
+          <p style="font-family: var(--font-body);font-size:0.88rem;color:var(--ink-78);line-height:1.7;margin:0 0 0.8rem;">Browsing is open to everyone, and three complete stories are free &mdash; no card, no subscription. The Lantern opens all ninety-one.</p>
+          <p style="font-family: var(--font-body);font-size:0.78rem;color:var(--ink-55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
+            Researchers testing whether storybooks actually shift children's moral beliefs found that most did not &mdash; abstract fables about talking animals changed very little. Stories worked when they were directly applicable to the situation the child was already dealing with. That is the entire reason this library is organized by the problem in front of you tonight instead of by book order. <a href="https://www.psychologytoday.com/us/blog/moral-boundaries/202010/do-children-learn-moral-lessons-storybooks" target="_blank" rel="noopener" style="color:var(--gold-ink);text-decoration:underline;">(Psychology Today, on children's moral learning from storybooks)</a>
           </p>
         </div>
 
@@ -2081,12 +2082,12 @@
   </script>
   <div id="emailLightbox" role="dialog" aria-modal="true" aria-label="The 5 AM Email preview" style="
     display:none;position:fixed;inset:0;z-index:9999;
-    background:rgba(4,8,20,0.93);backdrop-filter:blur(8px);
+    background:rgba(var(--rgb-navy-pitch), 0.93);backdrop-filter:blur(8px);
     align-items:center;justify-content:center;padding:1rem;
   ">
     <div style="
       position:relative;width:100%;max-width:780px;
-      background:linear-gradient(150deg,#0d1b4b,#07112e);
+      background:linear-gradient(150deg,var(--page-2),var(--page));
       border:2px solid var(--gold,#f4c842);border-radius:18px;
       overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);
       display:flex;flex-direction:column;max-height:92vh;
@@ -2097,7 +2098,7 @@
       ">
         <div style="font-family: var(--font-display);font-weight:600;font-size:1rem;color:var(--gold,#f4c842);">The 5&nbsp;AM Email</div>
         <button id="emailLightboxClose" aria-label="Close" style="
-          background:rgba(255,255,255,0.1);border:none;color:#fff;
+          background:var(--fill-12);border:none;color:var(--ink);
           width:28px;height:28px;border-radius:50%;cursor:pointer;
           font-size:0.85rem;line-height:28px;text-align:center;flex-shrink:0;
         ">&#x2715;</button>
@@ -2106,24 +2107,24 @@
       <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:1rem;">
 
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Ready by 5 AM Mountain</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; 3 Questions for You</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:#f4c842;">&#9733; Story PDF Inside</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; Ready by 5 AM Mountain</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; 3 Questions for You</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(244,200,66,0.12);border:1px solid rgba(244,200,66,0.35);border-radius:999px;padding:4px 12px;font-family: var(--font-body);font-size:0.78rem;font-weight:700;color:var(--gold-ink);">&#9733; Story PDF Inside</span>
         </div>
 
-        <p style="font-family: var(--font-body);font-size:0.92rem;color:rgba(255,255,255,0.82);line-height:1.7;margin:0 0 1.1rem;">
-          Every morning by <strong style="color:#f4c842;">5 AM Mountain Standard Time</strong> this is waiting for you on the website and in the app &mdash; long before anyone needs anything from you. Here is a real one, start to finish.
+        <p style="font-family: var(--font-body);font-size:0.92rem;color:var(--ink-85);line-height:1.7;margin:0 0 1.1rem;">
+          Every morning by <strong style="color:var(--gold-ink);">5 AM Mountain Standard Time</strong> this is waiting for you on the website and in the app &mdash; long before anyone needs anything from you. Here is a real one, start to finish.
         </p>
 
-        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
-          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; What's inside every morning</div>
+        <div style="background:var(--fill-04);border:1px solid rgba(244,200,66,0.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.2rem;">
+          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:0.7rem;">&#10022; What's inside every morning</div>
           <ul style="list-style:none;padding:0;margin:0;">
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The story in a nutshell</strong> &mdash; tonight's whole story summarized in a paragraph, so you know where bedtime is headed before the day begins.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">A little background for you</strong> &mdash; the history, place, and setting behind the story, written for the parent rather than the child.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">The Heart of Tonight's Story</strong> &mdash; the main gospel principle, plus the key lesson stated simply enough for a young child.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Key Scripture</strong> &mdash; the verse of the day and exactly which chapter to open if you want to read it together.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">A Parent's Heart</strong> &mdash; three questions to carry with you all day (more on these below).</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;flex-shrink:0;">&#10022;</span><span><strong style="color:#fff;">Read tonight's story</strong> &mdash; one tap to the full illustrated PDF, ready to read on any device or print for a binder.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">The story in a nutshell</strong> &mdash; tonight's whole story summarized in a paragraph, so you know where bedtime is headed before the day begins.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">A little background for you</strong> &mdash; the history, place, and setting behind the story, written for the parent rather than the child.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">The Heart of Tonight's Story</strong> &mdash; the main gospel principle, plus the key lesson stated simply enough for a young child.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">Key Scripture</strong> &mdash; the verse of the day and exactly which chapter to open if you want to read it together.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">A Parent's Heart</strong> &mdash; three questions to carry with you all day (more on these below).</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.6;padding:0.35rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);flex-shrink:0;">&#10022;</span><span><strong style="color:var(--ink);">Read tonight's story</strong> &mdash; one tap to the full illustrated PDF, ready to read on any device or print for a binder.</span></li>
           </ul>
         </div>
 
@@ -2132,23 +2133,23 @@
             <img id="emailZoomImg" src="images/email-preview/email-full.jpg" alt="A real 5 AM email from Little Scripture Travelers — Book 8, Week 1, Day 4: Ezra Loves the Scriptures" loading="lazy" style="width:100%;max-width:none;border-radius:10px;display:block;">
           </div>
         </div>
-        <p id="emailZoomHint" style="max-width:none;width:100%;font-family: var(--font-body);font-size:0.72rem;color:rgba(255,255,255,0.55);text-align:center;margin:0.55rem 0 0;">Tap the email to enlarge &middot; tap again to fit</p>
+        <p id="emailZoomHint" style="max-width:none;width:100%;font-family: var(--font-body);font-size:0.72rem;color:var(--ink-55);text-align:center;margin:0.55rem 0 0;">Tap the email to enlarge &middot; tap again to fit</p>
 
         <div style="background:rgba(244,200,66,0.07);border:1px solid rgba(244,200,66,0.28);border-radius:12px;padding:1rem 1.1rem;margin-top:1.2rem;">
-          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:#f4c842;margin-bottom:0.7rem;">&#10022; Why the three questions come at 5 AM</div>
-          <p style="font-family: var(--font-body);font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">
-            The three questions in <em>A Parent's Heart</em> are not a quiz for your child. They are for <strong style="color:#f4c842;">you</strong>, and they arrive early on purpose &mdash; so they can sit with you through the whole day.
+          <div style="font-family: var(--font-accent);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:0.7rem;">&#10022; Why the three questions come at 5 AM</div>
+          <p style="font-family: var(--font-body);font-size:0.88rem;color:var(--ink-78);line-height:1.7;margin:0 0 0.8rem;">
+            The three questions in <em>A Parent's Heart</em> are not a quiz for your child. They are for <strong style="color:var(--gold-ink);">you</strong>, and they arrive early on purpose &mdash; so they can sit with you through the whole day.
           </p>
           <ul style="list-style:none;padding:0;margin:0 0 0.9rem;">
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.65;padding:0.3rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;font-weight:700;flex-shrink:0;">1.</span><span>A moment from <strong style="color:#fff;">your own life</strong> when you lived what tonight's story teaches.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.65;padding:0.3rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;font-weight:700;flex-shrink:0;">2.</span><span>What that principle <strong style="color:#fff;">actually feels like</strong> on a hard day &mdash; something your child can recognize in you.</span></li>
-            <li style="font-family: var(--font-body);font-size:0.86rem;color:rgba(255,255,255,0.78);line-height:1.65;padding:0.3rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:#f4c842;font-weight:700;flex-shrink:0;">3.</span><span>A <strong style="color:#fff;">grandparent or ancestor</strong> who lived it before you were born, and how their example still reaches your family.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.65;padding:0.3rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);font-weight:700;flex-shrink:0;">1.</span><span>A moment from <strong style="color:var(--ink);">your own life</strong> when you lived what tonight's story teaches.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.65;padding:0.3rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);font-weight:700;flex-shrink:0;">2.</span><span>What that principle <strong style="color:var(--ink);">actually feels like</strong> on a hard day &mdash; something your child can recognize in you.</span></li>
+            <li style="font-family: var(--font-body);font-size:0.86rem;color:var(--ink-78);line-height:1.65;padding:0.3rem 0;display:flex;gap:0.55rem;align-items:flex-start;"><span style="color:var(--gold-ink);font-weight:700;flex-shrink:0;">3.</span><span>A <strong style="color:var(--ink);">grandparent or ancestor</strong> who lived it before you were born, and how their example still reaches your family.</span></li>
           </ul>
-          <p style="font-family: var(--font-body);font-size:0.88rem;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 0.8rem;">
+          <p style="font-family: var(--font-body);font-size:0.88rem;color:var(--ink-78);line-height:1.7;margin:0 0 0.8rem;">
             You read them over breakfast and let them turn over quietly while you work, drive, and fold laundry. By the time the lights go low, you are not simply reading a story to your child &mdash; you are telling them about the time <em>your</em> grandmother held on, and the scripture story has become your family's story too.
           </p>
-          <p style="font-family: var(--font-body);font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
-            This is the part parents tell us they did not expect. Researchers at Emory University's Family Narratives Lab found that children in families who told coherent, emotionally open stories about hard family moments had better self-esteem, stronger social competence, higher-quality friendships, and less anxiety and stress. <a href="https://news.emory.edu/stories/2020/04/how-family-stories-help-children-weather-hard-times" target="_blank" rel="noopener" style="color:#f4c842;text-decoration:underline;">(Fivush &amp; Duke, Emory University)</a>
+          <p style="font-family: var(--font-body);font-size:0.78rem;color:var(--ink-55);line-height:1.65;margin:0;border-top:1px solid rgba(244,200,66,0.18);padding-top:0.75rem;">
+            This is the part parents tell us they did not expect. Researchers at Emory University's Family Narratives Lab found that children in families who told coherent, emotionally open stories about hard family moments had better self-esteem, stronger social competence, higher-quality friendships, and less anxiety and stress. <a href="https://news.emory.edu/stories/2020/04/how-family-stories-help-children-weather-hard-times" target="_blank" rel="noopener" style="color:var(--gold-ink);text-decoration:underline;">(Fivush &amp; Duke, Emory University)</a>
           </p>
         </div>
 

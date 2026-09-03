@@ -74,7 +74,7 @@
         (lines ? '<ul class="lg-list">' + lines + "</ul>" : "") +
         '<a class="lg-cta" href="subscribe.html#plans" id="lg-go">Start the free week</a>' +
         '<p class="lg-fine">Cancel any time in two clicks &mdash; ' +
-          '<a href="cancel.html" style="color:rgba(255,255,255,.6);">here is how</a>.<br>' +
+          '<a href="cancel.html" style="color:var(--ink-62);">here is how</a>.<br>' +
           'Already a subscriber? <button type="button" id="lg-in">Sign in</button>' +
           ' &middot; <button type="button" id="lg-later">Keep looking around</button></p>' +
       "</div>";

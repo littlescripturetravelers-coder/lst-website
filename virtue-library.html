@@ -14,10 +14,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
+  <script src="js/lst-theme.js"></script>
   <style>
     /* ===== PAGE HERO ===== */
     .page-hero {
-      background: linear-gradient(160deg,#07112e,#0d1b4b 50%,#0a1640);
+      background: linear-gradient(160deg,var(--page),var(--page-2) 50%,var(--page-2));
       padding: 4.5rem 1.25rem 3.25rem;
       text-align: center;
       position: relative;
@@ -37,14 +38,14 @@
     .page-hero-content { position:relative; z-index:1; max-width:56rem; margin:0 auto; }
     .page-eyebrow {
       display:inline-block; font-family: var(--font-accent); font-size:.75rem;
-      letter-spacing:.16em; text-transform:uppercase; color:#F5C518; margin-bottom:1rem;
+      letter-spacing:.16em; text-transform:uppercase; color:var(--gold-ink); margin-bottom:1rem;
     }
     .page-hero h1 {
-      font-family: var(--font-display); font-weight:600; color:#fff;
+      font-family: var(--font-display); font-weight:600; color:var(--ink);
       font-size:clamp(2rem,5.2vw,3.35rem); line-height:1.1; margin:0 0 1rem;
     }
     .page-hero .subtitle {
-      color:rgba(255,255,255,.86); font-size:clamp(1rem,2vw,1.18rem);
+      color:var(--ink-85); font-size:clamp(1rem,2vw,1.18rem);
       line-height:1.65; max-width:44rem; margin:0 auto;
     }
     .star-divider { margin:1.75rem auto 0; display:flex; align-items:center; justify-content:center; gap:.9rem; max-width:16rem; }
@@ -52,7 +53,7 @@
       content:""; flex:1; height:1px;
       background:linear-gradient(90deg,transparent,rgba(245,197,24,.65),transparent);
     }
-    .star-divider span { color:#F5C518; font-size:1rem; }
+    .star-divider span { color:var(--gold-ink); font-size:1rem; }
 
     /* ===== FRAMING / INTRO ===== */
     .vl-frame { background:#fdfcf8; padding:3.25rem 1.25rem; }
@@ -66,7 +67,7 @@
     }
     .vl-prayer {
       margin-top:2rem; padding:1.5rem 1.65rem;
-      background:linear-gradient(135deg,rgba(13,27,75,.045),rgba(245,197,24,.09));
+      background:linear-gradient(135deg,rgba(var(--rgb-navy-mid), .045),rgba(245,197,24,.09));
       border-left:4px solid #F5C518; border-radius:.65rem;
     }
     .vl-prayer p { margin:0; font-size:1.02rem; line-height:1.72; color:#1a2c6b; }
@@ -78,107 +79,107 @@
       font-family: var(--font-accent); font-size:.72rem; letter-spacing:.15em;
       text-transform:uppercase; color:#1a2c6b; opacity:.72; margin-bottom:.7rem;
     }
-    .vl-bar { height:12px; background:rgba(13,27,75,.1); border-radius:99px; overflow:hidden; }
+    .vl-bar { height:12px; background:rgba(var(--rgb-navy-mid), .1); border-radius:99px; overflow:hidden; }
     .vl-bar-fill {
       height:100%; border-radius:99px;
-      background:linear-gradient(90deg,#1a2c6b,#F5C518);
+      background:linear-gradient(90deg,var(--page-3),#F5C518);
       transition:width 1.1s cubic-bezier(.22,1,.36,1);
     }
     .vl-growth-note { margin-top:.7rem; font-size:.92rem; color:#4a5578; }
 
     /* ===== SEARCH SHELL ===== */
-    .vl-tool { background:linear-gradient(180deg,#07112e,#0a1640); padding:3rem 1.25rem 4rem; }
+    .vl-tool { background:linear-gradient(180deg,var(--page),var(--page-2)); padding:3rem 1.25rem 4rem; }
     .vl-tool-inner { max-width:74rem; margin:0 auto; }
     .vl-axes { display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin-bottom:1.6rem; }
     .vl-axis {
       font-family: var(--font-display); font-weight:500; font-size:.95rem;
       padding:.62rem 1.25rem; border-radius:99px; cursor:pointer;
-      background:rgba(255,255,255,.07); color:rgba(255,255,255,.8);
-      border:1.5px solid rgba(255,255,255,.15); transition:all .2s ease;
+      background:var(--fill-08); color:var(--ink-78);
+      border:1.5px solid var(--edge-12); transition:all .2s ease;
     }
-    .vl-axis:hover { background:rgba(255,255,255,.13); color:#fff; }
+    .vl-axis:hover { background:var(--fill-12); color:var(--ink); }
     .vl-axis[aria-selected="true"] {
-      background:#F5C518; color:#07112e; border-color:#F5C518; font-weight:600;
+      background:#F5C518; color:#07112e; border-color:var(--gold-ink); font-weight:600;
     }
     .vl-searchrow { display:flex; gap:.7rem; max-width:42rem; margin:0 auto 1.1rem; flex-wrap:wrap; }
     .vl-search {
       flex:1 1 16rem; padding:.85rem 1.15rem; border-radius:99px;
-      border:1.5px solid rgba(255,255,255,.2); background:rgba(255,255,255,.96);
+      border:1.5px solid var(--edge-22); background:var(--fill-16);
       font-family: var(--font-body); font-size:1rem; color:#07112e;
     }
-    .vl-search:focus { outline:none; border-color:#F5C518; box-shadow:0 0 0 3px rgba(245,197,24,.28); }
+    .vl-search:focus { outline:none; border-color:var(--gold-ink); box-shadow:0 0 0 3px rgba(245,197,24,.28); }
     .vl-stage {
-      padding:.85rem 1.15rem; border-radius:99px; border:1.5px solid rgba(255,255,255,.2);
-      background:rgba(255,255,255,.96); font-family: var(--font-body); font-size:.98rem; color:#07112e;
+      padding:.85rem 1.15rem; border-radius:99px; border:1.5px solid var(--edge-22);
+      background:var(--fill-16); font-family: var(--font-body); font-size:.98rem; color:#07112e;
     }
     .vl-count {
-      text-align:center; font-size:.92rem; color:rgba(255,255,255,.62);
+      text-align:center; font-size:.92rem; color:var(--ink-62);
       margin-bottom:1.6rem; min-height:1.2em;
     }
 
     /* ===== CARD GRIDS ===== */
     .vl-grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(16.5rem,1fr)); }
     .vl-card {
-      background:rgba(255,255,255,.055); border:1.5px solid rgba(255,255,255,.12);
+      background:var(--fill-06); border:1.5px solid var(--edge-12);
       border-radius:1rem; padding:1.35rem 1.4rem; cursor:pointer;
       transition:transform .22s ease, border-color .22s ease, background .22s ease;
       text-align:left; width:100%; font-family:inherit;
     }
     .vl-card:hover {
       transform:translateY(-3px); border-color:rgba(245,197,24,.55);
-      background:rgba(255,255,255,.09);
+      background:var(--fill-08);
     }
     .vl-card:focus-visible { outline:2px solid #F5C518; outline-offset:3px; }
     .vl-cat {
       font-family: var(--font-accent); font-size:.63rem; letter-spacing:.14em;
-      text-transform:uppercase; color:#F5C518; display:block; margin-bottom:.55rem;
+      text-transform:uppercase; color:var(--gold-ink); display:block; margin-bottom:.55rem;
     }
     .vl-card h3 {
       font-family: var(--font-display); font-weight:600; font-size:1.13rem;
-      color:#fff; margin:0 0 .5rem; line-height:1.28;
+      color:var(--ink); margin:0 0 .5rem; line-height:1.28;
     }
-    .vl-card p { font-size:.92rem; line-height:1.6; color:rgba(255,255,255,.72); margin:0; max-width:none; }
+    .vl-card p { font-size:.92rem; line-height:1.6; color:var(--ink-70); margin:0; max-width:none; }
     .vl-tally {
       display:inline-block; margin-top:.85rem; font-size:.78rem; font-weight:700;
       color:#07112e; background:#F5C518; padding:.24rem .68rem; border-radius:99px;
     }
-    .vl-tally.zero { background:rgba(255,255,255,.16); color:rgba(255,255,255,.7); }
-    .vl-empty { text-align:center; padding:3rem 1rem; color:rgba(255,255,255,.6); }
-    .vl-empty strong { display:block; font-family: var(--font-display); font-size:1.2rem; color:#fff; margin-bottom:.5rem; }
+    .vl-tally.zero { background:var(--fill-16); color:var(--ink-70); }
+    .vl-empty { text-align:center; padding:3rem 1rem; color:var(--ink-62); }
+    .vl-empty strong { display:block; font-family: var(--font-display); font-size:1.2rem; color:var(--ink); margin-bottom:.5rem; }
 
     /* ===== DETAIL PANEL ===== */
     .vl-back {
-      background:none; border:none; cursor:pointer; color:#F5C518;
+      background:none; border:none; cursor:pointer; color:var(--gold-ink);
       font-family: var(--font-display); font-weight:500; font-size:.95rem;
       padding:.4rem 0; margin-bottom:1.1rem; display:inline-flex; align-items:center; gap:.45rem;
     }
     .vl-back:hover { text-decoration:underline; }
     .vl-detail-head {
-      background:rgba(255,255,255,.055); border:1.5px solid rgba(245,197,24,.3);
+      background:var(--fill-06); border:1.5px solid rgba(245,197,24,.3);
       border-radius:1rem; padding:1.75rem 1.85rem; margin-bottom:1.6rem;
     }
     .vl-detail-head h2 {
-      font-family: var(--font-display); font-weight:600; color:#fff;
+      font-family: var(--font-display); font-weight:600; color:var(--ink);
       font-size:clamp(1.5rem,3.4vw,2.05rem); margin:0 0 .7rem; line-height:1.2;
     }
-    .vl-def { font-size:1.04rem; line-height:1.72; color:rgba(255,255,255,.85); margin:0; max-width:46rem; }
+    .vl-def { font-size:1.04rem; line-height:1.72; color:var(--ink-85); margin:0; max-width:46rem; }
     .vl-stories { display:grid; gap:.9rem; }
     .vl-story {
       display:block; width:100%; text-align:left; font-family:inherit; cursor:pointer;
-      background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.11);
+      background:var(--fill-06); border:1.5px solid var(--edge-12);
       border-radius:.9rem; padding:1.2rem 1.35rem; transition:all .2s ease;
     }
-    .vl-story:hover { border-color:rgba(245,197,24,.5); background:rgba(255,255,255,.085); transform:translateX(3px); }
+    .vl-story:hover { border-color:rgba(245,197,24,.5); background:var(--fill-08); transform:translateX(3px); }
     .vl-story:focus-visible { outline:2px solid #F5C518; outline-offset:3px; }
     .vl-story-top { display:flex; flex-wrap:wrap; align-items:baseline; gap:.6rem; margin-bottom:.45rem; }
-    .vl-story h4 { font-family: var(--font-display); font-weight:600; font-size:1.06rem; color:#fff; margin:0; }
-    .vl-ref { font-size:.82rem; color:#F5C518; font-weight:700; }
-    .vl-loc { font-size:.78rem; color:rgba(255,255,255,0.55); }
-    .vl-note { font-size:.93rem; line-height:1.62; color:rgba(255,255,255,.74); margin:0; max-width:none; }
+    .vl-story h4 { font-family: var(--font-display); font-weight:600; font-size:1.06rem; color:var(--ink); margin:0; }
+    .vl-ref { font-size:.82rem; color:var(--gold-ink); font-weight:700; }
+    .vl-loc { font-size:.78rem; color:var(--ink-55); }
+    .vl-note { font-size:.93rem; line-height:1.62; color:var(--ink-78); margin:0; max-width:none; }
     .vl-chips { display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.75rem; }
     .vl-chip {
       font-size:.72rem; font-weight:700; padding:.2rem .6rem; border-radius:99px;
-      background:rgba(245,197,24,.16); color:#F5C518; border:1px solid rgba(245,197,24,.3);
+      background:rgba(245,197,24,.16); color:var(--gold-ink); border:1px solid rgba(245,197,24,.3);
       /* Chips are flex items, so without this a two-word virtue like
          "Keeping Promises" gets squeezed and wraps inside its own pill. */
       flex:0 0 auto; white-space:nowrap;
@@ -188,7 +189,7 @@
     .vl-modal {
       position:fixed; inset:0; z-index:9000; display:none;
       align-items:flex-start; justify-content:center;
-      background:rgba(4,8,22,.82); backdrop-filter:blur(5px);
+      background:rgba(var(--rgb-navy-pitch), .82); backdrop-filter:blur(5px);
       padding:2rem 1rem; overflow-y:auto;
     }
     .vl-modal.open { display:flex; }
@@ -198,11 +199,11 @@
       box-shadow:0 30px 80px rgba(0,0,0,.5); margin:auto;
     }
     .vl-close {
-      position:absolute; top:.9rem; right:1rem; background:rgba(13,27,75,.08);
+      position:absolute; top:.9rem; right:1rem; background:rgba(var(--rgb-navy-mid), .08);
       border:none; width:2.2rem; height:2.2rem; border-radius:50%; cursor:pointer;
       font-size:1.15rem; color:#0d1b4b; line-height:1;
     }
-    .vl-close:hover { background:rgba(13,27,75,.16); }
+    .vl-close:hover { background:rgba(var(--rgb-navy-mid), .16); }
     .vl-modal-eyebrow {
       font-family: var(--font-accent); font-size:.68rem; letter-spacing:.15em;
       text-transform:uppercase; color:#1a2c6b; opacity:.75; display:block; margin-bottom:.6rem;
@@ -221,11 +222,11 @@
     .vl-sec p:last-child { margin-bottom:0; }
     .vl-box {
       padding:1.15rem 1.3rem; border-radius:.7rem;
-      background:linear-gradient(135deg,rgba(13,27,75,.05),rgba(245,197,24,.1));
+      background:linear-gradient(135deg,rgba(var(--rgb-navy-mid), .05),rgba(245,197,24,.1));
       border-left:4px solid #F5C518;
     }
     .vl-box p { color:#1a2c6b; }
-    .vl-modal-foot { border-top:1px solid rgba(13,27,75,.12); padding-top:1.25rem; margin-top:.5rem; }
+    .vl-modal-foot { border-top:1px solid rgba(var(--rgb-navy-mid), .12); padding-top:1.25rem; margin-top:.5rem; }
     .vl-modal-foot p { font-size:.88rem; color:#5a6480; line-height:1.6; margin:0 0 .9rem; }
     .vl-btn {
       display:inline-block; background:#F5C518; color:#07112e; font-family: var(--font-display);
@@ -240,9 +241,9 @@
        outline beside it. Both wrap onto their own line on a phone. */
     .vl-modal-foot .vl-btn + .vl-btn { margin-left:.6rem; }
     .vl-btn-quiet {
-      background:transparent; color:#1a2c6b; border:1.5px solid rgba(13,27,75,.28);
+      background:transparent; color:#1a2c6b; border:1.5px solid rgba(var(--rgb-navy-mid), .28);
     }
-    .vl-btn-quiet:hover { background:rgba(13,27,75,.06); }
+    .vl-btn-quiet:hover { background:rgba(var(--rgb-navy-mid), .06); }
     @media (max-width:520px) {
       .vl-modal-foot .vl-btn { display:block; text-align:center; white-space:normal; }
       .vl-modal-foot .vl-btn + .vl-btn { margin:.6rem 0 0; }
@@ -251,22 +252,22 @@
     /* ===== ACCESS GATE ===== */
     /* Locked story panel shown to non-subscribers inside the story modal */
     .vl-locked {
-      background:linear-gradient(180deg,#0d1b4b,#07112e); border-radius:1rem;
+      background:linear-gradient(180deg,var(--page-2),var(--page)); border-radius:1rem;
       padding:1.6rem 1.5rem 1.75rem; text-align:center; margin:1.4rem 0 .5rem;
       border:1px solid rgba(245,197,24,.28);
     }
-    .vl-locked .vl-sec-label { color:#F5C518 !important; margin-bottom:.6rem; }
+    .vl-locked .vl-sec-label { color:var(--gold-ink) !important; margin-bottom:.6rem; }
     .vl-locked p {
-      color:rgba(255,255,255,.86) !important; font-size:.97rem; line-height:1.7;
+      color:var(--ink-85) !important; font-size:.97rem; line-height:1.7;
       margin:0 auto 1.15rem !important; max-width:30rem;
     }
     .vl-locked .vl-btn { margin:0 auto; }
-    .vl-locked-alt { font-size:.86rem !important; color:rgba(255,255,255,.6) !important; margin:1rem 0 0 !important; }
+    .vl-locked-alt { font-size:.86rem !important; color:var(--ink-62) !important; margin:1rem 0 0 !important; }
     .vl-link {
-      background:none; border:none; padding:0; font:inherit; color:#F5C518;
+      background:none; border:none; padding:0; font:inherit; color:var(--gold-ink);
       text-decoration:underline; cursor:pointer;
     }
-    .vl-link:hover { color:#fff; }
+    .vl-link:hover { color:var(--ink); }
     .vl-freebie {
       max-width:46rem; margin:2rem auto 0; padding:1.15rem 1.4rem;
       background:rgba(245,197,24,.1); border:1.5px solid rgba(245,197,24,.4);
@@ -277,11 +278,11 @@
 
     /* ===== SIGNED-IN STRIP ===== */
     .vl-who {
-      background:#0a1640; border-top:1px solid rgba(245,197,24,.22);
-      color:rgba(255,255,255,.82); font-family: var(--font-body); font-size:.9rem;
+      background:var(--page-2); border-top:1px solid rgba(245,197,24,.22);
+      color:var(--ink-85); font-family: var(--font-body); font-size:.9rem;
       padding:.7rem 1.25rem; text-align:center; line-height:1.6;
     }
-    .vl-who strong { color:#fff; }
+    .vl-who strong { color:var(--ink); }
     .vl-who .vl-link { margin-left:.35rem; }
 
     /* ===== TEASER + SIGN-IN INSIDE A STORY ===== */
@@ -295,15 +296,15 @@
     .vl-si-form { margin:.35rem 0 0; text-align:left; }
     .vl-si-label {
       display:block; font-family: var(--font-accent); font-size:.66rem; letter-spacing:.14em;
-      text-transform:uppercase; color:rgba(255,255,255,.62); margin:0 0 .4rem;
+      text-transform:uppercase; color:var(--ink-62); margin:0 0 .4rem;
     }
     .vl-si-input {
       display:block; width:100%; box-sizing:border-box; padding:.78rem 1.05rem;
-      border-radius:.7rem; border:1.5px solid rgba(255,255,255,.24);
-      background:rgba(255,255,255,.97); font-family: var(--font-body);
+      border-radius:.7rem; border:1.5px solid var(--edge-22);
+      background:var(--fill-16); font-family: var(--font-body);
       font-size:1rem; color:#07112e; margin:0 0 .7rem;
     }
-    .vl-si-input:focus { outline:none; border-color:#F5C518; box-shadow:0 0 0 3px rgba(245,197,24,.3); }
+    .vl-si-input:focus { outline:none; border-color:var(--gold-ink); box-shadow:0 0 0 3px rgba(245,197,24,.3); }
     .vl-si-code {
       letter-spacing:.5em; text-align:center; font-size:1.3rem; font-weight:700;
       font-family:'Courier New',monospace;
@@ -312,10 +313,10 @@
     .vl-si-btn[disabled] { opacity:.65; cursor:default; }
     .vl-si-msg {
       font-size:.88rem; line-height:1.6; margin:.7rem 0 0 !important;
-      color:rgba(255,255,255,.72); min-height:1.2em;
+      color:var(--ink-70); min-height:1.2em;
     }
-    .vl-si-msg.is-good { color:#bff0c8; }
-    .vl-si-msg.is-bad  { color:#ffb4b4; }
+    .vl-si-msg.is-good { color:var(--good-ink); }
+    .vl-si-msg.is-bad  { color:var(--warn-ink); }
 
     /* ===== FREE BADGE ON A STORY CARD ===== */
     .vl-free {
@@ -333,10 +334,10 @@
     .vl-stages-inner { max-width:74rem; margin:0 auto; }
     .vl-stage-grid { display:grid; gap:.9rem; grid-template-columns:repeat(auto-fill,minmax(15rem,1fr)); margin-top:1.75rem; }
     .vl-stage-card {
-      border:1.5px solid rgba(13,27,75,.14); border-radius:.9rem;
+      border:1.5px solid rgba(var(--rgb-navy-mid), .14); border-radius:.9rem;
       padding:1.25rem 1.35rem; background:#fff;
     }
-    .vl-stage-card.on { border-color:#F5C518; background:linear-gradient(135deg,#fff,rgba(245,197,24,.07)); }
+    .vl-stage-card.on { border-color:var(--gold-ink); background:linear-gradient(135deg,#fff,rgba(245,197,24,.07)); }
     .vl-stage-card h4 {
       font-family: var(--font-display); font-weight:600; font-size:1.05rem;
       color:#0d1b4b; margin:0 0 .15rem;
@@ -348,7 +349,7 @@
       text-transform:uppercase; padding:.2rem .55rem; border-radius:99px; margin-bottom:.7rem;
     }
     .vl-stage-badge.live { background:#F5C518; color:#07112e; }
-    .vl-stage-badge.soon { background:rgba(13,27,75,.1); color:#1a2c6b; }
+    .vl-stage-badge.soon { background:rgba(var(--rgb-navy-mid), .1); color:#1a2c6b; }
 
     @media (max-width:600px) {
       .vl-modal-box { padding:2rem 1.4rem 2.25rem; }
@@ -360,8 +361,8 @@
   </style>
 </head>
 <body>
-<div class="app-move-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
-  <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">A change for our families —</strong> your story has always arrived by email at 5&nbsp;AM Mountain. We are moving it all onto the website and into the app: the nightly story and lullabies, the Virtue Library, and your Family Story Library, all in one place.
+<div class="app-move-banner" role="note" style="background:linear-gradient(90deg,var(--page),var(--page-2));border-bottom:1px solid rgba(245,197,24,0.35);color:var(--ink);text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
+  <span style="font-size:1.05rem;">📱</span> <strong style="color:var(--gold-ink);">A change for our families —</strong> your story has always arrived by email at 5&nbsp;AM Mountain. We are moving it all onto the website and into the app: the nightly story and lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
   <!-- Nav -->
@@ -729,7 +730,7 @@
       <div class="fs-cta" style="text-align:center;">
         <a class="mp-btn mp-btn-gold" href="family-stories.html"
            style="text-decoration:none;display:inline-block;font-size:1rem;">Open your Family Stories</a>
-        <p style="margin:1rem auto 0;max-width:38rem;font-size:.95rem;line-height:1.7;color:rgba(255,255,255,.72);">
+        <p style="margin:1rem auto 0;max-width:38rem;font-size:.95rem;line-height:1.7;color:var(--ink-70);">
           They are looked up by the same five doors as the stories above &mdash; by virtue,
           by life situation, by feeling, by traveler, by scripture &mdash; and everything you
           write there is in the app as well.
@@ -802,28 +803,28 @@
     </div>
     <div class="footer-bottom" style="flex-direction:column;align-items:center;text-align:center;">
       <div class="social-links" style="justify-content:center;margin-bottom:0.75rem;gap:0.75rem;">
-        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
-        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
         </a>
-        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
-        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07112e"/></svg>
         </a>
-        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.14a8.16 8.16 0 0 0 4.77 1.52V7.21a4.85 4.85 0 0 1-1-.52z"/></svg>
         </a>
-        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
         </a>
       </div>
       <p style="margin-top:1rem;">We do not lecture. We do not pile on rules. We tell what happened &mdash; a beginning, a worry, and a hopeful ending &mdash; in the smallest words that still carry the meaning.</p>
       <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">&copy; 2026 Little Scripture Travelers</p>
-      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.15);font-size:0.72rem;line-height:1.5;color:#9aa6c0;text-align:center;">
+      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid var(--edge-12);font-size:0.72rem;line-height:1.5;color:var(--ink-62);text-align:center;">
         <p style="margin:0 0 0.6rem;">Little Scripture Travelers Bedtime Stories, LLC is an independent creative endeavor. It is not affiliated with, made by, sponsored by, approved by, or endorsed by The Church of Jesus Christ of Latter-day Saints or Intellectual Reserve, Inc. All stories, illustrations, characters, lullabies, and opinions are solely those of Little Scripture Travelers and do not represent the Church.</p>
         <p style="margin:0;">&ldquo;Come, Follow Me,&rdquo; the name of The Church of Jesus Christ of Latter-day Saints, and related names and logos are trademarks of Intellectual Reserve, Inc.; any reference to them here is for identification purposes only.</p>
       </div>

@@ -22,15 +22,22 @@
         '<h3>Sign in to see your account</h3>' +
         '<p>Use the same email and password as the Little Scripture Travelers app. One account covers both &mdash; your journal, your family stories and your subscription are the same on either.</p>' +
         '<button type="button" class="mp-btn mp-btn-gold" id="ac-signin">Sign in</button>' +
-      '</div>';
+      '</div>' +
+      /* The theme is a setting of the device, not of the account, so it is
+         offered here whether anybody is signed in or not. */
+      (window.LSTTheme
+        ? '<div class="mp-card" style="margin-top:1.25rem;">' +
+            row("Colour theme", themePicker()) +
+          "</div>"
+        : "");
   }
 
   function row(label, value, extra) {
     return '<div style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;padding:.85rem 0;' +
-      'border-bottom:1px solid rgba(255,255,255,.08);">' +
+      'border-bottom:1px solid var(--edge-08);">' +
       '<span style="font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;' +
-      'color:rgba(255,255,255,0.55);min-width:9rem;">' + label + "</span>" +
-      '<span style="color:#fff;font-size:1rem;flex:1;">' + value + "</span>" +
+      'color:var(--ink-55);min-width:9rem;">' + label + "</span>" +
+      '<span style="color:var(--ink);font-size:1rem;flex:1;">' + value + "</span>" +
       (extra || "") + "</div>";
   }
 
@@ -46,17 +53,26 @@
       return "The Morning Lantern, every morning.";
     }
     var mine = window.LSTData.faith.now();
-    return '<select id="ac-faith" style="background:rgba(255,255,255,.07);color:#fff;' +
-      'border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:.45rem .6rem;' +
+    return '<select id="ac-faith" style="background:var(--fill-08);color:var(--ink);' +
+      'border:1px solid var(--edge-22);border-radius:8px;padding:.45rem .6rem;' +
       "font-family:var(--font-body);font-size:.95rem;\">" +
       list.map(function (f) {
         return '<option value="' + f.id + '"' + (f.id === mine ? " selected" : "") + ">" +
           esc(f.name) + "</option>";
       }).join("") + "</select>" +
-      '<span id="ac-faith-said" style="color:#F5C518;font-size:.85rem;margin-left:.6rem;"></span>' +
-      '<p style="color:rgba(255,255,255,.55);font-size:.85rem;line-height:1.6;margin:.45rem 0 0;">' +
+      '<span id="ac-faith-said" style="color:var(--gold-ink);font-size:.85rem;margin-left:.6rem;"></span>' +
+      '<p style="color:var(--ink-55);font-size:.85rem;line-height:1.6;margin:.45rem 0 0;">' +
       "The story is the same for every family. This chooses whose Bible is quoted " +
       "and whose teachers are heard. It takes effect with tomorrow&rsquo;s Lantern.</p>";
+  }
+
+  /* The same three themes the app has. The header carries them as dots; here
+     they are written out, because this is where somebody goes looking. */
+  function themePicker() {
+    if (!window.LSTTheme) return "Traditional.";
+    return '<span data-theme-picker></span>' +
+      '<p style="color:var(--ink-55);font-size:.85rem;line-height:1.6;margin:.45rem 0 0;">' +
+      "Kept on this device, the same as in the app.</p>";
   }
 
   function signedInView() {
@@ -77,6 +93,7 @@
         row("Your things", "Journal, family stories and subscription are shared with the app &mdash; " +
             "sign in there with this same email and everything is already waiting.") +
         row("Your Lantern", faithPicker()) +
+        row("Colour theme", themePicker()) +
       "</div>" +
 
       '<div class="mp-bar" style="margin-top:1.25rem;">' +
@@ -86,8 +103,8 @@
       "</div>" +
 
       (open && !isAdmin
-        ? '<p style="color:rgba(255,255,255,.55);font-size:.92rem;line-height:1.7;margin:1.5rem 0 0;">' +
-          'Need to stop? <a href="cancel.html" style="color:#F5C518;">Here is exactly how to cancel</a> ' +
+        ? '<p style="color:var(--ink-55);font-size:.92rem;line-height:1.7;margin:1.5rem 0 0;">' +
+          'Need to stop? <a href="cancel.html" style="color:var(--gold-ink);">Here is exactly how to cancel</a> ' +
           '&mdash; it takes about a minute and you do it yourself.</p>'
         : "") +
 
@@ -100,9 +117,11 @@
       root.innerHTML = signedOutView();
       var si = document.getElementById("ac-signin");
       if (si) si.addEventListener("click", function () { auth().openSignIn(); });
+      if (window.LSTTheme && window.LSTTheme.place) window.LSTTheme.place();
       return;
     }
     root.innerHTML = signedInView();
+    if (window.LSTTheme && window.LSTTheme.place) window.LSTTheme.place();
     var out = document.getElementById("ac-out");
     if (out) out.addEventListener("click", function () { auth().signOut(); });
 

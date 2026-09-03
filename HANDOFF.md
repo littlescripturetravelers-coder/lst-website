@@ -1560,3 +1560,103 @@ push to `main` failed) and was reset away; `lst-app` is byte-identical to its or
 **Never chain a `cd` into another repo with a commit in the same command.** This chat is website
 only.
 
+
+---
+
+## 32. Light, Dark and Traditional — the same three the app has (2026-09-03)
+
+> "Can you please make it so the website has the same themes as the app. Light, Dark, Traditional.
+> You should be able to choose those options. And place it in the best place or where that
+> normally is and let me know where that is."
+> "Make sure with all three themes that all the writing is always visible."
+
+### WHERE THE CONTROL IS — the answer to Levi's question
+
+Three small circles, each a picture of the theme it turns on (half navy / half gold, half black /
+half gold, half white / half gold).
+
+| where | who sees it |
+|---|---|
+| **The header, at the right, just before the gold "Try the First 7 Days Free" button** | anyone on a computer or a tablet. This is where a reader looks for settings, and where the app keeps its own theme chip. |
+| **At the bottom of the phone menu (tap the ☰), under "COLOUR THEME"**, written out as three labelled buttons | anyone on a phone — the header dots are hidden below 960px because there is no room next to the burger |
+| **My Account**, written out in full under "COLOUR THEME" | anyone who goes looking for settings and misses the header. Shown whether or not you are signed in — the theme belongs to the device, not the account. |
+
+The chosen one carries a **gold ring and a gold-tinted fill**, so it is obvious which is on.
+
+### It is the app's contract, not a new one
+
+    stored as   lst_theme          localStorage, the same key the app uses
+    values      blue | dark | light   ("blue" IS Traditional)
+    applied as  data-theme on <html>; blue carries NO attribute
+    chrome      <meta name="theme-color"> follows, so the phone's own bar matches
+
+Read out of `lst-app/www/index.html`, not invented. A family who chooses Dark on their phone finds
+Dark here. **Do not rename the values.** `js/lst-theme.js`, which must stay in `<head>` on every
+page — loaded at the foot, a family who chose Light gets a flash of navy on every page and it
+looks like a fault.
+
+### ⚠️ EVERY COLOUR THAT CARRIES WRITING IS A TOKEN
+
+This is the whole discipline. A value that reads on navy is invisible on paper. The tokens live at
+the top of `style.css`: `--ink`, `--ink-92` … `--ink-55`, `--fill-*`, `--edge-*`, `--gold-ink`,
+`--cream-ink`, `--warn-ink`, `--good-ink`, `--patriot-ink`, `--family-ink`, and the navies as bare
+triples (`--rgb-navy-deep` … `--rgb-navy-sea`) for anything that sets its own transparency.
+
+**If you add a rule with a literal `color: #fff` or `color: rgba(255,255,255,…)`, it will be right
+in two themes and invisible in the third, and nobody will notice until a parent does.**
+
+### The four things that DO NOT turn
+
+1. **`--on-gold` (#07112e).** Text sitting on gold or cream is dark in all three themes. A gold
+   button's word is black in Traditional, black in Dark, black in Light. **Never override it.**
+   (The Light theme first shipped with gold buttons wearing near-white text, 51 of them, because
+   `--navy-deep` had been remapped to paper and 20 buttons were using it as their ink.)
+2. **`class="on-photo"`.** A photograph is still a photograph in Light. Inside these the palette is
+   pinned back to Traditional. All 16 photo heroes carry it. There is a harness that finds them:
+   `photos.mjs`.
+3. **`class="on-dark"`.** Same pin, for a section that paints itself a fixed dark colour —
+   books.html's green August panel does.
+4. **The Sacred World Timeline** (`timeline-explore.html`) is a night sky drawn on a canvas with
+   its own hand-placed colours. It locks itself with `<meta name="lst:theme-lock" content="blue">`
+   and stays Traditional in all three. Nothing is stored, nothing else changes.
+
+### ⚠️ A gradient hides a fault from the ordinary auditor
+
+`brand.mjs` / `themes.mjs` read the computed background colour, and a computed style **cannot see a
+gradient** — the check is skipped, silently. The Light theme passed those two with zero findings
+while the whole home-page hero was navy writing on a night sky.
+
+`grad.mjs` was written for exactly that: it pulls the colour stops out of the gradient and scores
+the worst one. `overlays.mjs` does the sign-in modal, the signup popup and the shut door, which are
+drawn by JavaScript after the page has loaded and so are never on the page when the others look.
+`phone.mjs` does all 36 pages at 390px with the burger menu open — which is how the white-on-gold
+"Try the First 7 Days Free" button in the phone menu was found, wrong in Traditional too.
+
+**Run all five before believing a theme is finished:**
+
+    THEME=light node themes.mjs      THEME=dark node themes.mjs      node brand.mjs
+    THEME=blue|dark|light node grad.mjs
+    node overlays.mjs
+    node phone.mjs
+    node boxes.mjs
+
+All five are at **zero** for all 36 website pages in all three themes.
+(`timeline-explore.html` is excluded from every sweep — it is the app's own pixel-positioned file
+with its own colours, and it is locked to Traditional anyway.)
+
+### What Traditional looks like now
+
+The same as it did, with four deliberate legibility fixes that were wrong in Traditional too:
+
+* the traveler captions ("Courage and faith") went from 40% white to 70% — they were 3.78:1;
+* the patriot-red headings on the Fourth of July article went from #C8102E to `--patriot-ink`
+  (#ec5468) — the flag red on navy is 2.8:1, a heading nobody can read;
+* "We use Mailchimp. Your email is safe." and its Privacy Policy link got their full strength back;
+* the gold button in the phone menu got its dark word back.
+
+### If you add a page
+
+1. `<script src="js/lst-theme.js"></script>` in the `<head>`, right after the `style.css` link.
+2. Colours from tokens only.
+3. `class="on-photo"` on any section with a photograph behind its words.
+4. Run the five harnesses.

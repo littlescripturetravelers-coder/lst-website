@@ -118,7 +118,7 @@
   /* ===================================================================
      SIGN-IN MODAL — builds itself, so a page only needs this script.
      =================================================================== */
-  var IN = "width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.06);color:#fff;font-size:1rem;font-family: var(--font-body);";
+  var IN = "width:100%;box-sizing:border-box;padding:0.75rem 0.9rem;margin-bottom:0.6rem;border-radius:10px;border:1px solid var(--edge-22);background:var(--fill-06);color:var(--ink);font-size:1rem;font-family: var(--font-body);";
 
   function el(id) { return document.getElementById(id); }
 
@@ -126,22 +126,22 @@
     if (el("lst-auth-modal")) return;
     var d = document.createElement("div");
     d.id = "lst-auth-modal";
-    d.style.cssText = "display:none;position:fixed;inset:0;z-index:99999;background:rgba(7,17,46,0.88);align-items:center;justify-content:center;padding:1rem;";
+    d.style.cssText = "display:none;position:fixed;inset:0;z-index:99999;background:rgba(var(--rgb-navy-deep), 0.88);align-items:center;justify-content:center;padding:1rem;";
     d.innerHTML =
-      '<div style="background:#0d1b3f;border:1px solid rgba(245,197,24,0.35);border-radius:16px;max-width:410px;width:100%;padding:1.6rem;font-family:\'Nunito\',sans-serif;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
-        '<div style="font-family:\'Fredoka\',sans-serif;font-weight:600;font-size:1.35rem;color:#f4c842;">Sign in</div>' +
-        '<p id="lst-auth-why" style="font-size:0.9rem;color:rgba(255,255,255,0.72);line-height:1.55;margin:0.45rem 0 0.9rem;">Use the same email and password as the Little Scripture Travelers app.</p>' +
+      '<div style="background:var(--page-2);border:1px solid rgba(245,197,24,0.35);border-radius:16px;max-width:410px;width:100%;padding:1.6rem;font-family:\'Nunito\',sans-serif;color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
+        '<div style="font-family:\'Fredoka\',sans-serif;font-weight:600;font-size:1.35rem;color:var(--gold-ink);">Sign in</div>' +
+        '<p id="lst-auth-why" style="font-size:0.9rem;color:var(--ink-70);line-height:1.55;margin:0.45rem 0 0.9rem;">Use the same email and password as the Little Scripture Travelers app.</p>' +
         '<input id="lst-auth-email" type="email" placeholder="Email" autocomplete="email" style="' + IN + '">' +
         '<input id="lst-auth-pw" type="password" placeholder="Password" autocomplete="current-password" style="' + IN + '">' +
-        '<div id="lst-auth-err" style="color:#e0607a;font-size:0.85rem;min-height:18px;margin-bottom:0.4rem;"></div>' +
+        '<div id="lst-auth-err" style="color:var(--warn-ink);font-size:0.85rem;min-height:18px;margin-bottom:0.4rem;"></div>' +
         '<button id="lst-auth-go" style="width:100%;cursor:pointer;background:#f4c842;color:#07112e;border:none;font-family:\'Nunito\',sans-serif;font-weight:900;font-size:1rem;padding:0.8rem;border-radius:999px;">Sign in</button>' +
-        '<p style="font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.55;margin:0.75rem 0 0;text-align:center;">' +
-          '<button type="button" id="lst-auth-forgot" style="background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:0.82rem;text-decoration:underline;padding:0;">Forgot your password?</button>' +
+        '<p style="font-size:0.82rem;color:var(--ink-62);line-height:1.55;margin:0.75rem 0 0;text-align:center;">' +
+          '<button type="button" id="lst-auth-forgot" style="background:none;border:none;color:var(--ink-70);cursor:pointer;font-size:0.82rem;text-decoration:underline;padding:0;">Forgot your password?</button>' +
         '</p>' +
-        '<p style="font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.55;margin:0.45rem 0 0;text-align:center;">' +
-          'No account yet? <button type="button" id="lst-auth-join" style="background:none;border:none;color:#f4c842;font-weight:800;cursor:pointer;font-size:0.82rem;text-decoration:underline;padding:0;">Start your free week</button>' +
+        '<p style="font-size:0.82rem;color:var(--ink-62);line-height:1.55;margin:0.45rem 0 0;text-align:center;">' +
+          'No account yet? <button type="button" id="lst-auth-join" style="background:none;border:none;color:var(--gold-ink);font-weight:800;cursor:pointer;font-size:0.82rem;text-decoration:underline;padding:0;">Start your free week</button>' +
         '</p>' +
-        '<button id="lst-auth-cancel" style="width:100%;background:none;border:none;color:rgba(255,255,255,0.55);margin-top:0.5rem;cursor:pointer;font-size:0.9rem;">Cancel</button>' +
+        '<button id="lst-auth-cancel" style="width:100%;background:none;border:none;color:var(--ink-55);margin-top:0.5rem;cursor:pointer;font-size:0.9rem;">Cancel</button>' +
       '</div>';
     d.addEventListener("click", function (e) { if (e.target === d) API.closeSignIn(); });
     document.body.appendChild(d);
@@ -162,7 +162,7 @@
       if (!email) { err.textContent = "Type your email above first, then tap this."; return; }
       err.textContent = "Sending a reset link\u2026";
       API.resetPassword(email).then(function (res) {
-        err.style.color = (res && res.error) ? "#e0607a" : "#9ae6b4";
+        err.style.color = (res && res.error) ? "var(--warn-ink)" : "var(--good-ink)";
         err.textContent = (res && res.error)
           ? res.error.message
           : "Check your email for a link to set a new password.";

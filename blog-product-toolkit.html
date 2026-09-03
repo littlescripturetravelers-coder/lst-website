@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="js/lst-theme.js"></script>
   <style>
     :root {
       --space-5: 1.25rem;
@@ -30,7 +31,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(7,17,46,0.78) 0%, rgba(7,17,46,0.5) 50%, rgba(7,17,46,0.82) 100%);
+      background: linear-gradient(to bottom, rgba(var(--rgb-navy-deep), 0.78) 0%, rgba(var(--rgb-navy-deep), 0.5) 50%, rgba(var(--rgb-navy-deep), 0.82) 100%);
       z-index: 1;
     }
     .article-hero-content {
@@ -45,7 +46,7 @@
       font-weight: 400;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--gold-ink);
       margin-bottom: var(--space-4);
       display: block;
     }
@@ -53,7 +54,7 @@
       font-family: var(--font-display);
       font-weight: 700;
       font-size: clamp(2rem, 5vw, 3.2rem);
-      color: #fff;
+      color: var(--ink);
       line-height: 1.15;
       margin-bottom: var(--space-5);
       text-shadow: 0 2px 20px rgba(0,0,0,0.6);
@@ -61,7 +62,7 @@
     .article-hero .subtitle {
       font-family: var(--font-body);
       font-style: italic;
-      color: rgba(255,255,255,0.82);
+      color: var(--ink-85);
       font-size: 1.15rem;
       line-height: 1.65;
       max-width: 620px;
@@ -69,7 +70,7 @@
     }
 
     .article-section {
-      background: linear-gradient(180deg, #07112e 0%, #0d1b4b 55%, #07112e 100%);
+      background: linear-gradient(180deg, var(--page) 0%, var(--page-2) 55%, var(--page) 100%);
       padding: var(--space-20) var(--space-6);
     }
     .article-inner {
@@ -78,17 +79,17 @@
     }
     .article-body p {
       font-family: var(--font-body);
-      color: rgba(255,255,255,0.83);
+      color: var(--ink-85);
       font-size: 1.07rem;
       line-height: 1.85;
       margin-bottom: 1.75rem;
     }
-    .article-body strong { color: #fff; }
-    .article-body em { color: rgba(255,255,255,0.9); }
+    .article-body strong { color: var(--ink); }
+    .article-body em { color: var(--ink-92); }
 
     /* Product block */
     .product-block {
-      background: rgba(255,255,255,0.04);
+      background: var(--fill-04);
       border: 1px solid rgba(245,197,24,0.18);
       border-radius: var(--radius-lg);
       padding: var(--space-8) var(--space-8);
@@ -108,7 +109,7 @@
       font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.35rem;
-      color: #fff;
+      color: var(--ink);
       margin: 0;
     }
     .product-tier-badge {
@@ -117,7 +118,7 @@
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--gold-ink);
       background: rgba(245,197,24,0.1);
       border: 1px solid rgba(245,197,24,0.3);
       border-radius: 999px;
@@ -135,13 +136,13 @@
       font-size: 0.82rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--gold-ink);
       margin-bottom: var(--space-2);
     }
     .product-why p, .product-solves p {
       font-family: var(--font-body);
       font-size: 0.97rem !important;
-      color: rgba(255,255,255,0.78) !important;
+      color: var(--ink-78) !important;
       line-height: 1.75 !important;
       margin-bottom: 0 !important;
     }
@@ -158,13 +159,13 @@
       font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.4rem;
-      color: var(--gold);
+      color: var(--gold-ink);
       margin-bottom: var(--space-5);
     }
     .stack-block p {
       font-family: var(--font-body);
       font-size: 1rem !important;
-      color: rgba(255,255,255,0.8) !important;
+      color: var(--ink-78) !important;
       line-height: 1.8 !important;
       margin-bottom: var(--space-4) !important;
     }
@@ -180,7 +181,7 @@
       font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.2rem;
-      color: var(--gold);
+      color: var(--gold-ink);
       margin-bottom: var(--space-6);
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -192,7 +193,7 @@
       font-size: 0.82rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
+      color: var(--ink-55);
       margin-bottom: var(--space-3);
     }
     .cite-list {
@@ -206,7 +207,7 @@
     .cite-list li {
       font-family: var(--font-body);
       font-size: 0.88rem;
-      color: rgba(255,255,255,0.6);
+      color: var(--ink-62);
       line-height: 1.65;
       padding-left: var(--space-5);
       position: relative;
@@ -215,15 +216,15 @@
       content: '✦';
       position: absolute;
       left: 0;
-      color: var(--gold);
+      color: var(--gold-ink);
       font-size: 0.6rem;
       top: 5px;
     }
     .cite-list li a {
-      color: rgba(245,197,24,0.7);
+      color: var(--gold-ink-70);
       text-decoration: none;
     }
-    .cite-list li a:hover { color: var(--gold); text-decoration: underline; }
+    .cite-list li a:hover { color: var(--gold-ink); text-decoration: underline; }
 
     /* Back / CTA */
     .back-link {
@@ -233,7 +234,7 @@
       font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.9rem;
-      color: var(--gold);
+      color: var(--gold-ink);
       text-decoration: none;
       margin-bottom: var(--space-10);
       opacity: 0.8;
@@ -252,12 +253,12 @@
       font-family: var(--font-body);
       font-weight: 900;
       font-size: 1.5rem;
-      color: #fff;
+      color: var(--ink);
       margin-bottom: var(--space-3);
     }
     .article-cta p {
       font-family: var(--font-body);
-      color: rgba(255,255,255,0.72);
+      color: var(--ink-70);
       font-size: 1rem;
       margin-bottom: var(--space-6) !important;
       max-width: 500px;
@@ -279,7 +280,7 @@
     .btn-gold:hover { opacity: 0.88; transform: translateY(-1px); }
     .star-divider {
       text-align: center;
-      color: var(--gold);
+      color: var(--gold-ink);
       font-size: 1.1rem;
       letter-spacing: 0.5em;
       margin: var(--space-10) 0;
@@ -297,14 +298,14 @@
       font-family: var(--font-body);
       font-size: 1.1rem;
       font-style: italic;
-      color: rgba(255,255,255,0.9);
+      color: var(--ink-92);
       line-height: 1.75;
       margin: 0;
     }
 
     /* Stones card */
     .stones-card {
-      background: rgba(13,27,75,0.7);
+      background: rgba(var(--rgb-navy-mid), 0.7);
       border: 1px solid rgba(244,200,66,0.2);
       border-radius: 18px;
       padding: 2rem 2.25rem;
@@ -320,13 +321,13 @@
     }
     .stones-list li {
       font-family: var(--font-body);
-      color: rgba(255,255,255,0.83);
+      color: var(--ink-85);
       font-size: 1.02rem;
       line-height: 1.75;
       padding-left: 1rem;
       border-left: 2px solid rgba(244,200,66,0.3);
     }
-    .stones-list li strong { color: #fff; }
+    .stones-list li strong { color: var(--ink); }
 
     /* Highlight box */
     .highlight-box {
@@ -338,16 +339,16 @@
     }
     .highlight-box p {
       font-family: var(--font-body);
-      color: rgba(255,255,255,0.9);
+      color: var(--ink-92);
       font-size: 1.15rem !important;
       line-height: 1.75 !important;
       margin: 0 !important;
     }
-    .highlight-box p strong { color: var(--gold); font-size: 1.3rem; }
+    .highlight-box p strong { color: var(--gold-ink); font-size: 1.3rem; }
 
     /* Credentials box */
     .credentials-box {
-      background: rgba(7,17,46,0.6);
+      background: rgba(var(--rgb-navy-deep), 0.6);
       border: 1px solid rgba(244,200,66,0.18);
       border-radius: 16px;
       padding: 1.75rem 2rem;
@@ -357,7 +358,7 @@
       font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.15rem;
-      color: var(--gold);
+      color: var(--gold-ink);
       margin: 0 0 1.1rem;
     }
     .credentials-box ul {
@@ -370,7 +371,7 @@
     }
     .credentials-box li {
       font-family: var(--font-body);
-      color: rgba(255,255,255,0.78);
+      color: var(--ink-78);
       font-size: 0.97rem;
       line-height: 1.72;
       padding-left: 1.25rem;
@@ -380,15 +381,15 @@
       content: '✦';
       position: absolute;
       left: 0;
-      color: var(--gold);
+      color: var(--gold-ink);
       font-size: 0.65rem;
       top: 0.45rem;
     }
-    .credentials-box li strong { color: #fff; }
+    .credentials-box li strong { color: var(--ink); }
 
     /* Mission box */
     .mission-box {
-      background: linear-gradient(135deg, rgba(13,27,75,0.9) 0%, rgba(26,44,107,0.7) 100%);
+      background: linear-gradient(135deg, rgba(var(--rgb-navy-mid), 0.9) 0%, rgba(var(--rgb-navy-light), 0.7) 100%);
       border: 1px solid rgba(244,200,66,0.25);
       border-radius: 18px;
       padding: 2.25rem 2.5rem;
@@ -400,7 +401,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--gold-ink);
       display: block;
       margin-bottom: 0.75rem;
     }
@@ -408,13 +409,13 @@
       font-family: var(--font-display);
       font-weight: 600;
       font-size: 1.45rem;
-      color: #fff;
+      color: var(--ink);
       margin-bottom: 1rem;
       line-height: 1.3;
     }
     .mission-box p {
       font-family: var(--font-body);
-      color: rgba(255,255,255,0.78);
+      color: var(--ink-78);
       font-size: 1rem !important;
       line-height: 1.8 !important;
       max-width: 580px;
@@ -433,7 +434,7 @@
       font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.55);
+      color: var(--ink-55);
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
@@ -445,7 +446,7 @@
       height: 36px;
       border-radius: 50%;
       border: 1.5px solid rgba(244,200,66,0.4);
-      color: var(--gold);
+      color: var(--gold-ink);
       transition: background 0.2s, color 0.2s;
     }
     .social-share a:hover { background: var(--gold); color: #07112e; }
@@ -453,8 +454,8 @@
   </style>
 </head>
 <body class="subpage-body">
-<div class="app-move-banner" role="note" style="background:linear-gradient(90deg,#07112e,#0d1b3f);border-bottom:1px solid rgba(245,197,24,0.35);color:#fff;text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
-  <span style="font-size:1.05rem;">📱</span> <strong style="color:#f4c842;">A change for our families —</strong> your story has always arrived by email at 5&nbsp;AM Mountain. We are moving it all onto the website and into the app: the nightly story and lullabies, the Virtue Library, and your Family Story Library, all in one place.
+<div class="app-move-banner" role="note" style="background:linear-gradient(90deg,var(--page),var(--page-2));border-bottom:1px solid rgba(245,197,24,0.35);color:var(--ink);text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
+  <span style="font-size:1.05rem;">📱</span> <strong style="color:var(--gold-ink);">A change for our families —</strong> your story has always arrived by email at 5&nbsp;AM Mountain. We are moving it all onto the website and into the app: the nightly story and lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
 
   <!-- Navigation -->
@@ -754,12 +755,12 @@
 
   <!-- ★ AMERICA 250 CELEBRATION RIBBON ★ -->
   <!-- Hero -->
-  <section class="article-hero">
+  <section class="article-hero on-photo">
     <div class="article-hero-content">
       <span class="article-tag">Faith &amp; Family &nbsp;&middot;&nbsp; Research &amp; Products</span>
       <h1>Bigger Than It Looks</h1>
       <p class="subtitle">What&rsquo;s behind the 5 pages of a nightly story &mdash; the research and purpose built into every step.</p>
-      <p style="font-family: var(--font-body);font-size:0.88rem;color:rgba(255,255,255,0.55);margin-top:1rem;">By Levi Lewis &middot; Little Scripture Travelers</p>
+      <p style="font-family: var(--font-body);font-size:0.88rem;color:var(--ink-55);margin-top:1rem;">By Levi Lewis &middot; Little Scripture Travelers</p>
     </div>
   </section>
 
@@ -777,7 +778,7 @@
 
         <div class="opening-quote">
           <p>&ldquo;In coming days, it will not be possible to survive spiritually without the guiding, directing, comforting, and constant influence of the Holy Ghost. My beloved brothers and sisters, I plead with you to increase your spiritual capacity to receive revelation.&rdquo;</p>
-          <cite style="display:block;margin-top:0.75rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson, April 2018 General Conference</cite>
+          <cite style="display:block;margin-top:0.75rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:var(--gold-ink);font-style:normal;">&mdash; President Russell M. Nelson, April 2018 General Conference</cite>
         </div>
 
         <p>Read that word again: <strong>survive.</strong> Not thrive, not do a little better. Survive. He said it as a warning and an invitation, and I took it as a father. My daughters are going to grow up in a louder, harder world than the one I grew up in, and one day they&rsquo;ll face things I can&rsquo;t fix or explain or protect them from. What they&rsquo;ll need isn&rsquo;t more of my advice. They&rsquo;ll need a relationship with the Spirit that is <em>theirs</em> &mdash; personal, practiced, and real long before the storm.</p>
@@ -786,7 +787,7 @@
 
         <div class="opening-quote">
           <p>&ldquo;The joy we feel has little to do with the circumstances of our lives and everything to do with the focus of our lives.&rdquo;</p>
-          <cite style="display:block;margin-top:0.75rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:#f4c842;font-style:normal;">&mdash; President Russell M. Nelson, October 2016 General Conference</cite>
+          <cite style="display:block;margin-top:0.75rem;font-family: var(--font-display);font-weight:600;font-size:0.88rem;color:var(--gold-ink);font-style:normal;">&mdash; President Russell M. Nelson, October 2016 General Conference</cite>
         </div>
 
         <p>That one reframed everything for me. If joy is a matter of focus rather than circumstance, then the most valuable thing I can give my kids isn&rsquo;t a smoother life &mdash; it&rsquo;s a trained focus. A heart that knows where to look when things get hard.</p>
@@ -1081,8 +1082,8 @@
 
         </div>
 
-        <div class="disclaimer-box" style="background:rgba(7,17,46,0.6);border:1px solid rgba(244,200,66,0.18);border-radius:16px;padding:1.75rem 2rem;margin:2rem 0;">
-          <p style="font-family: var(--font-body);color:rgba(255,255,255,0.65);font-size:0.88rem;line-height:1.75;margin:0;">Little Scripture Travelers books are educational and preventive tools designed to build resilience and healthy habits. They are not therapy, diagnosis, or treatment, and are not a substitute for professional help. A child showing signs of an anxiety disorder, depression, or another mental-health concern deserves the care of a qualified professional &mdash; prevention and treatment are partners, not rivals. The faith elements in this post reflect my own family&rsquo;s beliefs and testimony, shared honestly and without claiming more than my own experience shows.</p>
+        <div class="disclaimer-box" style="background:rgba(var(--rgb-navy-deep), 0.6);border:1px solid rgba(244,200,66,0.18);border-radius:16px;padding:1.75rem 2rem;margin:2rem 0;">
+          <p style="font-family: var(--font-body);color:var(--ink-62);font-size:0.88rem;line-height:1.75;margin:0;">Little Scripture Travelers books are educational and preventive tools designed to build resilience and healthy habits. They are not therapy, diagnosis, or treatment, and are not a substitute for professional help. A child showing signs of an anxiety disorder, depression, or another mental-health concern deserves the care of a qualified professional &mdash; prevention and treatment are partners, not rivals. The faith elements in this post reflect my own family&rsquo;s beliefs and testimony, shared honestly and without claiming more than my own experience shows.</p>
         </div>
 
         <!-- Social Share -->
@@ -1165,28 +1166,28 @@
 
     <div class="footer-bottom" style="flex-direction:column;align-items:center;text-align:center;">
       <div class="social-links" style="justify-content:center;margin-bottom:0.75rem;gap:0.75rem;">
-        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.facebook.com/profile.php?id=61589835130657" aria-label="Facebook" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
-        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.instagram.com/scripturetravelers" aria-label="Instagram" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
         </a>
-        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://x.com/LittleScriveek" aria-label="X (Twitter)" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L2.25 2.25h6.988l4.27 5.646zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
-        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.youtube.com/@LittleScriptureTravelers" aria-label="YouTube" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#07112e"/></svg>
         </a>
-        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://www.tiktok.com/@little.scripture" aria-label="TikTok" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.14a8.16 8.16 0 0 0 4.77 1.52V7.21a4.85 4.85 0 0 1-1-.52z"/></svg>
         </a>
-        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:#f4c842;transition:background 0.2s,color 0.2s;">
+        <a href="https://pin.it/3iCIxLDGB" aria-label="Pinterest" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #f4c842;color:var(--gold-ink);transition:background 0.2s,color 0.2s;">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
         </a>
       </div>
       <p style="margin-top:1rem;">We do not lecture. We do not pile on rules. We tell what happened — a beginning, a worry, and a hopeful ending — in the smallest words that still carry the meaning.</p>
       <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">© 2026 Little Scripture Travelers</p>
-      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.15);font-size:0.72rem;line-height:1.5;color:#9aa6c0;text-align:center;">
+      <div class="lst-legal-disclaimer" style="max-width:760px;margin:1rem auto 0;padding-top:1rem;border-top:1px solid var(--edge-12);font-size:0.72rem;line-height:1.5;color:var(--ink-62);text-align:center;">
         <p style="margin:0 0 0.6rem;">Little Scripture Travelers Bedtime Stories, LLC is an independent creative endeavor. It is not affiliated with, made by, sponsored by, approved by, or endorsed by The Church of Jesus Christ of Latter-day Saints or Intellectual Reserve, Inc. All stories, illustrations, characters, lullabies, and opinions are solely those of Little Scripture Travelers and do not represent the Church.</p>
         <p style="margin:0;">&ldquo;Come, Follow Me,&rdquo; the name of The Church of Jesus Christ of Latter-day Saints, and related names and logos are trademarks of Intellectual Reserve, Inc.; any reference to them here is for identification purposes only.</p>
       </div>

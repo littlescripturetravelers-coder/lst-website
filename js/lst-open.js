@@ -107,7 +107,7 @@
   }
 
   function head(title, sub) {
-    return "<h2 style=\"font-family: var(--font-display);font-weight:600;color:#fff;" +
+    return "<h2 style=\"font-family: var(--font-display);font-weight:600;color:var(--ink);" +
       "font-size:clamp(1.5rem,4.4vw,2.15rem);margin:0 0 .5rem;line-height:1.2;\">" +
       esc(title) + "</h2>" +
       (sub ? '<p class="mp-meta">' + esc(sub) + "</p>" : "");
@@ -125,7 +125,7 @@
     return '<div class="rd">' + toolsView() +
       '<div class="rd-body">' +
         head(l.title || "A Little Travelers&rsquo; Lullaby", "") +
-        (l.subtitle ? '<p style="color:rgba(255,255,255,.62);font-style:italic;margin:0 0 1.4rem;line-height:1.7;">' +
+        (l.subtitle ? '<p style="color:var(--ink-62);font-style:italic;margin:0 0 1.4rem;line-height:1.7;">' +
           esc(l.subtitle) + "</p>" : "") +
         (track ? '<div id="lst-player"></div>' : "") +
         (l.jump || "") + l.html +
@@ -141,7 +141,7 @@
     return '<div class="rd">' + toolsView() +
       '<div class="rd-body">' +
         head(l.title || n.title || "Tonight&rsquo;s lullaby", prettyDate(n.date)) +
-        (l.subtitle ? '<p style="color:rgba(255,255,255,.62);font-style:italic;margin:0 0 1.4rem;line-height:1.7;">' +
+        (l.subtitle ? '<p style="color:var(--ink-62);font-style:italic;margin:0 0 1.4rem;line-height:1.7;">' +
           esc(l.subtitle) + "</p>" : "") +
         (n.songAudio ? '<div id="lst-player"></div>' : "") +
         (l.jump || "") + (l.html || "") +
