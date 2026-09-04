@@ -1,8 +1,14 @@
-# Morning Lantern — Drive → GitHub sync (free; runs inside GitHub, no Zapier, no secrets)
+# Morning Lantern — Drive → GitHub sync + ElevenLabs lullaby (free GitHub Actions; the only secret lives in GitHub)
 # File location:  .github/workflows/lantern-sync.yml  in the lst-website repo.
-# It watches ONE public Drive folder ("Lantern Publish") and copies any new .html file into DEST.
-# File names in Drive look like  a-lamp-for-my-feet__morning-lantern-lds.html
-# and land in the repo as         DEST/a-lamp-for-my-feet/morning-lantern-lds.html
+#
+# 1. Copies any new .html / .json file from the public Drive folder "Lantern Publish" into DEST.
+#    Drive name  a-lamp-for-my-feet__morning-lantern-lds.html  ->  DEST/a-lamp-for-my-feet/morning-lantern-lds.html
+# 2. For every  DEST/<slug>/lullaby.json  that has no  DEST/<slug>/<slug>-lullaby.mp3  yet, asks ElevenLabs Music
+#    (finetune "LST Theme Music") to sing the lyrics, and saves the MP3 beside the lullaby page.
+#
+# Repo secret needed (Settings → Secrets and variables → Actions):
+#   ELEVENLABS_API_KEY   your ElevenLabs API key
+# The finetune is found by name (FINETUNE_NAME below) via GET /v1/music/finetunes — no ID to look up.
 
 name: Lantern sync
 
@@ -12,7 +18,7 @@ on:
   workflow_dispatch:            # lets you press "Run workflow" by hand
 
 permissions:
-  contents: write               # lets the workflow commit to this repo using GitHub's built-in token
+  contents: write
 
 jobs:
   sync:
@@ -35,29 +41,86 @@ jobs:
           page = get(f"https://drive.google.com/embeddedfolderview?id={folder}#list").decode('utf-8', 'ignore')
           if 'accounts.google.com' in page[:2000] or 'ServiceLogin' in page[:2000]:
               raise SystemExit("Google asked for a sign-in: the 'Lantern Publish' folder is not shared as 'Anyone with the link'.")
-          # each entry: id="entry-<FILEID>" ... <div class="flip-entry-title">NAME</div>
           entries = re.findall(r'id="entry-([\w-]+)".*?class="flip-entry-title">(.*?)</div>', page, re.S)
           print(f'{len(entries)} item(s) listed in the Drive folder')
-          if not entries:
-              print('Folder is empty (or nothing parseable yet) - nothing to do.')
-              print('--- first 400 chars of the listing page, for debugging ---')
-              print(re.sub(r'\s+', ' ', page[:400]))
           added = 0
           for fid, raw_name in entries:
               name = html.unescape(raw_name).strip()
-              if not name.endswith('.html'):
-                  print('skipping (not .html):', name); continue
+              if not (name.endswith('.html') or name.endswith('.json')):
+                  print('skipping:', name); continue
               rel = name.replace('__', '/')            # slug__file.html -> slug/file.html
               path = os.path.join(dest, rel)
               if os.path.exists(path):
                   continue
               data = get(f"https://drive.google.com/uc?export=download&id={fid}")
-              if b'<!DOCTYPE html>' not in data[:300]:
+              if name.endswith('.html') and b'<!DOCTYPE html>' not in data[:300]:
                   raise SystemExit(f"Download of {name} did not look like a Lantern page - check its sharing setting.")
+              if name.endswith('.json') and not data.lstrip().startswith(b'{'):
+                  raise SystemExit(f"Download of {name} did not look like JSON - check its sharing setting.")
               os.makedirs(os.path.dirname(path), exist_ok=True)
               open(path, 'wb').write(data)
               print('added', path); added += 1
           print(f'{added} new file(s)')
+          EOF
+
+      - name: Sing any lullaby that has no MP3 yet (ElevenLabs Music)
+        env:
+          DEST: public/lantern
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          FINETUNE_NAME: LST Theme Music
+        run: |
+          set -e
+          python3 - <<'EOF'
+          import os, json, glob, urllib.request
+          dest = os.environ['DEST']
+          key = os.environ.get('ELEVENLABS_API_KEY', '').strip()
+          want = os.environ.get('FINETUNE_NAME', '').strip()
+          todo = [p for p in glob.glob(f'{dest}/*/lullaby.json')
+                  if not os.path.exists(os.path.join(os.path.dirname(p), os.path.basename(os.path.dirname(p)) + '-lullaby.mp3'))]
+          if not todo:
+              print('No lullabies waiting for audio.'); raise SystemExit(0)
+          if not key:
+              print(f'{len(todo)} lullaby(ies) waiting, but ELEVENLABS_API_KEY is not set - skipping audio for now.'); raise SystemExit(0)
+          def api(url, data=None, accept='application/json'):
+              req = urllib.request.Request(url, data=data, headers={'xi-api-key': key, 'Content-Type': 'application/json', 'Accept': accept})
+              return urllib.request.urlopen(req, timeout=600).read()
+          # find the finetune id by name
+          finetune = ''
+          if want:
+              try:
+                  raw = json.loads(api('https://api.elevenlabs.io/v1/music/finetunes'))
+              except urllib.error.HTTPError as e:
+                  raise SystemExit(f"Could not list ElevenLabs finetunes: HTTP {e.code} {e.read()[:300]!r}")
+              def walk(o):
+                  if isinstance(o, dict):
+                      name = str(o.get('name') or o.get('title') or '')
+                      fid = o.get('finetune_id') or o.get('id')
+                      if fid and name.strip().lower() == want.lower():
+                          return fid
+                      for v in o.values():
+                          r = walk(v)
+                          if r: return r
+                  elif isinstance(o, list):
+                      for v in o:
+                          r = walk(v)
+                          if r: return r
+              finetune = walk(raw) or ''
+              print('finetune:', want, '->', finetune or 'NOT FOUND (will generate without it)')
+          for p in todo:
+              slug = os.path.basename(os.path.dirname(p))
+              meta = json.load(open(p, encoding='utf-8'))
+              prompt = meta.get('prompt', '').strip() + "\n\nSing exactly these lyrics, one voice only:\n\n" + meta['lyrics'].strip()
+              body = {'prompt': prompt[:4100], 'music_length_ms': int(meta.get('length_ms', 120000)), 'model_id': 'music_v1'}
+              if finetune:
+                  body['finetune_id'] = finetune
+              try:
+                  audio = api('https://api.elevenlabs.io/v1/music?output_format=mp3_44100_128',
+                              data=json.dumps(body).encode('utf-8'), accept='audio/mpeg')
+              except urllib.error.HTTPError as e:
+                  raise SystemExit(f"ElevenLabs refused {slug}: HTTP {e.code} {e.read()[:500]!r}")
+              out = os.path.join(os.path.dirname(p), f'{slug}-lullaby.mp3')
+              open(out, 'wb').write(audio)
+              print(f'sang {slug}: {len(audio)//1024} KB -> {out}')
           EOF
 
       - name: Commit and push
