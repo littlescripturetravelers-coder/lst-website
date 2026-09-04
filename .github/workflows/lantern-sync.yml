@@ -20,7 +20,7 @@ jobs:
 
       - name: Download any new Lantern files listed in the Drive manifest
         env:
-          MANIFEST_ID: https://drive.google.com/drive/folders/1v-pZMEKnNJN1OpZwdKQrrb2tjp6xSaag?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto     # <- from the Drive share link of lantern-manifest.json
+          MANIFEST_ID: 1X7u1aTZkswUhn-uFP6VJU4JHtz1gtLxS     # <- from the Drive share link of lantern-manifest.json
           DEST: public/lantern                             # <- folder in this repo where Lantern HTML files live
         run: |
           set -e
