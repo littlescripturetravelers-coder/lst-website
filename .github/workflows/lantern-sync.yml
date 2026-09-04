@@ -1,6 +1,8 @@
 # Morning Lantern — Drive → GitHub sync (free; runs inside GitHub, no Zapier, no secrets)
-# Put this file at:  .github/workflows/lantern-sync.yml  in the lst-website repo.
-# Then fill in the two values under "env:" below.
+# File location:  .github/workflows/lantern-sync.yml  in the lst-website repo.
+# It watches ONE public Drive folder ("Lantern Publish") and copies any new .html file into DEST.
+# File names in Drive look like  a-lamp-for-my-feet__morning-lantern-lds.html
+# and land in the repo as         DEST/a-lamp-for-my-feet/morning-lantern-lds.html
 
 name: Lantern sync
 
@@ -18,32 +20,38 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download any new Lantern files listed in the Drive manifest
+      - name: Download any new Lantern files from the Drive folder
         env:
-          MANIFEST_ID: 1X7u1aTZkswUhn-uFP6VJU4JHtz1gtLxS     # <- from the Drive share link of lantern-manifest.json
-          DEST: public/lantern                             # <- folder in this repo where Lantern HTML files live
+          FOLDER_ID: 1C5Xk6kEFo7gbyPaQs9Rh9ojkNjxg_rZQ     # "Lantern Publish" folder (must be shared: Anyone with the link)
+          DEST: public/lantern                            # folder in this repo where Lantern HTML files live
         run: |
           set -e
-          curl -sL "https://drive.google.com/uc?export=download&id=${MANIFEST_ID}" -o manifest.json
           python3 - <<'EOF'
-          import json, os, urllib.request
-          dest = os.environ['DEST']
-          m = json.load(open('manifest.json'))
+          import os, re, html, urllib.request
+          folder = os.environ['FOLDER_ID']; dest = os.environ['DEST']
+          listing_url = f"https://drive.google.com/embeddedfolderview?id={folder}#list"
+          page = urllib.request.urlopen(listing_url).read().decode('utf-8', 'ignore')
+          # each entry: id="entry-<FILEID>" ... <div class="flip-entry-title">NAME</div>
+          entries = re.findall(r'id="entry-([\w-]+)".*?class="flip-entry-title">(.*?)</div>', page, re.S)
+          if not entries and 'flip-entry' not in page:
+              raise SystemExit("Could not read the Drive folder listing. Is 'Lantern Publish' shared as 'Anyone with the link'?")
           added = 0
-          for f in m['files']:
-              path = os.path.join(dest, f['path'])
+          for fid, raw_name in entries:
+              name = html.unescape(raw_name).strip()
+              if not name.endswith('.html'):
+                  continue
+              rel = name.replace('__', '/')            # slug__file.html -> slug/file.html
+              path = os.path.join(dest, rel)
               if os.path.exists(path):
                   continue
-              os.makedirs(os.path.dirname(path), exist_ok=True)
-              url = f"https://drive.google.com/uc?export=download&id={f['id']}"
-              data = urllib.request.urlopen(url).read()
+              data = urllib.request.urlopen(f"https://drive.google.com/uc?export=download&id={fid}").read()
               if b'<!DOCTYPE html>' not in data[:300]:
-                  raise SystemExit(f"Download for {f['path']} did not look like a Lantern page — is the Drive file shared 'Anyone with the link'?")
+                  raise SystemExit(f"Download of {name} did not look like a Lantern page - check its sharing setting.")
+              os.makedirs(os.path.dirname(path), exist_ok=True)
               open(path, 'wb').write(data)
               print('added', path); added += 1
           print(f'{added} new file(s)')
           EOF
-          rm -f manifest.json
 
       - name: Commit and push
         run: |
