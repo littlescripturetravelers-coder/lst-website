@@ -1,0 +1,58 @@
+# Morning Lantern — Drive → GitHub sync (free; runs inside GitHub, no Zapier, no secrets)
+# Put this file at:  .github/workflows/lantern-sync.yml  in the lst-website repo.
+# Then fill in the two values under "env:" below.
+
+name: Lantern sync
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'      # every 30 minutes (UTC)
+  workflow_dispatch:            # lets you press "Run workflow" by hand
+
+permissions:
+  contents: write               # lets the workflow commit to this repo using GitHub's built-in token
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download any new Lantern files listed in the Drive manifest
+        env:
+          MANIFEST_ID: https://drive.google.com/drive/folders/1v-pZMEKnNJN1OpZwdKQrrb2tjp6xSaag?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto     # <- from the Drive share link of lantern-manifest.json
+          DEST: public/lantern                             # <- folder in this repo where Lantern HTML files live
+        run: |
+          set -e
+          curl -sL "https://drive.google.com/uc?export=download&id=${MANIFEST_ID}" -o manifest.json
+          python3 - <<'EOF'
+          import json, os, urllib.request
+          dest = os.environ['DEST']
+          m = json.load(open('manifest.json'))
+          added = 0
+          for f in m['files']:
+              path = os.path.join(dest, f['path'])
+              if os.path.exists(path):
+                  continue
+              os.makedirs(os.path.dirname(path), exist_ok=True)
+              url = f"https://drive.google.com/uc?export=download&id={f['id']}"
+              data = urllib.request.urlopen(url).read()
+              if b'<!DOCTYPE html>' not in data[:300]:
+                  raise SystemExit(f"Download for {f['path']} did not look like a Lantern page — is the Drive file shared 'Anyone with the link'?")
+              open(path, 'wb').write(data)
+              print('added', path); added += 1
+          print(f'{added} new file(s)')
+          EOF
+          rm -f manifest.json
+
+      - name: Commit and push
+        run: |
+          git config user.name  "lantern-bot"
+          git config user.email "lantern-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing new to publish."
+          else
+            git commit -m "Morning Lantern: sync $(date -u +%Y-%m-%d)"
+            git push
+          fi
