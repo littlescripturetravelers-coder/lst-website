@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>The Morning Lantern &middot; Children Are a Gift</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy:  #1B2D5F;
+    --navy2: #0E1A3A;
+    --navy3: #0A1228;
+    --gold:  #F5C518;
+    --teal:  #5BD3DC;
+    --amber: #D9A227;
+    --white: #FFFFFF;
+    /* Traveler signature colors — Brand Style Sheet §05 */
+    --beau:   #B5651D;  /* warm brown */
+    --scout:  #4F7A3A;  /* bright green */
+    --willow: #9C6FB6;  /* purple */
+    --wren:   #D4623C;  /* coral red */
+    --wren:  #D4623C;
+    --card-bg: rgba(255,255,255,0.62);
+    --card-text: #1B2D5F;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    font-family: 'Nunito', sans-serif;
+    color: var(--white);
+    overscroll-behavior: none;
+    background: var(--navy3);
+  }
+
+  /* ══ PLAIN NAVY BACKGROUND ══
+     No stars, no clouds — flat brand navy so it matches the other
+     Morning Lantern pages. Slightly darker than the cards so the
+     white and navy boxes both read cleanly on top of it. */
+  .sky-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(180deg, #12224A 0%, #0E1A3A 45%, #0A1228 100%);
+  }
+
+  /* ══ FIXED HEADER ══ */
+  .app-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    background: #1B2D5F;
+    border-bottom: 2px solid rgba(245,197,24,0.6);
+    padding-top: env(safe-area-inset-top, 0);
+    /* manipulation stops iOS turning a double-tap into a zoom */
+    touch-action: manipulation;
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  /* Tucked away — scrolling down, or after a double-tap */
+  .app-header.hdr-hidden { transform: translateY(-102%); }
+
+  /* A slim handle left behind so the header is never unreachable */
+  .hdr-peek {
+    position: fixed; z-index: 199;
+    top: calc(env(safe-area-inset-top, 0px) + 6px);
+    left: 50%; transform: translateX(-50%) translateY(-160%);
+    width: 46px; height: 5px; border-radius: 3px;
+    background: rgba(245,197,24,0.65); border: none; padding: 0;
+    cursor: pointer; opacity: 0;
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+  }
+  .hdr-peek.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .app-header, .hdr-peek { transition: none; }
+  }
+  .header-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 12px 20px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .brand-name {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .brand-name span { color: var(--gold); }
+  .night-chip {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--navy2);
+    background: var(--gold);
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .tab-row {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 16px 10px;
+    gap: 6px;
+  }
+  .tab-btn {
+    flex: 1;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 8px 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn.active {
+    background: var(--gold);
+    color: var(--navy2);
+    border-color: var(--gold);
+  }
+
+  /* ══ SCROLL AREA ══ */
+  .scroll-area {
+    position: relative;
+    z-index: 10;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 14px 100px;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 16px);
+  }
+
+  /* ══ STORY HERO ══ */
+  .story-hero {
+    text-align: center;
+    background: transparent;
+    margin: 0 0 18px;
+    padding: 18px 4px 6px;
+  }
+  .hero-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+    text-shadow: 0 1px 8px rgba(91,211,220,0.5);
+  }
+  .hero-title {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 12px rgba(27,45,95,0.8);
+  }
+  .hero-ref {
+    font-family: 'Nunito', sans-serif;
+    font-style: italic;
+    font-size: 12px;
+    color: rgba(217,162,39,0.9);
+    margin-bottom: 14px;
+  }
+  .gold-rule {
+    width: 48px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--amber));
+    border-radius: 2px;
+    margin: 0 auto;
+    box-shadow: 0 0 8px rgba(245,197,24,0.5);
+  }
+
+  /* ══ REVEAL ANIMATION ══ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    /* Never use pointer-events:none or user-select:none — text must stay selectable */
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ══ WEEKLY READING BLOCK (above story title) ══ */
+  .weekly-block {
+    background: #0B1430;
+    border: 1px solid rgba(245,197,24,0.3);
+    border-radius: 12px;
+    padding: 10px 16px 12px;
+    margin: 0 0 12px;
+    text-align: center;
+  }
+  .weekly-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 8.5px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 6px;
+  }
+  .weekly-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+  .weekly-pill a {
+    display: inline-block;
+    background: #1B2D5F;
+    border: 1px solid rgba(245,197,24,0.35);
+    border-radius: 20px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    color: rgba(255,255,255,0.92);
+    padding: 3px 10px;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .weekly-pill a:hover {
+    background: rgba(245,197,24,0.2);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* Tonight's specific verse beneath title */
+  .tonight-verse-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 8.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 4px;
+    opacity: 0.85;
+  }
+  .tonight-verse-ref {
+    font-family: 'Nunito', sans-serif;
+    font-style: italic;
+    font-size: 12px;
+    color: rgba(91,211,220,0.9);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  }
+  .tonight-verse-ref a {
+    color: rgba(91,211,220,0.9);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .tonight-verse-ref a:hover { color: var(--teal); }
+
+  /* ══ CARD BASE — white boxes per branding ══ */
+  .card {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F2F4F8 100%);
+    border-radius: 18px;
+    margin-bottom: 14px;
+    padding: 18px 20px 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25), 0 1px 4px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Colored top border per card type */
+  .card-gold   { border-top: 4px solid var(--gold); }
+  .card-navy   { border-top: 4px solid var(--teal); background: #1B2D5F; }
+  .card-teal   { border-top: 4px solid var(--teal); }
+  .card-amber  { border-top: 4px solid var(--amber); }
+  .card-wren   { border-top: 4px solid var(--wren); }
+
+
+  /* Story card is navy with white text (brand spec) */
+  .card-story  { background: #1B2D5F; border-top: 4px solid var(--teal); }
+  .card-conf   { border-top: 4px solid var(--gold); background: #1B2D5F; color: var(--white); }
+
+  /* ══ CARD LABEL ══ */
+  .card-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 8.5px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card-label::after { content:''; flex:1; height:1px; background:currentColor; opacity:0.2; }
+  .lbl-gold  { color: var(--gold); }
+  .lbl-navy  { color: var(--navy); }
+  .lbl-teal  { color: var(--teal); }
+  .lbl-amber { color: var(--amber); }
+  .lbl-wren  { color: var(--wren); }
+  .lbl-white { color: rgba(255,255,255,0.85); }
+
+  /* ══ CARD TITLES ══ */
+  .card-title {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .ct-navy  { color: var(--navy); }
+  .ct-white { color: #FFFFFF; font-weight: 700; }
+  .ct-wren  { color: var(--wren); }
+  .ct-gold  { color: var(--gold); }
+
+  /* ══ BODY TEXT — dark on white cards, light on navy cards ══ */
+  .bt {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #1B2D5F;
+  }
+  .bt + .bt { margin-top: 8px; }
+  .bt strong { color: var(--navy); }
+  .bt em { color: var(--amber); font-style: italic; }
+  .bt-white {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    line-height: 1.68;
+    color: #FFFFFF;
+  }
+  .bt-white + .bt-white { margin-top: 8px; }
+  .bt-white strong { color: #FFFFFF; font-weight: 800; }
+
+  /* ══ HEART QUESTIONS (inside gold card = white bg) ══ */
+  .heart-q {
+    background: rgba(27,45,95,0.07);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    padding: 10px 13px;
+    margin-bottom: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #1B2D5F;
+  }
+  .heart-q:last-child { margin-bottom: 0; }
+  .heart-q strong { color: var(--navy); }
+  .atonement-q {
+    background: rgba(91,211,220,0.1);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 10px 10px 0;
+    padding: 10px 13px;
+    margin-bottom: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #1B2D5F;
+  }
+  .atonement-q strong { color: #1B2D5F; }
+  .atonement-q em { color: var(--amber); font-style: italic; }
+
+  /* ══ TRAVELER ══ */
+  .traveler-center { text-align: center; margin-bottom: 10px; }
+  .traveler-name {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    color: var(--wren);
+    margin-bottom: 2px;
+  }
+  .traveler-motto {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: rgba(212,98,60,0.75);
+  }
+
+  /* ══ VERSE ══ */
+  .verse-text {
+    font-family: 'Nunito', sans-serif;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .verse-ref a {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--amber);
+    text-decoration: none;
+  }
+
+  /* ══ SCRIPTURE PILLS — tappable links ══ */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .pill a {
+    display: inline-block;
+    background: rgba(27,45,95,0.08);
+    border: 1.5px solid rgba(27,45,95,0.18);
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 11.5px;
+    color: var(--navy);
+    padding: 5px 11px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .pill a:hover { background: rgba(27,45,95,0.14); }
+
+  /* ══ CONFERENCE TALKS (inside navy card) ══ */
+  .conf-talk {
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 13px 15px;
+    margin-bottom: 10px;
+  }
+  .conf-talk:last-child { margin-bottom: 0; }
+  .conf-date { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 3px; }
+  .conf-speaker { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 15px; color: #FFFFFF; margin-bottom: 1px; }
+  .conf-talk-title { font-family: 'Nunito', sans-serif; font-size: 12px; color: var(--teal); font-style: italic; margin-bottom: 8px; }
+  .conf-body { font-family: 'Nunito', sans-serif; font-size: 13px; line-height: 1.65; color: #FFFFFF; margin-bottom: 8px; }
+  .conf-link { font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 700; color: var(--teal); text-decoration: none; }
+
+  /* ══ QUOTE CARDS (white card with colored left border) ══ */
+  .quote-inner-teal {
+    border-left: 3px solid var(--teal);
+    padding-left: 12px;
+    margin-bottom: 10px;
+  }
+  .quote-inner-gold {
+    border-left: 3px solid var(--gold);
+    padding-left: 12px;
+    margin-bottom: 10px;
+  }
+  .quote-inner-teal:last-child,
+  .quote-inner-gold:last-child { margin-bottom: 0; }
+  .quote-text {
+    font-family: 'Nunito', sans-serif;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #1B2D5F;
+    margin-bottom: 6px;
+  }
+  .quote-attr {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--amber);
+    margin-bottom: 4px;
+  }
+  .quote-link {
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  /* ══ PROMPT CARD — navy bg ══ */
+  .prompt-q {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #FFFFFF;
+    padding: 10px 13px;
+    border-left: 3px solid var(--gold);
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .prompt-q:last-child { margin-bottom: 0; }
+
+  /* ══ WORD CHIPS ══ */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .chip {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* ══ TONIGHT TAG ══ */
+  .tonight-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  /* ══ SOFT DIVIDER ══ */
+  .soft-div { height: 1px; background: rgba(27,45,95,0.1); margin: 12px 0; }
+
+/* ══ EDITION PANELS ══ */
+  .edition { display: none; }
+  .edition.active { display: block; }
+
+  /* ══ READABILITY SAFETY NET ══
+     All text inside dark/navy cards must be white and legible.
+     These rules override any accidental low-opacity values. */
+  .card-story .bt-white,
+  .card-story .card-title,
+  .card-story .card-label,
+  .card-conf .bt-white,
+  .card-conf .card-title,
+  .card-conf .card-label,
+  .card-conf .conf-body,
+  .card-conf .conf-speaker,
+  .card-conf .conf-talk-title,
+  .card-conf .conf-date,
+  .card-navy .bt-white,
+  .card-navy .card-title,
+  .card-navy .card-label,
+  .card-navy .prompt-q {
+    color: #FFFFFF !important;
+  }
+  .card-story .card-label.lbl-white,
+  .card-conf .card-label.lbl-gold,
+  .card-navy .card-label.lbl-white {
+    opacity: 1 !important;
+  }
+  /* Ensure body text on white cards is always dark navy — fully readable */
+  .card-gold .bt,
+  .card-teal .bt,
+  .card-amber .bt,
+  .card-wren .bt,
+  .card-gold .heart-q,
+  .card-gold .atonement-q,
+  .card-teal .quote-text,
+  .card-amber .quote-text {
+    color: #1B2D5F !important;
+  }
+  .card-gold .bt strong,
+  .card-teal .bt strong,
+  .card-amber .bt strong,
+  .card-wren .bt strong {
+    color: #1B2D5F !important;
+  }
+  .card-gold .heart-q strong { color: #1B2D5F !important; }
+  .card-gold .atonement-q strong { color: #044d52 !important; }
+
+  /* ══ APP FOOTER ══ */
+  .app-footer {
+    text-align: center;
+    padding: 18px 0 6px;
+  }
+  .footer-brand {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ══ HEADER TOP ROW ══ */
+  .header-top {
+    max-width: 480px; margin: 0 auto;
+    padding: 10px 16px 8px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .brand-name { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 18px; color: #FFFFFF; line-height: 1; }
+  .brand-name span { color: var(--gold); }
+  .icon-toolbar { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+  .icon-btn {
+    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    background: transparent; border: none; border-radius: 8px; cursor: pointer;
+    color: var(--gold); transition: background 0.15s, color 0.15s;
+  }
+  .icon-btn:hover { background: rgba(245,197,24,0.12); color: #FFD84D; }
+  .icon-btn.active { color: #FFFFFF; background: rgba(245,197,24,0.18); }
+  .icon-btn svg { display: block; flex-shrink: 0; }
+
+  /* ══ PINNED CARDS — parent's heart + resources always visible ══ */
+  .pinned-card { opacity: 1 !important; transform: none !important; }
+  .edition.focus-mode .pinned-card {
+    opacity: 1 !important; filter: none !important;
+    pointer-events: auto !important; transform: none !important;
+  }
+
+  /* ══ FOCUS MODE ══
+     Everything that isn't pinned recedes until you scroll to it. The cards
+     keep their height so scrolling stays natural — they just go quiet. */
+  .edition.focus-mode .reveal {
+    opacity: 0.05;
+    filter: blur(3px);
+    transform: scale(0.985);
+    pointer-events: none;
+    transition: opacity 0.45s ease, filter 0.45s ease, transform 0.45s ease;
+  }
+  .edition.focus-mode .reveal.card-active {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    pointer-events: auto;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .edition.focus-mode .reveal { filter: none; transform: none; transition: opacity 0.2s ease; }
+  }
+
+  /* ══ VOICE MODAL ══ */
+  .voice-modal-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(5,10,30,0.75);
+    display: flex; align-items: center; justify-content: center; padding: 16px;
+    visibility: hidden; opacity: 0;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+  .voice-modal-overlay.open { visibility: visible; opacity: 1; }
+  .voice-modal {
+    background: #1B2D5F; border-radius: 20px; border: 2px solid var(--gold);
+    padding: 20px 18px 22px; width: 100%; max-width: 380px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+    transform: scale(0.94); transition: transform 0.22s cubic-bezier(0.22,1,0.36,1);
+    max-height: 80vh; overflow-y: auto;
+  }
+  .voice-modal-overlay.open .voice-modal { transform: scale(1); }
+  .voice-modal-title { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 20px; color: var(--gold); margin-bottom: 4px; }
+  .voice-modal-sub { font-family: 'Nunito', sans-serif; font-size: 12px; color: rgba(255,255,255,0.55); margin-bottom: 18px; line-height: 1.4; }
+  .voice-option {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 14px; padding: 12px 14px; cursor: pointer; margin-bottom: 8px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .voice-option:hover { background: rgba(255,255,255,0.1); border-color: rgba(245,197,24,0.3); }
+  .voice-option.selected { background: rgba(245,197,24,0.12); border-color: var(--gold); }
+  .voice-option.selected .voice-opt-name { color: var(--gold); }
+  .voice-opt-name { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 15px; color: #FFFFFF; margin-bottom: 2px; }
+  .voice-opt-desc { font-family: 'Nunito', sans-serif; font-size: 11px; color: rgba(255,255,255,0.4); }
+  .voice-opt-badge { margin-left: auto; font-family: 'Nunito', sans-serif; font-size: 10px; font-weight: 800; color: var(--navy); background: var(--gold); padding: 3px 8px; border-radius: 20px; display: none; flex-shrink: 0; }
+  .voice-option.selected .voice-opt-badge { display: block; }
+
+  /* ══ ICON POPUPS ══ */
+  .icon-popup-overlay {
+    position: fixed; inset: 0; z-index: 9998;
+    background: rgba(5,10,30,0.55);
+    display: flex; align-items: flex-start; justify-content: flex-end;
+    padding: 58px 12px 0;
+    visibility: hidden; opacity: 0;
+    transition: opacity 0.18s ease, visibility 0.18s ease;
+  }
+  .icon-popup-overlay.open { visibility: visible; opacity: 1; }
+  .icon-popup {
+    background: #1B2D5F; border: 1.5px solid var(--gold); border-radius: 16px;
+    padding: 16px; min-width: 200px; max-width: 280px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    transform: translateY(-6px); transition: transform 0.2s cubic-bezier(0.22,1,0.36,1);
+  }
+  .icon-popup-overlay.open .icon-popup { transform: translateY(0); }
+  .icon-popup-title { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 15px; color: var(--gold); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(245,197,24,0.2); }
+  .text-size-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .text-size-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 8px; cursor: pointer; transition: all 0.15s; color: #FFFFFF; }
+  .text-size-btn:hover { background: rgba(255,255,255,0.12); }
+  .text-size-btn.active { background: var(--navy); border-color: var(--gold); }
+  .text-size-label { font-family: 'Nunito', sans-serif; font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.6); letter-spacing: 0.5px; }
+  .text-size-btn.active .text-size-label { color: var(--gold); }
+  .view-popup-btn { width: 100%; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 11px 14px; margin-bottom: 8px; cursor: pointer; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px; color: #FFFFFF; transition: all 0.15s; text-align: left; }
+  .view-popup-btn:last-child { margin-bottom: 0; }
+  .view-popup-btn:hover { background: rgba(255,255,255,0.1); }
+  .view-popup-btn.active { background: rgba(245,197,24,0.15); border-color: var(--gold); color: var(--gold); }
+  .share-btn { width: 100%; display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 11px 14px; margin-bottom: 8px; cursor: pointer; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 13px; color: #FFFFFF; transition: all 0.15s; text-align: left; }
+  .share-btn:last-child { margin-bottom: 0; }
+  .share-btn:hover { background: rgba(255,255,255,0.1); }
+
+  /* ══ TOOLKIT CARD ══ */
+  .toolkit-card {
+    background: #1B2D5F; border-radius: 16px; margin-bottom: 12px;
+    padding: 14px 16px 16px; box-shadow: 0 3px 16px rgba(0,0,0,0.28);
+    border-top: 4px solid var(--gold);
+  }
+  .toolkit-label { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 8.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .toolkit-label::after { content:''; flex:1; height:1px; background:var(--gold); opacity:0.2; }
+  /* One full-width row per resource. grid-auto-rows:1fr makes every row
+     match the tallest, so a title that wraps to two lines doesn't leave
+     the others looking short. */
+  .toolkit-grid { display: grid; grid-template-columns: 1fr; grid-auto-rows: 1fr; gap: 8px; }
+  .toolkit-btn {
+    display: flex; align-items: center; gap: 10px; min-height: 57px;
+    background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 12px; padding: 11px 14px; text-decoration: none; transition: background 0.2s;
+  }
+  .toolkit-btn:hover { background: rgba(245,197,24,0.12); }
+  /* The scripture story is the night's main act — gold, but the same size */
+  .toolkit-btn-primary { background: rgba(245,197,24,0.12); border-color: rgba(245,197,24,0.4); }
+  .toolkit-btn-primary:hover { background: rgba(245,197,24,0.22); }
+  .toolkit-icon { font-size: 18px; line-height: 1; flex-shrink: 0; }
+  .toolkit-title { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 14px; color: #FFFFFF; line-height: 1.2; margin-bottom: 1px; }
+  .toolkit-btn-primary .toolkit-title { color: var(--gold); }
+  .toolkit-sub { font-family: 'Nunito', sans-serif; font-size: 10px; color: rgba(255,255,255,0.55); line-height: 1.3; }
+  .toolkit-btn-primary .toolkit-sub { color: rgba(245,197,24,0.65); }
+
+  /* ══ HEART-Q INLINE EXPANDABLE ══ */
+  .heart-q-wrap, .atonement-q-wrap { margin-bottom: 8px; border-radius: 0 10px 10px 0; overflow: hidden; }
+  .heart-q {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+    background: rgba(27,45,95,0.07); border-left: 3px solid var(--gold);
+    border-radius: 0 10px 10px 0; padding: 10px 12px; cursor: pointer;
+    -webkit-user-select: none; user-select: none; margin-bottom: 0; transition: background 0.15s;
+  }
+  .heart-q:active { background: rgba(27,45,95,0.12); }
+  .heart-q-text { flex:1; font-family:'Nunito',sans-serif; font-size:13.5px; line-height:1.5; color:#1B2D5F; }
+  .heart-q-text strong { font-weight:800; color:#1B2D5F; }
+  .atonement-q {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+    background: rgba(91,211,220,0.1); border-left: 3px solid var(--teal);
+    border-radius: 0 10px 10px 0; padding: 10px 12px; cursor: pointer;
+    -webkit-user-select: none; user-select: none; margin-bottom: 0; transition: background 0.15s;
+  }
+  .atonement-q-text { flex:1; font-family:'Nunito',sans-serif; font-size:13.5px; line-height:1.5; color:#1B2D5F; }
+  .atonement-q-text strong { font-weight:800; }
+  .atonement-q-text em { color:var(--amber); font-style:italic; }
+  .hq-plus { flex-shrink:0; width:26px; height:26px; background:var(--gold); border:none; border-radius:50%; display:flex; align-items:center; justify-content:center; pointer-events:none; margin-top:1px; transition:background 0.15s, transform 0.25s cubic-bezier(0.22,1,0.36,1); }
+  .hq-plus svg { width:11px; height:11px; stroke:var(--navy); fill:none; stroke-width:2.5; stroke-linecap:round; transition:transform 0.25s cubic-bezier(0.22,1,0.36,1); }
+  .hq-teal-plus { background:var(--teal); }
+  .heart-q-wrap.hq-open .hq-plus, .atonement-q-wrap.hq-open .hq-plus { background:var(--navy); }
+  .heart-q-wrap.hq-open .hq-plus svg, .atonement-q-wrap.hq-open .hq-plus svg { stroke:#FFFFFF; transform:rotate(45deg); }
+  .hq-panel { display:none; flex-direction:column; gap:8px; padding:10px 12px 12px; background:rgba(27,45,95,0.03); border-left:3px solid var(--gold); border-radius:0 0 10px 0; animation:hqIn 0.18s ease; }
+  .atonement-q-wrap .hq-panel { border-left-color:var(--teal); }
+  .heart-q-wrap.hq-open .hq-panel, .atonement-q-wrap.hq-open .hq-panel { display:flex; }
+  @keyframes hqIn { from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);} }
+  .hq-textarea { width:100%; min-height:72px; background:#FFFFFF; border:1.5px solid rgba(27,45,95,0.15); border-radius:8px; padding:8px 10px; font-family:'Nunito',sans-serif; font-size:13px; line-height:1.55; color:var(--navy); resize:vertical; outline:none; transition:border-color 0.2s; }
+  .hq-textarea:focus { border-color:var(--teal); }
+  .hq-textarea::placeholder { color:rgba(27,45,95,0.28); }
+  .hq-auto-tags { display:flex; flex-wrap:wrap; gap:5px; }
+  .hq-tag { display:inline-flex; align-items:center; gap:3px; padding:3px 8px; border-radius:20px; font-family:'Nunito',sans-serif; font-size:10px; font-weight:700; }
+  .hq-tag.auto { background:rgba(245,197,24,0.12); border:1px solid rgba(245,197,24,0.3); color:#7a5e00; }
+  .hq-tag.custom { background:rgba(91,211,220,0.12); border:1px solid rgba(91,211,220,0.3); color:#044d52; }
+  .hq-tag-x { font-size:9px; opacity:0.5; cursor:pointer; margin-left:2px; }
+  .hq-tag-row { display:flex; gap:6px; }
+  .hq-tag-input { flex:1; height:28px; background:#FFFFFF; border:1.5px solid rgba(27,45,95,0.12); border-radius:20px; padding:0 10px; font-family:'Nunito',sans-serif; font-size:11px; color:var(--navy); outline:none; }
+  .hq-tag-input:focus { border-color:var(--teal); }
+  .hq-tag-input::placeholder { color:rgba(27,45,95,0.28); }
+  .hq-tag-btn { height:28px; padding:0 11px; background:var(--navy); color:#FFF; font-family:'Nunito',sans-serif; font-weight:800; font-size:10px; border:none; border-radius:20px; cursor:pointer; flex-shrink:0; }
+  .hq-suggest-row { display:flex; flex-wrap:wrap; gap:5px; }
+  .hq-suggest { background:rgba(27,45,95,0.05); border:1px dashed rgba(27,45,95,0.18); border-radius:20px; padding:3px 9px; font-family:'Nunito',sans-serif; font-size:10px; font-weight:700; color:rgba(27,45,95,0.45); cursor:pointer; transition:all 0.15s; }
+  .hq-suggest:hover { background:rgba(245,197,24,0.12); border-color:rgba(245,197,24,0.4); color:#7a5e00; }
+  .hq-save-btn { align-self:flex-end; width:32px; height:32px; background:var(--gold); border:none; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:background 0.15s, transform 0.1s; box-shadow:0 2px 8px rgba(245,197,24,0.4); }
+  .hq-save-btn:active { transform:scale(0.92); }
+  .hq-save-btn svg { width:14px; height:14px; stroke:#1B2D5F; fill:none; stroke-width:2.5; stroke-linecap:round; }
+  .hq-save-btn.saved { background:var(--teal); }
+
+  /* ══ JOURNAL TOAST ══ */
+  .journal-toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--navy); border:2px solid var(--gold); color:#FFFFFF; font-family:'Fredoka',sans-serif; font-weight:600; font-size:15px; padding:12px 24px; border-radius:30px; z-index:600; white-space:nowrap; transition:transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.35s; opacity:0; box-shadow:0 4px 20px rgba(0,0,0,0.4); }
+  .journal-toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+
+  /* ═══════════════════════════════════════════════
+     ORIGINAL CARD SURFACES — RESTORED
+     White (Cloud White) is the default card surface with a
+     colored accent rule on top. Three card types are navy:
+     the scripture story, the gospel-principle card, and the
+     General Conference card.
+  ═══════════════════════════════════════════════ */
+
+  /* ── White cards with colored accent rules ── */
+  .card-gold  { background: linear-gradient(180deg,#FFFFFF 0%,#F2F4F8 100%); border-top: 4px solid var(--gold); }
+  .card-teal  { background: linear-gradient(180deg,#FFFFFF 0%,#F2F4F8 100%); border-top: 4px solid var(--teal); }
+  .card-amber { background: linear-gradient(180deg,#FFFFFF 0%,#F2F4F8 100%); border-top: 4px solid var(--amber); }
+  .card-wren  { background: linear-gradient(180deg,#FFFFFF 0%,#F2F4F8 100%); border-top: 4px solid var(--wren); }
+  .card-verse { background: linear-gradient(180deg,#FFFFFF 0%,#F5F2E8 100%); border-top: 4px solid var(--gold); }
+  .card-quote { background: linear-gradient(180deg,#FFFFFF 0%,#F2F4F8 100%); border-top: 4px solid var(--teal); }
+  /* The Latter-day Apostle quote card wears gold instead of teal */
+  .card-quote:has(.quote-inner-gold) { border-top-color: var(--gold); }
+
+  /* ── Navy cards ── */
+  .card-navy  { background: #1B2D5F; border-top: 4px solid var(--teal); }
+  .card-story { background: #1B2D5F; border-top: 4px solid var(--teal); }
+  .card-conf  { background: #1B2D5F; border-top: 4px solid var(--gold); }
+
+  /* ── Text on the navy cards ── */
+  .card-navy .bt-white, .card-story .bt-white, .card-conf .bt-white,
+  .card-navy .card-title, .card-story .card-title, .card-conf .card-title,
+  .card-navy .prompt-q {
+    color: #FFFFFF !important;
+  }
+  .card-navy .bt-white strong, .card-story .bt-white strong,
+  .card-conf .bt-white strong { color: #FFFFFF !important; }
+  .card-navy .card-label, .card-story .card-label { color: rgba(255,255,255,0.85) !important; }
+  .card-conf .card-label  { color: var(--gold) !important; }
+  .card-conf .conf-talk   { background: rgba(255,255,255,0.06) !important; }
+  .card-conf .conf-body   { color: rgba(255,255,255,0.9) !important; }
+
+  /* ── Text on the white cards ── */
+  .card-gold .bt, .card-teal .bt, .card-amber .bt,
+  .card-wren .bt, .card-verse .bt {
+    color: #1B2D5F !important;
+  }
+  .card-gold .bt strong, .card-teal .bt strong, .card-amber .bt strong,
+  .card-wren .bt strong, .card-verse .bt strong { color: #1B2D5F !important; }
+  .card-gold .card-title, .card-teal .card-title,
+  .card-amber .card-title, .card-wren .card-title { color: var(--navy) !important; }
+  .card-gold .card-label  { color: var(--navy) !important; }
+  .card-teal .card-label  { color: var(--teal) !important; }
+  .card-amber .card-label { color: var(--amber) !important; }
+  .card-verse .card-label { color: var(--amber) !important; }
+  .card-quote .card-label { color: var(--teal) !important; }
+  .card-quote:has(.quote-inner-gold) .card-label { color: var(--amber) !important; }
+
+  /* ── Verse card details ── */
+  .card-verse .verse-text  { color: #1B2D5F !important; }
+  .card-verse .verse-ref a { color: var(--amber) !important; }
+  .card-verse .soft-div    { background: rgba(27,45,95,0.14) !important; }
+
+  /* ── Quote card details ── */
+  .card-quote .quote-text { color: #1B2D5F !important; }
+  .card-quote .quote-attr { color: var(--amber) !important; }
+  .card-quote .quote-link { color: var(--teal) !important; }
+
+  /* ── Plain (non-expandable) heart questions flow as normal text ──
+     .heart-q is a flex row built for the expandable version that has a
+     .heart-q-text child plus a + button. When those children aren't
+     present the bold lead-in gets pushed into its own column, so plain
+     questions are set back to block flow. ── */
+  .heart-q:not(:has(.heart-q-text)),
+  .atonement-q:not(:has(.atonement-q-text)) {
+    display: block;
+    cursor: default;
+  }
+
+  /* ── Word study chips ── */
+  .card-teal .chip { background: var(--gold) !important; color: #1B2D5F !important; }
+
+
+  /* ═══════════════════════════════════════════════
+     NARRATION PLAYER — voice picker + bottom bar
+  ═══════════════════════════════════════════════ */
+
+  /* ── Voice picker popup ── */
+  .vp-section-label {
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 8.5px;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--amber);
+    margin: 14px 0 8px;
+  }
+  .vp-section-label:first-of-type { margin-top: 0; }
+
+  .vp-voice {
+    display: flex; align-items: center; gap: 11px;
+    background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 11px; padding: 10px 12px; margin-bottom: 7px;
+    cursor: pointer; transition: background 0.15s, border-color 0.15s;
+  }
+  .vp-voice:last-of-type { margin-bottom: 0; }
+  .vp-voice:hover { background: rgba(255,255,255,0.1); }
+  .vp-voice.selected { background: rgba(245,197,24,0.14); border-color: var(--gold); }
+  .vp-avatar {
+    width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 17px;
+  }
+  .vp-name {
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 14px;
+    color: #FFFFFF; line-height: 1.2;
+  }
+  .vp-voice.selected .vp-name { color: var(--gold); }
+  .vp-desc { font-family: 'Nunito', sans-serif; font-size: 11px; color: rgba(255,255,255,0.45); }
+  .vp-check { margin-left: auto; color: var(--gold); font-size: 15px; display: none; flex-shrink: 0; }
+  .vp-voice.selected .vp-check { display: block; }
+
+  /* ── Speed selector ── */
+  .vp-speeds { display: flex; gap: 5px; flex-wrap: wrap; }
+  .vp-speed {
+    flex: 1; min-width: 48px;
+    background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 9px; padding: 8px 4px; cursor: pointer;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12px;
+    color: rgba(255,255,255,0.6); transition: all 0.15s;
+  }
+  .vp-speed:hover { background: rgba(255,255,255,0.1); }
+  .vp-speed.selected { background: var(--gold); border-color: var(--gold); color: #1B2D5F; }
+
+  .vp-play-btn {
+    width: 100%; margin-top: 14px; background: var(--gold); border: none;
+    border-radius: 12px; padding: 13px;
+    font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 15px;
+    color: #1B2D5F; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: background 0.15s;
+  }
+  .vp-play-btn:hover { background: var(--amber); }
+  .vp-play-btn:disabled { opacity: 0.4; cursor: default; }
+
+  /* ── Bottom player bar ── */
+  .player-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 900;
+    background: #1B2D5F;
+    border-top: 2px solid var(--gold);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    transform: translateY(110%);
+    transition: transform 0.32s cubic-bezier(0.22,1,0.36,1);
+    box-shadow: 0 -6px 28px rgba(0,0,0,0.45);
+  }
+  .player-bar.open { transform: translateY(0); }
+  .player-inner { max-width: 480px; margin: 0 auto; padding: 10px 16px 12px; }
+
+  /* Scrubber */
+  .pb-track {
+    height: 4px; background: rgba(255,255,255,0.18); border-radius: 4px;
+    cursor: pointer; position: relative; margin-bottom: 7px;
+  }
+  .pb-fill {
+    height: 100%; background: var(--gold); border-radius: 4px;
+    width: 0%; pointer-events: none; position: relative;
+  }
+  .pb-fill::after {
+    content: ''; position: absolute; right: -5px; top: 50%;
+    transform: translateY(-50%);
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--gold); box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+  .pb-times {
+    display: flex; justify-content: space-between;
+    font-family: 'Nunito', sans-serif; font-size: 10px; font-weight: 700;
+    color: rgba(255,255,255,0.5); margin-bottom: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Controls row */
+  .pb-row { display: flex; align-items: center; gap: 12px; }
+  .pb-meta { flex: 1; min-width: 0; }
+  .pb-title {
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 13px;
+    color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    line-height: 1.25;
+  }
+  .pb-sub {
+    font-family: 'Nunito', sans-serif; font-size: 10.5px;
+    color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .pb-controls { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .pb-skip {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: transparent; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.75); position: relative;
+    transition: background 0.15s, color 0.15s;
+  }
+  .pb-skip:hover { background: rgba(255,255,255,0.1); color: #FFFFFF; }
+  .pb-skip span {
+    position: absolute; font-family: 'Nunito', sans-serif;
+    font-size: 7.5px; font-weight: 800; top: 51%; left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .pb-play {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--gold); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: #1B2D5F; flex-shrink: 0;
+    transition: background 0.15s, transform 0.1s;
+    box-shadow: 0 2px 10px rgba(245,197,24,0.35);
+  }
+  .pb-play:hover { background: var(--amber); }
+  .pb-play:active { transform: scale(0.94); }
+  .pb-close {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.55); font-size: 13px; flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
+  }
+  .pb-close:hover { background: rgba(255,255,255,0.15); color: #FFFFFF; }
+
+  /* Listen icon pulses while playing */
+  .icon-btn.playing { color: var(--gold); animation: listenPulse 1.6s ease-in-out infinite; }
+  @keyframes listenPulse { 0%,100%{opacity:1;} 50%{opacity:0.45;} }
+
+  /* Leave room above the save bar / page end */
+  .player-bar.open ~ .scroll-area { padding-bottom: 120px; }
+
+
+  /* ── Traveler card wears the Traveler's signature color ── */
+  .card-wren.trav-beau   { border-top: 4px solid var(--beau)   !important; }
+  .card-wren.trav-scout  { border-top: 4px solid var(--scout)  !important; }
+  .card-wren.trav-willow { border-top: 4px solid var(--willow) !important; }
+  .card-wren.trav-wren   { border-top: 4px solid var(--wren)   !important; }
+
+  .card-wren.trav-beau   .traveler-name { color: var(--beau)   !important; }
+  .card-wren.trav-scout  .traveler-name { color: var(--scout)  !important; }
+  .card-wren.trav-willow .traveler-name { color: var(--willow) !important; }
+  .card-wren.trav-wren   .traveler-name { color: var(--wren)   !important; }
+
+  .card-wren.trav-beau   .card-label { color: var(--beau)   !important; }
+  .card-wren.trav-scout  .card-label { color: var(--scout)  !important; }
+  .card-wren.trav-willow .card-label { color: var(--willow) !important; }
+  .card-wren.trav-wren   .card-label { color: var(--wren)   !important; }
+
+  .card-wren .traveler-motto { color: rgba(27,45,95,0.6) !important; }
+  .card-wren.trav-beau   .traveler-motto { color: rgba(181,101,29,0.8)  !important; }
+  .card-wren.trav-scout  .traveler-motto { color: rgba(79,122,58,0.85)  !important; }
+  .card-wren.trav-willow .traveler-motto { color: rgba(156,111,182,0.85) !important; }
+  .card-wren.trav-wren   .traveler-motto { color: rgba(212,98,60,0.85)  !important; }
+
+
+  /* ═══════════════════════════════════════════════
+     FAMILY STORIES ENGINE
+     Expandable parent answers · Family Circle ·
+     Study Journal · Family Stories vault
+  ═══════════════════════════════════════════════ */
+
+  /* ── Memory spark: the smaller italic nudge under a question ── */
+  .heart-q-spark {
+    display:block; margin-top:7px; padding-top:7px;
+    border-top:1px dashed rgba(27,45,95,0.16);
+    font-family:'Nunito',sans-serif; font-style:italic;
+    font-size:11.5px; line-height:1.55; color:rgba(27,45,95,0.62);
+  }
+  .heart-q-spark b {
+    font-style:normal; font-weight:800; font-size:8.5px;
+    letter-spacing:1.3px; text-transform:uppercase;
+    color:var(--amber); display:block; margin-bottom:3px;
+  }
+
+  /* ── Collapsible memory spark ── */
+  .heart-q-spark-toggle {
+    display:flex; align-items:center; gap:5px;
+    width:100%; background:none; border:none; padding:0; margin:0;
+    cursor:pointer; text-align:left;
+    font-family:'Nunito',sans-serif; font-style:normal; font-weight:800;
+    font-size:8.5px; letter-spacing:1.3px; text-transform:uppercase;
+    color:var(--amber); -webkit-tap-highlight-color:transparent;
+  }
+  .heart-q-spark-toggle span { flex:1; }
+  .hq-spark-chev {
+    width:11px; height:11px; flex-shrink:0;
+    fill:none; stroke:currentColor; stroke-width:3;
+    stroke-linecap:round; stroke-linejoin:round;
+    transition:transform .22s ease;
+  }
+  .heart-q-spark.open .hq-spark-chev { transform:rotate(180deg); }
+  .heart-q-spark-body {
+    max-height:0; overflow:hidden; opacity:0;
+    transition:max-height .28s ease, opacity .2s ease, margin-top .28s ease;
+  }
+  .heart-q-spark.open .heart-q-spark-body {
+    max-height:340px; opacity:1; margin-top:5px;
+  }
+
+  /* ── Shared small section label inside panels ── */
+  .hq-sec-label {
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:8.5px;
+    letter-spacing:1.6px; text-transform:uppercase;
+    color:rgba(27,45,95,0.45); margin-top:2px;
+  }
+
+  /* ── Full-width submit ── */
+  .hq-submit {
+    width:100%; margin-top:4px; background:var(--gold); border:none;
+    border-radius:11px; padding:11px 12px; cursor:pointer;
+    font-family:'Fredoka',sans-serif; font-weight:600; font-size:13.5px;
+    color:#1B2D5F; display:flex; align-items:center; justify-content:center; gap:7px;
+    transition:background 0.15s, transform 0.1s;
+    box-shadow:0 2px 10px rgba(245,197,24,0.3);
+  }
+  .hq-submit:hover { background:var(--amber); }
+  .hq-submit:active { transform:scale(0.985); }
+  .hq-submit.done { background:var(--teal); }
+  .hq-submit svg { width:14px; height:14px; stroke:#1B2D5F; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* ── Person / story toggle chips ── */
+  .hq-chip-row { display:flex; flex-wrap:wrap; gap:5px; }
+  .hq-chip {
+    display:inline-flex; align-items:center; gap:5px;
+    background:#FFFFFF; border:1.5px solid rgba(27,45,95,0.15);
+    border-radius:20px; padding:4px 10px; cursor:pointer;
+    font-family:'Nunito',sans-serif; font-weight:700; font-size:10.5px;
+    color:rgba(27,45,95,0.6); transition:all 0.15s;
+  }
+  .hq-chip:hover { border-color:rgba(91,211,220,0.6); }
+  .hq-chip.on { background:rgba(91,211,220,0.16); border-color:var(--teal); color:#0d4a4f; }
+  .hq-chip-dot { width:6px; height:6px; border-radius:50%; background:rgba(27,45,95,0.2); flex-shrink:0; }
+  .hq-chip.on .hq-chip-dot { background:var(--teal); }
+  .hq-chip-empty {
+    font-family:'Nunito',sans-serif; font-size:10.5px; font-style:italic;
+    color:rgba(27,45,95,0.35);
+  }
+
+  /* ── Draft saved hint ── */
+  .hq-draft {
+    font-family:'Nunito',sans-serif; font-size:9.5px; font-weight:700;
+    color:rgba(27,45,95,0.35); text-align:right; margin-top:-4px;
+  }
+
+  /* ═══ FAMILY CIRCLE ═══ */
+  .fam-list { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
+  .fam-empty {
+    font-family:'Nunito',sans-serif; font-size:12.5px; font-style:italic;
+    color:rgba(27,45,95,0.45); background:rgba(27,45,95,0.04);
+    border-radius:10px; padding:12px 14px; line-height:1.55;
+  }
+  .fam-member { border-radius:12px; overflow:hidden; background:rgba(27,45,95,0.05); }
+  .fam-head {
+    display:flex; align-items:center; gap:10px; padding:9px 11px;
+    cursor:pointer; -webkit-user-select:none; user-select:none;
+    transition:background 0.15s;
+  }
+  .fam-head:hover { background:rgba(27,45,95,0.04); }
+  .fam-avatar {
+    width:32px; height:32px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fredoka',sans-serif; font-weight:700; font-size:14px;
+    color:#FFFFFF; background:var(--navy);
+  }
+  .fam-meta { flex:1; min-width:0; }
+  .fam-name {
+    font-family:'Fredoka',sans-serif; font-weight:600; font-size:14px;
+    color:var(--navy); line-height:1.2;
+  }
+  .fam-role {
+    font-family:'Nunito',sans-serif; font-size:10px; font-weight:700;
+    color:rgba(27,45,95,0.45); text-transform:uppercase; letter-spacing:1px;
+  }
+  .fam-count {
+    font-family:'Nunito',sans-serif; font-size:9.5px; font-weight:800;
+    color:#7a5e00; background:rgba(245,197,24,0.2);
+    border-radius:20px; padding:2px 8px; flex-shrink:0;
+  }
+  .fam-member.fam-open .fam-panel { display:flex; }
+  .fam-panel {
+    display:none; flex-direction:column; gap:8px;
+    padding:4px 11px 12px; background:rgba(27,45,95,0.03);
+  }
+  .fam-story {
+    background:#FFFFFF; border-left:3px solid var(--teal);
+    border-radius:0 10px 10px 0; padding:9px 11px;
+  }
+  .fam-story-body {
+    font-family:'Nunito',sans-serif; font-size:12.5px; line-height:1.55;
+    color:#1B2D5F; white-space:pre-wrap;
+  }
+  .fam-story-meta {
+    font-family:'Nunito',sans-serif; font-size:9.5px; font-weight:700;
+    color:rgba(27,45,95,0.4); margin-top:5px;
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+  }
+  .fam-del {
+    background:none; border:none; cursor:pointer; padding:0;
+    font-family:'Nunito',sans-serif; font-size:9.5px; font-weight:800;
+    color:rgba(212,98,60,0.7);
+  }
+  .fam-del:hover { color:var(--wren); }
+
+  .fam-add { display:flex; flex-direction:column; gap:7px; margin-top:12px; }
+  .fam-add-row { display:flex; gap:6px; }
+  .fam-input {
+    flex:1; min-width:0; height:34px; background:#FFFFFF;
+    border:1.5px solid rgba(27,45,95,0.15); border-radius:10px; padding:0 11px;
+    font-family:'Nunito',sans-serif; font-size:12.5px; color:var(--navy); outline:none;
+  }
+  .fam-input:focus { border-color:var(--teal); }
+  .fam-input::placeholder { color:rgba(27,45,95,0.28); }
+  .fam-select {
+    height:34px; background:#FFFFFF; border:1.5px solid rgba(27,45,95,0.15);
+    border-radius:10px; padding:0 8px; flex-shrink:0;
+    font-family:'Nunito',sans-serif; font-weight:700; font-size:11.5px;
+    color:var(--navy); outline:none; cursor:pointer;
+  }
+  .fam-add-btn {
+    height:34px; padding:0 14px; background:var(--navy); color:#FFFFFF;
+    border:none; border-radius:10px; cursor:pointer; flex-shrink:0;
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:11.5px;
+  }
+  .fam-add-btn:hover { background:#24397a; }
+
+  /* ═══ STUDY JOURNAL ═══ */
+  /* Three even columns; grid-auto-rows:1fr keeps every tile the same
+     height however its label wraps. */
+  .jr-types {
+    display:grid; grid-template-columns:repeat(3, 1fr);
+    grid-auto-rows:1fr; gap:6px; margin:10px 0 4px;
+  }
+  .jr-type {
+    background:#FFFFFF; border:1.5px solid rgba(27,45,95,0.15);
+    border-radius:10px; padding:8px 4px; cursor:pointer;
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:9.5px;
+    letter-spacing:0.2px; color:rgba(27,45,95,0.5); line-height:1.25;
+    transition:all 0.15s; text-align:center;
+  }
+  .jr-type:hover { border-color:rgba(245,197,24,0.5); }
+  .jr-type.on { background:var(--gold); border-color:var(--gold); color:#1B2D5F; }
+  .jr-type-ico { display:block; font-size:14px; margin-bottom:2px; }
+
+  .jr-saved { display:flex; flex-direction:column; gap:7px; margin-top:12px; }
+  .jr-entry {
+    background:rgba(27,45,95,0.04); border-left:3px solid var(--gold);
+    border-radius:0 10px 10px 0; padding:9px 11px;
+  }
+  .jr-entry.k-question   { border-left-color:var(--teal); }
+  .jr-entry.k-thought    { border-left-color:var(--navy); }
+  .jr-entry.k-revelation { border-left-color:var(--gold); }
+  .jr-entry.k-goal       { border-left-color:var(--scout); }
+  .jr-badge {
+    display:inline-block; font-family:'Nunito',sans-serif; font-weight:800;
+    font-size:8.5px; letter-spacing:1.4px; text-transform:uppercase;
+    color:rgba(27,45,95,0.5); margin-bottom:4px;
+  }
+  .jr-body {
+    font-family:'Nunito',sans-serif; font-size:12.5px; line-height:1.55;
+    color:#1B2D5F; white-space:pre-wrap;
+  }
+  .jr-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+
+  /* ═══ SAVED-TONIGHT STRIP + VAULT LINK ═══ */
+  .fs-link {
+    width:100%; margin-top:10px; background:#FFFFFF;
+    border:1.5px solid rgba(27,45,95,0.18); border-radius:11px;
+    padding:10px 12px; cursor:pointer;
+    font-family:'Fredoka',sans-serif; font-weight:600; font-size:12.5px;
+    color:var(--navy); display:flex; align-items:center; justify-content:center; gap:7px;
+    transition:all 0.15s;
+  }
+  .fs-link:hover { border-color:var(--gold); background:rgba(245,197,24,0.08); }
+  .fs-count {
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:10px;
+    background:var(--gold); color:#1B2D5F; border-radius:20px; padding:2px 8px;
+  }
+
+  /* ═══ FAMILY STORIES VAULT (full-screen) ═══ */
+  .fs-overlay {
+    position:fixed; inset:0; z-index:9997; background:rgba(5,10,30,0.75);
+    visibility:hidden; opacity:0; transition:opacity 0.22s, visibility 0.22s;
+    display:flex; align-items:flex-end; justify-content:center;
+  }
+  .fs-overlay.open { visibility:visible; opacity:1; }
+  .fs-sheet {
+    width:100%; max-width:480px; max-height:88vh;
+    background:linear-gradient(180deg,#FFFFFF 0%,#F2F4F8 100%);
+    border-radius:22px 22px 0 0; border-top:4px solid var(--gold);
+    display:flex; flex-direction:column;
+    transform:translateY(100%); transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  .fs-overlay.open .fs-sheet { transform:translateY(0); }
+  .fs-head {
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:16px 18px 10px; border-bottom:1px solid rgba(27,45,95,0.1); flex-shrink:0;
+  }
+  .fs-title { font-family:'Fredoka',sans-serif; font-weight:700; font-size:18px; color:var(--navy); }
+  .fs-sub { font-family:'Nunito',sans-serif; font-size:11px; color:rgba(27,45,95,0.5); margin-top:1px; }
+  .fs-close {
+    width:30px; height:30px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(27,45,95,0.08); color:var(--navy); font-size:14px; flex-shrink:0;
+  }
+  .fs-close:hover { background:rgba(27,45,95,0.16); }
+  .fs-body { overflow-y:auto; padding:14px 18px 20px; -webkit-overflow-scrolling:touch; }
+  .fs-filter { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:12px; }
+  .fs-night-label {
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:9px;
+    letter-spacing:1.8px; text-transform:uppercase; color:var(--amber);
+    margin:14px 0 7px; display:flex; align-items:center; gap:6px;
+  }
+  .fs-night-label:first-child { margin-top:0; }
+  .fs-night-label::after { content:''; flex:1; height:1px; background:var(--amber); opacity:0.25; }
+  .fs-item {
+    background:#FFFFFF; border:1px solid rgba(27,45,95,0.1);
+    border-left:3px solid var(--gold); border-radius:0 12px 12px 0;
+    padding:11px 13px; margin-bottom:8px;
+  }
+  .fs-item-prompt {
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:11px;
+    color:rgba(27,45,95,0.55); line-height:1.45; margin-bottom:5px;
+  }
+  .fs-item-body {
+    font-family:'Nunito',sans-serif; font-size:13px; line-height:1.6;
+    color:#1B2D5F; white-space:pre-wrap;
+  }
+  .fs-item-foot {
+    display:flex; align-items:center; justify-content:space-between;
+    gap:8px; margin-top:8px;
+  }
+  .fs-empty {
+    font-family:'Nunito',sans-serif; font-size:13px; font-style:italic;
+    line-height:1.6; color:rgba(27,45,95,0.45); text-align:center; padding:26px 10px;
+  }
+
+  /* Journal card sits last — a little breathing room above the footer */
+  .jr-card { margin-bottom:18px; }
+
+
+  /* ═══════════════════════════════════════════════
+     PAGE MENU — one circle button, one popover
+     Replaces the row of icons. Same idea as the
+     "•••" menu in Gospel Library.
+  ═══════════════════════════════════════════════ */
+  .menu-btn {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(245,197,24,0.14);
+    border: 1.5px solid rgba(245,197,24,0.45);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--gold);
+    transition: background 0.15s, transform 0.1s;
+    touch-action: manipulation;
+  }
+  .menu-btn:hover { background: rgba(245,197,24,0.26); }
+  .menu-btn:active { transform: scale(0.93); }
+  .menu-btn.playing { animation: listenPulse 1.6s ease-in-out infinite; }
+
+  .menu-scrim {
+    position: fixed; inset: 0; z-index: 950;
+    background: rgba(5,10,30,0.28);
+    visibility: hidden; opacity: 0;
+    transition: opacity 0.18s ease, visibility 0.18s ease;
+  }
+  .menu-scrim.open { visibility: visible; opacity: 1; }
+
+  .page-menu {
+    position: fixed; z-index: 960;
+    top: calc(env(safe-area-inset-top, 0px) + 54px);
+    right: 12px; width: 232px;
+    background: rgba(252,253,255,0.97);
+    -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    transform-origin: top right;
+    transform: scale(0.9) translateY(-6px); opacity: 0; visibility: hidden;
+    transition: transform 0.2s cubic-bezier(0.22,1,0.36,1), opacity 0.18s ease, visibility 0.18s;
+  }
+  .page-menu.open { transform: scale(1) translateY(0); opacity: 1; visibility: visible; }
+  .pm-item {
+    width: 100%; display: flex; align-items: center; gap: 14px;
+    background: transparent; border: none; cursor: pointer;
+    padding: 14px 16px; text-align: left;
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 15px;
+    color: #10193a; transition: background 0.12s;
+  }
+  .pm-item:hover, .pm-item:active { background: rgba(27,45,95,0.07); }
+  .pm-item svg { flex-shrink: 0; color: rgba(16,25,58,0.75); }
+  .pm-sep { height: 1px; background: rgba(27,45,95,0.1); margin: 0 16px; }
+  .pm-item .pm-badge {
+    margin-left: auto; font-size: 10px; font-weight: 800;
+    color: #1B2D5F; background: var(--gold);
+    border-radius: 20px; padding: 2px 8px;
+  }
+
+  /* ═══════════════════════════════════════════════
+     MINI PLAYER — the floating pill
+  ═══════════════════════════════════════════════ */
+  .mini-player {
+    position: fixed; z-index: 900;
+    left: 12px; right: 12px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+    max-width: 456px; margin: 0 auto;
+    background: rgba(20,34,74,0.93);
+    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+    border: 1px solid rgba(245,197,24,0.3);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    transform: translateY(150%); opacity: 0;
+    transition: transform 0.34s cubic-bezier(0.22,1,0.36,1), opacity 0.24s ease;
+    touch-action: manipulation;
+  }
+  .mini-player.open { transform: translateY(0); opacity: 1; }
+  .mp-row { display: flex; align-items: center; gap: 11px; padding: 9px 11px; cursor: pointer; }
+  .mp-art {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; background: var(--gold);
+  }
+  .mp-meta { flex: 1; min-width: 0; }
+  .mp-title {
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 13.5px;
+    color: #FFFFFF; line-height: 1.25;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mp-sub {
+    font-family: 'Nunito', sans-serif; font-size: 10.5px; color: var(--gold);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mp-btn {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    background: transparent; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: #FFFFFF; position: relative; transition: background 0.15s;
+  }
+  .mp-btn:hover { background: rgba(255,255,255,0.12); }
+  .mp-btn span {
+    position: absolute; font-family: 'Nunito', sans-serif;
+    font-size: 7.5px; font-weight: 800; top: 51%; left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .mp-line { height: 2px; background: rgba(255,255,255,0.14); }
+  .mp-fill { height: 100%; width: 0%; background: var(--gold); transition: width 0.2s linear; }
+
+  /* ═══════════════════════════════════════════════
+     NOW PLAYING — the full screen
+  ═══════════════════════════════════════════════ */
+  .now-playing {
+    position: fixed; inset: 0; z-index: 9990;
+    background: linear-gradient(180deg, #16295c 0%, #0E1A3A 55%, #070E20 100%);
+    display: flex; flex-direction: column;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+    transform: translateY(100%);
+    transition: transform 0.36s cubic-bezier(0.22,1,0.36,1);
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+  }
+  .now-playing.open { transform: translateY(0); }
+  .np-inner { max-width: 460px; width: 100%; margin: 0 auto; padding: 8px 26px 26px; }
+  .np-grab {
+    width: 40px; height: 5px; border-radius: 3px;
+    background: rgba(255,255,255,0.3); margin: 8px auto 4px;
+    border: none; cursor: pointer; display: block;
+  }
+  .np-artwrap { padding: 18px 10px 6px; }
+  .np-art {
+    width: 100%; aspect-ratio: 1 / 1; border-radius: 22px;
+    background: radial-gradient(circle at 50% 34%, #24407f 0%, #16295c 55%, #0d1a3d 100%);
+    border: 1px solid rgba(245,197,24,0.22);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; position: relative; overflow: hidden;
+  }
+  .np-art-glow {
+    position: absolute; width: 74%; aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,197,24,0.24) 0%, rgba(245,197,24,0) 68%);
+    pointer-events: none;
+  }
+  .np-emoji { font-size: 74px; line-height: 1; position: relative; }
+  .np-voice {
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 10px;
+    letter-spacing: 2.4px; text-transform: uppercase;
+    color: var(--gold); position: relative;
+  }
+  .np-eyebrow {
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 4px;
+  }
+  .np-title {
+    font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 24px;
+    color: #FFFFFF; line-height: 1.2;
+  }
+  .np-sub {
+    font-family: 'Nunito', sans-serif; font-size: 13px;
+    color: rgba(255,255,255,0.6); margin-top: 3px;
+  }
+  .np-track {
+    height: 6px; background: rgba(255,255,255,0.16); border-radius: 6px;
+    cursor: pointer; position: relative; margin: 22px 0 7px;
+  }
+  .np-fill { height: 100%; width: 0%; background: var(--gold); border-radius: 6px; position: relative; pointer-events: none; }
+  .np-fill::after {
+    content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%);
+    width: 14px; height: 14px; border-radius: 50%;
+    background: #FFFFFF; box-shadow: 0 2px 7px rgba(0,0,0,0.5);
+  }
+  .np-times {
+    display: flex; justify-content: space-between;
+    font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 700;
+    color: rgba(255,255,255,0.45); font-variant-numeric: tabular-nums;
+  }
+  .np-controls {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 26px; gap: 8px;
+  }
+  .np-skip {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: transparent; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.9); position: relative; transition: background 0.15s;
+  }
+  .np-skip:hover { background: rgba(255,255,255,0.1); }
+  .np-skip span {
+    position: absolute; font-family: 'Nunito', sans-serif;
+    font-size: 9px; font-weight: 800; top: 52%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .np-play {
+    width: 74px; height: 74px; border-radius: 50%; flex-shrink: 0;
+    background: var(--gold); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: #1B2D5F; box-shadow: 0 5px 22px rgba(245,197,24,0.4);
+    transition: background 0.15s, transform 0.1s;
+  }
+  .np-play:hover { background: var(--amber); }
+  .np-play:active { transform: scale(0.94); }
+  .np-side {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: transparent; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 15px;
+    color: rgba(255,255,255,0.8); transition: background 0.15s, color 0.15s;
+  }
+  .np-side:hover { background: rgba(255,255,255,0.1); color: #FFFFFF; }
+  .np-foot {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin-top: 26px; padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.09);
+  }
+  .np-foot button {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px; padding: 9px 16px; cursor: pointer;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 11.5px;
+    color: rgba(255,255,255,0.85); transition: background 0.15s;
+  }
+  .np-foot button:hover { background: rgba(255,255,255,0.14); }
+
+  /* Room for the mini player at the end of a night */
+  .mini-player.open ~ .edition .jr-card { margin-bottom: 84px; }
+
+
+  /* ═══════════════════════════════════════════════
+     THEMES
+
+     Three surfaces, one set of brand accents. Gold,
+     teal and amber never change — they are the brand.
+     What changes is what they sit on.
+
+       blue  (default) — the night sky. Deep navy.
+       dark            — near-black, for a dark room.
+       light           — daytime reading.
+  ═══════════════════════════════════════════════ */
+
+  /* ── DARK ───────────────────────────────────── */
+  [data-theme="dark"] .sky-bg {
+    background: linear-gradient(180deg, #14161C 0%, #0C0E13 50%, #05060A 100%) !important;
+  }
+  [data-theme="dark"] .app-header,
+  [data-theme="dark"] .icon-popup,
+  [data-theme="dark"] .voice-modal { background: #14171F !important; }
+  [data-theme="dark"] .app-header { border-bottom-color: rgba(245,197,24,0.4) !important; }
+
+  /* Navy surfaces become charcoal */
+  [data-theme="dark"] .card-navy,
+  [data-theme="dark"] .card-story,
+  [data-theme="dark"] .card-conf,
+  [data-theme="dark"] .toolkit-card { background: #191D26 !important; }
+  [data-theme="dark"] .weekly-block { background: #0F1116 !important; }
+  [data-theme="dark"] .toolkit-btn { background: rgba(255,255,255,0.05) !important; }
+  [data-theme="dark"] .weekly-pill  { background: #232833 !important; }
+
+  /* White surfaces become soft charcoal, and their text flips */
+  [data-theme="dark"] .card,
+  [data-theme="dark"] .card-gold,
+  [data-theme="dark"] .card-teal,
+  [data-theme="dark"] .card-amber,
+  [data-theme="dark"] .card-wren,
+  [data-theme="dark"] .card-verse,
+  [data-theme="dark"] .card-quote,
+  [data-theme="dark"] .fs-sheet,
+  [data-theme="dark"] .page-menu {
+    background: linear-gradient(180deg, #20242E 0%, #191D26 100%) !important;
+  }
+  [data-theme="dark"] .card-gold .bt,     [data-theme="dark"] .card-teal .bt,
+  [data-theme="dark"] .card-amber .bt,    [data-theme="dark"] .card-wren .bt,
+  [data-theme="dark"] .card-verse .bt,    [data-theme="dark"] .card .bt,
+  [data-theme="dark"] .card-gold .bt strong, [data-theme="dark"] .card-teal .bt strong,
+  [data-theme="dark"] .card-amber .bt strong, [data-theme="dark"] .card-wren .bt strong,
+  [data-theme="dark"] .card-verse .bt strong,
+  [data-theme="dark"] .card-verse .verse-text,
+  [data-theme="dark"] .card-quote .quote-text,
+  [data-theme="dark"] .fs-item-body, [data-theme="dark"] .fs-title,
+  [data-theme="dark"] .jr-body, [data-theme="dark"] .fam-story-body,
+  [data-theme="dark"] .hq-textarea, [data-theme="dark"] .fam-input,
+  [data-theme="dark"] .hq-tag-input, [data-theme="dark"] .fam-select {
+    color: #E6EAF3 !important;
+  }
+  [data-theme="dark"] .card-gold .card-title,  [data-theme="dark"] .card-teal .card-title,
+  [data-theme="dark"] .card-amber .card-title, [data-theme="dark"] .card-wren .card-title,
+  [data-theme="dark"] .ct-navy, [data-theme="dark"] .fam-name, [data-theme="dark"] .pm-item {
+    color: #F2F5FB !important;
+  }
+  [data-theme="dark"] .card-gold .card-label { color: rgba(230,234,243,0.7) !important; }
+  [data-theme="dark"] .heart-q, [data-theme="dark"] .atonement-q,
+  [data-theme="dark"] .jr-entry, [data-theme="dark"] .hq-panel {
+    background: rgba(255,255,255,0.05) !important;
+  }
+  [data-theme="dark"] .heart-q-spark {
+    color: rgba(230,234,243,0.6) !important;
+    border-top-color: rgba(255,255,255,0.14) !important;
+  }
+  [data-theme="dark"] .hq-sec-label { color: rgba(230,234,243,0.45) !important; }
+  [data-theme="dark"] .hq-textarea, [data-theme="dark"] .hq-tag-input,
+  [data-theme="dark"] .fam-input, [data-theme="dark"] .fam-select,
+  [data-theme="dark"] .jr-type, [data-theme="dark"] .hq-chip,
+  [data-theme="dark"] .hq-suggest, [data-theme="dark"] .fs-link,
+  [data-theme="dark"] .fs-item, [data-theme="dark"] .fam-story {
+    background: rgba(255,255,255,0.06) !important;
+    border-color: rgba(255,255,255,0.14) !important;
+    color: #E6EAF3 !important;
+  }
+  [data-theme="dark"] .jr-type.on { background: var(--gold) !important; color: #14171F !important; }
+  [data-theme="dark"] .hq-tag.custom { background: rgba(91,211,220,0.18) !important; color: #9FE8ED !important; }
+  [data-theme="dark"] .fam-empty, [data-theme="dark"] .fs-empty { background: rgba(255,255,255,0.05) !important; }
+  [data-theme="dark"] .fam-avatar { background: #2C3341 !important; }
+  [data-theme="dark"] .pm-item svg { color: rgba(242,245,251,0.7) !important; }
+  [data-theme="dark"] .pm-sep { background: rgba(255,255,255,0.12) !important; }
+  [data-theme="dark"] .pm-item:hover, [data-theme="dark"] .pm-item:active {
+    background: rgba(255,255,255,0.07) !important;
+  }
+  [data-theme="dark"] .mini-player { background: rgba(25,29,38,0.95) !important; }
+  [data-theme="dark"] .now-playing {
+    background: linear-gradient(180deg, #1B1F29 0%, #0E1016 55%, #05060A 100%) !important;
+  }
+  [data-theme="dark"] .np-art {
+    background: radial-gradient(circle at 50% 34%, #2A303D 0%, #1B1F29 55%, #0E1016 100%) !important;
+  }
+  [data-theme="dark"] .hq-submit { box-shadow: none !important; }
+
+  /* The navy cards also carry .card, so they need to out-rank the
+     white-surface rule above. Two class names does it. */
+  [data-theme="dark"] .card.card-navy,
+  [data-theme="dark"] .card.card-story,
+  [data-theme="dark"] .card.card-conf {
+    background: #191D26 !important;
+  }
+  [data-theme="dark"] .card.card-story .card-title,
+  [data-theme="dark"] .card.card-navy .card-title,
+  [data-theme="dark"] .card.card-conf .card-title { color: #FFFFFF !important; }
+
+  /* The parent questions carry their own navy — lift them too */
+  [data-theme="dark"] .heart-q,
+  [data-theme="dark"] .heart-q-text,
+  [data-theme="dark"] .heart-q-text strong,
+  [data-theme="dark"] .atonement-q,
+  [data-theme="dark"] .atonement-q-text,
+  [data-theme="dark"] .prompt-q,
+  [data-theme="dark"] .fs-item-prompt,
+  [data-theme="dark"] .jr-badge,
+  [data-theme="dark"] .fam-role,
+  [data-theme="dark"] .box-cap {
+    color: #E6EAF3 !important;
+  }
+  [data-theme="dark"] .atonement-q-text strong { color: #7FD9E0 !important; }
+  [data-theme="dark"] .atonement-q { background: rgba(91,211,220,0.09) !important; }
+  [data-theme="dark"] .heart-q-text em, [data-theme="dark"] .atonement-q-text em {
+    color: var(--gold) !important;
+  }
+  /* <a> elements default to link blue; the labels inside are already styled */
+  [data-theme="dark"] .toolkit-btn, [data-theme="dark"] .toolkit-icon { color: #E6EAF3 !important; }
+
+  /* Helper copy and the verse pills */
+  [data-theme="dark"] .fam-empty,
+  [data-theme="dark"] .hq-chip-empty,
+  [data-theme="dark"] .hq-chip { color: rgba(230,234,243,0.6) !important; }
+  [data-theme="dark"] .card-verse .pill a,
+  [data-theme="dark"] .pill a {
+    background: rgba(255,255,255,0.07) !important;
+    border-color: rgba(255,255,255,0.16) !important;
+    color: #E6EAF3 !important;
+  }
+
+  /* ── LIGHT ──────────────────────────────────── */
+  [data-theme="light"] .sky-bg {
+    background: linear-gradient(180deg, #F7F9FD 0%, #EDF1F8 55%, #E4EAF4 100%) !important;
+  }
+  [data-theme="light"] .app-header {
+    background: #FFFFFF !important;
+    border-bottom-color: var(--gold) !important;
+    box-shadow: 0 2px 14px rgba(27,45,95,0.1);
+  }
+  [data-theme="light"] .brand-name { color: var(--navy) !important; }
+  [data-theme="light"] .brand-name span { color: var(--amber) !important; }
+  [data-theme="light"] .menu-btn {
+    background: rgba(27,45,95,0.06) !important;
+    border-color: rgba(27,45,95,0.18) !important;
+    color: var(--navy) !important;
+  }
+  [data-theme="light"] .tab-btn {
+    background: rgba(27,45,95,0.05) !important;
+    border-color: rgba(27,45,95,0.12) !important;
+    color: rgba(27,45,95,0.6) !important;
+  }
+  [data-theme="light"] .tab-btn.active {
+    background: var(--gold) !important; color: var(--navy) !important;
+    border-color: var(--gold) !important;
+  }
+  /* The hero sits on light now, so its text flips */
+  [data-theme="light"] .hero-title { color: var(--navy) !important; text-shadow: none !important; }
+  [data-theme="light"] .hero-eyebrow { color: #2C7C84 !important; }
+  [data-theme="light"] .tonight-verse-label { color: #2C7C84 !important; }
+  [data-theme="light"] .tonight-verse-ref a { color: #1B6B73 !important; }
+  /* White cards need an edge to separate from a light page */
+  /* light-theme card separation is handled by shadow in the sleek pass */
+  [data-theme="light"] .footer-brand { color: rgba(27,45,95,0.4) !important; }
+  [data-theme="light"] .hdr-peek { background: rgba(27,45,95,0.4) !important; }
+
+  /* ── THEME PICKER ROWS ──────────────────────── */
+  .theme-btn {
+    width: 100%; display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 11px 14px; margin-bottom: 8px; cursor: pointer;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px;
+    color: #FFFFFF; transition: all 0.15s; text-align: left;
+  }
+  .theme-btn:last-child { margin-bottom: 0; }
+  .theme-btn:hover { background: rgba(255,255,255,0.1); }
+  .theme-btn.active { background: rgba(245,197,24,0.18); border-color: var(--gold); color: var(--gold); }
+  .theme-swatch {
+    width: 26px; height: 26px; border-radius: 8px; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .sw-blue  { background: linear-gradient(140deg,#1B2D5F 0%,#0A1228 100%); }
+  .sw-dark  { background: linear-gradient(140deg,#20242E 0%,#05060A 100%); }
+  .sw-light { background: linear-gradient(140deg,#FFFFFF 0%,#DDE4F0 100%); }
+  .theme-btn .tb-sub {
+    display: block; font-weight: 700; font-size: 10px;
+  color: rgba(255,255,255,0.45); margin-top: 1px;
+  }
+  .theme-btn.active .tb-sub { color: rgba(245,197,24,0.65); }
+
+
+  /* ═══════════════════════════════════════════════
+     HEADERLESS LAYOUT
+     The fixed bar is gone. The name rides at the top
+     of the page and scrolls away with everything else.
+     Only a small round button stays pinned.
+  ═══════════════════════════════════════════════ */
+  .page-title {
+    max-width: 480px; margin: 0 auto 4px;
+    padding: 4px 52px 0 2px;
+    font-family: 'Fredoka', sans-serif; font-weight: 700;
+    font-size: 22px; line-height: 1.15; color: #FFFFFF;
+  }
+  .page-title span { color: var(--gold); }
+  [data-theme="light"] .page-title { color: var(--navy); }
+  [data-theme="light"] .page-title span { color: var(--amber); }
+
+  .depth-note {
+    max-width: 480px; margin: 0 auto 16px; padding: 0 2px;
+    font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  [data-theme="light"] .depth-note { color: rgba(27,45,95,0.45); }
+
+  /* The one thing that stays pinned */
+  .float-menu {
+    position: fixed; z-index: 880;
+    top: calc(env(safe-area-inset-top, 0px) + 10px); right: 14px;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(27,45,95,0.86);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border: 1.5px solid rgba(245,197,24,0.5);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--gold);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+    touch-action: manipulation;
+    transition: transform 0.28s cubic-bezier(0.22,1,0.36,1), opacity 0.24s ease, background 0.15s;
+  }
+  .float-menu:active { transform: scale(0.92); }
+  .float-menu.hdr-hidden { transform: translateY(-160%); opacity: 0; }
+  .float-menu.playing { animation: listenPulse 1.6s ease-in-out infinite; }
+  [data-theme="dark"]  .float-menu { background: rgba(25,29,38,0.9); }
+  [data-theme="light"] .float-menu {
+    background: rgba(255,255,255,0.94); color: var(--navy);
+    border-color: rgba(27,45,95,0.18);
+  }
+
+  /* ═══════════════════════════════════════════════
+     DISPLAY OPTIONS — one sheet for size, theme, view
+  ═══════════════════════════════════════════════ */
+  .sheet-overlay {
+    position: fixed; inset: 0; z-index: 9995;
+    background: rgba(5,10,30,0.5);
+    display: flex; align-items: flex-end; justify-content: center;
+    visibility: hidden; opacity: 0;
+    transition: opacity 0.22s ease, visibility 0.22s;
+  }
+  .sheet-overlay.open { visibility: visible; opacity: 1; }
+  .sheet {
+    width: 100%; max-width: 480px;
+    background: #1B2D5F;
+    border-radius: 22px 22px 0 0;
+    border-top: 3px solid var(--gold);
+    padding: 10px 20px calc(env(safe-area-inset-bottom, 0px) + 22px);
+    transform: translateY(100%);
+    transition: transform 0.32s cubic-bezier(0.22,1,0.36,1);
+    max-height: 88vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  }
+  .sheet-overlay.open .sheet { transform: translateY(0); }
+  [data-theme="dark"]  .sheet { background: #191D26; }
+  [data-theme="light"] .sheet { background: #FFFFFF; }
+
+  .sheet-grab {
+    width: 40px; height: 5px; border-radius: 3px;
+    background: rgba(255,255,255,0.25); margin: 0 auto 12px;
+  }
+  [data-theme="light"] .sheet-grab { background: rgba(27,45,95,0.2); }
+  .sheet-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; margin-bottom: 16px;
+  }
+  .sheet-title {
+    font-family: 'Fredoka', sans-serif; font-weight: 700;
+    font-size: 20px; color: #FFFFFF;
+  }
+  [data-theme="light"] .sheet-title { color: var(--navy); }
+  .sheet-x {
+    width: 30px; height: 30px; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7);
+    font-size: 14px; flex-shrink: 0;
+  }
+  [data-theme="light"] .sheet-x { background: rgba(27,45,95,0.08); color: var(--navy); }
+  .sheet-label {
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 9px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin: 18px 0 9px;
+  }
+  .sheet-label:first-of-type { margin-top: 0; }
+
+  /* Text size row */
+  .size-row { display: flex; gap: 8px; }
+  .size-btn {
+    flex: 1; background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(255,255,255,0.12); border-radius: 12px;
+    padding: 12px 4px; cursor: pointer; color: #FFFFFF;
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    transition: all 0.15s;
+  }
+  .size-btn .sz-lab { font-size: 9px; letter-spacing: 0.5px; opacity: 0.6; }
+  .size-btn.active { background: var(--gold); border-color: var(--gold); color: #1B2D5F; }
+  .size-btn.active .sz-lab { opacity: 0.75; }
+  [data-theme="light"] .size-btn {
+    background: rgba(27,45,95,0.05); border-color: rgba(27,45,95,0.12); color: var(--navy);
+  }
+  [data-theme="light"] .size-btn.active { background: var(--gold); border-color: var(--gold); }
+
+  /* Theme swatches */
+  .swatch-row { display: flex; gap: 10px; }
+  .swatch-btn {
+    flex: 1; border-radius: 12px; cursor: pointer; padding: 0;
+    border: 2.5px solid rgba(255,255,255,0.14);
+    overflow: hidden; transition: border-color 0.15s, transform 0.1s;
+  }
+  .swatch-btn:active { transform: scale(0.96); }
+  .swatch-btn.active { border-color: var(--gold); }
+  .swatch-face { height: 62px; display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 0 12px; }
+  .swatch-face i { display: block; height: 4px; border-radius: 2px; }
+  .sf-blue  { background: linear-gradient(160deg,#1B2D5F,#0A1228); }
+  .sf-blue  i { background: rgba(255,255,255,0.55); }
+  .sf-blue  i:last-child { background: var(--gold); width: 52%; }
+  .sf-dark  { background: linear-gradient(160deg,#20242E,#05060A); }
+  .sf-dark  i { background: rgba(255,255,255,0.5); }
+  .sf-dark  i:last-child { background: var(--gold); width: 52%; }
+  .sf-light { background: linear-gradient(160deg,#FFFFFF,#E4EAF4); }
+  .sf-light i { background: rgba(27,45,95,0.5); }
+  .sf-light i:last-child { background: var(--amber); width: 52%; }
+  .swatch-name {
+    display: block; padding: 6px 4px 7px; text-align: center;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 9.5px;
+    letter-spacing: 0.4px; color: rgba(255,255,255,0.65);
+    background: rgba(255,255,255,0.05);
+  }
+  .swatch-btn.active .swatch-name { color: var(--gold); background: rgba(245,197,24,0.14); }
+  [data-theme="light"] .swatch-name { color: rgba(27,45,95,0.6); background: rgba(27,45,95,0.04); }
+
+  /* Rows with toggles / checkboxes */
+  .opt-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 0; cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .opt-row:last-child { border-bottom: none; }
+  [data-theme="light"] .opt-row { border-bottom-color: rgba(27,45,95,0.1); }
+  .opt-text { flex: 1; min-width: 0; }
+  .opt-name {
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 14px; color: #FFFFFF;
+  }
+  [data-theme="light"] .opt-name { color: var(--navy); }
+  .opt-sub {
+    font-family: 'Nunito', sans-serif; font-size: 11px;
+    color: rgba(255,255,255,0.45); margin-top: 1px; line-height: 1.4;
+  }
+  [data-theme="light"] .opt-sub { color: rgba(27,45,95,0.5); }
+  .toggle {
+    width: 46px; height: 27px; border-radius: 20px; flex-shrink: 0;
+    background: rgba(255,255,255,0.18); border: none; cursor: pointer;
+    position: relative; transition: background 0.2s;
+  }
+  [data-theme="light"] .toggle { background: rgba(27,45,95,0.18); }
+  .toggle::after {
+    content: ''; position: absolute; top: 3px; left: 3px;
+    width: 21px; height: 21px; border-radius: 50%; background: #FFFFFF;
+    transition: transform 0.2s cubic-bezier(0.22,1,0.36,1);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+  .toggle.on { background: var(--gold); }
+  .toggle.on::after { transform: translateX(19px); }
+
+  /* Depth rows inside the menu */
+  .pm-depth {
+    display: flex; gap: 6px; padding: 8px 12px 12px;
+  }
+  .pm-depth button {
+    flex: 1; border-radius: 10px; cursor: pointer;
+    border: 1.5px solid rgba(27,45,95,0.14);
+    background: rgba(27,45,95,0.04); padding: 9px 2px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 9.5px;
+    letter-spacing: 0.6px; text-transform: uppercase; color: rgba(16,25,58,0.55);
+    transition: all 0.15s;
+  }
+  .pm-depth button.active { background: var(--gold); border-color: var(--gold); color: #1B2D5F; }
+  [data-theme="dark"] .pm-depth button {
+    background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14);
+    color: rgba(230,234,243,0.6);
+  }
+  [data-theme="dark"] .pm-depth button.active { background: var(--gold); color: #14171F; }
+  .pm-head {
+    padding: 14px 16px 4px;
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 15px;
+    color: #10193a;
+  }
+  [data-theme="dark"] .pm-head { color: #F2F5FB; }
+  .pm-sublabel {
+    padding: 0 16px; font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: 8.5px; letter-spacing: 1.8px; text-transform: uppercase;
+    color: rgba(16,25,58,0.4);
+  }
+  [data-theme="dark"] .pm-sublabel { color: rgba(242,245,251,0.45); }
+
+  /* ── Popups + fields follow the theme ── */
+  [data-theme="light"] .icon-popup,
+  [data-theme="light"] .voice-modal {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(27,45,95,0.12);
+  }
+  [data-theme="light"] .icon-popup-title,
+  [data-theme="light"] .vp-title,
+  [data-theme="light"] .vp-name,
+  [data-theme="light"] .view-popup-btn,
+  [data-theme="light"] .share-btn,
+  [data-theme="light"] .vp-section-label { color: var(--navy) !important; }
+  [data-theme="light"] .view-popup-btn,
+  [data-theme="light"] .share-btn,
+  [data-theme="light"] .vp-voice,
+  [data-theme="light"] .vp-speed {
+    background: rgba(27,45,95,0.05) !important;
+    border-color: rgba(27,45,95,0.12) !important;
+  }
+  [data-theme="light"] .vp-desc { color: rgba(27,45,95,0.55) !important; }
+  [data-theme="light"] .mini-player { background: rgba(255,255,255,0.96) !important; }
+  [data-theme="light"] .mp-title { color: var(--navy) !important; }
+  [data-theme="light"] .mp-btn { color: var(--navy) !important; }
+  [data-theme="light"] .now-playing {
+    background: linear-gradient(180deg,#FFFFFF 0%,#EDF1F8 55%,#E4EAF4 100%) !important;
+  }
+  [data-theme="light"] .np-title { color: var(--navy) !important; }
+  [data-theme="light"] .np-sub, [data-theme="light"] .np-times { color: rgba(27,45,95,0.55) !important; }
+  [data-theme="light"] .np-skip, [data-theme="light"] .np-side { color: var(--navy) !important; }
+  [data-theme="light"] .np-art {
+    background: radial-gradient(circle at 50% 34%, #FFFFFF 0%, #EDF1F8 55%, #DCE4F2 100%) !important;
+    border-color: rgba(27,45,95,0.12) !important;
+  }
+  [data-theme="light"] .np-grab { background: rgba(27,45,95,0.25) !important; }
+  [data-theme="light"] .np-foot { border-top-color: rgba(27,45,95,0.12) !important; }
+  [data-theme="light"] .np-foot button {
+    background: rgba(27,45,95,0.05) !important;
+    border-color: rgba(27,45,95,0.12) !important;
+    color: var(--navy) !important;
+  }
+  [data-theme="light"] .fs-overlay { background: rgba(27,45,95,0.35); }
+
+
+  /* ═══════════════════════════════════════════════
+     SLEEK PASS — no outlines anywhere, depth by shadow
+
+     Every 1px stroke comes off. What separates one
+     surface from another is now elevation, the way
+     modern apps do it. The coloured rule across the
+     top of each card stays — that is an accent, not
+     an outline, and it is how the sections read.
+  ═══════════════════════════════════════════════ */
+
+  /* ── Title now rides with the rest of the hero ── */
+  .hero-lockup { text-align: center; margin-bottom: 4px; }
+  .page-title {
+    max-width: none; margin: 0 auto 2px; padding: 0;
+    font-family: 'Fredoka', sans-serif; font-weight: 700;
+    font-size: 17px; line-height: 1.15; color: rgba(255,255,255,0.9);
+  }
+  .depth-note {
+    max-width: none; margin: 0 auto 14px; padding: 0;
+    font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: 8.5px; letter-spacing: 2.4px; text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+  [data-theme="light"] .page-title { color: rgba(27,45,95,0.85); }
+  [data-theme="light"] .depth-note { color: rgba(27,45,95,0.4); }
+
+  /* ── Strip every outline ── */
+  .card, .toolkit-card, .weekly-block, .weekly-pill, .toolkit-btn,
+  .page-menu, .icon-popup, .voice-modal, .sheet, .mini-player,
+  .float-menu, .np-art, .fs-sheet, .fs-item, .fs-link,
+  .hq-textarea, .hq-tag-input, .fam-input, .fam-select,
+  .hq-chip, .hq-tag, .hq-suggest, .jr-type, .size-btn, .swatch-btn,
+  .np-foot button, .view-popup-btn, .share-btn, .vp-voice, .vp-speed,
+  .pill a, .fam-story, .jr-entry, .heart-q, .atonement-q, .hq-panel,
+  .conf-talk, .toolkit-btn-primary, .fam-member, .np-track, .mp-line {
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    outline: none !important;
+  }
+  /* These have no accent rule either — clear the top edge too */
+  .weekly-block, .weekly-pill, .toolkit-btn, .page-menu, .icon-popup,
+  .voice-modal, .mini-player, .float-menu, .np-art, .fs-item, .fs-link,
+  .hq-textarea, .hq-tag-input, .fam-input, .fam-select, .hq-chip, .hq-tag,
+  .hq-suggest, .jr-type, .size-btn, .np-foot button, .view-popup-btn,
+  .share-btn, .vp-voice, .vp-speed, .pill a, .jr-entry, .conf-talk,
+  .toolkit-btn-primary, .fam-member {
+    border-top: none !important;
+  }
+  /* Left accent bars are the identity of these blocks — keep them */
+  .heart-q, .atonement-q, .fam-story, .jr-entry, .fs-item {
+    border-left-width: 3px !important;
+    border-left-style: solid !important;
+  }
+  .jr-entry, .fs-item { border-left: 3px solid var(--gold) !important; }
+
+  /* ── Elevation instead ── */
+  .card, .toolkit-card {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.30), 0 2px 6px rgba(0,0,0,0.18) !important;
+  }
+  [data-theme="light"] .card,
+  [data-theme="light"] .toolkit-card {
+    box-shadow: 0 8px 24px rgba(27,45,95,0.10), 0 1px 3px rgba(27,45,95,0.07) !important;
+  }
+
+  /* The week's readings — a soft inset panel, no frame */
+  .weekly-block {
+    background: rgba(255,255,255,0.06) !important;
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-radius: 16px !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 6px 20px rgba(0,0,0,0.22);
+    padding: 12px 14px 14px !important;
+  }
+  [data-theme="light"] .weekly-block {
+    background: rgba(27,45,95,0.05) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 4px 16px rgba(27,45,95,0.08);
+  }
+  .weekly-pill {
+    background: rgba(255,255,255,0.09) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;
+  }
+  [data-theme="light"] .weekly-pill {
+    background: #FFFFFF !important;
+    box-shadow: 0 2px 8px rgba(27,45,95,0.09) !important;
+  }
+
+  /* Tonight's reading gets its own pill */
+  .tonight-verse-ref {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 7px; padding: 7px 16px; border-radius: 22px;
+    background: rgba(91,211,220,0.14);
+    box-shadow: 0 3px 14px rgba(0,0,0,0.24);
+    text-shadow: none !important;
+    font-size: 12.5px !important;
+  }
+  [data-theme="light"] .tonight-verse-ref {
+    background: rgba(27,107,115,0.1);
+    box-shadow: 0 3px 12px rgba(27,45,95,0.08);
+  }
+  [data-theme="dark"] .tonight-verse-ref { background: rgba(91,211,220,0.11); }
+
+  /* Menus, sheets and popups float */
+  .page-menu { box-shadow: 0 16px 48px rgba(0,0,0,0.45) !important; }
+  .icon-popup, .voice-modal { box-shadow: 0 20px 56px rgba(0,0,0,0.5) !important; }
+  .sheet { box-shadow: 0 -14px 44px rgba(0,0,0,0.4) !important; }
+  .mini-player { box-shadow: 0 10px 34px rgba(0,0,0,0.5) !important; }
+  .float-menu { box-shadow: 0 6px 22px rgba(0,0,0,0.4) !important; }
+  [data-theme="light"] .page-menu   { box-shadow: 0 16px 44px rgba(27,45,95,0.18) !important; }
+  [data-theme="light"] .icon-popup,
+  [data-theme="light"] .voice-modal { box-shadow: 0 20px 50px rgba(27,45,95,0.2) !important; }
+  [data-theme="light"] .sheet       { box-shadow: 0 -14px 40px rgba(27,45,95,0.16) !important; }
+  [data-theme="light"] .mini-player { box-shadow: 0 10px 30px rgba(27,45,95,0.18) !important; }
+  [data-theme="light"] .float-menu  { box-shadow: 0 6px 20px rgba(27,45,95,0.16) !important; }
+
+  /* Small controls sit just barely off the surface */
+  .toolkit-btn, .fs-link, .fs-item, .jr-type, .size-btn,
+  .np-foot button, .view-popup-btn, .share-btn, .vp-voice, .vp-speed,
+  .hq-chip, .hq-suggest, .pill a, .fam-member, .conf-talk {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.16);
+  }
+  [data-theme="light"] .toolkit-btn, [data-theme="light"] .fs-link,
+  [data-theme="light"] .fs-item, [data-theme="light"] .jr-type,
+  [data-theme="light"] .size-btn, [data-theme="light"] .np-foot button,
+  [data-theme="light"] .view-popup-btn, [data-theme="light"] .share-btn,
+  [data-theme="light"] .vp-voice, [data-theme="light"] .vp-speed,
+  [data-theme="light"] .hq-chip, [data-theme="light"] .hq-suggest,
+  [data-theme="light"] .pill a, [data-theme="light"] .fam-member,
+  [data-theme="light"] .conf-talk {
+    box-shadow: 0 2px 8px rgba(27,45,95,0.08);
+  }
+
+  /* Fields read as recessed rather than boxed */
+  .hq-textarea, .hq-tag-input, .fam-input, .fam-select {
+    background: rgba(27,45,95,0.05) !important;
+    box-shadow: inset 0 1px 3px rgba(27,45,95,0.1) !important;
+  }
+  .hq-textarea:focus, .hq-tag-input:focus, .fam-input:focus {
+    background: #FFFFFF !important;
+    box-shadow: inset 0 1px 3px rgba(27,45,95,0.08), 0 0 0 2px rgba(91,211,220,0.5) !important;
+  }
+  [data-theme="dark"] .hq-textarea, [data-theme="dark"] .hq-tag-input,
+  [data-theme="dark"] .fam-input, [data-theme="dark"] .fam-select {
+    background: rgba(255,255,255,0.06) !important;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.35) !important;
+  }
+  [data-theme="dark"] .hq-textarea:focus, [data-theme="dark"] .hq-tag-input:focus,
+  [data-theme="dark"] .fam-input:focus {
+    background: rgba(255,255,255,0.09) !important;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), 0 0 0 2px rgba(91,211,220,0.5) !important;
+  }
+
+  /* Selected states carry their own weight now */
+  .jr-type.on, .size-btn.active {
+    box-shadow: 0 3px 12px rgba(245,197,24,0.35) !important;
+  }
+  .swatch-btn {
+    border: none !important;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.22) !important;
+    transition: box-shadow 0.15s, transform 0.1s;
+  }
+  .swatch-btn.active { box-shadow: 0 0 0 3px var(--gold), 0 4px 16px rgba(245,197,24,0.3) !important; }
+  .hq-chip.on { box-shadow: 0 2px 10px rgba(91,211,220,0.3) !important; }
+  .toolkit-btn-primary { box-shadow: 0 3px 14px rgba(245,197,24,0.22) !important; }
+
+  /* Dividers get lighter too */
+  .pm-sep { background: rgba(27,45,95,0.07) !important; }
+  [data-theme="dark"] .pm-sep { background: rgba(255,255,255,0.07) !important; }
+  .card-label::after { opacity: 0.16 !important; }
+
+
+  /* ═══════════════════════════════════════════════
+     THIS WEEK'S SCRIPTURES — takes the theme's own
+     card surface, so it sits in the page like every
+     other box rather than floating as a tinted panel.
+  ═══════════════════════════════════════════════ */
+  .weekly-block {
+    background: #1B2D5F !important;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.30), 0 2px 6px rgba(0,0,0,0.18) !important;
+  }
+  [data-theme="dark"] .weekly-block {
+    background: linear-gradient(180deg,#20242E 0%,#191D26 100%) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.40), 0 2px 6px rgba(0,0,0,0.25) !important;
+  }
+  [data-theme="light"] .weekly-block {
+    background: linear-gradient(180deg,#FFFFFF 0%,#F2F4F8 100%) !important;
+    box-shadow: 0 8px 24px rgba(27,45,95,0.10), 0 1px 3px rgba(27,45,95,0.07) !important;
+  }
+
+  /* The chips are anchors, so they carry their own styling */
+  .weekly-pill a {
+    border: none !important;
+    background: rgba(255,255,255,0.10) !important;
+    color: rgba(255,255,255,0.94) !important;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.2) !important;
+    padding: 4px 12px !important;
+  }
+  .weekly-pill a:hover { background: rgba(245,197,24,0.24) !important; }
+  [data-theme="dark"] .weekly-pill a {
+    background: rgba(255,255,255,0.07) !important;
+    color: #E6EAF3 !important;
+  }
+  [data-theme="light"] .weekly-pill a {
+    background: rgba(27,45,95,0.06) !important;
+    color: var(--navy) !important;
+    box-shadow: 0 2px 7px rgba(27,45,95,0.08) !important;
+  }
+  [data-theme="light"] .weekly-pill a:hover { background: rgba(245,197,24,0.28) !important; }
+
+  /* The label reads against whichever surface it lands on */
+  [data-theme="light"] .weekly-label { color: #A67C10 !important; }
+
+  /* Depth buttons ride on shadow like everything else */
+  .pm-depth button {
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(27,45,95,0.1) !important;
+  }
+  .pm-depth button.active { box-shadow: 0 3px 12px rgba(245,197,24,0.35) !important; }
+  [data-theme="dark"] .pm-depth button { box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important; }
+
+  /* ═══════════════════════════════════════════════
+     NARRATION PICKER IN LIGHT THEME
+
+     This popup is an .icon-popup, not a .voice-modal —
+     so the earlier light rules never reached it and its
+     text stayed white on a white sheet. Everything in
+     here now takes Midnight Navy.
+  ═══════════════════════════════════════════════ */
+  [data-theme="light"] .icon-popup,
+  [data-theme="light"] .icon-popup div,
+  [data-theme="light"] .vp-voice,
+  [data-theme="light"] .vp-voice.selected,
+  [data-theme="light"] .vp-speeds,
+  [data-theme="light"] .vp-name {
+    color: #1B2D5F !important;
+  }
+  [data-theme="light"] .vp-speed { color: rgba(27,45,95,0.6) !important; }
+  [data-theme="light"] .vp-speed.selected { color: #1B2D5F !important; background: var(--gold) !important; }
+  [data-theme="light"] .vp-desc { color: rgba(27,45,95,0.6) !important; }
+  [data-theme="light"] .vp-section-label,
+  [data-theme="light"] .icon-popup-title { color: #A67C10 !important; }
+  [data-theme="light"] .vp-check { color: #A67C10 !important; }
+  /* the emoji avatars keep their own tinted discs */
+  [data-theme="light"] .vp-avatar { color: inherit !important; }
+  [data-theme="light"] .vp-voice.selected { background: rgba(245,197,24,0.16) !important; }
+
+  /* Same treatment for the share sheet, which shares the shell */
+  [data-theme="light"] .share-btn { color: #1B2D5F !important; }
+
+  /* Dark theme: keep it light on charcoal */
+  [data-theme="dark"] .icon-popup,
+  [data-theme="dark"] .icon-popup div,
+  [data-theme="dark"] .vp-voice,
+  [data-theme="dark"] .vp-name,
+  [data-theme="dark"] .share-btn { color: #E6EAF3 !important; }
+  [data-theme="dark"] .vp-speed { color: rgba(230,234,243,0.6) !important; }
+  [data-theme="dark"] .vp-speed.selected { color: #14171F !important; }
+
+  /* ── v26: four depth tiers ── */
+  .pm-depth-4 { flex-wrap: wrap; }
+  .pm-depth-4 button { flex: 1 1 22%; font-size: 9px; padding: 9px 1px; letter-spacing: 0.4px; }
+  .lbl-verse { color: var(--gold); }
+  .lbl-quote { color: var(--amber); }
+  .tonight-verse-label {
+    margin-top: 12px; text-align: center;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 10px;
+    letter-spacing: 1.4px; text-transform: uppercase; color: var(--teal);
+  }
+  .tonight-verse-ref {
+    margin-top: 3px; text-align: center;
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 15px;
+  }
+  .tonight-verse-ref a { color: var(--gold); text-decoration: none; }
+  .conf-talk-title {
+    font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 15px;
+    color: var(--gold); margin: 2px 0 6px;
+  }
+  .toolkit-btn-primary { box-shadow: 0 3px 14px rgba(245,197,24,0.28); }
+</style>
+</head>
+<body>
+
+<!-- PLAIN NAVY BACKGROUND -->
+<div class="sky-bg" aria-hidden="true"></div>
+
+<!-- FIXED HEADER -->
+<!-- The header bar is gone. Only the round menu button stays pinned. -->
+<button class="float-menu" id="floatMenuBtn" onclick="togglePageMenu(event)" aria-label="Options for this page" aria-haspopup="true">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+</button>
+
+
+<!-- TEXT SIZE POPUP -->
+
+<!-- VIEW MODE POPUP -->
+
+<!-- THEME POPUP -->
+
+<!-- SHARE POPUP -->
+<div class="icon-popup-overlay" id="sharePopupOverlay" onclick="closeAllPopups(event,'sharePopupOverlay')">
+  <div class="icon-popup">
+    <div class="icon-popup-title">Share The Morning Lantern</div>
+    <button class="share-btn" onclick="doShare('copy')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Link</button>
+    <button class="share-btn" onclick="doShare('native')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>Share…</button>
+  </div>
+</div>
+
+<div class="scroll-area">
+
+<!-- ======================== QUICK ======================== -->
+<div class="edition active" id="tab-quick">
+
+  <div class="story-hero reveal">
+    <div class="hero-lockup">
+      <div class="page-title">The <span>Morning</span> Lantern</div>
+      <div class="depth-note">Quick read</div>
+    </div>
+    <div class="hero-eyebrow">September 7, 2026 &nbsp;&#9733;&nbsp; Week 1 &middot; Night 6 &middot; Story 6</div>
+
+    <div class="hero-title">Children Are a Gift</div>
+    <div class="tonight-verse-label">Tonight's Scripture</div>
+    <div class="tonight-verse-ref">
+      <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/127?lang=eng&id=p3#p3" target="_blank">Psalm 127:3 &#8599;</a>
+    </div>
+    <div class="gold-rule" style="margin-top:14px;"></div>
+  </div>
+
+
+  <div class="card card-gold pinned-card">
+    <div class="card-label lbl-navy">&#9733; A Parent's Heart for Tonight</div>
+    <div class="card-title ct-navy">Before the lights go low</div>
+    <div class="heart-q"><strong>1.</strong> When have you felt your family was a sacred gift from Heavenly Father? Share that tender awareness.</div>
+    <div class="heart-q"><strong>2.</strong> How do you invite Heavenly Father to help &ldquo;build your house&rdquo;? Tell about a way He&rsquo;s strengthened your home.</div>
+    <div class="heart-q"><strong>3.</strong> Did a grandparent or ancestor build a home of faith and love? Describe the family blessing they began.</div>
+    <div class="atonement-q"><strong>The Atonement:</strong> The psalm says the house is built by the Lord or it is not built at all, and then it says children are His heritage &mdash; not ours. Both halves are about ownership. The child asleep down the hall belongs to Heavenly Father first, and He has lent her to you. That is a relief and a weight at once, and the Atonement of Jesus Christ is what makes it bearable. The Savior is the one Builder who has already paid for every crack in the walls; the mistakes you made at dinner tonight are inside His reach, and so is the child who watched you make them. When the psalmist says <em>he giveth his beloved sleep</em>, he is describing a house where someone else is keeping watch. Say it plainly: <em>&ldquo;You are a gift from Heavenly Father, and Jesus loves you even more than we do.&rdquo;</em> Then go to sleep. The Builder is awake.</div>
+  </div>
+
+  <div class="toolkit-card pinned-card">
+    <div class="toolkit-label">&#127769; Tonight's Resources</div>
+    <div class="toolkit-grid">
+      <a class="toolkit-btn" href="travelers-lullaby.html" target="_blank">
+        <div class="toolkit-icon">&#127926;</div>
+        <div><div class="toolkit-title">The Lantern Lullaby &mdash; Lyrics &amp; Music</div><div class="toolkit-sub">Our signature Old Testament lullaby</div></div>
+      </a>
+      <a class="toolkit-btn" href="children-are-a-gift-lullaby.html" target="_blank">
+        <div class="toolkit-icon">&#127925;</div>
+        <div><div class="toolkit-title">Tonight's Lullaby &mdash; Lyrics &amp; Music</div><div class="toolkit-sub">You Are a Gift</div></div>
+      </a>
+      <a class="toolkit-btn toolkit-btn-primary" href="children-are-a-gift.html" target="_blank">
+        <div class="toolkit-icon">&#128214;</div>
+        <div><div class="toolkit-title">Tonight's Story</div><div class="toolkit-sub">Week 1 &middot; Night 6 &middot; Children Are a Gift</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="card card-story reveal">
+    <div class="card-label lbl-white">&#128214; Tonight's Scripture Story</div>
+    <div class="card-title ct-white">Children Are a Gift</div>
+    <div class="bt-white">Heavenly Father loves families very much. One of the Psalms is a happy song all about home and children.</div>
+    <div class="bt-white" style="margin-top:8px;">&ldquo;Unless Heavenly Father helps build the house, the builders work for nothing,&rdquo; the song says. That means Heavenly Father is the one who helps our family and home grow strong and happy.</div>
+    <div class="bt-white" style="margin-top:8px;">Then the song says something sweet: &ldquo;Children are a gift from Heavenly Father!&rdquo; Every child &mdash; including YOU &mdash; is a special present He gives to a family.</div>
+    <div class="bt-white" style="margin-top:8px;">The song paints a happy picture: a mom and dad and their little ones gathered close, like young plants growing round a table full of love.</div>
+    <div class="bt-white" style="margin-top:8px;">Your family is a gift, and you are a gift too! Heavenly Father helps your home be a place of love, where you are treasured every single day.</div>
+  </div>
+
+  <div class="card card-wren trav-willow reveal">
+    <div class="card-label lbl-wren">&#9733; Scripture Traveler of the Night</div>
+    <div class="traveler-center">
+      <div class="traveler-name">Willow the Warm</div>
+      <div class="traveler-motto">"Warm hugs, warm hearts!"</div>
+    </div>
+    <div class="bt">Willow fits tonight because she cherishes the people in her home. In Willow&rsquo;s world today: at dinner, Willow looked around at everyone laughing together and felt her heart go warm. &ldquo;I&rsquo;m so glad you&rsquo;re my family,&rdquo; she said, and gave her little brother a hug &mdash; even though he&rsquo;d been silly all day. Just like the song about children being a gift from Heavenly Father, Willow felt how precious her family is.</div>
+  </div>
+
+  <div class="card card-navy reveal">
+    <div class="card-label lbl-white">&#9733; The Heart of Tonight's Story</div>
+    <div class="bt-white"><strong>Gospel Principle:</strong> A home is something Heavenly Father builds, and children are something He gives. Psalm 127 puts those two sentences side by side on purpose: the builders labour in vain unless the Lord builds, and children are <em>an heritage of the Lord</em> &mdash; an inheritance, family land, the thing you hold for the next generation. The family is not a project we finish. It is a gift we receive, and then a house we let Him build.</div>
+    <div class="bt-white" style="margin-top:8px;"><strong>Virtue:</strong> Gratitude &amp; Belonging &mdash; because a child who knows she is a gift, and not an accident or a chore, has been handed something no report card can take away. Tonight's feeling word is <em>treasured</em>, and it is a bigger word than <em>liked</em>. Liked means someone enjoys you today. Treasured means someone would keep you at any cost, and already has.</div>
+    <div class="bt-white" style="margin-top:8px;"><strong>For young children:</strong> Heavenly Father helps build our home. He gave me to my family as a gift, and He gave my family to me. I am treasured. I can say thank You for the people in my house.</div>
+  </div>
+
+  <div class="card card-verse reveal">
+    <div class="card-label lbl-gold">&#10022; Verse of the Day</div>
+    <div class="verse-text">"Lo, children are an heritage of the Lord: and the fruit of the womb is his reward."</div>
+    <div class="verse-ref"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/127?lang=eng&id=p3#p3" target="_blank">Psalm 127:3 (KJV) &#8599;</a></div>
+    <div class="soft-div"></div>
+    <div class="bt"><strong>Simple truth:</strong> Read the first word. <em>Lo</em> &mdash; look, behold, pay attention. The psalmist is pointing at something in the room that everyone has stopped noticing: the children. Then two nouns. <em>Heritage</em> is an inheritance, the land a family holds and hands down. <em>Reward</em> is wages, something paid out on purpose. A child, says the psalm, is not a cost or a chance. She is an inheritance and a payment, both from Heavenly Father, and both given &mdash; which means the right response is not pride, and not worry, but thanks. (Verse 1, in the same psalm: <em>Except the Lord build the house, they labour in vain that build it.</em>)</div>
+    <div class="pills">
+      <div class="pill"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/127?lang=eng" target="_blank">Psalm 127</a></div>
+      <div class="pill"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/127?lang=eng&id=p1#p1" target="_blank">Psalm 127:1</a></div>
+      <div class="pill"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/127?lang=eng&id=p3#p3" target="_blank">Psalm 127:3</a></div>
+      <div class="pill"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/128?lang=eng&id=p3#p3" target="_blank">Psalm 128:3</a></div>
+      <div class="pill"><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/17?lang=eng&id=p21-p24#p21" target="_blank">3 Nephi 17:21&ndash;24</a></div>
+    </div>
+  </div>
+
+  <div class="card card-gold reveal">
+    <div class="card-label lbl-navy">&#10022; Apply It &mdash; For You, Today</div>
+    <div class="bt">Tomorrow, before anyone leaves the house, say one sentence to one child that begins with <em>I am so glad you are</em> &mdash; and finish it with something true and specific. <em>I am so glad you are the one who notices when the dog is sad.</em> <em>I am so glad you are in this family.</em> Not praise for a performance; thanks for a person. Children learn that they are a gift by hearing an adult receive them like one. It takes eight seconds, and it will outlast most of what you say this week.</div>
+  </div>
+
+</div><!-- /quick -->
+
+
+<!-- ======================== MEDIUM ======================== -->
+<div class="edition" id="tab-medium">
+
+  <div class="story-hero reveal">
+    <div class="hero-lockup">
+      <div class="page-title">The <span>Morning</span> Lantern</div>
+      <div class="depth-note">Medium read</div>
+    </div>
+    <div class="hero-eyebrow">September 7, 2026 &nbsp;&#9733;&nbsp; Week 1 &middot; Night 6 &middot; Story 6</div>
+
+    <div class="hero-title">Children Are a Gift</div>
+    <div class="tonight-verse-label">Tonight's Scripture</div>
+    <div class="tonight-verse-ref">
+      <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/127?lang=eng&id=p3#p3" target="_blank">Psalm 127:3 &#8599;</a>
+    </div>
+    <div class="gold-rule" style="margin-top:14px;"></div>
+  </div>
+
+
+  <div class="card card-gold pinned-card">
+    <div class="card-label lbl-navy">&#9733; A Parent's Heart for Tonight</div>
+    <div class="card-title ct-navy">Before the lights go low</div>
+    <div class="heart-q"><strong>1.</strong> When have you felt your family was a sacred gift from Heavenly Father? Share that tender awareness.</div>
+    <div class="heart-q"><strong>2.</strong> How do you invite Heavenly Father to help &ldquo;build your house&rdquo;? Tell about a way He&rsquo;s strengthened your home.</div>
+    <div class="heart-q"><strong>3.</strong> Did a grandparent or ancestor build a home of faith and love? Describe the family blessing they began.</div>
+    <div class="atonement-q"><strong>The Atonement:</strong> The psalm says the house is built by the Lord or it is not built at all, and then it says children are His heritage &mdash; not ours. Both halves are about ownership. The child asleep down the hall belongs to Heavenly Father first, and He has lent her to you. That is a relief and a weight at once, and the Atonement of Jesus Christ is what makes it bearable. The Savior is the one Builder who has already paid for every crack in the walls; the mistakes you made at dinner tonight are inside His reach, and so is the child who watched you make them. When the psalmist says <em>he giveth his beloved sleep</em>, he is describing a house where someone else is keeping watch. Say it plainly: <em>&ldquo;You are a gift from Heavenly Father, and Jesus loves you even more than we do.&rdquo;</em> Then go to sleep. The Builder is awake.</div>
+  </div>
+
+  <div class="toolkit-card pinned-card">
+    <div class="toolkit-label">&#127769; Tonight's Resources</div>
+    <div class="toolkit-grid">
+      <a class="toolkit-btn" href="travelers-lullaby.html" target="_blank">
+        <div class="toolkit-icon">&#127926;</div>
+        <div><div class="toolkit-title">The Lantern Lullaby &mdash; Lyrics &amp; Music</div><div class="toolkit-sub">Our signature Old Testament lullaby</div></div>
+      </a>
+      <a class="toolkit-btn" href="children-are-a-gift-lullaby.html" target="_blank">
+        <div class="toolkit-icon">&#127925;</div>
+        <div><div class="toolkit-title">Tonight's Lullaby &mdash; Lyrics &amp; Music</div><div class="toolkit-sub">You Are a Gift</div></div>
+      </a>
+      <a class="toolkit-btn toolkit-btn-primary" href="children-are-a-gift.html" target="_blank">
+        <div class="toolkit-icon">&#128214;</div>
+        <div><div class="toolkit-title">Tonight's Story</div><div class="toolkit-sub">Week 1 &middot; Night 6 &middot; Children Are a Gift</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="card card-story reveal">
+    <div class="card-label lbl-white">&#128214; Tonight's Scripture Story</div>
+    <div class="card-title ct-white">Children Are a Gift</div>
+    <div class="bt-white">Heavenly Father loves families very much. One of the Psalms is a happy song all about home and children.</div>
+    <div class="bt-white" style="margin-top:8px;">&ldquo;Unless Heavenly Father helps build the house, the builders work for nothing,&rdquo; the song says. That means Heavenly Father is the one who helps our family and home grow strong and happy.</div>
+    <div class="bt-white" style="margin-top:8px;">Then the song says something sweet: &ldquo;Children are a gift from Heavenly Father!&rdquo; Every child &mdash; including YOU &mdash; is a special present He gives to a family.</div>
+    <div class="bt-white" style="margin-top:8px;">The song paints a happy picture: a mom and dad and their little ones gathered close, like young plants growing round a table full of love.</div>
+    <div class="bt-white" style="margin-top:8px;">Your family is a gift, and you are a gift too! Heavenly Father helps your home be a place of love, where you are treasured every single day.</div>
+  </div>
+
+  <div class="card card-wren trav-willow reveal">
+    <div class="card-label lbl-wren">&#9733; Scripture Traveler of the Night</div>
+    <div class="traveler-center">
+      <div class="traveler-name">Willow the Warm</div>
+      <div class="traveler-motto">"Warm hugs, warm hearts!"</div>
+    </div>
+    <div class="bt">Willow fits tonight because she cherishes the people in her home. In Willow&rsquo;s world today: at dinner, Willow looked around at everyone laughing together and felt her heart go warm. &ldquo;I&rsquo;m so glad you&rsquo;re my family,&rdquo; she said, and gave her little brother a hug &mdash; even though he&rsquo;d been silly all day. Just like the song about children being a gift from Heavenly Father, Willow felt how precious her family is.</div>
+  </div>
+
+  <div class="card card-navy reveal">
+    <div class="card-label lbl-white">&#9733; The Heart of Tonight's Story</div>
+    <div class="bt-white"><strong>Gospel Principle:</strong> A home is something Heavenly Father builds, and children are something He gives. Psalm 127 puts those two sentences side by side on purpose: the builders labour in vain unless the Lord builds, and children are <em>an heritage of the Lord</em> &mdash; an inheritance, family land, the thing you hold for the next generation. The family is not a project we finish. It is a gift we receive, and then a house we let Him build.</div>
+    <div class="bt-white" style="margin-top:8px;"><strong>Virtue:</strong> Gratitude &amp; Belonging &mdash; because a child who knows she is a gift, and not an accident or a chore, has been handed something no report card can take away. Tonight's feeling word is <em>treasured</em>, and it is a bigger word than <em>liked</em>. Liked means someone enjoys you today. Treasured means someone would keep you at any cost, and already has.</div>
+    <div class="bt-white" style="margin-top:8px;"><strong>For young children:</strong> Heavenly Father helps build our home. He gave me to my family as a gift, and He gave my family to me. I am treasured. I can say thank You for the people in my house.</div>
+  </div>
+
+  <div class="card card-verse reveal">
+    <div class="card-label lbl-gold">&#10022; Verse of the Day</div>
+    <div class="verse-text">"Lo, children are an heritage of the Lord: and the fruit of the womb is his reward."</div>
+    <div class="verse-ref"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/127?lang=eng&id=p3#p3" target="_blank">Psalm 127:3 (KJV) &#8599;</a></div>
+    <div class="soft-div"></div>
+    <div class="bt"><strong>Simple truth:</strong> Read the first word. <em>Lo</em> &mdash; look, behold, pay attention. The psalmist is pointing at something in the room that everyone has stopped noticing: the children. Then two nouns. <em>Heritage</em> is an inheritance, the land a family holds and hands down. <em>Reward</em> is wages, something paid out on purpose. A child, says the psalm, is not a cost or a chance. She is an inheritance and a payment, both from Heavenly Father, and both given &mdash; which means the right response is not pride, and not worry, but thanks. (Verse 1, in the same psalm: <em>Except the Lord build the house, they labour in vain that build it.</em>)</div>
+    <div class="pills">
+      <div class="pill"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/127?lang=eng" target="_blank">Psalm 127</a></div>
+      <div class="pill"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/127?lang=eng&id=p1#p1" target="_blank">Psalm 127:1</a></div>
+      <div class="pill"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/127?lang=eng&id=p3#p3" target="_blank">Psalm 127:3</a></div>
+      <div class="pill"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/128?lang=eng&id=p3#p3" target="_blank">Psalm 128:3</a></div>
+      <div class="pill"><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/17?lang=eng&id=p21-p24#p21" target="_blank">3 Nephi 17:21&ndash;24</a></div>
+    </div>
+  </div>
+
+  <div class="card card-teal reveal">
+    <div class="card-label lbl-teal">Why This Story Matters</div>
+    <div class="bt">Every child eventually asks, in some wordless way, whether she is wanted. Not whether she is fed or driven to practice &mdash; whether she was a good idea. The whole question of belonging is what a child concludes about that, and she concludes it early, from a thousand small moments at a table. Tonight's psalm answers the question before it is asked, in a picture a two-year-old can hold: children are a gift, a present Heavenly Father gives to a family. Willow's story is that answer in miniature. She looked around the dinner table, felt her heart go warm, and said it out loud to her brother, silly day and all.</div>
+    <div class="bt" style="margin-top:8px;">That is the quiet claim of Psalm 127, and it deserves to be said plainly to a family. A home is not chiefly a thing parents build by effort. Verse 1 rules that out &mdash; the builders labour in vain unless the Lord builds. A home is a thing Heavenly Father builds, and a child is a thing He gives, and the parents' work is to receive both with thanks and keep the doors open. That is not an excuse for laziness; verse 4 has arrows and a warrior in it. But it is a relief. You are not the architect. You are the household that the Architect is building.</div>
+    <div class="bt" style="margin-top:8px;">Notice, too, what the psalm does not promise. It does not say children are easy, or that the house will never crack, or that every arrow flies straight. It says they are an <em>heritage</em> &mdash; an inheritance to be kept for the next generation &mdash; and that the family who knows this will not be ashamed at the gate. Teaching a child that she is treasured is not teaching her that she is perfect. It is teaching her that she was given on purpose, to people who are glad, by a Father who is still building the house around her.</div>
+  </div>
+
+  <div class="card card-navy reveal">
+    <div class="card-label lbl-white">Historical Background</div>
+    <div class="bt-white">Psalm 127 is one of the fifteen Songs of Ascents (Psalms 120 to 134), the little collection pilgrims sang on the road up to Jerusalem for the feasts. Families walked those roads together &mdash; Luke says Jesus was twelve when His family made the trip and did not notice for a day that He was missing &mdash; and the ascent songs are full of the things travelling families talk about: home, children, work, sleep, the city gate. Tonight's is the only ascent song with Solomon's name on it, and only one other psalm in the whole book carries his name. Solomon was the king who built the house of the Lord, and the psalm's first line is a builder's confession: <em>except the Lord build the house, they labour in vain that build it.</em></div>
+    <div class="bt-white" style="margin-top:8px;">The Hebrew has a joke in it that the English cannot keep. The word for <em>build</em> is <em>banah</em>; the word for <em>sons</em> is <em>banim</em>; the word for <em>house</em> is <em>bayit</em>. In Hebrew a house is built out of children &mdash; the verb and the noun are the same family &mdash; so when verse 3 turns from building to children it has not changed the subject at all. The house the Lord builds in verse 1 is the family of verse 3. The psalm then pictures a father with a quiver of arrows standing in the city gate, which was the courtroom and the marketplace of an ancient town, the place a man's standing was decided. Children were his defence and his witnesses.</div>
+    <div class="bt-white" style="margin-top:8px;">The picture tonight's story uses &mdash; little ones like young plants round a table &mdash; actually comes from the next song on the road, Psalm 128, which is Psalm 127's twin: <em>thy children like olive plants round about thy table.</em> Olive shoots grow up from the roots of the old tree in a ring, and a farmer lets them, because they are the orchard's future. The two psalms were sung one after the other, and the second answers the first: the house the Lord builds turns out to have a table in it, and around the table, in a ring, the children He gave. That is the scene Willow saw at dinner.</div>
+  </div>
+
+  <div class="card card-conf reveal">
+    <div class="card-label lbl-gold">&#9733; From Recent General Conference</div>
+    <div class="card-title ct-gold">What Living Prophets &amp; Apostles Are Teaching Now</div>
+    <div class="conf-talk">
+      <div class="conf-date" style="color:var(--gold);">October 2025 General Conference</div>
+      <div class="conf-speaker">President Dallin H. Oaks &middot; First Presidency</div>
+      <div class="conf-talk-title">"The Family-Centered Gospel of Jesus Christ"</div>
+      <div class="conf-body">The title is the teaching, and it is tonight's psalm in five words. The gospel of Jesus Christ is <em>family-centered</em>: the house the Lord builds is not an optional extra to the plan of salvation, it is the shape of the plan. A parent reading Psalm 127 beside this talk will find the same two ideas in the same order &mdash; that the home is Heavenly Father's building project before it is ours, and that children are His heritage before they are our responsibility. Read it with verse 3 open and a child's name in mind.</div>
+      <div class="conf-body" style="margin-top:8px;">A note from the editors: our overnight source check could not run tonight (the web-fetch tool was blocked while no one was at the desk), so we print no wordin
+
