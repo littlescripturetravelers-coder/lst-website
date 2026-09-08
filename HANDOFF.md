@@ -1710,3 +1710,55 @@ being published.** If you want that covered, it has to be a live fetch of the re
 (That fetch cannot be made from this environment — the egress proxy denies the site's own host,
 which is why the diagnosis here was made from DNS, the repo tree and Vercel's own error code
 rather than by loading the page.)
+
+---
+
+## 34. The website tells us when it stops answering (8 Sep 2026)
+
+> "Yes please set up a check that looks at your site every hour and messages you the moment it
+> stops answering."
+
+`.github/workflows/uptime.yml` — **"Is the site up"**, hourly at :17 UTC, on GitHub's own runners.
+
+### Why it is on GitHub and not here
+
+The check has to fetch the real address. **This environment's egress proxy denies
+`littlescripturetravelers.com`** (`CONNECT tunnel failed, response 403`), so no Claude session can
+probe the live site — which is also why §33 was diagnosed from DNS, the repo tree and Vercel's
+error code instead of by loading the page. GitHub Actions has unrestricted network, is already
+trusted by this repo, costs nothing, and needs no secret: `GITHUB_TOKEN` opens the issue.
+
+### What it checks, and why it is not just a status code
+
+Three pages — the home page on the apex **and** on `www`, plus `subscribe.html`. Each must answer
+**200 AND still contain the words that prove it is our page**.
+
+**The status code alone is not enough.** The failure that started all this answered with a page —
+just not ours. A deploy that publishes the wrong folder can easily return 200 with something else
+on it, and then a status-only check reports everything fine while the site is gone.
+
+A failing page is retried twice more, twenty seconds apart. A blip wakes nobody.
+
+### How Levi hears about it
+
+It opens **one** issue labelled `website-down`, which GitHub emails him, and **comments on that
+same issue** every hour the outage lasts rather than opening a new one — a long outage is one
+conversation, not a hundred emails. The first detection also fails the run, which is a second,
+independent email. When the site answers again it says so on the issue and closes it.
+
+The issue text tells him in plain words what to do, and names the two things that have taken the
+site down before: a `public` folder at the top of the repo, and a failed Vercel deploy.
+
+### Tested
+
+The probe was lifted out of the workflow and run against four fake servers before it shipped: a
+healthy page, **the exact Vercel 404 that caused the outage**, a 200 carrying the wrong content,
+and a host refusing the connection. All four behaved correctly. Then it was dispatched for real
+against the live site, which answered **"The website is up."**
+
+### ⚠️ If you change the site's wording
+
+The check looks for the literal words `Little Scripture Travelers` on the home page and `Subscribe`
+on the subscribe page. They are in `PAGES` at the top of the workflow. If a redesign ever removes
+one of those phrases, **the check will report the site as down when it is fine** — change the
+phrase in the workflow at the same time.
