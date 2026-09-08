@@ -1660,3 +1660,53 @@ The same as it did, with four deliberate legibility fixes that were wrong in Tra
 2. Colours from tokens only.
 3. `class="on-photo"` on any section with a photograph behind its words.
 4. Run the five harnesses.
+
+---
+
+## 33. ⚠️ NEVER PUT A FOLDER CALLED `public` AT THE TOP OF THIS REPO (8 Sep 2026)
+
+> "I went to my website and it says it can't be found."
+
+`littlescripturetravelers.com` served **`404: NOT_FOUND`** from **5 to 8 September**.
+
+### What did it
+
+This site is plain HTML with **no build step**. Vercel serves the top of the repo exactly as it
+is. But Vercel has a rule for repos like this one:
+
+> **If a folder called `public` exists at the top level and no framework is detected, Vercel treats
+> that folder as the entire website and publishes nothing else.**
+
+On 5 September the `Lantern sync` workflow (`.github/workflows/lantern-sync.yml`, added from
+another chat) started copying Morning Lantern pages out of Google Drive into **`public/lantern/`**.
+The moment the first file landed, the published website stopped being 37 pages and became four
+lullaby pages and three mp3s. There is no `public/index.html`, so the front door answered 404.
+
+Nothing was deleted. `index.html` was in the repo the whole time — it just stopped being served.
+
+### The fix
+
+The Lantern files now live at **`lantern/`** at the top of the repo (so they are reachable at
+`/lantern/…`, which is what was wanted anyway), and the workflow's `DEST` says `lantern`. A warning
+sits beside that setting. Nothing on the site linked to those files yet, so no link broke.
+
+### ⚠️ How to not do this again
+
+* **Any new folder at the top of the repo is fine except one: `public`.** If something ever needs
+  to be called that, the site needs a `vercel.json` naming the root as the Output Directory
+  **before** the folder appears — not after.
+* **The Lantern sync runs every 30 minutes** and pushes straight to `main`. It is a second author
+  on this repo. Before concluding that a change of yours broke something, run
+  `git log --oneline origin/main` and see whose commits are on top.
+* **A dead site does not announce itself.** Three days passed. If it matters, a check that fetches
+  `https://littlescripturetravelers.com/` and shouts on a non-200 is worth more than any amount of
+  care taken while editing.
+
+### ⚠️ For the next chat: this was not a code fault, and the tests could not have caught it
+
+Every page was correct, in all three themes, the whole time — the harnesses serve the folder
+directly and never saw Vercel. **The harnesses test the pages; they do not test that the pages are
+being published.** If you want that covered, it has to be a live fetch of the real domain.
+(That fetch cannot be made from this environment — the egress proxy denies the site's own host,
+which is why the diagnosis here was made from DNS, the repo tree and Vercel's own error code
+rather than by loading the page.)

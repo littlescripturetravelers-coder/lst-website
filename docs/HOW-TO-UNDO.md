@@ -37,6 +37,7 @@ precise rather than approximate.
 
 | Code | Date | What changed |
 |---|---|---|
+| `572bd07` | 8 Sep | **The website put back after three days of "404: NOT_FOUND"** — the Lantern files moved out of `public/` |
 | `eda7ee1` | 3 Sep | **The three themes — Traditional, Dark and Light**, choosable in the header, the phone menu and My Account |
 | `4f8a87f` | 28 Aug | **The Lantern in five editions** — faith asked at signup, changeable on My Account |
 | `826b3fe` | 26 Aug | September's book says "coming" instead of showing nothing |
