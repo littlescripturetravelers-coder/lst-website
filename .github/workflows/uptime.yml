@@ -1,0 +1,186 @@
+# Is the website actually up?
+#
+# WHY THIS EXISTS
+# On 5 September 2026 the whole site started answering "404: NOT_FOUND" and
+# nobody found out for three days. Every page was correct the whole time; they
+# had just stopped being published. No test could have caught that, because
+# every test we have serves the folder straight off the disk and never asks
+# Vercel anything. The only thing that catches it is fetching the real address.
+#
+# WHAT IT DOES
+# Once an hour it opens three real pages the way a parent would, and checks
+# that each one comes back 200 AND still has the words that prove it is really
+# our page and not an error page wearing a 200. If a page fails it waits and
+# tries twice more, so a one-second blip does not wake anybody.
+#
+# HOW IT TELLS LEVI
+# It opens an issue on this repository, which GitHub emails to him. It opens
+# ONE issue and keeps commenting on that same issue for as long as the site is
+# down, so a long outage is one conversation and not a hundred emails. When the
+# site comes back it says so on the issue and closes it.
+#
+# It needs no password, no API key and no third-party service. GITHUB_TOKEN is
+# provided by GitHub itself.
+
+name: Is the site up
+
+on:
+  schedule:
+    - cron: '17 * * * *'      # every hour at 17 minutes past (UTC), clear of the Lantern sync
+  workflow_dispatch:          # and whenever you press "Run workflow" by hand
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: uptime               # never two of these at once
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open the website and read it
+        id: probe
+        run: |
+          python3 - <<'PY'
+          import os, time, urllib.error, urllib.request
+
+          # Each page, and a phrase that only appears when the page is really there.
+          PAGES = [
+              ("https://littlescripturetravelers.com/",             "Little Scripture Travelers"),
+              ("https://www.littlescripturetravelers.com/",         "Little Scripture Travelers"),
+              ("https://littlescripturetravelers.com/subscribe.html", "Subscribe"),
+          ]
+          TRIES, WAIT = 3, 20          # a blip is not an outage
+          UA = {"User-Agent": "LST-uptime-check (GitHub Actions)"}
+
+          def check(url, phrase):
+              """None if the page is fine, else a short plain-English reason."""
+              try:
+                  with urllib.request.urlopen(
+                          urllib.request.Request(url, headers=UA), timeout=30) as r:
+                      code = r.getcode()
+                      body = r.read(200_000).decode("utf-8", "ignore")
+              except urllib.error.HTTPError as e:
+                  detail = ""
+                  try:
+                      detail = e.read(400).decode("utf-8", "ignore").strip().replace("\n", " ")[:200]
+                  except Exception:
+                      pass
+                  return f"answered {e.code} {e.reason}" + (f" - {detail}" if detail else "")
+              except Exception as e:
+                  return f"could not be reached ({type(e).__name__}: {e})"
+              if code != 200:
+                  return f"answered {code}"
+              if phrase not in body:
+                  return (f'answered 200 but the words "{phrase}" were not on it '
+                          f"({len(body)} characters came back) - it is probably an error "
+                          f"page, or the wrong folder is being published")
+              return None
+
+          problems = []
+          for url, phrase in PAGES:
+              why = None
+              for attempt in range(1, TRIES + 1):
+                  why = check(url, phrase)
+                  if why is None:
+                      print(f"OK   {url}")
+                      break
+                  print(f"try {attempt}/{TRIES}  {url}  -> {why}")
+                  if attempt < TRIES:
+                      time.sleep(WAIT)
+              if why is not None:
+                  problems.append(f"- {url}\n  {why}")
+
+          # The reason text is quoted from the site's own error page, so make sure it
+          # can never contain the marker that ends this block.
+          text = "\n".join(problems).replace("END_OF_REPORT", "END-OF-REPORT")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+              fh.write(f"down={'true' if problems else 'false'}\n")
+              fh.write("report<<END_OF_REPORT\n" + text + "\nEND_OF_REPORT\n")
+
+          if problems:
+              print("\nTHE SITE IS NOT ANSWERING PROPERLY:\n" + "\n".join(problems))
+          else:
+              print("\nThe website is up.")
+          PY
+
+      - name: Tell Levi, or tell him it is better
+        uses: actions/github-script@v7
+        env:
+          DOWN: ${{ steps.probe.outputs.down }}
+          REPORT: ${{ steps.probe.outputs.report }}
+        with:
+          script: |
+            const down   = process.env.DOWN === 'true';
+            const report = (process.env.REPORT || '').trim();
+            const MARK   = '<!-- lst-uptime -->';   // how we recognise our own issue
+            const when   = new Date().toUTCString();
+
+            const open = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'website-down', per_page: 20,
+            });
+            const existing = open.data.find(i => (i.body || '').includes(MARK));
+
+            if (down) {
+              const body = [
+                MARK,
+                '## The website is not answering',
+                '',
+                'Checked at **' + when + '**. What went wrong:',
+                '',
+                report,
+                '',
+                '---',
+                '',
+                '### What to do',
+                '',
+                '1. Open https://littlescripturetravelers.com yourself. If it loads for you,',
+                '   it may already be better — this issue will close itself at the next check.',
+                '2. If it does not load, send this whole page to the website chat and say',
+                '   "the site is down again". Everything needed to work it out is above.',
+                '3. Two things have taken it down before, both worth a look first:',
+                '   a folder named `public` appearing at the top of the repository, and a',
+                '   failed deploy on Vercel.',
+                '',
+                'This issue closes itself as soon as the site answers properly again.',
+              ].join('\n');
+
+              if (existing) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: existing.number,
+                  body: 'Still down as of **' + when + '**.\n\n' + report,
+                });
+                core.notice('Still down — commented on issue #' + existing.number);
+                return;                       // already shouted once; stay quiet
+              }
+
+              const made = await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title: '⚠️ littlescripturetravelers.com is not answering',
+                body,
+                labels: ['website-down'],
+              });
+              core.setFailed('The website is down. Opened issue #' + made.data.number);
+              return;                         // failing the run emails Levi a second time
+            }
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: existing.number,
+                body: '✅ The website is answering again, as of **' + when + '**.',
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: existing.number, state: 'closed',
+              });
+              core.notice('Back up — closed issue #' + existing.number);
+            } else {
+              core.notice('The website is up.');
+            }
