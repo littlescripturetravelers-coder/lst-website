@@ -1730,8 +1730,16 @@ trusted by this repo, costs nothing, and needs no secret: `GITHUB_TOKEN` opens t
 
 ### What it checks, and why it is not just a status code
 
-Three pages — the home page on the apex **and** on `www`, plus `subscribe.html`. Each must answer
-**200 AND still contain the words that prove it is our page**.
+Eight addresses. Four pages — the home page on the apex **and** on `www`, plus `subscribe.html`
+and `account.html` — and **the four files sign-in cannot work without**: `style.css`, the Supabase
+library, `js/lst-auth.js` and `js/lst-theme.js`. Each must answer **200 AND still contain the
+words that prove the real thing came back**.
+
+**The files matter as much as the pages.** A page can load perfectly while the JavaScript beside it
+is missing, and then the site *looks* completely fine and nothing works — signing in above all,
+because sign-in is entirely JavaScript. A check that only opened the pages would call that a
+healthy website. (This is what the check was used to rule out on 8 Sep when Levi could not sign
+in: all eight came back correct, which said the trouble was in the account, not the website.)
 
 **The status code alone is not enough.** The failure that started all this answered with a page —
 just not ours. A deploy that publishes the wrong folder can easily return 200 with something else
@@ -1758,7 +1766,8 @@ against the live site, which answered **"The website is up."**
 
 ### ⚠️ If you change the site's wording
 
-The check looks for the literal words `Little Scripture Travelers` on the home page and `Subscribe`
-on the subscribe page. They are in `PAGES` at the top of the workflow. If a redesign ever removes
+The check looks for literal words in each thing it fetches — `Little Scripture Travelers` on the
+home page, `Subscribe` on the subscribe page, `openSignIn` inside `lst-auth.js`, and so on. They
+are in `PAGES` at the top of the workflow. If a redesign ever removes
 one of those phrases, **the check will report the site as down when it is fine** — change the
 phrase in the workflow at the same time.
