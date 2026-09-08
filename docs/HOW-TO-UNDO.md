@@ -37,6 +37,7 @@ precise rather than approximate.
 
 | Code | Date | What changed |
 |---|---|---|
+| `eb56f0c` | 8 Sep | **My Account no longer goes blank on a slow phone** — and the sell stays quiet when we can't tell who you are |
 | `572bd07` | 8 Sep | **The website put back after three days of "404: NOT_FOUND"** — the Lantern files moved out of `public/` |
 | `eda7ee1` | 3 Sep | **The three themes — Traditional, Dark and Light**, choosable in the header, the phone menu and My Account |
 | `4f8a87f` | 28 Aug | **The Lantern in five editions** — faith asked at signup, changeable on My Account |
