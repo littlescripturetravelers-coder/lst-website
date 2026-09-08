@@ -47,11 +47,23 @@ jobs:
           python3 - <<'PY'
           import os, time, urllib.error, urllib.request
 
-          # Each page, and a phrase that only appears when the page is really there.
+          # Each address, and a phrase that only appears when the real thing came back.
+          #
+          # ⚠️ THE FILES MATTER AS MUCH AS THE PAGES. A page can load perfectly while
+          # the JavaScript beside it is missing, and then the site LOOKS fine and
+          # nothing works — signing in above all, because sign-in is entirely
+          # JavaScript. Checking only the pages would call that a healthy website.
+          SITE = "https://littlescripturetravelers.com"
           PAGES = [
-              ("https://littlescripturetravelers.com/",             "Little Scripture Travelers"),
-              ("https://www.littlescripturetravelers.com/",         "Little Scripture Travelers"),
-              ("https://littlescripturetravelers.com/subscribe.html", "Subscribe"),
+              (SITE + "/",                     "Little Scripture Travelers"),
+              ("https://www.littlescripturetravelers.com/", "Little Scripture Travelers"),
+              (SITE + "/subscribe.html",       "Subscribe"),
+              (SITE + "/account.html",         "Little Scripture Travelers"),
+              # the four files that sign-in cannot work without
+              (SITE + "/style.css",            ".site-header"),
+              (SITE + "/js/vendor/supabase.js", "var supabase"),
+              (SITE + "/js/lst-auth.js",       "openSignIn"),
+              (SITE + "/js/lst-theme.js",      "lst_theme"),
           ]
           TRIES, WAIT = 3, 20          # a blip is not an outage
           UA = {"User-Agent": "LST-uptime-check (GitHub Actions)"}
