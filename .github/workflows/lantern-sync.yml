@@ -1,7 +1,8 @@
 # Morning Lantern — Drive → GitHub sync + ElevenLabs lullaby (free GitHub Actions; the only secret lives in GitHub)
 # File location:  .github/workflows/lantern-sync.yml  in the lst-website repo.
 #
-# 1. Copies any new .html / .json file from the public Drive folder "Lantern Publish" into DEST.
+# 1. Copies any new .html / .json file from the public Drive folder "Lantern Publish" into DEST
+#    (DEST is "lantern" at the top of the repo - see the warning beside it; it must never be under "public").
 #    Drive name  a-lamp-for-my-feet__morning-lantern-lds.html  ->  DEST/a-lamp-for-my-feet/morning-lantern-lds.html
 # 2. For every  DEST/<slug>/lullaby.json  that has no  DEST/<slug>/<slug>-lullaby.mp3  yet, asks ElevenLabs Music
 #    (finetune "LST Theme Music") to sing the lyrics, and saves the MP3 beside the lullaby page.
@@ -29,7 +30,13 @@ jobs:
       - name: Download any new Lantern files from the Drive folder
         env:
           FOLDER_ID: 1C5Xk6kEFo7gbyPaQs9Rh9ojkNjxg_rZQ     # "Lantern Publish" folder (must be shared: Anyone with the link)
-          DEST: public/lantern                            # folder in this repo where Lantern HTML files live
+          DEST: lantern                                   # folder in this repo where Lantern HTML files live
+          # ⚠️ NEVER set DEST to public/anything. This website is plain HTML served
+          # straight from the top of the repo. Vercel has a rule for repos like this:
+          # if a folder called "public" exists at the top level, it treats THAT as the
+          # whole website and serves nothing else. On 5 Sep 2026 this line said
+          # "public/lantern", the folder appeared, and littlescripturetravelers.com
+          # answered "404: NOT_FOUND" for three days. Keep it out of "public".
         run: |
           set -e
           python3 - <<'EOF'
@@ -65,7 +72,7 @@ jobs:
 
       - name: Sing any lullaby that has no MP3 yet (ElevenLabs Music)
         env:
-          DEST: public/lantern
+          DEST: lantern
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           FINETUNE_NAME: LST Theme Music
         run: |
