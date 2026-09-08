@@ -1,0 +1,92 @@
+# Can anything reach the account database?
+#
+# WHY THIS EXISTS
+# On 8 Sep 2026 signing in failed with Safari's message "Load failed", which
+# means the request never completed at all - Supabase did not refuse the
+# password, it never answered. From inside a browser you cannot tell the
+# difference between "the database is down", "this phone cannot get to it" and
+# "the key is wrong". This asks from a neutral machine so we can.
+#
+# It uses only the anon key, which is already public - it is served to every
+# visitor inside js/lst-auth.js. It never uses anybody's password: the sign-in
+# test uses an address that cannot exist, purely to see the SHAPE of the answer.
+
+name: Can we reach the database
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reach:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask Supabase three questions
+        run: |
+          python3 - <<'PY'
+          import json, socket, ssl, urllib.error, urllib.request
+
+          REF  = "rdbvktqgrwhjucocobua"
+          HOST = REF + ".supabase.co"
+          BASE = "https://" + HOST
+          # The anon key. Public by design - it is in js/lst-auth.js, which the
+          # website serves to everyone. It grants nothing on its own; row-level
+          # security decides what any request may actually see.
+          KEY  = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
+                  "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkYnZrdHFncndoanVjb2NvYnVhIiwicm9sZSI6ImFub24i"
+                  "LCJpYXQiOjE3ODYwNDAwMzEsImV4cCI6MjEwMTYxNjAzMX0."
+                  "1PJVCfeK6dIFWeBvdsC13HPQ8173BHEok0Qq6l7mfC4")
+
+          def say(step, detail):
+              print(f"\n--- {step}\n    {detail}")
+
+          # 1. Does the name still exist?
+          try:
+              ips = sorted({a[4][0] for a in socket.getaddrinfo(HOST, 443)})
+              say("1. DNS", f"{HOST} -> {', '.join(ips)}")
+          except Exception as e:
+              say("1. DNS", f"FAILED - the name does not resolve ({e})")
+              raise SystemExit("The project's address no longer exists. "
+                               "That usually means the project was deleted or renamed.")
+
+          # 2. Is the auth service answering at all?
+          def ask(path, data=None, extra=None):
+              url = BASE + path
+              headers = {"apikey": KEY, "Authorization": "Bearer " + KEY,
+                         "Content-Type": "application/json",
+                         "User-Agent": "LST-reachability-check"}
+              headers.update(extra or {})
+              body = json.dumps(data).encode() if data is not None else None
+              req = urllib.request.Request(url, data=body, headers=headers)
+              try:
+                  with urllib.request.urlopen(req, timeout=25) as r:
+                      return r.getcode(), r.read(600).decode("utf-8", "ignore")
+              except urllib.error.HTTPError as e:
+                  return e.code, e.read(600).decode("utf-8", "ignore")
+
+          code, text = ask("/auth/v1/health")
+          say("2. Auth service", f"HTTP {code}  {text.strip()[:300]}")
+
+          # 3. Does it accept our key, and answer a sign-in the normal way?
+          #    A deliberately impossible address - never a real password.
+          code, text = ask("/auth/v1/token?grant_type=password",
+                           {"email": "nobody-at-all@example.invalid",
+                            "password": "not-a-real-password"})
+          say("3. Sign-in endpoint", f"HTTP {code}  {text.strip()[:300]}")
+
+          print("\n=========================================================")
+          if code in (400, 401) and "invalid" in text.lower():
+              print("The database is UP and the key WORKS. It refused a made-up")
+              print("account exactly as it should. So a browser that says")
+              print('"Load failed" is being stopped BEFORE it gets here -')
+              print("look at the phone's network, a content blocker, or Private Relay.")
+          elif code == 401 and "api key" in text.lower():
+              print("The database is up but REJECTED OUR KEY. The anon key in")
+              print("js/lst-auth.js needs replacing with the current one from")
+              print("Supabase - Settings, API, 'anon public'.")
+          else:
+              print("Unexpected answer - read the three results above.")
+          print("=========================================================")
+          PY
