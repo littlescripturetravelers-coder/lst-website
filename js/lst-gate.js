@@ -155,6 +155,14 @@
     if (done || alreadyShownThisSession()) { done = true; return; }
 
     function settle() {
+      /* ⚠️ If we could not reach the account service we do not know who this
+         is. Say nothing. Selling a subscription to a family who already pays
+         for one is worse than staying quiet, and nothing leaks by waiting:
+         the stories are locked in the database by row-level security, not by
+         this box. When the answer arrives, onChange runs settle again. */
+      var a = auth();
+      if (a && a.offline && a.offline()) { armed = false; listen(false); return; }
+
       if (paying()) { armed = false; listen(false); return; }
       if (!armed) { armed = true; listen(true); }
     }

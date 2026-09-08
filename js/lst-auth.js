@@ -42,8 +42,44 @@
   var tier = null;         // "subscriber" | "free" | null when signed out
   var admin = false;       // owner/admin accounts never need a subscription
   var resolved = false;    // have we finished the first session check?
+  var offline  = false;    // did that check fail, or take too long?
   var readyCbs = [];
   var changeCbs = [];
+
+  /* ⚠️ EVERY PAGE WAITS ON THE FIRST SESSION CHECK BEFORE IT DRAWS ITSELF.
+     So that check must ALWAYS finish. Supabase on a one-bar phone, a content
+     blocker, a captive wifi portal, an outage - any of them can leave the
+     request hanging forever, and a page that waits forever shows a heading and
+     then nothing at all, which is what My Account did on 8 Sep 2026.
+
+     After WAIT_LIMIT we give up, mark ourselves `offline`, and let the pages
+     draw. They can then say "we could not reach your account" instead of
+     showing an empty screen. If the slow answer turns up later we take it,
+     clear `offline` and tell the pages, so the screen mends itself. */
+  var WAIT_LIMIT = 8000;
+
+  function settleWithin(p) {
+    return new Promise(function (done) {
+      var over = false;
+      var timer = setTimeout(function () {
+        if (over) return;
+        over = true; offline = true; resolved = true;
+        done();
+      }, WAIT_LIMIT);
+
+      function finish(failed) {
+        if (over) {
+          /* The answer came in after we had given up. Take it anyway. */
+          if (!failed && offline) { offline = false; announce(); }
+          return;
+        }
+        over = true; clearTimeout(timer);
+        offline = !!failed; resolved = true;
+        done();
+      }
+      p.then(function () { finish(false); }, function () { finish(true); });
+    });
+  }
 
   function fire(list) {
     for (var i = 0; i < list.length; i++) {
@@ -106,13 +142,13 @@
   }
 
   function refresh() {
-    if (!sb) { resolved = true; return Promise.resolve(); }
-    return sb.auth.getSession().then(function (res) {
-      setUser(res && res.data ? res.data.session : null);
-      return lookupTier();
-    }).then(function () {
-      resolved = true;
-    }).catch(function () { resolved = true; });
+    if (!sb) { resolved = true; offline = true; return Promise.resolve(); }
+    return settleWithin(
+      sb.auth.getSession().then(function (res) {
+        setUser(res && res.data ? res.data.session : null);
+        return lookupTier();
+      })
+    );
   }
 
   /* ===================================================================
@@ -213,6 +249,11 @@
     isAdmin: function () { return admin; },
     tier: function () { return tier; },
     resolved: function () { return resolved; },
+
+    /* True when we could not reach the account service. A page that shows
+       anything about the family MUST check this, or it will quietly say
+       "signed out" to somebody who is signed in. */
+    offline: function () { return offline; },
 
     /* Runs cb once the first session check is done (immediately if already). */
     ready: function (cb) {

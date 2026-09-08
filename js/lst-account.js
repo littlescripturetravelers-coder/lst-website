@@ -111,9 +111,48 @@
       '<p style="margin:1.5rem 0 0;"><button type="button" class="mp-link" id="ac-out">Sign out</button></p>';
   }
 
+  /* When the account service cannot be reached. Never leave the page empty:
+     say what happened, offer a way to try again, and still give the theme
+     picker, which needs nothing from the network. */
+  function noConnectionView() {
+    return '' +
+      '<div class="mp-empty">' +
+        '<div class="mp-empty-i">&#10022;</div>' +
+        '<h3>We couldn&rsquo;t reach your account</h3>' +
+        '<p>The website is fine &mdash; it just could not get through to the account service. ' +
+        'That is usually a slow or patchy connection. Your journal, your family stories and your ' +
+        'subscription are all safe.</p>' +
+        '<button type="button" class="mp-btn mp-btn-gold" id="ac-retry">Try again</button>' +
+      '</div>' +
+      (window.LSTTheme
+        ? '<div class="mp-card" style="margin-top:1.25rem;">' +
+            row("Colour theme", themePicker()) +
+          "</div>"
+        : "");
+  }
+
   function render() {
     if (!root) return;
-    if (!auth() || !auth().signedIn()) {
+
+    /* ⚠️ Check this BEFORE signedIn(). With no answer from the service,
+       signedIn() is false, and showing "sign in" to somebody who is already
+       signed in sends them round in circles. */
+    if (!auth() || (auth().offline && auth().offline())) {
+      root.innerHTML = noConnectionView();
+      var again = document.getElementById("ac-retry");
+      if (again) {
+        again.addEventListener("click", function () {
+          again.disabled = true;
+          again.textContent = "Trying\u2026";
+          if (auth() && auth().refresh) auth().refresh().then(render);
+          else location.reload();
+        });
+      }
+      if (window.LSTTheme && window.LSTTheme.place) window.LSTTheme.place();
+      return;
+    }
+
+    if (!auth().signedIn()) {
       root.innerHTML = signedOutView();
       var si = document.getElementById("ac-signin");
       if (si) si.addEventListener("click", function () { auth().openSignIn(); });
@@ -143,7 +182,21 @@
   window.LSTAccount = {
     mount: function (elm) {
       root = typeof elm === "string" ? document.getElementById(elm) : elm;
-      if (!root || !auth()) return;
+      if (!root) return;
+
+      /* ⚠️ PAINT SOMETHING NOW. Whatever happens next, and however long the
+         account service takes, this page is never blank for a single second.
+         An empty screen tells a parent the website is broken. */
+      root.innerHTML =
+        '<div class="mp-empty">' +
+          '<div class="mp-empty-i">&#10022;</div>' +
+          "<h3>Checking your account&hellip;</h3>" +
+          "<p>One moment.</p>" +
+        "</div>";
+
+      /* No LSTAuth at all (its script failed to load) is still not a reason to
+         show an empty page. Draw the "could not reach" card instead. */
+      if (!auth()) { render(); return; }
       auth().ready(render);
       auth().onChange(render);
     }

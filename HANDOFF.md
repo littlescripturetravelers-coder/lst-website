@@ -1771,3 +1771,62 @@ home page, `Subscribe` on the subscribe page, `openSignIn` inside `lst-auth.js`,
 are in `PAGES` at the top of the workflow. If a redesign ever removes
 one of those phrases, **the check will report the site as down when it is fine** — change the
 phrase in the workflow at the same time.
+
+---
+
+## 35. ⚠️ A PAGE MUST NEVER RENDER NOTHING (8 Sep 2026)
+
+> "Well it now is doing this. I can't even sign in from the website on my Apple phone."
+> (My Account: header, heading, intro paragraph — then blank forever.)
+
+### The fault
+
+`LSTAuth` checked the session on load and every page waited for that check before drawing
+**anything**:
+
+```js
+refresh().then(function () { fire(readyCbs); ... });   // no time limit
+```
+
+`refresh()` calls `getSession()` and then `lookupTier()`. **Twelve modules wait on
+`LSTAuth.ready`.** If Supabase never answers — one bar of signal, a content blocker, a captive
+wifi portal, an outage — that promise never settles, the callbacks never fire, and every one of
+those pages shows its static heading and then nothing, forever.
+
+### ⚠️ Why the first attempt to reproduce it lied
+
+A signed-**out** browser draws the page fine even with Supabase completely dead, because
+`getSession()` answers from `localStorage` without touching the network and `lookupTier()` returns
+early with no user. **The bug only appears for somebody who has signed in before.** The reproduction
+that mattered planted a real `sb-<ref>-auth-token` in `localStorage` first, then hung every request
+to `supabase.co`:
+
+    scratchpad/signedin_offline.mjs      # blank before the fix, drawn after it
+
+Confirmed both ways — stash the fix, blank after 15s; restore it, drawn.
+
+### The fix, in three parts
+
+1. **`lst-auth.js`: the first check now always finishes.** `settleWithin()` gives it
+   `WAIT_LIMIT` (8s), then gives up, sets `offline = true`, and lets the pages draw. **If the slow
+   answer arrives later it is taken anyway** — `offline` clears and `announce()` runs, so the
+   screen mends itself. This one change protects all twelve modules.
+2. **`lst-account.js`: paint immediately.** `mount()` writes "Checking your account…" *before*
+   waiting on anything, so the page is never empty for even a second. On `offline` it draws
+   "We couldn't reach your account" with a **Try again** button — and the theme picker, which needs
+   no network.
+3. **`lst-gate.js`: do not sell to somebody we cannot identify.** When `offline`, the gate stays
+   quiet instead of arming. **Showing "start your free week" to a family who already pays is worse
+   than showing nothing**, and nothing leaks by waiting — the stories are locked by row-level
+   security in the database, not by that box.
+
+### ⚠️ The rule this leaves behind
+
+**Anything that waits on the network before it draws must have a time limit and something to draw
+when the limit runs out.** And anything that shows a family their own status must ask
+`LSTAuth.offline()` **before** `signedIn()` — with no answer from the service `signedIn()` is
+`false`, which silently tells a signed-in parent they are signed out and sends them round in
+circles.
+
+The uptime check cannot catch this class of fault: the site was serving every file perfectly the
+whole time. It was the *browser's* conversation with Supabase that stalled.
