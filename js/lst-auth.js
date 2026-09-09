@@ -109,6 +109,21 @@
   function lookupTier() {
     if (!sb || !user) { tier = null; admin = false; return Promise.resolve(null); }
 
+    /* Ask the database the question it answers for itself. Since 9 September
+       a trial is held to its end date and this is the only place that date is
+       applied - a status scan on the client would still say "subscriber" for a
+       free week that ended in August, and the page would then draw a library
+       whose every story came back empty. The row scan below stays as the
+       fallback for a database without the function. */
+    function askServer() {
+      return sb.rpc("lst_is_subscriber")
+        .then(function (res) {
+          if (res.error) return null;
+          return res.data ? "subscriber" : "free";
+        })
+        .catch(function () { return null; });
+    }
+
     function readRows(res) {
       if (res.error || !res.data || !res.data.length) return null;
       for (var i = 0; i < res.data.length; i++) {
@@ -118,13 +133,17 @@
       return "free";
     }
 
-    return sb.from("subscriptions").select("status").eq("user_id", user.id)
-      .then(function (res) {
-        var t = readRows(res);
-        if (t) return t;
-        if (!user.email) return "free";
-        return sb.from("subscriptions").select("status").eq("email", user.email)
-          .then(function (r2) { return readRows(r2) || "free"; });
+    return askServer()
+      .then(function (answer) {
+        if (answer) return answer;
+        return sb.from("subscriptions").select("status").eq("user_id", user.id)
+          .then(function (res) {
+            var t = readRows(res);
+            if (t) return t;
+            if (!user.email) return "free";
+            return sb.from("subscriptions").select("status").eq("email", user.email)
+              .then(function (r2) { return readRows(r2) || "free"; });
+          });
       })
       .then(function (t) {
         return lookupAdmin().then(function (isAdmin) {
