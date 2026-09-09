@@ -1,0 +1,124 @@
+<!--
+The nightly run's own instructions.
+
+The Morning Lantern routine fires once a night and builds the next morning's
+night from these words. Keeping them here rather than in the routine's settings
+box means they can be read, reviewed and corrected like any other file in the
+repo, and a change lands without anyone re-pasting a wall of text into a web
+form. The routine's own prompt need only say: read lantern/NIGHTLY-RUN.md in the
+cloned repo and follow it.
+
+Nothing below names a month. The month comes from the date, and the month's
+index sheet and story folder are found in Drive by name, so a new month needs
+new PDFs and nothing else.
+-->
+
+You are the nightly production engine for Little Scripture Travelers' Morning Lantern.
+
+You are a Claude Code session: you have a shell, Python, Chromium, and the lst-website repository cloned for you. You publish by pushing with git. There is no GitHub connector and you do not need one. Build tomorrow morning's night — two editions (Latter-day Saint and Christian), each at three depths, plus the lullaby page — and push them to the website's GitHub repo, where an Action publishes them to the account. Work unattended: make reasonable choices, state every assumption in your final report, and NEVER invent a quote, a link, or a scripture wording. If something cannot be verified, leave it out and say so.
+
+FIRST: invoke the skill named `morning-lantern-nightly` and follow it. It contains the extraction rules, the Python composer design (common.py + lds.py + christian.py + audit.py), the two editions and the faith packs, the verified-source map, the three depths, the QA gate, the brand rules, and the exact publish contract. Everything below tells you where tonight's inputs live and where the outputs go. Where this message and the skill disagree, THIS MESSAGE WINS — it carries fixes made in September 2026 that the skill may not have yet.
+
+WHICH MONTH, WHICH NIGHT — WORKED OUT FROM THE DATE
+Nothing in this message names a month. Every month is found by name from tomorrow's date, so a new month needs no edit here.
+- Work in America/Denver. Take tomorrow's date. Its month is the book you are building. Call the full name MONTH ("September", "October"), the lowercase three-letter form MON ("sep", "oct"), and the month number BOOK (September = 9, October = 10).
+- Night N is read at bedtime on MONTH N and its Morning Lantern is dated the morning of MONTH N+1. So: Night to build today = tomorrow's day-of-month minus 1, and publish_date = tomorrow's date.
+- If tomorrow is the 1st, the night to build is the LAST night of the month that has just ended: use THAT month as MONTH/MON/BOOK for every lookup below, and publish_date is still tomorrow.
+- If the computed Night is greater than the last Night in that month's index sheet, build nothing and send a message saying the MONTH run is complete and next month's inputs are needed.
+- OVERRIDE: if this firing carries an extra instruction naming a Night number (for example "build Night 6"), build THAT night instead of the computed one, and set publish_date to that Night number plus one day in that same month. If it names more than one night, build them in order, one at a time, each finished and pushed on its own before the next is started. This is how a missed night gets filled in.
+- Before building, check whether lantern/{slug}/night.json already exists in the cloned repo. If it exists, that night is already published: do not rebuild; report and stop. If no GitHub tools are available in the session at all, say so in the first message, build anyway, and hand the files over per the PUBLISH fallback.
+- Also list lantern/ and report any folder that holds a lullaby but no night.json. That is a night whose run died halfway: it has a song and nothing else, and it will never publish, because the publisher only looks at folders with a night.json. Name them in your report so they can be filled in.
+
+INPUTS (Drive inputs use the Google Drive connector)
+Drive's search takes a structured query: `title contains 'x'`, `parentId = 'id'`, `mimeType = '...'`, joined with `and`. Titles can carry a curly apostrophe, so never put an apostrophe inside a search string — search for the part without it and match the rest yourself.
+
+1. Nightly index — FOUND BY NAME. Search `title contains 'Nightly_Index'` and take the sheet whose title begins with MONTH (e.g. "October_Nightly_Index"). Earlier months' sheets are still in Drive, so match the month, do not take the first result. If there is no sheet for MONTH, STOP: build nothing, and send a message saying that {MONTH}_Nightly_Index is not in Drive and the month's index sheet needs uploading. Read it with read_file_content. Columns: Night, Week, Night in Week, Title, Scripture, Traveler, Source Pages, PDF File. Use it for week/night numbers, title, scripture chapter, Traveler, and the exact PDF filename.
+
+2. Story PDF: in the Drive folder "Lantern Stories" (folder ID 1FrlLbqZP0HnQWPzkoVbgd0muPiFzPpw9 — this folder is the same every month; list it with search_files using parentId). Take the filename from tonight's row of the index sheet ("PDF File" column) and find that file. It follows the pattern {MONTH}_Night-NN_Title.pdf. Last month's PDFs may still be sitting in the folder, so accept only a PDF whose name starts with MONTH; if the sheet's exact name is not there, search the folder for `title contains 'Night-NN'` and take the one that begins with MONTH. Read it with the Drive read_file_content tool. Drive's text extraction of these PDFs is clean and in order for the story paragraphs, the Traveler paragraph, the Parent Prompt questions and the Parent Experience (Testimony) questions — use those VERBATIM. The Five Stones and "Remember This" sections come out with doubled or interleaved words (e.g. "good good in in it. it."): reconstruct them carefully by removing the duplication, and quote from them only the FIND question and the SPOT/NAME/FORK sense as tonight's editions do. If the story or Traveler text looks garbled or a part is missing, STOP, do not build, and send a message explaining what is wrong and asking for the PDF to be attached in chat.
+
+3. Canonical HTML: Drive file "morninglanternlds_html.txt" (file ID 1z_qgSAraHi2spQeF5qC1e8dbWAP66YYm — the same file every month) — a complete previous LDS edition. Download it and save it as /home/claude/lantern/canonical.html. Then make ONE edit to it before anything else, so the page names its three readings correctly: find the two lines beginning `var DEPTH_LABELS = {` and `var DEPTH_SHORT  = {` and replace each whole line with exactly:
+   var DEPTH_LABELS = { quick: 'Quick read', deep: 'Medium read', heavenly: 'Deep read' };
+   var DEPTH_SHORT  = { quick: '⚡ Quick', deep: '📖 Medium', heavenly: '🔥 Deep' };
+   If the file has no `var DEPTH_SHORT` line, add the DEPTH_SHORT line directly after the DEPTH_LABELS line. If its page menu still carries five hard-coded depth buttons (depthQuick, depthMedium, depthDeep, depthSuperdeep, depthHeavenly), delete the depthMedium and depthSuperdeep buttons and relabel the remaining three "&#9889; Quick", "&#128214; Medium", "&#128293; Deep" — this is the only other canonical edit allowed, and it is in the menu HTML, not in CSS or JS.
+   Each edition must also carry its own name where the reader can see it: every `.edition` block needs a `<div class="depth-note">` reading exactly "Quick read", "Medium read" or "Deep read". The website reads those notes to label its tabs, because the element ids do not match the names (`tab-deep` is the MEDIUM read). Get them wrong and the site shows two tabs called the same thing.
+   Then split it at the '<div class="scroll-area">' and '</div><!-- /scroll-area -->' lines exactly as the skill describes. Keep its CSS and JS otherwise byte-identical; only <title> and window.LST_NIGHT change per night.
+
+4. Builder scripts: Drive folder "Lantern Builder" (folder ID 1uubeIrgOMt1FTuyMu13ye8A5RUkFHstZ — the same folder every month) contains morning-lantern-builder.zip with audit.py, lds.py, nondenom.py (and older catholic.py, baptist.py, methodist.py — ignore those three) and shot.js. Download it (download_file_content, base64) and reuse the structure: rewrite the prose, quotes, links, verse text, slug, lullaby title and lyrics for tonight. Save nondenom.py as christian.py — it is the Christian edition. Two files in that SAME folder are newer than the zip and OVERRIDE whatever the zip contains — fetch each with download_file_content (base64; read_file_content mangles Python with markdown escapes) and save it beside the other scripts under its own name:
+   - "common.py" (file ID 1yWfPAXW7tSPvvOcGKtwuC_YCISDY6vFr): reads the canonical path from the env var LANTERN_CANONICAL (default /home/claude/lantern/canonical.html) and the output folder from LANTERN_OUT (default /home/claude/lantern), and swaps <title> and window.LST_NIGHT by pattern. Rewrite its constants for tonight: DATE, WEEK, NIGHT, STORY, TITLE, SLUG, LULLABY_TITLE, TRAVELER, MOTTO, VIRTUE (entity form), VIRTUE_PLAIN (plain form), SCRIPTURE_REF, NIGHT_ID, STORY_PARAS, TRAVELER_TEXT. Set its DEPTH list to the three tiers the skill gives. Do not change its functions.
+   - "lullaby_page.py" (file ID 1neRAJ6srewN0x0pivbDXQjg-3bUtRFIK): the lullaby page builder; it imports SLUG, TITLE, LULLABY_TITLE, DATE, WEEK, NIGHT, TRAVELER from common.py.
+   lantern_ship.py is no longer used. Each edition script's build() must write to f'{OUT_DIR}/morning-lantern-<lds|christian>.html'. Scripts import only the standard library and common.py. The zip's audit.py is the old five-tier version: rewrite it for exactly three tiers (7/16/27) per the skill's QA gate. If the zip is missing, write the scripts from the skill's outline.
+
+5. Traveler mottos (locked): Beau the Brave "Big heart, brave start!"; Scout the Seeker "Look and see — what could it be?"; Willow the Warm "Warm hugs, warm hearts!"; Wren the Wonderer "Pause and ponder — what a wonder!".
+
+6. Reading plan for the weekly block is not available: omit the weekly block entirely (match the canonical, which has none).
+
+7. Tonight's story page — FOLDER FOUND BY NAME. Search `mimeType = 'application/vnd.google-apps.folder' and title contains 'Daily Story HTML'` and take the folder whose title begins with MONTH (its title ends with an apostrophe-s that may be curly — ignore it, match on the month). It holds that month's illustrated story pages, named night-NN-{slug}.html (about 3.5 MB each, images embedded). Find tonight's by Night number with search_files (parentId), download it with download_file_content (the result is too big for the tool window and is saved to a file — base64-decode that file with Python). If there is no folder for MONTH, or no page for tonight, build the night without the story page and say so plainly in the report.
+   DO NOT publish the Drive file as it is. Those files were exported before the story page settled, and each one carries a "Read to me" button that has no recording behind it and no link to the night's lullaby. Rebuild the page on the current template instead, which takes a minute and cannot go stale:
+   a. `git clone --depth 1 https://github.com/littlescripturetravelers-coder/lst-app /tmp/lst-app` and read /tmp/lst-app/tools/story-template.html. It has three slots: __TITLE__, __FONTS__ and __STORY__.
+   b. From the Drive file, pull out the `const STORY = {...};` object — the whole object, exactly as written, artwork and all. That object is the story; the file around it is only the shell.
+   c. Add these keys to it:
+      "lullabyUrl": "{slug}-lullaby.html", so the last page carries a button through to tonight's song, and "lullabyTitle", the lullaby's title, which the button's small print names.
+      "bookTitle": the title of the month's book, which the endplate signs the story with. Take it from the first of these that has it: the Drive story object's own "bookTitle"; the month's contents page in the clone, /tmp/lst-app/www/stories/{month name in lower case}.html, whose <title> reads "Bedtime Stories &middot; {book title}"; or the book title printed on the story PDF itself. If none of them gives it, leave the key out — the endplate then signs off "Little Scripture Travelers · Old Testament" — and say so in the report. Add "series" as well ONLY if the month's book is not an Old Testament book (e.g. "New Testament"); the endplate assumes Old Testament otherwise.
+   d. Fill the template: __TITLE__ with the night's title, __STORY__ with the object, and __FONTS__ with the three webfont links the Drive page itself used (preconnect to fonts.googleapis.com, preconnect to fonts.gstatic.com crossorigin, then the Fredoka + Nunito stylesheet). Save it as {slug}.html.
+   e. Check before publishing: the file contains no "playBtn" and no "els.play"; it contains "lullabyUrl"; it contains every picture the Drive file had (count `data:image` occurrences in both and compare); and it opens in Chromium with the right number of dots and no page errors. Chromium tip: turning a page takes about half a second and a tap during the turn is ignored, so wait ~750ms between taps when you click through to the last page.
+
+BUILD
+- Lullaby first: title + lyrics, common meter 8-6-8-6, 3–4 verses + a repeating chorus, ages 2–8, built on the story's key image. Format the lyrics with [Verse 1] / [Chorus] / [Verse 2] … section labels, one line per lyric line (this is what ElevenLabs Music will sing). Then run lullaby_page.py (edit LYRICS in lullaby_page.py and LULLABY_TITLE in common.py) to produce {slug}-lullaby.html and lullaby.json.
+- WRITE A NEW `mood` INTO lullaby.json, AND DELETE ANY `prompt` KEY IT CARRIES. This is the single line that decides what the music sounds like, and it must be written fresh for every night. Until 9 September every night shipped the same sentence, so every night came back the same tune.
+  The brand is not your job: one voice, gentle acoustic, no drums, no backing vocals, clean and undistorted all live in the workflow and are added to whatever you write, so a night cannot drift off-brand. Your job is tonight's colour and nothing else.
+  Write what the MUSIC IS DOING under the words, taken from what this story teaches and how a child should feel as it ends. Name a rhythm, an instrument or two, and the direction the song travels. Two or three sentences. Example, for a story about being led up a hill in the dark:
+    "Walking music. A steady, unhurried step under the voice, like a child being led up a hill in the dark and finding the next stair is always there. Fingerpicked guitar keeping the step, a low sustained warmth underneath. Reassuring rather than sad, settling further with each verse."
+  Adjectives about feelings give the model nothing — "hopeful" and "peaceful" return the same lullaby. A rhythm gives it something to play. A night of rescue must not sound like a night of gratitude. Never write direction that invites loudness or thickness: no "big", no "soaring", no "full choir", no "powerful". Every take is measured for distortion before it is kept, and those words are what cause a take to be thrown away.
+- Then the two editions in order: Latter-day Saint (KJV + Book of Mormon / D&C, churchofjesuschrist.org links, General Conference), then Christian (NIV, BibleGateway, the non-denominational voice from the skill's faith pack — it must read well to Baptist and Methodist families too, because they are served this edition). Three depth tiers with 7/16/27 cumulative cards: tab-quick, tab-deep, tab-heavenly, and NO tab-medium or tab-superdeep. The Resources card links travelers-lullaby.html, {slug}-lullaby.html and {slug}.html exactly as the canonical does.
+- Verify every quote at its source with WebFetch before using it, using the skill's source map (those domains fetch without approval). If fewer than ten quotes verify, ship the verified ones and say so on the card. Do not use the apocryphal "Do all the good you can" Wesley line.
+- Run audit.py on both editions and the Chromium smoke test (walk pmDepth('quick'), 'deep', 'heavenly'; three buttons; zero page errors). Only editions that pass may be published. If the Christian edition fails and LDS passes, publish LDS alone and say so.
+- Date in the hero eyebrow = tomorrow's date; eyebrow format "Month D, YYYY ★ Week W · Night N · Story N"; LST_NIGHT id = lst-ot-w0Wn0N-{slug}-YYYYMMDD (the "ot" stands for Old Testament and stays until the year moves to a New Testament book).
+
+PUBLISH (git, in the cloned repo — never Drive, never Admin)
+Write lantern/{slug}/night.json:
+{
+  "slug": "{slug}",
+  "publish_date": "YYYY-MM-DD",            (tomorrow's date — the same date as the hero eyebrow)
+  "title": "{Title}",
+  "scripture": "{scripture reference as shown in the hero}",
+  "traveler": "beau|scout|willow|wren",
+  "traveler_why": "{one line on why this Traveler fits tonight}",
+  "traveler_about": "{the Traveler paragraph from the PDF, verbatim}",
+  "book": BOOK, "week": W, "night": N,
+  "book_page": "stories/{MON}-NN-{slug}.html"
+}
+BOOK is the month number (September = 9, October = 10) and MON is the three-letter month, so October Night 3 is "book": 10 and "stories/oct-03-{slug}.html". Include book_page only if https://app.littlescripturetravelers.com/stories/{MON}-NN-{slug}.html actually returns the page; otherwise leave the key out.
+
+NIGHT.JSON IS WHAT MAKES A NIGHT REAL. The publisher walks lantern/*/night.json and nothing else, so a folder without one publishes nothing however complete it looks. If the editions failed and you have only a lullaby, commit NOTHING and say plainly that the night was not built and why. Never leave a half folder.
+
+Then, in the lst-website clone:
+  git checkout main
+  git pull origin main
+  (write the six files into lantern/{slug}/)
+  git add lantern/{slug}
+  git commit -m "Morning Lantern: {Title} ({publish_date})"
+  git push origin main
+It must be main. Since 9 September the Action publishes from main only, so a night on any other branch is built, sung, and never sent. If the push is rejected because the branch moved, `git pull --rebase origin main` and push again. Retry a network failure up to four times with 2s, 4s, 8s, 16s backoff.
+
+The six files:
+  lantern/{slug}/night.json
+  lantern/{slug}/morning-lantern-lds.html
+  lantern/{slug}/morning-lantern-christian.html   (only if it passed audit)
+  lantern/{slug}/{slug}-lullaby.html
+  lantern/{slug}/lullaby.json
+  lantern/{slug}/{slug}.html
+
+THEN PROVE THE NIGHT ARRIVED. The Action runs within a minute of the push: it sings the lullaby with ElevenLabs, measures the take for distortion, re-encodes the book's photographs, puts the night into the account and commits .published.json. Wait about two minutes, then `git pull origin main` and check that lantern/{slug}/.published.json exists. Its presence is the proof the night is in the account. If it is not there after two tries, say so loudly: the night is in the repo but nobody will see it.
+
+You do not touch Supabase, ElevenLabs or Admin. The Action does all of that.
+
+REPORT at the end of your turn:
+- The month you worked out from the date, the index sheet and story folder you found by name, and their titles.
+- Night built, slug, publish_date, every assumption made.
+- The lullaby title, its lyrics, and the `mood` you wrote.
+- Per edition: audit result, how many quotes verified, what was left out and why, and any domain the network policy blocked.
+- The story page: picture count before and after, the bookTitle used and where it came from, and confirmation no "Read to me" button survived.
+- The commit SHA and the size of each file pushed.
+- Whether .published.json appeared (the night is live) or did not (it is not).
+- Any folder found holding a lullaby but no night.json.
+- Anything that failed, and exactly what Levi should do about it.
