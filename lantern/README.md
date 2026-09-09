@@ -54,10 +54,36 @@ lantern/<slug>/
 
 1. finds every `night.json`, and skips any folder whose files have not changed
    since `.published.json` was written;
-2. upserts `daily_content` **on `publish_date`** - exactly what the app's Admin
+2. re-encodes the book's photographs, at most 1200px on the long side (see
+   below);
+3. upserts `daily_content` **on `publish_date`** - exactly what the app's Admin
    does, so re-publishing a date replaces that night instead of doubling it;
-3. asks the `narrate` function to record the voices from the Quick reading;
-4. writes `.published.json`.
+4. asks the `narrate` function to record the voices from the Quick reading;
+5. writes `.published.json`.
+
+The fingerprint watches the folder's files, not this script, so `PUBLISH_REV` at
+the top of `publish_to_supabase.py` is bumped whenever a change here alters what
+a published night contains. Every folder then goes again instead of being
+skipped as unchanged.
+
+## Why the book's pictures are re-encoded
+
+The app keeps tonight's book in the browser so it opens again without a signal,
+and a browser will not hold much more than five megabytes. Night 8's book was
+3.3 MB of full-size photographs, so it was never kept: the story stopped being
+in the family's hand and became a page away on the website, and the Lantern's
+"Tonight's Story" button had nowhere to go.
+
+So the pictures go to the account at the size a phone shows them. Set
+`BOOK_MAX_SIDE=0` to send a book untouched; `BOOK_QUALITY` defaults to 78.
+
+  night 8:  artwork 2.4 MB -> 1.6 MB,  book 3.3 MB -> 2.2 MB
+
+**The copy in this repository is the master and is never touched.** The website
+goes on serving the book at full size, and `story_link` is published as that
+full address, so a phone that still cannot hold the book has somewhere to open
+it from. Re-encoding needs Pillow; without it the step says so and sends the
+book whole, and the run still passes.
 
 An unchanged folder is still checked against the account on every run: a save
 from the app's Admin screen keeps only the boxes Admin has and drops the rest

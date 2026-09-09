@@ -41,6 +41,14 @@ KEY       = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
 SITE_BASE = os.environ.get("SITE_BASE", "https://littlescripturetravelers.com").rstrip("/")
 APP_BASE  = os.environ.get("APP_BASE", "https://app.littlescripturetravelers.com").rstrip("/")
 NARRATE   = os.environ.get("NARRATE", "1") != "0"
+# The illustrated story, on its way to the account. A book is mostly photographs;
+# these are the size the phone actually shows them at. 0 leaves them alone.
+BOOK_MAX_SIDE = int(os.environ.get("BOOK_MAX_SIDE", "1200"))
+BOOK_QUALITY  = int(os.environ.get("BOOK_QUALITY", "78"))
+# Bumped whenever this file changes what a published night contains, so that
+# every folder goes again instead of being skipped as unchanged. The
+# fingerprint below only watches the files; it cannot see a new rule here.
+PUBLISH_REV = "2"   # 2: artwork re-encoded, the story addressed in full
 
 # night.json -> daily_content. Left column is the key in night.json.
 NIGHT_KEYS = {
@@ -100,6 +108,61 @@ def http(method, url, body=None, headers=None, timeout=90):
 def fetch(url):
     status, body = http("GET", url, headers={"User-Agent": "lantern-publish"})
     return body if status == 200 else ""
+
+def shrink_book(html):
+    """The illustrated story, small enough for a phone to keep.
+
+    The app saves tonight's book in the browser so it opens again without a
+    signal, and a browser will not hold much more than five megabytes. A book of
+    full-size photographs is three, so it was never kept - and the story went
+    from being in the family's hand to being a page away on the website.
+
+    The pictures are re-encoded once, here, on the way to the account. The copy
+    in this repository is untouched and stays the master; the website goes on
+    serving it at full size.
+
+    Returns the book and a line to print. Without Pillow the book goes exactly as
+    it is - a heavy book beats no book, and this never fails the run.
+    """
+    if not html or not BOOK_MAX_SIDE:
+        return html, ""
+    try:
+        from PIL import Image
+    except ImportError:
+        return html, "Pillow is not installed - the book goes at full size"
+    import base64, io
+    tally = [0, 0, 0]        # pictures re-encoded, bytes before, bytes after
+
+    def one(m):
+        b64 = m.group(2)
+        try:
+            raw = base64.b64decode(b64 + "=" * (-len(b64) % 4))
+            im = Image.open(io.BytesIO(raw)); im.load()
+        except Exception:
+            return m.group(0)                      # not a picture we understand
+        if im.mode in ("RGBA", "LA") or (im.mode == "P" and "transparency" in im.info):
+            return m.group(0)                      # see-through parts, leave it be
+        w, h = im.size
+        scale = min(1.0, float(BOOK_MAX_SIDE) / max(w, h))
+        if scale < 1:
+            im = im.resize((max(1, round(w * scale)), max(1, round(h * scale))), Image.LANCZOS)
+        buf = io.BytesIO()
+        try:
+            im.convert("RGB").save(buf, "JPEG", quality=BOOK_QUALITY,
+                                   optimize=True, progressive=True)
+        except Exception:
+            return m.group(0)
+        if buf.tell() >= len(raw):
+            return m.group(0)                      # already smaller than ours
+        tally[0] += 1; tally[1] += len(raw); tally[2] += buf.tell()
+        return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode("ascii")
+
+    out = re.sub(r"data:image/([a-z+]+);base64,([A-Za-z0-9+/=]+)", one, html)
+    if not tally[0]:
+        return html, ""
+    mb = lambda n: n / 1048576.0
+    return out, (f"artwork {tally[0]} picture(s), {mb(tally[1]):.1f} MB -> {mb(tally[2]):.1f} MB; "
+                 f"book {mb(len(html)):.1f} MB -> {mb(len(out)):.1f} MB")
 
 def upsert(row):
     """One night into daily_content. Postgres refuses the whole row for one
@@ -183,14 +246,20 @@ def main():
         book_html, book_link = "", ""
         if os.path.exists(book_path):
             book_html = read(book_path)
-            book_link = f"{slug}.html"
+            # In full, not by name. The app matches the Lantern's own "Tonight's
+            # Story" button to this by file name either way, and when the book is
+            # too big for the phone to keep, this address is the only way back to
+            # it - a bare name sends the app to the top of the website, where no
+            # book has ever lived.
+            book_link = f"{SITE_BASE}/lantern/{slug}/{slug}.html"
         elif night.get("book_page"):
             book_html = fetch(APP_BASE + "/" + str(night["book_page"]).lstrip("/"))
             book_link = APP_BASE + "/" + str(night["book_page"]).lstrip("/")
             if not book_html:
                 print(f"{slug}: could not fetch the story page {night['book_page']} - publishing without the book")
 
-        stamp = sha(json.dumps(night, sort_keys=True), lds, chr_, song, book_html, "mp3" if has_mp3 else "")
+        stamp = sha(PUBLISH_REV, json.dumps(night, sort_keys=True), lds, chr_, song, book_html,
+                    "mp3" if has_mp3 else "")
         marker = os.path.join(folder, ".published.json")
         if os.path.exists(marker):
             try:
@@ -221,7 +290,9 @@ def main():
             row["lyrics_url"] = row["song_url"]
         if has_mp3:   row["song_audio_url"] = f"{SITE_BASE}/lantern/{slug}/{slug}-lullaby.mp3"
         if book_html:
-            row["book_html"] = book_html
+            small, note = shrink_book(book_html)
+            if note: print(f"    {note}")
+            row["book_html"] = small
             # The same by name, so the app can match the devotional's own
             # "Tonight's Story" button to the book it holds.
             row.setdefault("story_link", book_link)

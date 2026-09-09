@@ -140,13 +140,19 @@ jobs:
       #    Repo secret needed:  SUPABASE_SERVICE_ROLE_KEY   (Supabase > Project Settings > API)
       #    Without it the step explains and does nothing - it never fails the run.
       - name: Publish any finished night to the account (Supabase)
+        # Pillow re-encodes a book's photographs on the way to the account. Without
+        # it the publisher says so and sends the book at full size, so a bad install
+        # day costs picture weight, never the night.
         env:
           DEST: lantern
           SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           SITE_BASE: https://littlescripturetravelers.com
           APP_BASE: https://app.littlescripturetravelers.com
-        run: python3 lantern/publish_to_supabase.py
+        run: |
+          python3 -m pip install --quiet --disable-pip-version-check Pillow || \
+            echo "Pillow would not install - books go at full size."
+          python3 lantern/publish_to_supabase.py
 
       - name: Commit and push
         run: |
