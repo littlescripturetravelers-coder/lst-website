@@ -17,6 +17,8 @@ on:
   schedule:
     - cron: '*/30 * * * *'      # every 30 minutes (UTC)
   workflow_dispatch:            # lets you press "Run workflow" by hand
+  push:                         # a night pushed straight into lantern/ publishes within a minute
+    paths: ['lantern/**']       # (the Action's own commits use GITHUB_TOKEN and do not re-trigger this)
 
 permissions:
   contents: write
@@ -129,6 +131,22 @@ jobs:
               open(out, 'wb').write(audio)
               print(f'sang {slug}: {len(audio)//1024} KB -> {out}')
           EOF
+
+      # 3. Put every finished night into the account - the paste Levi used to do by
+      #    hand in Admin, every night. Reads lantern/<slug>/night.json and the files
+      #    beside it, upserts daily_content on publish_date exactly as Admin does, then
+      #    asks the narrate function to record the voices. Publishes each folder once
+      #    per change (fingerprint in .published.json, committed below).
+      #    Repo secret needed:  SUPABASE_SERVICE_ROLE_KEY   (Supabase > Project Settings > API)
+      #    Without it the step explains and does nothing - it never fails the run.
+      - name: Publish any finished night to the account (Supabase)
+        env:
+          DEST: lantern
+          SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SITE_BASE: https://littlescripturetravelers.com
+          APP_BASE: https://app.littlescripturetravelers.com
+        run: python3 lantern/publish_to_supabase.py
 
       - name: Commit and push
         run: |
