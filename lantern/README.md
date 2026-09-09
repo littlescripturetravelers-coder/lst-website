@@ -13,7 +13,7 @@ lantern/<slug>/
   morning-lantern-christian.html   the Christian edition                  optional
   <slug>.html                      the illustrated story (the book) optional
   <slug>-lullaby.html              tonight's song page                    optional
-  lullaby.json                     the words - the Action sings them      optional
+  lullaby.json                     the words and the mood - it is sung     optional
   <slug>-lullaby.mp3               made by the Action, never by hand      (output)
   .published.json                  fingerprint of what was published      (output)
 ```
@@ -101,6 +101,55 @@ read tonight and there is no second copy to practise on, so the trigger is
 hand-pressed run. Everything before that step still runs on a branch, which
 makes a branch a dry run: the night is built, sung and checked, and simply not
 sent.
+
+## The song
+
+`lullaby.json` is `{slug, title, story, lyrics, mood, length_ms}`.
+
+The words have always been written fresh for each story. The music was not: every
+night carried the same sentence of direction, so every night came back the same
+tune. The direction now has two parts.
+
+**The spine** is in the workflow, not in a night, so a night cannot quietly stop
+sounding like us: one single voice, warm and unhurried, gentle acoustic, no
+drums, no backing vocals, and recorded clean with headroom.
+
+**The mood** is the night's own, and it is what the build writes. It is the
+colour of this story and nothing else - what the music is doing under the words.
+
+```
+"mood": "Walking music. A steady, unhurried step under the voice, like a child
+         being led up a hill in the dark and finding the next stair is always
+         there. Fingerpicked guitar keeping the step, a low sustained warmth
+         underneath. Reassuring rather than sad, settling further with each verse."
+```
+
+Write what the music *does*, not how the story feels. "Hopeful" gives the model
+nothing; "a step that keeps arriving" gives it a rhythm. The older `prompt` key
+is still read, so a night written before this still sings.
+
+`FINETUNE_NAME` stays pinned to **LST Theme Music**. The finetune is what makes
+the songs a family; the mood is what makes tonight's its own. Drop the finetune
+and you get twenty unrelated songs a month.
+
+### Every take is measured
+
+The model sometimes returns something clipped, near-silent, or far too short,
+and nothing about saving a file notices. So each take is measured with ffmpeg
+before it is kept:
+
+| Rejected when | Why |
+|---|---|
+| Over 2,000 samples pinned at full scale | That is distortion, heard as crackle on the voice |
+| Average level under -40 dB | Effectively silent |
+| Peak under -25 dB | Too quiet to hear at bedtime |
+| Under 40% of the asked-for length | The song was cut off |
+
+A failed take is asked for again, up to three times. If every take is badly
+distorted the night publishes **with no song at all**, because a broken lullaby
+is worse than none; run it again and it starts afresh. A take that fails only
+mildly is kept, with a line in the log saying what to listen for. Without ffmpeg
+on the runner the take is kept unmeasured and the log says so.
 
 ## The one secret
 
