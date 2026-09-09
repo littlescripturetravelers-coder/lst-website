@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tonight&rsquo;s Story &middot; Little Scripture Travelers</title>
+<meta name="description" content="A Little Scripture Travelers bedtime story, read the way the app tells it.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<!-- style.css is loaded for the sign-in box and the shut door only; everything
+     the book itself wears is in the <style> below, which comes after it. -->
+<link rel="stylesheet" href="style.css">
+<script src="js/lst-theme.js"></script>
+<style>
+  /* ═══════════════════════════════════════════════════════════════════════
+     THE STORY, FULL BLEED — the app's own look, filling the browser window.
+
+     The artwork owns the whole screen, edge to edge. The words sit on top of
+     it, on a soft scrim that fades up out of the bottom of the picture.
+     Nothing is boxed, nothing is letterboxed, no margin is wasted.
+
+     ⚠️ The three themes are the SITE's three themes. js/lst-theme.js puts
+     data-theme on <html> from the same `lst_theme` key the app uses, so a
+     family who chose Dark on their phone gets Dark here. Traditional carries
+     no attribute, which is why the plain :root block below is Traditional.
+     Gold, teal and amber never change; they are the brand. What changes is
+     the surface they sit on.
+     ═══════════════════════════════════════════════════════════════════════ */
+  :root{
+    --navy:#1B2D5F; --gold:#F5C518; --teal:#5BD3DC; --amber:#D9A227;
+    --cream:#FBF7EA;
+    --beau:#8A4B2A; --scout:#4F9E5F; --willow:#8E63B5; --wren:#E0603C;
+    --display:'Fredoka',system-ui,sans-serif;
+    --body:'Nunito',system-ui,sans-serif;
+
+    --app-bg:#152449; --page:#FBF7EA; --art-bg:#101B39;
+    --ink:#1B2D5F; --ink-soft:#4A5878; --title:#1B2D5F;
+    --chrome:#FBF7EA; --chrome-soft:rgba(251,247,234,.75);
+    --dot:rgba(251,247,234,.30); --pill-bg:rgba(10,16,34,.42);
+
+    --scrim-a:rgba(13,22,48,.55); --scrim-b:rgba(9,15,34,.93);
+    --top-scrim:linear-gradient(to bottom,rgba(6,11,26,.62),rgba(6,11,26,0));
+    --ov-ink:#FBF7EA; --ov-soft:rgba(251,247,234,.78); --ov-title:#F5C518;
+    --ov-eyebrow:#7BC98A; --ov-parent:#F0C24E; --ov-shadow:0 1px 14px rgba(0,0,0,.55);
+    --spot:#6EC3E6; --name:#F4C61F; --find:#7BC98A; --fork:#F08A5F; --calm:#BE95DE;
+    /* ⚠️ ON PAPER. A page with no picture becomes the cream (or white) page
+       itself, and every one of the colours above was chosen for a dark scrim.
+       These are the same five, dark enough to read on paper. The Feeling
+       Moment is a paper page now, and it is the page that carries the Five
+       Stones, so this is not a corner case — it is one page in nine. */
+    --p-spot:#1F6E93; --p-name:#7a5c00; --p-find:#2F6B3C; --p-fork:#A33F14; --p-calm:#6B3FA0;
+    --p-eyebrow:#2F6B3C; --p-parent:#7a5c00; --p-sub:#2F6B3C;
+    --shut-link:#5BD3DC; --p-link:#0B6068;
+  }
+  html[data-theme="light"]{
+    --app-bg:#E8EBF2; --page:#FFFFFF; --art-bg:#DDE3EE;
+    --ink:#1B2D5F; --ink-soft:#5A6683; --title:#1B2D5F;
+    --chrome:#1B2D5F; --chrome-soft:rgba(27,45,95,.7);
+    --dot:rgba(27,45,95,.25); --pill-bg:rgba(255,255,255,.72);
+
+    --scrim-a:rgba(252,250,243,.62); --scrim-b:rgba(252,250,243,.97);
+    --top-scrim:linear-gradient(to bottom,rgba(252,250,243,.82),rgba(252,250,243,0));
+    --ov-ink:#1B2D5F; --ov-soft:#5A6683; --ov-title:#1B2D5F;
+    --ov-eyebrow:#3F8A50; --ov-parent:#9A730F; --ov-shadow:none;
+    --spot:#3E90BA; --name:#B98A05; --find:#3F7A2E; --fork:#C4522C; --calm:#7E4FA8;
+    --p-spot:#1F6E93; --p-name:#7a5c00; --p-find:#2F6B3C; --p-fork:#A33F14; --p-calm:#6B3FA0;
+    --p-eyebrow:#2F6B3C; --p-parent:#7a5c00; --p-sub:#2F6B3C;
+    --shut-link:#0B6068; --p-link:#0B6068;
+  }
+  html[data-theme="dark"]{
+    --app-bg:#05060A; --page:#12151B; --art-bg:#05060A;
+    --ink:#E7E2D5; --ink-soft:#9AA3B4; --title:#F5C518;
+    --chrome:#E7E2D5; --chrome-soft:rgba(231,226,213,.68);
+    --dot:rgba(231,226,213,.26); --pill-bg:rgba(0,0,0,.5);
+
+    --scrim-a:rgba(3,4,7,.62); --scrim-b:rgba(3,4,7,.96);
+    --top-scrim:linear-gradient(to bottom,rgba(0,0,0,.7),rgba(0,0,0,0));
+    --ov-ink:#E7E2D5; --ov-soft:rgba(231,226,213,.7); --ov-title:#F5C518;
+    --ov-eyebrow:#79BE88; --ov-parent:#D9A227; --ov-shadow:0 1px 14px rgba(0,0,0,.7);
+    --spot:#6EC3E6; --name:#F4C61F; --find:#79BE88; --fork:#E8794F; --calm:#B98FD6;
+    /* Dark's "paper" page is dark too, so the bright five stay bright. */
+    --p-spot:#6EC3E6; --p-name:#F4C61F; --p-find:#79BE88; --p-fork:#E8794F; --p-calm:#B98FD6;
+    --p-eyebrow:#79BE88; --p-parent:#D9A227; --p-sub:#79BE88;
+    --shut-link:#5BD3DC; --p-link:#5BD3DC;
+  }
+  /* Gold on paper is about 1.7:1 — a suggestion of writing, not writing. In
+     Light these two go dark; the brand gold stays gold everywhere it is being
+     PAINTED (the dots, the buttons' edges), only where it is being WRITTEN
+     does it change. */
+  html[data-theme="light"] .bar .night{color:#7a5c00;text-shadow:none}
+  html[data-theme="light"] .shut h1{color:#7a5c00}
+  html[data-theme="light"] .back{color:#0E7C85}
+  html[data-theme="light"] .hint .chev{border-color:#0E7C85}
+  html[data-theme="light"] .themebtn{border-color:rgba(27,45,95,.25)}
+  html[data-theme="light"] .pill{border-color:rgba(27,45,95,.25)}
+  html[data-theme="light"] .pill.play{color:#9A730F;border-color:rgba(217,162,39,.75)}
+  html[data-theme="light"] .dot.on{background:var(--amber)}
+
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  /* ⚠️ .waiting and .shut both set display:flex, which beats the browser's own
+     [hidden]{display:none} — so without this the shut door paints straight over
+     a subscriber's story. Caught by the paywall harness, not by eye. */
+  [hidden]{display:none!important}
+  html,body{margin:0;padding:0;overscroll-behavior:none}
+  html{height:100%}
+  body{
+    background:var(--app-bg); font-family:var(--body); color:var(--chrome);
+    height:100dvh; overflow:hidden; position:relative;
+    transition:background-color .25s ease,color .25s ease;
+  }
+
+  /* ---------- the book is the whole window ---------- */
+  .stage{position:absolute;inset:0}
+  .book{position:absolute;inset:0;overflow:hidden;background:var(--art-bg);
+        touch-action:pan-y;cursor:pointer;border:0;padding:0;display:block}
+  .page{position:absolute;inset:0;will-change:transform;text-align:left;background:var(--art-bg);
+        --peek:62vh;--peek-min:42%;--peek-max:82%;--blend:40px}
+  .page.sliding{transition:transform 340ms cubic-bezier(.25,.85,.35,1)}
+  .page.lifted{box-shadow:14px 0 34px rgba(0,0,0,.45)}
+
+  /* ---------- the picture ---------- */
+  .art{position:absolute;inset:0;overflow:hidden;background:var(--art-bg);z-index:1}
+  /* a blurred copy of the same picture bleeds it out to every edge, so the
+     screen is full of the artwork — never a black bar — while the picture
+     itself is still shown whole and uncropped */
+  .artbg{position:absolute;inset:-12%;background-size:cover;background-position:center;
+         filter:blur(58px) saturate(1.3) brightness(1.02);transform:scale(1.24);opacity:1}
+  html[data-theme="light"] .artbg{filter:blur(42px) saturate(1.15) brightness(1.14);opacity:.82}
+  html[data-theme="dark"] .artbg{filter:blur(42px) saturate(1) brightness(.62);opacity:.95}
+  .art::after{content:"";position:absolute;inset:0;pointer-events:none;
+              background:radial-gradient(ellipse at 50% 38%,rgba(0,0,0,0) 42%,rgba(0,0,0,.34) 100%)}
+  html[data-theme="light"] .art::after{background:radial-gradient(ellipse at 50% 38%,rgba(0,0,0,0) 48%,rgba(0,0,0,.12) 100%)}
+  .art img{
+    position:absolute;top:0;left:0;right:auto;width:100%;height:100%;display:block;
+    object-fit:contain;object-position:center center;
+    /* each side dissolves into the blurred copy behind it, so the art simply
+       runs out to the edges. The bottom fades furthest, into the words. */
+    --feather:30px; --feather-b:38px;
+    -webkit-mask-image:
+      linear-gradient(to right,  transparent 0, #000 var(--feather), #000 calc(100% - var(--feather)), transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 var(--feather), #000 calc(100% - var(--feather-b)), transparent 100%);
+    -webkit-mask-composite:source-in;
+    mask-image:
+      linear-gradient(to right,  transparent 0, #000 var(--feather), #000 calc(100% - var(--feather)), transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 var(--feather), #000 calc(100% - var(--feather-b)), transparent 100%);
+    mask-composite:intersect;
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  }
+  .page.noart .art{display:none}
+
+  /* ---------- the words: on the picture, not beside it ---------- */
+  .panel{
+    position:absolute;inset:0;z-index:2;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+    display:block;padding:0;background:none;
+    color:var(--ov-ink);text-shadow:var(--ov-shadow);scrollbar-width:none;
+  }
+  .panel::-webkit-scrollbar{display:none}
+  .sheet{
+    margin-top:var(--peek);min-height:calc(100% - var(--peek));
+    padding:3rem 1.35rem calc(env(safe-area-inset-bottom,0px) + 6.4rem);
+    background:linear-gradient(to bottom,rgba(0,0,0,0) 0,var(--scrim-a) 36px,var(--scrim-b) 130px,var(--scrim-b) 100%);
+  }
+  .page.dense{--peek-max:66%}
+  .panel-inner{width:100%;max-width:34rem;margin:0 auto}
+
+  .panel .eyebrow{font:800 .68rem/1.35 var(--body);letter-spacing:.18em;text-transform:uppercase;
+           color:var(--ov-eyebrow);margin:0 0 .5rem}
+  .panel .eyebrow.forparent{color:var(--ov-parent)}
+  .panel h1{font:700 clamp(1.9rem,8vw,2.6rem)/1.06 var(--display);letter-spacing:-.5px;
+            color:var(--ov-title);margin:.1rem 0 .5rem}
+  .panel .ref{font:400 1.02rem/1.4 var(--body);font-style:italic;color:var(--ov-soft);margin:0}
+  .storytext{font:400 clamp(1.06rem,4.5vw,1.24rem)/1.62 var(--body);margin:0}
+  .storytext + .storytext{margin-top:.85rem}
+  .panel .rule{height:2px;width:56px;background:var(--amber);border-radius:2px;margin:.85rem 0 1rem}
+  .stones{margin:1rem 0 0;padding:0;list-style:none}
+  .stones li{display:grid;grid-template-columns:4.2rem minmax(0,1fr);gap:.6rem;margin-bottom:.65rem;align-items:start}
+  .stones li:last-child{margin-bottom:0}
+  .stones .k{font:800 .72rem/1.55 var(--body);letter-spacing:.1em;text-transform:uppercase}
+  .stones .v{font:400 clamp(.98rem,3.9vw,1.08rem)/1.5 var(--body)}
+  .stones .spot{color:var(--spot)} .stones .name{color:var(--name)}
+  .stones .find{color:var(--find)} .stones .fork{color:var(--fork)}
+  .stones .calm{color:var(--calm)}
+  .substep{font:800 .64rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--ov-parent);margin:1.15rem 0 .2rem}
+  ol.prompts{margin:.25rem 0 0;padding-left:1.15rem}
+  ol.prompts li{font:400 clamp(1rem,4.1vw,1.1rem)/1.55 var(--body);margin-bottom:.75rem}
+  ol.prompts li::marker{color:var(--ov-parent);font-weight:800}
+
+  /* the goodnight plate has no picture, so it becomes the paper itself */
+  .page.noart .panel{
+    background:var(--page);
+    --ov-ink:var(--ink);--ov-title:var(--title);--ov-soft:var(--ink-soft);--ov-shadow:none;
+    --ov-eyebrow:var(--p-eyebrow);--ov-parent:var(--p-parent);
+    --spot:var(--p-spot);--name:var(--p-name);--find:var(--p-find);
+    --fork:var(--p-fork);--calm:var(--p-calm);
+  }
+  .page.noart .sheet{
+    margin-top:0;min-height:100%;background:none;
+    display:flex;align-items:center;justify-content:center;
+    padding:4.5rem 1.5rem calc(env(safe-area-inset-bottom,0px) + 4.2rem);
+  }
+  .page.noart .panel-inner{margin:auto}
+  .endplate{text-align:center}
+  .endplate .moon{font-size:2rem;line-height:1}
+  .endplate h1{font:700 2.1rem/1.1 var(--display);color:var(--title);margin:.7rem 0 .1rem}
+  .endplate h2{font:600 1.4rem/1.1 var(--display);color:var(--p-sub);margin:0 0 .9rem}
+  .endplate p{font:400 1.02rem/1.6 var(--body);color:var(--ink-soft);margin:0 auto;max-width:34ch}
+  .endplate .sig{font:400 .76rem/1.5 var(--body);color:var(--ink-soft);opacity:.75;margin-top:1.2rem}
+  .travelers{display:flex;gap:8px;justify-content:center;margin-top:1.1rem}
+  .travelers span{width:11px;height:11px;border-radius:50%}
+
+  /* a quiet nudge when there are more words below the fold */
+  .morecue{
+    position:absolute;right:.9rem;z-index:5;pointer-events:none;
+    bottom:calc(env(safe-area-inset-bottom,0px) + 3.5rem);
+    opacity:0;transition:opacity .28s ease;
+    display:flex;align-items:center;gap:.4rem;padding:.34rem .7rem;border-radius:999px;
+    background:var(--pill-bg);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(91,211,220,.35);
+    font:800 .58rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--chrome-soft);text-shadow:none;
+  }
+  .page.more .morecue{opacity:1;animation:bob 1.9s ease-in-out infinite}
+  .morecue .arw{width:8px;height:8px;border-right:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(45deg)}
+  @keyframes bob{0%,100%{transform:translate(0,0)}50%{transform:translate(0,4px)}}
+
+  /* ---------- chrome floats over the picture ---------- */
+  .bar{
+    position:absolute;top:0;left:0;right:0;z-index:6;
+    display:flex;align-items:center;gap:.5rem;
+    padding:calc(env(safe-area-inset-top,0px) + .5rem) .9rem 1.5rem;
+    background:var(--top-scrim);pointer-events:none;
+  }
+  .bar > *{pointer-events:auto}
+  .back{font:700 .82rem/1 var(--body);color:var(--teal);background:none;border:0;padding:.3rem .1rem;
+        cursor:pointer;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
+        text-shadow:0 1px 10px rgba(0,0,0,.5)}
+  .bar .night{margin-left:auto;font:800 .68rem/1 var(--body);letter-spacing:.15em;text-transform:uppercase;
+              color:var(--gold);text-shadow:0 1px 10px rgba(0,0,0,.5);white-space:nowrap;flex:0 0 auto}
+  .themebtn{
+    flex:0 0 auto;font:800 .62rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;
+    color:var(--chrome);background:var(--pill-bg);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(91,211,220,.35);border-radius:999px;
+    padding:.42rem .62rem;cursor:pointer;display:flex;align-items:center;gap:.35rem;
+  }
+  .themebtn .swatch{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 1.5px rgba(0,0,0,.25)}
+  .back:focus-visible,.book:focus-visible,.pill:focus-visible,.themebtn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:10px}
+
+  .controls{
+    position:absolute;left:0;right:0;bottom:0;z-index:6;
+    display:flex;gap:.45rem;align-items:center;
+    padding:.5rem .9rem calc(env(safe-area-inset-bottom,0px) + .55rem);
+    pointer-events:none;
+  }
+  .controls::before{
+    content:"";position:absolute;left:0;right:0;bottom:0;top:-1.6rem;z-index:-1;
+    background:linear-gradient(to bottom,rgba(0,0,0,0),var(--scrim-b) 55%);
+  }
+  body.plain .controls::before{background:linear-gradient(to bottom,rgba(0,0,0,0),var(--page) 55%)}
+  /* ⚠️ On a page with no picture the top scrim has nothing dark to sit on, so
+     the bar's writing is on cream. The contrast harness cannot see this — the
+     scrim's colour stops are all translucent, so it has no backdrop to score
+     against — which is exactly why it is written down here. `body.plain` is set
+     by the engine whenever the page it is showing has no picture. */
+  body.plain .bar{background:linear-gradient(to bottom,var(--page) 40%,transparent)}
+  body.plain .bar .night{color:var(--p-name);text-shadow:none}
+  body.plain .back{color:var(--p-link);text-shadow:none}
+  /* the pill's own tint is translucent, so on paper it just muddies the label:
+     drop it and let the page carry the button */
+  body.plain .themebtn{color:var(--ink);background:transparent;border-color:rgba(27,45,95,.28)}
+  html[data-theme="dark"] body.plain .themebtn{border-color:rgba(231,226,213,.28)}
+  .controls > *{pointer-events:auto}
+  .dots{display:flex;gap:5px;flex:0 0 auto}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--dot);transition:background .3s,transform .3s}
+  .dot.on{background:var(--gold);transform:scale(1.3)}
+  .hint{font:700 .76rem/1 var(--body);color:var(--chrome-soft);display:flex;align-items:center;gap:.35rem;margin-left:.5rem}
+  .hint .chev{display:inline-block;width:9px;height:9px;border-right:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(-45deg)}
+  .nudge .chev{animation:nudge 1.6s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:rotate(-45deg) translate(0,0)}50%{transform:rotate(-45deg) translate(3px,3px)}}
+  .pill{font:700 .76rem/1 var(--body);color:var(--chrome);background:var(--pill-bg);
+        backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+        border:1px solid rgba(91,211,220,.35);border-radius:999px;padding:.52rem .8rem;cursor:pointer;white-space:nowrap}
+  .pill[disabled]{opacity:.35;cursor:default}
+  .pill.icon{padding:.52rem .7rem}
+  /* With no "Read to me" button, Back is the one that floats right. */
+  #backBtn{margin-left:auto}
+  @media (max-width:420px){ .hint{display:none} }
+
+  /* ---------- landscape and desktop: words down one side ---------- */
+  @media (orientation:landscape) and (min-width:700px){
+    .art img{height:100%;object-position:center center}
+    .panel{left:auto;right:0;top:0;width:min(46%,34rem);height:100%}
+    .sheet{
+      margin-top:0;min-height:100%;
+      display:flex;align-items:center;justify-content:center;
+      padding:4.2rem 2rem calc(env(safe-area-inset-bottom,0px) + 4rem);
+      background:linear-gradient(to right,rgba(0,0,0,0) 0,var(--scrim-a) 54px,var(--scrim-b) 150px,var(--scrim-b) 100%);
+    }
+    .page.noart .panel,.page.noart.dense .panel{left:0;right:0;width:100%}
+    .page.noart .sheet{padding:3.4rem 2.6rem calc(env(safe-area-inset-bottom,0px) + 3.8rem)}
+    .panel h1{font-size:clamp(1.7rem,3.6vw,2.3rem)}
+    .storytext{font-size:clamp(1rem,2.1vw,1.16rem)}
+  }
+
+  @media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+
+  /* ---------- waiting, and the shut door ---------- */
+  .waiting{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+           color:var(--chrome-soft);font:700 .95rem/1 var(--body);z-index:3}
+  .shut{position:absolute;inset:0;z-index:7;overflow-y:auto;background:var(--app-bg);
+        display:flex;align-items:center;justify-content:center;padding:1.5rem}
+  .shut-in{max-width:34rem;width:100%;text-align:center}
+  .shut-cover{width:min(58vw,220px);aspect-ratio:1/1;margin:0 auto 1.4rem;border-radius:14px;
+              background:var(--art-bg) center/cover no-repeat;border:2px solid rgba(245,197,24,.45);
+              box-shadow:0 18px 44px rgba(0,0,0,.45)}
+  .shut h1{font:700 clamp(1.6rem,6vw,2.2rem)/1.15 var(--display);color:var(--gold);margin:0 0 .5rem}
+  .shut .teaser{font:400 1.05rem/1.65 var(--body);color:var(--chrome-soft);margin:0 0 1.4rem}
+  .shut .why{font:400 .95rem/1.6 var(--body);color:var(--chrome-soft);margin:1.2rem auto 0;max-width:30rem}
+  .shut .go{display:inline-block;background:var(--gold);color:#07112e;font:900 1rem/1 var(--body);
+            padding:.95rem 1.6rem;border-radius:999px;text-decoration:none;border:0;cursor:pointer}
+  .shut .second{display:block;margin-top:.9rem;background:none;border:0;cursor:pointer;
+                font:700 .9rem/1 var(--body);color:var(--shut-link);text-decoration:underline}
+  .shut .home{display:block;margin-top:1.6rem;font:700 .82rem/1 var(--body);color:var(--chrome-soft);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div id="lst-waiting" class="waiting">Opening tonight&rsquo;s story&hellip;</div>
+
+<div id="lst-shell" hidden>
+  <div class="bar">
+    <a class="back" id="backLink" href="bedtime-stories.html" aria-label="Back to the shelf">&larr; The shelf</a>
+    <button class="themebtn" id="themeBtn" type="button" aria-label="Colour theme">
+      <span class="swatch" aria-hidden="true"></span><span class="tlabel">Traditional</span>
+    </button>
+    <span class="night" id="nightLabel"></span>
+  </div>
+
+  <main class="stage">
+    <div class="book" id="book" role="button" tabindex="0" aria-live="polite"
+         aria-label="Story pages. Tap or swipe to turn.">
+      <div class="page" id="pageA"></div>
+      <div class="page" id="pageB"></div>
+    </div>
+  </main>
+
+  <div class="controls">
+    <div class="dots" id="dots"></div>
+    <span class="hint" id="hint"><span id="hintText">Tap to begin</span><span class="chev"></span></span>
+    <button class="pill" id="backBtn" disabled>Back</button>
+    <button class="pill icon" id="restartBtn" aria-label="Start over" title="Start over">&#8634;</button>
+  </div>
+</div>
+
+<div id="lst-shut" class="shut" hidden>
+  <div class="shut-in">
+    <div class="shut-cover" id="shut-cover" aria-hidden="true"></div>
+    <h1 id="shut-title">Tonight&rsquo;s story is waiting</h1>
+    <p class="teaser" id="shut-teaser">Every night has a story, a picture for every page, and a
+      quiet moment at the end that helps a child put words to what they feel.</p>
+    <a class="go" href="subscribe.html">Start the free week</a>
+    <button type="button" class="second" id="shut-signin">Already subscribed? Sign in</button>
+    <p class="why">The whole shelf &mdash; four books, one hundred and nineteen nights &mdash; opens
+      with a subscription, on the website and in the app, with the same account.</p>
+    <a class="home" href="bedtime-stories.html">&larr; Back to the shelf</a>
+  </div>
+</div>
+
+<script src="data/virtue-library.js"></script>
+<script src="data/book-covers.js"></script>
+<script src="js/vendor/supabase.js"></script>
+<script src="data/faiths.js"></script>
+<script src="js/lst-auth.js"></script>
+<script src="js/lst-app-data.js"></script>
+<script src="js/lst-book.js"></script>
+</body>
+</html>

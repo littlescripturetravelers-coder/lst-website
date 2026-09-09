@@ -147,13 +147,13 @@
     var free = (!subscriber() && isFree(s.id)) ? '<span class="bs-free">Free</span>' : "";
     var stamp = (s.week ? s.week : "?") + "&middot;" + (s.night ? s.night : "?");
     return '' +
-      '<button type="button" class="bs-tile" data-story="' + esc(s.id) + '">' +
+      '<a class="bs-tile" href="read.html?id=' + encodeURIComponent(s.id) + '">' +
         '<span class="bs-art"' + (art ? ' style="background-image:url(' + esc(art) + ')"' : "") + ">" +
           '<span class="bs-stamp">' + stamp + "</span>" + free +
         "</span>" +
         '<span class="bs-label">' + esc(s.title || "Untitled") + "</span>" +
         '<span class="bs-sub">' + esc(s.scripture || "") + "</span>" +
-      "</button>";
+      "</a>";
   }
 
   function shelfView() {
@@ -258,7 +258,7 @@
             ? '<div class="rd-card"><h3 class="rd-label">When to reach for this one</h3><p>' +
               esc(s.teachingNote) + "</p></div>" : "") +
           '<div id="sf-host"></div>' +
-          '<p class="rd-aside"><a class="bs-illus" href="story.html?id=' +
+          '<p class="rd-aside"><a class="bs-illus" href="read.html?id=' +
             encodeURIComponent(s.id) + '">&#10022; Open this story on its own page</a></p>' +
         "</div>" +
       "</article>";
@@ -376,9 +376,12 @@
       root = typeof elm === "string" ? document.getElementById(elm) : elm;
       if (!root) return;
       render();
-      /* bedtime-stories.html?story=b8-w5-n1 opens straight onto that night. */
+      /* bedtime-stories.html?story=b8-w5-n1 used to open the shelf's own
+         preview. Since 9 Sep 2026 every story is read in the full-screen book
+         (read.html), so an old link goes there instead of showing a second,
+         different-looking version of the same night. */
       var want = asked();
-      if (want) openStory(want, true);
+      if (want) { location.replace("read.html?id=" + encodeURIComponent(want)); return; }
       if (auth()) {
         auth().ready(render);
         auth().onChange(function () {

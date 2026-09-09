@@ -14,6 +14,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <script src="js/lst-theme.js"></script>
+  <script>
+    /* Since 9 Sep 2026 a book night is read in the full-screen book, read.html.
+       This page still serves the dated nights of the LST Library (?date=), so
+       only ?id= moves. An old bookmark should never land somewhere that looks
+       different from the rest of the shelf. */
+    (function () {
+      try {
+        var id = new URLSearchParams(location.search).get("id");
+        if (id) location.replace("read.html?id=" + encodeURIComponent(id));
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <header class="site-header" id="site-header">

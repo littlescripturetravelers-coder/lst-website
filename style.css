@@ -2763,6 +2763,8 @@ cite strong { color: var(--gold-ink); display: block; }
   display: flex; flex-direction: column; gap: .1rem; text-align: left;
   background: none; border: none; padding: 0; cursor: pointer;
   font-family: inherit;
+  /* a shelf tile is a link now, not a button — it opens read.html */
+  text-decoration: none; color: inherit;
 }
 .bs-art {
   position: relative; display: block; width: 100%; aspect-ratio: 1 / 1;

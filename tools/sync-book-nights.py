@@ -73,6 +73,26 @@ def main():
                 nb[k] = v
             beats.append(nb)
 
+        # ⚠️ THE FEELING MOMENT STANDS ALONE (Levi, 9 Sep 2026)
+        # On the website the Feeling Moment is the page where a family stops and
+        # DOES something together, so it carries no picture; its illustration
+        # belongs to Remember This, which had none. The app's older story files
+        # still have it the other way round, so without this a re-sync would
+        # quietly put it back. Levi's newer story pages already agree with this.
+        pic = {}
+        for b in beats:
+            if b.get("heading") == "A Feeling Moment":
+                for k in ("img", "alt", "focus"):
+                    if k in b:
+                        pic[k] = b.pop(k)
+        if pic:
+            for b in beats:
+                if b.get("heading") == "Remember This" and "img" not in b:
+                    b["img"] = pic["img"]
+                    b["alt"] = "Illustration for tonight's Remember This moment"
+                    if "focus" in pic:
+                        b["focus"] = pic["focus"]
+
         out[(book, o.get("night"))] = {
             "book": book, "night": o.get("night"), "title": o.get("title"),
             "reference": o.get("reference"), "beats": beats, "source": name,
