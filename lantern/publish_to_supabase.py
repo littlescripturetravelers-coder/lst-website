@@ -177,7 +177,12 @@ def main():
             row["song_url"]   = f"{SITE_BASE}/lantern/{slug}/{slug}-lullaby.html"
             row["lyrics_url"] = row["song_url"]
         if has_mp3:   row["song_audio_url"] = f"{SITE_BASE}/lantern/{slug}/{slug}-lullaby.mp3"
-        if book_html: row["book_html"] = book_html
+        if book_html:
+            row["book_html"] = book_html
+            # The same page by address, for anyone reading outside the app - the
+            # website's Tonight page, the emailed night - and so the app can match
+            # the devotional's own story link to it by name.
+            row.setdefault("story_link", APP_BASE + "/" + str(night["book_page"]).lstrip("/"))
 
         ok, why = upsert(row)
         if not ok:
