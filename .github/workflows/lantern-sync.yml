@@ -18,7 +18,9 @@ on:
     - cron: '*/30 * * * *'      # every 30 minutes (UTC)
   workflow_dispatch:            # lets you press "Run workflow" by hand
   push:                         # a night pushed straight into lantern/ publishes within a minute
-    paths: ['lantern/**']       # (the Action's own commits use GITHUB_TOKEN and do not re-trigger this)
+    branches: [main]            # main only: a night is published from what is merged, never from a
+    paths: ['lantern/**']       # working branch (the Action's own commits use GITHUB_TOKEN and do
+                                # not re-trigger this)
 
 permissions:
   contents: write
@@ -140,9 +142,18 @@ jobs:
       #    Repo secret needed:  SUPABASE_SERVICE_ROLE_KEY   (Supabase > Project Settings > API)
       #    Without it the step explains and does nothing - it never fails the run.
       - name: Publish any finished night to the account (Supabase)
+        # main only, again. The trigger above already keeps branch pushes out; this
+        # is for the hand-pressed run, which can be aimed at any branch. Everything
+        # above still runs there, so a branch can be taken all the way to the point
+        # of publishing and stopped - which is a dry run, and worth having.
+        #
+        # The account is the live one families read tonight. There is no second copy
+        # to practise on, so a night goes into it from merged work or not at all.
+        #
         # Pillow re-encodes a book's photographs on the way to the account. Without
         # it the publisher says so and sends the book at full size, so a bad install
         # day costs picture weight, never the night.
+        if: github.ref == 'refs/heads/main'
         env:
           DEST: lantern
           SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
