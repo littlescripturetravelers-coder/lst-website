@@ -10,6 +10,7 @@ A night is a folder,  lantern/<slug>/ , holding:
   night.json                       what the night is (see NIGHT_KEYS below)   required
   morning-lantern-lds.html         the Latter-day Saint edition               required
   morning-lantern-christian.html   the Christian edition                      optional
+  <slug>.html                      the illustrated story (the picture book)  optional
   <slug>-lullaby.html              tonight's song page                        optional
   <slug>-lullaby.mp3               sung by the step before this one           optional
   lullaby.json                     the words, for the step that sings them    optional
@@ -19,6 +20,15 @@ Each folder is published once per change: a fingerprint of the inputs is kept in
 alone. Change any file - a corrected edition, a new mp3 - and it goes again.
 Upserts on publish_date, exactly as the app's own Admin does, so re-publishing a
 date replaces that night rather than doubling it.
+
+A save from the app's Admin screen writes only the boxes Admin has, so it wipes
+the pieces only this publisher sends - the song page, the sung mp3, the book,
+the Traveler. So an unchanged folder is still checked against the account, and
+if a piece it carries has gone missing from the row, the night goes again.
+
+The song and story links are written the way Admin writes them - the bare file
+name (you-know-me-lullaby.html), which is what the Morning Lantern's own
+resource buttons point at and what the app opens by name.
 
 Needs SUPABASE_SERVICE_ROLE_KEY in the environment. Without it, it says so and
 does nothing - it never fails the run over a missing secret.
@@ -117,6 +127,25 @@ def narrate(date):
     status, body = http("POST", URL + "/functions/v1/narrate", {"date": date}, hdr, timeout=300)
     return status, body[:300]
 
+def missing_in_account(date, expect):
+    """The pieces this folder carries that the row for `date` no longer has.
+
+    `expect` maps a column to whether the folder has it. Only small columns
+    are read (never the HTML), so this costs one tiny request per night."""
+    cols = ",".join(sorted(expect))
+    hdr = {"apikey": KEY, "Authorization": "Bearer " + KEY}
+    status, body = http("GET", f"{URL}/rest/v1/daily_content?publish_date=eq.{date}&select={cols}", headers=hdr)
+    if status != 200:
+        return []          # cannot tell - do not republish on a guess
+    try:
+        rows = json.loads(body)
+    except Exception:
+        return []
+    if not rows:
+        return ["the whole night"]
+    row = rows[0]
+    return [c for c, have in expect.items() if have and row.get(c) in (None, "")]
+
 def main():
     folders = sorted(glob.glob(os.path.join(DEST, "*", "night.json")))
     if not folders:
@@ -138,6 +167,7 @@ def main():
 
         lds_path  = os.path.join(folder, "morning-lantern-lds.html")
         chr_path  = os.path.join(folder, "morning-lantern-christian.html")
+        book_path = os.path.join(folder, f"{slug}.html")
         song_path = os.path.join(folder, f"{slug}-lullaby.html")
         mp3_path  = os.path.join(folder, f"{slug}-lullaby.mp3")
         if not os.path.exists(lds_path):
@@ -148,11 +178,15 @@ def main():
         song = read(song_path) if os.path.exists(song_path) else ""
         has_mp3 = os.path.exists(mp3_path)
 
-        # The illustrated story lives in the app already, one page per night. Ask
-        # the web app for it rather than carrying a copy of every picture here.
-        book_html = ""
-        if night.get("book_page"):
+        # The illustrated story: the copy in this folder when the night brought
+        # one, otherwise the page the app already has, one per night.
+        book_html, book_link = "", ""
+        if os.path.exists(book_path):
+            book_html = read(book_path)
+            book_link = f"{slug}.html"
+        elif night.get("book_page"):
             book_html = fetch(APP_BASE + "/" + str(night["book_page"]).lstrip("/"))
+            book_link = APP_BASE + "/" + str(night["book_page"]).lstrip("/")
             if not book_html:
                 print(f"{slug}: could not fetch the story page {night['book_page']} - publishing without the book")
 
@@ -161,7 +195,13 @@ def main():
         if os.path.exists(marker):
             try:
                 if json.load(open(marker)).get("sha") == stamp:
-                    print(f"{slug}: unchanged since it was published - nothing to do"); continue
+                    gone = missing_in_account(date, {
+                        "song_url": bool(song), "song_audio_url": has_mp3,
+                        "story_link": bool(book_html), "traveler": bool(night.get("traveler")),
+                    })
+                    if not gone:
+                        print(f"{slug}: unchanged since it was published - nothing to do"); continue
+                    print(f"{slug}: the account has lost {', '.join(gone)} (an Admin save?) - publishing again")
             except Exception:
                 pass
 
@@ -173,16 +213,18 @@ def main():
         })
         if chr_:      row["story_html_nondenom"] = chr_
         if song:
+            # By name, as Admin writes it: the Morning Lantern's own "Tonight's
+            # Lullaby" button points at this file name, and the app opens the
+            # song page it holds when the two match.
             row["song_html"]  = song
-            row["song_url"]   = f"{SITE_BASE}/lantern/{slug}/{slug}-lullaby.html"
+            row["song_url"]   = f"{slug}-lullaby.html"
             row["lyrics_url"] = row["song_url"]
         if has_mp3:   row["song_audio_url"] = f"{SITE_BASE}/lantern/{slug}/{slug}-lullaby.mp3"
         if book_html:
             row["book_html"] = book_html
-            # The same page by address, for anyone reading outside the app - the
-            # website's Tonight page, the emailed night - and so the app can match
-            # the devotional's own story link to it by name.
-            row.setdefault("story_link", APP_BASE + "/" + str(night["book_page"]).lstrip("/"))
+            # The same by name, so the app can match the devotional's own
+            # "Tonight's Story" button to the book it holds.
+            row.setdefault("story_link", book_link)
 
         ok, why = upsert(row)
         if not ok:

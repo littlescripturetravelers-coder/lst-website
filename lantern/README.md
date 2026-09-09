@@ -11,6 +11,7 @@ lantern/<slug>/
   night.json                       what the night is                      required
   morning-lantern-lds.html         the Latter-day Saint edition           required
   morning-lantern-christian.html   the Christian edition                  optional
+  <slug>.html                      the illustrated story (the book) optional
   <slug>-lullaby.html              tonight's song page                    optional
   lullaby.json                     the words - the Action sings them      optional
   <slug>-lullaby.mp3               made by the Action, never by hand      (output)
@@ -37,10 +38,14 @@ lantern/<slug>/
 
 - `publish_date` is the day the night is **for**. The app and the website hide it
   until 5 AM Mountain on that day, so nights can be published weeks ahead.
+- `<slug>.html` is the illustrated story itself. When it is in the folder it is
+  the book families get, and it is what the Lantern's "Tonight's Story" button
+  and the song page's "More for Tonight" open. Its last page carries a button to
+  tonight's lullaby.
 - `book_page` is the illustrated story's page in the app (`www/stories/…` in
-  lst-app, served at app.littlescripturetravelers.com). The Action fetches it and
-  stores it with the night, so families get the book in the app. Leave it out if
-  the page is not there yet; add it later and the night republishes.
+  lst-app, served at app.littlescripturetravelers.com). When the folder has no
+  `<slug>.html`, the Action fetches this instead and stores it with the night.
+  Leave it out if the page is not there yet; add it later and the night republishes.
 - Everything else is optional. A missing key is simply not sent.
 
 ## How it publishes
@@ -53,6 +58,11 @@ lantern/<slug>/
    does, so re-publishing a date replaces that night instead of doubling it;
 3. asks the `narrate` function to record the voices from the Quick reading;
 4. writes `.published.json`.
+
+An unchanged folder is still checked against the account on every run: a save
+from the app's Admin screen keeps only the boxes Admin has and drops the rest
+(the song page, the sung mp3, the book, the Traveler), so if one of those has
+gone missing from the row, the night is published again from the folder.
 
 A push into `lantern/` runs the Action within a minute. Otherwise it runs every
 half hour.
