@@ -90,8 +90,17 @@ from the app's Admin screen keeps only the boxes Admin has and drops the rest
 (the song page, the sung mp3, the book, the Traveler), so if one of those has
 gone missing from the row, the night is published again from the folder.
 
-A push into `lantern/` runs the Action within a minute. Otherwise it runs every
-half hour.
+A push into `lantern/` **on `main`** runs the Action within a minute. Otherwise
+it runs every half hour.
+
+Nights are published from `main` and nowhere else. A push to a working branch
+used to run the whole Action, so a branch that touched a night rewrote the live
+account before anyone had looked at the change. The account is the one families
+read tonight and there is no second copy to practise on, so the trigger is
+`main` only and the publishing step checks the branch again for the
+hand-pressed run. Everything before that step still runs on a branch, which
+makes a branch a dry run: the night is built, sung and checked, and simply not
+sent.
 
 ## The one secret
 
