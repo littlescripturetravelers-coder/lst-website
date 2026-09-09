@@ -375,7 +375,6 @@
   <span class="hint" id="hint"><span id="hintText">Tap to begin</span><span class="chev"></span></span>
   <button class="pill" id="backBtn" disabled>Back</button>
   <button class="pill icon" id="restartBtn" aria-label="Start over" title="Start over">&#8634;</button>
-  <button class="pill play" id="playBtn">&#9654; Read to me</button>
 </div>
 
 <script>
@@ -606,7 +605,6 @@ const els = {
   hintText: document.getElementById('hintText'),
   back: document.getElementById('backBtn'),
   restart: document.getElementById('restartBtn'),
-  play: document.getElementById('playBtn'),
   backLink: document.getElementById('backLink'),
   night: document.getElementById('nightLabel')
 };
@@ -619,7 +617,6 @@ let i = 0;
 let front = 0;
 let busy = false;
 let idleTimer = null;
-let audio = null;
 
 if (STORY.night) els.night.textContent = STORY.night;
 document.title = STORY.title + ' \u00B7 Little Scripture Travelers';
@@ -1002,22 +999,6 @@ document.addEventListener('keydown', function(e){
 
 els.back.addEventListener('click', function(e){ e.stopPropagation(); go(i - 1, true); });
 els.restart.addEventListener('click', function(e){ e.stopPropagation(); go(0, true); });
-
-/* ---------- narration slot: drop ElevenLabs mp3 paths into beat.audio ---------- */
-els.play.addEventListener('click', function(e){
-  e.stopPropagation();
-  const src = STORY.beats[i].audio;
-  if (!src){
-    els.play.textContent = '\u266A Narration coming soon';
-    setTimeout(function(){ els.play.innerHTML = '&#9654; Read to me'; }, 1800);
-    return;
-  }
-  if (audio){ audio.pause(); audio = null; els.play.innerHTML = '&#9654; Read to me'; return; }
-  audio = new Audio(src);
-  audio.play();
-  els.play.textContent = '\u275A\u275A Pause';
-  audio.onended = function(){ els.play.innerHTML = '&#9654; Read to me'; audio = null; };
-});
 
 /* ---------- start ---------- */
 try {

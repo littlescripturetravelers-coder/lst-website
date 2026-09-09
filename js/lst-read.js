@@ -264,13 +264,31 @@
     { match: /deep/i,      label: "Deep read",      note: "For the grown-ups" }
   ];
 
+  /* What an edition calls itself.
+
+     The page's own label comes first, because it is the only thing that is
+     reliably true: the Lantern writes one into every edition as a `.depth-note`.
+     The ids are NOT reliable. In the Lantern the three editions are `tab-quick`,
+     `tab-deep` and `tab-heavenly`, and the middle one — the id that says deep —
+     is the MEDIUM read. Reading the id therefore gave the website two tabs both
+     called "Deep read" and no medium one at all.
+
+     The id is still the fallback, for a page written before the notes existed.
+     The table supplies the little line under the name once the name is known. */
   function depthOf(el) {
+    var note = el.querySelector(".depth-note");
+    var said = note ? tidy(note.textContent) : "";
+    if (said) {
+      var flat = said.replace(/\s+/g, "");
+      for (var j = 0; j < DEPTHS.length; j++) {
+        if (DEPTHS[j].match.test(flat)) return { label: said, note: DEPTHS[j].note };
+      }
+      return { label: said, note: "" };
+    }
     var id = (el.id || "") + " " + (el.className || "");
     /* superdeep before deep — "deep" matches both. */
-    var order = [DEPTHS[0], DEPTHS[1], DEPTHS[2], DEPTHS[3]];
-    for (var i = 0; i < order.length; i++) if (order[i].match.test(id)) return order[i];
-    var note = el.querySelector(".depth-note");
-    return { label: note ? tidy(note.textContent) : "", note: "" };
+    for (var i = 0; i < DEPTHS.length; i++) if (DEPTHS[i].match.test(id)) return DEPTHS[i];
+    return { label: "", note: "" };
   }
 
   /* Which website accent a card gets. The Lantern's own colour names carry
