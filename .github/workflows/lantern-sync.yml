@@ -75,6 +75,18 @@ jobs:
           EOF
 
       - name: Sing any lullaby that has no MP3 yet (ElevenLabs Music)
+        # The words change every night and always have. The music did not: every
+        # lullaby.json carried the same sentence of direction, so every night came
+        # back the same tune. The direction now has two parts - a spine that never
+        # changes, so a song is recognisably ours, and the night's own colour, which
+        # is whatever the build wrote for this story. Nothing else moves.
+        #
+        # Every take is measured before it is kept. ElevenLabs occasionally returns
+        # something clipped, near-silent, or the wrong length, and none of that is
+        # audible to the machine that saved it - so it is measured instead: samples
+        # pinned at full scale (that is distortion), average level, and duration.
+        # A take that fails is asked for again. A night ends up with a clean song or
+        # no song, never a broken one.
         env:
           DEST: lantern
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -82,19 +94,79 @@ jobs:
         run: |
           set -e
           python3 - <<'EOF'
-          import os, json, glob, urllib.request
+          import os, json, glob, subprocess, tempfile, urllib.request, urllib.error
           dest = os.environ['DEST']
           key = os.environ.get('ELEVENLABS_API_KEY', '').strip()
           want = os.environ.get('FINETUNE_NAME', '').strip()
+
+          # The part of the direction that is the brand. A Little Scripture Travelers
+          # lullaby is one voice, gently played, sung to a child who is nearly asleep,
+          # and recorded cleanly. Written here rather than in a night so that a night
+          # cannot quietly stop sounding like us.
+          SPINE = ("A children's bedtime lullaby for Little Scripture Travelers. "
+                   "One single voice, warm and unhurried, singing to a child who is "
+                   "almost asleep. Gentle acoustic accompaniment - fingerpicked guitar, "
+                   "soft piano, light strings. No drums, no percussion. "
+                   "Clean and undistorted: natural dynamics, no clipping, no loudness "
+                   "pushing, plenty of headroom, no harshness on the voice. "
+                   "Never more than one singer, and no backing vocals.")
+
           todo = [p for p in glob.glob(f'{dest}/*/lullaby.json')
                   if not os.path.exists(os.path.join(os.path.dirname(p), os.path.basename(os.path.dirname(p)) + '-lullaby.mp3'))]
           if not todo:
               print('No lullabies waiting for audio.'); raise SystemExit(0)
           if not key:
               print(f'{len(todo)} lullaby(ies) waiting, but ELEVENLABS_API_KEY is not set - skipping audio for now.'); raise SystemExit(0)
+
           def api(url, data=None, accept='application/json'):
               req = urllib.request.Request(url, data=data, headers={'xi-api-key': key, 'Content-Type': 'application/json', 'Accept': accept})
               return urllib.request.urlopen(req, timeout=600).read()
+
+          have_ffmpeg = True
+          try:
+              subprocess.run(['ffmpeg', '-version'], capture_output=True, check=True)
+          except Exception:
+              have_ffmpeg = False
+              print('ffmpeg is not here - a take will be kept without being measured.')
+
+          def measure(path, want_ms):
+              """What is objectively wrong with this take, as a list of sentences.
+
+              volumedetect counts samples sitting exactly at full scale. That is
+              what distortion is: the waveform hitting the ceiling and being
+              flattened. A handful is nothing; thousands is a ruined song."""
+              if not have_ffmpeg:
+                  return [], {}
+              r = subprocess.run(['ffmpeg', '-hide_banner', '-i', path, '-af', 'volumedetect', '-f', 'null', '-'],
+                                 capture_output=True, text=True)
+              out = r.stderr
+              def num(tag, cast=float):
+                  for line in out.splitlines():
+                      if tag in line:
+                          try: return cast(line.split(tag)[1].split()[0])
+                          except Exception: return None
+                  return None
+              peak = num('max_volume:'); mean = num('mean_volume:')
+              clipped = num('histogram_0db:', int) or 0
+              secs = None
+              try:
+                  pr = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
+                                       '-of', 'default=nw=1:nk=1', path], capture_output=True, text=True)
+                  secs = float(pr.stdout.strip())
+              except Exception:
+                  pass
+              facts = {'peak_db': peak, 'mean_db': mean, 'clipped_samples': clipped, 'seconds': secs}
+              bad = []
+              if clipped > 2000:
+                  bad.append(f'{clipped} samples pinned at full scale - that is audible distortion')
+              if mean is not None and mean < -40:
+                  bad.append(f'almost silent (average {mean} dB)')
+              if peak is not None and peak < -25:
+                  bad.append(f'far too quiet to hear at bedtime (peak {peak} dB)')
+              if secs is not None and want_ms and secs < (want_ms / 1000.0) * 0.4:
+                  bad.append(f'only {secs:.0f}s of a song that should run {want_ms // 1000}s')
+              return bad, facts
+
           # find the finetune id by name
           finetune = ''
           if want:
@@ -117,21 +189,53 @@ jobs:
                           if r: return r
               finetune = walk(raw) or ''
               print('finetune:', want, '->', finetune or 'NOT FOUND (will generate without it)')
+
+          ATTEMPTS = 3
           for p in todo:
               slug = os.path.basename(os.path.dirname(p))
               meta = json.load(open(p, encoding='utf-8'))
-              prompt = meta.get('prompt', '').strip() + "\n\nSing exactly these lyrics, one voice only:\n\n" + meta['lyrics'].strip()
-              body = {'prompt': prompt[:4100], 'music_length_ms': int(meta.get('length_ms', 120000)), 'model_id': 'music_v1'}
-              if finetune:
-                  body['finetune_id'] = finetune
-              try:
-                  audio = api('https://api.elevenlabs.io/v1/music?output_format=mp3_44100_128',
-                              data=json.dumps(body).encode('utf-8'), accept='audio/mpeg')
-              except urllib.error.HTTPError as e:
-                  raise SystemExit(f"ElevenLabs refused {slug}: HTTP {e.code} {e.read()[:500]!r}")
+              # The night's own colour. `mood` is the new key and is what the build
+              # should write; `prompt` is still read so an older night still sings.
+              colour = (meta.get('mood') or meta.get('prompt') or '').strip()
+              length = int(meta.get('length_ms', 120000))
+              prompt = (SPINE + ('\n\n' + colour if colour else '') +
+                        "\n\nSing exactly these lyrics, one voice only:\n\n" + meta['lyrics'].strip())
+              print(f'{slug}: {("colour: " + colour[:80]) if colour else "no colour written for this night - spine only"}')
+
+              best = None   # (how many things are wrong, bytes, facts, reasons)
+              for attempt in range(1, ATTEMPTS + 1):
+                  body = {'prompt': prompt[:4100], 'music_length_ms': length, 'model_id': 'music_v1'}
+                  if finetune:
+                      body['finetune_id'] = finetune
+                  try:
+                      audio = api('https://api.elevenlabs.io/v1/music?output_format=mp3_44100_128',
+                                  data=json.dumps(body).encode('utf-8'), accept='audio/mpeg')
+                  except urllib.error.HTTPError as e:
+                      raise SystemExit(f"ElevenLabs refused {slug}: HTTP {e.code} {e.read()[:500]!r}")
+                  with tempfile.NamedTemporaryFile(suffix='.mp3', delete=False) as fh:
+                      fh.write(audio); tmp = fh.name
+                  bad, facts = measure(tmp, length)
+                  os.unlink(tmp)
+                  print(f'    take {attempt}: {len(audio)//1024} KB, {facts}')
+                  if not bad:
+                      best = (0, audio, facts, []); break
+                  print('      not kept: ' + '; '.join(bad))
+                  if best is None or len(bad) < best[0]:
+                      best = (len(bad), audio, facts, bad)
+
+              score, audio, facts, reasons = best
               out = os.path.join(os.path.dirname(p), f'{slug}-lullaby.mp3')
-              open(out, 'wb').write(audio)
-              print(f'sang {slug}: {len(audio)//1024} KB -> {out}')
+              if score == 0:
+                  open(out, 'wb').write(audio)
+                  print(f'    sang {slug}: {len(audio)//1024} KB -> {out}')
+              elif (facts.get('clipped_samples') or 0) > 20000:
+                  # Past saving. A night is better with no song than with a broken one.
+                  print(f'    NOT KEPT after {ATTEMPTS} tries - every take was distorted '
+                        f'({facts}). The night publishes without a song; ask again and it will try afresh.')
+              else:
+                  open(out, 'wb').write(audio)
+                  print(f'    kept the best of {ATTEMPTS} for {slug}, but listen to it: '
+                        + '; '.join(reasons) + f' -> {out}')
           EOF
 
       # 3. Put every finished night into the account - the paste Levi used to do by
