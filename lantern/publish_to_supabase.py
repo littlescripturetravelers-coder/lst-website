@@ -164,6 +164,20 @@ def shrink_book(html):
     return out, (f"artwork {tally[0]} picture(s), {mb(tally[1]):.1f} MB -> {mb(tally[2]):.1f} MB; "
                  f"book {mb(len(html)):.1f} MB -> {mb(len(out)):.1f} MB")
 
+URL_COLS = ("story_link", "narration_url", "lantern_url", "song_url", "lyrics_url", "song_audio_url")
+
+def url_only(row):
+    """A URL column gets a URL, never the file itself. For a while the app's Admin
+    put whole MP3s - megabytes of base64 - into song_audio_url, and every list
+    that asked for that column paid for it. Nothing this publisher builds does
+    that, but the rule belongs at the door, not in one caller."""
+    for k in URL_COLS:
+        v = row.get(k)
+        if isinstance(v, str) and re.match(r"(?i)^(data:|idb:|blob:)", v.strip()):
+            print(f"    {k} held a file, not an address ({len(v)} chars) - dropped")
+            row[k] = None
+    return row
+
 def upsert(row):
     """One night into daily_content. Postgres refuses the whole row for one
     column it does not know, so drop the one it names and try again - the
@@ -171,7 +185,7 @@ def upsert(row):
     hdr = {"apikey": KEY, "Authorization": "Bearer " + KEY,
            "Content-Type": "application/json",
            "Prefer": "resolution=merge-duplicates,return=minimal"}
-    row = dict(row)
+    row = url_only(dict(row))
     for _ in range(8):
         status, body = http("POST", URL + "/rest/v1/daily_content?on_conflict=publish_date", row, hdr)
         if status in (200, 201, 204):
