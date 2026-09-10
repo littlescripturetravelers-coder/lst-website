@@ -80,6 +80,10 @@ check(bool(re.search(r'href="https://www\.(churchofjesuschrist\.org/study/script
 check('prints no outside' not in html and 'quotes no one but scripture' not in html, 'no "no outside voices tonight" card (THE QUOTES RULE)')
 check(bool(re.search(r'class="(conf-link|quote-link)" href="https?://', html)), 'a quotes card with a source link is present (THE QUOTES RULE)')
 
+# 5d. THE READING-POSITION RULE - the app restores a family's depth and scroll
+# through these two names; a page without them loses every reader's place.
+check("var currentDepth" in html and "function showTab(" in html, 'currentDepth and showTab(id) present (THE READING-POSITION RULE)')
+
 # 6. LST_NIGHT + story verbatim
 check(f"id:         '{NIGHT_ID}'" in html, 'LST_NIGHT id updated')
 for key in expected:
