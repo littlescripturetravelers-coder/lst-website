@@ -151,5 +151,11 @@ def build(edition_cards, verse_ref_html, out_path, page_title):
 }};"""
     html, n = re.subn(r"window\.LST_NIGHT = \{.*?\};", lambda m: new_night, html, count=1, flags=re.S)
     assert n == 1, 'window.LST_NIGHT block not found in canonical'
+    # THE LINKS RULE: every scripture reference is a link, made from the
+    # reference itself - no fetch, so no proxy can take the links away.
+    from links import linkify, count_links
+    edition = 'christian' if 'christian' in os.path.basename(out_path) else 'lds'
+    html = linkify(html, edition)
+    assert count_links(html) >= 8, f'{out_path}: only {count_links(html)} outbound links - a night is never published without them'
     open(out_path, 'w', encoding='utf-8').write(html)
     return html

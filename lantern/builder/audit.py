@@ -72,6 +72,14 @@ if os.path.exists(_song_path):
 else:
     check(False, f'{SLUG}-lullaby.html exists beside the editions (THE SONG RULE)')
 
+# 5c. THE LINKS RULE and THE QUOTES RULE - a night never ships without its
+# outside links or its outside voices, whatever the build machine could reach.
+_nlinks = len(re.findall(r'<a\b[^>]*href="https?://', html))
+check(_nlinks >= 8, f'outbound links present ({_nlinks}; THE LINKS RULE needs at least 8)')
+check(bool(re.search(r'href="https://www\.(churchofjesuschrist\.org/study/scriptures|biblegateway\.com/passage)', html)), 'scripture references are linked')
+check('prints no outside' not in html and 'quotes no one but scripture' not in html, 'no "no outside voices tonight" card (THE QUOTES RULE)')
+check(bool(re.search(r'class="(conf-link|quote-link)" href="https?://', html)), 'a quotes card with a source link is present (THE QUOTES RULE)')
+
 # 6. LST_NIGHT + story verbatim
 check(f"id:         '{NIGHT_ID}'" in html, 'LST_NIGHT id updated')
 for key in expected:
