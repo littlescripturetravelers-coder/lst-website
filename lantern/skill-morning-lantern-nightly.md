@@ -29,6 +29,8 @@ Title matching the story's theme, 3–4 short verses + repeating refrain, ages 2
 
 **THE SONG RULE.** A night's song is its page — the title, the words, and the page's own Play button — never the bare recording. The app opens the song page first and falls back to the .mp3 only for a night that has no page, so a night must always ship `{slug}-lullaby.html` beside its mp3, built from `lantern/lullaby-template.html` with `<audio id="player">` and `#playBtn`. `audit.py` fails the night if the page is missing or has no player; `publish_to_supabase.py` writes `song_url` = the page and `song_audio_url` = the mp3, and never the other way round.
 
+**THE STORY RULE.** Tonight's illustrated story must open every night on every phone. `night.json` / the publisher always carry `story_link` as the **full** website address `https://littlescripturetravelers.com/lantern/{slug}/{slug}.html`, and the story page `{slug}.html` is always pushed beside the editions. The app keeps the book in IndexedDB and opens its copy; a phone with no copy opens that address; a bare file name is resolved into the night's own folder, never the app's host (that is how a family saw a Vercel 404 at bedtime on 10 September). The Resources card's `Night` is the night within the week (Story 9 = Week 2 · Night 2), the same number as the eyebrow — `common.py` derives both from STORY. The Lantern lullaby link `travelers-lullaby.html` resolves on the website through `vercel.json` (every night folder → `/travelers-lullaby.html`), so it is never a dead link there either.
+
 ## Step 2 — Build both editions
 
 ### common.py (write once, reuse for both)
