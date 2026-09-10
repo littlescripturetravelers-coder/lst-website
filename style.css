@@ -2742,11 +2742,6 @@ cite strong { color: var(--gold-ink); display: block; }
   box-shadow: 0 6px 20px rgba(0,0,0,.4);
   transition: border-color .18s, transform .14s, box-shadow .18s;
 }
-.bs-cover-all {
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2.4rem; color: var(--ink);
-  background: linear-gradient(160deg,var(--page-3),var(--page-2));
-}
 .bs-cover:hover .bs-cover-art {
   border-color: rgba(245,197,24,.6); transform: translateY(-2px);
   box-shadow: 0 10px 26px rgba(0,0,0,.5);

@@ -126,10 +126,15 @@
      as the book it belongs to at a glance. A book we have no cover for yet
      falls back to its volume's, and then to nothing — a tile with no art
      still opens the same story. */
+  /* ⚠️ A BOOK WITHOUT AN ENTRY HERE FALLS BACK TO THE VOLUME COVER, and every
+     Old Testament book then wears the same generic picture. September was
+     missing, so "Wonderful Is His Way" showed "The World's Most Treasured True
+     Stories" on the shelf. Add each month as its book is published. */
   var BOOK_ART = {
     june: "images/book-cover-june.jpg",
     july: "images/book-cover-july.jpg",
-    august: "images/book-cover-august.jpg"
+    august: "images/book-cover-august.jpg",
+    september: "images/book-cover-september.jpg"
   };
   var VOLUME_ART = {
     ot: "images/cover-ot.jpg",
@@ -160,14 +165,14 @@
     var list = shown();
     var bs = books();
 
-    /* The books themselves, as covers — the shelf before the stories. */
+    /* The books themselves, as covers — the shelf before the stories.
+
+       There is no "All stories" tile any more (Levi, 10 Sep 2026): it was an
+       empty box with a book emoji in it, sitting where every other tile shows
+       real artwork. Showing every book is still the view the shelf opens on,
+       and tapping a chosen cover a second time comes back to it. */
     var covers =
       '<div class="bs-shelfrow">' +
-        '<button type="button" class="bs-cover' + (book === "" ? " on" : "") + '" data-book="">' +
-          '<span class="bs-cover-art bs-cover-all">&#128218;</span>' +
-          '<span class="bs-label">All stories</span>' +
-          '<span class="bs-sub">' + stories().length + " in the series</span>" +
-        "</button>" +
         bs.map(function (b) {
           var one = stories().filter(function (s) { return s.book === b.n; })[0] || {};
           var art = artFor(one);
@@ -336,7 +341,14 @@
     });
 
     root.querySelectorAll("[data-book]").forEach(function (b) {
-      b.addEventListener("click", function () { book = this.getAttribute("data-book"); render(); });
+      b.addEventListener("click", function () {
+        var picked = this.getAttribute("data-book");
+        /* Tapping the book you are already in takes you back to all of them.
+           With the "All stories" tile gone this is the only way back, so it
+           must never be removed without putting something else in its place. */
+        book = (String(book) === String(picked)) ? "" : picked;
+        render();
+      });
     });
 
     root.querySelectorAll("[data-story]").forEach(function (b) {
