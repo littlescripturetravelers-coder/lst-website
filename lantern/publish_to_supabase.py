@@ -255,6 +255,18 @@ def main():
         song = read(song_path) if os.path.exists(song_path) else ""
         has_mp3 = os.path.exists(mp3_path)
 
+        # THE SONG RULE. A night's song is a page - the words with their own Play
+        # button - never the bare recording. The app opens song_url (the page)
+        # first and falls back to song_audio_url only for a night with no page,
+        # so a night that ships a recording without its page lands families on
+        # a player with no words. Say so loudly; the words are the deliverable.
+        if has_mp3 and not song:
+            print(f"{slug}: SONG RULE - {slug}-lullaby.mp3 is here but {slug}-lullaby.html is not; "
+                  f"the app will fall back to the bare player until the song page is pushed")
+        if song and ('id="player"' not in song or 'playBtn' not in song):
+            print(f"{slug}: SONG RULE - {slug}-lullaby.html has no player of its own "
+                  f"(expected <audio id=\"player\"> and #playBtn from lantern/lullaby-template.html)")
+
         # The illustrated story: the copy in this folder when the night brought
         # one, otherwise the page the app already has, one per night.
         book_html, book_link = "", ""
@@ -303,6 +315,8 @@ def main():
             row["song_url"]   = f"{slug}-lullaby.html"
             row["lyrics_url"] = row["song_url"]
         if has_mp3:   row["song_audio_url"] = f"{SITE_BASE}/lantern/{slug}/{slug}-lullaby.mp3"
+        # song_url is the page and only ever the page; the recording has its own column.
+        assert not str(row.get("song_url", "")).lower().endswith((".mp3", ".m4a", ".wav")), "song_url must be the song page, never the recording"
         if book_html:
             small, note = shrink_book(book_html)
             if note: print(f"    {note}")

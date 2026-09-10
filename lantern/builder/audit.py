@@ -1,4 +1,4 @@
-import re, sys, subprocess
+import re, sys, os, subprocess
 from common import CANON, HEAD, TAIL, STORY_PARAS, SLUG, NIGHT_ID, ent
 
 path = sys.argv[1]
@@ -60,6 +60,17 @@ for key in expected:
     m = re.search(rf'id="tab-{key}">(.*?)</div><!-- /{key} -->', html, re.S).group(1)
     check(f'href="{SLUG}.html"' in m and f'href="{SLUG}-lullaby.html"' in m and 'href="travelers-lullaby.html"' in m, f'{key}: three resource links')
 check('trust-him-to-lead-the-way' not in html and 'a-lamp-for-my-feet' not in html, 'no previous-night slug')
+
+# 5b. THE SONG RULE - the night's song page must exist beside the editions and
+# carry its own Play button and <audio id="player">. The app opens the page,
+# never the bare recording; a night without its page lands on a player with no words.
+_song_path = os.path.join(os.path.dirname(os.path.abspath(sys.argv[1])), f'{SLUG}-lullaby.html')
+if os.path.exists(_song_path):
+    _song = open(_song_path, encoding='utf-8').read()
+    check('id="player"' in _song and 'id="playBtn"' in _song and f'{SLUG}-lullaby.mp3' in _song,
+          'song page has its own player (audio#player, #playBtn, the night\'s mp3)')
+else:
+    check(False, f'{SLUG}-lullaby.html exists beside the editions (THE SONG RULE)')
 
 # 6. LST_NIGHT + story verbatim
 check(f"id:         '{NIGHT_ID}'" in html, 'LST_NIGHT id updated')
