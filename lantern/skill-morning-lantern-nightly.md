@@ -27,6 +27,8 @@ Title matching the story's theme, 3–4 short verses + repeating refrain, ages 2
 
 **The song page.** `lullaby_page.py` (repo: `lantern/builder/`) builds `{slug}-lullaby.html` on `lantern/lullaby-template.html` — a copy of the app's own "A Little Travelers' Lullaby" page — so the night's lullaby looks and behaves exactly like that one inside the app (theme, text size, Play button, mini bar, sleep timer, repeat). Two things must be true of the built page: `<audio id="player"` has the mp3 linked **in full** (`https://littlescripturetravelers.com/lantern/{slug}/{slug}-lullaby.mp3` — the app opens the page from a copy it keeps, so a bare file name is silent there), and `const LULLABY =` carries one part per verse and chorus. Never ship the older navy card-list page.
 
+**THE SONG RULE.** A night's song is its page — the title, the words, and the page's own Play button — never the bare recording. The app opens the song page first and falls back to the .mp3 only for a night that has no page, so a night must always ship `{slug}-lullaby.html` beside its mp3, built from `lantern/lullaby-template.html` with `<audio id="player">` and `#playBtn`. `audit.py` fails the night if the page is missing or has no player; `publish_to_supabase.py` writes `song_url` = the page and `song_audio_url` = the mp3, and never the other way round.
+
 ## Step 2 — Build both editions
 
 ### common.py (write once, reuse for both)
