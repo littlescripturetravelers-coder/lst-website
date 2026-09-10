@@ -40,6 +40,11 @@ def paras(cls, ps, gap=8):
         out.append(f'    <div class="{cls}"{style}>{ent(p)}</div>')
     return '\n'.join(out)
 
+# NIGHT is the night WITHIN the week (1-7); STORY is the night's number through the
+# book. Night 8 of the book is Week 2, Night 1, Story 8. Two nights shipped as
+# "Week 2, Night 8" before this line existed, so the builder now refuses it.
+assert 1 <= int(NIGHT) <= 7, f"NIGHT must be the night within the week (1-7), not {NIGHT}; the count through the book goes in STORY"
+assert int(STORY) >= int(NIGHT), f"STORY ({STORY}) is the count through the book and cannot be less than NIGHT ({NIGHT})"
 EYEBROW = f'{DATE} &nbsp;&#9733;&nbsp; Week {WEEK} &middot; Night {NIGHT} &middot; Story {STORY}'
 
 def hero(depth_note, verse_ref_html):

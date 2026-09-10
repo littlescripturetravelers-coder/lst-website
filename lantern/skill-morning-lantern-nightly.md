@@ -19,7 +19,7 @@ The PDF text layer is doubled and interleaved; `pdftotext` (with or without `-la
 
 Slug = lowercase, hyphens, no punctuation. Resources: `{slug}.html`, `{slug}-lullaby.html`, and `travelers-lullaby.html` (never changes).
 
-**The 5-page extract never contains** the week's reading plan, the book number, or the Traveler's motto. The Traveler motto is in memory (`/areas/brand-system.md`) — never improvise it. Nobody is there to ask, so proceed on these defaults and state them at the top of the final report: edition date = the day after the canonical's date; eyebrow "Week W · Night N · Story N" mirroring the canonical; **no reading-plan block** (the canonical carries `.weekly-block` CSS but no markup, so match it); `LST_NIGHT.id` = `lst-ot-w0Wn0N-{slug}-YYYYMMDD`.
+**The 5-page extract never contains** the week's reading plan, the book number, or the Traveler's motto. The Traveler motto is in memory (`/areas/brand-system.md`) — never improvise it. Nobody is there to ask, so proceed on these defaults and state them at the top of the final report: edition date = the day after the canonical's date; eyebrow "Week W · Night n · Story N" mirroring the canonical, where n is the night **within the week** (1–7, the index sheet's "Night in Week") and N is the night's number through the book — Night 8 is "Week 2 · Night 1 · Story 8", never "Week 2 · Night 8"; **no reading-plan block** (the canonical carries `.weekly-block` CSS but no markup, so match it); `LST_NIGHT.id` = `lst-ot-w0Wn0N-{slug}-YYYYMMDD`.
 
 ## Step 1 — Lullaby
 
