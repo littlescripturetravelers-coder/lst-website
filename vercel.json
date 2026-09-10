@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/lantern/:slug/travelers-lullaby.html", "destination": "/travelers-lullaby.html" }
+  ]
+}

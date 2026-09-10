@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="navy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Little Travelers' Lullaby · Little Scripture Travelers</title>
+<!-- Fredoka and Nunito ship with the app, so they are served from the bundle.
+     Not only for speed: a parser-inserted script waits on every pending
+     stylesheet, and one that never answers holds the whole document at
+     readyState "loading" - a blank page on a phone with no signal, which is
+     exactly where this gets opened. Read from the bundle it cannot happen. -->
+<link rel="stylesheet" href="/fonts-embed.css">
+<script>
+/* Running inside the app: take the family's text size, learn how much room the
+   floating tab bar needs, and keep a handle on the app for the back link. */
+(function(){
+  var q=new URLSearchParams(location.search);
+  window.LST_FOOT=parseInt(q.get('appfoot')||'0',10)||0;
+  window.LST_HOST=null;
+  try{ if(window.parent && window.parent!==window && window.parent.lstBookBack) window.LST_HOST=window.parent; }catch(e){}
+  try{
+    var p=window.LST_HOST&&window.LST_HOST.LST_APP_PREFS;
+    if(p&&p.size){
+      var px={small:15,'default':16,large:18,xlarge:21}[p.size];
+      if(px) document.documentElement.style.fontSize=px+'px';
+    }
+  }catch(e){}
+})();
+</script>
+<style>
+  /* ============================================================
+     THEMES — sampled directly from the app's three modes so the
+     lullaby page sits inside them without looking bolted on.
+     ============================================================ */
+  html[data-theme="navy"]{
+    --bg:#1A284F; --surface:#253255; --surface-2:#23375C;
+    --ink:#FFFFFF; --body-ink:#BCC4D9; --ink-soft:#9BA6C4;
+    --accent:#EEC748; --quote:#EEC748;
+    --teal:#7CD0DA;
+    --edge:rgba(255,255,255,.10); --on-accent:#1F2D5C;
+    --shadow:rgba(0,0,0,.30);
+  }
+  html[data-theme="dark"]{
+    --bg:#0D1321; --surface:#1B1F2B; --surface-2:#182432;
+    --ink:#FFFFFF; --body-ink:#B9BFCD; --ink-soft:#8F97A8;
+    --accent:#EEC748; --quote:#EEC748;
+    --teal:#7CD0DA;
+    --edge:rgba(255,255,255,.09); --on-accent:#15162A;
+    --shadow:rgba(0,0,0,.5);
+  }
+  html[data-theme="light"]{
+    --bg:#F3F6FB; --surface:#FFFFFF; --surface-2:#F0FAFB;
+    --ink:#1F2D5C; --body-ink:#3D4971; --ink-soft:#5E6A8C;
+    --accent:#856B20; --quote:#856B20;
+    /* the app's light-mode teal label is very faint on white;
+       darkened here so every line stays readable */
+    --teal:#0E6B78;
+    --edge:rgba(31,45,92,.10); --on-accent:#FFFFFF;
+    --shadow:rgba(31,45,92,.10);
+  }
+
+  :root{
+    --beau:#8A4B2A; --scout:#4F9E5F; --willow:#8E63B5; --wren:#E0603C;
+    --display:'Fredoka',system-ui,sans-serif;
+    --body:'Nunito',system-ui,sans-serif;
+    --shell:min(640px,100%);
+    --fs:1.06rem;
+  }
+  html[data-theme="light"]{--beau:#7A3F20;--scout:#2F6B3C;--willow:#6A4790;--wren:#B23E1E}
+  html[data-theme="navy"],html[data-theme="dark"]{--beau:#D89A6E;--scout:#7FCB8C;--willow:#B48FD8;--wren:#F0876A}
+
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;background:var(--bg)}
+  body{
+    margin:0;padding:0 0 8.5rem;
+    background:var(--bg);color:var(--ink);
+    font-family:var(--body);
+    display:flex;flex-direction:column;align-items:center;
+  }
+
+  /* ---------- header ---------- */
+  .bar{
+    position:sticky;top:0;z-index:20;width:100%;
+    display:flex;justify-content:center;
+    background:var(--bg);border-bottom:1px solid var(--edge);
+    padding-top:env(safe-area-inset-top);
+  }
+  .bar-in{width:var(--shell);display:flex;align-items:center;gap:.4rem;padding:.6rem .9rem}
+  .back{font:700 .78rem/1.2 var(--body);color:var(--body-ink);text-decoration:none;padding:.45rem .1rem;flex:0 1 auto;min-width:0;cursor:pointer}
+  .tools{display:flex;gap:.3rem;flex:0 0 auto;margin-left:auto}
+  .tool{
+    font:700 .72rem/1 var(--body);color:var(--ink);
+    background:var(--surface);border:1px solid var(--edge);
+    border-radius:999px;padding:.5rem .62rem;cursor:pointer;
+  }
+  .tool:focus-visible,.back:focus-visible,.chip:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* ---------- title ---------- */
+  .head{width:var(--shell);padding:1.4rem 1.15rem .2rem}
+  .eyebrow-top{
+    font:800 .74rem/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 .35rem;
+  }
+  h1{
+    font:700 clamp(1.95rem,7.6vw,2.6rem)/1.08 var(--display);
+    color:var(--ink);margin:0 0 .5rem;letter-spacing:-.5px;
+  }
+  .sub{font:400 1rem/1.6 var(--body);color:var(--body-ink);margin:0}
+
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--surface);
+    border-radius:24px;
+    padding:1.35rem 1.3rem;
+    margin:0 0 1rem;
+    box-shadow:0 2px 10px var(--shadow);
+  }
+  .card.teal{background:var(--surface-2)}
+  .card .label{
+    font:800 .74rem/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 .85rem;
+    display:flex;align-items:center;gap:.55rem;
+  }
+  .card.teal .label{color:var(--teal)}
+  .card .label b{width:9px;height:9px;border-radius:50%;background:currentColor;flex:0 0 auto}
+
+  /* ---------- jump chips ---------- */
+  .jump{width:var(--shell);display:flex;gap:.4rem;overflow-x:auto;padding:.8rem 1.15rem .3rem;scrollbar-width:none}
+  .jump::-webkit-scrollbar{display:none}
+  .chip{
+    flex:0 0 auto;font:700 .76rem/1 var(--body);color:var(--body-ink);
+    background:var(--surface);border:1px solid var(--edge);
+    border-radius:999px;padding:.6rem .85rem;cursor:pointer;white-space:nowrap;
+  }
+  .chip.on{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
+
+  /* ---------- lyrics ---------- */
+  main{width:var(--shell);padding:.5rem 1.15rem 0}
+  section{scroll-margin-top:4.4rem}
+  .verse{
+    font:400 var(--fs)/1.75 var(--body);
+    color:var(--body-ink);margin:0 0 1.15rem;white-space:pre-line;
+  }
+  .verse:last-child{margin-bottom:0}
+  .quote{font-style:italic;color:var(--quote)}
+  .card.teal .verse{color:var(--teal);font-style:italic}
+  .t-beau .label{color:var(--beau)}
+  .t-scout .label{color:var(--scout)}
+  .t-willow .label{color:var(--willow)}
+  .t-wren .label{color:var(--wren)}
+
+  .dots{display:flex;gap:8px;justify-content:center;margin:1.6rem 0 .7rem}
+  .dots span{width:11px;height:11px;border-radius:50%}
+  .foot{width:var(--shell);text-align:center;font:400 .78rem/1.6 var(--body);color:var(--ink-soft);padding:0 1.15rem 1rem}
+
+
+  /* ---------- resources ---------- */
+  .card.resources .label{color:var(--accent)}
+  a.res{
+    display:block;text-decoration:none;
+    background:var(--surface-2);border:1px solid var(--edge);
+    border-radius:16px;padding:.85rem 2.1rem .85rem 1rem;
+    margin:0 0 .55rem;position:relative;
+  }
+  a.res:last-child{margin-bottom:0}
+  a.res:active{background:var(--surface)}
+  .res-kind{
+    display:block;font:800 .64rem/1 var(--body);letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);margin:0 0 .35rem;
+  }
+  .res-title{display:block;font:700 1rem/1.35 var(--display);color:var(--ink)}
+  .res-note{display:block;font:400 .84rem/1.5 var(--body);color:var(--ink-soft);margin-top:.2rem}
+  .res-go{
+    position:absolute;right:1rem;top:50%;width:9px;height:9px;
+    border-right:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);
+    transform:translateY(-50%) rotate(-45deg);
+  }
+
+  /* ---------- floating controls ---------- */
+  .float{
+    position:fixed;left:50%;transform:translateX(-50%);
+    bottom:calc(1rem + env(safe-area-inset-bottom));z-index:30;
+    display:flex;gap:.4rem;align-items:center;
+    background:var(--surface);border:1px solid var(--edge);
+    border-radius:999px;padding:.35rem;
+    box-shadow:0 10px 26px var(--shadow);
+  }
+  .float button{
+    font:700 .78rem/1 var(--body);color:var(--ink);
+    background:none;border:0;border-radius:999px;
+    padding:.62rem .8rem;cursor:pointer;white-space:nowrap;
+  }
+  .float button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+  /* the Play pill, as it was — gold outline, gold type */
+  .float .progress{
+    position:absolute;left:.9rem;right:.9rem;bottom:.28rem;
+    height:2px;border-radius:2px;background:var(--edge);overflow:hidden;
+  }
+  .float .progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s linear}
+  .float button.play{
+    border:1px solid var(--accent);
+    color:var(--accent);
+    padding:.62rem 1rem;
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none!important}
+  }
+
+  /* ── Bottom link out to the music file ── */
+  .music-link{
+    width:var(--shell);margin:1.9rem auto .2rem;box-sizing:border-box;
+    display:flex;align-items:center;gap:.8rem;
+    padding:.9rem 1.05rem;
+    background:var(--surface);border:1px solid var(--accent);
+    border-radius:16px;text-decoration:none;
+    box-shadow:0 6px 18px var(--shadow);
+  }
+  .music-link:active{transform:translateY(1px)}
+  .music-link-icon{font-size:1.4rem;line-height:1;color:var(--accent);flex:0 0 auto}
+  .music-link-txt{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1 1 auto}
+  .music-link-txt b{font:700 .96rem/1.25 var(--display);color:var(--accent)}
+  .music-link-txt i{font:400 .78rem/1.4 var(--body);font-style:normal;color:var(--ink-soft)}
+  .music-link-arrow{color:var(--accent);font-size:1rem;flex:0 0 auto}
+
+  /* ---- inside the app ----
+     The play / auto-scroll / top controls float at the bottom of the screen,
+     which is where the app's tab bar is. Lift them clear of it, and leave the
+     same room under the last card so nothing hides behind the tabs. The app
+     draws its own back chip, so the page's own back link steps aside and the
+     bar keeps only the A- / A+ pair. */
+  body.in-app .float{bottom:calc(1rem + var(--appfoot,0px) + env(safe-area-inset-bottom))}
+  body.in-app{padding-bottom:calc(var(--appfoot,0px) + 1rem)}
+  body.in-app .back{display:none}
+  body.in-app .bar{padding-top:.35rem;padding-bottom:.1rem}
+  body.in-app .bar-in{justify-content:flex-end}
+
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="back" id="backLink">&larr; Back to tonight's devotional</a>
+    <div class="tools">
+      <button class="tool" id="smaller" aria-label="Smaller text">A&minus;</button>
+      <button class="tool" id="bigger" aria-label="Larger text">A+</button>
+    </div>
+  </div>
+</header>
+
+<div class="head">
+  <p class="eyebrow-top">Lullaby &middot; Sing Together</p>
+  <h1 id="title">A Little Travelers' Lullaby</h1>
+  <p class="sub" id="subtitle"></p>
+</div>
+
+<nav class="jump" id="jump" aria-label="Jump to a part of the lullaby"></nav>
+<main id="lyrics"></main>
+
+<a class="music-link" href="/audio/hush-little-traveler.mp3">
+  <span class="music-link-icon">&#9835;</span>
+  <span class="music-link-txt">
+    <b>Listen to the music</b>
+    <i>Hush, Little Traveler &mdash; The full Lantern Lullaby &mdash; open or download the track</i>
+  </span>
+  <span class="music-link-arrow">&#8599;</span>
+</a>
+
+<div class="dots">
+  <span style="background:var(--beau)"></span>
+  <span style="background:var(--scout)"></span>
+  <span style="background:var(--willow)"></span>
+  <span style="background:var(--wren)"></span>
+</div>
+<div class="foot">
+  ~ Beau, Scout, Willow, &amp; Wren ~<br>
+  Little Scripture Travelers · littlescripturetravelers.com
+</div>
+
+<!-- floating controls -->
+<div class="float" id="float">
+  <button class="play" id="playBtn">&#9654; Play</button>
+  <button id="scrollBtn" aria-pressed="false">Auto-scroll</button>
+  <button id="topBtn">Top</button>
+  <div class="progress" id="progress" hidden><i id="progressFill"></i></div>
+</div>
+
+<audio id="player" preload="none" src="/audio/hush-little-traveler.mp3"></audio>
+
+<script>
+/* ============================================================
+   ADMIN BLOCK — the only part you change each day.
+
+   audio     : path to the mp3, e.g. "audio/travelers-lullaby.mp3"
+               Leave null and the Play button opens a file picker
+               so you can test an mp3 straight off your phone.
+   theme     : "auto" follows the device/app mode.
+               Force one with "navy", "dark" or "light".
+   ============================================================ */
+const LULLABY = {
+  title: "A Little Travelers' Lullaby",
+  subtitle: "Sing it slow. The words are for you \u2014 the calm is for them.",
+  artist: "Little Scripture Travelers",
+  /* where the song lives once you've uploaded it.
+     url can be the song's page in the app, or the mp3 itself.
+     id is optional — pass it if your player looks songs up by id. */
+  song: { url: "", id: "", title: "A Little Travelers' Lullaby" },
+  theme: "auto",
+  backUrl: "morning-lantern-2026-07-28-come-celebrate-with-god.html",
+
+  parts: [
+    { id:"hush", label:"Hush, Little Traveler", kind:"verse", stanzas:[
+      "Hush, little traveler, the day is done,\nThe moon is up, the stars have come.\nYour pillow\u2019s soft, your covers deep \u2014\nA comfy nest for little sleep.",
+      "Mom and Dad are nearby too,\nWith hearts that watch the whole night through.\nAnd One who loves you even more\nIs closer than your bedroom door.",
+      "Heavenly Father knows your name \u2014\nHe knew it long before you came.\nYou\u2019re loved for who you are inside,\nWith loving arms stretched open wide."
+    ]},
+    { id:"chorus1", label:"Goodnight, Friends", kind:"chorus", stanzas:["CHORUS"] },
+    { id:"beau", label:"Beau the Brave", kind:"traveler", tone:"beau", stanzas:[
+      "Beau the Brave has stories true \u2014\n<i class=\"quote\">\u201CBig heart, brave start, that\u2019s me and you!\u201D</i>\nWhen Goliath came, young David knew\nHeavenly Father would help him through.",
+      "When lions roared, brave Daniel prayed,\nAnd in the den he was not afraid.\nSo when you feel a giant near,\nHeavenly Father calms your fear."
+    ]},
+    { id:"scout", label:"Scout the Seeker", kind:"traveler", tone:"scout", stanzas:[
+      "Scout the Seeker, curious and free \u2014\n<i class=\"quote\">\u201CLook and see \u2014 what could it be?\u201D</i>\nA bush that burned with wondrous light,\nA pillar of fire that shone at night.",
+      "Young Samuel listened in the night,\nAnd Heavenly Father helped him choose the right.\nWhen something\u2019s hard, when roads feel long,\nLook up, dear one \u2014 His light is strong."
+    ]},
+    { id:"willow", label:"Willow the Warm", kind:"traveler", tone:"willow", stanzas:[
+      "Willow the Warm wraps tight and slow \u2014\n<i class=\"quote\">\u201CWarm hugs, warm hearts wherever we go.\u201D</i>\nLike Ruth who stayed by Naomi\u2019s side,\nWith faithful love to be her guide.",
+      "Like Joseph, who forgave his brothers too,\nThough they had hurt him through and through.\nWhen hearts feel small and tears come down,\nHeavenly Father\u2019s love is all around."
+    ]},
+    { id:"wren", label:"Wren the Wonderer", kind:"traveler", tone:"wren", stanzas:[
+      "Wren the Wonderer, gentle and slow \u2014\n<i class=\"quote\">\u201CPause and ponder \u2014 what a wonder we know.\u201D</i>\nLike Joseph pondering dreams in the night,\nAnd Pharaoh learning what they meant was right.",
+      "Like Elijah listening, still and small,\nFor the quiet voice beyond it all.\nWhen questions come and answers hide,\nThe Holy Ghost can whisper inside."
+    ]},
+    { id:"chorus2", label:"Goodnight, Friends", kind:"chorus", stanzas:["CHORUS"] },
+    { id:"stories", label:"Stories We Remember", kind:"verse", stanzas:[
+      "Moses raised his staff up high,\nAs frightened people wondered why.\nThe waters parted, wide and deep \u2014\nHeavenly Father His children would keep.",
+      "A path appeared where none had been,\nAnd Israel safely traveled in.\nWhen you can\u2019t see which way to go,\nHeavenly Father knows the road.",
+      "Jonah ran across the sea,\nBut Heavenly Father heard his plea.\nInside the fish, he prayed once more,\nThen found his second chance ashore.",
+      "Noah built when skies were clear,\nTrusting Heavenly Father year by year.\nWhen rain came down and waters grew,\nHe learned Heavenly Father\u2019s words were true.",
+      "Abraham looked into the night\nAnd saw the stars so small and bright.\nHeavenly Father made a promise there \u2014\nAnd Abraham trusted in His care.",
+      "Hannah prayed with all her heart,\nAnd Heavenly Father heard each part.\nShe trusted Him through hope and tears,\nAnd He stayed near throughout the years.",
+      "Esther stood courageous and tall,\nThough she was frightened by it all.\nShe chose to speak, she chose what\u2019s right,\nAnd Heavenly Father gave her might.",
+      "Job had days of grief and pain,\nWhen nothing seemed to make sense again.\nThough answers didn\u2019t all appear,\nHe learned that Heavenly Father was still near."
+    ]},
+    { id:"jesus", label:"Then Jesus Came", kind:"verse", stanzas:[
+      "Then Jesus came to walk our way;\nHe felt our hurts, He knew each day.\nHe carried every ache and tear,\nSo when you\u2019re sad, He\u2019s always near.",
+      "When we do wrong and want to mend,\nHe lifts it off \u2014 He is our Friend.\nYou\u2019re not the worst thing you have done;\nHe makes you clean, dear little one.",
+      "Because of Him, death can\u2019t hold on;\nThe bands are loosed, the sting is gone.\nSo families can stay together \u2014\nWith Heavenly Father, home forever."
+    ]},
+    { id:"yours", label:"You Are His", kind:"verse", stanzas:[
+      "You are not what the world might say \u2014\nNot just a stumble, not yesterday.\nNot what you have, not what you wear,\nBut a child of Heavenly Father\u2019s care.",
+      "A spirit precious, known above,\nA little wonder wrapped in love.\nThe Holy Ghost is whispering near,\nA still, small voice your heart can hear.",
+      "When you are scared, when you\u2019re alone,\nHe\u2019ll teach you truth and guide you home.\nLike Samuel listening in the night,\nYou can listen for what is right."
+    ]},
+    { id:"drift", label:"Drift, Little Traveler", kind:"verse", stanzas:[
+      "So drift, little traveler, soft and slow,\nWith all the friends and stories you know.\nBeau\u2019s brave heart, Scout\u2019s seeking eye,\nWillow\u2019s warm hug, Wren\u2019s gentle why \u2014",
+      "Four little friends who walked with you\nThrough Old Testament stories, brave and true.\nFrom David\u2019s sling to Daniel\u2019s den,\nWe\u2019ll dream about their stories again."
+    ]},
+    { id:"chorus3", label:"Goodnight, Friends", kind:"chorus", stanzas:["CHORUS"] },
+    { id:"goodnight", label:"Sleep Tight", kind:"verse", stanzas:[
+      "Mom and Dad love you deep, love you wide,\nAnd Heavenly Father stays by your side.\nJesus loves you every day,\nThe Holy Ghost can light your way.",
+      "Sleep tight, sweet child, you\u2019re never alone \u2014\nYou\u2019re loved in heaven; you\u2019re loved at home."
+    ]}
+  ],
+
+  chorus: "Goodnight Beau, goodnight Scout,\nGoodnight friends both in and out.\nGoodnight Willow, goodnight Wren,\nWe will travel here again.\nClose your eyes and say a prayer \u2014\nHeavenly Father\u2019s always there."
+};
+
+/* ============================================================
+   RESOURCES — the "More for Tonight" card at the bottom.
+
+   url : where each piece lives once it is uploaded. The
+         defaults below are plain filenames, which work if all
+         three sit in the same folder. Swap in your real app
+         paths (e.g. "/resources/travelers-lullaby") and
+         nothing else needs to change.
+   kind : the little gold tag — "Lullaby", "Story", "Printable"…
+   Remove an item, or the whole list, and the card disappears.
+   ============================================================ */
+const RESOURCES = {
+  label: "More for Tonight",
+  items: [
+    { kind: "Lullaby",
+      title: "Come Celebrate with Heavenly Father",
+      note:  "Hezekiah\u2019s invitation, set to a bedtime tune.",
+      url:   "come-celebrate-with-heavenly-father.html" },
+    { kind: "Story",
+      title: "Come Celebrate \u2014 Tonight\u2019s Story",
+      note:  "2 Chronicles 30 \u00b7 Week 4, Night 7. Tap-to-turn pages.",
+      url:   "come-celebrate-with-god.html" }
+  ]
+};
+
+/* ============================================================
+   THEME — set by the app, never chosen on this page.
+
+   The app tells the page which of its three modes is active,
+   by any of:
+
+     1. a query string:   ...travelers-lullaby.html?theme=navy
+     2. a shared key:     localStorage['lst:theme'] = 'navy'
+     3. a live message:   postMessage({type:'lst:theme', mode:'navy'})
+
+   Sending it any of 'navy', 'dark' or 'light' switches the page.
+   If nothing arrives, it falls back to LULLABY.theme, and 'auto'
+   follows the phone's light/dark setting as a last resort.
+   ============================================================ */
+const MODES = ['auto','navy','dark','light'];
+const sysDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+function validMode(m){ return m && MODES.indexOf(m) > -1 ? m : null; }
+
+function modeFromApp(){
+  try {
+    const q = validMode(new URLSearchParams(window.location.search).get('theme'));
+    if (q) return q;
+  } catch(e){}
+  try {
+    const shared = validMode(localStorage.getItem('lst:theme'));
+    if (shared) return shared;
+  } catch(e){}
+  return null;
+}
+
+let mode = modeFromApp() || LULLABY.theme;
+
+function applyMode(){
+  const m = (mode === 'auto') ? (sysDark.matches ? 'dark' : 'light') : mode;
+  document.documentElement.setAttribute('data-theme', m);
+}
+
+sysDark.addEventListener('change', function(){ if (mode === 'auto') applyMode(); });
+
+/* the app can switch mode while this page is open */
+window.addEventListener('message', function(e){
+  const d = e.data;
+  if (!d || d.type !== 'lst:theme') return;
+  const m = validMode(d.mode);
+  if (m){ mode = m; applyMode(); }
+});
+window.addEventListener('storage', function(e){
+  if (e.key !== 'lst:theme') return;
+  const m = validMode(e.newValue);
+  if (m){ mode = m; applyMode(); }
+});
+
+applyMode();
+
+/* ============================================================
+   LYRICS
+   ============================================================ */
+document.getElementById('title').textContent = LULLABY.title;
+document.getElementById('subtitle').textContent = LULLABY.subtitle;
+
+/* ---------- back link ----------
+   A bare href="#" is a link to the top of the document, so tapping the
+   header used to scroll the page up. The link now only navigates when
+   there is somewhere real to go. */
+(function(){
+  const back = document.getElementById('backLink');
+  if (!back) return;
+  const dest = (LULLABY.backUrl || '').trim();
+
+  if (dest && dest !== '#'){ back.href = dest; return; }
+
+  back.removeAttribute('href');
+  back.setAttribute('role', 'button');
+  back.setAttribute('tabindex', '0');
+
+  function goBack(e){
+    if (e) e.preventDefault();
+    if (typeof window.LSTApp !== 'undefined' && window.LSTApp.back){
+      window.LSTApp.back(); return;
+    }
+    if (window.parent !== window){
+      window.parent.postMessage({type:'lst:back'}, '*'); return;
+    }
+    if (window.history.length > 1){ window.history.back(); return; }
+    /* nowhere to go: stay put rather than jump to the top */
+  }
+
+  back.addEventListener('click', goBack);
+  back.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' ') goBack(e);
+  });
+})();
+
+
+function stanzaHTML(s){
+  return '<p class="verse">' + (s === 'CHORUS' ? LULLABY.chorus : s) + '</p>';
+}
+function partHTML(p){
+  const body = p.stanzas.map(stanzaHTML).join('');
+  const cls = 'card' + (p.kind === 'chorus' ? ' teal' : '') + (p.tone ? ' t-' + p.tone : '');
+  return '<section id="p-' + p.id + '" class="' + cls + '">' +
+         '<p class="label"><b></b>' + p.label + '</p>' + body +
+         '</section>';
+}
+
+/* ---------- resources card ---------- */
+function resourcesHTML(){
+  if (!RESOURCES || !RESOURCES.items || !RESOURCES.items.length) return '';
+  const rows = RESOURCES.items.map(function(r){
+    return '<a class="res" href="' + r.url + '">' +
+             '<span class="res-kind">' + r.kind + '</span>' +
+             '<span class="res-title">' + r.title + '</span>' +
+             (r.note ? '<span class="res-note">' + r.note + '</span>' : '') +
+             '<span class="res-go" aria-hidden="true"></span>' +
+           '</a>';
+  }).join('');
+  return '<section id="p-resources" class="card resources">' +
+         '<p class="label"><b></b>' + RESOURCES.label + '</p>' + rows +
+         '</section>';
+}
+
+document.getElementById('lyrics').innerHTML = LULLABY.parts.map(partHTML).join('') + resourcesHTML();
+
+const jump = document.getElementById('jump');
+let sawChorus = false;
+LULLABY.parts.forEach(function(p){
+  if (p.kind === 'chorus'){ if (sawChorus) return; sawChorus = true; }
+  const c = document.createElement('button');
+  c.className = 'chip';
+  c.textContent = p.label;
+  c.dataset.target = 'p-' + p.id;
+  c.addEventListener('click', function(){
+    const el = document.getElementById(c.dataset.target);
+    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  jump.appendChild(c);
+});
+
+/* one last chip for the resources card */
+if (document.getElementById('p-resources')){
+  const rc = document.createElement('button');
+  rc.className = 'chip';
+  rc.textContent = RESOURCES.label;
+  rc.dataset.target = 'p-resources';
+  rc.addEventListener('click', function(){
+    const el = document.getElementById(rc.dataset.target);
+    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  jump.appendChild(rc);
+}
+
+const chips = [].slice.call(document.querySelectorAll('.chip'));
+if ('IntersectionObserver' in window){
+  const obs = new IntersectionObserver(function(en){
+    en.forEach(function(e){
+      if (!e.isIntersecting) return;
+      chips.forEach(function(c){ c.classList.toggle('on', c.dataset.target === e.target.id); });
+    });
+  }, {rootMargin:'-30% 0px -60% 0px'});
+  LULLABY.parts.forEach(function(p){
+    const el = document.getElementById('p-' + p.id);
+    if (el) obs.observe(el);
+  });
+}
+
+/* ---------- text size ----------
+   Also honours the app: localStorage['lst:textSize'] = 0-3,
+   or postMessage({type:'lst:textSize', size:2}). The A- / A+
+   buttons stay for a parent reading in a dark room. */
+const SIZES = [0.94, 1.06, 1.22, 1.40];
+let size = 1;
+try {
+  const app = parseInt(localStorage.getItem('lst:textSize'), 10);
+  const own = parseInt(localStorage.getItem('lst:lullaby:size'), 10);
+  const pick = !isNaN(own) ? own : app;
+  if (!isNaN(pick)) size = Math.max(0, Math.min(3, pick));
+} catch(e){}
+function applySize(){
+  document.documentElement.style.setProperty('--fs', SIZES[size] + 'rem');
+}
+function saveSize(){
+  try { localStorage.setItem('lst:lullaby:size', String(size)); } catch(e){}
+}
+window.addEventListener('message', function(e){
+  const d = e.data;
+  if (!d || d.type !== 'lst:textSize') return;
+  const s = parseInt(d.size, 10);
+  if (!isNaN(s)){ size = Math.max(0, Math.min(3, s)); applySize(); }
+});
+document.getElementById('bigger').addEventListener('click', function(){ size = Math.min(3, size + 1); applySize(); saveSize(); });
+document.getElementById('smaller').addEventListener('click', function(){ size = Math.max(0, size - 1); applySize(); saveSize(); });
+applySize();
+
+/* ---------- hands-free scroll ---------- */
+const scrollBtn = document.getElementById('scrollBtn');
+let creeping = false, raf = null, carry = 0, last = 0;
+function step(now){
+  if (!creeping) return;
+  if (!last) last = now;
+  carry += (now - last) / 1000 * 16;
+  last = now;
+  if (carry >= 1){
+    const whole = Math.floor(carry); carry -= whole;
+    window.scrollBy(0, whole);
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 2) return stopCreep();
+  }
+  raf = requestAnimationFrame(step);
+}
+function startCreep(){
+  creeping = true; last = 0; carry = 0;
+  scrollBtn.setAttribute('aria-pressed','true');
+  scrollBtn.textContent = 'Stop scroll';
+  raf = requestAnimationFrame(step);
+}
+function stopCreep(){
+  creeping = false;
+  if (raf) cancelAnimationFrame(raf);
+  raf = null;
+  scrollBtn.setAttribute('aria-pressed','false');
+  scrollBtn.textContent = 'Auto-scroll';
+}
+scrollBtn.addEventListener('click', function(e){ e.stopPropagation(); if (creeping) stopCreep(); else startCreep(); });
+['touchstart','wheel','keydown'].forEach(function(ev){
+  window.addEventListener(ev, function(){ if (creeping) stopCreep(); }, {passive:true});
+});
+/* ============================================================
+   PLAY
+
+   The lullaby is embedded in this file, so it plays straight from
+   the page and keeps working with no signal.
+
+   If LULLABY.song.url is set, the app takes over instead: the page
+   hands the song off rather than playing it, so the app's own
+   player runs it. Leave song.url empty to use the built-in track.
+   ============================================================ */
+document.getElementById('topBtn').addEventListener('click', function(){
+  stopCreep(); window.scrollTo({top:0, behavior:'smooth'});
+});
+
+const playBtn  = document.getElementById('playBtn');
+const audio    = document.getElementById('player');
+const progress = document.getElementById('progress');
+const fill     = document.getElementById('progressFill');
+
+function setPlayLabel(playing){
+  playBtn.innerHTML = playing ? '&#10074;&#10074; Pause' : '&#9654; Play';
+}
+
+function handOffToApp(song){
+  const payload = {
+    type: 'lst:play',
+    id: song.id || null,
+    url: song.url || null,
+    title: song.title || LULLABY.title,
+    artist: LULLABY.artist
+  };
+  if (typeof window.LSTApp !== 'undefined' && window.LSTApp.play){ window.LSTApp.play(payload); return; }
+  if (window.parent !== window){ window.parent.postMessage(payload, '*'); return; }
+  window.location.href = song.url;
+}
+
+playBtn.addEventListener('click', function(e){
+  e.stopPropagation();
+  const song = LULLABY.song || {};
+  if (song.url){ handOffToApp(song); return; }      /* app plays it */
+  if (audio.paused) audio.play(); else audio.pause(); /* page plays it */
+});
+
+audio.addEventListener('play',  function(){ setPlayLabel(true); progress.hidden = false; });
+audio.addEventListener('pause', function(){ setPlayLabel(false); });
+audio.addEventListener('ended', function(){
+  setPlayLabel(false);
+  progress.hidden = true;
+  fill.style.width = '0';
+});
+audio.addEventListener('timeupdate', function(){
+  if (isFinite(audio.duration) && audio.duration > 0){
+    fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+  }
+});
+
+
+</script>
+
+<script>
+/* ---- Standing inside the app ------------------------------------------------
+   The back link becomes navigation rather than a hyperlink, the page shortens by
+   the height of the tab bar so its own controls stay reachable, and the app is
+   told what this page is. On its own on the web none of this runs and the page
+   behaves exactly as it always did. */
+(function(){
+  if(!window.LST_HOST) return;
+  document.body.classList.add('in-app');
+  if(window.LST_FOOT) document.documentElement.style.setProperty('--appfoot', window.LST_FOOT+'px');
+  var back=document.getElementById('backLink')||document.querySelector('.back');
+  if(back){
+    back.setAttribute('href','#');
+    back.addEventListener('click',function(e){
+      e.preventDefault();
+      try{ window.LST_HOST.lstBookBack(); }catch(err){}
+    });
+  }
+  try{ window.LST_HOST.lstBookInfo({title:document.title.split(/\s+[\u00b7|]\s+/)[0].trim()}); }catch(e){}
+  /* Two songs at once is the one thing worse than none. If the app is playing
+     something, this page's own player takes over. Only the app's shell player is
+     hushed - the app also watches this page's <audio>, and a full stopAudio()
+     would pause the very song that just started. */
+  var mine=document.querySelector('audio');
+  if(mine) mine.addEventListener('play',function(){
+    try{ (window.LST_HOST.shellSilence||window.LST_HOST.stopAudio)(); }catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
