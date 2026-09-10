@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#152449">
-<title>Wisdom, a Hidden Treasure &middot; Little Scripture Travelers</title>
+<title>Wisdom, a Hidden Treasure · Little Scripture Travelers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -511,7 +511,7 @@ const STORY = {
       "audio": null
     }
   ],
-  "lullabyUrl": "wisdom-a-hidden-treasure-lullaby.html",
+  "lullabyUrl": "https://littlescripturetravelers.com/lantern/wisdom-a-hidden-treasure/wisdom-a-hidden-treasure-lullaby.html",
   "lullabyTitle": "The Treasure Hidden in My Heart"
 };
 
@@ -650,6 +650,26 @@ document.title = STORY.title + ' \u00B7 Little Scripture Travelers';
     if (e.key === 'Enter' || e.key === ' ') goBack(e);
   });
 })();
+
+/* ---------- the lullaby button, one tap from the last page ----------
+   Inside the app the book is shown from a copy the app keeps, so a bare
+   "<slug>-lullaby.html" has nothing to resolve against and the tap used to land
+   on a 404. The link is now written in full, and inside the app the app itself
+   is asked to open it, which keeps the family in the app with the app's own
+   player. On the website it is a plain link to the song page in the night's
+   folder. The button is drawn when the last page is reached, so this listens
+   on the document rather than on the button. */
+document.addEventListener('click', function(e){
+  var a = e.target && e.target.closest ? e.target.closest('a.songlink') : null;
+  if (!a) return;
+  e.stopPropagation();                       /* not a page turn */
+  var host = null;
+  try { if (window.parent && window.parent !== window && window.parent.lstOpenSite) host = window.parent; } catch(err) {}
+  if (!host) return;                         /* the web: follow the link */
+  e.preventDefault();
+  try { host.lstOpenSite(a.getAttribute('href'), STORY.lullabyTitle || 'Tonight\u2019s lullaby'); }
+  catch(err) { location.href = a.href; }
+}, true);
 
 
 STORY.beats.forEach(function(){
