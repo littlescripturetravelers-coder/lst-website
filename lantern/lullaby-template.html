@@ -1365,6 +1365,31 @@ if ((LULLABY.song || {}).url){
 
 
 <script>
+/* ---- Standing inside the app, on another origin ----
+   Loaded straight from the website into the app's frame (a phone with no copy
+   of this page and no answer from the account), the app cannot reach in to dress
+   it. It says so in the address instead - ?inapp=1 - and the page does for
+   itself what the app does for the Lantern lullaby: the app's theme, no back
+   bar, and one big Play button in place of the floating pill (THE SONG RULE). */
+(function(){
+  if(window.LST_HOST) return;
+  var q; try{ q=new URLSearchParams(location.search); }catch(e){ return; }
+  if(q.get('inapp')!=='1') return;
+  document.body.classList.add('in-app');
+  if(window.LST_FOOT) document.documentElement.style.setProperty('--appfoot', window.LST_FOOT+'px');
+  var st=document.createElement('style');
+  st.textContent='.float,.lp-mini{display:none !important}';
+  document.head.appendChild(st);
+  var fa=document.getElementById('player'); if(!fa) return;
+  var b=document.createElement('button'); b.id='lstPlay'; b.type='button';
+  b.style.cssText='display:flex;align-items:center;justify-content:center;gap:.55rem;width:calc(100% - 2.4rem);max-width:22rem;margin:.1rem auto 1.1rem;padding:.9rem 1.2rem;border:0;border-radius:999px;cursor:pointer;-webkit-tap-highlight-color:transparent;font-family:var(--body,system-ui,sans-serif);font-weight:800;font-size:1rem;line-height:1;background:var(--accent,#F5C518);color:var(--on-accent,#1B2D5F);box-shadow:0 6px 18px rgba(0,0,0,.26)';
+  var paint=function(){ b.innerHTML=(fa.paused?'&#9654;':'&#10074;&#10074;')+'<span>'+(fa.paused?'Play the lullaby':'Pause')+'</span>'; };
+  paint();
+  b.addEventListener('click',function(e){ e.preventDefault(); if(fa.paused){ try{ if(fa.duration && fa.currentTime>=fa.duration-0.5) fa.currentTime=0; }catch(_){ } var p=fa.play(); if(p&&p.catch) p.catch(function(){}); } else fa.pause(); });
+  ['play','pause','ended'].forEach(function(ev){ fa.addEventListener(ev,paint); });
+  var host=document.getElementById('jump')||document.getElementById('lyrics');
+  if(host&&host.parentNode) host.parentNode.insertBefore(b,host);
+})();
 /* ---- Standing inside the app ---- */
 (function(){
   if(!window.LST_HOST) return;

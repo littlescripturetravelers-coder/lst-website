@@ -139,6 +139,11 @@ Voices: LDS — Heavenly Father, the Savior, covenants, the Holy Ghost. Catholic
 
 ## Quotes and links — verify, never assert
 
+**THE LINKS RULE.** A night is never published without its outside links, whatever the build machine can reach. `common.py`'s `build()` runs `links.linkify()` over every finished edition: every scripture reference in the words becomes a link made from the reference itself — churchofjesuschrist.org for the Latter-day Saint edition, BibleGateway (NIV) for the Christian — and the build fails if a page has fewer than eight outbound links. No fetch is involved, so a proxy that refuses the source domains (10 September) can no longer strip a night of its links. Write references plainly in the prose ("Proverbs 2:4–5", "Alma 37:37") and the linker does the rest.
+
+**THE QUOTES RULE.** A night is never published without outside voices. `lantern/quotes/bank.json` holds quotations read verbatim off their source pages (General Conference talks for the Latter-day Saint edition; Spurgeon and Wesley at ccel.org for the Christian), each with the page's own address and theme tags. The sources card is `quotes_card(edition, themes, n=2)` from `quotes.py`, picked from the bank by the night's themes — never fetched at build time. When the run CAN reach a source it may add a freshly verified quote via `extra=[...]`; when it cannot, the bank alone is the card. Never write an "unverified / no outside voices tonight" card: `audit.py` fails it. Refresh the bank with `lantern/quotes/refresh.md` when a new conference is published.
+
+
 Fetch every quote's source page before using it. Attribute name, source, year. Only link URLs confirmed to resolve; if the quote checks out but no free full text exists, ship it with attribution and no link, and say so on the card. **Eight verified beat ten padded** — the card intro states how many and why. If a deep link is uncertain, link the archive's landing page.
 
 Source map (what fetched, what didn't — fetches to new domains need user approval and time out when the user is away, so prefer these):

@@ -1,20 +1,13 @@
 from common import *
+from quotes import quotes_card
 
-# ── Tonight ships with NO external links and NO attributed outside quotes. ──
-# Every source domain in the run's source map (churchofjesuschrist.org included)
-# was refused by this environment's network egress proxy, so nothing could be
-# verified at its source. Rather than print an unverified quote or an unchecked
-# URL, both are left out and the omission is stated on the cards below.
+# Links: linkify() in build() (THE LINKS RULE). Quotes: quotes_card() from the bank (THE QUOTES RULE).
 
 VERSE_REF = 'Proverbs 2:4&ndash;5 (KJV)'
 
 def ref(label, text):
     return f'<div class="bt" style="margin-top:8px;"><strong style="color:var(--amber);">{ent(label)}</strong> &mdash; {ent(text)}</div>'
 
-UNVERIFIED = ("Tonight&rsquo;s edition prints no outside quotations and no outside links. "
-              "Every source this run is required to check &mdash; the General Conference archive included &mdash; "
-              "was unreachable from the machine that built the page, and nothing goes in front of a family unverified. "
-              "What follows is scripture, and our own words about it.")
 
 # ───────────────────────── BASE ─────────────────────────
 PARENT_HEART = f'''
@@ -85,17 +78,8 @@ HISTORICAL = f'''
   </div>
 '''
 
-SOURCES_TONIGHT = f'''
-  <div class="card card-conf reveal">
-    <div class="card-label lbl-gold">&#9733; About Tonight's Outside Voices</div>
-    <div class="card-title ct-gold">Why this edition quotes no one but scripture</div>
-    <div class="conf-talk">
-      <div class="conf-date" style="color:var(--gold);">September 10, 2026 &middot; A note from the workshop</div>
-      <div class="conf-body">{ent(UNVERIFIED)}</div>
-      <div class="conf-body" style="margin-top:10px;">Ordinarily this card carries a talk from a recent General Conference, chosen to sit beside tonight&rsquo;s chapter, with a link so you can read the whole thing. That could not be done honestly tonight, and a remembered quotation attached to a real person&rsquo;s name is exactly the kind of mistake that is worth missing a card to avoid. The study cards that follow lean on Proverbs itself instead, which is the better half of the reading anyway.</div>
-    </div>
-  </div>
-'''
+THEMES_TONIGHT = ['wisdom', 'seeking', 'scripture', 'light']
+SOURCES_TONIGHT = quotes_card('lds', THEMES_TONIGHT, n=2, seed=SLUG)
 
 WORD_STUDY = f'''
   <div class="card card-teal reveal">
