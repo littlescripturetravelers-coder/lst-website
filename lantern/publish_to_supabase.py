@@ -326,7 +326,33 @@ def main():
         with open(marker, "w", encoding="utf-8") as fh:
             json.dump({"sha": stamp, "date": date, "at": row["published_at"]}, fh, indent=2)
 
+    # The voices. Every night in the account that has words to read but no
+    # recording yet gets asked for one - not only tonight's. For a while the
+    # narrate function refused the Action's key and every night went out silent,
+    # so a night that missed its turn is picked up on the next run, a few at a
+    # time, rather than staying silent for good.
+    if NARRATE:
+        sweep_voices()
     return 1 if failures else 0
+
+def sweep_voices(limit=6):
+    hdr = {"apikey": KEY, "Authorization": "Bearer " + KEY}
+    status, body = http("GET", URL + "/rest/v1/daily_content?select=publish_date,narration_urls,story_text"
+                        "&published_at=not.is.null&order=publish_date.desc&limit=60", None, hdr)
+    if status != 200:
+        print(f"voices: could not list nights ({status})"); return
+    try:
+        rows = json.loads(body)
+    except Exception:
+        print("voices: could not read the list"); return
+    todo = [r for r in rows if (r.get("story_text") or "").strip()
+            and not (isinstance(r.get("narration_urls"), dict) and any(r["narration_urls"].values()))]
+    if not todo:
+        print("voices: every night with words has its recording"); return
+    print(f"voices: {len(todo)} night(s) without a recording; asking for up to {limit}")
+    for r in todo[:limit]:
+        st, resp = narrate(r["publish_date"])
+        print(f"    {r['publish_date']}: {'recorded' if st == 200 else f'not recorded ({st}) {resp}'}")
 
 if __name__ == "__main__":
     sys.exit(main())
