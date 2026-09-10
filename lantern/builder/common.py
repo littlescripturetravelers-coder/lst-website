@@ -42,9 +42,15 @@ def paras(cls, ps, gap=8):
 
 # NIGHT is the night WITHIN the week (1-7); STORY is the night's number through the
 # book. Night 8 of the book is Week 2, Night 1, Story 8. Two nights shipped as
-# "Week 2, Night 8" before this line existed, so the builder now refuses it.
-assert 1 <= int(NIGHT) <= 7, f"NIGHT must be the night within the week (1-7), not {NIGHT}; the count through the book goes in STORY"
-assert int(STORY) >= int(NIGHT), f"STORY ({STORY}) is the count through the book and cannot be less than NIGHT ({NIGHT})"
+# "Week 2, Night 8" before this existed, so the builder now puts it right itself:
+# STORY is the one number every run gets right, and week and night-in-week both
+# follow from it. A refusal here would have cost a night; a correction costs nothing.
+STORY = int(STORY)
+_week_from_story, _night_from_story = (STORY - 1) // 7 + 1, (STORY - 1) % 7 + 1
+if int(NIGHT) != _night_from_story or int(WEEK) != _week_from_story:
+    print(f"common.py: Story {STORY} is Week {_week_from_story}, Night {_night_from_story} - "
+          f"was given Week {WEEK}, Night {NIGHT}; corrected.")
+    WEEK, NIGHT = _week_from_story, _night_from_story
 EYEBROW = f'{DATE} &nbsp;&#9733;&nbsp; Week {WEEK} &middot; Night {NIGHT} &middot; Story {STORY}'
 
 def hero(depth_note, verse_ref_html):
