@@ -27,6 +27,8 @@ def load_bank():
 
 def pick(edition, themes, n=2, seed=None, exclude_ids=()):
     """The n entries for this edition that share the most themes with the night."""
+    if n <= 0:                            # the card is already full from `extra`;
+        return []                         # without this the loop below returns the whole bank
     bank = [q for q in load_bank() if q['edition'] in (edition, 'both') and q['id'] not in exclude_ids]
     themes = [t.lower() for t in themes]
     def score(q):
