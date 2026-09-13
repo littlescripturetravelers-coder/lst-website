@@ -204,6 +204,18 @@ def narrate(date):
     status, body = http("POST", URL + "/functions/v1/narrate", {"date": date}, hdr, timeout=300)
     return status, body[:300]
 
+# THE MARKETING RULE. The moment a night is in the account, its marketing is
+# drafted from it - one piece each for Instagram, Facebook, TikTok, Pinterest,
+# YouTube and email, written from the night's story and its Morning Lantern
+# study - and filed as "ready" for the owner to approve in the app's Marketing
+# Desk. Nothing is posted by this. The function itself skips a night that
+# already has its tree, so a re-publish never doubles the queue.
+MARKET = os.environ.get("MARKET", "1") != "0"
+def market(date):
+    hdr = {"Authorization": "Bearer " + KEY, "Content-Type": "application/json"}
+    status, body = http("POST", URL + "/functions/v1/marketing-draft", {"date": date}, hdr, timeout=300)
+    return status, body[:300]
+
 def missing_in_account(date, expect):
     """The pieces this folder carries that the row for `date` no longer has.
 
@@ -336,6 +348,11 @@ def main():
             status, body = narrate(date)
             if status == 200: print(f"    narration: recorded")
             else:             print(f"    narration: not recorded ({status}) {body}")
+
+        if MARKET:
+            status, body = market(date)
+            if status == 200: print(f"    marketing: drafted for the owner to approve")
+            else:             print(f"    marketing: not drafted ({status}) {body}")
 
         with open(marker, "w", encoding="utf-8") as fh:
             json.dump({"sha": stamp, "date": date, "at": row["published_at"]}, fh, indent=2)
