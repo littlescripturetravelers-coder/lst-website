@@ -69,11 +69,31 @@ def make_image(prompt, portrait=True):
     s2, b2 = http("GET", d["url"]); return b2
 
 # ---------------------------------------------------------------- the voice
+_VOICE = None
+PREFERRED = ["Rachel", "Sarah", "Matilda", "Lily", "Alice", "Bella", "Jessica", "Charlotte", "Laura", "Aria"]
+def resolve_voice():
+    """A voice this account can actually use. The owner's ELEVENLABS_VOICE_ID if
+    it is in the account; else the first warm premade voice we know by name;
+    else whatever the account lists first. (A hard-coded id came back 404.)"""
+    global _VOICE
+    if _VOICE: return _VOICE
+    s, b = http("GET", "https://api.elevenlabs.io/v1/voices", headers={"xi-api-key": ELEVEN}, timeout=60)
+    voices = json.loads(b).get("voices", []) if s == 200 else []
+    ids = {v.get("voice_id"): v.get("name", "") for v in voices}
+    env = os.environ.get("ELEVENLABS_VOICE_ID", "").strip()
+    if env and env in ids: _VOICE = env
+    else:
+        by_name = {v.get("name", ""): v.get("voice_id") for v in voices}
+        pick = next((by_name[n] for n in PREFERRED if n in by_name), None)
+        _VOICE = pick or (voices[0].get("voice_id") if voices else env or VOICE)
+    print(f"  voice: {ids.get(_VOICE, _VOICE)}")
+    return _VOICE
+
 def tts(text):
     """ElevenLabs reads one line. Returns mp3 bytes."""
     if not ELEVEN: raise RuntimeError("ELEVENLABS_API_KEY is not set")
     body = {"text": text, "model_id": "eleven_multilingual_v2", "voice_settings": {"stability": 0.5, "similarity_boost": 0.8, "style": 0.2}}
-    s, b = http("POST", f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE}?output_format=mp3_44100_128", body,
+    s, b = http("POST", f"https://api.elevenlabs.io/v1/text-to-speech/{resolve_voice()}?output_format=mp3_44100_128", body,
                 {"xi-api-key": ELEVEN, "Content-Type": "application/json", "Accept": "audio/mpeg"}, timeout=180)
     if s != 200: raise RuntimeError(f"ElevenLabs: {s} {b[:200]!r}")
     return b
@@ -205,13 +225,13 @@ def main():
             prompt = it.get("image_prompt") or f"Storybook cartoon in the Little Scripture Travelers style: warm rounded characters, night sky, gold stars, navy and gold. {it.get('title','')}"
             img = make_image(prompt, portrait=True)
             image_url = upload(f"{iid}/image.png", img, "image/png")
-            patch = {"media_url": image_url, "media_type": "image", "thumb_url": image_url}
+            patch = {"media_url": image_url, "media_type": "image", "thumb_url": image_url, "post_error": None}
             if fmt in VIDEO_FORMATS or plat in ("tiktok", "youtube"):
                 lines = parse_lines(it.get("body") or "")
                 if not lines: lines = [(it.get("hook") or it.get("title") or "", it.get("hook") or "")]
                 mp4, thumb = make_video(img, lines, iid)
                 patch = {"media_url": upload(f"{iid}/video.mp4", mp4, "video/mp4"), "media_type": "video",
-                         "thumb_url": upload(f"{iid}/thumb.jpg", thumb, "image/jpeg")}
+                         "thumb_url": upload(f"{iid}/thumb.jpg", thumb, "image/jpeg"), "post_error": None}
             sb_patch(iid, patch); done += 1
             print(f"  {plat:9s} {fmt:9s} {patch['media_type']:5s} {it.get('title','')[:50]}")
         except Exception as e:
