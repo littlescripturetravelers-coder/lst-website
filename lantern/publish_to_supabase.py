@@ -71,7 +71,7 @@ def sha(*parts):
         h.update(b"\x00")
     return h.hexdigest()
 
-def quick_text(page, limit=4500):
+def quick_text(page, limit=4400):   # under the narrate function's 4,500 with room for the count to differ
     """The words a voice should read: the Quick section, as plain text.
 
     Mirrors narrationDraft() in the app - the Quick reading only, furniture
