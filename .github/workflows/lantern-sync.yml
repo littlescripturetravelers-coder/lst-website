@@ -269,6 +269,28 @@ jobs:
             echo "Pillow would not install - books go at full size."
           python3 lantern/publish_to_supabase.py
 
+      # THE MARKETING RULE, second half. The drafts the publisher asked for are
+      # turned into finished media (image from the draft's own prompt; captioned,
+      # voiced video for reels and shorts) and anything the owner has approved
+      # whose time has come is handed to the poster. Both need their keys; either
+      # one missing simply skips its half and says so.
+      - name: Marketing media and posting
+        if: github.ref == 'refs/heads/main'
+        env:
+          SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then echo "OPENAI_API_KEY not set - no marketing media this run."; else
+            python3 -m pip install --quiet --disable-pip-version-check Pillow || true
+            python3 lantern/marketing_media.py || echo "marketing media step had trouble - the drafts are still in the desk."
+          fi
+          curl -sS -X POST "$SUPABASE_URL/functions/v1/marketing-post" \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" -H "Content-Type: application/json" \
+            -d '{"action":"sweep"}' | head -c 400; echo
+
       - name: Commit and push
         run: |
           git config user.name  "lantern-bot"
