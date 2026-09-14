@@ -65,7 +65,8 @@ DID    = os.environ.get("DID_API_KEY", "").strip()          # optional: the pres
 SITE   = "https://littlescripturetravelers.com"
 HERE   = os.path.dirname(os.path.abspath(__file__))
 ROOT   = os.path.abspath(os.path.join(HERE, ".."))
-LOGO   = os.path.join(ROOT, "images", "logo-badge.jpg")
+LOGO   = os.path.join(HERE, "brand", "logo.png")          # the badge, background removed (never a plate of white around it)
+FONTS  = os.path.join(HERE, "brand", "fonts")             # the brand's own fonts (Google, OFL): Fredoka, Nunito, Anton
 BRAND  = os.path.join(HERE, "brand")
 CAST   = os.path.join(BRAND, "travelers-cast.jpg")
 TRAVELERS = ["beau", "scout", "willow", "wren"]
@@ -73,9 +74,12 @@ PRESENTER = os.path.join(BRAND, "presenter.png")
 PORTRAIT_DIR = os.path.join(ROOT, "images", "book", "portrait")
 COVERS = os.path.join(BRAND, "covers")          # the month's book cover: covers/YYYY-MM.jpg
 LOCKS_DIR = os.path.join(BRAND, "locks")        # the owner's room and character locks (see locks/README.md)
-STYLE_LOCK = ("Warm premium cinematic 2D children's storybook illustration in the official Little Scripture Travelers "
-              "style: soft painterly rendering, glowing warm lighting, rounded child-friendly shapes, Disney-quality "
-              "emotional warmth. No realism, no 3D, no anime, no flat cartoon style, no text, no watermark, no style drift.")
+STYLE_LOCK = ("Premium animated 2D storybook illustration in the official Little Scripture Travelers style (brand sheet "
+              "v2.0): soft painterly textures, glossy expressive eyes with bright catchlights, rounded toddler anatomy, "
+              "bright high-key preschool-animation lighting - about 30-40% brighter than typical storybook art, even at "
+              "night - soft feathered warm transparent shadows (never black or harsh), Disney Junior brightness and Pixar "
+              "warmth, made reverent. No realism, no 3D render look, no anime, no flat cartoon style, no text, no "
+              "watermark, no style drift.")
 # (file, the heading whose paragraph is the short lock, what in a scene calls for it)
 LOCKS = [
     ("front-room.md",  "SHORT IMAGE PROMPT VERSION",          r"front room|living room|grandma lewis"),
@@ -125,9 +129,11 @@ def travelers_in(text):
 def portrait(named):
     """The picture for the Travelers named: one portrait, or the cast sheet for several."""
     return os.path.join(BRAND, named[0] + ".jpg") if len(named) == 1 else CAST
-FONT_B = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FONT_B = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"      # fallbacks only, if the kit's fonts are missing
 FONT_R = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
-NAVY, GOLD, CREAM, TEAL = (27, 45, 95), (245, 197, 24), (251, 247, 234), (91, 211, 220)
+# THE BRAND SHEET (v2.0, 2026): Midnight Navy, Scripture Gold, Traveler Teal, Frame Amber, Cloud White.
+# Text on dark is Cloud White; titles and calls-to-action are Scripture Gold.
+NAVY, GOLD, CREAM, TEAL, AMBER = (27, 45, 95), (245, 197, 24), (255, 255, 255), (91, 211, 220), (217, 162, 39)
 SOCIAL = {"instagram", "facebook", "tiktok", "pinterest", "youtube"}
 VIDEO_FORMATS = {"reel", "short", "video"}
 
@@ -393,10 +399,32 @@ def parse_lines(body):
     return out[:14]
 
 # ---------------------------------------------------------------- drawing
-def font(bold, size):
+def font(bold, size, face=None):
+    """The brand's type: Fredoka (display, bold) where the piece greets the reader,
+    Nunito (body) where it serves the reader. `face` may force "fredoka" / "nunito" /
+    "anton" (accent caps, one per layout at most). Falls back to DejaVu if the kit's
+    fonts are missing."""
     from PIL import ImageFont
+    face = face or ("fredoka" if bold else "nunito")
+    path = {"fredoka": os.path.join(FONTS, "Fredoka.ttf"), "nunito": os.path.join(FONTS, "Nunito.ttf"),
+            "nunito-italic": os.path.join(FONTS, "Nunito-Italic.ttf"), "anton": os.path.join(FONTS, "Anton-Regular.ttf")}.get(face)
+    if path and os.path.exists(path):
+        f = ImageFont.truetype(path, size)
+        try:
+            if face == "fredoka": f.set_variation_by_name(b"Bold" if bold else b"SemiBold")            # Fredoka (display: Bold / SemiBold)
+            elif face in ("nunito", "nunito-italic"):
+                try: f.set_variation_by_name(b"ExtraBold" if bold else b"Regular")                     # Nunito (body: Regular / ExtraBold)
+                except Exception: f.set_variation_by_axes([800 if bold else 400])
+        except Exception: pass
+        return f
     p = FONT_B if bold else FONT_R
     return ImageFont.truetype(p, size) if os.path.exists(p) else ImageFont.load_default()
+
+def logo_rgba(width):
+    """The badge at `width`, transparent around it - never a plate of its own."""
+    from PIL import Image
+    im = Image.open(LOGO).convert("RGBA")
+    return im.resize((width, int(im.height * width / im.width)))
 
 def wrap(draw, text, fnt, max_w):
     words, lines, cur = text.split(), [], ""
@@ -444,7 +472,7 @@ def portrait_of(pic):
     if ih > 1300: r = 1300 / im.height; iw, ih = int(im.width * r), 1300
     small = im.resize((iw, ih)); x, y = (W - iw) // 2, (H - ih) // 2
     out = None
-    if OPENAI and src:
+    for attempt in (1, 2) if (OPENAI and src) else ():
         try:
             canvas = Image.new("RGBA", (W, H), (0, 0, 0, 0)); canvas.paste(small, (x, y))
             data = to_bytes(canvas, "PNG")
@@ -458,11 +486,10 @@ def portrait_of(pic):
             print(f"  extended {name} to fill the frame")
             return cached
         except Exception as e:
-            print(f"  extend {name}: {e} - using a blurred fill this time")
-    bg = cover(im, W, H).filter(ImageFilter.GaussianBlur(30))
-    bg = ImageEnhance.Brightness(bg).enhance(0.55); bg.paste(small, (x, y))
-    tmp = os.path.join(tempfile.gettempdir(), "lst-fill-" + name); bg.save(tmp, quality=92)
-    return tmp
+            print(f"  extend {name} (try {attempt}): {e}")
+    # No extension possible this run: the picture still fills the frame edge to
+    # edge (cover-cropped), never a picture inside a picture.
+    return pic
 
 def bands(im, top_h, bottom_h):
     """Soft navy fades at the top and bottom so words read over any picture."""
@@ -601,12 +628,12 @@ def end_card(W=1080, H=1920, cover=None):
     from PIL import Image, ImageDraw
     im = Image.new("RGB", (W, H), NAVY); d = ImageDraw.Draw(im)
     if cover and os.path.exists(cover):
-        size = int(W * 0.40); top = int(H * 0.24)
+        size = int(W * 0.42); top = int(H * 0.24)
         try:
-            logo = Image.open(LOGO).convert("RGB").resize((size, size)); im.paste(logo, (int(W * 0.07), top))
+            lg = logo_rgba(size); im.paste(lg, (int(W * 0.06), top + int((size - lg.height) / 2)), lg)
             cv = load_rgb(cover); h = int(size * 1.15); w = int(cv.width * h / cv.height); cv = cv.resize((w, h))
-            x = W - int(W * 0.07) - w; im.paste(cv, (x, top - int((h - size) / 2)))
-            d.rectangle([x - 5, top - int((h - size) / 2) - 5, x + w + 4, top - int((h - size) / 2) + h + 4], outline=GOLD, width=4)
+            x = W - int(W * 0.06) - w; im.paste(cv, (x, top - int((h - size) / 2)))
+            d.rectangle([x - 5, top - int((h - size) / 2) - 5, x + w + 4, top - int((h - size) / 2) + h + 4], outline=AMBER, width=4)
         except Exception: pass
         d.text((W / 2, top + size + int(H * 0.09)), "A new story every night", font=font(True, int(W * 0.055)), fill=GOLD, anchor="mm")
         d.text((W / 2, top + size + int(H * 0.135)), "This month's book, and the app", font=font(False, int(W * 0.036)), fill=CREAM, anchor="mm")
@@ -614,10 +641,33 @@ def end_card(W=1080, H=1920, cover=None):
         return im
     size = int(W * 0.57); top = int(H * 0.22)
     try:
-        logo = Image.open(LOGO).convert("RGB").resize((size, size)); im.paste(logo, ((W - size) // 2, top))
+        lg = logo_rgba(size); im.paste(lg, ((W - size) // 2, top), lg); size = lg.height
     except Exception: pass
     d.text((W / 2, top + size + int(H * 0.06)), "A new story every night", font=font(True, int(W * 0.055)), fill=GOLD, anchor="mm")
     d.text((W / 2, top + size + int(H * 0.11)), "littlescripturetravelers.com", font=font(False, int(W * 0.04)), fill=CREAM, anchor="mm")
+    return im
+
+def intro_card(W=1080, H=1920):
+    """THE BRAND SHEET: a reel opens on the logo with the star motif, on navy."""
+    from PIL import Image, ImageDraw
+    import random
+    im = Image.new("RGB", (W, H), NAVY); d = ImageDraw.Draw(im)
+    rnd = random.Random(7)
+    for _ in range(90):                                       # a quiet star field
+        x, y, r = rnd.randint(0, W), rnd.randint(0, H), rnd.choice([1, 1, 2, 2, 3])
+        d.ellipse([x - r, y - r, x + r, y + r], fill=(255, 244, 200))
+    def star(cx, cy, R, fill):
+        import math
+        pts = []
+        for i in range(10):
+            ang = -math.pi / 2 + i * math.pi / 5; rr = R if i % 2 == 0 else R * 0.42
+            pts.append((cx + rr * math.cos(ang), cy + rr * math.sin(ang)))
+        d.polygon(pts, fill=fill)
+    for cx, cy, R in ((int(W * 0.14), int(H * 0.22), 26), (int(W * 0.86), int(H * 0.19), 20), (int(W * 0.80), int(H * 0.72), 24), (int(W * 0.18), int(H * 0.76), 18)):
+        star(cx, cy, R, GOLD)
+    try:
+        lg = logo_rgba(int(W * 0.62)); im.paste(lg, ((W - lg.width) // 2, int(H * 0.30)), lg)
+    except Exception: pass
     return im
 
 # ---------------------------------------------------------------- the video
@@ -626,6 +676,7 @@ def make_video(pics, lines, who=None, cover=None):
     names a Traveler shows that Traveler's portrait instead of a story picture."""
     tmp = tempfile.mkdtemp(prefix="mkt-")
     concat, audio_parts, story_i = [], [], 0
+    ip = os.path.join(tmp, "intro.png"); intro_card().save(ip); concat.append((ip, 1.2))
     for i, (spoken, overlay) in enumerate(lines):
         named = travelers_in(spoken + " " + overlay)
         if named: pic, mark = portrait(named), None
@@ -652,7 +703,8 @@ def make_video(pics, lines, who=None, cover=None):
             for p in audio_parts: fh.write(f"file '{p}'\n")
         voice = os.path.join(tmp, "voice.mp3")
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", alist, "-c", "copy", voice], check=True)
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-i", voice, "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", out], check=True)
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-i", voice, "-filter_complex", "[1:a]adelay=1200|1200[a]", "-map", "0:v", "-map", "[a]",
+                        "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", out], check=True)
     else:
         out = silent
     first = travelers_in(" ".join(lines[0]) if lines else "")
@@ -725,11 +777,15 @@ def talking_video(lines, item_id, cover=None):
     tail = os.path.join(tmp, "tail.mp4")
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-t", "2.5", "-i", ep, "-f", "lavfi", "-t", "2.5", "-i", "anullsrc=r=44100:cl=stereo",
                     "-vf", "scale=1080:1920,format=yuv420p", "-r", "30", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-c:a", "aac", "-shortest", tail], check=True)
-    lst = os.path.join(tmp, "join.txt"); open(lst, "w").write(f"file '{body}'\nfile '{tail}'\n")
+    ip = os.path.join(tmp, "intro.png"); intro_card().save(ip)
+    head = os.path.join(tmp, "head.mp4")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-t", "1.2", "-i", ip, "-f", "lavfi", "-t", "1.2", "-i", "anullsrc=r=44100:cl=stereo",
+                    "-vf", "scale=1080:1920,format=yuv420p", "-r", "30", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-c:a", "aac", "-shortest", head], check=True)
+    lst = os.path.join(tmp, "join.txt"); open(lst, "w").write(f"file '{head}'\nfile '{body}'\nfile '{tail}'\n")
     out = os.path.join(tmp, "out.mp4")
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", "-movflags", "+faststart", out], check=True)
     thumb = os.path.join(tmp, "thumb.jpg")
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", out, "-ss", "1", "-frames:v", "1", thumb], check=True)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", out, "-ss", "2.2", "-frames:v", "1", thumb], check=True)
     return open(out, "rb").read(), open(thumb, "rb").read()
 
 # ---------------------------------------------------------------- the pictures for one piece
@@ -774,7 +830,9 @@ def main():
                 patch = {"media_url": upload(f"{iid}/video.mp4", mp4, "video/mp4"), "media_type": "video",
                          "thumb_url": upload(f"{iid}/thumb.jpg", thumb, "image/jpeg"), "post_error": None}
             else:
-                W, H = (1000, 1500) if plat == "pinterest" else (1080, 1350)
+                # THE BRAND SHEET: social posts are square and illustration-led; Pinterest wants 2:3;
+                # a card or a carousel of cards keeps 4:5 so the Lantern cards stay readable.
+                W, H = (1000, 1500) if plat == "pinterest" else ((1080, 1350) if fmt in ("carousel", "card") else (1080, 1080))
                 in_hook = travelers_in(hook) if kids else []
                 first = still_image(portrait(in_hook) if in_hook else pics[0], hook, W, H, who=None if in_hook else who, cover=cover)
                 cards = pick_cards(lantern_cards(it.get("night_date")), it.get("body") or "", n=1 if fmt == "card" else 6) if fmt in ("carousel", "card") else []
