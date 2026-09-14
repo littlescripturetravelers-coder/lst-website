@@ -9,9 +9,12 @@ THE PICTURE RULE (the owner's brand, every time):
   reference images (lantern/brand/: the four Travelers and the cast sheet), so
   the characters stay the same from one day to the next.
   THE PRESENTERS: parents-audience pieces use two fixed presenters - the mom
-  (lantern/brand/presenter.png, the default) and the dad (presenter-dad.png, when
-  the drafter marks a piece DAD PRESENTER) - each made once from words and kept,
-  so the "face" of the parent videos never changes. THE PEOPLE RULE (PEOPLE_RULE)
+  (lantern/brand/presenter.png) and the dad (presenter-dad.png) - each made once
+  from words and kept, so the "faces" of the parent videos never change. THE MIX:
+  the drafter may mark a piece MOM PRESENTER / DAD PRESENTER / BOTH PRESENTERS;
+  otherwise a steady random mix keyed on the piece's id gives about half the mom
+  alone, a quarter the dad alone, a quarter the two together. In a 'both' video
+  the lines alternate voices (a line may start "Mom:" or "Dad:" to say who). THE PEOPLE RULE (PEOPLE_RULE)
   rides on every generated adult: women pretty and put-together, tasteful makeup,
   a modern modest dress, simple jewelry, proud to be a woman and a mom; men
   masculine and strong. The dad's videos use a male voice (ELEVENLABS_VOICE_ID_DAD
@@ -55,7 +58,7 @@ Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, OPENAI_API_KEY (generated pictures
      MEDIA_LIMIT (default 20).
 Runs on the Action's Ubuntu runner (ffmpeg installed by the workflow, DejaVu fonts present).
 """
-import os, re, io, json, glob, base64, subprocess, tempfile, urllib.request, urllib.error, uuid, sys
+import os, re, io, json, glob, base64, subprocess, tempfile, urllib.request, urllib.error, uuid, sys, math, hashlib
 
 URL   = os.environ.get("SUPABASE_URL", "").rstrip("/")
 KEY   = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
@@ -168,10 +171,33 @@ PRESENTER_DAD_TEXT = ("A photoreal portrait of the brand's second presenter: a m
                       "broad shoulders, athletic build, short neat dark hair, clean-shaven or a neat short beard, a fitted navy "
                       "henley and jeans, a steady confident warm smile. Sitting on the edge of a child's bed in soft evening "
                       "lamplight, a children's storybook in his hands. Not a cartoon. Portrait framing, calm and kind. " + PEOPLE_RULE)
-DAD_RE = re.compile(r"\b(dad|father|daddy)\s+(presenter|speaks|speaking|talks|talking)\b|\bpresenter\s*:\s*(dad|father)\b", re.I)
-def wants_dad(it):
-    """The dad presents when the drafter says so (image_prompt / visual_brief 'DAD PRESENTER')."""
-    return bool(DAD_RE.search(" ".join(str(it.get(k) or "") for k in ("image_prompt", "visual_brief"))))
+DAD_RE  = re.compile(r"\b(dad|father|daddy)\s+(presenter|speaks|speaking|talks|talking)\b|\bpresenter\s*:\s*(dad|father)\b", re.I)
+MOM_RE  = re.compile(r"\b(mom|mother|mum)\s+(presenter|speaks|speaking|talks|talking)\b|\bpresenter\s*:\s*(mom|mother)\b", re.I)
+BOTH_RE = re.compile(r"\bboth\s+(presenters|parents)\b|\b(mom|mother)\s+(and|&)\s+(dad|father)\b|\bpresenters?\s*:\s*both\b", re.I)
+def presenter_mode(it):
+    """Who presents this piece: 'mom', 'dad' or 'both'. The drafter may say so
+    (image_prompt / visual_brief: MOM PRESENTER, DAD PRESENTER, BOTH PRESENTERS);
+    otherwise THE MIX - a steady random mix keyed on the piece's id, so a re-render
+    gives the same answer: about half the mom alone, a quarter the dad alone, a
+    quarter the two of them together."""
+    text = " ".join(str(it.get(k) or "") for k in ("image_prompt", "visual_brief"))
+    if BOTH_RE.search(text): return "both"
+    if DAD_RE.search(text): return "dad"
+    if MOM_RE.search(text): return "mom"
+    h = int(hashlib.md5(str(it.get("id") or it.get("title") or "").encode()).hexdigest(), 16) % 4
+    return ("mom", "mom", "dad", "both")[h]
+def wants_dad(it): return presenter_mode(it) == "dad"
+SPEAKER_RE = re.compile(r"^\s*(mom|mother|mum|dad|father|daddy)\s*:\s*", re.I)
+def speakers_of(body, mode):
+    """One voice per spoken line: True = the dad's voice. For 'both', lines marked
+    'Mom:' / 'Dad:' keep their speaker and unmarked lines alternate, mom first."""
+    if mode == "dad": return lambda i, spoken: True
+    if mode != "both": return lambda i, spoken: False
+    def pick(i, spoken):
+        m = SPEAKER_RE.match(spoken or "")
+        if m: return m.group(1).lower() in ("dad", "father", "daddy")
+        return i % 2 == 1
+    return pick
 
 def http(method, url, body=None, headers=None, raw=None, timeout=180):
     data = raw if raw is not None else (None if body is None else json.dumps(body).encode("utf-8"))
@@ -369,12 +395,19 @@ def presenter_file(dad=False):
         print(f"  presenter: made the brand kit's {who} presenter picture (kept for every future piece)")
     return path
 
-def presenter_picture(prompt, dad=False):
-    """The same presenter every time (the mom by default, the dad when the piece asks), in the scene the piece describes."""
-    ref = presenter_file(dad)
-    same = "The same man as in the reference image - same face, hair, build and warmth" if dad else \
-           "The same woman as in the reference image - same face, hair, makeup, dress style and warmth"
-    return generate_with_refs(f"{same} - photoreal, not cartoon. {PEOPLE_RULE}\n\nScene: {prompt}", [ref])
+def presenter_picture(prompt, dad=False, mode=None):
+    """The same presenters every time, in the scene the piece describes: the mom
+    (default), the dad, or the two of them together (mode 'both')."""
+    mode = mode or ("dad" if dad else "mom")
+    if mode == "both":
+        refs = [presenter_file(False), presenter_file(True)]
+        same = ("The same woman (first reference image) and the same man (second reference image) together, side by side "
+                "as husband and wife - same faces, hair, build, makeup and dress style as their references, warm and close")
+    else:
+        refs = [presenter_file(mode == "dad")]
+        same = "The same man as in the reference image - same face, hair, build and warmth" if mode == "dad" else \
+               "The same woman as in the reference image - same face, hair, makeup, dress style and warmth"
+    return generate_with_refs(f"{same} - photoreal, not cartoon. {PEOPLE_RULE}\n\nScene: {prompt}", refs)
 
 # ---------------------------------------------------------------- the voice
 _VOICE = None
@@ -428,6 +461,7 @@ def parse_lines(body):
         raw = raw.strip()
         if not raw or raw.startswith("#"): continue
         raw = re.sub(r"^(HOOK|SCRIPT|CAPTION|CTA|LINE\s*\d+|SCENE\s*\d+)\s*:\s*", "", raw, flags=re.I)
+        raw = re.sub(r"^(MOM|MOTHER|MUM|DAD|FATHER|DADDY)\s*:\s*", lambda m: m.group(0).upper(), raw, flags=re.I)  # keep the speaker tag, normalised
         m = LINE_RE.match(raw)
         spoken, overlay = (m.group(1) or "").strip(), (m.group(2) or "").strip()
         spoken = re.sub(r"\s*\(.*?\)\s*$", "", spoken)          # trailing stage directions
@@ -710,7 +744,9 @@ def intro_card(W=1080, H=1920):
 # ---------------------------------------------------------------- the video
 def make_video(pics, lines, who=None, cover=None, male=False):
     """who: the Traveler this piece is about (badge on story frames). A line that
-    names a Traveler shows that Traveler's portrait instead of a story picture."""
+    names a Traveler shows that Traveler's portrait instead of a story picture.
+    male: False / True for one voice, or a function (i, spoken) -> bool per line."""
+    voice_of = male if callable(male) else (lambda i, spoken: bool(male))
     tmp = tempfile.mkdtemp(prefix="mkt-")
     concat, audio_parts, story_i = [], [], 0
     ip = os.path.join(tmp, "intro.png"); intro_card().save(ip); concat.append((ip, 1.2))
@@ -718,9 +754,10 @@ def make_video(pics, lines, who=None, cover=None, male=False):
         named = travelers_in(spoken + " " + overlay)
         if named: pic, mark = portrait(named), None
         else: pic, mark = pics[story_i % len(pics)], who; story_i += 1
-        fpath = os.path.join(tmp, f"f{i:02d}.png"); frame(pic, overlay, spoken, who=mark).save(fpath)
+        fpath = os.path.join(tmp, f"f{i:02d}.png"); frame(pic, overlay, SPEAKER_RE.sub("", spoken), who=mark).save(fpath)
         if spoken:
-            apath = os.path.join(tmp, f"a{i:02d}.mp3"); open(apath, "wb").write(tts(spoken, male)); dur = duration_of(apath) + 0.35
+            said = SPEAKER_RE.sub("", spoken)
+            apath = os.path.join(tmp, f"a{i:02d}.mp3"); open(apath, "wb").write(tts(said, voice_of(i, spoken))); dur = duration_of(apath) + 0.35
             audio_parts.append(apath)
         else:
             dur = 2.2
@@ -764,6 +801,7 @@ def talking_video(lines, item_id, cover=None, dad=False):
     parts, cues, t = [], [], 0.0
     for i, (spoken, overlay) in enumerate(lines):
         if not spoken: continue
+        spoken = SPEAKER_RE.sub("", spoken)
         apath = os.path.join(tmp, f"a{i:02d}.mp3"); open(apath, "wb").write(tts(spoken, dad)); d = duration_of(apath)
         parts.append(apath); cues.append((t, t + d, spoken)); t += d
     if not parts: raise RuntimeError("nothing to say")
@@ -832,8 +870,8 @@ def pictures_for(it):
     audience = (it.get("audience") or "kids").lower()
     prompt = it.get("image_prompt") or it.get("title") or "a bedtime scripture story"
     if audience.startswith("parent"):
-        dad = wants_dad(it)
-        return [presenter_picture(prompt, dad=dad)], ("the dad presenter" if dad else "the mom presenter")
+        mode = presenter_mode(it)
+        return [presenter_picture(prompt, mode=mode)], {"mom": "the mom presenter", "dad": "the dad presenter"}.get(mode, "the mom and dad presenters")
     pics = night_pictures(it.get("night_date"))
     if pics: return pics, "the night's own illustrations"
     return [kids_picture(prompt)], "drawn from the brand kit"
@@ -862,11 +900,11 @@ def main():
                 lines = parse_lines(it.get("body") or "")
                 if not lines: lines = [(hook, hook)]
                 mp4 = thumb = None
-                dad = (not kids) and wants_dad(it)
-                if not kids and DID:
-                    try: mp4, thumb = talking_video(lines, iid, cover=cover, dad=dad); source += ", talking"
+                mode = presenter_mode(it) if not kids else "mom"
+                if not kids and DID and mode != "both":       # D-ID animates one face; the pair keeps the still video
+                    try: mp4, thumb = talking_video(lines, iid, cover=cover, dad=(mode == "dad")); source += ", talking"
                     except Exception as e: print(f"  talking presenter: {e} - using the still presenter")
-                if mp4 is None: mp4, thumb = make_video(pics, lines, who=who, cover=cover, male=dad)
+                if mp4 is None: mp4, thumb = make_video(pics, lines, who=who, cover=cover, male=speakers_of(it.get("body") or "", mode) if not kids else False)
                 patch = {"media_url": upload(f"{iid}/video.mp4", mp4, "video/mp4"), "media_type": "video",
                          "thumb_url": upload(f"{iid}/thumb.jpg", thumb, "image/jpeg"), "post_error": None}
             else:
