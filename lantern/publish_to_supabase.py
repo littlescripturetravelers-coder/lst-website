@@ -212,8 +212,17 @@ def narrate(date):
 # already has its tree, so a re-publish never doubles the queue.
 MARKET = os.environ.get("MARKET", "1") != "0"
 def market(date):
+    """Ask the drafter for the night's three slots (morning, midday, evening):
+    each call writes the first slot still missing and says how many remain."""
     hdr = {"Authorization": "Bearer " + KEY, "Content-Type": "application/json"}
-    status, body = http("POST", URL + "/functions/v1/marketing-draft", {"date": date}, hdr, timeout=300)
+    status, body = 0, b""
+    for _ in range(3):
+        status, body = http("POST", URL + "/functions/v1/marketing-draft", {"date": date}, hdr, timeout=300)
+        if status != 200: break
+        try:
+            if int(json.loads(body).get("remaining", 0)) <= 0: break
+        except Exception:
+            break
     return status, body[:300]
 
 def missing_in_account(date, expect):

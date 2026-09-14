@@ -289,6 +289,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+          DID_API_KEY: ${{ secrets.DID_API_KEY }}
         run: |
           if [ -z "$OPENAI_API_KEY" ]; then echo "OPENAI_API_KEY not set - no marketing media this run."; else
             python3 -m pip install --quiet --disable-pip-version-check Pillow || true
