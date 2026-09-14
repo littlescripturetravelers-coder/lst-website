@@ -121,7 +121,11 @@ The six files:
   lantern/{slug}/lullaby.json
   lantern/{slug}/{slug}.html
 
-THEN PROVE THE NIGHT ARRIVED. The Action runs within a minute of the push: it sings the lullaby with ElevenLabs, measures the take for distortion, re-encodes the book's photographs, puts the night into the account and commits .published.json. Wait about two minutes, then `git pull origin main` and check that lantern/{slug}/.published.json exists. Its presence is the proof the night is in the account. If it is not there after two tries, say so loudly: the night is in the repo but nobody will see it.
+THEN PROVE THE NIGHT ARRIVED. The Action starts within a minute of the push: it sings the lullaby with ElevenLabs, measures the take for distortion, re-encodes the book's photographs, puts the night into the account, builds and posts the marketing, and only in its LAST step commits .published.json. The marker therefore lags the account by a long way. On 14 September the night was in the account four minutes after the push and .published.json landed twenty-five minutes after it, because the marketing-media step sits between the two. A missing marker at two minutes means the Action is still working. It does not mean the night failed.
+
+So: wait about two minutes, `git pull origin main`, and check for lantern/{slug}/.published.json. If it is not there, find out what the run is actually doing before you conclude anything. If the session has GitHub tools, read the steps of the newest "Lantern sync" run on main for your commit - the step list names which step is in progress and which have passed, and "Publish any finished night to the account (Supabase)" turning green IS the night being in the account, whatever the marker says yet. If the session has no GitHub tools, keep pulling. Either way, while a step is still in progress the run is healthy: check again every few minutes, up to about forty-five, and never with a foreground sleep.
+
+Say the night did not arrive ONLY when the run has finished or failed without the marker, or when forty-five minutes have gone by. Then say it loudly: the night is in the repo but nobody will see it. Short of that, report what you actually saw - which steps passed, which was still running, and whether the account step went green. "Still building the marketing when my turn ended, night already in the account" is a truthful and useful line to write, and it is not the same thing as a failure.
 
 You do not touch Supabase, ElevenLabs or Admin. The Action does all of that.
 
@@ -132,6 +136,6 @@ REPORT at the end of your turn:
 - Per edition: audit result, how many quotes verified, what was left out and why, and any domain the network policy blocked.
 - The story page: picture count before and after, the bookTitle used and where it came from, and confirmation no "Read to me" button survived.
 - The commit SHA and the size of each file pushed.
-- Whether .published.json appeared (the night is live) or did not (it is not).
+- Whether .published.json appeared (the night is live). If it had not appeared by the end of your turn, say where the Action had got to instead - the step that was running, and whether the Supabase publish step had already gone green - rather than reporting a flat failure.
 - Any folder found holding a lullaby but no night.json.
 - Anything that failed, and exactly what Levi should do about it.
