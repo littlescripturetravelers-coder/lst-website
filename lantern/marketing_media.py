@@ -11,6 +11,10 @@ THE PICTURE RULE (the owner's brand, every time):
   Parents-audience pieces use one fixed presenter (lantern/brand/presenter.png,
   made once from the kit and kept), so the "face" of the parent videos never
   changes either.
+  THE TRAVELER RULE: when a piece names a Traveler (Beau, Scout, Willow, Wren),
+  that Traveler's own portrait is shown - a video line that names one shows the
+  portrait for that line, a hook that names one puts the portrait in the frame,
+  and every other frame of such a piece carries the Traveler as a round badge.
 
 For every fresh draft in marketing_items that has no media yet:
   image  - a brand panel: the illustration framed on navy with the hook in gold,
@@ -45,6 +49,13 @@ BRAND  = os.path.join(HERE, "brand")
 CAST   = os.path.join(BRAND, "travelers-cast.jpg")
 TRAVELERS = ["beau", "scout", "willow", "wren"]
 PRESENTER = os.path.join(BRAND, "presenter.png")
+TRAVELER_RE = {t: re.compile(r"\b" + t + r"\b", re.I) for t in TRAVELERS}
+def travelers_in(text):
+    """Which Travelers a piece of text names, in cast order."""
+    return [t for t in TRAVELERS if TRAVELER_RE[t].search(text or "")]
+def portrait(named):
+    """The picture for the Travelers named: one portrait, or the cast sheet for several."""
+    return os.path.join(BRAND, named[0] + ".jpg") if len(named) == 1 else CAST
 FONT_B = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 FONT_R = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 NAVY, GOLD, CREAM, TEAL = (27, 45, 95), (245, 197, 24), (251, 247, 234), (91, 211, 220)
@@ -245,7 +256,7 @@ def rounded(im, radius):
     ImageDraw.Draw(mask).rounded_rectangle([0, 0, im.width - 1, im.height - 1], radius=radius, fill=255)
     out = im.convert("RGBA"); out.putalpha(mask); return out
 
-def panel(pic, W, H, pic_top=None, pic_w=None):
+def panel(pic, W, H, pic_top=None, pic_w=None, max_h=None):
     """The brand backdrop: the picture itself blurred and darkened behind, the
     picture framed in gold in front. Returns (RGB image, (top, bottom) of the frame)."""
     from PIL import Image, ImageDraw, ImageFilter, ImageEnhance
@@ -256,8 +267,9 @@ def panel(pic, W, H, pic_top=None, pic_w=None):
     bg = Image.blend(bg, tint, 0.35)
     pw = pic_w or (W - 80)
     ph = int(im.height * pw / im.width)
-    if ph > int(H * 0.62):                                     # a tall picture: fit the height instead
-        ph = int(H * 0.62); pw = int(im.width * ph / im.height)
+    cap = min(int(H * 0.62), max_h or H)
+    if ph > cap:                                               # a tall picture: fit the height instead
+        ph = cap; pw = int(im.width * ph / im.height)
     top = pic_top if pic_top is not None else (H - ph) // 2
     left = (W - pw) // 2
     frame_ = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -271,21 +283,38 @@ def text_block(d, text, fnt, cx, y, max_w, fill, max_lines, step, stroke=(15, 25
         d.text((cx, y), ln, font=fnt, fill=fill, anchor="mm", stroke_width=sw, stroke_fill=stroke); y += step
     return y
 
-def still_image(pic, hook, W, H):
+def badge(im, who, cx, cy, size):
+    """A Traveler's face in a round gold ring, centred on (cx, cy)."""
+    from PIL import Image, ImageDraw
+    if not who: return im
+    face = load_rgb(portrait([who]))
+    side = min(face.width, face.height)
+    face = face.crop(((face.width - side) // 2, 0, (face.width - side) // 2 + side, side)).resize((size, size))
+    mask = Image.new("L", (size, size), 0); ImageDraw.Draw(mask).ellipse([0, 0, size - 1, size - 1], fill=255)
+    out = im.convert("RGBA")
+    ring = Image.new("RGBA", out.size, (0, 0, 0, 0))
+    ImageDraw.Draw(ring).ellipse([cx - size // 2 - 7, cy - size // 2 - 7, cx + size // 2 + 7, cy + size // 2 + 7], fill=GOLD + (255,))
+    out = Image.alpha_composite(out, ring)
+    out.paste(face, (cx - size // 2, cy - size // 2), mask)
+    return out.convert("RGB")
+
+def still_image(pic, hook, W, H, who=None):
     """A feed picture: the illustration framed, the hook in gold above, the brand below."""
     from PIL import ImageDraw
-    im, (top, bottom) = panel(pic, W, H, pic_top=int(H * 0.30))
+    im, (top, bottom) = panel(pic, W, H, pic_top=int(H * 0.30), max_h=int(H * 0.56))
+    if who: im = badge(im, who, W - 130, top + 30, 210)      # the Traveler, top-right corner of the frame
     d = ImageDraw.Draw(im)
     fb = font(True, int(W * 0.062)); fr = font(False, int(W * 0.036))
-    if hook: text_block(d, hook, fb, W / 2, int(H * 0.09), W - 140, GOLD, 4, int(W * 0.078))
+    if hook: text_block(d, hook, fb, W / 2, int(H * 0.09), W - 140, GOLD, 3, int(W * 0.078))
     d.text((W / 2, bottom + int(H * 0.06)), "A new story every night - free in the app", font=fr, fill=CREAM, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
     d.text((W / 2, bottom + int(H * 0.105)), "Little Scripture Travelers", font=font(True, int(W * 0.04)), fill=TEAL, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
     return im
 
-def frame(pic, overlay, caption, W=1080, H=1920):
+def frame(pic, overlay, caption, W=1080, H=1920, who=None):
     """One video frame: the picture framed mid-screen, on-screen text above, the spoken words below."""
     from PIL import ImageDraw
     im, (top, bottom) = panel(pic, W, H, pic_top=560, pic_w=1000)
+    if who: im = badge(im, who, W - 150, top + 40, 250)      # the Traveler, top-right corner of the frame
     d = ImageDraw.Draw(im)
     fb, fr = font(True, 72), font(False, 50)
     if overlay:
@@ -309,12 +338,16 @@ def end_card(W=1080, H=1920):
     return im
 
 # ---------------------------------------------------------------- the video
-def make_video(pics, lines):
+def make_video(pics, lines, who=None):
+    """who: the Traveler this piece is about (badge on story frames). A line that
+    names a Traveler shows that Traveler's portrait instead of a story picture."""
     tmp = tempfile.mkdtemp(prefix="mkt-")
-    concat, audio_parts = [], []
+    concat, audio_parts, story_i = [], [], 0
     for i, (spoken, overlay) in enumerate(lines):
-        pic = pics[i % len(pics)]
-        fpath = os.path.join(tmp, f"f{i:02d}.png"); frame(pic, overlay, spoken).save(fpath)
+        named = travelers_in(spoken + " " + overlay)
+        if named: pic, mark = portrait(named), None
+        else: pic, mark = pics[story_i % len(pics)], who; story_i += 1
+        fpath = os.path.join(tmp, f"f{i:02d}.png"); frame(pic, overlay, spoken, who=mark).save(fpath)
         if spoken:
             apath = os.path.join(tmp, f"a{i:02d}.mp3"); open(apath, "wb").write(tts(spoken)); dur = duration_of(apath) + 0.35
             audio_parts.append(apath)
@@ -339,7 +372,8 @@ def make_video(pics, lines):
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", silent, "-i", voice, "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", out], check=True)
     else:
         out = silent
-    thumb = os.path.join(tmp, "thumb.jpg"); frame(pics[0], lines[0][1] if lines else "", "").save(thumb, quality=88)
+    first = travelers_in(" ".join(lines[0]) if lines else "")
+    thumb = os.path.join(tmp, "thumb.jpg"); frame(portrait(first) if first else pics[0], lines[0][1] if lines else "", "", who=None if first else who).save(thumb, quality=88)
     return open(out, "rb").read(), open(thumb, "rb").read()
 
 # ---------------------------------------------------------------- the pictures for one piece
@@ -368,15 +402,20 @@ def main():
         try:
             pics, source = pictures_for(it)
             hook = it.get("hook") or it.get("title") or ""
+            kids = not (it.get("audience") or "kids").lower().startswith("parent")
+            # THE TRAVELER RULE: a piece that names a Traveler shows that Traveler
+            about = travelers_in(" ".join(str(it.get(k) or "") for k in ("title", "hook", "body", "caption"))) if kids else []
+            who = about[0] if len(about) == 1 else None
             if fmt in VIDEO_FORMATS or plat in ("tiktok", "youtube"):
                 lines = parse_lines(it.get("body") or "")
                 if not lines: lines = [(hook, hook)]
-                mp4, thumb = make_video(pics, lines)
+                mp4, thumb = make_video(pics, lines, who=who)
                 patch = {"media_url": upload(f"{iid}/video.mp4", mp4, "video/mp4"), "media_type": "video",
                          "thumb_url": upload(f"{iid}/thumb.jpg", thumb, "image/jpeg"), "post_error": None}
             else:
                 W, H = (1000, 1500) if plat == "pinterest" else (1080, 1350)
-                png = to_bytes(still_image(pics[0], hook, W, H))
+                in_hook = travelers_in(hook) if kids else []
+                png = to_bytes(still_image(portrait(in_hook) if in_hook else pics[0], hook, W, H, who=None if in_hook else who))
                 image_url = upload(f"{iid}/image.png", png, "image/png")
                 patch = {"media_url": image_url, "media_type": "image", "thumb_url": image_url, "post_error": None}
             sb_patch(iid, patch); done += 1
