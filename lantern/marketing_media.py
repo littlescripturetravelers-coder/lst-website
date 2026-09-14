@@ -48,13 +48,15 @@ For every fresh draft in marketing_items that has no media yet:
 Both land in the public "marketing" bucket and the row gets media_url. The
 poster (marketing-post) only sends pieces that have media.
 
-  THE TALKING PRESENTER: with DID_API_KEY set, a parents-audience video is the
-  presenter actually speaking the lines (D-ID animates lantern/brand/presenter.png
-  to the ElevenLabs voice), captions burned in, brand end card. Without the key
-  the presenter's still picture carries the voice and captions as before.
+  THE TALKING PRESENTER: with REPLICATE_API_TOKEN (pay per video; TALKER_MODEL,
+  default lucataco/sadtalker) or DID_API_KEY (a subscription) set, a parents-audience
+  video is the presenter actually speaking the lines, lip-synced: the piece's own
+  scene picture of the mom or dad is animated to the ElevenLabs voice, captions
+  burned in, brand end card. With neither key the still picture carries the voice.
 
 Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, OPENAI_API_KEY (generated pictures),
-     ELEVENLABS_API_KEY (voice), ELEVENLABS_VOICE_ID / ELEVENLABS_VOICE_ID_DAD (optional), DID_API_KEY (optional),
+     ELEVENLABS_API_KEY (voice), ELEVENLABS_VOICE_ID / ELEVENLABS_VOICE_ID_DAD (optional),
+     REPLICATE_API_TOKEN + TALKER_MODEL (the talking presenter, optional), DID_API_KEY (optional),
      MEDIA_LIMIT (default 20).
 Runs on the Action's Ubuntu runner (ffmpeg installed by the workflow, DejaVu fonts present).
 """
@@ -69,7 +71,9 @@ ELEVEN = os.environ.get("ELEVENLABS_API_KEY", "")
 # the voice URL ended in nothing, which ElevenLabs answered with 404.
 VOICE  = os.environ.get("ELEVENLABS_VOICE_ID", "").strip() or "21m00Tcm4TlvDq8ikWAM"   # Rachel - warm, clear
 LIMIT  = int(os.environ.get("MEDIA_LIMIT", "20"))
-DID    = os.environ.get("DID_API_KEY", "").strip()          # optional: the presenter talks (D-ID)
+DID    = os.environ.get("DID_API_KEY", "").strip()          # optional: the presenter talks (D-ID, a subscription)
+REPLICATE = os.environ.get("REPLICATE_API_TOKEN", "").strip()   # optional: the presenter talks (Replicate, pay per video)
+TALKER = os.environ.get("TALKER_MODEL", "").strip() or "lucataco/sadtalker"   # the talking-head model on Replicate
 SITE   = "https://littlescripturetravelers.com"
 HERE   = os.path.dirname(os.path.abspath(__file__))
 ROOT   = os.path.abspath(os.path.join(HERE, ".."))
@@ -790,13 +794,66 @@ def srt_time(t):
     ms = int(round(t * 1000)); h, ms = divmod(ms, 3600000); m, ms = divmod(ms, 60000); sec, ms = divmod(ms, 1000)
     return f"{h:02d}:{m:02d}:{sec:02d},{ms:03d}"
 
-def talking_video(lines, item_id, cover=None, dad=False):
+def _jpeg_bytes(pic):
+    """A picture as JPEG bytes, whatever we were handed (a path, bytes, or a PIL image)."""
+    from PIL import Image
+    if isinstance(pic, (bytes, bytearray)): im = Image.open(io.BytesIO(pic))
+    elif isinstance(pic, str): im = Image.open(pic)
+    else: im = pic
+    return to_bytes(im.convert("RGB"), "JPEG")
+
+def replicate_talk(image_url, audio_url):
+    """THE TALKING PRESENTER on Replicate: a still picture + the voice -> a lip-synced
+    talking video (mp4 bytes). The model's input names are read from its own schema,
+    so a different talker (TALKER_MODEL) still works if it takes an image and audio."""
+    if not REPLICATE: raise RuntimeError("REPLICATE_API_TOKEN is not set")
+    auth = {"Authorization": "Bearer " + REPLICATE, "Content-Type": "application/json"}
+    s, b = http("GET", f"https://api.replicate.com/v1/models/{TALKER}", headers=auth, timeout=60)
+    if s != 200: raise RuntimeError(f"Replicate: model {TALKER}: {s} {b[:160]!r}")
+    m = json.loads(b); ver = (m.get("latest_version") or {}).get("id")
+    props = (((m.get("latest_version") or {}).get("openapi_schema") or {}).get("components", {}).get("schemas", {}).get("Input", {}).get("properties", {}))
+    names = list(props.keys())
+    def pick(cands):
+        for c in cands:
+            if c in names: return c
+        return None
+    img_key = pick(["source_image", "image", "face", "input_image", "source_image_url", "face_image"])
+    aud_key = pick(["driven_audio", "audio", "input_audio", "driven_audio_url", "audio_file"])
+    if not (ver and img_key and aud_key): raise RuntimeError(f"Replicate: {TALKER} does not look like an image+audio talker ({names[:8]})")
+    inp = {img_key: image_url, aud_key: audio_url}
+    def enum_of(k):
+        pr = props.get(k, {}); return pr.get("enum") or (pr.get("allOf") and []) or []
+    def setif(k, v):
+        if k in names: inp[k] = v
+    # the whole picture stays (the face is animated inside it), a calm head, the face cleaned up
+    if "preprocess" in names: inp["preprocess"] = "full"
+    setif("still", True); setif("still_mode", True)
+    if "enhancer" in names: inp["enhancer"] = "gfpgan"
+    setif("use_enhancer", True)
+    if "size_of_image" in names: inp["size_of_image"] = 512
+    setif("expression_scale", 1.0)
+    s, b = http("POST", "https://api.replicate.com/v1/predictions", {"version": ver, "input": inp}, auth, timeout=120)
+    if s not in (200, 201): raise RuntimeError(f"Replicate: {s} {b[:200]!r}")
+    pred = json.loads(b); get_url = (pred.get("urls") or {}).get("get") or f"https://api.replicate.com/v1/predictions/{pred.get('id')}"
+    for _ in range(150):                      # up to ten minutes: a cold model can take a while to wake
+        if pred.get("status") in ("succeeded", "failed", "canceled"): break
+        time.sleep(4)
+        s, b = http("GET", get_url, headers=auth, timeout=60)
+        if s == 200: pred = json.loads(b)
+    if pred.get("status") != "succeeded": raise RuntimeError(f"Replicate: {pred.get('status')} {str(pred.get('error') or '')[:200]}")
+    out = pred.get("output"); url = out[0] if isinstance(out, list) and out else (out if isinstance(out, str) else None)
+    if not url: raise RuntimeError("Replicate: no video came back")
+    s, mp4 = http("GET", url, timeout=300)
+    if s != 200: raise RuntimeError(f"Replicate: could not fetch the video ({s})")
+    return mp4
+
+def talking_video(lines, item_id, cover=None, dad=False, source=None):
     """The presenter speaks the lines. ElevenLabs reads them (one file, with the
     per-line timing kept for captions); D-ID animates the presenter picture to
     that audio; ffmpeg frames it 1080x1920 with the headline, burned-in
     captions, the brand line and the end card. Returns (mp4 bytes, jpg bytes)."""
     ref = presenter_file(dad)
-    if not (DID and os.path.exists(ref)): raise RuntimeError("no D-ID key or presenter")
+    if not ((DID or REPLICATE) and os.path.exists(ref)): raise RuntimeError("no talker key (D-ID or Replicate) or no presenter")
     tmp = tempfile.mkdtemp(prefix="talk-")
     parts, cues, t = [], [], 0.0
     for i, (spoken, overlay) in enumerate(lines):
@@ -811,23 +868,28 @@ def talking_video(lines, item_id, cover=None, dad=False):
     voice = os.path.join(tmp, "voice.mp3")
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", alist, "-c", "copy", voice], check=True)
     audio_url = upload(f"{item_id}/voice.mp3", open(voice, "rb").read(), "audio/mpeg")
-    # the presenter picture must be reachable by D-ID: the website serves the brand kit
-    source_url = f"{SITE}/lantern/brand/{os.path.basename(ref)}"
-    auth = {"Authorization": "Basic " + DID, "Content-Type": "application/json"}
-    st, b = http("POST", "https://api.d-id.com/talks", {"source_url": source_url, "script": {"type": "audio", "audio_url": audio_url},
-                 "config": {"fluent": True, "pad_audio": 0.3, "stitch": True}}, auth, timeout=120)
-    if st not in (200, 201): raise RuntimeError(f"D-ID: {st} {b[:200]!r}")
-    talk_id = json.loads(b).get("id")
-    result = None
-    for _ in range(90):
-        time.sleep(4)
-        st, b = http("GET", f"https://api.d-id.com/talks/{talk_id}", headers=auth, timeout=60)
-        j = json.loads(b) if st == 200 else {}
-        if j.get("status") == "done": result = j.get("result_url"); break
-        if j.get("status") in ("error", "rejected"): raise RuntimeError(f"D-ID: {j.get('error') or j.get('status')}")
-    if not result: raise RuntimeError("D-ID: the talk did not finish in time")
-    st, mp4 = http("GET", result, timeout=300)
-    if st != 200: raise RuntimeError(f"D-ID: could not fetch the result ({st})")
+    # the picture that talks: the piece's own scene of the presenter (uploaded so the talker can fetch it),
+    # else the presenter's base picture, which the website serves
+    if source is not None: source_url = upload(f"{item_id}/talk-source.jpg", _jpeg_bytes(source), "image/jpeg")
+    else: source_url = f"{SITE}/lantern/brand/{os.path.basename(ref)}"
+    if DID:
+        auth = {"Authorization": "Basic " + DID, "Content-Type": "application/json"}
+        st, b = http("POST", "https://api.d-id.com/talks", {"source_url": source_url, "script": {"type": "audio", "audio_url": audio_url},
+                     "config": {"fluent": True, "pad_audio": 0.3, "stitch": True}}, auth, timeout=120)
+        if st not in (200, 201): raise RuntimeError(f"D-ID: {st} {b[:200]!r}")
+        talk_id = json.loads(b).get("id")
+        result = None
+        for _ in range(90):
+            time.sleep(4)
+            st, b = http("GET", f"https://api.d-id.com/talks/{talk_id}", headers=auth, timeout=60)
+            j = json.loads(b) if st == 200 else {}
+            if j.get("status") == "done": result = j.get("result_url"); break
+            if j.get("status") in ("error", "rejected"): raise RuntimeError(f"D-ID: {j.get('error') or j.get('status')}")
+        if not result: raise RuntimeError("D-ID: the talk did not finish in time")
+        st, mp4 = http("GET", result, timeout=300)
+        if st != 200: raise RuntimeError(f"D-ID: could not fetch the result ({st})")
+    else:
+        mp4 = replicate_talk(source_url, audio_url)
     src = os.path.join(tmp, "talk.mp4"); open(src, "wb").write(mp4)
     # captions
     srt = os.path.join(tmp, "captions.srt")
@@ -903,8 +965,8 @@ def main():
                 if not lines: lines = [(hook, hook)]
                 mp4 = thumb = None
                 mode = presenter_mode(it) if not kids else "mom"
-                if not kids and DID and mode != "both":       # D-ID animates one face; the pair keeps the still video
-                    try: mp4, thumb = talking_video(lines, iid, cover=cover, dad=(mode == "dad")); source += ", talking"
+                if not kids and (DID or REPLICATE) and mode != "both":   # the talker animates one face; the pair keeps the still video
+                    try: mp4, thumb = talking_video(lines, iid, cover=cover, dad=(mode == "dad"), source=pics[0]); source += ", talking (lip-synced)"
                     except Exception as e: print(f"  talking presenter: {e} - using the still presenter")
                 if mp4 is None: mp4, thumb = make_video(pics, lines, who=who, cover=cover, male=speakers_of(it.get("body") or "", mode) if not kids else False)
                 patch = {"media_url": upload(f"{iid}/video.mp4", mp4, "video/mp4"), "media_type": "video",

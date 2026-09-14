@@ -342,6 +342,8 @@ jobs:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
           DID_API_KEY: ${{ secrets.DID_API_KEY }}
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}   # the talking presenter (lip sync), pay per video
+          TALKER_MODEL: ${{ vars.TALKER_MODEL }}                    # optional; default lucataco/sadtalker
         run: |
           # Catch-up: today's night gets all three slots even if it was published before this
           # step existed (each call writes the first slot still missing; drafted slots are skipped),
