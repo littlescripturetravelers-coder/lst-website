@@ -1,0 +1,59 @@
+# WREN PAJAMA MASTER CHARACTER + BEDROOM MASTER PROMPT SYSTEM, and WREN FAMILY
+
+Use this as the permanent identity lock for Wren's bedtime world. This system permanently locks Wren's exact appearance, pajama design, facial structure, curl pattern, proportions, room layout, lighting, decor style, emotional atmosphere. Only camera angle, pose, expression, movement, and small storytelling props may change.
+
+## WREN — PAJAMA MASTER CHARACTER LOCK
+Wren is a 4-year-old little girl with warm deep brown skin and soft rosy cheeks. She has very large glossy dark brown eyes with long curled lashes and expressive eyebrows. Her face is round, soft, toddler-like, and emotionally warm with a tiny nose, full cheeks, and small chin. Her hair is black, extremely curly, soft dense ringlets, shoulder-length, rounded volume, identical curl pattern in every image. She ALWAYS wears a golden-yellow braided headband, identical shape and placement, visible in every image. Her proportions are permanently locked: large toddler head, short torso, small hands, short legs, soft rounded anatomy, toddler-safe proportions.
+
+### WREN — OFFICIAL PAJAMA LOCK
+Pajama top: coral-red long sleeve pajama shirt, tiny white polka dots, soft cozy cotton texture, small chest pocket, ribbed wrist cuffs, rounded pajama collar stitching. Pajama pants: coral-red pajama pants, matching white polka dots, soft cozy fabric, ribbed ankle cuffs, slightly loose toddler pajama fit. Barefoot: Wren is always barefoot in bedtime scenes unless specifically requested otherwise.
+
+### WREN — PERSONALITY + EXPRESSION LOCK
+Thoughtful, wise, curious, gentle, loving, observant, emotionally warm. Expressions may vary but must always feel wholesome, childlike, emotionally soft, intelligent and curious.
+
+### WREN — SHORT MASTER GENERATION PROMPT (pajamas)
+Wren, age 4, warm deep brown skin, large glossy dark brown eyes, black shoulder-length dense curly ringlets, golden-yellow braided headband, coral-red long sleeve pajamas with tiny white polka dots, matching pajama pants, soft toddler proportions, rounded cheeks, thoughtful and loving expression, warm cinematic 2D children's storybook illustration style, polished Disney-quality rendering, glowing warm lighting, identical facial structure and curl pattern in every image.
+
+## WREN BEDROOM — MASTER ENVIRONMENT LOCK
+The bedroom is a warm cozy cinematic children's bedtime room with rich amber-orange lighting and peaceful nighttime atmosphere. The room feels magical, emotionally safe, faith-centered, and deeply comforting. The room must ALWAYS maintain: warm orange/red color palette; cozy bedtime ambiance; cinematic glowing lantern lighting; soft warm shadows; nighttime setting; whimsical children's decor; faith-centered emotional warmth. The room is viewed as intimate, cozy, safe, magical, soft, peaceful.
+
+ROOM LAYOUT LOCK — the room ALWAYS includes: BED: large cozy bed, warm coral/red bedding, soft textured blankets, layered pillows, plush bedtime atmosphere. WINDOWS: nighttime window view, visible stars, deep blue night sky, glowing moonlight ambiance, soft curtains. LIGHTING: warm amber lantern lighting, fairy lights/string lights, glowing bedside lanterns, cinematic warm glow, soft illumination, cozy bedtime shadows. WALL DECOR: faith-centered children's room decor including framed scripture art, maps, soft inspirational signs, cozy wall art, storybook-style decorations. BOOKS + STORY ELEMENTS: bedtime books, scripture journals, children's Bible-style books, warm reading environment, cozy storytelling props. COLOR PALETTE: warm amber, deep coral red, soft golden glow, rich warm browns, muted pinks, warm orange highlights, cozy nighttime blues.
+
+ROOM ATMOSPHERE LOCK — the room must ALWAYS feel peaceful, emotionally safe, magical, cinematic, bedtime cozy, faith-filled, childlike wonder, warm family love.
+
+### FULL MASTER SCENE PROMPT (Wren's bedroom)
+Wren sitting in her permanently consistent cozy bedtime bedroom, warm amber lantern lighting, glowing fairy lights, coral-red bedding, deep blue nighttime window with stars, scripture books, journals, warm faith-centered children's room decor, magical cozy atmosphere, cinematic 2D premium children's storybook illustration style. Wren has warm deep brown skin, glossy dark brown eyes, black dense curly shoulder-length ringlets, golden-yellow braided headband, coral-red polka-dot pajamas, soft toddler proportions, thoughtful and loving expression, Disney-quality polished rendering, identical character and room consistency in every image.
+
+### CINEMATIC STYLE LOCK
+Warm premium cinematic 2D children's storybook illustration style. Disney-quality emotional warmth. Painterly textures. Soft glow lighting. Glossy expressive eyes. Cozy bedtime atmosphere. Rich warm colors. High-detail curls. Soft rounded anatomy. Child-safe wholesome presentation. Beautiful cinematic composition. Gentle shadows. Emotional warmth and wonder.
+
+## WREN FAMILY — PERMANENT MASTER CHARACTER PROMPT SYSTEM
+Use this as the permanent identity lock for all future image generations, illustrations, animation frames, storybooks, thumbnails, bedtime scenes, and cinematic artwork.
+
+CORE IDENTITY LOCK RULE (MANDATORY): these characters must remain 100% visually identical in every image. Only the following may change: pose, body position, hand gestures, facial expression, movement, camera angle, lighting, clothing variations (ONLY if specifically requested). The following must NEVER change: face structure, eye shape, smile shape, hair texture, curl pattern, skin tone, proportions, body scale, age appearance, character silhouette, family resemblance, signature colors, art style. This is a permanent character lock system.
+
+MASTER STYLE LOCK (applies to all three): warm premium cinematic 2D children's storybook illustration style. Soft painterly rendering. Disney-quality emotional warmth. Glossy expressive eyes. Rounded toddler-safe features. Rich warm color palette. Smooth clean linework. Soft cinematic golden lighting. Gentle ambient glow. Cozy family atmosphere. Modern wholesome family aesthetic. High-detail curls and facial consistency. Beautiful polished children's book rendering. No realism. No 3D. No anime. No style drift. No distorted anatomy. No exaggerated cartoon proportions. No text. No watermark.
+
+### WREN — MASTER CHARACTER PROMPT (daytime)
+Wren is a 4-year-old little girl with warm deep brown skin and soft rosy cheeks. She has large dark brown glossy eyes with long curled lashes and expressive eyebrows. Her hair is black, extremely curly, dense, soft, and shoulder-length with rounded volume and defined ringlets. Her signature accessory is a golden-yellow braided headband that must always remain identical in shape and color. Her face is round and toddler-like with a tiny nose, small chin, full cheeks, and a warm joyful smile. Her proportions are stylized toddler proportions with a large head, short torso, small hands, and short legs. She wears: coral-red top with tiny white polka dots; soft ruffled sleeves; light blue cuffed jeans; heart patches on jeans; colorful sneakers in coral, yellow, red, and white. Her emotional presence is thoughtful, sweet, curious, loving, gentle, wise, joyful. Wren must remain perfectly identical in all future generations.
+
+WREN — SHORT GENERATION PROMPT: Wren, age 4, warm deep brown skin, glossy dark brown eyes, black shoulder-length dense curly ringlets, golden-yellow braided headband, coral-red polka-dot top with ruffled sleeves, cuffed light blue jeans with heart patches, colorful coral/yellow sneakers, rounded toddler proportions, warm cinematic 2D children's storybook style, soft glowing lighting, polished Disney-quality illustration, identical facial structure and curls in every image.
+
+### DAD — MASTER CHARACTER PROMPT
+Dad is a warm and loving young father with warm brown skin and expressive large brown eyes. He has thick dark black curly hair with dense natural volume and soft defined curls. His eyebrows are thick and expressive. His smile is warm, friendly, protective, and joyful. His face shape is soft and rounded with youthful features and gentle cheek structure. He has no facial hair. He wears: red henley shirt with 3 buttons; dark blue jeans; red and white sneakers. His proportions: lean but warm and approachable; medium-tall father build; soft animated proportions; rounded storybook anatomy. His emotional presence: safe, loving, playful, protective, patient, joyful. Dad must remain visually identical in every image.
+
+DAD — SHORT GENERATION PROMPT: Warm loving father, warm brown skin, large brown expressive eyes, thick black curly hair with natural volume, friendly smile, red henley shirt with buttons, dark jeans, red and white sneakers, soft rounded storybook anatomy, polished cinematic 2D children's illustration style, warm glowing lighting, Disney-quality emotional warmth, identical face and hair consistency.
+
+### MOM — MASTER CHARACTER PROMPT
+Mom is a warm gentle mother with warm brown skin and large glossy brown eyes with long curled lashes. She has long dark black curly hair with soft luxurious volume and defined curls extending below her shoulders. Her face is elegant but soft and motherly with rounded cheeks, kind eyes, and a gentle nurturing smile. She wears: coral-red patterned dress; puff sleeves; front buttons; waist tie; gold hoop earrings; gold necklace; tan ballet flats. Her emotional presence: nurturing, calm, graceful, loving, comforting, joyful. Her proportions: elegant storybook mother proportions; soft rounded anatomy; warm approachable silhouette. Mom must remain visually identical in every image.
+
+MOM — SHORT GENERATION PROMPT: Warm loving mother, warm brown skin, large glossy brown eyes with long lashes, long black curly hair with soft volume, coral-red patterned dress with puff sleeves and waist tie, gold earrings and necklace, tan ballet flats, elegant soft storybook proportions, cinematic 2D children's illustration style, glowing warm lighting, polished Disney-quality rendering, identical facial structure and curls in every image.
+
+### FULL FAMILY MASTER PROMPT
+Wren and her parents standing together in a warm cinematic children's storybook world. Dad with red henley shirt and curly black hair, Mom with long curly black hair and coral-red dress, Wren with golden-yellow headband, coral-red polka-dot top, cuffed jeans, and colorful sneakers. All characters have warm brown skin tones, glossy expressive brown eyes, soft rounded storybook anatomy, dense curly hair consistency, polished 2D cinematic children's illustration style, glowing warm lighting, cozy loving family atmosphere, Disney-quality emotional warmth, identical character identity lock across all future generations.
+
+### NEGATIVE PROMPT (USE EVERY TIME)
+Do not change facial structure, eye shape, curl pattern, hairstyle, proportions, skin tone, clothing colors, or family resemblance. No realism. No 3D rendering. No anime style. No hyper realism. No sharp harsh shadows. No uncanny faces. No extra fingers. No stretched limbs. No oversized eyes. No redesigns. No random accessories. No style drift. No text. No watermark. No low-detail rendering. No inconsistent curls. No different clothing unless requested. No age changes. No different body types.
+
+### NEGATIVE PROMPT (MANDATORY, bedroom)
+Do not redesign Wren. Do not change face shape, eye shape, curl pattern, headband design, pajama colors, proportions, or skin tone. No realism. No 3D. No anime. No harsh lighting. No different bedroom style. No modern neon lighting. No inconsistent furniture. No random decor changes. No different wall colors. No different bedding colors. No different art style. No distorted anatomy. No oversized eyes. No missing headband. No hairstyle changes. No age changes. No text. No watermark.

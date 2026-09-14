@@ -104,12 +104,56 @@ jobs:
           # and recorded cleanly. Written here rather than in a night so that a night
           # cannot quietly stop sounding like us.
           SPINE = ("A children's bedtime lullaby for Little Scripture Travelers. "
-                   "One single voice, warm and unhurried, singing to a child who is "
-                   "almost asleep. Gentle acoustic accompaniment - fingerpicked guitar, "
-                   "soft piano, light strings. No drums, no percussion. "
+                   "{voice}, warm and unhurried, singing to a child who is "
+                   "almost asleep. {style}. No drums, no percussion. "
                    "Clean and undistorted: natural dynamics, no clipping, no loudness "
                    "pushing, plenty of headroom, no harshness on the voice. "
                    "Never more than one singer, and no backing vocals.")
+
+          # THE VARIETY RULE. The brand is the spine above; the SINGER and the
+          # ARRANGEMENT change from night to night, chosen to match the story's
+          # feeling, from these two palettes and no others (so a night can be
+          # different without stepping outside the brand). A night's lullaby.json
+          # may name its own `voice` and `style` (the builder writes them from the
+          # story); otherwise they are read from the mood's own words, and failing
+          # that rotated by the date so two nights in a row never sound alike.
+          VOICES = {
+              "mother":   "One single voice: a mother's soft alto, close and hushed",
+              "father":   "One single voice: a father's low, gentle baritone, almost a hum",
+              "soprano":  "One single voice: a light, clear soprano, sweet and airy",
+              "tenor":    "One single voice: a young man's soft tenor, tender and plain",
+              "grandma":  "One single voice: an older woman's warm, weathered alto, unhurried",
+              "whisper":  "One single voice: a breathy half-whisper, barely above the strings",
+          }
+          STYLES = {
+              "guitar":   "Gentle acoustic accompaniment: fingerpicked nylon guitar with a low sustained warmth underneath",
+              "piano":    "Gentle acoustic accompaniment: soft felt piano, slow rolling chords, light strings far back",
+              "harp":     "Gentle acoustic accompaniment: a small celtic harp, plucked slowly, a cello holding long notes",
+              "musicbox": "Gentle acoustic accompaniment: a music-box waltz in three, glockenspiel and soft strings",
+              "ukulele":  "Gentle acoustic accompaniment: a softly strummed ukulele and a quiet upright bass",
+              "hymn":     "Gentle acoustic accompaniment: a hymn-like piano with a warm, faint organ pad and strings",
+              "cello":    "Gentle acoustic accompaniment: a cello and a fingerpicked guitar in slow conversation",
+              "strings":  "Gentle acoustic accompaniment: a small string quartet, soft and slow, nothing else",
+          }
+          # words in a mood that point to a palette entry (the first hit wins)
+          VOICE_HINTS = [("father|dad|deep|low voice|baritone", "father"), ("grandma|grandmother|older|weathered", "grandma"),
+                         ("whisper|breath|hush", "whisper"), ("bright|light|airy|soprano|high", "soprano"),
+                         ("tenor|young man", "tenor"), ("mother|mom|alto", "mother")]
+          STYLE_HINTS = [("harp|celtic|pluck", "harp"), ("music box|music-box|waltz|glocken", "musicbox"), ("ukulele|strum", "ukulele"),
+                         ("hymn|organ|chapel|reverent|worship", "hymn"), ("cello", "cello"), ("string|quartet|violin", "strings"),
+                         ("piano|keys", "piano"), ("guitar|fingerpick|folk|walking|step", "guitar")]
+          import re, hashlib
+          def choose(meta, slug):
+              mood = (meta.get('mood') or '').lower()
+              v = meta.get('voice'); st = meta.get('style')
+              if v not in VOICES:
+                  v = next((k for pat, k in VOICE_HINTS if re.search(pat, mood)), None)
+              if st not in STYLES:
+                  st = next((k for pat, k in STYLE_HINTS if re.search(pat, mood)), None)
+              h = int(hashlib.md5(slug.encode()).hexdigest(), 16)
+              if v is None:  v = list(VOICES)[h % len(VOICES)]
+              if st is None: st = list(STYLES)[(h // 7) % len(STYLES)]
+              return v, st
 
           todo = [p for p in glob.glob(f'{dest}/*/lullaby.json')
                   if not os.path.exists(os.path.join(os.path.dirname(p), os.path.basename(os.path.dirname(p)) + '-lullaby.mp3'))]
@@ -198,7 +242,9 @@ jobs:
               # should write; `prompt` is still read so an older night still sings.
               colour = (meta.get('mood') or meta.get('prompt') or '').strip()
               length = int(meta.get('length_ms', 120000))
-              prompt = (SPINE + ('\n\n' + colour if colour else '') +
+              v, st = choose(meta, os.path.basename(os.path.dirname(p)))
+              print(f'  singer: {v} - arrangement: {st}')
+              prompt = (SPINE.format(voice=VOICES[v], style=STYLES[st]) + ('\n\n' + colour if colour else '') +
                         "\n\nSing exactly these lyrics, one voice only:\n\n" + meta['lyrics'].strip())
               print(f'{slug}: {("colour: " + colour[:80]) if colour else "no colour written for this night - spine only"}')
 
