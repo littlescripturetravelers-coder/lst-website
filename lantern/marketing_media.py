@@ -876,7 +876,9 @@ def pictures_for(it):
     if pics: return pics, "the night's own illustrations"
     return [kids_picture(prompt)], "drawn from the brand kit"
 
-def to_bytes(im, fmt="PNG"):
+def to_bytes(im, fmt="JPEG"):
+    """Pictures go out as JPEG: Instagram's API takes no PNG, and every other platform takes JPEG."""
+    if fmt == "JPEG" and im.mode not in ("RGB", "L"): im = im.convert("RGB")
     buf = io.BytesIO(); im.save(buf, fmt, quality=90); return buf.getvalue()
 
 # ---------------------------------------------------------------- the run
@@ -922,17 +924,17 @@ def main():
                         backs = night_pictures(it.get("night_date")) or pics
                         card_imgs = [card_slide(backs[(i + 1) % len(backs)], lab, lines, W, H) for i, (lab, lines) in enumerate(cards)]
                     if fmt == "card":
-                        image_url = upload(f"{iid}/image.png", to_bytes(card_imgs[0]), "image/png")
+                        image_url = upload(f"{iid}/image.jpg", to_bytes(card_imgs[0]), "image/jpeg")
                         patch = {"media_url": image_url, "media_type": "image", "thumb_url": image_url, "post_error": None}
                         source = "the Lantern card: " + cards[0][0]
                     else:
                         slides = [first] + card_imgs + ([cover_slide(cover, W, H)] if cover else []) + [end_card(W, H, cover=cover)]
-                        urls = [upload(f"{iid}/slide-{n + 1:02d}.png", to_bytes(sl), "image/png") for n, sl in enumerate(slides[:10])]
+                        urls = [upload(f"{iid}/slide-{n + 1:02d}.jpg", to_bytes(sl), "image/jpeg") for n, sl in enumerate(slides[:10])]
                         patch = {"media_url": urls[0], "media_type": "image", "thumb_url": urls[0], "post_error": None,
                                  "meta": {**(it.get("meta") or {}), "slides": urls}}
                         source += f" + {len(card_imgs)} Lantern cards" + ("" if shots else " (set words)")
                 else:
-                    image_url = upload(f"{iid}/image.png", to_bytes(first), "image/png")
+                    image_url = upload(f"{iid}/image.jpg", to_bytes(first), "image/jpeg")
                     patch = {"media_url": image_url, "media_type": "image", "thumb_url": image_url, "post_error": None}
             sb_patch(iid, patch); done += 1
             print(f"  {plat:9s} {fmt:9s} {patch['media_type']:5s} {it.get('title','')[:44]}  [{source}]")
