@@ -161,6 +161,7 @@ Source map (what fetched, what didn't — fetches to new domains need user appro
 - Fredoka = display; Nunito = body/UI; **Anton = accent caps, one badge per layout** (`.tonight-tag`).
 - Palette via CSS variables only, never hardcoded hex: navy `#1B2D5F`, gold `#F5C518`, teal `#5BD3DC`, amber `#D9A227`.
 - Travelers are Beau, Scout, Willow, Wren only. Mottos are locked — check memory, never improvise. Retired names (Rockwell, Shamrock, Maylyn, Amay) must never appear.
+- THE VARIETY RULE (lullaby): besides `mood`, write `voice` and `style` into lullaby.json, chosen to match the story's feeling, from these palettes only - voice: mother | father | soprano | tenor | grandma | whisper; style: guitar | piano | harp | musicbox | ukulele | hymn | cello | strings. The Action keeps the brand spine (one singer, gentle acoustic, no drums) and swaps in the singer and the arrangement you chose, so nights differ without leaving the brand. Never use the same pair two nights running.
 - "Heavenly Father," never bare "God," in original LST prose (LDS edition); other editions use their own voice in adult prose only.
 
 ## QA gate — `python3 audit.py <file>`, run before delivering each file

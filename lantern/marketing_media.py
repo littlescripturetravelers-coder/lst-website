@@ -71,6 +71,46 @@ CAST   = os.path.join(BRAND, "travelers-cast.jpg")
 TRAVELERS = ["beau", "scout", "willow", "wren"]
 PRESENTER = os.path.join(BRAND, "presenter.png")
 PORTRAIT_DIR = os.path.join(ROOT, "images", "book", "portrait")
+COVERS = os.path.join(BRAND, "covers")          # the month's book cover: covers/YYYY-MM.jpg
+LOCKS_DIR = os.path.join(BRAND, "locks")        # the owner's room and character locks (see locks/README.md)
+STYLE_LOCK = ("Warm premium cinematic 2D children's storybook illustration in the official Little Scripture Travelers "
+              "style: soft painterly rendering, glowing warm lighting, rounded child-friendly shapes, Disney-quality "
+              "emotional warmth. No realism, no 3D, no anime, no flat cartoon style, no text, no watermark, no style drift.")
+# (file, the heading whose paragraph is the short lock, what in a scene calls for it)
+LOCKS = [
+    ("front-room.md",  "SHORT IMAGE PROMPT VERSION",          r"front room|living room|grandma lewis"),
+    ("grandma-room.md","SHORT VERSION",                       r"grandma'?s (bed)?room|grandmother'?s (bed)?room|grandma'?s bed"),
+    ("beau-room.md",   "SHORT VERSION",                       r"beau'?s (bed)?room|\bbeau\b.{0,60}\b(bedroom|bedtime|his room|in bed|pajama)"),
+    ("scout-room.md",  "SHORT VERSION",                       r"scout'?s (bed)?room|\bscout\b.{0,60}\b(bedroom|bedtime|his room|in bed|pajama)"),
+    ("willow-room.md", "SHORT VERSION",                       r"willow'?s (bed)?room|\bwillow\b.{0,60}\b(bedroom|bedtime|her room|in bed|pajama)"),
+    ("wren.md",        "FULL MASTER SCENE PROMPT",            r"wren'?s (bed)?room|\bwren\b.{0,60}\b(bedroom|bedtime|her room|in bed)"),
+    ("wren.md",        "WREN — SHORT MASTER GENERATION PROMPT", r"\bwren\b.{0,60}\bpajama"),
+    ("wren.md",        "FULL FAMILY MASTER PROMPT",           r"wren'?s (mom|dad|parents|family|mother|father)"),
+]
+def lock_text(file, heading):
+    """The paragraph under `heading` in a lock file (the short version of the lock)."""
+    try: lines = open(os.path.join(LOCKS_DIR, file), encoding="utf-8").read().splitlines()
+    except Exception: return ""
+    out, on = [], False
+    for ln in lines:
+        if ln.startswith("#"):
+            if on: break
+            on = heading.lower() in ln.lower(); continue
+        if on and ln.strip(): out.append(ln.strip())
+    return " ".join(out)
+def locks_for(text):
+    """Every lock a scene calls for, by the places and people it names."""
+    found, seen = [], set()
+    for file, heading, pat in LOCKS:
+        if re.search(pat, text or "", re.I):
+            t = lock_text(file, heading)
+            if t and t not in seen: seen.add(t); found.append(t)
+    return found
+def month_cover(night_date):
+    """This month's book cover (lantern/brand/covers/YYYY-MM.jpg), if the kit has it."""
+    if not night_date: return None
+    p = os.path.join(COVERS, str(night_date)[:7] + ".jpg")
+    return p if os.path.exists(p) else None
 EXTEND_TEXT = ("Extend this children's storybook illustration outward to fill the whole tall frame. Continue the same "
                "scene, setting, lighting and painting style seamlessly beyond the current edges - more of the sky, "
                "ground, room or landscape. Do not add new characters, text or objects. Keep everything already in "
@@ -280,14 +320,16 @@ def generate_with_refs(prompt, ref_paths, size="1024x1536"):
             ctype = "image/png" if p.lower().endswith(".png") else "image/jpeg"
             files.append(("image[]", (os.path.basename(p), open(p, "rb").read(), ctype)))
     if not files: return generate(prompt, size)
-    body, ctype = _multipart({"model": "gpt-image-1", "prompt": prompt[:3500], "n": "1", "size": size, "quality": "medium"}, files)
+    body, ctype = _multipart({"model": "gpt-image-1", "prompt": prompt[:12000], "n": "1", "size": size, "quality": "medium"}, files)
     s, b = http("POST", "https://api.openai.com/v1/images/edits", raw=body,
                 headers={"Authorization": "Bearer " + OPENAI, "Content-Type": ctype}, timeout=400)
     return _image_result(s, b, "images/edits")
 
 def kids_picture(prompt):
     refs = [CAST] + [os.path.join(BRAND, t + ".jpg") for t in TRAVELERS]
-    return generate_with_refs(f"{CAST_TEXT}\n\nScene: {prompt}", refs)
+    locks = locks_for(prompt)
+    if locks: print(f"  locks: {len(locks)} applied to the scene")
+    return generate_with_refs("\n\n".join([CAST_TEXT, STYLE_LOCK] + locks + [f"Scene: {prompt}"]), refs)
 
 def presenter_picture(prompt):
     """The one presenter, every time. Made once, kept in the brand kit (the Action commits it)."""
@@ -455,7 +497,7 @@ def text_block(d, text, fnt, cx, y, max_w, fill, max_lines, step, stroke=(15, 25
         d.text((cx, y), ln, font=fnt, fill=fill, anchor="mm", stroke_width=sw, stroke_fill=stroke); y += step
     return y
 
-def still_image(pic, hook, W, H, who=None):
+def still_image(pic, hook, W, H, who=None, cover=None):
     """A feed picture: the illustration edge to edge, the hook in gold at the top, the brand at the bottom."""
     from PIL import ImageDraw
     im = bands(full(pic, W, H), int(H * 0.34), int(H * 0.22))
@@ -465,6 +507,7 @@ def still_image(pic, hook, W, H, who=None):
     if hook: text_block(d, hook, fb, W / 2, int(H * 0.075), W - 120, GOLD, 4, int(W * 0.08), sw=4)
     d.text((W / 2, H - int(H * 0.085)), "A new story every night - free in the app", font=fr, fill=CREAM, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
     d.text((W / 2, H - int(H * 0.045)), "Little Scripture Travelers", font=font(True, int(W * 0.038)), fill=TEAL, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
+    if cover: im = book_badge(im, cover, W, H)
     return im
 
 def frame(pic, overlay, caption, W=1080, H=1920, who=None):
@@ -521,9 +564,54 @@ def card_slide(pic, label, lines, W=1080, H=1350):
     d.text((W / 2, H - 70), "Little Scripture Travelers", font=font(True, 34), fill=TEAL, anchor="mm")
     return im
 
-def end_card(W=1080, H=1920):
+def book_badge(im, cover, W, H):
+    """THE COVER RULE: this month's book cover, small and slightly tilted with a soft
+    shadow, in the lower-left corner of a feed picture."""
+    from PIL import Image, ImageDraw, ImageFilter
+    try: cv = load_rgb(cover)
+    except Exception: return im
+    h = int(H * 0.21); w = int(cv.width * h / cv.height); cv = cv.resize((w, h))
+    card = Image.new("RGBA", (w + 16, h + 16), (0, 0, 0, 0)); ImageDraw.Draw(card).rectangle([0, 0, w + 15, h + 15], fill=CREAM + (255,))
+    card.paste(cv, (8, 8)); card = card.rotate(6, expand=True, resample=Image.BICUBIC)
+    shadow = Image.new("RGBA", card.size, (0, 0, 0, 0)); sh = ImageDraw.Draw(shadow)
+    sh.rectangle([10, 14, card.width - 10, card.height - 6], fill=(0, 0, 0, 120)); shadow = shadow.filter(ImageFilter.GaussianBlur(14))
+    out = im.convert("RGBA"); x, y = int(W * 0.035), H - int(H * 0.125) - card.height
+    out.alpha_composite(shadow, (x, y + 8)); out.alpha_composite(card, (x, y))
+    return out.convert("RGB")
+
+def cover_slide(cover, W, H):
+    """A carousel slide for this month's book: the cover large on navy."""
+    from PIL import Image, ImageDraw, ImageFilter
+    im = Image.new("RGB", (W, H), NAVY); d = ImageDraw.Draw(im)
+    d.text((W / 2, int(H * 0.09)), "This month's book", font=font(True, int(W * 0.05)), fill=GOLD, anchor="mm")
+    try:
+        cv = load_rgb(cover); h = int(H * 0.62); w = int(cv.width * h / cv.height); cv = cv.resize((w, h))
+        x, y = (W - w) // 2, int(H * 0.16)
+        shadow = Image.new("RGBA", (w + 80, h + 80), (0, 0, 0, 0)); ImageDraw.Draw(shadow).rectangle([30, 40, w + 50, h + 60], fill=(0, 0, 0, 150))
+        shadow = shadow.filter(ImageFilter.GaussianBlur(22)); base = im.convert("RGBA"); base.alpha_composite(shadow, (x - 40, y - 30)); im = base.convert("RGB")
+        ImageDraw.Draw(im).rectangle([x - 6, y - 6, x + w + 5, y + h + 5], outline=GOLD, width=5); im.paste(cv, (x, y))
+    except Exception: pass
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, H - int(H * 0.11)), "Every night's story, in one book", font=font(False, int(W * 0.036)), fill=CREAM, anchor="mm")
+    d.text((W / 2, H - int(H * 0.06)), "littlescripturetravelers.com", font=font(True, int(W * 0.036)), fill=TEAL, anchor="mm")
+    return im
+
+def end_card(W=1080, H=1920, cover=None):
+    """The closing card: the logo, and this month's book cover beside it when the kit has one."""
     from PIL import Image, ImageDraw
     im = Image.new("RGB", (W, H), NAVY); d = ImageDraw.Draw(im)
+    if cover and os.path.exists(cover):
+        size = int(W * 0.40); top = int(H * 0.24)
+        try:
+            logo = Image.open(LOGO).convert("RGB").resize((size, size)); im.paste(logo, (int(W * 0.07), top))
+            cv = load_rgb(cover); h = int(size * 1.15); w = int(cv.width * h / cv.height); cv = cv.resize((w, h))
+            x = W - int(W * 0.07) - w; im.paste(cv, (x, top - int((h - size) / 2)))
+            d.rectangle([x - 5, top - int((h - size) / 2) - 5, x + w + 4, top - int((h - size) / 2) + h + 4], outline=GOLD, width=4)
+        except Exception: pass
+        d.text((W / 2, top + size + int(H * 0.09)), "A new story every night", font=font(True, int(W * 0.055)), fill=GOLD, anchor="mm")
+        d.text((W / 2, top + size + int(H * 0.135)), "This month's book, and the app", font=font(False, int(W * 0.036)), fill=CREAM, anchor="mm")
+        d.text((W / 2, top + size + int(H * 0.175)), "littlescripturetravelers.com", font=font(False, int(W * 0.04)), fill=TEAL, anchor="mm")
+        return im
     size = int(W * 0.57); top = int(H * 0.22)
     try:
         logo = Image.open(LOGO).convert("RGB").resize((size, size)); im.paste(logo, ((W - size) // 2, top))
@@ -533,7 +621,7 @@ def end_card(W=1080, H=1920):
     return im
 
 # ---------------------------------------------------------------- the video
-def make_video(pics, lines, who=None):
+def make_video(pics, lines, who=None, cover=None):
     """who: the Traveler this piece is about (badge on story frames). A line that
     names a Traveler shows that Traveler's portrait instead of a story picture."""
     tmp = tempfile.mkdtemp(prefix="mkt-")
@@ -549,7 +637,7 @@ def make_video(pics, lines, who=None):
         else:
             dur = 2.2
         concat.append((fpath, dur))
-    ep = os.path.join(tmp, "end.png"); end_card().save(ep); concat.append((ep, 2.5))
+    ep = os.path.join(tmp, "end.png"); end_card(cover=cover).save(ep); concat.append((ep, 2.5))
     lst = os.path.join(tmp, "frames.txt")
     with open(lst, "w") as fh:
         for p, dur in concat: fh.write(f"file '{p}'\nduration {dur:.2f}\n")
@@ -576,7 +664,7 @@ def srt_time(t):
     ms = int(round(t * 1000)); h, ms = divmod(ms, 3600000); m, ms = divmod(ms, 60000); sec, ms = divmod(ms, 1000)
     return f"{h:02d}:{m:02d}:{sec:02d},{ms:03d}"
 
-def talking_video(lines, item_id):
+def talking_video(lines, item_id, cover=None):
     """The presenter speaks the lines. ElevenLabs reads them (one file, with the
     per-line timing kept for captions); D-ID animates the presenter picture to
     that audio; ffmpeg frames it 1080x1920 with the headline, burned-in
@@ -628,7 +716,7 @@ def talking_video(lines, item_id):
             d.text((540, y), ln, font=font(True, 68), fill=GOLD + (255,), anchor="mm", stroke_width=4, stroke_fill=(15, 25, 55, 255)); y += 84
     d.text((540, 1780), "Little Scripture Travelers", font=font(False, 46), fill=TEAL + (255,), anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55, 255))
     ovp = os.path.join(tmp, "overlay.png"); ov.save(ovp)
-    ep = os.path.join(tmp, "end.png"); end_card().save(ep)
+    ep = os.path.join(tmp, "end.png"); end_card(cover=cover).save(ep)
     body = os.path.join(tmp, "body.mp4")
     vf = ("scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,"
           f"subtitles={srt}:force_style='FontName=DejaVu Sans,FontSize=17,PrimaryColour=&H00FFFFFF,OutlineColour=&H00371B0F,Outline=2,Shadow=0,Alignment=2,MarginV=260'")
@@ -670,6 +758,7 @@ def main():
         try:
             pics, source = pictures_for(it)
             hook = it.get("hook") or it.get("title") or ""
+            cover = month_cover(it.get("night_date"))          # THE COVER RULE: this month's book rides along
             kids = not (it.get("audience") or "kids").lower().startswith("parent")
             # THE TRAVELER RULE: a piece that names a Traveler shows that Traveler
             about = travelers_in(" ".join(str(it.get(k) or "") for k in ("title", "hook", "body", "caption"))) if kids else []
@@ -679,15 +768,15 @@ def main():
                 if not lines: lines = [(hook, hook)]
                 mp4 = thumb = None
                 if not kids and DID:
-                    try: mp4, thumb = talking_video(lines, iid); source = "the presenter, talking"
+                    try: mp4, thumb = talking_video(lines, iid, cover=cover); source = "the presenter, talking"
                     except Exception as e: print(f"  talking presenter: {e} - using the still presenter")
-                if mp4 is None: mp4, thumb = make_video(pics, lines, who=who)
+                if mp4 is None: mp4, thumb = make_video(pics, lines, who=who, cover=cover)
                 patch = {"media_url": upload(f"{iid}/video.mp4", mp4, "video/mp4"), "media_type": "video",
                          "thumb_url": upload(f"{iid}/thumb.jpg", thumb, "image/jpeg"), "post_error": None}
             else:
                 W, H = (1000, 1500) if plat == "pinterest" else (1080, 1350)
                 in_hook = travelers_in(hook) if kids else []
-                first = still_image(portrait(in_hook) if in_hook else pics[0], hook, W, H, who=None if in_hook else who)
+                first = still_image(portrait(in_hook) if in_hook else pics[0], hook, W, H, who=None if in_hook else who, cover=cover)
                 cards = pick_cards(lantern_cards(it.get("night_date")), it.get("body") or "", n=1 if fmt == "card" else 6) if fmt in ("carousel", "card") else []
                 if cards:
                     # THE CARDS RULE: the Lantern's own cards, photographed as the app shows them
@@ -701,7 +790,7 @@ def main():
                         patch = {"media_url": image_url, "media_type": "image", "thumb_url": image_url, "post_error": None}
                         source = "the Lantern card: " + cards[0][0]
                     else:
-                        slides = [first] + card_imgs + [end_card(W, H)]
+                        slides = [first] + card_imgs + ([cover_slide(cover, W, H)] if cover else []) + [end_card(W, H, cover=cover)]
                         urls = [upload(f"{iid}/slide-{n + 1:02d}.png", to_bytes(sl), "image/png") for n, sl in enumerate(slides[:10])]
                         patch = {"media_url": urls[0], "media_type": "image", "thumb_url": urls[0], "post_error": None,
                                  "meta": {**(it.get("meta") or {}), "slides": urls}}
