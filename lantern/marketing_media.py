@@ -532,7 +532,7 @@ def still_image(pic, hook, W, H, who=None, cover=None):
     d = ImageDraw.Draw(im)
     fb = font(True, int(W * 0.064)); fr = font(False, int(W * 0.034))
     if hook: text_block(d, hook, fb, W / 2, int(H * 0.075), W - 120, GOLD, 4, int(W * 0.08), sw=4)
-    d.text((W / 2, H - int(H * 0.085)), "A new story every night - free in the app", font=fr, fill=CREAM, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
+    d.text((W / 2, H - int(H * 0.085)), "A new story every night", font=fr, fill=CREAM, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
     d.text((W / 2, H - int(H * 0.045)), "Little Scripture Travelers", font=font(True, int(W * 0.038)), fill=TEAL, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
     if cover: im = book_badge(im, cover, W, H)
     return im
