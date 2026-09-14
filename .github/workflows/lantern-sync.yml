@@ -274,6 +274,13 @@ jobs:
       # voiced video for reels and shorts) and anything the owner has approved
       # whose time has come is handed to the poster. Both need their keys; either
       # one missing simply skips its half and says so.
+      - name: Keep Playwright's Chromium between runs (the card photographer)
+        if: github.ref == 'refs/heads/main'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-1.56.1
+
       - name: Marketing media and posting
         if: github.ref == 'refs/heads/main'
         env:
@@ -290,6 +297,9 @@ jobs:
               sudo apt-get -qq update >/dev/null 2>&1 || true
               sudo apt-get -qq install -y ffmpeg >/dev/null 2>&1 || echo "could not install ffmpeg - videos will wait"
             fi
+            # the card photographer (THE CARDS RULE) needs Playwright's Chromium
+            npm install --no-save --silent playwright@1.56.1 >/dev/null 2>&1 || echo "playwright did not install - cards fall back to set words"
+            npx playwright install --with-deps chromium >/dev/null 2>&1 || echo "chromium did not install - cards fall back to set words"
             python3 lantern/marketing_media.py || echo "marketing media step had trouble - the drafts are still in the desk."
           fi
           echo "Poster readiness (key set? platforms linked?):"
