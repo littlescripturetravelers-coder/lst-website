@@ -22,9 +22,12 @@ THE PICTURE RULE (the owner's brand, every time):
   images/book/portrait/ (the Action commits it) - never cropped into a small box.
   THE CARDS RULE: the night's Morning Lantern cards (A Parent's Heart, Verse of
   the Day, Why This Story Matters, The Line to Carry, Conversation Starter,
-  Apply It ...) become slides - a "carousel" piece is the hook slide, the cards
-  over the night's pictures, and a closing card - read straight from the
-  Lantern page, never paraphrased.
+  Apply It ...) go out exactly as the app shows them: card_shot.mjs opens the
+  night's Lantern page in Chromium and photographs each card - the real card,
+  fonts and colors - and the card sits by itself on the app's navy. A "card"
+  piece is one card; a "carousel" piece is the hook slide, the cards, and a
+  closing card. Never paraphrased, never redrawn. (If Chromium is not there,
+  the card's words are set over the night's picture instead.)
 
 For every fresh draft in marketing_items that has no media yet:
   image  - a brand panel: the illustration framed on navy with the hook in gold,
@@ -179,6 +182,43 @@ def lantern_cards(night_date, edition="christian"):
         lines = _plain(rest)
         if label and lines: out.append((label, lines))
     return out
+
+def card_shots(night_date, names, edition="christian"):
+    """Photograph the named cards from the night's Lantern page, as the app shows
+    them. [(label, png path)], skipping any card that was not found."""
+    folder = night_folder(night_date)
+    if not folder or not names: return []
+    f = os.path.join(folder, f"morning-lantern-{edition}.html")
+    if not os.path.exists(f): f = os.path.join(folder, "morning-lantern-lds.html")
+    if not os.path.exists(f): return []
+    out_dir = tempfile.mkdtemp(prefix="cards-")
+    try:
+        r = subprocess.run(["node", os.path.join(HERE, "card_shot.mjs"), f, out_dir, json.dumps(list(names))],
+                           capture_output=True, text=True, timeout=240)
+        if r.returncode != 0: raise RuntimeError((r.stderr or r.stdout).strip()[-300:])
+        data = json.loads(r.stdout.strip().splitlines()[-1])
+    except Exception as e:
+        print(f"  card photos: {e} - falling back to set words"); return []
+    return [(c["label"], c["file"]) for c in data.get("cards", []) if c.get("file")]
+
+def card_picture(png, W, H):
+    """One photographed card by itself on the app's navy, the brand line beneath."""
+    from PIL import Image, ImageDraw
+    card = Image.open(png).convert("RGBA")
+    im = Image.new("RGB", (W, H), (10, 18, 40))
+    max_w, max_h = W - 80, H - 230
+    r = min(max_w / card.width, max_h / card.height, 1.25)
+    card = card.resize((int(card.width * r), int(card.height * r)))
+    x, y = (W - card.width) // 2, max(70, (H - 90 - card.height) // 2)
+    shadow = Image.new("RGBA", (card.width + 60, card.height + 60), (0, 0, 0, 0))
+    ImageDraw.Draw(shadow).rounded_rectangle([20, 34, card.width + 40, card.height + 50], radius=40, fill=(0, 0, 0, 110))
+    from PIL import ImageFilter
+    shadow = shadow.filter(ImageFilter.GaussianBlur(18))
+    im.paste(shadow, (x - 30, y - 30), shadow)
+    im.paste(card, (x, y), card)
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, H - 58), "Little Scripture Travelers  -  tonight's Morning Lantern", font=font(True, 30), fill=TEAL, anchor="mm")
+    return im
 
 def pick_cards(cards, body_text="", n=6):
     """Which cards go on the slides: the ones the writer named in the body (by
@@ -563,15 +603,24 @@ def main():
                 W, H = (1000, 1500) if plat == "pinterest" else (1080, 1350)
                 in_hook = travelers_in(hook) if kids else []
                 first = still_image(portrait(in_hook) if in_hook else pics[0], hook, W, H, who=None if in_hook else who)
-                cards = pick_cards(lantern_cards(it.get("night_date")), it.get("body") or "") if fmt == "carousel" else []
+                cards = pick_cards(lantern_cards(it.get("night_date")), it.get("body") or "", n=1 if fmt == "card" else 6) if fmt in ("carousel", "card") else []
                 if cards:
-                    # THE CARDS RULE: the Lantern's own cards, each over one of the night's pictures
-                    backs = night_pictures(it.get("night_date")) or pics
-                    slides = [first] + [card_slide(backs[(i + 1) % len(backs)], lab, lines, W, H) for i, (lab, lines) in enumerate(cards)] + [end_card(W, H)]
-                    urls = [upload(f"{iid}/slide-{n + 1:02d}.png", to_bytes(sl), "image/png") for n, sl in enumerate(slides[:10])]
-                    patch = {"media_url": urls[0], "media_type": "image", "thumb_url": urls[0], "post_error": None,
-                             "meta": {**(it.get("meta") or {}), "slides": urls}}
-                    source += f" + {len(cards)} Lantern cards"
+                    # THE CARDS RULE: the Lantern's own cards, photographed as the app shows them
+                    shots = card_shots(it.get("night_date"), [lab for lab, _ in cards])
+                    if shots: card_imgs = [card_picture(png, W, H) for _lab, png in shots]
+                    else:
+                        backs = night_pictures(it.get("night_date")) or pics
+                        card_imgs = [card_slide(backs[(i + 1) % len(backs)], lab, lines, W, H) for i, (lab, lines) in enumerate(cards)]
+                    if fmt == "card":
+                        image_url = upload(f"{iid}/image.png", to_bytes(card_imgs[0]), "image/png")
+                        patch = {"media_url": image_url, "media_type": "image", "thumb_url": image_url, "post_error": None}
+                        source = "the Lantern card: " + cards[0][0]
+                    else:
+                        slides = [first] + card_imgs + [end_card(W, H)]
+                        urls = [upload(f"{iid}/slide-{n + 1:02d}.png", to_bytes(sl), "image/png") for n, sl in enumerate(slides[:10])]
+                        patch = {"media_url": urls[0], "media_type": "image", "thumb_url": urls[0], "post_error": None,
+                                 "meta": {**(it.get("meta") or {}), "slides": urls}}
+                        source += f" + {len(card_imgs)} Lantern cards" + ("" if shots else " (set words)")
                 else:
                     image_url = upload(f"{iid}/image.png", to_bytes(first), "image/png")
                     patch = {"media_url": image_url, "media_type": "image", "thumb_url": image_url, "post_error": None}
