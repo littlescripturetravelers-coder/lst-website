@@ -287,6 +287,11 @@ jobs:
             python3 -m pip install --quiet --disable-pip-version-check Pillow || true
             python3 lantern/marketing_media.py || echo "marketing media step had trouble - the drafts are still in the desk."
           fi
+          echo "Poster readiness (key set? platforms linked?):"
+          curl -sS -X POST "$SUPABASE_URL/functions/v1/marketing-post" \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" -H "Content-Type: application/json" \
+            -d '{"action":"status"}' | head -c 400; echo
+          echo "Sweep (posts anything approved whose time has come):"
           curl -sS -X POST "$SUPABASE_URL/functions/v1/marketing-post" \
             -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" -H "Content-Type: application/json" \
             -d '{"action":"sweep"}' | head -c 400; echo
