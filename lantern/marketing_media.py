@@ -8,9 +8,14 @@ THE PICTURE RULE (the owner's brand, every time):
   the night has no pictures, a picture is generated WITH the brand kit as
   reference images (lantern/brand/: the four Travelers and the cast sheet), so
   the characters stay the same from one day to the next.
-  Parents-audience pieces use one fixed presenter (lantern/brand/presenter.png,
-  made once from the kit and kept), so the "face" of the parent videos never
-  changes either.
+  THE PRESENTERS: parents-audience pieces use two fixed presenters - the mom
+  (lantern/brand/presenter.png, the default) and the dad (presenter-dad.png, when
+  the drafter marks a piece DAD PRESENTER) - each made once from words and kept,
+  so the "face" of the parent videos never changes. THE PEOPLE RULE (PEOPLE_RULE)
+  rides on every generated adult: women pretty and put-together, tasteful makeup,
+  a modern modest dress, simple jewelry, proud to be a woman and a mom; men
+  masculine and strong. The dad's videos use a male voice (ELEVENLABS_VOICE_ID_DAD
+  or the first male premade voice).
   THE TRAVELER RULE: when a piece names a Traveler (Beau, Scout, Willow, Wren),
   that Traveler's own portrait is shown - a video line that names one shows the
   portrait for that line, a hook that names one puts the portrait in the frame,
@@ -46,7 +51,7 @@ poster (marketing-post) only sends pieces that have media.
   the presenter's still picture carries the voice and captions as before.
 
 Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, OPENAI_API_KEY (generated pictures),
-     ELEVENLABS_API_KEY (voice), ELEVENLABS_VOICE_ID (optional), DID_API_KEY (optional),
+     ELEVENLABS_API_KEY (voice), ELEVENLABS_VOICE_ID / ELEVENLABS_VOICE_ID_DAD (optional), DID_API_KEY (optional),
      MEDIA_LIMIT (default 20).
 Runs on the Action's Ubuntu runner (ffmpeg installed by the workflow, DejaVu fonts present).
 """
@@ -70,7 +75,8 @@ FONTS  = os.path.join(HERE, "brand", "fonts")             # the brand's own font
 BRAND  = os.path.join(HERE, "brand")
 CAST   = os.path.join(BRAND, "travelers-cast.jpg")
 TRAVELERS = ["beau", "scout", "willow", "wren"]
-PRESENTER = os.path.join(BRAND, "presenter.png")
+PRESENTER = os.path.join(BRAND, "presenter.png")        # the mom, the default presenter
+PRESENTER_DAD = os.path.join(BRAND, "presenter-dad.png")  # the dad, for pieces written in a father's voice
 PORTRAIT_DIR = os.path.join(ROOT, "images", "book", "portrait")
 COVERS = os.path.join(BRAND, "covers")          # the month's book cover: covers/YYYY-MM.jpg
 LOCKS_DIR = os.path.join(BRAND, "locks")        # the owner's room and character locks (see locks/README.md)
@@ -146,9 +152,26 @@ CAST_TEXT = ("The four Little Scripture Travelers, exactly as in the reference i
              "Wren the Wonderer (girl, black curly hair, gold headband, coral-red dress). "
              "Bright storybook cartoon, warm rounded faces, big eyes, sandals; "
              "navy night sky with gold stars where a sky shows. Same faces, same clothes, same style as the references.")
-PRESENTER_TEXT = ("A warm, real-looking mother in her thirties, natural smile, soft brown hair, "
-                  "simple cream sweater, photoreal, sitting on the edge of a child's bed in soft evening lamplight, "
-                  "a children's storybook in her lap. Not a cartoon. Portrait framing, calm and kind.")
+# THE PEOPLE RULE (the owner's): every real-looking adult in a marketing picture.
+PEOPLE_RULE = ("Any woman shown is very pretty and well put-together: tasteful makeup, styled hair, a beautiful modern "
+               "MODEST dress (sleeves, modest neckline, knee-length or longer), simple elegant jewelry (small earrings, "
+               "a delicate necklace), and she looks proud and glad to be a woman and a mother - warm, confident, joyful. "
+               "Any man shown is masculine and strong: broad shoulders, athletic build, clean and well-kept, a steady "
+               "confident look, dressed neatly (a fitted button-up or henley, jeans or chinos). Wholesome, real, "
+               "never suggestive, never sloppy.")
+PRESENTER_TEXT = ("A photoreal portrait of the brand's presenter: a very pretty mother in her early thirties, tasteful makeup, "
+                  "styled shoulder-length brown hair, a beautiful modern modest dress in a soft cream or navy tone with sleeves "
+                  "and a modest neckline, small gold earrings and a delicate necklace. She looks proud and glad to be a woman "
+                  "and a mom - a warm confident smile, kind eyes. Sitting on the edge of a child's bed in soft evening lamplight, "
+                  "a children's storybook in her lap. Not a cartoon. Portrait framing, calm and joyful. " + PEOPLE_RULE)
+PRESENTER_DAD_TEXT = ("A photoreal portrait of the brand's second presenter: a masculine, strong father in his mid-thirties, "
+                      "broad shoulders, athletic build, short neat dark hair, clean-shaven or a neat short beard, a fitted navy "
+                      "henley and jeans, a steady confident warm smile. Sitting on the edge of a child's bed in soft evening "
+                      "lamplight, a children's storybook in his hands. Not a cartoon. Portrait framing, calm and kind. " + PEOPLE_RULE)
+DAD_RE = re.compile(r"\b(dad|father|daddy)\s+(presenter|speaks|speaking|talks|talking)\b|\bpresenter\s*:\s*(dad|father)\b", re.I)
+def wants_dad(it):
+    """The dad presents when the drafter says so (image_prompt / visual_brief 'DAD PRESENTER')."""
+    return bool(DAD_RE.search(" ".join(str(it.get(k) or "") for k in ("image_prompt", "visual_brief"))))
 
 def http(method, url, body=None, headers=None, raw=None, timeout=180):
     data = raw if raw is not None else (None if body is None else json.dumps(body).encode("utf-8"))
@@ -335,42 +358,56 @@ def kids_picture(prompt):
     refs = [CAST] + [os.path.join(BRAND, t + ".jpg") for t in TRAVELERS]
     locks = locks_for(prompt)
     if locks: print(f"  locks: {len(locks)} applied to the scene")
-    return generate_with_refs("\n\n".join([CAST_TEXT, STYLE_LOCK] + locks + [f"Scene: {prompt}"]), refs)
+    return generate_with_refs("\n\n".join([CAST_TEXT, STYLE_LOCK, "ADULTS IN THE SCENE (storybook style, but the same standard): " + PEOPLE_RULE] + locks + [f"Scene: {prompt}"]), refs)
 
-def presenter_picture(prompt):
-    """The one presenter, every time. Made once, kept in the brand kit (the Action commits it)."""
-    if not os.path.exists(PRESENTER):
+def presenter_file(dad=False):
+    """The presenter's reference picture: made once, kept in the brand kit (the Action commits it)."""
+    path, text, who = (PRESENTER_DAD, PRESENTER_DAD_TEXT, "dad") if dad else (PRESENTER, PRESENTER_TEXT, "mom")
+    if not os.path.exists(path):
         os.makedirs(BRAND, exist_ok=True)
-        open(PRESENTER, "wb").write(generate(PRESENTER_TEXT))
-        print("  presenter: made the brand kit's presenter picture (kept for every future piece)")
-    return generate_with_refs(f"The same woman as in the reference image - same face, hair and warmth - photoreal, not cartoon.\n\nScene: {prompt}", [PRESENTER])
+        open(path, "wb").write(generate(text))
+        print(f"  presenter: made the brand kit's {who} presenter picture (kept for every future piece)")
+    return path
+
+def presenter_picture(prompt, dad=False):
+    """The same presenter every time (the mom by default, the dad when the piece asks), in the scene the piece describes."""
+    ref = presenter_file(dad)
+    same = "The same man as in the reference image - same face, hair, build and warmth" if dad else \
+           "The same woman as in the reference image - same face, hair, makeup, dress style and warmth"
+    return generate_with_refs(f"{same} - photoreal, not cartoon. {PEOPLE_RULE}\n\nScene: {prompt}", [ref])
 
 # ---------------------------------------------------------------- the voice
 _VOICE = None
 PREFERRED = ["Rachel", "Sarah", "Matilda", "Lily", "Alice", "Bella", "Jessica", "Charlotte", "Laura", "Aria"]
-def resolve_voice():
-    """A voice this account can actually use. The owner's ELEVENLABS_VOICE_ID if
-    it is in the account; else the first warm premade voice we know by name;
-    else whatever the account lists first. (A hard-coded id came back 404.)"""
-    global _VOICE
-    if _VOICE: return _VOICE
+PREFERRED_MALE = ["Adam", "Josh", "Daniel", "George", "Brian", "Liam", "Chris", "Eric", "Callum", "Roger", "Bill"]
+VOICE_MALE = os.environ.get("ELEVENLABS_VOICE_ID_DAD", "").strip() or "pNInz6obpgDQGcFmaJgB"   # Adam - deep, steady
+_VOICES = {}
+def resolve_voice(male=False):
+    """A voice this account can actually use. The owner's ELEVENLABS_VOICE_ID
+    (ELEVENLABS_VOICE_ID_DAD for the dad) if it is in the account; else the first
+    premade voice we know by name; else whatever the account lists first."""
+    if male in _VOICES: return _VOICES[male]
     s, b = http("GET", "https://api.elevenlabs.io/v1/voices", headers={"xi-api-key": ELEVEN}, timeout=60)
     voices = json.loads(b).get("voices", []) if s == 200 else []
     ids = {v.get("voice_id"): v.get("name", "") for v in voices}
-    env = os.environ.get("ELEVENLABS_VOICE_ID", "").strip()
-    if env and env in ids: _VOICE = env
+    env = os.environ.get("ELEVENLABS_VOICE_ID_DAD" if male else "ELEVENLABS_VOICE_ID", "").strip()
+    if env and env in ids: pick = env
     else:
         by_name = {v.get("name", ""): v.get("voice_id") for v in voices}
-        pick = next((by_name[n] for n in PREFERRED if n in by_name), None)
-        _VOICE = pick or (voices[0].get("voice_id") if voices else env or VOICE)
-    print(f"  voice: {ids.get(_VOICE, _VOICE)} ({len(voices)} in the account, list status {s})")
-    return _VOICE
+        pick = next((by_name[n] for n in (PREFERRED_MALE if male else PREFERRED) if n in by_name), None)
+        if not pick:
+            gender = "male" if male else "female"
+            pick = next((v.get("voice_id") for v in voices if str((v.get("labels") or {}).get("gender", "")).lower() == gender), None)
+        pick = pick or (voices[0].get("voice_id") if voices else env or (VOICE_MALE if male else VOICE))
+    _VOICES[male] = pick
+    print(f"  voice ({'dad' if male else 'mom'}): {ids.get(pick, pick)} ({len(voices)} in the account, list status {s})")
+    return pick
 
-def tts(text):
+def tts(text, male=False):
     """ElevenLabs reads one line. Returns mp3 bytes."""
     if not ELEVEN: raise RuntimeError("ELEVENLABS_API_KEY is not set")
     body = {"text": text, "model_id": "eleven_multilingual_v2", "voice_settings": {"stability": 0.5, "similarity_boost": 0.8, "style": 0.2}}
-    s, b = http("POST", f"https://api.elevenlabs.io/v1/text-to-speech/{resolve_voice()}?output_format=mp3_44100_128", body,
+    s, b = http("POST", f"https://api.elevenlabs.io/v1/text-to-speech/{resolve_voice(male)}?output_format=mp3_44100_128", body,
                 {"xi-api-key": ELEVEN, "Content-Type": "application/json", "Accept": "audio/mpeg"}, timeout=180)
     if s != 200: raise RuntimeError(f"ElevenLabs: {s} {b[:200]!r}")
     return b
@@ -671,7 +708,7 @@ def intro_card(W=1080, H=1920):
     return im
 
 # ---------------------------------------------------------------- the video
-def make_video(pics, lines, who=None, cover=None):
+def make_video(pics, lines, who=None, cover=None, male=False):
     """who: the Traveler this piece is about (badge on story frames). A line that
     names a Traveler shows that Traveler's portrait instead of a story picture."""
     tmp = tempfile.mkdtemp(prefix="mkt-")
@@ -683,7 +720,7 @@ def make_video(pics, lines, who=None, cover=None):
         else: pic, mark = pics[story_i % len(pics)], who; story_i += 1
         fpath = os.path.join(tmp, f"f{i:02d}.png"); frame(pic, overlay, spoken, who=mark).save(fpath)
         if spoken:
-            apath = os.path.join(tmp, f"a{i:02d}.mp3"); open(apath, "wb").write(tts(spoken)); dur = duration_of(apath) + 0.35
+            apath = os.path.join(tmp, f"a{i:02d}.mp3"); open(apath, "wb").write(tts(spoken, male)); dur = duration_of(apath) + 0.35
             audio_parts.append(apath)
         else:
             dur = 2.2
@@ -716,17 +753,18 @@ def srt_time(t):
     ms = int(round(t * 1000)); h, ms = divmod(ms, 3600000); m, ms = divmod(ms, 60000); sec, ms = divmod(ms, 1000)
     return f"{h:02d}:{m:02d}:{sec:02d},{ms:03d}"
 
-def talking_video(lines, item_id, cover=None):
+def talking_video(lines, item_id, cover=None, dad=False):
     """The presenter speaks the lines. ElevenLabs reads them (one file, with the
     per-line timing kept for captions); D-ID animates the presenter picture to
     that audio; ffmpeg frames it 1080x1920 with the headline, burned-in
     captions, the brand line and the end card. Returns (mp4 bytes, jpg bytes)."""
-    if not (DID and os.path.exists(PRESENTER)): raise RuntimeError("no D-ID key or presenter")
+    ref = presenter_file(dad)
+    if not (DID and os.path.exists(ref)): raise RuntimeError("no D-ID key or presenter")
     tmp = tempfile.mkdtemp(prefix="talk-")
     parts, cues, t = [], [], 0.0
     for i, (spoken, overlay) in enumerate(lines):
         if not spoken: continue
-        apath = os.path.join(tmp, f"a{i:02d}.mp3"); open(apath, "wb").write(tts(spoken)); d = duration_of(apath)
+        apath = os.path.join(tmp, f"a{i:02d}.mp3"); open(apath, "wb").write(tts(spoken, dad)); d = duration_of(apath)
         parts.append(apath); cues.append((t, t + d, spoken)); t += d
     if not parts: raise RuntimeError("nothing to say")
     alist = os.path.join(tmp, "audio.txt")
@@ -736,7 +774,7 @@ def talking_video(lines, item_id, cover=None):
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", alist, "-c", "copy", voice], check=True)
     audio_url = upload(f"{item_id}/voice.mp3", open(voice, "rb").read(), "audio/mpeg")
     # the presenter picture must be reachable by D-ID: the website serves the brand kit
-    source_url = f"{SITE}/lantern/brand/presenter.png"
+    source_url = f"{SITE}/lantern/brand/{os.path.basename(ref)}"
     auth = {"Authorization": "Basic " + DID, "Content-Type": "application/json"}
     st, b = http("POST", "https://api.d-id.com/talks", {"source_url": source_url, "script": {"type": "audio", "audio_url": audio_url},
                  "config": {"fluent": True, "pad_audio": 0.3, "stitch": True}}, auth, timeout=120)
@@ -794,7 +832,8 @@ def pictures_for(it):
     audience = (it.get("audience") or "kids").lower()
     prompt = it.get("image_prompt") or it.get("title") or "a bedtime scripture story"
     if audience.startswith("parent"):
-        return [presenter_picture(prompt)], "presenter"
+        dad = wants_dad(it)
+        return [presenter_picture(prompt, dad=dad)], ("the dad presenter" if dad else "the mom presenter")
     pics = night_pictures(it.get("night_date"))
     if pics: return pics, "the night's own illustrations"
     return [kids_picture(prompt)], "drawn from the brand kit"
@@ -823,10 +862,11 @@ def main():
                 lines = parse_lines(it.get("body") or "")
                 if not lines: lines = [(hook, hook)]
                 mp4 = thumb = None
+                dad = (not kids) and wants_dad(it)
                 if not kids and DID:
-                    try: mp4, thumb = talking_video(lines, iid, cover=cover); source = "the presenter, talking"
+                    try: mp4, thumb = talking_video(lines, iid, cover=cover, dad=dad); source += ", talking"
                     except Exception as e: print(f"  talking presenter: {e} - using the still presenter")
-                if mp4 is None: mp4, thumb = make_video(pics, lines, who=who, cover=cover)
+                if mp4 is None: mp4, thumb = make_video(pics, lines, who=who, cover=cover, male=dad)
                 patch = {"media_url": upload(f"{iid}/video.mp4", mp4, "video/mp4"), "media_type": "video",
                          "thumb_url": upload(f"{iid}/thumb.jpg", thumb, "image/jpeg"), "post_error": None}
             else:
