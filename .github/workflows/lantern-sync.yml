@@ -285,6 +285,11 @@ jobs:
         run: |
           if [ -z "$OPENAI_API_KEY" ]; then echo "OPENAI_API_KEY not set - no marketing media this run."; else
             python3 -m pip install --quiet --disable-pip-version-check Pillow || true
+            # the video maker needs ffmpeg + ffprobe; the runner image does not always ship them
+            if ! command -v ffprobe >/dev/null 2>&1; then
+              sudo apt-get -qq update >/dev/null 2>&1 || true
+              sudo apt-get -qq install -y ffmpeg >/dev/null 2>&1 || echo "could not install ffmpeg - videos will wait"
+            fi
             python3 lantern/marketing_media.py || echo "marketing media step had trouble - the drafts are still in the desk."
           fi
           echo "Poster readiness (key set? platforms linked?):"
