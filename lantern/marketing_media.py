@@ -15,6 +15,16 @@ THE PICTURE RULE (the owner's brand, every time):
   that Traveler's own portrait is shown - a video line that names one shows the
   portrait for that line, a hook that names one puts the portrait in the frame,
   and every other frame of such a piece carries the Traveler as a round badge.
+  THE FULL-FRAME RULE: a story picture fills the whole social frame, edge to
+  edge. The book pictures are landscape, so each is extended once to a tall
+  2:3 picture (OpenAI images/edits with a mask - the original pixels are kept
+  exactly, only the scene is continued beyond the edges) and kept under
+  images/book/portrait/ (the Action commits it) - never cropped into a small box.
+  THE CARDS RULE: the night's Morning Lantern cards (A Parent's Heart, Verse of
+  the Day, Why This Story Matters, The Line to Carry, Conversation Starter,
+  Apply It ...) become slides - a "carousel" piece is the hook slide, the cards
+  over the night's pictures, and a closing card - read straight from the
+  Lantern page, never paraphrased.
 
 For every fresh draft in marketing_items that has no media yet:
   image  - a brand panel: the illustration framed on navy with the hook in gold,
@@ -49,6 +59,14 @@ BRAND  = os.path.join(HERE, "brand")
 CAST   = os.path.join(BRAND, "travelers-cast.jpg")
 TRAVELERS = ["beau", "scout", "willow", "wren"]
 PRESENTER = os.path.join(BRAND, "presenter.png")
+PORTRAIT_DIR = os.path.join(ROOT, "images", "book", "portrait")
+EXTEND_TEXT = ("Extend this children's storybook illustration outward to fill the whole tall frame. Continue the same "
+               "scene, setting, lighting and painting style seamlessly beyond the current edges - more of the sky, "
+               "ground, room or landscape. Do not add new characters, text or objects. Keep everything already in "
+               "the picture exactly as it is.")
+# The Lantern cards worth a slide, in the order they go out
+CARD_PICKS = ["A Parent's Heart", "Verse of the Day", "The Heart of Tonight", "Why This Story Matters",
+              "The Line to Carry", "Conversation Starter", "Apply It", "One Invitation", "Tonight's Story Connection"]
 TRAVELER_RE = {t: re.compile(r"\b" + t + r"\b", re.I) for t in TRAVELERS}
 def travelers_in(text):
     """Which Travelers a piece of text names, in cast order."""
@@ -117,6 +135,67 @@ def night_pictures(night_date):
         pics = sorted(glob.glob(os.path.join(os.path.dirname(f), "*.jpg")) + glob.glob(os.path.join(os.path.dirname(f), "*.png")))
         return [p for p in pics if "lullaby" not in os.path.basename(p)]
     return []
+
+def night_folder(night_date):
+    for f in glob.glob(os.path.join(HERE, "*", "night.json")):
+        try:
+            if json.load(open(f)).get("publish_date") == night_date: return os.path.dirname(f)
+        except Exception: continue
+    return None
+
+def _plain(fragment):
+    """HTML -> lines of plain text (paragraphs, list items and breaks kept as lines)."""
+    import html as _h
+    t = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", fragment)
+    t = re.sub(r"<br\s*/?>", "\n", t, flags=re.I)
+    t = re.sub(r"<li[^>]*>", "\n- ", t, flags=re.I)
+    t = re.sub(r"</(p|li|h\d|div|blockquote|tr)>", "\n", t, flags=re.I)
+    t = re.sub(r"<[^>]+>", " ", t)
+    t = _h.unescape(t).replace("\xa0", " ")
+    lines = [re.sub(r"[ \t]+", " ", ln).strip() for ln in t.split("\n")]
+    return [ln for ln in lines if ln]
+
+def lantern_cards(night_date, edition="christian"):
+    """The night's Morning Lantern cards as (label, text). The deep read holds
+    every card of the quick and medium reads too. Public marketing reads the
+    Christian edition (it speaks to every Christian family)."""
+    folder = night_folder(night_date)
+    if not folder: return []
+    f = os.path.join(folder, f"morning-lantern-{edition}.html")
+    if not os.path.exists(f): f = os.path.join(folder, "morning-lantern-lds.html")
+    if not os.path.exists(f): return []
+    html_ = open(f, encoding="utf-8", errors="ignore").read()
+    m = re.search(r'id="tab-heavenly">(.*?)<!-- /heavenly -->', html_, re.S)
+    part = m.group(1) if m else html_
+    out = []
+    for _cls, body in re.findall(r'<div class="card ([^"]*)">(.*?)</div>\s*(?=<div class="card |<!-- /heavenly|$)', part, re.S):
+        lab = re.search(r'<div class="card-label[^"]*">(.*?)</div>', body, re.S)
+        if lab:
+            label = " ".join(_plain(lab.group(1))); rest = body[lab.end():]
+        else:
+            lines = _plain(body); label = lines[0] if lines else ""; rest = body
+            rest = rest.replace(label, "", 1)
+        label = re.sub(r"^[^A-Za-z0-9]+", "", label).strip()          # drop the star / emoji marks
+        lines = _plain(rest)
+        if label and lines: out.append((label, lines))
+    return out
+
+def pick_cards(cards, body_text="", n=6):
+    """Which cards go on the slides: the ones the writer named in the body (by
+    name, one per line), else the standing picks, in order."""
+    def find(name):
+        key = name.lower()
+        return next((c for c in cards if key in c[0].lower()), None)
+    chosen = []
+    for ln in (body_text or "").splitlines():
+        ln = re.sub(r"^\s*(slide\s*\d+\s*[:.)-]\s*|\d+[.)]\s*|[-*]\s*)", "", ln, flags=re.I).strip()
+        c = find(ln) if len(ln) > 5 else None
+        if c and c not in chosen: chosen.append(c)
+    if not chosen:
+        for name in CARD_PICKS:
+            c = find(name)
+            if c and c not in chosen: chosen.append(c)
+    return chosen[:n]
 
 # ---------------------------------------------------------------- generated pictures (with the kit as reference)
 def _multipart(fields, files):
@@ -256,38 +335,63 @@ def rounded(im, radius):
     ImageDraw.Draw(mask).rounded_rectangle([0, 0, im.width - 1, im.height - 1], radius=radius, fill=255)
     out = im.convert("RGBA"); out.putalpha(mask); return out
 
-def panel(pic, W, H, pic_top=None, pic_w=None, max_h=None):
-    """The brand backdrop: the picture itself blurred and darkened behind, the
-    picture framed in gold in front. Returns (RGB image, (top, bottom) of the frame)."""
-    from PIL import Image, ImageDraw, ImageFilter, ImageEnhance
+def portrait_of(pic):
+    """A tall 2:3 (1024x1536) version of a picture with the scene continued
+    beyond its edges, so it fills a social frame edge to edge. Made once
+    (OpenAI images/edits with a mask; the original pixels are pasted back
+    exactly), kept under images/book/portrait/. Without a key, or if the
+    extension fails, the picture sits on a blurred, darkened copy of itself
+    (not cached, so a later run can still extend it properly)."""
+    from PIL import Image, ImageFilter, ImageEnhance
+    src = pic if isinstance(pic, str) else None
+    name = (os.path.splitext(os.path.basename(src))[0] if src else "gen-" + uuid.uuid4().hex[:8]) + ".jpg"
+    cached = os.path.join(PORTRAIT_DIR, name)
+    if src and os.path.exists(cached): return cached
     im = load_rgb(pic)
-    bg = cover(im, W, H).filter(ImageFilter.GaussianBlur(28))
-    bg = ImageEnhance.Brightness(bg).enhance(0.42)
-    tint = Image.new("RGB", (W, H), NAVY)
-    bg = Image.blend(bg, tint, 0.35)
-    pw = pic_w or (W - 80)
-    ph = int(im.height * pw / im.width)
-    cap = min(int(H * 0.62), max_h or H)
-    if ph > cap:                                               # a tall picture: fit the height instead
-        ph = cap; pw = int(im.width * ph / im.height)
-    top = pic_top if pic_top is not None else (H - ph) // 2
-    left = (W - pw) // 2
-    frame_ = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    ImageDraw.Draw(frame_).rounded_rectangle([left - 8, top - 8, left + pw + 8, top + ph + 8], radius=38, fill=GOLD + (255,))
-    bg = Image.alpha_composite(bg.convert("RGBA"), frame_)
-    bg.alpha_composite(rounded(im.resize((pw, ph)), 30), (left, top))
-    return bg.convert("RGB"), (top, top + ph)
+    W, H = 1024, 1536
+    if im.height >= im.width * 1.4: return pic                 # already tall - nothing to extend
+    r = 864 / im.width; iw, ih = 864, int(im.height * r)
+    if ih > 1300: r = 1300 / im.height; iw, ih = int(im.width * r), 1300
+    small = im.resize((iw, ih)); x, y = (W - iw) // 2, (H - ih) // 2
+    out = None
+    if OPENAI and src:
+        try:
+            canvas = Image.new("RGBA", (W, H), (0, 0, 0, 0)); canvas.paste(small, (x, y))
+            data = to_bytes(canvas, "PNG")
+            body, ctype = _multipart({"model": "gpt-image-1", "prompt": EXTEND_TEXT, "n": "1", "size": f"{W}x{H}", "quality": "medium"},
+                                     [("image", ("scene.png", data, "image/png")), ("mask", ("mask.png", data, "image/png"))])
+            st, b = http("POST", "https://api.openai.com/v1/images/edits", raw=body,
+                         headers={"Authorization": "Bearer " + OPENAI, "Content-Type": ctype}, timeout=400)
+            out = load_rgb(_image_result(st, b, "images/edits")).resize((W, H))
+            out.paste(small, (x, y))                            # the original, untouched
+            os.makedirs(PORTRAIT_DIR, exist_ok=True); out.save(cached, quality=92)
+            print(f"  extended {name} to fill the frame")
+            return cached
+        except Exception as e:
+            print(f"  extend {name}: {e} - using a blurred fill this time")
+    bg = cover(im, W, H).filter(ImageFilter.GaussianBlur(30))
+    bg = ImageEnhance.Brightness(bg).enhance(0.55); bg.paste(small, (x, y))
+    tmp = os.path.join(tempfile.gettempdir(), "lst-fill-" + name); bg.save(tmp, quality=92)
+    return tmp
 
-def text_block(d, text, fnt, cx, y, max_w, fill, max_lines, step, stroke=(15, 25, 55), sw=3):
-    for ln in wrap(d, text, fnt, max_w)[:max_lines]:
-        d.text((cx, y), ln, font=fnt, fill=fill, anchor="mm", stroke_width=sw, stroke_fill=stroke); y += step
-    return y
+def bands(im, top_h, bottom_h):
+    """Soft navy fades at the top and bottom so words read over any picture."""
+    from PIL import Image, ImageDraw
+    W, H = im.size
+    shade = Image.new("RGBA", (W, H), (0, 0, 0, 0)); sd = ImageDraw.Draw(shade)
+    for y in range(0, top_h):    sd.line([(0, y), (W, y)], fill=(12, 20, 48, int(215 * (1 - y / top_h) ** 1.2)))
+    for y in range(H - bottom_h, H): sd.line([(0, y), (W, y)], fill=(12, 20, 48, int(230 * ((y - (H - bottom_h)) / bottom_h) ** 1.2)))
+    return Image.alpha_composite(im.convert("RGBA"), shade).convert("RGB")
+
+def full(pic, W, H):
+    """The picture filling the whole frame."""
+    return cover(load_rgb(portrait_of(pic)), W, H)
 
 def badge(im, who, cx, cy, size):
     """A Traveler's face in a round gold ring, centred on (cx, cy)."""
     from PIL import Image, ImageDraw
     if not who: return im
-    face = load_rgb(portrait([who]))
+    face = load_rgb(os.path.join(BRAND, who + ".jpg"))
     side = min(face.width, face.height)
     face = face.crop(((face.width - side) // 2, 0, (face.width - side) // 2 + side, side)).resize((size, size))
     mask = Image.new("L", (size, size), 0); ImageDraw.Draw(mask).ellipse([0, 0, size - 1, size - 1], fill=255)
@@ -298,43 +402,86 @@ def badge(im, who, cx, cy, size):
     out.paste(face, (cx - size // 2, cy - size // 2), mask)
     return out.convert("RGB")
 
+def text_block(d, text, fnt, cx, y, max_w, fill, max_lines, step, stroke=(15, 25, 55), sw=3):
+    for ln in wrap(d, text, fnt, max_w)[:max_lines]:
+        d.text((cx, y), ln, font=fnt, fill=fill, anchor="mm", stroke_width=sw, stroke_fill=stroke); y += step
+    return y
+
 def still_image(pic, hook, W, H, who=None):
-    """A feed picture: the illustration framed, the hook in gold above, the brand below."""
+    """A feed picture: the illustration edge to edge, the hook in gold at the top, the brand at the bottom."""
     from PIL import ImageDraw
-    im, (top, bottom) = panel(pic, W, H, pic_top=int(H * 0.30), max_h=int(H * 0.56))
-    if who: im = badge(im, who, W - 130, top + 30, 210)      # the Traveler, top-right corner of the frame
+    im = bands(full(pic, W, H), int(H * 0.34), int(H * 0.22))
+    if who: im = badge(im, who, W - 130, int(H * 0.40), 200)
     d = ImageDraw.Draw(im)
-    fb = font(True, int(W * 0.062)); fr = font(False, int(W * 0.036))
-    if hook: text_block(d, hook, fb, W / 2, int(H * 0.09), W - 140, GOLD, 3, int(W * 0.078))
-    d.text((W / 2, bottom + int(H * 0.06)), "A new story every night - free in the app", font=fr, fill=CREAM, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
-    d.text((W / 2, bottom + int(H * 0.105)), "Little Scripture Travelers", font=font(True, int(W * 0.04)), fill=TEAL, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
+    fb = font(True, int(W * 0.064)); fr = font(False, int(W * 0.034))
+    if hook: text_block(d, hook, fb, W / 2, int(H * 0.075), W - 120, GOLD, 4, int(W * 0.08), sw=4)
+    d.text((W / 2, H - int(H * 0.085)), "A new story every night - free in the app", font=fr, fill=CREAM, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
+    d.text((W / 2, H - int(H * 0.045)), "Little Scripture Travelers", font=font(True, int(W * 0.038)), fill=TEAL, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
     return im
 
 def frame(pic, overlay, caption, W=1080, H=1920, who=None):
-    """One video frame: the picture framed mid-screen, on-screen text above, the spoken words below."""
+    """One video frame: the picture edge to edge, the on-screen text at the top, the spoken words at the bottom."""
     from PIL import ImageDraw
-    im, (top, bottom) = panel(pic, W, H, pic_top=560, pic_w=1000)
-    if who: im = badge(im, who, W - 150, top + 40, 250)      # the Traveler, top-right corner of the frame
+    im = bands(full(pic, W, H), 640, 760)
+    if who: im = badge(im, who, W - 150, 760, 240)
     d = ImageDraw.Draw(im)
-    fb, fr = font(True, 72), font(False, 50)
+    fb, fr = font(True, 74), font(False, 50)
     if overlay:
-        lines = wrap(d, overlay.upper(), fb, W - 160)[:3]
-        y = 250 - (len(lines) - 1) * 44
+        lines = wrap(d, overlay.upper(), fb, W - 140)[:3]
+        y = 250 - (len(lines) - 1) * 45
         for ln in lines:
-            d.text((W / 2, y), ln, font=fb, fill=GOLD, anchor="mm", stroke_width=4, stroke_fill=(15, 25, 55)); y += 88
+            d.text((W / 2, y), ln, font=fb, fill=GOLD, anchor="mm", stroke_width=4, stroke_fill=(15, 25, 55)); y += 90
     if caption:
-        text_block(d, caption, fr, W / 2, bottom + 110, W - 200, CREAM, 4, 64)
-    d.text((W / 2, H - 120), "Little Scripture Travelers", font=fr, fill=TEAL, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
+        lines = wrap(d, caption, fr, W - 180)[:5]
+        y = H - 470 - (len(lines) - 1) * 32
+        for ln in lines:
+            d.text((W / 2, y), ln, font=fr, fill=CREAM, anchor="mm", stroke_width=3, stroke_fill=(15, 25, 55)); y += 64
+    d.text((W / 2, H - 150), "Little Scripture Travelers", font=fr, fill=TEAL, anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55))
+    return im
+
+def trim_lines(lines, limit):
+    """The first lines of a card up to `limit` characters, the last one cut at a sentence end."""
+    out, used = [], 0
+    for ln in lines:
+        if used + len(ln) <= limit: out.append(ln); used += len(ln) + 1; continue
+        room = limit - used
+        if room > 60:
+            cut = ln[:room]
+            m = max(cut.rfind(". "), cut.rfind("! "), cut.rfind("? "), cut.rfind('." '), cut.rfind('!" '), cut.rfind('?" '))
+            if m > 40: out.append(cut[:m + 1])
+            elif len(out) < 2: out.append(cut.rsplit(" ", 1)[0] + "...")
+        break
+    return out or lines[:1]
+
+def card_slide(pic, label, lines, W=1080, H=1350):
+    """One Morning Lantern card over the night's picture: the label in gold, the card's own words in cream."""
+    from PIL import Image, ImageDraw, ImageEnhance
+    im = ImageEnhance.Brightness(full(pic, W, H)).enhance(0.42)
+    im = Image.blend(im, Image.new("RGB", (W, H), NAVY), 0.30)
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, 96), "Tonight's Morning Lantern", font=font(False, 34), fill=TEAL, anchor="mm")
+    y = text_block(d, label, font(True, 58), W / 2, 176, W - 140, GOLD, 2, 68, sw=3) + 20
+    # the words: a slide holds one thought - the card's first ~420 characters, cut at a sentence end
+    lines = trim_lines(lines, 420)
+    for size, step in ((48, 62), (44, 57), (40, 52), (36, 47)):
+        fnt = font(False, size); wrapped = []
+        for ln in lines:
+            wrapped += wrap(d, ln, fnt, W - 150) or [""]
+        if y + len(wrapped) * step <= H - 150: break
+    for ln in wrapped[:int((H - 150 - y) / step)]:
+        d.text((W / 2, y), ln, font=fnt, fill=CREAM, anchor="mm", stroke_width=2, stroke_fill=(10, 16, 40)); y += step
+    d.text((W / 2, H - 70), "Little Scripture Travelers", font=font(True, 34), fill=TEAL, anchor="mm")
     return im
 
 def end_card(W=1080, H=1920):
     from PIL import Image, ImageDraw
     im = Image.new("RGB", (W, H), NAVY); d = ImageDraw.Draw(im)
+    size = int(W * 0.57); top = int(H * 0.22)
     try:
-        logo = Image.open(LOGO).convert("RGB").resize((620, 620)); im.paste(logo, ((W - 620) // 2, 480))
+        logo = Image.open(LOGO).convert("RGB").resize((size, size)); im.paste(logo, ((W - size) // 2, top))
     except Exception: pass
-    d.text((W / 2, 1220), "A new story every night", font=font(True, 60), fill=GOLD, anchor="mm")
-    d.text((W / 2, 1310), "littlescripturetravelers.com", font=font(False, 44), fill=CREAM, anchor="mm")
+    d.text((W / 2, top + size + int(H * 0.06)), "A new story every night", font=font(True, int(W * 0.055)), fill=GOLD, anchor="mm")
+    d.text((W / 2, top + size + int(H * 0.11)), "littlescripturetravelers.com", font=font(False, int(W * 0.04)), fill=CREAM, anchor="mm")
     return im
 
 # ---------------------------------------------------------------- the video
@@ -415,9 +562,19 @@ def main():
             else:
                 W, H = (1000, 1500) if plat == "pinterest" else (1080, 1350)
                 in_hook = travelers_in(hook) if kids else []
-                png = to_bytes(still_image(portrait(in_hook) if in_hook else pics[0], hook, W, H, who=None if in_hook else who))
-                image_url = upload(f"{iid}/image.png", png, "image/png")
-                patch = {"media_url": image_url, "media_type": "image", "thumb_url": image_url, "post_error": None}
+                first = still_image(portrait(in_hook) if in_hook else pics[0], hook, W, H, who=None if in_hook else who)
+                cards = pick_cards(lantern_cards(it.get("night_date")), it.get("body") or "") if fmt == "carousel" else []
+                if cards:
+                    # THE CARDS RULE: the Lantern's own cards, each over one of the night's pictures
+                    backs = night_pictures(it.get("night_date")) or pics
+                    slides = [first] + [card_slide(backs[(i + 1) % len(backs)], lab, lines, W, H) for i, (lab, lines) in enumerate(cards)] + [end_card(W, H)]
+                    urls = [upload(f"{iid}/slide-{n + 1:02d}.png", to_bytes(sl), "image/png") for n, sl in enumerate(slides[:10])]
+                    patch = {"media_url": urls[0], "media_type": "image", "thumb_url": urls[0], "post_error": None,
+                             "meta": {**(it.get("meta") or {}), "slides": urls}}
+                    source += f" + {len(cards)} Lantern cards"
+                else:
+                    image_url = upload(f"{iid}/image.png", to_bytes(first), "image/png")
+                    patch = {"media_url": image_url, "media_type": "image", "thumb_url": image_url, "post_error": None}
             sb_patch(iid, patch); done += 1
             print(f"  {plat:9s} {fmt:9s} {patch['media_type']:5s} {it.get('title','')[:44]}  [{source}]")
         except Exception as e:
