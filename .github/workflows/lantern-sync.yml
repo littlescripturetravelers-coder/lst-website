@@ -289,6 +289,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+          DID_API_KEY: ${{ secrets.DID_API_KEY }}
         run: |
           if [ -z "$OPENAI_API_KEY" ]; then echo "OPENAI_API_KEY not set - no marketing media this run."; else
             python3 -m pip install --quiet --disable-pip-version-check Pillow || true
@@ -301,6 +302,23 @@ jobs:
             npm install --no-save --silent playwright@1.56.1 >/dev/null 2>&1 || echo "playwright did not install - cards fall back to set words"
             npx playwright install --with-deps chromium >/dev/null 2>&1 || echo "chromium did not install - cards fall back to set words"
             python3 lantern/marketing_media.py || echo "marketing media step had trouble - the drafts are still in the desk."
+          fi
+          # Catch-up: today's night gets all three slots even if it was published before this
+          # step existed (each call writes the first slot still missing; drafted slots are skipped),
+          # and the keyword bank is seeded once if it is empty.
+          TODAY=$(TZ=America/Denver date +%F)
+          for pass in 1 2 3; do
+            R=$(curl -sS -X POST "$SUPABASE_URL/functions/v1/marketing-draft" \
+              -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" -H "Content-Type: application/json" \
+              -d "{\"date\":\"$TODAY\"}" | head -c 300); echo "draft $TODAY pass $pass: $R"
+            echo "$R" | grep -q '"remaining":[1-9]' || break
+          done
+          BANK=$(curl -sS "$SUPABASE_URL/rest/v1/marketing_keywords?select=id&limit=1" -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY")
+          if [ "$BANK" = "[]" ]; then
+            echo "keyword bank is empty - seeding it:"
+            curl -sS -X POST "$SUPABASE_URL/functions/v1/marketing-draft" \
+              -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" -H "Content-Type: application/json" \
+              -d '{"action":"growth","target":"seo"}' | head -c 200; echo
           fi
           echo "Poster readiness (key set? platforms linked?):"
           curl -sS -X POST "$SUPABASE_URL/functions/v1/marketing-post" \

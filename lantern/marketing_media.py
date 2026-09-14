@@ -40,8 +40,14 @@ For every fresh draft in marketing_items that has no media yet:
 Both land in the public "marketing" bucket and the row gets media_url. The
 poster (marketing-post) only sends pieces that have media.
 
+  THE TALKING PRESENTER: with DID_API_KEY set, a parents-audience video is the
+  presenter actually speaking the lines (D-ID animates lantern/brand/presenter.png
+  to the ElevenLabs voice), captions burned in, brand end card. Without the key
+  the presenter's still picture carries the voice and captions as before.
+
 Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, OPENAI_API_KEY (generated pictures),
-     ELEVENLABS_API_KEY (voice), ELEVENLABS_VOICE_ID (optional), MEDIA_LIMIT (default 8).
+     ELEVENLABS_API_KEY (voice), ELEVENLABS_VOICE_ID (optional), DID_API_KEY (optional),
+     MEDIA_LIMIT (default 20).
 Runs on the Action's Ubuntu runner (ffmpeg installed by the workflow, DejaVu fonts present).
 """
 import os, re, io, json, glob, base64, subprocess, tempfile, urllib.request, urllib.error, uuid, sys
@@ -54,7 +60,9 @@ ELEVEN = os.environ.get("ELEVENLABS_API_KEY", "")
 # string must fall through to the default - `.get(..., default)` did not, and
 # the voice URL ended in nothing, which ElevenLabs answered with 404.
 VOICE  = os.environ.get("ELEVENLABS_VOICE_ID", "").strip() or "21m00Tcm4TlvDq8ikWAM"   # Rachel - warm, clear
-LIMIT  = int(os.environ.get("MEDIA_LIMIT", "8"))
+LIMIT  = int(os.environ.get("MEDIA_LIMIT", "20"))
+DID    = os.environ.get("DID_API_KEY", "").strip()          # optional: the presenter talks (D-ID)
+SITE   = "https://littlescripturetravelers.com"
 HERE   = os.path.dirname(os.path.abspath(__file__))
 ROOT   = os.path.abspath(os.path.join(HERE, ".."))
 LOGO   = os.path.join(ROOT, "images", "logo-badge.jpg")
@@ -563,6 +571,79 @@ def make_video(pics, lines, who=None):
     thumb = os.path.join(tmp, "thumb.jpg"); frame(portrait(first) if first else pics[0], lines[0][1] if lines else "", "", who=None if first else who).save(thumb, quality=88)
     return open(out, "rb").read(), open(thumb, "rb").read()
 
+# ---------------------------------------------------------------- the talking presenter (D-ID)
+def srt_time(t):
+    ms = int(round(t * 1000)); h, ms = divmod(ms, 3600000); m, ms = divmod(ms, 60000); sec, ms = divmod(ms, 1000)
+    return f"{h:02d}:{m:02d}:{sec:02d},{ms:03d}"
+
+def talking_video(lines, item_id):
+    """The presenter speaks the lines. ElevenLabs reads them (one file, with the
+    per-line timing kept for captions); D-ID animates the presenter picture to
+    that audio; ffmpeg frames it 1080x1920 with the headline, burned-in
+    captions, the brand line and the end card. Returns (mp4 bytes, jpg bytes)."""
+    if not (DID and os.path.exists(PRESENTER)): raise RuntimeError("no D-ID key or presenter")
+    tmp = tempfile.mkdtemp(prefix="talk-")
+    parts, cues, t = [], [], 0.0
+    for i, (spoken, overlay) in enumerate(lines):
+        if not spoken: continue
+        apath = os.path.join(tmp, f"a{i:02d}.mp3"); open(apath, "wb").write(tts(spoken)); d = duration_of(apath)
+        parts.append(apath); cues.append((t, t + d, spoken)); t += d
+    if not parts: raise RuntimeError("nothing to say")
+    alist = os.path.join(tmp, "audio.txt")
+    with open(alist, "w") as fh:
+        for p in parts: fh.write(f"file '{p}'\n")
+    voice = os.path.join(tmp, "voice.mp3")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", alist, "-c", "copy", voice], check=True)
+    audio_url = upload(f"{item_id}/voice.mp3", open(voice, "rb").read(), "audio/mpeg")
+    # the presenter picture must be reachable by D-ID: the website serves the brand kit
+    source_url = f"{SITE}/lantern/brand/presenter.png"
+    auth = {"Authorization": "Basic " + DID, "Content-Type": "application/json"}
+    st, b = http("POST", "https://api.d-id.com/talks", {"source_url": source_url, "script": {"type": "audio", "audio_url": audio_url},
+                 "config": {"fluent": True, "pad_audio": 0.3, "stitch": True}}, auth, timeout=120)
+    if st not in (200, 201): raise RuntimeError(f"D-ID: {st} {b[:200]!r}")
+    talk_id = json.loads(b).get("id")
+    result = None
+    for _ in range(90):
+        time.sleep(4)
+        st, b = http("GET", f"https://api.d-id.com/talks/{talk_id}", headers=auth, timeout=60)
+        j = json.loads(b) if st == 200 else {}
+        if j.get("status") == "done": result = j.get("result_url"); break
+        if j.get("status") in ("error", "rejected"): raise RuntimeError(f"D-ID: {j.get('error') or j.get('status')}")
+    if not result: raise RuntimeError("D-ID: the talk did not finish in time")
+    st, mp4 = http("GET", result, timeout=300)
+    if st != 200: raise RuntimeError(f"D-ID: could not fetch the result ({st})")
+    src = os.path.join(tmp, "talk.mp4"); open(src, "wb").write(mp4)
+    # captions
+    srt = os.path.join(tmp, "captions.srt")
+    with open(srt, "w") as fh:
+        for i, (a, z, text) in enumerate(cues, 1):
+            fh.write(f"{i}\n{srt_time(a)} --> {srt_time(z)}\n{text}\n\n")
+    # the headline (the first on-screen text) and the brand line, drawn once as a transparent overlay
+    from PIL import Image, ImageDraw
+    ov = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
+    headline = next((o for _s, o in lines if o), "")
+    if headline:
+        y = 200
+        for ln in wrap(d, headline.upper(), font(True, 68), 940)[:3]:
+            d.text((540, y), ln, font=font(True, 68), fill=GOLD + (255,), anchor="mm", stroke_width=4, stroke_fill=(15, 25, 55, 255)); y += 84
+    d.text((540, 1780), "Little Scripture Travelers", font=font(False, 46), fill=TEAL + (255,), anchor="mm", stroke_width=2, stroke_fill=(15, 25, 55, 255))
+    ovp = os.path.join(tmp, "overlay.png"); ov.save(ovp)
+    ep = os.path.join(tmp, "end.png"); end_card().save(ep)
+    body = os.path.join(tmp, "body.mp4")
+    vf = ("scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,"
+          f"subtitles={srt}:force_style='FontName=DejaVu Sans,FontSize=17,PrimaryColour=&H00FFFFFF,OutlineColour=&H00371B0F,Outline=2,Shadow=0,Alignment=2,MarginV=260'")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", src, "-i", ovp, "-filter_complex", f"[0:v]{vf}[v];[v][1:v]overlay=0:0,format=yuv420p[out]",
+                    "-map", "[out]", "-map", "0:a?", "-r", "30", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-c:a", "aac", "-b:a", "160k", body], check=True)
+    tail = os.path.join(tmp, "tail.mp4")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-t", "2.5", "-i", ep, "-f", "lavfi", "-t", "2.5", "-i", "anullsrc=r=44100:cl=stereo",
+                    "-vf", "scale=1080:1920,format=yuv420p", "-r", "30", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-c:a", "aac", "-shortest", tail], check=True)
+    lst = os.path.join(tmp, "join.txt"); open(lst, "w").write(f"file '{body}'\nfile '{tail}'\n")
+    out = os.path.join(tmp, "out.mp4")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", "-movflags", "+faststart", out], check=True)
+    thumb = os.path.join(tmp, "thumb.jpg")
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", out, "-ss", "1", "-frames:v", "1", thumb], check=True)
+    return open(out, "rb").read(), open(thumb, "rb").read()
+
 # ---------------------------------------------------------------- the pictures for one piece
 def pictures_for(it):
     """The pictures a piece is built from, and where they came from."""
@@ -596,7 +677,11 @@ def main():
             if fmt in VIDEO_FORMATS or plat in ("tiktok", "youtube"):
                 lines = parse_lines(it.get("body") or "")
                 if not lines: lines = [(hook, hook)]
-                mp4, thumb = make_video(pics, lines, who=who)
+                mp4 = thumb = None
+                if not kids and DID:
+                    try: mp4, thumb = talking_video(lines, iid); source = "the presenter, talking"
+                    except Exception as e: print(f"  talking presenter: {e} - using the still presenter")
+                if mp4 is None: mp4, thumb = make_video(pics, lines, who=who)
                 patch = {"media_url": upload(f"{iid}/video.mp4", mp4, "video/mp4"), "media_type": "video",
                          "thumb_url": upload(f"{iid}/thumb.jpg", thumb, "image/jpeg"), "post_error": None}
             else:
