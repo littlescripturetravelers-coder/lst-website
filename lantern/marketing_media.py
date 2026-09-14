@@ -21,7 +21,10 @@ URL   = os.environ.get("SUPABASE_URL", "").rstrip("/")
 KEY   = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 OPENAI = os.environ.get("OPENAI_API_KEY", "")
 ELEVEN = os.environ.get("ELEVENLABS_API_KEY", "")
-VOICE  = os.environ.get("ELEVENLABS_VOICE_ID", "21m00Tcm4TlvDq8ikWAM")   # Rachel - warm, clear
+# The Action passes this variable even when the secret is empty, so an empty
+# string must fall through to the default - `.get(..., default)` did not, and
+# the voice URL ended in nothing, which ElevenLabs answered with 404.
+VOICE  = os.environ.get("ELEVENLABS_VOICE_ID", "").strip() or "21m00Tcm4TlvDq8ikWAM"   # Rachel - warm, clear
 LIMIT  = int(os.environ.get("MEDIA_LIMIT", "8"))
 LOGO   = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "images", "logo-badge.jpg")
 FONT_B = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
@@ -86,7 +89,7 @@ def resolve_voice():
         by_name = {v.get("name", ""): v.get("voice_id") for v in voices}
         pick = next((by_name[n] for n in PREFERRED if n in by_name), None)
         _VOICE = pick or (voices[0].get("voice_id") if voices else env or VOICE)
-    print(f"  voice: {ids.get(_VOICE, _VOICE)}")
+    print(f"  voice: {ids.get(_VOICE, _VOICE)} ({len(voices)} in the account, list status {s})")
     return _VOICE
 
 def tts(text):
