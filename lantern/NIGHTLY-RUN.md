@@ -109,12 +109,16 @@ BOOK is the month number (September = 9, October = 10) and MON is the three-lett
 NIGHT.JSON IS WHAT MAKES A NIGHT REAL. The publisher walks lantern/*/night.json and nothing else, so a folder without one publishes nothing however complete it looks. If the editions failed and you have only a lullaby, commit NOTHING and say plainly that the night was not built and why. Never leave a half folder.
 
 Then, in the lst-website clone:
-  git checkout main
-  git pull origin main
+  git fetch origin main
+  git checkout -B main origin/main
   (write the six files into lantern/{slug}/)
   git add lantern/{slug}
   git commit -m "Morning Lantern: {Title} ({publish_date})"
   git push origin main
+START FROM origin/main, NOT FROM THE LOCAL BRANCH. `git checkout -B main origin/main` is the two lines that matter and it replaces the older `git checkout main` + `git pull origin main`, which broke on 15 September. The container hands you a SHALLOW clone checked out at a detached HEAD, and its local `refs/heads/main` can still point at an older commit left over from the cached image - on 15 September it was five days stale. Two things follow, and both look alarming and are not:
+  - `git status` and `git checkout main` will report the branch "diverged" from origin/main with N and M different commits each, and `git merge-base` will find no common ancestor. That is the shallow clone's truncated history failing to meet, not real divergence. On 15 September it claimed 62 and 59 divergent commits; `git fetch --unshallow` proved the local ref was a plain ancestor of origin/main with ZERO commits of its own. Nothing was lost, and there is nothing to recover.
+  - `git pull origin main` then fails outright with "Need to specify how to reconcile divergent branches" and the run is left standing on the stale commit. If it commits there without noticing, the night is built on a days-old tree and only fails at push time.
+`git fetch origin main && git checkout -B main origin/main` is immune to both: it is idempotent, it ignores whatever the local ref happened to be, and it guarantees the night is built on the true tip. Never `git pull` here, and never treat the divergence warning as a reason to stop or to try to rescue commits - say in the report that you saw it and moved the branch to origin/main.
 It must be main. Since 9 September the Action publishes from main only, so a night on any other branch is built, sung, and never sent. If the push is rejected because the branch moved, `git pull --rebase origin main` and push again. Retry a network failure up to four times with 2s, 4s, 8s, 16s backoff.
 
 The six files:
