@@ -1,0 +1,28 @@
+# How many ElevenLabs credits are left. Press "Run workflow" and read the numbers
+# in the log. The key never leaves the secret store: only counts are printed.
+name: ElevenLabs balance
+on:
+  workflow_dispatch:
+jobs:
+  balance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask ElevenLabs for the balance
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          python3 - <<'EOF'
+          import os, json, datetime, urllib.request
+          key = os.environ.get('ELEVENLABS_API_KEY', '').strip()
+          if not key:
+              raise SystemExit('ELEVENLABS_API_KEY is not set in this repository\'s secrets.')
+          req = urllib.request.Request('https://api.elevenlabs.io/v1/user/subscription', headers={'xi-api-key': key})
+          d = json.load(urllib.request.urlopen(req, timeout=30))
+          used = int(d.get('character_count') or 0); limit = int(d.get('character_limit') or 0)
+          reset = d.get('next_character_count_reset_unix')
+          print('plan:            ', d.get('tier'))
+          print('credit limit:    ', limit)
+          print('credits used:    ', used)
+          print('credits left:    ', limit - used)
+          print('cycle resets:    ', datetime.datetime.utcfromtimestamp(reset).strftime('%Y-%m-%d %H:%M UTC') if reset else 'unknown')
+          EOF
