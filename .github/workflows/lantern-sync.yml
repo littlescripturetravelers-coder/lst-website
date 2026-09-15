@@ -81,6 +81,17 @@ jobs:
           print(f'{added} new file(s)')
           EOF
 
+      # The take-measuring below needs ffmpeg, and the runner image does not
+      # always ship it. Without it every take was kept unmeasured (15 Sept, run
+      # 147), so it is put in place here, before a single song is asked for.
+      - name: Make sure ffmpeg is here before any song is measured
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -qq update >/dev/null 2>&1 || true
+            sudo apt-get -qq install -y ffmpeg >/dev/null 2>&1 || echo "could not install ffmpeg - takes will be kept unmeasured"
+          fi
+          command -v ffmpeg >/dev/null 2>&1 && ffmpeg -version | head -1 || true
+
       - name: Sing any lullaby that has no MP3 yet (ElevenLabs Music)
         # The words change every night and always have. The music did not: every
         # lullaby.json carried the same sentence of direction, so every night came
