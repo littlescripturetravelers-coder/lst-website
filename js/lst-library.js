@@ -69,7 +69,8 @@
      tile that opens. */
   var BOOK_ART = { 6: "images/book-cover-june.jpg", 7: "images/book-cover-july.jpg",
                    8: "images/book-cover-august.jpg",
-                   9: "images/book-cover-september.jpg" };
+                   9: "images/book-cover-september.jpg",
+                   10: "images/book-cover-october.jpg" };
   function artFor(n) { return BOOK_ART[n && n.book] || "images/cover-ot.jpg"; }
 
   function load() {

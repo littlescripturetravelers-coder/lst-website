@@ -1,0 +1,71 @@
+name: Book nights
+
+# Puts a month's bedtime-story words into the website's database (book_nights),
+# so a subscriber can read the month on the website as well as in the app.
+#
+# The words are read from the app's own story pages on app.littlescripturetravelers.com
+# (the month's contents page lists them), shaped exactly as the earlier books were
+# (tools/sync-book-nights.py) and upserted with tools/apply-book-nights.py.
+# The pictures are files in this repo (images/book/<slug>-NN-<beat>.jpg), written
+# once per book with tools/extract-night-pictures.py and committed.
+#
+# Press "Run workflow", give the month (october) and the book number (10).
+# Safe to run again: it updates rather than duplicating.
+#
+# Repo secret needed: SUPABASE_SERVICE_ROLE_KEY (the same one lantern-sync uses).
+
+on:
+  workflow_dispatch:
+    inputs:
+      month:
+        description: "the month, as its contents page is named (october)"
+        default: "october"
+        required: true
+      book:
+        description: "the book number (June was 6, so October is 10)"
+        default: "10"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch the month's story pages from the app
+        env:
+          MONTH: ${{ github.event.inputs.month }}
+        run: |
+          set -e
+          mkdir -p /tmp/stories
+          python3 - <<'PY'
+          import os, re, urllib.request
+          month = os.environ['MONTH'].lower()
+          base = 'https://app.littlescripturetravelers.com/stories/'
+          def get(u):
+              return urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': 'lst-book-nights'}), timeout=120).read()
+          index = get(base + month + '.html').decode('utf-8', 'ignore')
+          files = sorted(set(re.findall(r'href="(%s-\d\d-[^"]+\.html)"' % month[:3], index)))
+          if not files: raise SystemExit('no night pages linked from ' + month + '.html')
+          for f in files:
+              open('/tmp/stories/' + f, 'wb').write(get(base + f))
+          print(len(files), 'night pages fetched')
+          PY
+
+      - name: Shape the nights and put them in book_nights
+        env:
+          BOOK: ${{ github.event.inputs.book }}
+          SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          LST_APP_STORIES: /tmp/stories
+        run: |
+          set -e
+          python3 tools/sync-book-nights.py /tmp/beats.json
+          python3 tools/apply-book-nights.py /tmp/beats.json "$BOOK"

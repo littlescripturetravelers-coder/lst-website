@@ -26,10 +26,12 @@ OUTPUT
 """
 import json, os, re, sys, collections
 
-APP  = "/home/user/lst-app/www/stories"
+APP  = os.environ.get("LST_APP_STORIES") or "/home/user/lst-app/www/stories"
 SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG  = os.path.join(SITE, "images", "book")
-MONTH = {"jun": 6, "jul": 7, "aug": 8, "sep": 9}
+# a book is numbered by its month (June was the first, book 6)
+MONTH = {"jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+         "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12}
 KEEP = ("type", "img", "alt", "focus", "eyebrow", "heading",
         "text", "stones", "list", "forParent")
 
