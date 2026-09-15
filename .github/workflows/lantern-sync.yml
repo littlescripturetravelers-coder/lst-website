@@ -5,11 +5,12 @@
 #    (DEST is "lantern" at the top of the repo - see the warning beside it; it must never be under "public").
 #    Drive name  a-lamp-for-my-feet__morning-lantern-lds.html  ->  DEST/a-lamp-for-my-feet/morning-lantern-lds.html
 # 2. For every  DEST/<slug>/lullaby.json  that has no  DEST/<slug>/<slug>-lullaby.mp3  yet, asks ElevenLabs Music
-#    (finetune "LST Theme Music") to sing the lyrics, and saves the MP3 beside the lullaby page.
+#    to compose and sing the lyrics fresh for that night, and saves the MP3 beside the lullaby page.
 #
 # Repo secret needed (Settings → Secrets and variables → Actions):
 #   ELEVENLABS_API_KEY   your ElevenLabs API key
-# The finetune is found by name (FINETUNE_NAME below) via GET /v1/music/finetunes — no ID to look up.
+# No finetune is used (FINETUNE_NAME is blank): the "LST Theme Music" finetune sang every night as
+# the same song in the same voice. The brand lives in the SPINE text of the request instead.
 
 name: Lantern sync
 
@@ -96,7 +97,7 @@ jobs:
         env:
           DEST: lantern
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
-          FINETUNE_NAME: LST Theme Music
+          FINETUNE_NAME: ""   # left blank on purpose - see the note beside the request
         run: |
           set -e
           python3 - <<'EOF'
@@ -114,7 +115,10 @@ jobs:
                    "almost asleep. {style}. No drums, no percussion. "
                    "Clean and undistorted: natural dynamics, no clipping, no loudness "
                    "pushing, plenty of headroom, no harshness on the voice. "
-                   "Never more than one singer, and no backing vocals.")
+                   "Never more than one singer, and no backing vocals. "
+                   "Compose a new, original melody for these lyrics - not a reprise of any "
+                   "earlier song - in a key, tempo and meter that suit the words and the "
+                   "direction below.")
 
           # THE VARIETY RULE. The brand is the spine above; the SINGER and the
           # ARRANGEMENT change from night to night, chosen to match the story's
@@ -257,8 +261,9 @@ jobs:
               best = None   # (how many things are wrong, bytes, facts, reasons)
               for attempt in range(1, ATTEMPTS + 1):
                   body = {'prompt': prompt[:4100], 'music_length_ms': length, 'model_id': 'music_v1'}
-                  if finetune:
-                      body['finetune_id'] = finetune
+                  # No finetune. "LST Theme Music" was trained on one song, so every night
+                  # came back as that song in that voice, whatever the prompt asked for.
+                  # The brand is the SPINE above; the tune and the singer are the night's.
                   try:
                       audio = api('https://api.elevenlabs.io/v1/music?output_format=mp3_44100_128',
                                   data=json.dumps(body).encode('utf-8'), accept='audio/mpeg')
