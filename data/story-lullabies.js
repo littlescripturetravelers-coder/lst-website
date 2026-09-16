@@ -16,7 +16,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-01-ruth-stays-with-naomi/jun-01-ruth-stays-with-naomi-lullaby.mp3",
   "readId": "b6-w1-n1",
   "appPage": "stories/jun-01-ruth-stays-with-naomi.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-02-ruth-works-in-the-field",
@@ -32,7 +32,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-02-ruth-works-in-the-field/jun-02-ruth-works-in-the-field-lullaby.mp3",
   "readId": "b6-w1-n2",
   "appPage": "stories/jun-02-ruth-works-in-the-field.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-03-boaz-marries-ruth",
@@ -48,7 +48,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-03-boaz-marries-ruth/jun-03-boaz-marries-ruth-lullaby.mp3",
   "readId": "b6-w1-n3",
   "appPage": "stories/jun-03-boaz-marries-ruth.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-04-hannah-prays-for-a-baby",
@@ -64,7 +64,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-04-hannah-prays-for-a-baby/jun-04-hannah-prays-for-a-baby-lullaby.mp3",
   "readId": "b6-w1-n4",
   "appPage": "stories/jun-04-hannah-prays-for-a-baby.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-05-samuel-goes-to-the-temple",
@@ -80,7 +80,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-05-samuel-goes-to-the-temple/jun-05-samuel-goes-to-the-temple-lullaby.mp3",
   "readId": "b6-w1-n5",
   "appPage": "stories/jun-05-samuel-goes-to-the-temple.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-06-the-lord-calls-samuel",
@@ -96,7 +96,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-06-the-lord-calls-samuel/jun-06-the-lord-calls-samuel-lullaby.mp3",
   "readId": "b6-w1-n6",
   "appPage": "stories/jun-06-the-lord-calls-samuel.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-07-gods-power-and-the-ark",
@@ -112,7 +112,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-07-gods-power-and-the-ark/jun-07-gods-power-and-the-ark-lullaby.mp3",
   "readId": "b6-w1-n7",
   "appPage": "stories/jun-07-gods-power-and-the-ark.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-08-israel-wants-a-king",
@@ -128,7 +128,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-08-israel-wants-a-king/jun-08-israel-wants-a-king-lullaby.mp3",
   "readId": "b6-w2-n1",
   "appPage": "stories/jun-08-israel-wants-a-king.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-09-saul-looks-for-donkeys",
@@ -144,7 +144,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-09-saul-looks-for-donkeys/jun-09-saul-looks-for-donkeys-lullaby.mp3",
   "readId": "b6-w2-n2",
   "appPage": "stories/jun-09-saul-looks-for-donkeys.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-10-saul-is-anointed-king",
@@ -160,7 +160,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-10-saul-is-anointed-king/jun-10-saul-is-anointed-king-lullaby.mp3",
   "readId": "b6-w2-n3",
   "appPage": "stories/jun-10-saul-is-anointed-king.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-11-saul-doesnt-wait",
@@ -176,7 +176,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-11-saul-doesnt-wait/jun-11-saul-doesnt-wait-lullaby.mp3",
   "readId": "b6-w2-n4",
   "appPage": "stories/jun-11-saul-doesnt-wait.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-12-obey-is-better-than-sacrifice",
@@ -192,7 +192,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-12-obey-is-better-than-sacrifice/jun-12-obey-is-better-than-sacrifice-lullaby.mp3",
   "readId": "b6-w2-n5",
   "appPage": "stories/jun-12-obey-is-better-than-sacrifice.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-13-god-chooses-david",
@@ -208,7 +208,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-13-god-chooses-david/jun-13-god-chooses-david-lullaby.mp3",
   "readId": "b6-w2-n6",
   "appPage": "stories/jun-13-god-chooses-david.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-14-david-plays-music-for-saul",
@@ -224,7 +224,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-14-david-plays-music-for-saul/jun-14-david-plays-music-for-saul-lullaby.mp3",
   "readId": "b6-w2-n7",
   "appPage": "stories/jun-14-david-plays-music-for-saul.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-15-david-and-goliath",
@@ -240,7 +240,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-15-david-and-goliath/jun-15-david-and-goliath-lullaby.mp3",
   "readId": "b6-w3-n1",
   "appPage": "stories/jun-15-david-and-goliath.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-16-david-and-jonathan-are-best-friends",
@@ -256,7 +256,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-16-david-and-jonathan-are-best-friends/jun-16-david-and-jonathan-are-best-friends-lullaby.mp3",
   "readId": "b6-w3-n2",
   "appPage": "stories/jun-16-david-and-jonathan-are-best-friends.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-17-saul-gets-jealous-of-david",
@@ -272,7 +272,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-17-saul-gets-jealous-of-david/jun-17-saul-gets-jealous-of-david-lullaby.mp3",
   "readId": "b6-w3-n3",
   "appPage": "stories/jun-17-saul-gets-jealous-of-david.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-18-david-forgives-saul-in-the-cave",
@@ -288,7 +288,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-18-david-forgives-saul-in-the-cave/jun-18-david-forgives-saul-in-the-cave-lullaby.mp3",
   "readId": "b6-w3-n4",
   "appPage": "stories/jun-18-david-forgives-saul-in-the-cave.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-19-wise-abigail-stops-trouble",
@@ -304,7 +304,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-19-wise-abigail-stops-trouble/jun-19-wise-abigail-stops-trouble-lullaby.mp3",
   "readId": "b6-w3-n5",
   "appPage": "stories/jun-19-wise-abigail-stops-trouble.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-20-david-becomes-king",
@@ -320,7 +320,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-20-david-becomes-king/jun-20-david-becomes-king-lullaby.mp3",
   "readId": "b6-w3-n6",
   "appPage": "stories/jun-20-david-becomes-king.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-21-david-dances-before-the-lord",
@@ -336,7 +336,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-21-david-dances-before-the-lord/jun-21-david-dances-before-the-lord-lullaby.mp3",
   "readId": "b6-w3-n7",
   "appPage": "stories/jun-21-david-dances-before-the-lord.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-22-david-makes-a-big-mistake",
@@ -352,7 +352,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-22-david-makes-a-big-mistake/jun-22-david-makes-a-big-mistake-lullaby.mp3",
   "readId": "b6-w4-n1",
   "appPage": "stories/jun-22-david-makes-a-big-mistake.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-23-david-says-sorry",
@@ -368,7 +368,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-23-david-says-sorry/jun-23-david-says-sorry-lullaby.mp3",
   "readId": "b6-w4-n2",
   "appPage": "stories/jun-23-david-says-sorry.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-24-solomon-asks-for-wisdom",
@@ -384,7 +384,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-24-solomon-asks-for-wisdom/jun-24-solomon-asks-for-wisdom-lullaby.mp3",
   "readId": "b6-w4-n3",
   "appPage": "stories/jun-24-solomon-asks-for-wisdom.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-25-two-mothers-and-one-baby",
