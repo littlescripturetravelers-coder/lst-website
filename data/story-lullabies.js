@@ -1168,7 +1168,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-17-kind-friends-come-to-sit/aug-17-kind-friends-come-to-sit-lullaby.mp3",
   "readId": "b8-w3-n3",
   "appPage": "stories/aug-17-kind-friends-come-to-sit.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-18-job-tells-heavenly-father-his-feelings",
@@ -1184,7 +1184,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-18-job-tells-heavenly-father-his-feelings/aug-18-job-tells-heavenly-father-his-feelings-lullaby.mp3",
   "readId": "b8-w3-n4",
   "appPage": "stories/aug-18-job-tells-heavenly-father-his-feelings.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-19-heavenly-father-shows-his-wonders",
@@ -1200,7 +1200,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-19-heavenly-father-shows-his-wonders/aug-19-heavenly-father-shows-his-wonders-lullaby.mp3",
   "readId": "b8-w3-n5",
   "appPage": "stories/aug-19-heavenly-father-shows-his-wonders.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-20-job-trusts-heavenly-fathers-wisdom",
@@ -1216,7 +1216,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-20-job-trusts-heavenly-fathers-wisdom/aug-20-job-trusts-heavenly-fathers-wisdom-lullaby.mp3",
   "readId": "b8-w3-n6",
   "appPage": "stories/aug-20-job-trusts-heavenly-fathers-wisdom.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-21-heavenly-father-blesses-job-again",
@@ -1232,7 +1232,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-21-heavenly-father-blesses-job-again/aug-21-heavenly-father-blesses-job-again-lullaby.mp3",
   "readId": "b8-w3-n7",
   "appPage": "stories/aug-21-heavenly-father-blesses-job-again.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-22-the-happy-little-tree",
@@ -1248,7 +1248,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-22-the-happy-little-tree/aug-22-the-happy-little-tree-lullaby.mp3",
   "readId": "b8-w4-n1",
   "appPage": "stories/aug-22-the-happy-little-tree.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-23-look-at-the-stars",
@@ -1264,7 +1264,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-23-look-at-the-stars/aug-23-look-at-the-stars-lullaby.mp3",
   "readId": "b8-w4-n2",
   "appPage": "stories/aug-23-look-at-the-stars.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-24-the-good-shepherd",
@@ -1280,7 +1280,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-24-the-good-shepherd/aug-24-the-good-shepherd-lullaby.mp3",
   "readId": "b8-w4-n3",
   "appPage": "stories/aug-24-the-good-shepherd.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-25-heavenly-father-is-my-light",
@@ -1296,7 +1296,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-25-heavenly-father-is-my-light/aug-25-heavenly-father-is-my-light-lullaby.mp3",
   "readId": "b8-w4-n4",
   "appPage": "stories/aug-25-heavenly-father-is-my-light.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-26-be-still-and-know",
@@ -1312,7 +1312,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-26-be-still-and-know/aug-26-be-still-and-know-lullaby.mp3",
   "readId": "b8-w4-n5",
   "appPage": "stories/aug-26-be-still-and-know.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-27-a-brand-new-song",
@@ -1328,7 +1328,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-27-a-brand-new-song/aug-27-a-brand-new-song-lullaby.mp3",
   "readId": "b8-w4-n6",
   "appPage": "stories/aug-27-a-brand-new-song.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-28-sing-with-all-your-heart",
@@ -1344,7 +1344,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-28-sing-with-all-your-heart/aug-28-sing-with-all-your-heart-lullaby.mp3",
   "readId": "b8-w4-n7",
   "appPage": "stories/aug-28-sing-with-all-your-heart.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-29-a-clean-new-heart",
@@ -1360,7 +1360,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-29-a-clean-new-heart/aug-29-a-clean-new-heart-lullaby.mp3",
   "readId": "b8-w5-n1",
   "appPage": "stories/aug-29-a-clean-new-heart.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-30-my-strong-safe-rock",
@@ -1376,7 +1376,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-30-my-strong-safe-rock/aug-30-my-strong-safe-rock-lullaby.mp3",
   "readId": "b8-w5-n2",
   "appPage": "stories/aug-30-my-strong-safe-rock.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-31-thinking-of-heavenly-father-at-night",
@@ -1392,7 +1392,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-31-thinking-of-heavenly-father-at-night/aug-31-thinking-of-heavenly-father-at-night-lullaby.mp3",
   "readId": "b8-w5-n3",
   "appPage": "stories/aug-31-thinking-of-heavenly-father-at-night.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-32-come-and-hear",
@@ -1408,7 +1408,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-32-come-and-hear/aug-32-come-and-hear-lullaby.mp3",
   "readId": "b8-w5-n4",
   "appPage": "stories/aug-32-come-and-hear.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-33-my-hope-since-i-was-little",
@@ -1424,7 +1424,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-33-my-hope-since-i-was-little/aug-33-my-hope-since-i-was-little-lullaby.mp3",
   "readId": "b8-w5-n5",
   "appPage": "stories/aug-33-my-hope-since-i-was-little.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-34-tell-the-children",
@@ -1440,7 +1440,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-34-tell-the-children/aug-34-tell-the-children-lullaby.mp3",
   "readId": "b8-w5-n6",
   "appPage": "stories/aug-34-tell-the-children.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-35-heavenly-father-is-so-good",
@@ -1456,7 +1456,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-35-heavenly-father-is-so-good/aug-35-heavenly-father-is-so-good-lullaby.mp3",
   "readId": "b8-w5-n7",
   "appPage": "stories/aug-35-heavenly-father-is-so-good.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "sep-01-bless-the-lord-o-my-soul",
@@ -1472,7 +1472,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/sep-01-bless-the-lord-o-my-soul/sep-01-bless-the-lord-o-my-soul-lullaby.mp3",
   "readId": "b9-w1-n1",
   "appPage": "stories/sep-01-bless-the-lord-o-my-soul.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "sep-02-he-hears-my-voice",
@@ -1488,7 +1488,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/sep-02-he-hears-my-voice/sep-02-he-hears-my-voice-lullaby.mp3",
   "readId": "b9-w1-n2",
   "appPage": "stories/sep-02-he-hears-my-voice.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "sep-03-this-is-the-day",
@@ -1504,6 +1504,6 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/sep-03-this-is-the-day/sep-03-this-is-the-day-lullaby.mp3",
   "readId": "b9-w1-n3",
   "appPage": "stories/sep-03-this-is-the-day.html",
-  "sung": false
+  "sung": true
  }
 ];
