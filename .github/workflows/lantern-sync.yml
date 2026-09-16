@@ -182,6 +182,23 @@ jobs:
               print('No lullabies waiting for audio.'); raise SystemExit(0)
           if not key:
               print(f'{len(todo)} lullaby(ies) waiting, but ELEVENLABS_API_KEY is not set - skipping audio for now.'); raise SystemExit(0)
+          # THE QUEUE RULE. Tonight's song first, always; then the story lullabies
+          # (lantern/build_story_lullabies.py) in book order, June before July. A
+          # run sings at most MAX_PER_RUN and stops, so a long queue is worked
+          # through by the half-hourly runs a couple of dozen at a time, and each
+          # run's songs are committed before the next begins - a queue of ninety
+          # in one run would have risked the whole batch on one hiccup.
+          BOOK_NO = {'june':6,'july':7,'august':8,'september':9,'october':10,'november':11,'december':12}
+          def order(p):
+              try: m = json.load(open(p, encoding='utf-8'))
+              except Exception: m = {}
+              book = m.get('book') or ''
+              return (1 if book else 0, BOOK_NO.get(book, 99), int(m.get('storyNumber') or 0), p)
+          todo.sort(key=order)
+          MAX_PER_RUN = int(os.environ.get('MAX_PER_RUN', '24'))
+          if len(todo) > MAX_PER_RUN:
+              print(f'{len(todo)} lullabies waiting; singing the first {MAX_PER_RUN} this run, the rest on the next runs.')
+              todo = todo[:MAX_PER_RUN]
 
           def api(url, data=None, accept='application/json'):
               req = urllib.request.Request(url, data=data, headers={'xi-api-key': key, 'Content-Type': 'application/json', 'Accept': accept})
@@ -256,6 +273,7 @@ jobs:
               print('finetune:', want, '->', finetune or 'NOT FOUND (will generate without it)')
 
           ATTEMPTS = 3
+          refused = []
           for p in todo:
               slug = os.path.basename(os.path.dirname(p))
               meta = json.load(open(p, encoding='utf-8'))
@@ -279,7 +297,18 @@ jobs:
                       audio = api('https://api.elevenlabs.io/v1/music?output_format=mp3_44100_128',
                                   data=json.dumps(body).encode('utf-8'), accept='audio/mpeg')
                   except urllib.error.HTTPError as e:
-                      raise SystemExit(f"ElevenLabs refused {slug}: HTTP {e.code} {e.read()[:500]!r}")
+                      # One refusal must not stop the queue behind it (a night's words
+                      # ElevenLabs will not sing, a moment's overload). Say so, keep
+                      # going; the song is asked for again on the next run. An empty
+                      # account is different: nothing after it can succeed either.
+                      detail = e.read()[:500]
+                      print(f"    ElevenLabs refused {slug}: HTTP {e.code} {detail!r}")
+                      refused.append(slug)
+                      if e.code in (401, 402) or b'quota' in detail.lower() or b'credits' in detail.lower():
+                          raise SystemExit(f"ElevenLabs will not sing anything more this run (HTTP {e.code}). Songs sung so far are kept.")
+                      best = None; break
+                  except (urllib.error.URLError, TimeoutError, OSError) as e:
+                      print(f"    no answer from ElevenLabs for {slug} ({e}); moving on"); refused.append(slug); best = None; break
                   with tempfile.NamedTemporaryFile(suffix='.mp3', delete=False) as fh:
                       fh.write(audio); tmp = fh.name
                   bad, facts = measure(tmp, length)
@@ -291,6 +320,8 @@ jobs:
                   if best is None or len(bad) < best[0]:
                       best = (len(bad), audio, facts, bad)
 
+              if best is None:
+                  continue
               score, audio, facts, reasons = best
               out = os.path.join(os.path.dirname(p), f'{slug}-lullaby.mp3')
               if score == 0:
@@ -304,7 +335,15 @@ jobs:
                   open(out, 'wb').write(audio)
                   print(f'    kept the best of {ATTEMPTS} for {slug}, but listen to it: '
                         + '; '.join(reasons) + f' -> {out}')
+          if refused:
+              print(f'{len(refused)} not sung this run (asked for again next run): ' + ', '.join(refused))
           EOF
+
+      # The story lullabies' catalogue (data/story-lullabies.js) says which of
+      # them have a recording yet; a song just sung is marked here. No credits.
+      - name: Refresh the story-lullaby catalogue
+        if: ${{ !cancelled() }}
+        run: python3 lantern/build_story_lullabies.py
 
       # 3. Put every finished night into the account - the paste Levi used to do by
       #    hand in Admin, every night. Reads lantern/<slug>/night.json and the files
@@ -403,7 +442,10 @@ jobs:
             -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" -H "Content-Type: application/json" \
             -d '{"action":"analytics"}' | head -c 300; echo
 
+      # Whatever happened above, a song that was sung is kept: a failure later
+      # in the run must never cost the credits already spent.
       - name: Commit and push
+        if: ${{ !cancelled() }}
         run: |
           git config user.name  "lantern-bot"
           git config user.email "lantern-bot@users.noreply.github.com"
