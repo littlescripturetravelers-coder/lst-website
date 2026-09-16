@@ -38,7 +38,7 @@
 */
 (function () {
   var root = null;
-  var view = "hub";            /* hub | books | lullabies */
+  var view = "hub";            /* hub | books | lullabies | storysongs */
   var books = null, songs = null;
   var loading = false, loadError = "";
 
@@ -122,6 +122,9 @@
         signedIn()
           ? (nSongs + (nSongs === 1 ? " lullaby" : " lullabies"))
           : "One for every night") +
+      tile("storysongs", null, "images/book-cover-june.jpg",
+        "Story Lullabies",
+        (storySongs().length ? storySongs().length + " songs &middot; " : "") + "one for every story in the books") +
       tile(null, "archive.html", "images/hero-bg.jpg",
         "The Lantern Archive",
         "Every Morning Lantern we have sent") +
@@ -145,7 +148,53 @@
     "</a>";
   }
 
+  /* THE STORY LULLABIES. One song for every story in the books, June onward,
+     written and sung on the website (lantern/<key>/) and listed in
+     data/story-lullabies.js by lantern/build_story_lullabies.py. Public pages,
+     same shelf gate as the nightly ones. */
+  function storySongs() { return window.LST_STORY_SONGS || []; }
+  function storySongTile(s) {
+    var art = BOOK_ART[s.bookNo] || "images/cover-ot.jpg";
+    var href = "lantern/" + encodeURIComponent(s.key) + "/" + encodeURIComponent(s.key) + "-lullaby.html";
+    return '<a class="bs-tile" href="' + href + '">' +
+      '<span class="bs-art" style="background-image:url(' + esc(art) + ')">' +
+        '<span class="bs-stamp">' + esc("Story " + s.n) + "</span>" +
+        (s.sung ? "" : '<span class="bs-when">words</span>') +
+      "</span>" +
+      '<span class="bs-label">' + esc(s.title) + "</span>" +
+      '<span class="bs-sub">' + esc(s.story) + "</span>" +
+    "</a>";
+  }
+  function storySongsView() {
+    var head =
+      '<div class="lb-head">' +
+        '<button type="button" class="rd-tool" data-go="hub">&larr; The LST Library</button>' +
+        "<h2>Story Lullabies</h2>" +
+        "<p>Every story in the books has a lullaby of its own &mdash; the music and the words to sing, " +
+        "book by book, in story order. A tile marked <i>words</i> has its words up and its recording on the way.</p>" +
+      "</div>";
+    var all = storySongs();
+    if (!all.length) {
+      return head + '<div class="mp-empty"><h3>Nothing on this shelf yet</h3>' +
+        "<p>The story lullabies arrive here as they are written.</p></div>";
+    }
+    var books = [];
+    all.forEach(function (s) {
+      var g = null;
+      for (var i = 0; i < books.length; i++) if (books[i].no === s.bookNo) g = books[i];
+      if (!g) { g = { no: s.bookNo, name: s.book, title: s.bookTitle, rows: [] }; books.push(g); }
+      g.rows.push(s);
+    });
+    books.sort(function (a, b) { return b.no - a.no; });
+    return head + books.map(function (g) {
+      var name = g.name ? "The " + g.name.charAt(0).toUpperCase() + g.name.slice(1) + " Book" : "The book";
+      return '<h3 class="lb-shelf">' + esc(name) + (g.title ? ' <span>&middot; ' + esc(g.title) + "</span>" : "") + "</h3>" +
+        '<div class="bs-grid">' + g.rows.map(storySongTile).join("") + "</div>";
+    }).join("");
+  }
+
   function shelfView(kind) {
+    if (kind === "storysongs") return storySongsView();
     var rows = kind === "books" ? books : songs;
     var where = kind === "books" ? "story.html" : "lullaby.html";
     var name = kind === "books" ? "Picture Books" : "Daily Lullabies";

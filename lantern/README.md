@@ -165,3 +165,19 @@ The app - and this publisher - keep one row per date with the editions as
 columns (`story_html`, `story_html_nondenom`, …). Running that file would make
 every publish from Admin and from here fail with "no unique constraint matching
 ON CONFLICT". The two editions are columns, not rows.
+
+## The story lullabies (June onward)
+
+Every story in the books has a lullaby of its own, beside the nightly ones:
+`lantern/<key>/` where the key is `jun-01-ruth-stays-with-naomi` and so on.
+Each folder holds `lullaby.json` (the words, the mood, the singer and the
+arrangement, plus `book`, `storyNumber`, `readId`) and the song page. There is
+no `night.json`, so the publisher leaves them alone; the sync Action sings any
+whose MP3 is missing, at most `MAX_PER_RUN` (24) a run, June before July, so a
+long queue is worked through by the half-hourly runs.
+
+`python3 lantern/build_story_lullabies.py` rebuilds every song page and the
+catalogue `data/story-lullabies.js` (the Library's "Story Lullabies" shelf);
+with `APP_DATA=../lst-app/www/data/lullabies.js` it also writes the app's copy,
+which the Lullabies & Songs page reads. The Action runs it after singing so
+the catalogue's `sung` flags stay true.
