@@ -181,3 +181,10 @@ catalogue `data/story-lullabies.js` (the Library's "Story Lullabies" shelf);
 with `APP_DATA=../lst-app/www/data/lullabies.js` it also writes the app's copy,
 which the Lullabies & Songs page reads. The Action runs it after singing so
 the catalogue's `sung` flags stay true.
+
+**The own-song rule.** Before any new lullaby.json is committed, run
+`python3 lantern/builder/lyric_tells.py lantern/<slug>/lullaby.json`. It fails
+when the words lean on a line the other songs already use (the 16 Sept 2026
+audit found "close your eyes" in 92 of 106) or when the last verse opens the
+way another's does. `python3 lantern/builder/lyric_tells.py` alone audits the
+whole shelf. The rule itself is in skill-morning-lantern-nightly.md, Step 1.
