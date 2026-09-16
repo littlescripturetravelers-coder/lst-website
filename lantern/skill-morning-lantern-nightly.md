@@ -23,7 +23,9 @@ Slug = lowercase, hyphens, no punctuation. Resources: `{slug}.html`, `{slug}-lul
 
 ## Step 1 — Lullaby
 
-Title matching the story's theme, 3–4 short verses + repeating refrain, ages 2–8, built on the story's key image. Keep one meter throughout (8-6-8-6 sings to any common-meter tune) and rhyme lines 2 and 4 so a parent can sing it without a new melody. Output, then stop.
+Title matching the story's theme, 3–4 short verses + repeating refrain, ages 2–8, built on the story's key image. Keep one meter throughout (8-6-8-6 sings to any common-meter tune) and rhyme lines 2 and 4 so a parent can sing it without a new melody.
+
+**THE OWN-SONG RULE.** A parent sings several of these in a week, so no song may lean on a stock line. On 16 Sept 2026 an audit found "close your eyes" in 92 of 106 lullabies and "Now close your eyes…" opening 70 last verses. So: **no "close your eyes", "little one", "sleepy head", "rest your head", "beneath the moon" or any other lullaby-stock phrase.** The last verse stays inside the story's own picture (Ruth's road, the jar of oil, the still small voice) and lets *that* image be the thing that settles the child; sleep is implied, never announced. Before the words are saved, run `python3 lantern/builder/lyric_tells.py lantern/<slug>/lullaby.json` — it fails on any three-word run already in more than one song in twelve, or a last verse that opens like another's. Rewrite until it passes. Output, then stop.
 
 **The song page.** `lullaby_page.py` (repo: `lantern/builder/`) builds `{slug}-lullaby.html` on `lantern/lullaby-template.html` — a copy of the app's own "A Little Travelers' Lullaby" page — so the night's lullaby looks and behaves exactly like that one inside the app (theme, text size, Play button, mini bar, sleep timer, repeat). Two things must be true of the built page: `<audio id="player"` has the mp3 linked **in full** (`https://littlescripturetravelers.com/lantern/{slug}/{slug}-lullaby.mp3` — the app opens the page from a copy it keeps, so a bare file name is silent there), and `const LULLABY =` carries one part per verse and chorus. Never ship the older navy card-list page.
 
