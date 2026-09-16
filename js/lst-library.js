@@ -38,7 +38,7 @@
 */
 (function () {
   var root = null;
-  var view = "hub";            /* hub | books | lullabies | storysongs */
+  var view = "hub";            /* hub | books | lullabies */
   var books = null, songs = null;
   var loading = false, loadError = "";
 
@@ -91,7 +91,7 @@
   /* ------------------------------------------------------------------ hub */
   function hubView() {
     var nBooks = books ? books.length : 0;
-    var nSongs = songs ? songs.length : 0;
+    var nSongs = (songs ? songs.length : 0) + storySongs().length;
     var series = (window.LST_LIBRARY && window.LST_LIBRARY.stories || []).length;
 
     function tile(go, href, art, title, sub, glyph) {
@@ -118,13 +118,10 @@
         "The Signature Lantern Lullaby",
         "A Little Travelers&rsquo; Lullaby &middot; always here") +
       tile("lullabies", null, "images/sky-star.jpg",
-        "Daily Lullabies",
+        "Lullabies",
         signedIn()
           ? (nSongs + (nSongs === 1 ? " lullaby" : " lullabies"))
-          : "One for every night") +
-      tile("storysongs", null, "images/book-cover-june.jpg",
-        "Story Lullabies",
-        (storySongs().length ? storySongs().length + " songs &middot; " : "") + "one for every story in the books") +
+          : "One for every story and every night") +
       tile(null, "archive.html", "images/hero-bg.jpg",
         "The Lantern Archive",
         "Every Morning Lantern we have sent") +
@@ -150,8 +147,9 @@
 
   /* THE STORY LULLABIES. One song for every story in the books, June onward,
      written and sung on the website (lantern/<key>/) and listed in
-     data/story-lullabies.js by lantern/build_story_lullabies.py. Public pages,
-     same shelf gate as the nightly ones. */
+     data/story-lullabies.js by lantern/build_story_lullabies.py. They sit on
+     the one lullabies shelf with the nightly songs, book by book: a book's
+     stories in story order, then its nights by date. */
   function storySongs() { return window.LST_STORY_SONGS || []; }
   function storySongTile(s) {
     var art = BOOK_ART[s.bookNo] || "images/cover-ot.jpg";
@@ -165,42 +163,43 @@
       '<span class="bs-sub">' + esc(s.story) + "</span>" +
     "</a>";
   }
-  function storySongsView() {
-    var head =
-      '<div class="lb-head">' +
-        '<button type="button" class="rd-tool" data-go="hub">&larr; The LST Library</button>' +
-        "<h2>Story Lullabies</h2>" +
-        "<p>Every story in the books has a lullaby of its own &mdash; the music and the words to sing, " +
-        "book by book, in story order. A tile marked <i>words</i> has its words up and its recording on the way.</p>" +
-      "</div>";
-    var all = storySongs();
-    if (!all.length) {
-      return head + '<div class="mp-empty"><h3>Nothing on this shelf yet</h3>' +
-        "<p>The story lullabies arrive here as they are written.</p></div>";
+  var BOOK_NAMES = { 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December" };
+  var BOOK_TITLES = { 6: "A Heart That Follows the Lord", 7: "There Is a Prophet in Israel",
+                      8: "I Will Trust and Sing", 9: "Wonderful Is His Way", 10: "He Gathers the Lambs" };
+  function bookOfNight(n) {
+    if (n.book) return Number(n.book);
+    var p = String(n.date || "").split("-");
+    return p.length === 3 ? parseInt(p[1], 10) : 0;
+  }
+  function lullabyShelves() {
+    var books = {};
+    function shelf(no) {
+      if (!books[no]) books[no] = { no: no, stories: [], nights: [] };
+      return books[no];
     }
-    var books = [];
-    all.forEach(function (s) {
-      var g = null;
-      for (var i = 0; i < books.length; i++) if (books[i].no === s.bookNo) g = books[i];
-      if (!g) { g = { no: s.bookNo, name: s.book, title: s.bookTitle, rows: [] }; books.push(g); }
-      g.rows.push(s);
-    });
-    books.sort(function (a, b) { return b.no - a.no; });
-    return head + books.map(function (g) {
-      var name = g.name ? "The " + g.name.charAt(0).toUpperCase() + g.name.slice(1) + " Book" : "The book";
-      return '<h3 class="lb-shelf">' + esc(name) + (g.title ? ' <span>&middot; ' + esc(g.title) + "</span>" : "") + "</h3>" +
-        '<div class="bs-grid">' + g.rows.map(storySongTile).join("") + "</div>";
-    }).join("");
+    storySongs().forEach(function (s) { shelf(s.bookNo).stories.push(s); });
+    (songs || []).forEach(function (n) { shelf(bookOfNight(n)).nights.push(n); });
+    return Object.keys(books).map(function (k) { return books[k]; })
+      .sort(function (a, b) { return b.no - a.no; })
+      .map(function (g) {
+        g.stories.sort(function (a, b) { return a.n - b.n; });
+        g.nights.sort(function (a, b) { return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
+        var name = BOOK_NAMES[g.no] ? "The " + BOOK_NAMES[g.no] + " Book" : "More songs";
+        return '<h3 class="lb-shelf">' + esc(name) +
+          (BOOK_TITLES[g.no] ? ' <span>&middot; ' + esc(BOOK_TITLES[g.no]) + "</span>" : "") + "</h3>" +
+          '<div class="bs-grid">' + g.stories.map(storySongTile).join("") +
+          g.nights.map(function (n) { return nightTile(n, "lullaby.html"); }).join("") + "</div>";
+      }).join("");
   }
 
   function shelfView(kind) {
-    if (kind === "storysongs") return storySongsView();
     var rows = kind === "books" ? books : songs;
     var where = kind === "books" ? "story.html" : "lullaby.html";
-    var name = kind === "books" ? "Picture Books" : "Daily Lullabies";
+    var name = kind === "books" ? "Picture Books" : "Lullabies";
     var blurb = kind === "books"
       ? "Every night&rsquo;s illustrated story, newest first. Each one opens on its own page."
-      : "Every night&rsquo;s own lullaby, newest first &mdash; the words to sing after the story.";
+      : "A lullaby for every story and every night &mdash; the music and the words to sing, book by book. " +
+        "A tile marked <i>words</i> has its words up and its recording on the way.";
 
     var head =
       '<div class="lb-head">' +
@@ -212,6 +211,7 @@
     if (loading) return head + '<p class="mp-note">Opening the shelf&hellip;</p>';
     if (loadError) return head + '<p class="mp-note mp-note-warn">' + esc(loadError) + "</p>";
 
+    if (kind === "lullabies" && storySongs().length) return head + lullabyShelves();
     if (!rows || !rows.length) {
       return head +
         '<div class="mp-empty"><h3>Nothing on this shelf yet</h3>' +
