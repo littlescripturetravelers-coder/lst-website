@@ -784,7 +784,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-21-king-josiah-makes-a-promise/jul-21-king-josiah-makes-a-promise-lullaby.mp3",
   "readId": "b7-w3-n7",
   "appPage": "stories/jul-21-king-josiah-makes-a-promise.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-22-king-asa-calls-on-god",
@@ -800,7 +800,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-22-king-asa-calls-on-god/jul-22-king-asa-calls-on-god-lullaby.mp3",
   "readId": "b7-w4-n1",
   "appPage": "stories/jul-22-king-asa-calls-on-god.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-23-be-strong-and-dont-give-up",
@@ -816,7 +816,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-23-be-strong-and-dont-give-up/jul-23-be-strong-and-dont-give-up-lullaby.mp3",
   "readId": "b7-w4-n2",
   "appPage": "stories/jul-23-be-strong-and-dont-give-up.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-24-when-asa-forgot-to-trust",
@@ -832,7 +832,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-24-when-asa-forgot-to-trust/jul-24-when-asa-forgot-to-trust-lullaby.mp3",
   "readId": "b7-w4-n3",
   "appPage": "stories/jul-24-when-asa-forgot-to-trust.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-25-judges-who-are-fair",
@@ -848,7 +848,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-25-judges-who-are-fair/jul-25-judges-who-are-fair-lullaby.mp3",
   "readId": "b7-w4-n4",
   "appPage": "stories/jul-25-judges-who-are-fair.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-26-our-eyes-are-upon-thee",
@@ -864,7 +864,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-26-our-eyes-are-upon-thee/jul-26-our-eyes-are-upon-thee-lullaby.mp3",
   "readId": "b7-w4-n5",
   "appPage": "stories/jul-26-our-eyes-are-upon-thee.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-27-the-king-who-forgot-to-stay-humble",
@@ -880,7 +880,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-27-the-king-who-forgot-to-stay-humble/jul-27-the-king-who-forgot-to-stay-humble-lullaby.mp3",
   "readId": "b7-w4-n6",
   "appPage": "stories/jul-27-the-king-who-forgot-to-stay-humble.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-28-come-celebrate-with-god",
@@ -896,7 +896,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-28-come-celebrate-with-god/jul-28-come-celebrate-with-god-lullaby.mp3",
   "readId": "b7-w4-n7",
   "appPage": "stories/jul-28-come-celebrate-with-god.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-01-the-king-says-you-may-go-home",
@@ -912,7 +912,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-01-the-king-says-you-may-go-home/aug-01-the-king-says-you-may-go-home-lullaby.mp3",
   "readId": "b8-w1-n1",
   "appPage": "stories/aug-01-the-king-says-you-may-go-home.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-02-the-first-big-stone",
@@ -928,7 +928,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-02-the-first-big-stone/aug-02-the-first-big-stone-lullaby.mp3",
   "readId": "b8-w1-n2",
   "appPage": "stories/aug-02-the-first-big-stone.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-03-the-temple-is-finished",
@@ -944,7 +944,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-03-the-temple-is-finished/aug-03-the-temple-is-finished-lullaby.mp3",
   "readId": "b8-w1-n3",
   "appPage": "stories/aug-03-the-temple-is-finished.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-04-ezra-loves-the-scriptures",
@@ -960,7 +960,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-04-ezra-loves-the-scriptures/aug-04-ezra-loves-the-scriptures-lullaby.mp3",
   "readId": "b8-w1-n4",
   "appPage": "stories/aug-04-ezra-loves-the-scriptures.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-05-nehemiahs-brave-idea",
@@ -976,7 +976,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-05-nehemiahs-brave-idea/aug-05-nehemiahs-brave-idea-lullaby.mp3",
   "readId": "b8-w1-n5",
   "appPage": "stories/aug-05-nehemiahs-brave-idea.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-06-i-am-doing-a-great-work",
@@ -992,7 +992,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-06-i-am-doing-a-great-work/aug-06-i-am-doing-a-great-work-lullaby.mp3",
   "readId": "b8-w1-n6",
   "appPage": "stories/aug-06-i-am-doing-a-great-work.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-07-the-happiest-reading-day",
@@ -1008,7 +1008,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-07-the-happiest-reading-day/aug-07-the-happiest-reading-day-lullaby.mp3",
   "readId": "b8-w1-n7",
   "appPage": "stories/aug-07-the-happiest-reading-day.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-08-a-kind-girl-becomes-queen",
@@ -1024,7 +1024,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-08-a-kind-girl-becomes-queen/aug-08-a-kind-girl-becomes-queen-lullaby.mp3",
   "readId": "b8-w2-n1",
   "appPage": "stories/aug-08-a-kind-girl-becomes-queen.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-09-mordecai-stands-tall",
@@ -1040,7 +1040,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-09-mordecai-stands-tall/aug-09-mordecai-stands-tall-lullaby.mp3",
   "readId": "b8-w2-n2",
   "appPage": "stories/aug-09-mordecai-stands-tall.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-10-for-such-a-time-as-this",
@@ -1056,7 +1056,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-10-for-such-a-time-as-this/aug-10-for-such-a-time-as-this-lullaby.mp3",
   "readId": "b8-w2-n3",
   "appPage": "stories/aug-10-for-such-a-time-as-this.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-11-esthers-brave-choice",
@@ -1072,7 +1072,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-11-esthers-brave-choice/aug-11-esthers-brave-choice-lullaby.mp3",
   "readId": "b8-w2-n4",
   "appPage": "stories/aug-11-esthers-brave-choice.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-12-esthers-wise-plan",
@@ -1088,7 +1088,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-12-esthers-wise-plan/aug-12-esthers-wise-plan-lullaby.mp3",
   "readId": "b8-w2-n5",
   "appPage": "stories/aug-12-esthers-wise-plan.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-13-the-king-saves-the-people",
@@ -1104,7 +1104,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-13-the-king-saves-the-people/aug-13-the-king-saves-the-people-lullaby.mp3",
   "readId": "b8-w2-n6",
   "appPage": "stories/aug-13-the-king-saves-the-people.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-14-a-happy-celebration",
@@ -1120,7 +1120,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-14-a-happy-celebration/aug-14-a-happy-celebration-lullaby.mp3",
   "readId": "b8-w2-n7",
   "appPage": "stories/aug-14-a-happy-celebration.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-15-job-loved-heavenly-father",
@@ -1136,7 +1136,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-15-job-loved-heavenly-father/aug-15-job-loved-heavenly-father-lullaby.mp3",
   "readId": "b8-w3-n1",
   "appPage": "stories/aug-15-job-loved-heavenly-father.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-16-job-keeps-trusting",
@@ -1152,7 +1152,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/aug-16-job-keeps-trusting/aug-16-job-keeps-trusting-lullaby.mp3",
   "readId": "b8-w3-n2",
   "appPage": "stories/aug-16-job-keeps-trusting.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "aug-17-kind-friends-come-to-sit",
