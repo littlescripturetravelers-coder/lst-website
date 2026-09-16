@@ -400,7 +400,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-25-two-mothers-and-one-baby/jun-25-two-mothers-and-one-baby-lullaby.mp3",
   "readId": "b6-w4-n4",
   "appPage": "stories/jun-25-two-mothers-and-one-baby.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-26-building-the-temple",
@@ -416,7 +416,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-26-building-the-temple/jun-26-building-the-temple-lullaby.mp3",
   "readId": "b6-w4-n5",
   "appPage": "stories/jun-26-building-the-temple.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-27-solomons-prayer-at-the-temple",
@@ -432,7 +432,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-27-solomons-prayer-at-the-temple/jun-27-solomons-prayer-at-the-temple-lullaby.mp3",
   "readId": "b6-w4-n6",
   "appPage": "stories/jun-27-solomons-prayer-at-the-temple.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jun-28-keep-your-heart-close-to-god",
@@ -448,7 +448,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jun-28-keep-your-heart-close-to-god/jun-28-keep-your-heart-close-to-god-lullaby.mp3",
   "readId": "b6-w4-n7",
   "appPage": "stories/jun-28-keep-your-heart-close-to-god.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-01-two-kings-one-choice",
@@ -464,7 +464,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-01-two-kings-one-choice/jul-01-two-kings-one-choice-lullaby.mp3",
   "readId": "b7-w1-n1",
   "appPage": "stories/jul-01-two-kings-one-choice.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-02-the-ravens-feed-elijah",
@@ -480,7 +480,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-02-the-ravens-feed-elijah/jul-02-the-ravens-feed-elijah-lullaby.mp3",
   "readId": "b7-w1-n2",
   "appPage": "stories/jul-02-the-ravens-feed-elijah.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-03-the-jar-that-never-ran-out",
@@ -496,7 +496,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-03-the-jar-that-never-ran-out/jul-03-the-jar-that-never-ran-out-lullaby.mp3",
   "readId": "b7-w1-n3",
   "appPage": "stories/jul-03-the-jar-that-never-ran-out.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-04-elijah-prays-for-the-little-boy",
@@ -512,7 +512,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-04-elijah-prays-for-the-little-boy/jul-04-elijah-prays-for-the-little-boy-lullaby.mp3",
   "readId": "b7-w1-n4",
   "appPage": "stories/jul-04-elijah-prays-for-the-little-boy.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-05-fire-from-heaven",
@@ -528,7 +528,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-05-fire-from-heaven/jul-05-fire-from-heaven-lullaby.mp3",
   "readId": "b7-w1-n5",
   "appPage": "stories/jul-05-fire-from-heaven.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-06-the-still-small-voice",
@@ -544,7 +544,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-06-the-still-small-voice/jul-06-the-still-small-voice-lullaby.mp3",
   "readId": "b7-w1-n6",
   "appPage": "stories/jul-06-the-still-small-voice.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-07-micaiah-tells-the-truth",
@@ -560,7 +560,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-07-micaiah-tells-the-truth/jul-07-micaiah-tells-the-truth-lullaby.mp3",
   "readId": "b7-w1-n7",
   "appPage": "stories/jul-07-micaiah-tells-the-truth.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-08-elijah-goes-up-to-heaven",
@@ -576,7 +576,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-08-elijah-goes-up-to-heaven/jul-08-elijah-goes-up-to-heaven-lullaby.mp3",
   "readId": "b7-w2-n1",
   "appPage": "stories/jul-08-elijah-goes-up-to-heaven.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-09-the-widows-oil",
@@ -592,7 +592,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-09-the-widows-oil/jul-09-the-widows-oil-lullaby.mp3",
   "readId": "b7-w2-n2",
   "appPage": "stories/jul-09-the-widows-oil.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-10-a-special-room-for-the-prophet",
@@ -608,7 +608,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-10-a-special-room-for-the-prophet/jul-10-a-special-room-for-the-prophet-lullaby.mp3",
   "readId": "b7-w2-n3",
   "appPage": "stories/jul-10-a-special-room-for-the-prophet.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-11-naaman-washes-seven-times",
@@ -624,7 +624,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-11-naaman-washes-seven-times/jul-11-naaman-washes-seven-times-lullaby.mp3",
   "readId": "b7-w2-n4",
   "appPage": "stories/jul-11-naaman-washes-seven-times.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-12-the-floating-axe-head",
@@ -640,7 +640,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-12-the-floating-axe-head/jul-12-the-floating-axe-head-lullaby.mp3",
   "readId": "b7-w2-n5",
   "appPage": "stories/jul-12-the-floating-axe-head.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-13-horses-of-fire-all-around",
@@ -656,7 +656,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-13-horses-of-fire-all-around/jul-13-horses-of-fire-all-around-lullaby.mp3",
   "readId": "b7-w2-n6",
   "appPage": "stories/jul-13-horses-of-fire-all-around.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-14-good-news-to-share",
@@ -672,7 +672,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-14-good-news-to-share/jul-14-good-news-to-share-lullaby.mp3",
   "readId": "b7-w2-n7",
   "appPage": "stories/jul-14-good-news-to-share.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-15-good-king-hezekiah-trusts-god",
@@ -688,7 +688,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-15-good-king-hezekiah-trusts-god/jul-15-good-king-hezekiah-trusts-god-lullaby.mp3",
   "readId": "b7-w3-n1",
   "appPage": "stories/jul-15-good-king-hezekiah-trusts-god.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-16-hezekiah-shows-god-the-letter",
@@ -704,7 +704,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-16-hezekiah-shows-god-the-letter/jul-16-hezekiah-shows-god-the-letter-lullaby.mp3",
   "readId": "b7-w3-n2",
   "appPage": "stories/jul-16-hezekiah-shows-god-the-letter.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-17-god-gives-hezekiah-more-days",
@@ -720,7 +720,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-17-god-gives-hezekiah-more-days/jul-17-god-gives-hezekiah-more-days-lullaby.mp3",
   "readId": "b7-w3-n3",
   "appPage": "stories/jul-17-god-gives-hezekiah-more-days.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-18-the-boy-who-became-king",
@@ -736,7 +736,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-18-the-boy-who-became-king/jul-18-the-boy-who-became-king-lullaby.mp3",
   "readId": "b7-w3-n4",
   "appPage": "stories/jul-18-the-boy-who-became-king.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-19-the-lost-book-is-found",
@@ -752,7 +752,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-19-the-lost-book-is-found/jul-19-the-lost-book-is-found-lullaby.mp3",
   "readId": "b7-w3-n5",
   "appPage": "stories/jul-19-the-lost-book-is-found.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-20-huldah-speaks-for-god",
@@ -768,7 +768,7 @@ window.LST_STORY_SONGS = [
   "audio": "https://littlescripturetravelers.com/lantern/jul-20-huldah-speaks-for-god/jul-20-huldah-speaks-for-god-lullaby.mp3",
   "readId": "b7-w3-n6",
   "appPage": "stories/jul-20-huldah-speaks-for-god.html",
-  "sung": false
+  "sung": true
  },
  {
   "key": "jul-21-king-josiah-makes-a-promise",
