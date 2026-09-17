@@ -1457,37 +1457,5 @@ window.LST_STORY_SONGS = [
   "readId": "b8-w5-n7",
   "appPage": "stories/aug-35-heavenly-father-is-so-good.html",
   "sung": true
- },
- {
-  "key": "sep-02-he-hears-my-voice",
-  "book": "september",
-  "bookNo": 9,
-  "bookTitle": "Wonderful Is His Way",
-  "n": 2,
-  "night": "Week 1 · Night 2",
-  "story": "He Hears My Voice",
-  "reference": "Psalm 116",
-  "title": "Every Whisper Heard",
-  "page": "https://littlescripturetravelers.com/lantern/sep-02-he-hears-my-voice/sep-02-he-hears-my-voice-lullaby.html",
-  "audio": "https://littlescripturetravelers.com/lantern/sep-02-he-hears-my-voice/sep-02-he-hears-my-voice-lullaby.mp3",
-  "readId": "b9-w1-n2",
-  "appPage": "stories/sep-02-he-hears-my-voice.html",
-  "sung": true
- },
- {
-  "key": "sep-03-this-is-the-day",
-  "book": "september",
-  "bookNo": 9,
-  "bookTitle": "Wonderful Is His Way",
-  "n": 3,
-  "night": "Week 1 · Night 3",
-  "story": "This Is the Day!",
-  "reference": "Psalm 118",
-  "title": "A Gift Wrapped in Sunrise",
-  "page": "https://littlescripturetravelers.com/lantern/sep-03-this-is-the-day/sep-03-this-is-the-day-lullaby.html",
-  "audio": "https://littlescripturetravelers.com/lantern/sep-03-this-is-the-day/sep-03-this-is-the-day-lullaby.mp3",
-  "readId": "b9-w1-n3",
-  "appPage": "stories/sep-03-this-is-the-day.html",
-  "sung": true
  }
 ];
