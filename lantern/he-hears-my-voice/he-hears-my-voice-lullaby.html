@@ -10,7 +10,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Every Whisper Heard · Little Scripture Travelers</title>
+<title>He Hears My Whisper · Little Scripture Travelers</title>
 <!-- Fredoka and Nunito ship with the app, so they are served from the bundle. A
      stylesheet that never answers holds the whole document at "loading" - a blank
      page on a phone with no signal, exactly where this gets opened. -->
@@ -451,7 +451,7 @@
 
 <header class="bar">
   <div class="bar-in">
-    <a class="back" id="backLink">&larr; Back to the songs</a>
+    <a class="back" id="backLink">&larr; Back to tonight's devotional</a>
     <div class="tools">
       <button class="tool" id="smaller" aria-label="Smaller text">A&minus;</button>
       <button class="tool" id="bigger" aria-label="Larger text">A+</button>
@@ -461,7 +461,7 @@
 
 <div class="head">
   <p class="eyebrow-top">Lullaby &middot; Sing Together</p>
-  <h1 id="title">Every Whisper Heard</h1>
+  <h1 id="title">He Hears My Whisper</h1>
   <p class="sub" id="subtitle"></p>
 </div>
 
@@ -472,7 +472,7 @@
   <span class="music-link-icon">&#9835;</span>
   <span class="music-link-txt">
     <b>Listen to the music</b>
-    <i>Every Whisper Heard &mdash; tonight's lullaby, sung, with a sleep timer and repeat</i>
+    <i>He Hears My Whisper &mdash; tonight's lullaby, sung, with a sleep timer and repeat</i>
   </span>
   <span class="music-link-arrow">&#9654;</span>
 </button>
@@ -500,7 +500,7 @@
   <button id="topBtn">Top</button>
 </div>
 
-<audio id="player" preload="metadata" src="https://littlescripturetravelers.com/lantern/sep-02-he-hears-my-voice/sep-02-he-hears-my-voice-lullaby.mp3"></audio>
+<audio id="player" preload="metadata" src="https://littlescripturetravelers.com/lantern/he-hears-my-voice/he-hears-my-voice-lullaby.mp3"></audio>
 
 <script>
 /* ============================================================
@@ -513,13 +513,13 @@
                Force one with "navy", "dark" or "light".
    ============================================================ */
 const LULLABY = {
- "title": "Every Whisper Heard",
+ "title": "He Hears My Whisper",
  "subtitle": "Sing it slow. The words are for you — the calm is for them.",
  "artist": "Little Scripture Travelers",
  "song": {
   "url": "",
   "id": "",
-  "title": "Every Whisper Heard"
+  "title": "He Hears My Whisper"
  },
  "theme": "auto",
  "backUrl": "",
@@ -529,7 +529,7 @@ const LULLABY = {
    "label": "Verse 1",
    "kind": "verse",
    "stanzas": [
-    "There was a person, sad and scared,\nNot knowing what to do,\nSo he called out, 'Please help me, Lord!'\nAnd God heard, and He knew."
+    "When troubles crowded all around\nAnd I did not know how,\nI called out to my Heavenly Father —\nHe heard me even now."
    ]
   },
   {
@@ -545,7 +545,7 @@ const LULLABY = {
    "label": "Verse 2",
    "kind": "verse",
    "stanzas": [
-    "God listened close and helped him through,\nHis heart grew calm and glad,\n'I love the Lord,' he sang, 'for He\nHears me when I am sad.'"
+    "I did not have to shout it loud\nOr find the perfect word;\nI only whispered, \"Help me, please\" —\nAnd every word was heard."
    ]
   },
   {
@@ -561,7 +561,7 @@ const LULLABY = {
    "label": "Verse 3",
    "kind": "verse",
    "stanzas": [
-    "Now close your eyes and whisper soft\nThe things you want to say,\nHe hears each word, you're not alone,\nHe's close to you; He'll stay."
+    "My sad turned into glad again,\nMy worried heart grew still;\nSo I will call on Him and love Him\nAll my life, I will."
    ]
   },
   {
@@ -571,9 +571,25 @@ const LULLABY = {
    "stanzas": [
     "CHORUS"
    ]
+  },
+  {
+   "id": "v4",
+   "label": "Verse 4",
+   "kind": "verse",
+   "stanzas": [
+    "So whisper what is on your heart,\nThen close your eyes and rest;\nYou're never, ever, ever alone —\nHe hears you, little guest."
+   ]
+  },
+  {
+   "id": "c4",
+   "label": "Chorus",
+   "kind": "chorus",
+   "stanzas": [
+    "CHORUS"
+   ]
   }
  ],
- "chorus": "Heavenly Father hears my voice,\nEach whisper and each prayer,\nSo when I call, I'm not alone,\nHe listens; He is there."
+ "chorus": "He hears my voice, He hears my voice,\nHowever small it be;\nHe bends His ear down close to hear,\nAnd then He answers me."
 };
 
 /* ============================================================
@@ -592,8 +608,8 @@ const RESOURCES = {
   items: [
     { kind: "Story",
       title: "He Hears My Voice",
-      note:  "He Hears My Voice — Psalm 116. September, Story 2.",
-      url:   "https://littlescripturetravelers.com/read.html?id=b9-w1-n2" },
+      note:  "Tonight's illustrated story — Psalm 116:1–2.",
+      url:   "he-hears-my-voice.html" },
     { kind: "Lullaby",
       title: "A Little Travelers’ Lullaby",
       note:  "All four Travelers, one verse each. Sing it slow.",
