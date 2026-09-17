@@ -87,8 +87,33 @@
           (kind ? '<span class="mp-badge">' + kind.ico + " " + esc(kind.label) + "</span>" : "") +
           (where ? "&#128205; " + where : "") +
         "</p>" +
-        '<p class="mp-text">' + esc(r.body) + "</p>" +
+        (r.body_html ? '<div class="mp-text mp-rich">' + richClean(r.body_html) + "</div>"
+                     : '<p class="mp-text">' + esc(r.body) + "</p>") +
       "</article>";
+  }
+
+  /* The app writes an entry with its formatting (bold, lists, a heading). Only
+     these tags are let through, with no attributes, so nothing in a saved
+     entry can run or restyle the page. */
+  var RICH = { B:"b", STRONG:"b", I:"i", EM:"i", U:"u", S:"s", STRIKE:"s", DEL:"s", UL:"ul", OL:"ol", LI:"li",
+               P:"p", DIV:"p", BR:"br", H1:"h2", H2:"h2", H3:"h2", BLOCKQUOTE:"blockquote" };
+  function richClean(html) {
+    var doc;
+    try { doc = new DOMParser().parseFromString('<div id="r">' + String(html || "") + "</div>", "text/html"); } catch (e) { return ""; }
+    var root = doc.getElementById("r"); if (!root) return "";
+    function walk(n) {
+      var out = "";
+      n.childNodes.forEach(function (c) {
+        if (c.nodeType === 3) { out += esc(c.nodeValue); return; }
+        if (c.nodeType !== 1) return;
+        var t = RICH[c.tagName], inner = walk(c);
+        if (!t) { out += inner; return; }
+        if (t === "br") { out += "<br>"; return; }
+        out += "<" + t + ">" + inner + "</" + t + ">";
+      });
+      return out;
+    }
+    return walk(root);
   }
 
   function formView(rec) {

@@ -3436,3 +3436,8 @@ html[data-theme="light"] .bs-art {
   --white-15: rgba(255,255,255,0.12);
   --white-08: rgba(255,255,255,0.07);
 }
+
+/* a journal entry written in the app, with its formatting */
+.mp-rich p{margin:0 0 .6rem;} .mp-rich > :first-child{font-weight:800;font-size:1.1rem;}
+.mp-rich ul,.mp-rich ol{margin:0 0 .6rem;padding-left:1.4rem;} .mp-rich h2{font-size:1rem;margin:.8rem 0 .3rem;}
+.mp-rich blockquote{margin:0 0 .6rem;padding-left:.8rem;border-left:3px solid rgba(245,197,24,.6);opacity:.85;font-style:italic;}
