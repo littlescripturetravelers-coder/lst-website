@@ -269,6 +269,7 @@
         user_id: uid(),
         entry_date: e.date || today(),
         body: e.body || "",
+        body_html: null,                       /* written plain here; the app's formatting is let go */
         source: e.source || "website",
         place: e.place || null,
         lat: (e.lat === null || e.lat === undefined || e.lat === "") ? null : Number(e.lat),
@@ -280,8 +281,8 @@
         .then(function (res) {
           /* A journal table made before photos and places existed: keep the
              writing rather than losing it to a column that isn't there. */
-          if (res.error && /place|lat|lon|photos|column/i.test(res.error.message || "")) {
-            delete row.place; delete row.lat; delete row.lon; delete row.photos;
+          if (res.error && /place|lat|lon|photos|body_html|column/i.test(res.error.message || "")) {
+            delete row.place; delete row.lat; delete row.lon; delete row.photos; delete row.body_html;
             return sb().from("journal_entries").upsert(row, { onConflict: "id" });
           }
           return res;
