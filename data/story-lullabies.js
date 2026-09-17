@@ -1459,22 +1459,6 @@ window.LST_STORY_SONGS = [
   "sung": true
  },
  {
-  "key": "sep-01-bless-the-lord-o-my-soul",
-  "book": "september",
-  "bookNo": 9,
-  "bookTitle": "Wonderful Is His Way",
-  "n": 1,
-  "night": "Week 1 · Night 1",
-  "story": "Bless the Lord, O My Soul",
-  "reference": "Psalm 103",
-  "title": "Love as High as the Sky",
-  "page": "https://littlescripturetravelers.com/lantern/sep-01-bless-the-lord-o-my-soul/sep-01-bless-the-lord-o-my-soul-lullaby.html",
-  "audio": "https://littlescripturetravelers.com/lantern/sep-01-bless-the-lord-o-my-soul/sep-01-bless-the-lord-o-my-soul-lullaby.mp3",
-  "readId": "b9-w1-n1",
-  "appPage": "stories/sep-01-bless-the-lord-o-my-soul.html",
-  "sung": true
- },
- {
   "key": "sep-02-he-hears-my-voice",
   "book": "september",
   "bookNo": 9,
