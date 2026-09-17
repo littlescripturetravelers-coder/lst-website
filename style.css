@@ -3438,6 +3438,6 @@ html[data-theme="light"] .bs-art {
 }
 
 /* a journal entry written in the app, with its formatting */
-.mp-rich p{margin:0 0 .6rem;} .mp-rich > :first-child{font-weight:800;font-size:1.1rem;}
-.mp-rich ul,.mp-rich ol{margin:0 0 .6rem;padding-left:1.4rem;} .mp-rich h2{font-size:1rem;margin:.8rem 0 .3rem;}
+.mp-rich p{margin:0 0 .6rem;} .mp-rich h1{font-size:1.25rem;margin:0 0 .5rem;} .mp-rich h2{font-size:1.05rem;margin:.8rem 0 .3rem;} .mp-rich h3{font-size:.98rem;margin:.7rem 0 .3rem;}
+.mp-rich ul,.mp-rich ol{margin:0 0 .6rem;padding-left:1.4rem;}
 .mp-rich blockquote{margin:0 0 .6rem;padding-left:.8rem;border-left:3px solid rgba(245,197,24,.6);opacity:.85;font-style:italic;}

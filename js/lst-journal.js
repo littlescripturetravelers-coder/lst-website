@@ -96,7 +96,26 @@
      these tags are let through, with no attributes, so nothing in a saved
      entry can run or restyle the page. */
   var RICH = { B:"b", STRONG:"b", I:"i", EM:"i", U:"u", S:"s", STRIKE:"s", DEL:"s", UL:"ul", OL:"ol", LI:"li",
-               P:"p", DIV:"p", BR:"br", H1:"h2", H2:"h2", H3:"h2", BLOCKQUOTE:"blockquote" };
+               P:"p", DIV:"p", BR:"br", H1:"h1", H2:"h2", H3:"h3", H4:"h3", BLOCKQUOTE:"blockquote", SPAN:"span", FONT:"span" };
+  var RICH_BLOCK = /^(p|h1|h2|h3|blockquote|li)$/;
+  /* the few styles the app's editor writes (colour, size, font, alignment,
+     spacing, indent, list marks), each value checked */
+  function richStyle(tag, css, fontColor) {
+    var out = [], block = RICH_BLOCK.test(tag), list = (tag === "ul" || tag === "ol");
+    var decl = String(css || "").split(";").map(function (x) { return x.split(":"); }).filter(function (x) { return x.length >= 2; });
+    if (fontColor) decl.push(["color", fontColor]);
+    decl.forEach(function (d) {
+      var k = d[0].trim().toLowerCase(), v = d.slice(1).join(":").trim(), m;
+      if (k === "text-align" && block && /^(left|center|right|justify)$/.test(v)) out.push("text-align:" + v);
+      else if (k === "color" && /^(#[0-9a-f]{3,8}|rgba?\([\d\s.,%]+\))$/i.test(v)) out.push("color:" + v);
+      else if (k === "font-size" && (block || tag === "span") && (m = v.match(/^(\d{2})px$/)) && +m[1] >= 10 && +m[1] <= 48) out.push("font-size:" + m[1] + "px");
+      else if (k === "font-family" && (block || tag === "span")) { if (/fredoka/i.test(v)) out.push("font-family:Fredoka"); else if (/nunito/i.test(v)) out.push("font-family:Nunito"); }
+      else if (k === "line-height" && block && /^[\d.]+$/.test(v) && +v >= 1 && +v <= 3) out.push("line-height:" + v);
+      else if ((k === "margin-left" || k === "padding-left") && block && (m = v.match(/^(\d{1,3})px$/)) && +m[1] <= 200) out.push("margin-left:" + m[1] + "px");
+      else if (k === "list-style-type" && list && /^(disc|circle|square|decimal|lower-alpha|"[\u2013\u2014\-] ?")$/.test(v)) out.push("list-style-type:" + v);
+    });
+    return out.join(";");
+  }
   function richClean(html) {
     var doc;
     try { doc = new DOMParser().parseFromString('<div id="r">' + String(html || "") + "</div>", "text/html"); } catch (e) { return ""; }
@@ -106,10 +125,13 @@
       n.childNodes.forEach(function (c) {
         if (c.nodeType === 3) { out += esc(c.nodeValue); return; }
         if (c.nodeType !== 1) return;
+        if (/^(SCRIPT|STYLE|TEMPLATE|IFRAME|OBJECT)$/.test(c.tagName)) return;
         var t = RICH[c.tagName], inner = walk(c);
         if (!t) { out += inner; return; }
         if (t === "br") { out += "<br>"; return; }
-        out += "<" + t + ">" + inner + "</" + t + ">";
+        var st = richStyle(t, c.getAttribute("style"), c.tagName === "FONT" ? c.getAttribute("color") : "");
+        if (t === "span") { out += st ? '<span style="' + esc(st) + '">' + inner + "</span>" : inner; return; }
+        out += "<" + t + (st ? ' style="' + esc(st) + '"' : "") + ">" + inner + "</" + t + ">";
       });
       return out;
     }
