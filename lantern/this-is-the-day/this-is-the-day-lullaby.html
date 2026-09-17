@@ -10,7 +10,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>A Gift Wrapped in Sunrise · Little Scripture Travelers</title>
+<title>The Day He Made for You · Little Scripture Travelers</title>
 <!-- Fredoka and Nunito ship with the app, so they are served from the bundle. A
      stylesheet that never answers holds the whole document at "loading" - a blank
      page on a phone with no signal, exactly where this gets opened. -->
@@ -451,7 +451,7 @@
 
 <header class="bar">
   <div class="bar-in">
-    <a class="back" id="backLink">&larr; Back to the songs</a>
+    <a class="back" id="backLink">&larr; Back to tonight's devotional</a>
     <div class="tools">
       <button class="tool" id="smaller" aria-label="Smaller text">A&minus;</button>
       <button class="tool" id="bigger" aria-label="Larger text">A+</button>
@@ -461,7 +461,7 @@
 
 <div class="head">
   <p class="eyebrow-top">Lullaby &middot; Sing Together</p>
-  <h1 id="title">A Gift Wrapped in Sunrise</h1>
+  <h1 id="title">The Day He Made for You</h1>
   <p class="sub" id="subtitle"></p>
 </div>
 
@@ -472,7 +472,7 @@
   <span class="music-link-icon">&#9835;</span>
   <span class="music-link-txt">
     <b>Listen to the music</b>
-    <i>A Gift Wrapped in Sunrise &mdash; tonight's lullaby, sung, with a sleep timer and repeat</i>
+    <i>The Day He Made for You &mdash; tonight's lullaby, sung, with a sleep timer and repeat</i>
   </span>
   <span class="music-link-arrow">&#9654;</span>
 </button>
@@ -500,7 +500,7 @@
   <button id="topBtn">Top</button>
 </div>
 
-<audio id="player" preload="metadata" src="https://littlescripturetravelers.com/lantern/sep-03-this-is-the-day/sep-03-this-is-the-day-lullaby.mp3"></audio>
+<audio id="player" preload="metadata" src="https://littlescripturetravelers.com/lantern/this-is-the-day/this-is-the-day-lullaby.mp3"></audio>
 
 <script>
 /* ============================================================
@@ -513,13 +513,13 @@
                Force one with "navy", "dark" or "light".
    ============================================================ */
 const LULLABY = {
- "title": "A Gift Wrapped in Sunrise",
+ "title": "The Day He Made for You",
  "subtitle": "Sing it slow. The words are for you — the calm is for them.",
  "artist": "Little Scripture Travelers",
  "song": {
   "url": "",
   "id": "",
-  "title": "A Gift Wrapped in Sunrise"
+  "title": "The Day He Made for You"
  },
  "theme": "auto",
  "backUrl": "",
@@ -529,7 +529,7 @@ const LULLABY = {
    "label": "Verse 1",
    "kind": "verse",
    "stanzas": [
-    "A song-writer woke up one day,\nThe sun was shining bright,\nThe birds were singing, and his heart\nWas full of joy and light."
+    "The morning came and brought the sun,\nThe birds began to sing;\nAnd someone woke and looked outside\nAnd praised Him for each thing."
    ]
   },
   {
@@ -545,7 +545,7 @@ const LULLABY = {
    "label": "Verse 2",
    "kind": "verse",
    "stanzas": [
-    "Some days are big and full of fun,\nSome days are quiet, small,\nBut each one is a gift from God,\nWho's good and loves us all."
+    "Some days are big with things to do,\nSome days are hushed and slow;\nBut every single one of them\nIs His, and good to know."
    ]
   },
   {
@@ -561,7 +561,7 @@ const LULLABY = {
    "label": "Verse 3",
    "kind": "verse",
    "stanzas": [
-    "Now close your eyes, the sun has set,\nTomorrow's on its way,\nA gift from God made just for you,\nHe's near you; rest till day."
+    "So Scout went looking in the rain\nTo see what might be found:\nA puddle and a rainbow too,\nAnd kindness all around."
    ]
   },
   {
@@ -571,9 +571,25 @@ const LULLABY = {
    "stanzas": [
     "CHORUS"
    ]
+  },
+  {
+   "id": "v4",
+   "label": "Verse 4",
+   "kind": "verse",
+   "stanzas": [
+    "Now close your eyes, the day is done,\nIts gifts are gathered in;\nTomorrow is another one —\nSleep well, and we'll begin."
+   ]
+  },
+  {
+   "id": "c4",
+   "label": "Chorus",
+   "kind": "chorus",
+   "stanzas": [
+    "CHORUS"
+   ]
   }
  ],
- "chorus": "This is the day the Lord has made,\nSo I'll be glad today,\nEach day's a gift from God to me,\nHis love will always stay."
+ "chorus": "This is the day He made for you,\nSo wake up glad and see;\nSome days are loud and some are small —\nBut each one's meant to be."
 };
 
 /* ============================================================
@@ -592,8 +608,8 @@ const RESOURCES = {
   items: [
     { kind: "Story",
       title: "This Is the Day!",
-      note:  "This Is the Day! — Psalm 118. September, Story 3.",
-      url:   "https://littlescripturetravelers.com/read.html?id=b9-w1-n3" },
+      note:  "Tonight's illustrated story — Psalm 118:24.",
+      url:   "this-is-the-day.html" },
     { kind: "Lullaby",
       title: "A Little Travelers’ Lullaby",
       note:  "All four Travelers, one verse each. Sing it slow.",
