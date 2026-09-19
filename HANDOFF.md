@@ -1922,8 +1922,14 @@ family something we do not actually know. When the second address turns up, swap
 ### ⚠️ Never guess the address
 
 A wrong Amazon link sends a family to the wrong book and takes their money for it. Wait for the
-address; never reason one out from the pattern of the others.
+address; never reason one out from the pattern of the other books' — they are not sequential, and
+a near-miss still charges somebody for the wrong thing.
 
-**September has not been published yet**, so it correctly still says "Coming Soon" while October
-beside it says Available. The Books page therefore shows a gap between August and October. That
-gap is right, and it is not a fault to go and fix — books do not necessarily come out in order.
+**Do not try to look it up either.** Amazon is blocked by this container's network, and a new
+listing takes weeks to reach a search engine, so a search that "finds" it is finding something
+else. The only trustworthy source is Levi pasting the address from his own Amazon page.
+
+*As of 19 Sep 2026:* September (*Wonderful Is His Way*, book 9) **is published**, but its address
+has not been supplied, so it still reads "Coming Soon" beside an Available October. Two fields
+turn it on the moment the link arrives — `status`/`oneLink` in `books.html`, and `"amazon"` on
+book 9 in `data/virtue-library.js`.
