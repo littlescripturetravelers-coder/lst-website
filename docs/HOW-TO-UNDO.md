@@ -37,6 +37,10 @@ precise rather than approximate.
 
 | Code | Date | What changed |
 |---|---|---|
+| `e13e7e3` | 19 Sep | **October is on sale** — *He Gathers the Lambs* on the Books page, the front page and the foot of every October story |
+| `0142703` | 15 Sep | Two editions of the website: four volumes with Come, Follow Me, or the two Testaments |
+| `77494bf` | 14 Sep | **October's pictures and cover**, and the way book nights are kept in step with the app |
+| `f0247f8` | 14 Sep | **The full-screen reader** — stories on the website read the way they do in the app, a page at a time |
 | `eb56f0c` | 8 Sep | **My Account no longer goes blank on a slow phone** — and the sell stays quiet when we can't tell who you are |
 | `572bd07` | 8 Sep | **The website put back after three days of "404: NOT_FOUND"** — the Lantern files moved out of `public/` |
 | `eda7ee1` | 3 Sep | **The three themes — Traditional, Dark and Light**, choosable in the header, the phone menu and My Account |

@@ -1830,3 +1830,98 @@ circles.
 
 The uptime check cannot catch this class of fault: the site was serving every file perfectly the
 whole time. It was the *browser's* conversation with Supabase that stalled.
+
+---
+
+## 36. The stories read the way the app reads them (14 Sep 2026)
+
+> "Alright I need you to change the way the bedtime story looks like on the website to
+> actually match the app but I want it to cover the entire web page."
+
+### What a family sees
+
+Tapping any story on **Bedtime Stories** opens `read.html?id=…` — a full-bleed reader with
+no header, no footer and no website furniture. It turns a page at a time: click the left or
+right half, press the arrow keys, or drag with a thumb. The shape of each page is the same
+one the app uses:
+
+| Page | What is on it |
+|---|---|
+| Cover | the book's art, the title, the scripture |
+| Story | the picture, then the words |
+| A Feeling Moment | the Move · Imagine · Connect activity, **on its own** |
+| Remember This | the five stones, the lesson — **and the picture** |
+| Parent Prompt | the question, and the space for a parent's own testimony |
+| End | the way back to the shelf |
+
+**The Feeling Moment stands alone and the picture belongs to Remember This.** Levi asked for
+that specifically. It also means the Feeling Moment is a *paper* page (cream, no photo), which
+is why `read.html` carries a second palette — `--p-spot`, `--p-name`, `--p-find`, `--p-fork`,
+`--p-calm`. The five stones' bright colours are lovely on a dark photo and unreadable on cream;
+the paper palette is what they use there. **If you add a colour to the stones, add its paper
+twin too, or it will fail on that one page.**
+
+There is no "Read to me" button. Levi asked for it to go.
+
+### The pieces
+
+    read.html          the page itself — its own palette, its own type, nothing shared
+    js/lst-book.js     the reader: builds each page, fits the art, turns, drags
+    js/lst-bedtime.js  the shelf — each tile is now a link straight to read.html
+    story.html         still answers ?date=, but sends ?id= on to read.html
+
+### ⚠️ Two things that will bite
+
+1. **`[hidden]` must beat `display:flex`.** The shut door (`.shut`) and the waiting
+   state both set `display:flex`, which outranks the `hidden` attribute. Without
+
+   ```css
+   [hidden]{display:none!important}
+   ```
+
+   the locked-door panel paints straight over a paying family's story. It did, once.
+   `scratchpad/readwall.mjs` checks the wall from three postures — signed out, signed in
+   without a subscription, and subscribed — and is worth re-running after any change here.
+
+2. **The words are never in a file.** The reader asks the database for them through
+   `LSTData.bookNights.one(id)`, and row-level security decides whether it gets any. Never
+   cache a story's text into anything the website serves — that is the paywall.
+
+---
+
+## 37. What to change when a new book goes on sale
+
+Levi sends one thing: **the Amazon address**. Four places have to agree, and they are easy
+to half-do.
+
+| File | What goes in it | What breaks if you forget |
+|---|---|---|
+| `books.html` — the `books` object | the grid card for that month turns from `status: 'coming'` to `status: 'available'` with its title, link and cover | the book still says "Coming Soon" in the grid |
+| `books.html` — a featured panel | a new panel **above** the last one, and the previous one's badge stops saying "New" | two books both claim to be the newest |
+| `index.html` — the book row | one more `.book-card` | the front page never mentions it |
+| `data/virtue-library.js` — `books` | `"amazon": "<the address>"` on that book number | the foot of every story in that book keeps saying "coming soon" |
+
+The cover goes in `images/book-cover-<month>.jpg` and is already named in two maps —
+`BOOK_ART` in `js/lst-bedtime.js` (keyed by month name) and in `js/lst-library.js` (keyed by
+book number). Both need the month, or the shelf tiles fall back to the volume's generic art.
+
+### ⚠️ One link means one button
+
+Every book that has been out a while carries **two** addresses — a paperback and a Kindle
+edition — and its card shows two buttons. October arrived with **one** address, and we do not
+know which edition it opens. So the card shows a single, honest **Buy on Amazon**:
+
+```js
+{ status: 'available', title: '…', oneLink: 'https://a.co/…', coverImage: '…' }
+```
+
+Splitting one address into "Paperback" and "Kindle" that both land in the same place tells a
+family something we do not actually know. When the second address turns up, swap `oneLink` for
+`amazonHardcover` + `amazonKindle` and the two buttons come back on their own.
+
+### ⚠️ Never guess the address
+
+A wrong Amazon link sends a family to the wrong book and takes their money for it. **September
+is sitting at "Coming Soon" right now for exactly this reason** — the paperback is published,
+but its address has not been sent yet, so the Books page shows a gap between August and
+October. That gap is correct. It closes the moment Levi sends the link, and not before.
