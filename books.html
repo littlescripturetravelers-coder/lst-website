@@ -1429,12 +1429,42 @@
   </div>
 </section>
 
+<!-- ===== FEATURED BOOK — OCTOBER =====
+     The newest book in print. When the next one lands, change the cover, the
+     badge, the tag, the heading, the four pills, the paragraph and the button
+     below — they are all one panel and they must agree with each other. -->
+<section class="featured-book on-dark" style="background: linear-gradient(135deg, #1a3320 0%, #0d2218 100%); border-top: 2px solid var(--gold);">
+  <div class="featured-book-inner">
+    <div class="featured-book-cover">
+      <img src="images/book-cover-october.jpg" alt="He Gathers the Lambs — Little Scripture Travelers October Book" />
+      <span class="featured-book-badge" style="background:var(--gold); color:#07112e;">✦ New — October</span>
+    </div>
+    <div class="featured-book-info">
+      <span class="featured-tag">✦ THE OLD TESTAMENT VOLUME · BOOK 10 OF 12</span>
+      <h2>He Gathers <em>the Lambs</em></h2>
+      <div class="featured-meta">
+        <span class="featured-meta-pill">October · Old Testament</span>
+        <span class="featured-meta-pill"><span class="only-lds">Book 10 of 48</span><span class="only-christian">Book 10 of 24</span></span>
+        <span class="featured-meta-pill">Isaiah &middot; Jeremiah</span>
+        <span class="featured-meta-pill">Paperback</span>
+      </div>
+      <p>Book 10 of the Old Testament volume: Beau, Scout, Willow, and Wren walk through Isaiah&rsquo;s promises of comfort and Jeremiah&rsquo;s gentle call to come home. Four weeks of stories about the Shepherd who gathers the lambs in His arms and carries them close to His heart &mdash; so a child falls asleep knowing they are one of them.</p>
+      <div class="featured-actions">
+        <a href="https://a.co/d/0eitPVL2" target="_blank" rel="noopener" class="btn-featured-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/></svg>
+          Paperback on Amazon
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FEATURED BOOK — AUGUST ===== -->
 <section class="featured-book on-dark" style="background: linear-gradient(135deg, #1a3320 0%, #0d2218 100%); border-top: 2px solid var(--gold);">
   <div class="featured-book-inner">
     <div class="featured-book-cover">
       <img src="images/book-cover-august.jpg" alt="I Will Trust and Sing — Little Scripture Travelers August Book" />
-      <span class="featured-book-badge" style="background:var(--gold); color:#07112e;">✦ New — August</span>
+      <span class="featured-book-badge" style="background:var(--gold); color:#07112e;">✦ August</span>
     </div>
     <div class="featured-book-info">
       <span class="featured-tag">✦ THE OLD TESTAMENT VOLUME · BOOK 8 OF 12</span>
@@ -1878,7 +1908,7 @@ const books = {
     { status: 'available', title: 'There Is a Prophet in Israel', amazonHardcover: 'https://www.amazon.com/dp/B0H745TTNZ', amazonKindle: 'https://a.co/d/03yPEh1D', coverImage: 'images/book-cover-july.jpg' }, // July ✅
     { status: 'available', title: 'I Will Trust and Sing', amazonHardcover: 'https://www.amazon.com/dp/B0HC53FHHP/ref=tmm_pap_swatch_0', amazonKindle: 'https://a.co/d/03skwG4k', coverImage: 'images/book-cover-august.jpg' }, // August ✅
     { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // September
-    { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // October
+    { status: 'available', title: 'He Gathers the Lambs', oneLink: 'https://a.co/d/0eitPVL2', coverImage: 'images/book-cover-october.jpg' }, // October ✅
     { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // November
     { status: 'coming',    amazonHardcover: '', amazonKindle: '' },           // December
   ],
@@ -1932,7 +1962,14 @@ function renderBooks(volumeKey) {
         </div>`;
     }
 
-    let actionsHTML = isAvailable && book.kindleOnly
+    /* ⚠️ ONE LINK, ONE BUTTON. When Levi sends a single Amazon address we show
+       a single "Buy on Amazon" button. Splitting it into "Paperback" and
+       "Kindle" that both point at the same place tells a family something we
+       do not actually know. Add amazonHardcover + amazonKindle when both
+       addresses are known and the two buttons come back by themselves. */
+    let actionsHTML = isAvailable && book.oneLink
+      ? `<a href="${book.oneLink}" target="_blank" rel="noopener" class="book-btn primary">Buy on Amazon</a>`
+      : isAvailable && book.kindleOnly
       ? `<span class="book-btn disabled">Paperback — Coming Soon</span>
          <a href="${book.amazonKindle}" target="_blank" rel="noopener" class="book-btn secondary">Kindle &amp; Kindle Unlimited</a>`
       : isAvailable

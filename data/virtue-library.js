@@ -1009,7 +1009,8 @@ window.LST_LIBRARY = {
          button appears by itself. Never put a guessed URL here: it sends a
          family to the wrong book. */
       "paperback": "coming" },
-    { "book": 10, "month": "October", "title": "He Gathers the Lambs", "paperback": "coming" }
+    { "book": 10, "month": "October", "title": "He Gathers the Lambs",
+      "amazon": "https://a.co/d/0eitPVL2" }
  ],
  "stories": [
   {
