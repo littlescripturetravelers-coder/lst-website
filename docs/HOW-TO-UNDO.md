@@ -37,6 +37,7 @@ precise rather than approximate.
 
 | Code | Date | What changed |
 |---|---|---|
+| `64d05b2` | 19 Sep | **September and October both on sale** — *Wonderful Is His Way* and *He Gathers the Lambs*, paperback buttons on the Books page and the front page |
 | `e13e7e3` | 19 Sep | **October is on sale** — *He Gathers the Lambs* on the Books page, the front page and the foot of every October story |
 | `0142703` | 15 Sep | Two editions of the website: four volumes with Come, Follow Me, or the two Testaments |
 | `77494bf` | 14 Sep | **October's pictures and cover**, and the way book nights are kept in step with the app |
