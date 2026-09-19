@@ -1921,7 +1921,9 @@ family something we do not actually know. When the second address turns up, swap
 
 ### ⚠️ Never guess the address
 
-A wrong Amazon link sends a family to the wrong book and takes their money for it. **September
-is sitting at "Coming Soon" right now for exactly this reason** — the paperback is published,
-but its address has not been sent yet, so the Books page shows a gap between August and
-October. That gap is correct. It closes the moment Levi sends the link, and not before.
+A wrong Amazon link sends a family to the wrong book and takes their money for it. Wait for the
+address; never reason one out from the pattern of the others.
+
+**September has not been published yet**, so it correctly still says "Coming Soon" while October
+beside it says Available. The Books page therefore shows a gap between August and October. That
+gap is right, and it is not a fault to go and fix — books do not necessarily come out in order.
