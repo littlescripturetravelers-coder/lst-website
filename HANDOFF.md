@@ -1470,10 +1470,10 @@ Levi (2026-08-26): *"September hasn't been published yet. That is why I can't pr
 The middle state exists because silence is worse than waiting: a parent who has just loved a story
 and finds nothing about a book concludes there isn't one.
 
-**When September is published: replace `"coming"` with the real URL. One field, and the Buy button
-appears by itself.** Never put a guessed Amazon URL there — it sends a family to somebody else's
-book. `books.html` is hand-written and does not read this array, so it promises nothing about
-September either.
+**Done — September was published on 19 Sep 2026 and `"coming"` was replaced with its real URL.**
+The pattern stands for the books still to come: one field, and the Buy button appears by itself.
+Never put a guessed Amazon URL there — it sends a family to somebody else's book. `books.html` is
+hand-written and does not read this array, so each has to be filled in separately.
 
 ### The foot of a story — `js/lst-story-foot.js`
 > "link those stories to the virtues and family memories that are connected to them ... it should
@@ -1905,19 +1905,23 @@ The cover goes in `images/book-cover-<month>.jpg` and is already named in two ma
 `BOOK_ART` in `js/lst-bedtime.js` (keyed by month name) and in `js/lst-library.js` (keyed by
 book number). Both need the month, or the shelf tiles fall back to the volume's generic art.
 
-### ⚠️ One link means one button
+### ⚠️ Only promise the editions we hold an address for
 
-Every book that has been out a while carries **two** addresses — a paperback and a Kindle
-edition — and its card shows two buttons. October arrived with **one** address, and we do not
-know which edition it opens. So the card shows a single, honest **Buy on Amazon**:
+June, July and August each carry **two** addresses — a paperback and a Kindle edition — so their
+cards show two buttons. September and October are **paperback only**: those are the links Levi
+sent, and no Kindle address exists for them yet. So they get one button, **Buy Paperback**:
 
 ```js
-{ status: 'available', title: '…', oneLink: 'https://a.co/…', coverImage: '…' }
+{ status: 'available', title: '…', amazonHardcover: 'https://a.co/…',
+  amazonKindle: '', coverImage: '…' }
 ```
 
-Splitting one address into "Paperback" and "Kindle" that both land in the same place tells a
-family something we do not actually know. When the second address turns up, swap `oneLink` for
-`amazonHardcover` + `amazonKindle` and the two buttons come back on their own.
+`books.html` decides from the data — a paperback with an empty `amazonKindle` renders one button.
+Fill `amazonKindle` in and the second button appears by itself.
+
+Two things not to do. Do **not** point a "Kindle Edition" button at the paperback address to make
+the card match its neighbours; that takes a family to the wrong thing. And do **not** add
+"Kindle — Coming Soon" beside it: we do not know that a Kindle edition is coming.
 
 ### ⚠️ Never guess the address
 
@@ -1929,7 +1933,5 @@ a near-miss still charges somebody for the wrong thing.
 listing takes weeks to reach a search engine, so a search that "finds" it is finding something
 else. The only trustworthy source is Levi pasting the address from his own Amazon page.
 
-*As of 19 Sep 2026:* September (*Wonderful Is His Way*, book 9) **is published**, but its address
-has not been supplied, so it still reads "Coming Soon" beside an Available October. Two fields
-turn it on the moment the link arrives — `status`/`oneLink` in `books.html`, and `"amazon"` on
-book 9 in `data/virtue-library.js`.
+*As of 19 Sep 2026:* June through October are all out and all live. November and December are the
+next to come.

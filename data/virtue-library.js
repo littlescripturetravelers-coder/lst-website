@@ -1004,13 +1004,9 @@ window.LST_LIBRARY = {
    "amazon": "https://www.amazon.com/dp/B0HC53FHHP/"
   },
     { "book": 9, "month": "September", "title": "Wonderful Is His Way",
-      /* Not on Amazon yet. Leave this as "coming" until the paperback is
-         actually published, then replace it with the real link and the Buy
-         button appears by itself. Never put a guessed URL here: it sends a
-         family to the wrong book. */
-      "paperback": "coming" },
+      "amazon": "https://a.co/d/04uVtSA4" },
     { "book": 10, "month": "October", "title": "He Gathers the Lambs",
-      "amazon": "https://a.co/d/0eitPVL2" }
+      "amazon": "https://a.co/d/0iacBH3H" }
  ],
  "stories": [
   {
