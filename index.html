@@ -399,6 +399,24 @@
 </style>
 </head>
 <body>
+<script>
+/* A PASSWORD LINK THAT LANDED HERE.
+   Supabase sends a parent to the address the app or the site asked for. When it
+   cannot - the link was already used, or it has run out of time - it sends them
+   to the front door instead, carrying the reason in the part of the address
+   after the #. Left alone, a parent who wanted a new password just lands on the
+   home page with no idea why. So a recovery answer of any kind is handed
+   straight to the page that knows how to speak about it. */
+(function(){
+  try{
+    var h=String(location.hash||'');
+    if(!h || h.length<2) return;
+    if(!/(^|[#&])type=recovery|error_code=otp_expired|error_code=access_denied/.test(h)) return;
+    if(/reset-password\.html/.test(location.pathname)) return;
+    location.replace('/reset-password.html'+h);
+  }catch(e){}
+})();
+</script>
 <div class="app-move-banner" role="note" style="background:linear-gradient(90deg,var(--page),var(--page-2));border-bottom:1px solid rgba(245,197,24,0.35);color:var(--ink);text-align:center;padding:0.6rem 1.1rem;font-family: var(--font-body);font-size:0.9rem;line-height:1.5;">
   <span style="font-size:1.05rem;">📱</span> <strong style="color:var(--gold-ink);">A change for our families.</strong> Your story has always arrived by email at 5&nbsp;AM Mountain. We are moving it all onto the website and into the app: the nightly story and lullabies, the Virtue Library, and your Family Story Library, all in one place.
 </div>
