@@ -37,7 +37,7 @@ VERSE_CARD = f'''
     <div class="verse-ref">Proverbs 2:4&ndash;5 (New International Version)</div>
     <div class="soft-div"></div>
     <div class="bt"><strong>Simple truth:</strong> {ent("Read the two verbs before you read anything else. <em>Look for</em>, and <em>search</em>. Solomon does not say wisdom is given to the deserving or dawns on the patient. He says it is hunted, with the same energy a person brings to silver. And then verse 5 tells you what is actually at the bottom of the hole, which is not a fact about life. It is the knowledge of God. The treasure hunt in tonight’s story ends where Solomon said it would: not with a clever child, but with a child who knows God better than they did yesterday.")}</div>
-    <div class="bt" style="margin-top:8px;"><strong>A note on tonight&rsquo;s wording:</strong> {ent("The NIV text above is set from memory and could not be re-checked against a Bible source tonight — the network blocked every one. It is worth a glance at your own Bible at Proverbs 2:4–5 before you read it aloud.")}</div>
+{sources_note("The NIV text above is set from memory and could not be re-checked against a Bible source tonight. It is worth a glance at your own Bible before you read it aloud.", "The NIV wording above was re-read at its source before this page was built.")}
     <div class="pills">
       <div class="pill">Proverbs 2:1&ndash;5</div>
       <div class="pill">Proverbs 2:6</div>
@@ -256,7 +256,8 @@ TEN_PASSAGES = f'''
   <div class="card card-quote reveal">
     <div class="card-label lbl-amber">&#10022; Ten Places Scripture Says It</div>
     <div class="card-title ct-gold">The treasure of wisdom, traced from Genesis to the letters</div>
-    <div class="bt" style="margin-bottom:4px;">{ent("This card normally carries ten quotations from teachers of the faith. Tonight it carries ten references instead, described rather than quoted, because no source could be verified — see the note earlier in this reading. Open them yourself; the descriptions are ours, the words are not.")}</div>
+    <div class="bt" style="margin-bottom:4px;">{ent("Ten references rather than ten quotations, each one linked and described in our own words. Open them yourself; the descriptions are ours, the words are not.")}</div>
+{sources_note("No source could be verified tonight, which is why nothing on this card is quoted.", "Every reference on this card was opened at its source before this page was built.")}
 {ref('Proverbs 2:1–6', "The chapter itself: eight conditions, one promise, and then the reason — the Lord gives wisdom.")}
 {ref('Proverbs 3:13–18', "Wisdom rated above silver, gold and rubies, and called a tree of life to those who take hold of her.")}
 {ref('Proverbs 4:5–9', "Get wisdom, get understanding, and do not forget it; she will honour you if you embrace her.")}
