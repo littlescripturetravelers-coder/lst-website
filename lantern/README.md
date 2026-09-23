@@ -132,6 +132,24 @@ is still read, so a night written before this still sings.
 the songs a family; the mood is what makes tonight's its own. Drop the finetune
 and you get twenty unrelated songs a month.
 
+### The words rule: the page and the song agree
+
+The words a family reads on the song page must be the words they hear. One
+prompt let the singer drop a verse or reshape a line, and a two-minute clock
+for thirty-two lines made that certain. So the song is now asked for as a
+**plan**, section by section: every `[Verse]` and `[Chorus]` of `lyrics`, each
+with its own lines and its own share of time (about 5.5 s a line, a short
+opening and close, at most four minutes). `length_ms` in `lullaby.json` no
+longer sets the length; the page's lines do. If ElevenLabs ever turns the plan
+down, the log says so and the run asks the old way, with the page's length.
+
+Then every take is **read back**: with `OPENAI_API_KEY` set, the recording is
+transcribed and each line of the page is looked for in what was heard. A take
+that sings fewer than 78 % of the lines (`FIT_KEEP`) is asked for again, up to
+three times, and the log names the lines that were not heard. The best take is
+kept, with `words_heard` beside it in the log. Without the key the words go
+unchecked, and the log says so.
+
 ### Every take is measured
 
 The model sometimes returns something clipped, near-silent, or far too short,

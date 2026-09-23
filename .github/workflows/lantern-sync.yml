@@ -108,6 +108,7 @@ jobs:
         env:
           DEST: lantern
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}   # reads each take back, to check the words (THE WORDS RULE)
           FINETUNE_NAME: ""   # left blank on purpose - see the note beside the request
         run: |
           set -e
@@ -272,24 +273,124 @@ jobs:
               finetune = walk(raw) or ''
               print('finetune:', want, '->', finetune or 'NOT FOUND (will generate without it)')
 
+          # ── THE WORDS RULE ─────────────────────────────────────────────────
+          # The words a family reads on the page must be the words they hear.
+          # One prompt lets the singer drop a verse or reshape a line, and a
+          # two-minute clock for thirty-two lines makes that certain. So the
+          # song is asked for as a PLAN, section by section - every [Verse] and
+          # [Chorus] of the page with its own lines and its own share of time -
+          # and every take is read back by a transcriber and held against the
+          # page. A take that sings less than most of the lines is asked for
+          # again, and the best of the takes is kept, with its score in the log.
+          import re, difflib, uuid
+          PER_LINE_MS = int(os.environ.get('PER_LINE_MS', '5500'))   # a sung line of common metre, unhurried
+          INTRO_MS, OUTRO_MS, MAX_SONG_MS = 4000, 5000, 240000
+          FIT_KEEP = float(os.environ.get('FIT_KEEP', '0.78'))        # the share of lines that must be heard
+          oa_key = os.environ.get('OPENAI_API_KEY', '').strip()
+          SPINE_STYLE = ["children's bedtime lullaby", "one single voice, no second singer", "warm and unhurried",
+                         "gentle acoustic accompaniment", "no drums, no percussion", "clean and undistorted, plenty of headroom",
+                         "a new, original melody that suits the words", "every word sung clearly, exactly as written"]
+          NEG_STYLE = ["drums", "percussion", "backing vocals", "choir", "duet", "distortion", "clipping",
+                       "loudness pushing", "shouting", "spoken word", "rap", "improvised words", "scat singing", "ad-libs"]
+
+          def sections_of(lyrics):
+              """[Verse n] / [Chorus] blocks -> [(name, lines)]; an empty [Chorus] repeats the first one's words."""
+              out, chorus, nc = [], None, 0
+              for block in lyrics.strip().replace('\r', '').split('\n\n'):
+                  rows = [l.strip() for l in block.strip().split('\n') if l.strip()]
+                  if not rows: continue
+                  name = rows[0].strip('[]').strip() if rows[0].startswith('[') else ''
+                  body = rows[1:] if name else rows
+                  if name.lower().startswith('chorus'):
+                      nc += 1
+                      if body: chorus = body
+                      elif chorus: body = chorus
+                      name = 'Chorus' if nc == 1 else f'Chorus {nc}'
+                  if not body: continue
+                  out.append((name or f'Verse {len(out) + 1}', body))
+              return out
+
+          def plan_for(meta, v, st, colour):
+              """The song as sections, each with the page's own lines and its share of the time."""
+              secs = sections_of(meta['lyrics'])
+              if not secs: return None, 0
+              n = sum(len(b) for _, b in secs)
+              scale = min(1.0, (MAX_SONG_MS - INTRO_MS - OUTRO_MS) / float(n * PER_LINE_MS))
+              sections, total = [], 0
+              for i, (name, lines) in enumerate(secs):
+                  dur = int(len(lines) * PER_LINE_MS * scale) + (INTRO_MS if i == 0 else 0) + (OUTRO_MS if i == len(secs) - 1 else 0)
+                  local = ['sung softly, one line at a time, every word clear']
+                  if name.startswith('Chorus'): local.append('the chorus: a little fuller, the same tune each time it returns')
+                  if i == 0: local.append('a short instrumental opening, then the words')
+                  if i == len(secs) - 1: local.append('settling and slowing, almost asleep, a soft instrumental close')
+                  sections.append({'section_name': name, 'positive_local_styles': local, 'negative_local_styles': [],
+                                   'duration_ms': dur, 'lines': lines})
+                  total += dur
+              plan = {'positive_global_styles': SPINE_STYLE + [VOICES[v], STYLES[st]] + ([colour] if colour else []),
+                      'negative_global_styles': NEG_STYLE, 'sections': sections}
+              return plan, total
+
+          def heard(path):
+              """The words in a take as a transcriber hears them, or None when it cannot be asked."""
+              if not oa_key: return None
+              bd = uuid.uuid4().hex; data = open(path, 'rb').read()
+              body = ((f'--{bd}\r\nContent-Disposition: form-data; name="model"\r\n\r\nwhisper-1\r\n'
+                       f'--{bd}\r\nContent-Disposition: form-data; name="response_format"\r\n\r\ntext\r\n'
+                       f'--{bd}\r\nContent-Disposition: form-data; name="language"\r\n\r\nen\r\n'
+                       f'--{bd}\r\nContent-Disposition: form-data; name="temperature"\r\n\r\n0\r\n'
+                       f'--{bd}\r\nContent-Disposition: form-data; name="file"; filename="song.mp3"\r\nContent-Type: audio/mpeg\r\n\r\n').encode('utf-8')
+                      + data + f'\r\n--{bd}--\r\n'.encode('utf-8'))
+              req = urllib.request.Request('https://api.openai.com/v1/audio/transcriptions', data=body,
+                                           headers={'Authorization': 'Bearer ' + oa_key, 'Content-Type': f'multipart/form-data; boundary={bd}'})
+              try:
+                  return urllib.request.urlopen(req, timeout=300).read().decode('utf-8', 'replace')
+              except Exception as e:
+                  print(f'    could not read the take back ({str(e)[:120]}); its words go unchecked'); return None
+
+          def words(s): return re.findall(r"[a-z']+", s.lower().replace('’', "'"))
+          def fit(lyrics, text):
+              """The share of the page's lines heard in the take, and the lines that were not."""
+              sung = words(text); lines = [l for _, body in sections_of(lyrics) for l in body]
+              hit, missing = 0, []
+              for l in lines:
+                  w = words(l)
+                  if not w: continue
+                  n = len(w); best = 0.0
+                  for i in range(0, max(1, len(sung) - n + 1)):
+                      r = difflib.SequenceMatcher(None, w, sung[i:i + n + 1]).ratio()
+                      if r > best: best = r
+                      if best >= 0.95: break
+                  if best >= 0.6: hit += 1
+                  else: missing.append(l)
+              return (hit / float(len(lines)) if lines else 1.0), missing
+
           ATTEMPTS = 3
           refused = []
+          plan_refused = False   # the service turned the plan down once: the prompt carries the rest of the run
           for p in todo:
               slug = os.path.basename(os.path.dirname(p))
               meta = json.load(open(p, encoding='utf-8'))
               # The night's own colour. `mood` is the new key and is what the build
               # should write; `prompt` is still read so an older night still sings.
               colour = (meta.get('mood') or meta.get('prompt') or '').strip()
-              length = int(meta.get('length_ms', 120000))
               v, st = choose(meta, os.path.basename(os.path.dirname(p)))
               print(f'  singer: {v} - arrangement: {st}')
+              plan, plan_ms = plan_for(meta, v, st, colour)
+              # the page's lines decide the length now; lullaby.json's length_ms is a floor for the old road only
+              length = max(int(meta.get('length_ms', 120000)), plan_ms or 0)
+              length = min(length, MAX_SONG_MS)
               prompt = (SPINE.format(voice=VOICES[v], style=STYLES[st]) + ('\n\n' + colour if colour else '') +
-                        "\n\nSing exactly these lyrics, one voice only:\n\n" + meta['lyrics'].strip())
+                        "\n\nSing exactly these lyrics, every line, in this order, one voice only:\n\n" + meta['lyrics'].strip())
               print(f'{slug}: {("colour: " + colour[:80]) if colour else "no colour written for this night - spine only"}')
+              if plan: print(f'    plan: {len(plan["sections"])} sections, {sum(len(x["lines"]) for x in plan["sections"])} lines, {plan_ms // 1000}s')
 
-              best = None   # (how many things are wrong, bytes, facts, reasons)
+              best = None   # (how many things are wrong, -fit, bytes, facts, reasons)
               for attempt in range(1, ATTEMPTS + 1):
-                  body = {'prompt': prompt[:4100], 'music_length_ms': length, 'model_id': 'music_v1'}
+                  use_plan = bool(plan) and not plan_refused
+                  if use_plan:
+                      body = {'composition_plan': plan, 'model_id': 'music_v1'}
+                  else:
+                      body = {'prompt': prompt[:4100], 'music_length_ms': length, 'model_id': 'music_v1'}
                   # No finetune. "LST Theme Music" was trained on one song, so every night
                   # came back as that song in that voice, whatever the prompt asked for.
                   # The brand is the SPINE above; the tune and the singer are the night's.
@@ -297,11 +398,17 @@ jobs:
                       audio = api('https://api.elevenlabs.io/v1/music?output_format=mp3_44100_128',
                                   data=json.dumps(body).encode('utf-8'), accept='audio/mpeg')
                   except urllib.error.HTTPError as e:
+                      detail = e.read()[:500]
+                      if use_plan and e.code in (400, 422):
+                          # The plan was not understood. Say so plainly - it is the thing to
+                          # look at - and ask again the old way, with the page's own length.
+                          print(f"    the plan was refused (HTTP {e.code} {detail!r}); asking with the prompt instead, {length // 1000}s")
+                          plan_refused = True
+                          continue
                       # One refusal must not stop the queue behind it (a night's words
                       # ElevenLabs will not sing, a moment's overload). Say so, keep
                       # going; the song is asked for again on the next run. An empty
                       # account is different: nothing after it can succeed either.
-                      detail = e.read()[:500]
                       print(f"    ElevenLabs refused {slug}: HTTP {e.code} {detail!r}")
                       refused.append(slug)
                       if e.code in (401, 402) or b'quota' in detail.lower() or b'credits' in detail.lower():
@@ -311,22 +418,34 @@ jobs:
                       print(f"    no answer from ElevenLabs for {slug} ({e}); moving on"); refused.append(slug); best = None; break
                   with tempfile.NamedTemporaryFile(suffix='.mp3', delete=False) as fh:
                       fh.write(audio); tmp = fh.name
-                  bad, facts = measure(tmp, length)
+                  bad, facts = measure(tmp, plan_ms if use_plan else length)
+                  # the words: read the take back and hold it against the page
+                  score = None
+                  if not bad or len(bad) < 2:
+                      text = heard(tmp)
+                      if text is not None:
+                          score, missing = fit(meta['lyrics'], text)
+                          facts['words_heard'] = f'{int(score * 100)}%'
+                          if score < FIT_KEEP:
+                              bad.append(f'sang only {int(score * 100)}% of the lines on the page')
+                              for l in missing[:6]: print(f'      not heard: {l}')
+                              if len(missing) > 6: print(f'      ... and {len(missing) - 6} more')
                   os.unlink(tmp)
-                  print(f'    take {attempt}: {len(audio)//1024} KB, {facts}')
+                  print(f'    take {attempt} ({"plan" if use_plan else "prompt"}): {len(audio)//1024} KB, {facts}')
                   if not bad:
-                      best = (0, audio, facts, []); break
+                      best = (0, -(score or 0), audio, facts, []); break
                   print('      not kept: ' + '; '.join(bad))
-                  if best is None or len(bad) < best[0]:
-                      best = (len(bad), audio, facts, bad)
+                  cand = (len(bad), -(score or 0), audio, facts, bad)
+                  if best is None or cand[:2] < best[:2]:
+                      best = cand
 
               if best is None:
                   continue
-              score, audio, facts, reasons = best
+              score_n, _, audio, facts, reasons = best
               out = os.path.join(os.path.dirname(p), f'{slug}-lullaby.mp3')
-              if score == 0:
+              if score_n == 0:
                   open(out, 'wb').write(audio)
-                  print(f'    sang {slug}: {len(audio)//1024} KB -> {out}')
+                  print(f'    sang {slug}: {len(audio)//1024} KB, words heard {facts.get("words_heard", "unchecked")} -> {out}')
               elif (facts.get('clipped_samples') or 0) > 20000:
                   # Past saving. A night is better with no song than with a broken one.
                   print(f'    NOT KEPT after {ATTEMPTS} tries - every take was distorted '
