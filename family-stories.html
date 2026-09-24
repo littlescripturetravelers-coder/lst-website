@@ -321,6 +321,21 @@
 
   <section class="mp-body">
     <div class="mp-in">
+      <!-- Family Keepsakes: the two simplest doors, which open in the web app where the family's books and hands live -->
+      <style>
+        .fk{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 28px;}
+        @media(max-width:560px){.fk{grid-template-columns:1fr;}}
+        .fk a{display:flex;flex-direction:column;gap:6px;text-decoration:none;border:1px solid rgba(217,162,39,.35);border-radius:22px;padding:18px;background:rgba(255,255,255,.05);color:inherit;transition:transform .12s;}
+        .fk a:hover{transform:translateY(-2px);}
+        .fk a.gold{background:#F5C518;border-color:#F5C518;color:#1B2D5F;}
+        .fk .fk-ic{font-size:26px;line-height:1;}
+        .fk b{font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.15rem;}
+        .fk small{font-family:'Nunito',sans-serif;font-weight:700;font-size:.85rem;opacity:.8;line-height:1.4;}
+      </style>
+      <div class="fk">
+        <a class="gold" href="https://app.littlescripturetravelers.com/memory.html"><span class="fk-ic">&#128248;</span><b>Create a Memory</b><small>Add photos, a line under each, and the story &mdash; it is laid out on pages of a family book for you.</small></a>
+        <a href="https://app.littlescripturetravelers.com/handwriting-twin.html"><span class="fk-ic">&#9997;&#65039;</span><b>Handwriting Twin</b><small>Their handwriting, scanned once, becomes a hand you can type or speak with &mdash; and keep for every generation.</small></a>
+      </div>
       <div id="lst-family"></div>
     </div>
   </section>
