@@ -1985,6 +1985,13 @@ cite strong { color: var(--gold-ink); display: block; }
     .mp-meta { color:var(--teal-ink); font-size:.82rem; font-weight:700; margin:.3rem 0 .6rem; }
     .mp-text { color:var(--ink-85); font-size:.97rem; line-height:1.7; margin:0;
       white-space:pre-wrap; }
+    /* a voice memo shared in on the phone, played beside its words */
+    .mp-audio { background:rgba(91,211,220,.10); border:1.5px solid rgba(91,211,220,.45);
+      border-radius:.85rem; padding:.7rem .85rem .55rem; margin:0 0 .8rem; }
+    .mp-audio-t { font-family: var(--font-display); font-weight:600; color:var(--ink);
+      font-size:.92rem; margin-bottom:.45rem; }
+    .mp-audio-n { display:block; color:var(--ink-78); font-size:.78rem; font-weight:700; margin-top:.3rem; }
+    .mp-audio-n:empty { display:none; }
 
     .mp-empty { text-align:center; background:var(--fill-04);
       border:1px dashed var(--edge-22); border-radius:1rem; padding:2.5rem 1.5rem; }
