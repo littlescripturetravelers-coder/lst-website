@@ -254,6 +254,8 @@
         lat: (r.lat === null || r.lat === undefined) ? null : Number(r.lat),
         lon: (r.lon === null || r.lon === undefined) ? null : Number(r.lon),
         photos: Array.isArray(r.photos) ? r.photos : [],
+        /* a voice memo shared in on the phone, kept in the private bucket */
+        audio: (r.audio && r.audio.path) ? r.audio : null,
         created: r.created_at,
         updated: r.updated_at
       };
@@ -275,14 +277,15 @@
         lat: (e.lat === null || e.lat === undefined || e.lat === "") ? null : Number(e.lat),
         lon: (e.lon === null || e.lon === undefined || e.lon === "") ? null : Number(e.lon),
         photos: Array.isArray(e.photos) ? e.photos : [],
+        audio: (e.audio && e.audio.path) ? e.audio : null,   /* carried through, never dropped */
         updated_at: new Date().toISOString()
       };
       return sb().from("journal_entries").upsert(row, { onConflict: "id" })
         .then(function (res) {
           /* A journal table made before photos and places existed: keep the
              writing rather than losing it to a column that isn't there. */
-          if (res.error && /place|lat|lon|photos|body_html|column/i.test(res.error.message || "")) {
-            delete row.place; delete row.lat; delete row.lon; delete row.photos; delete row.body_html;
+          if (res.error && /place|lat|lon|photos|body_html|audio|column/i.test(res.error.message || "")) {
+            delete row.place; delete row.lat; delete row.lon; delete row.photos; delete row.body_html; delete row.audio;
             return sb().from("journal_entries").upsert(row, { onConflict: "id" });
           }
           return res;

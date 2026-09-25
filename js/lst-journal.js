@@ -87,9 +87,35 @@
           (kind ? '<span class="mp-badge">' + kind.ico + " " + esc(kind.label) + "</span>" : "") +
           (where ? "&#128205; " + where : "") +
         "</p>" +
+        audioView(r) +
         (r.body_html ? '<div class="mp-text mp-rich">' + richClean(r.body_html) + "</div>"
                      : '<p class="mp-text">' + esc(r.body) + "</p>") +
       "</article>";
+  }
+
+  /* A voice memo shared into the app is kept beside its words. The file sits
+     in the account's private folder, so the page asks for a short-lived link
+     when the card is on screen; only the account that owns it can. */
+  function audioView(r) {
+    var a = r.audio;
+    if (!a || !a.path || /^local:/.test(a.path)) return "";
+    return '<div class="mp-audio" data-audio="' + esc(a.path) + '">' +
+        '<div class="mp-audio-t">&#127908; ' + esc(a.name || "Voice memo") + '</div>' +
+        '<audio controls preload="none" style="width:100%;display:block;"></audio>' +
+        '<small class="mp-audio-n">Loading the recording&hellip;</small>' +
+      "</div>";
+  }
+  function wireAudio() {
+    var sb = window.LST_SB; if (!sb || !root) return;
+    root.querySelectorAll(".mp-audio[data-audio]").forEach(function (box) {
+      var path = box.getAttribute("data-audio"), el = box.querySelector("audio"), note = box.querySelector(".mp-audio-n");
+      box.removeAttribute("data-audio");
+      sb.storage.from("handwriting").createSignedUrl(path, 3600).then(function (res) {
+        if (res.error || !res.data || !res.data.signedUrl) { note.textContent = "The recording could not be fetched."; return; }
+        el.src = res.data.signedUrl; note.textContent = "";
+        el.onerror = function () { note.textContent = "This browser cannot play that kind of recording."; };
+      }).catch(function () { note.textContent = "The recording could not be fetched."; });
+    });
   }
 
   /* The app writes an entry with its formatting (bold, lists, a heading). Only
@@ -193,6 +219,7 @@
     if (!loaded) { root.innerHTML = '<p class="mp-note">Loading your journal&hellip;</p>'; return; }
     if (editing) { root.innerHTML = formView(editing); wireForm(); return; }
     root.innerHTML = listView();
+    wireAudio();
     wireList();
   }
 
@@ -238,6 +265,7 @@
         body: body,
         lat: editing.lat, lon: editing.lon,   /* never lose the map pin the app set */
         photos: editing.photos || [],         /* carried through, never shown */
+        audio: editing.audio || null,         /* the phone's recording stays with the entry */
         source: editing.source || "website"
       };
 
