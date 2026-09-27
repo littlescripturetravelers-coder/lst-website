@@ -1,0 +1,58 @@
+# THE WORLD TIMELINE LEARNS ON ITS OWN.
+#   every day     Technology for Good: what the world learned about each technology's
+#                 effects on children and families, and any new technology worth a card
+#   every month   New Discoveries: finds that bear on the Bible, the Book of Mormon and
+#                 Christ, each with its source and an honest confidence label
+# The result goes to the account (table timeline_feed) - the app's timeline reads it the
+# next time it opens - and a copy is kept in lantern/timeline-feed/ here, as its history.
+name: Timeline watch
+
+on:
+  schedule:
+    - cron: '17 9 * * *'     # every day at 09:17 UTC (about 3:17 AM Mountain)
+    - cron: '23 10 1 * *'    # the first of every month at 10:23 UTC
+  workflow_dispatch:
+    inputs:
+      job:
+        description: 'Which search to run'
+        type: choice
+        options: [tech, discoveries]
+        default: tech
+
+permissions:
+  contents: write
+
+concurrency:
+  group: timeline-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Decide which search this is
+        id: which
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then echo "job=${{ inputs.job }}" >> "$GITHUB_OUTPUT";
+          elif [ "${{ github.event.schedule }}" = "23 10 1 * *" ]; then echo "job=discoveries" >> "$GITHUB_OUTPUT";
+          else echo "job=tech" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Search, check, and write it to the account
+        env:
+          JOB: ${{ steps.which.outputs.job }}
+          SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python3 lantern/timeline_watch.py
+
+      - name: Keep the history in this repo
+        run: |
+          git config user.name "timeline-watch"
+          git config user.email "timeline-watch@users.noreply.github.com"
+          git add lantern/timeline-feed
+          if git diff --cached --quiet; then echo "nothing to commit"; else
+            git commit -m "Timeline watch: ${{ steps.which.outputs.job }} $(date -u +%Y-%m-%d)"
+            git push
+          fi
