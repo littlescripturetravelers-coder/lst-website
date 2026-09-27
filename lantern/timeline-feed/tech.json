@@ -1,5 +1,5 @@
 {
- "version": 1,
+ "version": 2,
  "updated": "2026-09-27",
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
  "items": [
@@ -771,6 +771,12 @@
      "on": "2026-09-27",
      "note": "Filters and family rules help, but the thing that works most is a parent who talks about it early and often, before something is seen, not after.",
      "source": "Child-safety research, summarised"
+    },
+    {
+     "on": "2026-09-27",
+     "note": "A study in the Journal of Development Economics found that early exposure to high-speed internet may negatively impact children's communication and social skills, highlighting the need for mindful internet use.",
+     "source": "Journal of Development Economics",
+     "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304387826001264"
     }
    ],
    "kids": [
@@ -815,6 +821,12 @@
      "on": "2026-09-27",
      "note": "The mobile phone taught families the phrase 'phones down at dinner'. It is still the single best rule.",
      "source": "The Little Scripture Travelers team"
+    },
+    {
+     "on": "2026-09-27",
+     "note": "Research in BMC Public Health showed that increased screen use in early childhood is associated with shorter sleep duration and more sleep problems, emphasizing the importance of managing screen time.",
+     "source": "BMC Public Health",
+     "url": "https://link.springer.com/article/10.1186/s12889-026-27580-1"
     }
    ],
    "kids": [
@@ -918,6 +930,12 @@
      "on": "2026-09-27",
      "note": "Waiting to give a child their own smartphone until high school, and a 'dumb' phone before that, is now common advice from pediatricians.",
      "source": "Pediatric guidance, summarised"
+    },
+    {
+     "on": "2026-09-27",
+     "note": "A review in Frontiers in Psychology found that excessive smartphone use among adolescents is linked to sleep disruption, reduced attention, and increased anxiety, suggesting the need for balanced usage.",
+     "source": "Frontiers in Psychology",
+     "url": "https://www.frontiersin.org/articles/10.3389/fpsyg.2026.1832219/full"
     }
    ],
    "kids": [
@@ -963,6 +981,12 @@
      "on": "2026-09-27",
      "note": "Turning off autoplay and choosing videos together removes most of the harm and keeps most of the good. Watching beside a child turns a screen into a conversation.",
      "source": "Media-use guidance, summarised"
+    },
+    {
+     "on": "2026-09-27",
+     "note": "A study in npj Digital Medicine indicated that digital mental health interventions can offer small but significant benefits for children's emotional and behavioral outcomes, especially when combined with in-person support.",
+     "source": "npj Digital Medicine",
+     "url": "https://www.nature.com/articles/s41746-026-03044-z"
     }
    ],
    "kids": [
@@ -1146,6 +1170,12 @@
      "on": "2026-09-27",
      "note": "Several AI chatbots have been found giving harmful advice to teens, and lawsuits followed. Makers added age checks and parent controls. A child's AI use, like their internet use, belongs where a parent can see it.",
      "source": "News and regulatory reports, summarised"
+    },
+    {
+     "on": "2026-09-27",
+     "note": "The American Psychological Association highlighted concerns that AI tools, while offering educational benefits, may interfere with children's cognitive and social development if misused.",
+     "source": "American Psychological Association",
+     "url": "https://www.apa.org/monitor/2026/09/ai-brain-development-youth"
     }
    ],
    "kids": [
