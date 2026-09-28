@@ -165,6 +165,7 @@ Source map (what fetched, what didn't — fetches to new domains need user appro
 - Travelers are Beau, Scout, Willow, Wren only. Mottos are locked — check memory, never improvise. Retired names (Rockwell, Shamrock, Maylyn, Amay) must never appear.
 - THE VARIETY RULE (lullaby): besides `mood`, write `voice` and `style` into lullaby.json, chosen to match the story's feeling, from these palettes only - voice: mother | father | soprano | tenor | grandma | whisper; style: guitar | piano | harp | musicbox | ukulele | hymn | cello | strings. The Action keeps the brand spine (one singer, gentle acoustic, no drums) and swaps in the singer and the arrangement you chose, so nights differ without leaving the brand. Never use the same pair two nights running.
 - "Heavenly Father," never bare "God," in original LST prose (LDS edition); other editions use their own voice in adult prose only.
+- THE PLAIN WORDS RULE (28 Sept 2026): LST's own prose in every reading is written for a tired parent on a phone - one idea per sentence, 12-20 words, never over 30; everyday words, no scholar words (the never-use list is in NIGHTLY-RUN.md); one dash at most, no semicolons; the Deep read is more cards and more voices in the same plain words, never harder ones. Story, Traveler, scripture text and quotations are verbatim and exempt. NIGHTLY-RUN.md carries the full rule and wins.
 
 ## QA gate — `python3 audit.py <file>`, run before delivering each file
 
@@ -178,6 +179,7 @@ Source map (what fetched, what didn't — fetches to new domains need user appro
 8. Leak check: the Christian edition contains none of `General Conference`, `Latter-day Prophet`, `churchofjesuschrist.org`, `Book of Mormon`, `Nephi`, `Holy Ghost`; the LDS edition contains no `Spurgeon`
 9. Playwright smoke test with the pre-installed Chromium: load the file, call `pmDepth('quick')`, `pmDepth('deep')` and `pmDepth('heavenly')` in turn, assert three buttons and zero `pageerror`s, screenshot the deepest one and look at it once
 10. Correct translation quoted **and named** beside the verse (manual)
+11. THE PLAIN WORDS CHECK - `audit.py` ends by running `lantern/builder/plain_words.py` on the Deep read: verbatim cards, quotations and link text dropped, then FAIL on any sentence of LST's own prose over 35 words, any never-use word, or an average over 19; it prints every sentence over 25 words. Fix the prose, not the check.
 
 Re-run the audit on both files at the end of the run.
 

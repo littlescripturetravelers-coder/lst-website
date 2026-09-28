@@ -108,3 +108,12 @@ if 'lds' not in path:
 else:
     check('Spurgeon' not in authored, 'no Spurgeon card in LDS edition')
 print('ALL PASS (with leak check)' if ok else 'FAILURES PRESENT')
+
+# 9. THE PLAIN WORDS CHECK (28 Sept 2026): is the Deep read written for a tired parent?
+# plain_words.py sits beside this file; it drops every verbatim card and quotation
+# and measures only what LST wrote itself. Fix the prose, never the check.
+pw = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'plain_words.py')
+r = subprocess.run([sys.executable, pw, path], capture_output=True, text=True)
+print(r.stdout.rstrip())
+check(r.returncode == 0, 'plain words: every sentence LST wrote is short and plain (see above)')
+print('ALL PASS (with plain words)' if ok else 'FAILURES PRESENT')
