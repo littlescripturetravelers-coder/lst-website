@@ -833,9 +833,33 @@
     },
     {
      "on": "2026-09-27",
+     "url": "https://www.frontiersin.org/articles/10.3389/fpsyg.2026.1832219/full",
      "note": "Research suggests that excessive smartphone use can negatively impact adolescents' cognitive development, leading to decreased attention spans and academic performance.",
+     "source": "Frontiers in Psychology"
+    },
+    {
+     "on": "2026-09-28",
+     "note": "A study in the U.S. linked excessive screen time in children and adolescents to higher risks of anxiety, depression, behavior problems, and ADHD, with physical activity and sleep as mediating factors.",
+     "source": "Humanities and Social Sciences Communications",
+     "url": "https://www.nature.com/articles/s41599-026-06609-1"
+    },
+    {
+     "on": "2026-09-28",
+     "note": "A meta-analysis revealed that parental device use during parent-child interactions is moderately to largely associated with children's internalizing and externalizing mental health problems.",
+     "source": "SSRN",
+     "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6613900"
+    },
+    {
+     "on": "2026-09-28",
+     "note": "A systematic review indicated that excessive screen use negatively impacts sleep duration and quality in preschool children, potentially leading to behavioral and cognitive issues.",
+     "source": "European Child & Adolescent Psychiatry",
+     "url": "https://link.springer.com/article/10.1007/s00787-024-02430-w"
+    },
+    {
+     "on": "2026-09-28",
+     "note": "A meta-analysis found that digital interventions can effectively promote mental health in children and adolescents, suggesting potential benefits of technology when used appropriately.",
      "source": "Frontiers in Psychology",
-     "url": "https://www.frontiersin.org/articles/10.3389/fpsyg.2026.1832219/full"
+     "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1356554/full"
     }
    ]
   },
@@ -890,9 +914,9 @@
     },
     {
      "on": "2026-09-27",
+     "url": "https://www.sciencedirect.com/science/article/pii/S2212657026000760",
      "note": "Studies indicate that passive engagement with short-form digital media, such as scrolling through social media feeds, is associated with higher levels of anxiety and depression among adolescents.",
-     "source": "Mental Health & Prevention",
-     "url": "https://www.sciencedirect.com/science/article/pii/S2212657026000760"
+     "source": "Mental Health & Prevention"
     }
    ]
   },
@@ -1194,15 +1218,15 @@
     },
     {
      "on": "2026-09-27",
+     "url": "https://link.springer.com/article/10.1007/s40124-026-00388-8",
      "note": "A recent review highlights that excessive use of generative AI by adolescents is linked to increased mental health issues, including anxiety and depression.",
-     "source": "Current Pediatrics Reports",
-     "url": "https://link.springer.com/article/10.1007/s40124-026-00388-8"
+     "source": "Current Pediatrics Reports"
     },
     {
      "on": "2026-09-27",
+     "url": "https://link.springer.com/article/10.1007/s00431-026-07442-z",
      "note": "A study discusses the benefits and risks of AI in pediatric healthcare, emphasizing the need for ethical considerations to protect children's mental health.",
-     "source": "European Journal of Pediatrics",
-     "url": "https://link.springer.com/article/10.1007/s00431-026-07442-z"
+     "source": "European Journal of Pediatrics"
     }
    ]
   },
@@ -1252,7 +1276,7 @@
    ]
   }
  ],
- "updated": "2026-09-27",
- "version": 3,
+ "updated": "2026-09-28",
+ "version": 4,
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson."
 }
