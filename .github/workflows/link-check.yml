@@ -1,0 +1,39 @@
+# LINK CHECK - run by hand only. Every source link in a data file is fetched
+# from the runner (which can reach the open web) and its answer written to the
+# job log, so nothing is cited that cannot be opened. Nothing is changed.
+name: link-check
+on:
+  workflow_dispatch:
+    inputs:
+      file:
+        description: 'Path of a JS or JSON data file in this repo holding "url" fields'
+        required: true
+        default: 'data/discoveries.js'
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch every link
+        env:
+          FILE: ${{ inputs.file }}
+        run: |
+          python3 - <<'PY'
+          import os, re, urllib.request, urllib.error, ssl, time
+          s=open(os.environ['FILE'],encoding='utf-8').read()
+          urls=sorted(set(re.findall(r'https?://[^\s"\'<>\\]+',s)))
+          print('checking',len(urls),'links from',os.environ['FILE'])
+          bad=0
+          for u in urls:
+              try:
+                  req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 (link check for Little Scripture Travelers)'},method='GET')
+                  r=urllib.request.urlopen(req,timeout=30); code=r.getcode(); final=r.geturl()
+                  print('OK  ',code,u,('-> '+final) if final!=u else '')
+              except urllib.error.HTTPError as e:
+                  # some sites refuse scripts but serve people; say so plainly rather than guess
+                  print('HTTP',e.code,u); bad+=1
+              except Exception as e:
+                  print('FAIL',str(e)[:80],u); bad+=1
+              time.sleep(0.4)
+          print('=== DONE ===',len(urls)-bad,'reachable,',bad,'not')
+          PY
