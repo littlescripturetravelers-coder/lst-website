@@ -124,12 +124,16 @@ def ask(instructions, prompt):
                         for c in item.get("content", []):
                             if c.get("type") == "output_text": parts.append(c.get("text", ""))
                 out = "\n".join(parts)
-            m = re.search(r"\{[\s\S]*\}", out or "")
-            if not m: raise ValueError("no JSON in the answer: " + (out or "")[:300])
-            return json.loads(m.group(0))
+            # the first complete JSON object in the answer; anything the model wrote after it is ignored
+            out = re.sub(r"^\s*```(?:json)?|```\s*$", "", (out or "").strip())
+            start = out.find("{")
+            if start < 0: raise ValueError("no JSON in the answer: " + out[:300])
+            obj, _end = json.JSONDecoder().raw_decode(out[start:])
+            if not isinstance(obj, dict): raise ValueError("the answer is not an object")
+            return obj
         except Exception as e:
             last = e; print("attempt", attempt + 1, "failed:", e); time.sleep(20 * (attempt + 1))
-    die("the model did not answer usably: %s" % last)
+    raise RuntimeError("the model did not answer usably: %s" % last)   # one bad answer must not end a whole run
 
 TEXT_RULES = ("Write in plain, warm words a child of eight could follow, and a parent would trust. No hype, no fear-mongering, "
               "no politics. Every note must rest on a real, credible, recent source (a study, a government or medical body, a "
@@ -317,8 +321,6 @@ def run_studies(body):
     for ev in todo[:PER_RUN]:
         try:
             st = study_one(ev)
-        except SystemExit:
-            raise
         except Exception as e:
             print("  failed:", ev.get("key"), str(e)[:160]); continue
         if st:
