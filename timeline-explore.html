@@ -8830,6 +8830,8 @@ function slfStudies(cb){
     _slfSt="done"; var q=_slfQ; _slfQ=[]; q.forEach(function(f){ try{ f(SLF.studies); }catch(e){} });
   });
 }
+/* the website's timeline asks the account for the guide and the finds once the page is up */
+setTimeout(function(){ try{ slfFetch(function(ch){ if(ch&&slBuilt){ try{ slRender(); }catch(e){} } }); }catch(e){} },900);
 function slfStages(){ return (SLF.tech.ages||[]).map(function(s){ return {id:s.id,label:s.label,years:s.years,key:String(s.years||"").replace(" to ","-").replace(" and up","+")}; }); }
 function slfFindById(id){ var it=SLF.finds.items; for(var i=0;i<it.length;i++) if(it[i]&&it[i].id===id) return it[i]; return null; }
 function slfTechById(id){ var it=SLF.tech.items; for(var i=0;i<it.length;i++) if(it[i]&&it[i].id===id) return it[i]; return null; }
