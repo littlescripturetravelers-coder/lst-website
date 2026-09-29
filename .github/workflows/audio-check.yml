@@ -1,0 +1,62 @@
+# AUDIO CHECK - run by hand only. Writes down exactly which words a recording
+# sings (through OpenAI's transcriber, with timings), and lists the names of
+# the ElevenLabs music fine-tunes the account holds. Nothing is changed and
+# nothing is published; the answer is in the job's log.
+name: audio-check
+on:
+  workflow_dispatch:
+    inputs:
+      file:
+        description: 'Path of the recording in this repo'
+        required: true
+        default: 'audio/hush-little-traveler.mp3'
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Transcribe
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          FILE: ${{ inputs.file }}
+        run: |
+          python3 - <<'PY'
+          import os, json, urllib.request, uuid, sys
+          path=os.environ['FILE']; data=open(path,'rb').read()
+          print('file', path, len(data), 'bytes')
+          b=uuid.uuid4().hex.encode()
+          def part(name, value, filename=None, ctype=None):
+              h=b'--'+b+b'\r\nContent-Disposition: form-data; name="'+name.encode()+b'"'
+              if filename: h+=b'; filename="'+filename.encode()+b'"\r\nContent-Type: '+ctype.encode()
+              return h+b'\r\n\r\n'+(value if isinstance(value,bytes) else value.encode())+b'\r\n'
+          body=(part('model','whisper-1')+part('response_format','verbose_json')+part('language','en')
+                +part('timestamp_granularities[]','segment')
+                +part('prompt','A children\'s bedtime lullaby about Heavenly Father, Beau, Scout, Willow and Wren.')
+                +part('file',data,os.path.basename(path),'audio/mpeg')+b'--'+b+b'--\r\n')
+          req=urllib.request.Request('https://api.openai.com/v1/audio/transcriptions',data=body,
+              headers={'Authorization':'Bearer '+os.environ['OPENAI_API_KEY'],'Content-Type':'multipart/form-data; boundary='+b.decode()})
+          try:
+              r=json.load(urllib.request.urlopen(req,timeout=600))
+          except urllib.error.HTTPError as e:
+              print('OPENAI HTTP',e.code,e.read()[:400]); sys.exit(1)
+          print('DURATION', r.get('duration'))
+          print('=== TRANSCRIPT ===')
+          for s in r.get('segments',[]):
+              print('[%6.1f-%6.1f] %s'%(s['start'],s['end'],s['text'].strip()))
+          print('=== END ===')
+          key=os.environ.get('ELEVENLABS_API_KEY','').strip()
+          if key:
+              try:
+                  raw=json.load(urllib.request.urlopen(urllib.request.Request('https://api.elevenlabs.io/v1/music/finetunes',headers={'xi-api-key':key}),timeout=60))
+                  def walk(o,depth=0):
+                      if isinstance(o,dict):
+                          nm=o.get('name') or o.get('title'); fid=o.get('finetune_id') or o.get('id')
+                          if nm or fid: print('  finetune:',nm,'|',fid,'|',{k:v for k,v in o.items() if k in ('status','state','created_at','description','model_id','training_status')})
+                          for v in o.values(): walk(v,depth+1)
+                      elif isinstance(o,list):
+                          for v in o: walk(v,depth+1)
+                  print('=== ELEVENLABS MUSIC FINETUNES ==='); walk(raw); print('=== END ===')
+              except Exception as e:
+                  print('finetunes: could not list -', e)
+          PY
