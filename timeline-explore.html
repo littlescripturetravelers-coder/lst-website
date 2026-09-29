@@ -8825,10 +8825,31 @@ var _slfSt=null, _slfQ=[];
 function slfStudies(cb){
   if(_slfSt==="done"){ cb(SLF.studies); return; }
   _slfQ.push(cb); if(_slfSt==="busy") return; _slfSt="busy";
-  slfRows(["studies"],function(rows){
-    try{ var b=rows&&rows[0]&&rows[0].body; if(b&&slfAdopt("studies",b)) slfRemember(); }catch(e){}
-    _slfSt="done"; var q=_slfQ; _slfQ=[]; q.forEach(function(f){ try{ f(SLF.studies); }catch(e){} });
+  var finish=function(){ _slfSt="done"; var q=_slfQ; _slfQ=[]; q.forEach(function(f){ try{ f(SLF.studies); }catch(e){} }); };
+  /* the studies row is large; a few bytes first, and the whole row only when the account has a newer copy than the phone */
+  slfVersion("studies",function(v){
+    var have=0; try{ have=Object.keys(SLF.studies.items).length; }catch(e){}
+    if(v!=null&&have&&Number(v)<=Number(SLF.studies.version||0)){ finish(); return; }
+    slfRows(["studies"],function(rows){
+      try{ var b=rows&&rows[0]&&rows[0].body; if(b&&slfAdopt("studies",b)) slfRemember(); }catch(e){}
+      finish();
+    });
   });
+}
+function slfVersion(id,cb){
+  try{
+    var c=window.LST_CONFIG||{};
+    if(c.SUPABASE_URL&&c.SUPABASE_ANON_KEY&&typeof fetch==="function"){
+      fetch(c.SUPABASE_URL+"/rest/v1/timeline_feed?select=v:body->>version&id=eq."+id,{headers:{apikey:c.SUPABASE_ANON_KEY,Authorization:"Bearer "+c.SUPABASE_ANON_KEY}})
+        .then(function(r){ return r.ok?r.json():null; }).then(function(rows){ cb(rows&&rows[0]&&rows[0].v!=null?rows[0].v:null); }).catch(function(){ cb(null); });
+      return;
+    }
+    if(window.LST_SB&&window.LST_SB.from){
+      window.LST_SB.from("timeline_feed").select("v:body->>version").eq("id",id).then(function(res){ var d=res&&res.data; cb(d&&d[0]&&d[0].v!=null?d[0].v:null); },function(){ cb(null); });
+      return;
+    }
+  }catch(e){}
+  cb(null);
 }
 /* the website's timeline asks the account for the guide and the finds once the page is up */
 setTimeout(function(){ try{ slfFetch(function(ch){ if(ch&&slBuilt){ try{ slRender(); }catch(e){} } }); }catch(e){} },900);
