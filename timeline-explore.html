@@ -715,6 +715,24 @@ body.hand-active .hand-label{display:block;}
 .sl-dep-de{font-family:var(--font-body);font-size:11px;line-height:1.68;
   color:rgba(255,255,255,.82);margin-bottom:8px;}
 .sl-gl{color:#5BD3DC;text-decoration:none;border-bottom:1px dotted rgba(91,211,220,.55);}
+/* a bedtime story's study: the story itself, its Traveler, the Feeling Moment
+   and Five Stones, Remember This, the questions and the parent's prompts */
+.sl-st{margin-top:10px;padding:9px 12px;border-radius:8px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);}
+.sl-st-h{font-family:Nunito,sans-serif;font-weight:800;font-size:8px;letter-spacing:1.6px;text-transform:uppercase;color:#F5C518;margin-bottom:5px;}
+.sl-st-h.teal{color:#5BD3DC;}.sl-st-h.pink{color:#F472B6;}.sl-st-h.green{color:#34D399;}
+.sl-st p{font-family:Nunito,sans-serif;font-size:11px;line-height:1.68;color:rgba(255,255,255,.84);margin:0 0 7px;}
+.sl-st p:last-child{margin-bottom:0;}
+.sl-st ul{margin:0;padding-left:16px;}
+.sl-st li{font-family:Nunito,sans-serif;font-size:11px;line-height:1.6;color:rgba(255,255,255,.84);margin-bottom:5px;}
+.sl-stone{display:grid;grid-template-columns:44px 1fr;gap:8px;align-items:start;margin-bottom:6px;font-family:Nunito,sans-serif;font-size:11px;line-height:1.55;color:rgba(255,255,255,.84);}
+.sl-stone b{font-size:8.5px;letter-spacing:1.2px;text-transform:uppercase;color:#F5C518;padding-top:2px;}
+.sl-st-trav{font-family:Fredoka,sans-serif;font-weight:700;font-size:13px;color:#fff;margin-bottom:3px;}
+.sl-st-note{padding-left:10px;border-left:2px solid rgba(91,211,220,.5);}
+.sl-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px;}
+.sl-tag{font-family:Nunito,sans-serif;font-weight:800;font-size:8.5px;padding:3px 8px;border-radius:99px;background:rgba(245,197,24,.12);color:#F5C518;border:1px solid rgba(245,197,24,.35);}
+.sl-tag.teal{background:rgba(91,211,220,.1);color:#5BD3DC;border-color:rgba(91,211,220,.35);}
+.sl-open{display:inline-block;margin-top:10px;padding:8px 14px;border-radius:99px;border:0;background:#F5C518;color:#1B2D5F;font-family:Fredoka,sans-serif;font-weight:700;font-size:11.5px;cursor:pointer;}
+.sl-wait{font-family:Nunito,sans-serif;font-size:10.5px;color:rgba(255,255,255,.5);padding:8px 0;}
 .sl-gl:hover{color:#F5C518;border-bottom-color:#F5C518;}
 .sl-src{margin-top:10px;padding:8px 11px;border-radius:7px;
   background:rgba(217,162,39,.055);border:1px solid rgba(217,162,39,.2);}
@@ -5376,6 +5394,11 @@ function openStoryMod(n,bk){
     ds.querySelector(".story-de").textContent=decodeT(n.de);
     body.appendChild(ds);
   }
+  if(slInApp()){ /* in the app, the whole picture book is one tap away */
+    var ob=document.createElement("button"); ob.className="sl-open"; ob.style.cssText="display:block;width:100%;margin:2px 0 10px;padding:10px 14px;font-size:13px;";
+    ob.innerHTML="&#128214; Open the picture book"; ob.onclick=function(){ slOpenBook(nightId(bk,n)); };
+    body.appendChild(ob);
+  }
   if(n.note){
     var nt=document.createElement("div");
     nt.style.cssText="background:rgba(91,211,220,.05);border:1px solid rgba(91,211,220,.2);border-radius:8px;padding:9px 12px;margin-bottom:9px;";
@@ -8807,10 +8830,11 @@ function slCollect(){
     for(var ni=0;ni<bk.nights.length;ni++){var n=bk.nights[ni];
       add("lstbook",n.y,"&#10022;",n.t,n.ref+" &#183; about "+Math.abs(n.y)+" BC",
         bk.t+" &#183; Week "+n.wk+", Night "+n.nt+" &#183; "+n.loc,
-        "A bedtime story from "+bk.t+", the "+bk.month+" book. Read "+n.ref+" together, then turn to Week "+n.wk+", Night "+n.nt+".",
+        n.de||("A bedtime story from "+bk.t+", the "+bk.month+" book. Read "+n.ref+" together, then turn to Week "+n.wk+", Night "+n.nt+"."),
         [{l:"Where It Happened",t:n.loc,k:"extra"},
          {l:"When It Happened",t:"About "+Math.abs(n.y)+" years before Jesus was born.",k:"gospel"}],
-        bk.id+"n"+n.nt);}}
+        bk.id+"w"+n.wk+"n"+n.nt);
+      out[out.length-1].night=n; out[out.length-1].book=bk;}}
   }catch(err){}
   try{ for(var i=0;i<PROP.length;i++){var e=PROP[i];
     var lab=e.eff==="state"?"State Propaganda":e.eff==="commercial"?"Commercial Persuasion":e.eff==="resistance"?"Resisting Manipulation":e.eff==="origin"?"Where the Word Came From":"Still Being Argued";
@@ -8992,6 +9016,54 @@ function slSources(it){
   }
   return h+"</div>";
 }
+/* THE STUDY OF A BEDTIME STORY. The story pages carry far more than the timeline
+   knows: the whole story, the Traveler of the night and why, the Feeling Moment
+   with its Five Stones, Remember This, questions for the child and prompts for
+   the parent. tools/build-story-study.js gathers all 147 into
+   data/story-study.js, loaded here the first time a study is opened. */
+function slEsc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+var _studyLoad=null;
+function slStudyData(cb){
+  if(window.LST_STUDY){ cb(window.LST_STUDY); return; }
+  if(!_studyLoad){ _studyLoad=[]; var sc=document.createElement("script"); sc.src="data/story-study.js";
+    sc.onload=function(){ var q=_studyLoad; _studyLoad=null; q.forEach(function(f){ f(window.LST_STUDY||{}); }); };
+    sc.onerror=function(){ var q=_studyLoad; _studyLoad=null; q.forEach(function(f){ f({}); }); };
+    document.head.appendChild(sc); }
+  _studyLoad.push(cb);
+}
+function slInApp(){ try{ return window.parent!==window; }catch(e){ return false; } }
+function slOpenBook(id){ try{ window.parent.postMessage({type:"lst-open-story",id:id},"*"); }catch(e){} }
+function slStudyHtml(it,st){
+  var n=it.night, bk=it.book, L=window.LST_LIBRARY, lib=null;
+  try{ if(L&&L.stories) lib=L.stories.filter(function(s){ return s.id===nightId(bk,n); })[0]||null; }catch(e){}
+  var h="";
+  var para=function(arr){ return arr.map(function(p){ return "<p>"+slEsc(p)+"</p>"; }).join(""); };
+  if(st&&st.story&&st.story.length) h+="<div class='sl-st'><div class='sl-st-h'>The Story</div>"+para(st.story)+"</div>";
+  else if(n.de) h+="<div class='sl-st'><div class='sl-st-h'>The Story</div><p>"+slEsc(n.de)+"</p></div>";
+  if(st&&st.traveler){ var tv=null; try{ for(var k in TV){ if(TV[k].n===st.traveler) tv=TV[k]; } }catch(e){}
+    h+="<div class='sl-st'><div class='sl-st-h teal'>Scripture Traveler of the Night</div><div class='sl-st-trav'>"+(tv?decodeT(tv.e)+" ":"")+slEsc(st.traveler)+(tv?" <span style='font-family:Nunito,sans-serif;font-weight:700;font-size:10px;color:rgba(255,255,255,.55)'>&ldquo;"+decodeT(tv.q)+"&rdquo;</span>":"")+"</div>"+(st.why?"<p>"+slEsc(st.why)+"</p>":"")+"</div>"; }
+  if(st&&(st.feel||(st.stones&&st.stones.length))){
+    h+="<div class='sl-st'><div class='sl-st-h pink'>A Feeling Moment &#183; Move, Imagine, Connect</div>"+(st.feel?"<p>"+slEsc(st.feel)+"</p>":"");
+    if(st.stones&&st.stones.length){ h+="<div class='sl-st-h' style='margin-top:8px'>The Five Stones</div>"; st.stones.forEach(function(s){ h+="<div class='sl-stone'><b>"+slEsc(s[0])+"</b><span>"+slEsc(s[1])+"</span></div>"; }); }
+    h+="</div>"; }
+  if(st&&st.remember) h+="<div class='sl-st'><div class='sl-st-h'>Remember This</div><p>"+slEsc(st.remember)+"</p></div>";
+  if(st&&st.ask&&st.ask.length) h+="<div class='sl-st'><div class='sl-st-h teal'>Questions for the Child</div><ul>"+st.ask.map(function(q){ return "<li>"+slEsc(q)+"</li>"; }).join("")+"</ul></div>";
+  if(st&&st.share&&st.share.length) h+="<div class='sl-st'><div class='sl-st-h green'>A Parent&#39;s Experience &#183; Your Testimony</div><ul>"+st.share.map(function(q){ return "<li>"+slEsc(q)+"</li>"; }).join("")+"</ul></div>";
+  if(lib){ var tags=[]; try{ (lib.virtues||[]).forEach(function(v){ var vv=(L.virtues||[]).filter(function(x){ return x.id===v; })[0]; tags.push("<span class='sl-tag'>"+slEsc(vv?vv.name:v)+"</span>"); }); }catch(e){}
+    if(lib.feeling) tags.push("<span class='sl-tag teal'>Feeling: "+slEsc(lib.feeling)+"</span>");
+    if(lib.stages&&lib.stages.length) tags.push("<span class='sl-tag teal'>Ages: "+slEsc(lib.stages.join(", "))+"</span>");
+    h+="<div class='sl-st'><div class='sl-st-h'>What It Teaches</div>"+(lib.teachingNote?"<p class='sl-st-note'>"+slEsc(lib.teachingNote)+"</p>":"")+(tags.length?"<div class='sl-tags'>"+tags.join("")+"</div>":"")+"</div>"; }
+  h+="<div class='sl-blk sl-blk-gospel'><b>Read It Together:</b> "+slEsc(n.ref)+" &#183; then Week "+n.wk+", Night "+n.nt+" in "+slEsc(bk.t)+" (the "+slEsc(bk.month)+" book).</div>";
+  for(var b=0;b<it.blocks.length;b++){ var bl=it.blocks[b]; h+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>"; }
+  if(slInApp()) h+="<button class='sl-open' onclick=\"slOpenBook('"+nightId(bk,n)+"')\">&#128214; Open the picture book</button>";
+  h+=slSources(it);
+  return h;
+}
+function slStudyFill(did,it){
+  var dep=document.getElementById(did); if(!dep||dep.getAttribute("data-filled")) return;
+  dep.setAttribute("data-filled","1");
+  slStudyData(function(all){ var st=all[nightId(it.book,it.night)]||null; try{ dep.innerHTML=slStudyHtml(it,st); }catch(e){ dep.innerHTML="<div class='sl-wait'>The story could not be gathered.</div>"; } });
+}
 function slTgl(id,btn,label){
   var el=document.getElementById(id);
   if(!el)return;
@@ -9042,23 +9114,30 @@ function slRender(){
     wrap.appendChild(head);
 
     var sum=document.createElement("div");sum.className="sl-sum";sum.id=sid;
-    var sumHtml="<div class='sl-sum-txt'>"+slLink(slSummarize(it.de))+"</div>";
+    var sumHtml="<div class='sl-sum-txt'>"+slLink(it.night?it.de:slSummarize(it.de))+"</div>";
+    if(it.night){ /* a bedtime story: a taste of it, where to read, and when to reach for it */
+      sumHtml+="<div class='sl-blk sl-blk-gospel'><b>Read it together:</b> "+slEsc(it.night.ref)+", then turn to Week "+it.night.wk+", Night "+it.night.nt+" in "+slEsc(it.book.t)+".</div>";
+      if(it.night.note) sumHtml+="<div class='sl-blk sl-blk-extra'><b>When to reach for it:</b> "+slEsc(it.night.note)+"</div>";
+    }
     if(it.meta)sumHtml="<div class='sl-sum-meta'>"+it.meta+"</div>"+sumHtml;
     sum.innerHTML=sumHtml;
     var b2=document.createElement("button");
     b2.className="sl-x sl-x2";
     b2.textContent="+ In-Depth Study";
-    b2.onclick=function(){slTgl(did,b2,"In-Depth Study");};
+    b2.onclick=function(){slTgl(did,b2,"In-Depth Study"); if(it.night) slStudyFill(did,it);};
     sum.appendChild(b2);
 
     var dep=document.createElement("div");dep.className="sl-dep";dep.id=did;
     var dh="";
-    if(it.de)dh+="<div class='sl-dep-de'>"+slLink(it.de)+"</div>";
-    for(var b=0;b<it.blocks.length;b++){
-      var bl=it.blocks[b];
-      dh+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>";
+    if(it.night){ dh="<div class='sl-wait'>Gathering the story\u2026</div>"; }
+    else {
+      if(it.de)dh+="<div class='sl-dep-de'>"+slLink(it.de)+"</div>";
+      for(var b=0;b<it.blocks.length;b++){
+        var bl=it.blocks[b];
+        dh+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>";
+      }
+      dh+=slSources(it);
     }
-    dh+=slSources(it);
     dep.innerHTML=dh;
     sum.appendChild(dep);
     wrap.appendChild(sum);
