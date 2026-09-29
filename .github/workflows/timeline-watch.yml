@@ -3,6 +3,8 @@
 #                 effects on children and families, and any new technology worth a card
 #   every month   New Discoveries: finds that bear on the Bible, the Book of Mormon and
 #                 Christ, each with its source and an honest confidence label
+#   four times    In-depth studies: one for every event in the Study Library that has
+#   a day         none yet (80 a run), until every event has one; then it is quick and quiet
 # The result goes to the account (table timeline_feed) - the app's timeline reads it the
 # next time it opens - and a copy is kept in lantern/timeline-feed/ here, as its history.
 name: Timeline watch
@@ -11,12 +13,13 @@ on:
   schedule:
     - cron: '17 9 * * *'     # every day at 09:17 UTC (about 3:17 AM Mountain)
     - cron: '23 10 1 * *'    # the first of every month at 10:23 UTC
+    - cron: '47 2,8,14,20 * * *'   # four times a day: the in-depth studies, until every event has one
   workflow_dispatch:
     inputs:
       job:
         description: 'Which search to run'
         type: choice
-        options: [tech, discoveries]
+        options: [tech, discoveries, studies]
         default: tech
 
 permissions:
@@ -37,6 +40,7 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then echo "job=${{ inputs.job }}" >> "$GITHUB_OUTPUT";
           elif [ "${{ github.event.schedule }}" = "23 10 1 * *" ]; then echo "job=discoveries" >> "$GITHUB_OUTPUT";
+          elif [ "${{ github.event.schedule }}" = "47 2,8,14,20 * * *" ]; then echo "job=studies" >> "$GITHUB_OUTPUT";
           else echo "job=tech" >> "$GITHUB_OUTPUT"; fi
 
       - name: Search, check, and write it to the account
