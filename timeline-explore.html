@@ -9272,18 +9272,20 @@ function slFindHtml(it){
    Written on the website by the studies job, one event at a time, with web search
    and sources, and kept in the account (row studies). Until an event's study has
    been written, the timeline's own notes stand in and say so. */
+/* prose for a parent, not a web page: a citation or link written into the words comes out; the sources list carries the links */
+function slPlain(t){ return String(t==null?"":t).replace(/\s*\(\[[^\]]*\]\([^)]*\)\)/g,"").replace(/\[([^\]]*)\]\([^)]*\)/g,"$1").replace(/\s*\(\s*https?:\/\/[^)]*\)/g,"").replace(/[*_#`]+/g,"").replace(/\s+/g," ").trim(); }
 function slDeepHtml(it,st){
-  var h="", src="";
+  var h="", src="", slP=function(t){ t=slPlain(t); return t?"<p>"+slfEsc(t)+"</p>":""; };
   h+=slSec("","What happened",slP(st.happened));
   h+=slSec("","The world it happened in",slP(st.background));
   h+=slSec("sl-gold","&#10022; Why it matters",slP(st.matters));
   h+=slSec("sl-teal","What the scriptures say",slP(st.scripture));
   if(st.evidence){ var cf=slConf(st.conf); h+=slSec("sl-amber","What the evidence shows","<div class='sl-conf-row'><span class='sl-conf "+cf[0]+"'>"+cf[1]+"</span></div>"+slP(st.evidence)); }
   h+=slSec("sl-green","What we can learn",slP(st.learn));
-  if(st.child) h+=slSec("sl-green","For a child","<p class='sl-quote'>"+slfEsc(st.child)+"</p>");
-  if(st.talk) h+=slSec("sl-teal","Talk about it tonight","<p class='sl-quote'>&ldquo;"+slfEsc(st.talk)+"&rdquo;</p>");
+  if(st.child) h+=slSec("sl-green","For a child","<p class='sl-quote'>"+slfEsc(slPlain(st.child))+"</p>");
+  if(st.talk) h+=slSec("sl-teal","Talk about it tonight","<p class='sl-quote'>&ldquo;"+slfEsc(slPlain(st.talk))+"&rdquo;</p>");
   for(var b=0;b<it.blocks.length;b++){ var bl=it.blocks[b]; h+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>"; }
-  (Array.isArray(st.sources)?st.sources:[]).forEach(function(s){ if(!s) return; var u=slfUrl(s.url); if(u) src+="<a class='sl-src-l' href='"+slfEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+slfEsc(s.name||u)+"</a>"; });
+  (Array.isArray(st.sources)?st.sources:[]).forEach(function(s){ if(!s) return; var u=slfUrl(String(s.url||"").replace(/[?&]utm_source=openai\b/,"")); if(u) src+="<a class='sl-src-l' href='"+slfEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+slfEsc(s.name||u)+"</a>"; });
   var own=(it.id&&SL_SRC_ID[it.id])?SL_SRC_ID[it.id]:(SL_SRC_CAT[it.cat]||[]);
   own.forEach(function(o){ if(!o) return; src+=o[1]?"<a class='sl-src-l' href='"+o[1]+"' target='_blank' rel='noopener'>&#128279; "+o[0]+"</a>":"<div class='sl-src-n'>"+o[0]+"</div>"; });
   if(src) h+="<div class='sl-src'><div class='sl-src-t'>Sources: open and read them</div>"+src+"</div>";
