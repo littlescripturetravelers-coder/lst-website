@@ -1328,7 +1328,9 @@ window.TECH_GUIDE = {
     "Keep a family group where the good news gets told first."
    ],
    "ages": {
-    "0-9": "None.",
+    "0-2": "None.",
+    "3-5": "None.",
+    "6-9": "None.",
     "10-12": "None; the law says 13 and the Surgeon General says even that is not proof of safety.",
     "13-15": "Delay it as long as you can. If it is used: private accounts, parents follow and know the passwords, notifications off, a daily limit, nothing in bedrooms.",
     "16+": "Purposeful use with their own limits; a weekly day away from it."
@@ -1402,7 +1404,8 @@ window.TECH_GUIDE = {
     "Record the stories of the old and the first words of the young."
    ],
    "ages": {
-    "0-5": "A parent's phone, held by the parent, for family video calls; not a toy, not a babysitter.",
+    "0-2": "A parent's phone, held by the parent, for family video calls; not a toy, not a babysitter.",
+    "3-5": "A parent's phone, held by the parent, for family video calls; not a toy, not a babysitter.",
     "6-9": "No smartphone.",
     "10-12": "No smartphone; a basic phone or a watch if the family needs one.",
     "13-15": "Only with a written family agreement, filters, parent-known passwords and no bedroom overnight; many experts say wait until high school.",
@@ -1668,7 +1671,9 @@ window.TECH_GUIDE = {
     "Learn a skill safely: surgery, flying, repair."
    ],
    "ages": {
-    "0-9": "None.",
+    "0-2": "None.",
+    "3-5": "None.",
+    "6-9": "None.",
     "10-12": "Only what the maker allows, in the family room, short sessions, no social VR.",
     "13-15": "Short sessions, no strangers, parents can see what is played.",
     "16+": "A tool for learning and creating, with their own limits."
@@ -1744,7 +1749,8 @@ window.TECH_GUIDE = {
     "Help with the Lord's work: translation, teaching, reaching."
    ],
    "ages": {
-    "0-5": "None; a parent may use it to help them.",
+    "0-2": "None; a parent may use it to help them.",
+    "3-5": "None; a parent may use it to help them.",
     "6-9": "Only with a parent beside them, in a family-safe tool.",
     "10-12": "With a parent, for learning; never alone with a chatbot; check facts together.",
     "13-15": "School-approved tools; never AI companions; learn to verify; honest about what is theirs.",

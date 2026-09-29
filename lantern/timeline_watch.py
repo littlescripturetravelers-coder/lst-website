@@ -2,7 +2,7 @@
 """
 THE WORLD TIMELINE LEARNS ON ITS OWN.
 
-Two jobs, one script (JOB=tech or JOB=discoveries):
+Three jobs, one script (JOB=tech, JOB=discoveries or JOB=studies):
 
   tech         every day: for each technology in the Technology for Good guide,
                look for what the world has learned lately about its effects on
@@ -16,6 +16,16 @@ Two jobs, one script (JOB=tech or JOB=discoveries):
                confidence label (confirmed / believed / debated). Hoaxes and
                claims with no credible source are left out.
 
+  studies      several times a day until every event has one: for each event in
+               the Study Library that has no in-depth study yet (the list is
+               lantern/timeline-feed/events-index.json, exported from the
+               timeline), write one - what happened, the world it happened in,
+               why it matters, what the scriptures say, what the evidence shows
+               with an honest label, what we can learn, a word for a child, a
+               question for tonight - with web search and at least two sources
+               that can be opened. Bedtime stories, the technology guide and
+               the discoveries have their own studies and are skipped.
+
 The guide's current copy is read from the account (table timeline_feed), the
 model is asked - with web search - for additions only, the additions are
 checked and merged, the version is bumped, and the result is written back to
@@ -23,7 +33,7 @@ the account and into lantern/timeline-feed/ in this repo (its history).
 
 Secrets: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, OPENAI_API_KEY.
 """
-import json, os, re, sys, time, datetime, urllib.request, urllib.error
+import json, os, re, sys, time, datetime, html, urllib.request, urllib.error
 
 JOB        = os.environ.get("JOB", "tech").strip()
 MODEL      = os.environ.get("TIMELINE_WATCH_MODEL", "gpt-4.1").strip()
@@ -32,7 +42,9 @@ SB_KEY     = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
 OA_KEY     = os.environ.get("OPENAI_API_KEY", "").strip()
 HERE       = os.path.dirname(os.path.abspath(__file__))
 FEED_DIR   = os.path.join(HERE, "timeline-feed")
-ROW        = {"tech": "tech", "discoveries": "discoveries"}[JOB]
+ROW        = {"tech": "tech", "discoveries": "discoveries", "studies": "studies"}[JOB]
+INDEX_FILE = os.path.join(FEED_DIR, "events-index.json")
+PER_RUN    = int(os.environ.get("STUDIES_PER_RUN") or "80")
 SEED_FILE  = os.path.join(FEED_DIR, ROW + ".json")
 TODAY      = datetime.date.today().isoformat()
 
@@ -56,7 +68,35 @@ def read_row():
     if not body.get("items") or int(body.get("version") or 0) < 1:
         with open(SEED_FILE, encoding="utf-8") as f: body = json.load(f)
         print("seeded from the repo copy, version", body.get("version"))
+    elif isinstance(body.get("items"), list):
+        merge_seed(body)
     return body
+
+def merge_seed(body):
+    """The repo's seed copy may have grown fields the account's copy never had (the
+    age guide, harm, avoid, bless, ages...). Anything the account lacks is taken
+    from the seed; nothing the account has is touched. Returns True if it changed."""
+    try:
+        with open(SEED_FILE, encoding="utf-8") as f: seed = json.load(f)
+    except Exception:
+        return False
+    changed = False
+    for k, v in seed.items():
+        if k in ("items", "version", "updated") or k in body: continue
+        body[k] = v; changed = True
+    mine = {it.get("id"): it for it in body["items"] if isinstance(it, dict)}
+    for sit in seed.get("items") or []:
+        if not isinstance(sit, dict) or not sit.get("id"): continue
+        it = mine.get(sit["id"])
+        if it is None:
+            body["items"].append(sit); mine[sit["id"]] = sit; changed = True; continue
+        for k, v in sit.items():
+            if k == "learned" or k in it: continue
+            it[k] = v; changed = True
+    if changed:
+        body["_seed_merged"] = TODAY
+        print("took from the repo seed the fields the account's copy lacked")
+    return changed
 
 def write_row(body):
     st, txt = http(SB_URL + "/rest/v1/timeline_feed?on_conflict=id", method="POST",
@@ -186,13 +226,89 @@ def run_discoveries(body):
     print("discoveries: %d new" % added)
     return added
 
+# ── studies ─────────────────────────────────────────────────────────────────
+STUDY_FIELDS = ("happened", "background", "matters", "scripture", "evidence", "learn", "child", "talk")
+CAT_ORDER = ["gospel", "bom", "church", "arch", "xian", "seeds", "scifaith", "faith", "empire", "famous", "world", "city", "war",
+             "explore", "migrate", "trade", "lang", "pop", "freedom", "faithfree", "socfam", "child", "health", "socio", "prop",
+             "work", "slave", "escape", "drugs", "counter", "disaster", "invent", "family"]
+
+def study_one(ev):
+    plain = lambda v: html.unescape(re.sub(r"<[^>]+>", "", str(v or "")))   # the index carries the page's own markup
+    blocks = "\n".join("%s: %s" % (plain(b.get("l")), plain(b.get("t"))) for b in (ev.get("blocks") or []) if b.get("t"))
+    instructions = ("You write in-depth studies for a family study library that sits beside a world timeline. " + TEXT_RULES +
+                    " The reader is a parent, often a member of The Church of Jesus Christ of Latter-day Saints, who will teach a child from it. "
+                    "Be accurate first. Where history and scripture meet, say plainly what is known, what is believed, and what is debated, "
+                    "and never overstate. Use web search to check dates, names and claims, and to find sources a parent could open. "
+                    "Write whole paragraphs, not lists. Do not use markdown, headings or bullet characters in any field.")
+    prompt = ("Today is %s. Write the in-depth study for this event from the timeline's topic '%s':\n"
+              "Title: %s\nWhen: %s (year %s)\nWhere / who: %s\nThe timeline's short note: %s\n%s\n\n"
+              "Give these fields, each 1-3 paragraphs of plain prose unless told otherwise:\n"
+              "happened - what happened, told well, 180-320 words;\n"
+              "background - the world it happened in: what came before, who the people were, what daily life was like, 120-220 words;\n"
+              "matters - why it matters, for the world and for a family of faith, 100-180 words;\n"
+              "scripture - what the scriptures say that touches this event (Bible, Book of Mormon, Doctrine and Covenants, Pearl of Great Price), "
+              "naming the passages, 80-160 words; if none touch it directly, say what principle in scripture speaks to it;\n"
+              "evidence - what the historical, archaeological or scientific evidence shows, honestly, 100-200 words;\n"
+              "conf - one word for how settled the event itself is as history: confirmed, believed, or debated;\n"
+              "learn - what we can learn, 80-150 words;\n"
+              "child - two or three sentences a child of six could follow;\n"
+              "talk - one question a parent could ask a child tonight;\n"
+              "sources - 2 to 4 real, openable https sources with name and url (encyclopedias, museums, universities, churchofjesuschrist.org, "
+              "reputable histories). Never invent a URL.\n\n"
+              "Answer with JSON only: {\"happened\":\"...\",\"background\":\"...\",\"matters\":\"...\",\"scripture\":\"...\",\"evidence\":\"...\","
+              "\"conf\":\"...\",\"learn\":\"...\",\"child\":\"...\",\"talk\":\"...\",\"sources\":[{\"name\":\"...\",\"url\":\"https://...\"}]}") % (
+              TODAY, plain(ev.get("catName") or ev.get("cat")), plain(ev.get("t")), plain(ev.get("date")), ev.get("y"), plain(ev.get("meta")),
+              plain(ev.get("de")), blocks)
+    ans = ask(instructions, prompt)
+    st = {}
+    for f in STUDY_FIELDS:
+        st[f] = re.sub(r"\s+", " ", str(ans.get(f) or "")).strip()[:3000]
+    st["conf"] = ans.get("conf") if ans.get("conf") in ("confirmed", "believed", "debated") else "believed"
+    st["sources"] = []
+    for src in (ans.get("sources") or [])[:4]:
+        if not isinstance(src, dict): continue
+        url = clean_str(src.get("url"), 300)
+        if re.match(r"^https://[^\s\"'<>]+$", url):
+            st["sources"].append({"name": clean_str(src.get("name"), 120) or url, "url": url})
+    ok = len(st["happened"]) >= 400 and len(st["background"]) >= 200 and len(st["matters"]) >= 150 and len(st["learn"]) >= 120 and len(st["sources"]) >= 1
+    if not ok:
+        print("  rejected (too thin or no source):", ev.get("key"), {f: len(st[f]) for f in STUDY_FIELDS}, len(st["sources"]))
+        return None
+    st["v"] = 1; st["on"] = TODAY; st["t"] = clean_str(plain(ev.get("t")), 120); st["cat"] = ev.get("cat")
+    return st
+
+def run_studies(body):
+    with open(INDEX_FILE, encoding="utf-8") as f: index = json.load(f)
+    items = body.setdefault("items", {})
+    if not isinstance(items, dict): items = body["items"] = {}
+    todo = [ev for ev in index if ev.get("key") and ev["key"] not in items]
+    rank = {c: i for i, c in enumerate(CAT_ORDER)}
+    todo.sort(key=lambda ev: (rank.get(ev.get("cat"), 99), ev.get("y") or 0))
+    print("studies: %d of %d events still want a study; writing up to %d now" % (len(todo), len(index), PER_RUN))
+    written = 0
+    for ev in todo[:PER_RUN]:
+        try:
+            st = study_one(ev)
+        except SystemExit:
+            raise
+        except Exception as e:
+            print("  failed:", ev.get("key"), str(e)[:160]); continue
+        if st:
+            items[ev["key"]] = st; written += 1
+            print("  wrote:", ev["key"], "-", st["t"], "(%d sources)" % len(st["sources"]))
+            if written % 10 == 0:   # keep what is done so far, in case the run is cut off
+                body["version"] = int(body.get("version") or 0) + 1; body["updated"] = TODAY; write_row(body)
+    print("studies: %d written this run; %d still to go" % (written, len(todo) - written))
+    return written
+
 # ── run ─────────────────────────────────────────────────────────────────────
 body = read_row()
-changed = run_tech(body) if JOB == "tech" else run_discoveries(body)
-if changed or os.environ.get("FORCE_WRITE") == "1" or int(body.get("version") or 0) < 1:
+seeded = body.pop("_seed_merged", None) is not None
+changed = run_tech(body) if JOB == "tech" else run_studies(body) if JOB == "studies" else run_discoveries(body)
+if changed or seeded or os.environ.get("FORCE_WRITE") == "1" or int(body.get("version") or 0) < 1:
     body["version"] = int(body.get("version") or 0) + 1
     body["updated"] = TODAY
     write_row(body)
-    print("written: version", body["version"], "with", len(body.get("items", [])), "items")
+    print("written: version", body["version"], "with", len(body.get("items") or []), "items")
 else:
     print("nothing new today; the row stays at version", body.get("version"))

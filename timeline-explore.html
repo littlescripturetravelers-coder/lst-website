@@ -732,7 +732,29 @@ body.hand-active .hand-label{display:block;}
 .sl-tag{font-family:Nunito,sans-serif;font-weight:800;font-size:8.5px;padding:3px 8px;border-radius:99px;background:rgba(245,197,24,.12);color:#F5C518;border:1px solid rgba(245,197,24,.35);}
 .sl-tag.teal{background:rgba(91,211,220,.1);color:#5BD3DC;border-color:rgba(91,211,220,.35);}
 .sl-open{display:inline-block;margin-top:10px;padding:8px 14px;border-radius:99px;border:0;background:#F5C518;color:#1B2D5F;font-family:Fredoka,sans-serif;font-weight:700;font-size:11.5px;cursor:pointer;}
-.sl-wait{font-family:Nunito,sans-serif;font-size:10.5px;color:rgba(255,255,255,.5);padding:8px 0;}
+.sl-wait{font-family:Nunito,sans-serif;font-size:10.5px;color:rgba(255,255,255,.5);padding:8px 0;line-height:1.55;}
+/* Technology for Good, Evidence & Discoveries and the in-depth studies */
+.sl-st.sl-gold{background:rgba(245,197,24,.07);border-color:rgba(245,197,24,.3);} .sl-st.sl-gold .sl-st-h{color:#F5C518;}
+.sl-st.sl-teal{border-color:rgba(91,211,220,.3);} .sl-st.sl-teal .sl-st-h{color:#5BD3DC;}
+.sl-st.sl-green{border-color:rgba(52,211,153,.3);} .sl-st.sl-green .sl-st-h{color:#34D399;}
+.sl-st.sl-red{border-color:rgba(248,113,113,.3);} .sl-st.sl-red .sl-st-h{color:#F87171;}
+.sl-st.sl-amber{border-color:rgba(251,191,36,.3);} .sl-st.sl-amber .sl-st-h{color:#FBBF24;}
+.sl-st-sub{font-family:Nunito,sans-serif;font-weight:800;font-size:8.5px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin:8px 0 4px;}
+.sl-ul{margin:0;padding-left:16px;} .sl-ul li{font-family:Nunito,sans-serif;font-size:11px;line-height:1.6;color:rgba(255,255,255,.84);margin-bottom:5px;}
+.sl-dim{font-family:Nunito,sans-serif;font-size:10px;line-height:1.55;color:rgba(255,255,255,.5);margin:6px 0 0;}
+.sl-quote{font-family:Fredoka,sans-serif;font-weight:500;font-size:12.5px;line-height:1.5;color:#fff;}
+.sl-age{display:grid;grid-template-columns:96px 1fr;gap:8px;align-items:start;margin-bottom:6px;font-family:Nunito,sans-serif;font-size:11px;line-height:1.55;color:rgba(255,255,255,.84);}
+.sl-age b{font-size:9px;letter-spacing:.6px;text-transform:uppercase;color:#5BD3DC;padding-top:2px;line-height:1.35;}
+.sl-age b span{display:block;font-size:8.5px;letter-spacing:.3px;text-transform:none;color:rgba(255,255,255,.45);}
+.sl-ages-sum{margin-top:5px;} .sl-ages-sum .sl-age{margin-bottom:4px;font-size:10.5px;}
+.sl-stage .sl-st-h{font-size:10px;} .sl-yrs{font-size:8.5px;letter-spacing:.4px;text-transform:none;color:rgba(255,255,255,.5);margin-left:6px;}
+.sl-note{border-top:1px solid rgba(255,255,255,.07);padding:6px 0;font-family:Nunito,sans-serif;font-size:11px;line-height:1.55;color:rgba(255,255,255,.84);}
+.sl-note b{display:block;font-size:8.5px;letter-spacing:1px;text-transform:uppercase;color:#5BD3DC;margin-bottom:2px;}
+.sl-note a{display:block;font-size:9.5px;color:rgba(255,255,255,.62);text-decoration:none;margin-top:2px;} .sl-note a:hover{color:#F5C518;}
+.sl-note small{display:block;font-size:9.5px;color:rgba(255,255,255,.45);margin-top:2px;}
+.sl-conf-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0 4px;} .sl-conf-row .sl-dim{margin:0;flex:1;min-width:160px;}
+.sl-conf{display:inline-block;font-family:Nunito,sans-serif;font-size:8.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:2px 7px;border-radius:4px;}
+.sl-conf.dc{background:rgba(52,211,153,.14);color:#34D399;border:1px solid rgba(52,211,153,.4);} .sl-conf.db{background:rgba(251,191,36,.14);color:#FBBF24;border:1px solid rgba(251,191,36,.4);} .sl-conf.dd{background:rgba(248,113,113,.14);color:#F87171;border:1px solid rgba(248,113,113,.4);}
 .sl-gl:hover{color:#F5C518;border-bottom-color:#F5C518;}
 .sl-src{margin-top:10px;padding:8px 11px;border-radius:7px;
   background:rgba(217,162,39,.055);border:1px solid rgba(217,162,39,.2);}
@@ -1570,6 +1592,8 @@ body.hand-active .hand-label{display:block;}
 
 
 <script src="data/virtue-library.js"></script>
+<script src="data/tech-guide.js"></script>
+<script src="data/discoveries.js"></script>
 <script>
 /* ---------- Floating controls ----------
    The header rows are hidden, not deleted, and their contents are moved into the
@@ -7442,6 +7466,8 @@ var SL_GLOSSARY={
 // SOURCES — per-category defaults, per-entry overrides.
 // ============================================================
 var SL_SRC_CAT={
+tech:[["American Academy of Pediatrics: Media and Children","https://www.healthychildren.org/English/family-life/Media/Pages/default.aspx"],["American Academy of Pediatrics: Family Media Plan","https://www.healthychildren.org/English/fmp/Pages/MediaPlan.aspx"],["American Psychological Association: Health Advisory on Social Media Use in Adolescence","https://www.apa.org/topics/social-media-internet/health-advisory-adolescent-social-media-use"],["World Health Organization: guidelines for children under 5","https://www.who.int/publications/i/item/9789241550536"],["Children&#39;s Online Privacy Protection Rule (why 13 is the legal floor)","https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa"],["For the Strength of Youth: A Guide for Making Choices","https://www.churchofjesuschrist.org/study/manual/for-the-strength-of-youth?lang=eng"],["Common Sense Media","https://www.commonsensemedia.org/"]],
+evidence:[["Each discovery carries its own sources, listed with it",""]],
 gospel:[["Holy Bible, King James Version","https://www.churchofjesuschrist.org/study/scriptures/bible"]],
 bom:[["The Book of Mormon","https://www.churchofjesuschrist.org/study/scriptures/bofm"]],
 church:[["Church History Topics","https://www.churchofjesuschrist.org/study/history/topics"],["Church Newsroom","https://newsroom.churchofjesuschrist.org/"]],
@@ -8720,9 +8746,99 @@ var PROP=[
   result:"The techniques work on everyone, including on the people deploying them, and including on those certain they are immune. Nobody on this layer thought of themselves as the villain.",
   lesson:"This is why Moroni 10:4 asks rather than tells, and why the Restoration required a nation where a boy could not be punished for reporting what he saw. Truth that will not survive being questioned is not being protected by the questioning ban &#8212; it is being replaced by it."}
 ];
+
+/* ══════════════════════════════════════════════════════════════════════════
+   THE FEED THE STUDY LIBRARY READS
+   Technology for Good (data/tech-guide.js), Evidence & Discoveries
+   (data/discoveries.js) and the in-depth studies of every event, plus whatever
+   the account has learned since this copy was built (table timeline_feed: rows
+   tech, discoveries, studies). The account's copy is adopted item by item: a
+   field the account has is taken, a field only this copy has is kept, learned
+   notes are joined, and nothing is ever lost. Text from the feed is untrusted
+   and is always shown as words.
+   ══════════════════════════════════════════════════════════════════════════ */
+var SLF={tech:(window.TECH_GUIDE||{version:0,items:[]}),finds:(window.DISCOVERIES||{version:0,items:[]}),studies:{version:0,items:{}}};
+if(!Array.isArray(SLF.tech.items)) SLF.tech.items=[];
+if(!Array.isArray(SLF.finds.items)) SLF.finds.items=[];
+function slfEsc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function slfEm(e){ return /^&#\d{2,7};$/.test(String(e||""))?e:"&#10022;"; }
+function slfUrl(u){ return /^https:\/\/[^\s"'<>]+$/.test(String(u||""))?String(u):""; }
+function slfAdopt(kind,feed){
+  var t=SLF[kind]; if(!t||!feed||typeof feed!=="object") return false;
+  var fv=Number(feed.version)||0, tv=Number(t.version)||0, n=0;
+  if(kind==="studies"){
+    var src=feed.items; if(!src||typeof src!=="object"||Array.isArray(src)) return false;
+    for(var k in src){ if(!src.hasOwnProperty(k)||!src[k]||typeof src[k]!=="object") continue;
+      if(!t.items[k]||Number(src[k].v||0)>=Number(t.items[k].v||0)){ t.items[k]=src[k]; n++; } }
+    if(fv>tv) t.version=fv;
+    if(feed.updated&&String(feed.updated)>String(t.updated||"")) t.updated=feed.updated;
+    return n>0;
+  }
+  if(!Array.isArray(feed.items)||fv<=tv) return false;
+  for(var key in feed){ if(!feed.hasOwnProperty(key)||key==="items"||key==="version") continue;
+    var tv2=feed[key]; if(tv2==null||tv2===""||(Array.isArray(tv2)&&!tv2.length)) continue; t[key]=tv2; }
+  var byId={}; t.items.forEach(function(it){ if(it&&it.id) byId[it.id]=it; });
+  feed.items.forEach(function(it){ if(!it||typeof it!=="object"||!it.id) return; var mine=byId[it.id];
+    if(!mine){ t.items.push(it); byId[it.id]=it; return; }
+    for(var f in it){ if(!it.hasOwnProperty(f)) continue; var v=it[f];
+      if(f==="learned"){ var have=Array.isArray(mine.learned)?mine.learned:[]; (Array.isArray(v)?v:[]).forEach(function(nn){ if(!nn||typeof nn!=="object") return;
+          var dup=have.some(function(o){ return o&&((nn.url&&o.url===nn.url)||(nn.note&&o.note===nn.note)); }); if(!dup) have.push(nn); }); mine.learned=have; continue; }
+      if(v==null||v===""||(Array.isArray(v)&&!v.length)) continue;   /* the account has nothing here: keep ours */
+      mine[f]=v; }
+  });
+  t.version=fv; return true;
+}
+/* remembered on the phone, so the newest copy is there before the network answers */
+(function(){
+  try{ var c=JSON.parse(localStorage.getItem("lst_timeline_feed")||"{}"); if(c.tech) slfAdopt("tech",c.tech); if(c.finds) slfAdopt("finds",c.finds); }catch(e){}
+  try{ var s=JSON.parse(localStorage.getItem("lst_timeline_studies")||"null"); if(s) slfAdopt("studies",s); }catch(e){}
+})();
+function slfRemember(){
+  try{ localStorage.setItem("lst_timeline_feed",JSON.stringify({tech:SLF.tech,finds:SLF.finds})); }catch(e){}
+  try{ localStorage.setItem("lst_timeline_studies",JSON.stringify(SLF.studies)); }catch(e){}
+}
+/* rows of timeline_feed, whichever way this page can reach the account */
+function slfRows(ids,cb){
+  try{
+    var c=window.LST_CONFIG||{};
+    if(c.SUPABASE_URL&&c.SUPABASE_ANON_KEY&&typeof fetch==="function"){
+      fetch(c.SUPABASE_URL+"/rest/v1/timeline_feed?select=id,body&id=in.("+ids.join(",")+")",{headers:{apikey:c.SUPABASE_ANON_KEY,Authorization:"Bearer "+c.SUPABASE_ANON_KEY}})
+        .then(function(r){ return r.ok?r.json():null; }).then(function(rows){ cb(Array.isArray(rows)?rows:null); }).catch(function(){ cb(null); });
+      return;
+    }
+    if(window.LST_SB&&window.LST_SB.from){
+      window.LST_SB.from("timeline_feed").select("id,body").in("id",ids).then(function(res){ cb(res&&Array.isArray(res.data)?res.data:null); },function(){ cb(null); });
+      return;
+    }
+  }catch(e){}
+  cb(null);
+}
+function slfFetch(cb){
+  slfRows(["tech","discoveries"],function(rows){
+    if(!rows){ if(cb) cb(false); return; } var ch=false;
+    rows.forEach(function(r){ try{ var b=r&&r.body; if(!b) return; if(r.id==="tech"&&slfAdopt("tech",b)) ch=true; if(r.id==="discoveries"&&slfAdopt("finds",b)) ch=true; }catch(e){} });
+    if(ch) slfRemember(); if(cb) cb(ch);
+  });
+}
+/* the in-depth studies: asked for once, the first time one is wanted */
+var _slfSt=null, _slfQ=[];
+function slfStudies(cb){
+  if(_slfSt==="done"){ cb(SLF.studies); return; }
+  _slfQ.push(cb); if(_slfSt==="busy") return; _slfSt="busy";
+  slfRows(["studies"],function(rows){
+    try{ var b=rows&&rows[0]&&rows[0].body; if(b&&slfAdopt("studies",b)) slfRemember(); }catch(e){}
+    _slfSt="done"; var q=_slfQ; _slfQ=[]; q.forEach(function(f){ try{ f(SLF.studies); }catch(e){} });
+  });
+}
+function slfStages(){ return (SLF.tech.ages||[]).map(function(s){ return {id:s.id,label:s.label,years:s.years,key:String(s.years||"").replace(" to ","-").replace(" and up","+")}; }); }
+function slfFindById(id){ var it=SLF.finds.items; for(var i=0;i<it.length;i++) if(it[i]&&it[i].id===id) return it[i]; return null; }
+function slfTechById(id){ var it=SLF.tech.items; for(var i=0;i<it.length;i++) if(it[i]&&it[i].id===id) return it[i]; return null; }
+
 var SL_CATS=[
   {k:"gospel",  n:"Gospel Stories",     c:"#F5C518"},
   {k:"bom",     n:"Book of Mormon",     c:"#7BC67E"},
+  {k:"tech",    n:"Technology for Good",c:"#22D3EE"},
+  {k:"evidence",n:"Evidence &amp; Discoveries",c:"#D9A227"},
   {k:"church",  n:"Church History",     c:"#C084FC"},
   {k:"xian",    n:"Christian History",  c:"#60A5FA"},
   {k:"faith",   n:"World Faiths",       c:"#E879F9"},
@@ -8778,6 +8894,8 @@ function slCollect(){
       add(e.l,e.y,e.em,e.t,e.date,e.loc,e.de,clean([
         B("Gospel Connection",e.gospel,"gospel"),
         B("Heavenly Father&#39;s Hand",e.hand,"hand")]),e.id);
+      /* an invention that is in the Technology guide, or a find from the Evidence list, studies as itself */
+      try{ var o=out[out.length-1]; if(e.tech){ var tt=slfTechById(e.tech); if(tt) o.tech=tt; } if(e.find){ var ff=slfFindById(e.find); if(ff) o.find=ff; } }catch(e2){}
     }
   }catch(err){}
 
@@ -8895,8 +9013,30 @@ function slCollect(){
     add("seeds",e.y,e.em,e.t,"",(e.culture||"")+(e.region?" &#183; "+e.region:""),e.truth,clean([
       B("Gospel Connection",e.connect,"gospel"),B("Heavenly Father&#39;s Hand",e.hand,"hand")]),e.id);}
   }catch(err){}
+  // Technology for Good: the age guide first, then every technology in the guide (feed text is untrusted: escaped)
+  try{ var TGd=SLF.tech;
+    if(TGd.ages&&TGd.ages.length){
+      add("tech",-1e9,"&#128106;","The Age Guide: what fits a child at each age","Birth to 16+","By child development &#183; the American Academy of Pediatrics, the WHO and For the Strength of Youth",slfEsc(TGd.agesNote||""),[],"tg-ages");
+      out[out.length-1].ages=TGd; out[out.length-1].pin=true; }
+    for(var ti=0;ti<TGd.items.length;ti++){ var tg=TGd.items[ti]; if(!tg||!tg.id) continue;
+      add("tech",Number(tg.y)||0,slfEm(tg.em),slfEsc(tg.name),slfEsc(tg.date||""),slfEsc(tg.loc||""),slfEsc(tg.what||""),[],"tg-"+tg.id);
+      out[out.length-1].tech=tg; }
+  }catch(err){}
+  // Evidence & Discoveries: every find, with its honest label and its sources
+  try{ var fl=SLF.finds.items;
+    for(var fi=0;fi<fl.length;fi++){ var fd=fl[fi]; if(!fd||!fd.id) continue;
+      add("evidence",Number(fd.y)||0,slfEm(fd.em||"&#127963;"),slfEsc(fd.t||fd.name||""),slfEsc(fd.date||""),slfEsc(fd.loc||""),slfEsc(fd.de||""),[],"ev-"+fd.id);
+      out[out.length-1].find=fd; }
+  }catch(err){}
   return out;
 }
+/* the key an event's in-depth study is filed under: its id, or id:title where two events share an id */
+var slDupIds={};
+function slKey(it){ if(!it||!it.id) return ""; return slDupIds[it.id]?it.id+":"+String(it.t||"").toLowerCase().replace(/&[^;]+;/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40):it.id; }
+function slMarkDups(all){ var seen={}; slDupIds={}; for(var i=0;i<all.length;i++){ var id=all[i].id; if(!id) continue; if(seen[id]&&seen[id]!==all[i].cat+"|"+all[i].t) slDupIds[id]=true; seen[id]=seen[id]||(all[i].cat+"|"+all[i].t); } }
+/* what the studies job on the website reads: every event that wants a study, with its key */
+function slStudyIndex(){ var all=slCollect(); slMarkDups(all); return all.filter(function(it){ return it.id&&!it.night&&!it.tech&&!it.ages&&!it.find; }).map(function(it){ return {key:slKey(it),id:it.id,cat:it.cat,catName:slName(it.cat),y:it.y,t:it.t,date:it.date,meta:it.meta,de:it.de,blocks:it.blocks}; }); }
+
 
 function slYearLabel(y){
   if(!y&&y!==0)return "";
@@ -8905,6 +9045,7 @@ function slYearLabel(y){
 }
 
 function openStudy(){
+  try{ slfStudies(function(){}); }catch(e){}
   if(!slBuilt){
     slBuilt=true;
     for(var i=0;i<SL_CATS.length;i++){slPick[SL_CATS[i].k]=(i<4);}
@@ -9059,6 +9200,111 @@ function slStudyHtml(it,st){
   h+=slSources(it);
   return h;
 }
+/* ── TECHNOLOGY FOR GOOD in the Study Library ──
+   Every technology, read as a parent: what it is and why it came, what had to come
+   first, the good it does, how the adversary turns it, what it can do to a child,
+   what to stay away from, how to bless others with it, and what fits at each age. */
+function slList(arr,cls){ if(!Array.isArray(arr)||!arr.length) return ""; return "<ul class='sl-ul "+(cls||"")+"'>"+arr.map(function(x){ return "<li>"+slfEsc(x)+"</li>"; }).join("")+"</ul>"; }
+function slSec(cls,head,inner){ return inner?"<div class='sl-st "+(cls||"")+"'><div class='sl-st-h'>"+head+"</div>"+inner+"</div>":""; }
+function slP(t){ return t?"<p>"+slfEsc(t)+"</p>":""; }
+function slAgeLines(ages){ var st=slfStages(); if(!ages||typeof ages!=="object") return ""; var h="";
+  st.forEach(function(s){ var t=ages[s.key]||ages[s.years]||ages[s.id]; if(!t) return; h+="<div class='sl-age'><b>"+slfEsc(s.label)+"<span>"+slfEsc(s.years)+"</span></b><span>"+slfEsc(t)+"</span></div>"; });
+  return h; }
+function slNotes(arr){ if(!Array.isArray(arr)||!arr.length) return "<p class='sl-dim'>Nothing new yet. This grows on its own as the world learns.</p>";
+  return arr.slice().sort(function(a,b){ return String(b.on||"").localeCompare(String(a.on||"")); }).map(function(n){ if(!n) return "";
+    var u=slfUrl(n.url), src=slfEsc(n.source||"source");
+    return "<div class='sl-note'><b>"+slfEsc(n.on||"")+"</b><span>"+slfEsc(n.note||"")+"</span>"+(u?"<a href='"+slfEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+src+"</a>":(n.source?"<small>"+src+"</small>":""))+"</div>"; }).join(""); }
+function slTechHtml(it){
+  var tg=it.tech, h="", names=function(ids){ return (ids||[]).map(function(id){ var b=slfTechById(id); return b?"<span class='sl-tag teal'>"+slfEm(b.em)+" "+slfEsc(b.name)+"</span>":""; }).join(""); };
+  var made=SLF.tech.items.filter(function(o){ return o&&(o.builtOn||[]).indexOf(tg.id)>=0; }).map(function(o){ return o.id; });
+  h+=slSec("","What it is",slP(tg.what));
+  h+=slSec("sl-gold","&#10022; Why it came: the purpose behind it",slP(tg.why));
+  if((tg.builtOn||[]).length||made.length) h+=slSec("","How one light led to the next",((tg.builtOn||[]).length?"<div class='sl-st-sub'>What had to come first</div><div class='sl-tags'>"+names(tg.builtOn)+"</div>":"")+(made.length?"<div class='sl-st-sub'>What it made possible</div><div class='sl-tags'>"+names(made)+"</div>":""));
+  h+=slSec("sl-green","Good ways to use it",slList(tg.good));
+  h+=slSec("sl-red","How the adversary turns it",slList(tg.bad));
+  h+=slSec("sl-amber","Dangers to watch for",slList(tg.dangers));
+  h+=slSec("sl-red","What it can do to a child",slList(tg.harm));
+  h+=slSec("sl-amber","What to stay away from",slList(tg.avoid));
+  h+=slSec("sl-gold","Bless others with it: Heavenly Father&#39;s purposes",slList(tg.bless));
+  var al=slAgeLines(tg.ages); if(al) h+=slSec("sl-teal","Age by age: what fits, by how a child grows",al+"<p class='sl-dim'>The Age Guide at the top of this topic explains each stage.</p>");
+  h+=slSec("sl-teal","What we are learning",slNotes(tg.learned));
+  h+=slSec("sl-gold","Three rules for kids",slList(tg.kids));
+  if(tg.talk) h+=slSec("sl-teal","Talk about it tonight","<p class='sl-quote'>&ldquo;"+slfEsc(tg.talk)+"&rdquo;</p>");
+  if(typeof openTechGuide==="function") h+="<button class='sl-open' onclick=\"closeStudy();openTechGuide('tech','"+slfEsc(tg.id)+"')\">&#128161; Open it in the Technology guide</button>";
+  h+=slSources(it);
+  return h;
+}
+function slAgesHtml(it){
+  var g=it.ages, h="";
+  if(g.principle) h+=slSec("sl-gold","The one lesson",slP(g.principle));
+  h+=slSec("","How to read this guide",slP(g.agesNote)+"<p class='sl-dim'>Ages are a guide, not a law. A parent who knows the child decides. The years below follow how children grow, not how old a product says they must be.</p>");
+  (g.ages||[]).forEach(function(s){ if(!s) return; var inner="";
+    inner+=slP(s.growing);
+    if((s.fits||[]).length) inner+="<div class='sl-st-sub'>What fits at this age</div>"+slList(s.fits);
+    if((s.rules||[]).length) inner+="<div class='sl-st-sub'>Rules for this age</div>"+slList(s.rules);
+    if((s.watch||[]).length) inner+="<div class='sl-st-sub'>Watch for</div>"+slList(s.watch);
+    if((s.bless||[]).length) inner+="<div class='sl-st-sub'>Ways to bless others at this age</div>"+slList(s.bless);
+    var lines=""; SLF.tech.items.forEach(function(tg){ var t=tg&&tg.ages&&(tg.ages[String(s.years||"").replace(" to ","-").replace(" and up","+")]||tg.ages[s.years]||tg.ages[s.id]); if(t) lines+="<div class='sl-age'><b>"+slfEm(tg.em)+" "+slfEsc(tg.name)+"</b><span>"+slfEsc(t)+"</span></div>"; });
+    if(lines) inner+="<div class='sl-st-sub'>Technology by technology</div>"+lines;
+    h+="<div class='sl-st sl-teal sl-stage'><div class='sl-st-h'>"+slfEsc(s.label)+" <span class='sl-yrs'>"+slfEsc(s.years)+"</span></div>"+inner+"</div>"; });
+  h+=slSources(it);
+  return h;
+}
+/* ── EVIDENCE & DISCOVERIES in the Study Library ── */
+function slConf(c){ return c==="confirmed"?["dc","Confirmed"]:c==="debated"?["dd","Debated"]:["db","Believed"]; }
+function slFindHtml(it){
+  var f=it.find, h="", cf=slConf(f.conf), lab=(SLF.finds.labels||{})[f.conf==="confirmed"||f.conf==="debated"?f.conf:"believed"]||"";
+  h+="<div class='sl-conf-row'><span class='sl-conf "+cf[0]+"'>"+cf[1]+"</span><span class='sl-dim'>"+slfEsc(lab)+"</span></div>";
+  h+=slSec("","What was found",slP(f.de));
+  h+=slSec("sl-gold","&#10022; Why it matters",slP(f.gospel));
+  if(f.scripture) h+=slSec("sl-teal","The scriptures it touches",slP(f.scripture));
+  if(f.loc||f.date||f.added) h+=slSec("","Where and when",slP([f.loc,f.date].filter(Boolean).join(" &#183; ").replace(/&amp;#183;/g,"&#183;"))+(f.added?"<p class='sl-dim'>Added to the list "+slfEsc(f.added)+"</p>":""));
+  if(f.forkids) h+=slSec("sl-green","For a child","<p class='sl-quote'>"+slfEsc(f.forkids)+"</p>");
+  var srcs=Array.isArray(f.sources)?f.sources.slice():[]; if(!srcs.length&&f.url) srcs.push({name:f.source||"source",url:f.url});
+  var sh=""; srcs.forEach(function(s){ if(!s) return; var u=slfUrl(s.url); sh+=u?"<a class='sl-src-l' href='"+slfEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+slfEsc(s.name||u)+"</a>":(s.name?"<div class='sl-src-n'>"+slfEsc(s.name)+"</div>":""); });
+  if(sh) h+="<div class='sl-src'><div class='sl-src-t'>Sources: open and read them</div>"+sh+"</div>";
+  if(typeof tgToTimeline==="function"&&EVS.some(function(e){ return e.id==="find-"+f.id; })) h+="<button class='sl-open' onclick=\"closeStudy();tgToTimeline('find-"+slfEsc(f.id)+"')\">&#128506; Find it on the timeline</button>";
+  return h;
+}
+/* ── THE IN-DEPTH STUDY OF ANY OTHER EVENT ──
+   Written on the website by the studies job, one event at a time, with web search
+   and sources, and kept in the account (row studies). Until an event's study has
+   been written, the timeline's own notes stand in and say so. */
+function slDeepHtml(it,st){
+  var h="", src="";
+  h+=slSec("","What happened",slP(st.happened));
+  h+=slSec("","The world it happened in",slP(st.background));
+  h+=slSec("sl-gold","&#10022; Why it matters",slP(st.matters));
+  h+=slSec("sl-teal","What the scriptures say",slP(st.scripture));
+  if(st.evidence){ var cf=slConf(st.conf); h+=slSec("sl-amber","What the evidence shows","<div class='sl-conf-row'><span class='sl-conf "+cf[0]+"'>"+cf[1]+"</span></div>"+slP(st.evidence)); }
+  h+=slSec("sl-green","What we can learn",slP(st.learn));
+  if(st.child) h+=slSec("sl-green","For a child","<p class='sl-quote'>"+slfEsc(st.child)+"</p>");
+  if(st.talk) h+=slSec("sl-teal","Talk about it tonight","<p class='sl-quote'>&ldquo;"+slfEsc(st.talk)+"&rdquo;</p>");
+  for(var b=0;b<it.blocks.length;b++){ var bl=it.blocks[b]; h+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>"; }
+  (Array.isArray(st.sources)?st.sources:[]).forEach(function(s){ if(!s) return; var u=slfUrl(s.url); if(u) src+="<a class='sl-src-l' href='"+slfEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+slfEsc(s.name||u)+"</a>"; });
+  var own=(it.id&&SL_SRC_ID[it.id])?SL_SRC_ID[it.id]:(SL_SRC_CAT[it.cat]||[]);
+  own.forEach(function(o){ if(!o) return; src+=o[1]?"<a class='sl-src-l' href='"+o[1]+"' target='_blank' rel='noopener'>&#128279; "+o[0]+"</a>":"<div class='sl-src-n'>"+o[0]+"</div>"; });
+  if(src) h+="<div class='sl-src'><div class='sl-src-t'>Sources: open and read them</div>"+src+"</div>";
+  if(st.on) h+="<p class='sl-dim' style='margin-top:8px'>Study written "+slfEsc(st.on)+". It is checked against its sources; if you find an error, tell us and it will be corrected.</p>";
+  return h;
+}
+function slDeepFallback(it){
+  var dh="";
+  if(it.de) dh+="<div class='sl-dep-de'>"+slLink(it.de)+"</div>";
+  for(var b=0;b<it.blocks.length;b++){ var bl=it.blocks[b]; dh+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>"; }
+  dh+=slSources(it);
+  return dh;
+}
+function slDeepFill(did,it){
+  var dep=document.getElementById(did); if(!dep||dep.getAttribute("data-filled")) return;
+  var key=slKey(it), st=SLF.studies.items[key];
+  if(st&&st.happened){ dep.setAttribute("data-filled","1"); try{ dep.innerHTML=slDeepHtml(it,st); }catch(e){} return; }
+  dep.innerHTML=slDeepFallback(it)+"<div class='sl-wait' id='"+did+"-w'>Gathering the full study&hellip;</div>";
+  slfStudies(function(all){ var s=all.items[key]; var d2=document.getElementById(did); if(!d2||d2.getAttribute("data-filled")) return;
+    if(s&&s.happened){ d2.setAttribute("data-filled","1"); try{ d2.innerHTML=slDeepHtml(it,s); }catch(e){} }
+    else { var w=document.getElementById(did+"-w"); if(w) w.innerHTML="&#10022; The full study of this event is still being written. It will appear here on its own when it is ready; the notes above are the timeline&#39;s own."; }
+  });
+}
 function slStudyFill(did,it){
   var dep=document.getElementById(did); if(!dep||dep.getAttribute("data-filled")) return;
   dep.setAttribute("data-filled","1");
@@ -9082,7 +9328,7 @@ function slRender(){
   slPickCount();
   var body=document.getElementById("sl-body");
   body.innerHTML="";
-  var all=slCollect();
+  var all=slCollect(); slMarkDups(all);
   var items=[];
   for(var i=0;i<all.length;i++){ if(slPick[all[i].cat])items.push(all[i]); }
   document.getElementById("sl-count").textContent=decodeT(items.length+(items.length===1?" entry":" entries"));
@@ -9119,25 +9365,27 @@ function slRender(){
       sumHtml+="<div class='sl-blk sl-blk-gospel'><b>Read it together:</b> "+slEsc(it.night.ref)+", then turn to Week "+it.night.wk+", Night "+it.night.nt+" in "+slEsc(it.book.t)+".</div>";
       if(it.night.note) sumHtml+="<div class='sl-blk sl-blk-extra'><b>When to reach for it:</b> "+slEsc(it.night.note)+"</div>";
     }
+    if(it.tech){ /* a technology: its purpose, and the age it fits, at a glance */
+      if(it.tech.why) sumHtml+="<div class='sl-blk sl-blk-gospel'><b>Why it came:</b> "+slfEsc(it.tech.why)+"</div>";
+      var ag=slAgeLines(it.tech.ages); if(ag) sumHtml+="<div class='sl-blk sl-blk-extra'><b>Age by age:</b><div class='sl-ages-sum'>"+ag+"</div></div>";
+    }
+    if(it.find){ var cf0=slConf(it.find.conf); sumHtml="<div class='sl-conf-row'><span class='sl-conf "+cf0[0]+"'>"+cf0[1]+"</span></div>"+sumHtml;
+      if(it.find.gospel) sumHtml+="<div class='sl-blk sl-blk-gospel'><b>Why it matters:</b> "+slfEsc(it.find.gospel)+"</div>"; }
     if(it.meta)sumHtml="<div class='sl-sum-meta'>"+it.meta+"</div>"+sumHtml;
     sum.innerHTML=sumHtml;
     var b2=document.createElement("button");
     b2.className="sl-x sl-x2";
     b2.textContent="+ In-Depth Study";
-    b2.onclick=function(){slTgl(did,b2,"In-Depth Study"); if(it.night) slStudyFill(did,it);};
+    b2.onclick=function(){slTgl(did,b2,"In-Depth Study"); if(it.night) slStudyFill(did,it); else if(!it.tech&&!it.ages&&!it.find) slDeepFill(did,it);};
     sum.appendChild(b2);
 
     var dep=document.createElement("div");dep.className="sl-dep";dep.id=did;
     var dh="";
     if(it.night){ dh="<div class='sl-wait'>Gathering the story\u2026</div>"; }
-    else {
-      if(it.de)dh+="<div class='sl-dep-de'>"+slLink(it.de)+"</div>";
-      for(var b=0;b<it.blocks.length;b++){
-        var bl=it.blocks[b];
-        dh+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>";
-      }
-      dh+=slSources(it);
-    }
+    else if(it.ages){ try{ dh=slAgesHtml(it); }catch(e){ dh=slDeepFallback(it); } }
+    else if(it.tech){ try{ dh=slTechHtml(it); }catch(e){ dh=slDeepFallback(it); } }
+    else if(it.find){ try{ dh=slFindHtml(it); }catch(e){ dh=slDeepFallback(it); } }
+    else { dh="<div class='sl-wait'>Gathering the full study\u2026</div>"; }
     dep.innerHTML=dh;
     sum.appendChild(dep);
     wrap.appendChild(sum);
@@ -9148,6 +9396,7 @@ function slRender(){
     items.sort(function(a,b){return a.y-b.y;});
     var lastEra="";
     for(var i=0;i<items.length;i++){
+      if(items[i].pin){ body.appendChild(row(items[i],true)); continue; }   /* a guide, not an event: it leads */
       var era=slEraFor(items[i].y);
       if(era!==lastEra){
         lastEra=era;
