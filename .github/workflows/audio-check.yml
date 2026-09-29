@@ -57,6 +57,24 @@ jobs:
                       elif isinstance(o,list):
                           for v in o: walk(v,depth+1)
                   print('=== ELEVENLABS MUSIC FINETUNES ==='); walk(raw); print('=== END ===')
+                  # the LST ones in full: what each was trained on, so we know which one made a recording
+                  ids=[]
+                  def ids_of(o):
+                      if isinstance(o,dict):
+                          nm=str(o.get('name') or ''); fid=o.get('finetune_id') or o.get('id')
+                          if fid and 'lst' in nm.lower(): ids.append((nm,fid))
+                          for v in o.values(): ids_of(v)
+                      elif isinstance(o,list):
+                          for v in o: ids_of(v)
+                  ids_of(raw)
+                  print('=== LST FINETUNES IN FULL ===')
+                  for nm,fid in ids:
+                      try:
+                          d=json.load(urllib.request.urlopen(urllib.request.Request('https://api.elevenlabs.io/v1/music/finetunes/'+fid,headers={'xi-api-key':key}),timeout=60))
+                          print(nm, '|', json.dumps(d)[:3000])
+                      except Exception as e:
+                          print(nm, '| could not read -', e)
+                  print('=== END ===')
               except Exception as e:
                   print('finetunes: could not list -', e)
           PY
