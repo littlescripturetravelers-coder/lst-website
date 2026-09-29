@@ -1,0 +1,1004 @@
+/* EVIDENCE AND DISCOVERIES  ·  the seed of the timeline's evidence list
+
+   Finds that bear on the Bible, the Book of Mormon, Jesus Christ and the
+   Creator. Each carries what was found, why it matters, a line for a child,
+   an honest label (confirmed / believed / debated), the scriptures it touches,
+   and sources that can be opened. The monthly discoveries job on the website
+   adds new finds to the account's copy (timeline_feed row 'discoveries'); the
+   timeline merges the two so nothing here is ever lost. */
+window.DISCOVERIES = {
+ "version": 1,
+ "updated": "2026-09-29",
+ "note": "Discoveries that bear on the Bible, the Book of Mormon, Jesus Christ and the Creator. Every entry carries an honest label - confirmed, believed or debated - and at least one source that can be opened. The monthly discoveries job adds to this list as new finds are reported; the seed here is the starting point.",
+ "labels": {
+  "confirmed": "Confirmed: evidence exists outside the scriptures and scholars broadly agree on what it is.",
+  "believed": "Believed: the find is real and fits the scriptures well, but what it proves is a matter of faith or of ongoing scholarship.",
+  "debated": "Debated: scholars genuinely disagree about the date or the meaning, and the timeline says so rather than picking a side."
+ },
+ "items": [
+  {
+   "id": "cyrus-cylinder",
+   "y": -539,
+   "date": "539 BC; found 1879",
+   "t": "The Cyrus Cylinder",
+   "loc": "Babylon (British Museum, London)",
+   "lat": 32.54,
+   "lng": 44.42,
+   "em": "&#127963;",
+   "de": "A clay cylinder written for King Cyrus of Persia after he took Babylon in 539 BC. On it Cyrus says he let captive peoples return to their homelands and rebuild their temples, and sent their gods' images home. It was dug up in Babylon in 1879 and is in the British Museum.",
+   "gospel": "Ezra 1 says Cyrus proclaimed that the Jews could go home to Jerusalem and rebuild the Lord's house, and Isaiah 44-45 had named Cyrus as the Lord's shepherd long before he was born. The cylinder shows this was exactly Cyrus's policy. The return from exile, the rebuilt temple, and everything that followed rest on a decree we can still read.",
+   "forkids": "A king let the Jews go home to build the temple, just as the Bible says. We can still see the clay he wrote it on.",
+   "conf": "confirmed",
+   "scripture": "Ezra 1:1-4; Isaiah 44:28-45:1; 2 Chronicles 36:22-23",
+   "source": "The British Museum: the Cyrus Cylinder",
+   "url": "https://www.britishmuseum.org/collection/object/W_1880-0617-1941",
+   "sources": [
+    {
+     "name": "The British Museum: the Cyrus Cylinder",
+     "url": "https://www.britishmuseum.org/collection/object/W_1880-0617-1941"
+    },
+    {
+     "name": "Wikipedia: Cyrus Cylinder",
+     "url": "https://en.wikipedia.org/wiki/Cyrus_Cylinder"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "taylor-prism",
+   "y": -701,
+   "date": "701 BC; found 1830",
+   "t": "Sennacherib's Prism: Hezekiah 'Like a Bird in a Cage'",
+   "loc": "Nineveh (British Museum, London)",
+   "lat": 36.36,
+   "lng": 43.15,
+   "em": "&#127963;",
+   "de": "A six-sided clay prism on which the Assyrian king Sennacherib recorded his campaign of 701 BC. He lists forty-six walled cities of Judah taken, and says of Hezekiah, 'I shut him up like a bird in a cage in Jerusalem, his royal city.' He never claims to have taken Jerusalem.",
+   "gospel": "2 Kings 18-19 and Isaiah 36-37 tell of Sennacherib's army at Jerusalem's walls, Hezekiah's prayer, and the army leaving without taking the city. The Assyrian king's own record agrees on every point it touches: the cities of Judah fell, Jerusalem was surrounded, and Jerusalem did not fall. What the prism leaves out, the Bible explains.",
+   "forkids": "The enemy king wrote down that he trapped Hezekiah in Jerusalem, but he never wrote that he won. The Bible tells why: Heavenly Father saved the city.",
+   "conf": "confirmed",
+   "scripture": "2 Kings 18:13-19:36; Isaiah 37:33-37",
+   "source": "Wikipedia: Sennacherib's Annals (Taylor Prism)",
+   "url": "https://en.wikipedia.org/wiki/Sennacherib%27s_Annals",
+   "sources": [
+    {
+     "name": "Wikipedia: Sennacherib's Annals (Taylor Prism)",
+     "url": "https://en.wikipedia.org/wiki/Sennacherib%27s_Annals"
+    },
+    {
+     "name": "The British Museum collection",
+     "url": "https://www.britishmuseum.org/collection"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "lachish-reliefs",
+   "y": -701,
+   "date": "701 BC; found 1847",
+   "t": "The Lachish Reliefs",
+   "loc": "Nineveh (British Museum, London)",
+   "lat": 36.36,
+   "lng": 43.15,
+   "em": "&#127963;",
+   "de": "Carved stone panels from Sennacherib's palace at Nineveh showing, scene by scene, the Assyrian siege and capture of Lachish in Judah in 701 BC: siege ramps, archers, captives led away. Excavation at Lachish itself found the siege ramp, arrowheads and sling stones.",
+   "gospel": "2 Kings 18:14 says Sennacherib was at Lachish when Hezekiah sent to him. The reliefs show that campaign from the enemy's side, and the ground at Lachish still holds its ramp. The Bible's small details sit inside a real war we can see carved in stone.",
+   "forkids": "Pictures carved by the enemy show the very battle the Bible mentions, and diggers found the ramp the enemy built.",
+   "conf": "confirmed",
+   "scripture": "2 Kings 18:13-17; 2 Chronicles 32:9",
+   "source": "Wikipedia: Lachish reliefs",
+   "url": "https://en.wikipedia.org/wiki/Lachish_reliefs",
+   "sources": [
+    {
+     "name": "Wikipedia: Lachish reliefs",
+     "url": "https://en.wikipedia.org/wiki/Lachish_reliefs"
+    },
+    {
+     "name": "Wikipedia: Siege of Lachish",
+     "url": "https://en.wikipedia.org/wiki/Siege_of_Lachish"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "siloam-tunnel",
+   "y": -701,
+   "date": "c. 701 BC; found 1880",
+   "t": "Hezekiah's Tunnel and the Siloam Inscription",
+   "loc": "Jerusalem",
+   "lat": 31.78,
+   "lng": 35.22,
+   "em": "&#127963;",
+   "de": "A 533-metre tunnel cut through rock under Jerusalem to bring the Gihon spring's water inside the walls before Sennacherib came. In 1880 boys found an inscription inside describing the moment the two digging crews met. The tunnel still carries water today.",
+   "gospel": "2 Kings 20:20 and 2 Chronicles 32:30 say Hezekiah made the pool and the conduit that brought water into the city. You can walk it. A line the Bible gives in half a verse turns out to be one of the great engineering works of the ancient world, done exactly when the Bible says.",
+   "forkids": "King Hezekiah's workers dug a tunnel for water so the city could be safe. You can still walk through it with a flashlight.",
+   "conf": "confirmed",
+   "scripture": "2 Kings 20:20; 2 Chronicles 32:30",
+   "source": "Wikipedia: Siloam inscription",
+   "url": "https://en.wikipedia.org/wiki/Siloam_inscription",
+   "sources": [
+    {
+     "name": "Wikipedia: Siloam inscription",
+     "url": "https://en.wikipedia.org/wiki/Siloam_inscription"
+    },
+    {
+     "name": "Wikipedia: Hezekiah's Tunnel",
+     "url": "https://en.wikipedia.org/wiki/Hezekiah%27s_Tunnel"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "hezekiah-bulla",
+   "y": -700,
+   "date": "c. 700 BC; found 2015",
+   "t": "The Seal Impression of King Hezekiah",
+   "loc": "Jerusalem",
+   "lat": 31.78,
+   "lng": 35.22,
+   "em": "&#127963;",
+   "de": "A clay seal impression (bulla) reading 'Belonging to Hezekiah, son of Ahaz, king of Judah,' found in 2015 in scientifically sifted earth from the Ophel excavation beside the Temple Mount, led by Eilat Mazar. It is the first seal of a king of Israel or Judah ever found in a controlled excavation.",
+   "gospel": "Hezekiah is one of the Bible's most fully told kings (2 Kings 18-20; 2 Chronicles 29-32; Isaiah 36-39). His own seal, with his father's name as the Bible gives it, pressed into clay by his own officials, was lying a few hundred feet from where the temple stood.",
+   "forkids": "A tiny piece of clay has the king's name on it, pressed there by his own helpers three thousand years ago.",
+   "conf": "confirmed",
+   "scripture": "2 Kings 18:1-7",
+   "source": "Wikipedia: Hezekiah (bulla section)",
+   "url": "https://en.wikipedia.org/wiki/Hezekiah",
+   "sources": [
+    {
+     "name": "Wikipedia: Hezekiah (bulla section)",
+     "url": "https://en.wikipedia.org/wiki/Hezekiah"
+    },
+    {
+     "name": "Wikipedia: Ophel excavations",
+     "url": "https://en.wikipedia.org/wiki/Ophel"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "mesha-stele",
+   "y": -840,
+   "date": "c. 840 BC; found 1868",
+   "t": "The Mesha Stele (Moabite Stone)",
+   "loc": "Dhiban, Jordan (Louvre, Paris)",
+   "lat": 31.5,
+   "lng": 35.78,
+   "em": "&#127963;",
+   "de": "A black basalt stone set up by Mesha, king of Moab, telling how Omri king of Israel had oppressed Moab and how Mesha threw off Israel's rule. It names Omri, Israel, the God of Israel (Yahweh), and many towns the Bible names. Found at Dhiban in 1868; most scholars also read a reference to the 'House of David.'",
+   "gospel": "2 Kings 3 tells of Mesha of Moab rebelling against Israel after Ahab's death. Here is Mesha's own account, in his own words, of the same events. The kings, the places and the God the Bible names were real to Israel's enemies too.",
+   "forkids": "An enemy king carved his side of a story the Bible tells, and he names the same people and the same God.",
+   "conf": "confirmed",
+   "scripture": "2 Kings 3:4-27",
+   "source": "Wikipedia: Mesha Stele",
+   "url": "https://en.wikipedia.org/wiki/Mesha_Stele",
+   "sources": [
+    {
+     "name": "Wikipedia: Mesha Stele",
+     "url": "https://en.wikipedia.org/wiki/Mesha_Stele"
+    },
+    {
+     "name": "Wikipedia: Mesha",
+     "url": "https://en.wikipedia.org/wiki/Mesha"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "black-obelisk",
+   "y": -841,
+   "date": "841 BC; found 1846",
+   "t": "The Black Obelisk: King Jehu Bowing",
+   "loc": "Nimrud (British Museum, London)",
+   "lat": 36.1,
+   "lng": 43.33,
+   "em": "&#127963;",
+   "de": "A black limestone monument of Shalmaneser III of Assyria found at Nimrud in 1846. One panel shows an Israelite king bowing to the Assyrian and reads 'tribute of Jehu, son of Omri.' It is the only known picture of an Israelite king from his own time.",
+   "gospel": "Jehu is the king who ended Ahab's house (2 Kings 9-10). Here he is, carved by the Assyrians, paying tribute in 841 BC, exactly where the Bible's timeline puts him. The kings of Israel were not legends; their enemies kept pictures of them.",
+   "forkids": "We have a picture of King Jehu from the Bible, carved by the Assyrians while he was alive.",
+   "conf": "confirmed",
+   "scripture": "2 Kings 9-10",
+   "source": "Wikipedia: Black Obelisk of Shalmaneser III",
+   "url": "https://en.wikipedia.org/wiki/Black_Obelisk_of_Shalmaneser_III",
+   "sources": [
+    {
+     "name": "Wikipedia: Black Obelisk of Shalmaneser III",
+     "url": "https://en.wikipedia.org/wiki/Black_Obelisk_of_Shalmaneser_III"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "ketef-hinnom",
+   "y": -600,
+   "date": "c. 600 BC; found 1979",
+   "t": "The Silver Scrolls of Ketef Hinnom: the Oldest Scripture",
+   "loc": "Jerusalem",
+   "lat": 31.78,
+   "lng": 35.22,
+   "em": "&#127963;",
+   "de": "Two tiny rolled silver amulets found in a burial cave outside Jerusalem's walls in 1979 by Gabriel Barkay. Unrolled, they carry the priestly blessing of Numbers 6:24-26, 'The Lord bless thee and keep thee.' Dated to about 600 BC, they are the oldest known copies of any words of the Bible, four centuries older than the Dead Sea Scrolls.",
+   "gospel": "Some scholars had argued that the books of Moses were written after the exile. These scrolls show the priestly blessing was already being worn and treasured in Jerusalem before the Babylonians came. The words families still say over their children were on Jerusalem's lips in Jeremiah's day.",
+   "forkids": "The oldest Bible words ever found are a blessing a mother or father wore on a tiny silver scroll: 'The Lord bless thee and keep thee.'",
+   "conf": "confirmed",
+   "scripture": "Numbers 6:24-26",
+   "source": "Wikipedia: Ketef Hinnom",
+   "url": "https://en.wikipedia.org/wiki/Ketef_Hinnom",
+   "sources": [
+    {
+     "name": "Wikipedia: Ketef Hinnom",
+     "url": "https://en.wikipedia.org/wiki/Ketef_Hinnom"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "babylonian-chronicle",
+   "y": -597,
+   "date": "597 BC; published 1956",
+   "t": "The Babylonian Chronicle: Nebuchadnezzar Takes Jerusalem",
+   "loc": "Babylon (British Museum, London)",
+   "lat": 32.54,
+   "lng": 44.42,
+   "em": "&#127963;",
+   "de": "A clay tablet of the Babylonian court chronicles recording that in his seventh year Nebuchadnezzar marched to 'the city of Judah,' took it on the second day of Adar (16 March 597 BC), captured its king, and set up a king of his own choosing. It was read and published by Donald Wiseman in 1956.",
+   "gospel": "2 Kings 24:10-17 says Nebuchadnezzar took Jerusalem, carried King Jehoiachin to Babylon, and made Zedekiah king in his place. The Babylonian record gives the same events and the exact day. Lehi's family left Jerusalem in the reign of that same Zedekiah (1 Nephi 1:4).",
+   "forkids": "The Babylonian king's own record gives the very day he took Jerusalem, and it matches the Bible.",
+   "conf": "confirmed",
+   "scripture": "2 Kings 24:10-17; 1 Nephi 1:4",
+   "source": "Wikipedia: Nebuchadnezzar Chronicle",
+   "url": "https://en.wikipedia.org/wiki/Nebuchadnezzar_Chronicle",
+   "sources": [
+    {
+     "name": "Wikipedia: Nebuchadnezzar Chronicle",
+     "url": "https://en.wikipedia.org/wiki/Nebuchadnezzar_Chronicle"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "nebo-sarsekim",
+   "y": -595,
+   "date": "595 BC; read 2007",
+   "t": "The Nebo-Sarsekim Tablet: a Name from Jeremiah 39",
+   "loc": "Sippar (British Museum, London)",
+   "lat": 33.06,
+   "lng": 44.25,
+   "em": "&#127963;",
+   "de": "A small clay receipt from Sippar, in the British Museum since 1920, that scholar Michael Jursa read in 2007. It records a gift of gold to a temple by 'Nabu-sharrussu-ukin, chief eunuch' of Nebuchadnezzar, dated 595 BC.",
+   "gospel": "Jeremiah 39:3 lists the Babylonian officers who sat in Jerusalem's gate when the city fell in 586 BC, among them 'Nebo-Sarsekim, Rab-saris' (chief eunuch). A minor official named once in the Bible turns up, with the same title, on a Babylonian receipt written nine years earlier. Jeremiah's report was written by someone who was there.",
+   "forkids": "One man is named only once in the Bible. Then his name was found on a little clay note from Babylon, with the same job title.",
+   "conf": "confirmed",
+   "scripture": "Jeremiah 39:3",
+   "source": "Wikipedia: Nebo-Sarsekim Tablet",
+   "url": "https://en.wikipedia.org/wiki/Nebo-Sarsekim_Tablet",
+   "sources": [
+    {
+     "name": "Wikipedia: Nebo-Sarsekim Tablet",
+     "url": "https://en.wikipedia.org/wiki/Nebo-Sarsekim_Tablet"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "lachish-letters",
+   "y": -588,
+   "date": "588 BC; found 1935",
+   "t": "The Lachish Letters",
+   "loc": "Lachish, Judah (British Museum and Israel Museum)",
+   "lat": 31.56,
+   "lng": 34.85,
+   "em": "&#127963;",
+   "de": "Eighteen ink-written pottery letters found in the burned gate of Lachish in 1935, written by a Judean officer during Nebuchadnezzar's final campaign. One says the writer is watching for the fire signals of Lachish because the signals of Azekah can no longer be seen.",
+   "gospel": "Jeremiah 34:7 says that at that moment only Lachish and Azekah were left of Judah's fortified cities. The letter was written as Azekah went dark. Jeremiah's words and the officer's letter describe the same week from two rooms.",
+   "forkids": "A soldier wrote a note saying he could not see the signal fires from the next city anymore. Jeremiah wrote about that same city falling.",
+   "conf": "confirmed",
+   "scripture": "Jeremiah 34:6-7",
+   "source": "Wikipedia: Lachish letters",
+   "url": "https://en.wikipedia.org/wiki/Lachish_letters",
+   "sources": [
+    {
+     "name": "Wikipedia: Lachish letters",
+     "url": "https://en.wikipedia.org/wiki/Lachish_letters"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "nabonidus-belshazzar",
+   "y": -539,
+   "date": "c. 550-539 BC; found 1854",
+   "t": "Belshazzar Was Real: the Nabonidus Cylinders",
+   "loc": "Ur (British Museum, London)",
+   "lat": 30.96,
+   "lng": 46.1,
+   "em": "&#127963;",
+   "de": "For centuries critics said the Bible's Belshazzar never existed, since ancient historians named Nabonidus as Babylon's last king. Cylinders found at Ur in 1854 record Nabonidus praying for 'Belshazzar, my firstborn son.' Other tablets show Nabonidus away in Arabia for years while Belshazzar ruled in Babylon.",
+   "gospel": "Daniel 5 has Belshazzar ruling in Babylon the night it fell, and offering Daniel the third place in the kingdom, because Belshazzar himself was only second, under his absent father. A detail once used to doubt Daniel now shows how well Daniel knew the court.",
+   "forkids": "People said the king in Daniel's story was made up. Then his name was found, written by his own father.",
+   "conf": "confirmed",
+   "scripture": "Daniel 5",
+   "source": "Wikipedia: Nabonidus Cylinder",
+   "url": "https://en.wikipedia.org/wiki/Nabonidus_Cylinder",
+   "sources": [
+    {
+     "name": "Wikipedia: Nabonidus Cylinder",
+     "url": "https://en.wikipedia.org/wiki/Nabonidus_Cylinder"
+    },
+    {
+     "name": "Wikipedia: Belshazzar",
+     "url": "https://en.wikipedia.org/wiki/Belshazzar"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "shishak-karnak",
+   "y": -925,
+   "date": "c. 925 BC",
+   "t": "Shishak's Victory List at Karnak",
+   "loc": "Karnak, Egypt",
+   "lat": 25.72,
+   "lng": 32.66,
+   "em": "&#127963;",
+   "de": "On the Bubastite Portal at the Karnak temple, Pharaoh Shoshenq I (the Bible's Shishak) carved a list of the towns his army took in Canaan, about 925 BC, including many in Israel and Judah. A fragment of his victory stele was also found at Megiddo.",
+   "gospel": "1 Kings 14:25-26 and 2 Chronicles 12 say that in Rehoboam's fifth year Shishak king of Egypt came up against Jerusalem and took the treasures of the temple. The pharaoh's own wall records that campaign, with the towns of the land Rehoboam ruled.",
+   "forkids": "A pharaoh carved the list of towns he attacked in Israel, the same attack the Bible tells about after Solomon died.",
+   "conf": "confirmed",
+   "scripture": "1 Kings 14:25-28; 2 Chronicles 12:1-12",
+   "source": "Wikipedia: Bubastite Portal",
+   "url": "https://en.wikipedia.org/wiki/Bubastite_Portal",
+   "sources": [
+    {
+     "name": "Wikipedia: Bubastite Portal",
+     "url": "https://en.wikipedia.org/wiki/Bubastite_Portal"
+    },
+    {
+     "name": "Wikipedia: Shoshenq I",
+     "url": "https://en.wikipedia.org/wiki/Shoshenq_I"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "isaiah-scroll",
+   "y": -125,
+   "date": "c. 125 BC; found 1947",
+   "t": "The Great Isaiah Scroll",
+   "loc": "Qumran (Israel Museum, Jerusalem)",
+   "lat": 31.74,
+   "lng": 35.46,
+   "em": "&#127963;",
+   "de": "A complete copy of the book of Isaiah on leather, found in Cave 1 at Qumran in 1947 and dated to about 125 BC. It is a thousand years older than the oldest complete Hebrew Bibles known before it, and its text is nearly identical to them.",
+   "gospel": "Isaiah is the prophet the Book of Mormon quotes most, and the one whose words about the Savior are read every Christmas. This scroll shows those words were copied faithfully for a thousand years. What Nephi quoted from the brass plates and what we read today are the same book.",
+   "forkids": "A whole book of Isaiah, older than Jesus, was found in a cave. The words are the same as in our Bible today.",
+   "conf": "confirmed",
+   "scripture": "Isaiah 53; 2 Nephi 12-24",
+   "source": "Wikipedia: Isaiah Scroll",
+   "url": "https://en.wikipedia.org/wiki/Isaiah_Scroll",
+   "sources": [
+    {
+     "name": "Wikipedia: Isaiah Scroll",
+     "url": "https://en.wikipedia.org/wiki/Isaiah_Scroll"
+    },
+    {
+     "name": "The Digital Dead Sea Scrolls (Israel Museum)",
+     "url": "https://www.deadseascrolls.org.il/"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "ekron-inscription",
+   "y": -675,
+   "date": "c. 675 BC; found 1996",
+   "t": "The Ekron Inscription: a Philistine City Named",
+   "loc": "Tel Miqne (Ekron), Israel",
+   "lat": 31.78,
+   "lng": 34.85,
+   "em": "&#127963;",
+   "de": "A stone inscription found in 1996 in a temple at Tel Miqne naming the city as Ekron and its king as Achish, son of Padi. It settled the city's identity and gave the Philistines a written voice.",
+   "gospel": "Ekron is one of the five Philistine cities named in Joshua 13:3 and 1 Samuel 6, and Achish is the name of the Philistine king David served under (1 Samuel 27). Philistine kings, cities and names in the Bible match what the Philistines wrote of themselves.",
+   "forkids": "The Bible names the Philistine city of Ekron. Diggers found a stone in that very city that says 'Ekron.'",
+   "conf": "confirmed",
+   "scripture": "Joshua 13:3; 1 Samuel 5-6; 1 Samuel 27",
+   "source": "Wikipedia: Ekron Royal Dedicatory Inscription",
+   "url": "https://en.wikipedia.org/wiki/Ekron_Royal_Dedicatory_Inscription",
+   "sources": [
+    {
+     "name": "Wikipedia: Ekron Royal Dedicatory Inscription",
+     "url": "https://en.wikipedia.org/wiki/Ekron_Royal_Dedicatory_Inscription"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "jericho-walls",
+   "y": -1400,
+   "date": "c. 1400 BC (debated); excavated 1907-1958",
+   "t": "The Fallen Walls of Jericho",
+   "loc": "Tell es-Sultan (Jericho)",
+   "lat": 31.87,
+   "lng": 35.44,
+   "em": "&#127963;",
+   "de": "Jericho's mound has a collapsed mud-brick wall that fell outward at the base of the stone rampart, a burned city, and full storage jars of grain, all found by Garstang (1930s) and Kenyon (1950s). The find is real; its date is argued: Kenyon placed the fall about 1550 BC, before Joshua, while Bryant Wood argued from pottery that it was about 1400 BC, in Joshua's time.",
+   "gospel": "Joshua 6 says the walls fell down flat, the city was burned, and the grain was not taken (it was harvest time, and the city was devoted to the Lord). All three details are in the ground. Whether this fallen city is Joshua's depends on a date scholars still dispute, and honesty requires saying so.",
+   "forkids": "Jericho's walls really did fall down, and the city really was burned with its food still inside. Scholars still argue about which year.",
+   "conf": "debated",
+   "scripture": "Joshua 6",
+   "source": "Wikipedia: Battle of Jericho",
+   "url": "https://en.wikipedia.org/wiki/Battle_of_Jericho",
+   "sources": [
+    {
+     "name": "Wikipedia: Battle of Jericho",
+     "url": "https://en.wikipedia.org/wiki/Battle_of_Jericho"
+    },
+    {
+     "name": "Wikipedia: Tell es-Sultan",
+     "url": "https://en.wikipedia.org/wiki/Tell_es-Sultan"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "pilate-stone",
+   "y": 26,
+   "date": "AD 26-36; found 1961",
+   "t": "The Pilate Stone",
+   "loc": "Caesarea Maritima (Israel Museum, Jerusalem)",
+   "lat": 32.5,
+   "lng": 34.89,
+   "em": "&#127963;",
+   "de": "A limestone block found in 1961 in the theatre at Caesarea, reused as a step, carrying a Latin dedication by 'Pontius Pilate, Prefect of Judea.' It is the only inscription from Pilate's own lifetime naming him.",
+   "gospel": "The man who sentenced Jesus is named in all four Gospels, by Tacitus, by Josephus, and now by his own building inscription. It also gives his exact title, prefect, which matches what the Gospels imply and corrects a later habit of calling him procurator.",
+   "forkids": "The Roman governor who judged Jesus put his name on a stone building. The stone was found sixty years ago.",
+   "conf": "confirmed",
+   "scripture": "Matthew 27; Luke 23; John 18-19",
+   "source": "Wikipedia: Pilate stone",
+   "url": "https://en.wikipedia.org/wiki/Pilate_stone",
+   "sources": [
+    {
+     "name": "Wikipedia: Pilate stone",
+     "url": "https://en.wikipedia.org/wiki/Pilate_stone"
+    }
+   ],
+   "group": "christ"
+  },
+  {
+   "id": "yehohanan",
+   "y": 30,
+   "date": "first century AD; found 1968",
+   "t": "Yehohanan: a Crucified Man's Heel Bone",
+   "loc": "Jerusalem",
+   "lat": 31.78,
+   "lng": 35.22,
+   "em": "&#127963;",
+   "de": "In 1968 an ossuary in a Jerusalem tomb held the bones of a man named Yehohanan with an iron nail still driven through his heel bone, the wood of the cross still attached. It is direct physical evidence of Roman crucifixion in Jerusalem in Jesus' century.",
+   "gospel": "The Gospels describe Jesus nailed to a cross outside Jerusalem and buried in a tomb by Joseph of Arimathea. Some claimed crucified men were never given burial. Yehohanan was crucified with nails and then laid in a family tomb, exactly the pattern the Gospels give for the Savior.",
+   "forkids": "A man who was crucified in Jerusalem, like Jesus, was found with the nail still in his foot, and he had been buried in a tomb by his family.",
+   "conf": "confirmed",
+   "scripture": "John 19:16-42; John 20:25",
+   "source": "Wikipedia: Jehohanan",
+   "url": "https://en.wikipedia.org/wiki/Jehohanan",
+   "sources": [
+    {
+     "name": "Wikipedia: Jehohanan",
+     "url": "https://en.wikipedia.org/wiki/Jehohanan"
+    }
+   ],
+   "group": "christ"
+  },
+  {
+   "id": "capernaum",
+   "y": 30,
+   "date": "first century AD; excavated 1968 onward",
+   "t": "Capernaum: the Synagogue and Peter's House",
+   "loc": "Capernaum, Galilee",
+   "lat": 32.88,
+   "lng": 35.58,
+   "em": "&#127963;",
+   "de": "Excavations at Capernaum uncovered a first-century house beneath a fourth-century church, which early Christians had marked and venerated as Peter's, with graffiti naming Jesus and Peter; and the black basalt foundations of a first-century synagogue under the later white limestone one.",
+   "gospel": "Jesus made Capernaum His own city (Matthew 9:1), taught in its synagogue (Mark 1:21), and healed Peter's mother-in-law in Peter's house (Mark 1:29-31). The synagogue's floor and a house Christians remembered as Peter's within a generation or two are both there.",
+   "forkids": "The town where Jesus lived, its meeting house, and the house that was probably Peter's have all been found.",
+   "conf": "believed",
+   "scripture": "Mark 1:21-34; Matthew 9:1",
+   "source": "Wikipedia: Capernaum",
+   "url": "https://en.wikipedia.org/wiki/Capernaum",
+   "sources": [
+    {
+     "name": "Wikipedia: Capernaum",
+     "url": "https://en.wikipedia.org/wiki/Capernaum"
+    }
+   ],
+   "group": "christ"
+  },
+  {
+   "id": "magdala-stone",
+   "y": 30,
+   "date": "first century AD; found 2009",
+   "t": "The Magdala Synagogue and the Magdala Stone",
+   "loc": "Magdala, Galilee",
+   "lat": 32.83,
+   "lng": 35.52,
+   "em": "&#127963;",
+   "de": "Building a hotel at Magdala in 2009 uncovered a first-century synagogue, one of the few in Galilee from Jesus' lifetime, with a carved stone showing the temple's menorah. It stood in the town of Mary Magdalene.",
+   "gospel": "Matthew 4:23 says Jesus went through all Galilee teaching in their synagogues. Critics once doubted Galilee had synagogue buildings that early. Magdala's is dated before AD 70, on the shore where Jesus walked, in Mary Magdalene's own town.",
+   "forkids": "A meeting house from the time of Jesus was found in the town of Mary Magdalene, one of His friends.",
+   "conf": "confirmed",
+   "scripture": "Matthew 4:23; Luke 8:2",
+   "source": "Wikipedia: Magdala stone",
+   "url": "https://en.wikipedia.org/wiki/Magdala_stone",
+   "sources": [
+    {
+     "name": "Wikipedia: Magdala stone",
+     "url": "https://en.wikipedia.org/wiki/Magdala_stone"
+    },
+    {
+     "name": "Wikipedia: Magdala",
+     "url": "https://en.wikipedia.org/wiki/Magdala"
+    }
+   ],
+   "group": "christ"
+  },
+  {
+   "id": "nazareth-house",
+   "y": 30,
+   "date": "first century AD; found 2009",
+   "t": "A First-Century House in Nazareth",
+   "loc": "Nazareth, Galilee",
+   "lat": 32.7,
+   "lng": 35.3,
+   "em": "&#127963;",
+   "de": "Because so little from the first century had been found there, some writers claimed Nazareth did not exist in Jesus' day. In 2009 the Israel Antiquities Authority excavated a small first-century house in Nazareth, with a courtyard and cistern, near the Church of the Annunciation; more such remains have followed.",
+   "gospel": "Nazareth was a small village, which is exactly how the Gospels treat it ('Can anything good come out of Nazareth?', John 1:46). It was there, with families living in ordinary stone houses like the one Jesus grew up in.",
+   "forkids": "People said Jesus' hometown was not a real place. Then a house from His time was found in it.",
+   "conf": "confirmed",
+   "scripture": "Luke 2:39-40; John 1:46",
+   "source": "Wikipedia: Nazareth",
+   "url": "https://en.wikipedia.org/wiki/Nazareth",
+   "sources": [
+    {
+     "name": "Wikipedia: Nazareth",
+     "url": "https://en.wikipedia.org/wiki/Nazareth"
+    }
+   ],
+   "group": "christ"
+  },
+  {
+   "id": "pool-of-siloam",
+   "y": 30,
+   "date": "first century AD; found 2004",
+   "t": "The Pool of Siloam",
+   "loc": "Jerusalem",
+   "lat": 31.78,
+   "lng": 35.22,
+   "em": "&#127963;",
+   "de": "Repairs to a sewer in 2004 uncovered the wide stone steps of the first-century Pool of Siloam at the low end of the City of David, fed by Hezekiah's Tunnel. Coins in its plaster date it to Jesus' lifetime. Excavation of the whole pool began in 2023.",
+   "gospel": "In John 9 Jesus sends a man born blind to wash in the Pool of Siloam, and he comes back seeing. The pool John describes, at the place John describes, has been under the mud all along.",
+   "forkids": "The pool where Jesus sent a blind man to wash has been found, with its steps.",
+   "conf": "confirmed",
+   "scripture": "John 9:1-11",
+   "source": "Wikipedia: Pool of Siloam",
+   "url": "https://en.wikipedia.org/wiki/Pool_of_Siloam",
+   "sources": [
+    {
+     "name": "Wikipedia: Pool of Siloam",
+     "url": "https://en.wikipedia.org/wiki/Pool_of_Siloam"
+    }
+   ],
+   "group": "christ"
+  },
+  {
+   "id": "bethesda",
+   "y": 30,
+   "date": "first century AD; excavated 1888 onward",
+   "t": "The Pool of Bethesda and Its Five Porches",
+   "loc": "Jerusalem",
+   "lat": 31.78,
+   "lng": 35.22,
+   "em": "&#127963;",
+   "de": "John 5 describes a pool by the Sheep Gate with five porches. No such five-sided pool was known, and some said John invented it. Excavations beside St Anne's Church from 1888 onward uncovered two large pools with colonnades on four sides and a fifth across the middle: five porches.",
+   "gospel": "John's odd detail, five porches, was right, because John had stood there. The place where Jesus healed the man who had waited thirty-eight years is a place you can visit.",
+   "forkids": "The Bible said a pool had five porches. People laughed. Then they dug it up, and it has five.",
+   "conf": "confirmed",
+   "scripture": "John 5:1-15",
+   "source": "Wikipedia: Pool of Bethesda",
+   "url": "https://en.wikipedia.org/wiki/Pool_of_Bethesda",
+   "sources": [
+    {
+     "name": "Wikipedia: Pool of Bethesda",
+     "url": "https://en.wikipedia.org/wiki/Pool_of_Bethesda"
+    }
+   ],
+   "group": "christ"
+  },
+  {
+   "id": "gallio",
+   "y": 51,
+   "date": "AD 51-52; found 1905",
+   "t": "The Gallio Inscription at Delphi",
+   "loc": "Delphi, Greece",
+   "lat": 38.48,
+   "lng": 22.5,
+   "em": "&#127963;",
+   "de": "Fragments of a letter from the emperor Claudius carved at Delphi name Lucius Junius Gallio as proconsul of Achaia, and date his year in office to AD 51-52.",
+   "gospel": "Acts 18:12 says Paul was brought before Gallio, proconsul of Achaia, in Corinth. The inscription proves Gallio held that office, and pins Paul's stay in Corinth to AD 51-52. It is the anchor that dates Paul's whole ministry.",
+   "forkids": "A carved letter from the emperor names the judge Paul stood in front of, and tells us the year.",
+   "conf": "confirmed",
+   "scripture": "Acts 18:12-17",
+   "source": "Wikipedia: Delphi Inscription (Gallio)",
+   "url": "https://en.wikipedia.org/wiki/Delphi_Inscription",
+   "sources": [
+    {
+     "name": "Wikipedia: Delphi Inscription (Gallio)",
+     "url": "https://en.wikipedia.org/wiki/Delphi_Inscription"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "politarchs",
+   "y": 50,
+   "date": "first century AD; found 1835",
+   "t": "The Politarchs of Thessalonica",
+   "loc": "Thessalonica, Greece (British Museum)",
+   "lat": 40.64,
+   "lng": 22.94,
+   "em": "&#127963;",
+   "de": "Acts 17:6 calls the city officials of Thessalonica 'politarchs,' a title found in no other ancient writer, so critics called it Luke's mistake. An arch in Thessalonica, recorded in 1835 and now in the British Museum, lists the city's politarchs, and dozens more inscriptions using the title have been found since.",
+   "gospel": "Luke used the right local title for the right city. The man who wrote Acts knew the towns he wrote about, which is what you would expect from Paul's travelling companion.",
+   "forkids": "The Bible used a special word for the rulers of one city. Nobody else used it, so people said it was wrong. Then the word was found carved in that city.",
+   "conf": "confirmed",
+   "scripture": "Acts 17:1-9",
+   "source": "Wikipedia: Politarch",
+   "url": "https://en.wikipedia.org/wiki/Politarch",
+   "sources": [
+    {
+     "name": "Wikipedia: Politarch",
+     "url": "https://en.wikipedia.org/wiki/Politarch"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "erastus",
+   "y": 50,
+   "date": "mid first century AD; found 1929",
+   "t": "The Erastus Inscription at Corinth",
+   "loc": "Corinth, Greece",
+   "lat": 37.91,
+   "lng": 22.88,
+   "em": "&#127963;",
+   "de": "A paving inscription at Corinth records that Erastus, in return for his aedileship, laid the pavement at his own expense. Paul, writing from Corinth, sends greetings from 'Erastus the chamberlain of the city' (Romans 16:23).",
+   "gospel": "Most scholars think this is Paul's Erastus, a city official who became a believer; a few think the name is a coincidence. Either way it shows the Corinth of Romans 16 as it was: a city where a public official could carry the gospel's greeting.",
+   "forkids": "A helper of Paul named Erastus paid for a stone street in his city. His name is still in the pavement.",
+   "conf": "believed",
+   "scripture": "Romans 16:23; Acts 19:22",
+   "source": "Wikipedia: Erastus of Corinth",
+   "url": "https://en.wikipedia.org/wiki/Erastus_of_Corinth",
+   "sources": [
+    {
+     "name": "Wikipedia: Erastus of Corinth",
+     "url": "https://en.wikipedia.org/wiki/Erastus_of_Corinth"
+    }
+   ],
+   "group": "bible"
+  },
+  {
+   "id": "tacitus",
+   "y": 116,
+   "date": "written c. AD 116",
+   "t": "Tacitus on Christ",
+   "loc": "Rome",
+   "lat": 41.9,
+   "lng": 12.5,
+   "em": "&#127963;",
+   "de": "The Roman historian Tacitus, no friend to Christians, wrote in his Annals (15.44) that 'Christus' was executed under Pontius Pilate in the reign of Tiberius, and that the 'pernicious superstition' broke out again in Judea and reached Rome, where Nero blamed the Christians for the fire of AD 64.",
+   "gospel": "A Roman senator confirms, from Roman records and with contempt, the core of the Gospel history: Jesus lived, was executed by Pilate under Tiberius, and His followers multiplied rather than vanished. Nobody dies for a man who never lived.",
+   "forkids": "A Roman writer who did not like Christians still wrote that Jesus was real and was killed by Pilate.",
+   "conf": "confirmed",
+   "scripture": "Luke 3:1; Luke 23",
+   "source": "Wikipedia: Tacitus on Jesus",
+   "url": "https://en.wikipedia.org/wiki/Tacitus_on_Jesus",
+   "sources": [
+    {
+     "name": "Wikipedia: Tacitus on Jesus",
+     "url": "https://en.wikipedia.org/wiki/Tacitus_on_Jesus"
+    }
+   ],
+   "group": "christ"
+  },
+  {
+   "id": "josephus",
+   "y": 93,
+   "date": "written c. AD 93",
+   "t": "Josephus on Jesus and on James His Brother",
+   "loc": "Rome",
+   "lat": 41.9,
+   "lng": 12.5,
+   "em": "&#127963;",
+   "de": "The Jewish historian Josephus mentions 'James, the brother of Jesus who was called Christ,' stoned in AD 62 (Antiquities 20.9.1), a passage nearly all scholars accept as genuine. His longer passage on Jesus (Antiquities 18.3.3) was touched up by later Christian copyists, but most scholars hold that an original notice of Jesus, His deeds, His execution by Pilate and His followers lies beneath it.",
+   "gospel": "A Jewish writer of the first century, not a Christian, records Jesus and His brother James as real people in a real Jerusalem. The Gospels and Acts name James too (Matthew 13:55; Acts 15).",
+   "forkids": "A Jewish historian from that time wrote about Jesus and about His brother James.",
+   "conf": "believed",
+   "scripture": "Matthew 13:55; Acts 15:13; Galatians 1:19",
+   "source": "Wikipedia: Josephus on Jesus",
+   "url": "https://en.wikipedia.org/wiki/Josephus_on_Jesus",
+   "sources": [
+    {
+     "name": "Wikipedia: Josephus on Jesus",
+     "url": "https://en.wikipedia.org/wiki/Josephus_on_Jesus"
+    }
+   ],
+   "group": "christ"
+  },
+  {
+   "id": "p52",
+   "y": 125,
+   "date": "c. AD 125-175; identified 1934",
+   "t": "Rylands Papyrus P52: the Oldest Piece of the New Testament",
+   "loc": "Egypt (John Rylands Library, Manchester)",
+   "lat": 30.04,
+   "lng": 31.24,
+   "em": "&#127963;",
+   "de": "A credit-card-sized scrap of papyrus with John 18:31-33 on one side and 18:37-38 on the other, found in Egypt and identified in 1934. Most scholars date it to the first half of the second century, within decades of when John was written.",
+   "gospel": "Critics once dated John's Gospel to the late second century. A copy was being read in a village in Egypt far from Ephesus by then. The words are Pilate's question, 'Art thou a king then?', and Jesus' answer, 'Every one that is of the truth heareth my voice.'",
+   "forkids": "The oldest little piece of the New Testament ever found has Jesus talking to Pilate on it.",
+   "conf": "confirmed",
+   "scripture": "John 18:31-38",
+   "source": "Wikipedia: Rylands Library Papyrus P52",
+   "url": "https://en.wikipedia.org/wiki/Rylands_Library_Papyrus_P52",
+   "sources": [
+    {
+     "name": "Wikipedia: Rylands Library Papyrus P52",
+     "url": "https://en.wikipedia.org/wiki/Rylands_Library_Papyrus_P52"
+    }
+   ],
+   "group": "christ"
+  },
+  {
+   "id": "nahom",
+   "y": -600,
+   "date": "c. 600 BC; altars dated 7th-6th century BC; found 1990s-2000",
+   "t": "Nahom: the Altars of NHM in Yemen",
+   "loc": "Nihm region, Yemen",
+   "lat": 15.62,
+   "lng": 44.72,
+   "em": "&#10022;",
+   "de": "1 Nephi 16:34 says Ishmael died and was buried 'in the place which was called Nahom,' south-south-east of Jerusalem along Lehi's route. In the 1990s and 2000, German and other excavators at the Bar'an temple near Marib, Yemen, published altars inscribed with the tribal name NHM, dated to the seventh and sixth centuries BC, in the region still called Nihm today.",
+   "gospel": "The Book of Mormon names a place, says it 'was called' that already, and puts it on the frankincense trail exactly where a burial place of that name existed in Lehi's century. Joseph Smith had no map that showed it. Scholars debate what the match proves; the altars and the name are not in doubt.",
+   "forkids": "The Book of Mormon names a place called Nahom in Arabia. Old stone altars with that name were found there, from the right time.",
+   "conf": "believed",
+   "scripture": "1 Nephi 16:34",
+   "source": "Wikipedia: Nahom",
+   "url": "https://en.wikipedia.org/wiki/Nahom",
+   "sources": [
+    {
+     "name": "Wikipedia: Nahom",
+     "url": "https://en.wikipedia.org/wiki/Nahom"
+    },
+    {
+     "name": "Scripture Central",
+     "url": "https://scripturecentral.org/"
+    }
+   ],
+   "group": "bom"
+  },
+  {
+   "id": "bountiful-kharfot",
+   "y": -592,
+   "date": "c. 592 BC; surveyed 1980s onward",
+   "t": "Bountiful: Khor Kharfot on the Coast of Oman",
+   "loc": "Dhofar, Oman",
+   "lat": 16.73,
+   "lng": 53.34,
+   "em": "&#10022;",
+   "de": "1 Nephi 17 describes Lehi's family reaching a fertile coast with fruit, honey, timber for a ship, a mountain, and ore, after travelling nearly eastward from Nahom. Khor Kharfot in Oman, almost due east of Nihm, has all of these: a freshwater lagoon, large trees, fruit, wild bees, iron ore nearby and a cliff over the sea.",
+   "gospel": "In 1830 Arabia was thought to be all desert; a green coast with timber was a laughable claim. It is there, where the text says. Which inlet was Bountiful is debated among believing scholars themselves, so the claim is kept modest.",
+   "forkids": "The Book of Mormon says Lehi's family found a green place with trees and fruit by the sea in Arabia. There is one, right where the book says.",
+   "conf": "debated",
+   "scripture": "1 Nephi 17:5-8",
+   "source": "Wikipedia: Khor Kharfot",
+   "url": "https://en.wikipedia.org/wiki/Khor_Kharfot",
+   "sources": [
+    {
+     "name": "Wikipedia: Khor Kharfot",
+     "url": "https://en.wikipedia.org/wiki/Khor_Kharfot"
+    },
+    {
+     "name": "Scripture Central",
+     "url": "https://scripturecentral.org/"
+    }
+   ],
+   "group": "bom"
+  },
+  {
+   "id": "chiasmus",
+   "y": 1967,
+   "date": "noticed 1967",
+   "t": "Chiasmus in the Book of Mormon",
+   "loc": "Regensburg, Germany",
+   "lat": 49.01,
+   "lng": 12.1,
+   "em": "&#10022;",
+   "de": "Chiasmus is an ancient Hebrew pattern in which ideas are stated and then repeated in reverse order (A-B-C-B-A). In 1967 John W. Welch, a missionary in Germany, found long, careful chiasms in the Book of Mormon, most famously Alma 36, a form scholars had only begun to describe in the Bible in the 1860s, decades after 1830.",
+   "gospel": "A young farmer in 1829 did not know this Hebrew pattern; it is there anyway, in the places a Hebrew record would put it. It is literary evidence, not a dig, and honest study says it is strong for some passages and weaker for others.",
+   "forkids": "The Book of Mormon has hidden patterns that ancient Hebrew writers used, which nobody in Joseph Smith's day knew about.",
+   "conf": "believed",
+   "scripture": "Alma 36; Mosiah 5:10-12",
+   "source": "Wikipedia: Chiasmus",
+   "url": "https://en.wikipedia.org/wiki/Chiasmus",
+   "sources": [
+    {
+     "name": "Wikipedia: Chiasmus",
+     "url": "https://en.wikipedia.org/wiki/Chiasmus"
+    },
+    {
+     "name": "Scripture Central",
+     "url": "https://scripturecentral.org/"
+    }
+   ],
+   "group": "bom"
+  },
+  {
+   "id": "metal-plates",
+   "y": -515,
+   "date": "c. 515 BC; found 1933",
+   "t": "Scripture on Metal Plates: the Darius Foundation Tablets",
+   "loc": "Persepolis, Iran (National Museum of Iran)",
+   "lat": 29.93,
+   "lng": 52.89,
+   "em": "&#10022;",
+   "de": "In 1830 a sacred record written on gold plates and buried in a stone box was called absurd. In 1933 excavators at Persepolis opened stone boxes set under the palace of Darius I and found gold and silver plates inscribed with his royal text, buried about 515 BC. Many other inscribed metal plates have been found since, from Italy to Korea.",
+   "gospel": "The Book of Mormon's plates were not a strange idea in the ancient world; kings and priests wrote what mattered most on metal and sealed it in stone to last. Nephi's world knew the practice; Joseph Smith's did not.",
+   "forkids": "People said nobody ever wrote on gold plates. Then gold plates from a king were found in a stone box, just like the Book of Mormon's.",
+   "conf": "confirmed",
+   "scripture": "1 Nephi 19:1; Mormon 8:5",
+   "source": "Wikipedia: Apadana (foundation tablets)",
+   "url": "https://en.wikipedia.org/wiki/Apadana",
+   "sources": [
+    {
+     "name": "Wikipedia: Apadana (foundation tablets)",
+     "url": "https://en.wikipedia.org/wiki/Apadana"
+    },
+    {
+     "name": "Wikipedia: Pyrgi Tablets",
+     "url": "https://en.wikipedia.org/wiki/Pyrgi_Tablets"
+    }
+   ],
+   "group": "bom"
+  },
+  {
+   "id": "cement",
+   "y": -100,
+   "date": "c. 100 BC-AD 250",
+   "t": "Cement in Ancient America",
+   "loc": "Teotihuacan, Mexico",
+   "lat": 19.69,
+   "lng": -98.84,
+   "em": "&#10022;",
+   "de": "Helaman 3:7-11 says people in the land northward, short of timber, became expert in working cement and built houses of it about 50 BC. In 1830 no one knew of cement in ancient America. Teotihuacan and other Mesoamerican sites of that era used lime cement and concrete on a large scale for floors, walls and plaster.",
+   "gospel": "A detail that looked like a blunder turned out to be a fact about the right place and roughly the right time. Where in the Americas the Book of Mormon happened is debated; that ancient Americans built with cement is not.",
+   "forkids": "The Book of Mormon says people in America built houses of cement long ago. They did; whole cities were plastered with it.",
+   "conf": "believed",
+   "scripture": "Helaman 3:7-11",
+   "source": "Wikipedia: Teotihuacan",
+   "url": "https://en.wikipedia.org/wiki/Teotihuacan",
+   "sources": [
+    {
+     "name": "Wikipedia: Teotihuacan",
+     "url": "https://en.wikipedia.org/wiki/Teotihuacan"
+    },
+    {
+     "name": "Scripture Central",
+     "url": "https://scripturecentral.org/"
+    }
+   ],
+   "group": "bom"
+  },
+  {
+   "id": "little-barley",
+   "y": -100,
+   "date": "c. 300 BC-AD 900; found 1983",
+   "t": "Barley in the Americas Before Columbus",
+   "loc": "Phoenix, Arizona, USA",
+   "lat": 33.45,
+   "lng": -112.07,
+   "em": "&#10022;",
+   "de": "Mosiah 9:9 and Alma 11:7 mention barley among Nephite crops. For a century critics said barley was unknown in the New World before Europeans. In 1983 archaeologists at a Hohokam site near Phoenix found domesticated little barley (Hordeum pusillum); it has since been found at many pre-Columbian sites in North America.",
+   "gospel": "A crop named in passing by the Book of Mormon, ridiculed for a hundred years, was being grown in ancient America after all. Whether Nephite barley was this plant is a fair question; that the ridicule was misplaced is not.",
+   "forkids": "The Book of Mormon mentions barley in America. People said there was none. Then old barley seeds were found.",
+   "conf": "believed",
+   "scripture": "Mosiah 9:9; Alma 11:7",
+   "source": "Wikipedia: Hordeum pusillum",
+   "url": "https://en.wikipedia.org/wiki/Hordeum_pusillum",
+   "sources": [
+    {
+     "name": "Wikipedia: Hordeum pusillum",
+     "url": "https://en.wikipedia.org/wiki/Hordeum_pusillum"
+    },
+    {
+     "name": "Scripture Central",
+     "url": "https://scripturecentral.org/"
+    }
+   ],
+   "group": "bom"
+  },
+  {
+   "id": "alma-name",
+   "y": 132,
+   "date": "documents of AD 132-135; found 1961",
+   "t": "'Alma' Was a Man's Name in Ancient Israel",
+   "loc": "Nahal Hever, Judean Desert",
+   "lat": 31.42,
+   "lng": 35.35,
+   "em": "&#10022;",
+   "de": "Critics said Alma, the Book of Mormon's great prophet, carried a woman's name borrowed from Latin. In 1961 Yigael Yadin found documents from the Bar Kokhba revolt in the Cave of Letters naming a Jewish landowner, 'Alma son of Judah.' The name is Hebrew, and male.",
+   "gospel": "A name Joseph Smith supposedly got wrong is a real Hebrew man's name from the land Lehi left. It is a small thing, and small things are where forgeries usually fail.",
+   "forkids": "People made fun of the name Alma. Then a real man named Alma was found in old Jewish papers.",
+   "conf": "confirmed",
+   "scripture": "Mosiah 17:2; Alma 36",
+   "source": "Wikipedia: Cave of Letters",
+   "url": "https://en.wikipedia.org/wiki/Cave_of_Letters",
+   "sources": [
+    {
+     "name": "Wikipedia: Cave of Letters",
+     "url": "https://en.wikipedia.org/wiki/Cave_of_Letters"
+    },
+    {
+     "name": "Scripture Central",
+     "url": "https://scripturecentral.org/"
+    }
+   ],
+   "group": "bom"
+  },
+  {
+   "id": "hubble-beginning",
+   "y": 1929,
+   "date": "1929",
+   "t": "The Universe Had a Beginning: Hubble's Expanding Universe",
+   "loc": "Mount Wilson Observatory, California",
+   "lat": 34.22,
+   "lng": -118.06,
+   "em": "&#127756;",
+   "de": "In 1929 Edwin Hubble showed that the galaxies are flying apart, and that the farther away they are the faster they go. Run the film backward and everything was once together: the universe began. Until then many scientists believed the universe had always existed.",
+   "gospel": "'In the beginning God created the heaven and the earth' was, for a century, thought to be the opposite of science. The universe having a beginning is now the settled starting point of physics. Faith does not depend on it, but it is honest to notice that the scriptures said 'beginning' first.",
+   "forkids": "Scientists found out that the whole universe had a beginning, like the Bible says. Everything started somewhere.",
+   "conf": "confirmed",
+   "scripture": "Genesis 1:1; Moses 1:33-39",
+   "source": "Wikipedia: Hubble's law",
+   "url": "https://en.wikipedia.org/wiki/Hubble%27s_law",
+   "sources": [
+    {
+     "name": "Wikipedia: Hubble's law",
+     "url": "https://en.wikipedia.org/wiki/Hubble%27s_law"
+    }
+   ],
+   "group": "god"
+  },
+  {
+   "id": "cmb",
+   "y": 1965,
+   "date": "1965",
+   "t": "The Afterglow of Creation: the Cosmic Microwave Background",
+   "loc": "Holmdel, New Jersey, USA",
+   "lat": 40.39,
+   "lng": -74.18,
+   "em": "&#127756;",
+   "de": "In 1965 Arno Penzias and Robert Wilson found a faint microwave glow coming evenly from every direction in the sky. It is the leftover light of the universe's hot beginning, predicted years earlier. They received the Nobel Prize for it.",
+   "gospel": "The beginning Hubble inferred, Penzias and Wilson heard. There was a first moment, and light was in it. Abraham was told the heavens were made and set in order by design (Abraham 4); the sky still carries the glow of that ordering.",
+   "forkids": "Two scientists heard a quiet hum from the whole sky. It is the leftover light from the very beginning of everything.",
+   "conf": "confirmed",
+   "scripture": "Genesis 1:3; Abraham 4:1-5",
+   "source": "Wikipedia: Discovery of cosmic microwave background radiation",
+   "url": "https://en.wikipedia.org/wiki/Discovery_of_cosmic_microwave_background_radiation",
+   "sources": [
+    {
+     "name": "Wikipedia: Discovery of cosmic microwave background radiation",
+     "url": "https://en.wikipedia.org/wiki/Discovery_of_cosmic_microwave_background_radiation"
+    }
+   ],
+   "group": "god"
+  }
+ ]
+};
