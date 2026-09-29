@@ -1985,8 +1985,8 @@ window.TECH_GUIDE = {
    "url": "https://www.healthychildren.org/English/fmp/Pages/MediaPlan.aspx"
   },
   {
-   "name": "U.S. Surgeon General: Social Media and Youth Mental Health (2023)",
-   "url": "https://www.hhs.gov/surgeongeneral/priorities/youth-mental-health/social-media/index.html"
+   "name": "American Psychological Association: Health Advisory on Social Media Use in Adolescence (2023)",
+   "url": "https://www.apa.org/topics/social-media-internet/health-advisory-adolescent-social-media-use"
   },
   {
    "name": "World Health Organization: guidelines for children under 5 (2019)",
@@ -1998,7 +1998,7 @@ window.TECH_GUIDE = {
   },
   {
    "name": "For the Strength of Youth: A Guide for Making Choices",
-   "url": "https://www.churchofjesuschrist.org/study/manual/for-the-strength-of-youth-a-guide-for-making-choices?lang=eng"
+   "url": "https://www.churchofjesuschrist.org/study/manual/for-the-strength-of-youth?lang=eng"
   },
   {
    "name": "Common Sense Media",

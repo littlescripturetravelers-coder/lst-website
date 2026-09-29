@@ -30,16 +30,16 @@ window.DISCOVERIES = {
    "forkids": "A king let the Jews go home to build the temple, just as the Bible says. We can still see the clay he wrote it on.",
    "conf": "confirmed",
    "scripture": "Ezra 1:1-4; Isaiah 44:28-45:1; 2 Chronicles 36:22-23",
-   "source": "The British Museum: the Cyrus Cylinder",
-   "url": "https://www.britishmuseum.org/collection/object/W_1880-0617-1941",
+   "source": "Wikipedia: Cyrus Cylinder",
+   "url": "https://en.wikipedia.org/wiki/Cyrus_Cylinder",
    "sources": [
-    {
-     "name": "The British Museum: the Cyrus Cylinder",
-     "url": "https://www.britishmuseum.org/collection/object/W_1880-0617-1941"
-    },
     {
      "name": "Wikipedia: Cyrus Cylinder",
      "url": "https://en.wikipedia.org/wiki/Cyrus_Cylinder"
+    },
+    {
+     "name": "Wikipedia: Apadana (the Persian kings and their subject peoples)",
+     "url": "https://en.wikipedia.org/wiki/Apadana"
     }
    ],
    "group": "bible"
@@ -66,8 +66,8 @@ window.DISCOVERIES = {
      "url": "https://en.wikipedia.org/wiki/Sennacherib%27s_Annals"
     },
     {
-     "name": "The British Museum collection",
-     "url": "https://www.britishmuseum.org/collection"
+     "name": "Wikipedia: Siege of Lachish",
+     "url": "https://en.wikipedia.org/wiki/Siege_of_Lachish"
     }
    ],
    "group": "bible"
@@ -798,12 +798,12 @@ window.DISCOVERIES = {
    "forkids": "The Book of Mormon says Lehi's family found a green place with trees and fruit by the sea in Arabia. There is one, right where the book says.",
    "conf": "debated",
    "scripture": "1 Nephi 17:5-8",
-   "source": "Wikipedia: Khor Kharfot",
-   "url": "https://en.wikipedia.org/wiki/Khor_Kharfot",
+   "source": "Wikipedia: Wadi Sayq (Khor Kharfot)",
+   "url": "https://en.wikipedia.org/wiki/Wadi_Sayq",
    "sources": [
     {
-     "name": "Wikipedia: Khor Kharfot",
-     "url": "https://en.wikipedia.org/wiki/Khor_Kharfot"
+     "name": "Wikipedia: Wadi Sayq (Khor Kharfot)",
+     "url": "https://en.wikipedia.org/wiki/Wadi_Sayq"
     },
     {
      "name": "Scripture Central",
