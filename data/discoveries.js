@@ -798,12 +798,12 @@ window.DISCOVERIES = {
    "forkids": "The Book of Mormon says Lehi's family found a green place with trees and fruit by the sea in Arabia. There is one, right where the book says.",
    "conf": "debated",
    "scripture": "1 Nephi 17:5-8",
-   "source": "Wikipedia: Wadi Sayq (Khor Kharfot)",
-   "url": "https://en.wikipedia.org/wiki/Wadi_Sayq",
+   "source": "Wikipedia: Bountiful in the Book of Mormon",
+   "url": "https://en.wikipedia.org/wiki/Bountiful_(Book_of_Mormon)",
    "sources": [
     {
-     "name": "Wikipedia: Wadi Sayq (Khor Kharfot)",
-     "url": "https://en.wikipedia.org/wiki/Wadi_Sayq"
+     "name": "Wikipedia: Bountiful in the Book of Mormon",
+     "url": "https://en.wikipedia.org/wiki/Bountiful_(Book_of_Mormon)"
     },
     {
      "name": "Scripture Central",
