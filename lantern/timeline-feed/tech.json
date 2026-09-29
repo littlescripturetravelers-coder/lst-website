@@ -685,6 +685,12 @@
      "on": "2026-09-27",
      "note": "Several countries now treat loot boxes as gambling and limit game time for children. Games with a clear end and games played beside a parent show none of the harms of endless online ones.",
      "source": "Child-protection policy, summarised"
+    },
+    {
+     "on": "2026-09-29",
+     "note": "A systematic review found that excessive video game play is associated with poorer academic performance and increased behavioral problems in children.",
+     "source": "National Institutes of Health",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10029815/"
     }
    ]
   },
@@ -839,27 +845,33 @@
     },
     {
      "on": "2026-09-28",
+     "url": "https://www.nature.com/articles/s41599-026-06609-1",
      "note": "A study in the U.S. linked excessive screen time in children and adolescents to higher risks of anxiety, depression, behavior problems, and ADHD, with physical activity and sleep as mediating factors.",
-     "source": "Humanities and Social Sciences Communications",
-     "url": "https://www.nature.com/articles/s41599-026-06609-1"
+     "source": "Humanities and Social Sciences Communications"
     },
     {
      "on": "2026-09-28",
+     "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6613900",
      "note": "A meta-analysis revealed that parental device use during parent-child interactions is moderately to largely associated with children's internalizing and externalizing mental health problems.",
-     "source": "SSRN",
-     "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6613900"
+     "source": "SSRN"
     },
     {
      "on": "2026-09-28",
+     "url": "https://link.springer.com/article/10.1007/s00787-024-02430-w",
      "note": "A systematic review indicated that excessive screen use negatively impacts sleep duration and quality in preschool children, potentially leading to behavioral and cognitive issues.",
-     "source": "European Child & Adolescent Psychiatry",
-     "url": "https://link.springer.com/article/10.1007/s00787-024-02430-w"
+     "source": "European Child & Adolescent Psychiatry"
     },
     {
      "on": "2026-09-28",
+     "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1356554/full",
      "note": "A meta-analysis found that digital interventions can effectively promote mental health in children and adolescents, suggesting potential benefits of technology when used appropriately.",
-     "source": "Frontiers in Psychology",
-     "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1356554/full"
+     "source": "Frontiers in Psychology"
+    },
+    {
+     "on": "2026-09-29",
+     "note": "A recent study found that children who use mobile devices at bedtime are more likely to experience reduced sleep quality and duration, leading to increased daytime sleepiness.",
+     "source": "National Sleep Foundation",
+     "url": "https://www.thensf.org/effects-of-screen-use-on-childrens-sleep/"
     }
    ]
   },
@@ -917,6 +929,12 @@
      "url": "https://www.sciencedirect.com/science/article/pii/S2212657026000760",
      "note": "Studies indicate that passive engagement with short-form digital media, such as scrolling through social media feeds, is associated with higher levels of anxiety and depression among adolescents.",
      "source": "Mental Health & Prevention"
+    },
+    {
+     "on": "2026-09-29",
+     "note": "Research indicates that excessive use of social media platforms can negatively impact adolescents' mental health, contributing to increased anxiety and depression.",
+     "source": "Eunice Kennedy Shriver National Institute of Child Health and Human Development",
+     "url": "https://www.nichd.nih.gov/about/org/od/directors_corner/prev_updates/effects-digital-media-children-march2024"
     }
    ]
   },
@@ -1069,6 +1087,12 @@
      "on": "2026-09-27",
      "note": "Pediatric guidance: no screens for children under two except video calls, and about an hour a day of good content, watched together, for young children. A tablet at bedtime delays sleep.",
      "source": "Pediatric screen-time guidance, summarised"
+    },
+    {
+     "on": "2026-09-29",
+     "note": "Experts recommend keeping tablets out of children's bedrooms overnight to prevent sleep disturbances and promote better sleep hygiene.",
+     "source": "Children and Screens",
+     "url": "https://www.childrenandscreens.org/newsroom/news/experts-vote-8-0-against-phones-and-tablets-in-childrens-bedrooms-overnight/"
     }
    ]
   },
@@ -1227,6 +1251,12 @@
      "url": "https://link.springer.com/article/10.1007/s00431-026-07442-z",
      "note": "A study discusses the benefits and risks of AI in pediatric healthcare, emphasizing the need for ethical considerations to protect children's mental health.",
      "source": "European Journal of Pediatrics"
+    },
+    {
+     "on": "2026-09-29",
+     "note": "Recent developments in AI-driven educational tools show promise in enhancing personalized learning experiences for children, though concerns about data privacy remain.",
+     "source": "Nature Human Behaviour",
+     "url": "https://www.nature.com/articles/s41562-023-01712-8"
     }
    ]
   },
@@ -1276,7 +1306,7 @@
    ]
   }
  ],
- "updated": "2026-09-28",
- "version": 4,
+ "updated": "2026-09-29",
+ "version": 5,
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson."
 }
