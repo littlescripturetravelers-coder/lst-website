@@ -1,0 +1,41 @@
+# ARTIFACT TO BRANCH - run by hand only. Copies the files a run attached
+# (its artifact) onto a git branch named takes/<run id>, so they can be
+# fetched with git from anywhere. Nothing on main changes.
+name: artifact-to-branch
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'The run whose artifact to copy'
+        required: true
+      name:
+        description: 'The artifact name'
+        required: true
+        default: 'lullaby-takes'
+permissions:
+  contents: write
+  actions: read
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.name }}
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: takes
+      - name: Push to a branch
+        env:
+          RUN_ID: ${{ inputs.run_id }}
+        run: |
+          ls -la takes
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan "takes/$RUN_ID"
+          git rm -rfq --cached . >/dev/null 2>&1 || true
+          git add -f takes
+          git -c commit.gpgsign=false commit -qm "Takes from run $RUN_ID" -- takes
+          git push -f origin "takes/$RUN_ID"
+          echo "pushed takes/$RUN_ID"
