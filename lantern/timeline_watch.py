@@ -228,6 +228,32 @@ def run_discoveries(body):
 
 # ── studies ─────────────────────────────────────────────────────────────────
 STUDY_FIELDS = ("happened", "background", "matters", "scripture", "evidence", "learn", "child", "talk")
+
+def scrub(t):
+    """Prose for a parent, not a web page: the model's inline citations like
+    ([site](https://...)) and markdown links come out; the sources list carries the links."""
+    t = str(t or "")
+    t = re.sub(r"\s*\(\[[^\]]*\]\([^)]*\)\)", "", t)
+    t = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", t)
+    t = re.sub(r"\s*\(\s*https?://[^)]*\)", "", t)
+    t = re.sub(r"[*_#`]+", "", t)
+    return re.sub(r"\s+", " ", t).strip()
+
+def scrub_url(u):
+    u = re.sub(r"[?&]utm_source=openai\b", "", str(u or ""))
+    return u[:-1] if u.endswith("?") else u
+
+def scrub_study(st):
+    changed = False
+    for f in STUDY_FIELDS:
+        if f not in st: continue
+        v = scrub(st.get(f))
+        if v != st.get(f): st[f] = v; changed = True
+    for src in st.get("sources") or []:
+        if isinstance(src, dict):
+            u = scrub_url(src.get("url"))
+            if u != src.get("url"): src["url"] = u; changed = True
+    return changed
 CAT_ORDER = ["gospel", "bom", "church", "arch", "xian", "seeds", "scifaith", "faith", "empire", "famous", "world", "city", "war",
              "explore", "migrate", "trade", "lang", "pop", "freedom", "faithfree", "socfam", "child", "health", "socio", "prop",
              "work", "slave", "escape", "drugs", "counter", "disaster", "invent", "family"]
@@ -243,7 +269,7 @@ def study_one(ev):
     prompt = ("Today is %s. Write the in-depth study for this event from the timeline's topic '%s':\n"
               "Title: %s\nWhen: %s (year %s)\nWhere / who: %s\nThe timeline's short note: %s\n%s\n\n"
               "Give these fields, each 1-3 paragraphs of plain prose unless told otherwise:\n"
-              "happened - what happened, told well, 180-320 words;\n"
+              "happened - what happened, told well, 220-350 words;\n"
               "background - the world it happened in: what came before, who the people were, what daily life was like, 120-220 words;\n"
               "matters - why it matters, for the world and for a family of faith, 100-180 words;\n"
               "scripture - what the scriptures say that touches this event (Bible, Book of Mormon, Doctrine and Covenants, Pearl of Great Price), "
@@ -254,7 +280,7 @@ def study_one(ev):
               "child - two or three sentences a child of six could follow;\n"
               "talk - one question a parent could ask a child tonight;\n"
               "sources - 2 to 4 real, openable https sources with name and url (encyclopedias, museums, universities, churchofjesuschrist.org, "
-              "reputable histories). Never invent a URL.\n\n"
+              "reputable histories). Never invent a URL. Put no links, citations or brackets inside the prose fields; the sources list is where links go.\n\n"
               "Answer with JSON only: {\"happened\":\"...\",\"background\":\"...\",\"matters\":\"...\",\"scripture\":\"...\",\"evidence\":\"...\","
               "\"conf\":\"...\",\"learn\":\"...\",\"child\":\"...\",\"talk\":\"...\",\"sources\":[{\"name\":\"...\",\"url\":\"https://...\"}]}") % (
               TODAY, plain(ev.get("catName") or ev.get("cat")), plain(ev.get("t")), plain(ev.get("date")), ev.get("y"), plain(ev.get("meta")),
@@ -262,15 +288,15 @@ def study_one(ev):
     ans = ask(instructions, prompt)
     st = {}
     for f in STUDY_FIELDS:
-        st[f] = re.sub(r"\s+", " ", str(ans.get(f) or "")).strip()[:3000]
+        st[f] = scrub(ans.get(f))[:3000]
     st["conf"] = ans.get("conf") if ans.get("conf") in ("confirmed", "believed", "debated") else "believed"
     st["sources"] = []
     for src in (ans.get("sources") or [])[:4]:
         if not isinstance(src, dict): continue
-        url = clean_str(src.get("url"), 300)
+        url = scrub_url(clean_str(src.get("url"), 300))
         if re.match(r"^https://[^\s\"'<>]+$", url):
             st["sources"].append({"name": clean_str(src.get("name"), 120) or url, "url": url})
-    ok = len(st["happened"]) >= 400 and len(st["background"]) >= 200 and len(st["matters"]) >= 150 and len(st["learn"]) >= 120 and len(st["sources"]) >= 1
+    ok = len(st["happened"]) >= 600 and len(st["background"]) >= 200 and len(st["matters"]) >= 150 and len(st["learn"]) >= 120 and len(st["sources"]) >= 1
     if not ok:
         print("  rejected (too thin or no source):", ev.get("key"), {f: len(st[f]) for f in STUDY_FIELDS}, len(st["sources"]))
         return None
@@ -281,6 +307,8 @@ def run_studies(body):
     with open(INDEX_FILE, encoding="utf-8") as f: index = json.load(f)
     items = body.setdefault("items", {})
     if not isinstance(items, dict): items = body["items"] = {}
+    cleaned = sum(1 for st in items.values() if isinstance(st, dict) and scrub_study(st))   # studies written before the scrub
+    if cleaned: print("studies: cleaned citations out of %d earlier studies" % cleaned); body["_seed_merged"] = TODAY
     todo = [ev for ev in index if ev.get("key") and ev["key"] not in items]
     rank = {c: i for i, c in enumerate(CAT_ORDER)}
     todo.sort(key=lambda ev: (rank.get(ev.get("cat"), 99), ev.get("y") or 0))
