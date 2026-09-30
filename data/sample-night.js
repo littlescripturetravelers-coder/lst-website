@@ -101,8 +101,7 @@ window.LST_SAMPLE_NIGHT = {
       "img": null,
       "alt": "",
       "text": [
-        "Your family is a gift from Heavenly Father — and so are you! He helps your home be full of love.",
-        "Who in your family are you thankful for tonight?"
+        "Your family is a gift from Heavenly Father — and so are you! He helps your home be full of love."
       ],
       "audio": null
     },
