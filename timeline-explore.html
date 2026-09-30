@@ -23,6 +23,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-body);color:#fff;touch-action:none;}
+html{background:#030810;}   /* the sky is a fixed layer; the page behind it is night too */
 #sky-bg{position:fixed;top:var(--safet);left:0;right:0;bottom:0;z-index:0;background:linear-gradient(180deg,#030810 0%,#060d1e 50%,#1B2D5F 100%);}
 #sky-canvas{position:fixed;top:var(--safet);left:0;right:0;bottom:0;z-index:1;pointer-events:none;}
 
@@ -9537,6 +9538,18 @@ function closeQuad(){document.getElementById("quad-panel").classList.remove("ope
 //   ?appheader=130&appfoot=110         via the web view URL
 //   ?appheader=0&appfoot=0             plain browser, no chrome
 // ============================================================
+/* This page never scrolls as a document: the map, the sheets and the panels
+   scroll themselves. Inside the app's frame on iOS a "fixed" layer moves with
+   the document, so a stray document scroll slid the sky and the open panel up.
+   Any scroll of the document is undone at once. */
+(function(){
+  var se=document.scrollingElement||document.documentElement, busy=false;
+  function pin(){ if(busy) return; busy=true;
+    try{ if(se.scrollTop) se.scrollTop=0; if(se.scrollLeft) se.scrollLeft=0; if(document.body.scrollTop) document.body.scrollTop=0; if(window.scrollY||window.scrollX) window.scrollTo(0,0); }catch(e){}
+    busy=false; }
+  window.addEventListener("scroll",pin,{passive:true});
+  document.addEventListener("scroll",function(e){ if(e.target===document||e.target===document.body||e.target===document.documentElement) pin(); },true);
+})();
 function setAppHeader(px){
   document.documentElement.style.setProperty("--appheader",(px|0)+"px");
   try{ fitAll(); }catch(e){}
