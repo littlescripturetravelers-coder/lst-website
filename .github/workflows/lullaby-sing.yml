@@ -94,6 +94,7 @@ on:
         default: ''
 permissions:
   contents: write
+  actions: read      # check mode reads an earlier run's artifact
 jobs:
   sing:
     runs-on: ubuntu-latest
