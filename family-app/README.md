@@ -21,7 +21,7 @@ alexa/                  Alexa skill manifest + interaction model
 ```
 
 ## First-time setup
-**New to this?** Follow **TESTFLIGHT.md** instead. It covers the same steps, written out in full, and includes adding your spouse.
+**New to this?** Follow **START-HERE.md** (the simplest version), or **TESTFLIGHT.md** for more detail. It covers the same steps, written out in full, and includes adding your spouse.
 
 1. `npm install`, then `npx expo install` to line up native versions.
 2. Create a Supabase project and run `supabase db push`, which applies `supabase/migrations`.

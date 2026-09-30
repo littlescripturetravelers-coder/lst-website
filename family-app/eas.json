@@ -17,7 +17,8 @@
       },
       "env": {
         "APP_NAME": "Lewis Family"
-      }
+      },
+      "environment": "production"
     }
   },
   "submit": {

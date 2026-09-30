@@ -23,18 +23,18 @@ What you need: a Mac, your iPhone, an Apple ID, and a credit card ($99/year for 
 3. Paste each line and press Return after each one:
    ```
    npm install -g eas-cli
-   npm install -g supabase
+   brew install supabase/tap/supabase
    ```
-4. Download the code folder from this project (**app-code**) and put it in your Documents folder. Then:
+4. Get the code with **GitHub Desktop** (clone `lst-website`). Then:
    ```
-   cd ~/Documents/app-code
+   cd ~/Documents/GitHub/lst-website/family-app
    npm install
    ```
 5. `CLAUDE.md` is already in place. Whenever you open this folder in Claude Code, it knows the rules of your app.
 
 ## Part 3: Turn on the backend (~20 min)
 
-Still in Terminal, inside the `app-code` folder:
+Still in Terminal, inside the `family-app` folder:
 
 1. Log in and connect to your project. The project ref is in Supabase → Project Settings → General.
    ```
@@ -57,7 +57,7 @@ Still in Terminal, inside the `app-code` folder:
    ```
    lewisfamily://
    ```
-6. Copy `.env.example` to a new file named `.env`. Fill in the two values from Supabase → **Project Settings → API**: the Project URL and the `anon` public key.
+6. Copy `.env.example` to a new file named `.env`. Fill in the two values from Supabase → **Project Settings → API**: the Project URL and the `anon` public key. This is for running the app on your Mac only. The cloud build can't see `.env`, so you also give Expo these two values in Part 4.
 
 ## Part 4: Build and send to TestFlight (~40 min, mostly waiting)
 
@@ -65,6 +65,11 @@ Still in Terminal, inside the `app-code` folder:
    ```
    eas login
    eas init
+   ```
+   Then give Expo the two Supabase values (the cloud build can't see `.env`):
+   ```
+   eas env:create --environment production --visibility plaintext --name EXPO_PUBLIC_SUPABASE_URL --value YOUR-PROJECT-URL
+   eas env:create --environment production --visibility plaintext --name EXPO_PUBLIC_SUPABASE_ANON_KEY --value YOUR-ANON-KEY
    ```
 2. Build the iPhone app in the cloud:
    ```
