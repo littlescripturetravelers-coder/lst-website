@@ -58,5 +58,8 @@ jobs:
           git add lantern/timeline-feed
           if git diff --cached --quiet; then echo "nothing to commit"; else
             git commit -m "Timeline watch: ${{ steps.which.outputs.job }} $(date -u +%Y-%m-%d)"
-            git push
+            # main may have moved while a long run was writing; the account already has the result,
+            # so the history simply goes on top of whatever landed meanwhile
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push || (git pull --rebase origin "${GITHUB_REF_NAME}" && git push)
           fi
