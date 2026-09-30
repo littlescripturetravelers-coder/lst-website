@@ -1,5 +1,5 @@
 import re, sys, os, subprocess
-from common import CANON, HEAD, TAIL, STORY_PARAS, SLUG, NIGHT_ID, ent
+from common import CANON, HEAD, TAIL, STORY_PARAS, SLUG, NIGHT_ID, ent, SOURCES_VERIFIED
 
 path = sys.argv[1]
 html = open(path, encoding='utf-8').read()
@@ -59,7 +59,16 @@ print('   deep-read order:', [re.sub(r'&#\d+; ?', '', l) for l in tiers['heavenl
 for key in expected:
     m = re.search(rf'id="tab-{key}">(.*?)</div><!-- /{key} -->', html, re.S).group(1)
     check(f'href="{SLUG}.html"' in m and f'href="{SLUG}-lullaby.html"' in m and 'href="travelers-lullaby.html"' in m, f'{key}: three resource links')
-check('trust-him-to-lead-the-way' not in html and 'a-lamp-for-my-feet' not in html, 'no previous-night slug')
+# No other night's page is linked. DERIVED, never listed: every relative page
+# link in the authored words must be tonight's story, tonight's song, or the one
+# fixed lullaby. Anything else is a leftover from whichever night the builder was
+# last copied from. The old version of this check named two slugs by hand and had
+# to be re-typed every night; it was last true on 12 September and passed
+# vacuously for a week afterwards, which is exactly the failure it was meant to catch.
+_auth = html[html.index('<div class="scroll-area">'):html.index('</div><!-- /scroll-area -->')]
+_allowed = {f'{SLUG}.html', f'{SLUG}-lullaby.html', 'travelers-lullaby.html'}
+_stray = sorted(set(re.findall(r'href="(?!https?:|mailto:|#|//)([^"?#]+\.html)"', _auth)) - _allowed)
+check(not _stray, f'no other night\'s page linked {_stray}')
 
 # 5b. THE SONG RULE - the night's song page must exist beside the editions and
 # carry its own Play button and <audio id="player">. The app opens the page,
@@ -79,6 +88,20 @@ check(_nlinks >= 8, f'outbound links present ({_nlinks}; THE LINKS RULE needs at
 check(bool(re.search(r'href="https://www\.(churchofjesuschrist\.org/study/scriptures|biblegateway\.com/passage)', html)), 'scripture references are linked')
 check('prints no outside' not in html and 'quotes no one but scripture' not in html, 'no "no outside voices tonight" card (THE QUOTES RULE)')
 check(bool(re.search(r'class="(conf-link|quote-link)" href="https?://', html)), 'a quotes card with a source link is present (THE QUOTES RULE)')
+
+# 5e. THE VERIFICATION RULE - a page may say its sources went unchecked only on a
+# night that actually could not reach them. 10 September could not, and its
+# "set from memory ... the network blocked every one" then sat in the builder for
+# every later night to notice and delete by hand. Now the claim has to match the run.
+_CAVEAT = re.compile(r'could not be (?:re-)?(?:checked|verified)|no source could be verified'
+                     r'|set from memory|the network blocked', re.I)
+_said = _CAVEAT.findall(_auth)
+if SOURCES_VERIFIED:
+    check(not _said, f'no stale "unverified sources" caveat on a night that verified them {_said[:3]}')
+else:
+    check(bool(_said), 'the run could not verify its sources, and the page says so plainly')
+check(not ('data-sources="verified"' in _auth and 'data-sources="unverified"' in _auth),
+      'the page does not claim both verified and unverified sources')
 
 # 5d. THE READING-POSITION RULE - the app restores a family's depth and scroll
 # through these two names; a page without them loses every reader's place.

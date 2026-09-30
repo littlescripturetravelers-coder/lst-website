@@ -33,6 +33,25 @@ def ent(s):
              .replace('‘', '&lsquo;').replace('’', '&rsquo;')
              .replace('…', '&hellip;'))
 
+# Did tonight's run actually re-read its sources? The run says so here; audit.py
+# enforces it both ways. A night that verified nothing must say so, a night that
+# verified must not - and neither sentence can survive into the next night by
+# being copied, because neither is written down as prose any more.
+SOURCES_VERIFIED = os.environ.get('LANTERN_SOURCES_VERIFIED', '1') != '0'
+
+def sources_note(unverified, verified=None):
+    """The one place a page is allowed to talk about whether its sources were
+    checked. Returns the caveat or the confirmation, never both, never the wrong
+    one. (Before this existed, 10 September's "the network blocked every one"
+    sat frozen in the builder and every later night had to notice and delete it.)"""
+    if SOURCES_VERIFIED:
+        if not verified:
+            return ''
+        return ('    <div class="bt" data-sources="verified" style="margin-top:8px;">'
+                f'<strong>Verified tonight:</strong> {ent(verified)}</div>')
+    return ('    <div class="bt" data-sources="unverified" style="margin-top:8px;">'
+            f'<strong>A note on tonight&rsquo;s wording:</strong> {ent(unverified)}</div>')
+
 def paras(cls, ps, gap=8):
     out = []
     for i, p in enumerate(ps):
