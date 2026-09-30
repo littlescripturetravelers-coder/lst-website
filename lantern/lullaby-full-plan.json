@@ -1,0 +1,69 @@
+{
+ "positive_global_styles": [
+  "children's bedtime lullaby",
+  "gentle acoustic accompaniment",
+  "no drums, no percussion",
+  "clean and undistorted, plenty of headroom",
+  "slow and steady, the same tempo all the way through",
+  "one melody carried through every verse, the chorus the same tune each time it returns",
+  "every word sung clearly, exactly as written, nothing added",
+  "one single voice, warm and unhurried, the same singer from the first note to the last"
+ ],
+ "negative_global_styles": [
+  "drums",
+  "percussion",
+  "backing vocals",
+  "choir",
+  "duet",
+  "a second singer",
+  "a change of singer",
+  "distortion",
+  "clipping",
+  "loudness pushing",
+  "shouting",
+  "spoken word",
+  "rap",
+  "improvised words",
+  "scat singing",
+  "ad-libs",
+  "key change",
+  "tempo change"
+ ],
+ "sections": [
+  {
+   "section_name": "Opening, from the recording",
+   "positive_local_styles": [
+    "exactly as recorded"
+   ],
+   "negative_local_styles": [],
+   "duration_ms": 20000,
+   "lines": [
+    "Hush, little traveler, the day is done,",
+    "The moon is up, the stars have come.",
+    "Your pillow\u2019s soft, your covers deep \u2014"
+   ],
+   "source_from": {
+    "song_id": "",
+    "range": {
+     "start_ms": 0,
+     "end_ms": 20000
+    }
+   }
+  },
+  {
+   "section_name": "Sung again",
+   "positive_local_styles": [
+    "sung softly, one line at a time, every word clear, exactly as written",
+    "the same voice, the same tune, the same key and the same slow tempo as the opening, straight on without a pause"
+   ],
+   "negative_local_styles": [],
+   "duration_ms": 17200,
+   "lines": [
+    "Esther stood courageous and tall,",
+    "Though she was frightened by it all.",
+    "She chose to speak, she chose what\u2019s right,",
+    "And Heavenly Father gave her might."
+   ]
+  }
+ ]
+}
