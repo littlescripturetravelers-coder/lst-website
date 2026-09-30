@@ -309,6 +309,17 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 .tonight-box .k{font-family:Nunito,sans-serif;font-weight:800;font-size:7px;letter-spacing:2px;color:#F5C518;}
 .tonight-box .t{font-family:Fredoka,sans-serif;font-weight:700;font-size:11.5px;color:#fff;line-height:1.2;margin:3px 0 2px;}
 .tonight-box .s{font-family:Nunito,sans-serif;font-size:8px;color:rgba(255,255,255,.62);}
+/* the beacon: tonight's story at every zoom. Drawn on the stage, not in the world,
+   so it stays one size when the whole timeline is on the screen and the marker
+   itself is a speck. Over the marker when it is on screen, at the edge nearest it
+   when it is not; a tap flies to the story. */
+#tonight-beacon{position:absolute;z-index:80;width:0;height:0;cursor:pointer;transform:translate(0,0);}
+#tonight-beacon .tb-ring{position:absolute;left:-15px;top:-15px;width:30px;height:30px;border-radius:50%;border:2.5px solid #5BD3DC;
+  box-shadow:0 0 12px rgba(91,211,220,.8),inset 0 0 8px rgba(245,197,24,.5);animation:tonightPulse 1.6s ease-in-out infinite;pointer-events:none;}
+#tonight-beacon .tb-lbl{position:absolute;left:-70px;top:19px;width:140px;text-align:center;font-family:Fredoka,sans-serif;font-weight:700;font-size:10px;
+  color:#F5C518;text-shadow:0 1px 6px rgba(0,0,0,1),0 0 12px rgba(0,0,0,.9);line-height:1.2;pointer-events:none;white-space:nowrap;}
+#tonight-beacon.off .tb-ring{border-style:dashed;}
+#tonight-beacon .tb-hit{position:absolute;left:-34px;top:-24px;width:68px;height:64px;}
 
 /* MINIMAP */
 #mm{position:fixed;right:10px;bottom:calc(var(--safeb) + 8px);width:120px;height:22px;
@@ -1705,9 +1716,9 @@ function goTonight(){
   if(!TONIGHT||!TONIGHT.cluster) return;
   var st=document.getElementById("stage"); var cl=TONIGHT.cluster;
   sc=Math.max(sc,1.6);
-  tx=-(cl.x*sc-st.clientWidth/2);
   var cy=laneY("lstbook")+(cl.slot||0)*laneStep("lstbook")*laneDir("lstbook");
-  ty=-(cy*sc-st.clientHeight*.5);
+  if(curView==="v"){ tx=st.clientWidth/2+cy*sc; ty=st.clientHeight/2-cl.x*sc; }   /* the world is turned on its side */
+  else { tx=-(cl.x*sc-st.clientWidth/2); ty=-(cy*sc-st.clientHeight*.5); }
   applyT(true);
 }
 
@@ -6003,6 +6014,28 @@ function applyT(anim){
   var rot=(curView==="v")?" rotate(90deg)":"";
   w.style.transform="translate("+tx+"px,"+ty+"px) scale("+sc+")"+rot;
   w.style.transformOrigin="0 0";upZL();try{upMM();}catch(e){}
+  try{ tonightBeacon(); }catch(e){}
+}
+/* where a world point lands on the stage, in either view */
+function worldToStage(wx,wy){ return (curView==="v")?{x:tx-wy*sc,y:ty+wx*sc}:{x:tx+wx*sc,y:ty+wy*sc}; }
+function tonightBeacon(){
+  var b=document.getElementById("tonight-beacon"), st=document.getElementById("stage");
+  if(!TONIGHT||!TONIGHT.cluster||!AL["lstbook"]||!st){ if(b) b.style.display="none"; return; }
+  if(!b){
+    b=document.createElement("div"); b.id="tonight-beacon";
+    b.innerHTML="<div class='tb-hit'></div><div class='tb-ring'></div><div class='tb-lbl'></div>";
+    b.addEventListener("click",function(e){ e.stopPropagation(); if(sc<1.2) goTonight(); else openStoryMod(TONIGHT.n,TONIGHT.bk); });
+    b.addEventListener("touchstart",function(e){ e.stopPropagation(); },{passive:true});
+    b.addEventListener("mousedown",function(e){ e.stopPropagation(); });
+    st.appendChild(b);
+  }
+  var cl=TONIGHT.cluster, wy=laneY("lstbook")+(cl.slot||0)*laneStep("lstbook")*laneDir("lstbook");
+  var p=worldToStage(cl.x,wy), W=st.clientWidth, H=st.clientHeight, pad=40;
+  var off=(p.x<pad||p.x>W-pad||p.y<pad||p.y>H-pad);
+  b.style.display=(sc>=1.2)?"none":"";      /* close in, the open box over the marker does this job */
+  b.classList.toggle("off",off);
+  b.querySelector(".tb-lbl").textContent=decodeT(off?"\u2726 Tonight\u2019s story \u00b7 tap to fly there":"\u2726 Tonight\u2019s story");
+  b.style.left=Math.max(pad,Math.min(W-pad,p.x))+"px"; b.style.top=Math.max(pad,Math.min(H-pad,p.y))+"px";
 }
 function upZL(){document.getElementById("zlv").textContent=decodeT(Math.round(sc*100)+"%");}
 function upMM(){
