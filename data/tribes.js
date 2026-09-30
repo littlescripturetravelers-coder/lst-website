@@ -3038,7 +3038,7 @@ window.LST_TRIBES = {
   "sources": [
    {
     "name": "Gospel Topics: Book of Mormon and DNA Science",
-    "url": "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/book-of-mormon-and-dna-science?lang=eng"
+    "url": "https://www.churchofjesuschrist.org/study/manual/gospel-topics/book-of-mormon-and-dna-science?lang=eng"
    },
    {
     "name": "Wikipedia: James Adair (historian)",
@@ -3111,7 +3111,7 @@ window.LST_TRIBES = {
   },
   {
    "name": "Gospel Topics: Book of Mormon and DNA Science",
-   "url": "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/book-of-mormon-and-dna-science?lang=eng"
+   "url": "https://www.churchofjesuschrist.org/study/manual/gospel-topics/book-of-mormon-and-dna-science?lang=eng"
   },
   {
    "name": "Gospel Topics: Book of Mormon Geography",
