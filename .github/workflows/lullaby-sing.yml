@@ -56,9 +56,9 @@ on:
         required: false
         default: 'one single voice, warm and unhurried, the same singer from the first note to the last'
       song_id:
-        description: 'fix mode: the ElevenLabs song id of the take to keep'
+        description: 'fix mode: the ElevenLabs song id of the take to keep (blank = upload fix_file, which is what works)'
         required: false
-        default: 'cTrg8UQGXOZGTNpnst1p'
+        default: ''
       fix_file:
         description: 'fix mode: the take as a file in this repo, uploaded if the id cannot be read from'
         required: false
@@ -116,6 +116,10 @@ jobs:
           FIX_ID=os.environ.get('SONG_ID','').strip(); FIX_FILE=os.environ.get('FIX_FILE','').strip()
           FIX_FROM=int(os.environ.get('FIX_FROM') or 0); FIX_TO=int(os.environ.get('FIX_TO') or 0)
           FIX_LINES=[x.strip() for x in os.environ.get('FIX_LINES','').split('|') if x.strip()]
+          if mode=='fix': LENGTH=min(LENGTH,599000)   # the API wants strictly under 600 seconds
+          # when the take sings each line (lantern/lullaby-full-lines.json), so a kept stretch can carry its words
+          try: TAKE_LINES=json.load(open('lantern/lullaby-full-lines.json',encoding='utf8'))['lines']
+          except Exception: TAKE_LINES=[]
 
           # ── the words, exactly as the app prints them ────────────────────────
           src=open('data/lantern-lullaby.js',encoding='utf8').read()
@@ -212,8 +216,9 @@ jobs:
                   x=a; k=1
                   while x<b:
                       y=min(b,x+CH)
+                      words=[ln for ln,at in TAKE_LINES if at is not None and x<=at<y and ln not in FIX_LINES][:30]
                       secs.append({'section_name':('%s %d'%(label,k))[:100],'positive_local_styles':['exactly as recorded'],'negative_local_styles':[],
-                                   'duration_ms':y-x,'lines':[],'source_from':{'song_id':sid,'range':{'start_ms':x,'end_ms':y}}})
+                                   'duration_ms':y-x,'lines':words,'source_from':{'song_id':sid,'range':{'start_ms':x,'end_ms':y}}})
                       x=y; k+=1
               kept(0,FIX_FROM,'Kept from the take, before')
               secs.append({'section_name':'Sung again','positive_local_styles':['sung softly, every word clear, exactly as written',
