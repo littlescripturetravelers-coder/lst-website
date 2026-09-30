@@ -259,6 +259,21 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
   border-radius:0 8px 8px 0;margin-bottom:10px;font-size:10.5px;color:rgba(255,255,255,.65);line-height:1.65;}
 .dmod-hand b{color:#C084FC;}
 .dmod-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+/* meanwhile in the world */
+.mw-hint{font-family:Nunito,sans-serif;font-size:9.5px;color:rgba(255,255,255,.45);margin:-2px 0 7px;line-height:1.5;}
+.mw-row{display:flex;gap:9px;align-items:flex-start;padding:7px 9px;border-radius:8px;background:rgba(91,211,220,.05);border:1px solid rgba(91,211,220,.16);margin-bottom:5px;cursor:pointer;}
+.mw-row:hover{background:rgba(91,211,220,.1);}
+.mw-em{font-size:15px;line-height:1.2;flex-shrink:0;}
+.mw-body{flex:1;min-width:0;}
+.mw-t{font-family:Fredoka,sans-serif;font-weight:600;font-size:12px;color:#fff;line-height:1.25;}
+.mw-s{font-family:Nunito,sans-serif;font-weight:800;font-size:8.5px;color:rgba(255,255,255,.5);margin-top:2px;letter-spacing:.3px;}
+.mw-de{display:none;font-family:Nunito,sans-serif;font-size:10.5px;line-height:1.6;color:rgba(255,255,255,.8);margin-top:6px;}
+.mw-row.open .mw-de{display:block;}
+.mw-go{display:inline-block;margin-top:5px;color:#F5C518;font-weight:800;text-decoration:none;font-size:10px;}
+.sl-mw{margin-bottom:7px;font-family:Nunito,sans-serif;font-size:11px;line-height:1.5;color:rgba(255,255,255,.84);}
+.sl-mw b{display:block;font-family:Fredoka,sans-serif;font-weight:600;color:#fff;}
+.sl-mw span{display:block;font-size:8.5px;font-weight:800;color:rgba(255,255,255,.5);}
+.sl-mw em{display:block;font-style:normal;font-size:10.5px;color:rgba(255,255,255,.72);margin-top:2px;}
 .dtag{padding:2px 8px;border-radius:10px;font-size:8.5px;font-weight:700;
   background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.55);}
 .dmod-lst{background:linear-gradient(135deg,rgba(245,197,24,.06),rgba(245,197,24,.02));
@@ -4860,6 +4875,7 @@ function openEvMod(ev){
   if(ev.sc){var sc2=document.createElement("div");sc2.className="dsec";sc2.innerHTML="<div class='dsec-t'>&#128366; Scripture</div><div class='dsec-c' style='font-style:italic;color:rgba(255,255,255,.65);'>"+ev.sc+"</div>";body.appendChild(sc2);}
   if(ev.gospel){var gc=document.createElement("div");gc.className="dmod-gospel";gc.innerHTML="<b>&#10022; Gospel Connection:</b><br>"+ev.gospel;body.appendChild(gc);}
   if(ev.hand){var hd=document.createElement("div");hd.className="dmod-hand";hd.innerHTML="<b>&#9770; Heavenly Father&#39;s Hand:</b><br>"+ev.hand;body.appendChild(hd);}
+  try{ if(typeof ev.y==="number"){ var mw=mwSection(ev.y,ev.l,ev.t); if(mw) body.appendChild(mw); } }catch(e){}
   if(ev.trav&&TV[ev.trav]){var t=TV[ev.trav];var td=document.createElement("div");td.style.cssText="display:flex;align-items:center;gap:7px;padding:7px 11px;background:rgba(27,45,95,.45);border-radius:7px;margin-top:8px;";td.innerHTML="<div style='width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;background:"+t.c+"33'>"+t.e+"</div><div><div style='font-family:var(--font-display);font-weight:600;font-size:9.5px;color:#F5C518;'>"+t.n+"</div><div style='font-size:8px;color:rgba(255,255,255,.42);font-style:italic;'>"+t.q+"</div></div>";body.appendChild(td);}
   if(ev.lat!==undefined){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
@@ -5381,6 +5397,77 @@ function animateChain(){
 
 
 // ── LST BOOK / STORY MODALS ─────────────────────────────────
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MEANWHILE IN THE WORLD
+   The timeline's whole reason is that a scripture story did not happen in a
+   vacuum: while David faced Goliath, someone was building something, writing
+   something, ruling somewhere. Every story and every event now shows the
+   nearest happenings on the other lines of the timeline, one line each, and a
+   tap reads or opens them. Nearness scales with the age of the date: thirty
+   years around AD 1500, a few hundred around 2000 BC.
+   ══════════════════════════════════════════════════════════════════════════ */
+function mwPick(y,cat,title,max){
+  var all; try{ all=slCollect(); }catch(e){ return []; }
+  var me=String(title||"").toLowerCase().replace(/&[^;]+;/g,"").trim(), out=[];
+  for(var i=0;i<all.length;i++){ var it=all[i];
+    if(!it.id||typeof it.y!=="number"||it.pin||it.cat===cat||it.cat==="lstbook"||it.cat==="tech"||it.cat==="evidence") continue;   /* the study rows repeat events already on a line */
+    if(String(it.t||"").toLowerCase().replace(/&[^;]+;/g,"").trim()===me) continue;
+    out.push(it); }
+  var span=Math.max(30,Math.abs(y)*0.05), pick=[];
+  for(var w=span; w<=span*8&&pick.length<3; w*=2){ pick=out.filter(function(it){ return Math.abs(it.y-y)<=w; }); }
+  pick.sort(function(a,b){ return Math.abs(a.y-y)-Math.abs(b.y-y); });
+  var seen={}, res=[];
+  pick.forEach(function(it){ if(res.length<max&&!seen[it.cat]){ seen[it.cat]=1; res.push(it); } });   /* one per line first */
+  pick.forEach(function(it){ if(res.length<max&&res.indexOf(it)<0) res.push(it); });
+  return res;
+}
+function mwWhen(dy){
+  var a=Math.abs(Math.round(dy)); if(a<=10) return "about the same time";
+  var r=a>=1000?Math.round(a/100)*100:a>=100?Math.round(a/10)*10:a;
+  return "about "+r+" years "+(dy<0?"earlier":"later");
+}
+function mwOpen(it){
+  var id=it.id, c=it.cat, W=window;
+  function byId(arr){ arr=arr||[]; for(var i=0;i<arr.length;i++) if(arr[i]&&arr[i].id===id) return arr[i]; return null; }
+  try{
+    if(it.night&&it.book){ openStoryMod(it.night,it.book); return true; }
+    var ev=byId(W.EVS)||byId(W.famEvs); if(ev){ openEvMod(ev); return true; }
+    var M={empire:["EMPIRES","openEmpireMod"],war:["WARS","openWarMod"],famous:["FAMOUS","openFamousMod"],migrate:["MIGRATIONS","openMigrateMod"],explore:["EXPLORATIONS","openExploreMod"],xian:["XIAN_EVS","openXianMod"],socfam:["SOCFAM","openSocFamMod"],faithfree:["FAITHFREE","openFFMod"],seeds:["SEEDS","openSeedMod"],prop:["PROP","openPropMod"],child:["CHILD","openChildMod"],socio:["SOCIO","openSocioMod"],health:["HEALTH","openHealthMod"],scifaith:["SCIFAITH","openSciMod"],escape:["ESCAPE","openEscMod"],slave:["SLAVERY","openSlaveMod"],work:["WORK","openWorkMod"],drugs:["DRUGS","openDrugMod"]};
+    if(M[c]&&typeof W[M[c][1]]==="function"){ var o=byId(W[M[c][0]]); if(o){ W[M[c][1]](o); return true; } }
+    if(c==="trade"&&typeof openGenMod==="function"){ var t=byId(W.TRADES); if(t){ openGenMod(t,"trade"); return true; } }
+    if(typeof openGenericMod==="function"){
+      if(c==="lang"){ var l=byId(W.LANG_EVS); if(l){ openGenericMod(l,"#F59E0B","LANGUAGE"); return true; } }
+      if(c==="pop"){ var p=byId(W.POP_EVS); if(p){ openGenericMod(p,"#34D399","POPULATION"); return true; } }
+      if(c==="city"){ var ci=byId(W.CITY_EVS); if(ci){ openGenericMod(ci,"#E879F9","GREAT CITY"); return true; } }
+    }
+  }catch(e){}
+  return false;
+}
+function mwRow(it,y){
+  var col=slColor(it.cat);
+  var row=document.createElement("div"); row.className="mw-row";
+  row.innerHTML="<span class='mw-em'>"+(it.em||"&#10022;")+"</span><div class='mw-body'><div class='mw-t'>"+it.t+"</div>"
+    +"<div class='mw-s'><span style='color:"+col+"'>"+slName(it.cat)+"</span> &#183; "+(it.date||slYearLabel(it.y))+" &#183; "+mwWhen(it.y-y)+"</div>"
+    +"<div class='mw-de'>"+(it.de||"")+(it.de?"<br>":"")+"<a class='mw-go' href='#'>Open it &#8250;</a></div></div>";
+  row.addEventListener("click",function(e){ e.stopPropagation();
+    if(e.target&&e.target.classList&&e.target.classList.contains("mw-go")){ e.preventDefault(); if(!mwOpen(it)) row.classList.remove("open"); return; }
+    row.classList.toggle("open"); });
+  return row;
+}
+function mwSection(y,cat,title){
+  var res=mwPick(y,cat,title,6); if(!res.length) return null;
+  var box=document.createElement("div"); box.className="dsec mw";
+  box.innerHTML="<div class='dsec-t' style='color:#5BD3DC'>&#127757; Meanwhile in the world</div><div class='mw-hint'>What else was happening then, on the other lines of the timeline. Tap one to read it.</div>";
+  for(var i=0;i<res.length;i++) box.appendChild(mwRow(res[i],y));
+  return box;
+}
+function mwHtml(y,cat,title){   /* the same, as words for the Study Library */
+  var res=mwPick(y,cat,title,6); if(!res.length) return "";
+  var h="<div class='sl-st sl-teal'><div class='sl-st-h'>&#127757; Meanwhile in the world</div><p class='sl-dim' style='margin:0 0 6px'>What else was happening then, on the other lines of the timeline.</p>";
+  res.forEach(function(it){ h+="<div class='sl-mw'><b>"+(it.em||"&#10022;")+" "+it.t+"</b><span><span style='color:"+slColor(it.cat)+"'>"+slName(it.cat)+"</span> &#183; "+(it.date||slYearLabel(it.y))+" &#183; "+mwWhen(it.y-y)+"</span>"+(it.de?"<em>"+slSummarize(it.de)+"</em>":"")+"</div>"; });
+  return h+"</div>";
+}
 function openStoryMod(n,bk){
   curEv={lat:n.lat,lng:n.lng,t:n.t,loc:n.loc};
   var G="#F5C518";
@@ -5447,6 +5534,7 @@ function openStoryMod(n,bk){
   var sc=document.createElement("div");sc.className="dmod-gospel";
   sc.innerHTML="<b>&#128214; Read It Together:</b><br>"+n.ref+" \u2014 then turn to Week "+n.wk+", Night "+n.nt+" in "+bk.t+".";
   body.appendChild(sc);
+  try{ var mw=mwSection(n.y,"lstbook",n.t); if(mw) body.appendChild(mw); }catch(e){}
 
   if(n.lat){var mb=document.createElement("button");mb.className="map-btn";
     mb.innerHTML="&#128506; Show My Child Where This Happened";
@@ -9252,6 +9340,7 @@ function slStudyHtml(it,st){
     if(lib.feeling) tags.push("<span class='sl-tag teal'>Feeling: "+slEsc(lib.feeling)+"</span>");
     if(lib.stages&&lib.stages.length) tags.push("<span class='sl-tag teal'>Ages: "+slEsc(lib.stages.join(", "))+"</span>");
     h+="<div class='sl-st'><div class='sl-st-h'>What It Teaches</div>"+(lib.teachingNote?"<p class='sl-st-note'>"+slEsc(lib.teachingNote)+"</p>":"")+(tags.length?"<div class='sl-tags'>"+tags.join("")+"</div>":"")+"</div>"; }
+  try{ h+=mwHtml(n.y,"lstbook",n.t); }catch(e){}
   h+="<div class='sl-blk sl-blk-gospel'><b>Read It Together:</b> "+slEsc(n.ref)+" &#183; then Week "+n.wk+", Night "+n.nt+" in "+slEsc(bk.t)+" (the "+slEsc(bk.month)+" book).</div>";
   for(var b=0;b<it.blocks.length;b++){ var bl=it.blocks[b]; h+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>"; }
   if(slInApp()) h+="<button class='sl-open' onclick=\"slOpenBook('"+nightId(bk,n)+"')\">&#128214; Open the picture book</button>";
@@ -9340,6 +9429,7 @@ function slDeepHtml(it,st){
   h+=slSec("sl-green","What we can learn",slP(st.learn));
   if(st.child) h+=slSec("sl-green","For a child","<p class='sl-quote'>"+slfEsc(slPlain(st.child))+"</p>");
   if(st.talk) h+=slSec("sl-teal","Talk about it tonight","<p class='sl-quote'>&ldquo;"+slfEsc(slPlain(st.talk))+"&rdquo;</p>");
+  try{ h+=mwHtml(it.y,it.cat,it.t); }catch(e){}
   for(var b=0;b<it.blocks.length;b++){ var bl=it.blocks[b]; h+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>"; }
   (Array.isArray(st.sources)?st.sources:[]).forEach(function(s){ if(!s) return; var u=slfUrl(String(s.url||"").replace(/[?&]utm_source=openai\b/,"")); if(u) src+="<a class='sl-src-l' href='"+slfEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+slfEsc(s.name||u)+"</a>"; });
   var own=(it.id&&SL_SRC_ID[it.id])?SL_SRC_ID[it.id]:(SL_SRC_CAT[it.cat]||[]);
@@ -9351,6 +9441,7 @@ function slDeepHtml(it,st){
 function slDeepFallback(it){
   var dh="";
   if(it.de) dh+="<div class='sl-dep-de'>"+slLink(it.de)+"</div>";
+  try{ dh+=mwHtml(it.y,it.cat,it.t); }catch(e){}
   for(var b=0;b<it.blocks.length;b++){ var bl=it.blocks[b]; dh+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>"; }
   dh+=slSources(it);
   return dh;
