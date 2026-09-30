@@ -32,5 +32,14 @@
         }
       ]
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "claude-work": false,
+      "lullaby-check": false,
+      "lullaby-fresh": false,
+      "native-peoples": false,
+      "remember-this-and-story-lullaby": false
+    }
+  }
 }
