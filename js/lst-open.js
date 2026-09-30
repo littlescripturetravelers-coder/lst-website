@@ -222,10 +222,10 @@
         "</ul>" +
 
         '<a class="mp-btn mp-btn-gold lk-go" href="subscribe.html#plans" ' +
-          'onclick="return openTrialSignup()">Start the free week</a>' +
+          'onclick="return openTrialSignup()">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
         '<p class="lk-fine">Your first seven days are free. ' +
           'Cancel any time in two clicks &mdash; <a href="cancel.html">here is how</a>.</p>' +
-        '<p class="lk-fine">Already a subscriber? ' +
+        '<p class="lk-fine">' + (window.LST_FREE_FOR_NOW ? "Already have an account? " : "Already a subscriber? ") +
           '<button type="button" class="mp-link" id="o-signin">Sign in</button></p>' +
       "</div></div>";
   }

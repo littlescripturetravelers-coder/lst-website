@@ -4,6 +4,10 @@
    openTrialSignup('monthly'|'annual') from a button. */
 (function () {
   var SUPA_URL = "https://rdbvktqgrwhjucocobua.supabase.co";
+  /* FREE FOR NOW: see js/lst-auth.js. The same switch, so the sign-up modal
+     creates a free account and never goes to checkout while it is on. */
+  var FREE_FOR_NOW = true;
+  window.LST_FREE_FOR_NOW = FREE_FOR_NOW;
   var SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkYnZrdHFncndoanVjb2NvYnVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwNDAwMzEsImV4cCI6MjEwMTYxNjAzMX0.1PJVCfeK6dIFWeBvdsC13HPQ8173BHEok0Qq6l7mfC4";
   /* ======================================================== THE PRICES
      ⚠️ CHANGING A NUMBER HERE DOES NOT CHANGE WHAT ANYONE IS CHARGED.
@@ -91,9 +95,9 @@
     d.style.cssText = "display:none;position:fixed;inset:0;z-index:99999;background:rgba(var(--rgb-navy-deep), 0.88);align-items:center;justify-content:center;padding:1rem;";
     d.innerHTML =
       '<div style="background:var(--page-2);border:1px solid rgba(245,197,24,0.35);border-radius:16px;max-width:430px;width:100%;padding:1.6rem;font-family:\'Nunito\',sans-serif;color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,0.5);">' +
-        '<div style="font-family:\'Fredoka\',sans-serif;font-weight:600;font-size:1.35rem;color:var(--gold-ink);">Start your free week</div>' +
+        '<div style="font-family:\'Fredoka\',sans-serif;font-weight:600;font-size:1.35rem;color:var(--gold-ink);">' + (FREE_FOR_NOW ? "Create your free account" : "Start your free week") + '</div>' +
         '<div style="display:inline-block;background:rgba(245,197,24,0.16);border:1px solid rgba(245,197,24,0.45);color:var(--gold-ink);font-weight:800;font-size:0.8rem;letter-spacing:0.02em;padding:0.28rem 0.75rem;border-radius:999px;margin:0.45rem 0 0.15rem;">&#10024; 7 DAYS FREE &middot; No charge today</div>' +
-        '<div id="ts-plans" style="display:flex;gap:0.5rem;margin:0.7rem 0 0.9rem;">' +
+        '<div id="ts-plans" style="display:' + (FREE_FOR_NOW ? "none" : "flex") + ';gap:0.5rem;margin:0.7rem 0 0.9rem;">' +
           '<button type="button" data-plan="annual" onclick="setTrialPlan(\'annual\')" class="ts-plan-btn ts-plan-best">' +
             '<b class="ts-best-tag">Best value</b>Yearly<span>' + PRICE.annual + '/yr &middot; just ' +
             PRICE.perMonth + ' a month</span></button>' +
@@ -104,9 +108,11 @@
         '<input id="ts-email" type="email" placeholder="Email" autocomplete="email" style="' + IN + '">' +
         '<input id="ts-pw" type="password" placeholder="Create a password (6+ characters)" autocomplete="new-password" style="' + IN + '">' +
         faithField() +
-        '<p style="font-size:0.8rem;color:var(--ink-62);line-height:1.5;margin:0.2rem 0 0.6rem;">Next, add your card on our secure checkout (Payhip). <b style="color:var(--ink);">You won\'t be charged for 7 days</b>, and you can cancel anytime. Please use this same email at checkout so your subscription connects to your account.</p>' +
+        (FREE_FOR_NOW
+          ? '<p style="font-size:0.85rem;color:var(--ink-62);line-height:1.5;margin:0.2rem 0 0.6rem;"><b style="color:var(--ink);">The Lantern is free while it is new.</b> Every story, song and study is included with your account, and no card is asked for.</p>'
+          : '<p style="font-size:0.8rem;color:var(--ink-62);line-height:1.5;margin:0.2rem 0 0.6rem;">Next, add your card on our secure checkout (Payhip). <b style="color:var(--ink);">You won\'t be charged for 7 days</b>, and you can cancel anytime. Please use this same email at checkout so your subscription connects to your account.</p>') +
         '<div id="ts-err" style="color:var(--warn-ink);font-size:0.85rem;min-height:18px;margin-bottom:0.4rem;"></div>' +
-        '<button id="ts-submit" onclick="submitTrialSignup()" style="width:100%;cursor:pointer;background:#f4c842;color:#07112e;border:none;font-family:\'Nunito\',sans-serif;font-weight:900;font-size:1rem;padding:0.8rem;border-radius:999px;">Continue to secure checkout &rarr;</button>' +
+        '<button id="ts-submit" onclick="submitTrialSignup()" style="width:100%;cursor:pointer;background:#f4c842;color:#07112e;border:none;font-family:\'Nunito\',sans-serif;font-weight:900;font-size:1rem;padding:0.8rem;border-radius:999px;">' + (FREE_FOR_NOW ? "Create my account &rarr;" : "Continue to secure checkout &rarr;") + '</button>' +
         '<button onclick="closeTrialSignup()" style="width:100%;background:none;border:none;color:var(--ink-55);margin-top:0.6rem;cursor:pointer;font-size:0.9rem;">Cancel</button>' +
       '</div>';
     d.addEventListener("click", function (e) { if (e.target === d) closeTrialSignup(); });
@@ -141,7 +147,7 @@
     if (!name) { err.textContent = "Please enter your first name."; return; }
     if (!email || !pw) { err.textContent = "Please enter your email and a password."; return; }
     if (pw.length < 6) { err.textContent = "Password must be at least 6 characters."; return; }
-    if (!sb) { window.location.href = PAYHIP[plan]; return; }
+    if (!sb) { if (FREE_FOR_NOW) { err.textContent = "Something went wrong. Please try again."; return; } window.location.href = PAYHIP[plan]; return; }
     var btn = el("ts-submit");
     err.textContent = "Creating your account…";
     if (btn) btn.disabled = true;
@@ -173,8 +179,50 @@
         if (uid) await sb.from("profiles").upsert({ id: uid, faith: faith });
       } catch (e) {}
     }
+    if (FREE_FOR_NOW) {
+      /* No checkout. A confirmed account goes straight in; one that must confirm
+         its email is told so, and read.html signs it in when it comes back. */
+      var session = res && res.data && res.data.session;
+      err.style.color = "var(--gold-ink)";
+      err.textContent = session ? "Your account is ready. Opening The Lantern\u2026" : "Your account is created. Check your email to confirm it, then sign in.";
+      if (session) setTimeout(function () { window.location.href = "read.html"; }, 700);
+      else if (btn) { btn.disabled = false; btn.textContent = "Sign in"; btn.onclick = function () { closeTrialSignup(); if (window.LSTAuth && LSTAuth.openSignIn) LSTAuth.openSignIn(); else window.location.href = "read.html"; }; }
+      return;
+    }
     window.location.href = withEmail(PAYHIP[plan], email);
   };
+
+  /* The site's own buttons: while The Lantern is free, every "Try the First 7
+     Days Free" and "Start the free week" becomes "Create a free account" that
+     opens the modal, "See All Plans" steps aside, and the plans on
+     subscribe.html make way for a plain word. */
+  function freeButtons() {
+    if (!FREE_FOR_NOW) return;
+    var links = document.querySelectorAll('a[href*="subscribe.html"], a[href*="payhip.com/order"]');
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i], t = (a.textContent || "").replace(/\s+/g, " ").trim();
+      if (/^Subscribe/i.test(t) && a.classList.contains("nav-link-parent")) { a.textContent = "Join free"; a.setAttribute("href", "#join"); a.onclick = function () { return openTrialSignup(); }; continue; }
+      if (/See All Plans|Choose a Plan|The Lantern$/i.test(t) && !/free/i.test(t)) { if (/See All Plans/i.test(t)) a.style.display = "none"; else { a.textContent = "Create a free account"; a.setAttribute("href", "#join"); a.onclick = function () { return openTrialSignup(); }; } continue; }
+      if (/7 Days Free|free week|Start The Lantern|Start my free|Begin|Join The Lantern/i.test(t) || /payhip\.com\/order/.test(a.getAttribute("href") || "")) {
+        a.textContent = "Create a free account" + (/→|&rarr;|→/.test(a.innerHTML) ? " →" : "");
+        a.setAttribute("href", "#join"); a.removeAttribute("target"); a.onclick = function () { return openTrialSignup(); };
+      }
+    }
+    if (/subscribe\.html$/i.test(location.pathname)) {
+      var plans = document.getElementById("plans");
+      if (plans && !document.getElementById("lst-free-note")) {
+        var n = document.createElement("section");
+        n.id = "lst-free-note"; n.className = "subscribe-section";
+        n.innerHTML = '<div style="max-width:640px;margin:0 auto;padding:2.5rem 1rem;text-align:center;font-family:\'Nunito\',sans-serif;">'
+          + '<h2 style="font-family:\'Fredoka\',sans-serif;color:var(--gold-ink);font-size:2rem;margin:0 0 .6rem;">The Lantern is free while it is new</h2>'
+          + '<p style="font-size:1.1rem;line-height:1.6;margin:0 0 1.2rem;">A new scripture story every morning, the lullabies, the Virtue Library and the Sacred World Timeline: everything is included with a free account, and no card is asked for. Plans will come later; for now, come in and tell us what you think.</p>'
+          + '<a href="#join" class="btn btn-gold btn-lg" onclick="return openTrialSignup()">Create a free account &rarr;</a></div>';
+        plans.parentNode.insertBefore(n, plans); plans.style.display = "none";
+      }
+    }
+  }
+  if (document.readyState !== "loading") freeButtons();
+  else document.addEventListener("DOMContentLoaded", freeButtons);
 
   if (document.readyState !== "loading") injectModal();
   else document.addEventListener("DOMContentLoaded", injectModal);

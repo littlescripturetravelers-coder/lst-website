@@ -18,6 +18,53 @@
 */
 (function () {
   var SUPA_URL = "https://rdbvktqgrwhjucocobua.supabase.co";
+  /* FREE FOR NOW (Levi, 30 Sept 2026). While The Lantern is new, an account is
+     all a family needs: every signed-in account reads everything, and nothing
+     on the site asks for a card. The database says the same
+     (lst_settings.free_for_now, read by lst_is_subscriber), so the nights are
+     handed out to every account too. Set both to false on the same day to
+     bring the subscription back. */
+  var FREE_FOR_NOW = true;
+  window.LST_FREE_FOR_NOW = FREE_FOR_NOW;
+  /* While it is free, the words about the free week change wherever they are
+     written, in the page or in a box drawn later: the text is rewritten as it
+     appears, and nothing else about the page is touched. Turn the switch off
+     and every page says what it said before. */
+  (function freeWords() {
+    if (!FREE_FOR_NOW || typeof MutationObserver === "undefined") return;
+    var RULES = [
+      [/Your first (?:seven|7) days are free\.?/g, "It is free with an account."],
+      [/the first seven days are free/g, "it is free with an account"],
+      [/Seven days free, then \$\d+ a year[^.]*\./g, "Free while The Lantern is new."],
+      [/a free week opens it too\./g, "a free account opens it."],
+      [/Cancel any time in two clicks[^.]*\.?\s*/g, ""],
+      [/Already a subscriber\?/g, "Already have an account?"],
+      [/Try the First 7 Days Free/g, "Create a free account"],
+      [/Start (?:the|your|my) free week/g, "Create a free account"],
+      [/This is for subscribing families/g, "Create a free account to open it"],
+      [/Comes with The Lantern/g, "Free with an account"]
+    ];
+    function fix(node) {
+      if (node.nodeType === 3) {
+        var t = node.nodeValue, u = t;
+        for (var i = 0; i < RULES.length; i++) u = u.replace(RULES[i][0], RULES[i][1]);
+        if (u !== t) node.nodeValue = u;
+        return;
+      }
+      if (node.nodeType !== 1 || /^(SCRIPT|STYLE|INPUT|TEXTAREA)$/.test(node.nodeName)) return;
+      var w = node.firstChild;
+      while (w) { var nx = w.nextSibling; fix(w); w = nx; }
+    }
+    function start() {
+      try { fix(document.body); } catch (e) {}
+      try {
+        new MutationObserver(function (muts) {
+          for (var i = 0; i < muts.length; i++) for (var j = 0; j < muts[i].addedNodes.length; j++) { try { fix(muts[i].addedNodes[j]); } catch (e) {} }
+        }).observe(document.body, { childList: true, subtree: true });
+      } catch (e) {}
+    }
+    if (document.body) start(); else document.addEventListener("DOMContentLoaded", start);
+  })();
   var SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkYnZrdHFncndoanVjb2NvYnVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwNDAwMzEsImV4cCI6MjEwMTYxNjAzMX0.1PJVCfeK6dIFWeBvdsC13HPQ8173BHEok0Qq6l7mfC4";
 
   /* Statuses that mean "let them read". Payhip's 7-day trial lands as
@@ -128,7 +175,7 @@
       })
       .then(function (t) {
         return lookupAdmin().then(function (isAdmin) {
-          tier = isAdmin ? "subscriber" : t;
+          tier = (isAdmin || FREE_FOR_NOW) ? "subscriber" : t;
           return tier;
         });
       })
@@ -246,6 +293,7 @@
     email: function () { return user ? user.email : null; },
     signedIn: function () { return !!user; },
     isSubscriber: function () { return tier === "subscriber"; },
+    freeForNow: function () { return FREE_FOR_NOW; },
     isAdmin: function () { return admin; },
     tier: function () { return tier; },
     resolved: function () { return resolved; },
