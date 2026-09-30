@@ -8952,7 +8952,7 @@ function slCollect(){
         B("Gospel Connection",e.gospel,"gospel"),
         B("Heavenly Father&#39;s Hand",e.hand,"hand")]),e.id);
       /* an invention that is in the Technology guide, or a find from the Evidence list, studies as itself */
-      try{ var o=out[out.length-1]; if(e.tech){ var tt=slfTechById(e.tech); if(tt) o.tech=tt; } if(e.find){ var ff=slfFindById(e.find); if(ff) o.find=ff; } }catch(e2){}
+      try{ var o=out[out.length-1]; if(e.tech){ var tt=slfTechById(e.tech); if(tt&&tt.modern) o.tech=tt; } if(e.find){ var ff=slfFindById(e.find); if(ff) o.find=ff; } }catch(e2){}
     }
   }catch(err){}
 
@@ -9075,7 +9075,8 @@ function slCollect(){
     if(TGd.ages&&TGd.ages.length){
       add("tech",-1e9,"&#128106;","The Age Guide: what fits a child at each age","Birth to 16+","By child development &#183; the American Academy of Pediatrics, the WHO and For the Strength of Youth",slfEsc(TGd.agesNote||""),[],"tg-ages");
       out[out.length-1].ages=TGd; out[out.length-1].pin=true; }
-    for(var ti=0;ti<TGd.items.length;ti++){ var tg=TGd.items[ti]; if(!tg||!tg.id) continue;
+    /* a modern-day tool: the parent's guide is for the technologies of today, from the Internet on */
+    for(var ti=0;ti<TGd.items.length;ti++){ var tg=TGd.items[ti]; if(!tg||!tg.id||!tg.modern) continue;
       add("tech",Number(tg.y)||0,slfEm(tg.em),slfEsc(tg.name),slfEsc(tg.date||""),slfEsc(tg.loc||""),slfEsc(tg.what||""),[],"tg-"+tg.id);
       out[out.length-1].tech=tg; }
   }catch(err){}
@@ -9294,7 +9295,7 @@ function slTechHtml(it){
 function slAgesHtml(it){
   var g=it.ages, h="";
   if(g.principle) h+=slSec("sl-gold","The one lesson",slP(g.principle));
-  h+=slSec("","How to read this guide",slP(g.agesNote)+"<p class='sl-dim'>Ages are a guide, not a law. A parent who knows the child decides. The years below follow how children grow, not how old a product says they must be.</p>");
+  h+=slSec("","How to read this guide",slP(g.agesNote)+(g.modernNote?slP(g.modernNote):"")+"<p class='sl-dim'>Ages are a guide, not a law. A parent who knows the child decides. The years below follow how children grow, not how old a product says they must be.</p>");
   (g.ages||[]).forEach(function(s){ if(!s) return; var inner="";
     inner+=slP(s.growing);
     if((s.fits||[]).length) inner+="<div class='sl-st-sub'>What fits at this age</div>"+slList(s.fits);

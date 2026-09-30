@@ -189,7 +189,7 @@ def run_tech(body):
                 "name": clean_str(ni.get("name"), 60), "ev": "", "what": clean_str(ni.get("what"), 240), "why": clean_str(ni.get("why"), 500),
                 "builtOn": [x for x in (ni.get("builtOn") or []) if x in ids][:4], "good": clean_list(ni.get("good")), "bad": clean_list(ni.get("bad")),
                 "dangers": clean_list(ni.get("dangers")), "kids": clean_list(ni.get("kids"), 3, 140), "talk": clean_str(ni.get("talk"), 200),
-                "learned": [], "added": TODAY}
+                "learned": [], "added": TODAY, "modern": True}
         for n in (ni.get("learned") or [])[:1]:
             url = clean_str(n.get("url"), 300)
             if re.match(r"^https?://", url): card["learned"].append({"on": TODAY, "note": clean_str(n.get("note"), 500), "source": clean_str(n.get("source"), 120) or "source", "url": url})
