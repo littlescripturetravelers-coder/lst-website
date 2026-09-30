@@ -9898,11 +9898,16 @@ function glDraw(){
   ctx.save(); ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.clip();
   for(var i=0;i<items.length;i++){ var it=items[i], q=glProject(it.lat,it.lng); if(q.z<0.05) continue;
     ctx.fillStyle=(GL.region&&it.region!==GL.region)?"rgba(255,255,255,.35)":slColor(it.cat); ctx.beginPath(); ctx.arc(cx+q.x*R,cy-q.y*R,GL.region===it.region?2.2:1.6,0,Math.PI*2); ctx.fill(); }
-  ctx.font="700 10px Fredoka,sans-serif"; ctx.textAlign="center"; ctx.textBaseline="middle";
-  rs.forEach(function(r){ var q=glProject(r.center[0],r.center[1]); if(q.z<0.25) return; var X=cx+q.x*R, Y=cy-q.y*R, on=r.id===GL.region;
-    ctx.font=(on?"700 11px":"600 9.5px")+" Fredoka,sans-serif"; var w=ctx.measureText(r.short).width+10;
-    ctx.fillStyle=on?"rgba(245,197,24,.95)":"rgba(6,13,30,.62)"; ctx.beginPath(); ctx.roundRect?ctx.roundRect(X-w/2,Y-8,w,16,8):ctx.rect(X-w/2,Y-8,w,16); ctx.fill();
-    ctx.fillStyle=on?"#0a1020":"#fff"; ctx.fillText(r.short,X,Y+0.5); });
+  /* each land's name: the chosen land first, then the Holy Land, then the nearest to the eye; a name that would sit on another is left off */
+  ctx.textAlign="center"; ctx.textBaseline="middle"; var boxes=[];
+  rs.map(function(r){ return {r:r,q:glProject(r.center[0],r.center[1])}; }).filter(function(o){ return o.q.z>=0.25; })
+    .sort(function(a,b){ var pa=(a.r.id===GL.region?2:a.r.id==="holy"?1:0), pb=(b.r.id===GL.region?2:b.r.id==="holy"?1:0); return pb-pa||b.q.z-a.q.z; })
+    .forEach(function(o){ var r=o.r, q=o.q, X=cx+q.x*R, Y=cy-q.y*R, on=r.id===GL.region;
+      ctx.font=(on?"700 11px":"600 9.5px")+" Fredoka,sans-serif"; var w=ctx.measureText(r.short).width+10, bx=[X-w/2,Y-9,X+w/2,Y+9];
+      for(var k=0;k<boxes.length;k++){ var o2=boxes[k]; if(bx[0]<o2[2]&&bx[2]>o2[0]&&bx[1]<o2[3]&&bx[3]>o2[1]) return; }
+      boxes.push(bx);
+      ctx.fillStyle=on?"rgba(245,197,24,.95)":"rgba(6,13,30,.62)"; ctx.beginPath(); ctx.roundRect?ctx.roundRect(X-w/2,Y-8,w,16,8):ctx.rect(X-w/2,Y-8,w,16); ctx.fill();
+      ctx.fillStyle=on?"#0a1020":"#fff"; ctx.fillText(r.short,X,Y+0.5); });
   ctx.restore();
 }
 function glSize(){ var st=document.getElementById("gl-stage"), c=document.getElementById("gl-canvas"), body=document.getElementById("gl-body");
