@@ -125,6 +125,65 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 .sys-box.gold{border-color:rgba(245,197,24,.35);background:rgba(245,197,24,.06);}
 .sys-ref{font-family:Fredoka,sans-serif;font-weight:600;font-size:11.5px;color:#F5C518;margin:8px 0 2px;}
 .sys-lesson{font-family:Fredoka,sans-serif;font-weight:500;font-size:13px;line-height:1.5;color:#fff;}
+/* THE NATIVE PEOPLES AND THE BOOK OF MORMON */
+#trb-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:601;background:rgba(2,5,15,.97);backdrop-filter:blur(16px);flex-direction:column;animation:mopen .22s ease;}
+#trb-panel.open{display:flex;}
+#trb-hdr{flex-shrink:0;background:rgba(6,13,30,.99);border-bottom:2px solid rgba(217,162,39,.35);padding:12px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+#trb-title{font-family:Fredoka,sans-serif;font-weight:700;font-size:18px;color:#D9A227;}
+#trb-sub{font-size:9px;color:rgba(255,255,255,.38);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+#trb-intro{font-size:10.5px;color:rgba(255,255,255,.55);margin-top:5px;line-height:1.5;max-width:560px;font-family:Nunito,sans-serif;}
+#trb-close{background:rgba(255,255,255,.08);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#trb-body{flex:1;overflow-y:auto;padding:10px 14px calc(var(--safeb) + 70px);-webkit-overflow-scrolling:touch;}
+.trb-rule{font-family:Nunito,sans-serif;font-size:10.5px;line-height:1.55;color:#F5C518;background:rgba(245,197,24,.07);border:1px solid rgba(245,197,24,.3);border-radius:10px;padding:8px 10px;margin-bottom:10px;}
+.trb-grades{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+.trb-grade{display:inline-block;font-family:Nunito,sans-serif;font-size:8.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px;border:1px solid;white-space:nowrap;}
+.trb-grade.own{color:#34D399;border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.12);}
+.trb-grade.chron{color:#FBBF24;border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.12);}
+.trb-grade.later{color:#CBD5E1;border-color:rgba(203,213,225,.4);background:rgba(203,213,225,.08);}
+.trb-grade.lds{color:#F5C518;border-color:rgba(245,197,24,.55);background:rgba(245,197,24,.14);}
+.trb-grade.none{color:rgba(255,255,255,.45);border-color:rgba(255,255,255,.2);}
+.trb-gl{font-family:Nunito,sans-serif;font-size:10px;color:rgba(255,255,255,.6);line-height:1.5;display:flex;gap:6px;align-items:flex-start;}
+.trb-h{font-family:Fredoka,sans-serif;font-weight:600;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#F5C518;margin:16px 2px 8px;}
+.trb-box{border-radius:12px;padding:10px 12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);}
+.trb-box p,.trb-box li{font-family:Nunito,sans-serif;font-size:11px;line-height:1.62;color:rgba(255,255,255,.84);margin:0 0 6px;}
+.trb-box ul{margin:0;padding-left:16px;}
+.trb-box.gold{border-color:rgba(245,197,24,.35);background:rgba(245,197,24,.06);}
+.trb-box h4{font-family:Fredoka,sans-serif;font-weight:700;font-size:13.5px;color:#fff;margin:0 0 4px;}
+.trb-k{display:block;font-family:Nunito,sans-serif;font-size:8px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#5BD3DC;margin:7px 0 2px;}
+.trb-k.lds{color:#F5C518;} .trb-k.sch{color:#A78BFA;} .trb-k.rec{color:#FBBF24;}
+.trb-ref{font-family:Fredoka,sans-serif;font-weight:600;font-size:11.5px;color:#F5C518;margin:8px 0 2px;}
+.trb-tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 8px;}
+.trb-search{flex:1;min-width:140px;font-family:Nunito,sans-serif;font-size:12px;padding:7px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;outline:none;}
+.trb-search::placeholder{color:rgba(255,255,255,.4);}
+.trb-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;}
+.trb-chip{font-family:Nunito,sans-serif;font-weight:800;font-size:9px;padding:4px 9px;border-radius:99px;border:1px solid;background:transparent;cursor:pointer;color:#fff;}
+.trb-chip.on{background:rgba(255,255,255,.14);}
+.trb-btn{font-family:Nunito,sans-serif;font-weight:800;font-size:10px;padding:6px 11px;border-radius:99px;border:1px solid rgba(91,211,220,.5);background:rgba(91,211,220,.1);color:#5BD3DC;cursor:pointer;}
+.trb-card{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:14px;padding:10px 12px;margin-bottom:8px;cursor:pointer;}
+.trb-card.open{border-color:rgba(217,162,39,.45);background:rgba(217,162,39,.05);cursor:default;}
+.trb-card h3{font-family:Fredoka,sans-serif;font-weight:700;font-size:14px;color:#fff;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.trb-card h3 small{font-family:Nunito,sans-serif;font-weight:700;font-size:9px;color:rgba(255,255,255,.45);}
+.trb-where{font-family:Nunito,sans-serif;font-weight:800;font-size:8.5px;margin:3px 0 4px;}
+.trb-kinds{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;}
+.trb-kind{font-family:Nunito,sans-serif;font-size:8.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:2px 6px;border-radius:4px;}
+.trb-kind.whitegod{background:rgba(251,191,36,.14);color:#FBBF24;} .trb-kind.israel{background:rgba(91,211,220,.14);color:#5BD3DC;} .trb-kind.bom{background:rgba(245,197,24,.16);color:#F5C518;}
+.trb-detail{margin-top:8px;}
+.trb-detail p{font-family:Nunito,sans-serif;font-size:11px;line-height:1.62;color:rgba(255,255,255,.84);margin:0 0 4px;}
+.trb-link{border-radius:10px;padding:9px 11px;margin:6px 0;border-left:3px solid;background:rgba(255,255,255,.04);}
+.trb-link.whitegod{border-color:#FBBF24;} .trb-link.israel{border-color:#5BD3DC;} .trb-link.bom{border-color:#F5C518;}
+.trb-link p{margin:3px 0;} .trb-link .trb-note{color:rgba(255,255,255,.6);font-size:10.5px;}
+.trb-study{margin-top:8px;padding-top:8px;border-top:1px dashed rgba(255,255,255,.12);}
+.trb-study h5{font-family:Fredoka,sans-serif;font-weight:600;font-size:12px;color:#5BD3DC;margin:8px 0 3px;}
+.trb-wait{font-family:Nunito,sans-serif;font-size:10px;color:rgba(255,255,255,.45);margin-top:6px;}
+#gl-modes{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:0 0 8px;}
+.gl-mode{font-family:Nunito,sans-serif;font-weight:800;font-size:9.5px;padding:5px 11px;border-radius:99px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:rgba(255,255,255,.7);cursor:pointer;}
+.gl-mode.on{border-color:#D9A227;color:#F5C518;background:rgba(217,162,39,.14);}
+.gl-cap{font-family:Nunito,sans-serif;font-size:10.5px;line-height:1.55;color:rgba(255,255,255,.6);padding:6px 2px 10px;}
+.gl-cap b{color:#fff;}
+#gl-stage{position:relative;}
+#gl-zoom{position:absolute;right:6px;bottom:6px;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.gl-zb{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(6,13,30,.8);color:#fff;font-size:17px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;}
+#gl-zoom-lbl{font-family:Nunito,sans-serif;font-size:8px;font-weight:800;color:rgba(255,255,255,.7);}
 
 #tl-sheet{display:none;position:fixed;top:calc(var(--safet) + 62px);left:10px;right:10px;
   max-height:calc(100% - var(--safet) - var(--safeb) - 74px);z-index:319;
@@ -1549,6 +1608,11 @@ body.hand-active .hand-label{display:block;}
       <span class="sm-txt"><b style="color:#34D399">Two Ways to Build a Society</b>
         <em>The person and the family, or the class and the collective: what each did to families and to prosperity</em></span>
       <span class="sm-arr">&#8250;</span></div>
+    <div class="sm-item" onclick="smGo('tribes')">
+      <span class="sm-ico" style="color:#D9A227">&#129718;</span>
+      <span class="sm-txt"><b style="color:#D9A227">The Native Peoples and the Book of Mormon</b>
+        <em>The peoples whose traditions, customs or history have been connected with Israel, the Book of Mormon or a teacher who came among them, every connection graded</em></span>
+      <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('family')">
       <span class="sm-ico" style="color:#F472B6">&#128106;</span>
       <span class="sm-txt"><b style="color:#F472B6">My Family History</b>
@@ -1680,6 +1744,17 @@ body.hand-active .hand-label{display:block;}
   </div>
   <div id="sys-body"></div>
 </div>
+<div id="trb-panel">
+  <div id="trb-hdr">
+    <div>
+      <div id="trb-sub">Bedtime &#183; Faith &#183; Wonder</div>
+      <div id="trb-title">&#129718; The Native Peoples and the Book of Mormon</div>
+      <div id="trb-intro">The peoples whose traditions, customs or history have been connected with Israel, the Book of Mormon or a teacher who came among them: who they are, how they lived, what they believed, and exactly what the connection is and where it comes from.</div>
+    </div>
+    <button id="trb-close" onclick="closeTribes()">&#10005;</button>
+  </div>
+  <div id="trb-body"></div>
+</div>
 <div id="globe-panel">
   <div id="gl-hdr">
     <div>
@@ -1690,8 +1765,10 @@ body.hand-active .hand-label{display:block;}
     <button id="gl-close" onclick="closeGlobe()">&#10005;</button>
   </div>
   <div id="gl-body">
-    <div id="gl-stage"><canvas id="gl-canvas"></canvas></div>
+    <div id="gl-stage"><canvas id="gl-canvas"></canvas>
+      <div id="gl-zoom"><button class="gl-zb" onclick="glZoom(1.5)" aria-label="Zoom in">+</button><span id="gl-zoom-lbl">1.0&#215;</span><button class="gl-zb" onclick="glZoom(1/1.5)" aria-label="Zoom out">&#8722;</button></div></div>
     <div id="gl-hint">Drag to turn the world &#183; tap a land to open its history</div>
+    <div id="gl-modes"><button class="gl-mode on" id="gl-mode-lands" onclick="glMode('lands')">&#127757; The lands and their history</button><button class="gl-mode" id="gl-mode-peoples" onclick="glMode('peoples')">&#129718; The peoples about 1500</button></div>
     <div id="gl-chips"></div>
     <div id="gl-land"></div>
   </div>
@@ -1737,6 +1814,7 @@ body.hand-active .hand-label{display:block;}
 <script src="data/discoveries.js"></script>
 <script src="data/regions.js"></script>
 <script src="data/society.js"></script>
+<script src="data/tribes.js"></script>
 <script>
 /* ---------- Floating controls ----------
    The header rows are hidden, not deleted, and their contents are moved into the
@@ -9832,7 +9910,7 @@ function closeQuad(){document.getElementById("quad-panel").classList.remove("ope
    every event that happened there, earliest to latest, grouped by era, each
    opening to its full details, its in-depth study and the timeline itself.
    ══════════════════════════════════════════════════════════════════════════ */
-var GL={region:null,lon:35,lat:22,tex:null,texW:0,texH:0,texTried:false,drag:null,spin:true,raf:0,grid:null,coords:null,long:{version:0,items:{}},longAsked:false,size:0,low:false};
+var GL={region:null,lon:35,lat:22,tex:null,texW:0,texH:0,texTried:false,drag:null,spin:true,raf:0,grid:null,coords:null,long:{version:0,items:{}},longAsked:false,size:0,low:false,zoom:1,tiles:{},inflight:0,mode:"lands"};
 function glRegions(){ return (window.LST_REGIONS&&LST_REGIONS.regions)||[]; }
 function glRegion(id){ var rs=glRegions(); for(var i=0;i<rs.length;i++) if(rs[i].id===id) return rs[i]; return null; }
 function glInPoly(lat,lng,poly){ var inside=false; for(var i=0,j=poly.length-1;i<poly.length;j=i++){ var yi=poly[i][0],xi=poly[i][1],yj=poly[j][0],xj=poly[j][1];
@@ -9869,8 +9947,8 @@ function glItems(){
 /* ── the globe ── */
 function glProject(lat,lng){ var d=Math.PI/180, la=lat*d, lo=(lng-GL.lon)*d, la0=GL.lat*d;
   var x=Math.cos(la)*Math.sin(lo), y=Math.cos(la0)*Math.sin(la)-Math.sin(la0)*Math.cos(la)*Math.cos(lo), z=Math.sin(la0)*Math.sin(la)+Math.cos(la0)*Math.cos(la)*Math.cos(lo);
-  return {x:x,y:y,z:z}; }
-function glUnproject(nx,ny){ var r2=nx*nx+ny*ny; if(r2>1) return null; var nz=Math.sqrt(1-r2), d=Math.PI/180, la0=GL.lat*d;
+  return {x:x*GL.zoom,y:y*GL.zoom,z:z}; }
+function glUnproject(nx,ny){ nx/=GL.zoom; ny/=GL.zoom; var r2=nx*nx+ny*ny; if(r2>1) return null; var nz=Math.sqrt(1-r2), d=Math.PI/180, la0=GL.lat*d;
   var lat=Math.asin(nz*Math.sin(la0)+ny*Math.cos(la0)), lng=GL.lon*d+Math.atan2(nx,nz*Math.cos(la0)-ny*Math.sin(la0));
   return {lat:lat/d,lng:((lng/d+540)%360)-180}; }
 function glTexture(){
@@ -9885,38 +9963,56 @@ function glTexture(){
       img.onerror=function(){ failed=true; }; img.src=tile2url(x,y,Z); })(x,y); }
   }catch(e){}
 }
+/* Sharper tiles for a zoomed globe: fetched for what is in view, kept for the
+   session, and the coarse map stands in until each arrives. The map's own
+   borders and names (countries, then states and cities) show as you zoom. */
+function glTileZ(){ return Math.max(2,Math.min(7,2+Math.round(Math.log(GL.zoom)/Math.LN2))); }
+function glTile(z,x,y){
+  var n=1<<z; x=((x%n)+n)%n; if(y<0||y>=n) return null; var k=z+"/"+x+"/"+y, t=GL.tiles[k];
+  if(t!==undefined) return t; if(GL.inflight>=12||typeof tile2url!=="function") return null;
+  GL.tiles[k]=null; GL.inflight++;
+  try{ var img=new Image(); img.crossOrigin="anonymous";
+    img.onload=function(){ GL.inflight--; try{ var oc=document.createElement("canvas"); oc.width=256; oc.height=256; var cx=oc.getContext("2d"); cx.drawImage(img,0,0); GL.tiles[k]=cx.getImageData(0,0,256,256).data; }catch(e){ GL.tiles[k]=false; } glRedrawSoon(); };
+    img.onerror=function(){ GL.inflight--; GL.tiles[k]=false; }; img.src=tile2url(x,y,z); }catch(e){ GL.inflight--; GL.tiles[k]=false; }
+  return null;
+}
+function glRedrawSoon(){ clearTimeout(GL.redraw); GL.redraw=setTimeout(function(){ try{ if(document.getElementById("globe-panel").classList.contains("open")) glDraw(); }catch(e){} },120); }
 function glColorAt(lat,lng,out){
+  if(GL.zoom>1.4&&GL.tex){ var z=glTileZ(), n=1<<z, la=Math.max(-85,Math.min(85,lat)), fx=(lng+180)/360*n, fy=lat2y(la,0)*n, tx=Math.floor(fx), ty=Math.floor(fy), t=glTile(z,tx,ty);
+    if(t){ var px=Math.min(255,Math.floor((fx-tx)*256)), py=Math.min(255,Math.floor((fy-ty)*256)), kk=(py*256+px)*4; out[0]=t[kk]*.86; out[1]=t[kk+1]*.88; out[2]=t[kk+2]*.92; return; } }
   if(GL.tex){ var X=Math.floor((lng+180)/360*GL.texW)%GL.texW, la=Math.max(-85,Math.min(85,lat)); var Y=Math.floor(lat2y(la,0)*GL.texH); if(Y<0) Y=0; if(Y>=GL.texH) Y=GL.texH-1;
-    var k=(Y*GL.texW+X)*4; out[0]=GL.tex[k]*.55; out[1]=GL.tex[k+1]*.6; out[2]=GL.tex[k+2]*.7; return; }
+    var k=(Y*GL.texW+X)*4; out[0]=GL.tex[k]*.8; out[1]=GL.tex[k+1]*.82; out[2]=GL.tex[k+2]*.86; return; }
   out[0]=12; out[1]=32; out[2]=70;   /* plain sea when the map cannot be fetched; the lands are tinted over it */
 }
 function glDraw(){
   var c=document.getElementById("gl-canvas"); if(!c||!GL.size) return;
-  var S=GL.size, step=GL.low?2:1, ctx=c.getContext("2d"), R=S/2-4, cx=S/2, cy=S/2;
+  var S=GL.size, step=GL.low?2:1, ctx=c.getContext("2d"), R=S/2-4, cx=S/2, cy=S/2, Z=GL.zoom;
   if(!GL.grid) glGridBuild();
   var rs=glRegions(), cols=rs.map(function(r){ var h=r.color.replace("#",""); return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)]; });
   var img=ctx.createImageData(S,S), d=img.data, px=[0,0,0], sel=GL.region?rs.findIndex(function(r){ return r.id===GL.region; }):-1;
+  var pm=GL.mode==="peoples", agrid=pm?trbGrid():null, acols=pm?trbCols():null, grid=pm?agrid:GL.grid, colsUse=pm?acols:cols;
   for(var y=0;y<S;y+=step){ var ny=(cy-y-0.5)/R;
-    for(var x=0;x<S;x+=step){ var nx=(x+0.5-cx)/R, r2=nx*nx+ny*ny; if(r2>1) continue;
+    for(var x=0;x<S;x+=step){ var nx=(x+0.5-cx)/R, r2=(nx*nx+ny*ny)/(Z*Z); if(r2>1) continue;
       var p=glUnproject(nx,ny); glColorAt(p.lat,p.lng,px);
-      var gi=Math.min(89,Math.max(0,Math.floor((90-p.lat)/2))), gj=Math.min(179,Math.max(0,Math.floor((p.lng+180)/2))), ri=GL.grid[gi*180+gj];
+      var gi=Math.min(89,Math.max(0,Math.floor((90-p.lat)/2))), gj=Math.min(179,Math.max(0,Math.floor((p.lng+180)/2))), ri=grid[gi*180+gj];
       var r=px[0],g=px[1],b=px[2];
-      if(ri>=0){ var a=(ri===sel)?.55:.22, cc=cols[ri]; r=r*(1-a)+cc[0]*a; g=g*(1-a)+cc[1]*a; b=b*(1-a)+cc[2]*a; }
-      var nz=Math.sqrt(1-r2), light=.42+.58*Math.max(0,.2*nx+.35*ny+.92*nz), rim=Math.pow(nz,.35);
+      if(ri>=0){ var a=(pm?.3:((ri===sel)?.4:.14))/(Z>1.4?2:1), cc=colsUse[ri]; r=r*(1-a)+cc[0]*a; g=g*(1-a)+cc[1]*a; b=b*(1-a)+cc[2]*a; }
+      var nz=Math.sqrt(1-r2), nxz=nx/Z, nyz=ny/Z, light=.55+.45*Math.max(0,.2*nxz+.35*nyz+.92*nz), rim=Math.pow(nz,.25);
       r*=light*rim; g*=light*rim; b*=light*rim;
       for(var dy=0;dy<step;dy++) for(var dx=0;dx<step;dx++){ var k=((y+dy)*S+(x+dx))*4; d[k]=r; d[k+1]=g; d[k+2]=b; d[k+3]=255; }
     } }
   ctx.clearRect(0,0,S,S); ctx.putImageData(img,0,0);
   /* the glow of the atmosphere */
-  ctx.save(); ctx.beginPath(); ctx.arc(cx,cy,R+1,0,Math.PI*2); ctx.strokeStyle="rgba(91,211,220,.55)"; ctx.lineWidth=2; ctx.shadowColor="rgba(91,211,220,.8)"; ctx.shadowBlur=14; ctx.stroke(); ctx.restore();
+  if(Z<1.05){ ctx.save(); ctx.beginPath(); ctx.arc(cx,cy,R+1,0,Math.PI*2); ctx.strokeStyle="rgba(91,211,220,.55)"; ctx.lineWidth=2; ctx.shadowColor="rgba(91,211,220,.8)"; ctx.shadowBlur=14; ctx.stroke(); ctx.restore(); }
+  if(pm){ ctx.save(); ctx.beginPath(); ctx.arc(cx,cy,Math.min(R*Z,S),0,Math.PI*2); ctx.clip(); trbDrawPeoples(ctx,cx,cy,R); ctx.restore(); return; }
   /* every event as a dot, and each land's name */
   var items=GL.items||(GL.items=glItems());
-  ctx.save(); ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.clip();
+  ctx.save(); ctx.beginPath(); ctx.arc(cx,cy,Math.min(R*Z,S),0,Math.PI*2); ctx.clip();
   for(var i=0;i<items.length;i++){ var it=items[i], q=glProject(it.lat,it.lng); if(q.z<0.05) continue;
     ctx.fillStyle=(GL.region&&it.region!==GL.region)?"rgba(255,255,255,.35)":slColor(it.cat); ctx.beginPath(); ctx.arc(cx+q.x*R,cy-q.y*R,GL.region===it.region?2.2:1.6,0,Math.PI*2); ctx.fill(); }
   /* each land's name: the chosen land first, then the Holy Land, then the nearest to the eye; a name that would sit on another is left off */
   ctx.textAlign="center"; ctx.textBaseline="middle"; var boxes=[];
-  rs.map(function(r){ return {r:r,q:glProject(r.center[0],r.center[1])}; }).filter(function(o){ return o.q.z>=0.25; })
+  (Z<2.5?rs:[]).map(function(r){ return {r:r,q:glProject(r.center[0],r.center[1])}; }).filter(function(o){ return o.q.z>=0.25; })
     .sort(function(a,b){ var pa=(a.r.id===GL.region?2:a.r.id==="holy"?1:0), pb=(b.r.id===GL.region?2:b.r.id==="holy"?1:0); return pb-pa||b.q.z-a.q.z; })
     .forEach(function(o){ var r=o.r, q=o.q, X=cx+q.x*R, Y=cy-q.y*R, on=r.id===GL.region;
       ctx.font=(on?"700 11px":"600 9.5px")+" Fredoka,sans-serif"; var w=ctx.measureText(r.short).width+10, bx=[X-w/2,Y-9,X+w/2,Y+9];
@@ -9935,31 +10031,41 @@ function glWire(){
   var c=document.getElementById("gl-canvas"); if(!c||c._wired) return; c._wired=true;
   var down=function(x,y){ GL.drag={x:x,y:y,lon:GL.lon,lat:GL.lat,moved:0}; GL.spin=false; GL.low=true; };
   var move=function(x,y){ if(!GL.drag) return; var dx=x-GL.drag.x, dy=y-GL.drag.y; GL.drag.moved=Math.max(GL.drag.moved,Math.abs(dx)+Math.abs(dy));
-    GL.lon=GL.drag.lon-dx*(160/GL.size); GL.lat=Math.max(-80,Math.min(80,GL.drag.lat+dy*(160/GL.size))); glDraw(); };
+    GL.lon=GL.drag.lon-dx*(160/GL.size)/GL.zoom; GL.lat=Math.max(-80,Math.min(80,GL.drag.lat+dy*(160/GL.size)/GL.zoom)); glDraw(); };
   var up=function(x,y){ if(!GL.drag) return; var tap=GL.drag.moved<8; GL.drag=null; GL.low=false;
-    if(tap){ var rc=c.getBoundingClientRect(), R=GL.size/2-4, nx=(x-rc.left-GL.size/2)/R, ny=(GL.size/2-(y-rc.top))/R, p=glUnproject(nx,ny); if(p){ var id=glRegionOf(p.lat,p.lng); if(id) glSelect(id,true); } }
+    if(tap){ var rc=c.getBoundingClientRect(), R=GL.size/2-4, nx=(x-rc.left-GL.size/2)/R, ny=(GL.size/2-(y-rc.top))/R, p=glUnproject(nx,ny); if(p){ if(GL.mode==="peoples") trbTapGlobe(p.lat,p.lng); else { var id=glRegionOf(p.lat,p.lng); if(id) glSelect(id,true); } } }
     glDraw(); };
-  c.addEventListener("pointerdown",function(e){ e.preventDefault(); try{ c.setPointerCapture(e.pointerId); }catch(x){} down(e.clientX,e.clientY); });
-  c.addEventListener("pointermove",function(e){ if(GL.drag){ e.preventDefault(); move(e.clientX,e.clientY); } });
-  c.addEventListener("pointerup",function(e){ up(e.clientX,e.clientY); });
-  c.addEventListener("pointercancel",function(){ GL.drag=null; GL.low=false; glDraw(); });
+  var pts={};
+  c.addEventListener("pointerdown",function(e){ e.preventDefault(); try{ c.setPointerCapture(e.pointerId); }catch(x){} pts[e.pointerId]={x:e.clientX,y:e.clientY};
+    if(Object.keys(pts).length===2){ var a=Object.values(pts); GL.pinch={d:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),zoom:GL.zoom}; GL.drag=null; return; } down(e.clientX,e.clientY); });
+  c.addEventListener("pointermove",function(e){ if(pts[e.pointerId]) pts[e.pointerId]={x:e.clientX,y:e.clientY};
+    if(GL.pinch&&Object.keys(pts).length>=2){ e.preventDefault(); var a=Object.values(pts), d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y); glZoomTo(GL.pinch.zoom*d/Math.max(1,GL.pinch.d)); return; }
+    if(GL.drag){ e.preventDefault(); move(e.clientX,e.clientY); } });
+  c.addEventListener("pointerup",function(e){ delete pts[e.pointerId]; if(GL.pinch){ if(Object.keys(pts).length<2){ GL.pinch=null; GL.low=false; glDraw(); } return; } up(e.clientX,e.clientY); });
+  c.addEventListener("wheel",function(e){ e.preventDefault(); glZoomTo(GL.zoom*(e.deltaY<0?1.15:1/1.15)); },{passive:false});
+  c.addEventListener("pointercancel",function(e){ delete pts[e.pointerId]; GL.drag=null; GL.pinch=null; GL.low=false; glDraw(); });
 }
+function glZoomTo(z){ GL.zoom=Math.max(1,Math.min(8,z)); GL.spin=false; clearTimeout(GL.raf); GL.low=!!GL.pinch; glDraw(); GL.low=false;
+  try{ document.getElementById("gl-zoom-lbl").textContent=GL.zoom.toFixed(1)+"×"; }catch(e){} }
+function glZoom(f){ glZoomTo(GL.zoom*f); }
 /* ── the panel ── */
 function openGlobe(id){
   var p=document.getElementById("globe-panel"); p.classList.add("open");
+  if(id&&GL.mode==="peoples") glMode("lands");
   try{ closeStudies(); }catch(e){} try{ tlSheetClose(); }catch(e){}
   glSize(); glWire(); GL.items=null; if(!GL.grid) glGridBuild(); glTexture(); glChips();
   try{ document.getElementById("gl-body").scrollTop=0; }catch(e){}
   if(id) glSelect(id,false); else if(GL.region) glSelect(GL.region,false); else { document.getElementById("gl-land").innerHTML="<div class='gl-empty'>&#127757; Tap a land on the globe, or a name below, and its history opens here.</div>"; glDraw(); }
-  if(!GL.region){ GL.spin=true; GL.spinFrom=0; clearTimeout(GL.raf); GL.raf=setTimeout(glSpin,60); }
-  glLong(function(){ if(GL.region) glShow(GL.region); });
+  if(GL.mode==="peoples"){ GL.spin=false; clearTimeout(GL.raf); trbChips(); trbGlobeCaption(); glDraw(); }
+  else if(!GL.region){ GL.spin=true; GL.spinFrom=0; clearTimeout(GL.raf); GL.raf=setTimeout(glSpin,60); }
+  glLong(function(){ if(GL.region&&GL.mode!=="peoples") glShow(GL.region); });
 }
 function closeGlobe(){ document.getElementById("globe-panel").classList.remove("open"); GL.spin=false; clearTimeout(GL.raf); }
-function glChips(){ var items=GL.items||(GL.items=glItems()), n={}; items.forEach(function(it){ n[it.region]=(n[it.region]||0)+1; });
+function glChips(){ if(GL.mode==="peoples"){ trbChips(); return; } var items=GL.items||(GL.items=glItems()), n={}; items.forEach(function(it){ n[it.region]=(n[it.region]||0)+1; });
   document.getElementById("gl-chips").innerHTML=glRegions().map(function(r){ return "<button class='gl-chip"+(r.id===GL.region?" on":"")+"' style='color:"+r.color+";border-color:"+r.color+"' onclick=\"glSelect('"+r.id+"',true)\">"+r.em+" "+r.short+"<small>"+(n[r.id]||0)+"</small></button>"; }).join(""); }
 function glSelect(id,fly){
-  var r=glRegion(id); if(!r) return; GL.region=id; GL.spin=false; clearTimeout(GL.raf);
-  if(fly){ GL.lon=r.center[1]; GL.lat=Math.max(-60,Math.min(60,r.center[0]-8)); }
+  var r=glRegion(id); if(!r) return; if(GL.mode==="peoples") glMode("lands"); GL.region=id; GL.spin=false; clearTimeout(GL.raf);
+  if(fly){ GL.lon=r.center[1]; GL.lat=Math.max(-60,Math.min(60,r.center[0]-8)); if(GL.zoom>2.5) glZoomTo(2.5); }
   glChips(); glDraw(); glShow(id);
   try{ var el=document.getElementById("gl-land"); if(fly&&el) setTimeout(function(){ el.scrollIntoView({block:"start",behavior:"smooth"}); },80); }catch(e){}
 }
@@ -10046,6 +10152,155 @@ function openSystems(){
   document.getElementById("sys-body").innerHTML=h; document.getElementById("sys-body").scrollTop=0;
 }
 function closeSystems(){ document.getElementById("sys-panel").classList.remove("open"); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   THE NATIVE PEOPLES AND THE BOOK OF MORMON  (data/tribes.js)
+   The peoples of the Americas whose traditions, customs or history have been
+   connected with Israel, the Book of Mormon or a teacher who came among them.
+   THE RULE: a people is listed only where such a connection is recorded; the
+   connection is shown with an honest grade of where it comes from. The
+   account's tribes job adds peoples that have one and a deep, sourced study
+   of each; on the globe, a second mode shows where they lived about 1500.
+   ══════════════════════════════════════════════════════════════════════════ */
+var TRB={long:{version:0,items:{}},asked:false,area:"",q:"",open:null,grid:null};
+function trbGradeClass(g){ g=String(g||"").toLowerCase(); return /own tradition/.test(g)?"own":/conquest|chronicl|recorded/.test(g)?"chron":/latter-day/.test(g)?"lds":/claimed|later/.test(g)?"later":"none"; }
+function trbGrade(g){ return "<span class='trb-grade "+trbGradeClass(g)+"'>"+slfEsc(g)+"</span>"; }
+function trbKind(k){ return k==="whitegod"?"A teacher who came":k==="israel"?"Israel":"The Book of Mormon"; }
+function trbData(){
+  var D=window.LST_TRIBES; if(!D) return null;
+  var peoples=D.peoples.slice(), seen={}; peoples.forEach(function(p){ seen[p.id]=1; });
+  var items=(TRB.long&&TRB.long.items)||{};
+  Object.keys(items).forEach(function(id){ var it=items[id]; if(it&&it.card&&!seen[id]&&it.card.name){ var c=it.card; c.id=id; c.added=true; peoples.push(c); seen[id]=1; } });
+  return {D:D,peoples:peoples,items:items};
+}
+function trbPeople(id){ var d=trbData(); if(!d) return null; for(var i=0;i<d.peoples.length;i++) if(d.peoples[i].id===id) return d.peoples[i]; return null; }
+function trbArea(id){ var D=window.LST_TRIBES; if(!D) return null; for(var i=0;i<D.areas.length;i++) if(D.areas[i].id===id) return D.areas[i]; return null; }
+/* the account's deep studies and added peoples, asked for once and kept on the phone */
+function trbLong(cb){
+  if(TRB.asked){ cb(); return; } TRB.asked=true;
+  try{ var c=JSON.parse(localStorage.getItem("lst_timeline_tribes")||"null"); if(c&&c.items) TRB.long=c; }catch(e){}
+  cb();
+  try{ slfRows(["tribes"],function(rows){ var b=rows&&rows[0]&&rows[0].body; if(b&&b.items&&Number(b.version||0)>=Number(TRB.long.version||0)){ TRB.long=b; try{ localStorage.setItem("lst_timeline_tribes",JSON.stringify(b)); }catch(e){} cb(); } }); }catch(e){}
+}
+function openTribes(id){
+  var d=trbData(); if(!d) return; var p=document.getElementById("trb-panel"); p.classList.add("open");
+  try{ closeStudies(); }catch(e){}
+  if(id) TRB.open=id;
+  trbRender(); trbLong(function(){ if(document.getElementById("trb-panel").classList.contains("open")) trbRender(); });
+  if(id) setTimeout(function(){ try{ var el=document.getElementById("trb-"+id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); }catch(e){} },120);
+}
+function closeTribes(){ document.getElementById("trb-panel").classList.remove("open"); }
+function trbRender(){
+  var d=trbData(); if(!d) return; var D=d.D, body=document.getElementById("trb-body"); var top=body.scrollTop;
+  var h="<div class='trb-rule'>&#10022; "+slfEsc(D.rule||"")+" "+slfEsc(D.intro||"")+"</div>";
+  h+="<div class='trb-grades'>"+(D.grades||[]).map(function(g){ return "<div class='trb-gl'>"+trbGrade(g.g)+"<span>"+slfEsc(g.x)+"</span></div>"; }).join("")+"</div>";
+  h+="<div class='trb-tools'><button class='trb-btn' onclick='trbToGlobe()'>&#127758; See where they lived, about 1500</button></div>";
+  /* the teacher who came */
+  var T=D.teacher||{};
+  h+="<div class='trb-h'>"+slfEsc(T.title||"The teacher who came")+"</div><div class='trb-box'><p>"+slfEsc(T.intro||"")+"</p></div>";
+  (T.figures||[]).forEach(function(f){ h+="<div class='trb-box'><h4>"+slfEsc(f.name)+" <small style='font-family:Nunito,sans-serif;font-size:9px;color:rgba(255,255,255,.45)'>"+slfEsc(f.people)+"</small></h4>"
+      +"<span class='trb-k'>What the tradition says</span><p>"+slfEsc(f.says)+"</p><span class='trb-k rec'>Who wrote it down</span><p>"+slfEsc(f.recorded)+"</p>"
+      +"<span class='trb-k sch'>What scholars say</span><p>"+slfEsc(f.scholars)+"</p><span class='trb-k lds'>What Latter-day Saints have said</span><p>"+slfEsc(f.lds)+"</p></div>"; });
+  if(T.caution) h+="<div class='trb-box'><span class='trb-k' style='color:#FBBF24'>The honest caution</span><p>"+slfEsc(T.caution)+"</p></div>";
+  if(T.bom&&T.bom.length) h+="<div class='trb-box gold'>"+T.bom.map(function(g){ return "<div class='trb-ref'>"+slfEsc(g.ref)+"</div><p>"+slfEsc(g.text)+"</p>"; }).join("")+"</div>";
+  /* Israel and the Book of Mormon */
+  var I=D.israel||{};
+  h+="<div class='trb-h'>"+slfEsc(I.title||"Israel and the Book of Mormon")+"</div><div class='trb-box'><p>"+slfEsc(I.intro||"")+"</p></div>";
+  (I.claims||[]).forEach(function(c){ h+="<div class='trb-box'><h4>"+slfEsc(c.when)+" &#183; "+slfEsc(c.who)+" "+trbGrade(c.grade)+"</h4><p>"+slfEsc(c.claim)+"</p></div>"; });
+  if(I.evidence&&I.evidence.length) h+="<div class='trb-box'><span class='trb-k sch'>What the evidence shows</span><ul>"+I.evidence.map(function(e){ return "<li><b style='color:#fff'>"+slfEsc(e.t)+".</b> "+slfEsc(e.x)+"</li>"; }).join("")+"</ul></div>";
+  if(I.church) h+="<div class='trb-box gold'><span class='trb-k lds'>What the Church teaches</span><p>"+slfEsc(I.church)+"</p></div>";
+  /* the peoples */
+  var areas={}; d.peoples.forEach(function(p){ areas[p.area]=(areas[p.area]||0)+1; });
+  h+="<div class='trb-h'>The peoples, one by one ("+d.peoples.length+")</div>";
+  h+="<div class='trb-tools'><input class='trb-search' id='trb-q' placeholder='Find a people by name' value='"+slfEsc(TRB.q)+"' oninput='trbSearch(this.value)'></div>";
+  h+="<div class='trb-chips'><button class='trb-chip"+(TRB.area?"":" on")+"' style='border-color:rgba(255,255,255,.3)' onclick=\"trbFilter('')\">All</button>"
+    +D.areas.filter(function(a){ return areas[a.id]; }).map(function(a){ return "<button class='trb-chip"+(TRB.area===a.id?" on":"")+"' style='border-color:"+a.color+";color:"+a.color+"' onclick=\"trbFilter('"+a.id+"')\">"+slfEsc(a.name)+" <small>"+areas[a.id]+"</small></button>"; }).join("")+"</div>";
+  var q=TRB.q.toLowerCase(), shown=0;
+  d.peoples.forEach(function(p){ if(TRB.area&&p.area!==TRB.area) return; if(q&&(p.name+" "+(p.also||"")).toLowerCase().indexOf(q)<0) return; shown++; h+=trbCardHtml(p,d.items[p.id]); });
+  if(!shown) h+="<div class='gl-empty'>No people by that name is in the study.</div>";
+  var src=""; (D.sources||[]).forEach(function(s){ var u=slfUrl(s.url); if(u) src+="<a class='sl-src-l' href='"+slfEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+slfEsc(s.name||u)+"</a>"; });
+  if(src) h+="<div class='sl-src'><div class='sl-src-t'>Sources: open and read them</div>"+src+"</div>";
+  if(D.gospel&&D.gospel.length) h+="<div class='trb-h'>What the scriptures say</div><div class='trb-box gold'>"+D.gospel.map(function(g){ return "<div class='trb-ref'>"+slfEsc(g.ref)+"</div><p>"+slfEsc(g.text)+"</p>"; }).join("")+"</div>";
+  body.innerHTML=h; body.scrollTop=top;
+}
+function trbCardHtml(p,it){
+  var a=trbArea(p.area)||{color:"#fff",name:""}, open=TRB.open===p.id, kinds={};
+  (p.links||[]).forEach(function(l){ kinds[l.kind]=1; });
+  var h="<div class='trb-card"+(open?" open":"")+"' id='trb-"+slfEsc(p.id)+"' onclick=\"trbShow('"+slfEsc(p.id)+"')\">";
+  h+="<h3>"+slfEsc(p.name)+(p.also?"<small>"+slfEsc(p.also)+"</small>":"")+(p.added?"<small style='color:#5BD3DC'>added by the account</small>":"")+"</h3>";
+  h+="<div class='trb-where' style='color:"+a.color+"'>"+slfEsc(a.name)+" &#183; "+slfEsc(p.where||"")+"</div>";
+  h+="<div class='trb-kinds'>"+Object.keys(kinds).map(function(k){ return "<span class='trb-kind "+k+"'>"+trbKind(k)+"</span>"; }).join("")+"</div>";
+  if(open){
+    h+="<div class='trb-detail'>";
+    if(p.since) h+="<span class='trb-k'>Since when</span><p>"+slfEsc(p.since)+"</p>";
+    if(p.lang) h+="<span class='trb-k'>Language</span><p>"+slfEsc(p.lang)+"</p>";
+    if(p.lived) h+="<span class='trb-k'>How they lived</span><p>"+slfEsc(p.lived)+"</p>";
+    if(p.ate) h+="<span class='trb-k'>What they ate</span><p>"+slfEsc(p.ate)+"</p>";
+    if(p.believed) h+="<span class='trb-k'>What they believed</span><p>"+slfEsc(p.believed)+"</p>";
+    if(p.rites) h+="<span class='trb-k'>Ceremonies</span><p>"+slfEsc(p.rites)+"</p>";
+    if(p.known) h+="<span class='trb-k'>Their history</span><p>"+slfEsc(p.known)+"</p>";
+    if(p.today) h+="<span class='trb-k'>Today</span><p>"+slfEsc(p.today)+"</p>";
+    if(p.links&&p.links.length) h+="<span class='trb-k lds'>The connection, and where it comes from</span>";
+    (p.links||[]).forEach(function(l){ h+="<div class='trb-link "+slfEsc(l.kind)+"'><span class='trb-kind "+slfEsc(l.kind)+"'>"+trbKind(l.kind)+"</span> "+trbGrade(l.grade)+"<p>"+slfEsc(l.claim)+"</p><p class='trb-note'>"+slfEsc(l.note)+"</p></div>"; });
+    var st=it&&it.study;
+    if(st&&st.sections&&st.sections.length){ h+="<div class='trb-study'><span class='trb-k sch'>The full study, from the account</span>"+st.sections.map(function(s){ return "<h5>"+slfEsc(s.title)+"</h5>"+String(s.text||"").split(/\n+/).map(function(x){ return x.trim()?"<p>"+slfEsc(slPlain(x))+"</p>":""; }).join(""); }).join("")+"</div>"; }
+    else h+="<div class='trb-wait'>&#10022; The account's full, sourced study of this people is still being written; the words above are the study for now.</div>";
+    var src=""; ((st&&st.sources)||p.sources||[]).forEach(function(s){ var u=slfUrl(s.url); if(u) src+="<a class='sl-src-l' href='"+slfEsc(u)+"' target='_blank' rel='noopener' onclick='event.stopPropagation()'>&#128279; "+slfEsc(s.name||u)+"</a>"; });
+    if(src) h+="<div class='sl-src'><div class='sl-src-t'>Sources: open and read them</div>"+src+"</div>";
+    h+="<div class='trb-tools' style='margin-top:8px'><button class='trb-btn' onclick=\"event.stopPropagation();trbToGlobe('"+slfEsc(p.id)+"')\">&#127758; On the globe</button><button class='trb-btn' onclick=\"event.stopPropagation();TRB.open=null;trbRender()\">Close</button></div>";
+    h+="</div>";
+  }
+  return h+"</div>";
+}
+function trbShow(id){ if(TRB.open===id) return; TRB.open=id; trbRender(); try{ var el=document.getElementById("trb-"+id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); }catch(e){} }
+function trbFilter(a){ TRB.area=a; trbRender(); }
+function trbSearch(q){ TRB.q=q||""; var body=document.getElementById("trb-body"); trbRender(); try{ var i=document.getElementById("trb-q"); i.focus(); i.setSelectionRange(i.value.length,i.value.length); }catch(e){} }
+/* ── the peoples on the globe, about 1500 ── */
+function trbToGlobe(id){ closeTribes(); openGlobe(); glMode("peoples"); var p=id?trbPeople(id):null; if(p&&typeof p.lat==="number"){ GL.lon=p.lng; GL.lat=Math.max(-60,Math.min(60,p.lat-6)); GL.pick=id; glDraw(); } }
+function trbAreaOf(lat,lng){ var D=window.LST_TRIBES; if(!D) return null; var order=D.order||D.areas.map(function(a){ return a.id; });
+  for(var i=0;i<order.length;i++){ var a=trbArea(order[i]); if(!a||!a.polys) continue; for(var p=0;p<a.polys.length;p++) if(glInPoly(lat,lng,a.polys[p])) return a.id; } return null; }
+function trbGrid(){ if(TRB.grid) return TRB.grid; var D=window.LST_TRIBES, g=new Int8Array(90*180), idx={}; (D?D.areas:[]).forEach(function(a,i){ idx[a.id]=i; });
+  for(var i=0;i<90;i++) for(var j=0;j<180;j++){ var id=trbAreaOf(89-i*2,-179+j*2); g[i*180+j]=id?idx[id]:-1; } TRB.grid=g; return g; }
+function trbCols(){ var D=window.LST_TRIBES; return (D?D.areas:[]).map(function(a){ var h=a.color.replace("#",""); return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)]; }); }
+function trbDrawPeoples(ctx,cx,cy,R){
+  var d=trbData(); if(!d) return; var boxes=[]; ctx.textAlign="center"; ctx.textBaseline="middle";
+  var ps=d.peoples.filter(function(p){ return typeof p.lat==="number"&&typeof p.lng==="number"; }).map(function(p){ return {p:p,q:glProject(p.lat,p.lng)}; }).filter(function(o){ return o.q.z>=0.05; })
+    .sort(function(a,b){ return (b.p.id===GL.pick?1:0)-(a.p.id===GL.pick?1:0)||b.q.z-a.q.z; });
+  ps.forEach(function(o){ var p=o.p, q=o.q, X=cx+q.x*R, Y=cy-q.y*R, a=trbArea(p.area)||{color:"#fff"}, on=GL.pick===p.id, ancient=p.area==="ancientna";
+    ctx.beginPath(); ctx.arc(X,Y,on?4.5:3,0,Math.PI*2);
+    if(ancient){ ctx.strokeStyle=on?"#F5C518":"rgba(255,255,255,.9)"; ctx.lineWidth=1.5; ctx.stroke(); } else { ctx.fillStyle=on?"#F5C518":a.color; ctx.fill(); ctx.strokeStyle="rgba(0,0,0,.6)"; ctx.lineWidth=1; ctx.stroke(); }
+    if(p.links&&p.links.length){ ctx.beginPath(); ctx.arc(X,Y,(on?4.5:3)+2.5,0,Math.PI*2); ctx.strokeStyle="rgba(245,197,24,.95)"; ctx.lineWidth=1.5; ctx.stroke(); }
+    if(q.z<0.3) return;
+    ctx.font=(on?"700 10.5px":"600 8.5px")+" Fredoka,sans-serif"; var name=p.name.replace(/\s*\(.*\)$/,""), w=ctx.measureText(name).width+8, bx=[X-w/2,Y+5,X+w/2,Y+19];
+    for(var k=0;k<boxes.length;k++){ var o2=boxes[k]; if(bx[0]<o2[2]&&bx[2]>o2[0]&&bx[1]<o2[3]&&bx[3]>o2[1]) return; }
+    boxes.push(bx); ctx.fillStyle=on?"rgba(245,197,24,.95)":"rgba(6,13,30,.7)"; ctx.beginPath(); ctx.roundRect?ctx.roundRect(X-w/2,Y+5,w,14,7):ctx.rect(X-w/2,Y+5,w,14); ctx.fill();
+    ctx.fillStyle=on?"#0a1020":"#fff"; ctx.fillText(name,X,Y+12.5); });
+}
+function trbTapGlobe(lat,lng){
+  var d=trbData(); if(!d) return; var best=null,bd=6;
+  d.peoples.forEach(function(p){ if(typeof p.lat!=="number") return; var dd=glDist(lat,lng,p.lat,p.lng); if(dd<bd){ bd=dd; best=p; } });
+  if(best){ GL.pick=best.id; glDraw(); trbGlobeCaption(best); }
+}
+function trbChips(){
+  var d=trbData(); if(!d) return; var n={}; d.peoples.forEach(function(p){ n[p.area]=(n[p.area]||0)+1; });
+  document.getElementById("gl-chips").innerHTML=d.D.areas.filter(function(a){ return n[a.id]; }).map(function(a){ return "<button class='gl-chip"+(GL.pickArea===a.id?" on":"")+"' style='color:"+a.color+";border-color:"+a.color+"' onclick=\"trbFly('"+a.id+"')\">"+slfEsc(a.name)+"<small>"+n[a.id]+" "+(n[a.id]===1?"people":"peoples")+"</small></button>"; }).join("");
+}
+function trbFly(aid){ var a=trbArea(aid); if(!a) return; GL.pickArea=aid; GL.spin=false; clearTimeout(GL.raf);
+  var d=trbData(), la=0,lo=0,k=0; d.peoples.forEach(function(p){ if(p.area===aid&&typeof p.lat==="number"){ la+=p.lat; lo+=p.lng; k++; } });
+  if(k){ GL.lon=lo/k; GL.lat=Math.max(-60,Math.min(60,la/k-6)); } trbChips(); glDraw(); trbGlobeCaption(null,a); }
+function trbGlobeCaption(p,a){
+  var el=document.getElementById("gl-land"); if(!el) return;
+  var h="<div class='gl-cap'><b>The peoples, where they lived about 1500</b>, when Europeans first came. Borders were never lines: the colours are the culture areas historians use, and each dot is a people's homeland then. A dot with a gold ring is a people whose traditions or history have been connected with Israel, the Book of Mormon or a visiting teacher; a hollow dot is a people known from ruins. Tap a dot to name it, then open its study. Zoom in with the buttons or a pinch to read the map's own names.</div>";
+  if(a) h+="<div class='gl-cap'><b>"+slfEsc(a.name)+"</b> &#183; "+slfEsc(a.where||"")+" "+slfEsc(a.note||"")+"</div>";
+  if(p){ var ar=trbArea(p.area)||{color:"#fff",name:""}; h+="<div class='trb-card open' style='cursor:default'><h3>"+slfEsc(p.name)+(p.also?"<small>"+slfEsc(p.also)+"</small>":"")+"</h3><div class='trb-where' style='color:"+ar.color+"'>"+slfEsc(ar.name)+" &#183; "+slfEsc(p.where||"")+"</div><div class='trb-detail'><p>"+slfEsc(p.believed||"")+"</p></div><div class='trb-tools' style='margin-top:8px'><button class='trb-btn' onclick=\"openTribes('"+slfEsc(p.id)+"')\">&#129718; Open its study</button></div></div>"; }
+  el.innerHTML=h;
+}
+function glMode(m){
+  GL.mode=m==="peoples"?"peoples":"lands"; GL.spin=false; clearTimeout(GL.raf);
+  try{ document.getElementById("gl-mode-lands").classList.toggle("on",GL.mode==="lands"); document.getElementById("gl-mode-peoples").classList.toggle("on",GL.mode==="peoples"); }catch(e){}
+  if(GL.mode==="peoples"){ GL.region=null; if(GL.lon>-30||GL.lon<-170){ GL.lon=-85; GL.lat=18; } trbChips(); trbGlobeCaption(); glDraw(); trbLong(function(){ if(GL.mode==="peoples"){ trbChips(); glDraw(); } }); }
+  else { GL.pick=null; GL.pickArea=null; glChips(); if(GL.region) glShow(GL.region); else document.getElementById("gl-land").innerHTML="<div class='gl-empty'>&#127757; Tap a land on the globe, or a name below, and its history opens here.</div>"; glDraw(); }
+}
 function setAppHeader(px){
   document.documentElement.style.setProperty("--appheader",(px|0)+"px");
   try{ fitAll(); }catch(e){}
@@ -10101,6 +10356,7 @@ function smGo(which){
       else if(which==="quad")   openQuad();
       else if(which==="family") openFamilyHistory();
       else if(which==="systems") openSystems();
+      else if(which==="tribes") openTribes();
     }catch(e){ console.log("studies menu error",e); }
   },140);
 }
