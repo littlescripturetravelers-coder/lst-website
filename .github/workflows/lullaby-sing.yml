@@ -86,6 +86,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: ffmpeg, to trim a take before upload
+        run: sudo apt-get update -qq >/dev/null && sudo apt-get install -y -qq ffmpeg >/dev/null && ffmpeg -version | head -1
       - name: Sing and check
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -157,7 +159,10 @@ jobs:
                   subprocess.run(['ffmpeg','-y','-loglevel','error','-i',path,'-t',str(LENGTH/1000.0),'-c','copy',cut],check=True)
                   if os.path.getsize(cut)>1000: path=cut; print('   trimmed the file to',LENGTH/1000.0,'s for upload')
               except Exception as e:
-                  print('   could not trim the file (uploading as is):',e)
+                  # no ffmpeg: an mp3 of steady bitrate can be cut by bytes, and a torn last frame is harmless
+                  print('   could not trim with ffmpeg:',e)
+                  raw=open(path,'rb').read(); keep=int(len(raw)*min(1.0,LENGTH/600000.0)); cut='out/upload-source.mp3'
+                  open(cut,'wb').write(raw[:keep]); path=cut; print('   cut the file by bytes to about',LENGTH/1000.0,'s for upload')
               data=open(path,'rb').read(); b=uuid.uuid4().hex.encode()
               def part(name,value,filename=None,ct=None):
                   h=b'--'+b+b'\r\nContent-Disposition: form-data; name="'+name.encode()+b'"'
