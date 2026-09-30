@@ -13,14 +13,15 @@
 #
 # Two modes:
 #   full   sing the whole song (as above).
-#   fix    re-sing one stretch of a take and patch it in. ElevenLabs will not
-#          read most of a recording back (it calls that copyrighted material),
-#          so the plan asks for a short piece only: twenty seconds of the take
-#          before the stretch, the given lines sung again in the same voice,
-#          twenty seconds after. The piece is transcribed to find the new
-#          lines, and they are spliced into the take with ffmpeg (a short
-#          crossfade at each cut). The whole patched song is then transcribed
-#          and checked line by line like any take.
+#   fix    re-sing one stretch of a take and patch it in. ElevenLabs refuses
+#          to read the ten-minute take back at all (it calls it copyrighted
+#          material, however little of it is asked for), but it accepts the
+#          original four-minute recording, whose voice and tune the take was
+#          sung on from. So the piece is: twenty seconds of that recording's
+#          opening, then the given lines sung again in the same voice. The
+#          piece is transcribed to find the new lines, and they are spliced
+#          into the take with ffmpeg (a short crossfade at each cut). The
+#          whole patched song is then transcribed and checked line by line.
 #
 # Nothing is published by itself: the takes and their line-by-line reports are
 # attached to the run as artifacts, and - when save_branch is given - the best
@@ -63,21 +64,21 @@ on:
         required: false
         default: ''
       fix_file:
-        description: 'fix mode: the take as a file in this repo, uploaded if the id cannot be read from'
+        description: 'fix mode: the take to patch, a file in this repo'
         required: false
         default: 'audio/hush-little-traveler-full-preview.mp3'
       fix_from_ms:
-        description: 'fix mode: where the stretch to re-sing begins'
+        description: 'fix mode: where the stretch to re-sing begins in the take'
         required: false
-        default: '379700'
+        default: '373400'
       fix_to_ms:
         description: 'fix mode: where it ends'
         required: false
         default: '387600'
       fix_lines:
-        description: 'fix mode: the lines to sing there, separated by " | "'
+        description: 'fix mode: the lines to sing there, separated by " | " (a whole stanza splices cleanest)'
         required: false
-        default: "She chose to speak, she chose what’s right, | And Heavenly Father gave her might."
+        default: "Esther stood courageous and tall, | Though she was frightened by it all. | She chose to speak, she chose what’s right, | And Heavenly Father gave her might."
       save_branch:
         description: 'Push the best take to this branch as audio/hush-little-traveler-full.mp3 (blank = artifact only)'
         required: false
@@ -200,7 +201,7 @@ jobs:
               except urllib.error.HTTPError as e:
                   print('upload refused: HTTP',e.code,e.read()[:500]); print('singing fresh instead')
           if mode=='fix' and not FIX_ID:
-              FIX_ID=upload(FIX_FILE); print('uploaded the take: song_id',FIX_ID)
+              FIX_ID=upload(SOURCE); print('uploaded the original recording, the voice the take was sung on from: song_id',FIX_ID)
 
           # ── the plan ────────────────────────────────────────────────────────
           POS=["children's bedtime lullaby","gentle acoustic accompaniment","no drums, no percussion",
@@ -230,17 +231,13 @@ jobs:
                   secs.append({'section_name':name[:100],'positive_local_styles':local,'negative_local_styles':[],'duration_ms':dur,'lines':lines})
               return {'positive_global_styles':POS,'negative_global_styles':NEG,'sections':secs}
           def plan_fix(sid):
-              secs=[]
-              def kept(a,b,label):
-                  a=max(0,a); b=min(LENGTH,b)
-                  words=[ln for ln,at in TAKE_LINES if at is not None and a<=at<b and ln not in FIX_LINES][:30]
-                  secs.append({'section_name':label,'positive_local_styles':['exactly as recorded'],'negative_local_styles':[],
-                               'duration_ms':b-a,'lines':words,'source_from':{'song_id':sid,'range':{'start_ms':a,'end_ms':b}}})
-              kept(FIX_FROM-CTX,FIX_FROM,'From the take, just before')
-              secs.append({'section_name':'Sung again','positive_local_styles':['sung softly, every word clear, exactly as written',
-                           'the same voice, the same tune and the same tempo as the lines before and after'],'negative_local_styles':[],
-                           'duration_ms':FIX_TO-FIX_FROM,'lines':FIX_LINES})
-              kept(FIX_TO,FIX_TO+CTX,'From the take, just after')
+              # the opening of the original recording (its first three lines, word-perfect), then the lines to sing again
+              opening=[ln for _,ls in sections for ln in ls][:3]
+              secs=[{'section_name':'Opening, from the recording','positive_local_styles':['exactly as recorded'],'negative_local_styles':[],
+                     'duration_ms':CTX,'lines':opening,'source_from':{'song_id':sid,'range':{'start_ms':0,'end_ms':CTX}}},
+                    {'section_name':'Sung again','positive_local_styles':['sung softly, one line at a time, every word clear, exactly as written',
+                     'the same voice, the same tune, the same key and the same slow tempo as the opening, straight on without a pause'],'negative_local_styles':[],
+                     'duration_ms':FIX_TO-FIX_FROM+3000,'lines':FIX_LINES}]
               return {'positive_global_styles':POS,'negative_global_styles':NEG,'sections':secs}
           def splice(take_path,patch_path,out_path):
               # where the piece sings the new lines: found in its own transcription, else where the plan put them
@@ -252,7 +249,7 @@ jobs:
                   if hit:
                       ps=sg['start'] if ps is None else min(ps,sg['start']); pe=sg['end'] if pe is None else max(pe,sg['end'])
               if ps is None: ps,pe=CTX/1000.0,(CTX+FIX_TO-FIX_FROM)/1000.0
-              ps=max(0.0,ps-0.15); pe=pe+0.15
+              ps=max(0.0,ps-0.2); pe=pe+0.35
               print('   the new lines sit at %.1f-%.1f s of the piece; heard: %s' % (ps,pe,' / '.join(sg['text'].strip() for sg in tr.get('segments',[]))))
               a=FIX_FROM/1000.0; c=FIX_TO/1000.0
               fc=('[0:a]atrim=0:%.3f,asetpts=PTS-STARTPTS[a];[1:a]atrim=%.3f:%.3f,asetpts=PTS-STARTPTS[b];[0:a]atrim=%.3f,asetpts=PTS-STARTPTS[c];'
@@ -316,9 +313,9 @@ jobs:
                       if e.code in (401,402) or b'quota' in detail.lower() or b'credits' in detail.lower(): sys.exit('no credit left; stopping')
                       audio=None
                       # fix mode: if the take cannot be read by its id, upload its file once and read from that
-                      if mode=='fix' and uploaded_fix is None and FIX_FILE and os.path.exists(FIX_FILE) and e.code in (400,404,422):
+                      if mode=='fix' and uploaded_fix is None and e.code in (400,404,422) and b'copyright' not in detail.lower():
                           try:
-                              uploaded_fix=upload(FIX_FILE); print('   uploaded the take instead: song_id',uploaded_fix)
+                              uploaded_fix=upload(SOURCE); print('   uploaded the recording again: song_id',uploaded_fix)
                               plan=plan_fix(uploaded_fix); json.dump(plan,open('out/plan.json','w'),indent=1)
                               for other in tries: other['composition_plan']=plan
                               audio=sing(bd); break
