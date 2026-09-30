@@ -26,10 +26,6 @@ window.LST_TRIBES = {
   {
    "g": "Latter-day Saint teaching",
    "x": "A teaching or reading among Latter-day Saints; the Church has no official position on which peoples descend from Lehi or where the Book of Mormon happened."
-  },
-  {
-   "g": "No known link",
-   "x": "No tradition or evidence connects this people to any of it."
   }
  ],
  "areas": [
@@ -852,7 +848,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Haida",
-     "url": "https://en.wikipedia.org/wiki/Haida"
+     "url": "https://en.wikipedia.org/wiki/Haida_people"
     }
    ]
   },
@@ -876,7 +872,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Kwakwaka'wakw",
-     "url": "https://en.wikipedia.org/wiki/Kwakwaka'wakw"
+     "url": "https://en.wikipedia.org/wiki/Kwakwaka%CA%BCwakw"
     }
    ]
   },
@@ -955,7 +951,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Ute",
-     "url": "https://en.wikipedia.org/wiki/Ute"
+     "url": "https://en.wikipedia.org/wiki/Ute_people"
     }
    ]
   },
@@ -1041,7 +1037,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Chumash",
-     "url": "https://en.wikipedia.org/wiki/Chumash"
+     "url": "https://en.wikipedia.org/wiki/Chumash_people"
     }
    ]
   },
@@ -1151,7 +1147,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Zuni",
-     "url": "https://en.wikipedia.org/wiki/Zuni"
+     "url": "https://en.wikipedia.org/wiki/Zuni_people"
     }
    ]
   },
@@ -1254,7 +1250,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Tohono O'odham and Akimel O'odham",
-     "url": "https://en.wikipedia.org/wiki/Tohono_O'odham_and_Akimel_O'odham"
+     "url": "https://en.wikipedia.org/wiki/Tohono_O%27odham"
     }
    ]
   },
@@ -1309,7 +1305,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Lakota",
-     "url": "https://en.wikipedia.org/wiki/Lakota"
+     "url": "https://en.wikipedia.org/wiki/Lakota_people"
     }
    ]
   },
@@ -1381,7 +1377,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Blackfoot",
-     "url": "https://en.wikipedia.org/wiki/Blackfoot"
+     "url": "https://en.wikipedia.org/wiki/Blackfoot_Confederacy"
     }
    ]
   },
@@ -1405,7 +1401,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Crow",
-     "url": "https://en.wikipedia.org/wiki/Crow"
+     "url": "https://en.wikipedia.org/wiki/Crow_people"
     }
    ]
   },
@@ -1477,7 +1473,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Pawnee",
-     "url": "https://en.wikipedia.org/wiki/Pawnee"
+     "url": "https://en.wikipedia.org/wiki/Pawnee_people"
     }
    ]
   },
@@ -1501,7 +1497,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Osage",
-     "url": "https://en.wikipedia.org/wiki/Osage"
+     "url": "https://en.wikipedia.org/wiki/Osage_Nation"
     }
    ]
   },
@@ -1562,7 +1558,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Haudenosaunee (Iroquois Confederacy)",
-     "url": "https://en.wikipedia.org/wiki/Haudenosaunee_(Iroquois_Confederacy)"
+     "url": "https://en.wikipedia.org/wiki/Iroquois"
     }
    ]
   },
@@ -1695,7 +1691,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Mi'kmaq",
-     "url": "https://en.wikipedia.org/wiki/Mi'kmaq"
+     "url": "https://en.wikipedia.org/wiki/Mi%27kmaq"
     }
    ]
   },
@@ -1897,7 +1893,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Catawba",
-     "url": "https://en.wikipedia.org/wiki/Catawba"
+     "url": "https://en.wikipedia.org/wiki/Catawba_people"
     }
    ]
   },
@@ -1952,7 +1948,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Natchez",
-     "url": "https://en.wikipedia.org/wiki/Natchez"
+     "url": "https://en.wikipedia.org/wiki/Natchez_people"
     }
    ]
   },
@@ -2044,7 +2040,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Mississippian peoples",
-     "url": "https://en.wikipedia.org/wiki/Mississippian_peoples"
+     "url": "https://en.wikipedia.org/wiki/Mississippian_culture"
     }
    ]
   },
@@ -2075,7 +2071,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Adena and Hopewell",
-     "url": "https://en.wikipedia.org/wiki/Adena_and_Hopewell"
+     "url": "https://en.wikipedia.org/wiki/Hopewell_tradition"
     }
    ]
   },
@@ -2130,7 +2126,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Olmec",
-     "url": "https://en.wikipedia.org/wiki/Olmec"
+     "url": "https://en.wikipedia.org/wiki/Olmecs"
     }
    ]
   },
@@ -2167,7 +2163,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Maya",
-     "url": "https://en.wikipedia.org/wiki/Maya"
+     "url": "https://en.wikipedia.org/wiki/Maya_civilization"
     }
    ]
   },
@@ -2222,7 +2218,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Zapotec",
-     "url": "https://en.wikipedia.org/wiki/Zapotec"
+     "url": "https://en.wikipedia.org/wiki/Zapotec_civilization"
     }
    ]
   },
@@ -2314,7 +2310,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Aztec (Mexica)",
-     "url": "https://en.wikipedia.org/wiki/Aztec_(Mexica)"
+     "url": "https://en.wikipedia.org/wiki/Aztecs"
     }
    ]
   },
@@ -2338,7 +2334,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Purépecha",
-     "url": "https://en.wikipedia.org/wiki/Purépecha"
+     "url": "https://en.wikipedia.org/wiki/Pur%C3%A9pecha"
     }
    ]
   },
@@ -2362,7 +2358,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Wixárika",
-     "url": "https://en.wikipedia.org/wiki/Wixárika"
+     "url": "https://en.wikipedia.org/wiki/Huichol"
     }
    ]
   },
@@ -2410,7 +2406,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Taíno",
-     "url": "https://en.wikipedia.org/wiki/Taíno"
+     "url": "https://en.wikipedia.org/wiki/Ta%C3%ADno"
     }
    ]
   },
@@ -2458,7 +2454,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Guna",
-     "url": "https://en.wikipedia.org/wiki/Guna"
+     "url": "https://en.wikipedia.org/wiki/Guna_people"
     }
    ]
   },
@@ -2482,7 +2478,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Miskito",
-     "url": "https://en.wikipedia.org/wiki/Miskito"
+     "url": "https://en.wikipedia.org/wiki/Miskito_people"
     }
    ]
   },
@@ -2574,7 +2570,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Inca (Quechua)",
-     "url": "https://en.wikipedia.org/wiki/Inca_(Quechua)"
+     "url": "https://en.wikipedia.org/wiki/Inca_Empire"
     }
    ]
   },
@@ -2605,7 +2601,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Aymara",
-     "url": "https://en.wikipedia.org/wiki/Aymara"
+     "url": "https://en.wikipedia.org/wiki/Aymara_people"
     }
    ]
   },
@@ -2653,7 +2649,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Moche",
-     "url": "https://en.wikipedia.org/wiki/Moche"
+     "url": "https://en.wikipedia.org/wiki/Moche_culture"
     }
    ]
   },
@@ -2677,7 +2673,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Nazca",
-     "url": "https://en.wikipedia.org/wiki/Nazca"
+     "url": "https://en.wikipedia.org/wiki/Nazca_culture"
     }
    ]
   },
@@ -2701,7 +2697,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Chavín",
-     "url": "https://en.wikipedia.org/wiki/Chavín"
+     "url": "https://en.wikipedia.org/wiki/Chav%C3%ADn_culture"
     }
    ]
   },
@@ -2756,7 +2752,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Guaraní",
-     "url": "https://en.wikipedia.org/wiki/Guaraní"
+     "url": "https://en.wikipedia.org/wiki/Guaran%C3%AD_people"
     }
    ]
   },
@@ -2787,7 +2783,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Tupinambá",
-     "url": "https://en.wikipedia.org/wiki/Tupinambá"
+     "url": "https://en.wikipedia.org/wiki/Tupinamb%C3%A1_people"
     }
    ]
   },
@@ -2859,7 +2855,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Wayuu",
-     "url": "https://en.wikipedia.org/wiki/Wayuu"
+     "url": "https://en.wikipedia.org/wiki/Wayuu_people"
     }
    ]
   },
@@ -2883,7 +2879,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Kogi",
-     "url": "https://en.wikipedia.org/wiki/Kogi"
+     "url": "https://en.wikipedia.org/wiki/Kogi_people"
     }
    ]
   },
@@ -2907,7 +2903,7 @@ window.LST_TRIBES = {
    "sources": [
     {
      "name": "Wikipedia: Selk'nam",
-     "url": "https://en.wikipedia.org/wiki/Selk'nam"
+     "url": "https://en.wikipedia.org/wiki/Selk%27nam_people"
     }
    ]
   }

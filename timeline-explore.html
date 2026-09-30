@@ -1611,7 +1611,7 @@ body.hand-active .hand-label{display:block;}
     <div class="sm-item" onclick="smGo('tribes')">
       <span class="sm-ico" style="color:#D9A227">&#129718;</span>
       <span class="sm-txt"><b style="color:#D9A227">The Native Peoples and the Book of Mormon</b>
-        <em>The peoples whose traditions, customs or history have been connected with Israel, the Book of Mormon or a teacher who came among them, every connection graded</em></span>
+        <em>Every people of the Americas: how they lived and what they believed, and, only where it is recorded, their connection with Israel, the Book of Mormon or a teacher who came among them, graded honestly</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('family')">
       <span class="sm-ico" style="color:#F472B6">&#128106;</span>
@@ -1749,7 +1749,7 @@ body.hand-active .hand-label{display:block;}
     <div>
       <div id="trb-sub">Bedtime &#183; Faith &#183; Wonder</div>
       <div id="trb-title">&#129718; The Native Peoples and the Book of Mormon</div>
-      <div id="trb-intro">The peoples whose traditions, customs or history have been connected with Israel, the Book of Mormon or a teacher who came among them: who they are, how they lived, what they believed, and exactly what the connection is and where it comes from.</div>
+      <div id="trb-intro">Every people of the Americas: where they lived about 1500, how they lived, what they ate and what they believed. Where a people has been connected with Israel, the Book of Mormon or a teacher who came among them, that connection is set out and graded; where there is none, nothing is claimed.</div>
     </div>
     <button id="trb-close" onclick="closeTribes()">&#10005;</button>
   </div>
@@ -9977,12 +9977,20 @@ function glTile(z,x,y){
   return null;
 }
 function glRedrawSoon(){ clearTimeout(GL.redraw); GL.redraw=setTimeout(function(){ try{ if(document.getElementById("globe-panel").classList.contains("open")) glDraw(); }catch(e){} },120); }
+/* The look of the globe emoji: blue seas and green lands. A map pixel is read
+   as water or land by its colour and repainted; its own darkness is kept, so
+   borders, names and coasts stay readable, and ice stays white. */
+function glLook(o){ var r=o[0],g=o[1],b=o[2];
+  if((r>246&&g>246&&b>246)||(r>200&&b>r+8&&g>r+8)){ o[0]=230; o[1]=238; o[2]=246; return; }   /* snow and glacier stay white; the map's beige land does not */
+  var L=(r*.3+g*.59+b*.11)/255;
+  if(b-r>26&&b>=g-10){ var w=.55+.45*L; o[0]=48*w; o[1]=122*w; o[2]=232*w; }
+  else { var l=.3+.7*L; o[0]=96*l; o[1]=184*l; o[2]=92*l; } }
 function glColorAt(lat,lng,out){
   if(GL.zoom>1.4&&GL.tex){ var z=glTileZ(), n=1<<z, la=Math.max(-85,Math.min(85,lat)), fx=(lng+180)/360*n, fy=lat2y(la,0)*n, tx=Math.floor(fx), ty=Math.floor(fy), t=glTile(z,tx,ty);
-    if(t){ var px=Math.min(255,Math.floor((fx-tx)*256)), py=Math.min(255,Math.floor((fy-ty)*256)), kk=(py*256+px)*4; out[0]=t[kk]*.86; out[1]=t[kk+1]*.88; out[2]=t[kk+2]*.92; return; } }
+    if(t){ var px=Math.min(255,Math.floor((fx-tx)*256)), py=Math.min(255,Math.floor((fy-ty)*256)), kk=(py*256+px)*4; out[0]=t[kk]; out[1]=t[kk+1]; out[2]=t[kk+2]; glLook(out); return; } }
   if(GL.tex){ var X=Math.floor((lng+180)/360*GL.texW)%GL.texW, la=Math.max(-85,Math.min(85,lat)); var Y=Math.floor(lat2y(la,0)*GL.texH); if(Y<0) Y=0; if(Y>=GL.texH) Y=GL.texH-1;
-    var k=(Y*GL.texW+X)*4; out[0]=GL.tex[k]*.8; out[1]=GL.tex[k+1]*.82; out[2]=GL.tex[k+2]*.86; return; }
-  out[0]=12; out[1]=32; out[2]=70;   /* plain sea when the map cannot be fetched; the lands are tinted over it */
+    var k=(Y*GL.texW+X)*4; out[0]=GL.tex[k]; out[1]=GL.tex[k+1]; out[2]=GL.tex[k+2]; glLook(out); return; }
+  out[0]=40; out[1]=104; out[2]=200;   /* plain blue sea when the map cannot be fetched; the lands are tinted over it */
 }
 function glDraw(){
   var c=document.getElementById("gl-canvas"); if(!c||!GL.size) return;
@@ -9997,7 +10005,7 @@ function glDraw(){
       var gi=Math.min(89,Math.max(0,Math.floor((90-p.lat)/2))), gj=Math.min(179,Math.max(0,Math.floor((p.lng+180)/2))), ri=grid[gi*180+gj];
       var r=px[0],g=px[1],b=px[2];
       if(ri>=0){ var a=(pm?.3:((ri===sel)?.4:.14))/(Z>1.4?2:1), cc=colsUse[ri]; r=r*(1-a)+cc[0]*a; g=g*(1-a)+cc[1]*a; b=b*(1-a)+cc[2]*a; }
-      var nz=Math.sqrt(1-r2), nxz=nx/Z, nyz=ny/Z, light=.55+.45*Math.max(0,.2*nxz+.35*nyz+.92*nz), rim=Math.pow(nz,.25);
+      var nz=Math.sqrt(1-r2), nxz=nx/Z, nyz=ny/Z, light=.68+.32*Math.max(0,.2*nxz+.35*nyz+.92*nz), rim=Math.pow(nz,.2);
       r*=light*rim; g*=light*rim; b*=light*rim;
       for(var dy=0;dy<step;dy++) for(var dx=0;dx<step;dx++){ var k=((y+dy)*S+(x+dx))*4; d[k]=r; d[k+1]=g; d[k+2]=b; d[k+3]=255; }
     } }
@@ -10192,7 +10200,7 @@ function openTribes(id){
 function closeTribes(){ document.getElementById("trb-panel").classList.remove("open"); }
 function trbRender(){
   var d=trbData(); if(!d) return; var D=d.D, body=document.getElementById("trb-body"); var top=body.scrollTop;
-  var h="<div class='trb-rule'>&#10022; "+slfEsc(D.rule||"")+" "+slfEsc(D.intro||"")+"</div>";
+  var h="<div class='trb-rule'>&#10022; "+slfEsc(D.rule||"")+"</div><div class='trb-box'><p>"+slfEsc(D.intro||"")+"</p></div>";
   h+="<div class='trb-grades'>"+(D.grades||[]).map(function(g){ return "<div class='trb-gl'>"+trbGrade(g.g)+"<span>"+slfEsc(g.x)+"</span></div>"; }).join("")+"</div>";
   h+="<div class='trb-tools'><button class='trb-btn' onclick='trbToGlobe()'>&#127758; See where they lived, about 1500</button></div>";
   /* the teacher who came */
