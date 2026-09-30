@@ -1,5 +1,36 @@
 {
   "rewrites": [
-    { "source": "/lantern/:slug/travelers-lullaby.html", "destination": "/travelers-lullaby.html" }
+    {
+      "source": "/lantern/:slug/travelers-lullaby.html",
+      "destination": "/travelers-lullaby.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)\\.mp3",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, HEAD, OPTIONS"
+        }
+      ]
+    },
+    {
+      "source": "/lantern/(.*)-lullaby.html",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, HEAD, OPTIONS"
+        }
+      ]
+    }
   ]
 }

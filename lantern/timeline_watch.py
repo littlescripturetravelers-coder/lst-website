@@ -175,13 +175,13 @@ def run_tech(body):
               "\"new_items\":[{...}]}") % (TODAY, listing)
     ans = ask(instructions, prompt)
     added_notes = 0; added_items = 0
-    for n in (ans.get("notes") or [])[:5]:
+    for n in [x for x in (ans.get("notes") or []) if isinstance(x, dict)][:5]:
         tid = str(n.get("tech", "")); it = next((x for x in items if x["id"] == tid), None)
         note = clean_str(n.get("note"), 500); url = clean_str(n.get("url"), 300); src = clean_str(n.get("source"), 120)
         if not it or not note or not re.match(r"^https?://", url): continue
         if any(x.get("url") == url or x.get("note") == note for x in it.get("learned", [])): continue
         it.setdefault("learned", []).append({"on": TODAY, "note": note, "source": src or "source", "url": url}); added_notes += 1
-    for ni in (ans.get("new_items") or [])[:1]:
+    for ni in [x for x in (ans.get("new_items") or []) if isinstance(x, dict)][:1]:
         nid = slug(ni.get("id") or ni.get("name"))
         if not nid or nid in ids or not clean_str(ni.get("name")): continue
         card = {"id": nid, "y": int(float(ni.get("y") or datetime.date.today().year)), "date": clean_str(ni.get("date"), 40) or str(datetime.date.today().year),
@@ -191,7 +191,11 @@ def run_tech(body):
                 "builtOn": [x for x in (ni.get("builtOn") or []) if x in ids][:4], "good": clean_list(ni.get("good")), "bad": clean_list(ni.get("bad")),
                 "dangers": clean_list(ni.get("dangers")), "kids": clean_list(ni.get("kids"), 3, 140), "talk": clean_str(ni.get("talk"), 200),
                 "learned": [], "added": TODAY, "modern": True}
-        for n in (ni.get("learned") or [])[:1]:
+        # the prompt asks for "one note", and the model sometimes answers with the
+        # note itself rather than a list of one - both are taken
+        learned = ni.get("learned") or []
+        if isinstance(learned, dict): learned = [learned]
+        for n in ([x for x in learned if isinstance(x, dict)] if isinstance(learned, list) else [])[:1]:
             url = clean_str(n.get("url"), 300)
             if re.match(r"^https?://", url): card["learned"].append({"on": TODAY, "note": clean_str(n.get("note"), 500), "source": clean_str(n.get("source"), 120) or "source", "url": url})
         if card["what"] and card["good"] and card["dangers"]:
