@@ -12,7 +12,11 @@
 # account's lullaby fine-tune is asked for as well. Each take is transcribed and
 # every written line is looked for in what was sung; the best take is kept.
 #
-# Two modes:
+# Three modes:
+#   check  transcribe and check the takes an earlier run already sang (they are
+#          kept as that run's artifact for thirty days), spending no ElevenLabs
+#          credit. For a run that sang but fell over before its check - the
+#          transcriber answered 429 once, after a take had been paid for.
 #   full   sing the whole song (as above).
 #   fix    re-sing one stretch of a take and patch it in. ElevenLabs refuses
 #          to read the ten-minute take back at all (it calls it copyrighted
@@ -36,10 +40,14 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'full = sing the whole song; fix = re-sing one stretch of a take'
+        description: 'full = sing the whole song; fix = re-sing one stretch of a take; check = transcribe and check the takes an earlier run sang (no credits spent)'
         type: choice
-        options: [full, fix]
+        options: [full, fix, check]
         default: full
+      check_run:
+        description: 'check mode: the id of the earlier run whose lullaby-takes artifact holds the takes'
+        required: false
+        default: ''
       finetune:
         description: 'Name of the ElevenLabs music fine-tune to sing with'
         required: true
@@ -86,6 +94,7 @@ on:
         default: ''
 permissions:
   contents: write
+  actions: read      # check mode reads an earlier run's artifact
 jobs:
   sing:
     runs-on: ubuntu-latest
@@ -93,6 +102,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: ffmpeg, to trim a take before upload
         run: sudo apt-get update -qq >/dev/null && sudo apt-get install -y -qq ffmpeg >/dev/null && ffmpeg -version | head -1
+      - name: The takes an earlier run sang (check mode)
+        if: ${{ inputs.mode == 'check' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: lullaby-takes
+          path: out
+          run-id: ${{ inputs.check_run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Sing and check
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -111,7 +128,7 @@ jobs:
         run: |
           mkdir -p out
           python3 - <<'PY'
-          import os, re, json, sys, uuid, difflib, html, subprocess, urllib.request, urllib.error
+          import os, re, json, sys, uuid, difflib, html, subprocess, time, glob, urllib.request, urllib.error
           key=os.environ['ELEVENLABS_API_KEY'].strip(); okey=os.environ['OPENAI_API_KEY'].strip()
           mode=os.environ.get('MODE','full').strip().lower()
           want=os.environ['FINETUNE'].strip(); takes=max(1,int(os.environ['TAKES'])); LENGTH=min(600000,max(30000,int(os.environ['LENGTH_MS'])))
@@ -182,7 +199,7 @@ jobs:
               return up.get('song_id')
 
           # ── the fine-tune, by name ───────────────────────────────────────────
-          raw=json.loads(api('https://api.elevenlabs.io/v1/music/finetunes')); fid=None
+          raw=json.loads(api('https://api.elevenlabs.io/v1/music/finetunes')) if mode!='check' else {}; fid=None
           def walk(o):
               global fid
               if isinstance(o,dict):
@@ -276,7 +293,59 @@ jobs:
                     +part('file',data,os.path.basename(path),'audio/mpeg')+b'--'+b+b'--\r\n')
               req=urllib.request.Request('https://api.openai.com/v1/audio/transcriptions',data=body,
                   headers={'Authorization':'Bearer '+okey,'Content-Type':'multipart/form-data; boundary='+b.decode()})
-              return json.load(urllib.request.urlopen(req,timeout=900))
+              # a take has been paid for by now: a busy transcriber is waited out, and when it
+              # keeps refusing (on 30 Sept 2026 whisper answered 429 for ten minutes straight while
+              # the same key's chat models worked) two other transcribers are asked in turn
+              last=None
+              for wait in (0,20,45):
+                  if wait: print('   transcriber busy; trying again in',wait,'s',flush=True); time.sleep(wait)
+                  try: return json.load(urllib.request.urlopen(req,timeout=900))
+                  except urllib.error.HTTPError as e:
+                      detail=e.read()[:300]; print('   OpenAI whisper: HTTP',e.code,detail,flush=True)
+                      if e.code not in (429,500,502,503,504): raise
+                      last=e
+              # ElevenLabs Scribe: words with their times, gathered into short segments
+              try:
+                  b2=uuid.uuid4().hex.encode()
+                  def part2(name,value,filename=None,ct=None):
+                      h=b'--'+b2+b'\r\nContent-Disposition: form-data; name="'+name.encode()+b'"'
+                      if filename: h+=b'; filename="'+filename.encode()+b'"\r\nContent-Type: '+ct.encode()
+                      return h+b'\r\n\r\n'+(value if isinstance(value,bytes) else value.encode())+b'\r\n'
+                  body2=(part2('model_id','scribe_v1')+part2('language_code','eng')+part2('timestamps_granularity','word')+part2('tag_audio_events','false')
+                         +part2('file',data,os.path.basename(path),'audio/mpeg')+b'--'+b2+b'--\r\n')
+                  r2=json.load(urllib.request.urlopen(urllib.request.Request('https://api.elevenlabs.io/v1/speech-to-text',data=body2,
+                       headers={'xi-api-key':key,'Content-Type':'multipart/form-data; boundary='+b2.decode()}),timeout=900))
+                  words=[w for w in r2.get('words',[]) if w.get('type','word')=='word' and w.get('text','').strip()]
+                  segs=[]; cur=None
+                  for w in words:
+                      if cur is None: cur={'start':w.get('start',0),'end':w.get('end',0),'text':''}
+                      cur['text']+=(' ' if cur['text'] else '')+w['text'].strip(); cur['end']=w.get('end',cur['end'])
+                      if re.search(r'[.!?,;]$',w['text'].strip()) or len(cur['text'].split())>=12: segs.append(cur); cur=None
+                  if cur: segs.append(cur)
+                  if not segs and r2.get('text'): segs=[{'start':0,'end':0,'text':r2['text']}]
+                  print('   transcribed by ElevenLabs Scribe:',len(words),'words',flush=True)
+                  return {'duration':(segs[-1]['end'] if segs else None),'segments':segs}
+              except urllib.error.HTTPError as e:
+                  print('   ElevenLabs Scribe: HTTP',e.code,e.read()[:300],flush=True)
+              except Exception as e:
+                  print('   ElevenLabs Scribe failed:',e,flush=True)
+              # OpenAI's newer transcriber: the words without their times
+              try:
+                  b3=uuid.uuid4().hex.encode()
+                  def part3(name,value,filename=None,ct=None):
+                      h=b'--'+b3+b'\r\nContent-Disposition: form-data; name="'+name.encode()+b'"'
+                      if filename: h+=b'; filename="'+filename.encode()+b'"\r\nContent-Type: '+ct.encode()
+                      return h+b'\r\n\r\n'+(value if isinstance(value,bytes) else value.encode())+b'\r\n'
+                  body3=(part3('model','gpt-4o-mini-transcribe')+part3('response_format','json')+part3('language','en')
+                         +part3('prompt',"A children's bedtime lullaby about Heavenly Father, Beau, Scout, Willow and Wren.")
+                         +part3('file',data,os.path.basename(path),'audio/mpeg')+b'--'+b3+b'--\r\n')
+                  r3=json.load(urllib.request.urlopen(urllib.request.Request('https://api.openai.com/v1/audio/transcriptions',data=body3,
+                       headers={'Authorization':'Bearer '+okey,'Content-Type':'multipart/form-data; boundary='+b3.decode()}),timeout=900))
+                  print('   transcribed by gpt-4o-mini-transcribe (no times)',flush=True)
+                  return {'duration':None,'segments':[{'start':0,'end':0,'text':r3.get('text','')}]}
+              except urllib.error.HTTPError as e:
+                  print('   gpt-4o-mini-transcribe: HTTP',e.code,e.read()[:300],flush=True)
+              raise last
           def coverage(tr):
               words=norm(' '.join(s['text'] for s in tr.get('segments',[]))).split()
               rows=[]; sung=0
@@ -299,6 +368,28 @@ jobs:
               ids={k:v for k,v in hd.items() if 'song' in k.lower() or 'request' in k.lower()}
               print('   got',len(audio),'bytes; ids:',ids); return audio
           best=None; uploaded_fix=None
+          def check_take(t,path):
+              tr=transcribe(path); dur=tr.get('duration'); cov,rows=coverage(tr)
+              fixed=[(ln,r) for lab,ln,st,r in rows if ln in FIX_LINES]
+              rep=[f'take {t}: {dur and round(dur)}s, {round(cov*100)}% of the {len(all_lines)} lines sung'+(('; the lines sung again: '+', '.join(f'{r}' for _,r in fixed)) if mode=='fix' else '')]
+              cur=None
+              for lab,ln,st,r in rows:
+                  if lab!=cur: rep.append('\n## '+lab); cur=lab
+                  rep.append(('   ' if st=='sung' else ' ~ ' if st=='close' else ' X ')+ln+f'   ({r})')
+              rep.append('\n=== what was heard ===')
+              rep+=['[%6.1f-%6.1f] %s'%(s['start'],s['end'],s['text'].strip()) for s in tr.get('segments',[])]
+              open(f'out/take-{t}-report.txt','w').write('\n'.join(rep))
+              print(rep[0],flush=True)
+              return cov+(min(r for _,r in fixed) if (mode=='fix' and fixed) else 0), cov
+          if mode=='check':
+              found=sorted(glob.glob('out/take-*.mp3'))
+              if not found: sys.exit('check mode: the earlier run left no take-*.mp3 in its artifact')
+              for path in found:
+                  t=int(re.search(r'take-(\d+)\.mp3$',path).group(1))
+                  print(f'checking {path} ({os.path.getsize(path)} bytes)',flush=True)
+                  score,cov=check_take(t,path)
+                  if best is None or score>best[0]: best=(score,t,cov)
+              takes=0
           for t in range(1,takes+1):
               body={'composition_plan':plan,'model_id':'music_v1'}
               if fid: body['finetune_id']=fid
@@ -329,18 +420,8 @@ jobs:
                   try: splice(FIX_FILE,f'out/piece-{t}.mp3',path)
                   except Exception as e: print('   could not splice:',e); continue
               else: open(path,'wb').write(audio)
-              tr=transcribe(path); dur=tr.get('duration'); cov,rows=coverage(tr)
-              fixed=[(ln,r) for lab,ln,st,r in rows if ln in FIX_LINES]
-              rep=[f'take {t}: {dur and round(dur)}s, {round(cov*100)}% of the {len(all_lines)} lines sung'+(('; the lines sung again: '+', '.join(f'{r}' for _,r in fixed)) if mode=='fix' else '')]
-              cur=None
-              for lab,ln,st,r in rows:
-                  if lab!=cur: rep.append('\n## '+lab); cur=lab
-                  rep.append(('   ' if st=='sung' else ' ~ ' if st=='close' else ' X ')+ln+f'   ({r})')
-              rep.append('\n=== what was heard ===')
-              rep+=['[%6.1f-%6.1f] %s'%(s['start'],s['end'],s['text'].strip()) for s in tr.get('segments',[])]
-              open(f'out/take-{t}-report.txt','w').write('\n'.join(rep))
-              print(rep[0],flush=True)
-              score=cov+(min(r for _,r in fixed) if (mode=='fix' and fixed) else 0)
+              # the take is on disk before it is checked: whatever happens next, the artifact keeps it
+              score,cov=check_take(t,path)
               if best is None or score>best[0]: best=(score,t,cov)
           if best is None: sys.exit('no take was made')
           print(f'BEST take {best[1]} with {round(best[2]*100)}% of lines. Listen before publishing.')
