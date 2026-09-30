@@ -33,7 +33,7 @@ the account and into lantern/timeline-feed/ in this repo (its history).
 
 Secrets: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, OPENAI_API_KEY.
 """
-import json, os, re, sys, time, datetime, html, urllib.request, urllib.error
+import json, os, re, sys, time, datetime, html, subprocess, urllib.request, urllib.error
 
 JOB        = os.environ.get("JOB", "tech").strip()
 MODEL      = os.environ.get("TIMELINE_WATCH_MODEL", "gpt-4.1").strip()
