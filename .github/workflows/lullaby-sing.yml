@@ -293,13 +293,58 @@ jobs:
                     +part('file',data,os.path.basename(path),'audio/mpeg')+b'--'+b+b'--\r\n')
               req=urllib.request.Request('https://api.openai.com/v1/audio/transcriptions',data=body,
                   headers={'Authorization':'Bearer '+okey,'Content-Type':'multipart/form-data; boundary='+b.decode()})
-              # a take has been paid for by now: a busy transcriber is waited out, never given up on at once
-              for wait in (0,20,45,90,150,240):
+              # a take has been paid for by now: a busy transcriber is waited out, and when it
+              # keeps refusing (on 30 Sept 2026 whisper answered 429 for ten minutes straight while
+              # the same key's chat models worked) two other transcribers are asked in turn
+              last=None
+              for wait in (0,20,45):
                   if wait: print('   transcriber busy; trying again in',wait,'s',flush=True); time.sleep(wait)
                   try: return json.load(urllib.request.urlopen(req,timeout=900))
                   except urllib.error.HTTPError as e:
+                      detail=e.read()[:300]; print('   OpenAI whisper: HTTP',e.code,detail,flush=True)
                       if e.code not in (429,500,502,503,504): raise
                       last=e
+              # ElevenLabs Scribe: words with their times, gathered into short segments
+              try:
+                  b2=uuid.uuid4().hex.encode()
+                  def part2(name,value,filename=None,ct=None):
+                      h=b'--'+b2+b'\r\nContent-Disposition: form-data; name="'+name.encode()+b'"'
+                      if filename: h+=b'; filename="'+filename.encode()+b'"\r\nContent-Type: '+ct.encode()
+                      return h+b'\r\n\r\n'+(value if isinstance(value,bytes) else value.encode())+b'\r\n'
+                  body2=(part2('model_id','scribe_v1')+part2('language_code','eng')+part2('timestamps_granularity','word')+part2('tag_audio_events','false')
+                         +part2('file',data,os.path.basename(path),'audio/mpeg')+b'--'+b2+b'--\r\n')
+                  r2=json.load(urllib.request.urlopen(urllib.request.Request('https://api.elevenlabs.io/v1/speech-to-text',data=body2,
+                       headers={'xi-api-key':key,'Content-Type':'multipart/form-data; boundary='+b2.decode()}),timeout=900))
+                  words=[w for w in r2.get('words',[]) if w.get('type','word')=='word' and w.get('text','').strip()]
+                  segs=[]; cur=None
+                  for w in words:
+                      if cur is None: cur={'start':w.get('start',0),'end':w.get('end',0),'text':''}
+                      cur['text']+=(' ' if cur['text'] else '')+w['text'].strip(); cur['end']=w.get('end',cur['end'])
+                      if re.search(r'[.!?,;]$',w['text'].strip()) or len(cur['text'].split())>=12: segs.append(cur); cur=None
+                  if cur: segs.append(cur)
+                  if not segs and r2.get('text'): segs=[{'start':0,'end':0,'text':r2['text']}]
+                  print('   transcribed by ElevenLabs Scribe:',len(words),'words',flush=True)
+                  return {'duration':(segs[-1]['end'] if segs else None),'segments':segs}
+              except urllib.error.HTTPError as e:
+                  print('   ElevenLabs Scribe: HTTP',e.code,e.read()[:300],flush=True)
+              except Exception as e:
+                  print('   ElevenLabs Scribe failed:',e,flush=True)
+              # OpenAI's newer transcriber: the words without their times
+              try:
+                  b3=uuid.uuid4().hex.encode()
+                  def part3(name,value,filename=None,ct=None):
+                      h=b'--'+b3+b'\r\nContent-Disposition: form-data; name="'+name.encode()+b'"'
+                      if filename: h+=b'; filename="'+filename.encode()+b'"\r\nContent-Type: '+ct.encode()
+                      return h+b'\r\n\r\n'+(value if isinstance(value,bytes) else value.encode())+b'\r\n'
+                  body3=(part3('model','gpt-4o-mini-transcribe')+part3('response_format','json')+part3('language','en')
+                         +part3('prompt',"A children's bedtime lullaby about Heavenly Father, Beau, Scout, Willow and Wren.")
+                         +part3('file',data,os.path.basename(path),'audio/mpeg')+b'--'+b3+b'--\r\n')
+                  r3=json.load(urllib.request.urlopen(urllib.request.Request('https://api.openai.com/v1/audio/transcriptions',data=body3,
+                       headers={'Authorization':'Bearer '+okey,'Content-Type':'multipart/form-data; boundary='+b3.decode()}),timeout=900))
+                  print('   transcribed by gpt-4o-mini-transcribe (no times)',flush=True)
+                  return {'duration':None,'segments':[{'start':0,'end':0,'text':r3.get('text','')}]}
+              except urllib.error.HTTPError as e:
+                  print('   gpt-4o-mini-transcribe: HTTP',e.code,e.read()[:300],flush=True)
               raise last
           def coverage(tr):
               words=norm(' '.join(s['text'] for s in tr.get('segments',[]))).split()
