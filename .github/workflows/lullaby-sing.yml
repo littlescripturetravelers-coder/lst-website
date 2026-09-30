@@ -1,17 +1,28 @@
 # THE SIGNATURE LULLABY, SUNG IN FULL - run by hand only, never on a schedule.
 #
-# A Little Travelers' Lullaby has 132 lines; the recording the app plays every
-# night (audio/hush-little-traveler.mp3, 4 minutes) sings about a third of them.
+# A Little Travelers' Lullaby has 132 lines; the recording the app played every
+# night (audio/hush-little-traveler.mp3, 4 minutes) sang about a third of them.
 # This job asks ElevenLabs Music for the whole song as a composition plan (a
-# plain prompt may hold only 4,100 characters, which is why the recording sings
+# plain prompt may hold only 4,100 characters, which is why the recording sang
 # a third of the words), section by section, every line in order, ten minutes
 # in all. To keep the same voice and the same tune, the opening of the current
 # recording is uploaded and the plan's first section is taken from it, so the
 # rest is sung on from that opening (ElevenLabs calls this inpainting). The
 # account's lullaby fine-tune is asked for as well. Each take is transcribed and
-# every written line is looked for in what was sung; the best take is kept. Nothing is published: the takes and their line-by-line reports
-# are attached to the run as artifacts, to be listened to first. Publishing is
-# a separate, deliberate step.
+# every written line is looked for in what was sung; the best take is kept.
+#
+# Two modes:
+#   full   sing the whole song (as above).
+#   fix    keep a take and re-sing one stretch of it: the plan takes the take
+#          itself for everything but the stretch (song_id, fix_from_ms,
+#          fix_to_ms) and sings the given lines there, in the same voice.
+#          Used for a line the checker heard wrong. If the API will not read
+#          from the take by its id, the take's file is uploaded and used.
+#
+# Nothing is published by itself: the takes and their line-by-line reports are
+# attached to the run as artifacts, and - when save_branch is given - the best
+# take is pushed to that branch as audio/hush-little-traveler-full.mp3 with its
+# report, to be fetched, listened to and published as a separate step.
 #
 # It spends ElevenLabs credits (one song's worth per take) and a few cents of
 # OpenAI transcription per take. Run it only on Levi's go.
@@ -19,6 +30,11 @@ name: lullaby-sing
 on:
   workflow_dispatch:
     inputs:
+      mode:
+        description: 'full = sing the whole song; fix = re-sing one stretch of a take'
+        type: choice
+        options: [full, fix]
+        default: full
       finetune:
         description: 'Name of the ElevenLabs music fine-tune to sing with'
         required: true
@@ -32,13 +48,39 @@ on:
         required: true
         default: '600000'
       anchor:
-        description: 'Start from the current recording (source) or sing fresh (none)'
+        description: 'full mode: start from the current recording (source) or sing fresh (none)'
         required: true
         default: 'source'
       voice:
         description: 'One line describing the singer, as heard on the current recording'
         required: false
         default: 'one single voice, warm and unhurried, the same singer from the first note to the last'
+      song_id:
+        description: 'fix mode: the ElevenLabs song id of the take to keep'
+        required: false
+        default: 'cTrg8UQGXOZGTNpnst1p'
+      fix_file:
+        description: 'fix mode: the take as a file in this repo, uploaded if the id cannot be read from'
+        required: false
+        default: 'audio/hush-little-traveler-full-preview.mp3'
+      fix_from_ms:
+        description: 'fix mode: where the stretch to re-sing begins'
+        required: false
+        default: '379700'
+      fix_to_ms:
+        description: 'fix mode: where it ends'
+        required: false
+        default: '387600'
+      fix_lines:
+        description: 'fix mode: the lines to sing there, separated by " | "'
+        required: false
+        default: "She chose to speak, she chose what’s right, | And Heavenly Father gave her might."
+      save_branch:
+        description: 'Push the best take to this branch as audio/hush-little-traveler-full.mp3 (blank = artifact only)'
+        required: false
+        default: ''
+permissions:
+  contents: write
 jobs:
   sing:
     runs-on: ubuntu-latest
@@ -48,22 +90,32 @@ jobs:
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MODE: ${{ inputs.mode }}
           FINETUNE: ${{ inputs.finetune }}
           TAKES: ${{ inputs.takes }}
           LENGTH_MS: ${{ inputs.length_ms }}
           ANCHOR: ${{ inputs.anchor }}
           VOICE: ${{ inputs.voice }}
+          SONG_ID: ${{ inputs.song_id }}
+          FIX_FILE: ${{ inputs.fix_file }}
+          FIX_FROM: ${{ inputs.fix_from_ms }}
+          FIX_TO: ${{ inputs.fix_to_ms }}
+          FIX_LINES: ${{ inputs.fix_lines }}
         run: |
           mkdir -p out
           python3 - <<'PY'
           import os, re, json, sys, uuid, difflib, html, subprocess, urllib.request, urllib.error
           key=os.environ['ELEVENLABS_API_KEY'].strip(); okey=os.environ['OPENAI_API_KEY'].strip()
+          mode=os.environ.get('MODE','full').strip().lower()
           want=os.environ['FINETUNE'].strip(); takes=max(1,int(os.environ['TAKES'])); LENGTH=min(600000,max(30000,int(os.environ['LENGTH_MS'])))
           anchor=os.environ.get('ANCHOR','source').strip().lower()=='source'; voice=os.environ['VOICE'].strip()
           SOURCE='audio/hush-little-traveler.mp3'
           # the opening of the current recording that is word-perfect: the first two
           # stanzas, 0:00-0:59 (the third stanza changes a line, so it is re-sung)
           ANCHOR_MS=59000; ANCHOR_LINES=8
+          FIX_ID=os.environ.get('SONG_ID','').strip(); FIX_FILE=os.environ.get('FIX_FILE','').strip()
+          FIX_FROM=int(os.environ.get('FIX_FROM') or 0); FIX_TO=int(os.environ.get('FIX_TO') or 0)
+          FIX_LINES=[x.strip() for x in os.environ.get('FIX_LINES','').split('|') if x.strip()]
 
           # ── the words, exactly as the app prints them ────────────────────────
           src=open('data/lantern-lullaby.js',encoding='utf8').read()
@@ -84,11 +136,25 @@ jobs:
               sections.append((p['label'],lines))
           all_lines=[ln for _,ls in sections for ln in ls]
           print('lyrics:',len(all_lines),'lines in',len(sections),'sections')
+          if mode=='fix':
+              missing=[l for l in FIX_LINES if l not in all_lines]
+              if missing: sys.exit('fix mode: these lines are not in the printed words, exactly: %r' % missing)
+              if not (0<=FIX_FROM<FIX_TO<=LENGTH): sys.exit('fix mode: the stretch %d-%d is not inside 0-%d' % (FIX_FROM,FIX_TO,LENGTH))
+              if not FIX_ID and not FIX_FILE: sys.exit('fix mode: no take to keep (song_id or fix_file)')
 
           def api(url,data=None,accept='application/json',ctype='application/json',want_headers=False):
               req=urllib.request.Request(url,data=data,headers={'xi-api-key':key,'accept':accept,**({'content-type':ctype} if data and ctype else {})})
               r=urllib.request.urlopen(req,timeout=900); b=r.read()
               return (b,dict(r.headers)) if want_headers else b
+          def upload(path):
+              data=open(path,'rb').read(); b=uuid.uuid4().hex.encode()
+              def part(name,value,filename=None,ct=None):
+                  h=b'--'+b+b'\r\nContent-Disposition: form-data; name="'+name.encode()+b'"'
+                  if filename: h+=b'; filename="'+filename.encode()+b'"\r\nContent-Type: '+ct.encode()
+                  return h+b'\r\n\r\n'+(value if isinstance(value,bytes) else value.encode())+b'\r\n'
+              form=part('file',data,os.path.basename(path),'audio/mpeg')+b'--'+b+b'--\r\n'
+              up=json.loads(api('https://api.elevenlabs.io/v1/music/upload',data=form,ctype='multipart/form-data; boundary='+b.decode()))
+              return up.get('song_id')
 
           # ── the fine-tune, by name ───────────────────────────────────────────
           raw=json.loads(api('https://api.elevenlabs.io/v1/music/finetunes')); fid=None
@@ -105,18 +171,13 @@ jobs:
 
           # ── the anchor: the current recording, uploaded for inpainting ──────
           song_id=None
-          if anchor:
-              data=open(SOURCE,'rb').read(); b=uuid.uuid4().hex.encode()
-              def part(name,value,filename=None,ct=None):
-                  h=b'--'+b+b'\r\nContent-Disposition: form-data; name="'+name.encode()+b'"'
-                  if filename: h+=b'; filename="'+filename.encode()+b'"\r\nContent-Type: '+ct.encode()
-                  return h+b'\r\n\r\n'+(value if isinstance(value,bytes) else value.encode())+b'\r\n'
-              form=part('file',data,'hush-little-traveler.mp3','audio/mpeg')+b'--'+b+b'--\r\n'
+          if mode=='full' and anchor:
               try:
-                  up=json.loads(api('https://api.elevenlabs.io/v1/music/upload',data=form,ctype='multipart/form-data; boundary='+b.decode()))
-                  song_id=up.get('song_id'); print('uploaded the current recording: song_id',song_id)
+                  song_id=upload(SOURCE); print('uploaded the current recording: song_id',song_id)
               except urllib.error.HTTPError as e:
                   print('upload refused: HTTP',e.code,e.read()[:500]); print('singing fresh instead')
+          if mode=='fix' and not FIX_ID:
+              FIX_ID=upload(FIX_FILE); print('uploaded the take: song_id',FIX_ID)
 
           # ── the plan ────────────────────────────────────────────────────────
           POS=["children's bedtime lullaby","gentle acoustic accompaniment","no drums, no percussion",
@@ -125,7 +186,7 @@ jobs:
                "every word sung clearly, exactly as written, nothing added",voice]
           NEG=["drums","percussion","backing vocals","choir","duet","a second singer","a change of singer","distortion","clipping",
                "loudness pushing","shouting","spoken word","rap","improvised words","scat singing","ad-libs","key change","tempo change"]
-          def plan_for():
+          def plan_full():
               secs=[]; budget=LENGTH-5000
               rest=[(n,l[:]) for n,l in sections]
               if song_id:
@@ -145,12 +206,28 @@ jobs:
                   if i==len(rest)-1: local.append('settling and slowing, almost asleep, a soft instrumental close')
                   secs.append({'section_name':name[:100],'positive_local_styles':local,'negative_local_styles':[],'duration_ms':dur,'lines':lines})
               return {'positive_global_styles':POS,'negative_global_styles':NEG,'sections':secs}
-          plan=plan_for(); total=sum(s['duration_ms'] for s in plan['sections'])
+          def plan_fix(sid):
+              CH=90000; secs=[]
+              def kept(a,b,label):
+                  x=a; k=1
+                  while x<b:
+                      y=min(b,x+CH)
+                      secs.append({'section_name':('%s %d'%(label,k))[:100],'positive_local_styles':['exactly as recorded'],'negative_local_styles':[],
+                                   'duration_ms':y-x,'lines':[],'source_from':{'song_id':sid,'range':{'start_ms':x,'end_ms':y}}})
+                      x=y; k+=1
+              kept(0,FIX_FROM,'Kept from the take, before')
+              secs.append({'section_name':'Sung again','positive_local_styles':['sung softly, every word clear, exactly as written',
+                           'the same voice, the same tune and the same tempo as the lines before and after'],'negative_local_styles':[],
+                           'duration_ms':FIX_TO-FIX_FROM,'lines':FIX_LINES})
+              kept(FIX_TO,LENGTH,'Kept from the take, after')
+              return {'positive_global_styles':POS,'negative_global_styles':NEG,'sections':secs}
+          plan=plan_full() if mode=='full' else plan_fix(FIX_ID)
+          total=sum(s['duration_ms'] for s in plan['sections'])
           print(f'plan: {len(plan["sections"])} sections, {sum(len(s["lines"]) for s in plan["sections"])} lines, {total//1000}s')
           json.dump(plan,open('out/plan.json','w'),indent=1)
 
           # ── transcription and the line check ────────────────────────────────
-          norm=lambda s: re.sub(r'[^a-z ]','',s.lower().replace('\u2019',"'").replace('traveller','traveler')).strip()
+          norm=lambda s: re.sub(r'[^a-z ]','',s.lower().replace('’',"'").replace('traveller','traveler')).strip()
           def transcribe(path):
               data=open(path,'rb').read(); b=uuid.uuid4().hex.encode()
               def part(name,value,filename=None,ct=None):
@@ -181,7 +258,11 @@ jobs:
                       sung+=st=='sung'; rows.append((lab,ln,st,round(best,2)))
               return sung/len(all_lines), rows
 
-          best=None
+          def sing(bd):
+              audio,hd=api('https://api.elevenlabs.io/v1/music?output_format=mp3_44100_192',data=json.dumps(bd).encode(),accept='audio/mpeg',want_headers=True)
+              ids={k:v for k,v in hd.items() if 'song' in k.lower() or 'request' in k.lower()}
+              print('   got',len(audio),'bytes; ids:',ids); return audio
+          best=None; uploaded_fix=None
           for t in range(1,takes+1):
               body={'composition_plan':plan,'model_id':'music_v1'}
               if fid: body['finetune_id']=fid
@@ -191,17 +272,25 @@ jobs:
               for i,bd in enumerate(tries):
                   print(f'take {t}: asking ElevenLabs ({total//1000}s{", with the fine-tune" if "finetune_id" in bd else ", without the fine-tune"})...',flush=True)
                   try:
-                      audio,hd=api('https://api.elevenlabs.io/v1/music?output_format=mp3_44100_192',data=json.dumps(bd).encode(),accept='audio/mpeg',want_headers=True)
-                      ids={k:v for k,v in hd.items() if 'song' in k.lower() or 'request' in k.lower()}
-                      print('   got',len(audio),'bytes; ids:',ids); break
+                      audio=sing(bd); break
                   except urllib.error.HTTPError as e:
                       detail=e.read()[:700]; print(f'   ElevenLabs refused: HTTP {e.code} {detail!r}')
                       if e.code in (401,402) or b'quota' in detail.lower() or b'credits' in detail.lower(): sys.exit('no credit left; stopping')
                       audio=None
+                      # fix mode: if the take cannot be read by its id, upload its file once and read from that
+                      if mode=='fix' and uploaded_fix is None and FIX_FILE and os.path.exists(FIX_FILE) and e.code in (400,404,422):
+                          try:
+                              uploaded_fix=upload(FIX_FILE); print('   uploaded the take instead: song_id',uploaded_fix)
+                              plan=plan_fix(uploaded_fix); json.dump(plan,open('out/plan.json','w'),indent=1)
+                              for other in tries: other['composition_plan']=plan
+                              audio=sing(bd); break
+                          except urllib.error.HTTPError as e2:
+                              print('   still refused: HTTP',e2.code,e2.read()[:700]); audio=None
               if not audio: continue
               path=f'out/take-{t}.mp3'; open(path,'wb').write(audio)
               tr=transcribe(path); dur=tr.get('duration'); cov,rows=coverage(tr)
-              rep=[f'take {t}: {dur and round(dur)}s, {round(cov*100)}% of the {len(all_lines)} lines sung']
+              fixed=[(ln,r) for lab,ln,st,r in rows if ln in FIX_LINES]
+              rep=[f'take {t}: {dur and round(dur)}s, {round(cov*100)}% of the {len(all_lines)} lines sung'+(('; the lines sung again: '+', '.join(f'{r}' for _,r in fixed)) if mode=='fix' else '')]
               cur=None
               for lab,ln,st,r in rows:
                   if lab!=cur: rep.append('\n## '+lab); cur=lab
@@ -210,10 +299,11 @@ jobs:
               rep+=['[%6.1f-%6.1f] %s'%(s['start'],s['end'],s['text'].strip()) for s in tr.get('segments',[])]
               open(f'out/take-{t}-report.txt','w').write('\n'.join(rep))
               print(rep[0],flush=True)
-              if best is None or cov>best[0]: best=(cov,t)
+              score=cov+(min(r for _,r in fixed) if (mode=='fix' and fixed) else 0)
+              if best is None or score>best[0]: best=(score,t,cov)
           if best is None: sys.exit('no take was made')
-          print(f'BEST take {best[1]} with {round(best[0]*100)}% of lines. Listen before publishing.')
-          open('out/BEST.txt','w').write(f'take-{best[1]}.mp3 {round(best[0]*100)}%\n')
+          print(f'BEST take {best[1]} with {round(best[2]*100)}% of lines. Listen before publishing.')
+          open('out/BEST.txt','w').write(f'take-{best[1]}.mp3 {round(best[2]*100)}%\n')
           PY
       - uses: actions/upload-artifact@v4
         if: always()
@@ -221,3 +311,19 @@ jobs:
           name: lullaby-takes
           path: out/
           retention-days: 30
+      - name: Push the best take to a branch
+        if: ${{ inputs.save_branch != '' }}
+        env:
+          BR: ${{ inputs.save_branch }}
+        run: |
+          best=$(cut -d' ' -f1 out/BEST.txt)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BR"
+          cp "out/$best" audio/hush-little-traveler-full.mp3
+          cp "out/${best%.mp3}-report.txt" lantern/lullaby-full-report.txt
+          cp out/plan.json lantern/lullaby-full-plan.json
+          git add audio/hush-little-traveler-full.mp3 lantern/lullaby-full-report.txt lantern/lullaby-full-plan.json
+          git -c commit.gpgsign=false commit -qm "The full lullaby: best take from run $GITHUB_RUN_ID"
+          git push -f origin "$BR"
+          echo "pushed $BR"
