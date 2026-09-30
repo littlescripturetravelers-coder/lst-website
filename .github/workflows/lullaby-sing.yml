@@ -1,7 +1,8 @@
 # THE SIGNATURE LULLABY, SUNG IN FULL - run by hand only, never on a schedule.
 #
-# A Little Travelers' Lullaby has 132 lines; the recording the app played every
-# night (audio/hush-little-traveler.mp3, 4 minutes) sang about a third of them.
+# A Little Travelers' Lullaby has 132 lines; the first recording the app played
+# every night (audio/hush-little-traveler-short.mp3, 4 minutes) sang about a third
+# of them; the ten-minute take made from it is what plays now.
 # This job asks ElevenLabs Music for the whole song as a composition plan (a
 # plain prompt may hold only 4,100 characters, which is why the recording sang
 # a third of the words), section by section, every line in order, ten minutes
@@ -66,7 +67,7 @@ on:
       fix_file:
         description: 'fix mode: the take to patch, a file in this repo'
         required: false
-        default: 'audio/hush-little-traveler-full-preview.mp3'
+        default: 'audio/hush-little-traveler.mp3'
       fix_from_ms:
         description: 'fix mode: where the stretch to re-sing begins in the take'
         required: false
@@ -115,7 +116,7 @@ jobs:
           mode=os.environ.get('MODE','full').strip().lower()
           want=os.environ['FINETUNE'].strip(); takes=max(1,int(os.environ['TAKES'])); LENGTH=min(600000,max(30000,int(os.environ['LENGTH_MS'])))
           anchor=os.environ.get('ANCHOR','source').strip().lower()=='source'; voice=os.environ['VOICE'].strip()
-          SOURCE='audio/hush-little-traveler.mp3'
+          SOURCE='audio/hush-little-traveler-short.mp3'   # the first, four-minute recording: the voice and tune everything else was sung on from
           # the opening of the current recording that is word-perfect: the first two
           # stanzas, 0:00-0:59 (the third stanza changes a line, so it is re-sung)
           ANCHOR_MS=59000; ANCHOR_LINES=8
