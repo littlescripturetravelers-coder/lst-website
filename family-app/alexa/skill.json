@@ -1,0 +1,43 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "name": "Lewis Family",
+          "summary": "Your family’s calendar, reminders, ideas and daily scripture.",
+          "examplePhrases": [
+            "Alexa, open Lewis Family",
+            "Alexa, ask Lewis Family what’s today",
+            "Alexa, ask Lewis Family to add pick up milk tomorrow at five"
+          ],
+          "keywords": [
+            "family",
+            "reminders",
+            "calendar"
+          ]
+        }
+      },
+      "isAvailableWorldwide": false,
+      "distributionCountries": [
+        "US"
+      ],
+      "category": "ORGANIZERS_AND_ASSISTANTS"
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "https://YOUR-PROJECT.supabase.co/functions/v1/alexa",
+          "sslCertificateType": "Wildcard"
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "usesPersonalInfo": true,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "containsAds": false
+    }
+  }
+}

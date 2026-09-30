@@ -18,6 +18,10 @@ The **mobile app** (iOS/Android, Capacitor, repo `lst-app`) is handled in a **se
 If a request here is about App Store review, Android APK/AAB builds, push notifications,
 Codemagic, or app UI — that belongs in the app chat. Don't do it here.
 
+The **Family Management App** (Lewis Family, Expo/React Native) lives in `family-app/` in this repo
+but is **not** part of the website — `.vercelignore` keeps it off Vercel. See `family-app/README.md`
+and `family-app/TESTFLIGHT.md`; work on it from inside that folder (its own `CLAUDE.md` applies).
+
 Things that live in *both* worlds (Supabase, Payhip, Mailchimp) are documented below only to the
 extent the website touches them.
 

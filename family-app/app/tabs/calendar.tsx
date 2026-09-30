@@ -1,0 +1,50 @@
+import { useEffect, useMemo, useState } from 'react';
+import { Pressable, View } from 'react-native';
+import { router } from 'expo-router';
+import { Screen, Gutter } from '@/components/screen';
+import { Text } from '@/components/text';
+import { Button } from '@/components/button';
+import { Icon } from '@/components/icon';
+import { useTheme } from '@/theme/theme-provider';
+import { useFamily } from '@/hooks/use-family';
+import { useReminders } from '@/hooks/use-reminders';
+import { supabase } from '@/lib/supabase';
+import { todayISO, fmtTime } from '@/lib/dates';
+import { ageOn } from '@/lib/family';
+/** Apple-Calendar-style month grid. Merges events, calendar-linked reminders, and birthdays/anniversary computed from the family profile. */
+export default function CalendarTab() {
+  const { theme: t } = useTheme(); const { family } = useFamily(); const rem = useReminders(family?.id);
+  const today = todayISO(); const [ym, setYm] = useState<[number, number]>([+today.slice(0, 4), +today.slice(5, 7)]); const [sel, setSel] = useState(today);
+  const [events, setEvents] = useState<any[]>([]);
+  const [y, m] = ym; const iso = (d: number) => y + '-' + String(m).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+  useEffect(() => { if (!family) return; supabase.from('events').select('*').eq('family_id', family.id).gte('starts_at', iso(1)).lte('starts_at', iso(31) + 'T23:59').then(({ data }) => setEvents(data || [])); }, [family?.id, y, m]);
+  const annual = (s: string) => !family ? [] : [
+    ...family.members.filter(x => x.birthday.slice(5) === s.slice(5)).map(x => ({ title: x.name + '’s birthday · ' + ageOn(x.birthday, s), area: x.role === 'daughter' ? 'girls' : 'home', time: 'All day' })),
+    ...(family.anniversary?.slice(5) === s.slice(5) ? [{ title: 'Anniversary · ' + ageOn(family.anniversary, s) + ' years', area: 'marriage', time: 'All day' }] : [])];
+  const dayItems = (s: string) => [...annual(s), ...events.filter(e => e.starts_at.slice(0, 10) === s).map(e => ({ title: e.title, area: e.area ?? 'home', time: e.all_day ? 'All day' : new Date(e.starts_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) }))];
+  const dayRems = (s: string) => rem.items.filter(r => r.on_calendar && r.due_date === s);
+  const start = new Date(y, m - 1, 1).getDay(), days = new Date(y, m, 0).getDate();
+  const cells = useMemo(() => [...Array(start).fill(null), ...Array.from({ length: days }, (_, i) => i + 1)], [y, m]);
+  const shift = (n: number) => { const d = new Date(y, m - 1 + n, 1); setYm([d.getFullYear(), d.getMonth() + 1]); };
+  return <Screen title={new Date(y, m - 1, 1).toLocaleDateString('en-US', { month: 'long' })} subtitle={String(y)}
+    trailing={<Pressable onPress={() => router.push({ pathname: '/reminder-sheet', params: { date: sel, calendar: '1' } })}><Icon name="plus" size={26} color={t.brand[500]} /></Pressable>}>
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 8 }}>
+      {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => <Text key={i} v="caption" weight="bold" color={t.ink[3]} style={{ width: '14.28%', textAlign: 'center', paddingVertical: 4 }}>{d}</Text>)}
+      {cells.map((d, i) => { if (!d) return <View key={i} style={{ width: '14.28%', height: 50 }} />; const s = iso(d), isT = s === today, on = s === sel;
+        const dots = [...dayItems(s).map(e => t.area[e.area as keyof typeof t.area]?.[0] ?? t.ink[3]), ...dayRems(s).filter(r => !r.done).map(() => t.ink[3])].slice(0, 3);
+        return <Pressable key={i} onPress={() => setSel(s)} style={{ width: '14.28%', height: 50, alignItems: 'center', paddingTop: 5, borderTopWidth: .5, borderColor: t.line[1] }}>
+          <View style={{ width: 32, height: 32, borderRadius: 16, alignItems: 'center', justifyContent: 'center', backgroundColor: on ? (isT ? t.gold[500] : t.brand[500]) : 'transparent', borderWidth: isT && !on ? 2 : 0, borderColor: t.gold[500] }}>
+            <Text weight={isT || on ? 'heavy' : 'regular'} color={on && !isT ? t.ink.inverse : t.ink[1]}>{d}</Text></View>
+          <View style={{ flexDirection: 'row', gap: 2, marginTop: 3 }}>{dots.map((c, j) => <View key={j} style={{ width: 5, height: 5, borderRadius: 3, backgroundColor: c }} />)}</View>
+        </Pressable>; })}
+    </View>
+    <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 8, marginVertical: 6 }}><Button size="sm" variant="ghost" icon="chevron-left" title="Previous" onPress={() => shift(-1)} /><Button size="sm" variant="ghost" title="Next" onPress={() => shift(1)} /></View>
+    <View style={{ backgroundColor: t.paper[0], paddingTop: 12, paddingBottom: 40, borderTopWidth: .5, borderColor: t.line[2] }}><Gutter style={{ gap: 6 }}>
+      <Text v="subhead" weight="bold" color={t.ink[2]}>{new Date(sel + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</Text>
+      {dayItems(sel).map((e, i) => { const [c, tint] = t.area[e.area as keyof typeof t.area] ?? [t.ink[3], t.paper[2]]; return <View key={i} style={{ flexDirection: 'row', gap: 10, padding: 10, borderRadius: 8, backgroundColor: tint }}><View style={{ width: 4, borderRadius: 2, backgroundColor: c }} /><View><Text v="subhead" weight="bold">{e.title}</Text><Text v="footnote" color={t.ink[2]}>{e.time}</Text></View></View>; })}
+      {dayRems(sel).map(r => <Pressable key={r.id} onPress={() => rem.toggle(r)} style={{ flexDirection: 'row', gap: 10, alignItems: 'center', padding: 10, borderRadius: 8, borderWidth: 1, borderColor: t.line[1] }}>
+        <View style={{ width: 22, height: 22, borderRadius: 11, borderWidth: r.done ? 6 : 1.5, borderColor: r.done ? t.brand[500] : t.ink[4] }} />
+        <View><Text v="subhead" weight="bold" color={r.done ? t.ink[3] : t.ink[1]}>{r.title}</Text><Text v="footnote" color={t.ink[2]}>{r.due_time ? fmtTime(r.due_time.slice(0, 5)) : 'All day'} · Reminders</Text></View></Pressable>)}
+    </Gutter></View>
+  </Screen>;
+}

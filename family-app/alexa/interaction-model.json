@@ -1,0 +1,168 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "lewis family",
+      "intents": [
+        {
+          "name": "AddReminderIntent",
+          "slots": [
+            {
+              "name": "task",
+              "type": "AMAZON.SearchQuery"
+            },
+            {
+              "name": "date",
+              "type": "AMAZON.DATE"
+            },
+            {
+              "name": "time",
+              "type": "AMAZON.TIME"
+            },
+            {
+              "name": "list",
+              "type": "ListName"
+            }
+          ],
+          "samples": [
+            "add {task}",
+            "remind us to {task}",
+            "add {task} on {date}",
+            "add {task} {date} at {time}",
+            "remind us to {task} {date} at {time}",
+            "add {task} to the {list} list"
+          ]
+        },
+        {
+          "name": "TodayIntent",
+          "slots": [],
+          "samples": [
+            "what’s today",
+            "what’s on today",
+            "what do we have today",
+            "what’s our day look like"
+          ]
+        },
+        {
+          "name": "DateIdeaIntent",
+          "slots": [
+            {
+              "name": "who",
+              "type": "IdeaFor"
+            }
+          ],
+          "samples": [
+            "give us a date idea",
+            "give me an idea for {who}",
+            "what should we do tonight",
+            "what can I do with {who}"
+          ]
+        },
+        {
+          "name": "LanternIntent",
+          "slots": [],
+          "samples": [
+            "what’s today’s scripture",
+            "what’s the morning lantern",
+            "read the scripture of the day"
+          ]
+        },
+        {
+          "name": "AskIntent",
+          "slots": [
+            {
+              "name": "question",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "question {question}",
+            "I have a question {question}"
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "name": "ListName",
+          "values": [
+            {
+              "name": {
+                "value": "family"
+              }
+            },
+            {
+              "name": {
+                "value": "groceries"
+              }
+            },
+            {
+              "name": {
+                "value": "date night"
+              }
+            },
+            {
+              "name": {
+                "value": "our girls"
+              }
+            },
+            {
+              "name": {
+                "value": "home projects"
+              }
+            },
+            {
+              "name": {
+                "value": "health"
+              }
+            }
+          ]
+        },
+        {
+          "name": "IdeaFor",
+          "values": [
+            {
+              "name": {
+                "value": "the girls"
+              }
+            },
+            {
+              "name": {
+                "value": "the kids"
+              }
+            },
+            {
+              "name": {
+                "value": "us"
+              }
+            },
+            {
+              "name": {
+                "value": "my wife"
+              }
+            },
+            {
+              "name": {
+                "value": "my husband"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
