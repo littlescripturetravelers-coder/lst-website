@@ -151,13 +151,23 @@ jobs:
               r=urllib.request.urlopen(req,timeout=900); b=r.read()
               return (b,dict(r.headers)) if want_headers else b
           def upload(path):
+              # the upload endpoint, like the song, wants strictly under ten minutes: a take of exactly 600 s is trimmed first
+              try:
+                  cut='out/upload-source.mp3'
+                  subprocess.run(['ffmpeg','-y','-loglevel','error','-i',path,'-t',str(LENGTH/1000.0),'-c','copy',cut],check=True)
+                  if os.path.getsize(cut)>1000: path=cut; print('   trimmed the file to',LENGTH/1000.0,'s for upload')
+              except Exception as e:
+                  print('   could not trim the file (uploading as is):',e)
               data=open(path,'rb').read(); b=uuid.uuid4().hex.encode()
               def part(name,value,filename=None,ct=None):
                   h=b'--'+b+b'\r\nContent-Disposition: form-data; name="'+name.encode()+b'"'
                   if filename: h+=b'; filename="'+filename.encode()+b'"\r\nContent-Type: '+ct.encode()
                   return h+b'\r\n\r\n'+(value if isinstance(value,bytes) else value.encode())+b'\r\n'
               form=part('file',data,os.path.basename(path),'audio/mpeg')+b'--'+b+b'--\r\n'
-              up=json.loads(api('https://api.elevenlabs.io/v1/music/upload',data=form,ctype='multipart/form-data; boundary='+b.decode()))
+              try:
+                  up=json.loads(api('https://api.elevenlabs.io/v1/music/upload',data=form,ctype='multipart/form-data; boundary='+b.decode()))
+              except urllib.error.HTTPError as e:
+                  print('   upload refused: HTTP',e.code,e.read()[:600]); raise
               return up.get('song_id')
 
           # ── the fine-tune, by name ───────────────────────────────────────────
