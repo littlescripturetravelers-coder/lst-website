@@ -134,9 +134,21 @@ def ask(instructions, prompt):
             obj, _end = json.JSONDecoder().raw_decode(out[start:])
             if not isinstance(obj, dict): raise ValueError("the answer is not an object")
             return obj
+        except urllib.error.HTTPError as e:
+            detail = ""
+            try: detail = e.read().decode("utf-8", "replace")[:400]
+            except Exception: pass
+            # no credit left is not a bad answer to retry: every further ask would fail the same way
+            if e.code == 429 and ("insufficient_quota" in detail or "credit_balance_exhausted" in detail or "no credits remaining" in detail.lower()):
+                raise NoCredits("OpenAI answered: no credits remaining. Add credits at platform.openai.com (Settings, Billing) and run this job again.")
+            last = e; print("attempt", attempt + 1, "failed:", e, detail[:160]); time.sleep(20 * (attempt + 1))
         except Exception as e:
             last = e; print("attempt", attempt + 1, "failed:", e); time.sleep(20 * (attempt + 1))
     raise RuntimeError("the model did not answer usably: %s" % last)   # one bad answer must not end a whole run
+
+class NoCredits(Exception):
+    """The OpenAI account has no credit left: the whole run stops, plainly, rather than
+    asking hundreds of times more. Whatever was written before is already in the account."""
 
 TEXT_RULES = ("Write in plain, warm words a child of eight could follow, and a parent would trust. No hype, no fear-mongering, "
               "no politics. Every note must rest on a real, credible, recent source (a study, a government or medical body, a "
@@ -339,6 +351,7 @@ def run_studies(body):
     for ev in todo[:PER_RUN]:
         try:
             st = study_one(ev)
+        except NoCredits: raise
         except Exception as e:
             print("  failed:", ev.get("key"), str(e)[:160]); continue
         if st:
@@ -381,6 +394,7 @@ def run_regions(body):
                   TODAY, html.unescape(r["name"]), r["center"][0], r["center"][1], html.unescape(r.get("short") or r["name"]), html.unescape(r.get("intro") or ""))
         try:
             ans = ask(instructions, prompt)
+        except NoCredits: raise
         except Exception as e:
             print("  failed:", r["id"], str(e)[:160]); continue
         eras = []
@@ -445,6 +459,7 @@ def run_tribes(body):
                   json.dumps(links, ensure_ascii=False) if links else "none", GRADES)
         try:
             ans = ask(rules, prompt)
+        except NoCredits: raise
         except Exception as e:
             print("  failed:", p["id"], str(e)[:160]); continue
         sections = []
@@ -505,6 +520,7 @@ def run_tribes(body):
             items[pid] = {"v": 0, "on": TODAY, "name": name, "card": card}; added += 1; print("  added:", pid, "-", name, "(" + area["name"] + ")")
         body["area_turn"] = turn + 1
         if added: written += added; body["version"] = int(body.get("version") or 0) + 1; body["updated"] = TODAY; write_row(body)
+    except NoCredits: raise
     except Exception as e:
         print("  new peoples failed:", str(e)[:160])
     print("tribes: %d written this run" % written)
@@ -513,7 +529,12 @@ def run_tribes(body):
 # ── run ─────────────────────────────────────────────────────────────────────
 body = read_row()
 seeded = body.pop("_seed_merged", None) is not None
-changed = run_tech(body) if JOB == "tech" else run_studies(body) if JOB == "studies" else run_regions(body) if JOB == "regions" else run_tribes(body) if JOB == "tribes" else run_discoveries(body)
+try:
+    changed = run_tech(body) if JOB == "tech" else run_studies(body) if JOB == "studies" else run_regions(body) if JOB == "regions" else run_tribes(body) if JOB == "tribes" else run_discoveries(body)
+except NoCredits as e:
+    print("timeline-watch: STOPPED. " + str(e), file=sys.stderr)
+    print("timeline-watch: STOPPED. " + str(e))
+    sys.exit(1)
 if changed or seeded or os.environ.get("FORCE_WRITE") == "1" or int(body.get("version") or 0) < 1:
     body["version"] = int(body.get("version") or 0) + 1
     body["updated"] = TODAY
