@@ -13,11 +13,14 @@
 #
 # Two modes:
 #   full   sing the whole song (as above).
-#   fix    keep a take and re-sing one stretch of it: the plan takes the take
-#          itself for everything but the stretch (song_id, fix_from_ms,
-#          fix_to_ms) and sings the given lines there, in the same voice.
-#          Used for a line the checker heard wrong. If the API will not read
-#          from the take by its id, the take's file is uploaded and used.
+#   fix    re-sing one stretch of a take and patch it in. ElevenLabs will not
+#          read most of a recording back (it calls that copyrighted material),
+#          so the plan asks for a short piece only: twenty seconds of the take
+#          before the stretch, the given lines sung again in the same voice,
+#          twenty seconds after. The piece is transcribed to find the new
+#          lines, and they are spliced into the take with ffmpeg (a short
+#          crossfade at each cut). The whole patched song is then transcribed
+#          and checked line by line like any take.
 #
 # Nothing is published by itself: the takes and their line-by-line reports are
 # attached to the run as artifacts, and - when save_branch is given - the best
@@ -119,6 +122,7 @@ jobs:
           FIX_FROM=int(os.environ.get('FIX_FROM') or 0); FIX_TO=int(os.environ.get('FIX_TO') or 0)
           FIX_LINES=[x.strip() for x in os.environ.get('FIX_LINES','').split('|') if x.strip()]
           if mode=='fix': LENGTH=min(LENGTH,599000)   # the API wants strictly under 600 seconds
+          CTX=20000   # fix mode: how much of the take is sung along before and after the new lines
           # when the take sings each line (lantern/lullaby-full-lines.json), so a kept stretch can carry its words
           try: TAKE_LINES=json.load(open('lantern/lullaby-full-lines.json',encoding='utf8'))['lines']
           except Exception: TAKE_LINES=[]
@@ -226,21 +230,35 @@ jobs:
                   secs.append({'section_name':name[:100],'positive_local_styles':local,'negative_local_styles':[],'duration_ms':dur,'lines':lines})
               return {'positive_global_styles':POS,'negative_global_styles':NEG,'sections':secs}
           def plan_fix(sid):
-              CH=90000; secs=[]
+              secs=[]
               def kept(a,b,label):
-                  x=a; k=1
-                  while x<b:
-                      y=min(b,x+CH)
-                      words=[ln for ln,at in TAKE_LINES if at is not None and x<=at<y and ln not in FIX_LINES][:30]
-                      secs.append({'section_name':('%s %d'%(label,k))[:100],'positive_local_styles':['exactly as recorded'],'negative_local_styles':[],
-                                   'duration_ms':y-x,'lines':words,'source_from':{'song_id':sid,'range':{'start_ms':x,'end_ms':y}}})
-                      x=y; k+=1
-              kept(0,FIX_FROM,'Kept from the take, before')
+                  a=max(0,a); b=min(LENGTH,b)
+                  words=[ln for ln,at in TAKE_LINES if at is not None and a<=at<b and ln not in FIX_LINES][:30]
+                  secs.append({'section_name':label,'positive_local_styles':['exactly as recorded'],'negative_local_styles':[],
+                               'duration_ms':b-a,'lines':words,'source_from':{'song_id':sid,'range':{'start_ms':a,'end_ms':b}}})
+              kept(FIX_FROM-CTX,FIX_FROM,'From the take, just before')
               secs.append({'section_name':'Sung again','positive_local_styles':['sung softly, every word clear, exactly as written',
                            'the same voice, the same tune and the same tempo as the lines before and after'],'negative_local_styles':[],
                            'duration_ms':FIX_TO-FIX_FROM,'lines':FIX_LINES})
-              kept(FIX_TO,LENGTH,'Kept from the take, after')
+              kept(FIX_TO,FIX_TO+CTX,'From the take, just after')
               return {'positive_global_styles':POS,'negative_global_styles':NEG,'sections':secs}
+          def splice(take_path,patch_path,out_path):
+              # where the piece sings the new lines: found in its own transcription, else where the plan put them
+              tr=transcribe(patch_path); ps=None; pe=None
+              want=[norm(l) for l in FIX_LINES]
+              for sg in tr.get('segments',[]):
+                  t=norm(sg['text'])
+                  hit=any(difflib.SequenceMatcher(None,w,t).ratio()>=0.6 or (w in t) for w in want)
+                  if hit:
+                      ps=sg['start'] if ps is None else min(ps,sg['start']); pe=sg['end'] if pe is None else max(pe,sg['end'])
+              if ps is None: ps,pe=CTX/1000.0,(CTX+FIX_TO-FIX_FROM)/1000.0
+              ps=max(0.0,ps-0.15); pe=pe+0.15
+              print('   the new lines sit at %.1f-%.1f s of the piece; heard: %s' % (ps,pe,' / '.join(sg['text'].strip() for sg in tr.get('segments',[]))))
+              a=FIX_FROM/1000.0; c=FIX_TO/1000.0
+              fc=('[0:a]atrim=0:%.3f,asetpts=PTS-STARTPTS[a];[1:a]atrim=%.3f:%.3f,asetpts=PTS-STARTPTS[b];[0:a]atrim=%.3f,asetpts=PTS-STARTPTS[c];'
+                  '[a][b]acrossfade=d=0.15:c1=tri:c2=tri[ab];[ab][c]acrossfade=d=0.15:c1=tri:c2=tri[out]') % (a,ps,pe,c)
+              subprocess.run(['ffmpeg','-y','-loglevel','error','-i',take_path,'-i',patch_path,'-filter_complex',fc,'-map','[out]','-b:a','192k',out_path],check=True)
+              print('   spliced into the take:',os.path.getsize(out_path),'bytes')
           plan=plan_full() if mode=='full' else plan_fix(FIX_ID)
           total=sum(s['duration_ms'] for s in plan['sections'])
           print(f'plan: {len(plan["sections"])} sections, {sum(len(s["lines"]) for s in plan["sections"])} lines, {total//1000}s')
@@ -307,7 +325,12 @@ jobs:
                           except urllib.error.HTTPError as e2:
                               print('   still refused: HTTP',e2.code,e2.read()[:700]); audio=None
               if not audio: continue
-              path=f'out/take-{t}.mp3'; open(path,'wb').write(audio)
+              path=f'out/take-{t}.mp3'
+              if mode=='fix':
+                  open(f'out/piece-{t}.mp3','wb').write(audio)
+                  try: splice(FIX_FILE,f'out/piece-{t}.mp3',path)
+                  except Exception as e: print('   could not splice:',e); continue
+              else: open(path,'wb').write(audio)
               tr=transcribe(path); dur=tr.get('duration'); cov,rows=coverage(tr)
               fixed=[(ln,r) for lab,ln,st,r in rows if ln in FIX_LINES]
               rep=[f'take {t}: {dur and round(dur)}s, {round(cov*100)}% of the {len(all_lines)} lines sung'+(('; the lines sung again: '+', '.join(f'{r}' for _,r in fixed)) if mode=='fix' else '')]
