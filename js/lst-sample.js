@@ -70,7 +70,7 @@
           "Ten quiet minutes, and the words do the rest.</p>" +
           '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" ' +
             'style="text-decoration:none;display:inline-block;" ' +
-            'onclick="return openTrialSignup()">Start the free week</a>' +
+            'onclick="return openTrialSignup()">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
           '<p class="sm-fine">Seven days free, then $49 a year &mdash; about $4 a month. ' +
             'Cancel in two clicks, <a href="cancel.html">here is how</a>.</p>' +
           '<p class="sm-fine">Know a family this would suit? ' +

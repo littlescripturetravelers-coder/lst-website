@@ -234,8 +234,8 @@
         '<div class="mp-empty-i">&#128218;</div>' +
         "<h3>The LST Library opens with a subscription</h3>" +
         "<p>Every picture book and every lullaby we have sent, gathered on one shelf and kept. Your first seven days are free.</p>" +
-        '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" style="text-decoration:none;display:inline-block;" onclick="return openTrialSignup(\'monthly\')">Start the free week</a>' +
-        '<p class="mp-note" style="padding:.9rem 0 0;font-size:.9rem;">Already a subscriber? ' +
+        '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" style="text-decoration:none;display:inline-block;" onclick="return openTrialSignup(\'monthly\')">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
+        '<p class="mp-note" style="padding:.9rem 0 0;font-size:.9rem;">' + (window.LST_FREE_FOR_NOW ? "Already have an account? " : "Already a subscriber? ") +
           '<button type="button" class="mp-link" id="lb-signin">Sign in</button></p>' +
         '<p class="mp-note" style="padding:.4rem 0 0;font-size:.9rem;">' +
           'Read one first &mdash; <a href="sample.html">a whole bedtime story, free</a>.</p>' +

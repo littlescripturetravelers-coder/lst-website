@@ -70,7 +70,7 @@
         '<div class="mp-empty-i">&#128218;</div>' +
         "<h3>No stories to show yet</h3>" +
         "<p>Either no stories have been published yet, or this account&rsquo;s subscription isn&rsquo;t open. The archive comes with The Lantern &mdash; a free week opens it too.</p>" +
-        '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" style="text-decoration:none;display:inline-block;" onclick="return openTrialSignup(\'monthly\')">Start the free week</a>' +
+        '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" style="text-decoration:none;display:inline-block;" onclick="return openTrialSignup(\'monthly\')">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
       "</div>";
   }
 

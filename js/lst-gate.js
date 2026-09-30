@@ -72,10 +72,10 @@
           "Little Scripture Travelers sends one short scripture story every night, " +
           "written for ages 1&ndash;5. Start tonight; you are not charged for seven days.") + "</p>" +
         (lines ? '<ul class="lg-list">' + lines + "</ul>" : "") +
-        '<a class="lg-cta" href="subscribe.html#plans" id="lg-go">Start the free week</a>' +
+        '<a class="lg-cta" href="subscribe.html#plans" id="lg-go">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
         '<p class="lg-fine">Cancel any time in two clicks &mdash; ' +
           '<a href="cancel.html" style="color:var(--ink-62);">here is how</a>.<br>' +
-          'Already a subscriber? <button type="button" id="lg-in">Sign in</button>' +
+          (window.LST_FREE_FOR_NOW ? "Already have an account? " : "Already a subscriber? ") + '<button type="button" id="lg-in">Sign in</button>' +
           ' &middot; <button type="button" id="lg-later">Keep looking around</button></p>' +
       "</div>";
     return veil;

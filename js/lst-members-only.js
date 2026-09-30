@@ -45,14 +45,14 @@
     d.id = "lst-members-only";
     d.innerHTML =
       '<div class="mo-box">' +
-        '<span class="mo-eyebrow">' + esc(cfg.eyebrow || "Comes with The Lantern") + "</span>" +
-        "<h2>" + esc(cfg.what || "This is for subscribing families") + "</h2>" +
+        '<span class="mo-eyebrow">' + esc(cfg.eyebrow || (window.LST_FREE_FOR_NOW ? "Free with an account" : "Comes with The Lantern")) + "</span>" +
+        "<h2>" + esc(cfg.what || (window.LST_FREE_FOR_NOW ? "Create a free account to open it" : "This is for subscribing families")) + "</h2>" +
         "<p>" + esc(cfg.blurb ||
           "It comes with a subscription, along with a new scripture story every night. " +
           "Your first seven days are free.") + "</p>" +
         (lines ? '<ul class="mo-list">' + lines + "</ul>" : "") +
-        '<a class="mo-cta" href="subscribe.html#plans" id="mo-go">Start the free week</a>' +
-        '<p class="mo-fine">Already a subscriber? ' +
+        '<a class="mo-cta" href="subscribe.html#plans" id="mo-go">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
+        '<p class="mo-fine">' + (window.LST_FREE_FOR_NOW ? "Already have an account? " : "Already a subscriber? ") +
           '<button type="button" id="mo-in">Sign in</button><br>' +
           '<a href="' + esc(cfg.back || "index.html") + '">' +
           esc(cfg.backLabel || "Back to the website") + "</a></p>" +

@@ -163,7 +163,7 @@
       '<div class="mp-empty" style="margin-top:1.25rem;">' +
         "<h3>And then there is the rest of the night</h3>" +
         "<p>Every evening carries the story, a lullaby to sing together, the narration if a voice is easier than reading aloud, and a page in your family&rsquo;s own book. Your first seven days are free.</p>" +
-        '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" style="text-decoration:none;display:inline-block;" onclick="return openTrialSignup(\'monthly\')">Start the free week</a>' +
+        '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" style="text-decoration:none;display:inline-block;" onclick="return openTrialSignup(\'monthly\')">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
         '<p class="mp-note" style="padding:.9rem 0 0;font-size:.87rem;">Already a subscriber? ' +
           '<button type="button" class="mp-link" id="t-signin">Sign in</button></p>' +
       "</div>";
@@ -177,7 +177,7 @@
         '<div class="mp-empty-i">&#127769;</div>' +
         "<h3>Nothing has arrived for tonight yet</h3>" +
         "<p>Either tonight&rsquo;s story hasn&rsquo;t been published, or this account&rsquo;s subscription isn&rsquo;t open. The nightly story comes with The Lantern &mdash; a free week opens it too.</p>" +
-        '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" style="text-decoration:none;display:inline-block;" onclick="return openTrialSignup(\'monthly\')">Start the free week</a>' +
+        '<a class="mp-btn mp-btn-gold" href="subscribe.html#plans" style="text-decoration:none;display:inline-block;" onclick="return openTrialSignup(\'monthly\')">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
       "</div>" + peekView();
   }
 

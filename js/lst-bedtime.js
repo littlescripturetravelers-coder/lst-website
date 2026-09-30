@@ -233,7 +233,7 @@
           "<li>A lullaby to sing afterwards, with a sleep timer</li>" +
         "</ul>" +
         '<a class="mp-btn mp-btn-gold lk-go" href="subscribe.html#plans" ' +
-          'onclick="return openTrialSignup()">Start the free week</a>' +
+          'onclick="return openTrialSignup()">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
         '<p class="lk-fine">Your first seven days are free. Cancel any time in two clicks ' +
           '&mdash; <a href="cancel.html">here is how</a>.</p>' +
       "</div></div>";
