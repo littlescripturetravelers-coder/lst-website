@@ -26,7 +26,7 @@
    that process - it only grows. The timeline uses whichever copy is newer.
    ═══════════════════════════════════════════════════════════════════════════ */
 window.TECH_GUIDE = {
- "version": 3,
+ "version": 4,
  "updated": "2026-09-29",
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
  "items": [
@@ -70,29 +70,7 @@ window.TECH_GUIDE = {
     "Never leave a fire alone.",
     "Fire is for warming and cooking, never for showing off."
    ],
-   "talk": "Fire can cook our dinner or burn our house. What makes the difference?",
-   "harm": [
-    "Burns and house fires: fire does not know a child from a log.",
-    "A fascination with flames that grows if it is a secret."
-   ],
-   "avoid": [
-    "Matches, lighters and candles left where small hands reach.",
-    "Fireworks in a child's hands.",
-    "Playing near a stove, a campfire or a heater."
-   ],
-   "bless": [
-    "Cook a meal for a family that needs one.",
-    "A campfire family night, with stories of the pioneers who cooked over one every night.",
-    "Bring warmth to someone: soup, a blanket, a lit porch."
-   ],
-   "ages": {
-    "0-2": "Never within reach. 'Hot' is one of the first words worth teaching.",
-    "3-5": "Watch a campfire from a parent's arms; learn that fire is a helper only when a grown-up holds it.",
-    "6-9": "Help gather wood and feed a campfire with a grown-up right beside them.",
-    "10-12": "Light a candle or a stove with permission, and learn how to put a fire out.",
-    "13-15": "Build, tend and fully put out a campfire; cook a meal on it.",
-    "16+": "Teach the younger ones fire safety; carry the responsibility."
-   }
+   "talk": "Fire can cook our dinner or burn our house. What makes the difference?"
   },
   {
    "id": "wheel",
@@ -134,29 +112,7 @@ window.TECH_GUIDE = {
     "A cart is for carrying, not for racing.",
     "Help load it for someone who cannot."
    ],
-   "talk": "What do we carry to other people that they could not get on their own?",
-   "harm": [
-    "Falls, and roads: the wheel goes faster than a child can judge.",
-    "A car treated as a toy or a place to play."
-   ],
-   "avoid": [
-    "Riding without a helmet.",
-    "Streets without a grown-up until they have earned it.",
-    "A driver's seat before the law and the family say so."
-   ],
-   "bless": [
-    "Deliver a meal or a note on a bike.",
-    "Pull a wagon of groceries for a neighbor.",
-    "Learn to fix a bike, then fix someone else's."
-   ],
-   "ages": {
-    "0-2": "Strollers and wagons pulled by a parent.",
-    "3-5": "A tricycle or balance bike, helmet on every time.",
-    "6-9": "A bike on sidewalks and paths with a grown-up near.",
-    "10-12": "Rides to a friend's house with agreed routes and times.",
-    "13-15": "Longer rides; learn the road rules a driver keeps.",
-    "16+": "Driving: the biggest wheel of all, phone out of reach, every time."
-   }
+   "talk": "What do we carry to other people that they could not get on their own?"
   },
   {
    "id": "writing",
@@ -199,29 +155,7 @@ window.TECH_GUIDE = {
     "Write true things.",
     "Write something kind to someone every week."
    ],
-   "talk": "If you could write one true thing for your grandchildren to read, what would it be?",
-   "harm": [
-    "Hurtful words on a page or a screen last long after the anger is gone.",
-    "Written lies look like truth; children believe what is written down."
-   ],
-   "avoid": [
-    "Writing anything you would not say to the person's face.",
-    "Sharing another person's secret in writing.",
-    "Copying someone else's words and calling them your own."
-   ],
-   "bless": [
-    "Thank-you notes to teachers, leaders and grandparents.",
-    "A journal: the story of their life, kept for their own children.",
-    "Letters to a missionary, a soldier, or someone alone."
-   ],
-   "ages": {
-    "0-2": "Scribbles beside you; they learn that marks mean something.",
-    "3-5": "Their own name, and letters they dictate to you.",
-    "6-9": "Thank-you notes and a first journal with pictures.",
-    "10-12": "A real journal, written weekly; letters that get a reply.",
-    "13-15": "Essays and, above all, a written testimony of their own.",
-    "16+": "Write the family's stories down; that is family history."
-   }
+   "talk": "If you could write one true thing for your grandchildren to read, what would it be?"
   },
   {
    "id": "paper",
@@ -263,27 +197,7 @@ window.TECH_GUIDE = {
     "Use both sides.",
     "A hand-written note is a gift."
    ],
-   "talk": "Why do we still love paper books when we have screens?",
-   "harm": [
-    "Very little. Paper is one of the safest gifts a child can be handed."
-   ],
-   "avoid": [
-    "Tearing and wasting; teach that paper is a tree and a gift.",
-    "Reading only screens: paper rests the eyes and settles the mind."
-   ],
-   "bless": [
-    "Handmade cards for the lonely.",
-    "A scrapbook of the family's year.",
-    "Wrap a gift with your own drawing on it."
-   ],
-   "ages": {
-    "0-2": "Board books; let them turn the pages.",
-    "3-5": "Crayons and paper every day; a picture for grandma.",
-    "6-9": "Their own books, and a shelf to keep them on.",
-    "10-12": "Paper scriptures of their own, marked in their own hand.",
-    "13-15": "Study on paper as well as on a screen; it sticks better.",
-    "16+": "Keep a paper journal for the things too sacred for a screen."
-   }
+   "talk": "Why do we still love paper books when we have screens?"
   },
   {
    "id": "press",
@@ -326,29 +240,7 @@ window.TECH_GUIDE = {
     "Read the scriptures for yourself.",
     "Just because it is printed does not make it true."
    ],
-   "talk": "What would it be like if only one family in town owned a Bible?",
-   "harm": [
-    "Printed lies look true; propaganda was printed on the same presses as scripture.",
-    "Books and magazines carry adult content into a home as easily as good words."
-   ],
-   "avoid": [
-    "Books and magazines a parent has not looked at first.",
-    "Believing something because it is in print.",
-    "Comics and fan stories from unknown sources."
-   ],
-   "bless": [
-    "Print a family book of your own stories.",
-    "Give scriptures to someone who has none.",
-    "Make a neighborhood newsletter that tells the good news."
-   ],
-   "ages": {
-    "0-2": "Board books, read aloud every day.",
-    "3-5": "Picture books at bedtime, the same ones over and over; that is how they learn.",
-    "6-9": "Their own library card, books chosen together.",
-    "10-12": "Chapter books, and the first lesson in checking a claim: who wrote this, and how do they know?",
-    "13-15": "Read widely, the classics included, and learn to spot propaganda by its feel.",
-    "16+": "Publish something of their own; the press is theirs too."
-   }
+   "talk": "What would it be like if only one family in town owned a Bible?"
   },
   {
    "id": "telescope",
@@ -390,27 +282,7 @@ window.TECH_GUIDE = {
     "Use it to learn, not to spy.",
     "Share what you see."
    ],
-   "talk": "When you look at the stars, what do you think Heavenly Father wants you to feel?",
-   "harm": [
-    "Only one: never point it at the sun."
-   ],
-   "avoid": [
-    "Looking at the sun through any lens.",
-    "Buying a toy telescope that shows nothing; a good pair of binoculars is better."
-   ],
-   "bless": [
-    "Show a friend the moon's craters for the first time.",
-    "Let wonder turn into gratitude: 'the heavens declare the glory of God.'",
-    "Star-gaze with the family on a clear night and read Abraham 3 or Psalm 8."
-   ],
-   "ages": {
-    "0-2": "Point at the moon together.",
-    "3-5": "The moon and the bright planets through binoculars on a parent's lap.",
-    "6-9": "A small telescope with a grown-up; learn the moon's face.",
-    "10-12": "Find Jupiter's moons the way Galileo did.",
-    "13-15": "Learn the constellations and how far the light has come.",
-    "16+": "Teach a younger child the sky."
-   }
+   "talk": "When you look at the stars, what do you think Heavenly Father wants you to feel?"
   },
   {
    "id": "steam",
@@ -453,26 +325,7 @@ window.TECH_GUIDE = {
     "Rest is not laziness.",
     "Thank the people who keep the engines running."
    ],
-   "talk": "If a machine could do your chores, what would you do with the time?",
-   "harm": [
-    "Machines do not stop for a hand or a foot."
-   ],
-   "avoid": [
-    "Playing near running machinery or engines.",
-    "Treating a lawn mower or a power tool as a toy."
-   ],
-   "bless": [
-    "Learn how a machine works, then fix one for someone who cannot.",
-    "Mow, plow or haul for a neighbor with the machine you have."
-   ],
-   "ages": {
-    "0-2": "Watch a train go by.",
-    "3-5": "Toy engines and a museum visit.",
-    "6-9": "Take a simple machine apart with a grown-up.",
-    "10-12": "Help with tools, with safety glasses and supervision.",
-    "13-15": "Learn a power tool properly, from a parent.",
-    "16+": "Repair and build; machines as a way to serve."
-   }
+   "talk": "If a machine could do your chores, what would you do with the time?"
   },
   {
    "id": "photo",
@@ -516,30 +369,7 @@ window.TECH_GUIDE = {
     "Never share a picture that would embarrass someone.",
     "If a picture makes you feel yucky, tell a grown-up."
    ],
-   "talk": "Which photograph in our house means the most to you, and why?",
-   "harm": [
-    "A photo shared can never be taken back; it can be copied, changed and used against them.",
-    "Constant comparison with edited pictures of other people's lives.",
-    "Predators ask for pictures first."
-   ],
-   "avoid": [
-    "Sharing a photo of a friend without asking them.",
-    "Any photo in a bathroom, bedroom or swimsuit sent to anyone.",
-    "Sending a picture to someone you have not met in person."
-   ],
-   "bless": [
-    "Photograph the family's history: grandparents, homes, headstones, hands.",
-    "Send pictures to a grandparent every Sunday.",
-    "Take the pictures at a service project so the story can be told."
-   ],
-   "ages": {
-    "0-2": "Parents take the photos and keep them private.",
-    "3-5": "Hold the family camera with a parent; photos stay in the family.",
-    "6-9": "A simple camera of their own; nothing shared online.",
-    "10-12": "No camera phone in a bedroom; ask before sharing any picture of a person.",
-    "13-15": "The rule that never bends: no photo of your body to anyone, and no photo kept secret from parents.",
-    "16+": "Become the family's photographer and historian."
-   }
+   "talk": "Which photograph in our house means the most to you, and why?"
   },
   {
    "id": "telegraph",
@@ -582,25 +412,7 @@ window.TECH_GUIDE = {
     "Wait before you pass something on.",
     "Use it to say 'I am safe' and 'I love you'."
    ],
-   "talk": "If you could send one message to anyone in the world right now, who would it be and what would it say?",
-   "harm": [
-    "Rumors travel as fast as truth once messages fly."
-   ],
-   "avoid": [
-    "Passing on a message you have not checked."
-   ],
-   "bless": [
-    "A quick word of comfort can reach across the world in a second; send one.",
-    "Learn Morse code together; tap out 'I love you.'"
-   ],
-   "ages": {
-    "0-2": "Not yet.",
-    "3-5": "Tap a code on the table: two taps means 'hello'.",
-    "6-9": "Learn the alphabet in Morse for fun.",
-    "10-12": "Understand that every text is a telegraph, and every telegraph is read by someone.",
-    "13-15": "Check a message before you pass it on.",
-    "16+": "Use the fastest word for the kindest reasons."
-   }
+   "talk": "If you could send one message to anyone in the world right now, who would it be and what would it say?"
   },
   {
    "id": "telephone",
@@ -642,29 +454,7 @@ window.TECH_GUIDE = {
     "Put it down when someone is talking to you.",
     "Call Grandma."
    ],
-   "talk": "Whose voice would you most like to hear tonight?",
-   "harm": [
-    "Strangers can call a child; scammers call everyone.",
-    "Late-night calls steal sleep and privacy."
-   ],
-   "avoid": [
-    "Giving a name, an address or a family's plans to any caller.",
-    "Answering unknown numbers alone.",
-    "Calls after the family's bedtime."
-   ],
-   "bless": [
-    "Call grandparents every week; it is the call they wait for.",
-    "Check on a lonely neighbor or a widow by phone.",
-    "Be the one who calls to say sorry."
-   ],
-   "ages": {
-    "0-2": "Video calls so family faces stay familiar.",
-    "3-5": "Talk to grandma on speaker with you.",
-    "6-9": "Use the family phone with permission; learn to answer politely.",
-    "10-12": "A basic phone that calls and texts, only if truly needed, and only known numbers.",
-    "13-15": "Call etiquette; never answer or call strangers; the phone sleeps outside the bedroom.",
-    "16+": "Their phone, their manners, their calls of service."
-   }
+   "talk": "Whose voice would you most like to hear tonight?"
   },
   {
    "id": "light",
@@ -707,27 +497,7 @@ window.TECH_GUIDE = {
     "Dark room, better sleep.",
     "Never touch a plug with wet hands."
    ],
-   "talk": "Why do you think the very first thing created was light?",
-   "harm": [
-    "Light at night, especially from screens, tells the body it is day; sleep suffers, and so does everything sleep protects."
-   ],
-   "avoid": [
-    "Bright screens and lights in the bedroom after dark.",
-    "Leaving every light on; a child should know light costs something."
-   ],
-   "bless": [
-    "A lamp for reading scriptures together at night.",
-    "Leave a porch light on for someone coming home late.",
-    "Bring a flashlight and a meal to a neighbor whose power is out."
-   ],
-   "ages": {
-    "0-2": "A dim night-light only.",
-    "3-5": "Lights off means eyes closed; keep the rule kindly.",
-    "6-9": "A reading lamp and a bedtime, both kept.",
-    "10-12": "No screens for an hour before bed; the light itself is the problem.",
-    "13-15": "Learn why blue light steals sleep, then choose.",
-    "16+": "Keep their own dark, quiet hour before sleep."
-   }
+   "talk": "Why do you think the very first thing created was light?"
   },
   {
    "id": "radio",
@@ -770,28 +540,7 @@ window.TECH_GUIDE = {
     "Turn it off for dinner.",
     "Sing along to the good stuff."
    ],
-   "talk": "If you had a radio show everyone in the world could hear, what would you say?",
-   "harm": [
-    "Words and songs go in without a filter: explicit lyrics, adult talk, endless news."
-   ],
-   "avoid": [
-    "Music with explicit lyrics, even if the tune is good.",
-    "Talk shows and podcasts made for adults.",
-    "Radio or headphones on all day; silence is where thinking happens."
-   ],
-   "bless": [
-    "Hymns and scripture audio in the car and the kitchen.",
-    "Make a family 'radio show' and send it to grandparents.",
-    "A playlist that lifts a friend who is down."
-   ],
-   "ages": {
-    "0-2": "Lullabies and gentle music.",
-    "3-5": "Children's music and hymns; sing along.",
-    "6-9": "Audiobooks and scripture stories read aloud.",
-    "10-12": "Podcasts chosen together and listened to together first.",
-    "13-15": "Their music, checked against For the Strength of Youth by them, not only by you.",
-    "16+": "Curate what fills the house; it shapes everyone in it."
-   }
+   "talk": "If you had a radio show everyone in the world could hear, what would you say?"
   },
   {
    "id": "movies",
@@ -834,30 +583,7 @@ window.TECH_GUIDE = {
     "If it makes you feel dark, turn it off.",
     "Talk about the story afterwards."
    ],
-   "talk": "What is the best movie we have watched together, and what did it teach?",
-   "harm": [
-    "Images stay: a frightening scene at six is remembered at forty.",
-    "Violence and sexual content seen young numb what should stay tender.",
-    "Long films replace play, sleep and talk."
-   ],
-   "avoid": [
-    "Ratings above their age, and PG-13 or R because 'everyone has seen it.'",
-    "Horror at any age of childhood.",
-    "Watching alone anything a parent has not seen."
-   ],
-   "bless": [
-    "Family movie night with a film that lifts, then talk about it.",
-    "Make a family movie: a story, a play, a birthday, a farewell.",
-    "Watch the Savior's life together and talk about Him."
-   ],
-   "ages": {
-    "0-2": "None.",
-    "3-5": "Short, gentle films with a parent, in the daytime.",
-    "6-9": "G and PG films chosen together; ask afterwards what they felt.",
-    "10-12": "PG, with a talk after; PG-13 is a parent's call, case by case.",
-    "13-15": "PG-13 with your judgment, never R; teach why, not just no.",
-    "16+": "Their own standards, held for their own reasons."
-   }
+   "talk": "What is the best movie we have watched together, and what did it teach?"
   },
   {
    "id": "tv",
@@ -901,30 +627,7 @@ window.TECH_GUIDE = {
     "One show, then something real.",
     "No TV in the bedroom."
    ],
-   "talk": "What would our evenings look like with no TV for a week?",
-   "harm": [
-    "Television on in the background lowers how much parents talk to babies, and how much babies learn to talk.",
-    "Hours of passive watching replace play, reading and sleep.",
-    "Advertising teaches a child to want."
-   ],
-   "avoid": [
-    "A television in a bedroom.",
-    "TV on during meals or as background all day.",
-    "Channels and streaming feeds that autoplay whatever comes next."
-   ],
-   "bless": [
-    "Watch general conference and the Savior's story together.",
-    "Uplifting programs the whole family talks about afterwards.",
-    "Turn it off and read the story instead, some nights."
-   ],
-   "ages": {
-    "0-2": "None, except family on a video call.",
-    "3-5": "About an hour of good programs, with you, never as a babysitter.",
-    "6-9": "A daily limit that is kept; shows chosen together.",
-    "10-12": "Shows in the family room; learn what an ad is doing to you.",
-    "13-15": "Their own choices, measured against the family's standard.",
-    "16+": "Decide what deserves an evening."
-   }
+   "talk": "What would our evenings look like with no TV for a week?"
   },
   {
    "id": "computer",
@@ -968,29 +671,7 @@ window.TECH_GUIDE = {
     "Keep your passwords secret, even from friends.",
     "When you are done, get up and go outside."
    ],
-   "talk": "What is one thing a computer can never do that you can?",
-   "harm": [
-    "Hours sitting still, hunched, staring.",
-    "A computer in a private room is a private door to the whole world."
-   ],
-   "avoid": [
-    "A computer in a bedroom.",
-    "Accounts a parent does not know about.",
-    "Downloading what a parent has not approved."
-   ],
-   "bless": [
-    "Learn to code and build something that helps someone.",
-    "Type up grandma's stories and the family's history.",
-    "Help index old records so families can find their ancestors."
-   ],
-   "ages": {
-    "0-2": "Not yet.",
-    "3-5": "Not needed.",
-    "6-9": "Learning games and typing, in a family room, with limits.",
-    "10-12": "Homework, coding for fun, a family history project; history visible to parents.",
-    "13-15": "Real work: writing, design, code, editing; filters stay on.",
-    "16+": "A tool for a life's work; they set the limits and keep them."
-   }
+   "talk": "What is one thing a computer can never do that you can?"
   },
   {
    "id": "games",
@@ -1035,31 +716,7 @@ window.TECH_GUIDE = {
     "Set a timer before you start, and stop when it rings.",
     "Never buy anything in a game without asking."
    ],
-   "talk": "What game could we play together this week, and what does it teach?",
-   "harm": [
-    "Games are built to keep a child playing: rewards, streaks and loot boxes work on a young brain like slot machines.",
-    "Violence rehearsed for hours teaches the hands and dulls the heart.",
-    "Chat and voice with strangers; predators go where children play."
-   ],
-   "avoid": [
-    "Games rated above their age (E is for everyone; T is for teens; M is not for children).",
-    "Online chat or voice with anyone the family does not know in person.",
-    "Loot boxes and in-game purchases; that is gambling with a costume on.",
-    "Playing in a bedroom, or after bedtime."
-   ],
-   "bless": [
-    "Play together as a family; a game can be a table everyone sits at.",
-    "Creative games: build a temple, a city, a world, and show it off.",
-    "Invite a lonely child to play in the same room."
-   ],
-   "ages": {
-    "0-2": "None.",
-    "3-5": "None, or a few minutes of a simple touch game on a parent's lap.",
-    "6-9": "E-rated games, together, with a timer everyone can see.",
-    "10-12": "E10+ games, no online chat, a timer, and weekends more than school nights.",
-    "13-15": "T-rated with a parent's judgment; chat only with known friends; no loot boxes; no games in bedrooms.",
-    "16+": "Their own hours, but the same rule: real people before pixels."
-   }
+   "talk": "What game could we play together this week, and what does it teach?"
   },
   {
    "id": "pc",
@@ -1102,28 +759,7 @@ window.TECH_GUIDE = {
     "Save your work, then save it again.",
     "Make something with it, not just watch something on it."
    ],
-   "talk": "What could you create on a computer that would bless somebody?",
-   "harm": [
-    "The whole world on a desk, good and bad alike, unless a parent shapes it."
-   ],
-   "avoid": [
-    "A home computer without a filter and a family account.",
-    "Private browsing and cleared history.",
-    "Free downloads that carry viruses and worse."
-   ],
-   "bless": [
-    "Write a book, design a card, make music, edit a family film.",
-    "Learn a skill that will one day feed a family.",
-    "Help an elderly neighbor with their computer."
-   ],
-   "ages": {
-    "0-2": "Not yet.",
-    "3-5": "Not needed.",
-    "6-9": "A family computer in a family room, with a child account.",
-    "10-12": "Homework and creating; a parent can see everything.",
-    "13-15": "Real tools, with the filter still on and the door open.",
-    "16+": "Their own workstation, their own standards."
-   }
+   "talk": "What could you create on a computer that would bless somebody?"
   },
   {
    "id": "internet",
@@ -1193,7 +829,8 @@ window.TECH_GUIDE = {
     "10-12": "Filtered and monitored in family rooms; teach the plan for a bad page: close it, tell a parent, never punished.",
     "13-15": "Filters plus accountability; talk often about what they meet; they know you will ask.",
     "16+": "Their own filters and habits, built while you were still there to help."
-   }
+   },
+   "modern": true
   },
   {
    "id": "mobile",
@@ -1259,7 +896,8 @@ window.TECH_GUIDE = {
     "10-12": "A basic phone or watch that calls and texts, only if the family truly needs it.",
     "13-15": "A smartphone only with a written family agreement, filters, and no bedroom overnight; many families wait until high school.",
     "16+": "Their phone, with limits they wrote and keep."
-   }
+   },
+   "modern": true
   },
   {
    "id": "social",
@@ -1334,7 +972,8 @@ window.TECH_GUIDE = {
     "10-12": "None; the law says 13 and the Surgeon General says even that is not proof of safety.",
     "13-15": "Delay it as long as you can. If it is used: private accounts, parents follow and know the passwords, notifications off, a daily limit, nothing in bedrooms.",
     "16+": "Purposeful use with their own limits; a weekly day away from it."
-   }
+   },
+   "modern": true
   },
   {
    "id": "smartphone",
@@ -1410,7 +1049,8 @@ window.TECH_GUIDE = {
     "10-12": "No smartphone; a basic phone or a watch if the family needs one.",
     "13-15": "Only with a written family agreement, filters, parent-known passwords and no bedroom overnight; many experts say wait until high school.",
     "16+": "Their own phone under their own rules, learned while they were home."
-   }
+   },
+   "modern": true
   },
   {
    "id": "streaming",
@@ -1478,7 +1118,8 @@ window.TECH_GUIDE = {
     "10-12": "Titles chosen together; teach ratings and why.",
     "13-15": "Their choices within the family's standard; talk about what they watch.",
     "16+": "Decide what deserves their evenings."
-   }
+   },
+   "modern": true
   },
   {
    "id": "tablet",
@@ -1543,7 +1184,8 @@ window.TECH_GUIDE = {
     "10-12": "Schoolwork and creating, in family rooms.",
     "13-15": "A tool, with the same rules as the phone.",
     "16+": "Whatever it is for, on purpose."
-   }
+   },
+   "modern": true
   },
   {
    "id": "assistant",
@@ -1610,7 +1252,8 @@ window.TECH_GUIDE = {
     "10-12": "A tool, not an oracle; check what it says.",
     "13-15": "Learn what it records and who hears it.",
     "16+": "Use it to free time for what matters."
-   }
+   },
+   "modern": true
   },
   {
    "id": "vr",
@@ -1677,7 +1320,8 @@ window.TECH_GUIDE = {
     "10-12": "Only what the maker allows, in the family room, short sessions, no social VR.",
     "13-15": "Short sessions, no strangers, parents can see what is played.",
     "16+": "A tool for learning and creating, with their own limits."
-   }
+   },
+   "modern": true
   },
   {
    "id": "ai",
@@ -1755,7 +1399,8 @@ window.TECH_GUIDE = {
     "10-12": "With a parent, for learning; never alone with a chatbot; check facts together.",
     "13-15": "School-approved tools; never AI companions; learn to verify; honest about what is theirs.",
     "16+": "Learn to use it well and honestly; it will be part of their work."
-   }
+   },
+   "modern": true
   },
   {
    "id": "robots",
@@ -1823,7 +1468,8 @@ window.TECH_GUIDE = {
     "10-12": "Robotics club; code something that moves.",
     "13-15": "Build, program, compete; learn what the machine cannot do.",
     "16+": "Use them to serve, and keep the human in charge."
-   }
+   },
+   "modern": true
   }
  ],
  "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
@@ -2010,5 +1656,6 @@ window.TECH_GUIDE = {
    "name": "Common Sense Media",
    "url": "https://www.commonsensemedia.org/"
   }
- ]
+ ],
+ "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next."
 };
