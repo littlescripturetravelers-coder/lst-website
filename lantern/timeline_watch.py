@@ -42,8 +42,10 @@ SB_KEY     = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
 OA_KEY     = os.environ.get("OPENAI_API_KEY", "").strip()
 HERE       = os.path.dirname(os.path.abspath(__file__))
 FEED_DIR   = os.path.join(HERE, "timeline-feed")
-ROW        = {"tech": "tech", "discoveries": "discoveries", "studies": "studies", "regions": "regions"}[JOB]
+ROW        = {"tech": "tech", "discoveries": "discoveries", "studies": "studies", "regions": "regions", "tribes": "tribes"}[JOB]
 REGIONS_FILE = os.path.join(HERE, "..", "data", "regions.js")
+TRIBES_FILE  = os.path.join(HERE, "..", "data", "tribes.js")
+TRIBES_PER   = int(os.environ.get("TRIBES_PER_RUN") or "10")
 INDEX_FILE = os.path.join(FEED_DIR, "events-index.json")
 PER_RUN    = int(os.environ.get("STUDIES_PER_RUN") or "80")
 SEED_FILE  = os.path.join(FEED_DIR, ROW + ".json")
@@ -399,10 +401,119 @@ def run_regions(body):
     print("regions: %d written this run" % written)
     return written
 
+# ── the Native peoples ──────────────────────────────────────────────────────
+def run_tribes(body):
+    """The Native Peoples and the Book of Mormon: for each people in data/tribes.js
+    without a deep study yet (or an older one than TRIBES_V), write one with
+    sources, and check honestly whatever connection to Israel, the Book of Mormon
+    or a visiting teacher is claimed for it; then look for peoples not yet in the
+    catalogue and add them as full cards. THE RULE: every people is listed; the
+    connection material only where a real record exists, graded by its source."""
+    TRIBES_V = 1
+    src = open(TRIBES_FILE, encoding="utf-8").read()
+    m = re.search(r"window\.LST_TRIBES = (\{.*\});\s*$", src, re.S)
+    tmp = os.path.join(FEED_DIR, "_tribes.js"); open(tmp, "w", encoding="utf-8").write("const T=" + m.group(1) + ";console.log(JSON.stringify(T))")
+    T = json.loads(subprocess.check_output(["node", tmp]).decode()); os.remove(tmp)
+    items = body.setdefault("items", {})
+    if not isinstance(items, dict): items = body["items"] = {}
+    GRADES = "'Their own tradition' | 'Recorded after the conquest' | 'Claimed by later writers' | 'Latter-day Saint teaching'"
+    areas = {a["id"]: a for a in T["areas"]}
+    peoples = list(T["peoples"]) + [dict(v["card"], id=k) for k, v in items.items() if isinstance(v, dict) and v.get("card") and k not in {p["id"] for p in T["peoples"]}]
+    todo = [p for p in peoples if not (items.get(p["id"]) or {}).get("study") or int((items.get(p["id"]) or {}).get("v") or 0) < TRIBES_V]
+    print("tribes: %d of %d peoples want a study" % (len(todo), len(peoples)))
+    written = 0
+    rules = ("You write for a family study library beside a world timeline; the reader is a parent, often a member of The Church of Jesus Christ of "
+             "Latter-day Saints, who will teach a child from it. " + TEXT_RULES + " Accuracy first: use web search to check every date, name and claim, "
+             "and cite sources a parent could open. Be plain and respectful about a people's religion. Whole paragraphs, no markdown, no bullet "
+             "characters, no links inside the prose. Never invent a tradition, a parallel or a URL.")
+    for p in todo[:TRIBES_PER]:
+        links = p.get("links") or []
+        prompt = ("Today is %s. Write the full study of this people: %s (%s), of the %s culture area, %s.\n"
+                  "What is already written (expand it, do not contradict it):\nLanguage: %s\nSince: %s\nHow they lived: %s\nWhat they ate: %s\n"
+                  "What they believed: %s\nCeremonies: %s\nHistory: %s\nToday: %s\n"
+                  "Connections already recorded: %s\n\n"
+                  "Give 6 to 8 sections in order, each with a title and 150-300 words of prose: who they are and where they lived about 1500; how they "
+                  "lived and what they ate; what they believed about God, creation, spirits and the dead; their ceremonies and sacred things; their "
+                  "history since the first Europeans came; the people today; and, ONLY IF a real record exists, a section 'What has been connected with "
+                  "Israel, the Book of Mormon or a visiting teacher' that states each connection, who recorded or claimed it and when, what scholars "
+                  "say, and what Latter-day Saints have taught, graded as %s. If no such record exists for this people, leave that section out and set "
+                  "links to []. Then 4 to 8 real, openable https sources with name and url (encyclopedias, museums, universities, tribal nations' own "
+                  "sites, churchofjesuschrist.org, reputable histories).\n"
+                  "Answer with JSON only: {\"sections\":[{\"title\":\"...\",\"text\":\"...\"}],\"links\":[{\"kind\":\"whitegod|israel|bom\",\"grade\":\"...\",\"claim\":\"...\",\"note\":\"...\"}],\"sources\":[{\"name\":\"...\",\"url\":\"https://...\"}]}") % (
+                  TODAY, p["name"], p.get("also") or "no other name", areas.get(p["area"], {}).get("name", p["area"]), p.get("where", ""), p.get("lang", ""), p.get("since", ""),
+                  p.get("lived", ""), p.get("ate", ""), p.get("believed", ""), p.get("rites", ""), p.get("known", ""), p.get("today", ""),
+                  json.dumps(links, ensure_ascii=False) if links else "none", GRADES)
+        try:
+            ans = ask(rules, prompt)
+        except Exception as e:
+            print("  failed:", p["id"], str(e)[:160]); continue
+        sections = []
+        for sec in (ans.get("sections") or [])[:8]:
+            if not isinstance(sec, dict): continue
+            title = clean_str(sec.get("title"), 90); text = scrub(sec.get("text"))[:3500]
+            if title and len(text) >= 300: sections.append({"title": title, "text": text})
+        sources = []
+        for s2 in (ans.get("sources") or [])[:8]:
+            if not isinstance(s2, dict): continue
+            url = scrub_url(clean_str(s2.get("url"), 300))
+            if re.match(r"^https://[^\s\"'<>]+$", url): sources.append({"name": clean_str(s2.get("name"), 120) or url, "url": url})
+        newlinks = []
+        for l in (ans.get("links") or [])[:6]:
+            if not isinstance(l, dict): continue
+            kind = str(l.get("kind") or "").strip(); grade = clean_str(l.get("grade"), 60); claim = scrub(l.get("claim"))[:900]; note = scrub(l.get("note"))[:900]
+            if kind in ("whitegod", "israel", "bom") and grade and len(claim) >= 40: newlinks.append({"kind": kind, "grade": grade, "claim": claim, "note": note})
+        if len(sections) < 5 or not sources:
+            print("  rejected (too thin or no source):", p["id"], len(sections), len(sources)); continue
+        it = items.setdefault(p["id"], {})
+        it.update({"v": TRIBES_V, "on": TODAY, "name": p["name"], "study": {"sections": sections, "sources": sources, "links": newlinks}})
+        written += 1; print("  wrote:", p["id"], "-", len(sections), "sections,", len(newlinks), "connections,", len(sources), "sources")
+        body["version"] = int(body.get("version") or 0) + 1; body["updated"] = TODAY; write_row(body)
+    # peoples not yet in the catalogue, a few each run, culture area by culture area
+    have = sorted({p["id"] for p in peoples} | {p["name"] for p in peoples})
+    order = [a["id"] for a in T["areas"]]
+    turn = int(body.get("area_turn") or 0) % len(order); area = areas[order[turn]]
+    prompt = ("Today is %s. The catalogue already holds these peoples (do not repeat any of them, under any name): %s.\n"
+              "Name up to 3 more Native peoples of the %s culture area (%s) that a family study of the Americas should have, preferring the larger "
+              "and better-recorded nations first. For each give a full card, checked with web search: id (short slug), name, also (other names), "
+              "where (their homeland about 1500), lat, lng (numbers, the centre of that homeland), lang (language and family), since (how long they "
+              "have been there), lived (how they lived, 1-2 sentences), ate (their foods), believed (their beliefs about God, creation, spirits and the "
+              "dead, 1-2 sentences), rites (ceremonies), known (their history in 1-2 sentences), today (the people today), links (ONLY where a real record "
+              "connects them with Israel, the Book of Mormon or a teacher who came among them: kind whitegod|israel|bom, grade %s, claim, note on where "
+              "it comes from and what scholars say; otherwise []), and sources (2-4 real https URLs with names).\n"
+              "Answer with JSON only: {\"peoples\":[{...}]}") % (TODAY, ", ".join(have), area["name"], area.get("where", ""), GRADES)
+    try:
+        ans = ask(rules, prompt); added = 0
+        for c in (ans.get("peoples") or [])[:3]:
+            if not isinstance(c, dict): continue
+            pid = re.sub(r"[^a-z0-9]+", "", str(c.get("id") or c.get("name") or "").lower())[:24]
+            name = clean_str(c.get("name"), 60)
+            if not pid or not name or pid in items or pid in {p["id"] for p in peoples} or name.lower() in {p["name"].lower() for p in peoples}: continue
+            try: lat = float(c.get("lat")); lng = float(c.get("lng"))
+            except Exception: continue
+            card = {"name": name, "also": clean_str(c.get("also"), 80), "area": area["id"], "where": clean_str(c.get("where"), 120), "lat": lat, "lng": lng,
+                    "lang": clean_str(c.get("lang"), 100), "since": clean_str(c.get("since"), 200), "lived": scrub(c.get("lived"))[:600], "ate": scrub(c.get("ate"))[:300],
+                    "believed": scrub(c.get("believed"))[:700], "rites": scrub(c.get("rites"))[:400], "known": scrub(c.get("known"))[:700], "today": scrub(c.get("today"))[:300], "links": [], "sources": []}
+            for l in (c.get("links") or [])[:4]:
+                if not isinstance(l, dict): continue
+                kind = str(l.get("kind") or "").strip(); grade = clean_str(l.get("grade"), 60); claim = scrub(l.get("claim"))[:900]; note = scrub(l.get("note"))[:900]
+                if kind in ("whitegod", "israel", "bom") and grade and len(claim) >= 40: card["links"].append({"kind": kind, "grade": grade, "claim": claim, "note": note})
+            for s2 in (c.get("sources") or [])[:4]:
+                if not isinstance(s2, dict): continue
+                url = scrub_url(clean_str(s2.get("url"), 300))
+                if re.match(r"^https://[^\s\"'<>]+$", url): card["sources"].append({"name": clean_str(s2.get("name"), 120) or url, "url": url})
+            if not (card["where"] and card["lived"] and card["believed"] and card["sources"]): print("  new people rejected (thin):", pid); continue
+            items[pid] = {"v": 0, "on": TODAY, "name": name, "card": card}; added += 1; print("  added:", pid, "-", name, "(" + area["name"] + ")")
+        body["area_turn"] = turn + 1
+        if added: written += added; body["version"] = int(body.get("version") or 0) + 1; body["updated"] = TODAY; write_row(body)
+    except Exception as e:
+        print("  new peoples failed:", str(e)[:160])
+    print("tribes: %d written this run" % written)
+    return written
+
 # ── run ─────────────────────────────────────────────────────────────────────
 body = read_row()
 seeded = body.pop("_seed_merged", None) is not None
-changed = run_tech(body) if JOB == "tech" else run_studies(body) if JOB == "studies" else run_regions(body) if JOB == "regions" else run_discoveries(body)
+changed = run_tech(body) if JOB == "tech" else run_studies(body) if JOB == "studies" else run_regions(body) if JOB == "regions" else run_tribes(body) if JOB == "tribes" else run_discoveries(body)
 if changed or seeded or os.environ.get("FORCE_WRITE") == "1" or int(body.get("version") or 0) < 1:
     body["version"] = int(body.get("version") or 0) + 1
     body["updated"] = TODAY

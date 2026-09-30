@@ -16,12 +16,13 @@ on:
     - cron: '17 9 * * *'     # every day at 09:17 UTC (about 3:17 AM Mountain)
     - cron: '23 10 1 * *'    # the first of every month at 10:23 UTC
     - cron: '47 2,8,14,20 * * *'   # four times a day: the in-depth studies, until every event has one
+    - cron: '31 6 * * 0,3'   # Sundays and Wednesdays at 06:31 UTC: the Native peoples, until every one has its study
   workflow_dispatch:
     inputs:
       job:
         description: 'Which search to run'
         type: choice
-        options: [tech, discoveries, studies, regions]
+        options: [tech, discoveries, studies, regions, tribes]
         default: tech
 
 permissions:
@@ -43,6 +44,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then echo "job=${{ inputs.job }}" >> "$GITHUB_OUTPUT";
           elif [ "${{ github.event.schedule }}" = "23 10 1 * *" ]; then echo "job=discoveries" >> "$GITHUB_OUTPUT";
           elif [ "${{ github.event.schedule }}" = "47 2,8,14,20 * * *" ]; then echo "job=studies" >> "$GITHUB_OUTPUT";
+          elif [ "${{ github.event.schedule }}" = "31 6 * * 0,3" ]; then echo "job=tribes" >> "$GITHUB_OUTPUT";
           else echo "job=tech" >> "$GITHUB_OUTPUT"; fi
 
       - name: Search, check, and write it to the account
