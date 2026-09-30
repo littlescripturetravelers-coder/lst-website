@@ -42,7 +42,8 @@ SB_KEY     = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
 OA_KEY     = os.environ.get("OPENAI_API_KEY", "").strip()
 HERE       = os.path.dirname(os.path.abspath(__file__))
 FEED_DIR   = os.path.join(HERE, "timeline-feed")
-ROW        = {"tech": "tech", "discoveries": "discoveries", "studies": "studies"}[JOB]
+ROW        = {"tech": "tech", "discoveries": "discoveries", "studies": "studies", "regions": "regions"}[JOB]
+REGIONS_FILE = os.path.join(HERE, "..", "data", "regions.js")
 INDEX_FILE = os.path.join(FEED_DIR, "events-index.json")
 PER_RUN    = int(os.environ.get("STUDIES_PER_RUN") or "80")
 SEED_FILE  = os.path.join(FEED_DIR, ROW + ".json")
@@ -231,7 +232,10 @@ def run_discoveries(body):
     return added
 
 # ── studies ─────────────────────────────────────────────────────────────────
-STUDY_FIELDS = ("happened", "background", "matters", "scripture", "evidence", "learn", "child", "talk")
+STUDY_FIELDS = ("happened", "background", "matters", "scripture", "evidence", "learn", "child", "talk", "rise", "fall")
+EMPIRE_CATS = ("empire", "world")   # the great powers: their studies also tell what led to the rise and what led to the fall
+def needs_rewrite(ev, st):
+    return ev.get("cat") in EMPIRE_CATS and not (st.get("rise") and st.get("fall"))
 
 def scrub(t):
     """Prose for a parent, not a web page: the model's inline citations like
@@ -283,10 +287,16 @@ def study_one(ev):
               "learn - what we can learn, 80-150 words;\n"
               "child - two or three sentences a child of six could follow;\n"
               "talk - one question a parent could ask a child tonight;\n"
-              "sources - 2 to 4 real, openable https sources with name and url (encyclopedias, museums, universities, churchofjesuschrist.org, "
+              + (("rise - what led to this power's rise: the land, the leaders, the ideas, the luck and the choices that lifted it, "
+                  "with the years, 200-350 words;\n"
+                  "fall - what led to its fall or decline: the outside blows and the inside rot, pride, division, over-reach, "
+                  "the loss of what made it, with the years, 200-350 words;\n") if ev.get("cat") in EMPIRE_CATS else "")
+              + "sources - 2 to 4 real, openable https sources with name and url (encyclopedias, museums, universities, churchofjesuschrist.org, "
               "reputable histories). Never invent a URL. Put no links, citations or brackets inside the prose fields; the sources list is where links go.\n\n"
               "Answer with JSON only: {\"happened\":\"...\",\"background\":\"...\",\"matters\":\"...\",\"scripture\":\"...\",\"evidence\":\"...\","
-              "\"conf\":\"...\",\"learn\":\"...\",\"child\":\"...\",\"talk\":\"...\",\"sources\":[{\"name\":\"...\",\"url\":\"https://...\"}]}") % (
+              "\"conf\":\"...\",\"learn\":\"...\",\"child\":\"...\",\"talk\":\"...\","
+              + ("\"rise\":\"...\",\"fall\":\"...\"," if ev.get("cat") in EMPIRE_CATS else "")
+              + "\"sources\":[{\"name\":\"...\",\"url\":\"https://...\"}]}") % (
               TODAY, plain(ev.get("catName") or ev.get("cat")), plain(ev.get("t")), plain(ev.get("date")), ev.get("y"), plain(ev.get("meta")),
               plain(ev.get("de")), blocks)
     ans = ask(instructions, prompt)
@@ -301,6 +311,8 @@ def study_one(ev):
         if re.match(r"^https://[^\s\"'<>]+$", url):
             st["sources"].append({"name": clean_str(src.get("name"), 120) or url, "url": url})
     ok = len(st["happened"]) >= 600 and len(st["background"]) >= 200 and len(st["matters"]) >= 150 and len(st["learn"]) >= 120 and len(st["sources"]) >= 1
+    if ev.get("cat") in EMPIRE_CATS: ok = ok and len(st["rise"]) >= 500 and len(st["fall"]) >= 500
+    else: st.pop("rise", None); st.pop("fall", None)
     if not ok:
         print("  rejected (too thin or no source):", ev.get("key"), {f: len(st[f]) for f in STUDY_FIELDS}, len(st["sources"]))
         return None
@@ -313,7 +325,7 @@ def run_studies(body):
     if not isinstance(items, dict): items = body["items"] = {}
     cleaned = sum(1 for st in items.values() if isinstance(st, dict) and scrub_study(st))   # studies written before the scrub
     if cleaned: print("studies: cleaned citations out of %d earlier studies" % cleaned); body["_seed_merged"] = TODAY
-    todo = [ev for ev in index if ev.get("key") and ev["key"] not in items]
+    todo = [ev for ev in index if ev.get("key") and (ev["key"] not in items or needs_rewrite(ev, items[ev["key"]]))]
     rank = {c: i for i, c in enumerate(CAT_ORDER)}
     todo.sort(key=lambda ev: (rank.get(ev.get("cat"), 99), ev.get("y") or 0))
     print("studies: %d of %d events still want a study; writing up to %d now" % (len(todo), len(index), PER_RUN))
@@ -331,10 +343,62 @@ def run_studies(body):
     print("studies: %d written this run; %d still to go" % (written, len(todo) - written))
     return written
 
+# ── the lands ───────────────────────────────────────────────────────────────
+def run_regions(body):
+    """The World, Place by Place: for each land in data/regions.js that has no long
+    history yet (or an older one than REGIONS_V), write one: era by era from the
+    earliest record to today, 1500-2500 words, with sources."""
+    REGIONS_V = 1
+    src = open(REGIONS_FILE, encoding="utf-8").read()
+    m = re.search(r"window\.LST_REGIONS = (\{.*\});\s*$", src, re.S)
+    tmp = os.path.join(FEED_DIR, "_regions.js"); open(tmp, "w", encoding="utf-8").write("const R=" + m.group(1) + ";console.log(JSON.stringify(R))")
+    R = json.loads(subprocess.check_output(["node", tmp]).decode()); os.remove(tmp)
+    items = body.setdefault("items", {})
+    if not isinstance(items, dict): items = body["items"] = {}
+    todo = [r for r in R["regions"] if not items.get(r["id"]) or int(items[r["id"]].get("v") or 0) < REGIONS_V]
+    print("regions: %d of %d lands want a history" % (len(todo), len(R["regions"])))
+    written = 0
+    for r in todo:
+        instructions = ("You write the history of a land for a family study library that sits beside a world timeline. " + TEXT_RULES +
+                        " The reader is a parent, often a member of The Church of Jesus Christ of Latter-day Saints, who will teach a child from it. "
+                        "Be accurate first, era by era, and honest about what is known, believed and debated. Use web search to check dates and names "
+                        "and to find sources a parent could open. Whole paragraphs, no markdown, no bullet characters, no links inside the prose.")
+        prompt = ("Today is %s. Write the history of this land from the earliest record we have to today: %s.\n"
+                  "The land, roughly: the region around latitude %s, longitude %s, covering %s.\n"
+                  "A short account already written, to expand and not contradict: %s\n\n"
+                  "Give 6 to 9 eras in order (for example 'Before writing', 'The first kingdoms', 'The age of empires', 'The coming of the gospel', "
+                  "'The middle centuries', 'Empires and colonies', 'The modern nation'), each with a name and 180-320 words of prose that tells what happened, "
+                  "who the peoples were, what they built and believed, how the land touched the Bible, the Book of Mormon or the church where it did, "
+                  "and what a family can learn. Finish with 3 to 6 real, openable https sources with name and url (encyclopedias, museums, universities, "
+                  "churchofjesuschrist.org, reputable histories); never invent a URL.\n"
+                  "Answer with JSON only: {\"eras\":[{\"era\":\"...\",\"text\":\"...\"}],\"sources\":[{\"name\":\"...\",\"url\":\"https://...\"}]}") % (
+                  TODAY, html.unescape(r["name"]), r["center"][0], r["center"][1], html.unescape(r.get("short") or r["name"]), html.unescape(r.get("intro") or ""))
+        try:
+            ans = ask(instructions, prompt)
+        except Exception as e:
+            print("  failed:", r["id"], str(e)[:160]); continue
+        eras = []
+        for e in (ans.get("eras") or [])[:9]:
+            if not isinstance(e, dict): continue
+            name = clean_str(e.get("era"), 80); text = scrub(e.get("text"))[:4000]
+            if name and len(text) >= 400: eras.append({"era": name, "text": text})
+        sources = []
+        for s2 in (ans.get("sources") or [])[:6]:
+            if not isinstance(s2, dict): continue
+            url = scrub_url(clean_str(s2.get("url"), 300))
+            if re.match(r"^https://[^\s\"'<>]+$", url): sources.append({"name": clean_str(s2.get("name"), 120) or url, "url": url})
+        if len(eras) < 5 or not sources:
+            print("  rejected (too thin or no source):", r["id"], len(eras), len(sources)); continue
+        items[r["id"]] = {"v": REGIONS_V, "on": TODAY, "name": html.unescape(r["name"]), "eras": eras, "sources": sources}
+        written += 1; print("  wrote:", r["id"], "-", len(eras), "eras,", sum(len(e["text"]) for e in eras), "characters,", len(sources), "sources")
+        body["version"] = int(body.get("version") or 0) + 1; body["updated"] = TODAY; write_row(body)
+    print("regions: %d written this run" % written)
+    return written
+
 # ── run ─────────────────────────────────────────────────────────────────────
 body = read_row()
 seeded = body.pop("_seed_merged", None) is not None
-changed = run_tech(body) if JOB == "tech" else run_studies(body) if JOB == "studies" else run_discoveries(body)
+changed = run_tech(body) if JOB == "tech" else run_studies(body) if JOB == "studies" else run_regions(body) if JOB == "regions" else run_discoveries(body)
 if changed or seeded or os.environ.get("FORCE_WRITE") == "1" or int(body.get("version") or 0) < 1:
     body["version"] = int(body.get("version") or 0) + 1
     body["updated"] = TODAY

@@ -5,6 +5,8 @@
 #                 Christ, each with its source and an honest confidence label
 #   four times    In-depth studies: one for every event in the Study Library that has
 #   a day         none yet (80 a run), until every event has one; then it is quick and quiet
+#   by hand       The lands: a long history of each of the seventeen lands of the globe,
+#                 era by era with sources (regions), and again whenever their seed changes
 # The result goes to the account (table timeline_feed) - the app's timeline reads it the
 # next time it opens - and a copy is kept in lantern/timeline-feed/ here, as its history.
 name: Timeline watch
@@ -19,7 +21,7 @@ on:
       job:
         description: 'Which search to run'
         type: choice
-        options: [tech, discoveries, studies]
+        options: [tech, discoveries, studies, regions]
         default: tech
 
 permissions:
