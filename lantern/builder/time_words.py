@@ -42,7 +42,7 @@ import uuid
 HERE = os.path.dirname(os.path.abspath(__file__))
 LANTERN = os.path.dirname(HERE)
 KEY = os.environ.get("ELEVENLABS_API_KEY", "").strip()
-MIN_HEARD = 0.6          # the share of the page's words Scribe must have heard
+MIN_HEARD = 0.5          # the share of the page's words Scribe must have heard
 
 
 # ---- the lines, as the app reads them ------------------------------------------------
