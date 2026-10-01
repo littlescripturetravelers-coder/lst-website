@@ -123,7 +123,7 @@ About 30 minutes later, TestFlight on both phones shows **Update**. Tap it.
 ---
 
 ## If something goes wrong
-- **"No bundle identifier" or "already in use":** open `app.config.ts` and change `com.lewisfamily.app` to something unique, like `com.levilewis.family`. Use the same new value for the app group too.
+- **"No bundle identifier" or "already in use":** open `app.json` and change `com.lewisfamily.app` to something unique, like `com.levilewis.family`. Use the same new value for the app group too.
 - **The build fails:** copy the red error text into Claude Code and say "fix this EAS build error."
 - **You can't sign in (no email):** check spam. In Supabase → Authentication → Providers, make sure **Email** is on.
 - **Siri or Alexa:** Siri shortcuts work automatically once the app is installed; try "What's on today in Lewis Family." Alexa is a separate setup in `alexa/README.md`, and you can do it later.

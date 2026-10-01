@@ -1,6 +1,6 @@
 // Mirrors today's Morning Lantern night from the lantern repo, then writes each family's couple study.
 // Nights publish to lantern/<slug>/night.json with publish_date; a night is for that day after 5 AM Mountain.
-import { admin, familyFor, loadFamily, ok, cors } from '../_shared/ctx.ts';
+import { admin, familyFor, loadFamily, ok, cors, isService } from '../_shared/ctx.ts';
 import { claude, text, json } from '../_shared/claude.ts';
 import { storyActivity } from '../_shared/story-activity.ts';
 const REPO = Deno.env.get('LANTERN_REPO') ?? 'littlescripturetravelers-coder/lst-website';
@@ -35,6 +35,6 @@ Deno.serve(async req => {
   const db = admin(); const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Denver' });
   const night = await syncNight(db, today);
   if (body.forMe) { const f = await familyFor(req); const [s, a] = night ? await Promise.all([study(f, night), storyActivity(f, night)]) : [null, null]; return ok({ night, study: s, activity: a }); }
-  if (body.study) { const { data: fams } = await db.from('families').select('id'); for (const x of fams || []) { const f = await loadFamily(db, x.id); await study(f, night).catch(console.error); await storyActivity(f, night).catch(console.error); } }
+  if (body.study) { if (!isService(req)) return ok({ error: 'forbidden' }, 403); const { data: fams } = await db.from('families').select('id'); for (const x of fams || []) { const f = await loadFamily(db, x.id); await study(f, night).catch(console.error); await storyActivity(f, night).catch(console.error); } }
   return ok({ night });
 });

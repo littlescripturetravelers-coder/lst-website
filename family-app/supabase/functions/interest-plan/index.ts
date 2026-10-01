@@ -1,6 +1,6 @@
 // Turns an interest into dated calendar events + reminders for the next ~90 days (recurring ones) or the next year (seasonal ones).
 // Seasonal items (hunting, fishing, camping, a team's games, a show's new season) are looked up by Claude for the family's state; items it isn't sure of are marked "confirm".
-import { admin, familyFor, loadFamily, ok, cors } from '../_shared/ctx.ts';
+import { admin, familyFor, loadFamily, ok, cors, isService, underLimit } from '../_shared/ctx.ts';
 import { claude, text, json } from '../_shared/claude.ts';
 async function plan(f: any, i: any) {
   await f.db.from('reminders').delete().eq('interest_id', i.id).eq('done', false);
@@ -18,10 +18,13 @@ Deno.serve(async req => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
   const b = await req.json().catch(() => ({}));
   if (b.all) { // monthly cron: keep every family's interests rolling forward
+    if (!isService(req)) return ok({ error: 'forbidden' }, 403);
     const db = admin(); const { data: list } = await db.from('interests').select('*');
     for (const i of list || []) { const f = await loadFamily(db, i.family_id); await plan(f, i).catch(console.error); }
     return ok({ ok: true });
   }
-  const f = await familyFor(req); const { data: i } = await f.db.from('interests').select('*').eq('id', b.id).single();
+  const f = await familyFor(req); const { data: i } = await f.db.from('interests').select('*').eq('id', b.id).eq('family_id', f.family.id).maybeSingle();
+  if (!i) return ok({ error: 'not found' }, 404);
+  if (!await underLimit(f.db, f.family.id, 'interest', 10)) return ok({ error: 'daily_limit' }, 429);
   return ok(await plan(f, i));
 });

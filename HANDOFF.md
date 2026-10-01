@@ -20,7 +20,7 @@ Codemagic, or app UI — that belongs in the app chat. Don't do it here.
 
 The **Family Management App** (Lewis Family, Expo/React Native) lives in `family-app/` in this repo
 but is **not** part of the website — `.vercelignore` keeps it off Vercel. See `family-app/README.md`
-and `family-app/TESTFLIGHT.md`; work on it from inside that folder (its own `CLAUDE.md` applies).
+and `family-app/TESTFLIGHT.md`; work on it from inside that folder. **Read `family-app/CLAUDE.md` first**: it holds Levi's working rules for the app (do it all yourself, keep costs near zero, no bugs, nothing else changes).
 
 Things that live in *both* worlds (Supabase, Payhip, Mailchimp) are documented below only to the
 extent the website touches them.

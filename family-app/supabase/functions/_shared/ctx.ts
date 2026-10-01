@@ -1,7 +1,14 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'npm:@supabase/supabase-js@2';
 export const cors = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization, content-type, x-client-info, apikey' };
 export const ok = (b: unknown, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { ...cors, 'content-type': 'application/json' } });
+/** True only for the scheduled jobs (cron), which call with the service-role key. Guards the run-for-every-family paths. */
+export const isService = (req: Request) => { const k = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY'); return !!k && req.headers.get('authorization') === 'Bearer ' + k; };
 export const admin = () => createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
+/** Daily per-family cap on AI calls so one family can't run up the bill. Returns false once the limit is reached. */
+export async function underLimit(db: ReturnType<typeof admin>, familyId: string, kind: string, limit: number) {
+  const { data } = await db.rpc('bump_ai_usage', { fid: familyId, k: kind, lim: limit });
+  return data !== false;
+}
 /** Resolves the caller (user JWT) to their family + members with CURRENT ages. */
 export async function familyFor(req: Request, userId?: string) {
   const db = admin();

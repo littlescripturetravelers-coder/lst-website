@@ -33,7 +33,7 @@ export async function lanternVerse(f: any) {
   return `Today's scripture is ${data.scripture}. ${data.study.says} ${me ? 'Your question today: ' + me.q : ''}`;
 }
 export async function askAnything(f: any, q: string) {
-  const r = await claude({ model: MODEL_FAST, max_tokens: 300, system: 'You are the Lewis family app speaking through a voice assistant. Answer in 2–3 short spoken sentences. ' + f.context.voice + ' Family: ' + JSON.stringify(f.context), messages: [{ role: 'user', content: q }] });
+  const r = await claude({ model: MODEL_FAST, max_tokens: 300, system: 'You are this family\u2019s family app speaking through a voice assistant. Answer in 2–3 short spoken sentences. ' + f.context.voice + ' Family: ' + JSON.stringify(f.context), messages: [{ role: 'user', content: q }] });
   return text(r);
 }
 // "tomorrow at 5", "friday", "october 21 at 7 pm", ISO from Alexa AMAZON.DATE / AMAZON.TIME

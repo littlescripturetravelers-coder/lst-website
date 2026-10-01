@@ -1,13 +1,13 @@
 // Financial advisor bot: Claude with tools over the family's real (Plaid-synced) data. Educational guidance, read-only access.
-import { familyFor, ok, cors } from '../_shared/ctx.ts';
+import { familyFor, ok, cors, underLimit } from '../_shared/ctx.ts';
 import { claude, text } from '../_shared/claude.ts';
 
-const SYSTEM = (ctx: any) => `You are the Lewis family's personal financial advisor inside their family app. Family: ${JSON.stringify(ctx)}.
+const SYSTEM = (ctx: any) => `You are this family's personal financial advisor inside their family app. Family: ${JSON.stringify(ctx)}.
 How you work:
 - Always look at their real data with the tools before answering. Use exact numbers and show simple math.
 - Give one clear recommendation and one next step they can do this week. Offer to save a plan.
-- Default philosophy: starter emergency fund, then pay off high-interest debt (snowball for motivation or avalanche for savings; say which saves more), then a 3–6 month fund, then retirement match, then the girls' education and other goals. Adjust to what they tell you they value.
-- Respect tithing and fast offerings as a fixed first line of the budget if they give them.
+- Default philosophy: starter emergency fund, then pay off high-interest debt (snowball for motivation or avalanche for savings; say which saves more), then a 3–6 month fund, then retirement match, then the children's education and other goals. Adjust to what they tell you they value.
+- If they give to their church (tithing, offerings), treat it as a fixed first line of the budget.
 - Warm, plain, no shame. You are educational, not a licensed fiduciary. For investments, taxes, insurance or legal decisions, say to confirm with a licensed professional. Never ask for passwords. You cannot move money.`;
 
 const tools = [
@@ -36,6 +36,7 @@ Deno.serve(async req => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
   const f = await familyFor(req); const { db, family } = f;
   const { message } = await req.json();
+  if (!await underLimit(db, family.id, 'advisor', 20)) return ok({ answer: 'You have reached today\u2019s limit for the money coach. It resets tomorrow.' });
   await db.from('advisor_messages').insert({ family_id: family.id, user_id: f.uid, role: 'user', content: message });
   const { data: hist } = await db.from('advisor_messages').select('role, content').eq('family_id', family.id).order('created_at', { ascending: false }).limit(16);
   const messages: any[] = (hist || []).reverse().map(m => ({ role: m.role, content: m.content }));

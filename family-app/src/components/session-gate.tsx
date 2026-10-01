@@ -5,11 +5,15 @@ import { Text } from './text';
 import { Button } from './button';
 import { useTheme } from '@/theme/theme-provider';
 import { router } from 'expo-router';
+import * as Linking from 'expo-linking';
 import { APP_NAME } from '@/lib/brand';
 /** Email magic-link sign in. Both parents sign in to the same family (see supabase/seed.sql). */
 export function SessionGate({ children }: { children: React.ReactNode }) {
   const { theme: t } = useTheme(); const [session, setSession] = useState<any>(undefined); const [email, setEmail] = useState(''); const [sent, setSent] = useState(false);
   useEffect(() => { if (!session) return; supabase.from('family_members').select('family_id, role').eq('user_id', session.user.id).maybeSingle().then(({ data }) => { if (!data) router.replace('/onboarding'); else if (data.role === 'daughter' || data.role === 'son') router.replace('/kid'); }); }, [session?.user?.id]);
+  // The emailed sign-in link opens the app as lewisfamily://#access_token=…&refresh_token=…; turn that into a session.
+  const url = Linking.useURL();
+  useEffect(() => { if (!url) return; const q = url.split('#')[1] ?? url.split('?')[1]; if (!q) return; const p = new URLSearchParams(q); const access_token = p.get('access_token'), refresh_token = p.get('refresh_token'); if (access_token && refresh_token) supabase.auth.setSession({ access_token, refresh_token }); }, [url]);
   useEffect(() => { supabase.auth.getSession().then(({ data }) => setSession(data.session)); const { data } = supabase.auth.onAuthStateChange((_e, s) => setSession(s)); return () => data.subscription.unsubscribe(); }, []);
   if (session === undefined) return null;
   if (session) return <>{children}</>;

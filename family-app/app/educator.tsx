@@ -16,6 +16,7 @@ const SHIM = (url: string, token: string, vars: Record<string, string>) => `
   for (const k in ${JSON.stringify(vars)}) document.documentElement.style.setProperty(k, ${JSON.stringify(vars)}[k]);
   async function sample(messages, opts){ opts = opts || {};
     const r = await fetch('${url}/functions/v1/educator', { method:'POST', headers:{ 'content-type':'application/json', Authorization:'Bearer ${token}' }, body: JSON.stringify({ messages, deep: opts.modelTier === 'complex' }), signal: opts.signal });
+    if (!r.ok) { let m = 'Something went wrong. Please try again.'; try { m = (await r.json()).message || m; } catch (_) {} opts.onText && opts.onText({ text: m }); return { text: m, truncated: false }; }
     const reader = r.body.getReader(), dec = new TextDecoder(); let buf = '', text = '', stop = null;
     while (true) { const { value, done } = await reader.read(); if (done) break; buf += dec.decode(value, { stream: true });
       let i; while ((i = buf.indexOf('\\n')) >= 0) { const line = buf.slice(0, i).trim(); buf = buf.slice(i + 1); if (!line.startsWith('data:')) continue;

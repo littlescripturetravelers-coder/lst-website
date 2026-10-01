@@ -19,7 +19,7 @@ export default function Interests() {
   const [who, setWho] = useState<string | null>(null); const [d, setD] = useState<any>({ title: '', kind: 'habit', every_days: 7, weekday: 6, at_time: '19:00', add_to_calendar: true, remind: true });
   const load = async () => family && setList((await supabase.from('interests').select('*').eq('family_id', family.id)).data || []);
   useEffect(() => { load(); }, [family?.id]);
-  const save = async () => { const { data } = await supabase.from('interests').insert({ ...d, family_id: family!.id, member_slug: who }).select().single(); setWho(null); await load(); if (data) await fn('interest-plan', { id: data.id }); };
+  const save = async () => { const { data } = await supabase.from('interests').insert({ ...d, family_id: family!.id, member_slug: who }).select().single(); setWho(null); await load(); if (data) await fn('interest-plan', { id: data.id }).catch(() => {}); };
   const remove = async (id: string) => { await supabase.from('interests').delete().eq('id', id); load(); }; // cascades to its reminders + events
   if (!family) return null;
   return <Screen title="What matters to us" trailing={<Text color={t.brand[500]} onPress={() => router.back()}>Done</Text>}>

@@ -57,7 +57,7 @@ Each spouse takes a 10-question quiz (`app/love-languages.tsx`), and the result 
   - faith content: Latter-day Saint, Christian (uses the Christian Lantern edition) or none (faith features are hidden)
 - **Copy adapts per family:** `src/lib/brand.ts` provides `familyTitle()`, `kidsLabel()` ("the girls", "the boys", "the kids" or one child's name) and pronouns.
 - **Before submitting:**
-  - Pick a store name and set it with `APP_NAME`, and change `bundleIdentifier`.
+  - Pick a store name (`name` and `extra.appName` in `app.json`) and, if needed, change `bundleIdentifier`.
   - Add Sign in with Apple (the email magic link is already in place).
   - Write a privacy policy that covers health, financial and child data.
   - Get Plaid production access, Anthropic production limits and Alexa certification.
@@ -91,7 +91,7 @@ Each spouse takes a 10-question quiz (`app/love-languages.tsx`), and the result 
 - **When you're ready to charge:**
   1. Add RevenueCat.
   2. Create one "family" entitlement with monthly and yearly products. The design reference shows placeholder prices and a 14-day trial.
-  3. Set `PAYWALL_ENABLED=true`.
+  3. Set `extra.paywallEnabled` to `true` in `app.json`.
 - One subscription covers both spouses, because the RevenueCat user ID is the `family_id`.
 - Early-access families are flagged, so you can give them a founding-family offer.
 - The paywall screen design is in `ui_kits/family-app/OnboardingScreen.jsx` (`PaywallScreen`).

@@ -8,17 +8,18 @@
       "distribution": "internal",
       "ios": {
         "simulator": false
+      },
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "https://uoqfjmgznzbbvzzaoyju.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvcWZqbWd6bnpiYnZ6emFveWp1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4MDY0MDksImV4cCI6MjEwNjM4MjQwOX0.g7marhqzm7mdzM4AUooDCLrLAiUaOoZG310tC85z7WU"
       }
     },
     "production": {
       "autoIncrement": true,
-      "ios": {
-        "resourceClass": "m-medium"
-      },
       "env": {
-        "APP_NAME": "Lewis Family"
-      },
-      "environment": "production"
+        "EXPO_PUBLIC_SUPABASE_URL": "https://uoqfjmgznzbbvzzaoyju.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvcWZqbWd6bnpiYnZ6emFveWp1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4MDY0MDksImV4cCI6MjEwNjM4MjQwOX0.g7marhqzm7mdzM4AUooDCLrLAiUaOoZG310tC85z7WU"
+      }
     }
   },
   "submit": {

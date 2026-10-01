@@ -20,7 +20,6 @@ create or replace function i_am_parent() returns boolean language sql stable sec
   select exists (select 1 from family_members where user_id = auth.uid() and role in ('dad','mom'))
 $$;
 do $$ declare t text; begin foreach t in array array['accounts','transactions','budgets','advisor_messages','money_plans','health_log','checkins','couple_studies','think_sessions','goals'] loop
-  execute format('drop policy if exists "family access" on %I', t);
-  execute format('create policy "parents only" on %I for all using (family_id in (select my_family_ids()) and i_am_parent()) with check (family_id in (select my_family_ids()) and i_am_parent())', t);
+  execute format('alter policy "family access" on %I using (family_id in (select my_family_ids()) and i_am_parent()) with check (family_id in (select my_family_ids()) and i_am_parent())', t);
 end loop; end $$;
 alter publication supabase_realtime add table home_task_log, kid_chores;

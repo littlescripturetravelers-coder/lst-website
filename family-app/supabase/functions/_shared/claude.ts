@@ -1,6 +1,7 @@
 // All AI goes through here. Model names are configurable so they can be upgraded without code changes.
+// Cost rule: every feature defaults to the low-cost model. Raise a model only with the owner's OK.
 const KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
-export const MODEL = Deno.env.get('CLAUDE_MODEL') ?? 'claude-sonnet-4-5';
+export const MODEL = Deno.env.get('CLAUDE_MODEL') ?? 'claude-haiku-4-5';
 export const MODEL_FAST = Deno.env.get('CLAUDE_MODEL_FAST') ?? 'claude-haiku-4-5';
 export type Msg = { role: 'user' | 'assistant'; content: any };
 export async function claude(opts: { system: string; messages: Msg[]; tools?: any[]; model?: string; max_tokens?: number; stream?: boolean }) {
