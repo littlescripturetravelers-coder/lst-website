@@ -147,13 +147,32 @@ def align(lines, heard, length=None):
     sm = difflib.SequenceMatcher(None, a, b, autojunk=False)
     first = {}                                  # line -> start of its first matched word
     matched = 0
+    hit = {}                                    # page word index -> heard word index
     for i, j, n in sm.get_matching_blocks():
         for k in range(n):
-            li = page[i + k][0]
-            st = flat[j + k][0]
+            hit[i + k] = j + k
             matched += 1
-            if li not in first or st < first[li]:
-                first[li] = st
+    line_first = {}                             # line -> index of its first page word
+    for idx, (li, _) in enumerate(page):
+        line_first.setdefault(li, idx)
+    for idx, (li, _) in enumerate(page):
+        if idx not in hit:
+            continue
+        j = hit[idx]
+        st = flat[j][0]
+        # The line's first word was misheard (sung words often are) and a later
+        # word of the line was the first to match: the line began at the heard
+        # word just before that match, when it is unmatched and close enough to
+        # be the same breath - not at the second or third word.
+        if idx != line_first[li]:
+            back = idx - line_first[li]        # how many page words of this line sit before the match
+            jj = j
+            while back > 0 and jj - 1 >= 0 and (jj - 1) not in hit.values() and flat[j][0] - flat[jj - 1][0] < 0.9 * back + 0.6:
+                jj -= 1
+                back -= 1
+            st = flat[jj][0]
+        if li not in first or st < first[li]:
+            first[li] = st
     share = matched / float(len(page))
     n = len(lines)
     starts = [None] * n
