@@ -225,9 +225,12 @@ jobs:
           POS=["children's bedtime lullaby","gentle acoustic accompaniment","no drums, no percussion",
                "clean and undistorted, plenty of headroom","slow and steady, the same tempo all the way through",
                "one melody carried through every verse, the chorus the same tune each time it returns",
-               "every word sung clearly, exactly as written, nothing added",voice]
+               "every word sung clearly, exactly as written, nothing added",
+               "one continuous, flowing performance from the first note to the last: smooth legato phrasing, "
+               "an even, unhurried pulse, soft and steady dynamics, each verse flowing into the next without a break or a jolt",voice]
           NEG=["drums","percussion","backing vocals","choir","duet","a second singer","a change of singer","distortion","clipping",
-               "loudness pushing","shouting","spoken word","rap","improvised words","scat singing","ad-libs","key change","tempo change"]
+               "loudness pushing","shouting","spoken word","rap","improvised words","scat singing","ad-libs","key change","tempo change",
+               "abrupt transitions","sudden stops","long silences between verses","a jump in volume","a change of arrangement"]
           def plan_full():
               secs=[]; budget=LENGTH-5000
               rest=[(n,l[:]) for n,l in sections]
@@ -245,6 +248,7 @@ jobs:
                   local=['sung softly, one line at a time, every word clear']
                   if name.startswith('Goodnight'): local.append('the chorus: a little fuller, the same tune each time it returns')
                   if i==0 and not song_id: local.append('a short instrumental opening, then the words')
+                  if i or song_id: local.append('flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt')
                   if i==len(rest)-1: local.append('settling and slowing, almost asleep, a soft instrumental close')
                   secs.append({'section_name':name[:100],'positive_local_styles':local,'negative_local_styles':[],'duration_ms':dur,'lines':lines})
               return {'positive_global_styles':POS,'negative_global_styles':NEG,'sections':secs}
@@ -368,10 +372,35 @@ jobs:
               ids={k:v for k,v in hd.items() if 'song' in k.lower() or 'request' in k.lower()}
               print('   got',len(audio),'bytes; ids:',ids); return audio
           best=None; uploaded_fix=None
+          def smoothness(path,tr):
+              """How smoothly a take runs: the silences between sung lines (a break of more
+              than 2.5 s is a stumble) and how much the level wanders between twenty-second
+              stretches (a jump in volume is a seam). Levi, 1 Oct 2026: 'it doesn't run smoothly'."""
+              segs=[sg for sg in tr.get('segments',[]) if sg.get('end',0)>sg.get('start',0)]
+              gaps=[segs[i]['start']-segs[i-1]['end'] for i in range(1,len(segs))]
+              stumbles=sum(1 for g in gaps if g>2.5); longest=max(gaps) if gaps else 0.0
+              levels=[]
+              try:
+                  total=float(subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0',path],capture_output=True,text=True).stdout.strip() or 0)
+                  t0=0.0
+                  while t0+10<total:
+                      out=subprocess.run(['ffmpeg','-v','info','-ss',str(t0),'-t','20','-i',path,'-af','volumedetect','-f','null','-'],capture_output=True,text=True).stderr
+                      mm=re.search(r'mean_volume:\s*(-?[\d.]+) dB',out)
+                      if mm: levels.append(float(mm.group(1)))
+                      t0+=20
+              except Exception as e:
+                  print('   level check skipped:',e)
+              wander=0.0
+              if len(levels)>2:
+                  mean=sum(levels)/len(levels); wander=(sum((x-mean)**2 for x in levels)/len(levels))**0.5
+              return {'stumbles':stumbles,'longest_gap':round(longest,1),'level_wander_db':round(wander,2),'stretches':len(levels)}
           def check_take(t,path):
               tr=transcribe(path); dur=tr.get('duration'); cov,rows=coverage(tr)
+              sm=smoothness(path,tr)
               fixed=[(ln,r) for lab,ln,st,r in rows if ln in FIX_LINES]
-              rep=[f'take {t}: {dur and round(dur)}s, {round(cov*100)}% of the {len(all_lines)} lines sung'+(('; the lines sung again: '+', '.join(f'{r}' for _,r in fixed)) if mode=='fix' else '')]
+              rep=[f'take {t}: {dur and round(dur)}s, {round(cov*100)}% of the {len(all_lines)} lines sung; '
+                   f'smoothness: {sm["stumbles"]} break(s) over 2.5 s (longest {sm["longest_gap"]} s), level wanders {sm["level_wander_db"]} dB across {sm["stretches"]} stretches'
+                   +(('; the lines sung again: '+', '.join(f'{r}' for _,r in fixed)) if mode=='fix' else '')]
               cur=None
               for lab,ln,st,r in rows:
                   if lab!=cur: rep.append('\n## '+lab); cur=lab
@@ -380,7 +409,10 @@ jobs:
               rep+=['[%6.1f-%6.1f] %s'%(s['start'],s['end'],s['text'].strip()) for s in tr.get('segments',[])]
               open(f'out/take-{t}-report.txt','w').write('\n'.join(rep))
               print(rep[0],flush=True)
-              return cov+(min(r for _,r in fixed) if (mode=='fix' and fixed) else 0), cov
+              # the words come first: a take that sings the song is worth 100 points per
+              # whole; then every stumble costs 2 and every decibel of wander costs 1
+              score=cov*100-2*sm['stumbles']-sm['level_wander_db']+(min(r for _,r in fixed) if (mode=='fix' and fixed) else 0)
+              return score, cov
           if mode=='check':
               found=sorted(glob.glob('out/take-*.mp3'))
               if not found: sys.exit('check mode: the earlier run left no take-*.mp3 in its artifact')
@@ -426,6 +458,21 @@ jobs:
           if best is None: sys.exit('no take was made')
           print(f'BEST take {best[1]} with {round(best[2]*100)}% of lines. Listen before publishing.')
           open('out/BEST.txt','w').write(f'take-{best[1]}.mp3 {round(best[2]*100)}%\n')
+          # THE WORDS KEEP TIME WITH THE SINGING: the second each line of the best take
+          # begins, counted as the app counts the lines (lantern/builder/time_words.py),
+          # saved beside the take for the app's own lullaby page.
+          try:
+              sys.path.insert(0,'lantern/builder'); import time_words as TW
+              L2={'chorus':re.sub(r'<[^>]+>','',L.get('chorus','')),
+                  'parts':[{'stanzas':[re.sub(r'<[^>]+>','',st) if st!='CHORUS' else 'CHORUS' for st in p['stanzas']]} for p in L['parts']]}
+              tlines=[html.unescape(x) for x in TW.lines_of(L2)]
+              heard=TW.scribe(f'out/take-{best[1]}.mp3')
+              starts,share=TW.align(tlines,heard,None) if heard else (None,0.0)
+              if starts and len(starts)==len(tlines):
+                  json.dump({'lines':len(tlines),'heard':round(share,3),'timing':starts},open('out/timing.json','w'))
+                  print(f'timed the best take: {len(tlines)} lines, {round(share*100)}% of the words found in order')
+              else: print('the best take could not be timed (words found: %d%%)' % round(share*100))
+          except Exception as e: print('timing skipped:',e)
           PY
       - uses: actions/upload-artifact@v4
         if: always()
@@ -445,7 +492,9 @@ jobs:
           cp "out/$best" audio/hush-little-traveler-full.mp3
           cp "out/${best%.mp3}-report.txt" lantern/lullaby-full-report.txt
           cp out/plan.json lantern/lullaby-full-plan.json
+          [ -f out/timing.json ] && cp out/timing.json lantern/lullaby-full-timing.json
           git add audio/hush-little-traveler-full.mp3 lantern/lullaby-full-report.txt lantern/lullaby-full-plan.json
+          [ -f lantern/lullaby-full-timing.json ] && git add lantern/lullaby-full-timing.json
           git -c commit.gpgsign=false commit -qm "The full lullaby: best take from run $GITHUB_RUN_ID"
           git push -f origin "$BR"
           echo "pushed $BR"
