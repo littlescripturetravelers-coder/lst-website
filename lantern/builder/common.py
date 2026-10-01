@@ -14,17 +14,17 @@ TAIL = '\n'.join(LINES[_T:])
 assert LINES[_H].strip() == '<div class="scroll-area">'
 assert LINES[_T].strip() == '</div><!-- /scroll-area -->'
 
-DATE = 'September 10, 2026'
-WEEK, NIGHT, STORY = 2, 9, 9
-TITLE = 'Wisdom, a Hidden Treasure'
-SLUG = 'wisdom-a-hidden-treasure'
-LULLABY_TITLE = 'The Treasure Hidden in My Heart'
-TRAVELER = 'Scout the Seeker'
-MOTTO = '"Look and see &mdash; what could it be?"'
-VIRTUE = 'Wisdom &amp; Seeking'                    # entity form, for card text
-VIRTUE_PLAIN = 'Wisdom & Seeking'                  # plain form, for window.LST_NIGHT
-SCRIPTURE_REF = 'Proverbs 2:4-5'                   # for window.LST_NIGHT
-NIGHT_ID = 'lst-ot-w02n09-wisdom-a-hidden-treasure-20260910'
+DATE = 'October 1, 2026'
+WEEK, NIGHT, STORY = 1, 1, 1
+TITLE = 'He Carries the Lambs'
+SLUG = 'he-carries-the-lambs'
+LULLABY_TITLE = 'Carried Close to His Heart'
+TRAVELER = 'Willow the Warm'
+MOTTO = '"Warm hugs, warm hearts!"'
+VIRTUE = 'Compassion &amp; Tenderness'                    # entity form, for card text
+VIRTUE_PLAIN = 'Compassion & Tenderness'                  # plain form, for window.LST_NIGHT
+SCRIPTURE_REF = 'Isaiah 40:11'                   # for window.LST_NIGHT
+NIGHT_ID = 'lst-ot-w01n01-he-carries-the-lambs-20261001'
 
 def ent(s):
     """Convert typographic Unicode to the entities the canonical file uses."""
@@ -93,11 +93,11 @@ def resources_card():
 '''
 
 STORY_PARAS = [
-    "Wise Solomon wanted everyone to have something wonderful called wisdom. Wisdom means knowing the good and right thing to do.",
-    "“Look for wisdom like you’re searching for hidden treasure!” Solomon said. “Dig for it, hunt for it — it’s more precious than gold and shiny jewels!”",
-    "How do we find this treasure? Solomon said to listen to Heavenly Father, and to listen to the wise grown-ups who love us, like our mom and dad.",
-    "“Pay attention, my child,” he wrote. “Keep my good words close, and you will grow wise and happy.”",
-    "Every time you listen and learn, you’re finding a little more treasure. Heavenly Father loves to help you grow wise, one good lesson at a time.",
+    "Long ago the people of Israel were tired and sad. Heavenly Father sent them a message, and it began with the softest word of all: Comfort.",
+    "Then a voice called out in the wilderness. Make the road straight, it said, for the Lord is coming.",
+    "Isaiah told the people how the Lord would come to them. Not with stomping feet. He would come like a shepherd walking slow among his sheep.",
+    "He gathers the lambs up in his arms, Isaiah said, and carries them close against his heart. The tired mother sheep he leads gently, never fast.",
+    "You are one of His little lambs. When your legs are too tired for one more step, He is the One who carries you.",
 ]
 
 def story_card():
@@ -109,11 +109,11 @@ def story_card():
   </div>
 '''
 
-TRAVELER_TEXT = "Scout fits tonight because Scout loves to search out good and wonderful things. In Scout’s world today: Scout wanted to build the tallest sandcastle but didn’t know how. Instead of giving up, Scout asked Grandpa, who knew a clever trick — wet sand sticks better! Scout listened, tried it, and built a mighty castle. Just like Solomon said to hunt for wisdom like treasure, Scout discovered that listening to wise helpers is like finding gold."
+TRAVELER_TEXT = "Willow fits tonight because comfort is her gift, and this story is Heavenly Father comforting His tired people. In Willow’s world today: her cousin cries when her block tower falls over. Willow does not fix it. She sits down close and pats her back until the crying goes quiet. Just like the Shepherd gathering the lambs in His arms, Willow learned that being held is the very first comfort."
 
 def traveler_card():
     return f'''
-  <div class="card card-wren trav-scout reveal">
+  <div class="card card-wren trav-willow reveal">
     <div class="card-label lbl-wren">&#9733; Scripture Traveler of the Night</div>
     <div class="traveler-center">
       <div class="traveler-name">{TRAVELER}</div>

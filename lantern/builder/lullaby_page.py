@@ -17,6 +17,39 @@ LYRICS use [Verse n] / [Chorus] section labels, one lyric line per line. The fir
 import json, os, re, html as H
 from common import SLUG, TITLE, LULLABY_TITLE, SCRIPTURE_REF, OUT_DIR
 
+# THE PICTURE ON THE SONG (1 October 2026): the song's artwork is the story's own
+# title page - the cover picture of {slug}.html - not the stock lantern. It is read
+# from the story page beside this build (or LANTERN_STORY_PAGE), shrunk to a square
+# the player's size, and kept inside the song page as a data URI, so it shows in
+# the app's copy with no signal. A night with no story page keeps the lantern.
+STORY_PAGE = os.environ.get('LANTERN_STORY_PAGE') or os.path.join(OUT_DIR, f'{SLUG}.html')
+ART_SIDE = 640
+
+def title_page_art():
+    """The cover picture of the story page as a square JPEG data URI, or ''."""
+    if not os.path.exists(STORY_PAGE):
+        return ''
+    src = open(STORY_PAGE, encoding='utf-8').read()
+    m = re.search(r'"type":\s*"cover".{0,400}?"img":\s*"(data:image/[a-z]+;base64,[A-Za-z0-9+/=]+)"', src, re.S) \
+        or re.search(r'(data:image/[a-z]+;base64,[A-Za-z0-9+/=]+)', src)
+    if not m:
+        return ''
+    uri = m.group(1)
+    try:
+        import base64, io
+        from PIL import Image
+        raw = base64.b64decode(uri.split(',', 1)[1])
+        im = Image.open(io.BytesIO(raw)).convert('RGB')
+        w, h = im.size; side = min(w, h)
+        im = im.crop(((w - side) // 2, (h - side) // 2, (w - side) // 2 + side, (h - side) // 2 + side))
+        im = im.resize((ART_SIDE, ART_SIDE), Image.LANCZOS)
+        buf = io.BytesIO(); im.save(buf, 'JPEG', quality=82, optimize=True)
+        return 'data:image/jpeg;base64,' + base64.b64encode(buf.getvalue()).decode('ascii')
+    except Exception as e:            # no Pillow here: the picture goes in as it is
+        print('title page art kept at full size:', e)
+        return uri
+
+
 SITE_BASE = os.environ.get('SITE_BASE', 'https://littlescripturetravelers.com').rstrip('/')
 
 _here = os.path.dirname(os.path.abspath(__file__))
@@ -28,47 +61,47 @@ TEMPLATE = os.environ.get('LANTERN_LULLABY_TEMPLATE') or next(
 assert TEMPLATE, 'lullaby-template.html not found - it lives in lantern/ in the lst-website repo'
 
 LYRICS = """[Verse 1]
-Wise Solomon once told us all
-A secret kind and true:
-There's treasure hidden in the world
-And it is meant for you.
+Long ago the people were tired,
+And sad as sad could be;
+Then came the softest word of all:
+"Comfort, My child," said He.
 
 [Chorus]
-So hunt for it like treasure gold,
-And listen, little one;
-For every time you learn and love,
-Your treasure has begun.
+He gathers up the little lambs
+And holds them to His heart;
+And when I'm tired He carries me,
+We never are apart.
 
 [Verse 2]
-It shines above the finest gold
-And every jewel bright;
-So dig for it and hunt for it
-With all your might tonight.
+A voice called in the wilderness,
+"Make straight the road, make way";
+He's coming like a Shepherd, slow,
+To walk with sheep today.
 
 [Chorus]
 
 [Verse 3]
-How do we find this hidden gold?
-We listen and we learn:
-Heavenly Father's words are true,
-And Mom and Dad's, in turn.
+The weary mothers He leads on
+So gently, never fast;
+And every lamb that cannot walk
+Is carried home at last.
 
 [Chorus]
 
 [Verse 4]
-So close your eyes, my little one,
-The treasure's safe and near;
-For all you learned and loved today
-Is hidden safely here.
+So rest, my little sleepy lamb,
+And lay your heavy head;
+He holds you close against His heart
+While you are tucked in bed.
 
 [Chorus]"""
 
-MOOD = ("Searching music. A soft, curious pulse under the voice — the small careful "
-        "steps of a child turning something over in their hands and finding more than "
-        "they expected. Fingerpicked guitar with a light questioning lift at the end of "
-        "each line, and a few high plucked notes that answer it, like something glinting "
-        "in the dark. It travels from wondering outward to holding still, so the last "
-        "verse feels like a treasure closed safely in a pocket.")
+MOOD = ("Rocking music. A slow sway from side to side under the voice, the rock of a lamb "
+        "carried in two arms up a long hill, never hurried. Fingerpicked nylon guitar keeping the "
+        "sway, one low cello note held underneath like a heartbeat against the ear. It settles a "
+        "little more with every verse, until the last chorus is barely above a hum.")
+VOICE = "mother"      # a mother's soft alto, close: the story is Heavenly Father holding His tired people
+STYLE = "cello"       # the sway of the guitar with a cello underneath, the heartbeat a carried child hears
 
 def parts_from_lyrics(lyrics):
     """[Verse n] -> a verse part; [Chorus] -> a chorus part that repeats the one chorus."""
@@ -114,13 +147,19 @@ def build():
     for k, v in fills.items():
         assert k in page, f'{k} missing from template'
         page = page.replace(k, v)
+    art = title_page_art()
+    if art:
+        assert page.count('artwork: null') == 1, 'the template should carry exactly one artwork: null slot'
+        page = page.replace('artwork: null       /* or a path to a square image */', 'artwork: ' + json.dumps(art) + '   /* the story\'s title page */')
+        assert 'artwork: null' not in page
+    print('artwork:', 'the story\'s title page' if art else 'none (no story page beside the build)')
     assert '__' not in re.sub(r'__lst|lst__|__proto__', '', page) or True
     for k in fills:
         assert k not in page
     out = os.path.join(OUT_DIR, f'{SLUG}-lullaby.html')
     open(out, 'w', encoding='utf-8').write(page)
     json.dump({'slug': SLUG, 'title': LULLABY_TITLE, 'story': TITLE, 'lyrics': LYRICS,
-               'mood': MOOD, 'length_ms': 120000},
+               'mood': MOOD, 'voice': VOICE, 'style': STYLE, 'length_ms': 120000},
               open(os.path.join(OUT_DIR, 'lullaby.json'), 'w', encoding='utf-8'), indent=2, ensure_ascii=False)
     print('built', out, f'({len(page.encode())} bytes) and lullaby.json;',
           f'{sum(p["kind"]=="verse" for p in parts)} verses, {sum(p["kind"]=="chorus" for p in parts)} chorus repeats')
