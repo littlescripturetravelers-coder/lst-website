@@ -9173,8 +9173,9 @@ if(!Array.isArray(SLF.tech.items)) SLF.tech.items=[];
 if(!Array.isArray(SLF.finds.items)) SLF.finds.items=[];
 /* the evidence of the Savior (data/atonement.js) belongs in the Evidence list too; it is kept whatever the account sends */
 function atnMergeFinds(){
-  try{ var A=window.LST_ATONEMENT; if(!A||!Array.isArray(A.finds)) return; var have={}; SLF.finds.items.forEach(function(it){ if(it&&it.id) have[it.id]=1; });
-    A.finds.forEach(function(f){ if(f&&f.id&&!have[f.id]){ SLF.finds.items.push(f); have[f.id]=1; } }); }catch(e){}
+  try{ var A=window.LST_ATONEMENT; if(!A||!Array.isArray(A.finds)) return; var have={}; SLF.finds.items.forEach(function(it){ if(it&&it.id) have[it.id]=it; });
+    A.finds.forEach(function(f){ if(!f||!f.id) return; var mine=have[f.id]; if(!mine){ SLF.finds.items.push(f); have[f.id]=f; return; }
+      for(var k in f){ if(f.hasOwnProperty(k)&&k!=="added") mine[k]=f[k]; } }); }catch(e){}
 }
 atnMergeFinds();
 function slfEsc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }

@@ -579,8 +579,8 @@ window.LST_ATONEMENT = {
  ],
  "finds": [
   {
-   "id": "jc-pilate-stone",
-   "y": 1961,
+   "id": "pilate-stone",
+   "y": 26,
    "date": "AD 26-36; found 1961",
    "t": "The Pilate Stone",
    "loc": "Caesarea Maritima, Israel (Israel Museum)",
@@ -602,7 +602,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-caiaphas",
-   "y": 1990,
+   "y": 36,
    "date": "AD 18-36; found 1990",
    "t": "The Caiaphas ossuary",
    "loc": "Jerusalem, Peace Forest (Israel Museum)",
@@ -623,8 +623,8 @@ window.LST_ATONEMENT = {
    "atone": "trials"
   },
   {
-   "id": "jc-yehohanan",
-   "y": 1968,
+   "id": "yehohanan",
+   "y": 30,
    "date": "1st century AD; found 1968",
    "t": "The crucified man of Giv'at ha-Mivtar",
    "loc": "Jerusalem, Giv'at ha-Mivtar (Israel Museum)",
@@ -667,8 +667,8 @@ window.LST_ATONEMENT = {
    "atone": "cross"
   },
   {
-   "id": "jc-nazareth-house",
-   "y": 2009,
+   "id": "nazareth-house",
+   "y": 30,
    "date": "1st century AD; found 2009",
    "t": "A house in Nazareth from the time of Jesus",
    "loc": "Nazareth, Israel",
@@ -689,8 +689,8 @@ window.LST_ATONEMENT = {
    "atone": "ground"
   },
   {
-   "id": "jc-capernaum",
-   "y": 1968,
+   "id": "capernaum",
+   "y": 30,
    "date": "1st century AD; excavated 1968-1986",
    "t": "Capernaum: the synagogue and Peter's house",
    "loc": "Capernaum, Sea of Galilee, Israel",
@@ -711,8 +711,8 @@ window.LST_ATONEMENT = {
    "atone": "ground"
   },
   {
-   "id": "jc-magdala",
-   "y": 2009,
+   "id": "magdala-stone",
+   "y": 30,
    "date": "1st century AD; found 2009",
    "t": "Magdala and the Magdala Stone",
    "loc": "Migdal, Sea of Galilee, Israel",
@@ -734,7 +734,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-galilee-boat",
-   "y": 1986,
+   "y": 30,
    "date": "c. 40 BC - AD 50; found 1986",
    "t": "The Sea of Galilee boat",
    "loc": "Kibbutz Ginosar, Israel (Yigal Allon Centre)",
@@ -755,8 +755,8 @@ window.LST_ATONEMENT = {
    "atone": "ground"
   },
   {
-   "id": "jc-bethesda",
-   "y": 1888,
+   "id": "bethesda",
+   "y": 30,
    "date": "1st century AD; excavated from 1888",
    "t": "The Pool of Bethesda with its five porches",
    "loc": "Jerusalem, near St Anne's Church",
@@ -777,8 +777,8 @@ window.LST_ATONEMENT = {
    "atone": "ground"
   },
   {
-   "id": "jc-siloam",
-   "y": 2004,
+   "id": "pool-of-siloam",
+   "y": 30,
    "date": "1st century AD; found 2004",
    "t": "The Pool of Siloam",
    "loc": "Jerusalem, City of David",
@@ -800,7 +800,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-sepulchre",
-   "y": 2016,
+   "y": 33,
    "date": "Tomb cut before AD 30; shrine since 326; opened 2016",
    "t": "The tomb in the Church of the Holy Sepulchre",
    "loc": "Jerusalem, Church of the Holy Sepulchre",
@@ -847,7 +847,7 @@ window.LST_ATONEMENT = {
    "atone": "witnesses"
   },
   {
-   "id": "jc-josephus",
+   "id": "josephus",
    "y": 93,
    "date": "c. AD 93-94",
    "t": "Josephus writes of Jesus",
@@ -869,7 +869,7 @@ window.LST_ATONEMENT = {
    "atone": "witnesses"
   },
   {
-   "id": "jc-tacitus",
+   "id": "tacitus",
    "y": 116,
    "date": "c. AD 116",
    "t": "Tacitus writes of Christus and Pilate",
@@ -913,8 +913,8 @@ window.LST_ATONEMENT = {
    "atone": "witnesses"
   },
   {
-   "id": "jc-p52",
-   "y": 150,
+   "id": "p52",
+   "y": 125,
    "date": "c. AD 125-175; identified 1934",
    "t": "The Rylands fragment: the oldest page of the New Testament",
    "loc": "Manchester, John Rylands Library",
@@ -1068,7 +1068,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-james-ossuary",
-   "y": 2002,
+   "y": 62,
    "date": "1st century box; inscription announced 2002",
    "t": "The James ossuary",
    "loc": "Jerusalem (private collection)",
@@ -1090,7 +1090,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-nazareth-inscription",
-   "y": 1878,
+   "y": 41,
    "date": "1st century; acquired 1878",
    "t": "The Nazareth Inscription: a Caesar's law against robbing tombs",
    "loc": "Paris (Bibliothèque nationale), said to be from Nazareth",
@@ -1111,8 +1111,8 @@ window.LST_ATONEMENT = {
    "atone": "ground"
   },
   {
-   "id": "jc-isaiah-scroll",
-   "y": 1947,
+   "id": "isaiah-scroll",
+   "y": -125,
    "date": "Copied about 125 BC; found 1947",
    "t": "The Great Isaiah Scroll: the suffering servant written down before Christ",
    "loc": "Qumran, by the Dead Sea (Shrine of the Book, Jerusalem)",
@@ -1138,7 +1138,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-gethsemane",
-   "y": 2020,
+   "y": 30,
    "date": "Trees dated 2012; ritual bath found 2020",
    "t": "Gethsemane: the old olive trees and the ritual bath",
    "loc": "Mount of Olives, Jerusalem",
@@ -1160,7 +1160,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-pilate-ring",
-   "y": 2018,
+   "y": 30,
    "date": "Found 1968-69 at Herodium; read 2018",
    "t": "The ring that may read 'of Pilate'",
    "loc": "Herodium, near Bethlehem",
@@ -1182,7 +1182,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-praetorium",
-   "y": 2000,
+   "y": 33,
    "date": "Pavement found 1857-64; palace excavations 1999-2000",
    "t": "Where Pilate judged Him: the Lithostrotos and Herod's palace",
    "loc": "Jerusalem, Via Dolorosa and the Kishle by the Tower of David",
@@ -1208,7 +1208,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-temple-warning",
-   "y": 1871,
+   "y": 20,
    "date": "Herod's Temple, before AD 70; found 1871",
    "t": "The Temple Warning inscription",
    "loc": "Jerusalem (Istanbul Archaeology Museums)",
@@ -1230,7 +1230,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-trumpeting",
-   "y": 1968,
+   "y": 70,
    "date": "Fell AD 70; found 1968",
    "t": "The Trumpeting Place stone: the Temple He said would fall",
    "loc": "Jerusalem, foot of the Western Wall (Israel Museum)",
@@ -1252,7 +1252,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-nazareth-courses",
-   "y": 1962,
+   "y": 300,
    "date": "3rd-4th century; found 1962",
    "t": "The Caesarea inscription naming Nazareth",
    "loc": "Caesarea Maritima, Israel",
@@ -1278,7 +1278,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-bethsaida",
-   "y": 2017,
+   "y": 30,
    "date": "1st century; excavations since 2016",
    "t": "El-Araj: finding Bethsaida, the town of Peter, Andrew and Philip",
    "loc": "El-Araj, north shore of the Sea of Galilee",
@@ -1300,7 +1300,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-banias",
-   "y": 1988,
+   "y": 29,
    "date": "City founded 2 BC; excavations since 1988",
    "t": "Caesarea Philippi: where Peter said 'Thou art the Christ'",
    "loc": "Banias, foot of Mount Hermon",
@@ -1322,7 +1322,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-jacobs-well",
-   "y": 2007,
+   "y": 28,
    "date": "Ancient well; church over it finished 2007",
    "t": "Jacob's Well at Sychar",
    "loc": "Balata, by Nablus, West Bank",
@@ -1344,7 +1344,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-alexander-ossuary",
-   "y": 1941,
+   "y": 33,
    "date": "1st century; found 1941",
    "t": "The ossuary of Alexander son of Simon",
    "loc": "Kidron Valley, Jerusalem (Israel Antiquities Authority)",
@@ -1388,7 +1388,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-golgotha-quarry",
-   "y": 1961,
+   "y": 33,
    "date": "Quarry 8th century BC to 1st century BC; excavated 1961-1980",
    "t": "Golgotha and the garden: the quarry under the Holy Sepulchre",
    "loc": "Church of the Holy Sepulchre, Jerusalem",
@@ -1414,7 +1414,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-garden-tomb",
-   "y": 1867,
+   "y": 1883,
    "date": "Tomb cut 8th-7th century BC; found 1867",
    "t": "The Garden Tomb and Gordon's Calvary",
    "loc": "Jerusalem, north of the Damascus Gate",
@@ -1436,7 +1436,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-akeldama-shroud",
-   "y": 2009,
+   "y": 30,
    "date": "1st century; tomb found 2000, published 2009",
    "t": "The Tomb of the Shroud: a real first-century burial cloth from Jerusalem",
    "loc": "Akeldama, Hinnom Valley, Jerusalem",
@@ -1480,7 +1480,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-dura",
-   "y": 1932,
+   "y": 240,
    "date": "About AD 232-256; found 1931-32",
    "t": "The Dura-Europos house church: the women at the tomb on a wall",
    "loc": "Dura-Europos, Syria (Yale University Art Gallery)",
@@ -1590,7 +1590,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-alexamenos",
-   "y": 1857,
+   "y": 200,
    "date": "About AD 200; found 1857",
    "t": "The Alexamenos graffito: a Roman mocks a crucified God",
    "loc": "Palatine Hill, Rome (Palatine Museum)",
@@ -1612,7 +1612,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-megiddo",
-   "y": 2005,
+   "y": 230,
    "date": "About AD 230; found 2005",
    "t": "The Megiddo mosaic: 'to God Jesus Christ'",
    "loc": "Megiddo, Israel (found under a prison)",
@@ -1634,7 +1634,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-p75",
-   "y": 1952,
+   "y": 200,
    "date": "Copied about AD 175-225; found 1952",
    "t": "The Bodmer papyri: Luke and John nearly whole",
    "loc": "Egypt (Vatican Library)",
@@ -1660,7 +1660,7 @@ window.LST_ATONEMENT = {
   },
   {
    "id": "jc-sinaiticus",
-   "y": 1844,
+   "y": 350,
    "date": "Written about AD 330-360; found 1844 and 1859",
    "t": "Codex Sinaiticus: the oldest complete New Testament",
    "loc": "St Catherine's Monastery, Sinai (British Library and others)",
