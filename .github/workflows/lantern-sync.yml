@@ -18,6 +18,11 @@ on:
   schedule:
     - cron: '*/30 * * * *'      # every 30 minutes (UTC)
   workflow_dispatch:            # lets you press "Run workflow" by hand
+    inputs:
+      time_slugs:
+        description: "Time the words of these songs again (slugs, comma-separated) - ElevenLabs Scribe, a few cents each"
+        required: false
+        default: ""
   push:                         # a night pushed straight into lantern/ publishes within a minute
     branches: [main]            # main only: a night is published from what is merged, never from a
     paths: ['lantern/**']       # working branch (the Action's own commits use GITHUB_TOKEN and do
@@ -445,6 +450,7 @@ jobs:
               out = os.path.join(os.path.dirname(p), f'{slug}-lullaby.mp3')
               if score_n == 0:
                   open(out, 'wb').write(audio)
+                  open('/tmp/lst-sung.txt', 'a').write(slug + '\n')   # the next step times its words
                   print(f'    sang {slug}: {len(audio)//1024} KB, words heard {facts.get("words_heard", "unchecked")} -> {out}')
               elif (facts.get('clipped_samples') or 0) > 20000:
                   # Past saving. A night is better with no song than with a broken one.
@@ -452,11 +458,29 @@ jobs:
                         f'({facts}). The night publishes without a song; ask again and it will try afresh.')
               else:
                   open(out, 'wb').write(audio)
+                  open('/tmp/lst-sung.txt', 'a').write(slug + '\n')
                   print(f'    kept the best of {ATTEMPTS} for {slug}, but listen to it: '
                         + '; '.join(reasons) + f' -> {out}')
           if refused:
               print(f'{len(refused)} not sung this run (asked for again next run): ' + ', '.join(refused))
           EOF
+
+      # THE WORDS KEEP TIME WITH THE SINGING (Levi, 1 Oct 2026). The app lights
+      # each line as it is sung; a sung song keeps no clock, so every song just
+      # sung is listened to once by ElevenLabs Scribe and the second each line
+      # begins is written into its page (LULLABY.timing) and its lullaby.json.
+      # Also times a night for today or tomorrow that was sung but never timed
+      # (Scribe was busy), and any song named by hand when the run is started.
+      # A song whose words Scribe cannot find is left as it was - never broken.
+      # A few cents of ElevenLabs credit per song, only for songs sung this run.
+      - name: Time the words of every song sung
+        if: ${{ !cancelled() }}
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          TIME_SLUGS: ${{ github.event.inputs.time_slugs }}
+        run: |
+          touch /tmp/lst-sung.txt
+          python3 lantern/builder/time_words.py --from-file /tmp/lst-sung.txt --today ${TIME_SLUGS:+"$TIME_SLUGS" --force}
 
       # The story lullabies' catalogue (data/story-lullabies.js) says which of
       # them have a recording yet; a song just sung is marked here. No credits.
