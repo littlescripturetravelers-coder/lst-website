@@ -60,7 +60,7 @@
 
   /* WHICH EDITION OF THE LANTERN THIS FAMILY GETS.
 
-     The Lantern now comes in five voices — see data/faiths.js. Asking here is
+     The Lantern comes in two editions, the same two the app offers — see data/faiths.js. Asking here is
      the only chance we get, because it changes what arrives the very next
      morning.
 

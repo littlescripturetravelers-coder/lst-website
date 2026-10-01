@@ -313,60 +313,25 @@
        time (book_html, song_html, song_audio_url). A star never goes stale. */
     tonight: function () {
       if (!ready()) return Promise.resolve(null);
-      var tries = editionOrder();
-      function ask(i) {
-        if (i >= tries.length) return Promise.resolve(null);
-        var q = sb().from("daily_content").select("*")
-          .not("published_at", "is", null)
-          .lte("publish_date", today())
-          .eq("faith", tries[i])
-          .order("publish_date", { ascending: false })
-          .limit(1);
-        return q.then(function (res) {
-          /* A database that has not had the faith migration yet answers with
-             an error about the column. Ask again without it rather than
-             showing a family nothing. */
-          if (res.error) return i === 0 ? plainTonight() : null;
+      /* One row per night carries both editions (story_html, story_html_nondenom),
+         exactly as the app reads them; fromFullRow picks the family's own. */
+      return sb().from("daily_content").select("*")
+        .not("published_at", "is", null)
+        .lte("publish_date", today())
+        .order("publish_date", { ascending: false })
+        .limit(1)
+        .then(function (res) {
+          if (res.error) throw new Error(res.error.message);
           var row = (res.data || [])[0];
-          if (row) return archive.fromFullRow(row);
-          return ask(i + 1);
+          return row ? archive.fromFullRow(row) : null;
         });
-      }
-      function plainTonight() {
-        return sb().from("daily_content").select("*")
-          .not("published_at", "is", null)
-          .lte("publish_date", today())
-          .order("publish_date", { ascending: false })
-          .limit(1)
-          .then(function (res) {
-            if (res.error) throw new Error(res.error.message);
-            var row = (res.data || [])[0];
-            return row ? archive.fromFullRow(row) : null;
-          });
-      }
-      return ask(0);
     },
 
     /* One night in full — the two big HTML columns included. Fetched only
        when somebody actually opens that night. */
     full: function (date) {
       if (!ready() || !date) return Promise.resolve(null);
-      /* The family's own edition of this night, falling back the same way
-         tonight() does — a night that exists beats the right voice. */
-      var tries = editionOrder();
-      function ask(i) {
-        if (i >= tries.length) return plain();
-        return sb().from("daily_content").select("*")
-          .eq("publish_date", date)
-          .eq("faith", tries[i])
-          .not("published_at", "is", null)
-          .limit(1)
-          .then(function (res) {
-            if (res.error) return i === 0 ? plain() : null;
-            var row = (res.data || [])[0];
-            return row ? archive.fromFullRow(row) : ask(i + 1);
-          });
-      }
+      /* The family's own edition is a column of the night's one row; fromFullRow picks it. */
       function plain() {
         return sb().from("daily_content").select("*")
           .eq("publish_date", date)
@@ -378,14 +343,17 @@
             return row ? archive.fromFullRow(row) : null;
           });
       }
-      return ask(0);
+      return plain();
     },
 
     /* Everything a night carries. Named the same way the app names it, so
        the two files can be read side by side. */
     fromFullRow: function (r) {
       var n = archive.fromRow(r);
-      n.html = r.story_html || "";
+      /* THE EDITION, as the app chooses it: a Christian family reads the night's
+         Christian edition when it was written, and the Latter-day Saint one -
+         the edition that has always existed - when it was not. */
+      n.html = (faithNow() === "nondenom" && r.story_html_nondenom) ? r.story_html_nondenom : (r.story_html || "");
       n.bookHtml = r.book_html || "";
       n.songHtml = r.song_html || "";
       n.songAudio = r.song_audio_url || "";
@@ -475,13 +443,12 @@
 
 
   /* ------------------------------------------------------ THE EDITION
-     The Morning Lantern comes in five voices now (data/faiths.js). Which one
-     a family gets is `profiles.faith`; which one a night IS is
-     `daily_content.faith`. See sql/2026-08-28-faith-editions.sql.
+     The Morning Lantern comes in two editions (data/faiths.js), the same two
+     the app offers. Which one a family gets is `profiles.faith`; a night
+     carries both in its one row (story_html, story_html_nondenom).
 
      ⚠️ A FAMILY MUST NEVER BE SHOWN AN EMPTY PAGE BECAUSE THEIR EDITION IS NOT
-     WRITTEN YET. Levi is publishing five editions from one admin screen and
-     they will not always land together. So every read asks for the family's
+     WRITTEN YET. The Christian edition is not always written for every night. So every read asks for the family's
      own edition first and falls back to the one that has always existed. A
      Catholic family on a night with no Catholic edition gets the Latter-day
      Saint one, which is a real Lantern, rather than nothing at all.
@@ -496,6 +463,8 @@
 
   function knownFaith(v) {
     var list = window.LST_FAITHS || [];
+    var alias = window.LST_FAITH_ALIAS || {};
+    v = alias[v] || v;                 /* an older answer reads the edition it maps to */
     for (var i = 0; i < list.length; i++) if (list[i].id === v) return v;
     return "";
   }
@@ -532,7 +501,7 @@
     myFaith = knownFaith(v) || faithDefault();
     try { localStorage.setItem(FAITH_KEY, myFaith); } catch (e) {}
     if (!c || !u || !u.id) return Promise.resolve(myFaith);
-    return c.from("profiles").upsert({ id: u.id, faith: knownFaith(v) ? v : null })
+    return c.from("profiles").upsert({ id: u.id, faith: knownFaith(v) || null })
       .then(function () { return myFaith; })
       .catch(function () { return myFaith; });
   }

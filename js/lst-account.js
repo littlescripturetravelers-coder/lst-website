@@ -44,7 +44,7 @@
   /* WHICH EDITION OF THE LANTERN THIS FAMILY GETS.
 
      Asked at signup, changeable here — because a family who answered in a
-     hurry, or joined before there were five editions, should not be stuck with
+     hurry, or joined before there were two editions, should not be stuck with
      the wrong voice. It changes what arrives tomorrow morning, nothing else:
      not the price, not what they may read. */
   function faithPicker() {
