@@ -749,7 +749,7 @@ window.LST_ATONEMENT = {
    "sources": [
     {
      "name": "Wikipedia: Ancient Galilee Boat",
-     "url": "https://en.wikipedia.org/wiki/Ancient_Galilee_boat"
+     "url": "https://en.wikipedia.org/wiki/Ancient_Galilee_Boat"
     }
    ],
    "atone": "ground"
@@ -1200,8 +1200,8 @@ window.LST_ATONEMENT = {
      "url": "https://en.wikipedia.org/wiki/Herod%27s_Palace_(Jerusalem)"
     },
     {
-     "name": "Wikipedia: Ecce Homo Arch",
-     "url": "https://en.wikipedia.org/wiki/Ecce_Homo_Arch"
+     "name": "Wikipedia: Antonia Fortress",
+     "url": "https://en.wikipedia.org/wiki/Antonia_Fortress"
     }
    ],
    "atone": "trials"
@@ -1266,8 +1266,12 @@ window.LST_ATONEMENT = {
    "scripture": "Luke 2:39,51; Matthew 2:23; John 1:45-46",
    "sources": [
     {
-     "name": "Wikipedia: Caesarea Inscription",
-     "url": "https://en.wikipedia.org/wiki/Caesarea_Inscription"
+     "name": "Wikipedia: Nazareth",
+     "url": "https://en.wikipedia.org/wiki/Nazareth"
+    },
+    {
+     "name": "Wikipedia: Caesarea Maritima",
+     "url": "https://en.wikipedia.org/wiki/Caesarea_Maritima"
     }
    ],
    "atone": "ground"
