@@ -748,8 +748,12 @@ window.LST_ATONEMENT = {
    "scripture": "Mark 4:35-41; Luke 5:1-11; John 21:1-14",
    "sources": [
     {
-     "name": "Wikipedia: Ancient Galilee Boat",
-     "url": "https://en.wikipedia.org/wiki/Ancient_Galilee_Boat"
+     "name": "Wikipedia: Sea of Galilee Boat",
+     "url": "https://en.wikipedia.org/wiki/Sea_of_Galilee_Boat"
+    },
+    {
+     "name": "Wikipedia: Ginosar, where the boat is kept",
+     "url": "https://en.wikipedia.org/wiki/Ginosar"
     }
    ],
    "atone": "ground"
