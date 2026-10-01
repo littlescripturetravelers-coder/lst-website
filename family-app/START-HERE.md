@@ -2,7 +2,7 @@
 
 The same guide, with copy buttons and tick boxes: https://claude.ai/artifact/79QEfgCeMZBaWE1WtMS2z9
 
-Claude already built the app, set up the database and turned on the server helpers. These are the only steps that need you. Do them in order, one at a time. Tap Copy, paste, then press Return. If you ever see red words, copy them into Claude and say "please fix this."
+Claude already built the app, set up the database and turned on the server helpers. These are the only steps that need you. Do them in order, one at a time. Tap Copy, paste into Command Prompt (right-click pastes), then press Enter. If you ever see red words, copy them into Claude and say "please fix this."
 
 Think of it like a bakery:
 - **Pantry:** Supabase holds your family's information (already stocked).
@@ -47,26 +47,27 @@ About 5 minutes. Costs $5 one time, and it lasts a long time.
    ```
 5. Can't spend $5 right now? Skip this part. The app still works: calendar, reminders, chores, health and family. Only the AI ideas and studies stay empty until you add the key.
 
-## Part 3: Get your Mac ready
+## Part 3: Get your computer ready
 
-About 15 minutes, one time only.
+About 15 minutes, one time only. Written for Windows.
 
-1. Go to nodejs.org and click the big green Get Node.js button. On the next page leave the choices as they are (it picks v24, the LTS one), scroll down a little and click macOS Installer (.pkg). Open the downloaded file from your Downloads folder and click Continue, Continue, Agree, Install. Type your Mac password if it asks. Then check it worked in Terminal (press Command + Space, type Terminal, press Return): this should show something like v24.21.0.
+1. Go to nodejs.org and click the big green Get Node.js button. Halfway down the next page, click Windows Installer (.msi), not the Docker box. Open the downloaded file from your Downloads folder. Click Next, tick "I accept the terms", and keep clicking Next. Leave "Tools for Native Modules" unticked. Click Install, click Yes if Windows asks, then Finish.
+2. Open Command Prompt: press the Windows key, type cmd, press Enter. A black window opens. Type this and press Enter. It should show something like v24.21.0.
    ```
    node -v
    ```
-2. Go to desktop.github.com, download GitHub Desktop, open it and sign in.
-3. In GitHub Desktop, click File, then Clone repository. Pick lst-website and click Clone.
-4. At the top, click Current branch and pick claude/compassionate-keller-5hmdld. (After this work is merged, pick main instead.)
-5. Open Terminal: press Command + Space, type Terminal, press Return. Then install Expo's tool:
+3. Go to desktop.github.com, download GitHub Desktop, open it and sign in.
+4. In GitHub Desktop, click File, then Clone repository. Pick lst-website and click Clone. (Leave the folder it suggests as it is.)
+5. At the top, click Current branch and pick claude/compassionate-keller-5hmdld. (After this work is merged, pick main instead.)
+6. Back in Command Prompt, install Expo's tool:
    ```
    npm install -g eas-cli
    ```
-6. Walk into the app folder:
+7. Walk into the app folder:
    ```
-   cd ~/Documents/GitHub/lst-website/family-app
+   cd %USERPROFILE%\Documents\GitHub\lst-website\family-app
    ```
-7. Unpack the app's parts (takes a minute or two):
+8. Unpack the app's parts (takes a minute or two):
    ```
    npm install
    ```
@@ -75,7 +76,7 @@ About 15 minutes, one time only.
 
 About 30 minutes, mostly waiting. Expo's free plan.
 
-1. Log in to Expo with the same email and password you use on expo.dev:
+1. In the same Command Prompt window, log in to Expo with the same email and password you use on expo.dev:
    ```
    eas login
    ```
@@ -137,3 +138,4 @@ The bakery is open.
 - Morning Lantern studies need one more key so the app can read tonight's story from your private website repo. Claude will walk you through it when you're ready.
 - No sign-in email? Check spam. Supabase's free email sends only a few per hour, so wait a bit before trying again.
 - "Bundle identifier already in use": tell Claude, and it changes it for you.
+- If you close Command Prompt, open it again and run the "Walk into the app folder" line before any other command.
