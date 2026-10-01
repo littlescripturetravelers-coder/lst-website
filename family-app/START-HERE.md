@@ -51,7 +51,10 @@ About 5 minutes. Costs $5 one time, and it lasts a long time.
 
 About 15 minutes, one time only.
 
-1. Go to nodejs.org and download the button that says LTS. Open it and click Continue until it's done.
+1. Go to nodejs.org and click the big green Get Node.js button. On the next page leave the choices as they are (it picks v24, the LTS one), scroll down a little and click macOS Installer (.pkg). Open the downloaded file from your Downloads folder and click Continue, Continue, Agree, Install. Type your Mac password if it asks. Then check it worked in Terminal (press Command + Space, type Terminal, press Return): this should show something like v24.21.0.
+   ```
+   node -v
+   ```
 2. Go to desktop.github.com, download GitHub Desktop, open it and sign in.
 3. In GitHub Desktop, click File, then Clone repository. Pick lst-website and click Clone.
 4. At the top, click Current branch and pick claude/compassionate-keller-5hmdld. (After this work is merged, pick main instead.)
