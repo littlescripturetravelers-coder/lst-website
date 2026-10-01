@@ -12,7 +12,8 @@ Levi Lewis owns this app and is not technical. I am his developer.
   4. For server functions, run `npx deno check --no-lock supabase/functions/<name>/index.ts` for each one touched, and redeploy every function that imports a changed `_shared` file.
   5. For the database, add a new numbered migration (never edit an applied one), apply it, then run Supabase's security advisor.
   6. Re-read the full diff looking for anything that changes other behaviour; undo it.
-  7. Tell Levi plainly what changed and what he has to do (usually: nothing, or "tap Update in TestFlight").
+  7. Pages and guides I publish for Levi (like the setup guide artifact) get opened in a test browser (Playwright, phone width) before publishing: words visible, no script errors, no sideways scrolling.
+  8. Tell Levi plainly what changed and what he has to do (usually: nothing, or "tap Update in TestFlight").
 - **Keep costs as low as possible. He has no money right now.**
   - AI defaults to the cheapest model (`claude-haiku-4-5` in `_shared/claude.ts`). Don't raise it without his OK.
   - Every AI path has a per-family daily cap (`underLimit()` in `_shared/ctx.ts`, counted in `ai_usage`): educator 30, advisor 20, interest-plan 10, voice 40, and at most 3 rounds of daily ideas. Keep a cap on any new AI feature.
