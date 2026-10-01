@@ -71,15 +71,12 @@ def hero(depth_note, verse_ref_html):
   </div>
 '''
 
+# THE BUTTON ORDER (Levi, 1 October 2026): tonight's lullaby, then tonight's story, then the Lantern Lullaby.
 def resources_card():
     return f'''
   <div class="toolkit-card pinned-card">
     <div class="toolkit-label">&#127769; Tonight's Resources</div>
     <div class="toolkit-grid">
-      <a class="toolkit-btn" href="travelers-lullaby.html" target="_blank">
-        <div class="toolkit-icon">&#127926;</div>
-        <div><div class="toolkit-title">The Lantern Lullaby &mdash; Lyrics &amp; Music</div><div class="toolkit-sub">Our signature Old Testament lullaby</div></div>
-      </a>
       <a class="toolkit-btn" href="{SLUG}-lullaby.html" target="_blank">
         <div class="toolkit-icon">&#127925;</div>
         <div><div class="toolkit-title">Tonight's Lullaby &mdash; Lyrics &amp; Music</div><div class="toolkit-sub">{LULLABY_TITLE}</div></div>
@@ -87,6 +84,10 @@ def resources_card():
       <a class="toolkit-btn toolkit-btn-primary" href="{SLUG}.html" target="_blank">
         <div class="toolkit-icon">&#128214;</div>
         <div><div class="toolkit-title">Tonight's Story</div><div class="toolkit-sub">Week {WEEK} &middot; Night {NIGHT} &middot; {TITLE}</div></div>
+      </a>
+      <a class="toolkit-btn" href="travelers-lullaby.html" target="_blank">
+        <div class="toolkit-icon">&#127926;</div>
+        <div><div class="toolkit-title">The Lantern Lullaby &mdash; Lyrics &amp; Music</div><div class="toolkit-sub">Our signature Old Testament lullaby</div></div>
       </a>
     </div>
   </div>
