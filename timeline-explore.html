@@ -180,6 +180,55 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 .gl-mode.on{border-color:#D9A227;color:#F5C518;background:rgba(217,162,39,.14);}
 .gl-cap{font-family:Nunito,sans-serif;font-size:10.5px;line-height:1.55;color:rgba(255,255,255,.6);padding:6px 2px 10px;}
 .gl-cap b{color:#fff;}
+/* JESUS CHRIST AND HIS ATONEMENT */
+#atn-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:612;background:rgba(2,5,15,.97);backdrop-filter:blur(16px);flex-direction:column;animation:mopen .22s ease;}
+#atn-panel.open{display:flex;}
+#atn-hdr{flex-shrink:0;background:linear-gradient(135deg,rgba(245,197,24,.14),rgba(6,13,30,.99) 60%);border-bottom:2px solid rgba(245,197,24,.55);padding:12px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+#atn-title{font-family:Fredoka,sans-serif;font-weight:700;font-size:19px;color:#F5C518;text-shadow:0 0 22px rgba(245,197,24,.45);}
+#atn-sub{font-size:9px;color:rgba(255,255,255,.38);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+#atn-intro{font-size:10.5px;color:rgba(255,255,255,.6);margin-top:5px;line-height:1.5;max-width:600px;font-family:Nunito,sans-serif;}
+#atn-close{background:rgba(255,255,255,.08);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#atn-nav{flex-shrink:0;display:flex;gap:5px;overflow-x:auto;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.08);-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+#atn-nav::-webkit-scrollbar{display:none;}
+.atn-chip{flex-shrink:0;font-family:Nunito,sans-serif;font-weight:800;font-size:9.5px;padding:5px 10px;border-radius:99px;border:1px solid rgba(245,197,24,.35);background:rgba(245,197,24,.07);color:#F5C518;cursor:pointer;white-space:nowrap;}
+.atn-chip.ev{border-color:rgba(91,211,220,.45);background:rgba(91,211,220,.08);color:#5BD3DC;}
+.atn-chip.sc{border-color:rgba(167,139,250,.45);background:rgba(167,139,250,.08);color:#C4B5FD;}
+#atn-body{flex:1;overflow-y:auto;padding:10px 14px calc(var(--safeb) + 70px);-webkit-overflow-scrolling:touch;}
+.atn-h{font-family:Fredoka,sans-serif;font-weight:600;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#F5C518;margin:18px 2px 8px;}
+.atn-part{border-radius:14px;padding:12px 13px;margin-bottom:10px;border:1px solid rgba(245,197,24,.22);background:rgba(245,197,24,.04);}
+.atn-part h3{font-family:Fredoka,sans-serif;font-weight:700;font-size:15px;color:#fff;margin:0 0 6px;display:flex;gap:8px;align-items:center;}
+.atn-part p{font-family:Nunito,sans-serif;font-size:11.5px;line-height:1.66;color:rgba(255,255,255,.86);margin:0 0 7px;}
+.atn-sc{border-left:3px solid #A78BFA;background:rgba(167,139,250,.07);border-radius:0 10px 10px 0;padding:7px 10px;margin:7px 0;}
+.atn-sc b{display:block;font-family:Fredoka,sans-serif;font-weight:600;font-size:11px;color:#C4B5FD;margin-bottom:2px;}
+.atn-sc i{font-family:Nunito,sans-serif;font-size:11px;line-height:1.6;color:rgba(255,255,255,.8);font-style:italic;}
+.atn-part-ev{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.atn-part-ev span{font-family:Nunito,sans-serif;font-weight:800;font-size:9px;padding:4px 9px;border-radius:99px;border:1px solid rgba(91,211,220,.4);background:rgba(91,211,220,.08);color:#5BD3DC;cursor:pointer;}
+.atn-rule{font-family:Nunito,sans-serif;font-size:10.5px;line-height:1.55;color:#F5C518;background:rgba(245,197,24,.07);border:1px solid rgba(245,197,24,.3);border-radius:10px;padding:8px 10px;margin-bottom:10px;}
+.atn-filters{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;}
+.atn-f{font-family:Nunito,sans-serif;font-weight:800;font-size:9px;padding:4px 9px;border-radius:99px;border:1px solid rgba(255,255,255,.22);background:transparent;cursor:pointer;color:rgba(255,255,255,.75);}
+.atn-f.on{background:rgba(255,255,255,.14);color:#fff;}
+.atn-ev{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:14px;padding:10px 12px;margin-bottom:8px;cursor:pointer;}
+.atn-ev.open{border-color:rgba(91,211,220,.45);background:rgba(91,211,220,.04);cursor:default;}
+.atn-ev h4{font-family:Fredoka,sans-serif;font-weight:700;font-size:13.5px;color:#fff;margin:0;display:flex;align-items:flex-start;gap:8px;}
+.atn-ev h4 .atn-em{flex-shrink:0;}
+.atn-when{font-family:Nunito,sans-serif;font-size:9.5px;color:rgba(255,255,255,.5);margin:3px 0 4px;}
+.atn-ev .atn-det{margin-top:8px;}
+.atn-ev .atn-det p{font-family:Nunito,sans-serif;font-size:11px;line-height:1.62;color:rgba(255,255,255,.84);margin:0 0 6px;}
+.atn-k{display:block;font-family:Nunito,sans-serif;font-size:8px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#5BD3DC;margin:8px 0 2px;}
+.atn-k.gold{color:#F5C518;} .atn-k.green{color:#34D399;} .atn-k.purple{color:#C4B5FD;}
+.atn-conf{display:inline-block;font-family:Nunito,sans-serif;font-size:8.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px;border:1px solid;white-space:nowrap;}
+.atn-conf.dc{color:#34D399;border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.12);}
+.atn-conf.db{color:#FBBF24;border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.12);}
+.atn-conf.dd{color:#F87171;border-color:rgba(248,113,113,.5);background:rgba(248,113,113,.12);}
+.atn-gather{border-radius:12px;padding:10px 12px;margin-bottom:8px;border:1px solid rgba(167,139,250,.25);background:rgba(167,139,250,.05);}
+.atn-gather h4{font-family:Fredoka,sans-serif;font-weight:700;font-size:12.5px;color:#C4B5FD;margin:0 0 6px;}
+.atn-refs{display:flex;flex-wrap:wrap;gap:4px;}
+.atn-refs span{font-family:Nunito,sans-serif;font-weight:700;font-size:9.5px;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.1);}
+.atn-btn{display:inline-block;margin:8px 6px 0 0;padding:8px 14px;border-radius:99px;border:0;background:#F5C518;color:#1B2D5F;font-family:Fredoka,sans-serif;font-weight:700;font-size:11.5px;cursor:pointer;}
+.atn-btn.soft{background:rgba(91,211,220,.12);color:#5BD3DC;border:1px solid rgba(91,211,220,.45);}
+.map-btn.atn-open{border-color:rgba(245,197,24,.6);color:#F5C518;background:rgba(245,197,24,.1);font-size:12.5px;}
+.sl-open.atn-sl{background:rgba(245,197,24,.14);color:#F5C518;border:1px solid rgba(245,197,24,.55);margin-right:6px;}
+.gl-btn.atn-gl{border-color:rgba(245,197,24,.6);color:#F5C518;}
 #gl-stage{position:relative;}
 #gl-zoom{position:absolute;right:6px;bottom:6px;display:flex;flex-direction:column;align-items:center;gap:3px;}
 .gl-zb{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(6,13,30,.8);color:#fff;font-size:17px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;}
@@ -1583,6 +1632,11 @@ body.hand-active .hand-label{display:block;}
     <button id="sm-close" onclick="toggleStudies()">&#10005;</button>
   </div>
   <div id="sm-list">
+    <div class="sm-item" onclick="smGo('atonement')">
+      <span class="sm-ico" style="color:#F5C518">&#10013;</span>
+      <span class="sm-txt"><b style="color:#F5C518">Jesus Christ and His Atonement</b>
+        <em>Gethsemane, the cross, the tomb and the Resurrection: what He suffered, every scripture of the Atonement, and all the evidence of His life, death and rising, graded honestly</em></span>
+      <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('study')">
       <span class="sm-ico" style="color:#F5C518">&#128214;</span>
       <span class="sm-txt"><b style="color:#F5C518">The Study Library</b>
@@ -1755,6 +1809,18 @@ body.hand-active .hand-label{display:block;}
   </div>
   <div id="trb-body"></div>
 </div>
+<div id="atn-panel">
+  <div id="atn-hdr">
+    <div>
+      <div id="atn-sub">Bedtime &#183; Faith &#183; Wonder</div>
+      <div id="atn-title">&#10013; Jesus Christ and His Atonement</div>
+      <div id="atn-intro"></div>
+    </div>
+    <button id="atn-close" onclick="closeAtonement()">&#10005;</button>
+  </div>
+  <div id="atn-nav"></div>
+  <div id="atn-body"></div>
+</div>
 <div id="globe-panel">
   <div id="gl-hdr">
     <div>
@@ -1815,6 +1881,7 @@ body.hand-active .hand-label{display:block;}
 <script src="data/regions.js"></script>
 <script src="data/society.js"></script>
 <script src="data/tribes.js"></script>
+<script src="data/atonement.js"></script>
 <script>
 /* ---------- Floating controls ----------
    The header rows are hidden, not deleted, and their contents are moved into the
@@ -5087,6 +5154,7 @@ function openEvMod(ev){
   if(ev.hand){var hd=document.createElement("div");hd.className="dmod-hand";hd.innerHTML="<b>&#9770; Heavenly Father&#39;s Hand:</b><br>"+ev.hand;body.appendChild(hd);}
   try{ if(typeof ev.y==="number"){ var mw=mwSection(ev.y,ev.l,ev.t); if(mw) body.appendChild(mw); } }catch(e){}
   if(ev.trav&&TV[ev.trav]){var t=TV[ev.trav];var td=document.createElement("div");td.style.cssText="display:flex;align-items:center;gap:7px;padding:7px 11px;background:rgba(27,45,95,.45);border-radius:7px;margin-top:8px;";td.innerHTML="<div style='width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;background:"+t.c+"33'>"+t.e+"</div><div><div style='font-family:var(--font-display);font-weight:600;font-size:9.5px;color:#F5C518;'>"+t.n+"</div><div style='font-size:8px;color:rgba(255,255,255,.42);font-style:italic;'>"+t.q+"</div></div>";body.appendChild(td);}
+  try{ atnEventButton(ev,body); }catch(e){}
   if(ev.lat!==undefined){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
@@ -9103,6 +9171,12 @@ var PROP=[
 var SLF={tech:(window.TECH_GUIDE||{version:0,items:[]}),finds:(window.DISCOVERIES||{version:0,items:[]}),studies:{version:0,items:{}}};
 if(!Array.isArray(SLF.tech.items)) SLF.tech.items=[];
 if(!Array.isArray(SLF.finds.items)) SLF.finds.items=[];
+/* the evidence of the Savior (data/atonement.js) belongs in the Evidence list too; it is kept whatever the account sends */
+function atnMergeFinds(){
+  try{ var A=window.LST_ATONEMENT; if(!A||!Array.isArray(A.finds)) return; var have={}; SLF.finds.items.forEach(function(it){ if(it&&it.id) have[it.id]=1; });
+    A.finds.forEach(function(f){ if(f&&f.id&&!have[f.id]){ SLF.finds.items.push(f); have[f.id]=1; } }); }catch(e){}
+}
+atnMergeFinds();
 function slfEsc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
 function slfEm(e){ return /^&#\d{2,7};$/.test(String(e||""))?e:"&#10022;"; }
 function slfUrl(u){ return /^https:\/\/[^\s"'<>]+$/.test(String(u||""))?String(u):""; }
@@ -9129,7 +9203,7 @@ function slfAdopt(kind,feed){
       if(v==null||v===""||(Array.isArray(v)&&!v.length)) continue;   /* the account has nothing here: keep ours */
       mine[f]=v; }
   });
-  t.version=fv; return true;
+  t.version=fv; if(kind==="finds") atnMergeFinds(); return true;
 }
 /* remembered on the phone, so the newest copy is there before the network answers */
 (function(){
@@ -9631,7 +9705,8 @@ function slFindHtml(it){
   var srcs=Array.isArray(f.sources)?f.sources.slice():[]; if(!srcs.length&&f.url) srcs.push({name:f.source||"source",url:f.url});
   var sh=""; srcs.forEach(function(s){ if(!s) return; var u=slfUrl(s.url); sh+=u?"<a class='sl-src-l' href='"+slfEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+slfEsc(s.name||u)+"</a>":(s.name?"<div class='sl-src-n'>"+slfEsc(s.name)+"</div>":""); });
   if(sh) h+="<div class='sl-src'><div class='sl-src-t'>Sources: open and read them</div>"+sh+"</div>";
-  if(typeof tgToTimeline==="function"&&EVS.some(function(e){ return e.id==="find-"+f.id; })) h+="<button class='sl-open' onclick=\"closeStudy();tgToTimeline('find-"+slfEsc(f.id)+"')\">&#128506; Find it on the timeline</button>";
+  try{ h+=atnStudyHtml(it); }catch(e){}
+  if(EVS.some(function(e){ return e.id==="find-"+f.id; })) h+="<button class='sl-open' onclick=\"atnToTimeline('find-"+slfEsc(f.id)+"')\">&#128506; Find it on the timeline</button>";
   return h;
 }
 /* ── THE IN-DEPTH STUDY OF ANY OTHER EVENT ──
@@ -9746,6 +9821,7 @@ function slRender(){
     if(it.find){ var cf0=slConf(it.find.conf); sumHtml="<div class='sl-conf-row'><span class='sl-conf "+cf0[0]+"'>"+cf0[1]+"</span></div>"+sumHtml;
       if(it.find.gospel) sumHtml+="<div class='sl-blk sl-blk-gospel'><b>Why it matters:</b> "+slfEsc(it.find.gospel)+"</div>"; }
     if(it.meta)sumHtml="<div class='sl-sum-meta'>"+it.meta+"</div>"+sumHtml;
+    if(!it.find){ try{ sumHtml+=atnStudyHtml(it); }catch(e){} }
     sum.innerHTML=sumHtml;
     var b2=document.createElement("button");
     b2.className="sl-x sl-x2";
@@ -9808,6 +9884,7 @@ function slRender(){
 
 // All data blocks are now defined. Rebuild so late-loaded layers
 // (LST Books, Study Library sources) appear on the timeline.
+try{ atnTimelineMerge(); }catch(e){ console.log("evidence merge",e); }
 try{ buildTL(); }catch(e){ console.log("late rebuild error",e); }
 
 // ============================================================
@@ -10114,7 +10191,8 @@ function glRow(i){
   var h=""; if(it.meta) h+="<div class='sl-sum-meta'>"+it.meta+"</div>";
   if(it.de) h+="<div class='gl-de'>"+it.de+"</div>";
   (it.blocks||[]).forEach(function(bl){ h+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+bl.t+"</div>"; });
-  h+="<div class='gl-btns'><button class='gl-btn gold' onclick=\"glDeep("+i+")\">&#128214; The full study</button><button class='gl-btn' onclick=\"closeGlobe();mwOpen(GL.rows["+i+"])\">&#128506; Open it on the timeline</button></div><div class='gl-deep' id='gl-deep-"+i+"'></div>";
+  var ah=""; try{ if(!it.find) ah=atnStudyHtml(it,"gl-btn atn-gl"); }catch(e){}
+  h+="<div class='gl-btns'>"+ah+"<button class='gl-btn gold' onclick=\"glDeep("+i+")\">&#128214; The full study</button><button class='gl-btn' onclick=\"closeGlobe();mwOpen(GL.rows["+i+"])\">&#128506; Open it on the timeline</button></div><div class='gl-deep' id='gl-deep-"+i+"'></div>";
   det.innerHTML=h;
 }
 function glDeep(i){
@@ -10309,6 +10387,105 @@ function glMode(m){
   if(GL.mode==="peoples"){ GL.region=null; if(GL.lon>-30||GL.lon<-170){ GL.lon=-85; GL.lat=18; } trbChips(); trbGlobeCaption(); glDraw(); trbLong(function(){ if(GL.mode==="peoples"){ trbChips(); glDraw(); } }); }
   else { GL.pick=null; GL.pickArea=null; glChips(); if(GL.region) glShow(GL.region); else document.getElementById("gl-land").innerHTML="<div class='gl-empty'>&#127757; Tap a land on the globe, or a name below, and its history opens here.</div>"; glDraw(); }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   JESUS CHRIST AND HIS ATONEMENT  (data/atonement.js)
+   The study: what He suffered in Gethsemane, at the trials, on the cross and
+   in death, the Resurrection, the witnesses, the ground, the Shroud, the Book
+   of Mormon's witness and the Restoration's, each part with the scriptures
+   quoted. The evidence: every find and witness of His life, death and rising,
+   with the timeline's honest label and its sources, each also on the timeline.
+   Every scripture tied to the Atonement, gathered. Opens from the Studies menu,
+   from the Savior's events on the timeline, and from every piece of evidence.
+   ══════════════════════════════════════════════════════════════════════════ */
+var ATN={filter:"all",open:null,built:false};
+function atnData(){ return window.LST_ATONEMENT||null; }
+function atnEsc(s){ return slfEsc(s); }
+function atnConf(c){ return c==="confirmed"?["dc","Confirmed"]:c==="debated"?["dd","Debated"]:["db","Believed"]; }
+function atnFinds(){ var A=atnData(); return A&&Array.isArray(A.finds)?A.finds:[]; }
+function atnFind(id){ var f=atnFinds(); for(var i=0;i<f.length;i++) if(f[i].id===id) return f[i]; return null; }
+function atnPart(id){ var A=atnData(); if(!A) return null; for(var i=0;i<A.parts.length;i++) if(A.parts[i].id===id) return A.parts[i]; return null; }
+/* is this timeline event one of the Savior's, or a piece of His evidence? */
+function atnForEvent(ev){ var A=atnData(); if(!A||!ev) return null;
+  if(ev.find){ var f=atnFind(ev.find); if(f&&f.atone) return {part:f.atone,ev:f.id}; }
+  if(A.events.indexOf(ev.id)>=0) return {part:ev.id==="nt03"?"bom":ev.id==="nt01"?"what":"gethsemane",ev:null};
+  return null; }
+function atnButtonText(){ return "&#10013; Jesus Christ and His Atonement: the full study and all the evidence"; }
+/* the gold button on an event's card on the timeline */
+function atnEventButton(ev,body){ var a=atnForEvent(ev); if(!a||!body) return;
+  var b=document.createElement("button"); b.className="map-btn atn-open"; b.innerHTML=atnButtonText();
+  b.onclick=function(){ document.getElementById("dmod").classList.remove("open"); openAtonement(a.part,a.ev); }; body.appendChild(b); }
+/* the same door, as html, for the Study Library and the globe */
+function atnStudyHtml(it,cls){ var a=atnForEvent({id:it&&it.id,find:it&&it.find&&it.find.id}); if(!a) return "";
+  return "<button class='"+(cls||"sl-open atn-sl")+"' onclick=\"openAtonement('"+atnEsc(a.part)+"',"+(a.ev?"'"+atnEsc(a.ev)+"'":"null")+")\">"+atnButtonText()+"</button>"; }
+function openAtonement(part,evId){
+  var A=atnData(); if(!A) return; var p=document.getElementById("atn-panel");
+  try{ closeStudies(); }catch(e){}
+  p.classList.add("open"); if(!ATN.built) atnRender();
+  if(evId){ ATN.filter="all"; ATN.open=evId; atnRenderEvidence(); }
+  setTimeout(function(){ try{ var el=evId?document.getElementById("atn-ev-"+evId):part?document.getElementById("atn-part-"+part):null; if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); else document.getElementById("atn-body").scrollTop=0; }catch(e){} },60);
+}
+function closeAtonement(){ document.getElementById("atn-panel").classList.remove("open"); }
+function atnGo(id){ var el=document.getElementById(id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); }
+function atnRender(){
+  var A=atnData(); if(!A) return; ATN.built=true;
+  document.getElementById("atn-intro").textContent=A.intro;
+  var nav=""; A.parts.forEach(function(pt){ nav+="<button class='atn-chip' onclick=\"atnGo('atn-part-"+atnEsc(pt.id)+"')\">"+slfEm(pt.em)+" "+atnEsc(pt.title)+"</button>"; });
+  nav+="<button class='atn-chip ev' onclick=\"atnGo('atn-evidence')\">&#127963; All the evidence ("+atnFinds().length+")</button><button class='atn-chip sc' onclick=\"atnGo('atn-gather')\">&#128214; Every scripture</button>";
+  document.getElementById("atn-nav").innerHTML=nav;
+  var h="<div class='atn-rule'>&#10022; Everything here is written to be accurate. The study is what the scriptures and the prophets teach; the evidence carries the timeline's honest label on every piece: <b>Confirmed</b> (the evidence agrees), <b>Believed</b> (good evidence, not settled) or <b>Debated</b> (scholars disagree), with its sources to open and read. Faith does not need the facts bent; where a claim is weak, it says so.</div>";
+  h+="<div class='atn-h'>The study</div>";
+  A.parts.forEach(function(pt){
+    h+="<div class='atn-part' id='atn-part-"+atnEsc(pt.id)+"'><h3><span>"+slfEm(pt.em)+"</span>"+atnEsc(pt.title)+"</h3>";
+    (pt.text||[]).forEach(function(t){ h+="<p>"+atnEsc(t)+"</p>"; });
+    (pt.scriptures||[]).forEach(function(s){ h+="<div class='atn-sc'><b>"+atnEsc(s.ref)+"</b><i>"+atnEsc(s.text)+"</i></div>"; });
+    var evs=atnFinds().filter(function(f){ return f.atone===pt.id; });
+    if(evs.length){ h+="<span class='atn-k'>The evidence for this part</span><div class='atn-part-ev'>"; evs.forEach(function(f){ h+="<span onclick=\"openAtonement(null,'"+atnEsc(f.id)+"')\">"+slfEm(f.em)+" "+atnEsc(f.t)+"</span>"; }); h+="</div>"; }
+    h+="</div>"; });
+  h+="<div class='atn-h' id='atn-evidence'>All the evidence of His life, death and resurrection</div>";
+  h+="<div class='atn-filters' id='atn-filters'></div><div id='atn-evlist'></div>";
+  h+="<div class='atn-h' id='atn-gather'>Every scripture tied to the Atonement</div>";
+  (A.gather||[]).forEach(function(g){ h+="<div class='atn-gather'><h4>"+atnEsc(g.h)+"</h4><div class='atn-refs'>"+(g.refs||[]).map(function(r){ return "<span>"+atnEsc(r)+"</span>"; }).join("")+"</div></div>"; });
+  var src=""; (A.sources||[]).forEach(function(s){ var u=slfUrl(s.url); if(u) src+="<a class='sl-src-l' href='"+atnEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+atnEsc(s.name||u)+"</a>"; });
+  if(src) h+="<div class='sl-src'><div class='sl-src-t'>Sources for the study: open and read them</div>"+src+"</div>";
+  h+="<p class='sl-dim' style='margin-top:10px'>Study written "+atnEsc(A.updated||"")+". Every item is checked against its sources; if you find an error, tell us and it will be corrected.</p>";
+  document.getElementById("atn-body").innerHTML=h;
+  atnRenderEvidence();
+}
+function atnFilter(f){ ATN.filter=f; atnRenderEvidence(); }
+function atnShow(id){ ATN.open=(ATN.open===id)?null:id; atnRenderEvidence(); if(ATN.open){ var el=document.getElementById("atn-ev-"+id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); } }
+function atnRenderEvidence(){
+  var A=atnData(), list=document.getElementById("atn-evlist"), fl=document.getElementById("atn-filters"); if(!A||!list||!fl) return;
+  var all=atnFinds().slice().sort(function(a,b){ return (Number(a.y)||0)-(Number(b.y)||0); });
+  var n={all:all.length,confirmed:0,believed:0,debated:0,shroud:0,witnesses:0,ground:0}; all.forEach(function(f){ n[f.conf==="confirmed"||f.conf==="debated"?f.conf:"believed"]++; if(f.atone==="shroud") n.shroud++; else if(f.atone==="witnesses") n.witnesses++; else n.ground++; });
+  var fs=[["all","All"],["confirmed","Confirmed"],["believed","Believed"],["debated","Debated"],["ground","From the ground"],["witnesses","The writers and manuscripts"],["shroud","The Shroud of Turin"]];
+  fl.innerHTML=fs.map(function(x){ return "<button class='atn-f"+(ATN.filter===x[0]?" on":"")+"' onclick=\"atnFilter('"+x[0]+"')\">"+x[1]+" ("+n[x[0]]+")</button>"; }).join("");
+  var rows=all.filter(function(f){ var k=ATN.filter; if(k==="all") return true; if(k==="confirmed"||k==="debated") return f.conf===k; if(k==="believed") return f.conf!=="confirmed"&&f.conf!=="debated"; if(k==="shroud"||k==="witnesses") return f.atone===k; return f.atone!=="shroud"&&f.atone!=="witnesses"; });
+  var h=""; rows.forEach(function(f){ var cf=atnConf(f.conf), open=ATN.open===f.id, pt=atnPart(f.atone);
+    h+="<div class='atn-ev"+(open?" open":"")+"' id='atn-ev-"+atnEsc(f.id)+"'"+(open?"":" onclick=\"atnShow('"+atnEsc(f.id)+"')\"")+">";
+    h+="<h4><span class='atn-em'>"+slfEm(f.em)+"</span><span>"+atnEsc(f.t)+"</span></h4><div class='atn-when'>"+atnEsc(f.date||"")+(f.loc?" &#183; "+atnEsc(f.loc):"")+"</div><span class='atn-conf "+cf[0]+"'>"+cf[1]+"</span>";
+    if(open){ h+="<div class='atn-det'><span class='atn-k'>What was found</span><p>"+atnEsc(f.de)+"</p>";
+      if(f.gospel) h+="<span class='atn-k gold'>&#10022; Why it matters</span><p>"+atnEsc(f.gospel)+"</p>";
+      if(f.scripture) h+="<span class='atn-k purple'>The scriptures it touches</span><p>"+atnEsc(f.scripture)+"</p>";
+      if(f.forkids) h+="<span class='atn-k green'>For a child</span><p class='sl-quote'>"+atnEsc(f.forkids)+"</p>";
+      var sh=""; (Array.isArray(f.sources)?f.sources:[]).forEach(function(s){ if(!s) return; var u=slfUrl(s.url); sh+=u?"<a class='sl-src-l' href='"+atnEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+atnEsc(s.name||u)+"</a>":""; });
+      if(sh) h+="<div class='sl-src'><div class='sl-src-t'>Sources: open and read them</div>"+sh+"</div>";
+      if(pt) h+="<button class='atn-btn soft' onclick=\"atnGo('atn-part-"+atnEsc(pt.id)+"')\">&#8679; Read the part of the study it belongs to: "+atnEsc(pt.title)+"</button>";
+      h+="<button class='atn-btn' onclick=\"atnToTimeline('find-"+atnEsc(f.id)+"')\">&#128506; Find it on the timeline</button>";
+      h+="<button class='atn-btn soft' onclick=\"atnShow('"+atnEsc(f.id)+"')\">Close</button></div>"; }
+    h+="</div>"; });
+  list.innerHTML=h||"<div class='sl-wait'>Nothing under this label.</div>";
+}
+function atnToTimeline(evId){ closeAtonement(); try{ closeStudy(); }catch(e){} try{ closeGlobe(); }catch(e){} try{ closeTechGuide(); }catch(e){}
+  if(typeof tgToTimeline==="function"){ tgToTimeline(evId); return; }
+  for(var i=0;i<EVS.length;i++) if(EVS[i].id===evId){ try{ openEvMod(EVS[i]); }catch(e){} return; } }
+/* every piece of evidence joins the Archaeology lane of the timeline as an event of its own, on the website as in the app */
+function atnTimelineMerge(){
+  var finds=(SLF.finds&&SLF.finds.items)||[], have={}, i; for(i=0;i<EVS.length;i++) have[EVS[i].id]=EVS[i];
+  for(i=0;i<finds.length;i++){ var it=finds[i]; if(!it||!it.id) continue; var ev=have["find-"+it.id];
+    if(!ev){ ev={id:"find-"+it.id,l:"arch",y:Number(it.y)||0,em:slfEm(it.em||"&#127963;"),t:slfEsc(it.t||it.name||""),date:slfEsc(it.date||""),conf:(it.conf==="confirmed"||it.conf==="believed"||it.conf==="debated")?it.conf:"believed",loc:slfEsc(it.loc||""),lat:it.lat,lng:it.lng,de:slfEsc(it.de||""),gospel:slfEsc(it.gospel||"")}; EVS.push(ev); have[ev.id]=ev; }
+    ev.find=it.id; }
+}
 function setAppHeader(px){
   document.documentElement.style.setProperty("--appheader",(px|0)+"px");
   try{ fitAll(); }catch(e){}
@@ -10365,6 +10542,7 @@ function smGo(which){
       else if(which==="family") openFamilyHistory();
       else if(which==="systems") openSystems();
       else if(which==="tribes") openTribes();
+      else if(which==="atonement") openAtonement();
     }catch(e){ console.log("studies menu error",e); }
   },140);
 }
