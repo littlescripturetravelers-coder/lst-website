@@ -1,4 +1,158 @@
 {
+ "ages": [
+  {
+   "id": "baby",
+   "fits": [
+    "Video calls with grandparents and family far away, with a parent holding the phone.",
+    "Music, lullabies and scripture stories played aloud while you hold them.",
+    "A parent's phone camera, to keep the memories."
+   ],
+   "bless": [
+    "Let them see grandma's face and hear her voice every week.",
+    "Sing the same lullaby every night; it becomes home to them."
+   ],
+   "label": "Babies and toddlers",
+   "rules": [
+    "No screen time except video chat with family (American Academy of Pediatrics).",
+    "No screens in the room where they sleep.",
+    "Never a screen to stop crying; hold them instead."
+   ],
+   "watch": [
+    "A baby who stops looking up at faces, or whose words come late, when screens are on a lot.",
+    "Background television: it cuts the number of words a baby hears from you."
+   ],
+   "years": "0 to 2",
+   "growing": "Attachment, trust, first words and walking. A baby learns language from a face that answers back, not from a screen; this is the age when the brain wires itself fastest around real people."
+  },
+  {
+   "id": "little",
+   "fits": [
+    "Picture books and scripture stories on a screen, read together, the way you would read a book.",
+    "Children's music and hymns.",
+    "Drawing and building apps, for short spells, beside you."
+   ],
+   "bless": [
+    "Record a message or a song for someone who is sick or far away.",
+    "Make a card on the tablet and print it for a neighbor."
+   ],
+   "label": "Little ones",
+   "rules": [
+    "About an hour a day at most, of good content, watched with a parent (American Academy of Pediatrics); the WHO says an hour or less for this age too.",
+    "No screens at meals, in the car for short trips, or in the hour before bed.",
+    "You choose the content; autoplay is off; no 'kids' video feeds unwatched."
+   ],
+   "watch": [
+    "Tantrums when the screen goes off, and asking for it first thing in the morning.",
+    "Fast, flashing cartoons; they train a short attention span.",
+    "Advertisements aimed at them; explain what an ad is."
+   ],
+   "years": "3 to 5",
+   "growing": "Imagination, language, self-control, and the first sense of right and wrong. They copy everything, cannot yet tell a story from an advertisement, and feel a sudden stop like a loss."
+  },
+  {
+   "id": "early",
+   "fits": [
+    "Learning apps and reading apps, with the settings you chose.",
+    "Family video calls, family movie night, uplifting shows chosen together.",
+    "Simple creation: drawing, music, photos of family, a first typed story."
+   ],
+   "bless": [
+    "Video-call an older relative and ask them a family-history question; record the answer.",
+    "Type a thank-you note to a teacher or a bishop."
+   ],
+   "label": "Early school years",
+   "rules": [
+    "Consistent daily limits, written down as a family media plan; screens live in family rooms, never bedrooms.",
+    "No personal smartphone, no social media, no online games with strangers' chat.",
+    "Filters on every device, and a parent who can see the history."
+   ],
+   "watch": [
+    "Fear from something they saw; ask 'did you see anything that scared you?' often.",
+    "Sneaking screens, or lying about time.",
+    "Comparing themselves with children on a screen."
+   ],
+   "years": "6 to 9",
+   "growing": "Reading, friendship, fairness, and a conscience that can be taught. They believe what they see. They want to belong, and they still tell you everything if you make it safe to."
+  },
+  {
+   "id": "tween",
+   "fits": [
+    "A basic phone or a watch that calls and texts, only if the family truly needs it; a smartphone can wait.",
+    "Homework online in a family room, with filters and history visible.",
+    "Creating: coding, music, film-making, photography, with the results shared inside the family."
+   ],
+   "bless": [
+    "Teach a younger sibling something on the tablet.",
+    "Help a grandparent with their phone; that is service too.",
+    "Make a family video for a birthday or a farewell."
+   ],
+   "label": "Tweens",
+   "rules": [
+    "No social media (the law sets 13 as the floor; the Surgeon General warns it is not proof of safety).",
+    "No devices in bedrooms overnight; they charge in the kitchen.",
+    "A family rule that a secret online is never kept from parents, and that closing a bad page and telling is always the right move, never punished."
+   ],
+   "watch": [
+    "Withdrawal, secrecy, a phone that is always face-down.",
+    "Sleep loss, and mood that tracks the screen.",
+    "Anyone online who wants to move the talk to a private app."
+   ],
+   "years": "10 to 12",
+   "growing": "Identity, puberty, and the pull of friends. Curiosity is strong and the brakes are not built yet: the part of the brain that weighs consequences finishes growing in the mid-twenties. Most children first meet pornography by accident at about this age, so the talk comes before the device."
+  },
+  {
+   "id": "teen",
+   "fits": [
+    "A smartphone with a written family agreement, filters, and a parent who knows every account and password.",
+    "Tools to create and serve: editing, design, coding, music, a family history project.",
+    "Scripture and hymn apps, and talks they choose to listen to."
+   ],
+   "bless": [
+    "Share a testimony, a scripture or a kindness online on purpose, not by accident.",
+    "Organize a service project with friends through the group chat.",
+    "Record grandparents' stories and put them on the family timeline."
+   ],
+   "label": "Young teens",
+   "rules": [
+    "Delay social media as long as you can; if it is used, accounts are private, parents follow, notifications are off, and there is a daily limit.",
+    "Phones out of bedrooms at night and off the table at meals; the Surgeon General links heavy use to anxiety, depression and lost sleep.",
+    "Talk plainly about pornography, sextortion, bullying and AI 'companions' before they meet them; agree what they will do when they do."
+   ],
+   "watch": [
+    "Three hours a day or more on social media doubles the risk of anxiety and depression symptoms (Surgeon General, 2023).",
+    "A sudden new 'friend' who sends gifts or asks for pictures.",
+    "Comparing their body or their life to a feed."
+   ],
+   "years": "13 to 15",
+   "growing": "Abstract thinking, the need to be their own person, and a hunger for approval that social media is built to exploit. Risk feels smaller than it is. Faith becomes their own here, or does not."
+  },
+  {
+   "id": "older",
+   "fits": [
+    "Their own limits, written by them and reviewed with you.",
+    "AI, design, code and media as tools for real work and real service.",
+    "Teaching the younger ones what they have learned."
+   ],
+   "bless": [
+    "Lead the family history work; build the family's timeline.",
+    "Create something that lifts: music, a short film, a page that helps someone.",
+    "Use the tools the way the Lord's work uses them: to reach, to teach, to gather."
+   ],
+   "label": "Older teens",
+   "rules": [
+    "A weekly screen sabbath, and phones away when people are present.",
+    "Learn to tell truth from propaganda: check who made it, who paid for it, and what it wants you to feel.",
+    "Keep the standards in For the Strength of Youth as their own, not yours."
+   ],
+   "watch": [
+    "Driving with a phone in hand.",
+    "Gambling built into games and apps.",
+    "Letting an AI do the thinking, or the feeling."
+   ],
+   "years": "16 and up",
+   "growing": "Preparing to govern themselves: college, missions, work, marriage. The rules now move from yours to theirs, one at a time, while they are still home to talk about it."
+  }
+ ],
  "items": [
   {
    "y": -1000000,
@@ -1013,9 +1167,9 @@
     },
     {
      "on": "2026-09-29",
+     "url": "https://www.hopkinsmedicine.org/news/newsroom/news-releases/2024/09/specially-designed-video-games-may-benefit-mental-health-of-children-and-teenagers",
      "note": "A review by Johns Hopkins Children's Center found that specially designed video games can modestly improve mental health in children and teens with anxiety, depression, and ADHD.",
-     "source": "Johns Hopkins Medicine",
-     "url": "https://www.hopkinsmedicine.org/news/newsroom/news-releases/2024/09/specially-designed-video-games-may-benefit-mental-health-of-children-and-teenagers"
+     "source": "Johns Hopkins Medicine"
     }
    ],
    "harm": [
@@ -1121,11 +1275,24 @@
    "lng": 6.05,
    "loc": "CERN, Geneva, Switzerland",
    "why": "The gospel to every nation, kindred, tongue and people: the internet is the road that promise travels on. Scriptures in a hundred languages, family history from every country, a prophet's words the moment they are spoken.",
+   "ages": {
+    "0-2": "No.",
+    "16+": "Their own filters and habits, built while you were still there to help.",
+    "3-5": "No browsing; a parent plays the chosen video.",
+    "6-9": "Filtered, in a family room, on a short list of sites you chose, with a parent beside them.",
+    "10-12": "Filtered and monitored in family rooms; teach the plan for a bad page: close it, tell a parent, never punished.",
+    "13-15": "Filters plus accountability; talk often about what they meet; they know you will ask."
+   },
    "date": "1990 AD",
    "good": [
     "Scriptures, talks and family records for the whole world, free.",
     "Learning anything from anyone, anywhere.",
     "Finding your family across oceans."
+   ],
+   "harm": [
+    "Pornography finds children before they look for it: most first see it by accident, around age twelve, and it teaches lies about love and bodies.",
+    "Predators, scams and bullying reach into a bedroom.",
+    "Endless information with no way to tell true from false."
    ],
    "kids": [
     "If you see something yucky, look away and tell a grown-up. You are not in trouble.",
@@ -1135,6 +1302,18 @@
    "name": "The Internet and the Web",
    "talk": "What is the best thing the internet has brought into our home? What is the worst?",
    "what": "Every computer in the world able to talk to every other one. The web put pages on it that anyone can read.",
+   "avoid": [
+    "Unfiltered browsing anywhere, on any device, including a friend's.",
+    "Searching alone before they know what to do with what appears.",
+    "Clicking ads, pop-ups and 'free' downloads.",
+    "Private browsing modes and cleared histories."
+   ],
+   "bless": [
+    "Learn anything: a language, an instrument, how to fix the sink.",
+    "Find a scripture, a talk, a hymn in seconds and share it.",
+    "Serve: find who needs help, and organize the helpers."
+   ],
+   "modern": true,
    "builtOn": [
     "pc",
     "telephone",
@@ -1157,31 +1336,7 @@
      "note": "A study in the Journal of Development Economics found that early exposure to high-speed internet may negatively impact children's communication and social skills, highlighting the need for mindful internet use.",
      "source": "Journal of Development Economics"
     }
-   ],
-   "harm": [
-    "Pornography finds children before they look for it: most first see it by accident, around age twelve, and it teaches lies about love and bodies.",
-    "Predators, scams and bullying reach into a bedroom.",
-    "Endless information with no way to tell true from false."
-   ],
-   "avoid": [
-    "Unfiltered browsing anywhere, on any device, including a friend's.",
-    "Searching alone before they know what to do with what appears.",
-    "Clicking ads, pop-ups and 'free' downloads.",
-    "Private browsing modes and cleared histories."
-   ],
-   "bless": [
-    "Learn anything: a language, an instrument, how to fix the sink.",
-    "Find a scripture, a talk, a hymn in seconds and share it.",
-    "Serve: find who needs help, and organize the helpers."
-   ],
-   "ages": {
-    "0-2": "No.",
-    "3-5": "No browsing; a parent plays the chosen video.",
-    "6-9": "Filtered, in a family room, on a short list of sites you chose, with a parent beside them.",
-    "10-12": "Filtered and monitored in family rooms; teach the plan for a bad page: close it, tell a parent, never punished.",
-    "13-15": "Filters plus accountability; talk often about what they meet; they know you will ask.",
-    "16+": "Their own filters and habits, built while you were still there to help."
-   }
+   ]
   },
   {
    "y": 1983,
@@ -1196,11 +1351,23 @@
    "lng": -87.63,
    "loc": "Chicago, USA",
    "why": "A mother can be called from anywhere. Help can be summoned from a roadside. Missionaries in far places can reach their families. The phone in a pocket was made to keep people safe and close.",
+   "ages": {
+    "0-2": "A parent's phone is not a pacifier.",
+    "16+": "Their phone, with limits they wrote and keep.",
+    "3-5": "Still not a toy; video calls with family only.",
+    "6-9": "No phone of their own.",
+    "10-12": "A basic phone or watch that calls and texts, only if the family truly needs it.",
+    "13-15": "A smartphone only with a written family agreement, filters, and no bedroom overnight; many families wait until high school."
+   },
    "date": "1983 AD",
    "good": [
     "Calling for help wherever you are.",
     "Telling your family you are safe.",
     "A quick 'I love you' in the middle of a day."
+   ],
+   "harm": [
+    "A phone that is always there is always pulling.",
+    "Texts at night steal sleep; texts from strangers steal safety."
    ],
    "kids": [
     "Phones down at the table.",
@@ -1210,6 +1377,17 @@
    "name": "The Mobile Phone",
    "talk": "When is a phone a helper, and when is it a wall between us?",
    "what": "A telephone with no wire, small enough to carry. Anyone could be reached anywhere.",
+   "avoid": [
+    "A phone in the bedroom overnight.",
+    "Group chats a parent does not know about.",
+    "A phone at the table or in the car with the driver."
+   ],
+   "bless": [
+    "A text that says 'I'm praying for you' at the right moment.",
+    "Call the person, not just the text.",
+    "Coordinate service: rides, meals, visits."
+   ],
+   "modern": true,
    "builtOn": [
     "telephone",
     "radio",
@@ -1266,30 +1444,14 @@
      "url": "https://www.thensf.org/effects-of-screen-use-on-childrens-sleep/",
      "note": "A recent study found that children who use mobile devices at bedtime are more likely to experience reduced sleep quality and duration, leading to increased daytime sleepiness.",
      "source": "National Sleep Foundation"
+    },
+    {
+     "on": "2026-10-01",
+     "note": "Experts recommend keeping phones and tablets out of children's bedrooms overnight to prevent disrupted sleep and compulsive use.",
+     "source": "Children and Screens",
+     "url": "https://www.childrenandscreens.org/newsroom/news/experts-vote-8-0-against-phones-and-tablets-in-childrens-bedrooms-overnight/"
     }
-   ],
-   "harm": [
-    "A phone that is always there is always pulling.",
-    "Texts at night steal sleep; texts from strangers steal safety."
-   ],
-   "avoid": [
-    "A phone in the bedroom overnight.",
-    "Group chats a parent does not know about.",
-    "A phone at the table or in the car with the driver."
-   ],
-   "bless": [
-    "A text that says 'I'm praying for you' at the right moment.",
-    "Call the person, not just the text.",
-    "Coordinate service: rides, meals, visits."
-   ],
-   "ages": {
-    "0-2": "A parent's phone is not a pacifier.",
-    "3-5": "Still not a toy; video calls with family only.",
-    "6-9": "No phone of their own.",
-    "10-12": "A basic phone or watch that calls and texts, only if the family truly needs it.",
-    "13-15": "A smartphone only with a written family agreement, filters, and no bedroom overnight; many families wait until high school.",
-    "16+": "Their phone, with limits they wrote and keep."
-   }
+   ]
   },
   {
    "y": 2004,
@@ -1305,11 +1467,24 @@
    "lng": -71.11,
    "loc": "Cambridge, Massachusetts, USA",
    "why": "At its best it is the ward newsletter for the whole world: families far apart share a birthday, a missionary shares the gospel, a lonely person finds a friend. The good in it is real, and it is why so many wanted it.",
+   "ages": {
+    "0-2": "None.",
+    "16+": "Purposeful use with their own limits; a weekly day away from it.",
+    "3-5": "None.",
+    "6-9": "None.",
+    "10-12": "None; the law says 13 and the Surgeon General says even that is not proof of safety.",
+    "13-15": "Delay it as long as you can. If it is used: private accounts, parents follow and know the passwords, notifications off, a daily limit, nothing in bedrooms."
+   },
    "date": "2004 AD",
    "good": [
     "Keeping in touch with family who live far away.",
     "Sharing something good and true with many people at once.",
     "Finding others who believe what you believe."
+   ],
+   "harm": [
+    "Built to keep a child scrolling: the feed never ends, and every like is a small reward on a young brain.",
+    "Comparison, exclusion, bullying and sextortion happen here; teens who use it three or more hours a day face double the risk of anxiety and depression symptoms (U.S. Surgeon General, 2023).",
+    "Sleep loss, and a self-worth that rises and falls with strangers' approval."
    ],
    "kids": [
     "No account until you are old enough, and your parents say when.",
@@ -1319,6 +1494,18 @@
    "name": "Social Media",
    "talk": "We saw what social media did to a lot of kids before anyone knew. What would you want to know before you got an account?",
    "what": "Websites and apps where everyone posts and everyone watches. Facebook, then Instagram, TikTok, Snapchat and the rest.",
+   "avoid": [
+    "Any account under 13 (that is the law) and, most experts now say, well after.",
+    "Secret accounts, second accounts, and direct messages with strangers.",
+    "Posting photos of their body, their school, their home or their location.",
+    "Endless scrolling; use it for a purpose and put it down."
+   ],
+   "bless": [
+    "Share a testimony, a scripture, a kindness, on purpose.",
+    "Organize a service project with friends.",
+    "Keep a family group where the good news gets told first."
+   ],
+   "modern": true,
    "builtOn": [
     "internet",
     "mobile",
@@ -1351,32 +1538,14 @@
      "url": "https://www.nichd.nih.gov/about/org/od/directors_corner/prev_updates/effects-digital-media-children-march2024",
      "note": "Research indicates that excessive use of social media platforms can negatively impact adolescents' mental health, contributing to increased anxiety and depression.",
      "source": "Eunice Kennedy Shriver National Institute of Child Health and Human Development"
+    },
+    {
+     "on": "2026-10-01",
+     "note": "A global study found that high screen time, including social media use, is linked to lower academic achievement and increased mental health issues in children.",
+     "source": "The Guardian",
+     "url": "https://www.theguardian.com/society/2026/sep/28/high-screen-usage-in-children-linked-to-poorer-outcomes-major-study-suggests"
     }
-   ],
-   "harm": [
-    "Built to keep a child scrolling: the feed never ends, and every like is a small reward on a young brain.",
-    "Comparison, exclusion, bullying and sextortion happen here; teens who use it three or more hours a day face double the risk of anxiety and depression symptoms (U.S. Surgeon General, 2023).",
-    "Sleep loss, and a self-worth that rises and falls with strangers' approval."
-   ],
-   "avoid": [
-    "Any account under 13 (that is the law) and, most experts now say, well after.",
-    "Secret accounts, second accounts, and direct messages with strangers.",
-    "Posting photos of their body, their school, their home or their location.",
-    "Endless scrolling; use it for a purpose and put it down."
-   ],
-   "bless": [
-    "Share a testimony, a scripture, a kindness, on purpose.",
-    "Organize a service project with friends.",
-    "Keep a family group where the good news gets told first."
-   ],
-   "ages": {
-    "0-2": "None.",
-    "3-5": "None.",
-    "6-9": "None.",
-    "10-12": "None; the law says 13 and the Surgeon General says even that is not proof of safety.",
-    "13-15": "Delay it as long as you can. If it is used: private accounts, parents follow and know the passwords, notifications off, a daily limit, nothing in bedrooms.",
-    "16+": "Purposeful use with their own limits; a weekly day away from it."
-   }
+   ]
   },
   {
    "y": 2007,
@@ -1392,11 +1561,24 @@
    "lng": -122.4,
    "loc": "San Francisco, USA",
    "why": "The scriptures, the family's photos, a prophet's voice and a way to call for help, all in a pocket. This app lives here. Used with care, it is the most useful tool a family has ever carried.",
+   "ages": {
+    "0-2": "A parent's phone, held by the parent, for family video calls; not a toy, not a babysitter.",
+    "16+": "Their own phone under their own rules, learned while they were home.",
+    "3-5": "A parent's phone, held by the parent, for family video calls; not a toy, not a babysitter.",
+    "6-9": "No smartphone.",
+    "10-12": "No smartphone; a basic phone or a watch if the family needs one.",
+    "13-15": "Only with a written family agreement, filters, parent-known passwords and no bedroom overnight; many experts say wait until high school."
+   },
    "date": "2007 AD",
    "good": [
     "Scriptures and this app anywhere you go.",
     "A camera for every family memory.",
     "Maps, help and family one tap away."
+   ],
+   "harm": [
+    "Every other technology on this list in one pocket, always on, always pulling.",
+    "A camera, a chat and a browser with a child at bedtime, alone.",
+    "Attention broken into pieces; the mind never rests."
    ],
    "kids": [
     "It sleeps in the kitchen, not in your room.",
@@ -1406,6 +1588,18 @@
    "name": "The Smartphone",
    "talk": "Let's each say one thing our phone helps with and one thing it steals.",
    "what": "A phone, a camera, a computer and the whole internet in one pocket. The iPhone came first; now almost everyone has one.",
+   "avoid": [
+    "A smartphone in a bedroom overnight; it charges in the kitchen.",
+    "Apps installed without a parent's approval.",
+    "Deleted histories and hidden folders.",
+    "The phone at meals, in worship, and while driving."
+   ],
+   "bless": [
+    "Scriptures, hymns and talks in a pocket everywhere.",
+    "Navigation to someone who needs help; a call to someone alone.",
+    "Record the stories of the old and the first words of the young."
+   ],
+   "modern": true,
    "builtOn": [
     "mobile",
     "internet",
@@ -1434,31 +1628,7 @@
      "note": "A review in Frontiers in Psychology found that excessive smartphone use among adolescents is linked to sleep disruption, reduced attention, and increased anxiety, suggesting the need for balanced usage.",
      "source": "Frontiers in Psychology"
     }
-   ],
-   "harm": [
-    "Every other technology on this list in one pocket, always on, always pulling.",
-    "A camera, a chat and a browser with a child at bedtime, alone.",
-    "Attention broken into pieces; the mind never rests."
-   ],
-   "avoid": [
-    "A smartphone in a bedroom overnight; it charges in the kitchen.",
-    "Apps installed without a parent's approval.",
-    "Deleted histories and hidden folders.",
-    "The phone at meals, in worship, and while driving."
-   ],
-   "bless": [
-    "Scriptures, hymns and talks in a pocket everywhere.",
-    "Navigation to someone who needs help; a call to someone alone.",
-    "Record the stories of the old and the first words of the young."
-   ],
-   "ages": {
-    "0-2": "A parent's phone, held by the parent, for family video calls; not a toy, not a babysitter.",
-    "3-5": "A parent's phone, held by the parent, for family video calls; not a toy, not a babysitter.",
-    "6-9": "No smartphone.",
-    "10-12": "No smartphone; a basic phone or a watch if the family needs one.",
-    "13-15": "Only with a written family agreement, filters, parent-known passwords and no bedroom overnight; many experts say wait until high school.",
-    "16+": "Their own phone under their own rules, learned while they were home."
-   }
+   ]
   },
   {
    "y": 2005,
@@ -1474,11 +1644,24 @@
    "lng": -122.33,
    "loc": "San Mateo, California, USA",
    "why": "A gospel talk, a hymn, a how-to for fixing the sink, a lesson from the best teacher in the world: streaming put good teaching within reach of every child. The Travelers' own videos will live here.",
+   "ages": {
+    "0-2": "None.",
+    "16+": "Decide what deserves their evenings.",
+    "3-5": "One short show a day, chosen by you, with you.",
+    "6-9": "A locked child profile, autoplay off, a daily limit.",
+    "10-12": "Titles chosen together; teach ratings and why.",
+    "13-15": "Their choices within the family's standard; talk about what they watch."
+   },
    "date": "2005 AD",
    "good": [
     "Learning any skill by watching someone kind explain it.",
     "Watching a talk or a hymn together.",
     "Stories and lessons for children, chosen by parents."
+   ],
+   "harm": [
+    "Autoplay never stops; one episode becomes a night.",
+    "'Kids' profiles can still surface content no child should see.",
+    "Binge watching replaces sleep, play and people."
    ],
    "kids": [
     "Autoplay off. You choose the next one, with a grown-up.",
@@ -1488,6 +1671,17 @@
    "name": "Streaming Video",
    "talk": "What have you learned from a video that you could teach us?",
    "what": "Any video, any time, on any screen. YouTube, then Netflix and the rest. The next one starts by itself.",
+   "avoid": [
+    "Autoplay left on.",
+    "Unrated or mature titles, and a child's profile without a parental lock.",
+    "Watching alone in a bedroom."
+   ],
+   "bless": [
+    "Uplifting films and talks watched together and talked over.",
+    "A family series, one episode a week, with popcorn and a rule.",
+    "Turn it off and act the story out instead."
+   ],
+   "modern": true,
    "builtOn": [
     "internet",
     "tv",
@@ -1509,30 +1703,7 @@
      "note": "A study in npj Digital Medicine indicated that digital mental health interventions can offer small but significant benefits for children's emotional and behavioral outcomes, especially when combined with in-person support.",
      "source": "npj Digital Medicine"
     }
-   ],
-   "harm": [
-    "Autoplay never stops; one episode becomes a night.",
-    "'Kids' profiles can still surface content no child should see.",
-    "Binge watching replaces sleep, play and people."
-   ],
-   "avoid": [
-    "Autoplay left on.",
-    "Unrated or mature titles, and a child's profile without a parental lock.",
-    "Watching alone in a bedroom."
-   ],
-   "bless": [
-    "Uplifting films and talks watched together and talked over.",
-    "A family series, one episode a week, with popcorn and a rule.",
-    "Turn it off and act the story out instead."
-   ],
-   "ages": {
-    "0-2": "None.",
-    "3-5": "One short show a day, chosen by you, with you.",
-    "6-9": "A locked child profile, autoplay off, a daily limit.",
-    "10-12": "Titles chosen together; teach ratings and why.",
-    "13-15": "Their choices within the family's standard; talk about what they watch.",
-    "16+": "Decide what deserves their evenings."
-   }
+   ]
   },
   {
    "y": 2010,
@@ -1547,11 +1718,23 @@
    "lng": -122.4,
    "loc": "San Francisco, USA",
    "why": "A scripture story with pictures, a lullaby, a video call with Grandma: a tablet can bring all of it to a small child at bedtime. It was made to be simple enough for anyone to hold light and truth.",
+   "ages": {
+    "0-2": "None, except a video call in a parent's hands.",
+    "16+": "Whatever it is for, on purpose.",
+    "3-5": "Short spells of good apps beside a parent; about an hour of screens in all.",
+    "6-9": "A child account with limits; creation over consumption.",
+    "10-12": "Schoolwork and creating, in family rooms.",
+    "13-15": "A tool, with the same rules as the phone."
+   },
    "date": "2010 AD",
    "good": [
     "Reading illustrated scripture stories together.",
     "Video calls with family far away.",
     "Drawing, music and learning games chosen by parents."
+   ],
+   "harm": [
+    "The easiest screen to hand a child, and so the easiest to overuse.",
+    "A quiet child on a tablet is not always a learning child."
    ],
    "kids": [
     "Tablet time is together time.",
@@ -1561,6 +1744,17 @@
    "name": "Tablets",
    "talk": "What is your favourite thing we do on the tablet together? What is your favourite thing we do with no screen at all?",
    "what": "A big touch screen with no keyboard. Easy enough for a toddler to use, which is the point and the problem.",
+   "avoid": [
+    "Tablet at meals, in the car for short trips, and at bedtime.",
+    "A tablet as a way to stop crying or fill every wait.",
+    "Apps with ads and in-app purchases."
+   ],
+   "bless": [
+    "Read the scriptures and the stories together on it.",
+    "Draw a picture for someone and send it.",
+    "Video-call a grandparent and show them the drawing."
+   ],
+   "modern": true,
    "builtOn": [
     "smartphone",
     "pc"
@@ -1580,30 +1774,14 @@
      "url": "https://www.childrenandscreens.org/newsroom/news/experts-vote-8-0-against-phones-and-tablets-in-childrens-bedrooms-overnight/",
      "note": "Experts recommend keeping tablets out of children's bedrooms overnight to prevent sleep disturbances and promote better sleep hygiene.",
      "source": "Children and Screens"
+    },
+    {
+     "on": "2026-10-01",
+     "note": "The APA warns that engagement with educational technology, such as tablets, does not necessarily equate to learning, urging scrutiny of EdTech claims.",
+     "source": "American Psychological Association",
+     "url": "https://www.apa.org/news/press/releases/2026/09/education-technology-engagement"
     }
-   ],
-   "harm": [
-    "The easiest screen to hand a child, and so the easiest to overuse.",
-    "A quiet child on a tablet is not always a learning child."
-   ],
-   "avoid": [
-    "Tablet at meals, in the car for short trips, and at bedtime.",
-    "A tablet as a way to stop crying or fill every wait.",
-    "Apps with ads and in-app purchases."
-   ],
-   "bless": [
-    "Read the scriptures and the stories together on it.",
-    "Draw a picture for someone and send it.",
-    "Video-call a grandparent and show them the drawing."
-   ],
-   "ages": {
-    "0-2": "None, except a video call in a parent's hands.",
-    "3-5": "Short spells of good apps beside a parent; about an hour of screens in all.",
-    "6-9": "A child account with limits; creation over consumption.",
-    "10-12": "Schoolwork and creating, in family rooms.",
-    "13-15": "A tool, with the same rules as the phone.",
-    "16+": "Whatever it is for, on purpose."
-   }
+   ]
   },
   {
    "y": 2014,
@@ -1618,11 +1796,24 @@
    "lng": -122.33,
    "loc": "Seattle, USA",
    "why": "'Play the Lantern Lullaby.' 'Read tonight's story.' A voice assistant can put scripture and music in a room with no screen at all, and help a grandparent who cannot see the buttons.",
+   "ages": {
+    "0-2": "None.",
+    "16+": "Use it to free time for what matters.",
+    "3-5": "Ask it to play a song, with 'please', beside you.",
+    "6-9": "Timers, music and simple questions; teach that it can be wrong.",
+    "10-12": "A tool, not an oracle; check what it says.",
+    "13-15": "Learn what it records and who hears it."
+   },
    "date": "2014 AD",
    "good": [
     "Playing hymns and stories with no screen.",
     "Helping someone who cannot see or type.",
     "Timers, reminders and answers for a busy family."
+   ],
+   "harm": [
+    "A microphone that is always listening in the home.",
+    "A child who orders a 'person' around learns to order people around.",
+    "It answers with confidence whether it is right or wrong."
    ],
    "kids": [
     "Say please, even to the speaker.",
@@ -1632,6 +1823,17 @@
    "name": "Voice Assistants",
    "talk": "If our speaker could only do one thing for our family, what should it be?",
    "what": "A speaker you talk to. Alexa, Siri and Google answer questions, play music and set timers.",
+   "avoid": [
+    "Purchases left enabled.",
+    "A speaker in a child's bedroom.",
+    "Asking it questions of right and wrong that belong to parents and to prayer."
+   ],
+   "bless": [
+    "Play a hymn or a scripture story while hands are busy.",
+    "Timers for chores and for screens.",
+    "A voice for someone who cannot see or type."
+   ],
+   "modern": true,
    "builtOn": [
     "smartphone",
     "computer",
@@ -1647,30 +1849,7 @@
      "note": "Children who say 'please' and 'thank you' to a speaker keep saying it to people. Manners with machines are practice for manners with everyone.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "A microphone that is always listening in the home.",
-    "A child who orders a 'person' around learns to order people around.",
-    "It answers with confidence whether it is right or wrong."
-   ],
-   "avoid": [
-    "Purchases left enabled.",
-    "A speaker in a child's bedroom.",
-    "Asking it questions of right and wrong that belong to parents and to prayer."
-   ],
-   "bless": [
-    "Play a hymn or a scripture story while hands are busy.",
-    "Timers for chores and for screens.",
-    "A voice for someone who cannot see or type."
-   ],
-   "ages": {
-    "0-2": "None.",
-    "3-5": "Ask it to play a song, with 'please', beside you.",
-    "6-9": "Timers, music and simple questions; teach that it can be wrong.",
-    "10-12": "A tool, not an oracle; check what it says.",
-    "13-15": "Learn what it records and who hears it.",
-    "16+": "Use it to free time for what matters."
-   }
+   ]
   },
   {
    "y": 2016,
@@ -1685,11 +1864,24 @@
    "lng": -122.18,
    "loc": "Menlo Park, California, USA",
    "why": "Walk through Jerusalem as it was. Stand in a temple far away. See the earth from space. Made well, it lets a family stand where the scriptures happened.",
+   "ages": {
+    "0-2": "None.",
+    "16+": "A tool for learning and creating, with their own limits.",
+    "3-5": "None.",
+    "6-9": "None.",
+    "10-12": "Only what the maker allows, in the family room, short sessions, no social VR.",
+    "13-15": "Short sessions, no strangers, parents can see what is played."
+   },
    "date": "2016 AD",
    "good": [
     "Visiting holy places and history together.",
     "Training doctors and pilots without risk.",
     "Helping people who cannot travel see the world."
+   ],
+   "harm": [
+    "Young eyes and balance are still developing; makers set minimum ages for a reason.",
+    "A headset shuts out the room and the family.",
+    "Social VR puts strangers, and their voices and hands, right beside a child."
    ],
    "kids": [
     "Only with a grown-up in the room.",
@@ -1699,6 +1891,17 @@
    "name": "Virtual Reality",
    "talk": "If you could stand in one scripture story for five minutes, which one would it be?",
    "what": "A headset that covers your eyes and puts you inside a picture. You look around and it looks back.",
+   "avoid": [
+    "A headset under the maker's minimum age, and under 12 in most homes.",
+    "Social VR rooms with strangers.",
+    "Long sessions; twenty minutes is plenty."
+   ],
+   "bless": [
+    "Walk the streets of Jerusalem, stand in a temple, see the place a scripture happened.",
+    "Visit the town a great-grandparent came from.",
+    "Learn a skill safely: surgery, flying, repair."
+   ],
+   "modern": true,
    "builtOn": [
     "tv",
     "games",
@@ -1714,30 +1917,7 @@
      "note": "Makers set minimum ages of about 10 to 13 for headsets, and reports of harassment in virtual rooms led to 'personal boundary' settings. Treat a headset like the internet with the door open.",
      "source": "Manufacturer guidance and safety reports, summarised"
     }
-   ],
-   "harm": [
-    "Young eyes and balance are still developing; makers set minimum ages for a reason.",
-    "A headset shuts out the room and the family.",
-    "Social VR puts strangers, and their voices and hands, right beside a child."
-   ],
-   "avoid": [
-    "A headset under the maker's minimum age, and under 12 in most homes.",
-    "Social VR rooms with strangers.",
-    "Long sessions; twenty minutes is plenty."
-   ],
-   "bless": [
-    "Walk the streets of Jerusalem, stand in a temple, see the place a scripture happened.",
-    "Visit the town a great-grandparent came from.",
-    "Learn a skill safely: surgery, flying, repair."
-   ],
-   "ages": {
-    "0-2": "None.",
-    "3-5": "None.",
-    "6-9": "None.",
-    "10-12": "Only what the maker allows, in the family room, short sessions, no social VR.",
-    "13-15": "Short sessions, no strangers, parents can see what is played.",
-    "16+": "A tool for learning and creating, with their own limits."
-   }
+   ]
   },
   {
    "y": 2022,
@@ -1753,11 +1933,25 @@
    "lng": -122.4,
    "loc": "San Francisco, USA",
    "why": "AI can read every book ever written and explain any of them to a child in plain words. It can help a family write its history, help a doctor find a cure, help a missionary speak a new language. Light and knowledge, faster than ever - the last great tool before the Lord comes, if it is used for Him.",
+   "ages": {
+    "0-2": "None; a parent may use it to help them.",
+    "16+": "Learn to use it well and honestly; it will be part of their work.",
+    "3-5": "None; a parent may use it to help them.",
+    "6-9": "Only with a parent beside them, in a family-safe tool.",
+    "10-12": "With a parent, for learning; never alone with a chatbot; check facts together.",
+    "13-15": "School-approved tools; never AI companions; learn to verify; honest about what is theirs."
+   },
    "date": "November 30, 2022",
    "good": [
     "Explaining anything, at any level, patiently.",
     "Helping people who cannot see, hear or speak.",
     "Doing hours of hard work in seconds so people can do what only people can do."
+   ],
+   "harm": [
+    "It is confident when it is wrong, and a child cannot always tell.",
+    "Deepfakes: anyone's face and voice on anything, including a child's.",
+    "AI 'companions' pull lonely children from real friends and real family, and some have encouraged self-harm.",
+    "Doing the thinking for them, so they never learn to."
    ],
    "kids": [
     "AI can be wrong. Check it, especially about people and facts.",
@@ -1767,6 +1961,19 @@
    "name": "AI That Talks",
    "talk": "What is one thing you would love AI to help our family do? What is one thing we should never let it do?",
    "what": "Computers that write, draw, talk and answer like a person. ChatGPT came first; now AI is in phones, cars, schools and hospitals.",
+   "avoid": [
+    "Sharing private things, pictures or family details with any AI.",
+    "AI 'friends' and companion apps at any age of childhood.",
+    "Using it to do schoolwork and calling it their own.",
+    "Chatting with it alone before they are old enough to check it."
+   ],
+   "bless": [
+    "Explain a scripture at their level, patiently, as many times as they ask.",
+    "Write the family's history from grandpa's recordings.",
+    "Learn a language, a skill, a subject the school does not teach.",
+    "Help with the Lord's work: translation, teaching, reaching."
+   ],
+   "modern": true,
    "builtOn": [
     "internet",
     "computer",
@@ -1813,33 +2020,7 @@
      "note": "Recent developments in AI-driven educational tools show promise in enhancing personalized learning experiences for children, though concerns about data privacy remain.",
      "source": "Nature Human Behaviour"
     }
-   ],
-   "harm": [
-    "It is confident when it is wrong, and a child cannot always tell.",
-    "Deepfakes: anyone's face and voice on anything, including a child's.",
-    "AI 'companions' pull lonely children from real friends and real family, and some have encouraged self-harm.",
-    "Doing the thinking for them, so they never learn to."
-   ],
-   "avoid": [
-    "Sharing private things, pictures or family details with any AI.",
-    "AI 'friends' and companion apps at any age of childhood.",
-    "Using it to do schoolwork and calling it their own.",
-    "Chatting with it alone before they are old enough to check it."
-   ],
-   "bless": [
-    "Explain a scripture at their level, patiently, as many times as they ask.",
-    "Write the family's history from grandpa's recordings.",
-    "Learn a language, a skill, a subject the school does not teach.",
-    "Help with the Lord's work: translation, teaching, reaching."
-   ],
-   "ages": {
-    "0-2": "None; a parent may use it to help them.",
-    "3-5": "None; a parent may use it to help them.",
-    "6-9": "Only with a parent beside them, in a family-safe tool.",
-    "10-12": "With a parent, for learning; never alone with a chatbot; check facts together.",
-    "13-15": "School-approved tools; never AI companions; learn to verify; honest about what is theirs.",
-    "16+": "Learn to use it well and honestly; it will be part of their work."
-   }
+   ]
   },
   {
    "y": 2024,
@@ -1854,11 +2035,24 @@
    "lng": -122.4,
    "loc": "Worldwide",
    "why": "A robot can do work that is dangerous, dull or dirty so that people are free for family, service and learning. A self-driving car may one day stop the crashes that take so many families.",
+   "ages": {
+    "0-2": "Watch from a parent's arms.",
+    "16+": "Use them to serve, and keep the human in charge.",
+    "3-5": "Toy robots; learn that a machine only does what it is told.",
+    "6-9": "A first building kit with a grown-up.",
+    "10-12": "Robotics club; code something that moves.",
+    "13-15": "Build, program, compete; learn what the machine cannot do."
+   },
    "date": "2024 AD",
    "good": [
     "Dangerous jobs done without anyone getting hurt.",
     "Help for people who cannot walk, lift or see.",
     "Cars that never text and never fall asleep."
+   ],
+   "harm": [
+    "Machines that move do not see a small child.",
+    "A car that drives itself still needs a driver who is awake.",
+    "Worry about work and the future can weigh on a teenager."
    ],
    "kids": [
     "Treat a robot like a big machine: stay clear when it moves.",
@@ -1868,6 +2062,17 @@
    "name": "Robots and Self-Driving Machines",
    "talk": "If a robot did all the chores, what would our family do with the extra hours?",
    "what": "Machines with AI inside that move: cars that drive themselves, robots that build, deliver, clean and help.",
+   "avoid": [
+    "Standing near robots, mowers or self-driving cars at work.",
+    "Trusting an autopilot with your life or anyone else's.",
+    "Fear; a robot is a tool, and tools serve people."
+   ],
+   "bless": [
+    "Robots that help the disabled walk, see and speak.",
+    "Build a robot at home or in a club; that is learning to serve with machines.",
+    "Deliver help farther and faster than hands can reach."
+   ],
+   "modern": true,
    "builtOn": [
     "ai",
     "computer",
@@ -1884,218 +2089,42 @@
      "note": "Self-driving taxis now run in several cities with fewer crashes than human drivers in those same streets, and the arguments about who is responsible when one fails are just beginning.",
      "source": "Transport safety reports, summarised"
     }
-   ],
-   "harm": [
-    "Machines that move do not see a small child.",
-    "A car that drives itself still needs a driver who is awake.",
-    "Worry about work and the future can weigh on a teenager."
-   ],
-   "avoid": [
-    "Standing near robots, mowers or self-driving cars at work.",
-    "Trusting an autopilot with your life or anyone else's.",
-    "Fear; a robot is a tool, and tools serve people."
-   ],
-   "bless": [
-    "Robots that help the disabled walk, see and speak.",
-    "Build a robot at home or in a club; that is learning to serve with machines.",
-    "Deliver help farther and faster than hands can reach."
-   ],
-   "ages": {
-    "0-2": "Watch from a parent's arms.",
-    "3-5": "Toy robots; learn that a machine only does what it is told.",
-    "6-9": "A first building kit with a grown-up.",
-    "10-12": "Robotics club; code something that moves.",
-    "13-15": "Build, program, compete; learn what the machine cannot do.",
-    "16+": "Use them to serve, and keep the human in charge."
-   }
+   ]
   }
  ],
- "updated": "2026-09-29",
- "version": 6,
- "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
+ "updated": "2026-10-01",
+ "version": 8,
  "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
- "ages": [
-  {
-   "id": "baby",
-   "label": "Babies and toddlers",
-   "years": "0 to 2",
-   "growing": "Attachment, trust, first words and walking. A baby learns language from a face that answers back, not from a screen; this is the age when the brain wires itself fastest around real people.",
-   "fits": [
-    "Video calls with grandparents and family far away, with a parent holding the phone.",
-    "Music, lullabies and scripture stories played aloud while you hold them.",
-    "A parent's phone camera, to keep the memories."
-   ],
-   "rules": [
-    "No screen time except video chat with family (American Academy of Pediatrics).",
-    "No screens in the room where they sleep.",
-    "Never a screen to stop crying; hold them instead."
-   ],
-   "watch": [
-    "A baby who stops looking up at faces, or whose words come late, when screens are on a lot.",
-    "Background television: it cuts the number of words a baby hears from you."
-   ],
-   "bless": [
-    "Let them see grandma's face and hear her voice every week.",
-    "Sing the same lullaby every night; it becomes home to them."
-   ]
-  },
-  {
-   "id": "little",
-   "label": "Little ones",
-   "years": "3 to 5",
-   "growing": "Imagination, language, self-control, and the first sense of right and wrong. They copy everything, cannot yet tell a story from an advertisement, and feel a sudden stop like a loss.",
-   "fits": [
-    "Picture books and scripture stories on a screen, read together, the way you would read a book.",
-    "Children's music and hymns.",
-    "Drawing and building apps, for short spells, beside you."
-   ],
-   "rules": [
-    "About an hour a day at most, of good content, watched with a parent (American Academy of Pediatrics); the WHO says an hour or less for this age too.",
-    "No screens at meals, in the car for short trips, or in the hour before bed.",
-    "You choose the content; autoplay is off; no 'kids' video feeds unwatched."
-   ],
-   "watch": [
-    "Tantrums when the screen goes off, and asking for it first thing in the morning.",
-    "Fast, flashing cartoons; they train a short attention span.",
-    "Advertisements aimed at them; explain what an ad is."
-   ],
-   "bless": [
-    "Record a message or a song for someone who is sick or far away.",
-    "Make a card on the tablet and print it for a neighbor."
-   ]
-  },
-  {
-   "id": "early",
-   "label": "Early school years",
-   "years": "6 to 9",
-   "growing": "Reading, friendship, fairness, and a conscience that can be taught. They believe what they see. They want to belong, and they still tell you everything if you make it safe to.",
-   "fits": [
-    "Learning apps and reading apps, with the settings you chose.",
-    "Family video calls, family movie night, uplifting shows chosen together.",
-    "Simple creation: drawing, music, photos of family, a first typed story."
-   ],
-   "rules": [
-    "Consistent daily limits, written down as a family media plan; screens live in family rooms, never bedrooms.",
-    "No personal smartphone, no social media, no online games with strangers' chat.",
-    "Filters on every device, and a parent who can see the history."
-   ],
-   "watch": [
-    "Fear from something they saw; ask 'did you see anything that scared you?' often.",
-    "Sneaking screens, or lying about time.",
-    "Comparing themselves with children on a screen."
-   ],
-   "bless": [
-    "Video-call an older relative and ask them a family-history question; record the answer.",
-    "Type a thank-you note to a teacher or a bishop."
-   ]
-  },
-  {
-   "id": "tween",
-   "label": "Tweens",
-   "years": "10 to 12",
-   "growing": "Identity, puberty, and the pull of friends. Curiosity is strong and the brakes are not built yet: the part of the brain that weighs consequences finishes growing in the mid-twenties. Most children first meet pornography by accident at about this age, so the talk comes before the device.",
-   "fits": [
-    "A basic phone or a watch that calls and texts, only if the family truly needs it; a smartphone can wait.",
-    "Homework online in a family room, with filters and history visible.",
-    "Creating: coding, music, film-making, photography, with the results shared inside the family."
-   ],
-   "rules": [
-    "No social media (the law sets 13 as the floor; the Surgeon General warns it is not proof of safety).",
-    "No devices in bedrooms overnight; they charge in the kitchen.",
-    "A family rule that a secret online is never kept from parents, and that closing a bad page and telling is always the right move, never punished."
-   ],
-   "watch": [
-    "Withdrawal, secrecy, a phone that is always face-down.",
-    "Sleep loss, and mood that tracks the screen.",
-    "Anyone online who wants to move the talk to a private app."
-   ],
-   "bless": [
-    "Teach a younger sibling something on the tablet.",
-    "Help a grandparent with their phone; that is service too.",
-    "Make a family video for a birthday or a farewell."
-   ]
-  },
-  {
-   "id": "teen",
-   "label": "Young teens",
-   "years": "13 to 15",
-   "growing": "Abstract thinking, the need to be their own person, and a hunger for approval that social media is built to exploit. Risk feels smaller than it is. Faith becomes their own here, or does not.",
-   "fits": [
-    "A smartphone with a written family agreement, filters, and a parent who knows every account and password.",
-    "Tools to create and serve: editing, design, coding, music, a family history project.",
-    "Scripture and hymn apps, and talks they choose to listen to."
-   ],
-   "rules": [
-    "Delay social media as long as you can; if it is used, accounts are private, parents follow, notifications are off, and there is a daily limit.",
-    "Phones out of bedrooms at night and off the table at meals; the Surgeon General links heavy use to anxiety, depression and lost sleep.",
-    "Talk plainly about pornography, sextortion, bullying and AI 'companions' before they meet them; agree what they will do when they do."
-   ],
-   "watch": [
-    "Three hours a day or more on social media doubles the risk of anxiety and depression symptoms (Surgeon General, 2023).",
-    "A sudden new 'friend' who sends gifts or asks for pictures.",
-    "Comparing their body or their life to a feed."
-   ],
-   "bless": [
-    "Share a testimony, a scripture or a kindness online on purpose, not by accident.",
-    "Organize a service project with friends through the group chat.",
-    "Record grandparents' stories and put them on the family timeline."
-   ]
-  },
-  {
-   "id": "older",
-   "label": "Older teens",
-   "years": "16 and up",
-   "growing": "Preparing to govern themselves: college, missions, work, marriage. The rules now move from yours to theirs, one at a time, while they are still home to talk about it.",
-   "fits": [
-    "Their own limits, written by them and reviewed with you.",
-    "AI, design, code and media as tools for real work and real service.",
-    "Teaching the younger ones what they have learned."
-   ],
-   "rules": [
-    "A weekly screen sabbath, and phones away when people are present.",
-    "Learn to tell truth from propaganda: check who made it, who paid for it, and what it wants you to feel.",
-    "Keep the standards in For the Strength of Youth as their own, not yours."
-   ],
-   "watch": [
-    "Driving with a phone in hand.",
-    "Gambling built into games and apps.",
-    "Letting an AI do the thinking, or the feeling."
-   ],
-   "bless": [
-    "Lead the family history work; build the family's timeline.",
-    "Create something that lifts: music, a short film, a page that helps someone.",
-    "Use the tools the way the Lord's work uses them: to reach, to teach, to gather."
-   ]
-  }
- ],
+ "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
+ "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next.",
  "agesSources": [
   {
-   "name": "American Academy of Pediatrics: Media and Children",
-   "url": "https://www.healthychildren.org/English/family-life/Media/Pages/default.aspx"
+   "url": "https://www.healthychildren.org/English/family-life/Media/Pages/default.aspx",
+   "name": "American Academy of Pediatrics: Media and Children"
   },
   {
-   "name": "American Academy of Pediatrics: Family Media Plan",
-   "url": "https://www.healthychildren.org/English/fmp/Pages/MediaPlan.aspx"
+   "url": "https://www.healthychildren.org/English/fmp/Pages/MediaPlan.aspx",
+   "name": "American Academy of Pediatrics: Family Media Plan"
   },
   {
-   "name": "American Psychological Association: Health Advisory on Social Media Use in Adolescence (2023)",
-   "url": "https://www.apa.org/topics/social-media-internet/health-advisory-adolescent-social-media-use"
+   "url": "https://www.apa.org/topics/social-media-internet/health-advisory-adolescent-social-media-use",
+   "name": "American Psychological Association: Health Advisory on Social Media Use in Adolescence (2023)"
   },
   {
-   "name": "World Health Organization: guidelines for children under 5 (2019)",
-   "url": "https://www.who.int/publications/i/item/9789241550536"
+   "url": "https://www.who.int/publications/i/item/9789241550536",
+   "name": "World Health Organization: guidelines for children under 5 (2019)"
   },
   {
-   "name": "Children's Online Privacy Protection Rule (why 13 is the legal floor)",
-   "url": "https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa"
+   "url": "https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa",
+   "name": "Children's Online Privacy Protection Rule (why 13 is the legal floor)"
   },
   {
-   "name": "For the Strength of Youth: A Guide for Making Choices",
-   "url": "https://www.churchofjesuschrist.org/study/manual/for-the-strength-of-youth?lang=eng"
+   "url": "https://www.churchofjesuschrist.org/study/manual/for-the-strength-of-youth?lang=eng",
+   "name": "For the Strength of Youth: A Guide for Making Choices"
   },
   {
-   "name": "Common Sense Media",
-   "url": "https://www.commonsensemedia.org/"
+   "url": "https://www.commonsensemedia.org/",
+   "name": "Common Sense Media"
   }
  ]
 }
