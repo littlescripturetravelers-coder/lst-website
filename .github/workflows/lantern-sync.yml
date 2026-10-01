@@ -597,7 +597,23 @@ jobs:
             echo "Nothing new to publish."
           else
             git commit -m "Morning Lantern: sync $(date -u +%Y-%m-%d)"
-            # the night builder may have pushed meanwhile: bring main in, then push
-            git pull --rebase origin main || { git rebase --abort; git pull --no-rebase --no-edit origin main; }
+            # the night builder, or another run of this, may have pushed meanwhile:
+            # bring main in, then push. Two runs that both republished the same
+            # nights clash on their .published.json bookkeeping (1 Oct 2026, run
+            # 294): those markers are ours to keep - the later publish is the truer
+            # one - and anything else that clashes is theirs, never overwritten here.
+            if ! git pull --rebase origin main; then
+              git rebase --abort 2>/dev/null || true
+              if ! git pull --no-rebase --no-edit origin main; then
+                for f in $(git diff --name-only --diff-filter=U); do
+                  case "$f" in
+                    */.published.json) git checkout --ours -- "$f" ;;
+                    *)                 git checkout --theirs -- "$f" ;;
+                  esac
+                  git add -- "$f"
+                done
+                git -c core.editor=true commit --no-edit -m "Morning Lantern: sync $(date -u +%Y-%m-%d) (merged with a run that landed first)"
+              fi
+            fi
             git push
           fi
