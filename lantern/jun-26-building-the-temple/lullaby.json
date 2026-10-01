@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 5",
   "reference": "1 Kings 6",
   "readId": "b6-w4-n5",
-  "appPage": "stories/jun-26-building-the-temple.html"
+  "appPage": "stories/jun-26-building-the-temple.html",
+  "timing": [
+    0.9,
+    5.88,
+    10.56,
+    15.34,
+    20.14,
+    25.04,
+    29.76,
+    34.78,
+    39.38,
+    44.2,
+    48.96,
+    53.9,
+    58.52,
+    63.48,
+    68.18,
+    73.2,
+    77.78,
+    82.6,
+    87.36,
+    92.24,
+    96.92,
+    101.86,
+    106.58,
+    111.58
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.98,
+    "lines": 24,
+    "when": "2026-10-01T21:22:58Z"
+  }
 }

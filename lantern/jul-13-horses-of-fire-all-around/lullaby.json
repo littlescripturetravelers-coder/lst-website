@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 6",
   "reference": "2 Kings 6",
   "readId": "b7-w2-n6",
-  "appPage": "stories/jul-13-horses-of-fire-all-around.html"
+  "appPage": "stories/jul-13-horses-of-fire-all-around.html",
+  "timing": [
+    6.3,
+    10.66,
+    13.66,
+    19.46,
+    23.76,
+    28.1,
+    32.24,
+    36.78,
+    39.86,
+    45.52,
+    49.96,
+    54.34,
+    58.58,
+    63.04,
+    67.12,
+    71.68,
+    76.06,
+    80.52,
+    85.16,
+    89.34,
+    93.56,
+    97.94,
+    102.12,
+    106.66
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:21:30Z"
+  }
 }

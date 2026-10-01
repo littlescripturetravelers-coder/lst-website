@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 3",
   "reference": "Psalms 1–2; 8; 19–33; 40; 46",
   "readId": "b8-w4-n3",
-  "appPage": "stories/aug-24-the-good-shepherd.html"
+  "appPage": "stories/aug-24-the-good-shepherd.html",
+  "timing": [
+    8.12,
+    12.16,
+    16.1,
+    20.26,
+    24.4,
+    30.06,
+    34.26,
+    38.38,
+    44.12,
+    48.24,
+    52.22,
+    56.3,
+    60.28,
+    66.04,
+    70.12,
+    74.28,
+    80.16,
+    84.46,
+    88.26,
+    92.48,
+    96.52,
+    102.26,
+    106.78,
+    111.44
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:20:28Z"
+  }
 }

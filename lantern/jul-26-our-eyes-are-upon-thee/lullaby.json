@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 5",
   "reference": "2 Chronicles 20",
   "readId": "b7-w4-n5",
-  "appPage": "stories/jul-26-our-eyes-are-upon-thee.html"
+  "appPage": "stories/jul-26-our-eyes-are-upon-thee.html",
+  "timing": [
+    4.28,
+    9.14,
+    12.9,
+    18.52,
+    23.04,
+    27.82,
+    31.66,
+    37.16,
+    41.6,
+    46.5,
+    50.32,
+    55.8,
+    60.34,
+    65.12,
+    68.92,
+    74.5,
+    78.94,
+    83.74,
+    87.64,
+    93.24,
+    97.8,
+    102.54,
+    106.4,
+    111.94
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.981,
+    "lines": 24,
+    "when": "2026-10-01T21:22:00Z"
+  }
 }

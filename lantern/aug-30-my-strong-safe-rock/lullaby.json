@@ -12,5 +12,37 @@
   "night": "Week 5 · Night 2",
   "reference": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
   "readId": "b8-w5-n2",
-  "appPage": "stories/aug-30-my-strong-safe-rock.html"
+  "appPage": "stories/aug-30-my-strong-safe-rock.html",
+  "timing": [
+    0.14,
+    4.62,
+    9.32,
+    14.08,
+    19.34,
+    23.74,
+    28.54,
+    33.3,
+    38.22,
+    42.94,
+    47.78,
+    52.58,
+    57.76,
+    62.2,
+    66.96,
+    71.7,
+    76.48,
+    81.36,
+    86.14,
+    90.98,
+    96.18,
+    100.6,
+    105.34,
+    110.16
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:20:38Z"
+  }
 }

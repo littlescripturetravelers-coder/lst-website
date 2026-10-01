@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 7",
   "reference": "Esther",
   "readId": "b8-w2-n7",
-  "appPage": "stories/aug-14-a-happy-celebration.html"
+  "appPage": "stories/aug-14-a-happy-celebration.html",
+  "timing": [
+    6.1,
+    10.72,
+    14.24,
+    17.38,
+    21.28,
+    26.18,
+    31.74,
+    34.92,
+    42.72,
+    47.24,
+    50.88,
+    54.3,
+    57.98,
+    62.76,
+    67.96,
+    70.86,
+    78.58,
+    82.96,
+    86.56,
+    89.7,
+    93.28,
+    98.28,
+    104.08,
+    107.04
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:20:10Z"
+  }
 }

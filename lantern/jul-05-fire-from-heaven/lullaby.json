@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 5",
   "reference": "1 Kings 18",
   "readId": "b7-w1-n5",
-  "appPage": "stories/jul-05-fire-from-heaven.html"
+  "appPage": "stories/jul-05-fire-from-heaven.html",
+  "timing": [
+    0.72,
+    5.66,
+    10.38,
+    15.16,
+    20.06,
+    25.26,
+    29.64,
+    34.42,
+    39.26,
+    44.04,
+    48.88,
+    53.74,
+    58.64,
+    63.76,
+    68.06,
+    72.92,
+    78.74,
+    83.6,
+    88.26,
+    93.2,
+    98.12,
+    103.26,
+    107.66,
+    112.56
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.992,
+    "lines": 24,
+    "when": "2026-10-01T21:21:15Z"
+  }
 }

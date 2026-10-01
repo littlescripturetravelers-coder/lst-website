@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 5",
   "reference": "2 Kings 6",
   "readId": "b7-w2-n5",
-  "appPage": "stories/jul-12-the-floating-axe-head.html"
+  "appPage": "stories/jul-12-the-floating-axe-head.html",
+  "timing": [
+    7.82,
+    11.9,
+    15.88,
+    19.86,
+    24.12,
+    27.92,
+    31.84,
+    35.84,
+    43.88,
+    47.9,
+    51.96,
+    55.86,
+    60.1,
+    63.9,
+    67.86,
+    71.86,
+    79.78,
+    83.86,
+    88.12,
+    91.9,
+    96.22,
+    100.06,
+    104.02,
+    108.24
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.993,
+    "lines": 24,
+    "when": "2026-10-01T21:21:28Z"
+  }
 }

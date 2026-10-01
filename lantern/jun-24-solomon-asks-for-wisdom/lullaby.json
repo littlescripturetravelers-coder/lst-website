@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 3",
   "reference": "1 Kings 3:1–15",
   "readId": "b6-w4-n3",
-  "appPage": "stories/jun-24-solomon-asks-for-wisdom.html"
+  "appPage": "stories/jun-24-solomon-asks-for-wisdom.html",
+  "timing": [
+    1.64,
+    6.7,
+    10.68,
+    14.74,
+    19.66,
+    24.06,
+    28.06,
+    32.02,
+    39.62,
+    43.52,
+    48.64,
+    52.68,
+    57.66,
+    62.0,
+    66.12,
+    69.98,
+    79.66,
+    84.72,
+    88.66,
+    92.7,
+    97.68,
+    102.0,
+    108.06,
+    112.04
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:22:54Z"
+  }
 }

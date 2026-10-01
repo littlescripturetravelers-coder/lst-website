@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 2",
   "reference": "2 Kings 4",
   "readId": "b7-w2-n2",
-  "appPage": "stories/jul-09-the-widows-oil.html"
+  "appPage": "stories/jul-09-the-widows-oil.html",
+  "timing": [
+    8.72,
+    12.74,
+    16.76,
+    20.84,
+    25.62,
+    29.78,
+    33.82,
+    37.82,
+    43.8,
+    47.86,
+    51.9,
+    55.84,
+    59.58,
+    63.78,
+    67.82,
+    71.8,
+    79.64,
+    83.82,
+    88.0,
+    91.78,
+    95.6,
+    99.84,
+    103.88,
+    107.84
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.993,
+    "lines": 24,
+    "when": "2026-10-01T21:21:23Z"
+  }
 }

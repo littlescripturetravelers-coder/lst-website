@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 6",
   "reference": "2 Kings 22",
   "readId": "b7-w3-n6",
-  "appPage": "stories/jul-20-huldah-speaks-for-god.html"
+  "appPage": "stories/jul-20-huldah-speaks-for-god.html",
+  "timing": [
+    2.72,
+    7.64,
+    12.02,
+    16.7,
+    21.52,
+    25.48,
+    30.46,
+    35.1,
+    39.68,
+    44.26,
+    48.9,
+    53.5,
+    58.06,
+    62.4,
+    67.26,
+    71.98,
+    77.32,
+    82.16,
+    86.86,
+    91.58,
+    96.26,
+    100.58,
+    105.58,
+    110.14
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.978,
+    "lines": 24,
+    "when": "2026-10-01T21:21:44Z"
+  }
 }

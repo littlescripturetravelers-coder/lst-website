@@ -12,5 +12,37 @@
   "night": "Week 5 · Night 6",
   "reference": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
   "readId": "b8-w5-n6",
-  "appPage": "stories/aug-34-tell-the-children.html"
+  "appPage": "stories/aug-34-tell-the-children.html",
+  "timing": [
+    9.1,
+    13.1,
+    17.14,
+    21.2,
+    24.9,
+    29.16,
+    32.16,
+    36.16,
+    44.12,
+    49.0,
+    52.14,
+    56.94,
+    60.88,
+    65.16,
+    68.16,
+    72.18,
+    78.88,
+    82.92,
+    86.14,
+    90.86,
+    94.88,
+    99.16,
+    102.16,
+    106.16
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.98,
+    "lines": 24,
+    "when": "2026-10-01T21:20:46Z"
+  }
 }

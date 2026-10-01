@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 3",
   "reference": "Esther",
   "readId": "b8-w2-n3",
-  "appPage": "stories/aug-10-for-such-a-time-as-this.html"
+  "appPage": "stories/aug-10-for-such-a-time-as-this.html",
+  "timing": [
+    8.08,
+    12.16,
+    16.08,
+    20.12,
+    24.12,
+    28.16,
+    32.18,
+    36.18,
+    42.1,
+    46.1,
+    50.16,
+    54.18,
+    60.14,
+    64.16,
+    68.18,
+    72.22,
+    78.26,
+    82.24,
+    86.16,
+    90.14,
+    96.08,
+    100.16,
+    104.14,
+    108.16
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:20:03Z"
+  }
 }

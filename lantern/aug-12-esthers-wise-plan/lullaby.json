@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 5",
   "reference": "Esther",
   "readId": "b8-w2-n5",
-  "appPage": "stories/aug-12-esthers-wise-plan.html"
+  "appPage": "stories/aug-12-esthers-wise-plan.html",
+  "timing": [
+    8.5,
+    12.62,
+    16.54,
+    20.54,
+    26.08,
+    30.7,
+    34.54,
+    38.64,
+    42.2,
+    48.6,
+    52.54,
+    56.5,
+    62.06,
+    66.68,
+    70.54,
+    74.66,
+    80.54,
+    84.76,
+    88.5,
+    92.62,
+    98.0,
+    102.64,
+    106.58,
+    110.66
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:20:06Z"
+  }
 }

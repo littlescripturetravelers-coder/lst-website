@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 4",
   "reference": "Ezra 1; 3–7; Nehemiah 2; 4–6; 8",
   "readId": "b8-w1-n4",
-  "appPage": "stories/aug-04-ezra-loves-the-scriptures.html"
+  "appPage": "stories/aug-04-ezra-loves-the-scriptures.html",
+  "timing": [
+    8.06,
+    12.12,
+    16.1,
+    20.08,
+    23.86,
+    28.12,
+    32.1,
+    36.18,
+    40.1,
+    44.12,
+    48.14,
+    52.1,
+    55.84,
+    60.1,
+    64.06,
+    68.12,
+    72.08,
+    76.14,
+    80.06,
+    84.16,
+    87.84,
+    92.1,
+    96.08,
+    100.12
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.993,
+    "lines": 24,
+    "when": "2026-10-01T21:19:50Z"
+  }
 }

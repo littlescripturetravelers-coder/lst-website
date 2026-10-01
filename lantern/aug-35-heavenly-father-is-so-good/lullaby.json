@@ -12,5 +12,37 @@
   "night": "Week 5 · Night 7",
   "reference": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
   "readId": "b8-w5-n7",
-  "appPage": "stories/aug-35-heavenly-father-is-so-good.html"
+  "appPage": "stories/aug-35-heavenly-father-is-so-good.html",
+  "timing": [
+    7.02,
+    9.9,
+    14.56,
+    17.1,
+    23.14,
+    28.6,
+    31.18,
+    34.4,
+    47.42,
+    50.24,
+    54.58,
+    57.38,
+    60.58,
+    66.04,
+    68.62,
+    71.4,
+    83.36,
+    86.18,
+    90.54,
+    93.4,
+    96.58,
+    102.04,
+    104.58,
+    107.72
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.981,
+    "lines": 24,
+    "when": "2026-10-01T21:20:48Z"
+  }
 }

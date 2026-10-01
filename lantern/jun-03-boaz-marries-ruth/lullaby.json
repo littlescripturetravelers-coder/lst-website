@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 3",
   "reference": "Ruth 3–4",
   "readId": "b6-w1-n3",
-  "appPage": "stories/jun-03-boaz-marries-ruth.html"
+  "appPage": "stories/jun-03-boaz-marries-ruth.html",
+  "timing": [
+    4.88,
+    9.62,
+    13.76,
+    18.3,
+    22.88,
+    27.42,
+    31.74,
+    36.36,
+    40.9,
+    45.32,
+    50.22,
+    54.44,
+    58.96,
+    63.4,
+    67.92,
+    72.56,
+    76.96,
+    81.34,
+    86.38,
+    90.52,
+    94.9,
+    99.26,
+    103.98,
+    108.74
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:22:12Z"
+  }
 }

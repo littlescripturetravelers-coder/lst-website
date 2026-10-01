@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 1",
   "reference": "Psalms 1–2; 8; 19–33; 40; 46",
   "readId": "b8-w4-n1",
-  "appPage": "stories/aug-22-the-happy-little-tree.html"
+  "appPage": "stories/aug-22-the-happy-little-tree.html",
+  "timing": [
+    1.08,
+    5.98,
+    10.62,
+    15.44,
+    20.22,
+    25.1,
+    29.88,
+    34.74,
+    39.54,
+    44.34,
+    49.08,
+    53.84,
+    58.66,
+    63.48,
+    68.26,
+    73.1,
+    77.84,
+    82.7,
+    87.44,
+    92.22,
+    97.06,
+    101.9,
+    106.66,
+    111.46
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.987,
+    "lines": 24,
+    "when": "2026-10-01T21:20:24Z"
+  }
 }

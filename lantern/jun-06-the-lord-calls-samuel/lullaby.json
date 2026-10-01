@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 6",
   "reference": "1 Samuel 3",
   "readId": "b6-w1-n6",
-  "appPage": "stories/jun-06-the-lord-calls-samuel.html"
+  "appPage": "stories/jun-06-the-lord-calls-samuel.html",
+  "timing": [
+    0.44,
+    5.96,
+    10.24,
+    15.14,
+    18.82,
+    24.58,
+    28.88,
+    33.86,
+    38.32,
+    43.96,
+    47.42,
+    52.9,
+    56.76,
+    62.5,
+    67.0,
+    71.84,
+    76.26,
+    81.16,
+    85.64,
+    90.54,
+    95.54,
+    100.54,
+    104.26,
+    109.18
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:22:19Z"
+  }
 }

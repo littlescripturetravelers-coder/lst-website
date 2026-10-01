@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 4",
   "reference": "2 Kings 22",
   "readId": "b7-w3-n4",
-  "appPage": "stories/jul-18-the-boy-who-became-king.html"
+  "appPage": "stories/jul-18-the-boy-who-became-king.html",
+  "timing": [
+    0.12,
+    3.74,
+    7.32,
+    11.82,
+    16.58,
+    21.42,
+    26.5,
+    31.08,
+    38.5,
+    42.28,
+    45.76,
+    50.26,
+    55.08,
+    59.84,
+    64.92,
+    69.46,
+    76.92,
+    80.52,
+    84.16,
+    88.66,
+    93.48,
+    98.22,
+    103.32,
+    107.92
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.979,
+    "lines": 24,
+    "when": "2026-10-01T21:21:40Z"
+  }
 }

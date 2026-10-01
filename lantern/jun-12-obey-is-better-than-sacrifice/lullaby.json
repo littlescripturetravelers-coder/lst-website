@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 5",
   "reference": "1 Samuel 15",
   "readId": "b6-w2-n5",
-  "appPage": "stories/jun-12-obey-is-better-than-sacrifice.html"
+  "appPage": "stories/jun-12-obey-is-better-than-sacrifice.html",
+  "timing": [
+    4.62,
+    9.28,
+    13.66,
+    18.22,
+    22.56,
+    27.08,
+    31.6,
+    36.32,
+    41.56,
+    45.98,
+    50.8,
+    55.44,
+    59.8,
+    64.26,
+    68.74,
+    73.4,
+    78.44,
+    83.02,
+    87.5,
+    91.88,
+    96.34,
+    100.66,
+    105.06,
+    110.12
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.987,
+    "lines": 24,
+    "when": "2026-10-01T21:22:31Z"
+  }
 }

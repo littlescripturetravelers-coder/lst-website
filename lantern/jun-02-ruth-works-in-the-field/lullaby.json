@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 2",
   "reference": "Ruth 2",
   "readId": "b6-w1-n2",
-  "appPage": "stories/jun-02-ruth-works-in-the-field.html"
+  "appPage": "stories/jun-02-ruth-works-in-the-field.html",
+  "timing": [
+    8.16,
+    12.36,
+    16.32,
+    20.36,
+    24.18,
+    28.38,
+    32.4,
+    37.38,
+    43.68,
+    47.9,
+    51.94,
+    55.98,
+    59.66,
+    63.88,
+    67.86,
+    72.9,
+    79.18,
+    83.38,
+    87.42,
+    91.52,
+    95.68,
+    99.9,
+    103.88,
+    108.9
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:22:09Z"
+  }
 }

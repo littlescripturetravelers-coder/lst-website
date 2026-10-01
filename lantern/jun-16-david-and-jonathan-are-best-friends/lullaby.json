@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 2",
   "reference": "1 Samuel 18",
   "readId": "b6-w3-n2",
-  "appPage": "stories/jun-16-david-and-jonathan-are-best-friends.html"
+  "appPage": "stories/jun-16-david-and-jonathan-are-best-friends.html",
+  "timing": [
+    7.54,
+    11.84,
+    16.0,
+    20.08,
+    24.84,
+    29.26,
+    33.42,
+    37.72,
+    45.34,
+    49.5,
+    53.76,
+    57.66,
+    61.94,
+    66.14,
+    70.98,
+    74.92,
+    83.56,
+    87.62,
+    91.92,
+    96.14,
+    100.74,
+    104.96,
+    109.34,
+    113.06
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.975,
+    "lines": 24,
+    "when": "2026-10-01T21:22:39Z"
+  }
 }

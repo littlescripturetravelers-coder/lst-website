@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 4",
   "reference": "2 Chronicles 19",
   "readId": "b7-w4-n4",
-  "appPage": "stories/jul-25-judges-who-are-fair.html"
+  "appPage": "stories/jul-25-judges-who-are-fair.html",
+  "timing": [
+    7.84,
+    11.82,
+    15.86,
+    19.84,
+    23.8,
+    27.82,
+    31.84,
+    35.88,
+    41.88,
+    45.88,
+    49.8,
+    53.82,
+    59.76,
+    63.86,
+    67.82,
+    71.88,
+    77.8,
+    81.84,
+    85.84,
+    89.86,
+    93.8,
+    97.82,
+    101.88,
+    105.9
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:21:56Z"
+  }
 }

@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 3",
   "reference": "2 Chronicles 16",
   "readId": "b7-w4-n3",
-  "appPage": "stories/jul-24-when-asa-forgot-to-trust.html"
+  "appPage": "stories/jul-24-when-asa-forgot-to-trust.html",
+  "timing": [
+    1.4,
+    5.82,
+    10.28,
+    14.46,
+    18.9,
+    23.5,
+    27.84,
+    32.18,
+    37.78,
+    41.92,
+    46.36,
+    50.44,
+    55.2,
+    59.84,
+    64.22,
+    68.74,
+    76.06,
+    80.08,
+    84.38,
+    88.66,
+    94.02,
+    98.48,
+    102.92,
+    107.46
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:21:54Z"
+  }
 }

@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 4",
   "reference": "1 Samuel 1",
   "readId": "b6-w1-n4",
-  "appPage": "stories/jun-04-hannah-prays-for-a-baby.html"
+  "appPage": "stories/jun-04-hannah-prays-for-a-baby.html",
+  "timing": [
+    7.56,
+    11.94,
+    15.6,
+    19.84,
+    24.08,
+    27.6,
+    31.84,
+    35.66,
+    43.56,
+    47.72,
+    51.66,
+    55.86,
+    60.04,
+    63.64,
+    67.88,
+    71.86,
+    79.64,
+    83.64,
+    88.12,
+    91.84,
+    96.06,
+    99.62,
+    103.88,
+    107.88
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.986,
+    "lines": 24,
+    "when": "2026-10-01T21:22:14Z"
+  }
 }

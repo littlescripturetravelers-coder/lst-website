@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 3",
   "reference": "1 Kings 17",
   "readId": "b7-w1-n3",
-  "appPage": "stories/jul-03-the-jar-that-never-ran-out.html"
+  "appPage": "stories/jul-03-the-jar-that-never-ran-out.html",
+  "timing": [
+    7.76,
+    11.9,
+    15.96,
+    19.92,
+    24.16,
+    27.92,
+    31.88,
+    35.96,
+    41.88,
+    45.9,
+    49.9,
+    53.64,
+    59.14,
+    62.92,
+    66.88,
+    70.9,
+    76.72,
+    80.88,
+    84.94,
+    88.92,
+    95.14,
+    98.94,
+    102.86,
+    106.86
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:21:12Z"
+  }
 }

@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 2",
   "reference": "2 Chronicles 15",
   "readId": "b7-w4-n2",
-  "appPage": "stories/jul-23-be-strong-and-dont-give-up.html"
+  "appPage": "stories/jul-23-be-strong-and-dont-give-up.html",
+  "timing": [
+    0.98,
+    5.8,
+    8.92,
+    15.4,
+    20.16,
+    24.96,
+    29.76,
+    34.56,
+    39.36,
+    44.22,
+    48.98,
+    53.78,
+    58.56,
+    63.36,
+    68.16,
+    73.0,
+    77.78,
+    82.64,
+    87.34,
+    92.24,
+    96.96,
+    101.76,
+    106.58,
+    111.42
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:21:52Z"
+  }
 }

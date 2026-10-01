@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 7",
   "reference": "1 Samuel 4–7",
   "readId": "b6-w1-n7",
-  "appPage": "stories/jun-07-gods-power-and-the-ark.html"
+  "appPage": "stories/jun-07-gods-power-and-the-ark.html",
+  "timing": [
+    4.54,
+    9.06,
+    13.8,
+    18.12,
+    22.56,
+    27.08,
+    31.72,
+    36.04,
+    40.52,
+    44.88,
+    49.58,
+    53.92,
+    58.5,
+    63.04,
+    67.76,
+    72.16,
+    76.64,
+    81.2,
+    85.8,
+    90.22,
+    94.74,
+    99.16,
+    103.84,
+    108.22
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:22:20Z"
+  }
 }

@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 2",
   "reference": "Esther",
   "readId": "b8-w2-n2",
-  "appPage": "stories/aug-09-mordecai-stands-tall.html"
+  "appPage": "stories/aug-09-mordecai-stands-tall.html",
+  "timing": [
+    5.56,
+    10.18,
+    14.66,
+    19.32,
+    23.76,
+    28.42,
+    33.02,
+    37.74,
+    42.5,
+    46.96,
+    51.56,
+    56.12,
+    60.62,
+    65.3,
+    69.76,
+    74.36,
+    79.0,
+    83.66,
+    88.1,
+    92.72,
+    97.18,
+    101.86,
+    106.34,
+    110.88
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:20:02Z"
+  }
 }

@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 1",
   "reference": "2 Samuel 11",
   "readId": "b6-w4-n1",
-  "appPage": "stories/jun-22-david-makes-a-big-mistake.html"
+  "appPage": "stories/jun-22-david-makes-a-big-mistake.html",
+  "timing": [
+    8.04,
+    12.02,
+    16.08,
+    20.12,
+    24.14,
+    28.12,
+    32.06,
+    36.12,
+    42.06,
+    46.1,
+    50.08,
+    54.0,
+    58.02,
+    62.1,
+    66.04,
+    70.12,
+    78.1,
+    82.02,
+    86.04,
+    90.1,
+    94.04,
+    98.08,
+    102.04,
+    106.3
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:22:50Z"
+  }
 }

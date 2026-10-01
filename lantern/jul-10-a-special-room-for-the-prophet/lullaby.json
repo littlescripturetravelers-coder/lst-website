@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 3",
   "reference": "2 Kings 4",
   "readId": "b7-w2-n3",
-  "appPage": "stories/jul-10-a-special-room-for-the-prophet.html"
+  "appPage": "stories/jul-10-a-special-room-for-the-prophet.html",
+  "timing": [
+    7.88,
+    11.92,
+    15.88,
+    19.94,
+    23.88,
+    27.88,
+    31.86,
+    35.86,
+    43.92,
+    47.9,
+    51.98,
+    55.98,
+    59.88,
+    63.9,
+    67.94,
+    72.2,
+    81.9,
+    85.9,
+    89.88,
+    93.96,
+    97.88,
+    101.9,
+    105.86,
+    109.7
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:21:25Z"
+  }
 }

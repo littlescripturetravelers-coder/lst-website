@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 7",
   "reference": "Psalms 1–2; 8; 19–33; 40; 46",
   "readId": "b8-w4-n7",
-  "appPage": "stories/aug-28-sing-with-all-your-heart.html"
+  "appPage": "stories/aug-28-sing-with-all-your-heart.html",
+  "timing": [
+    4.98,
+    8.92,
+    12.52,
+    17.0,
+    20.4,
+    24.56,
+    29.0,
+    33.54,
+    41.42,
+    44.86,
+    48.52,
+    53.0,
+    56.4,
+    60.6,
+    65.0,
+    69.56,
+    77.04,
+    80.78,
+    84.56,
+    89.04,
+    92.4,
+    96.52,
+    101.0,
+    105.56
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:20:34Z"
+  }
 }

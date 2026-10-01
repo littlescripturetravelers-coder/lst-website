@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 7",
   "reference": "2 Kings 23",
   "readId": "b7-w3-n7",
-  "appPage": "stories/jul-21-king-josiah-makes-a-promise.html"
+  "appPage": "stories/jul-21-king-josiah-makes-a-promise.html",
+  "timing": [
+    4.14,
+    8.74,
+    13.14,
+    17.74,
+    21.48,
+    26.58,
+    30.4,
+    35.74,
+    40.2,
+    44.7,
+    49.14,
+    53.68,
+    57.64,
+    62.32,
+    66.4,
+    71.44,
+    77.98,
+    82.6,
+    87.14,
+    91.6,
+    96.06,
+    100.62,
+    104.98,
+    109.66
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:21:46Z"
+  }
 }

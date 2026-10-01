@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 6",
   "reference": "Esther",
   "readId": "b8-w2-n6",
-  "appPage": "stories/aug-13-the-king-saves-the-people.html"
+  "appPage": "stories/aug-13-the-king-saves-the-people.html",
+  "timing": [
+    0.28,
+    5.02,
+    9.8,
+    15.0,
+    19.46,
+    24.56,
+    29.98,
+    35.58,
+    40.14,
+    44.98,
+    49.74,
+    54.74,
+    59.36,
+    64.16,
+    68.96,
+    73.24,
+    77.66,
+    82.46,
+    87.54,
+    92.32,
+    97.14,
+    101.96,
+    106.44,
+    112.48
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.987,
+    "lines": 24,
+    "when": "2026-10-01T21:20:08Z"
+  }
 }

@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 1",
   "reference": "1 Kings 12",
   "readId": "b7-w1-n1",
-  "appPage": "stories/jul-01-two-kings-one-choice.html"
+  "appPage": "stories/jul-01-two-kings-one-choice.html",
+  "timing": [
+    9.58,
+    14.36,
+    19.2,
+    23.96,
+    28.76,
+    31.28,
+    36.28,
+    40.74,
+    46.74,
+    50.08,
+    53.96,
+    58.74,
+    62.32,
+    64.88,
+    68.64,
+    73.12,
+    79.18,
+    82.86,
+    86.32,
+    90.1,
+    96.0,
+    98.48,
+    103.44,
+    108.08
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.993,
+    "lines": 24,
+    "when": "2026-10-01T21:21:08Z"
+  }
 }

@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 4",
   "reference": "1 Samuel 13",
   "readId": "b6-w2-n4",
-  "appPage": "stories/jun-11-saul-doesnt-wait.html"
+  "appPage": "stories/jun-11-saul-doesnt-wait.html",
+  "timing": [
+    8.72,
+    12.68,
+    16.72,
+    20.76,
+    24.98,
+    28.58,
+    32.78,
+    36.72,
+    46.82,
+    50.74,
+    54.76,
+    58.7,
+    63.04,
+    66.74,
+    70.8,
+    74.7,
+    80.76,
+    84.72,
+    89.02,
+    92.82,
+    97.08,
+    100.82,
+    104.82,
+    108.78
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:22:29Z"
+  }
 }

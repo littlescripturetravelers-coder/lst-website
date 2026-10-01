@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 3",
   "reference": "1 Samuel 18:6–16",
   "readId": "b6-w3-n3",
-  "appPage": "stories/jun-17-saul-gets-jealous-of-david.html"
+  "appPage": "stories/jun-17-saul-gets-jealous-of-david.html",
+  "timing": [
+    7.92,
+    11.86,
+    15.88,
+    19.86,
+    23.88,
+    27.94,
+    31.92,
+    35.96,
+    41.86,
+    45.9,
+    49.92,
+    53.92,
+    57.92,
+    61.98,
+    65.9,
+    69.98,
+    75.88,
+    79.92,
+    84.12,
+    87.96,
+    91.86,
+    95.92,
+    99.9,
+    103.96
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.993,
+    "lines": 24,
+    "when": "2026-10-01T21:22:41Z"
+  }
 }

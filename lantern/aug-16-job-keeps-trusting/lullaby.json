@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 2",
   "reference": "Job 1–3; 12–14; 19; 21–24; 38–40; 42",
   "readId": "b8-w3-n2",
-  "appPage": "stories/aug-16-job-keeps-trusting.html"
+  "appPage": "stories/aug-16-job-keeps-trusting.html",
+  "timing": [
+    7.98,
+    11.84,
+    15.58,
+    19.46,
+    23.52,
+    27.56,
+    31.36,
+    35.26,
+    42.02,
+    46.1,
+    49.88,
+    53.54,
+    57.76,
+    61.66,
+    65.46,
+    69.36,
+    79.92,
+    84.14,
+    87.86,
+    91.4,
+    95.62,
+    99.58,
+    103.34,
+    107.7
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.993,
+    "lines": 24,
+    "when": "2026-10-01T21:20:14Z"
+  }
 }

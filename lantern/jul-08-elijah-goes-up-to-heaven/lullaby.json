@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 1",
   "reference": "2 Kings 2",
   "readId": "b7-w2-n1",
-  "appPage": "stories/jul-08-elijah-goes-up-to-heaven.html"
+  "appPage": "stories/jul-08-elijah-goes-up-to-heaven.html",
+  "timing": [
+    0.18,
+    4.72,
+    9.52,
+    14.32,
+    19.14,
+    23.92,
+    28.7,
+    33.52,
+    38.32,
+    43.28,
+    47.9,
+    52.66,
+    57.52,
+    62.32,
+    67.08,
+    71.9,
+    76.72,
+    81.48,
+    86.32,
+    91.06,
+    95.92,
+    100.68,
+    105.54,
+    110.54
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:21:21Z"
+  }
 }

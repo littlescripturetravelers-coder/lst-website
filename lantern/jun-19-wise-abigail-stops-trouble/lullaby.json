@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 5",
   "reference": "1 Samuel 25",
   "readId": "b6-w3-n5",
-  "appPage": "stories/jun-19-wise-abigail-stops-trouble.html"
+  "appPage": "stories/jun-19-wise-abigail-stops-trouble.html",
+  "timing": [
+    0.98,
+    5.88,
+    10.32,
+    14.72,
+    19.82,
+    24.54,
+    29.28,
+    33.38,
+    38.04,
+    42.78,
+    47.1,
+    51.82,
+    56.6,
+    61.04,
+    65.74,
+    69.86,
+    74.36,
+    79.14,
+    83.88,
+    88.14,
+    93.0,
+    97.34,
+    102.14,
+    106.24
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:22:44Z"
+  }
 }

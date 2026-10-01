@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 1",
   "reference": "Esther",
   "readId": "b8-w2-n1",
-  "appPage": "stories/aug-08-a-kind-girl-becomes-queen.html"
+  "appPage": "stories/aug-08-a-kind-girl-becomes-queen.html",
+  "timing": [
+    4.96,
+    9.86,
+    14.5,
+    19.44,
+    24.22,
+    29.26,
+    33.78,
+    38.84,
+    43.38,
+    48.22,
+    52.9,
+    57.8,
+    62.9,
+    67.66,
+    72.16,
+    77.22,
+    81.74,
+    86.54,
+    91.34,
+    96.16,
+    100.96,
+    107.36,
+    111.36,
+    115.36
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.839,
+    "lines": 24,
+    "when": "2026-10-01T21:20:00Z"
+  }
 }

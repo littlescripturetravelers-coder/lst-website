@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 3",
   "reference": "2 Kings 20",
   "readId": "b7-w3-n3",
-  "appPage": "stories/jul-17-god-gives-hezekiah-more-days.html"
+  "appPage": "stories/jul-17-god-gives-hezekiah-more-days.html",
+  "timing": [
+    15.86,
+    19.88,
+    23.88,
+    27.88,
+    31.66,
+    35.9,
+    39.92,
+    43.9,
+    47.96,
+    51.94,
+    55.94,
+    59.92,
+    63.66,
+    67.94,
+    71.92,
+    75.88,
+    81.92,
+    85.9,
+    89.9,
+    93.9,
+    97.62,
+    101.94,
+    105.9,
+    109.9
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.993,
+    "lines": 24,
+    "when": "2026-10-01T21:21:38Z"
+  }
 }

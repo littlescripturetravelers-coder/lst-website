@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 1",
   "reference": "Ruth 1",
   "readId": "b6-w1-n1",
-  "appPage": "stories/jun-01-ruth-stays-with-naomi.html"
+  "appPage": "stories/jun-01-ruth-stays-with-naomi.html",
+  "timing": [
+    8.18,
+    12.14,
+    16.16,
+    20.42,
+    23.88,
+    28.18,
+    32.16,
+    36.16,
+    44.12,
+    48.12,
+    52.2,
+    56.16,
+    59.88,
+    64.18,
+    68.12,
+    72.16,
+    80.1,
+    84.16,
+    88.14,
+    92.12,
+    95.86,
+    100.24,
+    104.2,
+    108.7
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:22:07Z"
+  }
 }

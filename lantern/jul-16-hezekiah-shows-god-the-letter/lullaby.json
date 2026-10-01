@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 2",
   "reference": "2 Kings 19",
   "readId": "b7-w3-n2",
-  "appPage": "stories/jul-16-hezekiah-shows-god-the-letter.html"
+  "appPage": "stories/jul-16-hezekiah-shows-god-the-letter.html",
+  "timing": [
+    7.18,
+    11.76,
+    14.78,
+    20.76,
+    23.72,
+    28.22,
+    31.94,
+    37.24,
+    43.22,
+    47.74,
+    50.68,
+    56.66,
+    59.74,
+    64.22,
+    67.7,
+    71.78,
+    79.24,
+    83.82,
+    88.18,
+    92.7,
+    95.76,
+    100.28,
+    103.72,
+    107.76
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.993,
+    "lines": 24,
+    "when": "2026-10-01T21:21:36Z"
+  }
 }

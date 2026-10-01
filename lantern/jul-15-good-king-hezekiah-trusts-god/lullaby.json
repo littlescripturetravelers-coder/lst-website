@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 1",
   "reference": "2 Kings 18",
   "readId": "b7-w3-n1",
-  "appPage": "stories/jul-15-good-king-hezekiah-trusts-god.html"
+  "appPage": "stories/jul-15-good-king-hezekiah-trusts-god.html",
+  "timing": [
+    8.0,
+    11.92,
+    15.4,
+    19.0,
+    22.62,
+    27.06,
+    30.84,
+    34.7,
+    44.48,
+    47.68,
+    50.9,
+    54.56,
+    58.46,
+    62.72,
+    66.66,
+    70.8,
+    80.98,
+    84.38,
+    88.16,
+    92.04,
+    95.66,
+    100.5,
+    104.58,
+    108.56
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:21:34Z"
+  }
 }

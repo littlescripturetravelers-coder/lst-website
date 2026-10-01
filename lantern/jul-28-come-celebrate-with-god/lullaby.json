@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 7",
   "reference": "2 Chronicles 30",
   "readId": "b7-w4-n7",
-  "appPage": "stories/jul-28-come-celebrate-with-god.html"
+  "appPage": "stories/jul-28-come-celebrate-with-god.html",
+  "timing": [
+    5.82,
+    10.46,
+    15.34,
+    19.82,
+    24.82,
+    30.22,
+    34.1,
+    38.86,
+    43.86,
+    48.4,
+    53.12,
+    57.92,
+    62.88,
+    68.2,
+    72.16,
+    76.86,
+    81.62,
+    86.34,
+    91.1,
+    95.92,
+    101.24,
+    106.84,
+    111.1,
+    115.72
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.993,
+    "lines": 24,
+    "when": "2026-10-01T21:22:05Z"
+  }
 }

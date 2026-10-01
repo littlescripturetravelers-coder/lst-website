@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 2",
   "reference": "Psalms 1–2; 8; 19–33; 40; 46",
   "readId": "b8-w4-n2",
-  "appPage": "stories/aug-23-look-at-the-stars.html"
+  "appPage": "stories/aug-23-look-at-the-stars.html",
+  "timing": [
+    6.06,
+    9.22,
+    12.1,
+    15.46,
+    18.1,
+    21.14,
+    24.12,
+    27.36,
+    42.18,
+    45.18,
+    48.16,
+    51.14,
+    54.06,
+    57.12,
+    60.42,
+    63.56,
+    78.38,
+    81.28,
+    84.14,
+    86.94,
+    90.12,
+    93.14,
+    96.18,
+    99.22
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:20:26Z"
+  }
 }

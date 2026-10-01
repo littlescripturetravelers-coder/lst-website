@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 2",
   "reference": "2 Samuel 12",
   "readId": "b6-w4-n2",
-  "appPage": "stories/jun-23-david-says-sorry.html"
+  "appPage": "stories/jun-23-david-says-sorry.html",
+  "timing": [
+    10.06,
+    15.22,
+    20.22,
+    25.18,
+    30.38,
+    35.18,
+    40.82,
+    45.5,
+    49.22,
+    56.18,
+    61.44,
+    66.44,
+    71.74,
+    76.84,
+    82.1,
+    86.94,
+    92.96,
+    97.8,
+    103.3,
+    108.16,
+    112.62,
+    118.86,
+    119.08,
+    119.13
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.812,
+    "lines": 24,
+    "when": "2026-10-01T21:22:52Z"
+  }
 }

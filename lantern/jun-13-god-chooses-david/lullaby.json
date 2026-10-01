@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 6",
   "reference": "1 Samuel 16:1–13",
   "readId": "b6-w2-n6",
-  "appPage": "stories/jun-13-god-chooses-david.html"
+  "appPage": "stories/jun-13-god-chooses-david.html",
+  "timing": [
+    0.42,
+    5.52,
+    10.16,
+    15.0,
+    19.78,
+    24.72,
+    29.36,
+    33.34,
+    38.86,
+    43.8,
+    48.48,
+    53.32,
+    58.26,
+    63.12,
+    67.76,
+    71.6,
+    77.3,
+    82.14,
+    87.0,
+    91.88,
+    96.64,
+    101.46,
+    106.02,
+    109.98
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.987,
+    "lines": 24,
+    "when": "2026-10-01T21:22:33Z"
+  }
 }

@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 7",
   "reference": "1 Samuel 16:14–23",
   "readId": "b6-w2-n7",
-  "appPage": "stories/jun-14-david-plays-music-for-saul.html"
+  "appPage": "stories/jun-14-david-plays-music-for-saul.html",
+  "timing": [
+    8.8,
+    13.22,
+    17.6,
+    21.94,
+    26.44,
+    30.74,
+    35.08,
+    39.34,
+    43.78,
+    48.22,
+    52.56,
+    56.58,
+    61.34,
+    65.62,
+    70.0,
+    74.26,
+    80.86,
+    85.36,
+    89.58,
+    93.94,
+    98.46,
+    102.72,
+    107.08,
+    111.34
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.986,
+    "lines": 24,
+    "when": "2026-10-01T21:22:35Z"
+  }
 }

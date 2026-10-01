@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 7",
   "reference": "Job 1–3; 12–14; 19; 21–24; 38–40; 42",
   "readId": "b8-w3-n7",
-  "appPage": "stories/aug-21-heavenly-father-blesses-job-again.html"
+  "appPage": "stories/aug-21-heavenly-father-blesses-job-again.html",
+  "timing": [
+    5.7,
+    8.86,
+    12.12,
+    16.28,
+    22.22,
+    25.42,
+    28.6,
+    32.92,
+    40.2,
+    43.26,
+    46.66,
+    50.8,
+    56.8,
+    59.92,
+    63.12,
+    67.38,
+    77.74,
+    80.96,
+    84.06,
+    88.3,
+    94.28,
+    97.38,
+    100.58,
+    106.36
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:20:23Z"
+  }
 }

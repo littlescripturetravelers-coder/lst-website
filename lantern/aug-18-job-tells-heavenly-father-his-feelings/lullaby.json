@@ -12,5 +12,37 @@
   "night": "Week 3 · Night 4",
   "reference": "Job1–3;12–14;19;21–24;38–40;42",
   "readId": "b8-w3-n4",
-  "appPage": "stories/aug-18-job-tells-heavenly-father-his-feelings.html"
+  "appPage": "stories/aug-18-job-tells-heavenly-father-his-feelings.html",
+  "timing": [
+    4.5,
+    8.68,
+    13.18,
+    17.72,
+    21.88,
+    26.68,
+    31.22,
+    35.68,
+    40.2,
+    44.72,
+    49.28,
+    53.74,
+    57.92,
+    62.74,
+    67.2,
+    71.72,
+    76.24,
+    80.72,
+    85.22,
+    89.74,
+    93.86,
+    98.72,
+    103.22,
+    107.74
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:20:17Z"
+  }
 }

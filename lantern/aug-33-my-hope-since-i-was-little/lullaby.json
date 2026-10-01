@@ -12,5 +12,37 @@
   "night": "Week 5 · Night 5",
   "reference": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
   "readId": "b8-w5-n5",
-  "appPage": "stories/aug-33-my-hope-since-i-was-little.html"
+  "appPage": "stories/aug-33-my-hope-since-i-was-little.html",
+  "timing": [
+    0.68,
+    6.38,
+    10.32,
+    14.9,
+    20.5,
+    25.62,
+    29.54,
+    34.16,
+    38.56,
+    44.14,
+    48.12,
+    52.44,
+    57.16,
+    61.74,
+    65.56,
+    69.94,
+    75.06,
+    80.54,
+    84.62,
+    89.52,
+    94.58,
+    99.74,
+    103.8,
+    108.52
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.973,
+    "lines": 24,
+    "when": "2026-10-01T21:20:44Z"
+  }
 }

@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 7",
   "reference": "1 Kings 22",
   "readId": "b7-w1-n7",
-  "appPage": "stories/jul-07-micaiah-tells-the-truth.html"
+  "appPage": "stories/jul-07-micaiah-tells-the-truth.html",
+  "timing": [
+    0.1,
+    5.34,
+    10.14,
+    14.92,
+    19.28,
+    22.94,
+    27.68,
+    31.68,
+    36.52,
+    41.34,
+    46.16,
+    50.96,
+    55.32,
+    58.9,
+    63.7,
+    67.72,
+    74.92,
+    79.88,
+    84.52,
+    89.38,
+    93.7,
+    97.32,
+    102.08,
+    106.12
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:21:19Z"
+  }
 }

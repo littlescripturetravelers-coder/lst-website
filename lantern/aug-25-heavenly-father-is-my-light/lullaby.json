@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 4",
   "reference": "Psalms 1–2; 8; 19–33; 40; 46",
   "readId": "b8-w4-n4",
-  "appPage": "stories/aug-25-heavenly-father-is-my-light.html"
+  "appPage": "stories/aug-25-heavenly-father-is-my-light.html",
+  "timing": [
+    4.16,
+    8.46,
+    12.84,
+    17.12,
+    21.82,
+    26.1,
+    30.16,
+    34.38,
+    40.9,
+    45.36,
+    49.6,
+    54.04,
+    58.74,
+    62.98,
+    67.18,
+    71.4,
+    78.1,
+    82.48,
+    86.7,
+    91.28,
+    95.86,
+    99.98,
+    104.12,
+    108.34
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:20:29Z"
+  }
 }

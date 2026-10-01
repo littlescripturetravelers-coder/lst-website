@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 4",
   "reference": "1 Kings 17",
   "readId": "b7-w1-n4",
-  "appPage": "stories/jul-04-elijah-prays-for-the-little-boy.html"
+  "appPage": "stories/jul-04-elijah-prays-for-the-little-boy.html",
+  "timing": [
+    6.5,
+    10.7,
+    14.98,
+    19.86,
+    24.46,
+    27.64,
+    32.0,
+    36.46,
+    42.38,
+    46.6,
+    50.68,
+    55.74,
+    60.32,
+    63.44,
+    67.82,
+    72.3,
+    79.04,
+    83.3,
+    87.4,
+    92.36,
+    96.96,
+    100.06,
+    104.46,
+    108.98
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.993,
+    "lines": 24,
+    "when": "2026-10-01T21:21:13Z"
+  }
 }

@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 6",
   "reference": "1 Kings 8",
   "readId": "b6-w4-n6",
-  "appPage": "stories/jun-27-solomons-prayer-at-the-temple.html"
+  "appPage": "stories/jun-27-solomons-prayer-at-the-temple.html",
+  "timing": [
+    6.34,
+    10.46,
+    13.96,
+    18.24,
+    22.8,
+    28.26,
+    31.7,
+    36.92,
+    42.96,
+    47.58,
+    51.4,
+    56.12,
+    60.1,
+    65.12,
+    68.94,
+    73.82,
+    79.54,
+    84.52,
+    88.06,
+    93.04,
+    96.58,
+    101.72,
+    105.14,
+    110.52
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:23:00Z"
+  }
 }

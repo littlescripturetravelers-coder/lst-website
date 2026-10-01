@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 1",
   "reference": "1 Samuel 8",
   "readId": "b6-w2-n1",
-  "appPage": "stories/jun-08-israel-wants-a-king.html"
+  "appPage": "stories/jun-08-israel-wants-a-king.html",
+  "timing": [
+    4.6,
+    9.44,
+    12.7,
+    19.04,
+    22.32,
+    28.64,
+    33.48,
+    38.22,
+    43.06,
+    47.82,
+    52.62,
+    57.46,
+    62.16,
+    67.08,
+    71.88,
+    76.64,
+    81.44,
+    86.28,
+    91.36,
+    95.82,
+    99.12,
+    105.5,
+    110.28,
+    115.08
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:22:22Z"
+  }
 }

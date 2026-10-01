@@ -12,5 +12,37 @@
   "night": "Week 1 · Night 5",
   "reference": "1 Samuel 2",
   "readId": "b6-w1-n5",
-  "appPage": "stories/jun-05-samuel-goes-to-the-temple.html"
+  "appPage": "stories/jun-05-samuel-goes-to-the-temple.html",
+  "timing": [
+    7.2,
+    11.5,
+    15.48,
+    19.54,
+    23.4,
+    27.42,
+    31.66,
+    35.72,
+    41.74,
+    45.92,
+    49.68,
+    53.82,
+    57.6,
+    61.54,
+    66.0,
+    69.88,
+    75.28,
+    79.34,
+    83.32,
+    87.56,
+    91.44,
+    95.4,
+    99.86,
+    103.82
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 1.0,
+    "lines": 24,
+    "when": "2026-10-01T21:22:16Z"
+  }
 }

@@ -12,5 +12,37 @@
   "night": "Week 5 · Night 3",
   "reference": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
   "readId": "b8-w5-n3",
-  "appPage": "stories/aug-31-thinking-of-heavenly-father-at-night.html"
+  "appPage": "stories/aug-31-thinking-of-heavenly-father-at-night.html",
+  "timing": [
+    0.92,
+    5.78,
+    9.4,
+    15.34,
+    20.14,
+    25.0,
+    29.86,
+    34.62,
+    38.62,
+    44.18,
+    48.94,
+    53.78,
+    58.52,
+    63.44,
+    68.28,
+    73.04,
+    77.78,
+    82.54,
+    87.32,
+    92.2,
+    96.96,
+    101.88,
+    106.68,
+    111.4
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.986,
+    "lines": 24,
+    "when": "2026-10-01T21:20:40Z"
+  }
 }

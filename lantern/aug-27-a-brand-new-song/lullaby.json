@@ -12,5 +12,37 @@
   "night": "Week 4 · Night 6",
   "reference": "Psalms 1–2; 8; 19–33; 40; 46",
   "readId": "b8-w4-n6",
-  "appPage": "stories/aug-27-a-brand-new-song.html"
+  "appPage": "stories/aug-27-a-brand-new-song.html",
+  "timing": [
+    6.14,
+    10.38,
+    14.62,
+    18.84,
+    23.06,
+    27.32,
+    31.56,
+    35.84,
+    44.6,
+    48.52,
+    52.76,
+    57.04,
+    61.2,
+    65.44,
+    69.68,
+    73.96,
+    82.36,
+    86.66,
+    90.88,
+    95.16,
+    99.32,
+    103.56,
+    107.78,
+    112.12
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.988,
+    "lines": 24,
+    "when": "2026-10-01T21:20:33Z"
+  }
 }

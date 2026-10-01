@@ -12,5 +12,37 @@
   "night": "Week 2 · Night 2",
   "reference": "1 Samuel 9",
   "readId": "b6-w2-n2",
-  "appPage": "stories/jun-09-saul-looks-for-donkeys.html"
+  "appPage": "stories/jun-09-saul-looks-for-donkeys.html",
+  "timing": [
+    8.64,
+    13.42,
+    17.72,
+    22.38,
+    26.22,
+    30.22,
+    34.08,
+    38.18,
+    45.14,
+    49.54,
+    53.34,
+    58.08,
+    62.06,
+    66.4,
+    70.4,
+    74.2,
+    81.0,
+    84.86,
+    88.98,
+    93.18,
+    97.08,
+    101.04,
+    104.84,
+    108.72
+  ],
+  "timed": {
+    "by": "elevenlabs-scribe",
+    "heard": 0.986,
+    "lines": 24,
+    "when": "2026-10-01T21:22:25Z"
+  }
 }
