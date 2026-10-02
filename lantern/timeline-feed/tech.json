@@ -168,11 +168,23 @@
    "lng": 28,
    "loc": "Africa",
    "why": "Fire is the first light people could hold. It gathered families around it at night - the first bedtime circle. Cooked food helped people grow strong and think clearly, ready one day to hear and understand the word of God.",
+   "ages": {
+    "0-2": "Never within reach. 'Hot' is one of the first words worth teaching.",
+    "16+": "Teach the younger ones fire safety; carry the responsibility.",
+    "3-5": "Watch a campfire from a parent's arms; learn that fire is a helper only when a grown-up holds it.",
+    "6-9": "Help gather wood and feed a campfire with a grown-up right beside them.",
+    "10-12": "Light a candle or a stove with permission, and learn how to put a fire out.",
+    "13-15": "Build, tend and fully put out a campfire; cook a meal on it."
+   },
    "date": "c. 1,000,000 BC",
    "good": [
     "Cooking food so it is safe and good to eat.",
     "Keeping a family warm and together on a cold night.",
     "Light to read and talk by after the sun goes down."
+   ],
+   "harm": [
+    "Burns and house fires: fire does not know a child from a log.",
+    "A fascination with flames that grows if it is a secret."
    ],
    "kids": [
     "Only grown-ups light it.",
@@ -182,6 +194,16 @@
    "name": "Fire",
    "talk": "Fire can cook our dinner or burn our house. What makes the difference?",
    "what": "People learned to keep a fire and to make one. Warmth, light in the dark, cooked food, and a safe place to gather.",
+   "avoid": [
+    "Matches, lighters and candles left where small hands reach.",
+    "Fireworks in a child's hands.",
+    "Playing near a stove, a campfire or a heater."
+   ],
+   "bless": [
+    "Cook a meal for a family that needs one.",
+    "A campfire family night, with stories of the pioneers who cooked over one every night.",
+    "Bring warmth to someone: soup, a blanket, a lit porch."
+   ],
    "builtOn": [],
    "dangers": [
     "A fire nobody watches grows fast.",
@@ -194,29 +216,7 @@
      "note": "The story never changes: fire blesses the careful and hurts the careless. That is the pattern every later technology follows.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "Burns and house fires: fire does not know a child from a log.",
-    "A fascination with flames that grows if it is a secret."
-   ],
-   "avoid": [
-    "Matches, lighters and candles left where small hands reach.",
-    "Fireworks in a child's hands.",
-    "Playing near a stove, a campfire or a heater."
-   ],
-   "bless": [
-    "Cook a meal for a family that needs one.",
-    "A campfire family night, with stories of the pioneers who cooked over one every night.",
-    "Bring warmth to someone: soup, a blanket, a lit porch."
-   ],
-   "ages": {
-    "0-2": "Never within reach. 'Hot' is one of the first words worth teaching.",
-    "3-5": "Watch a campfire from a parent's arms; learn that fire is a helper only when a grown-up holds it.",
-    "6-9": "Help gather wood and feed a campfire with a grown-up right beside them.",
-    "10-12": "Light a candle or a stove with permission, and learn how to put a fire out.",
-    "13-15": "Build, tend and fully put out a campfire; cook a meal on it.",
-    "16+": "Teach the younger ones fire safety; carry the responsibility."
-   }
+   ]
   },
   {
    "y": -3500,
@@ -231,11 +231,23 @@
    "lng": 44.4,
    "loc": "Mesopotamia",
    "why": "The wheel let people carry more than their arms could hold. Food reached hungry cities, families moved to new lands, and one day the wheel would carry scriptures and missionaries across the world.",
+   "ages": {
+    "0-2": "Strollers and wagons pulled by a parent.",
+    "16+": "Driving: the biggest wheel of all, phone out of reach, every time.",
+    "3-5": "A tricycle or balance bike, helmet on every time.",
+    "6-9": "A bike on sidewalks and paths with a grown-up near.",
+    "10-12": "Rides to a friend's house with agreed routes and times.",
+    "13-15": "Longer rides; learn the road rules a driver keeps."
+   },
    "date": "c. 3500 BC",
    "good": [
     "Carrying food and water to people who need it.",
     "Helping a family travel to be together.",
     "Every machine that helps people work: a mill, a bicycle, a car."
+   ],
+   "harm": [
+    "Falls, and roads: the wheel goes faster than a child can judge.",
+    "A car treated as a toy or a place to play."
    ],
    "kids": [
     "Look both ways.",
@@ -245,6 +257,16 @@
    "name": "The Wheel",
    "talk": "What do we carry to other people that they could not get on their own?",
    "what": "A round thing that rolls. Carts, then chariots, then every machine that turns.",
+   "avoid": [
+    "Riding without a helmet.",
+    "Streets without a grown-up until they have earned it.",
+    "A driver's seat before the law and the family say so."
+   ],
+   "bless": [
+    "Deliver a meal or a note on a bike.",
+    "Pull a wagon of groceries for a neighbor.",
+    "Learn to fix a bike, then fix someone else's."
+   ],
    "builtOn": [
     "fire"
    ],
@@ -258,29 +280,7 @@
      "note": "The wheel appears in Mesopotamia on pottery first and carts soon after. Its best use was never the chariot; it was bringing food home.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "Falls, and roads: the wheel goes faster than a child can judge.",
-    "A car treated as a toy or a place to play."
-   ],
-   "avoid": [
-    "Riding without a helmet.",
-    "Streets without a grown-up until they have earned it.",
-    "A driver's seat before the law and the family say so."
-   ],
-   "bless": [
-    "Deliver a meal or a note on a bike.",
-    "Pull a wagon of groceries for a neighbor.",
-    "Learn to fix a bike, then fix someone else's."
-   ],
-   "ages": {
-    "0-2": "Strollers and wagons pulled by a parent.",
-    "3-5": "A tricycle or balance bike, helmet on every time.",
-    "6-9": "A bike on sidewalks and paths with a grown-up near.",
-    "10-12": "Rides to a friend's house with agreed routes and times.",
-    "13-15": "Longer rides; learn the road rules a driver keeps.",
-    "16+": "Driving: the biggest wheel of all, phone out of reach, every time."
-   }
+   ]
   },
   {
    "y": -3500,
@@ -296,11 +296,23 @@
    "lng": 45.8,
    "loc": "Sumer, Mesopotamia",
    "why": "Without writing there is no scripture. Writing is how Heavenly Father's words reached us across thousands of years, and how your family's stories will reach your grandchildren.",
+   "ages": {
+    "0-2": "Scribbles beside you; they learn that marks mean something.",
+    "16+": "Write the family's stories down; that is family history.",
+    "3-5": "Their own name, and letters they dictate to you.",
+    "6-9": "Thank-you notes and a first journal with pictures.",
+    "10-12": "A real journal, written weekly; letters that get a reply.",
+    "13-15": "Essays and, above all, a written testimony of their own."
+   },
    "date": "c. 3500 BC",
    "good": [
     "Keeping the scriptures so every family can read them.",
     "Writing a letter to someone who is sad.",
     "Writing down what a child said so it is never lost."
+   ],
+   "harm": [
+    "Hurtful words on a page or a screen last long after the anger is gone.",
+    "Written lies look like truth; children believe what is written down."
    ],
    "kids": [
     "Write only what you would say to someone's face.",
@@ -310,6 +322,16 @@
    "name": "Writing",
    "talk": "If you could write one true thing for your grandchildren to read, what would it be?",
    "what": "Marks that hold words. Once people could write, a thought could outlive the person who had it.",
+   "avoid": [
+    "Writing anything you would not say to the person's face.",
+    "Sharing another person's secret in writing.",
+    "Copying someone else's words and calling them your own."
+   ],
+   "bless": [
+    "Thank-you notes to teachers, leaders and grandparents.",
+    "A journal: the story of their life, kept for their own children.",
+    "Letters to a missionary, a soldier, or someone alone."
+   ],
    "builtOn": [
     "fire"
    ],
@@ -323,29 +345,7 @@
      "note": "Every screen technology since is still writing: texts, posts and chat are words that stay. A child who learns 'written words last' is ready for all of them.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "Hurtful words on a page or a screen last long after the anger is gone.",
-    "Written lies look like truth; children believe what is written down."
-   ],
-   "avoid": [
-    "Writing anything you would not say to the person's face.",
-    "Sharing another person's secret in writing.",
-    "Copying someone else's words and calling them your own."
-   ],
-   "bless": [
-    "Thank-you notes to teachers, leaders and grandparents.",
-    "A journal: the story of their life, kept for their own children.",
-    "Letters to a missionary, a soldier, or someone alone."
-   ],
-   "ages": {
-    "0-2": "Scribbles beside you; they learn that marks mean something.",
-    "3-5": "Their own name, and letters they dictate to you.",
-    "6-9": "Thank-you notes and a first journal with pictures.",
-    "10-12": "A real journal, written weekly; letters that get a reply.",
-    "13-15": "Essays and, above all, a written testimony of their own.",
-    "16+": "Write the family's stories down; that is family history."
-   }
+   ]
   },
   {
    "y": 105,
@@ -360,11 +360,22 @@
    "lng": 108.9,
    "loc": "China, Han Dynasty",
    "why": "Paper made scripture light enough to carry and cheap enough to share. Every book on your shelf, including the bedtime books, stands on this Chinese invention.",
+   "ages": {
+    "0-2": "Board books; let them turn the pages.",
+    "16+": "Keep a paper journal for the things too sacred for a screen.",
+    "3-5": "Crayons and paper every day; a picture for grandma.",
+    "6-9": "Their own books, and a shelf to keep them on.",
+    "10-12": "Paper scriptures of their own, marked in their own hand.",
+    "13-15": "Study on paper as well as on a screen; it sticks better."
+   },
    "date": "105 AD",
    "good": [
     "Books a family can afford.",
     "Drawing and letters for someone who is far away.",
     "Keeping records so that promises are kept."
+   ],
+   "harm": [
+    "Very little. Paper is one of the safest gifts a child can be handed."
    ],
    "kids": [
     "Treat books gently; they are someone's work.",
@@ -374,6 +385,15 @@
    "name": "Paper",
    "talk": "Why do we still love paper books when we have screens?",
    "what": "Thin sheets made from plant fibre. Cheap enough that ordinary people could own writing.",
+   "avoid": [
+    "Tearing and wasting; teach that paper is a tree and a gift.",
+    "Reading only screens: paper rests the eyes and settles the mind."
+   ],
+   "bless": [
+    "Handmade cards for the lonely.",
+    "A scrapbook of the family's year.",
+    "Wrap a gift with your own drawing on it."
+   ],
    "builtOn": [
     "writing"
    ],
@@ -387,27 +407,7 @@
      "note": "Reading on paper still helps children remember more than reading the same words on a screen, in study after study. That is why the bedtime books are printed.",
      "source": "Reading research, summarised"
     }
-   ],
-   "harm": [
-    "Very little. Paper is one of the safest gifts a child can be handed."
-   ],
-   "avoid": [
-    "Tearing and wasting; teach that paper is a tree and a gift.",
-    "Reading only screens: paper rests the eyes and settles the mind."
-   ],
-   "bless": [
-    "Handmade cards for the lonely.",
-    "A scrapbook of the family's year.",
-    "Wrap a gift with your own drawing on it."
-   ],
-   "ages": {
-    "0-2": "Board books; let them turn the pages.",
-    "3-5": "Crayons and paper every day; a picture for grandma.",
-    "6-9": "Their own books, and a shelf to keep them on.",
-    "10-12": "Paper scriptures of their own, marked in their own hand.",
-    "13-15": "Study on paper as well as on a screen; it sticks better.",
-    "16+": "Keep a paper journal for the things too sacred for a screen."
-   }
+   ]
   },
   {
    "y": 1439,
@@ -422,11 +422,23 @@
    "lng": 8.27,
    "loc": "Mainz, Germany",
    "why": "Before the press, a Bible cost more than a house. After it, ordinary families could read the scriptures in their own homes. A boy reading his own Bible in his own home is how the Restoration began.",
+   "ages": {
+    "0-2": "Board books, read aloud every day.",
+    "16+": "Publish something of their own; the press is theirs too.",
+    "3-5": "Picture books at bedtime, the same ones over and over; that is how they learn.",
+    "6-9": "Their own library card, books chosen together.",
+    "10-12": "Chapter books, and the first lesson in checking a claim: who wrote this, and how do they know?",
+    "13-15": "Read widely, the classics included, and learn to spot propaganda by its feel."
+   },
    "date": "1439 AD",
    "good": [
     "Scriptures in every home, in every language.",
     "Books that teach children to read.",
     "News that tells the truth to everyone at once."
+   ],
+   "harm": [
+    "Printed lies look true; propaganda was printed on the same presses as scripture.",
+    "Books and magazines carry adult content into a home as easily as good words."
    ],
    "kids": [
     "Ask who wrote it and why.",
@@ -436,6 +448,16 @@
    "name": "The Printing Press",
    "talk": "What would it be like if only one family in town owned a Bible?",
    "what": "A machine that presses inked letters onto paper, page after page. The first big book it printed was the Bible.",
+   "avoid": [
+    "Books and magazines a parent has not looked at first.",
+    "Believing something because it is in print.",
+    "Comics and fan stories from unknown sources."
+   ],
+   "bless": [
+    "Print a family book of your own stories.",
+    "Give scriptures to someone who has none.",
+    "Make a neighborhood newsletter that tells the good news."
+   ],
    "builtOn": [
     "paper",
     "writing"
@@ -450,29 +472,7 @@
      "note": "Within fifty years of the press there were eight million books in Europe. Fifty years after the smartphone there are five billion of them. Both changed everything, faster than anyone planned for.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "Printed lies look true; propaganda was printed on the same presses as scripture.",
-    "Books and magazines carry adult content into a home as easily as good words."
-   ],
-   "avoid": [
-    "Books and magazines a parent has not looked at first.",
-    "Believing something because it is in print.",
-    "Comics and fan stories from unknown sources."
-   ],
-   "bless": [
-    "Print a family book of your own stories.",
-    "Give scriptures to someone who has none.",
-    "Make a neighborhood newsletter that tells the good news."
-   ],
-   "ages": {
-    "0-2": "Board books, read aloud every day.",
-    "3-5": "Picture books at bedtime, the same ones over and over; that is how they learn.",
-    "6-9": "Their own library card, books chosen together.",
-    "10-12": "Chapter books, and the first lesson in checking a claim: who wrote this, and how do they know?",
-    "13-15": "Read widely, the classics included, and learn to spot propaganda by its feel.",
-    "16+": "Publish something of their own; the press is theirs too."
-   }
+   ]
   },
   {
    "y": 1608,
@@ -487,11 +487,22 @@
    "lng": 3.61,
    "loc": "Middelburg, Netherlands",
    "why": "The heavens declare the glory of God, and the telescope let us read that declaration. The same glass, turned the other way, became the microscope and showed the tiny worlds that keep us alive.",
+   "ages": {
+    "0-2": "Point at the moon together.",
+    "16+": "Teach a younger child the sky.",
+    "3-5": "The moon and the bright planets through binoculars on a parent's lap.",
+    "6-9": "A small telescope with a grown-up; learn the moon's face.",
+    "10-12": "Find Jupiter's moons the way Galileo did.",
+    "13-15": "Learn the constellations and how far the light has come."
+   },
    "date": "1608 AD",
    "good": [
     "Learning how big and orderly Heavenly Father's creation is.",
     "Finding ships in trouble at sea.",
     "Microscopes that find sickness so doctors can heal it."
+   ],
+   "harm": [
+    "Only one: never point it at the sun."
    ],
    "kids": [
     "Look up at night; wonder is a gift.",
@@ -501,6 +512,15 @@
    "name": "The Telescope",
    "talk": "When you look at the stars, what do you think Heavenly Father wants you to feel?",
    "what": "Curved glass that brings far things close. Galileo pointed one at the sky and saw moons around Jupiter.",
+   "avoid": [
+    "Looking at the sun through any lens.",
+    "Buying a toy telescope that shows nothing; a good pair of binoculars is better."
+   ],
+   "bless": [
+    "Show a friend the moon's craters for the first time.",
+    "Let wonder turn into gratitude: 'the heavens declare the glory of God.'",
+    "Star-gaze with the family on a clear night and read Abraham 3 or Psalm 8."
+   ],
    "builtOn": [
     "press",
     "fire"
@@ -514,27 +534,7 @@
      "note": "Every telescope since Galileo has found more order, not less. The sky is still the easiest place to feel small and loved at the same time.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "Only one: never point it at the sun."
-   ],
-   "avoid": [
-    "Looking at the sun through any lens.",
-    "Buying a toy telescope that shows nothing; a good pair of binoculars is better."
-   ],
-   "bless": [
-    "Show a friend the moon's craters for the first time.",
-    "Let wonder turn into gratitude: 'the heavens declare the glory of God.'",
-    "Star-gaze with the family on a clear night and read Abraham 3 or Psalm 8."
-   ],
-   "ages": {
-    "0-2": "Point at the moon together.",
-    "3-5": "The moon and the bright planets through binoculars on a parent's lap.",
-    "6-9": "A small telescope with a grown-up; learn the moon's face.",
-    "10-12": "Find Jupiter's moons the way Galileo did.",
-    "13-15": "Learn the constellations and how far the light has come.",
-    "16+": "Teach a younger child the sky."
-   }
+   ]
   },
   {
    "y": 1769,
@@ -549,11 +549,22 @@
    "lng": -4.25,
    "loc": "Glasgow, Scotland",
    "why": "Steam shrank the world. Missionaries crossed oceans in weeks instead of months, and the Saints crossed a continent to gather. Work that broke backs could be done by a machine, so children could go to school.",
+   "ages": {
+    "0-2": "Watch a train go by.",
+    "16+": "Repair and build; machines as a way to serve.",
+    "3-5": "Toy engines and a museum visit.",
+    "6-9": "Take a simple machine apart with a grown-up.",
+    "10-12": "Help with tools, with safety glasses and supervision.",
+    "13-15": "Learn a power tool properly, from a parent."
+   },
    "date": "1769 AD",
    "good": [
     "Trains that bring families together across a country.",
     "Pumping clean water into cities.",
     "Factories that make warm clothes cheap enough for everyone."
+   ],
+   "harm": [
+    "Machines do not stop for a hand or a foot."
    ],
    "kids": [
     "Machines should make people's lives better, not people smaller.",
@@ -563,6 +574,14 @@
    "name": "The Steam Engine",
    "talk": "If a machine could do your chores, what would you do with the time?",
    "what": "Boiling water pushes a piston, and the piston turns a wheel. Trains, ships and factories that never got tired.",
+   "avoid": [
+    "Playing near running machinery or engines.",
+    "Treating a lawn mower or a power tool as a toy."
+   ],
+   "bless": [
+    "Learn how a machine works, then fix one for someone who cannot.",
+    "Mow, plow or haul for a neighbor with the machine you have."
+   ],
    "builtOn": [
     "wheel",
     "fire"
@@ -577,26 +596,7 @@
      "note": "It took laws, not machines, to get children out of the factories. A new tool does not decide how it is used; people do.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "Machines do not stop for a hand or a foot."
-   ],
-   "avoid": [
-    "Playing near running machinery or engines.",
-    "Treating a lawn mower or a power tool as a toy."
-   ],
-   "bless": [
-    "Learn how a machine works, then fix one for someone who cannot.",
-    "Mow, plow or haul for a neighbor with the machine you have."
-   ],
-   "ages": {
-    "0-2": "Watch a train go by.",
-    "3-5": "Toy engines and a museum visit.",
-    "6-9": "Take a simple machine apart with a grown-up.",
-    "10-12": "Help with tools, with safety glasses and supervision.",
-    "13-15": "Learn a power tool properly, from a parent.",
-    "16+": "Repair and build; machines as a way to serve."
-   }
+   ]
   },
   {
    "y": 1826,
@@ -612,11 +612,24 @@
    "lng": 4.82,
    "loc": "Saint-Loup-de-Varennes, France",
    "why": "A photograph lets a child see the great-grandmother who prayed for them. Family history became something you could hold. Every face in your scrapbook is here because of this.",
+   "ages": {
+    "0-2": "Parents take the photos and keep them private.",
+    "16+": "Become the family's photographer and historian.",
+    "3-5": "Hold the family camera with a parent; photos stay in the family.",
+    "6-9": "A simple camera of their own; nothing shared online.",
+    "10-12": "No camera phone in a bedroom; ask before sharing any picture of a person.",
+    "13-15": "The rule that never bends: no photo of your body to anyone, and no photo kept secret from parents."
+   },
    "date": "1826 AD",
    "good": [
     "Remembering the people we love, exactly as they were.",
     "Showing the truth of something that happened far away.",
     "A picture for someone who cannot be there."
+   ],
+   "harm": [
+    "A photo shared can never be taken back; it can be copied, changed and used against them.",
+    "Constant comparison with edited pictures of other people's lives.",
+    "Predators ask for pictures first."
    ],
    "kids": [
     "Ask before you take someone's picture.",
@@ -626,6 +639,16 @@
    "name": "Photography",
    "talk": "Which photograph in our house means the most to you, and why?",
    "what": "Light on a treated plate makes a picture of exactly what was there. For the first time a face could be kept.",
+   "avoid": [
+    "Sharing a photo of a friend without asking them.",
+    "Any photo in a bathroom, bedroom or swimsuit sent to anyone.",
+    "Sending a picture to someone you have not met in person."
+   ],
+   "bless": [
+    "Photograph the family's history: grandparents, homes, headstones, hands.",
+    "Send pictures to a grandparent every Sunday.",
+    "Take the pictures at a service project so the story can be told."
+   ],
    "builtOn": [
     "telescope",
     "paper"
@@ -640,30 +663,7 @@
      "note": "Today a phone takes a hundred pictures where a plate took one. The rule did not change: a picture is a gift when it is kept for love and a weapon when it is used for shame.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "A photo shared can never be taken back; it can be copied, changed and used against them.",
-    "Constant comparison with edited pictures of other people's lives.",
-    "Predators ask for pictures first."
-   ],
-   "avoid": [
-    "Sharing a photo of a friend without asking them.",
-    "Any photo in a bathroom, bedroom or swimsuit sent to anyone.",
-    "Sending a picture to someone you have not met in person."
-   ],
-   "bless": [
-    "Photograph the family's history: grandparents, homes, headstones, hands.",
-    "Send pictures to a grandparent every Sunday.",
-    "Take the pictures at a service project so the story can be told."
-   ],
-   "ages": {
-    "0-2": "Parents take the photos and keep them private.",
-    "3-5": "Hold the family camera with a parent; photos stay in the family.",
-    "6-9": "A simple camera of their own; nothing shared online.",
-    "10-12": "No camera phone in a bedroom; ask before sharing any picture of a person.",
-    "13-15": "The rule that never bends: no photo of your body to anyone, and no photo kept secret from parents.",
-    "16+": "Become the family's photographer and historian."
-   }
+   ]
   },
   {
    "y": 1844,
@@ -678,11 +678,22 @@
    "lng": -77,
    "loc": "Washington D.C., USA",
    "why": "The first message ever sent was a scripture: 'What hath God wrought' (Numbers 23:23). Distance stopped being a wall. Good news, and the gospel, could travel as fast as lightning.",
+   "ages": {
+    "0-2": "Not yet.",
+    "16+": "Use the fastest word for the kindest reasons.",
+    "3-5": "Tap a code on the table: two taps means 'hello'.",
+    "6-9": "Learn the alphabet in Morse for fun.",
+    "10-12": "Understand that every text is a telegraph, and every telegraph is read by someone.",
+    "13-15": "Check a message before you pass it on."
+   },
    "date": "1844 AD",
    "good": [
     "Calling for help fast in an emergency.",
     "Telling a family far away that everyone is safe.",
     "Sending truth faster than a rumour can walk."
+   ],
+   "harm": [
+    "Rumors travel as fast as truth once messages fly."
    ],
    "kids": [
     "Fast is not the same as true.",
@@ -692,6 +703,13 @@
    "name": "The Telegraph",
    "talk": "If you could send one message to anyone in the world right now, who would it be and what would it say?",
    "what": "Electric pulses down a wire, tapped out as dots and dashes. A message across a country in a minute instead of a month.",
+   "avoid": [
+    "Passing on a message you have not checked."
+   ],
+   "bless": [
+    "A quick word of comfort can reach across the world in a second; send one.",
+    "Learn Morse code together; tap out 'I love you.'"
+   ],
    "builtOn": [
     "writing",
     "steam"
@@ -706,25 +724,7 @@
      "note": "The telegraph made the first 'breaking news'. People in 1850 complained that it made them anxious and hurried. It is not a new feeling.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "Rumors travel as fast as truth once messages fly."
-   ],
-   "avoid": [
-    "Passing on a message you have not checked."
-   ],
-   "bless": [
-    "A quick word of comfort can reach across the world in a second; send one.",
-    "Learn Morse code together; tap out 'I love you.'"
-   ],
-   "ages": {
-    "0-2": "Not yet.",
-    "3-5": "Tap a code on the table: two taps means 'hello'.",
-    "6-9": "Learn the alphabet in Morse for fun.",
-    "10-12": "Understand that every text is a telegraph, and every telegraph is read by someone.",
-    "13-15": "Check a message before you pass it on.",
-    "16+": "Use the fastest word for the kindest reasons."
-   }
+   ]
   },
   {
    "y": 1876,
@@ -739,11 +739,23 @@
    "lng": -71.06,
    "loc": "Boston, USA",
    "why": "A grandmother's voice at bedtime from a thousand miles away. A prophet's voice reaching every home at once. The telephone gave families a way to stay close when life spread them out.",
+   "ages": {
+    "0-2": "Video calls so family faces stay familiar.",
+    "16+": "Their phone, their manners, their calls of service.",
+    "3-5": "Talk to grandma on speaker with you.",
+    "6-9": "Use the family phone with permission; learn to answer politely.",
+    "10-12": "A basic phone that calls and texts, only if truly needed, and only known numbers.",
+    "13-15": "Call etiquette; never answer or call strangers; the phone sleeps outside the bedroom."
+   },
    "date": "1876 AD",
    "good": [
     "Hearing the voice of someone you miss.",
     "Calling a doctor or the fire department fast.",
     "Checking on a neighbour who lives alone."
+   ],
+   "harm": [
+    "Strangers can call a child; scammers call everyone.",
+    "Late-night calls steal sleep and privacy."
    ],
    "kids": [
     "Never give your name or address to a caller you do not know.",
@@ -753,6 +765,16 @@
    "name": "The Telephone",
    "talk": "Whose voice would you most like to hear tonight?",
    "what": "A voice turned into electricity and back into a voice. For the first time you could hear someone who was not in the room.",
+   "avoid": [
+    "Giving a name, an address or a family's plans to any caller.",
+    "Answering unknown numbers alone.",
+    "Calls after the family's bedtime."
+   ],
+   "bless": [
+    "Call grandparents every week; it is the call they wait for.",
+    "Check on a lonely neighbor or a widow by phone.",
+    "Be the one who calls to say sorry."
+   ],
    "builtOn": [
     "telegraph"
    ],
@@ -766,29 +788,7 @@
      "note": "Phone scams now take billions of dollars a year, mostly from older people. Teaching grandparents 'hang up and call back' is a real act of love.",
      "source": "Consumer protection reports, summarised"
     }
-   ],
-   "harm": [
-    "Strangers can call a child; scammers call everyone.",
-    "Late-night calls steal sleep and privacy."
-   ],
-   "avoid": [
-    "Giving a name, an address or a family's plans to any caller.",
-    "Answering unknown numbers alone.",
-    "Calls after the family's bedtime."
-   ],
-   "bless": [
-    "Call grandparents every week; it is the call they wait for.",
-    "Check on a lonely neighbor or a widow by phone.",
-    "Be the one who calls to say sorry."
-   ],
-   "ages": {
-    "0-2": "Video calls so family faces stay familiar.",
-    "3-5": "Talk to grandma on speaker with you.",
-    "6-9": "Use the family phone with permission; learn to answer politely.",
-    "10-12": "A basic phone that calls and texts, only if truly needed, and only known numbers.",
-    "13-15": "Call etiquette; never answer or call strangers; the phone sleeps outside the bedroom.",
-    "16+": "Their phone, their manners, their calls of service."
-   }
+   ]
   },
   {
    "y": 1879,
@@ -803,11 +803,22 @@
    "lng": -74.47,
    "loc": "Menlo Park, New Jersey, USA",
    "why": "Light is the oldest sign of Heavenly Father's work: 'Let there be light.' Electric light let families read, study and gather after the sun went down, safely, and it lit the hospitals and schools that followed.",
+   "ages": {
+    "0-2": "A dim night-light only.",
+    "16+": "Keep their own dark, quiet hour before sleep.",
+    "3-5": "Lights off means eyes closed; keep the rule kindly.",
+    "6-9": "A reading lamp and a bedtime, both kept.",
+    "10-12": "No screens for an hour before bed; the light itself is the problem.",
+    "13-15": "Learn why blue light steals sleep, then choose."
+   },
    "date": "1879 AD",
    "good": [
     "Reading the scriptures together after dark.",
     "Hospitals that can work through the night.",
     "Streets that are safe to walk at night."
+   ],
+   "harm": [
+    "Light at night, especially from screens, tells the body it is day; sleep suffers, and so does everything sleep protects."
    ],
    "kids": [
     "Lights off when you leave the room.",
@@ -817,6 +828,15 @@
    "name": "The Electric Light",
    "talk": "Why do you think the very first thing created was light?",
    "what": "A glowing wire inside a glass bulb. Night stopped being dark, in every room, at the flip of a switch.",
+   "avoid": [
+    "Bright screens and lights in the bedroom after dark.",
+    "Leaving every light on; a child should know light costs something."
+   ],
+   "bless": [
+    "A lamp for reading scriptures together at night.",
+    "Leave a porch light on for someone coming home late.",
+    "Bring a flashlight and a meal to a neighbor whose power is out."
+   ],
    "builtOn": [
     "fire",
     "telegraph"
@@ -831,27 +851,7 @@
      "note": "Children sleep better and longer in a dark room, and the blue light of screens at bedtime pushes sleep later. Dim the lights an hour before bed and the body does the rest.",
      "source": "Sleep research, summarised"
     }
-   ],
-   "harm": [
-    "Light at night, especially from screens, tells the body it is day; sleep suffers, and so does everything sleep protects."
-   ],
-   "avoid": [
-    "Bright screens and lights in the bedroom after dark.",
-    "Leaving every light on; a child should know light costs something."
-   ],
-   "bless": [
-    "A lamp for reading scriptures together at night.",
-    "Leave a porch light on for someone coming home late.",
-    "Bring a flashlight and a meal to a neighbor whose power is out."
-   ],
-   "ages": {
-    "0-2": "A dim night-light only.",
-    "3-5": "Lights off means eyes closed; keep the rule kindly.",
-    "6-9": "A reading lamp and a bedtime, both kept.",
-    "10-12": "No screens for an hour before bed; the light itself is the problem.",
-    "13-15": "Learn why blue light steals sleep, then choose.",
-    "16+": "Keep their own dark, quiet hour before sleep."
-   }
+   ]
   },
   {
    "y": 1901,
@@ -866,11 +866,22 @@
    "lng": -52.71,
    "loc": "St. John's, Newfoundland",
    "why": "For the first time a sermon, a prophet, a hymn could reach every home at the same moment. General Conference, missionary broadcasts and the gospel in a hundred languages all ride on radio.",
+   "ages": {
+    "0-2": "Lullabies and gentle music.",
+    "16+": "Curate what fills the house; it shapes everyone in it.",
+    "3-5": "Children's music and hymns; sing along.",
+    "6-9": "Audiobooks and scripture stories read aloud.",
+    "10-12": "Podcasts chosen together and listened to together first.",
+    "13-15": "Their music, checked against For the Strength of Youth by them, not only by you."
+   },
    "date": "1901 AD",
    "good": [
     "Music and stories for a family in the kitchen.",
     "Warnings before a storm reaches you.",
     "Good words reaching people who cannot read."
+   ],
+   "harm": [
+    "Words and songs go in without a filter: explicit lyrics, adult talk, endless news."
    ],
    "kids": [
     "Ask who is talking and what they want.",
@@ -880,6 +891,16 @@
    "name": "Radio",
    "talk": "If you had a radio show everyone in the world could hear, what would you say?",
    "what": "Voices and music sent through the air with no wire at all. One person speaks and a whole nation hears.",
+   "avoid": [
+    "Music with explicit lyrics, even if the tune is good.",
+    "Talk shows and podcasts made for adults.",
+    "Radio or headphones on all day; silence is where thinking happens."
+   ],
+   "bless": [
+    "Hymns and scripture audio in the car and the kitchen.",
+    "Make a family 'radio show' and send it to grandparents.",
+    "A playlist that lifts a friend who is down."
+   ],
    "builtOn": [
     "telegraph",
     "telephone"
@@ -894,28 +915,7 @@
      "note": "Radio taught the world that a voice reaching millions must be chosen carefully. Every feed and channel since is the same lesson at a larger scale.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "Words and songs go in without a filter: explicit lyrics, adult talk, endless news."
-   ],
-   "avoid": [
-    "Music with explicit lyrics, even if the tune is good.",
-    "Talk shows and podcasts made for adults.",
-    "Radio or headphones on all day; silence is where thinking happens."
-   ],
-   "bless": [
-    "Hymns and scripture audio in the car and the kitchen.",
-    "Make a family 'radio show' and send it to grandparents.",
-    "A playlist that lifts a friend who is down."
-   ],
-   "ages": {
-    "0-2": "Lullabies and gentle music.",
-    "3-5": "Children's music and hymns; sing along.",
-    "6-9": "Audiobooks and scripture stories read aloud.",
-    "10-12": "Podcasts chosen together and listened to together first.",
-    "13-15": "Their music, checked against For the Strength of Youth by them, not only by you.",
-    "16+": "Curate what fills the house; it shapes everyone in it."
-   }
+   ]
   },
   {
    "y": 1895,
@@ -930,11 +930,24 @@
    "lng": 2.35,
    "loc": "Paris, France",
    "why": "Stories are how Jesus taught. A moving picture can carry a parable into a heart that will not sit still for a sermon. The Church's films, and every good family movie, stand here.",
+   "ages": {
+    "0-2": "None.",
+    "16+": "Their own standards, held for their own reasons.",
+    "3-5": "Short, gentle films with a parent, in the daytime.",
+    "6-9": "G and PG films chosen together; ask afterwards what they felt.",
+    "10-12": "PG, with a talk after; PG-13 is a parent's call, case by case.",
+    "13-15": "PG-13 with your judgment, never R; teach why, not just no."
+   },
    "date": "1895 AD",
    "good": [
     "A story the whole family watches and talks about.",
     "Seeing places and people you could never visit.",
     "Films that teach faith and courage."
+   ],
+   "harm": [
+    "Images stay: a frightening scene at six is remembered at forty.",
+    "Violence and sexual content seen young numb what should stay tender.",
+    "Long films replace play, sleep and talk."
    ],
    "kids": [
     "Watch with your family, not alone.",
@@ -944,6 +957,16 @@
    "name": "Movies",
    "talk": "What is the best movie we have watched together, and what did it teach?",
    "what": "Pictures shown fast enough that they seem to move. A story you can watch with a crowd.",
+   "avoid": [
+    "Ratings above their age, and PG-13 or R because 'everyone has seen it.'",
+    "Horror at any age of childhood.",
+    "Watching alone anything a parent has not seen."
+   ],
+   "bless": [
+    "Family movie night with a film that lifts, then talk about it.",
+    "Make a family movie: a story, a play, a birthday, a farewell.",
+    "Watch the Savior's life together and talk about Him."
+   ],
    "builtOn": [
     "photo",
     "light"
@@ -958,30 +981,7 @@
      "note": "Children copy what they see on screens more than what they are told. A parent watching beside them, asking 'was that right?', changes what the story teaches.",
      "source": "Media research, summarised"
     }
-   ],
-   "harm": [
-    "Images stay: a frightening scene at six is remembered at forty.",
-    "Violence and sexual content seen young numb what should stay tender.",
-    "Long films replace play, sleep and talk."
-   ],
-   "avoid": [
-    "Ratings above their age, and PG-13 or R because 'everyone has seen it.'",
-    "Horror at any age of childhood.",
-    "Watching alone anything a parent has not seen."
-   ],
-   "bless": [
-    "Family movie night with a film that lifts, then talk about it.",
-    "Make a family movie: a story, a play, a birthday, a farewell.",
-    "Watch the Savior's life together and talk about Him."
-   ],
-   "ages": {
-    "0-2": "None.",
-    "3-5": "Short, gentle films with a parent, in the daytime.",
-    "6-9": "G and PG films chosen together; ask afterwards what they felt.",
-    "10-12": "PG, with a talk after; PG-13 is a parent's call, case by case.",
-    "13-15": "PG-13 with your judgment, never R; teach why, not just no.",
-    "16+": "Their own standards, held for their own reasons."
-   }
+   ]
   },
   {
    "y": 1927,
@@ -997,11 +997,24 @@
    "lng": -122.4,
    "loc": "San Francisco, USA",
    "why": "Television carried General Conference and the words of prophets into homes that could never travel to hear them. It let a family see the world Heavenly Father made, from the ocean floor to the moon.",
+   "ages": {
+    "0-2": "None, except family on a video call.",
+    "16+": "Decide what deserves an evening.",
+    "3-5": "About an hour of good programs, with you, never as a babysitter.",
+    "6-9": "A daily limit that is kept; shows chosen together.",
+    "10-12": "Shows in the family room; learn what an ad is doing to you.",
+    "13-15": "Their own choices, measured against the family's standard."
+   },
    "date": "1927 AD",
    "good": [
     "Watching the prophet speak, as a family.",
     "Learning about animals, places and history.",
     "A game or a show that brings the family to one couch."
+   ],
+   "harm": [
+    "Television on in the background lowers how much parents talk to babies, and how much babies learn to talk.",
+    "Hours of passive watching replace play, reading and sleep.",
+    "Advertising teaches a child to want."
    ],
    "kids": [
     "Ask before you turn it on.",
@@ -1011,6 +1024,16 @@
    "name": "Television",
    "talk": "What would our evenings look like with no TV for a week?",
    "what": "Movies and radio together, in a box in the living room. The world came into the house.",
+   "avoid": [
+    "A television in a bedroom.",
+    "TV on during meals or as background all day.",
+    "Channels and streaming feeds that autoplay whatever comes next."
+   ],
+   "bless": [
+    "Watch general conference and the Savior's story together.",
+    "Uplifting programs the whole family talks about afterwards.",
+    "Turn it off and read the story instead, some nights."
+   ],
    "builtOn": [
     "radio",
     "movies"
@@ -1025,30 +1048,7 @@
      "note": "By the 1980s the average American child watched more television than they spent in school. It was the first screen to be blamed for what screens do, and the lessons learned then still hold.",
      "source": "Media research, summarised"
     }
-   ],
-   "harm": [
-    "Television on in the background lowers how much parents talk to babies, and how much babies learn to talk.",
-    "Hours of passive watching replace play, reading and sleep.",
-    "Advertising teaches a child to want."
-   ],
-   "avoid": [
-    "A television in a bedroom.",
-    "TV on during meals or as background all day.",
-    "Channels and streaming feeds that autoplay whatever comes next."
-   ],
-   "bless": [
-    "Watch general conference and the Savior's story together.",
-    "Uplifting programs the whole family talks about afterwards.",
-    "Turn it off and read the story instead, some nights."
-   ],
-   "ages": {
-    "0-2": "None, except family on a video call.",
-    "3-5": "About an hour of good programs, with you, never as a babysitter.",
-    "6-9": "A daily limit that is kept; shows chosen together.",
-    "10-12": "Shows in the family room; learn what an ad is doing to you.",
-    "13-15": "Their own choices, measured against the family's standard.",
-    "16+": "Decide what deserves an evening."
-   }
+   ]
   },
   {
    "y": 1945,
@@ -1063,11 +1063,23 @@
    "lng": -75.17,
    "loc": "Philadelphia, USA",
    "why": "Family history, scripture search, the app you are reading this in: all of it is a computer keeping track of what matters. It was built to think fast so that people could spend their thinking on what only people can do.",
+   "ages": {
+    "0-2": "Not yet.",
+    "16+": "A tool for a life's work; they set the limits and keep them.",
+    "3-5": "Not needed.",
+    "6-9": "Learning games and typing, in a family room, with limits.",
+    "10-12": "Homework, coding for fun, a family history project; history visible to parents.",
+    "13-15": "Real work: writing, design, code, editing; filters stay on."
+   },
    "date": "1945 AD",
    "good": [
     "Finding your ancestors in records from around the world.",
     "Helping doctors, farmers and teachers do more good.",
     "Keeping the scriptures searchable in every language."
+   ],
+   "harm": [
+    "Hours sitting still, hunched, staring.",
+    "A computer in a private room is a private door to the whole world."
    ],
    "kids": [
     "A computer is a tool, like a hammer. Use it to build.",
@@ -1077,6 +1089,16 @@
    "name": "The Computer",
    "talk": "What is one thing a computer can never do that you can?",
    "what": "A machine that follows instructions, millions of times a second. It counts, sorts, remembers and draws.",
+   "avoid": [
+    "A computer in a bedroom.",
+    "Accounts a parent does not know about.",
+    "Downloading what a parent has not approved."
+   ],
+   "bless": [
+    "Learn to code and build something that helps someone.",
+    "Type up grandma's stories and the family's history.",
+    "Help index old records so families can find their ancestors."
+   ],
    "builtOn": [
     "light",
     "telegraph",
@@ -1092,29 +1114,7 @@
      "note": "The first computers filled rooms and were used to aim guns. Within a lifetime they were used to find grandmothers in old census books. Purpose is chosen, not built in.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "Hours sitting still, hunched, staring.",
-    "A computer in a private room is a private door to the whole world."
-   ],
-   "avoid": [
-    "A computer in a bedroom.",
-    "Accounts a parent does not know about.",
-    "Downloading what a parent has not approved."
-   ],
-   "bless": [
-    "Learn to code and build something that helps someone.",
-    "Type up grandma's stories and the family's history.",
-    "Help index old records so families can find their ancestors."
-   ],
-   "ages": {
-    "0-2": "Not yet.",
-    "3-5": "Not needed.",
-    "6-9": "Learning games and typing, in a family room, with limits.",
-    "10-12": "Homework, coding for fun, a family history project; history visible to parents.",
-    "13-15": "Real work: writing, design, code, editing; filters stay on.",
-    "16+": "A tool for a life's work; they set the limits and keep them."
-   }
+   ]
   },
   {
    "y": 1972,
@@ -1130,11 +1130,24 @@
    "lng": -122.04,
    "loc": "Sunnyvale, California, USA",
    "why": "Play is how children learn. A good game teaches patience, problem-solving and teamwork, and a family that plays together laughs together. Games can be built to teach anything, including scripture.",
+   "ages": {
+    "0-2": "None.",
+    "16+": "Their own hours, but the same rule: real people before pixels.",
+    "3-5": "None, or a few minutes of a simple touch game on a parent's lap.",
+    "6-9": "E-rated games, together, with a timer everyone can see.",
+    "10-12": "E10+ games, no online chat, a timer, and weekends more than school nights.",
+    "13-15": "T-rated with a parent's judgment; chat only with known friends; no loot boxes; no games in bedrooms."
+   },
    "date": "1972 AD",
    "good": [
     "Playing together as a family and laughing.",
     "Games that teach maths, reading, music or the scriptures.",
     "Making your own game and learning how things work."
+   ],
+   "harm": [
+    "Games are built to keep a child playing: rewards, streaks and loot boxes work on a young brain like slot machines.",
+    "Violence rehearsed for hours teaches the hands and dulls the heart.",
+    "Chat and voice with strangers; predators go where children play."
    ],
    "kids": [
     "Play with people you know.",
@@ -1144,6 +1157,17 @@
    "name": "Video Games",
    "talk": "What game could we play together this week, and what does it teach?",
    "what": "A game you play on a screen. Pong, then Mario, then whole worlds.",
+   "avoid": [
+    "Games rated above their age (E is for everyone; T is for teens; M is not for children).",
+    "Online chat or voice with anyone the family does not know in person.",
+    "Loot boxes and in-game purchases; that is gambling with a costume on.",
+    "Playing in a bedroom, or after bedtime."
+   ],
+   "bless": [
+    "Play together as a family; a game can be a table everyone sits at.",
+    "Creative games: build a temple, a city, a world, and show it off.",
+    "Invite a lonely child to play in the same room."
+   ],
    "builtOn": [
     "computer",
     "tv"
@@ -1170,32 +1194,38 @@
      "url": "https://www.hopkinsmedicine.org/news/newsroom/news-releases/2024/09/specially-designed-video-games-may-benefit-mental-health-of-children-and-teenagers",
      "note": "A review by Johns Hopkins Children's Center found that specially designed video games can modestly improve mental health in children and teens with anxiety, depression, and ADHD.",
      "source": "Johns Hopkins Medicine"
+    },
+    {
+     "on": "2026-10-02",
+     "note": "A global study involving over 2.8 million children across 64 countries found that increased screen time, including video games, is linked to poorer academic achievement and language development, as well as higher socioemotional and mental health problems.",
+     "source": "The Guardian",
+     "url": "https://www.theguardian.com/society/2026/sep/28/high-screen-usage-in-children-linked-to-poorer-outcomes-major-study-suggests"
+    },
+    {
+     "on": "2026-10-02",
+     "note": "A systematic review and meta-analysis revealed that exergaming can promote physical activity and improve cognitive flexibility in children, though its effects on motor skills and other cognitive functions were not statistically significant.",
+     "source": "Journal of Physical Activity & Health",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/42772730/"
+    },
+    {
+     "on": "2026-10-02",
+     "note": "A study of preschool children found that brief digital or traditional gameplay improved performance on tasks requiring quick responses but reduced performance on tasks demanding greater concentration and self-control.",
+     "source": "Phys.org",
+     "url": "https://phys.org/news/2026-09-games-children-attentive-distractible.html"
+    },
+    {
+     "on": "2026-10-02",
+     "note": "A systematic review and meta-analysis indicated that exergaming has significant effects on glucose and lipid metabolism in children and adolescents, suggesting potential benefits for managing metabolic health.",
+     "source": "JMIR Serious Games",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/42747237/"
+    },
+    {
+     "on": "2026-10-02",
+     "note": "A scoping review found that video and app-based games could serve as beneficial tools to support youth emotion regulation through various strategies, though some studies reported areas of continued difficulty.",
+     "source": "JMIR Mental Health",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/42714938/"
     }
-   ],
-   "harm": [
-    "Games are built to keep a child playing: rewards, streaks and loot boxes work on a young brain like slot machines.",
-    "Violence rehearsed for hours teaches the hands and dulls the heart.",
-    "Chat and voice with strangers; predators go where children play."
-   ],
-   "avoid": [
-    "Games rated above their age (E is for everyone; T is for teens; M is not for children).",
-    "Online chat or voice with anyone the family does not know in person.",
-    "Loot boxes and in-game purchases; that is gambling with a costume on.",
-    "Playing in a bedroom, or after bedtime."
-   ],
-   "bless": [
-    "Play together as a family; a game can be a table everyone sits at.",
-    "Creative games: build a temple, a city, a world, and show it off.",
-    "Invite a lonely child to play in the same room."
-   ],
-   "ages": {
-    "0-2": "None.",
-    "3-5": "None, or a few minutes of a simple touch game on a parent's lap.",
-    "6-9": "E-rated games, together, with a timer everyone can see.",
-    "10-12": "E10+ games, no online chat, a timer, and weekends more than school nights.",
-    "13-15": "T-rated with a parent's judgment; chat only with known friends; no loot boxes; no games in bedrooms.",
-    "16+": "Their own hours, but the same rule: real people before pixels."
-   }
+   ]
   },
   {
    "y": 1977,
@@ -1210,11 +1240,22 @@
    "lng": -122.03,
    "loc": "Cupertino, California, USA",
    "why": "Family history left the archives and came home. A parent could type the family's stories, print a lesson, and keep the records Heavenly Father asked us to keep, in the kitchen.",
+   "ages": {
+    "0-2": "Not yet.",
+    "16+": "Their own workstation, their own standards.",
+    "3-5": "Not needed.",
+    "6-9": "A family computer in a family room, with a child account.",
+    "10-12": "Homework and creating; a parent can see everything.",
+    "13-15": "Real tools, with the filter still on and the door open."
+   },
    "date": "1977 AD",
    "good": [
     "Writing the family's history and printing it for the grandchildren.",
     "Learning any skill from your own desk.",
     "Running a small business from home."
+   ],
+   "harm": [
+    "The whole world on a desk, good and bad alike, unless a parent shapes it."
    ],
    "kids": [
     "Use it where the family can see the screen.",
@@ -1224,6 +1265,16 @@
    "name": "The Personal Computer",
    "talk": "What could you create on a computer that would bless somebody?",
    "what": "A computer small and cheap enough to sit on a family's desk.",
+   "avoid": [
+    "A home computer without a filter and a family account.",
+    "Private browsing and cleared history.",
+    "Free downloads that carry viruses and worse."
+   ],
+   "bless": [
+    "Write a book, design a card, make music, edit a family film.",
+    "Learn a skill that will one day feed a family.",
+    "Help an elderly neighbor with their computer."
+   ],
    "builtOn": [
     "computer",
     "tv"
@@ -1238,28 +1289,7 @@
      "note": "The rule that came out of the personal computer years still works best: keep it in a shared room where the screen faces the family.",
      "source": "The Little Scripture Travelers team"
     }
-   ],
-   "harm": [
-    "The whole world on a desk, good and bad alike, unless a parent shapes it."
-   ],
-   "avoid": [
-    "A home computer without a filter and a family account.",
-    "Private browsing and cleared history.",
-    "Free downloads that carry viruses and worse."
-   ],
-   "bless": [
-    "Write a book, design a card, make music, edit a family film.",
-    "Learn a skill that will one day feed a family.",
-    "Help an elderly neighbor with their computer."
-   ],
-   "ages": {
-    "0-2": "Not yet.",
-    "3-5": "Not needed.",
-    "6-9": "A family computer in a family room, with a child account.",
-    "10-12": "Homework and creating; a parent can see everything.",
-    "13-15": "Real tools, with the filter still on and the door open.",
-    "16+": "Their own workstation, their own standards."
-   }
+   ]
   },
   {
    "y": 1990,
@@ -1447,9 +1477,9 @@
     },
     {
      "on": "2026-10-01",
+     "url": "https://www.childrenandscreens.org/newsroom/news/experts-vote-8-0-against-phones-and-tablets-in-childrens-bedrooms-overnight/",
      "note": "Experts recommend keeping phones and tablets out of children's bedrooms overnight to prevent disrupted sleep and compulsive use.",
-     "source": "Children and Screens",
-     "url": "https://www.childrenandscreens.org/newsroom/news/experts-vote-8-0-against-phones-and-tablets-in-childrens-bedrooms-overnight/"
+     "source": "Children and Screens"
     }
    ]
   },
@@ -1541,9 +1571,9 @@
     },
     {
      "on": "2026-10-01",
+     "url": "https://www.theguardian.com/society/2026/sep/28/high-screen-usage-in-children-linked-to-poorer-outcomes-major-study-suggests",
      "note": "A global study found that high screen time, including social media use, is linked to lower academic achievement and increased mental health issues in children.",
-     "source": "The Guardian",
-     "url": "https://www.theguardian.com/society/2026/sep/28/high-screen-usage-in-children-linked-to-poorer-outcomes-major-study-suggests"
+     "source": "The Guardian"
     }
    ]
   },
@@ -1777,9 +1807,9 @@
     },
     {
      "on": "2026-10-01",
+     "url": "https://www.apa.org/news/press/releases/2026/09/education-technology-engagement",
      "note": "The APA warns that engagement with educational technology, such as tablets, does not necessarily equate to learning, urging scrutiny of EdTech claims.",
-     "source": "American Psychological Association",
-     "url": "https://www.apa.org/news/press/releases/2026/09/education-technology-engagement"
+     "source": "American Psychological Association"
     }
    ]
   },
@@ -2090,10 +2120,56 @@
      "source": "Transport safety reports, summarised"
     }
    ]
+  },
+  {
+   "id": "family-ai",
+   "y": 2026,
+   "date": "January 28, 2026",
+   "loc": "New York, USA",
+   "lat": 40.7128,
+   "lng": -74.006,
+   "em": "&#129302;",
+   "name": "Family AI",
+   "ev": "",
+   "what": "An AI platform designed to assist families in managing daily schedules, tasks, and home routines.",
+   "why": "To streamline family coordination and household management, reducing the time parents spend organizing family activities and responsibilities.",
+   "builtOn": [
+    "internet",
+    "ai"
+   ],
+   "good": [
+    "Helps families stay organized by managing schedules and tasks.",
+    "Reduces the time parents spend on coordinating family activities.",
+    "Provides a centralized platform for family communication and planning."
+   ],
+   "bad": [
+    "Potential privacy concerns regarding family data.",
+    "Dependence on technology for family management may reduce personal interaction."
+   ],
+   "dangers": [
+    "Data breaches could expose sensitive family information.",
+    "Overreliance on AI may diminish traditional family communication skills."
+   ],
+   "kids": [
+    "Use the AI to set reminders for homework and chores.",
+    "Discuss with parents how the AI can help with family activities.",
+    "Ensure screen time is balanced with offline family interactions."
+   ],
+   "talk": "How do you feel about using an AI to help manage our family's daily activities?",
+   "learned": [
+    {
+     "on": "2026-10-02",
+     "note": "Nori, the world's first Family AI, was launched to assist families in managing daily schedules and tasks.",
+     "source": "GlobeNewswire",
+     "url": "https://www.globenewswire.com/news-release/2026/01/28/3227793/0/en/nori-introduces-the-world-s-first-family-brain-bringing-ai-into-the-center-of-modern-family-life.html"
+    }
+   ],
+   "added": "2026-10-02",
+   "modern": true
   }
  ],
- "updated": "2026-10-01",
- "version": 8,
+ "updated": "2026-10-02",
+ "version": 9,
  "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
  "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next.",
