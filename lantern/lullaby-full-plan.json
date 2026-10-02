@@ -451,38 +451,11 @@
   "fade": 0.5,
   "gain_b_db": 1.28,
   "b_offset": 322.12,
-  "tone": {
-   "applied": true,
-   "curve_db": [
-    4.0,
-    4.0,
-    4.0,
-    4.0,
-    4.0,
-    4.0,
-    4.0,
-    4.0,
-    4.0,
-    4.0,
-    0.9,
-    -0.9,
-    -2.7,
-    -1.3,
-    -4.0,
-    -4.0,
-    -4.0,
-    -4.0,
-    -4.0,
-    -3.6,
-    0.1,
-    2.3,
-    1.5,
-    -1.7
-   ],
-   "gain_db": -0.86,
-   "brightness_before": 2151,
-   "brightness_after": 1904,
-   "brightness_reference": 1469
+  "clean": {
+   "peak": 1.11,
+   "changed": true,
+   "turned_down_db": -1.44,
+   "peak_after": 0.913
   }
  }
 }
