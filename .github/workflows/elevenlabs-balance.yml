@@ -30,8 +30,12 @@ jobs:
               u = ask('https://api.elevenlabs.io/v1/user')
               d = (u or {}).get('subscription') or {}
           if not d:
-              raise SystemExit('ElevenLabs would not report the balance to this key. In ElevenLabs, open '
-                               'Developers > API Keys, edit this key, and turn on the "User" read permission.')
+              # not a failure: this key is allowed to make music but not to read the account,
+              # and the balance can be seen in the ElevenLabs app (profile > credits)
+              print('This key is not allowed to read the balance (that is fine - it can still make music).')
+              print('To see the balance: open the ElevenLabs app, tap your profile; the credits are under your email.')
+              print('To let this job read it: ElevenLabs > Developers > API Keys > edit this key > turn on "User" read.')
+              raise SystemExit(0)
           used = int(d.get('character_count') or 0); limit = int(d.get('character_limit') or 0)
           reset = d.get('next_character_count_reset_unix')
           print('plan:            ', d.get('tier'))
