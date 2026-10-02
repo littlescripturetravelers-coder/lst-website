@@ -159,6 +159,32 @@ def join(a_path, a_last, b_path, b_first, out_path, tail=3.0, lead=3.0, fade=2.0
             "fade": round(float(f), 3), "gain_b_db": round(float(gain), 2), "gap_s": round(float(ta - a_last + b_first - tb - f), 2)}
 
 
+def join_at(a_path, ta, b_path, tb, out_path, pre=0.35, fade=0.5, bitrate="192k"):
+    """Join two takes that both sing the same verse: the first half is kept up to just
+    before it begins line N, the second from just before ITS line N, with a short
+    equal-power crossfade in the breath before that line. Both sides are in the
+    middle of their music (no ending, no fade, no start-up), and line N lands where
+    the first half would have sung it. ta / tb: the second line N begins in each."""
+    a_end = max(0.5, ta - pre)
+    b_start = max(0.0, tb - pre - fade)
+    f = max(0.1, min(fade, a_end, tb - pre - b_start if tb - pre > b_start else fade))
+    fa = features(decode(a_path, max(0.0, ta - 40), 40))
+    fb = features(decode(b_path, tb, 40))
+    gain = max(-6.0, min(6.0, fa["db"] - fb["db"]))
+    fc = ("[0:a]atrim=0:%.3f,asetpts=PTS-STARTPTS[a];"
+          "[1:a]atrim=%.3f,asetpts=PTS-STARTPTS,volume=%.2fdB[b];"
+          "[a][b]acrossfade=d=%.3f:c1=qsin:c2=qsin[out]") % (a_end, b_start, gain, f)
+    subprocess.run([ffmpeg(), "-y", "-v", "error", "-i", a_path, "-i", b_path, "-filter_complex", fc,
+                    "-map", "[out]", "-ar", "44100", "-b:a", bitrate, out_path], check=True)
+    return {"cut_a": round(float(a_end), 3), "start_b": round(float(b_start), 3), "fade": round(float(f), 3),
+            "gain_b_db": round(float(gain), 2), "b_offset": round(float(a_end - f - b_start), 3)}
+
+
+def heard_near(heard, t, within=0.6):
+    """Whether a sung word really begins near second t (not a guessed, filled-in time)."""
+    return any(abs(s - t) <= within for _, s, _ in (heard or []))
+
+
 def words_span(segments):
     """The first sung word's start and the last one's end, from a transcription."""
     segs = [s for s in segments if s.get("end", 0) > s.get("start", 0) and str(s.get("text", "")).strip()]

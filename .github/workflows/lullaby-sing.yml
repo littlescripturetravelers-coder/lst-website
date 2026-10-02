@@ -252,7 +252,7 @@ jobs:
           # 1,200 Hz against 2,300) with twice their share of warm low end, a line every 5.5-6 s and
           # a breath of 3-4 s between verses.
           POS=["lullaby","children's music","Christian","folk","children's bedtime lullaby","a slow, gently rocking lullaby at about 68 BPM, swaying like a cradle","in E major",
-               "warm, soft and mellow, dark-toned and cosy, nothing bright or sparkly",
+               "a major key, warm and comforting, never sad","warm, soft and mellow, cosy, nothing harsh",
                "gentle acoustic accompaniment, sparse and quiet, with a warm low end","no drums, no percussion",
                "clean and undistorted, plenty of headroom","the same slow tempo all the way through",
                "one melody carried through every verse, the chorus the same tune each time it returns",
@@ -261,7 +261,7 @@ jobs:
                "a soft instrumental breath of a few seconds between verses, soft and steady dynamics",voice]
           NEG=["drums","percussion","backing vocals","choir","duet","a second singer","a change of singer","distortion","clipping",
                "loudness pushing","shouting","spoken word","rap","improvised words","scat singing","ad-libs","key change","tempo change",
-               "rushed phrasing","a fast tempo","bright or harsh tone","busy accompaniment",
+               "rushed phrasing","a fast tempo","harsh tone","busy accompaniment","a minor key","sad","melancholic","dark",
                "abrupt transitions","sudden stops","long silences between verses","a jump in volume","a change of arrangement"]
           def plan_full():
               secs=[]; budget=LENGTH-5000
@@ -457,16 +457,24 @@ jobs:
                   score,cov=check_take(t,path)
                   if best is None or score>best[0]: best=(score,t,cov)
               takes=0
-          # ── two halves at the first recording's pace, joined in a breath (lantern/builder/lullaby_join.py) ──
+          # ── two halves at the first recording's pace, joined in the middle of the music ──
+          # Each half sings one verse of the other as well: the first half sings on into the
+          # first verse of the second, and the second begins with the chorus that ends the
+          # first. Both are then cut in the breath before the same line - the first verse of
+          # the second half - so the join falls between two lines with the music playing on
+          # both sides (lantern/builder/lullaby_join.join_at): no ending, no fade, no start-up.
           if mode=='full' and PARTS==2:
-              sys.path.insert(0,'lantern/builder'); import lullaby_join as J
+              sys.path.insert(0,'lantern/builder'); import lullaby_join as J; import time_words as TW
               n_all=len(all_lines); cum=0; cut=None
               for i,(lab,ls) in enumerate(sections[:-1]):
                   cum+=len(ls)
-                  # the join falls after a chorus ("Goodnight, Friends"), where the song rests anyway
                   if lab.startswith('Goodnight') and (cut is None or abs(cum-n_all/2.0)<abs(cut[1]-n_all/2.0)): cut=(i+1,cum)
               if cut is None: cut=(len(sections)//2,sum(len(l) for _,l in sections[:len(sections)//2]))
-              halves=[sections[:cut[0]],sections[cut[0]:]]
+              A_core,B_core=sections[:cut[0]],sections[cut[0]:]
+              lead=(A_core[-1][0],A_core[-1][1][:])            # the chorus that ends the first half
+              tail=(B_core[0][0],B_core[0][1][:4])              # the first verse of the second half
+              halves=[A_core+[tail],[lead]+B_core]
+              join_line=[sum(len(l) for _,l in A_core),len(lead[1])]   # where the shared verse begins, in each half's own lines
               def plan_half(h):
                   secs=[]; hs=halves[h]
                   for i,(name,lines) in enumerate(hs):
@@ -475,15 +483,11 @@ jobs:
                       local=['sung softly and slowly, one line at a time, every word clear, a breath between verses']
                       if name.startswith('Goodnight'): local.append('the chorus: the same gentle tune each time it returns')
                       if first and h==0: dur+=5000; local.append('a short, soft instrumental opening, then the words')
+                      if first and h==1: local.append('the song is already under way: sung straight in, at the same tempo and in the same key')
                       if not first: local.append('flows straight on from the section before - the same voice, key, tempo and accompaniment, no jolt')
+                      if last and h==0: dur+=4000; local.append('the song goes on after this verse: no ending, no slowing, no fade')
                       if last and h==1: dur+=8000; local.append('settling and slowing, almost asleep, a soft instrumental close')
                       secs.append({'section_name':name[:100],'positive_local_styles':local,'negative_local_styles':[],'duration_ms':int(max(3000,min(120000,dur))),'lines':lines})
-                  # the join is made in music, not in silence: the first half plays on after its
-                  # last line, and the second begins with the same soft accompaniment before it sings
-                  bridge={'positive_local_styles':['instrumental only, no singing','the same soft accompaniment, the same key and the same slow tempo, gently rocking'],
-                          'negative_local_styles':['singing','an ending','a fade-out','slowing down','silence']}
-                  if h==0: secs.append(dict(bridge,section_name='Instrumental, playing on',duration_ms=10000,lines=[]))
-                  if h==1: secs.insert(0,dict(bridge,section_name='Instrumental introduction',duration_ms=6000,lines=[]))
                   tot=sum(x['duration_ms'] for x in secs)
                   if tot>599000:
                       k=599000.0/tot
@@ -495,6 +499,7 @@ jobs:
                   print(f'half {h+1}: {sum(len(l) for _,l in halves[h])} lines, {sum(x["duration_ms"] for x in plans[h]["sections"])//1000}s')
               got=[[],[]]
               for h in (0,1):
+                  hl=[ln for _,ls in halves[h] for ln in ls]
                   for t in range(1,takes+1):
                       bd={'composition_plan':plans[h],'model_id':'music_v1'}
                       if fid: bd['finetune_id']=fid
@@ -503,35 +508,33 @@ jobs:
                       except urllib.error.HTTPError as e:
                           detail=e.read()[:700]; print(f'   ElevenLabs refused: HTTP {e.code} {detail!r}')
                           if e.code in (401,402) or b'quota' in detail.lower() or b'credits' in detail.lower(): sys.exit('no credit left; stopping')
-                          if e.code in (400,422) and any(not x['lines'] for x in plans[h]['sections']):
-                              # no instrumental sections, then: the time is given to the next or last section instead
-                              secs=plans[h]['sections']; keep=[]
-                              for x in secs:
-                                  if x['lines']: keep.append(x)
-                                  elif keep: keep[-1]['duration_ms']+=x['duration_ms']; keep[-1]['positive_local_styles'].append('then the accompaniment plays on softly for a few seconds, no ending, no fade')
-                              if secs and not secs[0]['lines'] and keep: keep[0]['duration_ms']+=secs[0]['duration_ms']; keep[0]['positive_local_styles'].append('a few seconds of soft instrumental introduction in the same key and tempo first')
-                              plans[h]['sections']=keep; bd['composition_plan']=plans[h]
-                              print('   sung again without instrumental sections',flush=True)
-                              try: audio=sing(bd)
-                              except urllib.error.HTTPError as e2: print('   still refused: HTTP',e2.code,e2.read()[:500]); continue
-                          else: continue
+                          continue
                       path=f'out/half{h+1}-take{t}.mp3'; open(path,'wb').write(audio)
-                      tr=transcribe(path); cov,rows=coverage(tr,halves[h]); sm=smoothness(path,tr)
-                      first,lastw=J.words_span(tr.get('segments',[]))
-                      json.dump(tr,open(path[:-4]+'-heard.json','w'))
-                      print(f'   {round(cov*100)}% of its lines sung; {sm["stumbles"]} break(s) over 2.5 s, level wanders {sm["level_wander_db"]} dB; words {first}-{lastw} s',flush=True)
-                      if first is None: continue
-                      tone=J.tone_distance(path,SOURCE); print(f'   tone: {tone} dB from the first recording',flush=True)
-                      got[h].append({'path':path,'cov':cov,'sm':sm,'first':first,'last':lastw,'tone':tone})
-              if not got[0] or not got[1]: sys.exit('a half could not be sung; nothing joined')
+                      heard=TW.scribe(path)
+                      if not heard: print('   could not hear this take; skipped'); continue
+                      starts,share=TW.align(hl,heard,None)
+                      tr={'segments':[{'start':s_,'end':e_,'text':w} for w,s_,e_ in heard]}
+                      json.dump(heard,open(path[:-4]+'-heard.json','w'))
+                      cov,rows=coverage(tr,halves[h]); sm=smoothness(path,tr)
+                      tj=starts[join_line[h]] if starts else None
+                      sure=bool(tj is not None and J.heard_near(heard,tj))
+                      f_=J.features(J.decode(path)); key=J.key_of(f_['chroma']); tone=J.tone_distance(path,SOURCE)
+                      print(f'   {round(cov*100)}% of its lines sung; key {key}; tone {tone} dB from the first recording; the shared verse begins at {tj} s ({"heard" if sure else "guessed"})',flush=True)
+                      if not sure: continue
+                      got[h].append({'path':path,'cov':cov,'sm':sm,'tj':tj,'key':key,'tone':tone})
+              if not got[0] or not got[1]: sys.exit('a half could not be sung and heard; nothing joined')
               pairs=[]
               for a in got[0]:
                   for b in got[1]:
-                      sm_=J.seam(a['path'],a['last'],b['path'],b['first'])
-                      score=(a['cov']+b['cov'])*100-2*(a['sm']['stumbles']+b['sm']['stumbles'])-(a['sm']['level_wander_db']+b['sm']['level_wander_db'])-sm_['penalty']-3*(a['tone']+b['tone'])
-                      pairs.append((score,a,b,sm_)); print(f'   pair {a["path"]} + {b["path"]}: seam {sm_} -> score {round(score,1)}')
+                      fa=J.features(J.decode(a['path'],a['tj']-30,30)); fb=J.features(J.decode(b['path'],b['tj'],30))
+                      ka,kb=J.key_of(fa['chroma']),J.key_of(fb['chroma'])
+                      corr=float(J.np.corrcoef(fa['chroma'],fb['chroma'])[0,1])
+                      pen=(1-corr)*40+(25 if ka!=kb else 0)+(15 if 'minor' in a['key'] else 0)+(15 if 'minor' in b['key'] else 0)
+                      score=(a['cov']+b['cov'])*100-2*(a['sm']['stumbles']+b['sm']['stumbles'])-pen-3*(a['tone']+b['tone'])
+                      pairs.append((score,a,b,{'key_a':ka,'key_b':kb,'chroma_match':round(corr,3),'penalty':round(pen,1)}))
+                      print(f'   pair {a["path"]} + {b["path"]}: {pairs[-1][3]} -> score {round(score,1)}')
               pairs.sort(key=lambda x:-x[0]); score,a,b,sm_=pairs[0]
-              jn=J.join(a['path'],a['last'],b['path'],b['first'],'out/take-1-raw.mp3')
+              jn=J.join_at(a['path'],a['tj'],b['path'],b['tj'],'out/take-1-raw.mp3')
               print('joined',a['path'],'+',b['path'],jn,flush=True)
               tn=J.match_tone('out/take-1-raw.mp3',SOURCE,'out/take-1.mp3'); jn['tone']=tn
               print('tone matched to the first recording:',{k:v for k,v in tn.items() if k!='curve_db'},flush=True)
