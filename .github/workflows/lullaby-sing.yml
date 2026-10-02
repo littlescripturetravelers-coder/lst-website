@@ -507,7 +507,7 @@ jobs:
                       try: audio=sing(bd)
                       except urllib.error.HTTPError as e:
                           detail=e.read()[:700]; print(f'   ElevenLabs refused: HTTP {e.code} {detail!r}')
-                          if e.code in (401,402) or b'quota' in detail.lower() or b'credits' in detail.lower(): sys.exit('no credit left; stopping')
+                          if e.code in (401,402) or b'quota' in detail.lower() or b'credits' in detail.lower(): sys.exit('ElevenLabs refused the key or the credits (HTTP %d); stopping' % e.code)
                           continue
                       path=f'out/half{h+1}-take{t}.mp3'; open(path,'wb').write(audio)
                       heard=TW.scribe(path)
@@ -518,10 +518,10 @@ jobs:
                       cov,rows=coverage(tr,halves[h]); sm=smoothness(path,tr)
                       tj=starts[join_line[h]] if starts else None
                       sure=bool(tj is not None and J.heard_near(heard,tj))
-                      f_=J.features(J.decode(path)); key=J.key_of(f_['chroma']); tone=J.tone_distance(path,SOURCE)
-                      print(f'   {round(cov*100)}% of its lines sung; key {key}; tone {tone} dB from the first recording; the shared verse begins at {tj} s ({"heard" if sure else "guessed"})',flush=True)
+                      f_=J.features(J.decode(path)); mkey=J.key_of(f_['chroma']); tone=J.tone_distance(path,SOURCE)   # mkey: the music's key ('key' is the ElevenLabs key)
+                      print(f'   {round(cov*100)}% of its lines sung; key {mkey}; tone {tone} dB from the first recording; the shared verse begins at {tj} s ({"heard" if sure else "guessed"})',flush=True)
                       if not sure: continue
-                      got[h].append({'path':path,'cov':cov,'sm':sm,'tj':tj,'key':key,'tone':tone})
+                      got[h].append({'path':path,'cov':cov,'sm':sm,'tj':tj,'key':mkey,'tone':tone})
               if not got[0] or not got[1]: sys.exit('a half could not be sung and heard; nothing joined')
               pairs=[]
               for a in got[0]:
