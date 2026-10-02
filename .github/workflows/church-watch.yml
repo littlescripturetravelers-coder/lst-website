@@ -1,0 +1,60 @@
+# TEMPLES AND MISSIONARY WORK, KEPT UP TO DATE ON THEIR OWN.
+#
+# Levi, 2 Oct 2026: every temple of The Church of Jesus Christ of Latter-day Saints
+# and the missionary work and membership in every place, on the timeline, "added
+# to the timeline as new temples are announced and dedicated and when places are
+# opened or closed to missionary work."
+#
+# Every day this reads the Church's own pages (the temple list and each temple's
+# milestones, the facts and statistics for every country, state and area, and the
+# Newsroom's world figures) with lantern/church_watch.py. No AI and no credits:
+# only the Church's words and numbers. When something changed it
+#   - writes data/temples.js and data/missions.js here (the website's timeline
+#     reads them), with what changed added to each file's "changes";
+#   - sends the same to the account (timeline_feed rows "temples" and "missions"),
+#     so the app's timeline on every phone has it the next time it opens.
+# A day when nothing changed writes nothing. A read that finds far fewer temples
+# or places than last time is treated as a broken read, and nothing is written.
+name: Church watch
+
+on:
+  schedule:
+    - cron: '37 11 * * *'     # every day at 11:37 UTC (about 5:37 AM Mountain)
+  workflow_dispatch:
+    inputs:
+      full:
+        description: 'Read every temple page again (it does this on the 1st of each month anyway)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: church-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the Church's pages, and tell the account what changed
+        env:
+          SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          FULL: ${{ inputs.full && '1' || '' }}
+        run: python3 lantern/church_watch.py
+
+      - name: Keep the new figures here
+        run: |
+          git config user.name "church-watch"
+          git config user.email "church-watch@users.noreply.github.com"
+          git add data/temples.js data/missions.js
+          if git diff --cached --quiet; then echo "nothing changed today"; else
+            git commit -m "Church watch: temples and missionary work $(date -u +%Y-%m-%d)"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push || (git pull --rebase origin "${GITHUB_REF_NAME}" && git push)
+          fi

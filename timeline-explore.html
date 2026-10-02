@@ -1496,6 +1496,8 @@ body.hand-active .hand-label{display:block;}
       <button class="hchip hchip-gold lchip on" onclick="tgl('gospel')" id="lc-gospel">&#10022; Gospel</button>
       <button class="hchip hchip-green lchip on" onclick="tgl('bom')" id="lc-bom">&#127795; Book of Mormon</button>
       <button class="hchip hchip-purple lchip on" onclick="tgl('church')" id="lc-church">&#9728; Church Hist.</button>
+      <button class="hchip hchip-amber lchip on" onclick="tgl('temples')" id="lc-temples">&#9962; Temples</button>
+      <button class="hchip hchip-teal lchip on" onclick="tgl('missions')" id="lc-missions">&#128694; Missionary Work</button>
       <button class="hchip hchip-blue lchip on" onclick="tgl('xian')" id="lc-xian">&#9768; Christian Hist.</button>
     </div>
     <div class="hdr2-sep"></div>
@@ -1552,6 +1554,8 @@ body.hand-active .hand-label{display:block;}
   <div class="lp-row" onclick="tgl('gospel')"><div class="lp-dot" style="background:#F5C518"></div><span class="lp-name" style="color:#F5C518">&#10022; Gospel Stories</span><div class="lp-toggle on" id="tog-gospel"></div></div>
   <div class="lp-row" onclick="tgl('bom')"><div class="lp-dot" style="background:#7BC67E"></div><span class="lp-name" style="color:#7BC67E">&#128220; Book of Mormon</span><div class="lp-toggle on" id="tog-bom"></div></div>
   <div class="lp-row" onclick="tgl('church')"><div class="lp-dot" style="background:#C084FC"></div><span class="lp-name" style="color:#C084FC">&#9962; Church History</span><div class="lp-toggle on" id="tog-church"></div></div>
+  <div class="lp-row" onclick="tgl('temples')"><div class="lp-dot" style="background:#D9A227"></div><span class="lp-name" style="color:#D9A227">&#9962; Temples</span><div class="lp-toggle on" id="tog-temples"></div></div>
+  <div class="lp-row" onclick="tgl('missions')"><div class="lp-dot" style="background:#5BD3DC"></div><span class="lp-name" style="color:#5BD3DC">&#128694; Missionary Work</span><div class="lp-toggle on" id="tog-missions"></div></div>
   <div class="lp-div"></div>
   <div class="lp-section">World History</div>
   <div class="lp-row" onclick="tgl('empire')"><div class="lp-dot" style="background:#E8C547"></div><span class="lp-name" style="color:#E8C547">&#127981; Empires</span><div class="lp-toggle on" id="tog-empire"></div></div>
@@ -1667,6 +1671,16 @@ body.hand-active .hand-label{display:block;}
       <span class="sm-ico" style="color:#D9A227">&#129718;</span>
       <span class="sm-txt"><b style="color:#D9A227">The Native Peoples and the Book of Mormon</b>
         <em>Every people of the Americas: how they lived and what they believed, and, only where it is recorded, their connection with Israel, the Book of Mormon or a teacher who came among them, graded honestly</em></span>
+      <span class="sm-arr">&#8250;</span></div>
+    <div class="sm-item" onclick="smGo('temples')">
+      <span class="sm-ico" style="color:#D9A227">&#9962;</span>
+      <span class="sm-txt"><b style="color:#D9A227">Temples of the Lord</b>
+        <em>Every temple of The Church of Jesus Christ of Latter-day Saints: when it was announced, begun and dedicated, and little facts about each; new temples join on their own</em></span>
+      <span class="sm-arr">&#8250;</span></div>
+    <div class="sm-item" onclick="smGo('missions')">
+      <span class="sm-ico" style="color:#5BD3DC">&#127758;</span>
+      <span class="sm-txt"><b style="color:#5BD3DC">Missionary Work Around the World</b>
+        <em>When missionaries first came to each country and state, the Church's history and members there, the areas of the world, and the places with no missionaries yet</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('family')">
       <span class="sm-ico" style="color:#F472B6">&#128106;</span>
@@ -1892,6 +1906,8 @@ body.hand-active .hand-label{display:block;}
 <script src="data/society.js"></script>
 <script src="data/tribes.js"></script>
 <script src="data/atonement.js"></script>
+<script src="data/temples.js"></script>
+<script src="data/missions.js"></script>
 <script>
 /* ---------- Floating controls ----------
    The header rows are hidden, not deleted, and their contents are moved into the
@@ -2118,6 +2134,8 @@ var LANES={
   gospel:{side:"above",row:2,color:"#F5C518",label:"Gospel Stories"},
   bom:{side:"above",row:3,color:"#7BC67E",label:"Book of Mormon"},
   church:{side:"above",row:4,color:"#C084FC",label:"Church History"},
+  temples:{side:"above",row:4.3,color:"#D9A227",label:"Temples"},
+  missions:{side:"above",row:4.6,color:"#5BD3DC",label:"Missionary Work"},
   empire:{side:"above",row:5,color:"#E8C547",label:"Empires"},
   world:{side:"above",row:6,color:"#5BD3DC",label:"Civilizations"},
   invent:{side:"above",row:7,color:"#FB923C",label:"Inventions &amp; Technology"},
@@ -2150,7 +2168,7 @@ var LANES={
   _unused:{side:"above",row:99,color:"#F5C518",label:""}
 };
 var LC={};for(var _lk in LANES)LC[_lk]=LANES[_lk].color;
-var AL={gospel:true,bom:true,church:true,empire:true,world:true,war:true,
+var AL={gospel:true,bom:true,church:true,temples:true,missions:true,empire:true,world:true,war:true,
   trade:true,famous:true,disaster:true,invent:true,faith:true,freedom:true,
   arch:true,family:true,counter:false,migrate:true,explore:true,xian:true,lang:true,pop:true,city:true,socfam:true,lstbook:true,faithfree:true,drugs:true,work:true,slave:true,escape:true,scifaith:true,health:true,socio:true,child:true,prop:true};
 var TV={
@@ -5161,6 +5179,7 @@ function openEvMod(ev){
   if(ev.tech){var tb=document.createElement("button");tb.className="map-btn tech-btn";tb.innerHTML="&#128161; Technology for Good: why it came, good ways, bad ways, dangers";tb.onclick=function(){document.getElementById("dmod").classList.remove("open");openTechGuide("tech",curEv.tech);};body.appendChild(tb);}
   if(ev.find){var fb=document.createElement("button");fb.className="map-btn tech-btn";fb.innerHTML="&#127963; About this discovery, and its source";fb.onclick=function(){document.getElementById("dmod").classList.remove("open");openTechGuide("finds",curEv.find);};body.appendChild(fb);}
   try{ atnEventButton(ev,body); }catch(e){}
+  try{ chEventButton(ev,body); }catch(e){}
   if(ev.lat!==undefined){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
@@ -9285,6 +9304,8 @@ var SL_CATS=[
   {k:"tech",    n:"Technology for Good",c:"#22D3EE"},
   {k:"evidence",n:"Evidence &amp; Discoveries",c:"#D9A227"},
   {k:"church",  n:"Church History",     c:"#C084FC"},
+  {k:"temples", n:"Temples",            c:"#D9A227"},
+  {k:"missions",n:"Missionary Work",    c:"#5BD3DC"},
   {k:"xian",    n:"Christian History",  c:"#60A5FA"},
   {k:"faith",   n:"World Faiths",       c:"#E879F9"},
   {k:"seeds",   n:"Seeds of Truth",     c:"#34D399"},
@@ -10551,6 +10572,8 @@ function smGo(which){
       else if(which==="atonement") openAtonement();
       else if(which==="tech")   openTechGuide("tech");
       else if(which==="finds")  openTechGuide("finds");
+      else if(which==="temples") openChurchGuide("temples");
+      else if(which==="missions") openChurchGuide("world");
     }catch(e){ console.log("studies menu error",e); }
   },140);
 }
@@ -10561,6 +10584,364 @@ function smGo(which){
 })();
 
 </script>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     TEMPLES OF THE LORD  ·  MISSIONARY WORK AROUND THE WORLD
+     Levi, 2 Oct 2026: every temple, when it was built and its history, and
+     the missionary work of The Church of Jesus Christ of Latter-day Saints:
+     when missionaries first went to each country and state, the history and
+     membership there, where missionaries serve, how many members each area
+     has, and which places have none - added to the timeline as temples are
+     announced and dedicated and as places open or close.
+     The figures are the Church's own (churchofjesuschrist.org and its
+     Newsroom), gathered every day by the website's church-watch Action into
+     data/temples.js and data/missions.js and the account's timeline_feed rows
+     "temples" and "missions". Whichever copy is newer is the one shown.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<style>
+#ch-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;background:rgba(2,5,15,.97);backdrop-filter:blur(16px);flex-direction:column;animation:mopen .22s ease;}
+#ch-panel.open{display:flex;}
+#ch-hdr{flex-shrink:0;background:rgba(6,13,30,.99);border-bottom:2px solid rgba(217,162,39,.4);padding:12px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+#ch-panel.msn #ch-hdr{border-bottom-color:rgba(91,211,220,.4);}
+#ch-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:#D9A227;}
+#ch-panel.msn #ch-title{color:#5BD3DC;}
+#ch-sub{font-size:9px;color:rgba(255,255,255,.38);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+#ch-intro{font-size:10.5px;color:rgba(255,255,255,.55);margin-top:5px;line-height:1.5;max-width:560px;}
+#ch-close{background:rgba(255,255,255,.08);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#ch-tabs{flex-shrink:0;display:flex;gap:6px;padding:8px 18px;background:rgba(6,13,30,.98);border-bottom:1px solid rgba(255,255,255,.08);overflow-x:auto;}
+.ch-tab{font-family:var(--font-display);font-weight:600;font-size:11.5px;padding:6px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);background:none;cursor:pointer;white-space:nowrap;}
+.ch-tab.on{background:rgba(217,162,39,.16);border-color:#D9A227;color:#F5C518;}
+#ch-panel.msn .ch-tab.on{background:rgba(91,211,220,.14);border-color:#5BD3DC;color:#5BD3DC;}
+#ch-body{flex:1;overflow-y:auto;padding:10px 14px calc(var(--safeb) + 70px);}
+#ch-body::-webkit-scrollbar{width:3px;} #ch-body::-webkit-scrollbar-thumb{background:#D9A227;}
+.ch-fresh{font-size:9.5px;color:rgba(255,255,255,.42);margin:4px 2px 10px;font-weight:700;letter-spacing:.4px;}
+.ch-fresh a{color:inherit;}
+.ch-era{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.6px;color:#F5C518;margin:14px 2px 6px;}
+.ch-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin:0 0 10px;}
+.ch-stat{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:14px;padding:10px 12px;}
+.ch-stat b{display:block;font-family:var(--font-display);font-weight:700;font-size:18px;color:#F5C518;}
+#ch-panel.msn .ch-stat b{color:#5BD3DC;}
+.ch-stat span{font-size:10px;color:rgba(255,255,255,.6);font-weight:700;}
+.ch-filters{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;}
+.ch-f{font-size:10.5px;font-weight:800;padding:5px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.65);background:none;cursor:pointer;}
+.ch-f.on{border-color:#D9A227;color:#F5C518;background:rgba(217,162,39,.12);}
+#ch-panel.msn .ch-f.on{border-color:#5BD3DC;color:#5BD3DC;background:rgba(91,211,220,.1);}
+.ch-search{width:100%;padding:9px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#fff;font-family:var(--font-body);font-size:13px;margin:0 0 10px;outline:none;}
+.ch-card{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:14px;margin:0 0 8px;overflow:hidden;}
+.ch-card.open{border-color:rgba(217,162,39,.5);}
+#ch-panel.msn .ch-card.open{border-color:rgba(91,211,220,.5);}
+.ch-head{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;}
+.ch-em{width:34px;height:34px;border-radius:10px;background:rgba(217,162,39,.14);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+#ch-panel.msn .ch-em{background:rgba(91,211,220,.12);}
+.ch-name{font-family:var(--font-display);font-weight:600;font-size:14px;color:#fff;line-height:1.2;}
+.ch-when{font-size:9.5px;color:rgba(255,255,255,.5);font-weight:700;margin-top:2px;}
+.ch-chev{margin-left:auto;color:#D9A227;font-size:12px;transition:transform .18s;}
+#ch-panel.msn .ch-chev{color:#5BD3DC;}
+.ch-card.open .ch-chev{transform:rotate(180deg);}
+.ch-detail{display:none;padding:0 12px 12px;}
+.ch-card.open .ch-detail{display:block;}
+.ch-sec{margin:10px 0 0;}
+.ch-lab{font-family:var(--font-display);font-weight:600;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:4px;color:#D9A227;}
+#ch-panel.msn .ch-lab{color:#5BD3DC;}
+.ch-p{font-size:12px;line-height:1.6;color:rgba(255,255,255,.85);}
+.ch-p+.ch-p{margin-top:6px;}
+.ch-list{margin:0;padding-left:18px;} .ch-list li{font-size:12px;line-height:1.55;color:rgba(255,255,255,.85);margin-bottom:3px;}
+.ch-why{background:rgba(245,197,24,.08);border-left:3px solid #F5C518;border-radius:0 10px 10px 0;padding:8px 10px;}
+.ch-tag{display:inline-block;font-size:8.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:2px 7px;border-radius:6px;margin-top:4px;margin-right:4px;}
+.ch-tag.op{background:rgba(52,211,153,.14);color:#34D399;border:1px solid rgba(52,211,153,.4);}
+.ch-tag.bu{background:rgba(251,191,36,.14);color:#FBBF24;border:1px solid rgba(251,191,36,.4);}
+.ch-tag.an{background:rgba(91,211,220,.12);color:#5BD3DC;border:1px solid rgba(91,211,220,.4);}
+.ch-tag.re{background:rgba(248,113,113,.12);color:#F87171;border:1px solid rgba(248,113,113,.4);}
+.ch-tag.hi{background:rgba(192,132,252,.14);color:#C084FC;border:1px solid rgba(192,132,252,.4);}
+.ch-nums{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11px;color:rgba(255,255,255,.75);}
+.ch-nums b{color:#fff;}
+.ch-src{font-size:9.5px;color:rgba(255,255,255,.42);margin-top:8px;}
+.ch-src a{color:#5BD3DC;text-decoration:none;}
+.ch-btn{margin-top:10px;width:100%;padding:9px 12px;border-radius:12px;border:1px solid rgba(245,197,24,.45);background:rgba(245,197,24,.12);color:#F5C518;font-family:var(--font-display);font-weight:600;font-size:12px;cursor:pointer;}
+.ch-note{border-top:1px solid rgba(255,255,255,.06);padding:7px 0;}
+.ch-note b{display:block;font-size:9.5px;color:#D9A227;letter-spacing:.6px;margin-bottom:2px;}
+.ch-note span{font-size:11.5px;line-height:1.55;color:rgba(255,255,255,.85);}
+.ch-empty{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;padding:16px 4px;text-align:center;}
+.ch-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.ch-chip{font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:99px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.75);background:rgba(255,255,255,.04);}
+.map-btn.ch-tbtn{border-color:rgba(217,162,39,.55);color:#F5C518;background:rgba(217,162,39,.1);}
+.map-btn.ch-mbtn{border-color:rgba(91,211,220,.55);color:#5BD3DC;background:rgba(91,211,220,.08);}
+</style>
+
+<div id="ch-panel">
+  <div id="ch-hdr">
+    <div>
+      <div id="ch-sub">The Church of Jesus Christ of Latter-day Saints</div>
+      <div id="ch-title">&#9962; Temples of the Lord</div>
+      <div id="ch-intro"></div>
+    </div>
+    <button id="ch-close" onclick="closeChurchGuide()" aria-label="Close">&#10005;</button>
+  </div>
+  <div id="ch-tabs">
+    <button class="ch-tab" id="ch-tab-temples" onclick="chTab('temples')">&#9962; Temples</button>
+    <button class="ch-tab" id="ch-tab-world" onclick="chTab('world')">&#127758; Around the world</button>
+    <button class="ch-tab" id="ch-tab-places" onclick="chTab('places')">&#128205; Country by country</button>
+    <button class="ch-tab" id="ch-tab-states" onclick="chTab('states')">&#127482;&#127480; State by state</button>
+    <button class="ch-tab" id="ch-tab-none" onclick="chTab('none')">&#128367; Not yet</button>
+    <button class="ch-tab" id="ch-tab-news" onclick="chTab('news')">&#128276; What changed</button>
+  </div>
+  <div id="ch-body"></div>
+</div>
+
+<script>
+/* ── the data: the app's copy, the phone's remembered copy, the account's copy (newest wins) ── */
+var CH={t:(window.LST_TEMPLES&&Array.isArray(window.LST_TEMPLES.items))?window.LST_TEMPLES:{updated:"",items:[],counts:{},changes:[]},
+        m:(window.LST_MISSIONS&&Array.isArray(window.LST_MISSIONS.places))?window.LST_MISSIONS:{updated:"",places:[],areas:[],world:{},notListed:[],noMissionBased:[],changes:[]},
+        tab:"temples",open:null,filter:"dedicated",q:""};
+(function(){
+  try{ var c=JSON.parse(localStorage.getItem("lst_church_feed")||"{}");
+    if(c.t&&Array.isArray(c.t.items)&&String(c.t.updated||"")>String(CH.t.updated||"")) CH.t=c.t;
+    if(c.m&&Array.isArray(c.m.places)&&String(c.m.updated||"")>String(CH.m.updated||"")) CH.m=c.m; }catch(e){}
+})();
+function chEsc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function chUrl(u){ return /^https:\/\/[^\s"'<>]+$/.test(String(u||""))?String(u):""; }
+function chN(n){ return (n==null||n==="")?"":Number(n).toLocaleString("en-US"); }
+var CH_MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
+function chDate(iso){ var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso||"")); if(!m) return String(iso||""); return CH_MON[+m[2]-1]+" "+(+m[3])+", "+m[1]; }
+function chYear(iso){ var m=/^(\d{4})/.exec(String(iso||"")); return m?+m[1]:null; }
+var CH_STATUS={OPERATING:["op","Dedicated"],RENOVATION:["re","Closed for renovation"],"OPENING SOON":["bu","Opening soon"],CONSTRUCTION:["bu","Under construction"],ANNOUNCED:["an","Announced"],HISTORICAL:["hi","Historic site"]};
+function chTempleById(id){ var it=CH.t.items; for(var i=0;i<it.length;i++) if(it[i]&&it[i].id===id) return it[i]; return null; }
+function chPlaceById(id){ var it=CH.m.places; for(var i=0;i<it.length;i++) if(it[i]&&it[i].id===id) return it[i]; return null; }
+
+/* ── onto the timeline ──
+   A century is about 365 pixels on the line, and more than two hundred temples
+   and first arrivals fall in the last two: one mark each would stack forty rows
+   deep. So each temple dedicated before 1950 has its own mark, and from 1950 on
+   one mark holds a decade's temples (the list is inside, and the panel opens on
+   that decade). The temples announced and still being built are one mark. The
+   first missionaries are one mark a decade, naming the places they reached. A
+   change the daily watch finds (a temple announced or dedicated, a place
+   opened or closed to missionaries) is a mark of its own on the day it was found. */
+var CH_EVS=[];
+function chEv(o){ o.conf="confirmed"; CH_EVS.push(o); EVS.push(o); return o; }
+function chDecade(y){ return Math.floor(y/10)*10; }
+function chNames(list,n){ var a=list.slice(0,n).map(function(x){ return chEsc(x.name); }); return list.length>n?a.join(", ")+" and "+(list.length-n)+" more":a.length>1?a.slice(0,-1).join(", ")+" and "+a[a.length-1]:a.join(""); }
+function chMerge(){
+  var keep=[]; for(var i=0;i<EVS.length;i++) if(CH_EVS.indexOf(EVS[i])<0) keep.push(EVS[i]);
+  EVS.length=0; Array.prototype.push.apply(EVS,keep); CH_EVS=[];
+  var ded=CH.t.items.filter(function(t){ return t&&t.dedicated&&chYear(t.dedicated); }).sort(function(a,b){ return String(a.dedicated).localeCompare(String(b.dedicated)); });
+  var dec={};
+  ded.forEach(function(t){ var y=chYear(t.dedicated);
+    if(y<1950){ chEv({id:"tmp-"+t.id,l:"temples",y:y,em:"&#9962;",t:chEsc(t.name),date:chEsc(chDate(t.dedicated)),loc:chEsc(t.location||""),
+      de:chEsc((t.facts||[]).join(" ")),ch:{tab:"temples",focus:t.id}}); return; }
+    (dec[chDecade(y)]||(dec[chDecade(y)]=[])).push(t); });
+  Object.keys(dec).forEach(function(d){ var ts=dec[d], firsts=ts.filter(function(t){ return t.country&&t.country!=="United States"&&(t.facts||[]).indexOf("The first temple in "+t.country+".")>=0; });
+    chEv({id:"tmp-d-"+d,l:"temples",y:+d+5,em:"&#9962;",t:ts.length+" temple"+(ts.length===1?"":"s")+" dedicated in the "+d+"s",date:d+" to "+(+d+9),loc:"",
+      de:"<div style='margin-bottom:6px'>"+(firsts.length?"Among them, the first temple in a land: "+chNames(firsts,8)+".":"")+"</div><ul style='margin:0;padding-left:16px'>"+ts.map(function(t){ return "<li><b>"+chEsc(t.name)+"</b> &#183; "+chEsc(chDate(t.dedicated))+"</li>"; }).join("")+"</ul>",
+      ch:{tab:"temples",decade:+d}}); });
+  /* announced and not yet dedicated: one mark, at the year of the newest announcement */
+  var coming=CH.t.items.filter(function(t){ return t&&!t.dedicated&&t.status!=="HISTORICAL"; });
+  if(coming.length){ var ny=Math.max.apply(null,coming.map(function(t){ return chYear(t.announced||t.scheduled)||0; }));
+    chEv({id:"tmpa-now",l:"temples",y:ny||new Date().getFullYear(),em:"&#10024;",t:coming.length+" temples announced and being built",date:"Today",loc:"",
+      de:"<ul style='margin:0;padding-left:16px'>"+coming.slice().sort(function(a,b){ return String(b.announced||"").localeCompare(String(a.announced||"")); }).map(function(t){ var st=CH_STATUS[t.status]||["an",t.status]; return "<li><b>"+chEsc(t.name)+"</b> &#183; "+chEsc(st[1].toLowerCase())+(t.scheduled?", to be dedicated "+chEsc(chDate(t.scheduled)):t.announced?", announced "+chEsc(chDate(t.announced)):"")+"</li>"; }).join("")+"</ul>",
+      ch:{tab:"temples",filter:"coming"}}); }
+  /* the first missionaries, a decade at a time */
+  var fm={}; CH.m.places.forEach(function(p){ if(!p||!p.firstMissionaries||!p.firstMissionaries.year) return; (fm[chDecade(+p.firstMissionaries.year)]||(fm[chDecade(+p.firstMissionaries.year)]=[])).push(p); });
+  Object.keys(fm).forEach(function(d){ var ps=fm[d].sort(function(a,b){ return a.firstMissionaries.year-b.firstMissionaries.year; });
+    chEv({id:"msn-d-"+d,l:"missions",y:+d+5,em:"&#128694;",t:"Missionaries reach "+(ps.length===1?chEsc(ps[0].name):ps.length+" new places"),date:d+" to "+(+d+9),loc:"",
+      de:"<div style='margin-bottom:6px'>"+chNames(ps,6)+".</div><ul style='margin:0;padding-left:16px'>"+ps.map(function(p){ return "<li><b>"+chEsc(p.name)+"</b> ("+p.firstMissionaries.year+"): "+chEsc(p.firstMissionaries.said||"")+"</li>"; }).join("")+"</ul>",
+      ch:{tab:"places",filter:"when",decade:+d}}); });
+  /* what the daily watch saw change */
+  (CH.t.changes||[]).forEach(function(c,i){ var y=chYear(c.on); if(!y||!c.note) return; var mo=+String(c.on).slice(5,7)||1;
+    chEv({id:"tmpc-"+i+"-"+c.on+"-"+c.id,l:"temples",y:y+(mo-1)/12,em:c.what==="announced"?"&#10024;":"&#9962;",t:chEsc(c.note),date:chEsc(chDate(c.on)),loc:"",de:chEsc(c.note),ch:{tab:"temples",focus:c.id}}); });
+  (CH.m.changes||[]).forEach(function(c,i){ var y=chYear(c.on); if(!y||!c.note) return; var mo=+String(c.on).slice(5,7)||1;
+    chEv({id:"msnc-"+i+"-"+c.on+"-"+c.id,l:"missions",y:y+(mo-1)/12,em:c.what==="closed"?"&#128682;":"&#128694;",t:chEsc(c.note),date:chEsc(chDate(c.on)),loc:"",de:chEsc(c.note),ch:{tab:"news"}}); });
+}
+/* the event card's door into the panel */
+function chEventButton(ev,body){
+  if(!ev||!ev.ch||(ev.l!=="temples"&&ev.l!=="missions")) return;
+  var b=document.createElement("button"); b.className="map-btn "+(ev.l==="temples"?"ch-tbtn":"ch-mbtn");
+  b.innerHTML=ev.l==="temples"?"&#9962; Every temple: its story, and when it was built":"&#127758; Missionary work and members, place by place";
+  b.onclick=function(){ document.getElementById("dmod").classList.remove("open"); openChurchGuide(ev.ch.tab,ev.ch.focus,ev.ch); };
+  body.appendChild(b);
+}
+
+/* ── the account's copy: a few bytes first, the whole row only when it is newer ── */
+function chFetch(){
+  try{
+    var ask=function(ids,cb){ slfRows(ids,cb); };
+    var c=window.LST_CONFIG||{}, url=c.SUPABASE_URL, key=c.SUPABASE_ANON_KEY;
+    var dates=function(cb){
+      if(url&&key&&typeof fetch==="function"){
+        fetch(url+"/rest/v1/timeline_feed?select=id,u:body->>updated&id=in.(temples,missions)",{headers:{apikey:key,Authorization:"Bearer "+key}})
+          .then(function(r){ return r.ok?r.json():null; }).then(function(rows){ cb(rows); }).catch(function(){ cb(null); }); return; }
+      if(window.LST_SB&&window.LST_SB.from){ window.LST_SB.from("timeline_feed").select("id,u:body->>updated").in("id",["temples","missions"]).then(function(res){ cb(res&&res.data); },function(){ cb(null); }); return; }
+      cb(null);
+    };
+    dates(function(rows){
+      if(!Array.isArray(rows)) return; var want=[];
+      rows.forEach(function(r){ if(r.id==="temples"&&String(r.u||"")>String(CH.t.updated||"")) want.push("temples"); if(r.id==="missions"&&String(r.u||"")>String(CH.m.updated||"")) want.push("missions"); });
+      if(!want.length) return;
+      ask(want,function(full){ if(!Array.isArray(full)) return; var ch=false;
+        full.forEach(function(r){ var b=r&&r.body; if(!b) return;
+          if(r.id==="temples"&&Array.isArray(b.items)&&b.items.length>=0.8*CH.t.items.length){ CH.t=b; ch=true; }
+          if(r.id==="missions"&&Array.isArray(b.places)&&b.places.length>=0.8*CH.m.places.length){ CH.m=b; ch=true; } });
+        if(!ch) return;
+        try{ localStorage.setItem("lst_church_feed",JSON.stringify({t:CH.t,m:CH.m})); }catch(e){}
+        chMerge(); try{ buildTL(); }catch(e){} if(document.getElementById("ch-panel").classList.contains("open")) chRender(); });
+    });
+  }catch(e){}
+}
+
+/* ── the panel ── */
+function openChurchGuide(tab,focus,opt){
+  opt=opt||{}; CH.tab=tab||"temples"; CH.open=focus||null; CH.q="";
+  CH.filter=opt.filter||(CH.tab==="temples"?(focus?"all":"dedicated"):"area");
+  document.getElementById("ch-panel").classList.add("open"); chRender();
+  var go=focus?("ch-"+focus):(opt.decade?("ch-d-"+opt.decade):null);
+  if(go) setTimeout(function(){ var el=document.getElementById(go); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); },60);
+}
+function closeChurchGuide(){ document.getElementById("ch-panel").classList.remove("open"); }
+function chTab(t){ CH.tab=t; CH.open=null; CH.q=""; CH.filter=t==="temples"?"dedicated":"area"; chRender(); document.getElementById("ch-body").scrollTop=0; }
+function chFilter(f){ CH.filter=f; CH.open=null; chRender(); }
+function chToggle(id){ CH.open=(CH.open===id)?null:id; chRender(); if(CH.open){ var el=document.getElementById("ch-"+id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); } }
+function chSearch(v){ CH.q=String(v||"").toLowerCase(); var box=document.getElementById("ch-list"); if(box) box.innerHTML=chListHtml(); }
+function chToTimeline(evId){ closeChurchGuide(); for(var i=0;i<EVS.length;i++) if(EVS[i].id===evId){ try{ openEvMod(EVS[i]); }catch(e){} return; } }
+function chTempleEvId(t){ var y=chYear(t.dedicated); if(!y) return (t.status!=="HISTORICAL")?"tmpa-now":""; return y<1950?"tmp-"+t.id:"tmp-d-"+chDecade(y); }
+function chPlaceEvId(p){ var y=p.firstMissionaries&&p.firstMissionaries.year; return y?"msn-d-"+chDecade(+y):""; }
+function chSrc(u,label){ u=chUrl(u); return u?"<div class='ch-src'>Source: <a href='"+chEsc(u)+"' target='_blank' rel='noopener'>"+chEsc(label||"The Church of Jesus Christ of Latter-day Saints")+"</a></div>":""; }
+function chTempleCard(t){
+  var open=CH.open===t.id, st=CH_STATUS[t.status]||["an",t.status], ev=chTempleEvId(t);
+  var when=t.dedicated?("Dedicated "+chDate(t.dedicated)):t.announced?("Announced "+chDate(t.announced)):"";
+  var ms=(t.milestones||[]).filter(function(m){ return m&&m.what; });
+  return "<div class='ch-card"+(open?" open":"")+"' id='ch-"+chEsc(t.id)+"'>"
+    +"<div class='ch-head' onclick=\"chToggle('"+chEsc(t.id)+"')\"><div class='ch-em'>"+(t.dedicated?"&#9962;":"&#10024;")+"</div><div><div class='ch-name'>"+chEsc(t.name)+"</div>"
+    +"<div class='ch-when'>"+chEsc(when)+(t.location?" &#183; "+chEsc(t.location):"")+"</div><span class='ch-tag "+st[0]+"'>"+chEsc(st[1])+"</span>"+(t.order?"<span class='ch-tag hi'>Temple no. "+t.order+"</span>":"")+"</div><span class='ch-chev'>&#9662;</span></div>"
+    +"<div class='ch-detail'>"
+    +((t.facts||[]).length?"<div class='ch-sec'><div class='ch-lab'>Little facts</div><ul class='ch-list'>"+t.facts.map(function(f){ return "<li>"+chEsc(f)+"</li>"; }).join("")+"</ul></div>":"")
+    +(ms.length?"<div class='ch-sec'><div class='ch-lab'>Its history</div><ul class='ch-list'>"+ms.map(function(m){ return "<li><b>"+chEsc(m.what)+"</b> &#183; "+chEsc(m.date||chDate(m.iso))+"</li>"; }).join("")+"</ul></div>":"")
+    +((t.history||[]).length?"<div class='ch-sec ch-why'><div class='ch-lab' style='color:#F5C518'>&#10022; Remember</div>"+t.history.map(function(h){ var u=chUrl(h.url); return "<div class='ch-p'>"+chEsc(h.said)+(u?" <a href='"+chEsc(u)+"' target='_blank' rel='noopener' style='color:#5BD3DC'>Read it</a>":"")+"</div>"; }).join("")+"</div>":"")
+    +chSrc(t.url,t.status==="HISTORICAL"?"The Church's history and scriptures":"The Church's page for this temple")
+    +(ev?"<button class='ch-btn' onclick=\"chToTimeline('"+chEsc(ev)+"')\">&#128506; Find it on the timeline</button>":"")
+    +"</div></div>";
+}
+function chFig(p){
+  var a=[];
+  if(p.members!=null) a.push("<span><b>"+chN(p.members)+"</b> members</span>");
+  if(p.congregations!=null) a.push("<span><b>"+chN(p.congregations)+"</b> congregations"+((p.wards!=null&&p.branches!=null)?" ("+chN(p.wards)+" wards, "+chN(p.branches)+" branches)":"")+"</span>");
+  if(p.missions!=null) a.push("<span><b>"+chN(p.missions)+"</b> mission"+(p.missions===1?"":"s")+" based here</span>");
+  if(p.temples!=null) a.push("<span><b>"+chN(p.temples)+"</b> temple"+(p.temples===1?"":"s")+"</span>");
+  if(p.stakes!=null) a.push("<span><b>"+chN(p.stakes)+"</b> stakes</span>");
+  if(p.districts) a.push("<span><b>"+chN(p.districts)+"</b> districts</span>");
+  if(p.familySearchCenters) a.push("<span><b>"+chN(p.familySearchCenters)+"</b> FamilySearch centers</span>");
+  return a.length?"<div class='ch-nums'>"+a.join("")+"</div>":"<div class='ch-p' style='color:rgba(255,255,255,.5)'>The Church does not publish figures for this place.</div>";
+}
+function chPlaceCard(p){
+  var open=CH.open===p.id, fm=p.firstMissionaries, ev=chPlaceEvId(p);
+  var when=fm&&fm.year?("Missionaries first came in "+fm.year):(p.began&&p.began.year?("The Church's story here begins in "+p.began.year):"");
+  return "<div class='ch-card"+(open?" open":"")+"' id='ch-"+chEsc(p.id)+"'>"
+    +"<div class='ch-head' onclick=\"chToggle('"+chEsc(p.id)+"')\"><div class='ch-em'>&#128205;</div><div><div class='ch-name'>"+chEsc(p.name)+"</div>"
+    +"<div class='ch-when'>"+(p.members!=null?chN(p.members)+" members":"")+(when?(p.members!=null?" &#183; ":"")+chEsc(when):"")+"</div>"
+    +(p.missions===0?"<span class='ch-tag bu'>No mission based here</span>":"")+"</div><span class='ch-chev'>&#9662;</span></div>"
+    +"<div class='ch-detail'>"
+    +"<div class='ch-sec'><div class='ch-lab'>The Church here today</div>"+chFig(p)+(p.asOf?"<div class='ch-src'>"+chEsc(p.asOf)+"</div>":"")+"</div>"
+    +(fm&&fm.said?"<div class='ch-sec ch-why'><div class='ch-lab' style='color:#F5C518'>&#128694; The first missionaries</div><div class='ch-p'>"+chEsc(fm.said)+"</div></div>":"")
+    +((p.summary||[]).length?"<div class='ch-sec'><div class='ch-lab'>The Church in "+chEsc(p.name)+"</div>"+p.summary.map(function(x){ return "<div class='ch-p'>"+chEsc(x)+"</div>"; }).join("")+"</div>":"")
+    +((p.history||[]).length?"<div class='ch-sec'><div class='ch-lab'>Its history</div>"+p.history.map(function(x){ return "<div class='ch-p'>"+chEsc(x)+"</div>"; }).join("")+"</div>":"")
+    +chSrc(p.source,"The Church's facts and statistics for "+p.name)
+    +(ev?"<button class='ch-btn' onclick=\"chToTimeline('"+chEsc(ev)+"')\">&#128506; Find it on the timeline</button>":"")
+    +"</div></div>";
+}
+function chMatch(s){ return !CH.q||String(s||"").toLowerCase().indexOf(CH.q)>=0; }
+function chListHtml(){
+  var h="";
+  if(CH.tab==="temples"){
+    var f=CH.filter, items=CH.t.items.filter(function(t){ if(!t) return false;
+      if(f==="dedicated") return !!t.dedicated;
+      if(f==="coming") return !t.dedicated&&t.status!=="HISTORICAL";
+      return true; }).filter(function(t){ return chMatch(t.name+" "+t.location); });
+    if(f==="coming") items.sort(function(a,b){ return String(b.announced||"").localeCompare(String(a.announced||"")); });
+    else items.sort(function(a,b){ return String(a.dedicated||"9999").localeCompare(String(b.dedicated||"9999")); });
+    var era="";
+    items.forEach(function(t){ var y=chYear(f==="coming"?t.announced:t.dedicated), e=y?(f==="coming"?("Announced in "+y):(chDecade(y)+"s")):(f==="coming"?"Not yet dated":"Not yet dedicated");
+      if(e!==era){ era=e; h+="<div class='ch-era'"+(y&&f!=="coming"?" id='ch-d-"+chDecade(y)+"'":"")+">"+e+"</div>"; }
+      h+=chTempleCard(t); });
+    if(!items.length) h="<div class='ch-empty'>No temple matches.</div>";
+    return h;
+  }
+  var kind=CH.tab==="states"?"state":"country";
+  var ps=CH.m.places.filter(function(p){ return p&&p.kind===kind&&chMatch(p.name); });
+  if(CH.filter==="when"){
+    var by={}; ps.forEach(function(p){ var y=p.firstMissionaries&&p.firstMissionaries.year; var k=y?chDecade(+y):9999; (by[k]||(by[k]=[])).push(p); });
+    Object.keys(by).sort(function(a,b){ return a-b; }).forEach(function(d){ h+="<div class='ch-era'"+(d<9999?" id='ch-d-"+d+"'":"")+">"+(d<9999?"Missionaries first came in the "+d+"s":"The Church's own history gives no year")+" &#183; "+by[d].length+"</div>";
+      by[d].sort(function(a,b){ return ((a.firstMissionaries||{}).year||0)-((b.firstMissionaries||{}).year||0)||String(a.name).localeCompare(String(b.name)); }).forEach(function(p){ h+=chPlaceCard(p); }); });
+  } else if(kind==="country"){
+    var groups={}; ps.forEach(function(p){ (groups[p.continent||"Elsewhere"]||(groups[p.continent||"Elsewhere"]=[])).push(p); });
+    Object.keys(groups).sort().forEach(function(g){ h+="<div class='ch-era'>"+chEsc(g)+" &#183; "+groups[g].length+"</div>";
+      groups[g].sort(function(a,b){ return String(a.name).localeCompare(String(b.name)); }).forEach(function(p){ h+=chPlaceCard(p); }); });
+  } else ps.sort(function(a,b){ return String(a.name).localeCompare(String(b.name)); }).forEach(function(p){ h+=chPlaceCard(p); });
+  if(!ps.length) h="<div class='ch-empty'>No place matches.</div>";
+  return h;
+}
+function chRender(){
+  ["temples","world","places","states","none","news"].forEach(function(t){ var b=document.getElementById("ch-tab-"+t); if(b) b.classList.toggle("on",CH.tab===t); });
+  var tem=CH.tab==="temples", panel=document.getElementById("ch-panel"); panel.classList.toggle("msn",!tem);
+  document.getElementById("ch-title").innerHTML=tem?"&#9962; Temples of the Lord":"&#127758; Missionary Work Around the World";
+  document.getElementById("ch-intro").textContent=tem
+    ?"Every temple of The Church of Jesus Christ of Latter-day Saints: when it was announced, begun and dedicated, little facts about each, and the temples still being built. New temples join on their own as they are announced and dedicated."
+    :"Where missionaries serve, when they first came to each country and state, the history of the Church there, and how many members each place and area of the world has. Places that open or close to missionary work are added on their own.";
+  var body=document.getElementById("ch-body"), h="", w=CH.m.world||{};
+  if(tem){
+    var c=CH.t.counts||{};
+    h+="<div class='ch-stats'>"
+      +"<div class='ch-stat'><b>"+chN((c.OPERATING||0)+(c.RENOVATION||0))+"</b><span>dedicated temples in use</span></div>"
+      +"<div class='ch-stat'><b>"+chN((c.CONSTRUCTION||0)+(c["OPENING SOON"]||0))+"</b><span>being built</span></div>"
+      +"<div class='ch-stat'><b>"+chN(c.ANNOUNCED||0)+"</b><span>announced</span></div>"
+      +"<div class='ch-stat'><b>"+chN(CH.t.items.length)+"</b><span>in all</span></div></div>";
+    h+="<div class='ch-fresh'>From the Church's temple list &#183; updated "+chEsc(CH.t.updated||"")+" &#183; checked every day</div>";
+    h+="<div class='ch-filters'>"+[["dedicated","Dedicated, oldest first"],["coming","Announced and being built"],["all","Every temple"]].map(function(x){ return "<button class='ch-f"+(CH.filter===x[0]?" on":"")+"' onclick=\"chFilter('"+x[0]+"')\">"+x[1]+"</button>"; }).join("")+"</div>";
+    h+="<input class='ch-search' placeholder='Find a temple or a place' oninput='chSearch(this.value)' value='"+chEsc(CH.q)+"'>";
+    h+="<div id='ch-list'>"+chListHtml()+"</div>";
+  } else if(CH.tab==="world"){
+    h+="<div class='ch-stats'>"
+      +(w.members!=null?"<div class='ch-stat'><b>"+chN(w.members)+"</b><span>members</span></div>":"")
+      +(w.missionaries!=null?"<div class='ch-stat'><b>"+chN(w.missionaries)+"</b><span>full-time teaching missionaries</span></div>":"")
+      +(w.seniorServiceMissionaries!=null?"<div class='ch-stat'><b>"+chN(w.seniorServiceMissionaries)+"</b><span>senior service missionaries</span></div>":"")
+      +(w.congregations!=null?"<div class='ch-stat'><b>"+chN(w.congregations)+"</b><span>congregations</span></div>":"")
+      +(w.languages!=null?"<div class='ch-stat'><b>"+chN(w.languages)+"</b><span>languages taught in</span></div>":"")
+      +(w.missions!=null?"<div class='ch-stat'><b>"+chN(w.missions)+"</b><span>missions</span></div>":"")
+      +"</div>";
+    h+="<div class='ch-fresh'>The Church's Newsroom"+(w.asOf?" &#183; "+chEsc(w.asOf):"")+" &#183; checked every day</div>";
+    if(Array.isArray(w.growth)&&w.growth.length>1){
+      var g=w.growth.filter(function(x){ return x&&x.year&&x.members; }), mx=Math.max.apply(null,g.map(function(x){ return x.members; }));
+      h+="<div class='ch-card open'><div class='ch-detail' style='padding-top:10px'><div class='ch-lab'>Members, 1830 to today</div>"
+        +"<svg viewBox='0 0 300 90' style='width:100%;height:auto;display:block' role='img' aria-label='Membership by year'><polyline fill='none' stroke='#5BD3DC' stroke-width='2' points='"
+        +g.map(function(x){ return ((x.year-g[0].year)/Math.max(1,g[g.length-1].year-g[0].year)*296+2).toFixed(1)+","+(86-x.members/mx*80).toFixed(1); }).join(" ")+"'/></svg>"
+        +"<div class='ch-nums' style='justify-content:space-between'><span>"+g[0].year+"<br><b>"+chN(g[0].members)+"</b></span><span style='text-align:right'>"+g[g.length-1].year+"<br><b>"+chN(g[g.length-1].members)+"</b></span></div></div></div>";
+    }
+    h+="<div class='ch-era'>The areas of the world</div>";
+    (CH.m.areas||[]).forEach(function(a){ h+="<div class='ch-card open'><div class='ch-head' style='cursor:default'><div class='ch-em'>&#127758;</div><div><div class='ch-name'>"+chEsc(a.name)+"</div><div class='ch-when'>"+chEsc(a.asOf||"")+"</div></div></div><div class='ch-detail'>"+chFig(a)+chSrc(a.source,"The Church's facts and statistics for "+a.name)+"</div></div>"; });
+    var reach=CH.m.places.filter(function(p){ return p.kind==="country"&&p.missions>0; }).length;
+    h+="<div class='ch-sec ch-why' style='margin-top:12px'><div class='ch-lab' style='color:#F5C518'>Where missionaries serve</div><div class='ch-p'>Missions are based in "+reach+" of the countries and territories the Church reports, and their missionaries also serve the neighbouring places those missions cover. Open <b>Country by country</b> for each place, or <b>Not yet</b> for the places with no mission and the places the Church does not report.</div></div>";
+  } else if(CH.tab==="none"){
+    var nm=CH.m.noMissionBased||[], nl=CH.m.notListed||[];
+    h+="<div class='ch-p' style='margin:0 2px 10px;color:rgba(255,255,255,.62)'>Said carefully: the Church reports figures for these places, but no mission is based in them. Some are served by a mission in a neighbouring country; in others the Church has members but no missionaries.</div>";
+    h+="<div class='ch-card open'><div class='ch-detail' style='padding-top:10px'><div class='ch-lab'>Reported, with no mission based there &#183; "+nm.length+"</div><div class='ch-chips'>"+nm.map(function(n){ return "<span class='ch-chip'>"+chEsc(n)+"</span>"; }).join("")+"</div></div></div>";
+    h+="<div class='ch-p' style='margin:12px 2px 10px;color:rgba(255,255,255,.62)'>Not listed in the Church's statistics: the Church publishes no figures for these countries. Most have no missionaries; in some, the law forbids preaching, and members who live there meet quietly.</div>";
+    h+="<div class='ch-card open'><div class='ch-detail' style='padding-top:10px'><div class='ch-lab'>Not listed in the Church's statistics &#183; "+nl.length+"</div><div class='ch-chips'>"+nl.map(function(n){ return "<span class='ch-chip'>"+chEsc(n)+"</span>"; }).join("")+"</div></div></div>";
+  } else if(CH.tab==="news"){
+    var all=[]; (CH.t.changes||[]).forEach(function(c){ all.push({on:c.on,note:c.note,k:"&#9962;"}); }); (CH.m.changes||[]).forEach(function(c){ all.push({on:c.on,note:c.note,k:"&#128694;"}); });
+    all.sort(function(a,b){ return String(b.on||"").localeCompare(String(a.on||"")); });
+    h+="<div class='ch-fresh'>Newest first &#183; the Church's pages are read every day, and anything new appears here and on the timeline</div>";
+    h+=all.length?"<div class='ch-card open'><div class='ch-detail' style='padding-top:6px'>"+all.map(function(n){ return "<div class='ch-note'><b>"+n.k+" "+chEsc(chDate(n.on))+"</b><span>"+chEsc(n.note)+"</span></div>"; }).join("")+"</div></div>"
+      :"<div class='ch-empty'>Nothing has changed since the watch began on "+chEsc(CH.t.updated||"")+". A temple announced or dedicated, or a place opened or closed to missionaries, will appear here on the day it is found.</div>";
+  } else {
+    var kind=CH.tab==="states"?"state":"country", n=CH.m.places.filter(function(p){ return p.kind===kind; }).length;
+    h+="<div class='ch-fresh'>"+n+(kind==="state"?" states":" countries and territories")+" &#183; the Church's own figures and history &#183; checked every day</div>";
+    h+="<div class='ch-filters'>"+[["area",kind==="state"?"A to Z":"By area of the world"],["when","By when missionaries first came"]].map(function(x){ return "<button class='ch-f"+(CH.filter===x[0]?" on":"")+"' onclick=\"chFilter('"+x[0]+"')\">"+x[1]+"</button>"; }).join("")+"</div>";
+    h+="<input class='ch-search' placeholder='Find a "+(kind==="state"?"state":"country")+"' oninput='chSearch(this.value)' value='"+chEsc(CH.q)+"'>";
+    h+="<div id='ch-list'>"+chListHtml()+"</div>";
+  }
+  body.innerHTML=h;
+}
+try{ chMerge(); }catch(e){ console.log("church merge",e); }   /* drawn by the build just below */
+setTimeout(chFetch,1200);
+</script>
+
 <!-- ═══════════════════════════════════════════════════════════════════════
      TECHNOLOGY FOR GOOD  ·  NEW DISCOVERIES
      A study panel and a live feed. The cards come from data/tech-guide.js
