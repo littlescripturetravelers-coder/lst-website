@@ -180,6 +180,27 @@ def join_at(a_path, ta, b_path, tb, out_path, pre=0.35, fade=0.5, bitrate="192k"
             "gain_b_db": round(float(gain), 2), "b_offset": round(float(a_end - f - b_start), 3)}
 
 
+def peak(path):
+    """The loudest sample, 0..1 (both channels)."""
+    raw = subprocess.run([ffmpeg(), "-v", "error", "-i", path, "-ac", "2", "-f", "f32le", "-"], capture_output=True, check=True).stdout
+    y = np.frombuffer(raw, dtype=np.float32)
+    return float(np.abs(y).max()) if len(y) else 0.0
+
+
+def keep_clean(src, dst, ceiling=0.94, bitrate="192k"):
+    """The joined song, published as it was sung: no equaliser, no limiter. The file
+    is copied untouched (no second encoding) unless its loudest moment is above the
+    ceiling, and then the whole song is turned down evenly, just enough - never
+    squeezed, which is what makes singing crackle."""
+    pk = peak(src)
+    if pk <= ceiling:
+        shutil.copy(src, dst)
+        return {"peak": round(pk, 3), "changed": False}
+    db = 20 * np.log10(ceiling / pk)
+    subprocess.run([ffmpeg(), "-y", "-v", "error", "-i", src, "-af", "volume=%.2fdB" % db, "-ar", "44100", "-b:a", bitrate, dst], check=True)
+    return {"peak": round(pk, 3), "changed": True, "turned_down_db": round(float(db), 2), "peak_after": round(peak(dst), 3)}
+
+
 def heard_near(heard, t, within=0.6):
     """Whether a sung word really begins near second t (not a guessed, filled-in time)."""
     return any(abs(s - t) <= within for _, s, _ in (heard or []))

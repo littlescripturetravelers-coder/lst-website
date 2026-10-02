@@ -52,7 +52,7 @@ on:
       mode:
         description: 'full = sing the whole song; fix = re-sing one stretch of a take; check = transcribe and check the takes an earlier run sang (no credits spent)'
         type: choice
-        options: [full, fix, check]
+        options: [full, fix, check, clean]
         default: full
       check_run:
         description: 'check mode: the id of the earlier run whose lullaby-takes artifact holds the takes'
@@ -123,7 +123,7 @@ jobs:
           sudo apt-get update -qq >/dev/null && sudo apt-get install -y -qq ffmpeg >/dev/null && ffmpeg -version | head -1
           python3 -m pip install --quiet numpy && python3 -c "import numpy; print('numpy', numpy.__version__)"
       - name: The takes an earlier run sang (check mode)
-        if: ${{ inputs.mode == 'check' }}
+        if: ${{ inputs.mode == 'check' || inputs.mode == 'clean' }}
         uses: actions/download-artifact@v4
         with:
           name: lullaby-takes
@@ -222,7 +222,7 @@ jobs:
               return up.get('song_id')
 
           # ── the fine-tune, by name ───────────────────────────────────────────
-          raw=json.loads(api('https://api.elevenlabs.io/v1/music/finetunes')) if mode!='check' else {}; fid=None
+          raw=json.loads(api('https://api.elevenlabs.io/v1/music/finetunes')) if mode not in ('check','clean') else {}; fid=None
           def walk(o):
               global fid
               if isinstance(o,dict):
@@ -313,7 +313,7 @@ jobs:
           plan=plan_full() if mode=='full' else plan_fix(FIX_ID)
           total=sum(s['duration_ms'] for s in plan['sections'])
           print(f'plan: {len(plan["sections"])} sections, {sum(len(s["lines"]) for s in plan["sections"])} lines, {total//1000}s')
-          json.dump(plan,open('out/plan.json','w'),indent=1)
+          if mode in ('full','fix'): json.dump(plan,open('out/plan.json','w'),indent=1)   # check/clean keep the earlier run's plan
 
           # ── transcription and the line check ────────────────────────────────
           norm=lambda s: re.sub(r'[^a-z ]','',s.lower().replace('’',"'").replace('traveller','traveler')).strip()
@@ -448,8 +448,20 @@ jobs:
               # whole; then every stumble costs 2 and every decibel of wander costs 1
               score=cov*100-2*sm['stumbles']-sm['level_wander_db']+(min(r for _,r in fixed) if (mode=='fix' and fixed) else 0)
               return score, cov
+          if mode=='clean':
+              # Levi, 2 Oct 2026: "There are some distortions ... make sure it sings clear." The
+              # tone matching (an equaliser: lows +4 dB, the voice's clarity band 1.6-5 kHz -4 dB)
+              # muffled and muddied the singing. The joined song as it was sung, before that,
+              # is in the earlier run's artifact as take-1-raw.mp3: it is published as it is.
+              sys.path.insert(0,'lantern/builder'); import lullaby_join as J
+              if not os.path.exists('out/take-1-raw.mp3'): sys.exit('clean mode: the earlier run left no take-1-raw.mp3')
+              kc=J.keep_clean('out/take-1-raw.mp3','out/take-1.mp3'); print('kept as sung:',kc,flush=True)
+              try:
+                  pl=json.load(open('out/plan.json')); pl.get('join',{}).pop('tone',None); pl.setdefault('join',{})['clean']=kc; json.dump(pl,open('out/plan.json','w'),indent=1)
+              except Exception as e: print('plan note skipped:',e)
+              sc,cov=check_take(1,'out/take-1.mp3'); best=(sc,1,cov); takes=0
           if mode=='check':
-              found=sorted(glob.glob('out/take-*.mp3'))
+              found=sorted(p for p in glob.glob('out/take-*.mp3') if re.search(r'take-\d+\.mp3$',p))
               if not found: sys.exit('check mode: the earlier run left no take-*.mp3 in its artifact')
               for path in found:
                   t=int(re.search(r'take-(\d+)\.mp3$',path).group(1))
@@ -536,8 +548,8 @@ jobs:
               pairs.sort(key=lambda x:-x[0]); score,a,b,sm_=pairs[0]
               jn=J.join_at(a['path'],a['tj'],b['path'],b['tj'],'out/take-1-raw.mp3')
               print('joined',a['path'],'+',b['path'],jn,flush=True)
-              tn=J.match_tone('out/take-1-raw.mp3',SOURCE,'out/take-1.mp3'); jn['tone']=tn
-              print('tone matched to the first recording:',{k:v for k,v in tn.items() if k!='curve_db'},flush=True)
+              # published as sung: the tone matching tried on 2 Oct muffled the voice (Levi heard it as distortion)
+              jn['clean']=J.keep_clean('out/take-1-raw.mp3','out/take-1.mp3'); print('kept as sung:',jn['clean'],flush=True)
               json.dump({'halves':plans,'join':{'first':a['path'],'second':b['path'],'seam':sm_,**jn}},open('out/plan.json','w'),indent=1)
               sc,cov=check_take(1,'out/take-1.mp3'); best=(sc,1,cov); takes=0
           for t in range(1,takes+1):
