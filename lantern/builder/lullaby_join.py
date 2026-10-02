@@ -120,11 +120,30 @@ def seam(a_path, a_last, b_path, b_first, span=40.0):
             "key_a": ka, "key_b": kb, "penalty": round(float(penalty), 2)}
 
 
-def join(a_path, a_last, b_path, b_first, out_path, tail=3.5, lead=3.5, fade=2.5, bitrate="192k"):
+def fade_start(path, after, floor_db=9.0, win=0.25):
+    """Where a take begins to fade away after its last word (ElevenLabs ends a song
+    with a fade even when asked not to). The point where the sound first drops more
+    than floor_db below the singing before it; the end of the file if it never does."""
+    y = decode(path)
+    n = int(win * SR)
+    ref = y[max(0, int((after - 20) * SR)):int(after * SR)]
+    if len(ref) < n:
+        return len(y) / float(SR)
+    ref_db = 20 * np.log10(np.sqrt(np.mean(ref.astype(np.float64) ** 2)) + 1e-9)
+    i = int(after * SR)
+    while i + n <= len(y):
+        db = 20 * np.log10(np.sqrt(np.mean(y[i:i + n].astype(np.float64) ** 2)) + 1e-9)
+        if db < ref_db - floor_db:
+            return i / float(SR)
+        i += n
+    return len(y) / float(SR)
+
+
+def join(a_path, a_last, b_path, b_first, out_path, tail=3.0, lead=3.0, fade=2.0, bitrate="192k"):
     """Join the halves in the breath between them. Returns where the second half
     begins in the joined song (seconds), so its words' times can be shifted."""
-    a_len = length(a_path)
-    ta = min(a_len, a_last + tail)                  # the first half ends here
+    a_len = min(length(a_path), fade_start(a_path, a_last))
+    ta = min(a_len, a_last + tail)                  # the first half ends here, before any fade
     tb = max(0.0, b_first - lead)                   # the second half starts here
     f = max(0.3, min(fade, ta - a_last - 0.3, b_first - tb - 0.3, 6.0))
     # the second half at the first half's loudness (measured on the singing near the join)
@@ -146,6 +165,87 @@ def words_span(segments):
     if not segs:
         return None, None
     return segs[0]["start"], segs[-1]["end"]
+
+
+def bands():
+    """Third-octave bands from 40 Hz to 10 kHz."""
+    out, f = [], 40.0
+    while f < 10000:
+        out.append(f)
+        f *= 2 ** (1 / 3.0)
+    return out
+
+
+def ltas(y, n=8192):
+    """The long-term average spectrum in third-octave bands (dB), over the sound
+    louder than the quiet between phrases."""
+    hop = n // 2
+    win = np.hanning(n)
+    freqs = np.fft.rfftfreq(n, 1.0 / SR)
+    acc = np.zeros(len(freqs))
+    frames = []
+    for i in range(0, len(y) - n, hop):
+        seg = y[i:i + n]
+        frames.append((float(np.mean(seg.astype(np.float64) ** 2)), i))
+    if not frames:
+        return None
+    cut = np.percentile([f[0] for f in frames], 30)
+    k = 0
+    for e, i in frames:
+        if e >= cut:
+            acc += np.abs(np.fft.rfft(y[i:i + n] * win)) ** 2
+            k += 1
+    acc /= max(1, k)
+    out = []
+    for c in bands():
+        lo, hi = c / 2 ** (1 / 6.0), c * 2 ** (1 / 6.0)
+        m = (freqs >= lo) & (freqs < hi)
+        out.append(10 * np.log10(acc[m].mean() + 1e-12) if m.any() else -120.0)
+    return np.array(out)
+
+
+def tone_distance(path, ref_path):
+    """How far a take's tone is from the reference recording's: the average gap
+    between their spectra (dB, third-octave bands 60 Hz - 8 kHz, level-matched at
+    1 kHz). 0 is the same tone; 3 is close; 6 or more sounds plainly different."""
+    a = ltas(decode(path))
+    r = ltas(decode(ref_path))
+    if a is None or r is None:
+        return 99.0
+    d = r - a
+    d -= d[np.argmin([abs(c - 1000) for c in bands()])]
+    use = [i for i, c in enumerate(bands()) if 60 <= c <= 8000]
+    return round(float(np.mean(np.abs(d[use]))), 2)
+
+
+def match_tone(path, ref_path, out_path, max_db=4.0, bitrate="192k"):
+    """Give a take the warm, soft tone of the reference recording: the difference
+    between their average spectra, smoothed and held within max_db either way, is
+    applied as one gentle equaliser curve, and the level is brought to the
+    reference's. The tune, the words and their timing are untouched."""
+    a = ltas(decode(path))
+    r = ltas(decode(ref_path))
+    if a is None or r is None:
+        shutil.copy(path, out_path)
+        return {"applied": False}
+    d = r - a
+    d -= d[np.argmin([abs(c - 1000) for c in bands()])]     # 1 kHz is the anchor: the voice stays as loud
+    d = np.convolve(np.pad(d, 1, mode="edge"), np.ones(3) / 3.0, mode="valid")
+    d = np.clip(d, -max_db, max_db)
+    entries = ";".join("entry(%.1f,%.2f)" % (c, g) for c, g in zip(bands(), d))
+    ya = decode(path)
+    yr = decode(ref_path)
+    lev = lambda y: 20 * np.log10(np.sqrt(np.mean(y.astype(np.float64) ** 2)) + 1e-9)
+    tmp = out_path + ".eq.wav"
+    subprocess.run([ffmpeg(), "-y", "-v", "error", "-i", path, "-af", "firequalizer=gain_entry='%s'" % entries,
+                    "-ar", "44100", tmp], check=True)
+    gain = max(-8.0, min(8.0, lev(yr) - lev(decode(tmp))))
+    subprocess.run([ffmpeg(), "-y", "-v", "error", "-i", tmp, "-af", "volume=%.2fdB,alimiter=limit=0.95:level=disabled" % gain,
+                    "-ar", "44100", "-b:a", bitrate, out_path], check=True)
+    os.remove(tmp)
+    return {"applied": True, "curve_db": [round(float(x), 1) for x in d], "gain_db": round(float(gain), 2),
+            "brightness_before": round(features(ya)["centroid"]), "brightness_after": round(features(decode(out_path))["centroid"]),
+            "brightness_reference": round(features(yr)["centroid"])}
 
 
 if __name__ == "__main__":
