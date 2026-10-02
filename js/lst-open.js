@@ -282,6 +282,81 @@
       "</div></div>";
   }
 
+  /* THE APP'S OWN BOOK (Levi, 1 Oct 2026: "all the scripture stories for each
+     day, in the Morning Lantern and on the LST Library, the exact same HTML look
+     and set up as the app"). A night's picture book is shown as the page it is -
+     the same illustrated, page-turning book the app opens, pictures beside the
+     words on a wide screen - filling the window under the site's menu, instead
+     of being re-set as plain text down the page. The page is written into a
+     frame of this site (it never runs anywhere else), and its own doors are
+     pointed home: "Devotional" back to The Morning Lantern for that night,
+     "Sing tonight's lullaby" to the night's lullaby page, anything else in a
+     new tab. Only a book that cannot be read at all falls back to the text. */
+  function bookFrameView(n) {
+    return '<div class="lst-bookwrap" id="lst-bookwrap">' +
+      '<iframe id="lst-book" title="' + esc(n.title || "Tonight\u2019s story") + '"></iframe></div>';
+  }
+  var BOOK_CSS_DONE = false;
+  function bookChrome(on) {
+    if (!BOOK_CSS_DONE) {
+      BOOK_CSS_DONE = true;
+      var st = document.createElement("style");
+      st.textContent =
+        "body.lst-book-open .mp-hero,body.lst-book-open .site-footer{display:none !important}" +
+        "body.lst-book-open .mp-body{padding:0 !important;min-height:0 !important;background:#0a1020 !important}" +
+        "body.lst-book-open .mp-in{max-width:none !important;margin:0 !important;padding:0 !important;width:100%}" +
+        ".lst-bookwrap{position:relative;width:100%;height:calc(100vh - var(--lst-head,72px));" +
+        "height:calc(100dvh - var(--lst-head,72px));background:#0a1020;overflow:hidden}" +
+        ".lst-bookwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#0a1020}";
+      document.head.appendChild(st);
+    }
+    document.body.classList.toggle("lst-book-open", !!on);
+    if (on) {
+      var h = document.getElementById("site-header");
+      var px = h ? Math.round(h.getBoundingClientRect().height) : 72;
+      document.documentElement.style.setProperty("--lst-head", px + "px");
+    }
+  }
+  function nightQuery(n) { return n && n.date ? "?date=" + encodeURIComponent(n.date) : ""; }
+  function writeBookFrame(n) {
+    var f = document.getElementById("lst-book");
+    if (!f) return;
+    var d = f.contentDocument || (f.contentWindow && f.contentWindow.document);
+    if (!d) return;
+    d.open(); d.write(n.bookHtml); d.close();
+    var q = nightQuery(n);
+    var go = function (url) { window.location.href = url; };
+    /* The book's back link knows only the app; here it means the night's Lantern.
+       The page also asks its parent by message when it has no address. */
+    d.addEventListener("click", function (e) {
+      var a = e.target && e.target.closest ? e.target.closest("a,[role=button]") : null;
+      if (!a) return;
+      if (a.id === "backLink" || a.classList.contains("back")) {
+        e.preventDefault(); e.stopPropagation(); go("tonight.html" + q); return;
+      }
+      var href = a.getAttribute && (a.getAttribute("href") || "");
+      if (!href) return;
+      if (a.classList.contains("songlink") || /-lullaby\.html?([?#]|$)/i.test(href)) {
+        e.preventDefault(); e.stopPropagation(); go("lullaby.html" + q); return;
+      }
+      if (/^(#|javascript:)/i.test(href)) return;
+      e.preventDefault(); e.stopPropagation();
+      try { window.open(new URL(href, window.location.href).href, "_blank", "noopener"); } catch (err) {}
+    }, true);
+    try { f.title = n.title || f.title; } catch (e) {}
+    try { f.contentWindow.focus(); } catch (e) {}
+  }
+  window.addEventListener("message", function (e) {
+    var d = e && e.data;
+    if (!d || d.type !== "lst:back") return;
+    var f = document.getElementById("lst-book");
+    if (!f || e.source !== f.contentWindow) return;
+    window.location.href = "tonight.html" + nightQuery(night);
+  });
+  window.addEventListener("resize", function () {
+    if (document.body.classList.contains("lst-book-open")) bookChrome(true);
+  });
+
   function bookView(n) {
     var b = (n.bookHtml && window.LSTRead) ? window.LSTRead.book(n.bookHtml) : { ok: false };
     if (!b.ok) {
@@ -341,6 +416,15 @@
     if (loadError) { root.innerHTML = '<p class="mp-note mp-note-warn">' + esc(loadError) + "</p>"; return; }
     if (!night) { root.innerHTML = emptyView(); return; }
 
+    if (kind !== "song" && night.bookHtml && /<html|<body|STORY\s*=/i.test(night.bookHtml)) {
+      bookChrome(true);
+      root.innerHTML = bookFrameView(night);
+      writeBookFrame(night);
+      var plain = window.LSTRead ? window.LSTRead.decode(night.title || "") : (night.title || "");
+      if (plain) document.title = plain + " \u2014 Little Scripture Travelers";
+      return;
+    }
+    bookChrome(false);
     root.innerHTML = kind === "song" ? songView(night) : bookView(night);
     wire();
   }

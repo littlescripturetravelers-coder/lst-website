@@ -120,9 +120,16 @@
       }
     }
 
+    /* The night's picture book opens as the app's own illustrated book
+       (story.html), the same page the Morning Lantern and the LST Library open. */
+    var book = r.bookHtml
+      ? '<a class="mp-btn mp-btn-gold" href="story.html?date=' + encodeURIComponent(r.date) + '" ' +
+        'style="text-decoration:none;display:inline-block;margin:0 0 1.4rem;">&#128214; Read that night&rsquo;s story</a>'
+      : "";
+
     return '<article class="mp-card rd">' + head +
       '<div id="lst-admin"></div>' +
-      '<div class="rd-body">' + depths +
+      '<div class="rd-body">' + book + depths +
         (r.audio ? '<audio controls preload="none" src="' + esc(r.audio) +
            '" style="width:100%;margin-bottom:1.6rem;"></audio>' : "") +
         body +
