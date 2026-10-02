@@ -28,6 +28,16 @@
 #          into the take with ffmpeg (a short crossfade at each cut). The
 #          whole patched song is then transcribed and checked line by line.
 #
+# TWO HALVES (parts=2, the default since 2 Oct 2026): Levi wanted it to sound and
+# flow like the first recording, made with the "Lullaby LST" fine-tune. That
+# recording sings a line every 5.5-6 s with a breath between verses; 132 lines
+# at that pace is about fourteen minutes, and ElevenLabs sings ten at most, so a
+# single take rushed every line. The song is now sung in two halves at the
+# first recording's pace (E major, about 68 BPM, warm and soft), and the best
+# matching pair is joined in the breath after a chorus by
+# lantern/builder/lullaby_join.py. Uploading a recording to sing on from is
+# refused by ElevenLabs as "copyrighted material", so the anchor is off.
+#
 # Nothing is published by itself: the takes and their line-by-line reports are
 # attached to the run as artifacts, and - when save_branch is given - the best
 # take is pushed to that branch as audio/hush-little-traveler-full.mp3 with its
@@ -49,9 +59,9 @@ on:
         required: false
         default: ''
       finetune:
-        description: 'Name of the ElevenLabs music fine-tune to sing with'
+        description: 'Name of the ElevenLabs music fine-tune to sing with (Lullaby LST made the first recording)'
         required: true
-        default: 'Lullaby LST Lantern'
+        default: 'Lullaby LST'
       takes:
         description: 'How many takes to try (the best is kept)'
         required: true
@@ -61,13 +71,21 @@ on:
         required: true
         default: '600000'
       anchor:
-        description: 'full mode: start from the current recording (source) or sing fresh (none)'
+        description: 'full mode: start from the current recording (source) or sing fresh (none). ElevenLabs refuses every upload of our recordings as copyrighted, so none'
         required: true
-        default: 'source'
+        default: 'none'
+      parts:
+        description: 'full mode: 2 = sing the song in two halves at the first recording pace and join them in a breath between verses (about 14 minutes); 1 = squeeze it into one ten-minute take'
+        required: true
+        default: '2'
+      sec_per_line:
+        description: 'full mode, two halves: seconds per sung line (the first recording sings one about every 5.6 s), plus 3 s of breath between verses'
+        required: true
+        default: '5.6'
       voice:
         description: 'One line describing the singer, as heard on the current recording'
         required: false
-        default: 'one single voice, warm and unhurried, the same singer from the first note to the last'
+        default: 'one single warm, soft voice singing a child to sleep, unhurried, the same singer from the first note to the last'
       song_id:
         description: 'fix mode: the ElevenLabs song id of the take to keep (blank = upload fix_file, which is what works)'
         required: false
@@ -100,8 +118,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: ffmpeg, to trim a take before upload
-        run: sudo apt-get update -qq >/dev/null && sudo apt-get install -y -qq ffmpeg >/dev/null && ffmpeg -version | head -1
+      - name: ffmpeg and numpy, to trim, measure and join takes
+        run: |
+          sudo apt-get update -qq >/dev/null && sudo apt-get install -y -qq ffmpeg >/dev/null && ffmpeg -version | head -1
+          python3 -m pip install --quiet numpy && python3 -c "import numpy; print('numpy', numpy.__version__)"
       - name: The takes an earlier run sang (check mode)
         if: ${{ inputs.mode == 'check' }}
         uses: actions/download-artifact@v4
@@ -120,6 +140,8 @@ jobs:
           LENGTH_MS: ${{ inputs.length_ms }}
           ANCHOR: ${{ inputs.anchor }}
           VOICE: ${{ inputs.voice }}
+          PARTS: ${{ inputs.parts }}
+          SEC_PER_LINE: ${{ inputs.sec_per_line }}
           SONG_ID: ${{ inputs.song_id }}
           FIX_FILE: ${{ inputs.fix_file }}
           FIX_FROM: ${{ inputs.fix_from_ms }}
@@ -133,6 +155,7 @@ jobs:
           mode=os.environ.get('MODE','full').strip().lower()
           want=os.environ['FINETUNE'].strip(); takes=max(1,int(os.environ['TAKES'])); LENGTH=min(600000,max(30000,int(os.environ['LENGTH_MS'])))
           anchor=os.environ.get('ANCHOR','source').strip().lower()=='source'; voice=os.environ['VOICE'].strip()
+          PARTS=max(1,min(2,int(os.environ.get('PARTS') or 1))); LINE_S=max(3.0,min(9.0,float(os.environ.get('SEC_PER_LINE') or 5.6))); BREATH_S=3.0
           SOURCE='audio/hush-little-traveler-short.mp3'   # the first, four-minute recording: the voice and tune everything else was sung on from
           # the opening of the current recording that is word-perfect: the first two
           # stanzas, 0:00-0:59 (the third stanza changes a line, so it is re-sung)
@@ -222,14 +245,23 @@ jobs:
               FIX_ID=upload(SOURCE); print('uploaded the original recording, the voice the take was sung on from: song_id',FIX_ID)
 
           # ── the plan ────────────────────────────────────────────────────────
-          POS=["children's bedtime lullaby","gentle acoustic accompaniment","no drums, no percussion",
-               "clean and undistorted, plenty of headroom","slow and steady, the same tempo all the way through",
+          # Levi, 2 Oct 2026: "flow and sound just like the first one I had uploaded with the finetune of
+          # Lullaby LST ... to put a child to sleep." Measured from that first recording
+          # (audio/hush-little-traveler-short.mp3): E major, about 68 beats a minute with a rocking
+          # three-to-a-beat sway, half as bright as the ten-minute takes (spectral centroid about
+          # 1,200 Hz against 2,300) with twice their share of warm low end, a line every 5.5-6 s and
+          # a breath of 3-4 s between verses.
+          POS=["children's bedtime lullaby","a slow, gently rocking lullaby at about 68 BPM, swaying like a cradle","in E major",
+               "warm, soft and mellow, dark-toned and cosy, nothing bright or sparkly",
+               "gentle acoustic accompaniment, sparse and quiet, with a warm low end","no drums, no percussion",
+               "clean and undistorted, plenty of headroom","the same slow tempo all the way through",
                "one melody carried through every verse, the chorus the same tune each time it returns",
                "every word sung clearly, exactly as written, nothing added",
-               "one continuous, flowing performance from the first note to the last: smooth legato phrasing, "
-               "an even, unhurried pulse, soft and steady dynamics, each verse flowing into the next without a break or a jolt",voice]
+               "one continuous, flowing performance: smooth legato phrasing, each line given room to breathe, "
+               "a soft instrumental breath of a few seconds between verses, soft and steady dynamics",voice]
           NEG=["drums","percussion","backing vocals","choir","duet","a second singer","a change of singer","distortion","clipping",
                "loudness pushing","shouting","spoken word","rap","improvised words","scat singing","ad-libs","key change","tempo change",
+               "rushed phrasing","a fast tempo","bright or harsh tone","busy accompaniment",
                "abrupt transitions","sudden stops","long silences between verses","a jump in volume","a change of arrangement"]
           def plan_full():
               secs=[]; budget=LENGTH-5000
@@ -308,6 +340,8 @@ jobs:
                       detail=e.read()[:300]; print('   OpenAI whisper: HTTP',e.code,detail,flush=True)
                       if e.code not in (429,500,502,503,504): raise
                       last=e
+                      # an account with no OpenAI credit left will not have any in a minute either
+                      if b'quota' in detail.lower() or b'credit' in detail.lower(): break
               # ElevenLabs Scribe: words with their times, gathered into short segments
               try:
                   b2=uuid.uuid4().hex.encode()
@@ -350,10 +384,11 @@ jobs:
               except urllib.error.HTTPError as e:
                   print('   gpt-4o-mini-transcribe: HTTP',e.code,e.read()[:300],flush=True)
               raise last
-          def coverage(tr):
+          def coverage(tr,secs=None):
+              secs=secs or sections
               words=norm(' '.join(s['text'] for s in tr.get('segments',[]))).split()
               rows=[]; sung=0
-              for lab,ls in sections:
+              for lab,ls in secs:
                   for ln in ls:
                       n=norm(ln).split(); best=0
                       if n and words:
@@ -365,7 +400,7 @@ jobs:
                                   if r>best: best=r
                       st='sung' if best>=0.8 else ('close' if best>=0.6 else 'missing')
                       sung+=st=='sung'; rows.append((lab,ln,st,round(best,2)))
-              return sung/len(all_lines), rows
+              return sung/max(1,sum(len(ls) for _,ls in secs)), rows
 
           def sing(bd):
               audio,hd=api('https://api.elevenlabs.io/v1/music?output_format=mp3_44100_192',data=json.dumps(bd).encode(),accept='audio/mpeg',want_headers=True)
@@ -422,6 +457,68 @@ jobs:
                   score,cov=check_take(t,path)
                   if best is None or score>best[0]: best=(score,t,cov)
               takes=0
+          # ── two halves at the first recording's pace, joined in a breath (lantern/builder/lullaby_join.py) ──
+          if mode=='full' and PARTS==2:
+              sys.path.insert(0,'lantern/builder'); import lullaby_join as J
+              n_all=len(all_lines); cum=0; cut=None
+              for i,(lab,ls) in enumerate(sections[:-1]):
+                  cum+=len(ls)
+                  # the join falls after a chorus ("Goodnight, Friends"), where the song rests anyway
+                  if lab.startswith('Goodnight') and (cut is None or abs(cum-n_all/2.0)<abs(cut[1]-n_all/2.0)): cut=(i+1,cum)
+              if cut is None: cut=(len(sections)//2,sum(len(l) for _,l in sections[:len(sections)//2]))
+              halves=[sections[:cut[0]],sections[cut[0]:]]
+              def plan_half(h):
+                  secs=[]; hs=halves[h]
+                  for i,(name,lines) in enumerate(hs):
+                      first=(i==0); last=(i==len(hs)-1)
+                      dur=len(lines)*LINE_S*1000+((len(lines)+3)//4)*BREATH_S*1000
+                      local=['sung softly and slowly, one line at a time, every word clear, a breath between verses']
+                      if name.startswith('Goodnight'): local.append('the chorus: the same gentle tune each time it returns')
+                      if first and h==0: dur+=5000; local.append('a short, soft instrumental opening, then the words')
+                      if first and h==1: dur+=5000; local.append('a short, soft instrumental introduction in the same key and tempo, then the words, as if the song were already playing')
+                      if not first: local.append('flows straight on from the section before - the same voice, key, tempo and accompaniment, no jolt')
+                      if last and h==0: dur+=6000; local.append('after the last line the accompaniment keeps playing softly in the same tempo for a few seconds: no ending, no slowing, no fade to silence')
+                      if last and h==1: dur+=8000; local.append('settling and slowing, almost asleep, a soft instrumental close')
+                      secs.append({'section_name':name[:100],'positive_local_styles':local,'negative_local_styles':[],'duration_ms':int(max(3000,min(120000,dur))),'lines':lines})
+                  tot=sum(x['duration_ms'] for x in secs)
+                  if tot>599000:
+                      k=599000.0/tot
+                      for x in secs: x['duration_ms']=int(max(3000,x['duration_ms']*k))
+                  return {'positive_global_styles':POS,'negative_global_styles':NEG,'sections':secs}
+              plans=[plan_half(0),plan_half(1)]
+              json.dump({'halves':plans},open('out/plan.json','w'),indent=1)
+              for h in (0,1):
+                  print(f'half {h+1}: {sum(len(l) for _,l in halves[h])} lines, {sum(x["duration_ms"] for x in plans[h]["sections"])//1000}s')
+              got=[[],[]]
+              for h in (0,1):
+                  for t in range(1,takes+1):
+                      bd={'composition_plan':plans[h],'model_id':'music_v1'}
+                      if fid: bd['finetune_id']=fid
+                      print(f'half {h+1}, take {t}: asking ElevenLabs{" with the fine-tune" if fid else ""}...',flush=True)
+                      try: audio=sing(bd)
+                      except urllib.error.HTTPError as e:
+                          detail=e.read()[:700]; print(f'   ElevenLabs refused: HTTP {e.code} {detail!r}')
+                          if e.code in (401,402) or b'quota' in detail.lower() or b'credits' in detail.lower(): sys.exit('no credit left; stopping')
+                          continue
+                      path=f'out/half{h+1}-take{t}.mp3'; open(path,'wb').write(audio)
+                      tr=transcribe(path); cov,rows=coverage(tr,halves[h]); sm=smoothness(path,tr)
+                      first,lastw=J.words_span(tr.get('segments',[]))
+                      json.dump(tr,open(path[:-4]+'-heard.json','w'))
+                      print(f'   {round(cov*100)}% of its lines sung; {sm["stumbles"]} break(s) over 2.5 s, level wanders {sm["level_wander_db"]} dB; words {first}-{lastw} s',flush=True)
+                      if first is None: continue
+                      got[h].append({'path':path,'cov':cov,'sm':sm,'first':first,'last':lastw})
+              if not got[0] or not got[1]: sys.exit('a half could not be sung; nothing joined')
+              pairs=[]
+              for a in got[0]:
+                  for b in got[1]:
+                      sm_=J.seam(a['path'],a['last'],b['path'],b['first'])
+                      score=(a['cov']+b['cov'])*100-2*(a['sm']['stumbles']+b['sm']['stumbles'])-(a['sm']['level_wander_db']+b['sm']['level_wander_db'])-sm_['penalty']
+                      pairs.append((score,a,b,sm_)); print(f'   pair {a["path"]} + {b["path"]}: seam {sm_} -> score {round(score,1)}')
+              pairs.sort(key=lambda x:-x[0]); score,a,b,sm_=pairs[0]
+              jn=J.join(a['path'],a['last'],b['path'],b['first'],'out/take-1.mp3')
+              print('joined',a['path'],'+',b['path'],jn,flush=True)
+              json.dump({'halves':plans,'join':{'first':a['path'],'second':b['path'],'seam':sm_,**jn}},open('out/plan.json','w'),indent=1)
+              sc,cov=check_take(1,'out/take-1.mp3'); best=(sc,1,cov); takes=0
           for t in range(1,takes+1):
               body={'composition_plan':plan,'model_id':'music_v1'}
               if fid: body['finetune_id']=fid
