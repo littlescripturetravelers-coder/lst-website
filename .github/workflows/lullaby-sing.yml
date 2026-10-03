@@ -447,6 +447,15 @@ jobs:
               # the words come first: a take that sings the song is worth 100 points per
               # whole; then every stumble costs 2 and every decibel of wander costs 1
               score=cov*100-2*sm['stumbles']-sm['level_wander_db']+(min(r for _,r in fixed) if (mode=='fix' and fixed) else 0)
+              # one whole performance (parts=1): a warm major key is preferred, and a take that
+              # would clip is marked down (Levi, 3 Oct 2026: "one amazing lullaby ... so smooth")
+              try:
+                  sys.path.insert(0,'lantern/builder'); import lullaby_join as J
+                  mk=J.key_of(J.features(J.decode(path))['chroma']); pk=J.peak(path)
+                  if 'minor' in mk: score-=15
+                  print(f'   take {t}: key {mk}, loudest {pk:.2f} of full scale',flush=True)
+                  open(f'out/take-{t}-report.txt','a').write(f'\nkey {mk}; loudest {pk:.2f}\n')
+              except Exception as e: print('   key check skipped:',e)
               return score, cov
           if mode=='clean':
               # Levi, 2 Oct 2026: "There are some distortions ... make sure it sings clear." The
@@ -586,6 +595,15 @@ jobs:
               score,cov=check_take(t,path)
               if best is None or score>best[0]: best=(score,t,cov)
           if best is None: sys.exit('no take was made')
+          if mode=='full' and PARTS==1:
+              # kept as sung; only turned down evenly if its loudest moment would clip
+              try:
+                  sys.path.insert(0,'lantern/builder'); import lullaby_join as J
+                  src=f'out/take-{best[1]}.mp3'; os.rename(src,f'out/take-{best[1]}-as-sung.mp3')
+                  print('kept as sung:',J.keep_clean(f'out/take-{best[1]}-as-sung.mp3',src),flush=True)
+              except Exception as e:
+                  print('clean step skipped:',e)
+                  if not os.path.exists(f'out/take-{best[1]}.mp3') and os.path.exists(f'out/take-{best[1]}-as-sung.mp3'): os.rename(f'out/take-{best[1]}-as-sung.mp3',f'out/take-{best[1]}.mp3')
           print(f'BEST take {best[1]} with {round(best[2]*100)}% of lines. Listen before publishing.')
           open('out/BEST.txt','w').write(f'take-{best[1]}.mp3 {round(best[2]*100)}%\n')
           # THE WORDS KEEP TIME WITH THE SINGING: the second each line of the best take
