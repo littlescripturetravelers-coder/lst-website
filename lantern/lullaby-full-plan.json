@@ -1,15 +1,17 @@
 {
  "positive_global_styles": [
+  "a calm instrumental bed of soft piano and warm strings that plays under the voice the whole way through and never stops between lines",
   "lullaby",
   "children's music",
   "Christian",
   "folk",
   "children's bedtime lullaby",
   "a slow, gently rocking lullaby at about 68 BPM, swaying like a cradle",
-  "in E major",
   "a major key, warm and comforting, never sad",
   "warm, soft and mellow, cosy, nothing harsh",
-  "gentle acoustic accompaniment, sparse and quiet, with a warm low end",
+  "one solo singer only, a single voice from the first note to the last: no harmonies, no other voices ever join",
+  "calm instrumental accompaniment under the voice all the way through, following its melody and chords: gentle piano, warm soft strings and a light music-box shimmer, with a warm low end",
+  "soft instrumental passages between verses that carry the same melody",
   "no drums, no percussion",
   "clean and undistorted, plenty of headroom",
   "the same slow tempo all the way through",
@@ -26,6 +28,19 @@
   "duet",
   "a second singer",
   "a change of singer",
+  "a cappella",
+  "unaccompanied voice",
+  "a sparse arrangement",
+  "silence between lines",
+  "the music dropping out",
+  "harmonies",
+  "vocal harmonies",
+  "layered vocals",
+  "double-tracked vocals",
+  "group vocals",
+  "children singing",
+  "humming chorus",
+  "echo voices",
   "distortion",
   "clipping",
   "a man's voice",
@@ -58,18 +73,36 @@
  ],
  "sections": [
   {
-   "section_name": "Hush, Little Traveler",
+   "section_name": "Opening, from the recording",
    "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "a short instrumental opening, then the words"
+    "exactly as recorded"
    ],
    "negative_local_styles": [],
-   "duration_ms": 57727,
+   "duration_ms": 24300,
    "lines": [
     "Hush, little traveler, the day is done,",
     "The moon is up, the stars have come.",
     "Your pillow\u2019s soft, your covers deep \u2014",
-    "A comfy nest for little sleep.",
+    "A comfy nest for little sleep."
+   ],
+   "source_from": {
+    "song_id": "DMGZnbO29o9Fj7INf9Qt",
+    "range": {
+     "start_ms": 0,
+     "end_ms": 24300
+    }
+   }
+  },
+  {
+   "section_name": "Hush, Little Traveler (continued)",
+   "positive_local_styles": [
+    "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
+    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
+   ],
+   "negative_local_styles": [],
+   "duration_ms": 35668,
+   "lines": [
     "Mom and Dad are nearby too,",
     "With hearts that watch the whole night through.",
     "And One who loves you even more",
@@ -84,11 +117,12 @@
    "section_name": "Goodnight, Friends",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "the chorus: a little fuller, the same tune each time it returns",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 26863,
+   "duration_ms": 26751,
    "lines": [
     "Goodnight Beau, goodnight Scout,",
     "Goodnight friends both in and out.",
@@ -102,10 +136,11 @@
    "section_name": "Beau the Brave",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35818,
+   "duration_ms": 35668,
    "lines": [
     "Beau the Brave has stories true \u2014",
     "\u201cBig heart, brave start, that\u2019s me and you!\u201d",
@@ -121,10 +156,11 @@
    "section_name": "Scout the Seeker",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35818,
+   "duration_ms": 35668,
    "lines": [
     "Scout the Seeker, curious and free \u2014",
     "\u201cLook and see \u2014 what could it be?\u201d",
@@ -140,10 +176,11 @@
    "section_name": "Willow the Warm",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35818,
+   "duration_ms": 35668,
    "lines": [
     "Willow the Warm wraps tight and slow \u2014",
     "\u201cWarm hugs, warm hearts wherever we go.\u201d",
@@ -159,10 +196,11 @@
    "section_name": "Wren the Wonderer",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35818,
+   "duration_ms": 35668,
    "lines": [
     "Wren the Wonderer, gentle and slow \u2014",
     "\u201cPause and ponder \u2014 what a wonder we know.\u201d",
@@ -178,11 +216,12 @@
    "section_name": "Goodnight, Friends",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "the chorus: a little fuller, the same tune each time it returns",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 26863,
+   "duration_ms": 26751,
    "lines": [
     "Goodnight Beau, goodnight Scout,",
     "Goodnight friends both in and out.",
@@ -196,10 +235,11 @@
    "section_name": "Stories We Remember (first half)",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 71636,
+   "duration_ms": 71337,
    "lines": [
     "Moses raised his staff up high,",
     "As frightened people wondered why.",
@@ -223,10 +263,11 @@
    "section_name": "Stories We Remember",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 71636,
+   "duration_ms": 71337,
    "lines": [
     "Abraham looked into the night",
     "And saw the stars so small and bright.",
@@ -250,10 +291,11 @@
    "section_name": "Then Jesus Came",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 53727,
+   "duration_ms": 53503,
    "lines": [
     "Then Jesus came to walk our way;",
     "He felt our hurts, He knew each day.",
@@ -273,10 +315,11 @@
    "section_name": "You Are His",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 53727,
+   "duration_ms": 53503,
    "lines": [
     "You are not what the world might say \u2014",
     "Not just a stumble, not yesterday.",
@@ -296,10 +339,11 @@
    "section_name": "Drift, Little Traveler",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35818,
+   "duration_ms": 35668,
    "lines": [
     "So drift, little traveler, soft and slow,",
     "With all the friends and stories you know.",
@@ -315,11 +359,12 @@
    "section_name": "Goodnight, Friends",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "the chorus: a little fuller, the same tune each time it returns",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 26863,
+   "duration_ms": 26751,
    "lines": [
     "Goodnight Beau, goodnight Scout,",
     "Goodnight friends both in and out.",
@@ -333,11 +378,12 @@
    "section_name": "Sleep Tight",
    "positive_local_styles": [
     "sung softly, one line at a time, every word clear",
+    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt",
     "settling and slowing, almost asleep, a soft instrumental close"
    ],
    "negative_local_styles": [],
-   "duration_ms": 31863,
+   "duration_ms": 31751,
    "lines": [
     "Mom and Dad love you deep, love you wide,",
     "And Heavenly Father stays by your side.",
