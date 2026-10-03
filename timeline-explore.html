@@ -159,6 +159,7 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 .trb-chip{font-family:var(--font-body);font-weight:800;font-size:9px;padding:4px 9px;border-radius:99px;border:1px solid;background:transparent;cursor:pointer;color:#fff;}
 .trb-chip.on{background:rgba(255,255,255,.14);}
 .trb-btn{font-family:var(--font-body);font-weight:800;font-size:10px;padding:6px 11px;border-radius:99px;border:1px solid rgba(91,211,220,.5);background:rgba(91,211,220,.1);color:#5BD3DC;cursor:pointer;}
+.trb-see{display:block;width:100%;margin-top:10px;padding:9px 12px;border-radius:12px;border:1px solid rgba(91,211,220,.45);background:rgba(91,211,220,.1);color:#5BD3DC;font-family:var(--font-display);font-weight:600;font-size:12px;cursor:pointer;}
 .trb-card{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:14px;padding:10px 12px;margin-bottom:8px;cursor:pointer;}
 .trb-card.open{border-color:rgba(217,162,39,.45);background:rgba(217,162,39,.05);cursor:default;}
 .trb-card h3{font-family:var(--font-display);font-weight:700;font-size:14px;color:#fff;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
@@ -682,6 +683,10 @@ body.hand-active .hand-label{display:block;}
   font-weight:700;font-size:12px;cursor:pointer;}
 .fh-btn-primary{background:linear-gradient(135deg,#F472B6,#a855f7);color:#fff;}
 .fh-btn-secondary{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);}
+.fh-addr-row{margin-top:8px;} .fh-addr-t{font-size:10px;color:#5BD3DC;font-weight:700;margin-bottom:6px;line-height:1.4;}
+.fh-addr-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.fh-addr-b{font-family:var(--font-body);font-weight:800;font-size:10.5px;padding:6px 11px;border-radius:99px;cursor:pointer;border:1px solid rgba(91,211,220,.4);background:rgba(91,211,220,.08);color:#5BD3DC;}
+.fh-addr-edit,.fh-addr-cancel{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(255,255,255,.7);}
 
 /* FAMILY EVENT CARDS */
 .fh-event-card{background:rgba(27,45,95,.4);border:1px solid rgba(244,114,182,.2);
@@ -1304,6 +1309,10 @@ body.hand-active .hand-label{display:block;}
   font-weight:700;font-size:12px;cursor:pointer;}
 .fh-btn-primary{background:linear-gradient(135deg,#F472B6,#a855f7);color:#fff;}
 .fh-btn-secondary{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);}
+.fh-addr-row{margin-top:8px;} .fh-addr-t{font-size:10px;color:#5BD3DC;font-weight:700;margin-bottom:6px;line-height:1.4;}
+.fh-addr-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.fh-addr-b{font-family:var(--font-body);font-weight:800;font-size:10.5px;padding:6px 11px;border-radius:99px;cursor:pointer;border:1px solid rgba(91,211,220,.4);background:rgba(91,211,220,.08);color:#5BD3DC;}
+.fh-addr-edit,.fh-addr-cancel{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(255,255,255,.7);}
 
 /* FAMILY EVENT CARDS */
 .fh-event-card{background:rgba(27,45,95,.4);border:1px solid rgba(244,114,182,.2);
@@ -1894,13 +1903,14 @@ body.hand-active .hand-label{display:block;}
   <div style="position:absolute;right:4px;bottom:3px;z-index:5;font-size:8.5px;color:rgba(255,255,255,.55);background:rgba(6,13,30,.72);padding:1px 5px;border-radius:4px;">&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener" style="color:rgba(255,255,255,.75);">OpenStreetMap</a> contributors</div>
   <div id="map-nl" style="position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#0a1020;">
    <div style="font-size:44px;">&#128205;</div>
-   <div style="font-family:var(--font-display);font-size:17px;color:rgba(255,255,255,.45);">Location Unknown</div>
-   <div style="font-size:11px;color:rgba(255,255,255,.22);text-align:center;max-width:240px;line-height:1.6;">The exact location has not been confirmed archaeologically.</div>
+   <div id="map-nl-t" style="font-family:var(--font-display);font-size:17px;color:rgba(255,255,255,.45);">Location Unknown</div>
+   <div id="map-nl-s" style="font-size:11px;color:rgba(255,255,255,.22);text-align:center;max-width:240px;line-height:1.6;">The exact location has not been confirmed archaeologically.</div>
   </div>
  </div>
  <div id="map-btns">
   <button class="mopen-btn" onclick="openAppleMaps()" style="border-color:rgba(245,197,24,.3);color:#F5C518;background:rgba(245,197,24,.06);">&#127760; Apple Maps</button>
   <button class="mopen-btn" onclick="openGoogleMaps()" style="border-color:rgba(52,211,153,.3);color:#34D399;background:rgba(52,211,153,.06);">&#128205; Google Maps</button>
+  <button class="mopen-btn" id="map-sv" onclick="openStreetView()" style="border-color:rgba(91,211,220,.35);color:#5BD3DC;background:rgba(91,211,220,.07);">&#128064; Street View</button>
  </div>
 </div>
 
@@ -5174,7 +5184,7 @@ function openEvMod(ev){
   if(ev.conf){var cd=document.createElement("div");cd.className="dmod-conf "+(ev.conf==="confirmed"?"dc":ev.conf==="believed"?"db":"dd");cd.textContent=decodeT(ev.conf==="confirmed"?"Confirmed - evidence exists":ev.conf==="believed"?"Believed - held by faith":"Debated - scholars disagree");cf.appendChild(cd);}
   var body=document.getElementById("dmod-body");body.innerHTML="";
   if(ev.lst){var ls=document.createElement("div");ls.className="dmod-lst";ls.innerHTML="<div class='dlst-i'>&#10022;</div><div class='dlst-t'>"+ev.t+" - LST Book Story</div><div class='dlst-s'>Upload your artwork when published</div>";body.appendChild(ls);}
-  if(ev.loc){var lo=document.createElement("div");lo.style.cssText="padding:6px 9px;background:rgba(91,211,220,.05);border:1px solid rgba(91,211,220,.14);border-radius:7px;margin-bottom:10px;font-size:9.5px;color:#5BD3DC;font-weight:600;";lo.innerHTML="&#128205; "+ev.loc;body.appendChild(lo);}
+  if(ev.loc||ev.addr){var lo=document.createElement("div");lo.style.cssText="padding:6px 9px;background:rgba(91,211,220,.05);border:1px solid rgba(91,211,220,.14);border-radius:7px;margin-bottom:10px;font-size:9.5px;color:#5BD3DC;font-weight:600;";lo.innerHTML="&#128205; "+(ev.loc||"")+(ev.addr?(ev.loc?"<br>":"")+fhEsc(ev.addr):"");body.appendChild(lo);}
   if(ev.de){var de=document.createElement("div");de.className="dsec";de.innerHTML="<div class='dsec-c'>"+ev.de+"</div>";body.appendChild(de);}
   if(ev.sc){var sc2=document.createElement("div");sc2.className="dsec";sc2.innerHTML="<div class='dsec-t'>&#128366; Scripture</div><div class='dsec-c' style='font-style:italic;color:rgba(255,255,255,.65);'>"+ev.sc+"</div>";body.appendChild(sc2);}
   if(ev.gospel){var gc=document.createElement("div");gc.className="dmod-gospel";gc.innerHTML="<b>&#10022; Gospel Connection:</b><br>"+ev.gospel;body.appendChild(gc);}
@@ -5185,7 +5195,7 @@ function openEvMod(ev){
   if(ev.find){var fb=document.createElement("button");fb.className="map-btn tech-btn";fb.innerHTML="&#127963; About this discovery, and its source";fb.onclick=function(){document.getElementById("dmod").classList.remove("open");openTechGuide("finds",curEv.find);};body.appendChild(fb);}
   try{ atnEventButton(ev,body); }catch(e){}
   try{ chEventButton(ev,body); }catch(e){}
-  if(ev.lat!==undefined){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+  if(mapHas(ev)){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -5222,7 +5232,7 @@ function openEmpireMod(emp){
       else box.innerHTML="<div class='dsec-t' style='color:#F5C518'>&#128214; Rise and fall, in depth</div><div class='sl-wait'>&#10022; The study of this empire&#39;s rise and fall is still being written and will appear here on its own.</div>"; }); })(rf2,emp);
   }catch(e){}
   try{ if(typeof emp.tp==="number"){ var mw2=mwSection(emp.tp,"empire",emp.t); if(mw2) body.appendChild(mw2); } }catch(e){}
-  if(emp.lat){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+  if(emp.lat){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -5246,7 +5256,7 @@ function openWarMod(war){
   if(war.de){var de=document.createElement("div");de.className="dsec";de.innerHTML="<div class='dsec-c'>"+war.de+"</div>";body.appendChild(de);}
   if(war.gospel){var gc=document.createElement("div");gc.className="dmod-gospel";gc.innerHTML="<b>&#10022; Gospel Connection:</b><br>"+war.gospel;body.appendChild(gc);}
   if(war.hand){var hd=document.createElement("div");hd.className="dmod-hand";hd.innerHTML="<b>&#9770; Heavenly Father&#39;s Hand:</b><br>"+war.hand;body.appendChild(hd);}
-  if(war.lat){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+  if(war.lat){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -5264,7 +5274,7 @@ function openGenMod(item,type){
   if(item.de){var de=document.createElement("div");de.className="dsec";de.innerHTML="<div class='dsec-c'>"+item.de+"</div>";body.appendChild(de);}
   if(item.gospel){var gc=document.createElement("div");gc.className="dmod-gospel";gc.innerHTML="<b>&#10022; Gospel Connection:</b><br>"+item.gospel;body.appendChild(gc);}
   if(item.hand){var hd=document.createElement("div");hd.className="dmod-hand";hd.innerHTML="<b>&#9770; Heavenly Father&#39;s Hand:</b><br>"+item.hand;body.appendChild(hd);}
-  if(item.lat){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+  if(item.lat){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -5312,7 +5322,7 @@ function openFamousMod(fp){
   }
   if(fp.gospel){var gc=document.createElement("div");gc.className="dmod-gospel";gc.innerHTML="<b>&#10022; Gospel Connection:</b><br>"+fp.gospel;body.appendChild(gc);}
   if(fp.hand){var hd=document.createElement("div");hd.className="dmod-hand";hd.innerHTML="<b>&#9770; Heavenly Father&#39;s Hand:</b><br>"+fp.hand;body.appendChild(hd);}
-  if(fp.lat!==undefined){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+  if(fp.lat!==undefined){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -5338,7 +5348,7 @@ function openMigrateMod(mg){
   if(mg.sc){var sc2=document.createElement("div");sc2.className="dsec";sc2.innerHTML="<div class='dsec-t'>&#128366; Scripture</div><div class='dsec-c' style='font-style:italic;color:rgba(255,255,255,.65);'>"+mg.sc+"</div>";body.appendChild(sc2);}
   if(mg.gospel){var gc=document.createElement("div");gc.className="dmod-gospel";gc.innerHTML="<b>&#10022; Gospel Connection:</b><br>"+mg.gospel;body.appendChild(gc);}
   if(mg.hand){var hd=document.createElement("div");hd.className="dmod-hand";hd.innerHTML="<b>&#9770; Heavenly Father&#39;s Hand:</b><br>"+mg.hand;body.appendChild(hd);}
-  if(mg.lat){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128506; View Origin on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+  if(mg.lat){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128205; See where it began";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -5363,7 +5373,7 @@ function openExploreMod(ex){
   if(ex.de){var de=document.createElement("div");de.className="dsec";de.innerHTML="<div class='dsec-c'>"+ex.de+"</div>";body.appendChild(de);}
   if(ex.gospel){var gc=document.createElement("div");gc.className="dmod-gospel";gc.innerHTML="<b>&#10022; Gospel Connection:</b><br>"+ex.gospel;body.appendChild(gc);}
   if(ex.hand){var hd=document.createElement("div");hd.className="dmod-hand";hd.innerHTML="<b>&#9770; Heavenly Father&#39;s Hand:</b><br>"+ex.hand;body.appendChild(hd);}
-  if(ex.lat!==undefined){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128506; View Departure Point on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+  if(ex.lat!==undefined){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128205; See where they set out";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -5561,7 +5571,7 @@ function openXianMod(xe){
   // Gospel connection
   if(xe.gospel){var gc=document.createElement("div");gc.className="dmod-gospel";gc.innerHTML="<b>&#10022; Gospel Connection:</b><br>"+xe.gospel;body.appendChild(gc);}
 
-  if(xe.lat){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+  if(xe.lat){var mb=document.createElement("button");mb.className="map-btn";mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -5933,7 +5943,7 @@ function openPropMod(x){
   if(x.lesson){var l=document.createElement("div");l.className="dmod-hand";
     l.innerHTML="<b>&#10022; What It Teaches Us:</b><br>"+x.lesson;body.appendChild(l);}
   if(x.lat){var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+    mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -5962,7 +5972,7 @@ function openChildMod(x){
   if(x.lesson){var l=document.createElement("div");l.className="dmod-hand";
     l.innerHTML="<b>&#10022; What It Teaches Us:</b><br>"+x.lesson;body.appendChild(l);}
   if(x.lat){var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+    mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -5991,7 +6001,7 @@ function openSocioMod(x){
   if(x.lesson){var l=document.createElement("div");l.className="dmod-hand";
     l.innerHTML="<b>&#10022; What It Teaches Us:</b><br>"+x.lesson;body.appendChild(l);}
   if(x.lat){var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+    mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -6020,7 +6030,7 @@ function openHealthMod(x){
   if(x.lesson){var l=document.createElement("div");l.className="dmod-hand";
     l.innerHTML="<b>&#10022; What It Teaches Us:</b><br>"+x.lesson;body.appendChild(l);}
   if(x.lat){var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+    mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -6049,7 +6059,7 @@ function openSciMod(x){
   if(x.lesson){var l=document.createElement("div");l.className="dmod-hand";
     l.innerHTML="<b>&#10022; What It Teaches Us:</b><br>"+x.lesson;body.appendChild(l);}
   if(x.lat){var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+    mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -6078,7 +6088,7 @@ function openEscMod(x){
   if(x.lesson){var l=document.createElement("div");l.className="dmod-hand";
     l.innerHTML="<b>&#10022; What It Teaches Us:</b><br>"+x.lesson;body.appendChild(l);}
   if(x.lat){var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+    mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -6107,7 +6117,7 @@ function openSlaveMod(x){
   if(x.lesson){var l=document.createElement("div");l.className="dmod-hand";
     l.innerHTML="<b>&#10022; What It Teaches Us:</b><br>"+x.lesson;body.appendChild(l);}
   if(x.lat){var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+    mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -6136,7 +6146,7 @@ function openWorkMod(x){
   if(x.lesson){var l=document.createElement("div");l.className="dmod-hand";
     l.innerHTML="<b>&#10022; What It Teaches Us:</b><br>"+x.lesson;body.appendChild(l);}
   if(x.lat){var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+    mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -6165,7 +6175,7 @@ function openDrugMod(x){
   if(x.lesson){var l=document.createElement("div");l.className="dmod-hand";
     l.innerHTML="<b>&#10022; What It Teaches Us:</b><br>"+x.lesson;body.appendChild(l);}
   if(x.lat){var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+    mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -6198,7 +6208,7 @@ function openFFMod(fe){
   if(fe.lesson){var l=document.createElement("div");l.className="dmod-hand";
     l.innerHTML="<b>&#10022; What It Teaches Us:</b><br>"+fe.lesson;body.appendChild(l);}
   if(fe.lat){var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+    mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -6228,7 +6238,7 @@ function openSocFamMod(se){
   if(se.lesson){var l=document.createElement("div");l.className="dmod-hand";
     l.innerHTML="<b>&#10022; What It Teaches Us:</b><br>"+se.lesson;body.appendChild(l);}
   if(se.lat){var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
+    mb.innerHTML="&#128205; See where this happened";mb.onclick=function(){openMapFor(curEv);};body.appendChild(mb);}
   document.getElementById("dmod").classList.add("open");
 }
 
@@ -6348,14 +6358,26 @@ function lat2y(lat,z){return(1-Math.log(Math.tan(deg2rad(lat))+1/Math.cos(deg2ra
 function lng2x(lng,z){return(lng+180)/360*Math.pow(2,z);}
 function tile2url(x,y,z){return"https://tile.openstreetmap.org/"+z+"/"+x+"/"+y+".png";}
 
+/* SEE WHERE IT HAPPENED (Levi, 3 Oct 2026): every event, study, temple and family story
+   opens here, pinned where it happened, with Google Maps, Apple Maps and Street View to
+   go closer - down to the building and the street around it. A place may be known by
+   its spot (lat/lng), by its name (mapQ, a temple's own name) or by an address a
+   family typed (addr); any of them is enough to open it in Google or Apple Maps. */
+function mapHas(ev){ return !!ev && ((ev.lat!==undefined&&ev.lat!==null&&!isNaN(ev.lat))||!!ev.addr||!!ev.mapQ); }
+function mapQuery(ev){ return ev?(ev.mapQ||ev.addr||""):""; }
 function openMapFor(ev){
   mapEv=ev;
   document.getElementById("dmod").classList.remove("open");
   document.getElementById("map-t").textContent=decodeT(ev.t||"");
-  document.getElementById("map-l").textContent=decodeT(ev.region||ev.loc||"");
+  document.getElementById("map-l").textContent=decodeT(ev.addr||ev.region||ev.loc||"");
   document.getElementById("mapov").classList.add("open");
   var nl=document.getElementById("map-nl"),mc=document.getElementById("map-canvas");
-  if(!ev.lat&&ev.lat!==0){nl.style.display="flex";mc.style.display="none";return;}
+  var hasPin=ev.lat!==undefined&&ev.lat!==null&&!isNaN(ev.lat);
+  document.getElementById("map-btns").style.display=mapHas(ev)?"":"none";
+  document.getElementById("map-sv").style.display=(hasPin||mapQuery(ev))?"":"none";
+  document.getElementById("map-nl-t").textContent=mapQuery(ev)?"See it in the maps below":"Location Unknown";
+  document.getElementById("map-nl-s").textContent=mapQuery(ev)?"Open Google Maps or Apple Maps to see the place, the street around it and the buildings.":"The exact location has not been confirmed archaeologically.";
+  if(!hasPin){nl.style.display="flex";mc.style.display="none";return;}
   nl.style.display="none";mc.style.display="block";
   mapZoom=ev.y<-500?4:ev.y<1000?5:6;mapLat=ev.lat;mapLng=ev.lng||0;
   setTimeout(function(){
@@ -6411,8 +6433,17 @@ function initMapT(){
   c.ondblclick=function(){mapZoom=Math.min(18,mapZoom+1);drawMapC(mapEv);};
 }
 function closeMap(){document.getElementById("mapov").classList.remove("open");}
-function openAppleMaps(){if(!mapEv||mapEv.lat===undefined)return;window.open("https://maps.apple.com/?ll="+mapEv.lat+","+(mapEv.lng||0)+"&q="+encodeURIComponent(mapEv.t||"")+"&z=8");}
-function openGoogleMaps(){if(!mapEv||mapEv.lat===undefined)return;window.open("https://www.google.com/maps/search/?api=1&query="+mapEv.lat+","+(mapEv.lng||0));}
+function mapPin(ev){ return ev&&ev.lat!==undefined&&ev.lat!==null&&!isNaN(ev.lat); }
+function openAppleMaps(){ if(!mapHas(mapEv)) return; var q=mapQuery(mapEv);
+  window.open("https://maps.apple.com/?"+(mapPin(mapEv)?"ll="+mapEv.lat+","+(mapEv.lng||0)+"&":"")+"q="+encodeURIComponent(q||decodeT(mapEv.t||""))+(mapPin(mapEv)?"&z="+(q?17:8):"")); }
+function openGoogleMaps(){ if(!mapHas(mapEv)) return; var q=mapQuery(mapEv);
+  window.open("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q||(mapEv.lat+","+(mapEv.lng||0)))); }
+/* Google's street-level view at the spot (or, for a place known only by name or address,
+   or pinned only at its town - near:1 - Google Maps at that place by name, where the
+   little person can be dropped onto the street beside it). */
+function openStreetView(){ if(!mapHas(mapEv)) return;
+  if(mapPin(mapEv)&&!(mapEv.near&&mapQuery(mapEv))) window.open("https://www.google.com/maps/@?api=1&map_action=pano&viewpoint="+mapEv.lat+","+(mapEv.lng||0));
+  else window.open("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(mapQuery(mapEv))); }
 
 // ── TRANSFORM ────────────────────────────────────────────────
 function applyT(anim){
@@ -7260,6 +7291,11 @@ function buildAddForm(body){
   gospelField.innerHTML="<label class='fh-label'>Gospel Connection (optional)</label><textarea class='fh-textarea' id='fh-gospel' placeholder='How does this event connect to the gospel? What does it show about Heavenly Father in your family?' style='min-height:48px;'></textarea>";
   form.appendChild(gospelField);
 
+  var addrField=document.createElement("div");addrField.className="fh-field";
+  addrField.innerHTML="<label class='fh-label'>Address (for the map)</label><input class='fh-input' id='fh-addr' placeholder='e.g. 123 Main Street, Nauvoo, Illinois, USA' autocomplete='street-address'>"
+    +"<div style='font-size:9.5px;color:rgba(255,255,255,.45);margin-top:4px;line-height:1.5;'>A street address, or just a town and country. It is found on the map for you, and opens in Google or Apple Maps with Street View.</div>";
+  form.appendChild(addrField);
+
   var latRow=document.createElement("div");latRow.className="fh-row";
   latRow.innerHTML="<div class='fh-field'><label class='fh-label'>Latitude (for map)</label><input class='fh-input' id='fh-lat' type='number' step='0.01' placeholder='e.g. 40.76'></div><div class='fh-field'><label class='fh-label'>Longitude (for map)</label><input class='fh-input' id='fh-lng' type='number' step='0.01' placeholder='e.g. -111.89'></div>";
   form.appendChild(latRow);
@@ -7303,6 +7339,7 @@ function doAddFamilyEvent(){
     loc:document.getElementById("fh-loc").value.trim(),
     lat:parseFloat(document.getElementById("fh-lat").value)||undefined,
     lng:parseFloat(document.getElementById("fh-lng").value)||undefined,
+    addr:(document.getElementById("fh-addr")||{value:""}).value.trim()||undefined,
     de:document.getElementById("fh-de").value.trim()||"A family history event.",
     gospel:document.getElementById("fh-gospel").value.trim(),
     conf:"confirmed",added:new Date().toLocaleDateString()
@@ -7310,6 +7347,7 @@ function doAddFamilyEvent(){
   familyEvents.push(ev);
   famEvs.push(ev);
   saveFamilyEvents();
+  if(ev.addr&&ev.lat===undefined) fhPlace(ev);
   clearFHForm();
   toast("&#128106; "+title+" added to your family timeline!");
   // Switch to my events tab
@@ -7318,7 +7356,7 @@ function doAddFamilyEvent(){
 }
 
 function clearFHForm(){
-  ["fh-name","fh-year","fh-title-input","fh-loc","fh-em","fh-de","fh-gospel","fh-lat","fh-lng"]
+  ["fh-name","fh-year","fh-title-input","fh-loc","fh-addr","fh-em","fh-de","fh-gospel","fh-lat","fh-lng"]
     .forEach(function(id){var el=document.getElementById(id);if(el)el.value="";});
 }
 
@@ -7341,8 +7379,51 @@ function buildMyEvents(body){
     var typeLabel=ev.type?ev.type.charAt(0).toUpperCase()+ev.type.slice(1):"Family Event";
     card.innerHTML="<div class='fh-event-em'>"+ev.em+"</div><div class='fh-event-title'>"+ev.t+"</div><div class='fh-event-date'>"+(ev.person?ev.person+" &nbsp;&#183;&nbsp; ":"")+ev.date+(ev.loc?" &nbsp;&#183;&nbsp; "+ev.loc:"")+"</div><div class='fh-event-de'>"+ev.de+"</div>"+(ev.gospel?"<div style='margin-top:8px;padding:7px 10px;background:rgba(245,197,24,.05);border-left:3px solid rgba(245,197,24,.3);border-radius:0 6px 6px 0;font-size:10px;color:rgba(255,255,255,.6);'>&#10022; "+ev.gospel+"</div>":"")+"<div class='fh-timeline-badge'>&#128198; "+ev.date+"&nbsp;&#183;&nbsp;&#128106; On timeline</div>";
     card.appendChild(delBtn);
+    fhAddrRow(card,ev);
     body.appendChild(card);
   }
+}
+
+/* A family's address: shown on its card, found on the map (OpenStreetMap's finder, asked once
+   when the address is saved), and opened in Google or Apple Maps with Street View. */
+function fhEsc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function fhPlace(ev,done){
+  try{
+    if(!ev||!ev.addr||typeof fetch!=="function"){ if(done) done(false); return; }
+    fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&q="+encodeURIComponent(ev.addr),{headers:{"Accept-Language":"en"}})
+      .then(function(r){ return r.ok?r.json():[]; })
+      .then(function(rows){
+        var hit=rows&&rows[0]; if(!hit){ if(done) done(false); return; }
+        ev.lat=Math.round(parseFloat(hit.lat)*1e6)/1e6; ev.lng=Math.round(parseFloat(hit.lon)*1e6)/1e6;
+        familyEvents.forEach(function(f){ if(f.id===ev.id){ f.lat=ev.lat; f.lng=ev.lng; } });
+        famEvs.forEach(function(f){ if(f.id===ev.id){ f.lat=ev.lat; f.lng=ev.lng; } });
+        saveFamilyEvents(); try{ buildTL(); }catch(e){} if(done) done(true);
+      }).catch(function(){ if(done) done(false); });
+  }catch(e){ if(done) done(false); }
+}
+function fhAddrRow(card,ev){
+  var row=document.createElement("div"); row.className="fh-addr-row";
+  function show(){
+    row.innerHTML=(ev.addr?"<div class='fh-addr-t'>&#128205; "+fhEsc(ev.addr)+"</div>":"")
+      +"<div class='fh-addr-btns'>"+(mapHas(ev)?"<button class='fh-addr-b fh-addr-see'>&#128205; See where this happened</button>":"")
+      +"<button class='fh-addr-b fh-addr-edit'>"+(ev.addr?"Change address":"&#43; Add an address")+"</button></div>";
+    var see=row.querySelector(".fh-addr-see"); if(see) see.onclick=function(){ closeFamilyHistory(); openMapFor(ev); };
+    row.querySelector(".fh-addr-edit").onclick=edit;
+  }
+  function edit(){
+    row.innerHTML="<input class='fh-input fh-addr-in' placeholder='Street, town, country' value='"+fhEsc(ev.addr||"")+"'>"
+      +"<div class='fh-addr-btns'><button class='fh-addr-b fh-addr-save'>Save address</button><button class='fh-addr-b fh-addr-cancel'>Cancel</button></div>";
+    var inp=row.querySelector(".fh-addr-in"); inp.focus();
+    row.querySelector(".fh-addr-cancel").onclick=show;
+    row.querySelector(".fh-addr-save").onclick=function(){
+      var a=inp.value.trim();
+      [familyEvents,famEvs].forEach(function(list){ list.forEach(function(f){ if(f.id===ev.id){ f.addr=a||undefined; if(a!==(ev.addr||"")){ f.lat=undefined; f.lng=undefined; } } }); });
+      if(a!==(ev.addr||"")){ ev.lat=undefined; ev.lng=undefined; }
+      ev.addr=a||undefined; saveFamilyEvents(); show();
+      if(a) fhPlace(ev,function(ok){ show(); toast(ok?"&#128205; Found on the map":"&#128205; Saved - it opens in Google and Apple Maps"); });
+    };
+  }
+  show(); card.appendChild(row);
 }
 
 function deleteFamilyEvent(id){
@@ -7784,7 +7865,7 @@ function openGenericMod(ev,col,catLabel){
 
   if(ev.lat&&ev.lng){
     var mb=document.createElement("button");mb.className="map-btn";
-    mb.innerHTML="&#128506; View on Map";
+    mb.innerHTML="&#128205; See where this happened";
     mb.onclick=function(){openMapFor(curEv);};
     body.appendChild(mb);
   }
@@ -9804,6 +9885,23 @@ function slGroupTgl(k,hd){
   if(ar)ar.textContent=decodeT(open?"\u25BE":"\u25B8");
 }
 
+/* Where a study's event happened: found by its id among the timeline's events and every
+   study list that carries a place (lat/lng), or on the technology or discovery it is. */
+var SL_WHERE_LISTS=["EMPIRES","WARS","FAMOUS","MIGRATIONS","EXPLORATIONS","SEEDS","XIAN_EVS","LANG_EVS","POP_EVS","CITY_EVS","SOCFAM","FAITHFREE","DRUGS","WORK","SLAVERY","ESCAPE","SCIFAITH","HEALTH","SOCIO","CHILD","PROP"];
+function slWhere(it){
+  try{
+    var hit=null, id=it&&it.id;
+    if(it&&it.tech&&it.tech.lat!=null) hit=it.tech;
+    else if(it&&it.find&&it.find.lat!=null) hit=it.find;
+    if(!hit&&id){
+      var pools=[EVS,(typeof famEvs!=="undefined"?famEvs:[])];
+      SL_WHERE_LISTS.forEach(function(k){ try{ var a=window[k]; if(Array.isArray(a)) pools.push(a); }catch(e){} });
+      for(var i=0;i<pools.length&&!hit;i++) for(var j=0;j<pools[i].length;j++){ var x=pools[i][j]; if(x&&x.id===id){ hit=x; break; } }
+    }
+    if(!hit||!mapHas(hit)) return null;
+    return {t:hit.t||hit.n||hit.name||it.t||"",loc:hit.loc||hit.region||"",lat:hit.lat,lng:hit.lng,addr:hit.addr,mapQ:hit.mapQ,y:typeof hit.y==="number"?hit.y:it.y,l:hit.l||it.cat,color:hit.color};
+  }catch(e){ return null; }
+}
 function slRender(){
   slPickCount();
   var body=document.getElementById("sl-body");
@@ -9859,6 +9957,10 @@ function slRender(){
     b2.textContent="+ In-Depth Study";
     b2.onclick=function(){slTgl(did,b2,"In-Depth Study"); if(it.night) slStudyFill(did,it); else if(!it.tech&&!it.ages&&!it.find) slDeepFill(did,it);};
     sum.appendChild(b2);
+    /* every study that happened somewhere can show where (Levi, 3 Oct 2026) */
+    var wh=slWhere(it);
+    if(wh){ var bw=document.createElement("button"); bw.className="sl-x sl-x2 sl-where"; bw.innerHTML="&#128205; See where this happened";
+      bw.onclick=function(){ try{ closeStudy(); }catch(e){} openMapFor(wh); }; sum.appendChild(bw); }
 
     var dep=document.createElement("div");dep.className="sl-dep";dep.id=did;
     var dh="";
@@ -10307,6 +10409,12 @@ function openTribes(id){
   trbRender(); trbLong(function(){ if(document.getElementById("trb-panel").classList.contains("open")) trbRender(); });
   if(id) setTimeout(function(){ try{ var el=document.getElementById("trb-"+id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); }catch(e){} },120);
 }
+function trbSee(id){ try{ var D=window.LST_TRIBES, p=(D&&D.peoples||[]).filter(function(x){ return x&&x.id===id; })[0]; if(!p) return;
+  var a=trbArea(p.area), w={t:p.name,loc:p.where||"",mapQ:p.where||"",l:"faith",y:1500};
+  /* the middle of their region, for the pin; the place itself opens in Google and Apple Maps by its name */
+  try{ var pts=[]; (a&&a.polys||[]).forEach(function(poly){ pts=pts.concat(poly); });
+    if(pts.length){ w.lat=pts.reduce(function(s,q){ return s+q[0]; },0)/pts.length; w.lng=pts.reduce(function(s,q){ return s+q[1]; },0)/pts.length; } }catch(e){}
+  closeTribes(); openMapFor(w); }catch(e){} }
 function closeTribes(){ document.getElementById("trb-panel").classList.remove("open"); }
 function trbRender(){
   var d=trbData(); if(!d) return; var D=d.D, body=document.getElementById("trb-body"); var top=body.scrollTop;
@@ -10341,7 +10449,7 @@ function trbRender(){
   if(D.gospel&&D.gospel.length) h+="<div class='trb-h'>What the scriptures say</div><div class='trb-box gold'>"+D.gospel.map(function(g){ return "<div class='trb-ref'>"+slfEsc(g.ref)+"</div><p>"+slfEsc(g.text)+"</p>"; }).join("")+"</div>";
   body.innerHTML=h; body.scrollTop=top;
 }
-function trbCardHtml(p,it){
+function trbCardHtml(p,it){ /* (the See-where button is styled with .trb-see, set beside the panel's other styles) */
   var a=trbArea(p.area)||{color:"#fff",name:""}, open=TRB.open===p.id, kinds={};
   (p.links||[]).forEach(function(l){ kinds[l.kind]=1; });
   var h="<div class='trb-card"+(open?" open":"")+"' id='trb-"+slfEsc(p.id)+"' onclick=\"trbShow('"+slfEsc(p.id)+"')\">";
@@ -10358,6 +10466,7 @@ function trbCardHtml(p,it){
     if(p.rites) h+="<span class='trb-k'>Ceremonies</span><p>"+slfEsc(p.rites)+"</p>";
     if(p.known) h+="<span class='trb-k'>Their history</span><p>"+slfEsc(p.known)+"</p>";
     if(p.today) h+="<span class='trb-k'>Today</span><p>"+slfEsc(p.today)+"</p>";
+    if(p.where) h+="<button class='trb-see' onclick=\"event.stopPropagation();trbSee('"+slfEsc(p.id)+"')\">&#128205; See where they lived</button>";
     if(p.links&&p.links.length) h+="<span class='trb-k lds'>The connection, and where it comes from</span>";
     (p.links||[]).forEach(function(l){ h+="<div class='trb-link "+slfEsc(l.kind)+"'><span class='trb-kind "+slfEsc(l.kind)+"'>"+trbKind(l.kind)+"</span> "+trbGrade(l.grade)+"<p>"+slfEsc(l.claim)+"</p><p class='trb-note'>"+slfEsc(l.note)+"</p></div>"; });
     var st=it&&it.study;
@@ -10457,6 +10566,8 @@ function openAtonement(part,evId){
   if(evId){ ATN.filter="all"; ATN.open=evId; atnRenderEvidence(); }
   setTimeout(function(){ try{ var el=evId?document.getElementById("atn-ev-"+evId):part?document.getElementById("atn-part-"+part):null; if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); else document.getElementById("atn-body").scrollTop=0; }catch(e){} },60);
 }
+function atnSee(id){ try{ var A=window.LST_ATONEMENT, f=(A&&A.finds||[]).filter(function(x){ return x&&x.id===id; })[0]; if(!f) return;
+  closeAtonement(); openMapFor({t:f.t,loc:f.loc||"",lat:f.lat,lng:f.lng,y:f.y,l:"arch"}); }catch(e){} }
 function closeAtonement(){ document.getElementById("atn-panel").classList.remove("open"); }
 function atnGo(id){ var el=document.getElementById(id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); }
 function atnRender(){
@@ -10503,6 +10614,7 @@ function atnRenderEvidence(){
       var sh=""; (Array.isArray(f.sources)?f.sources:[]).forEach(function(s){ if(!s) return; var u=slfUrl(s.url); sh+=u?"<a class='sl-src-l' href='"+atnEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+atnEsc(s.name||u)+"</a>":""; });
       if(sh) h+="<div class='sl-src'><div class='sl-src-t'>Sources: open and read them</div>"+sh+"</div>";
       if(pt) h+="<button class='atn-btn soft' onclick=\"atnGo('atn-part-"+atnEsc(pt.id)+"')\">&#8679; Read the part of the study it belongs to: "+atnEsc(pt.title)+"</button>";
+      if(f.lat!=null) h+="<button class='atn-btn' onclick=\"atnSee('"+atnEsc(f.id)+"')\">&#128205; See where this happened</button>";
       h+="<button class='atn-btn' onclick=\"atnToTimeline('find-"+atnEsc(f.id)+"')\">&#128506; Find it on the timeline</button>";
       h+="<button class='atn-btn soft' onclick=\"atnShow('"+atnEsc(f.id)+"')\">Close</button></div>"; }
     h+="</div>"; });
@@ -10663,6 +10775,7 @@ function smGo(which){
 .ch-nums b{color:#fff;}
 .ch-src{font-size:9.5px;color:rgba(255,255,255,.42);margin-top:8px;}
 .ch-src a{color:#5BD3DC;text-decoration:none;}
+.ch-btn.ch-see{border-color:rgba(91,211,220,.45);background:rgba(91,211,220,.1);color:#5BD3DC;}
 .ch-btn{margin-top:10px;width:100%;padding:9px 12px;border-radius:12px;border:1px solid rgba(245,197,24,.45);background:rgba(245,197,24,.12);color:#F5C518;font-family:var(--font-display);font-weight:600;font-size:12px;cursor:pointer;}
 .ch-note{border-top:1px solid rgba(255,255,255,.06);padding:7px 0;}
 .ch-note b{display:block;font-size:9.5px;color:#D9A227;letter-spacing:.6px;margin-bottom:2px;}
@@ -10711,6 +10824,14 @@ var CH_MON=["January","February","March","April","May","June","July","August","S
 function chDate(iso){ var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso||"")); if(!m) return String(iso||""); return CH_MON[+m[2]-1]+" "+(+m[3])+", "+m[1]; }
 function chYear(iso){ var m=/^(\d{4})/.exec(String(iso||"")); return m?+m[1]:null; }
 var CH_STATUS={OPERATING:["op","Dedicated"],RENOVATION:["re","Closed for renovation"],"OPENING SOON":["bu","Opening soon"],CONSTRUCTION:["bu","Under construction"],ANNOUNCED:["an","Announced"],HISTORICAL:["hi","Historic site"]};
+/* where a temple or a place is: its spot when the daily watch has found it, and always its
+   name, which Google and Apple Maps know (a temple by its own name lands on the building) */
+function chTempleWhere(t){ var w={t:t.name,loc:t.location||"",l:"temples",y:chYear(t.dedicated||t.announced)||new Date().getFullYear(),mapQ:t.name+(t.location&&t.location!=="Location is not available"?", "+t.location:"")};
+  if(t.lat!=null&&t.lng!=null){ w.lat=+t.lat; w.lng=+t.lng; if(t.geo==="city") w.near=1; } return w; }
+function chPlaceWhere(p){ var w={t:p.name,loc:p.kind==="state"?p.name+", United States":p.name,l:"missions",y:(p.firstMissionaries&&p.firstMissionaries.year)||2000,mapQ:p.kind==="state"?p.name+", United States":p.name};
+  if(p.lat!=null&&p.lng!=null){ w.lat=+p.lat; w.lng=+p.lng; } return w; }
+function chSeeTemple(id){ var t=chTempleById(id); if(!t) return; closeChurchGuide(); openMapFor(chTempleWhere(t)); }
+function chSeePlace(id){ var p=chPlaceById(id); if(!p) return; closeChurchGuide(); openMapFor(chPlaceWhere(p)); }
 function chTempleById(id){ var it=CH.t.items; for(var i=0;i<it.length;i++) if(it[i]&&it[i].id===id) return it[i]; return null; }
 function chPlaceById(id){ var it=CH.m.places; for(var i=0;i<it.length;i++) if(it[i]&&it[i].id===id) return it[i]; return null; }
 
@@ -10733,8 +10854,8 @@ function chMerge(){
   var ded=CH.t.items.filter(function(t){ return t&&t.dedicated&&chYear(t.dedicated); }).sort(function(a,b){ return String(a.dedicated).localeCompare(String(b.dedicated)); });
   var dec={};
   ded.forEach(function(t){ var y=chYear(t.dedicated);
-    if(y<1950){ chEv({id:"tmp-"+t.id,l:"temples",y:y,em:"&#9962;",t:chEsc(t.name),date:chEsc(chDate(t.dedicated)),loc:chEsc(t.location||""),
-      de:chEsc((t.facts||[]).join(" ")),ch:{tab:"temples",focus:t.id}}); return; }
+    if(y<1950){ var tw=chTempleWhere(t); chEv({id:"tmp-"+t.id,l:"temples",y:y,em:"&#9962;",t:chEsc(t.name),date:chEsc(chDate(t.dedicated)),loc:chEsc(t.location||""),
+      lat:tw.lat,lng:tw.lng,mapQ:tw.mapQ,de:chEsc((t.facts||[]).join(" ")),ch:{tab:"temples",focus:t.id}}); return; }
     (dec[chDecade(y)]||(dec[chDecade(y)]=[])).push(t); });
   Object.keys(dec).forEach(function(d){ var ts=dec[d], firsts=ts.filter(function(t){ return t.country&&t.country!=="United States"&&(t.facts||[]).indexOf("The first temple in "+t.country+".")>=0; });
     chEv({id:"tmp-d-"+d,l:"temples",y:+d+5,em:"&#9962;",t:ts.length+" temple"+(ts.length===1?"":"s")+" dedicated in the "+d+"s",date:d+" to "+(+d+9),loc:"",
@@ -10822,6 +10943,7 @@ function chTempleCard(t){
     +((t.facts||[]).length?"<div class='ch-sec'><div class='ch-lab'>Little facts</div><ul class='ch-list'>"+t.facts.map(function(f){ return "<li>"+chEsc(f)+"</li>"; }).join("")+"</ul></div>":"")
     +(ms.length?"<div class='ch-sec'><div class='ch-lab'>Its history</div><ul class='ch-list'>"+ms.map(function(m){ return "<li><b>"+chEsc(m.what)+"</b> &#183; "+chEsc(m.date||chDate(m.iso))+"</li>"; }).join("")+"</ul></div>":"")
     +((t.history||[]).length?"<div class='ch-sec ch-why'><div class='ch-lab' style='color:#F5C518'>&#10022; Remember</div>"+t.history.map(function(h){ var u=chUrl(h.url); return "<div class='ch-p'>"+chEsc(h.said)+(u?" <a href='"+chEsc(u)+"' target='_blank' rel='noopener' style='color:#5BD3DC'>Read it</a>":"")+"</div>"; }).join("")+"</div>":"")
+    +"<button class='ch-btn ch-see' onclick=\"chSeeTemple('"+chEsc(t.id)+"')\">&#128205; See where this temple is</button>"
     +chSrc(t.url,t.status==="HISTORICAL"?"The Church's history and scriptures":"The Church's page for this temple")
     +(ev?"<button class='ch-btn' onclick=\"chToTimeline('"+chEsc(ev)+"')\">&#128506; Find it on the timeline</button>":"")
     +"</div></div>";
@@ -10849,6 +10971,7 @@ function chPlaceCard(p){
     +(fm&&fm.said?"<div class='ch-sec ch-why'><div class='ch-lab' style='color:#F5C518'>&#128694; The first missionaries</div><div class='ch-p'>"+chEsc(fm.said)+"</div></div>":"")
     +((p.summary||[]).length?"<div class='ch-sec'><div class='ch-lab'>The Church in "+chEsc(p.name)+"</div>"+p.summary.map(function(x){ return "<div class='ch-p'>"+chEsc(x)+"</div>"; }).join("")+"</div>":"")
     +((p.history||[]).length?"<div class='ch-sec'><div class='ch-lab'>Its history</div>"+p.history.map(function(x){ return "<div class='ch-p'>"+chEsc(x)+"</div>"; }).join("")+"</div>":"")
+    +"<button class='ch-btn ch-see' onclick=\"chSeePlace('"+chEsc(p.id)+"')\">&#128205; See where "+chEsc(p.name)+" is</button>"
     +chSrc(p.source,"The Church's facts and statistics for "+p.name)
     +(ev?"<button class='ch-btn' onclick=\"chToTimeline('"+chEsc(ev)+"')\">&#128506; Find it on the timeline</button>":"")
     +"</div></div>";
@@ -11002,6 +11125,7 @@ setTimeout(chFetch,1200);
 .tg-note small{display:block;font-size:9.5px;color:rgba(255,255,255,.42);margin-top:2px;}
 .tg-note a{color:#22D3EE;text-decoration:none;}
 .tg-talk .tg-p{font-style:italic;color:#5BD3DC;font-size:12.5px;}
+.tg-btn.tg-see{border-color:rgba(91,211,220,.45);background:rgba(91,211,220,.1);color:#5BD3DC;}
 .tg-btn{margin-top:10px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid rgba(245,197,24,.45);background:rgba(245,197,24,.12);color:#F5C518;font-family:var(--font-display);font-weight:600;font-size:12px;cursor:pointer;}
 .tg-conf{display:inline-block;font-size:8.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-top:4px;}
 .tg-conf.dc{background:rgba(52,211,153,.14);color:#34D399;border:1px solid rgba(52,211,153,.4);} .tg-conf.db{background:rgba(251,191,36,.14);color:#FBBF24;border:1px solid rgba(251,191,36,.4);} .tg-conf.dd{background:rgba(248,113,113,.14);color:#F87171;border:1px solid rgba(248,113,113,.4);}
@@ -11065,6 +11189,8 @@ function openTechGuide(tab,focus){
   document.getElementById("tech-panel").classList.add("open"); tgRender();
   if(focus){ setTimeout(function(){ var el=document.getElementById("tg-"+focus); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); },60); }
 }
+function tgSee(kind,id){ var it=kind==="tech"?tgById(id):tgFindById(id); if(!it||it.lat==null) return;
+  closeTechGuide(); openMapFor({t:decodeT(it.name||it.t||""),loc:it.loc||"",lat:+it.lat,lng:+it.lng,y:Number(it.y)||0,l:kind==="tech"?"invent":"arch"}); }
 function closeTechGuide(){ document.getElementById("tech-panel").classList.remove("open"); }
 function tgTab(t){ TG.tab=t; tgRender(); }
 function tgToggle(id){ TG.open=(TG.open===id)?null:id; tgRender(); if(TG.open){ var el=document.getElementById("tg-"+id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); } }
@@ -11097,6 +11223,7 @@ function tgCard(it){
     +"<div class='tg-sec tg-learn'><div class='tg-lab'>What we are learning</div>"+tgNotes(it.learned)+"</div>"
     +"<div class='tg-sec tg-kids'><div class='tg-lab'>Three rules for kids</div>"+tgList(it.kids)+"</div>"
     +(it.talk?"<div class='tg-sec tg-talk'><div class='tg-lab'>Talk about it tonight</div><div class='tg-p'>&ldquo;"+tgEsc(it.talk)+"&rdquo;</div></div>":"")
+    +(it.lat!=null?"<button class='tg-btn tg-see' onclick=\"tgSee('tech','"+tgEsc(it.id)+"')\">&#128205; See where this happened</button>":"")
     +"<button class='tg-btn' onclick=\"tgToTimeline('"+tgEsc(evId)+"')\">&#128506; Find it on the timeline</button>"
     +"</div></div>";
 }
@@ -11110,6 +11237,7 @@ function tgFindCard(it){
     +(it.gospel?"<div class='tg-sec tg-why'><div class='tg-lab' style='color:#F5C518'>&#10022; Why it matters</div><div class='tg-p'>"+tgEsc(it.gospel)+"</div></div>":"")
     +(it.forkids?"<div class='tg-sec tg-kids'><div class='tg-lab'>For a child</div><div class='tg-p'>"+tgEsc(it.forkids)+"</div></div>":"")
     +(src?"<div class='tg-sec'><div class='tg-lab' style='color:#22D3EE'>Source</div><div class='tg-p'>"+src+"</div></div>":"")
+    +(it.lat!=null?"<button class='tg-btn tg-see' onclick=\"tgSee('finds','"+tgEsc(it.id)+"')\">&#128205; See where this happened</button>":"")
     +"<button class='tg-btn' onclick=\"tgToTimeline('find-"+tgEsc(it.id)+"')\">&#128506; Find it on the timeline</button>"
     +"</div></div>";
 }
