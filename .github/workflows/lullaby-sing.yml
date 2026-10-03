@@ -58,6 +58,10 @@ on:
         description: 'check mode: the id of the earlier run whose lullaby-takes artifact holds the takes'
         required: false
         default: ''
+      pick:
+        description: 'check mode: the take number to keep (blank = the best score); only that take is checked and timed'
+        required: false
+        default: ''
       finetune:
         description: 'Name of the ElevenLabs music fine-tune to sing with (Lullaby LST made the first recording)'
         required: true
@@ -162,6 +166,7 @@ jobs:
           FIX_FROM: ${{ inputs.fix_from_ms }}
           FIX_TO: ${{ inputs.fix_to_ms }}
           FIX_LINES: ${{ inputs.fix_lines }}
+          PICK: ${{ inputs.pick }}
         run: |
           mkdir -p out
           python3 - <<'PY'
@@ -497,6 +502,15 @@ jobs:
                       if vals: f0=float(J.np.median(vals))
                   except Exception as e: print('   voice check skipped:',e)
                   if f0 is not None and f0<185: score-=30
+                  # Levi, 3 Oct 2026: "I love the voice." The kept opening is the voice he loves; a take
+                  # whose singer then moves to another key (run 37140555390: three of four takes went
+                  # from B major to E major and sang higher) is no longer that voice.
+                  if mode=='full' and ANCHOR_SONG:
+                      try:
+                          ko=J.key_of(J.features(J.decode(path,0,ANCHOR_MS/1000.0))['chroma'])
+                          if ko!=mk: score-=40; print(f'   take {t}: the kept opening is in {ko}, the rest in {mk} - not the same voice',flush=True)
+                          else: print(f'   take {t}: stays in the opening key, {ko}',flush=True)
+                      except Exception as e: print('   key check skipped:',e)
                   # "I only want the mother singing": ElevenLabs Scribe is asked who sings each word;
                   # words it gives to anyone but the main singer are other voices joining in
                   others=None
@@ -549,6 +563,10 @@ jobs:
           if mode=='check':
               found=sorted(p for p in glob.glob('out/take-*.mp3') if re.search(r'take-\d+\.mp3$',p))
               if not found: sys.exit('check mode: the earlier run left no take-*.mp3 in its artifact')
+              PICK=os.environ.get('PICK','').strip()
+              if PICK:
+                  found=[p for p in found if re.search(r'take-%d\.mp3$' % int(PICK),p)]
+                  if not found: sys.exit('check mode: take %s is not in that run' % PICK)
               for path in found:
                   t=int(re.search(r'take-(\d+)\.mp3$',path).group(1))
                   print(f'checking {path} ({os.path.getsize(path)} bytes)',flush=True)
