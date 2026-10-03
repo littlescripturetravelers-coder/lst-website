@@ -1,4 +1,4 @@
-take 1: 849s, 98% of the 132 lines sung; smoothness: 1 break(s) over 2.5 s (longest 5.2 s), level wanders 1.19 dB across 43 stretches
+take 4: 596s, 100% of the 132 lines sung; smoothness: 6 break(s) over 2.5 s (longest 3.3 s), level wanders 1.29 dB across 30 stretches
 
 ## Hush, Little Traveler
    Hush, little traveler, the day is done,   (1.0)
@@ -15,20 +15,20 @@ take 1: 849s, 98% of the 132 lines sung; smoothness: 1 break(s) over 2.5 s (long
    With loving arms stretched open wide.   (1.0)
 
 ## Goodnight, Friends
-   Goodnight Beau, goodnight Scout,   (0.97)
-   Goodnight friends both in and out.   (0.99)
-   Goodnight Willow, goodnight Wren,   (0.97)
+   Goodnight Beau, goodnight Scout,   (1.0)
+   Goodnight friends both in and out.   (1.0)
+   Goodnight Willow, goodnight Wren,   (1.0)
    We will travel here again.   (1.0)
    Close your eyes and say a prayer —   (1.0)
    Heavenly Father’s always there.   (1.0)
 
 ## Beau the Brave
-   Beau the Brave has stories true —   (0.93)
+   Beau the Brave has stories true —   (0.92)
    “Big heart, brave start, that’s me and you!”   (1.0)
    When Goliath came, young David knew   (1.0)
-   Heavenly Father would help him through.   (0.87)
+   Heavenly Father would help him through.   (1.0)
    When lions roared, brave Daniel prayed,   (1.0)
-   And in the den he was not afraid.   (0.93)
+   And in the den he was not afraid.   (1.0)
    So when you feel a giant near,   (1.0)
    Heavenly Father calms your fear.   (1.0)
 
@@ -48,7 +48,7 @@ take 1: 849s, 98% of the 132 lines sung; smoothness: 1 break(s) over 2.5 s (long
    Like Ruth who stayed by Naomi’s side,   (1.0)
    With faithful love to be her guide.   (1.0)
    Like Joseph, who forgave his brothers too,   (1.0)
-   Though they had hurt him through and through.   (0.95)
+   Though they had hurt him through and through.   (1.0)
    When hearts feel small and tears come down,   (1.0)
    Heavenly Father’s love is all around.   (1.0)
 
@@ -59,22 +59,22 @@ take 1: 849s, 98% of the 132 lines sung; smoothness: 1 break(s) over 2.5 s (long
    And Pharaoh learning what they meant was right.   (1.0)
    Like Elijah listening, still and small,   (1.0)
    For the quiet voice beyond it all.   (1.0)
-   When questions come and answers hide,   (0.8)
+   When questions come and answers hide,   (1.0)
    The Holy Ghost can whisper inside.   (1.0)
 
 ## Goodnight, Friends
-   Goodnight Beau, goodnight Scout,   (0.97)
-   Goodnight friends both in and out.   (0.99)
-   Goodnight Willow, goodnight Wren,   (0.97)
+   Goodnight Beau, goodnight Scout,   (1.0)
+   Goodnight friends both in and out.   (1.0)
+   Goodnight Willow, goodnight Wren,   (1.0)
    We will travel here again.   (1.0)
    Close your eyes and say a prayer —   (1.0)
    Heavenly Father’s always there.   (1.0)
 
 ## Stories We Remember (first half)
-   Moses raised his staff up high,   (0.84)
-   As frightened people wondered why.   (0.94)
+   Moses raised his staff up high,   (1.0)
+   As frightened people wondered why.   (1.0)
    The waters parted, wide and deep —   (1.0)
-   Heavenly Father His children would keep.   (1.0)
+   Heavenly Father His children would keep.   (0.96)
    A path appeared where none had been,   (1.0)
    And Israel safely traveled in.   (1.0)
    When you can’t see which way to go,   (1.0)
@@ -95,19 +95,19 @@ take 1: 849s, 98% of the 132 lines sung; smoothness: 1 break(s) over 2.5 s (long
    And Abraham trusted in His care.   (1.0)
    Hannah prayed with all her heart,   (1.0)
    And Heavenly Father heard each part.   (1.0)
-   She trusted Him through hope and tears,   (0.99)
+   She trusted Him through hope and tears,   (1.0)
    And He stayed near throughout the years.   (1.0)
    Esther stood courageous and tall,   (1.0)
    Though she was frightened by it all.   (1.0)
-   She chose to speak, she chose what’s right,   (0.95)
- ~ And Heavenly Father gave her might.   (0.78)
+   She chose to speak, she chose what’s right,   (1.0)
+   And Heavenly Father gave her might.   (1.0)
    Job had days of grief and pain,   (1.0)
    When nothing seemed to make sense again.   (1.0)
    Though answers didn’t all appear,   (1.0)
    He learned that Heavenly Father was still near.   (1.0)
 
 ## Then Jesus Came
- ~ Then Jesus came to walk our way;   (0.79)
+   Then Jesus came to walk our way;   (1.0)
    He felt our hurts, He knew each day.   (1.0)
    He carried every ache and tear,   (1.0)
    So when you’re sad, He’s always near.   (1.0)
@@ -116,7 +116,7 @@ take 1: 849s, 98% of the 132 lines sung; smoothness: 1 break(s) over 2.5 s (long
    You’re not the worst thing you have done;   (1.0)
    He makes you clean, dear little one.   (1.0)
    Because of Him, death can’t hold on;   (1.0)
-   The bands are loosed, the sting is gone.   (1.0)
+   The bands are loosed, the sting is gone.   (0.99)
    So families can stay together —   (1.0)
    With Heavenly Father, home forever.   (1.0)
 
@@ -136,18 +136,18 @@ take 1: 849s, 98% of the 132 lines sung; smoothness: 1 break(s) over 2.5 s (long
 
 ## Drift, Little Traveler
    So drift, little traveler, soft and slow,   (1.0)
-   With all the friends and stories you know.   (0.94)
-   Beau’s brave heart, Scout’s seeking eye,   (0.91)
-   Willow’s warm hug, Wren’s gentle why —   (0.94)
-   Four little friends who walked with you   (0.99)
-   Through Old Testament stories, brave and true.   (0.93)
+   With all the friends and stories you know.   (1.0)
+   Beau’s brave heart, Scout’s seeking eye,   (1.0)
+   Willow’s warm hug, Wren’s gentle why —   (1.0)
+   Four little friends who walked with you   (1.0)
+   Through Old Testament stories, brave and true.   (1.0)
    From David’s sling to Daniel’s den,   (1.0)
    We’ll dream about their stories again.   (1.0)
 
 ## Goodnight, Friends
-   Goodnight Beau, goodnight Scout,   (0.97)
-   Goodnight friends both in and out.   (0.99)
-   Goodnight Willow, goodnight Wren,   (0.97)
+   Goodnight Beau, goodnight Scout,   (1.0)
+   Goodnight friends both in and out.   (1.0)
+   Goodnight Willow, goodnight Wren,   (1.0)
    We will travel here again.   (1.0)
    Close your eyes and say a prayer —   (1.0)
    Heavenly Father’s always there.   (1.0)
@@ -161,176 +161,155 @@ take 1: 849s, 98% of the 132 lines sung; smoothness: 1 break(s) over 2.5 s (long
    You’re loved in heaven; you’re loved at home.   (1.0)
 
 === what was heard ===
-[   0.2-   3.2] Hush little traveler,
-[   3.3-   6.3] the day is done.
-[   7.0-   9.8] The moon is up,
-[   9.9-  13.3] the stars have come.
-[  14.0-  16.9] Your pillow soft,
-[  17.0-  20.3] your covers deep.
-[  21.2-  27.7] A comfy nest for little sleep.
-[  28.5-  34.4] Mom and Dad are nearby too,
-[  35.2-  41.6] with hearts that watch the whole night through.
-[  42.3-  48.7] And one who loves you even more,
-[  49.4-  55.9] is closer than your bedroom door.
-[  56.7-  62.8] Heavenly Father knows your name.
-[  63.5-  70.0] He knew it long before you came.
-[  70.5-  77.0] You're loved for who you are inside,
-[  77.6-  83.3] with loving arms stretched open wide.
-[  84.0-  84.8] Good night,
-[  84.9-  87.4] Bo the white scrolls,
-[  87.4-  88.9] do not scare.
-[  89.3-  94.2] Good night friends both in and out.
-[  94.6-  96.2] Good night Willow,
-[  96.4- 100.1] good night Wren.
-[ 100.4- 105.2] You'll travel here again.
-[ 106.0- 112.2] Close your eyes and say a prayer.
-[ 113.2- 119.3] Heavenly Father's always there.
-[ 120.9- 126.2] Bo the brave has stories true.
-[ 126.8- 127.9] Big heart,
-[ 128.1- 129.8] brave start,
-[ 129.9- 133.0] that's me and you.
-[ 133.8- 136.8] When Goliath came,
-[ 137.0- 146.7] young David knew Heavenly Father would help to strike him.
-[ 147.1- 149.3] When lions roared,
-[ 149.5- 152.0] brave Daniel prayed.
-[ 152.2- 158.2] In the den he was not afraid.
-[ 158.8- 165.1] So when you feel a giant near,
-[ 166.1- 172.2] Heavenly Father calms your fear.
-[ 173.9- 175.6] Scout the seeker,
-[ 175.7- 177.1] curious and free.
-[ 177.5- 178.8] Look and see,
-[ 178.9- 180.5] what could it be?
-[ 181.8- 186.4] A bush that burned with wondrous light.
-[ 187.1- 193.8] A pillar of fire that shone at night.
-[ 195.2- 200.6] Young Samuel listened in the night,
-[ 201.2- 207.6] and Heavenly Father helped him choose the right.
-[ 208.0- 211.0] When something's hard,
-[ 211.2- 214.7] when roads feel long,
-[ 215.6- 216.5] look up,
-[ 216.7- 218.0] dear one,
-[ 218.2- 222.0] His light is strong.
-[ 222.7- 228.7] Willow the warm wraps tight and slow.
-[ 229.7- 230.8] Warm hugs,
-[ 230.9- 232.1] warm hearts,
-[ 232.3- 235.7] wherever we go.
-[ 236.3- 242.7] Like Ruth who stayed by Naomi's side,
-[ 243.3- 247.5] with faithful love to be her guide.
-[ 248.2- 252.9] Like Joseph who forgave his brothers too,
-[ 253.4- 259.0] though they hurt him through and through.
-[ 261.0- 267.4] When hearts feel small and tears come down,
-[ 267.5- 273.2] Heavenly Father's love is all around.
-[ 273.7- 277.0] Wren the wonder,
-[ 277.3- 279.9] gentle and slow.
-[ 280.8- 286.9] Pause and ponder what a wonder we know.
-[ 288.8- 294.1] Like Joseph pondering dreams in the night,
-[ 294.7- 301.4] and Pharaoh learning what they meant was right.
-[ 302.0- 307.7] Like Elijah listening still and small,
-[ 308.2- 312.0] for the quiet voice beyond it all.
-[ 312.1- 318.4] When questions come and night,
-[ 319.2- 324.2] the Holy Ghost can whisper inside.
-[ 325.0- 327.1] Good night Bo,
-[ 328.5- 331.4] good night Scout.
-[ 332.0- 338.5] Good night friends both in and out.
-[ 339.1- 341.5] Good night Willow,
-[ 341.6- 343.5] good night Wren.
-[ 344.4- 349.1] We will travel here again.
-[ 351.3- 357.1] Close your eyes and say a prayer.
-[ 357.6- 362.8] Heavenly Father's always there.
-[ 363.8- 376.5] Moses raised his staff As frightened people wondered day and night,
-[ 377.5- 383.4] the waters parted wide and deep.
-[ 384.9- 390.7] Heavenly Father His children would keep.
-[ 391.7- 396.0] A path appeared where none had been,
-[ 396.1- 400.7] and Israel safely traveled in.
-[ 400.8- 405.6] When you can't see which way to go,
-[ 406.1- 411.7] Heavenly Father knows the road.
-[ 412.3- 416.2] Jonah ran across the sea,
-[ 417.2- 423.2] but Heavenly Father heard his plea inside the fish.
-[ 424.0- 427.1] He prayed once more,
-[ 427.7- 434.3] then found his second chance ashore.
-[ 435.3- 440.9] Noah built when skies were clear,
-[ 441.4- 446.7] trusting Heavenly Father year by year.
-[ 448.9- 455.3] When rain came down and waters grew,
-[ 455.5- 460.3] he learned Heavenly Father's words were true.
-[ 465.5- 477.4] Abraham looked into the night and saw the stars so small and
-[ 477.5- 479.5] bright.
-[ 480.2- 487.0] Heavenly Father made a promise there,
-[ 487.8- 492.2] and Abraham trusted in His care.
-[ 492.2- 499.6] And Hannah prayed with all her heart and might,
-[ 500.3- 504.9] and Heavenly Father heard each part.
-[ 505.4- 508.6] She trusted Him through hope and tear,
-[ 508.7- 514.0] and He stayed near throughout the years.
-[ 514.7- 518.7] Esther stood courageous and tall,
-[ 519.0- 522.3] though she was frightened by it all.
-[ 523.2- 524.6] She chose not to speak,
-[ 524.8- 528.4] she chose what's right.
-[ 529.7- 535.6] Finally found the thought she recalled.
-[ 536.8- 548.0] Job had days of grief and pain when nothing seemed to make
-[ 548.2- 551.0] sense again.
-[ 551.3- 556.5] Though answers didn't all appear,
-[ 557.5- 564.9] he learned that Heavenly Father was still near.
-[ 565.8- 571.8] Then Jesus one day stood to walk our way.
-[ 572.5- 575.4] He felt our hurts,
-[ 575.5- 578.6] He knew each day.
-[ 578.7- 582.3] He carried every ache and tear,
-[ 583.0- 589.4] so when you're sad He's always near.
-[ 590.1- 596.6] When we do wrong and want to mend,
-[ 597.2- 600.1] He lifts it off,
-[ 600.3- 603.7] He is our friend.
-[ 604.3- 610.8] You're not the worst thing you have done.
-[ 611.3- 614.2] He makes you clean,
-[ 614.4- 617.8] dear little one.
-[ 618.3- 621.2] Because of Him,
-[ 621.4- 624.9] death can't hold on.
-[ 625.5- 628.5] The bands are loosed,
-[ 628.9- 631.9] the sting is gone.
-[ 632.4- 641.4] So families can stay together with Heavenly Father home forever.
-[ 642.6- 647.8] You are not what the world might say.
-[ 648.8- 652.1] Not just a stumble,
-[ 652.3- 654.9] not yesterday.
-[ 655.9- 658.3] Not what you have,
-[ 658.5- 661.9] not what you wear,
-[ 662.9- 669.5] but a child of Heavenly Father's care.
-[ 670.5- 673.2] A spirit precious,
-[ 673.4- 676.3] known above.
-[ 676.8- 680.9] A little wonder wrapped in love.
-[ 681.0- 684.7] The Holy Ghost is whispering near,
-[ 685.5- 691.9] a still small voice your heart can hear.
-[ 692.5- 695.4] When you are scared,
-[ 695.6- 698.0] when you're alone,
-[ 698.6- 704.6] He'll teach you truth and guide you home.
-[ 705.7- 712.1] Like Samuel listening in the night,
-[ 713.2- 718.6] you can listen for what is right.
-[ 720.7- 721.9] So drift,
-[ 722.0- 724.3] little traveler,
-[ 724.6- 734.7] soft and slow with all the friends and stories you- Whose brave
-[ 734.8- 737.4] heart Scout's seeking eye.
-[ 737.4- 741.3] Willow's warm- Wren's gentle why.
-[ 741.8- 748.2] For little friends who walked with you.
-[ 749.0- 755.5] Old Testament stories brave and true.
-[ 756.0- 762.4] From David's sling to Daniel's den,
-[ 763.1- 768.7] we'll dream about their stories again.
-[ 769.6- 770.3] Good night,
-[ 770.5- 772.2] Beau,
-[ 772.3- 773.7] good night,
-[ 773.9- 776.1] Scout.
-[ 776.7- 779.1] Good night friends,
-[ 779.3- 783.1] both in and out.
-[ 783.7- 784.5] Good night,
-[ 784.7- 786.2] Willow,
-[ 786.4- 788.0] good night,
-[ 788.1- 788.6] Wren.
-[ 790.8- 794.6] We will travel here again.
-[ 795.1- 800.5] Close your eyes and say a prayer.
-[ 801.3- 807.0] Heavenly Father's always there.
-[ 808.4- 811.8] Mom and Dad love you deep,
-[ 812.0- 814.5] love you wide.
-[ 815.1- 821.9] And Heavenly Father stays by your side.
-[ 822.6- 825.8] Jesus loves you every day.
-[ 825.9- 829.5] The Holy Ghost can light your way.
-[ 830.0- 831.2] Sleep tight,
-[ 831.3- 833.0] sweet child,
-[ 833.1- 835.8] you're never alone.
-[ 836.3- 838.8] You're loved in heaven,
-[ 838.9- 843.1] you're loved at home.
-[ 843.8- 844.1] Oh,
-[ 844.7- 849.1] you're at home.
+[   1.5-   1.7] Hush,
+[   1.9-   3.4] little traveler,
+[   3.5-   5.5] the day is done.
+[   7.2-   8.9] The moon is up,
+[   9.2-  11.0] the stars have come.
+[  13.1-  15.0] Your pillow soft,
+[  15.1-  16.7] your covers deep.
+[  19.0-  22.5] A comfy nest for little sleep.
+[  24.8-  28.6] Mom and Dad are nearby too,
+[  30.4-  34.0] with hearts that watch the whole night through.
+[  36.2-  41.2] And one who loves you even more is closer than your bedroom
+[  41.3-  41.8] door.
+[  42.2-  44.6] Heavenly Father knows your name.
+[  44.9-  47.8] He knew it long before you came.
+[  47.8-  52.2] You're loved for who you are inside,
+[  53.6-  57.5] with loving arms stretched open wide.
+[  59.6-  60.3] Good night,
+[  60.4-  61.0] Bow.
+[  61.1-  61.6] Good night,
+[  61.8-  62.5] Scout.
+[  62.5-  63.1] Good night,
+[  63.3-  65.5] friends both in and out.
+[  65.5-  66.1] Good night,
+[  66.2-  66.8] Willow.
+[  66.9-  67.5] Good night,
+[  67.5-  68.2] Wren.
+[  68.3-  71.5] We will travel here again.
+[  74.0-  79.8] Close your eyes and say a prayer.
+[  79.8-  88.5] Heavenly Father's always there.
+[  88.5-  92.1] Bow the brave has stories true.
+[  94.0-  94.7] Big heart,
+[  94.8-  96.0] brave start,
+[  96.1-  97.5] that's me and you.
+[  99.7- 101.6] When Goliath came,
+[ 101.7- 108.1] young David knew Heavenly Father would help him through.
+[ 108.4- 109.6] When lions roared,
+[ 109.7- 111.1] brave Daniel prayed,
+[ 111.6- 113.9] and in the den he was not afraid.
+[ 114.0- 117.0] So when you feel a giant near,
+[ 117.1- 123.7] Heavenly Father calms your fear.
+[ 123.7- 124.6] Scout the seeker,
+[ 124.8- 126.3] curious and free.
+[ 126.7- 127.8] Look and see,
+[ 127.8- 129.1] what could it be?
+[ 129.2- 132.7] A bush that burned with wondrous light.
+[ 135.0- 137.6] A pillar of fire that shone at night.
+[ 137.9- 140.1] Young Samuel listened in the night,
+[ 140.6- 144.4] and Heavenly Father helped him choose the right.
+[ 146.3- 148.4] When something's hard,
+[ 148.4- 150.7] when roads feel long,
+[ 152.2- 152.7] look up,
+[ 152.8- 154.1] dear one,
+[ 154.2- 158.0] His light is strong.
+[ 158.1- 163.6] Willow the warm wraps tight and slow.
+[ 163.7- 164.4] Warm hugs,
+[ 164.5- 167.4] warm hearts wherever we go.
+[ 169.4- 174.3] Like Ruth who stayed by Naomi's side with faithful love to be
+[ 174.3- 175.0] her guide.
+[ 175.3- 178.4] Like Joseph who forgave his brothers,
+[ 178.6- 179.0] too,
+[ 181.2- 183.7] though they had hurt him through and through.
+[ 184.1- 186.8] When hearts feel small and tears come down,
+[ 187.1- 194.6] Heavenly Father's love is all around.
+[ 196.1- 196.9] Wren the wonder,
+[ 197.1- 198.5] gentle and slow.
+[ 198.9- 199.7] Pause and ponder,
+[ 200.0- 201.2] what a wonder we know.
+[ 201.4- 205.4] Like Joseph pondering dreams in the night,
+[ 207.1- 211.6] and Pharaoh learning what they meant was right.
+[ 212.9- 218.8] Like Elijah listening still and small for the quiet voice beyond it
+[ 219.0- 219.6] all.
+[ 221.5- 224.5] When questions come and answers hide,
+[ 224.6- 227.7] the Holy Ghost can whisper inside.
+[ 230.6- 231.2] Good night,
+[ 231.3- 231.9] Bow.
+[ 232.3- 233.0] Good night,
+[ 233.2- 234.5] Scout.
+[ 235.1- 235.5] Good night,
+[ 235.6- 238.4] friends both in and out.
+[ 239.0- 239.6] Good night,
+[ 239.7- 240.3] Willow.
+[ 241.0- 241.3] Good night,
+[ 241.4- 242.3] Wren.
+[ 242.4- 246.1] We will travel here again.
+[ 247.9- 250.8] Close your eyes and say a prayer.
+[ 251.6- 259.1] Heavenly Father's always there.
+[ 259.1- 265.9] Moses raised his staff up high as frightened people wondered why the
+[ 266.0- 268.6] waters parted wide and deep.
+[ 270.1- 274.8] Heavenly Father's children would keep.
+[ 274.9- 277.9] A path appeared where none had been,
+[ 278.0- 281.6] and Israel safely traveled in.
+[ 283.0- 286.2] When you can't see which way to go,
+[ 287.2- 291.2] Heavenly Father knows the road.
+[ 291.3- 296.7] Jonah ran across the sea,
+[ 296.8- 300.1] but Heavenly Father heard his plea.
+[ 303.0- 304.3] Inside the fish,
+[ 304.4- 306.2] he prayed once more,
+[ 306.3- 308.8] then found his second chance ashore.
+[ 308.9- 311.6] Noah built when skies were clear,
+[ 312.3- 317.2] trusting Heavenly Father year by year.
+[ 317.7- 320.5] When rain came down and waters grew,
+[ 320.9- 324.6] he learned Heavenly Father's words were true.
+[ 327.8- 333.9] Abraham looked into the night and saw the stars so small and
+[ 333.9- 334.9] bright.
+[ 335.4- 338.7] Heavenly Father made a promise there,
+[ 340.1- 344.1] and Abraham trusted in His care.
+[ 347.1- 349.8] Hannah prayed with all her heart,
+[ 350.3- 353.4] and Heavenly Father heard each part.
+[ 353.9- 357.1] She trusted Him through hope and tears,
+[ 357.5- 360.8] and He stayed near throughout the years.
+[ 361.5- 364.7] Esther stood courageous and tall,
+[ 364.7- 367.4] though she was frightened by it all.
+[ 370.6- 371.8] She chose to speak,
+[ 371.9- 379.4] she chose what's right And Heavenly Father gave her might Job had
+[ 379.5- 386.4] days of grief and pain When nothing seemed to make sense again
+[ 387.9- 396.0] Though answers didn't all appear He learned that Heavenly Father was still
+[ 396.1- 406.5] near Then Jesus came to walk our way He felt our hurts,
+[ 406.6- 413.6] He knew each day He carried every ache and tear So when
+[ 413.6- 414.4] you're sad,
+[ 414.5- 421.9] He's always near When we do wrong and want to mend He
+[ 422.0- 423.1] lifts it off,
+[ 423.2- 428.9] He is our friend You're not the worst thing you have done
+[ 429.0- 430.4] He makes you clean,
+[ 430.5- 433.2] dear little one Because of Him,
+[ 433.4- 438.5] death can't hold on The bands are loose,
+[ 438.5- 450.1] the sting is gone So families can stay together With Heavenly Father
+[ 450.2- 460.6] home forever You are not what the world might say Not just
+[ 460.7- 461.5] a stumble,
+[ 461.6- 464.6] not yesterday Not what you have,
+[ 464.6- 474.1] not what you wear But a child of Heavenly Father's care A
+[ 474.3- 481.2] spirit precious known above A little wonder wrapped in love The Holy
+[ 481.4- 487.8] Ghost is whispering near A still small voice your heart can hear
+[ 488.3- 489.8] When you are scared,
+[ 489.8- 497.9] when you're alone He'll teach you truth and guide you home Like
+[ 498.0- 506.4] Samuel listening in the night You can listen for what is right
+[ 508.3- 509.1] So drift,
+[ 509.2- 510.1] little traveler,
+[ 510.3- 517.7] soft and slow With all the friends and stories you know Beau's
+[ 517.7- 518.6] brave heart,
+[ 518.8- 522.4] Scout's seeking eye Willow's warm hug,
+[ 522.4- 529.5] Wren's gentle why Four little friends who walked with you Through Old
+[ 529.7- 537.8] Testament stories brave and true From David's sling to Daniel's den We'll
+[ 537.9- 545.8] dream about their stories again Goodnight Beau,
+[ 546.0- 553.0] goodnight Scout Goodnight friends both in and out Goodnight Willow,
+[ 553.1- 562.3] goodnight Wren We will travel here again Close your eyes and say
+[ 562.4- 572.5] a prayer Heavenly Father's always there Mom and Dad love you deep,
+[ 572.6- 580.4] love you wide And Heavenly Father stays by your side Jesus loves
+[ 580.5- 588.6] you every day The Holy Ghost can light your way Sleep tight,
+[ 588.7- 589.6] sweet child,
+[ 589.7- 593.5] you're never alone You're loved in heaven,
+[ 593.6- 596.4] you're loved at home
+key B major; voice 250 Hz; loudest 1.05
