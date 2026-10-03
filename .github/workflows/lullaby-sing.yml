@@ -273,7 +273,8 @@ jobs:
           # three-to-a-beat sway, half as bright as the ten-minute takes (spectral centroid about
           # 1,200 Hz against 2,300) with twice their share of warm low end, a line every 5.5-6 s and
           # a breath of 3-4 s between verses.
-          POS=["lullaby","children's music","Christian","folk","children's bedtime lullaby","a slow, gently rocking lullaby at about 68 BPM, swaying like a cradle","in E major",
+          POS=["a calm instrumental bed of soft piano and warm strings that plays under the voice the whole way through and never stops between lines",
+               "lullaby","children's music","Christian","folk","children's bedtime lullaby","a slow, gently rocking lullaby at about 68 BPM, swaying like a cradle","in E major",
                "a major key, warm and comforting, never sad","warm, soft and mellow, cosy, nothing harsh",
                # Levi, 3 Oct 2026: "I only want the mother singing ... add calm instrumental music that matches the singing"
                "one solo singer only, a single voice from the first note to the last: no harmonies, no other voices ever join",
@@ -286,6 +287,7 @@ jobs:
                "one continuous, flowing performance: smooth legato phrasing, each line given room to breathe, "
                "a soft instrumental breath of a few seconds between verses, soft and steady dynamics",voice]
           NEG=["drums","percussion","backing vocals","choir","duet","a second singer","a change of singer",
+               "a cappella","unaccompanied voice","a sparse arrangement","silence between lines","the music dropping out",
                "harmonies","vocal harmonies","layered vocals","double-tracked vocals","group vocals","children singing","humming chorus","echo voices","distortion","clipping",
                "a man's voice","a male singer","operatic","belting","vibrato-heavy","loudness pushing","shouting","spoken word","rap","improvised words","scat singing","ad-libs","key change","tempo change",
                "rushed phrasing","a fast tempo","harsh tone","busy accompaniment","a minor key","sad","melancholic","dark",
@@ -305,7 +307,7 @@ jobs:
                   if not lines: continue
                   dur=int(len(lines)*per)+(0 if (song_id or i) else 4000)+(5000 if i==len(rest)-1 else 0)
                   dur=max(3000,min(120000,dur))
-                  local=['sung softly, one line at a time, every word clear']
+                  local=['sung softly, one line at a time, every word clear','soft piano and warm strings keep playing under the voice, and carry on between the lines']
                   if name.startswith('Goodnight'): local.append('the chorus: a little fuller, the same tune each time it returns')
                   if i==0 and not song_id: local.append('a short instrumental opening, then the words')
                   if i or song_id: local.append('flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt')
@@ -515,6 +517,19 @@ jobs:
                       print(f'   take {t}: singers heard {by} - {round((others or 0)*100,1)}% of words by another voice',flush=True)
                   except Exception as e: print('   singer count skipped:',e)
                   if others is not None: score-=200*others   # 5% of the words by another voice costs 10 points
+                  # "add calm instrumental music that matches the singing": how full the quiet moments are.
+                  # The first recording's quiet moments sit 9.5 dB under its singing (1.8% near silence);
+                  # a take whose music drops out between lines loses points for every decibel and every gap.
+                  try:
+                      import librosa
+                      yy,srr=librosa.load(path,sr=22050)
+                      db=20*J.np.log10(librosa.feature.rms(y=yy,frame_length=4096,hop_length=1024)[0]+1e-9)
+                      act=db[db>J.np.percentile(db,99)-45]; p10,p90=J.np.percentile(act,[10,90])
+                      bed=float(p90-p10); hush=float(100*J.np.mean(db<p90-30))
+                      score-=2*max(0.0,bed-12)+2*max(0.0,hush-3)
+                      print(f'   take {t}: the music under her - quiet moments {bed:.1f} dB under the singing, {hush:.1f}% near silence',flush=True)
+                      open(f'out/take-{t}-report.txt','a').write(f'music bed: quiet moments {bed:.1f} dB under the singing; {hush:.1f}% near silence\n')
+                  except Exception as e: print('   music check skipped:',e)
                   print(f'   take {t}: key {mk}, voice centred near {f0 and round(f0)} Hz, loudest {pk:.2f} of full scale',flush=True)
                   open(f'out/take-{t}-report.txt','a').write(f'\nkey {mk}; voice {f0 and round(f0)} Hz; loudest {pk:.2f}\n')
               except Exception as e: print('   key check skipped:',e)
