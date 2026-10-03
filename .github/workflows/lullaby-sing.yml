@@ -122,6 +122,10 @@ on:
         description: 'fix mode: the lines to sing there, separated by " | " (a whole stanza splices cleanest)'
         required: false
         default: "Esther stood courageous and tall, | Though she was frightened by it all. | She chose to speak, she chose what’s right, | And Heavenly Father gave her might."
+      fix_ctx_ms:
+        description: 'fix mode: how much of the song_id take opens the piece (end it in a breath between lines, never inside one)'
+        required: false
+        default: '20000'
       sing_as:
         description: 'fix mode: words the singer should say differently from how they are printed, as "Job=Jobe" (comma between pairs); the printed words stay as they are'
         required: false
@@ -171,6 +175,7 @@ jobs:
           FIX_TO: ${{ inputs.fix_to_ms }}
           FIX_LINES: ${{ inputs.fix_lines }}
           SING_AS: ${{ inputs.sing_as }}
+          FIX_CTX_MS: ${{ inputs.fix_ctx_ms }}
           PICK: ${{ inputs.pick }}
         run: |
           mkdir -p out
@@ -200,7 +205,10 @@ jobs:
               for a,b in SING_AS: line=re.sub(r'\b%s\b' % re.escape(a.strip()),b.strip(),line)
               return line
           if mode=='fix': LENGTH=min(LENGTH,599000)   # the API wants strictly under 600 seconds
-          CTX=20000   # fix mode: how much of the take is sung along before and after the new lines
+          # fix mode: how much of the take is sung along before the new lines. It must end in a breath:
+          # run 37147098313 cut the opening inside its fourth line, and the singer finished that line
+          # into the new ones ("A comfy n... days of grief")
+          CTX=int(os.environ.get('FIX_CTX_MS') or 20000)
           # when the take sings each line (lantern/lullaby-full-lines.json), so a kept stretch can carry its words
           try: TAKE_LINES=json.load(open('lantern/lullaby-full-lines.json',encoding='utf8'))['lines']
           except Exception: TAKE_LINES=[]
@@ -344,12 +352,13 @@ jobs:
               tr=transcribe(patch_path); ps=None; pe=None
               want=[norm(l) for l in FIX_LINES]
               for sg in tr.get('segments',[]):
+                  if sg['end']<=CTX/1000.0+0.3: continue      # still the kept opening
                   t=norm(sg['text'])
                   hit=any(difflib.SequenceMatcher(None,w,t).ratio()>=0.6 or (w in t) for w in want)
                   if hit:
                       ps=sg['start'] if ps is None else min(ps,sg['start']); pe=sg['end'] if pe is None else max(pe,sg['end'])
               if ps is None: ps,pe=CTX/1000.0,(CTX+FIX_TO-FIX_FROM)/1000.0
-              ps=max(0.0,ps-0.2); pe=pe+0.35
+              ps=max(CTX/1000.0-0.25,ps-0.2); pe=pe+0.35      # never reaches back into the opening
               print('   the new lines sit at %.1f-%.1f s of the piece; heard: %s' % (ps,pe,' / '.join(sg['text'].strip() for sg in tr.get('segments',[]))))
               a=FIX_FROM/1000.0; c=FIX_TO/1000.0
               fc=('[0:a]atrim=0:%.3f,asetpts=PTS-STARTPTS[a];[1:a]atrim=%.3f:%.3f,asetpts=PTS-STARTPTS[b];[0:a]atrim=%.3f,asetpts=PTS-STARTPTS[c];'
