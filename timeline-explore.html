@@ -1144,7 +1144,9 @@ body.hand-active .hand-label{display:block;}
 #narrate-gospel{font-size:10.5px;color:rgba(245,197,24,.75);line-height:1.65;
   padding:8px 12px;background:rgba(245,197,24,.05);border-radius:8px;
   border-left:3px solid rgba(245,197,24,.3);margin-bottom:12px;display:none;}
-#narrate-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+#narrate-controls{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap;}
+#narrate-controls .nc-btn,#narrate-controls .nc-gospel-btn,#narrate-controls .nc-listen{padding:7px 9px;white-space:nowrap;}
+@media (max-width:400px){#narrate-controls{gap:4px;}#narrate-controls .nc-btn,#narrate-controls .nc-gospel-btn,#narrate-controls .nc-listen{padding:7px 7px;font-size:10px;}}
 .nc-btn{padding:7px 14px;border:none;border-radius:9px;font-family:var(--font-display);
   font-weight:700;font-size:11px;cursor:pointer;flex-shrink:0;}
 .nc-prev{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);}
@@ -1159,6 +1161,10 @@ body.hand-active .hand-label{display:block;}
 #narrate-progress-bar{height:2px;background:rgba(91,211,220,.12);border-radius:1px;margin-bottom:12px;overflow:hidden;}
 #narrate-progress-fill{height:100%;background:linear-gradient(90deg,#5BD3DC,#A78BFA);border-radius:1px;transition:width .4s ease;}
 #narrate-btn.on{background:#5BD3DC !important;color:#060d1e !important;}
+.nc-listen{background:linear-gradient(135deg,#F5C518,#D9A227);border:none;color:#1B2D5F;padding:7px 12px;border-radius:9px;
+  font-family:var(--font-display);font-weight:700;font-size:11px;cursor:pointer;flex-shrink:0;}
+.nc-listen.on{background:#1B2D5F;color:#F5C518;box-shadow:0 0 0 1.5px #F5C518 inset;}
+.nc-listen:disabled{opacity:.45;cursor:default;}
 #narrate-picker{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:0;z-index:600;background:rgba(2,5,15,.97);
   flex-direction:column;animation:mopen .22s ease;}
 #narrate-picker.open{display:flex;}
@@ -1738,6 +1744,7 @@ body.hand-active .hand-label{display:block;}
     <div id="narrate-gospel"></div>
     <div id="narrate-controls">
       <button class="nc-btn nc-prev" onclick="narrateGo(-1)">&#8592; Prev</button>
+      <button class="nc-listen" id="nc-listen" onclick="narrListen()">&#128266; Listen</button>
       <button class="nc-gospel-btn" onclick="toggleNarrateGospel()">&#10022; Gospel</button>
       <button class="nc-btn nc-next" onclick="narrateGo(1)">Next &#8594;</button>
       <button class="nc-close" onclick="closeNarrate()">&#10005;</button>
@@ -8117,6 +8124,10 @@ function showNarrateStep(idx){
   narrateStepIndex=idx;
   var stop=stops[idx];
 
+  // the recording follows the stop on screen
+  narrStop(); if(NARR.audio){ NARR.audio.removeAttribute("data-src"); }
+  if(NARR.on) setTimeout(narrPlay,0); else narrButton("idle");
+
   // Update card
   document.getElementById("narrate-em").textContent=decodeT(stop.em||"&#10022;");
   document.getElementById("narrate-step-label").textContent=decodeT("Stop "+(idx+1)+" of "+stops.length+" — "+activeTour.name);
@@ -8129,7 +8140,7 @@ function showNarrateStep(idx){
   narrateGospelVisible=false;
   gospelEl.style.display="none";
   if(stop.gospel){
-    gospelEl.innerHTML="&#10022; <b>Heavenly Father&#39;s Hand:</b> "+stop.gospel;
+    gospelEl.innerHTML="&#10022; <b>"+(tlChristian()?"God&#39;s Hand":"Heavenly Father&#39;s Hand")+":</b> "+stop.gospel;
   }
 
   // Progress
@@ -8160,6 +8171,43 @@ function showNarrateStep(idx){
   }
 }
 
+/* ── THE TOURS, READ ALOUD ──────────────────────────────────────────────────
+   Levi, 3 Oct 2026: "if you can do good sounding narration then i would like that added."
+   Every stop is recorded once, in the voices that read the nightly stories (Eli and Hannah,
+   Google's natural voices), by the website's tour-narrate Action through the narrate-tour
+   function, into the account's public narration store. A stop's recording is named by its
+   own words, so when a stop's words change (or read differently in the Christian timeline)
+   it simply has a recording of its own. Listen plays the stop on screen and moves on to the
+   next when it ends, panning the timeline as it goes, until the tour is done or paused. */
+function narrPlain(h){ return decodeT(String(h||"").replace(/<[^>]+>/g," ")).replace(/\s+/g," ").trim(); }
+function narrSpeech(stop){ var t=narrPlain(stop.title), x=narrPlain(stop.text); return (t?t+(/[.!?]$/.test(t)?" ":". "):"")+x; }
+function narrHash(str){ var h=0x811c9dc5; for(var i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; } return ("0000000"+h.toString(16)).slice(-8); }
+function narrKey(tour,stop){ return String(tour.id||"tour").toLowerCase().replace(/[^a-z0-9]+/g,"-")+"-"+narrHash(narrSpeech(stop)); }
+function narrVoice(){ var v=""; try{ v=new URLSearchParams(location.search).get("voice")||""; }catch(e){} if(!v){ try{ v=localStorage.getItem("lst:voice")||""; }catch(e){} } return v==="eli"?"eli":"hannah"; }
+function narrUrl(tour,stop){ var c=window.LST_CONFIG||{}, base=c.SUPABASE_URL||"https://rdbvktqgrwhjucocobua.supabase.co";
+  return base+"/storage/v1/object/public/narration/tours/"+narrKey(tour,stop)+"-"+narrVoice()+".mp3"; }
+var NARR={audio:null,on:false};
+function narrButton(state){ var b=document.getElementById("nc-listen"); if(!b) return;
+  b.disabled=(state==="none"); b.classList.toggle("on",state==="playing");
+  b.innerHTML=state==="playing"?"&#10074;&#10074; Pause":state==="loading"?"&#8230; Listen":state==="none"?"&#128263; Not recorded yet":"&#128266; Listen"; }
+function narrStop(){ if(NARR.audio){ try{ NARR.audio.pause(); }catch(e){} } }
+function narrPlay(){
+  if(!activeTour) return; var stop=activeTour.stops[narrateStepIndex]; if(!stop) return;
+  if(!NARR.audio){ NARR.audio=new Audio(); NARR.audio.preload="auto";
+    NARR.audio.addEventListener("ended",function(){ if(!NARR.on||!activeTour) return;
+      if(narrateStepIndex<activeTour.stops.length-1) setTimeout(function(){ if(NARR.on) narrateGo(1); },900);
+      else { NARR.on=false; narrButton("idle"); } });
+    NARR.audio.addEventListener("playing",function(){ if(NARR.on) narrButton("playing"); });
+    NARR.audio.addEventListener("error",function(){ NARR.on=false; narrButton("none"); }); }
+  var url=narrUrl(activeTour,stop);
+  if(NARR.audio.getAttribute("data-src")!==url){ NARR.audio.src=url; NARR.audio.setAttribute("data-src",url); }
+  narrButton("loading");
+  var p=NARR.audio.play(); if(p&&p.catch) p.catch(function(){ if(NARR.audio.error) return; NARR.on=false; narrButton("idle"); });
+}
+function narrListen(){
+  if(NARR.on){ NARR.on=false; narrStop(); narrButton("idle"); return; }
+  NARR.on=true; narrPlay();
+}
 function narrateGo(dir){
   if(!activeTour)return;
   var newIdx=narrateStepIndex+dir;
@@ -8177,6 +8225,7 @@ function toggleNarrateGospel(){
 }
 
 function closeNarrate(){
+  NARR.on=false; narrStop();
   narrateMode=false;
   activeTour=null;
   var btn=document.getElementById("narrate-btn");

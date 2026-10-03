@@ -1,0 +1,57 @@
+# THE TIMELINE'S TOURS, READ ALOUD.
+#
+# Levi, 3 Oct 2026: the timeline's Narrate tours had words but no voice - "if you can do
+# good sounding narration then i would like that added". Every stop of every tour, in
+# both editions (the Christian timeline's words differ where it says God), is recorded
+# once in the voices that read the nightly stories, Eli and Hannah (Google's natural
+# Neural2 voices, through the account's narrate-tour function), into the public
+# narration store as tours/<stop>-<voice>.mp3. A stop is named by its own words: one
+# that is already recorded is skipped and costs nothing; one whose words changed gets a
+# new recording. Runs by itself whenever the timeline changes, and by hand.
+name: Tour narration
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['timeline-explore.html']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tour-narrate
+  cancel-in-progress: false
+
+jobs:
+  narrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: A browser, to read the tours as the timeline prints them
+        run: |
+          npm install --no-save --silent playwright@1.48.2
+          npx playwright install --with-deps chromium >/dev/null
+      - name: Every stop, in both editions
+        run: node tools/tour-stops.js > stops.json
+      - name: Record each stop once, in Eli's and Hannah's voices
+        env:
+          SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          node -e '
+          const stops=require("./stops.json"); const url=process.env.SUPABASE_URL+"/functions/v1/narrate-tour", key=process.env.SUPABASE_SERVICE_ROLE_KEY;
+          (async()=>{ let made=0, kept=0, bad=0, chars=0;
+            for(const s of stops){
+              const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+key,apikey:key},body:JSON.stringify({id:s.id,text:s.text})});
+              const j=await r.json().catch(()=>({}));
+              if(!r.ok||!j.ok){ bad++; console.log("FAILED",s.id,r.status,JSON.stringify(j).slice(0,300)); continue; }
+              if(j.charactersUsed){ made++; chars+=j.charactersUsed; console.log("recorded",s.id); } else kept++;
+            }
+            console.log(`${stops.length} stops: ${made} recorded now (${chars} characters), ${kept} already recorded, ${bad} failed`);
+            if(bad) process.exit(1);
+          })();'
