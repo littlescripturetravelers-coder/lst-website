@@ -78,319 +78,33 @@
     "exactly as recorded"
    ],
    "negative_local_styles": [],
-   "duration_ms": 24300,
+   "duration_ms": 18300,
    "lines": [
     "Hush, little traveler, the day is done,",
     "The moon is up, the stars have come.",
-    "Your pillow\u2019s soft, your covers deep \u2014",
-    "A comfy nest for little sleep."
+    "Your pillow\u2019s soft, your covers deep \u2014"
    ],
    "source_from": {
-    "song_id": "DMGZnbO29o9Fj7INf9Qt",
+    "song_id": "I0t41EYZgBzULh5PKuwv",
     "range": {
      "start_ms": 0,
-     "end_ms": 24300
+     "end_ms": 18300
     }
    }
   },
   {
-   "section_name": "Hush, Little Traveler (continued)",
+   "section_name": "Sung again",
    "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
+    "sung softly, one line at a time, every word clear, exactly as written",
+    "the same voice, the same tune, the same key and the same slow tempo as the opening, straight on without a pause"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35668,
+   "duration_ms": 20600,
    "lines": [
-    "Mom and Dad are nearby too,",
-    "With hearts that watch the whole night through.",
-    "And One who loves you even more",
-    "Is closer than your bedroom door.",
-    "Heavenly Father knows your name \u2014",
-    "He knew it long before you came.",
-    "You\u2019re loved for who you are inside,",
-    "With loving arms stretched open wide."
-   ]
-  },
-  {
-   "section_name": "Goodnight, Friends",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "the chorus: a little fuller, the same tune each time it returns",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 26751,
-   "lines": [
-    "Goodnight Beau, goodnight Scout,",
-    "Goodnight friends both in and out.",
-    "Goodnight Willow, goodnight Wren,",
-    "We will travel here again.",
-    "Close your eyes and say a prayer \u2014",
-    "Heavenly Father\u2019s always there."
-   ]
-  },
-  {
-   "section_name": "Beau the Brave",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 35668,
-   "lines": [
-    "Beau the Brave has stories true \u2014",
-    "\u201cBig heart, brave start, that\u2019s me and you!\u201d",
-    "When Goliath came, young David knew",
-    "Heavenly Father would help him through.",
-    "When lions roared, brave Daniel prayed,",
-    "And in the den he was not afraid.",
-    "So when you feel a giant near,",
-    "Heavenly Father calms your fear."
-   ]
-  },
-  {
-   "section_name": "Scout the Seeker",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 35668,
-   "lines": [
-    "Scout the Seeker, curious and free \u2014",
-    "\u201cLook and see \u2014 what could it be?\u201d",
-    "A bush that burned with wondrous light,",
-    "A pillar of fire that shone at night.",
-    "Young Samuel listened in the night,",
-    "And Heavenly Father helped him choose the right.",
-    "When something\u2019s hard, when roads feel long,",
-    "Look up, dear one \u2014 His light is strong."
-   ]
-  },
-  {
-   "section_name": "Willow the Warm",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 35668,
-   "lines": [
-    "Willow the Warm wraps tight and slow \u2014",
-    "\u201cWarm hugs, warm hearts wherever we go.\u201d",
-    "Like Ruth who stayed by Naomi\u2019s side,",
-    "With faithful love to be her guide.",
-    "Like Joseph, who forgave his brothers too,",
-    "Though they had hurt him through and through.",
-    "When hearts feel small and tears come down,",
-    "Heavenly Father\u2019s love is all around."
-   ]
-  },
-  {
-   "section_name": "Wren the Wonderer",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 35668,
-   "lines": [
-    "Wren the Wonderer, gentle and slow \u2014",
-    "\u201cPause and ponder \u2014 what a wonder we know.\u201d",
-    "Like Joseph pondering dreams in the night,",
-    "And Pharaoh learning what they meant was right.",
-    "Like Elijah listening, still and small,",
-    "For the quiet voice beyond it all.",
-    "When questions come and answers hide,",
-    "The Holy Ghost can whisper inside."
-   ]
-  },
-  {
-   "section_name": "Goodnight, Friends",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "the chorus: a little fuller, the same tune each time it returns",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 26751,
-   "lines": [
-    "Goodnight Beau, goodnight Scout,",
-    "Goodnight friends both in and out.",
-    "Goodnight Willow, goodnight Wren,",
-    "We will travel here again.",
-    "Close your eyes and say a prayer \u2014",
-    "Heavenly Father\u2019s always there."
-   ]
-  },
-  {
-   "section_name": "Stories We Remember (first half)",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 71337,
-   "lines": [
-    "Moses raised his staff up high,",
-    "As frightened people wondered why.",
-    "The waters parted, wide and deep \u2014",
-    "Heavenly Father His children would keep.",
-    "A path appeared where none had been,",
-    "And Israel safely traveled in.",
-    "When you can\u2019t see which way to go,",
-    "Heavenly Father knows the road.",
-    "Jonah ran across the sea,",
-    "But Heavenly Father heard his plea.",
-    "Inside the fish, he prayed once more,",
-    "Then found his second chance ashore.",
-    "Noah built when skies were clear,",
-    "Trusting Heavenly Father year by year.",
-    "When rain came down and waters grew,",
-    "He learned Heavenly Father\u2019s words were true."
-   ]
-  },
-  {
-   "section_name": "Stories We Remember",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 71337,
-   "lines": [
-    "Abraham looked into the night",
-    "And saw the stars so small and bright.",
-    "Heavenly Father made a promise there \u2014",
-    "And Abraham trusted in His care.",
-    "Hannah prayed with all her heart,",
-    "And Heavenly Father heard each part.",
-    "She trusted Him through hope and tears,",
-    "And He stayed near throughout the years.",
-    "Esther stood courageous and tall,",
-    "Though she was frightened by it all.",
-    "She chose to speak, she chose what\u2019s right,",
-    "And Heavenly Father gave her might.",
-    "Job had days of grief and pain,",
+    "Jobe had days of grief and pain,",
     "When nothing seemed to make sense again.",
     "Though answers didn\u2019t all appear,",
     "He learned that Heavenly Father was still near."
-   ]
-  },
-  {
-   "section_name": "Then Jesus Came",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 53503,
-   "lines": [
-    "Then Jesus came to walk our way;",
-    "He felt our hurts, He knew each day.",
-    "He carried every ache and tear,",
-    "So when you\u2019re sad, He\u2019s always near.",
-    "When we do wrong and want to mend,",
-    "He lifts it off \u2014 He is our Friend.",
-    "You\u2019re not the worst thing you have done;",
-    "He makes you clean, dear little one.",
-    "Because of Him, death can\u2019t hold on;",
-    "The bands are loosed, the sting is gone.",
-    "So families can stay together \u2014",
-    "With Heavenly Father, home forever."
-   ]
-  },
-  {
-   "section_name": "You Are His",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 53503,
-   "lines": [
-    "You are not what the world might say \u2014",
-    "Not just a stumble, not yesterday.",
-    "Not what you have, not what you wear,",
-    "But a child of Heavenly Father\u2019s care.",
-    "A spirit precious, known above,",
-    "A little wonder wrapped in love.",
-    "The Holy Ghost is whispering near,",
-    "A still, small voice your heart can hear.",
-    "When you are scared, when you\u2019re alone,",
-    "He\u2019ll teach you truth and guide you home.",
-    "Like Samuel listening in the night,",
-    "You can listen for what is right."
-   ]
-  },
-  {
-   "section_name": "Drift, Little Traveler",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 35668,
-   "lines": [
-    "So drift, little traveler, soft and slow,",
-    "With all the friends and stories you know.",
-    "Beau\u2019s brave heart, Scout\u2019s seeking eye,",
-    "Willow\u2019s warm hug, Wren\u2019s gentle why \u2014",
-    "Four little friends who walked with you",
-    "Through Old Testament stories, brave and true.",
-    "From David\u2019s sling to Daniel\u2019s den,",
-    "We\u2019ll dream about their stories again."
-   ]
-  },
-  {
-   "section_name": "Goodnight, Friends",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "the chorus: a little fuller, the same tune each time it returns",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 26751,
-   "lines": [
-    "Goodnight Beau, goodnight Scout,",
-    "Goodnight friends both in and out.",
-    "Goodnight Willow, goodnight Wren,",
-    "We will travel here again.",
-    "Close your eyes and say a prayer \u2014",
-    "Heavenly Father\u2019s always there."
-   ]
-  },
-  {
-   "section_name": "Sleep Tight",
-   "positive_local_styles": [
-    "sung softly, one line at a time, every word clear",
-    "soft piano and warm strings keep playing under the voice, and carry on between the lines",
-    "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt",
-    "settling and slowing, almost asleep, a soft instrumental close"
-   ],
-   "negative_local_styles": [],
-   "duration_ms": 31751,
-   "lines": [
-    "Mom and Dad love you deep, love you wide,",
-    "And Heavenly Father stays by your side.",
-    "Jesus loves you every day,",
-    "The Holy Ghost can light your way.",
-    "Sleep tight, sweet child, you\u2019re never alone \u2014",
-    "You\u2019re loved in heaven; you\u2019re loved at home."
    ]
   }
  ]
