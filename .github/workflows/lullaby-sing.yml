@@ -74,6 +74,18 @@ on:
         description: 'full mode: start from the current recording (source) or sing fresh (none). ElevenLabs refuses every upload of our recordings as copyrighted, so none'
         required: true
         default: 'none'
+      anchor_song:
+        description: 'full mode: the ElevenLabs song id of a take to keep the voice of: its opening is kept and the same singer sings on (blank = none)'
+        required: false
+        default: ''
+      anchor_ms:
+        description: 'with anchor_song: how much of its opening to keep (ms), ending in the breath before the next line'
+        required: false
+        default: '24300'
+      anchor_lines:
+        description: 'with anchor_song: how many lines that opening sings'
+        required: false
+        default: '4'
       parts:
         description: 'full mode: 2 = sing the song in two halves at the first recording pace and join them in a breath between verses (about 14 minutes); 1 = squeeze it into one ten-minute take'
         required: true
@@ -141,6 +153,9 @@ jobs:
           ANCHOR: ${{ inputs.anchor }}
           VOICE: ${{ inputs.voice }}
           PARTS: ${{ inputs.parts }}
+          ANCHOR_SONG: ${{ inputs.anchor_song }}
+          ANCHOR_MS_IN: ${{ inputs.anchor_ms }}
+          ANCHOR_LINES_IN: ${{ inputs.anchor_lines }}
           SEC_PER_LINE: ${{ inputs.sec_per_line }}
           SONG_ID: ${{ inputs.song_id }}
           FIX_FILE: ${{ inputs.fix_file }}
@@ -160,6 +175,11 @@ jobs:
           # the opening of the current recording that is word-perfect: the first two
           # stanzas, 0:00-0:59 (the third stanza changes a line, so it is re-sung)
           ANCHOR_MS=59000; ANCHOR_LINES=8
+          ANCHOR_SONG=os.environ.get('ANCHOR_SONG','').strip()
+          if ANCHOR_SONG:
+              # Levi, 3 Oct 2026: "I love the voice" - the take he loves is kept for its opening
+              # and the same singer sings on from it (ElevenLabs inpainting, from its own song id)
+              ANCHOR_MS=int(os.environ.get('ANCHOR_MS_IN') or 24300); ANCHOR_LINES=int(os.environ.get('ANCHOR_LINES_IN') or 4)
           FIX_ID=os.environ.get('SONG_ID','').strip(); FIX_FILE=os.environ.get('FIX_FILE','').strip()
           FIX_FROM=int(os.environ.get('FIX_FROM') or 0); FIX_TO=int(os.environ.get('FIX_TO') or 0)
           FIX_LINES=[x.strip() for x in os.environ.get('FIX_LINES','').split('|') if x.strip()]
@@ -236,7 +256,9 @@ jobs:
 
           # ── the anchor: the current recording, uploaded for inpainting ──────
           song_id=None
-          if mode=='full' and anchor:
+          if mode=='full' and ANCHOR_SONG:
+              song_id=ANCHOR_SONG; print('keeping the voice of song',song_id,'- its first',ANCHOR_MS,'ms',flush=True)
+          elif mode=='full' and anchor:
               try:
                   song_id=upload(SOURCE); print('uploaded the current recording: song_id',song_id)
               except urllib.error.HTTPError as e:
@@ -253,16 +275,22 @@ jobs:
           # a breath of 3-4 s between verses.
           POS=["lullaby","children's music","Christian","folk","children's bedtime lullaby","a slow, gently rocking lullaby at about 68 BPM, swaying like a cradle","in E major",
                "a major key, warm and comforting, never sad","warm, soft and mellow, cosy, nothing harsh",
-               "gentle acoustic accompaniment, sparse and quiet, with a warm low end","no drums, no percussion",
+               # Levi, 3 Oct 2026: "I only want the mother singing ... add calm instrumental music that matches the singing"
+               "one solo singer only, a single voice from the first note to the last: no harmonies, no other voices ever join",
+               "calm instrumental accompaniment under the voice all the way through, following its melody and chords: "
+               "gentle piano, warm soft strings and a light music-box shimmer, with a warm low end",
+               "soft instrumental passages between verses that carry the same melody","no drums, no percussion",
                "clean and undistorted, plenty of headroom","the same slow tempo all the way through",
                "one melody carried through every verse, the chorus the same tune each time it returns",
                "every word sung clearly, exactly as written, nothing added",
                "one continuous, flowing performance: smooth legato phrasing, each line given room to breathe, "
                "a soft instrumental breath of a few seconds between verses, soft and steady dynamics",voice]
-          NEG=["drums","percussion","backing vocals","choir","duet","a second singer","a change of singer","distortion","clipping",
+          NEG=["drums","percussion","backing vocals","choir","duet","a second singer","a change of singer",
+               "harmonies","vocal harmonies","layered vocals","double-tracked vocals","group vocals","children singing","humming chorus","echo voices","distortion","clipping",
                "a man's voice","a male singer","operatic","belting","vibrato-heavy","loudness pushing","shouting","spoken word","rap","improvised words","scat singing","ad-libs","key change","tempo change",
                "rushed phrasing","a fast tempo","harsh tone","busy accompaniment","a minor key","sad","melancholic","dark",
                "abrupt transitions","sudden stops","long silences between verses","a jump in volume","a change of arrangement"]
+          if ANCHOR_SONG: POS=[x for x in POS if x!="in E major"]   # the kept opening sets the key
           def plan_full():
               secs=[]; budget=LENGTH-5000
               rest=[(n,l[:]) for n,l in sections]
@@ -467,6 +495,26 @@ jobs:
                       if vals: f0=float(J.np.median(vals))
                   except Exception as e: print('   voice check skipped:',e)
                   if f0 is not None and f0<185: score-=30
+                  # "I only want the mother singing": ElevenLabs Scribe is asked who sings each word;
+                  # words it gives to anyone but the main singer are other voices joining in
+                  others=None
+                  try:
+                      b5=uuid.uuid4().hex.encode()
+                      def part5(name,value,filename=None,ct=None):
+                          h=b'--'+b5+b'\r\nContent-Disposition: form-data; name="'+name.encode()+b'"'
+                          if filename: h+=b'; filename="'+filename.encode()+b'"\r\nContent-Type: '+ct.encode()
+                          return h+b'\r\n\r\n'+(value if isinstance(value,bytes) else value.encode())+b'\r\n'
+                      body5=(part5('model_id','scribe_v1')+part5('language_code','eng')+part5('diarize','true')+part5('tag_audio_events','false')
+                             +part5('file',open(path,'rb').read(),os.path.basename(path),'audio/mpeg')+b'--'+b5+b'--\r\n')
+                      r5=json.load(urllib.request.urlopen(urllib.request.Request('https://api.elevenlabs.io/v1/speech-to-text',data=body5,
+                           headers={'xi-api-key':key,'Content-Type':'multipart/form-data; boundary='+b5.decode()}),timeout=900))
+                      ws=[w for w in r5.get('words',[]) if w.get('type','word')=='word']
+                      by={}
+                      for w in ws: by[w.get('speaker_id') or '?']=by.get(w.get('speaker_id') or '?',0)+1
+                      if ws: others=round(1-max(by.values())/float(len(ws)),3)
+                      print(f'   take {t}: singers heard {by} - {round((others or 0)*100,1)}% of words by another voice',flush=True)
+                  except Exception as e: print('   singer count skipped:',e)
+                  if others is not None: score-=200*others   # 5% of the words by another voice costs 10 points
                   print(f'   take {t}: key {mk}, voice centred near {f0 and round(f0)} Hz, loudest {pk:.2f} of full scale',flush=True)
                   open(f'out/take-{t}-report.txt','a').write(f'\nkey {mk}; voice {f0 and round(f0)} Hz; loudest {pk:.2f}\n')
               except Exception as e: print('   key check skipped:',e)
