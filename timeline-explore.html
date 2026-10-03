@@ -2042,6 +2042,247 @@ function tonightKey(){
   }catch(e){}
   return null;
 }
+/* ── TWO TIMELINES: one for each edition ──────────────────────────────────────
+   Levi, 3 Oct 2026: "two different timelines ... One for Christians so when they choose
+   Christian that is the one they see and one for The Church of Jesus Christ of Latter-Day
+   Saints. The latter should have all the LDS stuff and the former not include their LDS
+   history and their temples ... The Christian one shouldn't be favored of the restoration
+   and first vision ... It should have all the faith stuff with the LDS though. Because it
+   covers all the world religions."
+   The edition comes, in order, from ?edition= (the app passes the family's own), the choice
+   made on the website (lst:edition), the faith on the account (lst:faith), and otherwise the
+   Latter-day Saint edition - the same order as the website's js/lst-edition.js.
+   In the Christian timeline: the Book of Mormon, Church History, Temples and Missionary
+   Work lines and their studies are gone; every event about the Restoration, the First
+   Vision, Joseph Smith and the Church's history is left out, and so is every sentence
+   elsewhere that speaks of them; "Heavenly Father" reads "God", as in the Christian
+   Lantern. The World Faiths (every religion, the Latter-day Saint faith among them, in its
+   own words) are kept whole. Done to the data itself, before anything is drawn, so every
+   view, study and search sees the same Christian timeline - and anything that arrives
+   later (the account's newest finds) is done the same way when the line is next drawn. */
+var TL_ED=(function(){
+  function n(v){ v=String(v||"").toLowerCase().trim(); if(v==="lds") return "lds"; return ["christian","nondenom","evangelical","baptist","methodist","catholic"].indexOf(v)>=0?"christian":""; }
+  try{ var q=n(new URLSearchParams(location.search).get("edition")); if(q){ try{ localStorage.setItem("lst:edition",q); }catch(e){} return q; } }catch(e){}
+  try{ var k=n(localStorage.getItem("lst:edition")); if(k) return k; }catch(e){}
+  try{ var f=n(localStorage.getItem("lst:faith")); if(f) return f; }catch(e){}
+  return "lds";
+})();
+function tlChristian(){ return TL_ED==="christian"; }
+try{ document.documentElement.setAttribute("data-tl-edition",TL_ED); }catch(e){}
+/* the website switches edition in place: the timeline follows (once; never a loop) */
+try{ document.addEventListener("lst:edition",function(e){ var d=e&&e.detail; if(d!=="lds"&&d!=="christian"||d===TL_ED) return;
+  try{ if(sessionStorage.getItem("tl-ed-reload")===d) return; sessionStorage.setItem("tl-ed-reload",d); }catch(x){ return; }
+  location.reload(); }); }catch(e){}
+var TL_LDS_LANES=["bom","church","temples","missions"];
+/* what is the Church's own history, scripture and teaching (not the Bible's, nor all Christians') */
+var TL_LDS_RX=new RegExp([
+  "Joseph Smith","Restoration","[Rr]estored (gospel|church|Church|priesthood|truths?)","First Vision","Sacred Grove","Book of Mormon","\\bNephi","Nephites?","Lamanites?","\\bLehi\\b","Moroni","Mosiah","Helaman","Jaredites?","Zarahemla","Third Nephi","\\bAlma \\d","\\bEther \\d","\\bJacob \\d","\\b(Enos|Jarom|Omni) \\d","\\bMoses \\d+(:\\d+)?([-–]\\d+)?(?=;|,|\\)|$)","\\bMoses \\d+:","Articles of Faith","Living Christ",
+  "Mormons?\\b","Latter-day","Latter&#8209;day","\\bLDS\\b","Doctrine (and|&amp;|&) Covenants","\\bD&(amp;)?C\\b","Pearl of Great Price","Book of (Abraham|Moses)","\\bMoses 1:","\\bAbraham 3",
+  "Brigham Young(?! University)","Nauvoo","Kirtland","Palmyra","Cumorah","gold plates","Urim","Hyrum","Cowdery","Emma Smith","Liberty Jail","Carthage Jail","Relief Society","Deseret","Zion&#39;s Camp","Zion's Camp",
+  "Aaronic","Melchizedek","General Conference","Russell M\\.? Nelson","Great Apostasy","the Apostasy","an apostasy","centuries of apostasy","through apostasy","Church of Jesus Christ of","Come, Follow Me",
+  "Salt Lake","handcarts?","[Pp]ioneer (ancestors?|trail|exodus|journey|compan)","the pioneers","Mormon pioneers?","temple (ordinances?|sealings?|work|marriage|covenants|recommend)","sealed (in the temple|as families|for eternity)","baptisms? for the dead","work for the dead","(temple|the) endowment",
+  "living prophets?","modern prophets?","Family Proclamation","President Nelson","keys and authority","priesthood authority","No prophet would","original gospel understanding","the original Church\\b","Restoration preparation","the Saints crossed","built Zion","prophets still speak","Temples were dedicated","\\bthe ward\\b","ward newsletter","Church leaders suspended","Church of Jesus Christ\\b","\\b[Tt]he Church (grew|reached|has (approximately|about|\\d)|had (grown|approximately|about|\\d|a significant)|was organized|was establishing|is not a building|conducts|was one of the first|welcomes|teaches that)","[Tt]he Church(&#39;|'|’)s","correlation program","families (are|were|can be) sealed","be sealed together","sealed together","[Aa] prophet(&#39;|'|’)s voice","No prophet","Missions of the Church","previously closed to the Church","The Tsunami and the Church","[Mm]embers of the Church","\\bChurch (members|leaders|growth|Humanitarian|meetings|conducts)","modern Church","sacrament was administered","fathers and sons","grove of trees","boy kneeling","one prophet","type of the temple","\\b1836\\b","FamilySearch","gathering of the last days","inherit the cosmos","spirit of Elijah","Christ&#39;s visit","Christ's visit","visit to the Americas","divine visitation","a sermon, a prophet","premortal","pre-mortal","eternal famil(y|ies)","exaltation","missionary program","full-time missionar","missionaries of the Church","\\bStakes?\\b"
+].join("|"));
+var TL_TITLE_F=["t","name","title","label","n","ref"], TL_BODY_F=["de","prophecy","truth","claim","contrib","fulfillment","says","x"];
+var TL_KEEP_F={id:1,l:1,em:1,color:1,conf:1,lat:1,lng:1,y:1,s:1,e:1,tp:1,url:1,img:1,cat:1,k:1,c:1,kind:1,grade:1,area:1,role:1,impact:1,eff:1};
+function tlSentences(t){ return String(t).split(/(?<=[.!?])(?<!\b[A-Z]\.)(?<!\b(?:c|ca|vs|St|Mr|Mrs|Dr|Jr|Sr|No|cf)\.)\s+(?=[A-Z0-9"“‘'(&])/); }
+/* the text without the sentences that speak of the Church's own history and teaching; a sentence
+   that only leans on the one before it ("This ...", "That ...") goes with it */
+/* "the Bible, the Book of Mormon and Jesus Christ" reads "the Bible and Jesus Christ" */
+var TL_LIST_FIX=[[/(the Bible|the Old Testament|the New Testament|scripture),? (and|or) (the )?Book of Mormon/g,"$1"],[/(the )?Book of Mormon (and|or) (the Bible)/g,"$3"],
+  [/(the Bible), (the )?Book of Mormon,? (and|or) /g,"$1 $3 "],[/(the Bible), (the )?Book of Mormon, /g,"$1, "],[/ and Book of Mormon\b/g,""]];
+function tlCleanText(t){
+  if(typeof t!=="string"||!t) return t;
+  var out=t;
+  if(TL_LDS_RX.test(t)){
+    for(var f=0;f<TL_LIST_FIX.length;f++) out=out.replace(TL_LIST_FIX[f][0],TL_LIST_FIX[f][1]);
+    var ss=tlSentences(out), keep=[], lastGone=false;
+    for(var i=0;i<ss.length;i++){ var x=ss[i];
+      if(TL_LDS_RX.test(x)){
+        /* a list of references keeps the Bible's: "Isaiah 53; Mosiah 14; Acts 8:32" */
+        var sep=null; if(/(?<!&#?\w{1,8});\s/.test(x)) sep=/(?<!&#?\w{1,8});\s+/; else if((x.match(/,\s/g)||[]).length>=2&&!/[.!?]\s/.test(x.replace(/[.!?]$/,""))) sep=/,\s+/;
+        if(sep){ var parts=x.replace(/[.]$/,"").split(sep), kp=parts.filter(function(y){ return !TL_LDS_RX.test(y); }), joiner=String(sep).indexOf(";")>=0?"; ":", ";
+          if(kp.length&&kp.length<parts.length&&kp.every(function(y){ return y.length<40||/\d/.test(y)&&y.length<60; })){ keep.push(kp.join(joiner)); lastGone=false; continue; } }
+        lastGone=true; continue; }
+      if(lastGone&&/^(This|That|These|Those|Such|It is|Here|There)\b/.test(x)){ continue; }
+      lastGone=false; keep.push(x); }
+    out=keep.join(" ");
+  }
+  return out.replace(/Heavenly Father(&#39;|’|')s/g,"God$1s").replace(/Heavenly Father/g,"God").replace(/Heavenly Parents/g,"God");
+}
+function tlLdsShare(t){ if(typeof t!=="string"||!t) return 0; var ss=tlSentences(t), n=0; for(var i=0;i<ss.length;i++) if(TL_LDS_RX.test(ss[i])) n++; return ss.length?n/ss.length:0; }
+/* one record (an event, a person, a find...): true when it is the Church's own and goes */
+function tlLdsRecord(r){
+  if(!r||typeof r!=="object") return false;
+  if(r.l&&TL_LDS_LANES.indexOf(r.l)>=0) return true;
+  if(r.k&&typeof r.n==="string"&&TL_LDS_LANES.indexOf(r.k)>=0) return true;      /* the Study Library's own shelves for those lines */
+  if(r.cat==="bom"||r.kind==="bom") return true;
+  /* a source that is the Church's own (its website, its universities and leaders) */
+  if(typeof r.url==="string"&&typeof r.name==="string"&&/churchofjesuschrist\.org|\blds\.org|byu\.edu|bookofmormoncentral|scripturecentral|ldsliving|deseret/i.test(r.url)) return true;
+  if(typeof r.scripture==="string"&&r.scripture){ var refs=r.scripture.split(/;\s*/); if(refs.every(function(x){ return TL_LDS_RX.test(x); })) return true; }
+  if(r.find&&r.l==="arch"){ try{ var F=(SLF&&SLF.finds&&SLF.finds.items)||[], has=false; for(var fi=0;fi<F.length;fi++) if(F[fi]&&F[fi].id===r.find){ has=true; break; } if(!has) return true; }catch(e){} }
+  for(var nk in {prophecy:1,fulfill:1}){ var no=r[nk]; if(no&&typeof no==="object"&&typeof no.t==="string"&&TL_LDS_RX.test(no.t)) return true; }
+  for(var i=0;i<TL_TITLE_F.length;i++){ var v=r[TL_TITLE_F[i]]; if(typeof v==="string"&&TL_LDS_RX.test(v)) return true; }
+  for(var j=0;j<TL_BODY_F.length;j++){ var b=r[TL_BODY_F[j]]; if(typeof b==="string"&&b) return tlLdsShare(b)>0.5; }
+  return false;
+}
+/* its main words were all the Church's own: nothing of it is left to show */
+var TL_MAIN_F=["de","fulfillment","text","truth","claim"];
+function tlEmptied(before,r){ for(var i=0;i<TL_MAIN_F.length;i++){ var f=TL_MAIN_F[i]; if(typeof before[f]==="string"&&before[f]&&!r[f]) return true; }
+  for(var nk in {prophecy:1,fulfill:1}){ if(before[nk]&&r[nk]&&typeof r[nk]==="object"&&before[nk].t&&!r[nk].t) return true; } return false; }
+function tlSnap(r){ var o={}; for(var i=0;i<TL_MAIN_F.length;i++) o[TL_MAIN_F[i]]=r[TL_MAIN_F[i]]; for(var nk in {prophecy:1,fulfill:1}) if(r[nk]&&typeof r[nk]==="object") o[nk]={t:r[nk].t}; return o; }
+/* every text in it, done; lists inside it lose their Church items */
+function tlCleanDeep(o,depth){
+  if(!o||typeof o!=="object"||depth>6) return o;
+  if(Array.isArray(o)){ for(var i=o.length-1;i>=0;i--){ var it=o[i];
+      if(typeof it==="string"){ if(TL_LDS_RX.test(it)&&tlLdsShare(it)>=0.5) o.splice(i,1); else o[i]=tlCleanText(it); }
+      else if(it&&typeof it==="object"){ if(tlLdsRecord(it)) o.splice(i,1); else { var sn=tlSnap(it); tlCleanDeep(it,depth+1); if(tlEmptied(sn,it)) o.splice(i,1); } } }
+    return o; }
+  for(var k in o){ if(!Object.prototype.hasOwnProperty.call(o,k)||TL_KEEP_F[k]) continue; var v=o[k];
+    if(typeof v==="string") o[k]=tlCleanText(v);
+    else if(v&&typeof v==="object") tlCleanDeep(v,depth+1); }
+  return o;
+}
+var TL_CHR_TEXT={
+  g03:{t:"Enoch Walked with God",de:"Enoch walked with God, and he was not, for God took him (Genesis 5:24). The Bible remembers him as a man who pleased God (Hebrews 11:5).",sc:"Genesis 5:18-24; Hebrews 11:5",
+    gospel:"Enoch shows that a person can walk with God every day of a long life, and that God takes His friends home to Himself."},
+  w006:{gospel:"Its outcome led to the Constitution and the First Amendment, which protect every American&#39;s freedom to worship.",hand:""},
+  cv02:{gospel:"For a time church doors closed around the world, yet families worshiped, prayed and read the scriptures together at home. The pandemic showed that the church is not a building."},
+  cv04:{gospel:"The First Amendment, written in 1791, was the protection that held. The legal shield prepared 229 years earlier did the work it was prepared to do.",hand:"God builds the protections before the pressure arrives."},
+  nt_families:{desc:"A gentle bedtime tour through the moments in history that show God has always cared about families, from Noah to the baby in Bethlehem."},
+  /* the Christian History line, in Christian words (its Latter-day Saint notes read it as a falling away) */
+  x40:{milestone:"The first comprehensive papal treatment of marriage and family in the modern era.",gospel:"Different traditions, remarkably similar substance: John Paul II described the family as the domestic church, where faith is first learned and lived."},
+  x41:{milestone:"A formal charter declaring family rights as prior to and independent of the State.",gospel:"The Charter declares that the family exists before the State: the family is not a construct of government, and so cannot be redefined by it."},
+  x42:{milestone:"An evangelical declaration on manhood and womanhood as created and given rather than chosen, roughly three decades before gender identity became a central public debate.",gospel:"Danvers states that manhood and womanhood are part of the created order (Genesis 1:27), a conviction shared across many Christian traditions."},
+  x43:{milestone:"Issued in the International Year of the Family, declared by the United Nations for 1994.",gospel:"John Paul II warned that the crisis facing families was fundamentally a crisis of concepts - that words like marriage, family, mother and father were losing agreed meaning."},
+  x01:{gospel:"The Holy Spirit came upon the disciples, Peter preached Christ crucified and risen, and about three thousand were baptized that day (Acts 2:41)."},
+  x02:{gospel:"Paul&#39;s epistles teach the core doctrines of the gospel: grace, faith, baptism, the resurrection, eternal life and the gifts of the Spirit."},
+  x03:{gospel:"Peter and Paul gave their lives for Christ. Tertullian later wrote that the blood of the martyrs is seed, and the church kept growing."},
+  x04:{gospel:"The New Testament is among the most carefully preserved ancient texts in history. Modern scholarship confirms its reliability."},
+  x05:{milestone:"The foundations of Christian theology are laid: early teachers such as Ignatius, Irenaeus and Tertullian defend the faith and pass on the apostles&#39; teaching.",gospel:"The Apostles&#39; Creed grew from the questions asked at baptism in the church at Rome in these centuries."},
+  x06:{gospel:"The Nicene Creed confesses Jesus Christ as &quot;true God from true God,&quot; and is still said each week by Catholic, Orthodox and many Protestant Christians."},
+  x07:{milestone:"Christianity goes from persecuted minority to imperial religion in less than 70 years.",gospel:"Favor with the state brought the church protection and power, and with them new temptations. Christians through the ages have learned how hard it is to serve both God and worldly power."},
+  x08:{gospel:"The canon gathered the books the churches had long read as scripture. Christians have treasured these 27 books ever since."},
+  x09:{gospel:"Monasteries copied and kept the scriptures through the centuries after Rome fell; the texts that would fuel later renewal survived in their libraries."},
+  x10:{gospel:"Gregory sent Augustine of Canterbury to bring the gospel to the English in 597, and fed Rome&#39;s poor through famine and plague."},
+  x11:{gospel:"Both East and West kept the scriptures and the creeds. In 1965 the Pope and the Patriarch of Constantinople lifted the mutual excommunications of 1054."},
+  x12:{gospel:"The Crusades are a sober lesson: Jesus said, &quot;My kingdom is not of this world&quot; (John 18:36), and taught His followers to love their enemies."},
+  x13:{gospel:"Wycliffe&#39;s English Bible was copied by hand at great risk. It began the long road that put scripture into ordinary English hands."},
+  x14:{gospel:"Luther&#39;s stand for scripture, grace and faith shaped Protestant Christianity, and the Reformation also stirred renewal within the Catholic Church."},
+  x15:{milestone:"Adult baptism by faith is restored as a Christian practice: the Anabaptists hold that baptism follows a person&#39;s own faith and decision.",gospel:"Their persecution for this conviction is one of history&#39;s great injustices. Their descendants, the Mennonites and the Amish, are known still for peace and simple faith."},
+  x16:{gospel:"Calvin&#39;s emphasis on the absolute sovereignty of God, and on all of life as worship, shaped Presbyterian, Reformed and Puritan churches. Christians still differ on how God&#39;s sovereignty and human choice fit together."},
+  x17:{gospel:"Born of politics as much as theology, the Church of England in time gave the world the Book of Common Prayer and, in 1611, the King James Bible."},
+  x18:{milestone:"Tyndale died for the English Bible, but his translation survived and became the foundation of the King James Version.",gospel:"Tyndale died so ordinary families could read scripture. His English New Testament was the most important book in England for 200 years."},
+  x19:{gospel:"The Council of Trent renewed Catholic teaching and the training of priests, and Jesuit missionaries such as Francis Xavier carried the gospel to India and Japan."},
+  x20:{milestone:"The King James Bible becomes the scripture of English-speaking Christianity for three centuries.",gospel:"Its words shaped the English language itself, and generations of families learned to read from it."},
+  x21:{milestone:"New England is established as a center of Bible-reading congregational Christianity.",gospel:"The Puritans came to build a community under God&#39;s word. Their habits of family Bible reading, prayer and schooling shaped American life for generations."},
+  x22:{gospel:"The Westminster Shorter Catechism has taught generations of children the faith, beginning: &quot;Man&#39;s chief end is to glorify God, and to enjoy him for ever.&quot;"},
+  x23:{gospel:"Pietism&#39;s emphasis on prayer, scripture in the home and a changed heart inspired the Moravian missionaries, and through them John Wesley."},
+  x24:{gospel:"Methodism&#39;s circuit riders carried the gospel to the American frontier, and the hymns of John and Charles Wesley are still sung in churches everywhere."},
+  x25:{milestone:"Jonathan Edwards and George Whitefield preach across the colonies, and the First Great Awakening gives American Protestants a shared faith of the heart.",gospel:"Whitefield preached to crowds of many thousands in the open air, and many colonists came to a personal faith in Christ for the first time."},
+  x26:{milestone:"Camp meetings and revivals sweep America, Bible and missionary societies are founded, and the movements against slavery and for reform gather strength.",gospel:"Revival reached the frontier through Methodist and Baptist preachers, and many of America&#39;s churches, colleges and missions were born in it."},
+  x28:{gospel:"The Great Disappointment of 1844 is poignant: thousands sincerely longing for Christ&#39;s return were disappointed, and many kept watching and serving in hope."},
+  x30:{gospel:"Pentecostalism&#39;s emphasis on the gifts of the Spirit - tongues, healing, prophecy - has made it the fastest-growing movement in world Christianity."},
+  x31:{gospel:"Vatican II&#39;s openness to dialogue, to worship in people&#39;s own languages, and to other Christians was a significant shift."},
+  x32:{gospel:"The desire for Christian unity is a gospel desire - Christ prayed that all may be one (John 17:21). The WCC seeks it through dialogue and shared service."},
+  x33:{gospel:"2.4 billion people carry the name of Jesus Christ. They are God&#39;s children seeking Him with sincerity, in every nation, tribe and language."},
+  g13:{de:"Daniel survived the lions&#39; den and interpreted dreams predicting empires thousands of years into the future. Daniel 2 points to the kingdom of God.",
+    gospel:"Daniel 2 - the stone cut out without hands becomes a great mountain and fills the whole earth: the kingdom the God of heaven sets up, which shall never be destroyed (Daniel 2:44)."},
+  x27:{de:"Barton W. Stone and Alexander Campbell independently call for restoring the original New Testament church by abandoning creeds and returning to scripture alone. Their movements unite in 1832.",
+    leaders:"Barton W. Stone, Alexander Campbell, Thomas Campbell",
+    milestone:"The Stone-Campbell movement grew into the Churches of Christ, the Christian Churches and the Disciples of Christ, with millions of members around the world today.",
+    gospel:"Thomas Campbell&#39;s rule of 1809 called believers back to the Bible and to the unity of the New Testament church: &quot;Where the Scriptures speak, we speak; where the Scriptures are silent, we are silent.&quot;"},
+  pp06:{de:"Earth reaches 1 billion humans for the first time around 1804. It took all of human history to reach the first billion. The milestone comes as the Industrial Revolution is transforming Europe and America, and printing, steam power and mass literacy are joining the world together as never before.",
+    gospel:"The British and Foreign Bible Society was founded in 1804, the very year the world reached its first billion, to put the Bible in every language; William Carey had sailed for India in 1793. The great missionary century had begun.",
+    hand:"God did not send the good news into a world of a few million living in isolated villages. As the world reached its first billion, He gave it printing presses, railroads and ships to carry the gospel to all nations."},
+  ct10:{de:"Philadelphia is the city where the Declaration of Independence was signed in 1776 and where the Constitution was written in 1787. The most consequential political documents in American history were drafted here, establishing the religious liberty in which every church could worship freely.",
+    gospel:"The First Amendment, written by the men who met in Philadelphia, protects the free exercise of religion: the freedom in which American churches grew, and from which missionaries went out to the world.",
+    hand:"Philadelphia in Greek means brotherly love. The city of brotherly love produced the documents that guaranteed religious freedom. God placed the right men in the right city at the right moment."}
+};
+var TL_ED_SEEN=typeof WeakSet!=="undefined"?new WeakSet():null;
+function tlChristianize(){
+  if(!tlChristian()) return;
+  try{
+    for(var i=0;i<TL_LDS_LANES.length;i++){ var lk=TL_LDS_LANES[i]; AL[lk]=false; }
+    /* the studies' own data */
+    ["LST_ATONEMENT","DISCOVERIES","TECH_GUIDE","LST_REGIONS","LST_SOCIETY"].forEach(function(w){ var o=window[w]; if(o&&!(TL_ED_SEEN&&TL_ED_SEEN.has(o))){ tlCleanDeep(o,0); if(TL_ED_SEEN) TL_ED_SEEN.add(o); } });
+    try{ if(SLF&&SLF.finds&&SLF.finds.items) tlCleanDeep(SLF.finds.items,0); if(SLF&&SLF.tech&&SLF.tech.items) tlCleanDeep(SLF.tech.items,0); }catch(e){}
+    /* the timeline's own lists - all but the World Faiths, kept whole in both editions */
+    var lists=["EVS","EMPIRES","WARS","TRADES","FAMOUS","MIGRATIONS","EXPLORATIONS","PROPHECIES","SEEDS","XIAN_EVS","FULFILLED_PROPHECIES","LANG_EVS","POP_EVS","CITY_EVS","SOCFAM","CHAIN_LINKS","HAND_EVENTS","NARRATE_TOURS","FAITHFREE","DRUGS","WORK","SLAVERY","ESCAPE","SCIFAITH","HEALTH","SOCIO","CHILD","PROP","SL_CATS","famEvs","CH_EVS"];
+    for(var n=0;n<lists.length;n++){ var a; try{ a=eval(lists[n]); }catch(e){ continue; } if(!Array.isArray(a)) continue;
+      for(var j=a.length-1;j>=0;j--){ var r=a[j]; if(!r||typeof r!=="object") continue;
+        if(TL_ED_SEEN&&TL_ED_SEEN.has(r)) continue;
+        if(r.l==="faith"){ if(TL_ED_SEEN) TL_ED_SEEN.add(r); continue; }          /* World Faiths: whole */
+        if(r.l==="family"){   /* a family's own events stay, in their own words; only the timeline's notes on them change */
+          for(var fk in r){ if(fk!=="t"&&fk!=="de"&&fk!=="addr"&&typeof r[fk]==="string"&&!TL_KEEP_F[fk]) r[fk]=tlCleanText(r[fk]); }
+          if(TL_ED_SEEN) TL_ED_SEEN.add(r); continue; }
+        var ov=r.id&&TL_CHR_TEXT[r.id];
+        if(ov){ var keepT=r.t; for(var ok in ov) r[ok]=ov[ok]; var saved={}; for(var ok2 in ov) saved[ok2]=r[ok2];
+          tlCleanDeep(r,0); for(var ok3 in saved) r[ok3]=saved[ok3]; r.t=ov.t||keepT; if(TL_ED_SEEN) TL_ED_SEEN.add(r); continue; }
+        if(tlLdsRecord(r)){ a.splice(j,1); continue; }
+        var snap=tlSnap(r); tlCleanDeep(r,0); if(tlEmptied(snap,r)){ a.splice(j,1); continue; }
+        if(TL_ED_SEEN) TL_ED_SEEN.add(r); } }
+    var T=window.LST_TRIBES;
+    if(T&&!(TL_ED_SEEN&&TL_ED_SEEN.has(T))){
+      T.title="The Native Peoples of the Americas";
+      T.rule="Every people is here: who they are, where they lived about 1500, how they lived, what they ate and what they believed.";
+      T.intro="The peoples who lived on the two continents before 1492, and live on them still: who they are, where they lived about 1500, what they ate and did, and what they believed.";
+      T.teacher=null; T.israel=null; T.gospel=[];
+      (T.peoples||[]).forEach(function(p){ p.links=[]; });
+      tlCleanDeep(T,0); if(TL_ED_SEEN) TL_ED_SEEN.add(T); }
+    if(typeof SL_ERAS!=="undefined"&&SL_ERAS) for(var se=0;se<SL_ERAS.length;se++) if(/Restoration/.test(SL_ERAS[se].n)) SL_ERAS[se].n="Revolution and Revival";
+    tlChristianPage();
+  }catch(e){ try{ console.log("christian timeline",e); }catch(x){} }
+}
+/* the words the page's own code writes (buttons, notes, toasts) say the same in the Christian
+   timeline; the World Faiths chart and each faith's beliefs keep every faith's own words */
+var TL_CHR_WORDS=[
+  [/Every ancestor who crossed the plains, every conversion, every temple sealing, every moment your family encountered the gospel — these belong on this timeline alongside Moses and Isaiah and the Restoration\./g,"Every ancestor, every journey, every day your family came to faith, every moment your family encountered the gospel — these belong on this timeline alongside Moses and Isaiah and the apostles."],
+  [/Restoration Chain hidden/g,"Chain hidden"],[/every link prepared the Restoration/g,"every link prepared the way"],[/The Restoration was no accident\./g,"The freedom to worship was no accident."],
+  [/Advanced the Restoration/g,"Advanced the Gospel"],[/prepared the world for the Restoration of the gospel/g,"prepared the world for the gospel"],
+  [/the Bible, the Book of Mormon and /g,"the Bible and "],[/Heavenly Father(’|')s/g,"God$1s"],[/Heavenly Father/g,"God"]];
+var TL_CHR_SKIP="#doctrine-panel,#compare-panel";
+function tlChrWords(t){ for(var i=0;i<TL_CHR_WORDS.length;i++) t=t.replace(TL_CHR_WORDS[i][0],TL_CHR_WORDS[i][1]); return t; }
+var TL_CHR_TEST=/Heavenly Father|Restoration|Book of Mormon/;
+function tlChrNode(n){
+  if(!n) return;
+  if(n.nodeType===3){ var v=n.nodeValue; if(v&&TL_CHR_TEST.test(v)){ var p=n.parentElement; if(p&&p.closest&&p.closest(TL_CHR_SKIP)) return; var w=tlChrWords(v); if(w!==v) n.nodeValue=w; } return; }
+  if(n.nodeType!==1) return;
+  if(n.closest&&n.closest(TL_CHR_SKIP)) return;
+  if(n.tagName==="SCRIPT"||n.tagName==="STYLE") return;
+  var ph=n.getAttribute&&n.getAttribute("placeholder"); if(ph&&TL_CHR_TEST.test(ph)) n.setAttribute("placeholder",tlChrWords(ph));
+  if(!TL_CHR_TEST.test(n.textContent||"")&&!(n.querySelector&&n.querySelector("[placeholder]"))) return;
+  for(var c=n.firstChild;c;c=c.nextSibling) tlChrNode(c);
+}
+/* the page's own words and buttons */
+var TL_ED_PAGE=false;
+function tlChristianPage(){
+  if(TL_ED_PAGE||!tlChristian()) return; TL_ED_PAGE=true;
+  try{
+    var css=document.createElement("style");
+    css.textContent=TL_LDS_LANES.map(function(k){ return "#lc-"+k+",.lp-row[onclick=\"tgl('"+k+"')\"]"; }).join(",")
+      +",.sm-item[onclick=\"smGo('temples')\"],.sm-item[onclick=\"smGo('missions')\"],.pt-filt[onclick^=\"ptFilter('bom'\"],.fh-tab[onclick^=\"fhTab('pioneers'\"]{display:none !important}";
+    document.head.appendChild(css);
+    var q=function(sel){ return document.querySelector(sel); }, set=function(sel,html){ var e=q(sel); if(e) e.innerHTML=html; };
+    var ej=document.querySelectorAll(".ej");
+    for(var i=0;i<ej.length;i++){ var b=ej[i], oc=b.getAttribute("onclick")||"";
+      if(oc==="je(400)") b.innerHTML="Early Church";
+      if(oc==="je(1820)"){ b.innerHTML="Reformation"; b.setAttribute("onclick","je(1517)"); } }
+    set(".sm-item[onclick=\"smGo('tribes')\"] .sm-txt b","The Native Peoples of the Americas");
+    set(".sm-item[onclick=\"smGo('tribes')\"] .sm-txt em","Every people of the Americas: where they lived about 1500, how they lived, what they ate and what they believed");
+    set(".sm-item[onclick=\"smGo('finds')\"] .sm-txt em","Finds that bear on the Bible and Jesus Christ, each with its source and an honest label; new ones every month");
+    set("#trb-title","&#129718; The Native Peoples of the Americas");
+    set("#trb-intro","Every people of the Americas: where they lived about 1500, how they lived, what they ate and what they believed.");
+    set("#fh-sub","Your Family&#39;s Chapter in God&#39;s Story");
+    set("#fh-intro","Every great story begins with a family. Add your ancestors, the day your family came to faith, your family&#39;s journeys, and your own chapter. Then see your family placed on the same timeline as Moses, Isaiah, and the early Church.");
+    tlChrNode(document.body);
+    try{ new MutationObserver(function(ms){ for(var m=0;m<ms.length;m++){ var r=ms[m];
+        if(r.type==="characterData") tlChrNode(r.target);
+        else for(var q=0;q<r.addedNodes.length;q++) tlChrNode(r.addedNodes[q]); } })
+      .observe(document.body,{childList:true,subtree:true,characterData:true}); }catch(e){}
+  }catch(e){}
+}
+
 var TONIGHT=null;      /* {n,bk,cluster} once found */
 function nightId(bk,n){ return "b"+bk.n+"-w"+n.wk+"-n"+n.nt; }
 /* Every night learns its teaser and teaching note from the library beside it. */
@@ -4531,6 +4772,7 @@ function animSky(){
 
 // ── BUILD TIMELINE ───────────────────────────────────────────
 function buildTL(){
+  tlChristianize();                  /* the Christian timeline leaves out the Church's own history (see TL_ED) */
   planLanes();                       /* measure the lanes before drawing them */
   var world=document.getElementById("world");
   while(world.children.length>1)world.removeChild(world.lastChild);
@@ -7390,7 +7632,7 @@ function buildAddForm(body){
 
   // Event type selector with examples
   var typeField=document.createElement("div");typeField.className="fh-field";
-  typeField.innerHTML="<label class='fh-label'>Event Type</label><select class='fh-select' id='fh-type'><option value='conversion'>&#10022; Conversion to the Gospel</option><option value='pioneer'>&#127795; Pioneer Journey</option><option value='temple'>&#127963; Temple Ordinance</option><option value='mission'>&#127760; Mission</option><option value='birth'>&#127863; Birth</option><option value='marriage'>&#128141; Marriage</option><option value='death'>&#10013; Death / Passing</option><option value='immigration'>&#128246; Immigration / Migration</option><option value='military'>&#9876; Military Service</option><option value='blessing'>&#10022; Blessing / Miracle</option><option value='testimony'>&#128366; Testimony Moment</option><option value='other'>&#128106; Other Family Event</option></select>";
+  typeField.innerHTML="<label class='fh-label'>Event Type</label><select class='fh-select' id='fh-type'>"+(tlChristian()?"<option value='conversion'>&#10022; Coming to Faith</option><option value='mission'>&#127760; Mission / Service</option>":"<option value='conversion'>&#10022; Conversion to the Gospel</option><option value='pioneer'>&#127795; Pioneer Journey</option><option value='temple'>&#127963; Temple Ordinance</option><option value='mission'>&#127760; Mission</option>")+"<option value='birth'>&#127863; Birth</option><option value='marriage'>&#128141; Marriage</option><option value='death'>&#10013; Death / Passing</option><option value='immigration'>&#128246; Immigration / Migration</option><option value='military'>&#9876; Military Service</option><option value='blessing'>&#10022; Blessing / Miracle</option><option value='testimony'>&#128366; Testimony Moment</option><option value='other'>&#128106; Other Family Event</option></select>";
   form.appendChild(typeField);
 
   var nameRow=document.createElement("div");nameRow.className="fh-row";
@@ -10543,20 +10785,24 @@ function trbRender(){
   var h="<div class='trb-rule'>&#10022; "+slfEsc(D.rule||"")+"</div><div class='trb-box'><p>"+slfEsc(D.intro||"")+"</p></div>";
   h+="<div class='trb-grades'>"+(D.grades||[]).map(function(g){ return "<div class='trb-gl'>"+trbGrade(g.g)+"<span>"+slfEsc(g.x)+"</span></div>"; }).join("")+"</div>";
   h+="<div class='trb-tools'><button class='trb-btn' onclick='trbToGlobe()'>&#127758; See where they lived, about 1500</button></div>";
-  /* the teacher who came */
+  /* the teacher who came (the Latter-day Saint timeline only: the Christian one has no teacher or Israel sections) */
   var T=D.teacher||{};
+  if(D.teacher){
   h+="<div class='trb-h'>"+slfEsc(T.title||"The teacher who came")+"</div><div class='trb-box'><p>"+slfEsc(T.intro||"")+"</p></div>";
   (T.figures||[]).forEach(function(f){ h+="<div class='trb-box'><h4>"+slfEsc(f.name)+" <small style='font-family:var(--font-body);font-size:9px;color:rgba(255,255,255,.45)'>"+slfEsc(f.people)+"</small></h4>"
       +"<span class='trb-k'>What the tradition says</span><p>"+slfEsc(f.says)+"</p><span class='trb-k rec'>Who wrote it down</span><p>"+slfEsc(f.recorded)+"</p>"
       +"<span class='trb-k sch'>What scholars say</span><p>"+slfEsc(f.scholars)+"</p><span class='trb-k lds'>What Latter-day Saints have said</span><p>"+slfEsc(f.lds)+"</p></div>"; });
   if(T.caution) h+="<div class='trb-box'><span class='trb-k' style='color:#FBBF24'>The honest caution</span><p>"+slfEsc(T.caution)+"</p></div>";
   if(T.bom&&T.bom.length) h+="<div class='trb-box gold'>"+T.bom.map(function(g){ return "<div class='trb-ref'>"+slfEsc(g.ref)+"</div><p>"+slfEsc(g.text)+"</p>"; }).join("")+"</div>";
+  }
   /* Israel and the Book of Mormon */
   var I=D.israel||{};
+  if(D.israel){
   h+="<div class='trb-h'>"+slfEsc(I.title||"Israel and the Book of Mormon")+"</div><div class='trb-box'><p>"+slfEsc(I.intro||"")+"</p></div>";
   (I.claims||[]).forEach(function(c){ h+="<div class='trb-box'><h4>"+slfEsc(c.when)+" &#183; "+slfEsc(c.who)+" "+trbGrade(c.grade)+"</h4><p>"+slfEsc(c.claim)+"</p></div>"; });
   if(I.evidence&&I.evidence.length) h+="<div class='trb-box'><span class='trb-k sch'>What the evidence shows</span><ul>"+I.evidence.map(function(e){ return "<li><b style='color:#fff'>"+slfEsc(e.t)+".</b> "+slfEsc(e.x)+"</li>"; }).join("")+"</ul></div>";
   if(I.church) h+="<div class='trb-box gold'><span class='trb-k lds'>What the Church teaches</span><p>"+slfEsc(I.church)+"</p></div>";
+  }
   /* the peoples */
   var areas={}; d.peoples.forEach(function(p){ areas[p.area]=(areas[p.area]||0)+1; });
   h+="<div class='trb-h'>The peoples, one by one ("+d.peoples.length+")</div>";
