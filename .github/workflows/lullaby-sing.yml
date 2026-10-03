@@ -85,7 +85,7 @@ on:
       voice:
         description: 'One line describing the singer, as heard on the current recording'
         required: false
-        default: 'one single warm, soft voice singing a child to sleep, unhurried, the same singer from the first note to the last'
+        default: "a woman's voice: a gentle, loving mother softly singing her own child to sleep, tender and warm, close and intimate, unhurried, the same singer from the first note to the last"
       song_id:
         description: 'fix mode: the ElevenLabs song id of the take to keep (blank = upload fix_file, which is what works)'
         required: false
@@ -121,7 +121,7 @@ jobs:
       - name: ffmpeg and numpy, to trim, measure and join takes
         run: |
           sudo apt-get update -qq >/dev/null && sudo apt-get install -y -qq ffmpeg >/dev/null && ffmpeg -version | head -1
-          python3 -m pip install --quiet numpy && python3 -c "import numpy; print('numpy', numpy.__version__)"
+          python3 -m pip install --quiet numpy librosa && python3 -c "import numpy, librosa; print('numpy', numpy.__version__, 'librosa', librosa.__version__)"
       - name: The takes an earlier run sang (check mode)
         if: ${{ inputs.mode == 'check' || inputs.mode == 'clean' }}
         uses: actions/download-artifact@v4
@@ -260,7 +260,7 @@ jobs:
                "one continuous, flowing performance: smooth legato phrasing, each line given room to breathe, "
                "a soft instrumental breath of a few seconds between verses, soft and steady dynamics",voice]
           NEG=["drums","percussion","backing vocals","choir","duet","a second singer","a change of singer","distortion","clipping",
-               "loudness pushing","shouting","spoken word","rap","improvised words","scat singing","ad-libs","key change","tempo change",
+               "a man's voice","a male singer","operatic","belting","vibrato-heavy","loudness pushing","shouting","spoken word","rap","improvised words","scat singing","ad-libs","key change","tempo change",
                "rushed phrasing","a fast tempo","harsh tone","busy accompaniment","a minor key","sad","melancholic","dark",
                "abrupt transitions","sudden stops","long silences between verses","a jump in volume","a change of arrangement"]
           def plan_full():
@@ -453,8 +453,22 @@ jobs:
                   sys.path.insert(0,'lantern/builder'); import lullaby_join as J
                   mk=J.key_of(J.features(J.decode(path))['chroma']); pk=J.peak(path)
                   if 'minor' in mk: score-=15
-                  print(f'   take {t}: key {mk}, loudest {pk:.2f} of full scale',flush=True)
-                  open(f'out/take-{t}-report.txt','a').write(f'\nkey {mk}; loudest {pk:.2f}\n')
+                  # Levi: "It's got to be a beautiful motherly voice." A woman sings a lullaby
+                  # around 200-400 Hz; a voice centred below about 185 Hz is most likely a man's.
+                  f0=None
+                  try:
+                      import librosa
+                      vals=[]
+                      for off in (30,150,300,450):
+                          y,sr_=librosa.load(path,sr=16000,offset=off,duration=20)
+                          if len(y)<sr_*5: continue
+                          f,vf,vp=librosa.pyin(librosa.effects.harmonic(y),fmin=80,fmax=700,sr=sr_,frame_length=1024)
+                          vals+=[x for x,v,pp in zip(f,vf,vp) if v and pp>0.6 and x==x]
+                      if vals: f0=float(J.np.median(vals))
+                  except Exception as e: print('   voice check skipped:',e)
+                  if f0 is not None and f0<185: score-=30
+                  print(f'   take {t}: key {mk}, voice centred near {f0 and round(f0)} Hz, loudest {pk:.2f} of full scale',flush=True)
+                  open(f'out/take-{t}-report.txt','a').write(f'\nkey {mk}; voice {f0 and round(f0)} Hz; loudest {pk:.2f}\n')
               except Exception as e: print('   key check skipped:',e)
               return score, cov
           if mode=='clean':
