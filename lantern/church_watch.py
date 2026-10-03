@@ -38,6 +38,7 @@ import re
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -161,6 +162,9 @@ def temples(previous):
             t["milestones"] = ms
         else:
             t["milestones"] = prev.get("milestones", [])
+        for k in ("lat", "lng", "geo", "geoFor"):
+            if prev and prev.get(k) is not None:
+                t[k] = prev[k]
         t["listed"] = r.get("date") or ""
         def first(what):
             for m in t["milestones"]:
@@ -191,6 +195,7 @@ HISTORIC = [
     {"id": "nauvoo-temple-1846", "name": "Nauvoo Temple (the first)", "status": "HISTORICAL", "city": "Nauvoo", "region": "Illinois",
      "country": "United States", "location": "Nauvoo, Illinois, United States", "dedicated": "1846-05-01", "announced": "", "groundbreaking": "",
      "milestones": [{"what": "Cornerstones laid", "date": "April 6, 1841", "iso": "1841-04-06"}, {"what": "Dedicated", "date": "May 1, 1846", "iso": "1846-05-01"}],
+     "geoName": "Nauvoo Illinois Temple",   # rebuilt on the same site; the map finds the building by that name
      "rededicated": [], "listed": "", "url": "https://www.churchofjesuschrist.org/study/history/topics/nauvoo-temple?lang=eng"},
 ]
 
@@ -621,6 +626,66 @@ def send(row, body):
         print("   the account refused", row, e.code, e.read()[:200])
 
 
+# ----------------------------------------------------------------------------- where each place is on the map
+GEO_UA = {"User-Agent": "LittleScriptureTravelers-timeline/1.0 (+https://littlescripturetravelers.com)", "Accept-Language": "en"}
+_geo_n = [0]
+
+
+def geocode(q, kind=""):
+    """OpenStreetMap's own finder (Nominatim): one place for a name or an address, never more
+    than one request a second (its rule). None when it has no answer."""
+    if not q or _geo_n[0] >= int(os.environ.get("GEO_MAX", "1200")):
+        return None
+    _geo_n[0] += 1
+    time.sleep(1.1)
+    url = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + urllib.parse.quote(q) + (
+        "&featuretype=" + kind if kind else "")
+    try:
+        rows = json.loads(urllib.request.urlopen(urllib.request.Request(url, headers=GEO_UA), timeout=30).read())
+        if rows:
+            return round(float(rows[0]["lat"]), 6), round(float(rows[0]["lon"]), 6)
+    except Exception as e:
+        print("   map finder:", q[:60], "-", e)
+    return None
+
+
+def place_temples(ts):
+    """Each temple's spot: the building itself by its name, else its city.
+    Found once and kept; found again only when its name or place changes."""
+    n = 0
+    for t in ts:
+        key = (t.get("geoName") or t.get("name") or "") + "|" + (t.get("location") or "")
+        if t.get("lat") is not None and t.get("geoFor") == key:
+            continue
+        hit, how = None, ""
+        # (a temple's page names only the nearby distribution centre's street address, so the
+        # building is found by its own name - which is how every map knows it - else its city)
+        for q, h in ((t.get("geoName") or t.get("name", ""), "building"), (t.get("location", ""), "city")):
+            if q.strip(", ") and q.strip() != "Location is not available":
+                hit = geocode(q)
+                if hit:
+                    how = h
+                    break
+        if hit:
+            t["lat"], t["lng"], t["geo"], t["geoFor"] = hit[0], hit[1], how, key
+            n += 1
+    print("   temples placed on the map this run:", n)
+
+
+def place_places(ps):
+    """Each country and state on the map, found once and kept."""
+    n = 0
+    for p in ps:
+        if p.get("lat") is not None:
+            continue
+        q = p["name"] + (", United States" if p.get("kind") == "state" else "")
+        hit = geocode(q, "state" if p.get("kind") == "state" else "country") or geocode(q)
+        if hit:
+            p["lat"], p["lng"] = hit
+            n += 1
+    print("   places placed on the map this run:", n)
+
+
 def main():
     prev_t = read_js(OUT_TEMPLES, "LST_TEMPLES")
     prev_m = read_js(OUT_MISSIONS, "LST_MISSIONS")
@@ -630,6 +695,16 @@ def main():
     print("places...", flush=True)
     ps = places(prev_m)
     print("  %d places" % len(ps), flush=True)
+    # where each is on the map (kept from last time; looked up only when new or moved)
+    old_pl = {p["id"]: p for p in (prev_m or {}).get("places", [])}
+    for p in ps:
+        o = old_pl.get(p["id"])
+        if o and o.get("lat") is not None:
+            p["lat"], p["lng"] = o["lat"], o["lng"]
+    if os.environ.get("NO_GEO") != "1":
+        print("map...", flush=True)
+        place_temples(ts)
+        place_places(ps)
     by_name = {p["name"]: p for p in ps if p["kind"] == "country"}
     by_name["United States"] = by_name.get("United States of America") or by_name.get("United States") or {"continent": "North America"}
     facts(ts, by_name)
