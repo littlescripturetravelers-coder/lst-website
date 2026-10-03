@@ -1931,7 +1931,7 @@ body.hand-active .hand-label{display:block;}
  <div id="map-btns">
   <button class="mopen-btn" onclick="openAppleMaps()" style="border-color:rgba(245,197,24,.3);color:#F5C518;background:rgba(245,197,24,.06);">&#127760; Apple Maps</button>
   <button class="mopen-btn" onclick="openGoogleMaps()" style="border-color:rgba(52,211,153,.3);color:#34D399;background:rgba(52,211,153,.06);">&#128205; Google Maps</button>
-  <button class="mopen-btn" id="map-sv" onclick="openStreetView()" style="border-color:rgba(91,211,220,.35);color:#5BD3DC;background:rgba(91,211,220,.07);">&#128064; Street View</button>
+  <button class="mopen-btn" id="map-sv" onclick="openStreetView()" style="display:none;border-color:rgba(91,211,220,.35);color:#5BD3DC;background:rgba(91,211,220,.07);">&#128064; Street View</button>
  </div>
 </div>
 
@@ -6632,6 +6632,10 @@ function tile2url(x,y,z){return"https://tile.openstreetmap.org/"+z+"/"+x+"/"+y+"
    go closer - down to the building and the street around it. A place may be known by
    its spot (lat/lng), by its name (mapQ, a temple's own name) or by an address a
    family typed (addr); any of them is enough to open it in Google or Apple Maps. */
+/* STREET VIEW, KEPT ASIDE (Levi, 3 Oct 2026: "Let's do away with the street view for
+   everything ... Hold it in the side in case later I want to.") Its button and
+   openStreetView() stay in the page; true here shows the button again everywhere. */
+var TL_STREET_VIEW=false;
 function mapHas(ev){ return !!ev && ((ev.lat!==undefined&&ev.lat!==null&&!isNaN(ev.lat))||!!ev.addr||!!ev.mapQ); }
 function mapQuery(ev){ return ev?(ev.mapQ||ev.addr||""):""; }
 function openMapFor(ev){
@@ -6643,7 +6647,7 @@ function openMapFor(ev){
   var nl=document.getElementById("map-nl"),mc=document.getElementById("map-canvas");
   var hasPin=ev.lat!==undefined&&ev.lat!==null&&!isNaN(ev.lat);
   document.getElementById("map-btns").style.display=mapHas(ev)?"":"none";
-  document.getElementById("map-sv").style.display=(hasPin||mapQuery(ev))?"":"none";
+  document.getElementById("map-sv").style.display=(TL_STREET_VIEW&&(hasPin||mapQuery(ev)))?"":"none";
   document.getElementById("map-nl-t").textContent=mapQuery(ev)?"See it in the maps below":"Location Unknown";
   document.getElementById("map-nl-s").textContent=mapQuery(ev)?"Open Google Maps or Apple Maps to see the place, the street around it and the buildings.":"The exact location has not been confirmed archaeologically.";
   if(!hasPin){nl.style.display="flex";mc.style.display="none";return;}
@@ -7664,7 +7668,7 @@ function buildAddForm(body){
 
   var addrField=document.createElement("div");addrField.className="fh-field";
   addrField.innerHTML="<label class='fh-label'>Address (for the map)</label><input class='fh-input' id='fh-addr' placeholder='e.g. 123 Main Street, Nauvoo, Illinois, USA' autocomplete='street-address'>"
-    +"<div style='font-size:9.5px;color:rgba(255,255,255,.45);margin-top:4px;line-height:1.5;'>A street address, or just a town and country. It is found on the map for you, and opens in Google or Apple Maps with Street View.</div>";
+    +"<div style='font-size:9.5px;color:rgba(255,255,255,.45);margin-top:4px;line-height:1.5;'>A street address, or just a town and country. It is found on the map for you, and opens in Google or Apple Maps.</div>";
   form.appendChild(addrField);
 
   var latRow=document.createElement("div");latRow.className="fh-row";
