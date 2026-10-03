@@ -372,6 +372,20 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 #beacon-year{font-family:var(--font-display);font-weight:600;font-size:11px;color:rgba(255,255,255,.7);
   text-shadow:0 0 8px rgba(245,197,24,.6);white-space:nowrap;}
 
+/* THE YEARS AND THE SAVIOR AT THE CENTRE (Levi, 3 Oct 2026): a mark every hundred years
+   with the year written small beside it, drawn on the screen (not the zoomed world) so the
+   years stay the same small, readable size at every zoom; and the risen Saviour shining
+   over the Atonement, the centre of all history. */
+#tl-ruler{position:absolute;left:0;top:0;pointer-events:none;z-index:60;}
+#savior{position:absolute;left:0;top:0;z-index:70;cursor:pointer;display:none;-webkit-tap-highlight-color:transparent;}
+#savior .sv-pic{position:relative;width:100%;border-radius:14px;overflow:hidden;border:2px solid #F5C518;
+  box-shadow:0 0 18px rgba(245,197,24,.75),0 0 46px rgba(245,197,24,.35);background:#1B2D5F;animation:svglow 3s ease-in-out infinite;}
+#savior .sv-pic img{display:block;width:100%;height:auto;}
+#savior .sv-cap{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:5px;text-align:center;font-family:Anton,Fredoka,sans-serif;font-size:9.5px;letter-spacing:1.4px;color:#F5C518;
+  text-shadow:0 0 8px rgba(245,197,24,.7),0 1px 3px #000;white-space:nowrap;}
+@keyframes svglow{0%,100%{box-shadow:0 0 16px rgba(245,197,24,.7),0 0 40px rgba(245,197,24,.3);}50%{box-shadow:0 0 24px rgba(245,197,24,.95),0 0 60px rgba(245,197,24,.45);}}
+@media (prefers-reduced-motion:reduce){#savior .sv-pic{animation:none;}}
+
 /* LANE LABELS */
 .lane-lbl{position:absolute;font-family:var(--font-body);font-weight:800;font-size:7px;
   text-transform:uppercase;letter-spacing:1px;opacity:.45;pointer-events:none;
@@ -2016,6 +2030,18 @@ var LST_CLUSTERS=[];    /* bedtime stories, grouped where they share a spot */
    into a cluster, is drawn bigger with an open box naming it, gets a "Tonight"
    button in the era row, and the view flies to it when the timeline opens. */
 var TONIGHT_ID=null; try{ TONIGHT_ID=new URLSearchParams(location.search).get("night")||null; }catch(e){}
+/* Tonight's story. The app names it (?night=, from the Morning Lantern); with no name given
+   (the website, or the app before the Lantern has loaded) it is the Lantern's own rule:
+   night N of this month's book on the Nth of the month. */
+function tonightKey(){
+  if(TONIGHT_ID) return TONIGHT_ID;
+  try{
+    if(typeof LST_BOOKS==="undefined") return null;
+    var d=new Date(), M=["January","February","March","April","May","June","July","August","September","October","November","December"][d.getMonth()];
+    for(var i=0;i<LST_BOOKS.length;i++){ var bk=LST_BOOKS[i]; if(bk&&bk.month===M){ var n=bk.nights&&bk.nights[d.getDate()-1]; return n?nightId(bk,n):null; } }
+  }catch(e){}
+  return null;
+}
 var TONIGHT=null;      /* {n,bk,cluster} once found */
 function nightId(bk,n){ return "b"+bk.n+"-w"+n.wk+"-n"+n.nt; }
 /* Every night learns its teaser and teaching note from the library beside it. */
@@ -2087,7 +2113,7 @@ function clusterNights(){
   var out=[],GAP=26;
   for(var i=0;i<all.length;i++){
     var last=out[out.length-1], it=all[i];
-    var isTonight=!!(TONIGHT_ID && nightId(it.bk,it.n)===TONIGHT_ID);
+    var tk=tonightKey(), isTonight=!!(tk && nightId(it.bk,it.n)===tk);
     /* tonight's story stands alone, whatever shares its year */
     if(last && !last.tonight && !isTonight && it.x-last.x0<GAP){ last.items.push(it); last.x=(last.x0+it.x)/2; }
     else { var c={x:it.x,x0:it.x,items:[it],tonight:isTonight}; out.push(c); if(isTonight) TONIGHT={n:it.n,bk:it.bk,cluster:c}; }
@@ -4534,13 +4560,7 @@ function buildTL(){
     var tl=document.createElement("div");
     tl.style.cssText="position:absolute;left:"+xx+"px;top:0;width:1px;height:"+TLH+"px;background:"+(maj?"rgba(255,255,255,.14)":"rgba(255,255,255,.05)")+";pointer-events:none;z-index:2;";
     world.appendChild(tl);
-    if(maj||yr%200===0){
-      var lb=document.createElement("div");
-      lb.style.cssText="position:absolute;left:"+(xx+2)+"px;top:"+(TLH/2+8)+"px;font-size:"+(maj?"8px":"6px")+";font-weight:700;color:rgba(255,255,255,"+(maj?".28":".16")+");pointer-events:none;white-space:nowrap;z-index:2;";
-      lb.textContent=decodeT(yr<0?Math.abs(yr)+"BC":yr===0?"":yr+"");
-      world.appendChild(lb);
-    }
-  }
+  }   /* the years themselves are written by drawRuler(), at a size that reads at every zoom */
 
   // EMPIRE SPAN BARS
   if(AL["empire"]){
@@ -5155,7 +5175,7 @@ function openStoryPicker(cl){
       "background:rgba(245,197,24,.09);border:1px solid rgba(245,197,24,.28);border-radius:12px;cursor:pointer;";
     var t=document.createElement("div");
     t.style.cssText="font-family:var(--font-display);font-weight:700;font-size:13.5px;color:#F5C518;line-height:1.25;";
-    t.textContent=decodeT((TONIGHT_ID&&nightId(it.bk,it.n)===TONIGHT_ID?"\u2726 Tonight: ":"")+it.n.t);
+    t.textContent=decodeT((tonightKey()&&nightId(it.bk,it.n)===tonightKey()?"\u2726 Tonight: ":"")+it.n.t);
     var sub=document.createElement("div");
     sub.style.cssText="font-size:10.5px;color:rgba(255,255,255,.55);margin-top:3px;";
     sub.textContent=decodeT(it.bk.month+" \u00B7 Week "+it.n.wk+", Night "+it.n.nt+" \u00B7 "+it.n.ref);
@@ -6453,6 +6473,101 @@ function applyT(anim){
   w.style.transform="translate("+tx+"px,"+ty+"px) scale("+sc+")"+rot;
   w.style.transformOrigin="0 0";upZL();try{upMM();}catch(e){}
   try{ tonightBeacon(); }catch(e){}
+  try{ drawRuler(); }catch(e){}
+  try{ placeSavior(); }catch(e){}
+}
+/* ── THE YEARS: a mark every hundred years, the year written small beside it ──
+   Drawn on the screen, along the gold line, so the writing is the same small size at
+   every zoom. Close in, every hundred years is named; further out only every 200, 500,
+   1000 or 2000, whichever leaves room to read them, while the small marks for every
+   hundred years stay as long as they have room to be told apart. Zoomed right in, where
+   a hundred years is wider than the screen, the decades are marked and named too. If the gold line is
+   moved off the screen, the years wait at the edge so they can always be read. */
+var TL_STEPS=[10,20,50,100,200,500,1000,2000];
+function tlYearLbl(y){ return y<0?(-y)+" BC":(y<1000?y+" AD":String(y)); }
+function drawRuler(){
+  var st=document.getElementById("stage"); if(!st) return;
+  var cv=document.getElementById("tl-ruler");
+  if(!cv){ cv=document.createElement("canvas"); cv.id="tl-ruler"; cv.setAttribute("aria-hidden","true"); st.appendChild(cv); }
+  var W=st.clientWidth,H=st.clientHeight,dpr=Math.min(3,window.devicePixelRatio||1);
+  if(cv.width!==Math.round(W*dpr)||cv.height!==Math.round(H*dpr)){ cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); cv.style.width=W+"px"; cv.style.height=H+"px"; }
+  var c=cv.getContext("2d"); c.setTransform(dpr,0,0,dpr,0,0); c.clearRect(0,0,W,H);
+  var vert=(curView==="v"), per=TLW/(YE-YS)*sc, p100=per*100;
+  c.font="700 9.5px Nunito, sans-serif";
+  var need=vert?24:c.measureText("4000 BC").width+16, step=TL_STEPS[TL_STEPS.length-1];
+  for(var i=0;i<TL_STEPS.length;i++){ if(TL_STEPS[i]*per>=need){ step=TL_STEPS[i]; break; } }
+  var line=vert?(tx-(TLH/2)*sc):(ty+(TLH/2)*sc);
+  line=vert?Math.max(8,Math.min(W-62,line)):Math.max(8,Math.min(H-26,line));
+  var unit=(per*10>=6)?10:100, y0=Math.ceil(YS/unit)*unit, minor=(unit*per>=3), lim=vert?H:W;
+  /* only the years on the screen are visited */
+  var first=YS+((vert?(-ty):(-tx))/sc-60/sc)/(TLW/(YE-YS)), last=YS+((vert?(H-ty):(W-tx))/sc+60/sc)/(TLW/(YE-YS));
+  y0=Math.max(y0,Math.floor(first/unit)*unit); var y1=Math.min(YE,last);
+  c.shadowColor="rgba(0,0,0,.9)"; c.shadowBlur=3; c.textBaseline=vert?"middle":"top";
+  for(var yr=y0;yr<=y1;yr+=unit){
+    var lab=(yr%step===0), cent=(yr%100===0); if(!lab&&!minor) continue;
+    var at=vert?(ty+yx(yr)*sc):(tx+yx(yr)*sc);
+    if(at<-60||at>lim+60) continue;
+    var len=lab?(cent?9:7):(cent?6:4);
+    c.strokeStyle=yr===0?"rgba(245,197,24,.95)":(lab?(cent?"rgba(255,255,255,.62)":"rgba(255,255,255,.45)"):(cent?"rgba(255,255,255,.34)":"rgba(255,255,255,.2)")); c.lineWidth=(lab&&cent)?1.25:1;
+    c.beginPath();
+    if(vert){ c.moveTo(line+3,at); c.lineTo(line+3+len,at); } else { c.moveTo(at,line+3); c.lineTo(at,line+3+len); }
+    c.stroke();
+    if(lab){
+      c.fillStyle=yr===0?"#F5C518":(cent?"rgba(255,255,255,.72)":"rgba(255,255,255,.5)");
+      var tx_=tlYearLbl(yr); if(yr===0) tx_="BC \u00b7 AD";
+      if(vert) c.fillText(tx_,line+3+len+4,at); else c.fillText(tx_,at+3,line+4);
+    }
+  }
+}
+/* ── THE SAVIOR AT THE CENTRE ── Levi's picture of the risen Saviour shines over the
+   Atonement, the centre of all history, at a size that can be seen however far out the
+   timeline is zoomed; close in it steps beside the gold beam so the words there show.
+   A tap opens the Atonement. Levi: "always having Jesus picture showing" - when the
+   Atonement is off the screen, a smaller picture waits at the edge nearest it, and a tap
+   there flies back to it. */
+function placeSavior(){
+  var st=document.getElementById("stage"); if(!st) return;
+  var el=document.getElementById("savior");
+  if(!el){
+    el=document.createElement("div"); el.id="savior"; el.setAttribute("role","button"); el.setAttribute("tabindex","0");
+    el.setAttribute("aria-label","Jesus Christ and His Atonement, the centre of all history");
+    el.innerHTML="<div class='sv-pic'><img src='images/savior-risen.jpg' alt='The risen Savior, Jesus Christ, with open arms' draggable='false'></div><div class='sv-cap'>THE ATONEMENT &#183; 30 AD</div>";
+    var open=function(e){ if(e){ e.stopPropagation(); e.preventDefault&&e.preventDefault(); } if(el.classList.contains("pinned")) goAtonement(); else openSaviorCard(); };
+    el.addEventListener("click",open);
+    el.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" ") open(e); });
+    el.addEventListener("mousedown",function(e){ e.stopPropagation(); });
+    st.appendChild(el);
+  }
+  var W=st.clientWidth,H=st.clientHeight,vert=(curView==="v");
+  var big=Math.max(84,Math.min(150,H*0.16)), k=Math.max(0,Math.min(1,(sc-0.08)/0.4));
+  var h=big-(big-62)*k, w=h*2/3, capH=(k<1)?17:0;
+  var ax,ay,left,top;
+  if(vert){ ax=tx-(TLH/2)*sc; ay=ty+yx(30)*sc; left=ax-14-w; top=ay-(h+capH)/2; }
+  else { ax=tx+yx(30)*sc; ay=ty+(TLH/2)*sc; left=ax-w/2-(w/2+12)*k; top=ay-24-h-capH; }   /* clear of tonight's ring on the line */
+  var off=(left+w<0||left>W||top+h+capH<0||top>H), cap=el.querySelector(".sv-cap");
+  if(off){
+    /* waits at the edge nearest the Atonement, clear of the buttons at the top and bottom */
+    h=60; w=40; capH=17;
+    if(vert){ left=Math.max(10,Math.min(W-80-w,left)); top=(ay<H/2)?72:Math.max(72,H*0.6-h-capH); }
+    else { left=(ax<W/2)?12:W-12-w; top=Math.max(72,Math.min(H*0.6-h-capH,top)); }
+    /* an arrow on the side He is */
+    cap.innerHTML=vert?((ay<H/2)?"&#9650; JESUS":"&#9660; JESUS"):((ax<W/2)?"&#9664; JESUS":"JESUS &#9654;");
+  } else cap.innerHTML="THE ATONEMENT &#183; 30 AD";
+  el.classList.toggle("pinned",off);
+  cap.style.display=capH?"":"none";
+  el.style.display="block";
+  el.style.width=w+"px"; el.style.left=left+"px"; el.style.top=top+"px";
+}
+/* fly to the Atonement, keeping the zoom, so it sits in the middle of the screen */
+function goAtonement(){
+  var st=document.getElementById("stage");
+  if(curView==="v"){ tx=st.clientWidth/2+(TLH/2)*sc; ty=st.clientHeight/2-yx(30)*sc; }
+  else { tx=st.clientWidth/2-yx(30)*sc; ty=st.clientHeight/2-(TLH/2)*sc; }
+  applyT(true);
+}
+/* the Atonement's own card on the timeline (its gold button leads on to the full study) */
+function openSaviorCard(){
+  for(var i=0;i<EVS.length;i++) if(EVS[i].id==="nt02"){ openEvMod(EVS[i]); return; }
 }
 /* where a world point lands on the stage, in either view */
 function worldToStage(wx,wy){ return (curView==="v")?{x:tx-wy*sc,y:ty+wx*sc}:{x:tx+wx*sc,y:ty+wy*sc}; }
@@ -6489,15 +6604,22 @@ function fitAll(){
   if(curView==="v"){
     sc=(sw/TLH)*.92;
     tx=TLH*sc+(sw-TLH*sc)/2;
-    ty=20;
+    ty=sh/2-yx(30)*sc;      /* the Atonement in the middle of the screen */
   } else {
-    sc=Math.min(sw/TLW,(sh-20)/TLH)*.85;
-    tx=(sw-TLW*sc)/2;ty=(sh-TLH*sc)/2;
+    /* the Atonement is the centre of all history, and of the screen: all of history fits
+       either side of it (the longer side, before Christ, sets the size) */
+    var ax=yx(30), half=Math.max(ax,TLW-ax);
+    sc=Math.min(sw/(2*half),(sh-20)/TLH)*.92;
+    tx=sw/2-ax*sc;ty=(sh-TLH*sc)/2;
   }
   if(!isFinite(sc)||sc<=0)sc=.05;
   applyT(true);
 }
-function rz(){var st=document.getElementById("stage");sc=.5;tx=0;ty=st.clientHeight/2-TLH*.5/2;applyT(true);}
+/* back to a close view, with the Atonement in the middle of the screen */
+function rz(){var st=document.getElementById("stage");sc=.5;
+  if(curView==="v"){ tx=st.clientWidth/2+(TLH/2)*sc; ty=st.clientHeight/2-yx(30)*sc; }
+  else { tx=st.clientWidth/2-yx(30)*sc; ty=st.clientHeight/2-TLH*.5/2; }
+  applyT(true);}
 
 // ── INTERACTION ──────────────────────────────────────────────
 function initInt(){
@@ -6837,7 +6959,7 @@ document.getElementById("srch").addEventListener("input",function(){
 function toast(msg){var t=document.getElementById("toast");t.innerHTML=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},3000);}
 
 // ── RESIZE ───────────────────────────────────────────────────
-window.addEventListener("resize",function(){var c=document.getElementById("sky-canvas");c.width=innerWidth;c.height=innerHeight;});
+window.addEventListener("resize",function(){var c=document.getElementById("sky-canvas");c.width=innerWidth;c.height=innerHeight;try{ drawRuler(); placeSavior(); }catch(e){}});
 
 // ── INIT ─────────────────────────────────────────────────────
 function init(){
