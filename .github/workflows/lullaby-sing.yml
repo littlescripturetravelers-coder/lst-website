@@ -122,6 +122,10 @@ on:
         description: 'fix mode: the lines to sing there, separated by " | " (a whole stanza splices cleanest)'
         required: false
         default: "Esther stood courageous and tall, | Though she was frightened by it all. | She chose to speak, she chose what’s right, | And Heavenly Father gave her might."
+      sing_as:
+        description: 'fix mode: words the singer should say differently from how they are printed, as "Job=Jobe" (comma between pairs); the printed words stay as they are'
+        required: false
+        default: ''
       save_branch:
         description: 'Push the best take to this branch as audio/hush-little-traveler-full.mp3 (blank = artifact only)'
         required: false
@@ -166,6 +170,7 @@ jobs:
           FIX_FROM: ${{ inputs.fix_from_ms }}
           FIX_TO: ${{ inputs.fix_to_ms }}
           FIX_LINES: ${{ inputs.fix_lines }}
+          SING_AS: ${{ inputs.sing_as }}
           PICK: ${{ inputs.pick }}
         run: |
           mkdir -p out
@@ -188,6 +193,12 @@ jobs:
           FIX_ID=os.environ.get('SONG_ID','').strip(); FIX_FILE=os.environ.get('FIX_FILE','').strip()
           FIX_FROM=int(os.environ.get('FIX_FROM') or 0); FIX_TO=int(os.environ.get('FIX_TO') or 0)
           FIX_LINES=[x.strip() for x in os.environ.get('FIX_LINES','').split('|') if x.strip()]
+          # Levi, 3 Oct 2026: "it says job instead of Job" - the singer is given the name spelled
+          # as it is said (Jobe), while the app keeps printing Job
+          SING_AS=[tuple(x.split('=',1)) for x in os.environ.get('SING_AS','').split(',') if '=' in x]
+          def sung(line):
+              for a,b in SING_AS: line=re.sub(r'\b%s\b' % re.escape(a.strip()),b.strip(),line)
+              return line
           if mode=='fix': LENGTH=min(LENGTH,599000)   # the API wants strictly under 600 seconds
           CTX=20000   # fix mode: how much of the take is sung along before and after the new lines
           # when the take sings each line (lantern/lullaby-full-lines.json), so a kept stretch can carry its words
@@ -297,7 +308,7 @@ jobs:
                "a man's voice","a male singer","operatic","belting","vibrato-heavy","loudness pushing","shouting","spoken word","rap","improvised words","scat singing","ad-libs","key change","tempo change",
                "rushed phrasing","a fast tempo","harsh tone","busy accompaniment","a minor key","sad","melancholic","dark",
                "abrupt transitions","sudden stops","long silences between verses","a jump in volume","a change of arrangement"]
-          if ANCHOR_SONG: POS=[x for x in POS if x!="in E major"]   # the kept opening sets the key
+          if ANCHOR_SONG or mode=='fix': POS=[x for x in POS if x!="in E major"]   # the kept opening sets the key
           def plan_full():
               secs=[]; budget=LENGTH-5000
               rest=[(n,l[:]) for n,l in sections]
@@ -326,7 +337,7 @@ jobs:
                      'duration_ms':CTX,'lines':opening,'source_from':{'song_id':sid,'range':{'start_ms':0,'end_ms':CTX}}},
                     {'section_name':'Sung again','positive_local_styles':['sung softly, one line at a time, every word clear, exactly as written',
                      'the same voice, the same tune, the same key and the same slow tempo as the opening, straight on without a pause'],'negative_local_styles':[],
-                     'duration_ms':FIX_TO-FIX_FROM+3000,'lines':FIX_LINES}]
+                     'duration_ms':FIX_TO-FIX_FROM+3000,'lines':[sung(l) for l in FIX_LINES]}]
               return {'positive_global_styles':POS,'negative_global_styles':NEG,'sections':secs}
           def splice(take_path,patch_path,out_path):
               # where the piece sings the new lines: found in its own transcription, else where the plan put them
