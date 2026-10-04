@@ -11803,9 +11803,16 @@ setTimeout(tgFetch,900);
     if(/^border.*color$|^outline-color$/.test(p)) return "border";
     if(p==="box-shadow"||p==="text-shadow") return "shadow";
     return null; }
+  /* As in the app: a panel's words take the whole step, its buttons and chips at most 1.4
+     times so they still fit their rows, and the round close buttons stay as they are. */
+  var CLOSE_RX=/close|-x\b|-x[:.]/i, CTRL_RX=/btn|chip|tab\b|tab[.:]|filt|tool|seg|mode|button|zb|zoom/i;
+  function factorFor(sel){ if(L.fs===1) return 1; if(CLOSE_RX.test(sel)) return 1; if(CTRL_RX.test(sel)) return L.fs>1?Math.min(L.fs,1.4):L.fs; return L.fs; }
+  function factorOf(el){ if(L.fs===1) return 1; var c=el.closest('[id$="-close"],[class*="close"],[id$="-x"],.dmod-close');
+    if(c) return 1; if(el.closest('button,[class*="btn"],[class*="chip"],[class*="tab"],[class*="filt"],select,input')) return L.fs>1?Math.min(L.fs,1.4):L.fs; return L.fs; }
+  var F=1;
   function mapValue(p,v){
-    var role=roleOf(p), sized=(p==="font-size"||p==="line-height")&&L.fs!==1;
-    if(sized) v=v.replace(/(\d*\.?\d+)px/g,function(m,n){ return (Math.round(parseFloat(n)*L.fs*100)/100)+"px"; });
+    var role=roleOf(p), sized=(p==="font-size"||p==="line-height")&&F!==1;
+    if(sized) v=v.replace(/(\d*\.?\d+)px/g,function(m,n){ return (Math.round(parseFloat(n)*F*100)/100)+"px"; });
     if(role&&L.theme!=="classic"){
       if(p==="background-image"&&!/gradient/.test(v)) return v;
       v=v.replace(COLOR_RX,function(t){ var c=parse(t.toLowerCase()); if(!c) return t; var n=(L.theme==="light"?light:dark)(role,c); return n||t; }); }
@@ -11825,20 +11832,22 @@ setTimeout(tgFetch,900);
     if(kinds.has(rule)) return kinds.get(rule);
     var sel=rule.selectorText||"", g=GROUND_RX.test(sel);
     if(!g){ var q=sel.replace(/::?[a-z-]+(\([^)]*\))?/gi,function(m){ return /^:not|^:is|^:where/i.test(m)?m:""; });
-      try{ var els=document.querySelectorAll(q||"#-none-"); for(var i=0;i<els.length&&!g;i++){ if(!els[i].closest(PANELS)&&els[i].closest(GROUND)) g=true; } }catch(e){} }
+      try{ var els=document.querySelectorAll(q||"#-none-"); for(var i=0;i<els.length&&!g;i++){ if(!els[i].closest(PANELS)&&!els[i].closest("#hdr,#hdr2")) g=true; }   /* anything drawn outside a panel is the timeline's own (the floating Studies and Add Story buttons too) */ }catch(e){} }
     kinds.set(rule,g); return g; }
   function walk(list){
     for(var i=0;i<list.length;i++){ var r=list[i];
       if(r.cssRules&&!r.selectorText){ if(r.type!==7) walk(r.cssRules); continue; }   /* @media: in; @keyframes: left alone */
       if(!r.style||ground(r)) continue;
       if(!ruleOrig.has(r)) ruleOrig.set(r,new Map());
-      restyle(r.style,ruleOrig.get(r)); } }
+      F=factorFor(r.selectorText||""); restyle(r.style,ruleOrig.get(r)); F=1; } }
   function sheets(){ var ss=document.styleSheets; for(var i=0;i<ss.length;i++){ if(ss[i].ownerNode&&ss[i].ownerNode.id==="tl-look-base") continue; var rl=null; try{ rl=ss[i].cssRules; }catch(e){} if(rl) walk(rl); } }
   /* words a panel does not colour itself take the page's white: on paper they take navy */
   function base(){
     var el=document.getElementById("tl-look-base");
     if(!el){ el=document.createElement("style"); el.id="tl-look-base"; document.head.appendChild(el); }
     el.textContent='html[data-tl-look="light"] :where('+PANELS+'){color:#1B2D5F;}'
+      /* big words break and hyphenate rather than run out of a panel */
+      +(L.fs>=1.75?':is('+PANELS+'){overflow-wrap:anywhere;-webkit-hyphens:auto;hyphens:auto;}':'')
       +'html[data-tl-look="light"] :is('+PANELS+') :is(input,select,textarea){background-color:#FFFFFF !important;color:#1B2D5F;}'; }
 
   /* the words and colours a panel writes on its own elements */
@@ -11851,7 +11860,7 @@ setTimeout(tgFetch,900);
     /* a property the page added since last time joins in as written */
     for(var i=0;i<el.style.length;i++){ var p=el.style[i]; if((roleOf(p)||p==="font-size"||p==="line-height")&&!o.has(p)) o.set(p,[el.style.getPropertyValue(p),el.style.getPropertyPriority(p),null]); }
     o.forEach(function(v,p){ if(v[2]!==null&&!el.style.getPropertyValue(p)&&v[0]){ v[0]=""; } });
-    restyle(el.style,o); }
+    F=factorOf(el); restyle(el.style,o); F=1; }
   function tree(root){ if(!root||root.nodeType!==1) return; inline(root); var all=root.querySelectorAll("[style]"); for(var i=0;i<all.length;i++) inline(all[i]); }
   function panels(){ var ps=document.querySelectorAll(PANELS); for(var i=0;i<ps.length;i++) tree(ps[i]); }
   function watch(){
@@ -11876,8 +11885,8 @@ setTimeout(tgFetch,900);
     if(mo) mo.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["style"]}); else watch(); }
 
   var THEMES={classic:"classic",blue:"classic",navy:"classic",dark:"dark",light:"light"};
-  var SIZES={small:.9,"default":1,large:1.15,xlarge:1.35};
-  function size(v){ var n=SIZES[v]!=null?SIZES[v]:parseFloat(v); return (n>=.8&&n<=1.6)?n:1; }
+  var SIZES={small:.8,"default":1,large:1.2,xlarge:1.4};
+  function size(v){ var n=SIZES[v]!=null?SIZES[v]:parseFloat(v); return (n>=.7&&n<=4.2)?n:1; }
   window.tlSetLook=function(theme,fs){
     if(theme!=null) L.theme=THEMES[String(theme).toLowerCase()]||"classic";
     if(fs!=null) L.fs=size(fs);
