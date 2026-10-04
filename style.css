@@ -3448,3 +3448,285 @@ html[data-theme="light"] .bs-art {
 .mp-rich p{margin:0 0 .6rem;} .mp-rich h1{font-size:1.25rem;margin:0 0 .5rem;} .mp-rich h2{font-size:1.05rem;margin:.8rem 0 .3rem;} .mp-rich h3{font-size:.98rem;margin:.7rem 0 .3rem;}
 .mp-rich ul,.mp-rich ol{margin:0 0 .6rem;padding-left:1.4rem;}
 .mp-rich blockquote{margin:0 0 .6rem;padding-left:.8rem;border-left:3px solid rgba(245,197,24,.6);opacity:.85;font-style:italic;}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   THE LANTERN, ON ITS OWN (Levi, 4 Oct 2026)
+
+   The website shows one plan: The Lantern. The Compass, The Knapsack and The
+   Caravan are still written into subscribe.html and the three front pages,
+   wrapped in `.tier-later`, so they are remembered. To show one again, remove
+   the `tier-later` class from its wrapper (and take the `solo` class off the
+   grid so the cards sit side by side again).
+
+   `.app-tour` is the row of real app screens under the plan, and
+   js/lst-app-peek.js opens any `[data-app-shot]` at full size. The screens are
+   images/app/app-*.jpg, made from the app itself at phone size.
+   ═══════════════════════════════════════════════════════════════════════ */
+.tier-later { display: none !important; }
+
+/* one card, centred, wide enough to hold the perks in two columns */
+.tiers-grid.tiers-solo,
+.plans-solo {
+  display: block !important;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.tiers-solo .tier-card:hover,
+.plans-solo .plan-card:hover { transform: none; }
+
+.lantern-perks { display: grid; grid-template-columns: 1fr; column-gap: 1.75rem; }
+@media (min-width: 720px) {
+  .lantern-perks { grid-template-columns: 1fr 1fr; }
+  .lantern-perks li.has-preview:nth-last-child(2) { border-bottom: none; }
+}
+.lantern-perks li .perk-label { display: block; }
+.lantern-perks .perk-title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+.lantern-perks .perk-line {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  color: var(--ink-70);
+  line-height: 1.5;
+}
+.lantern-perks li.has-preview:hover .perk-title { color: var(--gold-ink); }
+.lantern-perks .perk-eye { cursor: zoom-in; }
+.has-preview .perk-popup-media img.app-thumb {
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+}
+.lantern-trial-note {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--ink-70);
+  margin: 0;
+}
+.lantern-trial-note strong { color: var(--gold-ink); }
+
+/* ── A look inside the app ─────────────────────────────────────────────── */
+.app-tour { margin: 2.75rem auto 0; max-width: 1100px; text-align: center; }
+.app-tour-kicker {
+  font-family: var(--font-accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  margin-bottom: 0.6rem;
+}
+.app-tour h2, .app-tour h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  color: var(--ink);
+  margin: 0 0 0.45rem;
+}
+.app-tour-sub {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  color: var(--ink-70);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 1.6rem;
+}
+.app-tour-track {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.4rem 1.1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.app-shot {
+  all: unset;
+  box-sizing: border-box;
+  width: 172px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  cursor: zoom-in;
+  text-align: center;
+}
+.app-shot:focus-visible .app-shot-phone { outline: 3px solid var(--teal, #5BD3DC); outline-offset: 3px; }
+.app-shot-phone {
+  display: block;
+  width: 100%;
+  aspect-ratio: 390 / 844;
+  border-radius: 22px;
+  padding: 5px;
+  background: #0b1430;
+  border: 1.5px solid rgba(245,197,24,0.45);
+  box-shadow: 0 14px 34px var(--shadow);
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.app-shot:hover .app-shot-phone { transform: translateY(-4px); border-color: var(--gold); }
+.app-shot-phone img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 17px;
+}
+.app-shot-cap {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.app-shot-line {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--ink-62);
+  margin-top: 2px;
+}
+@media (max-width: 720px) {
+  .app-tour-track {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.25rem 1rem 1rem;
+    margin: 0 -1rem;
+    scrollbar-width: none;
+  }
+  .app-tour-track::-webkit-scrollbar { display: none; }
+  .app-shot { width: 58vw; max-width: 220px; flex-shrink: 0; scroll-snap-align: center; }
+  .app-tour p.app-tour-swipe { display: block; }
+}
+.app-tour .app-tour-swipe {
+  display: none;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--ink-55);
+  margin-top: 0.4rem;
+}
+
+/* ── the full-size view (js/lst-app-peek.js) ───────────────────────────── */
+.app-peek {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9996;
+  background: rgba(var(--rgb-navy-pitch), 0.94);
+  backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.app-peek.open { display: flex; }
+.app-peek-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  max-width: 860px;
+  width: 100%;
+  max-height: 94vh;
+  background: linear-gradient(150deg, var(--page-2), var(--page));
+  border: 2px solid var(--gold);
+  border-radius: 20px;
+  padding: 1.4rem 1.6rem;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+}
+.app-peek-phone {
+  flex-shrink: 0;
+  height: min(78vh, 700px);
+  aspect-ratio: 390 / 844;
+  border-radius: 30px;
+  padding: 7px;
+  background: #0b1430;
+  border: 1.5px solid rgba(245,197,24,0.5);
+  overflow: hidden;
+}
+.app-peek-phone img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 24px; }
+.app-peek-text { text-align: left; }
+.app-peek-kicker {
+  font-family: var(--font-accent);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal-ink);
+  margin-bottom: 0.5rem;
+}
+.app-peek-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--gold-ink);
+  margin: 0 0 0.6rem;
+  line-height: 1.2;
+}
+.app-peek-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink-85);
+  line-height: 1.7;
+  margin: 0 0 1.2rem;
+}
+.app-peek-nav { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.app-peek-nav button {
+  cursor: pointer;
+  background: var(--fill-08);
+  border: 1.5px solid rgba(245,197,24,0.45);
+  color: var(--gold-ink);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+}
+.app-peek-nav button:hover { background: var(--fill-16); }
+.app-peek-count { font-family: var(--font-body); font-size: 0.78rem; color: var(--ink-55); margin-top: 0.8rem; }
+.app-peek-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--fill-12);
+  color: var(--ink);
+  font-size: 0.95rem;
+  line-height: 32px;
+  text-align: center;
+}
+.app-peek-close:hover { background: var(--fill-16); }
+@media (max-width: 720px) {
+  .app-peek { padding: 0.6rem; align-items: flex-start; overflow-y: auto; }
+  .app-peek-box { flex-direction: column; gap: 1rem; padding: 2.6rem 1rem 1.2rem; max-height: none; margin: auto 0; }
+  .app-peek-phone { height: auto; width: min(76vw, 320px); }
+  .app-peek-text { text-align: center; }
+  .app-peek-nav { justify-content: center; }
+  .app-peek-title { font-size: 1.35rem; }
+  .app-peek-desc { font-size: 0.95rem; }
+}
+@media print { .app-peek { display: none !important; } }
+.plan-features.lantern-perks li.has-preview::before {
+  content: '\2726';
+  color: var(--gold-ink);
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  margin-top: 4px;
+}
+.tiers-solo .tier-price-note { text-align: center; }
+.tiers-solo .tier-persona,
+.plans-solo .plan-card > p { max-width: 600px; margin-left: auto; margin-right: auto; }
+.tiers-solo .tier-cta-group { max-width: 520px; width: 100%; margin: 0 auto; }

@@ -505,7 +505,7 @@
                 <a href="/subscribe.html#plans" class="nav-dropdown-item" onclick="return openTrialSignup()">Try the First 7 Days Free</a>
                 <a href="subscribe.html#plans" class="nav-dropdown-item" onclick="return openTrialSignup()">
                   <span class="nav-dropdown-item-title">Choose a Plan</span>
-                  <span class="nav-dropdown-item-desc">The Lantern, Compass, Knapsack, or Caravan</span>
+                  <span class="nav-dropdown-item-desc">The Lantern: everything in the app</span>
                 </a>
               </div>
             </div>
@@ -728,16 +728,16 @@
 
         <!-- Header -->
         <div style="text-align:center;margin-bottom:2rem;">
-          <div style="font-family: var(--font-accent);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:0.75rem;">✦ TRAVELER PACKS ✦</div>
-          <h2 style="font-family: var(--font-display);font-weight:600;font-size:clamp(1.9rem,4vw,2.8rem);color:var(--ink);margin:0 0 0.5rem;">Choose Your Plan</h2>
-          <p style="font-family: var(--font-body);font-size:1rem;color:var(--ink-70);margin:0 auto;max-width:560px;">All plans are managed securely through Payhip. Cancel anytime.</p>
+          <div style="font-family: var(--font-accent);font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:0.75rem;">✦ THE LANTERN ✦</div>
+          <h2 style="font-family: var(--font-display);font-weight:600;font-size:clamp(1.9rem,4vw,2.8rem);color:var(--ink);margin:0 0 0.5rem;">One plan. Everything in the app.</h2>
+          <p style="font-family: var(--font-body);font-size:1rem;color:var(--ink-70);margin:0 auto;max-width:560px;">Try the first 7 days free. Managed securely through Payhip. Cancel anytime.</p>
         </div>
 
         <!-- Draws nothing unless data/founding-offer.js is switched on. -->
         <div id="lst-founding"></div>
 
-        <!-- Tier cards grid -->
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;align-items:stretch;">
+        <!-- Tier cards grid. Only The Lantern shows; the others are kept below in .tier-later. -->
+        <div class="plans-solo" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;align-items:stretch;">
 
           <!-- Lantern -->
           <div class="plan-card" style="background:var(--fill-04);border:1px solid rgba(245,197,24,0.2);border-radius:16px;padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1rem;position:relative;">
@@ -746,116 +746,122 @@
             <div class="plan-price" style="text-align:center;font-family: var(--font-body);font-weight:900;font-size:2rem;color:var(--ink);line-height:1;">$49<span style="font-size:0.9rem;font-weight:600;color:var(--ink-55);">/year</span></div>
             <div style="text-align:center;font-family: var(--font-body);font-size:0.9rem;font-weight:800;color:var(--gold-ink);margin-top:-0.35rem;">just $4.08 a month</div>
             <div style="text-align:center;font-family: var(--font-body);font-size:0.82rem;color:var(--ink-70);margin-top:0.25rem;">or <strong style="color:var(--ink);">$6.99/month</strong> &mdash; yearly saves you $35</div>
-            <p style="font-family: var(--font-body);font-size:0.85rem;color:var(--ink-62);font-style:italic;line-height:1.5;border-left:2px solid rgba(245,197,24,0.3);padding-left:0.75rem;margin:0;">Best for families beginning a bedtime scripture routine — one quiet story and a soothing lullaby is all you need to start building a lifelong habit.</p>
-            <ul class="plan-features plan-features-grid" role="list" style="list-style:none;padding:0;margin:0;flex:1;">
-              <li class="has-preview" data-product="email">
-                <span class="perk-label">&#10022; The 5 AM Email</span>
-                <span class="perk-eye" title="Preview">&#128065;</span>
+            <p style="font-family: var(--font-body);font-size:0.85rem;color:var(--ink-62);font-style:italic;line-height:1.5;border-left:2px solid rgba(245,197,24,0.3);padding-left:0.75rem;margin:0;">Everything in the app, for the whole family: a quiet gospel study for you each morning, a story and a song for your children each night, and a safe place to keep what your family remembers.</p>
+            <ul class="plan-features plan-features-grid lantern-perks" role="list" style="list-style:none;padding:0;margin:0;flex:1;">
+              <li class="has-preview" data-product="app-lantern">
+                <span class="perk-label"><span class="perk-title">The Morning Lantern</span><span class="perk-line">A parent’s gospel study every morning, in Quick, Medium or Deep, with A Parent’s Heart questions to carry all day.</span></span>
+                <span class="perk-eye" title="See it in the app">&#128065;</span>
                 <div class="perk-popup">
-                  <div class="perk-popup-media" data-product="email" style="cursor:zoom-in;">
-                    <img src="images/email-preview/email-card.jpg" alt="The 5 AM Email preview" style="width:100%;height:130px;object-fit:cover;object-position:top;border-radius:8px;display:block;">
-                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to read a real one, start to finish &#8599;</div>
+                  <div class="perk-popup-media" data-product="app-lantern" data-app-shot="images/app/app-lantern.jpg" data-app-title="The Morning Lantern" data-app-desc="Waiting by 5 AM every morning: tonight’s scripture, the gospel principle behind it, and the background that brings it to life. Pick Quick for a few minutes, Medium for a little more, or Deep for a full study. A Parent’s Heart gives you three questions to ponder all day, so you reach bedtime with your own story ready to share." style="cursor:zoom-in;">
+                    <img class="app-thumb" src="images/app/app-lantern.jpg" alt="The Morning Lantern in the app, with the Quick, Medium and Deep study choices and A Parent’s Heart questions" loading="lazy" style="width:100%;border-radius:8px;display:block;">
+                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to see it full size &#8599;</div>
                   </div>
-                  <strong class="perk-popup-name">The 5 AM Email</strong>
-                  <p class="perk-popup-desc">Ready by 5 AM Mountain Standard Time every morning with tonight's story in a nutshell, the background behind it, the main gospel principle, the key scripture, a one-tap link to the illustrated story PDF, and three questions in <em>A Parent's Heart</em> to carry with you all day.</p>
-                <div class="perk-toolkit">
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; What it gives you</span>
-                    <p>The whole evening handed to you before breakfast &mdash; the story, the principle, the verse, and something of your own to say, hours before bedtime arrives.</p>
-                  </div>
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; Problem it solves</span>
-                    <p>Bedtime lands when you are most depleted. Reading the three questions at 5 AM means you have had all day to ponder, so you walk in with <em>your</em> story and your ancestors' stories ready &mdash; not scrambling for something to say.</p>
-                  </div>
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; Research behind it</span>
-                    <p>Researchers at Emory University's Family Narratives Lab found that children in families who told coherent, emotionally open stories about hard family moments had better self-esteem, stronger social competence, higher-quality friendships, and less anxiety and stress. The third question asks about a grandparent or ancestor for exactly this reason. <span class='perk-research-source'>(Fivush &amp; Duke, Emory University)</span></p>
-                  </div>
-                </div>
+                  <strong class="perk-popup-name">The Morning Lantern</strong>
+                  <p class="perk-popup-desc">Waiting by 5 AM every morning: tonight’s scripture, the gospel principle behind it, and the background that brings it to life. Pick Quick for a few minutes, Medium for a little more, or Deep for a full study. A Parent’s Heart gives you three questions to ponder all day, so you reach bedtime with your own story ready to share.</p>
                 </div>
               </li>
-              <li class="has-preview" data-product="story">
-                <span class="perk-label">✦ Nightly Scripture Story & PDF</span>
-                <span class="perk-eye" title="Preview">👁</span>
+              <li class="has-preview" data-product="app-story">
+                <span class="perk-label"><span class="perk-title">A New Bedtime Story Every Night</span><span class="perk-line">An illustrated scripture story with Beau, Scout, Willow and Wren. Read it yourself, or let the app read it aloud.</span></span>
+                <span class="perk-eye" title="See it in the app">&#128065;</span>
                 <div class="perk-popup">
-                  <div class="perk-popup-media" data-product="story" style="cursor:zoom-in;">
-                    <img src="images/story-pdf/page-06.jpg" alt="Story preview — page 1" style="width:100%;height:130px;object-fit:cover;border-radius:8px;display:block;">
-                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to flip through all 12 pages ↗</div>
+                  <div class="perk-popup-media" data-product="app-story" data-app-shot="images/app/app-story.jpg" data-app-title="A New Bedtime Story Every Night" data-app-desc="A short, gentle scripture story for every night, told in the smallest words that still carry the meaning, with one of the four Travelers beside it. Read it to your children yourself, or tap Listen and the app reads it aloud." style="cursor:zoom-in;">
+                    <img class="app-thumb" src="images/app/app-story.jpg" alt="Tonight’s scripture story in the app, with the Scripture Traveler of the night" loading="lazy" style="width:100%;border-radius:8px;display:block;">
+                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to see it full size &#8599;</div>
                   </div>
-                  <strong class="perk-popup-name">Nightly Scripture Story & PDF</strong>
-                  <p class="perk-popup-desc">A 5–10 minute illustrated bedtime story featuring Beau, Scout, Willow, and Wren — waiting on the website and in the app by 5 AM Mountain Standard Time (Denver) every morning, with a beautifully formatted PDF ready to read on any device or print for a binder.</p>
-                <div class="perk-toolkit">
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; What it gives you</span>
-                    <p>Gives parents a ready-made bedtime routine with zero prep — story, reflection moment, and parent prompt all included.</p>
-                  </div>
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; Problem it solves</span>
-                    <p>No more wondering <em>what should I teach tonight?</em> You walk in with the story already written and the Remember moment already there.</p>
-                  </div>
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; Research behind it</span>
-                    <p>Researchers at Ohio State estimated that reading one picture book a day gives a child about 78,000 words of exposure a year, and that children from literacy-rich homes hear roughly 1.4 million more words before kindergarten than children who are never read to. When that reading is scripture in your voice, you are stacking literacy growth on testimony-building on secure attachment — all in ten minutes. <span class='perk-research-source'><a href='https://ehe.osu.edu/news/listing/importance-reading-kids-daily-0' target='_blank' rel='noopener'>(Logan et al., Ohio State University)</a></span></p>
-                  </div>
-                </div>
+                  <strong class="perk-popup-name">A New Bedtime Story Every Night</strong>
+                  <p class="perk-popup-desc">A short, gentle scripture story for every night, told in the smallest words that still carry the meaning, with one of the four Travelers beside it. Read it to your children yourself, or tap Listen and the app reads it aloud.</p>
                 </div>
               </li>
-              <li class="has-preview" data-product="lullaby">
-                <span class="perk-label">✦ The Lantern Lullaby</span>
-                <span class="perk-eye" title="Preview">👁</span>
+              <li class="has-preview" data-product="app-songs">
+                <span class="perk-label"><span class="perk-title">Tonight’s Song &amp; the Lantern Lullaby</span><span class="perk-line">A song written for each night’s story, and our signature lullaby, with the words on screen to sing along.</span></span>
+                <span class="perk-eye" title="See it in the app">&#128065;</span>
                 <div class="perk-popup">
-                  <div class="perk-popup-media" data-product="lullaby" style="cursor:zoom-in;">
-                    <!-- MEDIA: lullaby -->
-                    <img src="images/lullaby-sheet.jpg" alt="A Little Travelers' Lullaby — full lyrics" style="width:100%;border-radius:8px;display:block;">
+                  <div class="perk-popup-media" data-product="app-songs" data-app-shot="images/app/app-songs.jpg" data-app-title="Tonight’s Song &amp; the Lantern Lullaby" data-app-desc="Every story has a song of its own, and the Lantern Lullaby is the same comforting song every night, so your child knows bedtime is here. The lyrics sit right under the player, each line lighting up as it is sung. Tap a line and the song starts from there." style="cursor:zoom-in;">
+                    <img class="app-thumb" src="images/app/app-songs.jpg" alt="A night’s song in the app, with its lyrics laid out verse by verse" loading="lazy" style="width:100%;border-radius:8px;display:block;">
+                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to see it full size &#8599;</div>
                   </div>
-                  <strong class="perk-popup-name">The Lantern Lullaby</strong>
-                  <p class="perk-popup-desc">Little Scripture Travelers' signature lullaby — the same comforting song every night, with printable lyrics and a sung audio recording to ease little ones into sleep.</p>
-                <div class="perk-toolkit">
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; What it gives you</span>
-                    <p>Gives parents a consistent, science-backed wind-down cue that does the calming work so you don't have to.</p>
-                  </div>
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; Problem it solves</span>
-                    <p>Bedtime resistance — no more nagging or negotiating. The same song each night signals <em>it's time to rest, you are safe</em> before a single word is said.</p>
-                  </div>
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; Research behind it</span>
-                    <p>In a study of 144 infants published in <em>Nature Human Behaviour</em>, babies relaxed measurably — slower heart rate and reduced arousal — when they heard lullabies, even ones from unfamiliar cultures in languages they had never heard. The same song at the same time each night becomes a cue the body reads as safety. <span class='perk-research-source'><a href='https://pmc.ncbi.nlm.nih.gov/articles/PMC8220405/' target='_blank' rel='noopener'>(Bainbridge et al., Nature Human Behaviour)</a></span></p>
-                  </div>
-                </div>
+                  <strong class="perk-popup-name">Tonight’s Song &amp; the Lantern Lullaby</strong>
+                  <p class="perk-popup-desc">Every story has a song of its own, and the Lantern Lullaby is the same comforting song every night, so your child knows bedtime is here. The lyrics sit right under the player, each line lighting up as it is sung. Tap a line and the song starts from there.</p>
                 </div>
               </li>
-              <li class="has-preview" data-product="library">
-                <span class="perk-label">&#10022; The Virtue Library</span>
-                <span class="perk-eye" title="Preview">&#128065;</span>
+              <li class="has-preview" data-product="app-library">
+                <span class="perk-label"><span class="perk-title">The Virtue Library</span><span class="perk-line">Every story, found by virtue, character, life situation, feeling or scripture.</span></span>
+                <span class="perk-eye" title="See it in the app">&#128065;</span>
                 <div class="perk-popup">
-                  <div class="perk-popup-media" data-product="library" style="cursor:zoom-in;">
-                    <img src="images/virtue-library-preview.jpg" alt="The Virtue Library — every story tagged by the virtue it teaches" style="width:100%;height:130px;object-fit:cover;object-position:top;border-radius:8px;display:block;">
-                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to look through the whole library &#8599;</div>
+                  <div class="perk-popup-media" data-product="app-library" data-app-shot="images/app/app-library.jpg" data-app-title="The Virtue Library" data-app-desc="Your child is facing something real tonight: a fib, a lost temper, a hard goodbye. Look it up by virtue, by character, by life situation, by feeling or by scripture, and the story that fits is already there." style="cursor:zoom-in;">
+                    <img class="app-thumb" src="images/app/app-library.jpg" alt="The Virtue Library in the app, with stories sorted by virtue" loading="lazy" style="width:100%;border-radius:8px;display:block;">
+                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to see it full size &#8599;</div>
                   </div>
                   <strong class="perk-popup-name">The Virtue Library</strong>
-                  <p class="perk-popup-desc">Every story in the series, tagged by the virtue it teaches, the life situation it fits, the feeling underneath it, the Traveler who guides it, and the scripture it comes from. Your child is standing in front of you with a real problem &mdash; look up what they need tonight and the story is already there.</p>
-                <div class="perk-toolkit">
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; What it gives you</span>
-                    <p>Tonight's story in about ten seconds. Ninety-one stories catalogued across thirty-six virtues, searchable five different ways &mdash; by virtue, by life situation, by feeling, by Traveler, or by scripture &mdash; and growing every month as the series is written.</p>
-                  </div>
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; Problem it solves</span>
-                    <p>The hard moment has already arrived &mdash; the lie, the shoving match over a toy, the tears at the bedroom door &mdash; and you are reaching for whichever three or four stories you happen to remember. This means you never have to teach from memory alone.</p>
-                  </div>
-                  <div class="perk-toolkit-row">
-                    <span class="perk-toolkit-label">&#10022; Research behind it</span>
-                    <p>Researchers testing whether storybooks actually shift children's moral beliefs found that most did not &mdash; abstract fables about talking animals changed very little. Stories worked when they were <em>directly applicable to the situation the child was already dealing with</em>. That finding is the entire reason this library is organized by the problem in front of you tonight instead of by book order. <span class='perk-research-source'><a href='https://www.psychologytoday.com/us/blog/moral-boundaries/202010/do-children-learn-moral-lessons-storybooks' target='_blank' rel='noopener'>(Psychology Today, on children's moral learning from storybooks)</a></span></p>
-                  </div>
+                  <p class="perk-popup-desc">Your child is facing something real tonight: a fib, a lost temper, a hard goodbye. Look it up by virtue, by character, by life situation, by feeling or by scripture, and the story that fits is already there.</p>
                 </div>
+              </li>
+              <li class="has-preview" data-product="app-archive">
+                <span class="perk-label"><span class="perk-title">Daily Stories</span><span class="perk-line">Every past night kept: the story, the study and the song. Miss a night and it is still there.</span></span>
+                <span class="perk-eye" title="See it in the app">&#128065;</span>
+                <div class="perk-popup">
+                  <div class="perk-popup-media" data-product="app-archive" data-app-shot="images/app/app-archive.jpg" data-app-title="Daily Stories" data-app-desc="Every night that has gone out, newest first, with its story, its Morning Lantern and its song kept together. Search by date, title or scripture to find a favorite again." style="cursor:zoom-in;">
+                    <img class="app-thumb" src="images/app/app-archive.jpg" alt="Daily Stories in the app, a list of past nights with their scriptures" loading="lazy" style="width:100%;border-radius:8px;display:block;">
+                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to see it full size &#8599;</div>
+                  </div>
+                  <strong class="perk-popup-name">Daily Stories</strong>
+                  <p class="perk-popup-desc">Every night that has gone out, newest first, with its story, its Morning Lantern and its song kept together. Search by date, title or scripture to find a favorite again.</p>
+                </div>
+              </li>
+              <li class="has-preview" data-product="app-journal">
+                <span class="perk-label"><span class="perk-title">The Journal</span><span class="perk-line">A private diary with dictation, voice memos, daily prompts, a calendar and a map.</span></span>
+                <span class="perk-eye" title="See it in the app">&#128065;</span>
+                <div class="perk-popup">
+                  <div class="perk-popup-media" data-product="app-journal" data-app-shot="images/app/app-journal.jpg" data-app-title="The Journal" data-app-desc="Your own private book. Type, or just talk and the app writes it down. Keep voice memos, write from a daily prompt, and look back by calendar or on a map of where you were. The night’s reflections are filed here too." style="cursor:zoom-in;">
+                    <img class="app-thumb" src="images/app/app-journal.jpg" alt="The Journal in the app, showing dated entries with tags and places" loading="lazy" style="width:100%;border-radius:8px;display:block;">
+                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to see it full size &#8599;</div>
+                  </div>
+                  <strong class="perk-popup-name">The Journal</strong>
+                  <p class="perk-popup-desc">Your own private book. Type, or just talk and the app writes it down. Keep voice memos, write from a daily prompt, and look back by calendar or on a map of where you were. The night’s reflections are filed here too.</p>
+                </div>
+              </li>
+              <li class="has-preview" data-product="app-scrapbook">
+                <span class="perk-label"><span class="perk-title">Scrapbook &amp; Family Books</span><span class="perk-line">Create a memory from your photos, turn a loved one’s handwriting into a font, and print real books.</span></span>
+                <span class="perk-eye" title="See it in the app">&#128065;</span>
+                <div class="perk-popup">
+                  <div class="perk-popup-media" data-product="app-scrapbook" data-app-shot="images/app/app-scrapbook.jpg" data-app-title="Scrapbook &amp; Family Books" data-app-desc="Create a memory from your photos, a line each, laid out for you. Handwriting Twin scans a loved one’s handwriting once and turns it into a font of their own, so new words appear in their hand. Then gather it all into a family book: print it at home, save it as a PDF, or order a bound copy." style="cursor:zoom-in;">
+                    <img class="app-thumb" src="images/app/app-scrapbook.jpg" alt="Handwriting and Books in the app, with Create a memory and Handwriting Twin" loading="lazy" style="width:100%;border-radius:8px;display:block;">
+                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to see it full size &#8599;</div>
+                  </div>
+                  <strong class="perk-popup-name">Scrapbook &amp; Family Books</strong>
+                  <p class="perk-popup-desc">Create a memory from your photos, a line each, laid out for you. Handwriting Twin scans a loved one’s handwriting once and turns it into a font of their own, so new words appear in their hand. Then gather it all into a family book: print it at home, save it as a PDF, or order a bound copy.</p>
+                </div>
+              </li>
+              <li class="has-preview" data-product="app-timeline">
+                <span class="perk-label"><span class="perk-title">The Sacred World Timeline</span><span class="perk-line">All of history on one map, with the Atonement of Jesus Christ at the center: studies, narrated tours, maps and family history.</span></span>
+                <span class="perk-eye" title="See it in the app">&#128065;</span>
+                <div class="perk-popup">
+                  <div class="perk-popup-media" data-product="app-timeline" data-app-shot="images/app/app-timeline.jpg" data-app-title="The Sacred World Timeline" data-app-desc="Every civilization, invention and turning point, laid out on one map of time around the moment everything else turns on: the Atonement of Jesus Christ. Zoom in or out, take a narrated tour, follow a study, open the maps, and add your own family to see where they stood." style="cursor:zoom-in;">
+                    <img class="app-thumb" src="images/app/app-timeline.jpg" alt="The Sacred World Timeline in the app, with tonight’s story marked on the map of history" loading="lazy" style="width:100%;border-radius:8px;display:block;">
+                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to see it full size &#8599;</div>
+                  </div>
+                  <strong class="perk-popup-name">The Sacred World Timeline</strong>
+                  <p class="perk-popup-desc">Every civilization, invention and turning point, laid out on one map of time around the moment everything else turns on: the Atonement of Jesus Christ. Zoom in or out, take a narrated tour, follow a study, open the maps, and add your own family to see where they stood.</p>
+                </div>
+              </li>
+              <li class="has-preview" data-product="app-family">
+                <span class="perk-label"><span class="perk-title">Family Stories</span><span class="perk-line">Your family’s own answers and memories, saved and kept together.</span></span>
+                <span class="perk-eye" title="See it in the app">&#128065;</span>
+                <div class="perk-popup">
+                  <div class="perk-popup-media" data-product="app-family" data-app-shot="images/app/app-family-stories.jpg" data-app-title="Family Stories" data-app-desc="Every answer you write to A Parent’s Heart, every testimony and every funny thing your child said, saved privately in My Family Stories. Find any of it by date, scripture, story or virtue, and keep it for the years to come." style="cursor:zoom-in;">
+                    <img class="app-thumb" src="images/app/app-family-stories.jpg" alt="My Family Stories in the app, with a family’s saved memories and reflections" loading="lazy" style="width:100%;border-radius:8px;display:block;">
+                    <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to see it full size &#8599;</div>
+                  </div>
+                  <strong class="perk-popup-name">Family Stories</strong>
+                  <p class="perk-popup-desc">Every answer you write to A Parent’s Heart, every testimony and every funny thing your child said, saved privately in My Family Stories. Find any of it by date, scripture, story or virtue, and keep it for the years to come.</p>
                 </div>
               </li>
             </ul>
             <a href="/subscribe.html#plans" style="display:block;background:transparent;color:var(--gold-ink);border:2px solid rgba(245,197,24,0.5);font-family: var(--font-body);font-weight:900;font-size:1rem;padding:0.7rem 1.5rem;border-radius:999px;text-decoration:none;text-align:center;margin-top:0.5rem;" onclick="return openTrialSignup()">Try the First 7 Days Free</a>
           </div>
 
+          <!-- Kept aside for later (Levi, 4 Oct 2026): remove the tier-later class to show again -->
+          <div class="tier-later" aria-hidden="true">
           <!-- Compass -->
           <div style="background:var(--fill-04);border:1px solid var(--edge-12);border-radius:16px;padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1rem;opacity:0.7;position:relative;">
             <div style="font-size:2.4rem;text-align:center;">🧭</div>
@@ -888,7 +894,27 @@
             </ul>
             <a href="https://gmail.us18.list-manage.com/subscribe/post?u=1269518e0e790bb0b9c6dff78&id=a6978c55f7&f_id=0033abe6f0" target="_blank" rel="noopener" style="display:block;background:transparent;color:var(--gold-ink);border:2px solid rgba(245,197,24,0.5);font-family: var(--font-body);font-weight:900;font-size:1rem;padding:0.7rem 1.5rem;border-radius:999px;text-decoration:none;text-align:center;margin-top:0.5rem;">Notify Me When Live</a>
           </div>
+          </div>
 
+        </div>
+
+        <!-- A look inside the app: real screens from the app (images/app/). A tap opens one full size (js/lst-app-peek.js). -->
+        <div class="app-tour" id="inside-app">
+          <div class="app-tour-kicker">&#10022; A look inside the app &#10022;</div>
+          <h3>Everything in The Lantern, on your phone</h3>
+          <p class="app-tour-sub">These are real screens from the Little Scripture Travelers app. Tap any one to see it bigger.</p>
+          <div class="app-tour-track">
+            <button type="button" class="app-shot" data-app-shot="images/app/app-lantern.jpg" data-app-title="The Morning Lantern" data-app-desc="Waiting by 5 AM every morning: tonight’s scripture, the gospel principle behind it, and the background that brings it to life. Pick Quick for a few minutes, Medium for a little more, or Deep for a full study. A Parent’s Heart gives you three questions to ponder all day, so you reach bedtime with your own story ready to share." aria-label="See The Morning Lantern full size"><span class="app-shot-phone"><img src="images/app/app-lantern.jpg" alt="The Morning Lantern in the app, with the Quick, Medium and Deep study choices and A Parent’s Heart questions" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">The Morning Lantern<span class="app-shot-line">Quick, Medium or Deep</span></span></button>
+            <button type="button" class="app-shot" data-app-shot="images/app/app-story.jpg" data-app-title="A New Bedtime Story Every Night" data-app-desc="A short, gentle scripture story for every night, told in the smallest words that still carry the meaning, with one of the four Travelers beside it. Read it to your children yourself, or tap Listen and the app reads it aloud." aria-label="See A New Bedtime Story Every Night full size"><span class="app-shot-phone"><img src="images/app/app-story.jpg" alt="Tonight’s scripture story in the app, with the Scripture Traveler of the night" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">A New Bedtime Story Every Night<span class="app-shot-line">A new one every night</span></span></button>
+            <button type="button" class="app-shot" data-app-shot="images/app/app-songs.jpg" data-app-title="Tonight’s Song &amp; the Lantern Lullaby" data-app-desc="Every story has a song of its own, and the Lantern Lullaby is the same comforting song every night, so your child knows bedtime is here. The lyrics sit right under the player, each line lighting up as it is sung. Tap a line and the song starts from there." aria-label="See Tonight’s Song &amp; the Lantern Lullaby full size"><span class="app-shot-phone"><img src="images/app/app-songs.jpg" alt="A night’s song in the app, with its lyrics laid out verse by verse" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">Tonight’s Song &amp; the Lantern Lullaby<span class="app-shot-line">Lyrics to sing along</span></span></button>
+            <button type="button" class="app-shot" data-app-shot="images/app/app-library.jpg" data-app-title="The Virtue Library" data-app-desc="Your child is facing something real tonight: a fib, a lost temper, a hard goodbye. Look it up by virtue, by character, by life situation, by feeling or by scripture, and the story that fits is already there." aria-label="See The Virtue Library full size"><span class="app-shot-phone"><img src="images/app/app-library.jpg" alt="The Virtue Library in the app, with stories sorted by virtue" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">The Virtue Library<span class="app-shot-line">Find tonight’s story</span></span></button>
+            <button type="button" class="app-shot" data-app-shot="images/app/app-archive.jpg" data-app-title="Daily Stories" data-app-desc="Every night that has gone out, newest first, with its story, its Morning Lantern and its song kept together. Search by date, title or scripture to find a favorite again." aria-label="See Daily Stories full size"><span class="app-shot-phone"><img src="images/app/app-archive.jpg" alt="Daily Stories in the app, a list of past nights with their scriptures" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">Daily Stories<span class="app-shot-line">Every night kept</span></span></button>
+            <button type="button" class="app-shot" data-app-shot="images/app/app-journal.jpg" data-app-title="The Journal" data-app-desc="Your own private book. Type, or just talk and the app writes it down. Keep voice memos, write from a daily prompt, and look back by calendar or on a map of where you were. The night’s reflections are filed here too." aria-label="See The Journal full size"><span class="app-shot-phone"><img src="images/app/app-journal.jpg" alt="The Journal in the app, showing dated entries with tags and places" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">The Journal<span class="app-shot-line">Your private diary</span></span></button>
+            <button type="button" class="app-shot" data-app-shot="images/app/app-scrapbook.jpg" data-app-title="Scrapbook &amp; Family Books" data-app-desc="Create a memory from your photos, a line each, laid out for you. Handwriting Twin scans a loved one’s handwriting once and turns it into a font of their own, so new words appear in their hand. Then gather it all into a family book: print it at home, save it as a PDF, or order a bound copy." aria-label="See Scrapbook &amp; Family Books full size"><span class="app-shot-phone"><img src="images/app/app-scrapbook.jpg" alt="Handwriting and Books in the app, with Create a memory and Handwriting Twin" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">Scrapbook &amp; Family Books<span class="app-shot-line">Memories, handwriting, books</span></span></button>
+            <button type="button" class="app-shot" data-app-shot="images/app/app-timeline.jpg" data-app-title="The Sacred World Timeline" data-app-desc="Every civilization, invention and turning point, laid out on one map of time around the moment everything else turns on: the Atonement of Jesus Christ. Zoom in or out, take a narrated tour, follow a study, open the maps, and add your own family to see where they stood." aria-label="See The Sacred World Timeline full size"><span class="app-shot-phone"><img src="images/app/app-timeline.jpg" alt="The Sacred World Timeline in the app, with tonight’s story marked on the map of history" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">The Sacred World Timeline<span class="app-shot-line">All of history, one map</span></span></button>
+            <button type="button" class="app-shot" data-app-shot="images/app/app-family-stories.jpg" data-app-title="Family Stories" data-app-desc="Every answer you write to A Parent’s Heart, every testimony and every funny thing your child said, saved privately in My Family Stories. Find any of it by date, scripture, story or virtue, and keep it for the years to come." aria-label="See Family Stories full size"><span class="app-shot-phone"><img src="images/app/app-family-stories.jpg" alt="My Family Stories in the app, with a family’s saved memories and reflections" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">Family Stories<span class="app-shot-line">Your family’s own words</span></span></button>
+          </div>
+          <p class="app-tour-swipe">Swipe to see more &rarr;</p>
         </div>
       </div>
     </section>
@@ -2887,5 +2913,6 @@
 <script src="js/lst-refs.js"></script>
 <script src="js/lst-signup.js"></script>
   <script src="js/lst-signed-in.js"></script>
+  <script src="js/lst-app-peek.js" defer></script>
 </body>
 </html>

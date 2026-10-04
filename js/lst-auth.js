@@ -24,7 +24,11 @@
      (lst_settings.free_for_now, read by lst_is_subscriber), so the nights are
      handed out to every account too. Set both to false on the same day to
      bring the subscription back. */
-  var FREE_FOR_NOW = true;
+  /* FREE FOR OCTOBER (Levi, 4 Oct 2026): free until midnight Mountain time on 1 November 2026,
+     then the free week with a card, as before. The same moment as the database's
+     lst_settings.free_until and the app; to give more free time, move all three. */
+  var FREE_UNTIL = Date.parse("2026-11-01T06:00:00Z");
+  var FREE_FOR_NOW = Date.now() < FREE_UNTIL;
   window.LST_FREE_FOR_NOW = FREE_FOR_NOW;
   /* While it is free, the words about the free week change wherever they are
      written, in the page or in a box drawn later: the text is rewritten as it

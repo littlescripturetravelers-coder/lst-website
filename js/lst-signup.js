@@ -6,7 +6,11 @@
   var SUPA_URL = "https://rdbvktqgrwhjucocobua.supabase.co";
   /* FREE FOR NOW: see js/lst-auth.js. The same switch, so the sign-up modal
      creates a free account and never goes to checkout while it is on. */
-  var FREE_FOR_NOW = true;
+  /* FREE FOR OCTOBER (Levi, 4 Oct 2026): free until midnight Mountain time on 1 November 2026,
+     then the free week with a card, as before. The same moment as the database's
+     lst_settings.free_until and the app; to give more free time, move all three. */
+  var FREE_UNTIL = Date.parse("2026-11-01T06:00:00Z");
+  var FREE_FOR_NOW = Date.now() < FREE_UNTIL;
   window.LST_FREE_FOR_NOW = FREE_FOR_NOW;
   var SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkYnZrdHFncndoanVjb2NvYnVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwNDAwMzEsImV4cCI6MjEwMTYxNjAzMX0.1PJVCfeK6dIFWeBvdsC13HPQ8173BHEok0Qq6l7mfC4";
   /* ======================================================== THE PRICES
@@ -108,6 +112,12 @@
         '<input id="ts-email" type="email" placeholder="Email" autocomplete="email" style="' + IN + '">' +
         '<input id="ts-pw" type="password" placeholder="Create a password (6+ characters)" autocomplete="new-password" style="' + IN + '">' +
         faithField() +
+        /* A CODE FROM LEVI (4 Oct 2026): "if they have received a code from me they can get the
+           code and get a discount or completely free according to the code I give them from
+           Payhip." The code is a Payhip coupon; it goes to checkout with them (in the address,
+           and shown on screen to type into Payhip's coupon box, which always works). */
+        (FREE_FOR_NOW ? '' :
+          '<input id="ts-code" placeholder="Have a code from us? Type it here (optional)" autocomplete="off" autocapitalize="characters" style="' + IN + 'text-transform:uppercase;letter-spacing:0.04em;">') +
         (FREE_FOR_NOW
           ? '<p style="font-size:0.85rem;color:var(--ink-62);line-height:1.5;margin:0.2rem 0 0.6rem;"><b style="color:var(--ink);">The Lantern is free while it is new.</b> Every story, song and study is included with your account, and no card is asked for.</p>'
           : '<p style="font-size:0.8rem;color:var(--ink-62);line-height:1.5;margin:0.2rem 0 0.6rem;">Next, add your card on our secure checkout (Payhip). <b style="color:var(--ink);">You won\'t be charged for 7 days</b>, and you can cancel anytime. Please use this same email at checkout so your subscription connects to your account.</p>') +
@@ -189,7 +199,21 @@
       else if (btn) { btn.disabled = false; btn.textContent = "Sign in"; btn.onclick = function () { closeTrialSignup(); if (window.LSTAuth && LSTAuth.openSignIn) LSTAuth.openSignIn(); else window.location.href = "read.html"; }; }
       return;
     }
-    window.location.href = withEmail(PAYHIP[plan], email);
+    var codeEl = el("ts-code");
+    var code = codeEl ? String(codeEl.value || "").trim().replace(/\s+/g, "") : "";
+    var go = withEmail(PAYHIP[plan], email) + (code ? "&coupon=" + encodeURIComponent(code) : "");
+    if (code) {
+      /* Payhip's checkout has its own box for a coupon. Say the code plainly, copy it, and let
+         them go on when they are ready, so a code never goes missing on the way. */
+      try { if (navigator.clipboard) navigator.clipboard.writeText(code); } catch (e) {}
+      if (btn) btn.disabled = false;
+      err.style.color = "var(--gold-ink)";
+      err.innerHTML = 'Your code <b style="letter-spacing:0.05em;">' + code.replace(/[<>&"]/g, "") + '</b> is copied. ' +
+        'On the next page, find the box for a <b>coupon or discount code</b>, paste or type your code in, and apply it. Your discount shows before you pay anything.';
+      if (btn) { btn.innerHTML = "Continue to secure checkout &rarr;"; btn.onclick = function () { window.location.href = go; }; }
+      return;
+    }
+    window.location.href = go;
   };
 
   /* The site's own buttons: while The Lantern is free, every "Try the First 7
