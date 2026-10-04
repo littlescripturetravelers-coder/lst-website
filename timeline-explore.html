@@ -7189,7 +7189,9 @@ function applyViewRotation(){
 }
 
 // ── ADD ──────────────────────────────────────────────────────
-function openAdd(){toast("Custom event builder - coming in next update! &#10022;");}
+/* Add Story puts the family's own events on the line: that is My Family History (it said
+   "coming in next update" before, 4 Oct 2026, while the real place was already in Studies) */
+function openAdd(){ try{ if(typeof closeStudies==="function") closeStudies(); openFamilyHistory(); }catch(e){ toast("Open Studies, then My Family History"); } }
 
 // ── SEARCH ───────────────────────────────────────────────────
 document.getElementById("srch").addEventListener("input",function(){
