@@ -9718,7 +9718,7 @@ function slfAdopt(kind,feed){
       if(!t.items[k]||Number(src[k].v||0)>=Number(t.items[k].v||0)){ t.items[k]=src[k]; n++; } }
     if(fv>tv) t.version=fv;
     if(feed.updated&&String(feed.updated)>String(t.updated||"")) t.updated=feed.updated;
-    return n>0;
+    if(n>0) slfChristian(t); return n>0;
   }
   if(!Array.isArray(feed.items)||fv<=tv) return false;
   for(var key in feed){ if(!feed.hasOwnProperty(key)||key==="items"||key==="version") continue;
@@ -9732,16 +9732,21 @@ function slfAdopt(kind,feed){
       if(v==null||v===""||(Array.isArray(v)&&!v.length)) continue;   /* the account has nothing here: keep ours */
       mine[f]=v; }
   });
-  t.version=fv; if(kind==="finds") atnMergeFinds(); return true;
+  t.version=fv; if(kind==="finds") atnMergeFinds(); slfChristian(t); return true;
 }
+/* what the account adds comes after the page was made Christian (tlChristianize), so the
+   Christian timeline cleans it the same way; the Latter-day Saint one takes it as it is */
+function slfChristian(t){ try{ if(typeof tlChristian==="function"&&tlChristian()) tlCleanDeep(t,0); }catch(e){} }
+/* each edition remembers its own copy, so the Christian words never reach the Latter-day Saint timeline */
+function slfKey(k){ try{ return tlChristian()?k+"_christian":k; }catch(e){ return k; } }
 /* remembered on the phone, so the newest copy is there before the network answers */
 (function(){
-  try{ var c=JSON.parse(localStorage.getItem("lst_timeline_feed")||"{}"); if(c.tech) slfAdopt("tech",c.tech); if(c.finds) slfAdopt("finds",c.finds); }catch(e){}
-  try{ var s=JSON.parse(localStorage.getItem("lst_timeline_studies")||"null"); if(s) slfAdopt("studies",s); }catch(e){}
+  try{ var c=JSON.parse(localStorage.getItem(slfKey("lst_timeline_feed"))||"{}"); if(c.tech) slfAdopt("tech",c.tech); if(c.finds) slfAdopt("finds",c.finds); }catch(e){}
+  try{ var s=JSON.parse(localStorage.getItem(slfKey("lst_timeline_studies"))||"null"); if(s) slfAdopt("studies",s); }catch(e){}
 })();
 function slfRemember(){
-  try{ localStorage.setItem("lst_timeline_feed",JSON.stringify({tech:SLF.tech,finds:SLF.finds})); }catch(e){}
-  try{ localStorage.setItem("lst_timeline_studies",JSON.stringify(SLF.studies)); }catch(e){}
+  try{ localStorage.setItem(slfKey("lst_timeline_feed"),JSON.stringify({tech:SLF.tech,finds:SLF.finds})); }catch(e){}
+  try{ localStorage.setItem(slfKey("lst_timeline_studies"),JSON.stringify(SLF.studies)); }catch(e){}
 }
 /* rows of timeline_feed, whichever way this page can reach the account */
 function slfRows(ids,cb){
