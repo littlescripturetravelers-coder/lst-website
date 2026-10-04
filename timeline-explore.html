@@ -1487,6 +1487,18 @@ body.hand-active .hand-label{display:block;}
   font-size:12px;cursor:pointer;box-shadow:0 3px 12px rgba(244,114,182,.4);}
 
 @media(max-width:600px){#enav{display:none;}}
+
+/* THE FOLD: every study's top section folds to one line (see THE FOLD in the script) */
+.tl-fold-btn{flex:0 0 30px;width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;
+  background:rgba(255,255,255,.08);color:#F5C518;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;
+  margin-left:auto;margin-right:-4px;transition:transform .2s;}
+.tl-fold-btn:active{transform:scale(.9);}
+html.tl-hdr-min .tl-fold-btn{transform:rotate(180deg);}
+html.tl-hdr-min .tl-fold-hdr{padding-top:8px !important;padding-bottom:8px !important;align-items:center !important;}
+html.tl-hdr-min .tl-fold-hdr > div:first-child{min-width:0;flex:1 1 auto;}
+html.tl-hdr-min .tl-fold-hdr > div:first-child > :not(.tl-fold-title){display:none !important;}
+html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tl-fold-title{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -11734,6 +11746,41 @@ setTimeout(tgFetch,900);
 </script>
   <script src="js/lst-signed-in.js"></script>
 <script>
+/* THE FOLD. Levi, 4 Oct 2026, on a study's top section at a large text size: "I need to be able
+   to collapse the top section and expand". Each study's top (its small label, its title and its
+   paragraph) folds to its title on one line with the arrow beside the close button, or a tap on
+   the title, and opens again the same way. One choice for every study, kept on this phone. (An
+   event's card needs none: its top scrolls away with the card.) */
+(function(){
+  var HDRS="#atn-hdr,#sl-hdr,#cp-hdr,#pt-hdr,#q-hdr,#sys-hdr,#trb-hdr,#ch-hdr,#fh-hdr,#tg-hdr,#gl-hdr,.dp-hdr";
+  var KEY="lst_tl_hdrmin";
+  function isMin(){ return document.documentElement.classList.contains("tl-hdr-min"); }
+  function set(min){
+    document.documentElement.classList.toggle("tl-hdr-min",!!min);
+    try{ localStorage.setItem(KEY,min?"1":"0"); }catch(e){}
+    var bs=document.querySelectorAll(".tl-fold-btn");
+    for(var i=0;i<bs.length;i++){ bs[i].setAttribute("aria-expanded",min?"false":"true"); bs[i].setAttribute("aria-label",min?"Show the top":"Fold the top away"); bs[i].title=min?"Show the top":"Fold the top away"; }
+  }
+  window.tlFold=function(min){ set(min==null?!isMin():min); return isMin(); };
+  function wire(){
+    var hs=document.querySelectorAll(HDRS);
+    for(var i=0;i<hs.length;i++){ var h=hs[i]; if(h.getAttribute("data-fold")) continue;
+      var box=h.querySelector(":scope > div"), close=h.querySelector(":scope > button");
+      if(!box||!close) continue;
+      var t=box.querySelector('[id$="-title"],#cp-main-title,.dp-title,#np-title');
+      if(!t) continue;
+      h.setAttribute("data-fold","1"); h.classList.add("tl-fold-hdr"); t.classList.add("tl-fold-title");
+      t.addEventListener("click",function(){ window.tlFold(); });
+      var b=document.createElement("button"); b.type="button"; b.className="tl-fold-btn"; b.innerHTML="&#9650;";
+      b.addEventListener("click",function(e){ e.stopPropagation(); window.tlFold(); });
+      h.insertBefore(b,close); }
+    var v=null; try{ v=localStorage.getItem(KEY); }catch(e){}
+    set(v==="1");
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",wire); else wire();
+})();
+</script>
+<script>
 /* THE LOOK: THE PANELS FOLLOW THE APP.
    Levi, 4 Oct 2026: "I want to be able to have the theme match the apps theme chose after
    traditional Navy, light, and dark. I also want it to match the size of text that is chosen
@@ -11849,7 +11896,10 @@ setTimeout(tgFetch,900);
     if(!el){ el=document.createElement("style"); el.id="tl-look-base"; document.head.appendChild(el); }
     el.textContent='html[data-tl-look="light"] :where('+PANELS+'){color:#1B2D5F;}'
       /* big words break and hyphenate rather than run out of a panel */
-      +(L.fs>=1.75?':is('+PANELS+'){overflow-wrap:anywhere;-webkit-hyphens:auto;hyphens:auto;}':'')
+      +(L.fs>=1.75?':is('+PANELS+'){overflow-wrap:anywhere;-webkit-hyphens:auto;hyphens:auto;}'
+        /* a row whose small side-note would squeeze its name to a letter a line: the note takes its own line */
+        +'.cf-faith-hdr,#sl-pick-toggle{flex-wrap:wrap;}.cf-faith-hdr>div:nth-child(2){flex:1 1 55%;min-width:0;}'
+        +'.cf-size{flex-basis:100%;order:5;padding-left:2px;}#sl-pick-lbl{flex:1 1 60%;min-width:0;}#sl-pick-cnt,#sl-pick-hint{flex-shrink:1;}':'')
       +'html[data-tl-look="light"] :is('+PANELS+') :is(input,select,textarea){background-color:#FFFFFF !important;color:#1B2D5F;}'; }
 
   /* the words and colours a panel writes on its own elements */
