@@ -43,7 +43,6 @@ VERSE_CARD = f'''
     <div class="verse-ref">Isaiah 40:11 (King James Version)</div>
     <div class="soft-div"></div>
     <div class="bt"><strong>Simple truth:</strong> {ent("Read the four verbs. He feeds. He gathers. He carries. He gently leads. None of them is fast. The lambs are gathered with His arm and carried in His bosom, which is the old word for the front of the chest. A lamb carried there hears a heartbeat. The mother sheep get a different verb. They are not carried. They are led, and led gently, at the pace of a tired animal. That is a shepherd who looks at each sheep and gives each one what it needs. He does the same with a family.")}</div>
-    <div class="bt" style="margin-top:8px;"><strong>A note on tonight&rsquo;s wording:</strong> {ent("The King James text above is set from memory and was not re-checked against a scripture source tonight. It is worth a glance at your own copy of Isaiah 40:11 before you read it aloud.")}</div>
     <div class="pills">
       <div class="pill">Isaiah 40:1&ndash;2</div>
       <div class="pill">Isaiah 40:3&ndash;5</div>

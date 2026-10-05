@@ -126,6 +126,11 @@ def traveler_card():
 
 DEPTH = [('quick', 'Quick read'), ('deep', 'Medium read'), ('heavenly', 'Deep read')]
 
+WORDING_NOTE = re.compile(r'\s*<div class="bt"[^>]*>\s*<strong>A note on (?:tonight(?:&rsquo;|\u2019|\')s|the) wording:</strong>.*?</div>', re.S | re.I)
+
+def drop_wording_note(html):
+    return WORDING_NOTE.sub('', html)
+
 def build(edition_cards, verse_ref_html, out_path, page_title):
     """edition_cards: dict tier -> list of card html strings (hero excluded)."""
     blocks = []
@@ -157,6 +162,10 @@ def build(edition_cards, verse_ref_html, out_path, page_title):
     from links import linkify, count_links
     edition = 'christian' if 'christian' in os.path.basename(out_path) else 'lds'
     html = linkify(html, edition)
+    # NO WORDING NOTE (Levi, 5 Oct 2026: "Please remove this note about checking against the
+    # scripture."). Whether a verse was checked, and against what, belongs in the run's report,
+    # never on the page a family reads; a "note on tonight's wording" is taken out here.
+    html = drop_wording_note(html)
     assert count_links(html) >= 8, f'{out_path}: only {count_links(html)} outbound links - a night is never published without them'
     open(out_path, 'w', encoding='utf-8').write(html)
     return html

@@ -98,6 +98,8 @@ check(not hexes, f'no hardcoded hex in authored markup {hexes[:5]}')
 check('\\"' not in authored, 'no escaped quotes leaked')
 bad = re.findall(r'[“”‘’—–…]', authored)
 check(not bad, f'no raw typographic chars ({len(bad)})')
+check(not re.search(r'note on (?:tonight(?:&rsquo;|\u2019|\')s|the) wording', authored, re.I),
+      'no note about checking the scripture wording on the page (Levi, 5 Oct 2026; it goes in the report)')
 print('\nALL PASS' if ok else '\nFAILURES PRESENT')
 
 # 8. faith-label leak check
