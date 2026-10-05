@@ -24,11 +24,14 @@
      (lst_settings.free_for_now, read by lst_is_subscriber), so the nights are
      handed out to every account too. Set both to false on the same day to
      bring the subscription back. */
-  /* FREE FOR OCTOBER (Levi, 4 Oct 2026): free until midnight Mountain time on 1 November 2026,
-     then the free week with a card, as before. The same moment as the database's
-     lst_settings.free_until and the app; to give more free time, move all three. */
-  var FREE_UNTIL = Date.parse("2026-11-01T06:00:00Z");
-  var FREE_FOR_NOW = Date.now() < FREE_UNTIL;
+  /* THE WEBSITE ASKS FOR THE CARD (Levi, 4 Oct 2026): "when they click free 7 days it should open
+     the sign in information and show the yearly subscription amount and monthly ... they should be
+     able to choose right there and they also have to still put their card in and they get the 7
+     days free but once the 7 days are up they are charged." So the website's sign-up shows both
+     plans and goes to Payhip for the card, now. (The app itself stays free for everyone through December
+     31 - lst_settings.free_until, Levi: "I don't want people to have to put their card in the app
+     though untill January 1st ... but in the website I want them to have to put their card in now".) Set true to make sign-up ask for no card again. */
+  var FREE_FOR_NOW = false;
   window.LST_FREE_FOR_NOW = FREE_FOR_NOW;
   /* While it is free, the words about the free week change wherever they are
      written, in the page or in a box drawn later: the text is rewritten as it

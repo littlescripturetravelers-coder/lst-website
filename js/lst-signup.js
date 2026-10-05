@@ -6,11 +6,14 @@
   var SUPA_URL = "https://rdbvktqgrwhjucocobua.supabase.co";
   /* FREE FOR NOW: see js/lst-auth.js. The same switch, so the sign-up modal
      creates a free account and never goes to checkout while it is on. */
-  /* FREE FOR OCTOBER (Levi, 4 Oct 2026): free until midnight Mountain time on 1 November 2026,
-     then the free week with a card, as before. The same moment as the database's
-     lst_settings.free_until and the app; to give more free time, move all three. */
-  var FREE_UNTIL = Date.parse("2026-11-01T06:00:00Z");
-  var FREE_FOR_NOW = Date.now() < FREE_UNTIL;
+  /* THE WEBSITE ASKS FOR THE CARD (Levi, 4 Oct 2026): "when they click free 7 days it should open
+     the sign in information and show the yearly subscription amount and monthly ... they should be
+     able to choose right there and they also have to still put their card in and they get the 7
+     days free but once the 7 days are up they are charged." So the website's sign-up shows both
+     plans and goes to Payhip for the card, now. (The app itself stays free for everyone through December
+     31 - lst_settings.free_until, Levi: "I don't want people to have to put their card in the app
+     though untill January 1st ... but in the website I want them to have to put their card in now".) Set true to make sign-up ask for no card again. */
+  var FREE_FOR_NOW = false;
   window.LST_FREE_FOR_NOW = FREE_FOR_NOW;
   var SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkYnZrdHFncndoanVjb2NvYnVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwNDAwMzEsImV4cCI6MjEwMTYxNjAzMX0.1PJVCfeK6dIFWeBvdsC13HPQ8173BHEok0Qq6l7mfC4";
   /* ======================================================== THE PRICES
@@ -117,10 +120,10 @@
            Payhip." The code is a Payhip coupon; it goes to checkout with them (in the address,
            and shown on screen to type into Payhip's coupon box, which always works). */
         (FREE_FOR_NOW ? '' :
-          '<input id="ts-code" placeholder="Have a code from us? Type it here (optional)" autocomplete="off" autocapitalize="characters" style="' + IN + 'text-transform:uppercase;letter-spacing:0.04em;">') +
+          '<input id="ts-code" placeholder="Coupon code (optional)" autocomplete="off" autocapitalize="characters" style="' + IN + 'text-transform:uppercase;letter-spacing:0.04em;">') +
         (FREE_FOR_NOW
           ? '<p style="font-size:0.85rem;color:var(--ink-62);line-height:1.5;margin:0.2rem 0 0.6rem;"><b style="color:var(--ink);">The Lantern is free while it is new.</b> Every story, song and study is included with your account, and no card is asked for.</p>'
-          : '<p style="font-size:0.8rem;color:var(--ink-62);line-height:1.5;margin:0.2rem 0 0.6rem;">Next, add your card on our secure checkout (Payhip). <b style="color:var(--ink);">You won\'t be charged for 7 days</b>, and you can cancel anytime. Please use this same email at checkout so your subscription connects to your account.</p>') +
+          : '<p id="ts-terms" style="font-size:0.8rem;color:var(--ink-62);line-height:1.5;margin:0.2rem 0 0.6rem;"></p>') +
         '<div id="ts-err" style="color:var(--warn-ink);font-size:0.85rem;min-height:18px;margin-bottom:0.4rem;"></div>' +
         '<button id="ts-submit" onclick="submitTrialSignup()" style="width:100%;cursor:pointer;background:#f4c842;color:#07112e;border:none;font-family:\'Nunito\',sans-serif;font-weight:900;font-size:1rem;padding:0.8rem;border-radius:999px;">' + (FREE_FOR_NOW ? "Create my account &rarr;" : "Continue to secure checkout &rarr;") + '</button>' +
         '<button onclick="closeTrialSignup()" style="width:100%;background:none;border:none;color:var(--ink-55);margin-top:0.6rem;cursor:pointer;font-size:0.9rem;">Cancel</button>' +
@@ -134,6 +137,14 @@
     var btns = document.querySelectorAll("#ts-plans .ts-plan-btn");
     for (var i = 0; i < btns.length; i++) {
       btns[i].classList.toggle("on", btns[i].getAttribute("data-plan") === plan);
+    }
+    /* What happens, in plain words, for the plan that is lit */
+    var t = el("ts-terms");
+    if (t) {
+      var price = plan === "annual" ? PRICE.annual + " a year" : PRICE.monthly + " a month";
+      t.innerHTML = 'Next, add your card on our secure checkout (Payhip). <b style="color:var(--ink);">Nothing is charged today.</b> ' +
+        'Your first <b style="color:var(--ink);">7 days are free</b>; after that, your plan begins at <b style="color:var(--ink);">' + price + '</b> unless you cancel before then. ' +
+        'Please use this same email at checkout so your subscription connects to your account.';
     }
   };
 
