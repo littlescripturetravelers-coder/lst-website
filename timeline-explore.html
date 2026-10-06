@@ -492,7 +492,7 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 .map-btn:hover{background:rgba(91,211,220,.16);}
 
 /* MAP MODAL */
-#mapov{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;background:#0a1020;flex-direction:column;}
+#mapov{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:700;background:#0a1020;flex-direction:column;}
 #mapov.open{display:flex;}
 #map-hdr{padding:9px 12px;display:flex;align-items:center;justify-content:space-between;
   background:rgba(6,13,30,.99);border-bottom:1px solid rgba(245,197,24,.16);flex-shrink:0;}
@@ -6650,9 +6650,13 @@ function tile2url(x,y,z){return"https://tile.openstreetmap.org/"+z+"/"+x+"/"+y+"
 var TL_STREET_VIEW=false;
 function mapHas(ev){ return !!ev && ((ev.lat!==undefined&&ev.lat!==null&&!isNaN(ev.lat))||!!ev.addr||!!ev.mapQ); }
 function mapQuery(ev){ return ev?(ev.mapQ||ev.addr||""):""; }
+/* BACK TO THE SAME SPOT (Levi, 6 Oct 2026: "when you click out of that it got back to the
+   timeline. It needs to be where you can click out of the map and it lands back on the exact same
+   spot you left in the study"). The map opens over whatever is open - a study, a guide, an
+   event's card - and nothing under it is closed, so closing the map shows that same page, at the
+   same section and the same scroll. It sits above every panel (z-index 700, under the toast). */
 function openMapFor(ev){
   mapEv=ev;
-  document.getElementById("dmod").classList.remove("open");
   document.getElementById("map-t").textContent=decodeT(ev.t||"");
   document.getElementById("map-l").textContent=decodeT(ev.addr||ev.region||ev.loc||"");
   document.getElementById("mapov").classList.add("open");
@@ -6718,6 +6722,52 @@ function initMapT(){
   c.ondblclick=function(){mapZoom=Math.min(18,mapZoom+1);drawMapC(mapEv);};
 }
 function closeMap(){document.getElementById("mapov").classList.remove("open");}
+/* BACK TO THE STUDY (Levi, 6 Oct 2026: "Also it should work that way with the show me it on the
+   timeline"). "Find it on the timeline" used to close the study, so the way back began again at
+   the Studies menu. Now the study only steps aside: it stays open, unseen, holding its section,
+   its open cards and its scroll, and a gold "Back to the study" button waits on the timeline.
+   One tap brings the study back exactly as it was. Opening any study or the Studies menu in the
+   meantime lets the one that stepped aside close for good, as before. */
+var TL_STUDY_PANELS=["atn-panel","study-panel","trb-panel","ch-panel","tech-panel","globe-panel","sys-panel","quad-panel","proph-tracker","compare-panel","doctrine-panel","family-panel"];
+var TL_AWAY=[];
+function tlStepAside(){
+  if(TL_AWAY.length) return;
+  TL_STUDY_PANELS.forEach(function(id){
+    var p=document.getElementById(id); if(!p||!p.classList.contains("open")) return;
+    var scrolls=[]; [p].concat([].slice.call(p.querySelectorAll("*"))).forEach(function(el){ if(el.scrollTop>0||el.scrollLeft>0) scrolls.push([el,el.scrollTop,el.scrollLeft]); });
+    p.classList.add("tl-away"); TL_AWAY.push({p:p,scrolls:scrolls});
+  });
+  var b=document.getElementById("tl-back-study"); if(b) b.classList.toggle("show",TL_AWAY.length>0);
+}
+function tlBackToStudy(){
+  try{ closeMap(); }catch(e){} try{ closeDmod(); }catch(e){}
+  var away=TL_AWAY; TL_AWAY=[];
+  away.forEach(function(a){ a.p.classList.remove("tl-away"); a.scrolls.forEach(function(x){ x[0].scrollTop=x[1]; x[0].scrollLeft=x[2]; }); });
+  var b=document.getElementById("tl-back-study"); if(b) b.classList.remove("show");
+}
+function tlDropAway(){
+  var away=TL_AWAY; TL_AWAY=[];
+  away.forEach(function(a){ a.p.classList.remove("tl-away"); a.p.classList.remove("open"); });
+  var b=document.getElementById("tl-back-study"); if(b) b.classList.remove("show");
+}
+(function(){
+  var st=document.createElement("style");
+  st.textContent=".tl-away{visibility:hidden!important;pointer-events:none!important;}"
+    +"#tl-back-study{display:none;position:fixed;top:calc(var(--safet) + 64px);left:50%;transform:translateX(-50%);z-index:560;"
+    +"background:linear-gradient(135deg,#F5C518,#D9A227);color:#1B2D5F;border:none;border-radius:999px;padding:10px 18px;"
+    +"font-family:var(--font-display);font-weight:700;font-size:15px;box-shadow:0 6px 20px rgba(0,0,0,.45);cursor:pointer;white-space:nowrap;}"
+    +"#tl-back-study.show{display:block;}";
+  document.head.appendChild(st);
+  function addBtn(){ if(document.getElementById("tl-back-study")) return; var b=document.createElement("button"); b.id="tl-back-study"; b.type="button";
+    b.innerHTML="&#8249; Back to the study"; b.onclick=tlBackToStudy; document.body.appendChild(b); }
+  if(document.body) addBtn(); else document.addEventListener("DOMContentLoaded",addBtn);
+  /* any study, or the Studies menu, opened while one waits: the waiting one closes for good */
+  function wrap(){ ["openAtonement","openStudy","openTribes","openChurchGuide","openTechGuide","openGlobe","openSystems","openQuad","openProphTracker","openCompare","openDocPanel","openFamilyHistory","openStudies","toggleStudies"].forEach(function(n){
+    var f=window[n]; if(typeof f!=="function"||f.tlWrapped) return;
+    var w=function(){ if(TL_AWAY.length) tlDropAway(); return f.apply(this,arguments); }; w.tlWrapped=true; window[n]=w;
+  }); }
+  if(document.readyState==="complete") wrap(); else window.addEventListener("load",wrap);
+})();
 function mapPin(ev){ return ev&&ev.lat!==undefined&&ev.lat!==null&&!isNaN(ev.lat); }
 function openAppleMaps(){ if(!mapHas(mapEv)) return; var q=mapQuery(mapEv);
   window.open("https://maps.apple.com/?"+(mapPin(mapEv)?"ll="+mapEv.lat+","+(mapEv.lng||0)+"&":"")+"q="+encodeURIComponent(q||decodeT(mapEv.t||""))+(mapPin(mapEv)?"&z="+(q?17:8):"")); }
@@ -7796,7 +7846,7 @@ function fhAddrRow(card,ev){
     row.innerHTML=(ev.addr?"<div class='fh-addr-t'>&#128205; "+fhEsc(ev.addr)+"</div>":"")
       +"<div class='fh-addr-btns'>"+(mapHas(ev)?"<button class='fh-addr-b fh-addr-see'>&#128205; See where this happened</button>":"")
       +"<button class='fh-addr-b fh-addr-edit'>"+(ev.addr?"Change address":"&#43; Add an address")+"</button></div>";
-    var see=row.querySelector(".fh-addr-see"); if(see) see.onclick=function(){ closeFamilyHistory(); openMapFor(ev); };
+    var see=row.querySelector(".fh-addr-see"); if(see) see.onclick=function(){ openMapFor(ev); };
     row.querySelector(".fh-addr-edit").onclick=edit;
   }
   function edit(){
@@ -10396,7 +10446,7 @@ function slRender(){
     /* every study that happened somewhere can show where (Levi, 3 Oct 2026) */
     var wh=slWhere(it);
     if(wh){ var bw=document.createElement("button"); bw.className="sl-x sl-x2 sl-where"; bw.innerHTML="&#128205; See where this happened";
-      bw.onclick=function(){ try{ closeStudy(); }catch(e){} openMapFor(wh); }; sum.appendChild(bw); }
+      bw.onclick=function(){ openMapFor(wh); }; sum.appendChild(bw); }
 
     var dep=document.createElement("div");dep.className="sl-dep";dep.id=did;
     var dh="";
@@ -10762,7 +10812,7 @@ function glRow(i){
   if(it.de) h+="<div class='gl-de'>"+it.de+"</div>";
   (it.blocks||[]).forEach(function(bl){ h+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+bl.t+"</div>"; });
   var ah=""; try{ if(!it.find) ah=atnStudyHtml(it,"gl-btn atn-gl"); }catch(e){}
-  h+="<div class='gl-btns'>"+ah+"<button class='gl-btn gold' onclick=\"glDeep("+i+")\">&#128214; The full study</button><button class='gl-btn' onclick=\"closeGlobe();mwOpen(GL.rows["+i+"])\">&#128506; Open it on the timeline</button></div><div class='gl-deep' id='gl-deep-"+i+"'></div>";
+  h+="<div class='gl-btns'>"+ah+"<button class='gl-btn gold' onclick=\"glDeep("+i+")\">&#128214; The full study</button><button class='gl-btn' onclick=\"tlStepAside();mwOpen(GL.rows["+i+"])\">&#128506; Open it on the timeline</button></div><div class='gl-deep' id='gl-deep-"+i+"'></div>";
   det.innerHTML=h;
 }
 function glDeep(i){
@@ -10783,7 +10833,7 @@ function glDeep(i){
    ══════════════════════════════════════════════════════════════════════════ */
 function sysItem(pair){ var id=pair[0], cat=pair[1], W=window, arrs={work:"WORK",socfam:"SOCFAM",faithfree:"FAITHFREE",escape:"ESCAPE",slave:"SLAVERY"};
   var arr=W[arrs[cat]]||[]; for(var i=0;i<arr.length;i++) if(arr[i]&&arr[i].id===id) return {id:id,cat:cat,t:arr[i].t,y:arr[i].y,date:arr[i].date}; return null; }
-function sysOpen(id,cat){ var it=sysItem([id,cat]); if(!it) return; closeSystems(); mwOpen(it); }
+function sysOpen(id,cat){ var it=sysItem([id,cat]); if(!it) return; tlStepAside(); mwOpen(it); }
 function sysChip(pair,col){ var it=sysItem(pair); if(!it) return ""; return "<button class='sys-chip' style='border-color:"+col+"66' onclick=\"sysOpen('"+it.id+"','"+it.cat+"')\">"+it.t+"<small>"+(it.date||slYearLabel(it.y))+"</small></button>"; }
 function sysGrade(g){ var k=/very/i.test(g)?"vs":/strong/i.test(g)?"s":"m"; return "<span class='sys-grade "+k+"'>"+slfEsc(g)+"</span>"; }
 function openSystems(){
@@ -10850,7 +10900,7 @@ function trbSee(id){ try{ var D=window.LST_TRIBES, p=(D&&D.peoples||[]).filter(f
   /* the middle of their region, for the pin; the place itself opens in Google and Apple Maps by its name */
   try{ var pts=[]; (a&&a.polys||[]).forEach(function(poly){ pts=pts.concat(poly); });
     if(pts.length){ w.lat=pts.reduce(function(s,q){ return s+q[0]; },0)/pts.length; w.lng=pts.reduce(function(s,q){ return s+q[1]; },0)/pts.length; } }catch(e){}
-  closeTribes(); openMapFor(w); }catch(e){} }
+  openMapFor(w); }catch(e){} }
 function closeTribes(){ document.getElementById("trb-panel").classList.remove("open"); }
 function trbRender(){
   var d=trbData(); if(!d) return; var D=d.D, body=document.getElementById("trb-body"); var top=body.scrollTop;
@@ -11007,7 +11057,7 @@ function openAtonement(part,evId){
   setTimeout(function(){ try{ var el=evId?document.getElementById("atn-ev-"+evId):part?document.getElementById("atn-part-"+part):null; if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); else document.getElementById("atn-body").scrollTop=0; }catch(e){} },60);
 }
 function atnSee(id){ try{ var A=window.LST_ATONEMENT, f=(A&&A.finds||[]).filter(function(x){ return x&&x.id===id; })[0]; if(!f) return;
-  closeAtonement(); openMapFor({t:f.t,loc:f.loc||"",lat:f.lat,lng:f.lng,y:f.y,l:"arch"}); }catch(e){} }
+  openMapFor({t:f.t,loc:f.loc||"",lat:f.lat,lng:f.lng,y:f.y,l:"arch"}); }catch(e){} }
 function closeAtonement(){ document.getElementById("atn-panel").classList.remove("open"); }
 function atnGo(id){ var el=document.getElementById(id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); }
 function atnRender(){
@@ -11060,7 +11110,7 @@ function atnRenderEvidence(){
     h+="</div>"; });
   list.innerHTML=h||"<div class='sl-wait'>Nothing under this label.</div>";
 }
-function atnToTimeline(evId){ closeAtonement(); try{ closeStudy(); }catch(e){} try{ closeGlobe(); }catch(e){} try{ closeTechGuide(); }catch(e){}
+function atnToTimeline(evId){ tlStepAside();
   if(typeof tgToTimeline==="function"){ tgToTimeline(evId); return; }
   for(var i=0;i<EVS.length;i++) if(EVS[i].id===evId){ try{ openEvMod(EVS[i]); }catch(e){} return; } }
 /* every piece of evidence joins the Archaeology lane of the timeline as an event of its own, on the website as in the app */
@@ -11270,8 +11320,8 @@ function chTempleWhere(t){ var w={t:t.name,loc:t.location||"",l:"temples",y:chYe
   if(t.lat!=null&&t.lng!=null){ w.lat=+t.lat; w.lng=+t.lng; if(t.geo==="city") w.near=1; } return w; }
 function chPlaceWhere(p){ var w={t:p.name,loc:p.kind==="state"?p.name+", United States":p.name,l:"missions",y:(p.firstMissionaries&&p.firstMissionaries.year)||2000,mapQ:p.kind==="state"?p.name+", United States":p.name};
   if(p.lat!=null&&p.lng!=null){ w.lat=+p.lat; w.lng=+p.lng; } return w; }
-function chSeeTemple(id){ var t=chTempleById(id); if(!t) return; closeChurchGuide(); openMapFor(chTempleWhere(t)); }
-function chSeePlace(id){ var p=chPlaceById(id); if(!p) return; closeChurchGuide(); openMapFor(chPlaceWhere(p)); }
+function chSeeTemple(id){ var t=chTempleById(id); if(!t) return; openMapFor(chTempleWhere(t)); }
+function chSeePlace(id){ var p=chPlaceById(id); if(!p) return; openMapFor(chPlaceWhere(p)); }
 function chTempleById(id){ var it=CH.t.items; for(var i=0;i<it.length;i++) if(it[i]&&it[i].id===id) return it[i]; return null; }
 function chPlaceById(id){ var it=CH.m.places; for(var i=0;i<it.length;i++) if(it[i]&&it[i].id===id) return it[i]; return null; }
 
@@ -11368,7 +11418,7 @@ function chTab(t){ CH.tab=t; CH.open=null; CH.q=""; CH.filter=t==="temples"?"ded
 function chFilter(f){ CH.filter=f; CH.open=null; chRender(); }
 function chToggle(id){ CH.open=(CH.open===id)?null:id; chRender(); if(CH.open){ var el=document.getElementById("ch-"+id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); } }
 function chSearch(v){ CH.q=String(v||"").toLowerCase(); var box=document.getElementById("ch-list"); if(box) box.innerHTML=chListHtml(); }
-function chToTimeline(evId){ closeChurchGuide(); for(var i=0;i<EVS.length;i++) if(EVS[i].id===evId){ try{ openEvMod(EVS[i]); }catch(e){} return; } }
+function chToTimeline(evId){ tlStepAside(); for(var i=0;i<EVS.length;i++) if(EVS[i].id===evId){ try{ openEvMod(EVS[i]); }catch(e){} return; } }
 function chTempleEvId(t){ var y=chYear(t.dedicated); if(!y) return (t.status!=="HISTORICAL")?"tmpa-now":""; return y<1950?"tmp-"+t.id:"tmp-d-"+chDecade(y); }
 function chPlaceEvId(p){ var y=p.firstMissionaries&&p.firstMissionaries.year; return y?"msn-d-"+chDecade(+y):""; }
 function chSrc(u,label){ u=chUrl(u); return u?"<div class='ch-src'>Source: <a href='"+chEsc(u)+"' target='_blank' rel='noopener'>"+chEsc(label||"The Church of Jesus Christ of Latter-day Saints")+"</a></div>":""; }
@@ -11630,12 +11680,12 @@ function openTechGuide(tab,focus){
   if(focus){ setTimeout(function(){ var el=document.getElementById("tg-"+focus); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); },60); }
 }
 function tgSee(kind,id){ var it=kind==="tech"?tgById(id):tgFindById(id); if(!it||it.lat==null) return;
-  closeTechGuide(); openMapFor({t:decodeT(it.name||it.t||""),loc:it.loc||"",lat:+it.lat,lng:+it.lng,y:Number(it.y)||0,l:kind==="tech"?"invent":"arch"}); }
+  openMapFor({t:decodeT(it.name||it.t||""),loc:it.loc||"",lat:+it.lat,lng:+it.lng,y:Number(it.y)||0,l:kind==="tech"?"invent":"arch"}); }
 function closeTechGuide(){ document.getElementById("tech-panel").classList.remove("open"); }
 function tgTab(t){ TG.tab=t; tgRender(); }
 function tgToggle(id){ TG.open=(TG.open===id)?null:id; tgRender(); if(TG.open){ var el=document.getElementById("tg-"+id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); } }
 function tgJump(id){ var it=tgById(id); if(!it) return; TG.tab="tech"; TG.open=id; tgRender(); var el=document.getElementById("tg-"+id); if(el) el.scrollIntoView({block:"start",behavior:"smooth"}); }
-function tgToTimeline(evId){ closeTechGuide(); for(var i=0;i<EVS.length;i++) if(EVS[i].id===evId){ try{ openEvMod(EVS[i]); }catch(e){} return; } }
+function tgToTimeline(evId){ tlStepAside(); for(var i=0;i<EVS.length;i++) if(EVS[i].id===evId){ try{ openEvMod(EVS[i]); }catch(e){} return; } }
 function tgEra(y){ y=Number(y)||0; if(y<1400) return "Before the printing press"; if(y<1900) return "Printing to electricity"; if(y<2000) return "The screen age"; return "Today and tomorrow"; }
 function tgList(arr,cls){ if(!Array.isArray(arr)||!arr.length) return ""; return "<ul class='tg-list "+(cls||"")+"'>"+arr.map(function(x){ return "<li>"+tgEsc(x)+"</li>"; }).join("")+"</ul>"; }
 function tgNotes(arr,withName){ if(!Array.isArray(arr)||!arr.length) return "<div class='tg-p' style='color:rgba(255,255,255,.5)'>Nothing new yet. This grows on its own.</div>";
