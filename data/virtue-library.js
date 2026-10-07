@@ -1024,8 +1024,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "family-love",
-    "keeping-promises",
-    "kindness"
+    "compassion"
    ],
    "stages": [
     "toddler",
@@ -1051,8 +1050,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "diligence",
-    "service",
-    "humility"
+    "service"
    ],
    "stages": [
     "toddler",
@@ -1077,15 +1075,14 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "faith",
-    "diligence",
-    "kindness"
+    "perseverance",
+    "hope"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "faith",
+   "primaryVirtue": "perseverance",
    "teachingNote": "Reach for this when your child is discouraged during a hard season and needs hope that staying faithful leads somewhere good.",
    "teaser": "Boaz thought Ruth was wonderful. Ruth was kind, hard-working, and loyal. Boaz wanted to take care of Ruth and Naomi. Boaz asked Ruth to marry him. Ruth said yes! They had a beautiful wedding. Now Ruth had a loving husband…",
    "wordCount": 102
@@ -1105,8 +1102,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "prayer",
-    "faith",
-    "keeping-promises"
+    "trust-in-god"
    ],
    "stages": [
     "toddler",
@@ -1132,8 +1128,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "courage",
-    "obedience",
-    "keeping-promises"
+    "obedience"
    ],
    "stages": [
     "toddler",
@@ -1159,8 +1154,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "prayer",
-    "obedience",
-    "heeding-counsel"
+    "pondering"
    ],
    "stages": [
     "toddler",
@@ -1186,7 +1180,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "trust-in-god",
-    "reverence"
+    "courage"
    ],
    "stages": [
     "toddler",
@@ -1212,8 +1206,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "contentment",
-    "heeding-counsel",
-    "trust-in-god"
+    "gratitude"
    ],
    "stages": [
     "toddler",
@@ -1239,8 +1232,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "trust-in-god",
-    "diligence",
-    "humility"
+    "diligence"
    ],
    "stages": [
     "toddler",
@@ -1265,7 +1257,6 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "humility",
     "courage",
     "obedience"
    ],
@@ -1273,7 +1264,7 @@ window.LST_LIBRARY = {
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "humility",
+   "primaryVirtue": "courage",
    "teachingNote": "Reach for this when your child is asked to do something that feels too big and wants to hide, the way Saul hid among the baggage.",
    "teaser": "Samuel took a special bottle of oil. He poured it on Saul's head. This meant Saul was chosen to be king! Samuel said, \"Heavenly Father has anointed you to be the leader of His people.\" Later, Samuel gathered all of…",
    "wordCount": 116
@@ -1345,8 +1336,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "identity",
-    "integrity",
-    "humility"
+    "kindness"
    ],
    "stages": [
     "toddler",
@@ -1398,7 +1388,6 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "courage",
-    "faith",
     "trust-in-god"
    ],
    "stages": [
@@ -1425,7 +1414,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "generosity",
-    "family-love"
+    "kindness"
    ],
    "stages": [
     "toddler",
@@ -1451,7 +1440,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "self-control",
-    "kindness"
+    "contentment"
    ],
    "stages": [
     "toddler",
@@ -1477,8 +1466,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "forgiveness",
-    "self-control",
-    "integrity"
+    "self-control"
    ],
    "stages": [
     "toddler",
@@ -1504,7 +1492,6 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "peacemaking",
-    "kindness",
     "wisdom"
    ],
    "stages": [
@@ -1556,14 +1543,14 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "reverence",
+    "worship-together",
     "gratitude"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "reverence",
+   "primaryVirtue": "worship-together",
    "teachingNote": "Reach for this when your child feels shy about showing joy for Heavenly Father and worries what others will think.",
    "teaser": "The Ark of the Covenant was Heavenly Father's special holy box. David wanted to bring it to Jerusalem! He was SO happy and excited! As the Ark came into the city, David couldn't stop being happy! He danced and danced…",
    "wordCount": 108
@@ -1583,7 +1570,6 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "self-control",
-    "integrity",
     "obedience"
    ],
    "stages": [
@@ -1661,15 +1647,14 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "compassion",
     "wisdom",
-    "family-love"
+    "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "compassion",
+   "primaryVirtue": "wisdom",
    "teachingNote": "Reach for this when teaching your child that real love means wanting what's best for someone else, even a hard sacrifice.",
    "teaser": "Two mothers came to King Solomon. They were arguing about a baby! Both of them said, \"This baby is MINE!\" They needed Solomon to help them. Solomon thought carefully. Then he said something shocking: \"Bring me a sword! I'll cut…",
    "wordCount": 113
@@ -1714,8 +1699,7 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "prayer",
-    "reverence"
+    "prayer"
    ],
    "stages": [
     "toddler",
@@ -1741,8 +1725,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "faith",
-    "obedience",
-    "trust-in-god"
+    "obedience"
    ],
    "stages": [
     "toddler",
@@ -1768,7 +1751,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "heeding-counsel",
-    "kindness"
+    "obedience"
    ],
    "stages": [
     "toddler",
@@ -1793,8 +1776,7 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "trust-in-god",
-    "faith"
+    "trust-in-god"
    ],
    "stages": [
     "toddler",
@@ -1845,8 +1827,7 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "prayer",
-    "trust-in-god"
+    "prayer"
    ],
    "stages": [
     "toddler",
@@ -1871,14 +1852,13 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "trust-in-god",
     "faith"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "trust-in-god",
+   "primaryVirtue": "faith",
    "teachingNote": "Reach for this when your child is choosing between Heavenly Father and something else that's competing for first place.",
    "teaser": "Many people had forgotten Heavenly Father. They worshiped a pretend god named Baal. Elijah said, \"Let's find out who the real Heavenly Father is!\" He gathered everyone on top of a mountain. The prophets of Baal called and called to…",
    "wordCount": 142
@@ -1923,15 +1903,14 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "stand-for-truth",
     "honesty",
-    "courage"
+    "stand-for-truth"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "stand-for-truth",
+   "primaryVirtue": "honesty",
    "teachingNote": "Reach for this when your child is tempted to say what others want to hear instead of what's true.",
    "teaser": "King Ahab wanted to go to a big battle. He gathered lots of prophets who only said what he wanted to hear. \"You'll win! You'll win!\" they cheered. But that wasn't really true. There was one true prophet named Micaiah.…",
    "wordCount": 143
@@ -1950,15 +1929,14 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "family-love",
-    "faith",
-    "trust-in-god"
+    "heeding-counsel",
+    "obedience"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "family-love",
+   "primaryVirtue": "heeding-counsel",
    "teachingNote": "Reach for this when a friendship or family bond is changing and your child needs comfort that loving loyalty carries on.",
    "teaser": "Elijah the prophet was very old. His helper Elisha loved him and stayed close by his side. Elisha would not leave Elijah, no matter what. They walked together as good friends. They came to a river. Elijah rolled up his…",
    "wordCount": 135
@@ -2004,7 +1982,6 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "kindness",
-    "generosity",
     "service"
    ],
    "stages": [
@@ -2057,7 +2034,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "trust-in-god",
-    "honesty"
+    "prayer"
    ],
    "stages": [
     "toddler",
@@ -2108,14 +2085,14 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "service",
-    "generosity"
+    "generosity",
+    "service"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "service",
+   "primaryVirtue": "generosity",
    "teachingNote": "Reach for this when your child has good news and needs a nudge to share it instead of keeping it to themselves.",
    "teaser": "There was no food in the city, and everyone was hungry. Four men sat outside the gate, hungry too. \"Let's go to the enemy camp,\" they said. \"Maybe they'll give us food.\" But when they got there — the camp…",
    "wordCount": 144
@@ -2134,8 +2111,7 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "trust-in-god",
-    "faith"
+    "trust-in-god"
    ],
    "stages": [
     "toddler",
@@ -2187,7 +2163,6 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "prayer",
-    "trust-in-god",
     "comfort"
    ],
    "stages": [
@@ -2239,8 +2214,7 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "love-of-scripture",
-    "obedience"
+    "love-of-scripture"
    ],
    "stages": [
     "toddler",
@@ -2292,8 +2266,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "keeping-promises",
-    "obedience",
-    "worship-together"
+    "obedience"
    ],
    "stages": [
     "toddler",
@@ -2396,8 +2369,7 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "kindness",
-    "wisdom"
+    "kindness"
    ],
    "stages": [
     "toddler",
@@ -2423,8 +2395,7 @@ window.LST_LIBRARY = {
    "feeling": null,
    "virtues": [
     "trust-in-god",
-    "prayer",
-    "courage"
+    "prayer"
    ],
    "stages": [
     "toddler",
@@ -2475,8 +2446,7 @@ window.LST_LIBRARY = {
    "traveler": null,
    "feeling": null,
    "virtues": [
-    "worship-together",
-    "humility"
+    "worship-together"
    ],
    "stages": [
     "toddler",
@@ -2502,7 +2472,7 @@ window.LST_LIBRARY = {
    "feeling": "excited",
    "virtues": [
     "trust-in-god",
-    "hope"
+    "courage"
    ],
    "stages": [
     "toddler",
@@ -2710,8 +2680,7 @@ window.LST_LIBRARY = {
    "feeling": "brave",
    "virtues": [
     "stand-for-truth",
-    "courage",
-    "reverence"
+    "courage"
    ],
    "stages": [
     "toddler",
@@ -2737,7 +2706,7 @@ window.LST_LIBRARY = {
    "feeling": "nervous",
    "virtues": [
     "identity",
-    "wisdom"
+    "service"
    ],
    "stages": [
     "toddler",
@@ -2867,7 +2836,7 @@ window.LST_LIBRARY = {
    "feeling": "grateful",
    "virtues": [
     "gratitude",
-    "integrity"
+    "faith"
    ],
    "stages": [
     "toddler",
@@ -2944,15 +2913,14 @@ window.LST_LIBRARY = {
    "traveler": "wren",
    "feeling": "confused",
    "virtues": [
-    "comfort",
     "prayer",
-    "hope"
+    "comfort"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "comfort",
+   "primaryVirtue": "prayer",
    "teachingNote": "Reach for this when your child is holding back tears or hard feelings and needs permission to tell Heavenly Father honestly.",
    "teaser": "Job had so many big feelings inside. He felt sad and confused, and he had lots of questions. So Job talked to Heavenly Father about all of it. He didn't hide his feelings — he shared them honestly, just like…",
    "wordCount": 102
@@ -2998,7 +2966,6 @@ window.LST_LIBRARY = {
    "feeling": "calm",
    "virtues": [
     "trust-in-god",
-    "wisdom",
     "humility"
    ],
    "stages": [
@@ -3025,7 +2992,7 @@ window.LST_LIBRARY = {
    "feeling": "happy",
    "virtues": [
     "hope",
-    "gratitude"
+    "comfort"
    ],
    "stages": [
     "toddler",
@@ -3050,8 +3017,7 @@ window.LST_LIBRARY = {
    "traveler": "wren",
    "feeling": "brave",
    "virtues": [
-    "love-of-scripture",
-    "diligence"
+    "love-of-scripture"
    ],
    "stages": [
     "toddler",
@@ -3207,7 +3173,7 @@ window.LST_LIBRARY = {
    "feeling": "happy",
    "virtues": [
     "gratitude",
-    "reverence"
+    "worship-together"
    ],
    "stages": [
     "toddler",
@@ -3258,8 +3224,7 @@ window.LST_LIBRARY = {
    "traveler": "beau",
    "feeling": "nervous",
    "virtues": [
-    "trust-in-god",
-    "hope"
+    "trust-in-god"
    ],
    "stages": [
     "toddler",
@@ -3284,14 +3249,14 @@ window.LST_LIBRARY = {
    "traveler": "wren",
    "feeling": "calm",
    "virtues": [
-    "prayer",
-    "pondering"
+    "pondering",
+    "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "prayer",
+   "primaryVirtue": "pondering",
    "teachingNote": "Reach for this at bedtime to help your child fall asleep thinking peacefully about Heavenly Father's love.",
    "teaser": "One song-writer loved Heavenly Father so much that he thought about Him all the time — even when he was lying in bed at night. \"I think about You while I rest,\" he sang. \"My heart wants to be close…",
    "wordCount": 109
@@ -3311,7 +3276,7 @@ window.LST_LIBRARY = {
    "feeling": "excited",
    "virtues": [
     "gratitude",
-    "service"
+    "generosity"
    ],
    "stages": [
     "toddler",
@@ -3413,7 +3378,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Psalms",
    "traveler": "willow",
    "feeling": "grateful",
-   "virtues": ["gratitude", "worship-together", "forgiveness"],
+   "virtues": [
+    "gratitude",
+    "forgiveness"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "gratitude",
    "teachingNote": "Reach for this when your child has done something wrong and cannot seem to put it down.",
@@ -3432,7 +3400,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Psalms",
    "traveler": "beau",
    "feeling": "worried",
-   "virtues": ["prayer", "faith", "comfort"],
+   "virtues": [
+    "prayer",
+    "trust-in-god"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "prayer",
    "teachingNote": "Reach for this when your child wonders whether anyone is really listening.",
@@ -3451,7 +3422,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Psalms",
    "traveler": "scout",
    "feeling": "happy",
-   "virtues": ["gratitude", "hope", "contentment"],
+   "virtues": [
+    "gratitude",
+    "contentment"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "gratitude",
    "teachingNote": "Reach for this on a morning that started badly, when the day still needs rescuing.",
@@ -3470,7 +3444,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Psalms",
    "traveler": "wren",
    "feeling": "confused",
-   "virtues": ["love-of-scripture", "obedience", "wisdom"],
+   "virtues": [
+    "love-of-scripture",
+    "obedience"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "love-of-scripture",
    "teachingNote": "Reach for this when your child has a choice to make and does not know how to weigh it.",
@@ -3489,7 +3466,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Psalms",
    "traveler": "wren",
    "feeling": "loved",
-   "virtues": ["identity", "wonder", "love-of-scripture"],
+   "virtues": [
+    "identity",
+    "wonder"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "identity",
    "teachingNote": "Reach for this when your child feels ordinary, overlooked, or unsure they matter.",
@@ -3508,7 +3488,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Psalms",
    "traveler": "willow",
    "feeling": "loved",
-   "virtues": ["family-love", "gratitude", "identity"],
+   "virtues": [
+    "family-love",
+    "gratitude"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "family-love",
    "teachingNote": "Reach for this on a night when home has felt hard and needs remembering as a gift.",
@@ -3527,7 +3510,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Psalms",
    "traveler": "scout",
    "feeling": "excited",
-   "virtues": ["worship-together", "gratitude", "reverence"],
+   "virtues": [
+    "worship-together",
+    "gratitude"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "worship-together",
    "teachingNote": "Reach for this when your child has more energy than the hour allows — and wants to use it.",
@@ -3546,7 +3532,9 @@ window.LST_LIBRARY = {
    "scriptureBook": "Proverbs",
    "traveler": "beau",
    "feeling": "nervous",
-   "virtues": ["trust-in-god", "faith", "heeding-counsel"],
+   "virtues": [
+    "trust-in-god"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "trust-in-god",
    "teachingNote": "Reach for this before something unknown — a new school, a first night away.",
@@ -3565,7 +3553,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Proverbs",
    "traveler": "scout",
    "feeling": "eager",
-   "virtues": ["wisdom", "curiosity", "heeding-counsel"],
+   "virtues": [
+    "wisdom",
+    "curiosity"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "wisdom",
    "teachingNote": "Reach for this when your child is asking good questions and you want to keep them asking.",
@@ -3584,9 +3575,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Proverbs",
    "traveler": "willow",
    "feeling": "angry",
-   "virtues": ["peacemaking", "self-control", "kindness"],
+   "virtues": [
+    "self-control",
+    "peacemaking"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
-   "primaryVirtue": "peacemaking",
+   "primaryVirtue": "self-control",
    "teachingNote": "Reach for this after a shouting match, when the words have already been said.",
    "teaser": "Wise Solomon knew that the words we say are very powerful. They can make a heart happy or a heart hurt. “A soft, kind answer makes angry feelings go away,” Solomon taught. “But mean, grumpy words just make things worse.” Imagine two…"
   },
@@ -3603,9 +3597,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Proverbs",
    "traveler": "willow",
    "feeling": "grateful",
-   "virtues": ["gratitude", "service", "honoring-parents"],
+   "virtues": [
+    "honoring-parents",
+    "gratitude"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
-   "primaryVirtue": "gratitude",
+   "primaryVirtue": "honoring-parents",
    "teachingNote": "Reach for this when your child has taken someone's work for granted.",
    "teaser": "Near the end of Proverbs is a beautiful song about a wonderful woman — a mom who loved her family with all her heart. She worked hard with happy hands. She made yummy food, cared for her home, and helped people who needed her. She was kind…"
   },
@@ -3622,7 +3619,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Ecclesiastes",
    "traveler": "wren",
    "feeling": "impatient",
-   "virtues": ["patience", "contentment", "trust-in-god"],
+   "virtues": [
+    "patience",
+    "contentment"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "patience",
    "teachingNote": "Reach for this when a child wants something now that can only come later.",
@@ -3641,7 +3641,9 @@ window.LST_LIBRARY = {
    "scriptureBook": "Ecclesiastes",
    "traveler": "scout",
    "feeling": "eager",
-   "virtues": ["faith", "diligence", "identity"],
+   "virtues": [
+    "faith"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "faith",
    "teachingNote": "Reach for this when your child thinks the important things are for grown-ups.",
@@ -3660,9 +3662,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Proverbs",
    "traveler": "beau",
    "feeling": "brave",
-   "virtues": ["integrity", "honesty", "stand-for-truth"],
+   "virtues": [
+    "honesty",
+    "integrity"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
-   "primaryVirtue": "integrity",
+   "primaryVirtue": "honesty",
    "teachingNote": "Reach for this when nobody would have known — and your child chose right anyway, or did not.",
    "teaser": "Wise Solomon shared one more treasure: he said a good name is better than piles of gold and silver. What is a “good name”? It means being someone people can trust — someone honest, kind, and true. When you do good, your name becomes a good…"
   },
@@ -3679,7 +3684,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "willow",
    "feeling": "guilty",
-   "virtues": ["repentance", "forgiveness", "hope"],
+   "virtues": [
+    "repentance",
+    "forgiveness"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "repentance",
    "teachingNote": "Reach for this when a mistake feels too big to be forgiven.",
@@ -3698,9 +3706,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "beau",
    "feeling": "brave",
-   "virtues": ["courage", "service", "obedience"],
+   "virtues": [
+    "service",
+    "courage"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
-   "primaryVirtue": "courage",
+   "primaryVirtue": "service",
    "teachingNote": "Reach for this when there is a hard job nobody wants and your child could be the one.",
    "teaser": "One day, the prophet Isaiah had an amazing experience. In a beautiful vision, he saw Heavenly Father’s shining throne, high and glorious, filling the temple with light. Bright angels flew all around, singing, “Holy, holy, holy!” Everything…"
   },
@@ -3717,7 +3728,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "scout",
    "feeling": "calm",
-   "virtues": ["reverence", "worship-together", "peacemaking"],
+   "virtues": [
+    "reverence",
+    "worship-together"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "reverence",
    "teachingNote": "Reach for this before a Sunday, or after a restless one.",
@@ -3736,7 +3750,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "wren",
    "feeling": "amazed",
-   "virtues": ["hope", "faith", "wonder"],
+   "virtues": [
+    "hope",
+    "faith"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "hope",
    "teachingNote": "Reach for this in a season of waiting, when something good has been promised but not come.",
@@ -3755,7 +3772,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "willow",
    "feeling": "safe",
-   "virtues": ["peacemaking", "kindness", "hope"],
+   "virtues": [
+    "peacemaking",
+    "kindness"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "peacemaking",
    "teachingNote": "Reach for this when the world has felt frightening and your child has noticed.",
@@ -3774,9 +3794,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "beau",
    "feeling": "worried",
-   "virtues": ["courage", "trust-in-god", "faith"],
+   "virtues": [
+    "courage",
+    "trust-in-god"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
-   "primaryVirtue": "trust-in-god",
+   "primaryVirtue": "courage",
    "teachingNote": "Reach for this at the door of something your child is afraid of.",
    "teaser": "After all his wonderful messages, Isaiah sang a happy song of trust. It’s the song this whole week is named after! “Heavenly Father saves me!” Isaiah sang. “I will trust in Him, and I will not be afraid.” Isaiah knew that when Heavenly…"
   },
@@ -3793,7 +3816,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "scout",
    "feeling": "happy",
-   "virtues": ["gratitude", "generosity", "hope"],
+   "virtues": [
+    "gratitude",
+    "generosity"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "gratitude",
    "teachingNote": "Reach for this when your child is happy and you want to teach them to spend it on someone.",
@@ -3812,7 +3838,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "willow",
    "feeling": "sad",
-   "virtues": ["comfort", "compassion", "hope"],
+   "virtues": [
+    "comfort",
+    "hope"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "comfort",
    "teachingNote": "Reach for this on a night that ended in tears — theirs or yours.",
@@ -3831,9 +3860,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "wren",
    "feeling": "worried",
-   "virtues": ["peacemaking", "trust-in-god", "pondering"],
+   "virtues": [
+    "pondering",
+    "trust-in-god"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
-   "primaryVirtue": "peacemaking",
+   "primaryVirtue": "pondering",
    "teachingNote": "Reach for this when a busy mind will not let your child fall asleep.",
    "teaser": "Isaiah shared a lovely secret about how to feel calm and peaceful inside, even when the world is busy. “Heavenly Father will keep you in perfect peace,” Isaiah said, “when you keep your mind on Him.” That means when we fill our thoughts…"
   },
@@ -3850,7 +3882,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "beau",
    "feeling": "discouraged",
-   "virtues": ["trust-in-god", "perseverance", "faith"],
+   "virtues": [
+    "trust-in-god",
+    "faith"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "trust-in-god",
    "teachingNote": "Reach for this when something your child counted on has given way.",
@@ -3869,7 +3904,9 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "scout",
    "feeling": "amazed",
-   "virtues": ["wonder", "faith", "curiosity"],
+   "virtues": [
+    "wonder"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "wonder",
    "teachingNote": "Reach for this when your child has just noticed something astonishing and you want to name it.",
@@ -3888,7 +3925,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "wren",
    "feeling": "confused",
-   "virtues": ["heeding-counsel", "pondering", "obedience"],
+   "virtues": [
+    "heeding-counsel",
+    "pondering"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "heeding-counsel",
    "teachingNote": "Reach for this when a decision is close and the answer has not come yet.",
@@ -3907,7 +3947,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "willow",
    "feeling": "discouraged",
-   "virtues": ["hope", "perseverance", "comfort"],
+   "virtues": [
+    "hope",
+    "faith"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "hope",
    "teachingNote": "Reach for this in a long, dry stretch, when nothing seems to be growing.",
@@ -3926,7 +3969,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "beau",
    "feeling": "brave",
-   "virtues": ["courage", "hope", "comfort"],
+   "virtues": [
+    "courage",
+    "perseverance"
+   ],
    "stages": ["toddler", "preschool", "early-elementary"],
    "primaryVirtue": "courage",
    "teachingNote": "Reach for this the night before something your child has to be brave for.",
@@ -3945,7 +3991,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "willow",
    "feeling": "comforted",
-   "virtues": ["comfort", "trust-in-god"],
+   "virtues": [
+    "comfort",
+    "trust-in-god"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "comfort",
    "teachingNote": "Reach for this when your child is worn out and needs to hear that being carried is allowed.",
@@ -3965,7 +4014,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "wren",
    "feeling": "amazed",
-   "virtues": ["identity", "wonder"],
+   "virtues": [
+    "identity",
+    "wonder"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "identity",
    "teachingNote": "Reach for this when your child feels small or overlooked and needs to know Heavenly Father knows their name.",
@@ -3985,7 +4037,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "beau",
    "feeling": "discouraged",
-   "virtues": ["perseverance", "trust-in-god"],
+   "virtues": [
+    "perseverance",
+    "trust-in-god"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "perseverance",
    "teachingNote": "Reach for this when your child is too tired to keep going and needs to learn where new strength comes from.",
@@ -4005,7 +4060,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "scout",
    "feeling": "comforted",
-   "virtues": ["hope", "trust-in-god"],
+   "virtues": [
+    "hope",
+    "prayer"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "hope",
    "teachingNote": "Reach for this when your child feels like nothing good is coming and needs a picture of rivers in dry places.",
@@ -4025,7 +4083,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "beau",
    "feeling": "worried",
-   "virtues": ["courage", "identity"],
+   "virtues": [
+    "courage",
+    "identity"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "courage",
    "teachingNote": "Reach for this the night before something scary, when your child needs to hear 'you are Mine.'",
@@ -4045,7 +4106,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "willow",
    "feeling": "loved",
-   "virtues": ["identity", "comfort"],
+   "virtues": [
+    "identity",
+    "comfort"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "identity",
    "teachingNote": "Reach for this when your child feels forgotten, left out, or passed over.",
@@ -4065,7 +4129,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "wren",
    "feeling": "calm",
-   "virtues": ["heeding-counsel", "obedience"],
+   "virtues": [
+    "heeding-counsel",
+    "obedience"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "heeding-counsel",
    "teachingNote": "Reach for this when your child struggles to listen and needs to see that commandments are a kindness.",
@@ -4085,9 +4152,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "beau",
    "feeling": "worried",
-   "virtues": ["faith", "courage"],
+   "virtues": [
+    "trust-in-god",
+    "comfort"
+   ],
    "stages": ["toddler", "preschool"],
-   "primaryVirtue": "faith",
+   "primaryVirtue": "trust-in-god",
    "teachingNote": "Reach for this when your child is afraid of the dark or of what comes next.",
    "teaser": "Morning by morning, Heavenly Father wakened Isaiah’s ear and taught him what to say. Then Isaiah could speak one gentle word to anyone who was weary. Isaiah was not afraid. He set his face steady as flint and…",
    "wordCount": 111
@@ -4105,9 +4175,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "wren",
    "feeling": "discouraged",
-   "virtues": ["family-love", "gratitude"],
+   "virtues": [
+    "hope",
+    "family-love"
+   ],
    "stages": ["toddler", "preschool"],
-   "primaryVirtue": "family-love",
+   "primaryVirtue": "hope",
    "teachingNote": "Reach for this when your child needs to know the family standing behind them.",
    "teaser": "Isaiah told the people to look at the rock they were cut from. Look back to Abraham your father, he said, and to Sarah who bore you. Heavenly Father called Abraham when he was all alone. Then He…",
    "wordCount": 105
@@ -4125,7 +4198,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "scout",
    "feeling": "excited",
-   "virtues": ["kindness", "service"],
+   "virtues": [
+    "kindness",
+    "service"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "kindness",
    "teachingNote": "Reach for this when your child has something kind to share and needs a nudge to carry it.",
@@ -4145,9 +4221,11 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "willow",
    "feeling": "sad",
-   "virtues": ["compassion", "comfort"],
+   "virtues": [
+    "comfort"
+   ],
    "stages": ["toddler", "preschool"],
-   "primaryVirtue": "compassion",
+   "primaryVirtue": "comfort",
    "teachingNote": "Reach for this when your child's heart is heavy and they need to learn that Jesus already knows how it feels.",
    "teaser": "Isaiah saw the Savior long before He came. Isaiah called Him a man of sorrows, One who knew exactly what sadness feels like. Jesus was not afraid of sad things. Surely, Isaiah said, He has borne our griefs…",
    "wordCount": 108
@@ -4165,9 +4243,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "wren",
    "feeling": "loved",
-   "virtues": ["forgiveness", "comfort"],
+   "virtues": [
+    "trust-in-god",
+    "comfort"
+   ],
    "stages": ["toddler", "preschool"],
-   "primaryVirtue": "forgiveness",
+   "primaryVirtue": "trust-in-god",
    "teachingNote": "Reach for this after a mistake, when your child is scared that love might leave.",
    "teaser": "For a small moment, Heavenly Father said, I let you go. But with great mercies I will gather you back to Me. With everlasting kindness I will have mercy on you, He said. His kindness had no ending…",
    "wordCount": 103
@@ -4185,7 +4266,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "scout",
    "feeling": "eager",
-   "virtues": ["hope", "prayer"],
+   "virtues": [
+    "hope",
+    "prayer"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "hope",
    "teachingNote": "Reach for this when your child is waiting on something good and needs to keep seeking.",
@@ -4205,7 +4289,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "beau",
    "feeling": "guilty",
-   "virtues": ["humility", "honesty"],
+   "virtues": [
+    "humility",
+    "honesty"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "humility",
    "teachingNote": "Reach for this when your child has hidden something and needs a safe way to tell the truth.",
@@ -4225,7 +4312,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "willow",
    "feeling": "sad",
-   "virtues": ["generosity", "service"],
+   "virtues": [
+    "generosity",
+    "service"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "generosity",
    "teachingNote": "Reach for this when your child has something to share and needs to see what giving does to a heart.",
@@ -4245,7 +4335,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "wren",
    "feeling": "distracted",
-   "virtues": ["reverence", "worship-together"],
+   "virtues": [
+    "reverence",
+    "worship-together"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "reverence",
    "teachingNote": "Reach for this on a Saturday night, when your family wants Sunday to feel different.",
@@ -4265,7 +4358,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "beau",
    "feeling": "discouraged",
-   "virtues": ["repentance", "prayer"],
+   "virtues": [
+    "repentance",
+    "prayer"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "repentance",
    "teachingNote": "Reach for this when your child feels far from Heavenly Father and needs to know turning back is easy.",
@@ -4285,7 +4381,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "scout",
    "feeling": "worried",
-   "virtues": ["hope", "faith"],
+   "virtues": [
+    "hope",
+    "faith"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "hope",
    "teachingNote": "Reach for this on a dark night, when your child needs to know morning is already on its way.",
@@ -4305,7 +4404,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "willow",
    "feeling": "sad",
-   "virtues": ["comfort", "compassion"],
+   "virtues": [
+    "comfort",
+    "hope"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "comfort",
    "teachingNote": "Reach for this when your child is grieving and needs someone to sit close before anything gets fixed.",
@@ -4325,7 +4427,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "wren",
    "feeling": "safe",
-   "virtues": ["humility", "patience"],
+   "virtues": [
+    "humility",
+    "trust-in-god"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "humility",
    "teachingNote": "Reach for this when your child feels unfinished or not good enough yet.",
@@ -4345,9 +4450,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Isaiah",
    "traveler": "scout",
    "feeling": "calm",
-   "virtues": ["peacemaking", "hope"],
+   "virtues": [
+    "hope",
+    "peacemaking"
+   ],
    "stages": ["toddler", "preschool"],
-   "primaryVirtue": "peacemaking",
+   "primaryVirtue": "hope",
    "teachingNote": "Reach for this when your child is afraid of someone or something and needs a picture of the peace that is coming.",
    "teaser": "Heavenly Father showed Isaiah something brand new: new heavens and a new earth, so good that the old sorrows would not even come to mind. There would be no more sound of weeping there, He said, and no…",
    "wordCount": 127
@@ -4365,9 +4473,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Jeremiah",
    "traveler": "beau",
    "feeling": "nervous",
-   "virtues": ["courage", "identity"],
+   "virtues": [
+    "identity",
+    "courage"
+   ],
    "stages": ["toddler", "preschool"],
-   "primaryVirtue": "courage",
+   "primaryVirtue": "identity",
    "teachingNote": "Reach for this when your child says 'I'm too little' and needs to hear that Heavenly Father sends small people.",
    "teaser": "Long ago a young man named Jeremiah heard a quiet voice. It was Heavenly Father, and He said, ‘Before I made you, I knew you.’ Jeremiah looked down at his own small hands. ‘But I am only a…",
    "wordCount": 119
@@ -4385,9 +4496,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Jeremiah",
    "traveler": "willow",
    "feeling": "confused",
-   "virtues": ["kindness", "prayer"],
+   "virtues": [
+    "trust-in-god",
+    "courage"
+   ],
    "stages": ["toddler", "preschool"],
-   "primaryVirtue": "kindness",
+   "primaryVirtue": "trust-in-god",
    "teachingNote": "Reach for this when your child wants to help someone but does not know what to say.",
    "teaser": "Jeremiah still felt small. He did not think he had one single good word tucked inside him. Then a gentle touch came to Jeremiah’s mouth. ‘I have put my words in thy mouth,’ Heavenly Father said, soft as…",
    "wordCount": 115
@@ -4405,7 +4519,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Jeremiah",
    "traveler": "scout",
    "feeling": "amazed",
-   "virtues": ["wonder", "keeping-promises"],
+   "virtues": [
+    "wonder",
+    "trust-in-god"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "wonder",
    "teachingNote": "Reach for this when your child is waiting on a promise and needs to learn that Heavenly Father never forgets one.",
@@ -4425,7 +4542,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Jeremiah",
    "traveler": "wren",
    "feeling": "comforted",
-   "virtues": ["hope", "patience"],
+   "virtues": [
+    "hope",
+    "identity"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "hope",
    "teachingNote": "Reach for this after something your child made fell apart, when they need to begin again.",
@@ -4445,9 +4565,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Jeremiah",
    "traveler": "willow",
    "feeling": "loved",
-   "virtues": ["forgiveness", "family-love"],
+   "virtues": [
+    "repentance",
+    "hope"
+   ],
    "stages": ["toddler", "preschool"],
-   "primaryVirtue": "forgiveness",
+   "primaryVirtue": "repentance",
    "teachingNote": "Reach for this when your child has run off to hide and needs to hear 'come home' instead of a lecture.",
    "teaser": "Heavenly Father gave Jeremiah words to call out toward the north. His children had wandered a long way from home. ‘Come back,’ the words said. ‘I am merciful. I will not keep my anger forever.’ He promised to…",
    "wordCount": 107
@@ -4465,7 +4588,10 @@ window.LST_LIBRARY = {
    "scriptureBook": "Jeremiah",
    "traveler": "beau",
    "feeling": "calm",
-   "virtues": ["trust-in-god", "perseverance"],
+   "virtues": [
+    "trust-in-god",
+    "perseverance"
+   ],
    "stages": ["toddler", "preschool"],
    "primaryVirtue": "trust-in-god",
    "teachingNote": "Reach for this on a hard, dry day, when your child needs to keep doing the small good things anyway.",
@@ -4485,9 +4611,12 @@ window.LST_LIBRARY = {
    "scriptureBook": "Jeremiah",
    "traveler": "scout",
    "feeling": "eager",
-   "virtues": ["worship-together", "courage"],
+   "virtues": [
+    "courage",
+    "worship-together"
+   ],
    "stages": ["toddler", "preschool"],
-   "primaryVirtue": "worship-together",
+   "primaryVirtue": "courage",
    "teachingNote": "Reach for this when your child has something true and happy inside and needs permission to let it out.",
    "teaser": "Some days were tired days for Jeremiah. People did not want the words he carried, and he thought about staying quiet. But the words would not sit still. They felt like a small warm fire tucked away inside…",
    "wordCount": 119
