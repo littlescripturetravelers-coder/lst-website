@@ -34,6 +34,11 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
    goes on working. */
 #hdr,#hdr2{display:none !important;}
 
+/* ANDROID, LIGHTER (7 Oct 2026): a glass blur over the moving sky is cheap on an iPhone and
+   heavy on most Android phones, which redraw it every frame. There the round buttons wear a
+   near-solid face instead; they look the same at a glance. */
+html.tl-lite .tlf{-webkit-backdrop-filter:none !important;backdrop-filter:none !important;} html.tl-lite .tlf:not(.on){background:rgba(6,13,30,.88);}
+html.tl-lite .hand-label{-webkit-backdrop-filter:none !important;backdrop-filter:none !important;}
 /* Floating controls, sitting over the map under the app's own circles. */
 #tl-fab{position:fixed;top:calc(var(--safet) + 10px);left:10px;z-index:320;
   display:flex;gap:8px;}
@@ -45,7 +50,7 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 .tlf:active{transform:scale(.92);}
 .tlf.on{background:rgba(245,197,24,.9);color:#0a1020;border-color:transparent;}
 /* THE WORLD, PLACE BY PLACE: the globe and the history of each land */
-#globe-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;background:rgba(2,5,15,.97);backdrop-filter:blur(16px);flex-direction:column;animation:mopen .22s ease;}
+#globe-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;background:rgba(2,5,15,.97);flex-direction:column;animation:mopen .22s ease;}
 #globe-panel.open{display:flex;}
 #gl-hdr{flex-shrink:0;background:rgba(6,13,30,.99);border-bottom:2px solid rgba(91,211,220,.3);padding:12px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
 #gl-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:#5BD3DC;}
@@ -88,7 +93,7 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 .gl-deep{margin-top:8px;}
 .gl-empty{font-family:var(--font-body);font-size:11px;color:rgba(255,255,255,.5);padding:14px 0;text-align:center;line-height:1.6;}
 /* TWO WAYS TO BUILD A SOCIETY */
-#sys-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;background:rgba(2,5,15,.97);backdrop-filter:blur(16px);flex-direction:column;animation:mopen .22s ease;}
+#sys-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;background:rgba(2,5,15,.97);flex-direction:column;animation:mopen .22s ease;}
 #sys-panel.open{display:flex;}
 #sys-hdr{flex-shrink:0;background:rgba(6,13,30,.99);border-bottom:2px solid rgba(52,211,153,.3);padding:12px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
 #sys-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:#34D399;}
@@ -126,7 +131,7 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 .sys-ref{font-family:var(--font-display);font-weight:600;font-size:11.5px;color:#F5C518;margin:8px 0 2px;}
 .sys-lesson{font-family:var(--font-display);font-weight:500;font-size:13px;line-height:1.5;color:#fff;}
 /* THE NATIVE PEOPLES AND THE BOOK OF MORMON */
-#trb-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:601;background:rgba(2,5,15,.97);backdrop-filter:blur(16px);flex-direction:column;animation:mopen .22s ease;}
+#trb-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:601;background:rgba(2,5,15,.97);flex-direction:column;animation:mopen .22s ease;}
 #trb-panel.open{display:flex;}
 #trb-hdr{flex-shrink:0;background:rgba(6,13,30,.99);border-bottom:2px solid rgba(217,162,39,.35);padding:12px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
 #trb-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:#D9A227;}
@@ -182,7 +187,7 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 .gl-cap{font-family:var(--font-body);font-size:10.5px;line-height:1.55;color:rgba(255,255,255,.6);padding:6px 2px 10px;}
 .gl-cap b{color:#fff;}
 /* JESUS CHRIST AND HIS ATONEMENT */
-#atn-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:612;background:rgba(2,5,15,.97);backdrop-filter:blur(16px);flex-direction:column;animation:mopen .22s ease;}
+#atn-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:612;background:rgba(2,5,15,.97);flex-direction:column;animation:mopen .22s ease;}
 #atn-panel.open{display:flex;}
 #atn-hdr{flex-shrink:0;background:linear-gradient(135deg,rgba(245,197,24,.14),rgba(6,13,30,.99) 60%);border-bottom:2px solid rgba(245,197,24,.55);padding:12px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
 #atn-title{font-family:var(--font-display);font-weight:700;font-size:19px;color:#F5C518;text-shadow:0 0 22px rgba(245,197,24,.45);}
@@ -237,7 +242,7 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 
 #tl-sheet{display:none;position:fixed;top:calc(var(--safet) + 62px);left:10px;right:10px;
   max-height:calc(100% - var(--safet) - var(--safeb) - 74px);z-index:319;
-  background:rgba(8,16,34,.96);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);
+  background:rgba(8,16,34,.96);
   border:1px solid rgba(245,197,24,.22);border-radius:18px;
   flex-direction:column;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.55);
   animation:tlpop .2s ease;}
@@ -263,11 +268,11 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 .tl-hint{font-size:10.5px;line-height:1.5;color:rgba(255,255,255,.4);margin:2px 0 12px;}
 
 #hdrOLD{position:fixed;top:var(--safet);left:0;right:0;z-index:300;height:48px;
-  background:rgba(6,13,30,.97);backdrop-filter:blur(12px);
+  background:rgba(6,13,30,.97);
   border-bottom:1px solid rgba(245,197,24,.15);
   display:flex;align-items:center;padding:0 10px;gap:8px;}
 #hdr2{position:fixed;top:calc(var(--safet) + 48px);left:0;right:0;z-index:299;height:38px;
-  background:rgba(6,13,30,.96);backdrop-filter:blur(10px);
+  background:rgba(6,13,30,.96);
   border-bottom:2px solid rgba(245,197,24,.2);
   overflow:hidden;}
 #hdr2-scroll{display:flex;align-items:center;gap:6px;padding:0 10px;
@@ -423,7 +428,7 @@ html{background:#030810;}   /* the sky is a fixed layer; the page behind it is n
 
 /* DETAIL MODAL */
 #dmod{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:500;
-  background:rgba(2,5,15,.93);backdrop-filter:blur(14px);
+  background:rgba(2,5,15,.93);
   align-items:center;justify-content:center;padding:12px;}
 #dmod.open{display:flex;}
 #dbox{background:linear-gradient(145deg,#111830,#080e1e);border-radius:18px;
@@ -614,7 +619,7 @@ body.hand-active .hand-label{display:block;}
   color:#F5C518;font-family:var(--font-display);font-weight:700;font-size:12px;cursor:pointer;}
 .doctrine-btn:hover{background:rgba(245,197,24,.18);}
 #doctrine-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;
-  background:rgba(2,5,15,.96);backdrop-filter:blur(16px);
+  background:rgba(2,5,15,.96);
   overflow-y:auto;animation:mopen .22s ease;}
 #doctrine-panel.open{display:block;}
 #doctrine-panel::-webkit-scrollbar{width:3px;}
@@ -658,7 +663,7 @@ body.hand-active .hand-label{display:block;}
 
 /* FAMILY HISTORY PANEL */
 #family-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;
-  background:rgba(2,5,15,.97);backdrop-filter:blur(16px);
+  background:rgba(2,5,15,.97);
   flex-direction:column;animation:mopen .22s ease;}
 #family-panel.open{display:flex;}
 #fh-hdr{flex-shrink:0;background:rgba(6,13,30,.99);
@@ -1016,7 +1021,7 @@ body.hand-active .hand-label{display:block;}
 
 /* PROPHECY TRACKER PANEL */
 #proph-tracker{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;
-  background:rgba(2,5,15,.97);backdrop-filter:blur(16px);
+  background:rgba(2,5,15,.97);
   flex-direction:column;animation:mopen .22s ease;}
 #proph-tracker.open{display:flex;}
 #pt-hdr{flex-shrink:0;background:rgba(6,13,30,.99);border-bottom:2px solid rgba(167,139,250,.3);
@@ -1072,7 +1077,7 @@ body.hand-active .hand-label{display:block;}
   box-shadow:0 3px 12px rgba(245,197,24,.2);}
 #compare-btn:hover{background:rgba(245,197,24,.2);}
 #compare-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;
-  background:rgba(2,5,15,.97);backdrop-filter:blur(16px);
+  background:rgba(2,5,15,.97);
   flex-direction:column;animation:mopen .22s ease;}
 #compare-panel.open{display:flex;}
 #cp-hdr{flex-shrink:0;background:rgba(6,13,30,.99);border-bottom:2px solid rgba(245,197,24,.2);
@@ -1246,7 +1251,7 @@ body.hand-active .hand-label{display:block;}
   color:#F5C518;font-family:var(--font-display);font-weight:700;font-size:12px;cursor:pointer;}
 .doctrine-btn:hover{background:rgba(245,197,24,.18);}
 #doctrine-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;
-  background:rgba(2,5,15,.96);backdrop-filter:blur(16px);
+  background:rgba(2,5,15,.96);
   overflow-y:auto;animation:mopen .22s ease;}
 #doctrine-panel.open{display:block;}
 #doctrine-panel::-webkit-scrollbar{width:3px;}
@@ -1290,7 +1295,7 @@ body.hand-active .hand-label{display:block;}
 
 /* FAMILY HISTORY PANEL */
 #family-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;
-  background:rgba(2,5,15,.97);backdrop-filter:blur(16px);
+  background:rgba(2,5,15,.97);
   flex-direction:column;animation:mopen .22s ease;}
 #family-panel.open{display:flex;}
 #fh-hdr{flex-shrink:0;background:rgba(6,13,30,.99);
@@ -1371,7 +1376,7 @@ body.hand-active .hand-label{display:block;}
 
 /* PROPHECY TRACKER PANEL */
 #proph-tracker{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;
-  background:rgba(2,5,15,.97);backdrop-filter:blur(16px);
+  background:rgba(2,5,15,.97);
   flex-direction:column;animation:mopen .22s ease;}
 #proph-tracker.open{display:flex;}
 #pt-hdr{flex-shrink:0;background:rgba(6,13,30,.99);border-bottom:2px solid rgba(167,139,250,.3);
@@ -1427,7 +1432,7 @@ body.hand-active .hand-label{display:block;}
   box-shadow:0 3px 12px rgba(245,197,24,.2);}
 #compare-btn:hover{background:rgba(245,197,24,.2);}
 #compare-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;
-  background:rgba(2,5,15,.97);backdrop-filter:blur(16px);
+  background:rgba(2,5,15,.97);
   flex-direction:column;animation:mopen .22s ease;}
 #compare-panel.open{display:flex;}
 #cp-hdr{flex-shrink:0;background:rgba(6,13,30,.99);border-bottom:2px solid rgba(245,197,24,.2);
@@ -1502,6 +1507,7 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
 </style>
 </head>
 <body>
+<script>try{ if(/Android/i.test(navigator.userAgent)) document.documentElement.classList.add("tl-lite"); }catch(e){}</script>
 <script src="data/tech-guide.js"></script>
 <div id="sky-bg"></div>
 <canvas id="sky-canvas"></canvas>
@@ -4770,23 +4776,38 @@ function initSky(){
   for(var i=0;i<200;i++)skyStars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.8+.3,a:Math.random(),da:Math.random()*.012+.003,g:Math.random()<.1});
   animSky();
 }
-function animSky(){
+/* THE SKY, GENTLY (7 Oct 2026). The stars twinkle slowly, so they are drawn twenty times a
+   second, not sixty, at the same speed; and not at all while a finger is moving the timeline,
+   while a study or a card covers the screen, or while the page is not showing. That frees the
+   phone to draw the timeline itself. */
+var SKY_STEP=3, _skyLast=0;
+function skyCovered(){
+  if(document.hidden) return true;
+  if(isDrag||isPinch) return true;
+  var ps=document.querySelectorAll('#atn-panel,#sys-panel,#trb-panel,#globe-panel,#dmod,#doctrine-panel,#family-panel,#proph-tracker,#compare-panel,#ch-panel,#tech-panel,#tl-sheet');
+  for(var i=0;i<ps.length;i++){ var el=ps[i]; if(el.classList.contains('tl-away')) continue; var cs=getComputedStyle(el); if(cs.display!=='none' && cs.visibility!=='hidden' && el.getBoundingClientRect().height>innerHeight*.6) return true; }
+  return false;
+}
+function animSky(t){
+  requestAnimationFrame(animSky);
+  if(t && t-_skyLast<48) return;
+  if(t) _skyLast=t;
+  if(skyCovered()) return;
   var c=document.getElementById("sky-canvas");if(!c)return;
   var ctx=c.getContext("2d");ctx.clearRect(0,0,c.width,c.height);
   for(var i=0;i<skyStars.length;i++){
-    var s=skyStars[i];s.a+=s.da;
+    var s=skyStars[i];s.a+=s.da*SKY_STEP;
     var al=.2+.75*Math.abs(Math.sin(s.a));
     ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
     ctx.fillStyle=s.g?"rgba(245,197,24,"+al+")":"rgba(255,255,255,"+al+")";ctx.fill();
   }
-  skyOffset=(skyOffset+.07)%c.width;
+  skyOffset=(skyOffset+.07*SKY_STEP)%c.width;
   var clouds=[[skyOffset-.1*c.width,c.height*.12,.05],[skyOffset+.3*c.width,c.height*.22,.04],[skyOffset+.7*c.width,c.height*.08,.045]];
   for(var i=0;i<clouds.length;i++){
     var cg=ctx.createRadialGradient(clouds[i][0],clouds[i][1],5,clouds[i][0],clouds[i][1],175);
     cg.addColorStop(0,"rgba(20,45,110,"+clouds[i][2]+")");cg.addColorStop(.5,"rgba(12,28,75,"+(clouds[i][2]*.5)+")");cg.addColorStop(1,"rgba(0,0,0,0)");
     ctx.fillStyle=cg;ctx.beginPath();ctx.ellipse(clouds[i][0],clouds[i][1],190,68,0,0,Math.PI*2);ctx.fill();
   }
-  requestAnimationFrame(animSky);
 }
 
 // ── BUILD TIMELINE ───────────────────────────────────────────
@@ -6913,7 +6934,13 @@ function upMM(){
   th.style.width=tw+"px";th.style.left=Math.max(0,Math.min(mw-tw,sf*mw))+"px";
 }
 function dz(f){var st=document.getElementById("stage");zaAt(st.clientWidth/2,st.clientHeight/2,f);}
-function zaAt(cx,cy,f){var ns=Math.min(Math.max(sc*f,.02),5),af=ns/sc;tx=cx-(cx-tx)*af;ty=cy-(cy-ty)*af;sc=ns;applyT();}
+function zaAt(cx,cy,f,soon){var ns=Math.min(Math.max(sc*f,.02),5),af=ns/sc;tx=cx-(cx-tx)*af;ty=cy-(cy-ty)*af;sc=ns;if(soon)applyTSoon();else applyT();}
+/* ONE DRAW PER FRAME WHILE A FINGER MOVES (7 Oct 2026, "clunky with the timeline" on Android).
+   A phone can report a finger's move more often than the screen draws; each report used to move
+   the map, redraw the years and re-place the Savior and tonight's beacon at once. Now the moves
+   add up and the timeline is drawn once, at the next frame. */
+var _tlRaf=0;
+function applyTSoon(){ if(_tlRaf) return; _tlRaf=requestAnimationFrame(function(){ _tlRaf=0; applyT(); }); }
 function fitAll(){
   var st=document.getElementById("stage"),sw=st.clientWidth,sh=st.clientHeight;
   if(curView==="v"){
@@ -6940,11 +6967,11 @@ function rz(){var st=document.getElementById("stage");sc=.5;
 function initInt(){
   var st=document.getElementById("stage");
   st.addEventListener("mousedown",function(e){if(e.target.closest("[class*='span-bar']")||e.button!==0)return;isDrag=true;lastM={x:e.clientX,y:e.clientY};e.preventDefault();});
-  window.addEventListener("mousemove",function(e){if(!isDrag)return;tx+=e.clientX-lastM.x;ty+=e.clientY-lastM.y;lastM={x:e.clientX,y:e.clientY};applyT();});
+  window.addEventListener("mousemove",function(e){if(!isDrag)return;tx+=e.clientX-lastM.x;ty+=e.clientY-lastM.y;lastM={x:e.clientX,y:e.clientY};applyTSoon();});
   window.addEventListener("mouseup",function(){isDrag=false;});
-  st.addEventListener("wheel",function(e){e.preventDefault();var r=st.getBoundingClientRect();zaAt(e.clientX-r.left,e.clientY-r.top,e.deltaY<0?1.12:.89);},{passive:false});
+  st.addEventListener("wheel",function(e){e.preventDefault();var r=st.getBoundingClientRect();zaAt(e.clientX-r.left,e.clientY-r.top,e.deltaY<0?1.12:.89,true);},{passive:false});
   st.addEventListener("touchstart",function(e){if(e.touches.length===2){isPinch=true;lastPD=ptDist(e);}else if(!isPinch){isDrag=true;lastM={x:e.touches[0].clientX,y:e.touches[0].clientY};}},{passive:true});
-  st.addEventListener("touchmove",function(e){e.preventDefault();if(e.touches.length===2&&isPinch){var d=ptDist(e),r=st.getBoundingClientRect();zaAt(((e.touches[0].clientX+e.touches[1].clientX)/2)-r.left,((e.touches[0].clientY+e.touches[1].clientY)/2)-r.top,d/lastPD);lastPD=d;}else if(isDrag){tx+=e.touches[0].clientX-lastM.x;ty+=e.touches[0].clientY-lastM.y;lastM={x:e.touches[0].clientX,y:e.touches[0].clientY};applyT();}},{passive:false});
+  st.addEventListener("touchmove",function(e){e.preventDefault();if(e.touches.length===2&&isPinch){var d=ptDist(e),r=st.getBoundingClientRect();zaAt(((e.touches[0].clientX+e.touches[1].clientX)/2)-r.left,((e.touches[0].clientY+e.touches[1].clientY)/2)-r.top,d/lastPD,true);lastPD=d;}else if(isDrag){tx+=e.touches[0].clientX-lastM.x;ty+=e.touches[0].clientY-lastM.y;lastM={x:e.touches[0].clientX,y:e.touches[0].clientY};applyTSoon();}},{passive:false});
   st.addEventListener("touchend",function(e){if(e.touches.length<2)isPinch=false;if(e.touches.length===0)isDrag=false;});
 }
 function ptDist(e){return Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);}
@@ -11207,7 +11234,7 @@ function smGo(which){
      "temples" and "missions". Whichever copy is newer is the one shown.
      ═══════════════════════════════════════════════════════════════════════ -->
 <style>
-#ch-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;background:rgba(2,5,15,.97);backdrop-filter:blur(16px);flex-direction:column;animation:mopen .22s ease;}
+#ch-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;background:rgba(2,5,15,.97);flex-direction:column;animation:mopen .22s ease;}
 #ch-panel.open{display:flex;}
 #ch-hdr{flex-shrink:0;background:rgba(6,13,30,.99);border-bottom:2px solid rgba(217,162,39,.4);padding:12px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
 #ch-panel.msn #ch-hdr{border-bottom-color:rgba(91,211,220,.4);}
@@ -11571,7 +11598,7 @@ setTimeout(chFetch,1200);
      and the newest is remembered on this phone for next time.
      ═══════════════════════════════════════════════════════════════════════ -->
 <style>
-#tech-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;background:rgba(2,5,15,.97);backdrop-filter:blur(16px);flex-direction:column;animation:mopen .22s ease;}
+#tech-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;background:rgba(2,5,15,.97);flex-direction:column;animation:mopen .22s ease;}
 #tech-panel.open{display:flex;}
 /* the same panel is two rooms. In the evidence room the technology tabs are gone and the colour is the digs' amber. */
 #tech-panel.finds #tg-tabs{display:none;} #tech-panel:not(.finds) #tg-tab-finds{display:none;}
