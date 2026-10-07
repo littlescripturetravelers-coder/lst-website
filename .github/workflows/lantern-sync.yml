@@ -40,6 +40,8 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    # A stuck step holds the queue (one run at a time), so no run may outlive the next nights' needs.
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
 
@@ -92,8 +94,10 @@ jobs:
       - name: Make sure ffmpeg is here before any song is measured
         run: |
           if ! command -v ffprobe >/dev/null 2>&1; then
-            sudo apt-get -qq update >/dev/null 2>&1 || true
-            sudo apt-get -qq install -y ffmpeg >/dev/null 2>&1 || echo "could not install ffmpeg - takes will be kept unmeasured"
+            # A clock on each: on 7 Oct 2026 apt hung here for forty minutes, and every run queued
+            # behind it - the night's sync included. Better a take kept unmeasured than no night.
+            timeout 180 sudo apt-get -qq update >/dev/null 2>&1 || true
+            timeout 300 sudo apt-get -qq install -y ffmpeg >/dev/null 2>&1 || echo "could not install ffmpeg - takes will be kept unmeasured"
           fi
           command -v ffmpeg >/dev/null 2>&1 && ffmpeg -version | head -1 || true
 
