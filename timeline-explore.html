@@ -6766,6 +6766,29 @@ function tlBackToStudy(){
   away.forEach(function(a){ a.p.classList.remove("tl-away"); a.scrolls.forEach(function(x){ x[0].scrollTop=x[1]; x[0].scrollLeft=x[2]; }); });
   var b=document.getElementById("tl-back-study"); if(b) b.classList.remove("show");
 }
+/* The phone's back button (Android) and Escape: close the top thing open on the timeline, one
+   at a time - the map or a detail back to the study it came from, then the study, then the
+   Studies menu - and only when nothing is open does the app leave the timeline. True when it
+   closed something. */
+var TL_BACK=[["mapov","closeMap"],["dmod","closeDmod"],["narrate-picker","closeNarratePicker"],["atn-panel","closeAtonement"],
+  ["quad-panel","closeQuad"],["study-panel","closeStudy"],["sys-panel","closeSystems"],["trb-panel","closeTribes"],["globe-panel","closeGlobe"],
+  ["ch-panel","closeChurchGuide"],["tech-panel","closeTechGuide"],["compare-panel","closeCompare"],["doctrine-panel","closeDocPanel"],
+  ["proph-tracker","closeProphTracker"],["family-panel","closeFamilyHistory"],["studies-menu","closeStudies"],["tl-sheet","tlSheetClose"],
+  ["lpanel",function(){ if(panelOpen) togglePanel(); }]];
+function tlBack(){
+  var top=null, topZ=-1e9;
+  TL_BACK.forEach(function(p){ var el=document.getElementById(p[0]);
+    if(!el||!el.classList.contains("open")||el.classList.contains("tl-away")) return;
+    var z=parseInt(getComputedStyle(el).zIndex,10); if(isNaN(z)) z=0;
+    if(z>=topZ){ topZ=z; top=p; } });
+  if(top){ var away=TL_AWAY.length && (top[0]==="mapov"||top[0]==="dmod");
+    if(away) tlBackToStudy(); else (typeof top[1]==="function"?top[1]:window[top[1]])(); return true; }
+  if(TL_AWAY.length){ tlBackToStudy(); return true; }
+  var np=document.getElementById("narrate-panel"); if(np&&np.style.display!=="none"&&narrateMode){ closeNarrate(); return true; }
+  return false;
+}
+window.tlBack=tlBack;
+document.addEventListener("keydown",function(e){ if(e.key==="Escape") tlBack(); });
 function tlDropAway(){
   var away=TL_AWAY; TL_AWAY=[];
   away.forEach(function(a){ a.p.classList.remove("tl-away"); a.p.classList.remove("open"); });
