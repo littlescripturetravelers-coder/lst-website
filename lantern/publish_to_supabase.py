@@ -329,6 +329,21 @@ def main():
             except Exception:
                 pass
 
+        # A night already in the account that only lacks its Christian edition (Aug 24, 26 and 27
+        # went out before there were two editions): night.json says "christian_only": true, and
+        # only that one column is written. Its words, song, book, voices and published date stay
+        # exactly as they are, so nothing is recorded or drafted again and no credit is spent.
+        if night.get("christian_only"):
+            if not chr_:
+                print(f"{slug}: christian_only, but no morning-lantern-christian.html yet - waiting"); continue
+            ok, why = upsert({"publish_date": date, "story_html_nondenom": chr_})
+            if not ok:
+                print(f"{slug}: Christian edition NOT published - {why}"); failures += 1; continue
+            print(f"{slug}: Christian edition added for {date} (nothing else touched)")
+            with open(marker, "w", encoding="utf-8") as fh:
+                json.dump({"sha": stamp, "date": date, "christian_only": True}, fh, indent=2)
+            continue
+
         row = {NIGHT_KEYS[k]: night[k] for k in NIGHT_KEYS if night.get(k) not in (None, "")}
         row.update({
             "story_html": lds,
