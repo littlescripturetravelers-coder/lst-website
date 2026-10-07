@@ -119,3 +119,22 @@ r = subprocess.run([sys.executable, pw, path], capture_output=True, text=True)
 print(r.stdout.rstrip())
 check(r.returncode == 0, 'plain words: every sentence LST wrote is short and plain (see above)')
 print('ALL PASS (with plain words)' if ok else 'FAILURES PRESENT')
+
+# 10. THE DAYTIME-SONG RULE (Levi, 7 Oct 2026): a night's song is sung in the day - nothing of
+# bed, sleep, dreams, night-time or eyes closing, and no "Shh"/"Hush" (the singer runs it into
+# the next word). Only the Lantern Lullaby is for sleep. Judged before the song is sung, while
+# the night has a lullaby.json and no recording yet; a song already sung is not re-judged here.
+night_dir = os.path.dirname(os.path.abspath(path))
+lj = os.path.join(night_dir, 'lullaby.json')
+slug_here = os.path.basename(night_dir)
+if os.path.exists(lj) and not os.path.exists(os.path.join(night_dir, slug_here + '-lullaby.mp3')):
+    import json as _json
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from lyric_tells import bedtime_words
+    try:
+        found = bedtime_words(_json.load(open(lj, encoding='utf-8')).get('lyrics', ''))
+    except Exception as e:
+        found = [('unreadable lullaby.json', str(e))]
+    check(not found, 'daytime song: no bed, sleep, dreams, night-time, closing eyes or "Shh" in the lyrics '
+          + ('' if not found else str([s for _, s in found])))
+    print('ALL PASS (with the daytime song)' if ok else 'FAILURES PRESENT')
