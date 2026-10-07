@@ -211,6 +211,14 @@ def narrate(date):
 # Desk. Nothing is posted by this. The function itself skips a night that
 # already has its tree, so a re-publish never doubles the queue.
 MARKET = os.environ.get("MARKET", "1") != "0"
+# THE BACKFILL LINE (7 Oct 2026). Levi asked for a devotional night for every story back to
+# June, the first book - nights from before the app's first night (24 Aug 2026) published now.
+# Those get no voices recorded (ElevenLabs credits need Levi's go) and no marketing drafted (they
+# are not news): only a night on or after FIRST_LIVE_NIGHT does. The phone's own voice still
+# reads a backfilled night aloud.
+FIRST_LIVE_NIGHT = os.environ.get("FIRST_LIVE_NIGHT", "2026-08-24")
+def live_night(date):
+    return str(date or "") >= FIRST_LIVE_NIGHT
 def market(date):
     """Ask the drafter for the night's three slots (morning, midday, evening):
     each call writes the first slot still missing and says how many remain."""
@@ -353,12 +361,14 @@ def main():
                  + (["sung lullaby"] if has_mp3 else []) + (["story book"] if book_html else [])
         print(f"{slug}: published for {date} - {', '.join(pieces)}")
 
-        if NARRATE and row["story_text"]:
+        if not live_night(date):
+            print(f"    a night from before the app began: no recording, no marketing (the backfill line)")
+        elif NARRATE and row["story_text"]:
             status, body = narrate(date)
             if status == 200: print(f"    narration: recorded")
             else:             print(f"    narration: not recorded ({status}) {body}")
 
-        if MARKET:
+        if MARKET and live_night(date):
             status, body = market(date)
             if status == 200: print(f"    marketing: drafted for the owner to approve")
             else:             print(f"    marketing: not drafted ({status}) {body}")
@@ -385,7 +395,7 @@ def sweep_voices(limit=6):
         rows = json.loads(body)
     except Exception:
         print("voices: could not read the list"); return
-    todo = [r for r in rows if (r.get("story_text") or "").strip()
+    todo = [r for r in rows if (r.get("story_text") or "").strip() and live_night(r.get("publish_date"))
             and not (isinstance(r.get("narration_urls"), dict) and any(r["narration_urls"].values()))]
     if not todo:
         print("voices: every night with words has its recording"); return
