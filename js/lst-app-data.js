@@ -102,8 +102,14 @@
     /* One row as the website likes to think about it. Understands both the
        app's shape and what earlier website builds wrote. */
     fromRow: function (r) {
+      var me = uid();
       return {
         id: r.id,
+        /* A family (app migration 0034, 9 Oct 2026) reads each other's stories; a story someone
+           else wrote shows their name and only they change it. */
+        authorId: r.user_id || null,
+        authorName: r.author_name || "",
+        other: !!(me && r.user_id && r.user_id !== me),
         date: r.entry_date || null,
         title: r.story_title || r.title || "",     // `title` = older website rows
         scripture: r.scripture || "",
@@ -177,8 +183,11 @@
       return find.then(function (res) {
         var rows = (res && res.data) || [];
         var mine = null;
+        var me = uid();
         for (var i = 0; i < rows.length; i++) {
-          /* One row per person per night: yours, and one for each child. */
+          /* One row per person per night: yours, and one for each child. Never one written by
+             someone else in the family - the family reads those, but only their author edits. */
+          if (rows[i].user_id && rows[i].user_id !== me) continue;
           if ((rows[i].person || "") === who) { mine = rows[i]; break; }
         }
 
@@ -226,7 +235,8 @@
         .eq("story_id", key).eq("kind", "journal")
         .then(function (res) {
           if (res.error) return [];
-          return (res.data || []).map(family.fromRow);
+          /* only this person's own answers fill their boxes - never someone else's in the family */
+          return (res.data || []).map(family.fromRow).filter(function (r) { return !r.other; });
         });
     }
   };

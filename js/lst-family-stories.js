@@ -208,15 +208,17 @@
       '<article class="fs-card">' +
         '<div class="fs-card-head">' +
           "<h3>" + esc(r.title || (isJournal(r) ? "Parent\u2019s Heart" : "Untitled")) + "</h3>" +
+          (r.other ? "" :
           '<div class="fs-card-acts">' +
             '<button type="button" class="fs-icon" data-edit="' + esc(r.id) + '" aria-label="Edit">&#9998;</button>' +
             '<button type="button" class="fs-icon" data-del="' + esc(r.id) + '" aria-label="Delete">&#128465;</button>' +
-          "</div>" +
+          "</div>") +
         "</div>" +
         '<p class="fs-meta">' +
           (isJournal(r)
             ? '<span class="fs-src fs-src-j">Parent&rsquo;s Heart</span>'
-            : '<span class="fs-src fs-src-h">Written by you</span>') +
+            : '<span class="fs-src fs-src-h">' + (r.other ? "Written by " + esc(r.authorName || "your family") : "Written by you") + '</span>') +
+          (r.other && isJournal(r) ? '<span class="fs-src fs-src-h">Added by ' + esc(r.authorName || "your family") + '</span>' : "") +
           [ r.person, (r.date || r.year), ref ]
             .filter(Boolean).map(esc).join(" &middot; ") +
         "</p>" +
