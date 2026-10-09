@@ -1,6 +1,6 @@
 /* THE LST LIBRARY — everything we have made, on one shelf.
 
-   Five collections, laid out the way a library is: covers you look along and
+   Six collections, laid out the way a library is: covers you look along and
    pick from.
 
      Bedtime Stories            the written series, all of it
@@ -8,6 +8,8 @@
      The Signature Lullaby      A Little Travelers' Lullaby, always there
      Daily Lullabies            every night's own lullaby
      The Lantern Archive        every Morning Lantern we have sent
+     Coloring Books             every night's picture to color (Levi, 9 Oct 2026: "under the
+                                LST LIBRARY"); coloring-books.html, from the web app's copy
 
    WHY THIS IS THE HUB. The header used to carry four doors that all sounded
    like collections of stories — LST Library, Bedtime Stories, Virtue Library,
@@ -125,6 +127,9 @@
       tile(null, "archive.html", "images/hero-bg.jpg",
         "The Lantern Archive",
         "Every Morning Lantern we have sent") +
+      tile(null, "coloring-books.html", "https://app.littlescripturetravelers.com/coloring/jun-01-1.png",
+        "Coloring Books",
+        "Every night&rsquo;s picture to color &middot; or print") +
     "</div>" +
     '<p class="rd-aside">These shelves fill themselves. Publish a night in the app and its story ' +
       'and its lullaby are here straight away. Looking for a story by what your child needs ' +
