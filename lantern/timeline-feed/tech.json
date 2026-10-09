@@ -1197,33 +1197,33 @@
     },
     {
      "on": "2026-10-02",
+     "url": "https://www.theguardian.com/society/2026/sep/28/high-screen-usage-in-children-linked-to-poorer-outcomes-major-study-suggests",
      "note": "A global study involving over 2.8 million children across 64 countries found that increased screen time, including video games, is linked to poorer academic achievement and language development, as well as higher socioemotional and mental health problems.",
-     "source": "The Guardian",
-     "url": "https://www.theguardian.com/society/2026/sep/28/high-screen-usage-in-children-linked-to-poorer-outcomes-major-study-suggests"
+     "source": "The Guardian"
     },
     {
      "on": "2026-10-02",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/42772730/",
      "note": "A systematic review and meta-analysis revealed that exergaming can promote physical activity and improve cognitive flexibility in children, though its effects on motor skills and other cognitive functions were not statistically significant.",
-     "source": "Journal of Physical Activity & Health",
-     "url": "https://pubmed.ncbi.nlm.nih.gov/42772730/"
+     "source": "Journal of Physical Activity & Health"
     },
     {
      "on": "2026-10-02",
+     "url": "https://phys.org/news/2026-09-games-children-attentive-distractible.html",
      "note": "A study of preschool children found that brief digital or traditional gameplay improved performance on tasks requiring quick responses but reduced performance on tasks demanding greater concentration and self-control.",
-     "source": "Phys.org",
-     "url": "https://phys.org/news/2026-09-games-children-attentive-distractible.html"
+     "source": "Phys.org"
     },
     {
      "on": "2026-10-02",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/42747237/",
      "note": "A systematic review and meta-analysis indicated that exergaming has significant effects on glucose and lipid metabolism in children and adolescents, suggesting potential benefits for managing metabolic health.",
-     "source": "JMIR Serious Games",
-     "url": "https://pubmed.ncbi.nlm.nih.gov/42747237/"
+     "source": "JMIR Serious Games"
     },
     {
      "on": "2026-10-02",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/42714938/",
      "note": "A scoping review found that video and app-based games could serve as beneficial tools to support youth emotion regulation through various strategies, though some studies reported areas of continued difficulty.",
-     "source": "JMIR Mental Health",
-     "url": "https://pubmed.ncbi.nlm.nih.gov/42714938/"
+     "source": "JMIR Mental Health"
     }
    ]
   },
@@ -1480,6 +1480,12 @@
      "url": "https://www.childrenandscreens.org/newsroom/news/experts-vote-8-0-against-phones-and-tablets-in-childrens-bedrooms-overnight/",
      "note": "Experts recommend keeping phones and tablets out of children's bedrooms overnight to prevent disrupted sleep and compulsive use.",
      "source": "Children and Screens"
+    },
+    {
+     "on": "2026-10-09",
+     "note": "A study found that excessive screen time in children is associated with mental health issues and ADHD, mediated by reduced physical activity and irregular sleep patterns.",
+     "source": "arXiv Study",
+     "url": "https://arxiv.org/abs/2508.10062"
     }
    ]
   },
@@ -1574,6 +1580,12 @@
      "url": "https://www.theguardian.com/society/2026/sep/28/high-screen-usage-in-children-linked-to-poorer-outcomes-major-study-suggests",
      "note": "A global study found that high screen time, including social media use, is linked to lower academic achievement and increased mental health issues in children.",
      "source": "The Guardian"
+    },
+    {
+     "on": "2026-10-09",
+     "note": "The U.S. Department of Health and Human Services released an advisory highlighting the risks of excessive screen use among children, linking it to increased anxiety, depression, and developmental challenges.",
+     "source": "HHS Press Release",
+     "url": "https://www.hhs.gov/press-room/secretary-kennedy-announces-hhs-action-reduce-harmful-screen-use-protect-children-online.html"
     }
    ]
   },
@@ -1732,6 +1744,12 @@
      "url": "https://www.nature.com/articles/s41746-026-03044-z",
      "note": "A study in npj Digital Medicine indicated that digital mental health interventions can offer small but significant benefits for children's emotional and behavioral outcomes, especially when combined with in-person support.",
      "source": "npj Digital Medicine"
+    },
+    {
+     "on": "2026-10-09",
+     "note": "The American Psychological Association emphasized that engagement with educational technology does not always equate to learning, urging careful evaluation of digital tools used in education.",
+     "source": "APA Report",
+     "url": "https://www.apa.org/pubs/reports/children-adolescent-learning-educational-technology"
     }
    ]
   },
@@ -2049,6 +2067,18 @@
      "url": "https://www.nature.com/articles/s41562-023-01712-8",
      "note": "Recent developments in AI-driven educational tools show promise in enhancing personalized learning experiences for children, though concerns about data privacy remain.",
      "source": "Nature Human Behaviour"
+    },
+    {
+     "on": "2026-10-09",
+     "note": "A UK parliamentary briefing discussed the cognitive and health impacts of screen and AI use on children, noting both benefits and risks, including potential sleep disruption and attention issues.",
+     "source": "UK Parliament Research Briefing",
+     "url": "https://post.parliament.uk/research-briefings/post-pn-0778/"
+    },
+    {
+     "on": "2026-10-09",
+     "note": "Research reviewed the use of digital health technologies and AI in mitigating mental health impacts of adverse childhood experiences, highlighting potential benefits and implementation challenges.",
+     "source": "arXiv Review",
+     "url": "https://arxiv.org/abs/2502.00066"
     }
    ]
   },
@@ -2122,54 +2152,54 @@
    ]
   },
   {
-   "id": "family-ai",
    "y": 2026,
-   "date": "January 28, 2026",
-   "loc": "New York, USA",
-   "lat": 40.7128,
-   "lng": -74.006,
    "em": "&#129302;",
-   "name": "Family AI",
    "ev": "",
-   "what": "An AI platform designed to assist families in managing daily schedules, tasks, and home routines.",
-   "why": "To streamline family coordination and household management, reducing the time parents spend organizing family activities and responsibilities.",
-   "builtOn": [
-    "internet",
-    "ai"
-   ],
-   "good": [
-    "Helps families stay organized by managing schedules and tasks.",
-    "Reduces the time parents spend on coordinating family activities.",
-    "Provides a centralized platform for family communication and planning."
-   ],
+   "id": "family-ai",
    "bad": [
     "Potential privacy concerns regarding family data.",
     "Dependence on technology for family management may reduce personal interaction."
    ],
-   "dangers": [
-    "Data breaches could expose sensitive family information.",
-    "Overreliance on AI may diminish traditional family communication skills."
+   "lat": 40.7128,
+   "lng": -74.006,
+   "loc": "New York, USA",
+   "why": "To streamline family coordination and household management, reducing the time parents spend organizing family activities and responsibilities.",
+   "date": "January 28, 2026",
+   "good": [
+    "Helps families stay organized by managing schedules and tasks.",
+    "Reduces the time parents spend on coordinating family activities.",
+    "Provides a centralized platform for family communication and planning."
    ],
    "kids": [
     "Use the AI to set reminders for homework and chores.",
     "Discuss with parents how the AI can help with family activities.",
     "Ensure screen time is balanced with offline family interactions."
    ],
+   "name": "Family AI",
    "talk": "How do you feel about using an AI to help manage our family's daily activities?",
+   "what": "An AI platform designed to assist families in managing daily schedules, tasks, and home routines.",
+   "added": "2026-10-02",
+   "modern": true,
+   "builtOn": [
+    "internet",
+    "ai"
+   ],
+   "dangers": [
+    "Data breaches could expose sensitive family information.",
+    "Overreliance on AI may diminish traditional family communication skills."
+   ],
    "learned": [
     {
      "on": "2026-10-02",
+     "url": "https://www.globenewswire.com/news-release/2026/01/28/3227793/0/en/nori-introduces-the-world-s-first-family-brain-bringing-ai-into-the-center-of-modern-family-life.html",
      "note": "Nori, the world's first Family AI, was launched to assist families in managing daily schedules and tasks.",
-     "source": "GlobeNewswire",
-     "url": "https://www.globenewswire.com/news-release/2026/01/28/3227793/0/en/nori-introduces-the-world-s-first-family-brain-bringing-ai-into-the-center-of-modern-family-life.html"
+     "source": "GlobeNewswire"
     }
-   ],
-   "added": "2026-10-02",
-   "modern": true
+   ]
   }
  ],
- "updated": "2026-10-02",
- "version": 9,
+ "updated": "2026-10-09",
+ "version": 10,
  "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
  "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next.",
