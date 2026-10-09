@@ -319,10 +319,16 @@ def main():
         if os.path.exists(marker):
             try:
                 if json.load(open(marker)).get("sha") == stamp:
-                    gone = missing_in_account(date, {
+                    expect = {
                         "song_url": bool(song), "song_audio_url": has_mp3,
                         "story_link": bool(book_html), "traveler": bool(night.get("traveler")),
-                    })
+                    }
+                    # A christian_only night writes one column and nothing else (below), so
+                    # only that one can be "lost". Asking after the rest found them missing
+                    # on every run and wrote the night again each time (9 Oct 2026).
+                    if night.get("christian_only"):
+                        expect = {"story_html_nondenom": bool(chr_)}
+                    gone = missing_in_account(date, expect)
                     if not gone:
                         print(f"{slug}: unchanged since it was published - nothing to do"); continue
                     print(f"{slug}: the account has lost {', '.join(gone)} (an Admin save?) - publishing again")
