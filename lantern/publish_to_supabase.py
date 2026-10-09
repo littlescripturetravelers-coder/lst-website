@@ -233,6 +233,20 @@ def market(date):
             break
     return status, body[:300]
 
+def christian_in_account(date):
+    """Whether the row for `date` has its Christian edition - asked without bringing the
+    edition itself down (a quarter megabyte), by asking for the date of a row that has one."""
+    hdr = {"apikey": KEY, "Authorization": "Bearer " + KEY}
+    status, body = http("GET", f"{URL}/rest/v1/daily_content?publish_date=eq.{date}"
+                        f"&story_html_nondenom=not.is.null&select=publish_date", headers=hdr)
+    if status != 200:
+        return True        # cannot tell - do not republish on a guess
+    try:
+        return bool(json.loads(body))
+    except Exception:
+        return True
+
+
 def missing_in_account(date, expect):
     """The pieces this folder carries that the row for `date` no longer has.
 
@@ -327,8 +341,9 @@ def main():
                     # only that one can be "lost". Asking after the rest found them missing
                     # on every run and wrote the night again each time (9 Oct 2026).
                     if night.get("christian_only"):
-                        expect = {"story_html_nondenom": bool(chr_)}
-                    gone = missing_in_account(date, expect)
+                        gone = [] if christian_in_account(date) else ["the Christian edition"]
+                    else:
+                        gone = missing_in_account(date, expect)
                     if not gone:
                         print(f"{slug}: unchanged since it was published - nothing to do"); continue
                     print(f"{slug}: the account has lost {', '.join(gone)} (an Admin save?) - publishing again")
