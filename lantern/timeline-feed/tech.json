@@ -1483,9 +1483,9 @@
     },
     {
      "on": "2026-10-09",
+     "url": "https://arxiv.org/abs/2508.10062",
      "note": "A study found that excessive screen time in children is associated with mental health issues and ADHD, mediated by reduced physical activity and irregular sleep patterns.",
-     "source": "arXiv Study",
-     "url": "https://arxiv.org/abs/2508.10062"
+     "source": "arXiv Study"
     }
    ]
   },
@@ -1583,9 +1583,21 @@
     },
     {
      "on": "2026-10-09",
+     "url": "https://www.hhs.gov/press-room/secretary-kennedy-announces-hhs-action-reduce-harmful-screen-use-protect-children-online.html",
      "note": "The U.S. Department of Health and Human Services released an advisory highlighting the risks of excessive screen use among children, linking it to increased anxiety, depression, and developmental challenges.",
-     "source": "HHS Press Release",
-     "url": "https://www.hhs.gov/press-room/secretary-kennedy-announces-hhs-action-reduce-harmful-screen-use-protect-children-online.html"
+     "source": "HHS Press Release"
+    },
+    {
+     "on": "2026-10-10",
+     "note": "The National Conference of State Legislatures reported that states are implementing policies to address the mental health impacts of social media and emerging technologies on youth, including AI safeguards and digital literacy efforts.",
+     "source": "NCSL.org",
+     "url": "https://www.ncsl.org/health/youth-mental-health-in-a-digital-age-state-policy-trends-on-social-media-and-emerging-technologies"
+    },
+    {
+     "on": "2026-10-10",
+     "note": "The American Academy of Pediatrics emphasized that screen time limits alone are insufficient, advocating for a comprehensive approach to digital media use that considers content quality and context.",
+     "source": "ABC News",
+     "url": "https://www-cdn.abcnews.com/amp/US/new-report-screen-time-limits-children-longer/story?id=129368332"
     }
    ]
   },
@@ -1747,9 +1759,9 @@
     },
     {
      "on": "2026-10-09",
+     "url": "https://www.apa.org/pubs/reports/children-adolescent-learning-educational-technology",
      "note": "The American Psychological Association emphasized that engagement with educational technology does not always equate to learning, urging careful evaluation of digital tools used in education.",
-     "source": "APA Report",
-     "url": "https://www.apa.org/pubs/reports/children-adolescent-learning-educational-technology"
+     "source": "APA Report"
     }
    ]
   },
@@ -2070,15 +2082,27 @@
     },
     {
      "on": "2026-10-09",
+     "url": "https://post.parliament.uk/research-briefings/post-pn-0778/",
      "note": "A UK parliamentary briefing discussed the cognitive and health impacts of screen and AI use on children, noting both benefits and risks, including potential sleep disruption and attention issues.",
-     "source": "UK Parliament Research Briefing",
-     "url": "https://post.parliament.uk/research-briefings/post-pn-0778/"
+     "source": "UK Parliament Research Briefing"
     },
     {
      "on": "2026-10-09",
+     "url": "https://arxiv.org/abs/2502.00066",
      "note": "Research reviewed the use of digital health technologies and AI in mitigating mental health impacts of adverse childhood experiences, highlighting potential benefits and implementation challenges.",
-     "source": "arXiv Review",
-     "url": "https://arxiv.org/abs/2502.00066"
+     "source": "arXiv Review"
+    },
+    {
+     "on": "2026-10-10",
+     "note": "The American Psychological Association warned that while educational technology can engage students, it doesn't always lead to actual learning, especially with generative AI tools that may improve immediate performance without building underlying knowledge.",
+     "source": "EurekAlert!",
+     "url": "https://www.eurekalert.org/news-releases/1142300"
+    },
+    {
+     "on": "2026-10-10",
+     "note": "The American Academy of Pediatrics highlighted potential dangers of AI for children, including privacy erosion and exposure to biased or harmful content, urging for cautious integration of AI in children's lives.",
+     "source": "HealthyChildren.org",
+     "url": "https://www.healthychildren.org/English/family-life/Media/Pages/how-will-artificial-intelligence-AI-affect-children.aspx?form=XCXCUUZZ"
     }
    ]
   },
@@ -2198,8 +2222,8 @@
    ]
   }
  ],
- "updated": "2026-10-09",
- "version": 10,
+ "updated": "2026-10-10",
+ "version": 11,
  "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
  "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next.",
