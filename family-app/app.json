@@ -14,7 +14,7 @@
       "bundleIdentifier": "com.lewisfamily.app",
       "supportsTablet": false,
       "infoPlist": {
-        "NSCalendarsFullAccessUsageDescription": "Shows and adds family events and reminders to your Apple Calendar.",
+        "NSCalendarsFullAccessUsageDescription": "Shows family events next to the work and personal calendars you choose, and adds family events to your Calendar. Your work events stay on your phone unless you choose to share them.",
         "NSRemindersFullAccessUsageDescription": "Keeps family reminders in sync with Apple Reminders so Siri can use them.",
         "NSSiriUsageDescription": "Lets you add reminders and hear today\u2019s plan with Siri.",
         "ITSAppUsesNonExemptEncryption": false

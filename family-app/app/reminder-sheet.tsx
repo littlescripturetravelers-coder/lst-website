@@ -10,7 +10,7 @@ import { todayISO } from '@/lib/dates';
 const ALERTS = [['none', 'None'], ['at', 'At time of reminder'], ['5', '5 minutes before'], ['15', '15 minutes before'], ['60', '1 hour before'], ['1d', '1 day before']];
 /** New / Details sheet. Add to Calendar mirrors into the family calendar + Apple Calendar; Alert schedules a local notification. */
 export default function ReminderSheet() {
-  const { theme: t } = useTheme(); const p = useLocalSearchParams<{ id?: string; date?: string; calendar?: string }>(); const { family } = useFamily(); const rem = useReminders(family?.id);
+  const { theme: t } = useTheme(); const p = useLocalSearchParams<{ id?: string; date?: string; calendar?: string }>(); const { family, canPrivate } = useFamily(); const rem = useReminders(family?.id);
   const [d, setD] = useState<Partial<Reminder>>({ title: '', due_date: p.date ?? null, on_calendar: !!p.calendar, alert: 'none' });
   useEffect(() => { const r = rem.items.find(x => x.id === p.id); if (r) setD(r); }, [rem.items.length]);
   const set = (k: keyof Reminder, v: any) => setD(x => ({ ...x, [k]: v }));
@@ -34,6 +34,9 @@ export default function ReminderSheet() {
       <View style={row}><Text style={{ flex: 1 }}>Flag</Text><Switch value={!!d.flagged} onValueChange={v => set('flagged', v)} trackColor={{ true: t.brand[500] }} /></View>
       <Pressable style={[row, { borderBottomWidth: 0 }]} onPress={() => { const i = rem.lists.findIndex(l => l.id === d.list_id); set('list_id', rem.lists[(i + 1) % rem.lists.length]?.id); }}><Text style={{ flex: 1 }}>List</Text><Text color={t.ink[3]}>{rem.lists.find(l => l.id === d.list_id)?.name ?? rem.lists[0]?.name}</Text></Pressable>
     </Card>
+    {(canPrivate || d.private) && <Card padding={0}>
+      <View style={[row, { borderBottomWidth: 0 }]}><View style={{ flex: 1 }}><Text>Just for me</Text><Text v="footnote" color={t.ink[3]}>Only you will see this. It stays off the family lists.</Text></View><Switch value={!!d.private} onValueChange={v => set('private', v)} disabled={!canPrivate} trackColor={{ true: t.brand[500] }} /></View>
+    </Card>}
     {d.id && <Text color={t.danger[0]} style={{ textAlign: 'center', padding: 14 }} onPress={async () => { await rem.remove(d.id!); router.back(); }}>Delete Reminder</Text>}
   </ScrollView>;
 }

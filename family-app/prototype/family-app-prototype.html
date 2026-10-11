@@ -119,6 +119,15 @@ button.card { cursor: pointer; }
 .seg button.on { background: var(--paper0); font-weight: 700; }
 .chip { padding: 6px 10px; border-radius: 6px; border: 0; background: var(--paper2); color: var(--ink2); font-family: var(--body); font-weight: 700; font-size: calc(13px * var(--s)); cursor: pointer; }
 .chip.on { background: var(--brand500); color: var(--inverse); }
+.switch { position: relative; width: 51px; height: 31px; flex: none; border-radius: 16px; border: 0; padding: 0; background: var(--paper3); cursor: pointer; transition: background .15s; }
+.switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: left .15s; }
+.switch.on { background: #3D7A58; }
+.switch.on::after { left: 22px; }
+.swrow { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: .5px solid var(--line2); }
+.sharechip { display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--line2); border-radius: 13px; padding: 0 8px; height: 26px; background: none; color: var(--ink1); font-family: var(--body); font-weight: 700; font-size: calc(12px * var(--s)); cursor: pointer; white-space: nowrap; }
+.sharechip svg, .ic15 { width: 15px; height: 15px; }
+.cbox { width: 24px; height: 24px; border-radius: 6px; border: 1.5px solid var(--ink4); background: transparent; flex: none; display: grid; place-items: center; padding: 0; cursor: pointer; color: #fff; }
+.cbox svg { width: 16px; height: 16px; }
 .field { width: 100%; min-height: 44px; border-radius: 8px; border: 1px solid var(--line2); background: var(--paper0); color: var(--ink1); padding: 10px 12px; font-family: var(--body); font-size: calc(17px * var(--s)); }
 textarea.field { min-height: 70px; resize: vertical; }
 .step { display: flex; gap: 12px; align-items: flex-start; }
@@ -306,11 +315,14 @@ textarea.field { min-height: 70px; resize: vertical; }
         { id: 'r4', title: 'Mayble’s library books due', list: 'kids', due: addDays(TODAY, 3) },
         { id: 'r5', title: 'Replace furnace filter', list: 'projects', due: addDays(TODAY, 5) },
         { id: 'r6', title: 'Esmay well-child visit', list: 'health', due: addDays(TODAY, 12), time: '10:00', cal: true },
-        { id: 'r7', title: 'Call the bank about the car loan', list: 'family', due: addDays(TODAY, -1) }],
+        { id: 'r7', title: 'Call the bank about the car loan', list: 'family', due: addDays(TODAY, -1) },
+        { id: 'r8', title: 'Plan Lindy’s birthday surprise', list: 'family', due: addDays(TODAY, 4), priv: true }],
       events: [
         { title: 'Family home evening', area: 'faith', day: 1, time: '18:30' },
         { title: 'Mayble’s soccer', area: 'girls', day: 6, time: '09:00' },
         { title: 'Date night', area: 'marriage', day: 5, time: '19:00' }],
+      cals: { w1: 'busy', p1: 'private' }, feeds: [], privOk: {},
+      goals: [{ id: 'g1', title: 'Weekly date night, no phones', area: 'marriage' }, { id: 'g2', title: 'Family scripture study 5 nights a week', area: 'faith' }, { id: 'g3', title: 'Run a 10K by spring', area: 'health', priv: true }],
       ll: {}, answers: {}, lanternDone: null, actDone: {}, home: {}, homeDay: TODAY, planned: 0,
       chores: [{ id: 'c1', who: 'mayble', title: 'Make bed' }, { id: 'c2', who: 'mayble', title: 'Set and clear the table' }, { id: 'c3', who: 'esmay', title: 'Put toys in the bin' }] };
   }
@@ -319,6 +331,7 @@ textarea.field { min-height: 70px; resize: vertical; }
   try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { S = null; }
   if (!S || !S.theme) S = sampleState();
   if (S.homeDay !== TODAY) { S.home = {}; S.homeDay = TODAY; }
+  (function (d) { ['cals', 'feeds', 'privOk', 'goals'].forEach(function (k) { if (!S[k]) S[k] = d[k]; }); })(sampleState());
   var save = function () { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 
   // ---------- navigation ----------
@@ -328,7 +341,7 @@ textarea.field { min-height: 70px; resize: vertical; }
   var go = function (r, p) { nav.push({ r: r, p: p }); render(true); };
   var back = function () { if (nav.length > 1) nav.pop(); render(true); };
   var tab = function (r) { nav = [{ r: r }]; render(true); };
-  var toast = function (m) { toastMsg = m; clearTimeout(toastTimer); toastTimer = setTimeout(function () { toastMsg = ''; render(); }, 2200); };
+  var toast = function (m) { toastMsg = m; clearTimeout(toastTimer); toastTimer = setTimeout(function () { toastMsg = ''; var el = scroller.querySelector('.toast'); if (el) el.remove(); }, 2200); };
 
   // ---------- small builders ----------
   var I = function (name, cls) { return '<i data-lucide="' + name + '"' + (cls ? ' class="' + cls + '"' : '') + '></i>'; };
@@ -387,7 +400,37 @@ textarea.field { min-height: 70px; resize: vertical; }
       sect('Reminders', 'All', 'tab-reminders') +
       '<div class="gut">' + card({ flush: true, body: due.length ? due.map(function (r) { return row({ leading: '<span class="circle" data-a="toggle" data-id="' + r.id + '" role="checkbox" aria-checked="false" aria-label="Complete ' + esc(r.title) + '"></span>', title: r.title, sub: fmtWhen(r), a: 'toggle', id: r.id }); }).join('') : '<p class="sh m3" style="padding:16px">All caught up for today.</p>' }) + '</div>';
   };
+  // Sample outside calendars on Levi's iPhone (the real app reads these from the phone).
+  var DEVCALS = [{ id: 'w1', title: 'Work', account: 'Outlook', color: '#2F6FB4' }, { id: 'w2', title: 'Team holidays', account: 'Outlook', color: '#7A5BA8' },
+    { id: 'g1', title: 'Church calling', account: 'Google', color: '#C2672E' }, { id: 'p1', title: 'Personal', account: 'iCloud', color: '#3D7A58' }];
+  var DEVEVENTS = [{ cal: 'w1', title: 'Team standup', days: [1, 3, 5], time: '09:00', end: '09:15' }, { cal: 'w1', title: 'Client review', days: [2], time: '14:00', end: '15:00' },
+    { cal: 'w2', title: 'Office closed', days: [], allDay: true }, { cal: 'g1', title: 'Bishopric meeting', days: [0], time: '07:30', end: '08:30' }, { cal: 'p1', title: 'Gym', days: [2, 4], time: '06:00', end: '07:00' }];
+  var FEEDTASKS = [{ title: 'Send weekly report', days: [5], time: '16:00' }, { title: 'Update project board', days: [3], time: '11:00' }];
+  var LINDYBUSY = [{ days: [2, 4], time: '13:00', end: '15:00' }];
+  var SHARE = { private: ['Only me', 'lock'], busy: ['Family sees “Busy”', 'clock'], details: ['Family sees details', 'eye'] }, SHORDER = ['private', 'busy', 'details'];
+  var inRange = function (iso) { return iso >= addDays(TODAY, -35) && iso <= addDays(TODAY, 60); };
+  function myOutside(iso) {
+    var dow = new Date(iso + 'T12:00:00').getDay(), out = [];
+    if (!inRange(iso)) return out;
+    DEVEVENTS.forEach(function (e) { var share = S.cals[e.cal], c = DEVCALS.filter(function (x) { return x.id === e.cal; })[0]; if (!share || e.days.indexOf(dow) < 0) return;
+      out.push({ title: e.title, color: c.color, time: (e.allDay ? 'All day' : fmtTime(e.time) + ' – ' + fmtTime(e.end)) + ' · ' + c.title, lock: share === 'private', sort: e.time || '00:00' }); });
+    S.feeds.forEach(function (f) { FEEDTASKS.forEach(function (x) { if (x.days.indexOf(dow) >= 0) out.push({ title: x.title, color: '#5A6B93', time: fmtTime(x.time) + ' · ' + f.name, lock: f.share === 'private', sort: x.time }); }); });
+    return out.sort(function (a, b) { return a.sort < b.sort ? -1 : a.sort > b.sort ? 1 : 0; });
+  }
+  function othersBusy(iso) {
+    var dow = new Date(iso + 'T12:00:00').getDay(), lindy = member('lindy'), out = [];
+    if (!inRange(iso) || !lindy) return out;
+    LINDYBUSY.forEach(function (b) { if (b.days.indexOf(dow) >= 0) out.push({ title: lindy.name + ' · Busy', color: lindy.color, time: fmtTime(b.time) + ' – ' + fmtTime(b.end), sort: b.time }); });
+    return out;
+  }
+  var calView = 'everyone';
   var calYM = null, calSel = TODAY;
+  var itemColor = function (e) { return e.area ? 'var(--a_' + e.area + ')' : e.color; };
+  function dayItems(s) {
+    var mine = myOutside(s);
+    var all = calView === 'everyone' ? eventsOn(s).concat(mine, othersBusy(s)) : mine;
+    return all;
+  }
   SCREENS.calendar = function () {
     if (!calYM) calYM = [+TODAY.slice(0, 4), +TODAY.slice(5, 7)];
     var y = calYM[0], m = calYM[1], iso = function (d) { return y + '-' + pad(m) + '-' + pad(d); };
@@ -395,17 +438,18 @@ textarea.field { min-height: 70px; resize: vertical; }
     ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(function (d) { cells += '<span class="dow">' + d + '</span>'; });
     for (var i = 0; i < start; i++) cells += '<span></span>';
     for (var d = 1; d <= days; d++) {
-      var s = iso(d), dots = eventsOn(s).map(function (e) { return 'var(--a_' + e.area + ')'; }).concat(openRems(function (r) { return r.cal && r.due === s; }).map(function () { return 'var(--ink3)'; })).slice(0, 3);
+      var s = iso(d), dots = dayItems(s).map(itemColor).concat(openRems(function (r) { return r.cal && r.due === s && (calView === 'everyone' || r.priv); }).map(function () { return 'var(--ink3)'; })).slice(0, 3);
       cells += '<button class="' + (s === TODAY ? 'today ' : '') + (s === calSel ? 'sel' : '') + '" data-a="calsel" data-id="' + s + '" aria-label="' + fmtDay(s) + '"><span class="d">' + d + '</span><span class="dots">' + dots.map(function (c) { return '<i style="background:' + c + '"></i>'; }).join('') + '</span></button>';
     }
-    var items = eventsOn(calSel), rs = S.rems.filter(function (r) { return r.cal && r.due === calSel; });
+    var items = dayItems(calSel), rs = S.rems.filter(function (r) { return r.cal && r.due === calSel && (calView === 'everyone' || r.priv); });
     return header(new Date(y, m - 1, 1).toLocaleDateString('en-US', { month: 'long' }), { sub: String(y), right: '<button class="iconbtn" data-a="newrem" data-id="cal" aria-label="New calendar item">' + I('plus') + '</button>' }) +
+      '<div class="gut" style="margin-bottom:8px"><div class="seg">' + [['everyone', 'Everyone'], ['me', 'Just me']].map(function (o) { return '<button class="' + (calView === o[0] ? 'on' : '') + '" data-a="calview" data-id="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div></div>' +
       '<div class="cal">' + cells + '</div>' +
       '<div style="display:flex;justify-content:center;gap:8px;margin:6px 0"><button class="btn ghost sm" data-a="calprev">' + I('chevron-left') + 'Previous</button><button class="btn ghost sm" data-a="calnext">Next' + I('chevron-right') + '</button></div>' +
       '<div style="background:var(--paper0);border-top:.5px solid var(--line2);padding:12px 0 30px"><div class="gut gap" style="gap:6px"><p class="sh b m2">' + fmtDay(calSel) + '</p>' +
-      items.map(function (e) { var c = area(e.area); return '<div class="ev" style="background:' + c[1] + '"><span class="bar" style="background:' + c[0] + '"></span><div><p class="sh b">' + esc(e.title) + '</p><p class="fn m2">' + e.time + '</p></div></div>'; }).join('') +
-      rs.map(function (r) { return '<div class="ev" style="border:1px solid var(--line1)"><button class="circle' + (r.done ? ' done' : '') + '" data-a="toggle" data-id="' + r.id + '" aria-label="Complete"></button><div><p class="sh b' + (r.done ? ' m3' : '') + '">' + esc(r.title) + '</p><p class="fn m2">' + (r.time ? fmtTime(r.time) : 'All day') + ' · Reminders</p></div></div>'; }).join('') +
-      (!items.length && !rs.length ? '<p class="sh m3">Nothing planned. Tap + to add something.</p>' : '') + '</div></div>';
+      items.map(function (e) { var c = e.area ? area(e.area) : [e.color, 'var(--paper2)']; return '<div class="ev" style="background:' + c[1] + '"><span class="bar" style="background:' + c[0] + '"></span><div style="flex:1"><p class="sh b">' + esc(e.title) + '</p><p class="fn m2">' + esc(e.time) + '</p></div>' + (e.lock ? '<span class="m3" aria-label="Only you see this">' + I('lock', 'ic15') + '</span>' : '') + '</div>'; }).join('') +
+      rs.map(function (r) { return '<div class="ev" style="border:1px solid var(--line1)"><button class="circle' + (r.done ? ' done' : '') + '" data-a="toggle" data-id="' + r.id + '" aria-label="Complete"></button><div><p class="sh b' + (r.done ? ' m3' : '') + '">' + esc(r.title) + '</p><p class="fn m2">' + (r.time ? fmtTime(r.time) : 'All day') + ' · Reminders</p></div>' + (r.priv ? '<span class="m3" aria-label="Only you see this">' + I('lock', 'ic15') + '</span>' : '') + '</div>'; }).join('') +
+      (!items.length && !rs.length ? '<p class="sh m3">' + (calView === 'me' ? 'Nothing of yours today. Connect work calendars in Settings.' : 'Nothing planned. Tap + to add something.') + '</p>' : '') + '</div></div>';
   };
   var SMART = [
     { id: 'today', name: 'Today', icon: 'calendar-days', color: 'var(--brand500)', f: function (r) { return !r.done && r.due && r.due <= TODAY; } },
@@ -415,7 +459,7 @@ textarea.field { min-height: 70px; resize: vertical; }
   function remRow(r) {
     var l = listOf(r.list), late = !r.done && r.due && r.due < TODAY;
     return '<div style="display:flex;gap:12px;padding:11px 0 0 16px"><button class="circle' + (r.done ? ' done' : '') + '" style="--c:' + listColor(l) + '" data-a="toggle" data-id="' + r.id + '" aria-label="' + (r.done ? 'Mark not done' : 'Complete') + ': ' + esc(r.title) + '"></button>' +
-      '<div style="flex:1;padding:0 16px 11px 0;border-bottom:.5px solid var(--line2);min-width:0"><div style="display:flex;gap:6px"><p class="bd" style="flex:1' + (r.done ? ';color:var(--ink3)' : '') + '">' + esc(r.title) + '</p>' + (r.flagged ? '<span style="color:var(--gold600)">' + I('flag', 'ic16') + '</span>' : '') + '</div>' +
+      '<div style="flex:1;padding:0 16px 11px 0;border-bottom:.5px solid var(--line2);min-width:0"><div style="display:flex;gap:6px"><p class="bd" style="flex:1' + (r.done ? ';color:var(--ink3)' : '') + '">' + esc(r.title) + '</p>' + (r.priv ? '<span class="m3" aria-label="Only you see this">' + I('lock', 'ic16') + '</span>' : '') + (r.flagged ? '<span style="color:var(--gold600)">' + I('flag', 'ic16') + '</span>' : '') + '</div>' +
       (r.notes ? '<p class="sh m3">' + esc(r.notes) + '</p>' : '') + (r.due ? '<p class="sh" style="color:' + (late ? '#B43A2E' : 'var(--ink3)') + '">' + fmtWhen(r) + (r.cal ? '  ·  on calendar' : '') + '</p>' : '') + '</div></div>';
   }
   SCREENS.reminders = function () {
@@ -532,14 +576,29 @@ textarea.field { min-height: 70px; resize: vertical; }
   };
   var stub = function (title, icon, ar, lines) { return function () { var c = area(ar); return header(title, { right: backLink('More') }) + '<div class="gut gap"><div style="height:150px;border-radius:10px;background:' + c[1] + ';color:' + c[0] + ';display:grid;place-items:center">' + I(icon, 'ic64') + '</div>' + lines.map(function (l) { return card({ body: '<p class="bd">' + esc(l) + '</p>' }); }).join('') + card({ v: 'sunken', body: '<p class="sh m2">In the prototype this screen is a preview. In the real app it works with your own family’s information.</p>' }) + '</div>'; }; };
   SCREENS.advisor = stub('Money advisor', 'bot', 'money', ['Link your banks, cards and loans (read-only) and ask anything: “How fast can we pay off the car?”', 'It looks at your real numbers, gives one clear next step, and can save a payoff plan with reminders.', 'Educational guidance, not a licensed advisor. It can never move money.']);
-  SCREENS.goals = stub('Goals', 'compass', 'growth', ['Set a goal for each role: marriage, the girls, faith, money, health, growth and home.', 'Sort tasks by urgent and important, then plan the week around the big rocks.']);
-  SCREENS.think = stub('Think it through', 'lightbulb', 'faith', ['Work through a hard decision step by step: the facts, the feelings, each side, then one next step.']);
+  var GOAL_AREAS = ['marriage', 'kids', 'faith', 'money', 'health', 'growth', 'home', 'work'], goalArea = 'marriage', goalMine = false, goalDraft = '';
+  var goalTint = function (a) { return a === 'kids' ? 'girls' : a === 'work' ? 'growth' : a; };
+  SCREENS.goals = function () {
+    var gc = function (g) { return card({ eyebrow: g.area, body: '<div style="display:flex;gap:8px;align-items:center"><p class="t3" style="flex:1;font-family:var(--display)">' + esc(g.title) + '</p>' + (g.priv ? '<span class="m3" aria-label="Only you see this">' + I('lock', 'ic16') + '</span>' : '') + '<button class="link sh" style="color:var(--ink3)" data-a="rmgoal" data-id="' + g.id + '">Remove</button></div>' }); };
+    var fam = S.goals.filter(function (g) { return !g.priv; }), mine = S.goals.filter(function (g) { return g.priv; });
+    return header('Goals', { right: backLink('More') }) +
+      '<div class="gut">' + card({ body: '<form data-f="newgoal" class="gap" style="gap:10px"><input class="field" name="t" placeholder="A new goal" aria-label="A new goal" value="' + esc(goalDraft) + '">' +
+        '<div style="display:flex;flex-wrap:wrap;gap:6px">' + GOAL_AREAS.map(function (a) { return '<button type="button" class="chip' + (goalArea === a ? ' on' : '') + '" data-a="goalarea" data-id="' + a + '">' + a + '</button>'; }).join('') + '</div>' +
+        '<div style="display:flex;align-items:center;gap:12px"><div style="flex:1"><p class="bd">Just for me</p><p class="cp m3">' + (goalMine ? 'Only you will see this goal.' : 'Your spouse will see this goal too.') + '</p></div><button type="button" class="switch' + (goalMine ? ' on' : '') + '" role="switch" aria-checked="' + goalMine + '" aria-label="Just for me" data-a="goalmine"></button></div>' +
+        '<button class="btn sm" type="submit">' + I('plus') + 'Add goal</button></form>' }) + '</div>' +
+      sect('Family goals, by role') + '<div class="gut gap">' + (fam.map(gc).join('') || '<p class="bd m3">Add your first goal for each role: marriage, ' + KIDS + ', faith, money, health, growth and home.</p>') + '</div>' +
+      sect('My goals · only I see these') + '<div class="gut gap">' + (mine.map(gc).join('') || '<p class="bd m3">Goals you keep just for yourself show here.</p>') + '</div>' +
+      '<div class="gut" style="margin-top:16px">' + card({ v: 'sunken', body: '<p class="sh m2">Family goals are shared between you and your spouse. Goals marked “Just for me” are seen only by you. Kids can keep their own goals once a parent turns that on in Settings.</p>' }) + '</div>';
+  };
+  SCREENS.think = stub('Think it through', 'lightbulb', 'faith', ['Work through a hard decision step by step: the facts, the feelings, each side, then one next step.', 'Keep it just for you: private sessions and the reminders they make are seen only by you.']);
   SCREENS.educator = stub('Family Life Educator', 'graduation-cap', 'growth', ['Ask parenting and marriage questions, or build a short family program or handout, fitted to your family’s ages and stage.']);
   SCREENS.settings = function () {
     var c = S.theme, lbl = function (s) { return '<p class="fn hv m3" style="margin:14px 0 8px;text-transform:uppercase">' + s + '</p>'; };
     return header('Settings', { right: backLink('More') }) + sect('Our family') + '<div class="gut">' + card({ flush: true, body: FAMILY.members.map(function (m) { return row({ leading: avatar(m, 30), title: m.full, sub: 'Born ' + fmtLong(m.birthday), value: String(ageOn(m.birthday)) }); }).join('') + row({ icon: 'heart', color: 'var(--a_marriage)', title: 'Anniversary', sub: fmtLong(FAMILY.anniversary), value: ageOn(FAMILY.anniversary) + ' yrs' }) }) +
       '<div style="margin-top:10px"><button class="btn tinted full" data-a="invite">' + I('user-plus') + 'Invite Lindy</button></div>' + (S.invite ? '<div style="margin-top:10px">' + card({ v: 'accent', body: '<p class="fn m2">Invite code (good for 14 days)</p><p class="t1" style="letter-spacing:4px">' + S.invite + '</p><p class="cp m3">Sample code. The real one comes from your database.</p>' }) + '</div>' : '') +
       '<p class="cp m3" style="margin-top:6px">Ages, stages, health checks, ideas and studies all update from these dates.</p></div>' +
+      sect('Kids’ privacy') + '<div class="gut">' + card({ flush: true, body: kids.map(function (k) { var on = !!S.privOk[k.id]; return '<div class="swrow">' + avatar(k, 30) + '<div style="flex:1"><p class="bd">' + esc(k.name) + ' · Can keep private goals and plans</p><p class="cp m3">When on, ' + esc(k.name) + ' can make goals, reminders and plans only she can see.</p></div><button class="switch' + (on ? ' on' : '') + '" role="switch" aria-checked="' + on + '" aria-label="' + esc(k.name) + ' can keep private goals and plans" data-a="privok" data-id="' + k.id + '"></button></div>'; }).join('') }) + '<p class="cp m3" style="margin-top:6px">Family things are seen by everyone. Private things are seen only by the person who made them. Turning this off stops new private items; ones already made stay private.</p></div>' +
+      sect('Work & personal schedules') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'briefcase', color: '#2F6FB4', title: 'Work calendars & tasks', sub: 'Outlook, Google, Asana, Todoist and more', chev: true, a: 'go', id: 'connections' }) }) + '</div>' +
       sect('Love languages') + '<div class="gut">' + card({ flush: true, body: parents.map(function (m) { var l = S.ll[m.id]; return row({ icon: 'heart', color: 'var(--a_marriage)', title: m.name, sub: l ? l.slice(0, 2).map(function (x) { return LOVE[x].name; }).join(' · ') : 'Take the 2-minute quiz', chev: true, a: 'quiz', id: m.id }); }).join('') }) + '</div>' +
       sect('Appearance') + '<div class="gut">' + card({ body:
         lbl('Light or dark') + '<div class="seg">' + [['light', 'Light'], ['dark', 'Dark'], ['auto', 'Match iPhone']].map(function (o) { return '<button class="' + (c.mode === o[0] ? 'on' : '') + '" data-a="mode" data-id="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>' +
@@ -551,6 +610,23 @@ textarea.field { min-height: 70px; resize: vertical; }
         lbl('Text font') + '<div style="display:grid;gap:6px">' + UI.map(function (d) { return '<button class="opt' + (c.ui === d[0] ? ' on' : '') + '" data-a="ui" data-id="' + d[0] + '"><span class="bd" style="font-family:' + d[2].replace(/"/g, '&quot;') + '">' + d[1] + '</span></button>'; }).join('') + '</div>' }) + '</div>' +
       sect('Voice assistants') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'mic', color: 'var(--ink1)', title: 'Siri & Shortcuts', sub: '“Add a family reminder in Lewis Family”' }) + row({ icon: 'speaker', color: 'var(--a_growth)', title: 'Alexa', sub: 'Enable the Lewis Family skill, then link your account' }) }) + '</div>';
   };
+  SCREENS.connections = function () {
+    var chip = function (s, a, id) { return '<button class="sharechip" data-a="' + a + '" data-id="' + id + '">' + I(SHARE[s][1]) + SHARE[s][0] + '</button>'; };
+    var accts = []; DEVCALS.forEach(function (c) { if (accts.indexOf(c.account) < 0) accts.push(c.account); });
+    return header('Work calendars', { sub: 'Calendars & tasks from other apps', right: backLink('Done') }) +
+      '<div class="gut">' + card({ v: 'sunken', body: '<p class="sh m2">Your work items show only to you. For each one, choose whether the family sees nothing, just that you’re busy, or the details. Tap the label to change it.</p>' }) + '</div>' +
+      sect('Calendars on this iPhone') + '<div class="gut gap">' + accts.map(function (acct) {
+        return card({ flush: true, body: '<p class="fn hv m3" style="padding:12px 14px 0;text-transform:uppercase">' + esc(acct) + '</p>' + DEVCALS.filter(function (c) { return c.account === acct; }).map(function (c) { var on = !!S.cals[c.id];
+          return '<div class="swrow"><button class="cbox" style="' + (on ? 'border:0;background:' + c.color : '') + '" data-a="caltoggle" data-id="' + c.id + '" role="checkbox" aria-checked="' + on + '" aria-label="Show ' + esc(c.title) + '">' + (on ? I('check') : '') + '</button><p class="bd" style="flex:1">' + esc(c.title) + '</p>' + (on ? chip(S.cals[c.id], 'calshare', c.id) : '') + '</div>'; }).join('') }); }).join('') +
+      card({ v: 'accent', body: '<p class="sh b">Don’t see your work calendar?</p><p class="sh m2" style="margin-top:4px">On your iPhone, open Settings, then Apps, then Calendar, then Calendar Accounts, then Add Account. Pick Google, Microsoft Exchange (for Outlook and Microsoft 365) or another. It shows up here after that.</p>' }) + '</div>' +
+      sect('Task and project apps') + '<div class="gut gap">' +
+      (S.feeds.length ? card({ flush: true, body: S.feeds.map(function (f) { return '<div class="swrow"><span class="m3">' + I('link', 'ic16') + '</span><p class="bd" style="flex:1">' + esc(f.name) + '</p>' + chip(f.share, 'feedshare', f.id) + '<button class="link" style="color:var(--ink3)" data-a="rmfeed" data-id="' + f.id + '" aria-label="Remove ' + esc(f.name) + '">' + I('x', 'ic16') + '</button></div>'; }).join('') }) : '') +
+      card({ body: '<p class="sh m2">Asana, Todoist, Trello, Jira, ClickUp, Monday and most others give you a private calendar feed link. Look for “Subscribe”, “iCal” or “Calendar feed”, copy the link, and paste it here.</p>' +
+        '<form data-f="addfeed" class="gap" style="gap:8px;margin-top:10px"><input class="field" name="n" placeholder="Name (for example, Work tasks)" aria-label="Name" value="' + esc(feedDraft[0]) + '"><input class="field" name="u" placeholder="Paste the link" aria-label="Link" autocapitalize="off" autocomplete="off" value="' + esc(feedDraft[1]) + '">' +
+        (feedErr ? '<p class="fn" style="color:#B43A2E">' + esc(feedErr) + '</p>' : '') + '<button class="btn sm" type="submit">' + I('plus') + 'Add link</button></form>' +
+        '<p class="cp m3" style="margin-top:8px">The link stays on this phone. The app only reads it and never changes anything in the other app. (In this preview any https:// or webcal:// link adds sample tasks.)</p>' }) + '</div>';
+  };
+  var feedErr = '', feedDraft = ['', ''];
   var quiz = null;
   SCREENS.quiz = function (id) {
     var m = member(id);
@@ -577,6 +653,7 @@ textarea.field { min-height: 70px; resize: vertical; }
         '<label class="fn hv m3">LIST<select class="field" name="l" style="margin-top:6px">' + LISTS.map(function (l) { return '<option value="' + l.id + '">' + l.name + '</option>'; }).join('') + '</select></label>' +
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><label class="fn hv m3">DATE<input class="field" type="date" name="d" value="' + d + '" style="margin-top:6px"></label><label class="fn hv m3">TIME<input class="field" type="time" name="tm" style="margin-top:6px"></label></div>' +
         '<label class="bd" style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="c"' + (sheet.cal ? ' checked' : '') + '> Show on calendar</label><label class="bd" style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="f"> Flag it</label>' +
+        '<label class="bd" style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="p"> Just for me <span class="cp m3">(only you will see it)</span></label>' +
         '<button class="btn full" type="submit">Add</button></form></div></div>'; }
     return '';
   }
@@ -623,6 +700,14 @@ textarea.field { min-height: 70px; resize: vertical; }
       case 'closesheet': sheet = null; render(); return;
       case 'newrem': sheet = { k: 'newrem', cal: id === 'cal' }; render(); setTimeout(function () { var f = app.querySelector('.sheet input[name=t]'); if (f) f.focus(); }, 50); return;
       case 'calsel': calSel = id; render(); return;
+      case 'calview': calView = id; render(); return;
+      case 'caltoggle': if (S.cals[id]) delete S.cals[id]; else S.cals[id] = 'private'; save(); render(); return;
+      case 'calshare': S.cals[id] = SHORDER[(SHORDER.indexOf(S.cals[id]) + 1) % 3]; save(); render(); return;
+      case 'feedshare': S.feeds.forEach(function (f) { if (f.id === id) f.share = SHORDER[(SHORDER.indexOf(f.share) + 1) % 3]; }); save(); render(); return;
+      case 'rmfeed': S.feeds = S.feeds.filter(function (f) { return f.id !== id; }); save(); render(); return;
+      case 'privok': S.privOk[id] = !S.privOk[id]; save(); toast(member(id).name + (S.privOk[id] ? ' can now keep private goals and plans' : ' can’t add new private items now')); render(); return;
+      case 'goalarea': case 'goalmine': { var gi = app.querySelector('form[data-f=newgoal] input[name=t]'); if (gi) goalDraft = gi.value; if (a === 'goalarea') goalArea = id; else goalMine = !goalMine; render(); return; }
+      case 'rmgoal': S.goals = S.goals.filter(function (g) { return g.id !== id; }); save(); render(); return;
       case 'calprev': case 'calnext': { var dd = new Date(calYM[0], calYM[1] - 1 + (a === 'calprev' ? -1 : 1), 1); calYM = [dd.getFullYear(), dd.getMonth() + 1]; render(); return; }
       case 'more-ideas': toast('In the real app, a fresh set of ideas appears (up to 3 sets a day).'); render(); return;
       case 'lanterndone': S.lanternDone = TODAY; save(); back(); toast('Lovely. Today’s study is marked done.'); return;
@@ -656,7 +741,15 @@ textarea.field { min-height: 70px; resize: vertical; }
     e.preventDefault(); var f = e.target, k = f.getAttribute('data-f');
     if (k === 'quickadd') { var t = f.t.value.trim(); if (!t) return; var id = f.getAttribute('data-id'), isList = LISTS.some(function (l) { return l.id === id; });
       S.rems.push({ id: 'q' + Date.now(), title: t, list: isList ? id : 'family', due: id === 'today' ? TODAY : null, flagged: id === 'flagged' }); save(); render(); var n = app.querySelector('input[name=t]'); if (n) n.focus(); }
-    if (k === 'newrem') { var tt = f.t.value.trim(); if (!tt) return; S.rems.push({ id: 'n' + Date.now(), title: tt, notes: f.n.value.trim() || null, list: f.l.value, due: f.d.value || null, time: f.tm.value || null, cal: f.c.checked && !!f.d.value, flagged: f.f.checked }); save(); sheet = null; toast('Added: ' + tt); render(); }
+    if (k === 'newrem') { var tt = f.t.value.trim(); if (!tt) return; S.rems.push({ id: 'n' + Date.now(), title: tt, notes: f.n.value.trim() || null, list: f.l.value, due: f.d.value || null, time: f.tm.value || null, cal: f.c.checked && !!f.d.value, flagged: f.f.checked, priv: f.p.checked }); save(); sheet = null; toast('Added: ' + tt); render(); }
+  });
+  app.addEventListener('submit', function (e) {
+    var f = e.target, k = f.getAttribute('data-f');
+    if (k === 'newgoal') { var t = f.t.value.trim(); if (!t) return; S.goals.push({ id: 'g' + Date.now(), title: t, area: goalArea, priv: goalMine }); goalDraft = ''; save(); toast(goalMine ? 'Added. Only you see it.' : 'Added to family goals'); render(); }
+    if (k === 'addfeed') { var raw = f.u.value.trim(), url = raw.replace(/^webcals?:\/\//i, 'https://'), ok = false; try { ok = new URL(url).protocol === 'https:'; } catch (x) { ok = false; }
+      if (!ok) { feedErr = 'That link should start with https:// or webcal://'; feedDraft = [f.n.value, raw]; render(); return; }
+      feedDraft = ['', ''];
+      feedErr = ''; S.feeds.push({ id: 'f' + Date.now(), name: f.n.value.trim() || 'Work tasks', url: url, share: 'private' }); save(); toast('Added. Its tasks show on your calendar.'); render(); }
   });
   app.addEventListener('change', function (e) { var a = e.target.getAttribute('data-ans'); if (a) { S.answers[a] = e.target.value; save(); } });
 
@@ -675,7 +768,7 @@ textarea.field { min-height: 70px; resize: vertical; }
       return c.openComposer({ element: target }).then(function (r) { notice.textContent = r && r.opened ? 'Type what you want changed, then post it. Choose to send it to Claude if you see that option.' : 'Tap Leave a note again, then tap the spot once more.'; });
     }).catch(function () { notice.textContent = 'That note didn’t open. Send Claude a screenshot in your chat instead.'; });
   }, true);
-  document.getElementById('resetBtn').addEventListener('click', function () { S = sampleState(); save(); nav = [{ r: 'today' }]; sheet = null; quiz = null; calYM = null; calSel = TODAY; render(true); notice.textContent = 'Back to the sample family.'; });
+  document.getElementById('resetBtn').addEventListener('click', function () { S = sampleState(); save(); nav = [{ r: 'today' }]; sheet = null; quiz = null; calYM = null; calSel = TODAY; calView = 'everyone'; feedErr = ''; goalMine = false; render(true); notice.textContent = 'Back to the sample family.'; });
   if (sysDark.addEventListener) sysDark.addEventListener('change', function () { render(); });
 
   render(true);

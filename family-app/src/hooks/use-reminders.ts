@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import { scheduleReminder } from '@/lib/notifications';
 import { upsertAppleReminder, pullAppleReminders } from '@/lib/eventkit';
-export type Reminder = { id: string; family_id: string; list_id: string | null; title: string; notes?: string | null; due_date?: string | null; due_time?: string | null; on_calendar?: boolean; alert?: string; repeat?: string | null; flagged?: boolean; priority?: string | null; done?: boolean; apple_id?: string | null; source?: string };
+export type Reminder = { id: string; family_id: string; list_id: string | null; title: string; notes?: string | null; due_date?: string | null; due_time?: string | null; on_calendar?: boolean; alert?: string; repeat?: string | null; flagged?: boolean; priority?: string | null; done?: boolean; apple_id?: string | null; source?: string; private?: boolean; owner_id?: string | null };
 export type ReminderList = { id: string; name: string; color: string; icon: string };
 export function useReminders(familyId?: string) {
   const [items, setItems] = useState<Reminder[]>([]); const [lists, setLists] = useState<ReminderList[]>([]);

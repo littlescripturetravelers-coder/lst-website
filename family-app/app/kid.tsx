@@ -10,6 +10,7 @@ import { useHome } from '@/hooks/use-home';
 import { supabase } from '@/lib/supabase';
 import { ageOn, stageFor } from '@/lib/family';
 import { useEffect, useState } from 'react';
+import { router } from 'expo-router';
 /** What a child sees when she signs in on her own device. Sections are chosen by parents in Settings → Kids' profiles. */
 export default function Kid() {
   const { theme: t } = useTheme(); const { family } = useFamily(); const h = useHome(family?.id); const [me, setMe] = useState<any>(null);
@@ -25,6 +26,7 @@ export default function Kid() {
         <Text v="title3" color={on ? '#fff' : t.ink[1]} style={{ fontFamily: t.font.display }}>{c.title}</Text></Pressable>; })}
       {mine.length > 0 && done === mine.length && <Text v="title3" style={{ textAlign: 'center' }}>All done. Great job!</Text>}
     </Gutter>}
+    {me.private_ok && <Gutter style={{ marginTop: 20 }}><Pressable onPress={() => router.push('/goals')} style={{ flexDirection: 'row', alignItems: 'center', gap: 12, padding: 16, borderRadius: 14, backgroundColor: t.paper[0] }}><Icon name="compass" size={26} color={t.area.growth[0]} /><View style={{ flex: 1 }}><Text v="title3" style={{ fontFamily: t.font.display }}>My goals</Text><Text v="footnote" color={t.ink[3]}>Only you can see these</Text></View><Icon name="chevron-right" color={t.ink[4]} /></Pressable></Gutter>}
     {S('feelings') && <Rail title="How do you feel?" itemWidth={120} data={stageFor(ageOn(me.birthday)).feelings} render={f => <ContentTile size="sm" area="girls" icon="smile" title={f} onPress={() => supabase.from('checkins').insert({ family_id: family.id, for_date: new Date().toISOString().slice(0, 10), question: me.name + ' feels', answers: { [me.name]: f } })} />} />}
   </Screen>;
 }

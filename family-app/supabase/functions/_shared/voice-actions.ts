@@ -10,9 +10,11 @@ export async function addReminder(f: any, title: string, when?: string, list?: s
 }
 export async function todaySummary(f: any) {
   const { db, family, today } = f;
+  // Private items belong to one person: only the person asking hears theirs.
+  const mine = 'private.is.false' + (f.uid ? ',owner_id.eq.' + f.uid : '');
   const [{ data: ev }, { data: rem }, { data: study }] = await Promise.all([
-    db.from('events').select('title,starts_at,all_day').eq('family_id', family.id).gte('starts_at', today).lt('starts_at', today + 'T23:59:59').order('starts_at'),
-    db.from('reminders').select('title,due_time').eq('family_id', family.id).eq('done', false).lte('due_date', today),
+    db.from('events').select('title,starts_at,all_day').eq('family_id', family.id).gte('starts_at', today).lt('starts_at', today + 'T23:59:59').or(mine).order('starts_at'),
+    db.from('reminders').select('title,due_time').eq('family_id', family.id).eq('done', false).lte('due_date', today).or(mine),
     db.from('couple_studies').select('scripture').eq('family_id', family.id).eq('for_date', today).maybeSingle(),
   ]);
   const parts = [];

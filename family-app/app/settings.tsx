@@ -20,7 +20,7 @@ const ACCENTS = ['#1B2D5F', '#2E6E8E', '#355845', '#A8502F', '#B5536B', '#4E3563
 const DISPLAY: [DisplayFont, string][] = [['fredoka', 'Fredoka'], ['youngSerif', 'Young Serif'], ['lora', 'Lora'], ['nunito', 'Nunito']];
 const UI: [UiFont, string][] = [['nunito', 'Nunito'], ['figtree', 'Figtree'], ['atkinson', 'Atkinson Hyperlegible'], ['system', 'iPhone system']];
 export default function Settings() {
-  const { theme: t, setChoice } = useTheme(); const c = t.choice; const { family, saveMember, saveAnniversary } = useFamily();
+  const { theme: t, setChoice } = useTheme(); const c = t.choice; const { family, saveMember, saveAnniversary, setPrivateOk } = useFamily();
   const [edit, setEdit] = useState<string | null>(null); const [val, setVal] = useState(''); const [invite, setInvite] = useState<string | null>(null);
   const makeInvite = async (slug: string) => { const { data, error } = await supabase.from('family_invites').insert({ family_id: family!.id, member_slug: slug }).select('code').single(); if (!error) setInvite(data.code); };
   const Sw = ({ color, on, onPress }: any) => <Pressable onPress={onPress} style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: color, borderWidth: on ? 3 : 0, borderColor: t.ink[1] }} />;
@@ -36,6 +36,8 @@ export default function Settings() {
       {family.members.filter((m: any) => (m.role === 'dad' || m.role === 'mom') && !m.user_id).map(m => <View key={'inv' + m.id} style={{ marginTop: 10 }}><Button full variant="tinted" icon="user-plus" title={'Invite ' + m.name} onPress={() => makeInvite(m.id)} /></View>)}
       {invite && <Card variant="accent" style={{ marginTop: 10 }}><Text v="footnote" color={t.ink[2]}>Invite code (good for 14 days)</Text><Text v="title1" style={{ letterSpacing: 4 }}>{invite}</Text><View style={{ marginTop: 8 }}><Button size="sm" variant="secondary" icon="share" title="Share" onPress={() => Share.share({ message: 'Join our family in the app. Sign in, tap “I have an invite code” and enter ' + invite })} /></View></Card>}
       <Text v="caption" color={t.ink[3]} style={{ marginTop: 6 }}>Ages, stages, health checks, ideas and studies all update from these dates.</Text></Gutter>}
+    <SectionHead title="Work & personal schedules" />
+    <Gutter><Card padding={0}><ListRow icon="briefcase" iconColor={t.area.growth[0]} title="Work calendars & tasks" subtitle="Google, Outlook, Asana, Todoist and more. Private unless you share." chevron divider={false} onPress={() => router.push('/connections')} /></Card></Gutter>
     <SectionHead title="What matters to each of us" />
     <Gutter><Card padding={0}><ListRow icon="star" iconColor={t.area.growth[0]} title="Hobbies, people & shows" subtitle="Added to the calendar and reminders on their own" chevron divider={false} onPress={() => router.push('/interests')} /></Card></Gutter>
     <SectionHead title="Kids’ profiles" />
@@ -44,6 +46,7 @@ export default function Settings() {
       <Text v="footnote" weight="heavy" color={t.ink[3]}>WHAT THEY CAN SEE</Text>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 6 }}>{KID_SECTIONS.map(([id, label]) => { const on = (k.kid_sections || ['chores', 'story', 'feelings']).includes(id); return <Pressable key={id} onPress={async () => { const cur = k.kid_sections || ['chores', 'story', 'feelings']; await supabase.from('family_members').update({ kid_sections: on ? cur.filter((x: string) => x !== id) : [...cur, id] }).eq('family_id', family.id).eq('slug', k.id); }} style={{ paddingHorizontal: 10, paddingVertical: 6, borderRadius: 6, backgroundColor: on ? t.brand[500] : t.paper[2] }}><Text v="footnote" weight="bold" color={on ? t.ink.inverse : t.ink[2]}>{label}</Text></Pressable>; })}</View>
       <Text v="caption" color={t.ink[3]} style={{ marginTop: 8 }}>Money, health records, marriage check-ins and the advisor are never shown to kids.</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 12 }}><View style={{ flex: 1 }}><Text>Can keep private goals and plans</Text><Text v="caption" color={t.ink[3]}>When on, {k.name} can make goals, reminders and plans only {k.sex === 'm' ? 'he' : 'she'} can see.</Text></View><Switch value={!!k.private_ok} onValueChange={v => setPrivateOk(k.id, v)} /></View>
       {k.can_login && <View style={{ marginTop: 10 }}><Button size="sm" variant="tinted" icon="user-plus" title={'Invite code for ' + k.name} onPress={() => makeInvite(k.id)} /></View>}
     </Card>)}</Gutter>}
     <SectionHead title="Love languages" />

@@ -25,7 +25,7 @@ export default function RemindersTab() {
   const Row = ({ r }: { r: Reminder }) => <Pressable onPress={() => router.push({ pathname: '/reminder-sheet', params: { id: r.id } })} style={{ flexDirection: 'row', gap: 12, paddingLeft: 16, paddingTop: 11 }}>
     <Pressable onPress={() => rem.toggle(r)} hitSlop={10} style={{ width: 24, height: 24, borderRadius: 12, borderWidth: r.done ? 2 : 1.5, borderColor: r.done ? colorOf(r) : t.ink[4], alignItems: 'center', justifyContent: 'center' }}>{r.done && <View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: colorOf(r) }} />}</Pressable>
     <View style={{ flex: 1, paddingBottom: 11, paddingRight: 16, borderBottomWidth: .5, borderColor: t.line[2] }}>
-      <View style={{ flexDirection: 'row' }}><Text style={{ flex: 1 }} color={r.done ? t.ink[3] : t.ink[1]}>{r.title}</Text>{r.flagged && <Icon name="flag" size={16} color={t.gold[600]} />}</View>
+      <View style={{ flexDirection: 'row' }}><Text style={{ flex: 1 }} color={r.done ? t.ink[3] : t.ink[1]}>{r.title}</Text>{r.private && <Icon name="lock" size={15} color={t.ink[3]} />}{r.flagged && <Icon name="flag" size={16} color={t.gold[600]} />}</View>
       {r.notes && <Text v="subhead" color={t.ink[3]}>{r.notes}</Text>}
       {r.due_date && <Text v="subhead" color={!r.done && r.due_date < today ? t.danger[0] : t.ink[3]}>{fmtWhen(r)}{r.on_calendar ? '  ·  on calendar' : ''}</Text>}
     </View></Pressable>;
