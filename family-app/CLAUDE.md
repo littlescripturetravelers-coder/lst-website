@@ -36,6 +36,13 @@ Levi Lewis owns this app and is not technical. I am his developer. **His compute
 - **Using the app before TestFlight (Expo Go):** Levi and Lindy run it inside the free **Expo Go** app. Levi publishes with `eas update --branch main --message "…"` from `$HOME\lst-website\family-app` (needs `eas login` + `eas init` + `eas update:configure` once); each phone opens the update from expo.dev (scan the Preview QR) while signed into Expo Go with Levi's Expo account. `runtimeVersion` uses the `sdkVersion` policy so Expo Go can load it; `expo-updates` is installed. Everything works in Expo Go except Plaid bank linking (loaded only outside Expo Go in `app/advisor.tsx`) and the Siri App Intents (App Store build only). After every change I make, Levi runs the `eas update` line again. (api.expo.dev is blocked from my environment, so I can't publish updates myself.)
 - Sign-in is an email link that opens `lewisfamily://#access_token=…` (or `exp://…` inside Expo Go, via `Linking.createURL('/')`); `src/components/session-gate.tsx` turns it into a session. Supabase needs `lewisfamily://**` and `exp://**` in Authentication, then URL Configuration, then Redirect URLs.
 
+## Brand: Family Wellness (approved name; not applied to the app yet)
+- Name **Family Wellness**, tagline "Family, well kept.", endorsed "An LST company" (App Store seller line, website footer, About screen only; the full "Little Scripture Travelers" name stays out of the app). Brand book: https://claude.ai/artifact/L1y3q3UfSD6mu8Ls9cymfC (source ).
+- Colors: **coral #F2665A and white #FFFFFF only** (Levi rejected indigo/rose/olive and any darker coral). Tints of the same coral for cards (#FEF0EF) and lines (#FBD1CE). Text is coral, Figtree Medium 500+, 15 pt and up. No LST colors or fonts.
+- Fonts: Fraunces SemiBold, soft 100 (titles, logo) and Figtree (everything else).
+- Logo files in : the woven nest with the light inside an unbroken ring (eternity), on coral and on white; the name-only logo (the "i" dot is the ring and light), one line and stacked; the app icon (1024 PNG and SVG).
+- When applying it: add a "Family Wellness" theme (default for new families), and **keep today's look as a "Classic" theme** in Settings → Appearance so Levi can switch back with one tap. The last commit before the brand is `e67a9e1`.
+
 ## Product rules
 - **Privacy model (0012/0013):** family things are seen by the whole family; "Just for me" things are seen only by the person who made them, and nobody else, parents included.
   - `events`, `reminders`, `goals`, `think_sessions` have `owner_id` (defaults to `auth.uid()`) and `private`. RLS: family rows as before (goals/think are parents-only); private rows owner-only; inserting a private row needs `can_private()`.
