@@ -3,21 +3,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,600;9..144,700,100&family=Figtree:wght@400;500;700;800&display=swap">
 <style>
-/* Layout: one reading column of brand chapters on white; the coral hero is the only big block of color. Deliberately one look: coral and white only. */
+/* Layout: one reading column of brand chapters on white; the coral hero is the only big block of color. Deliberately one look: coral and white, with charcoal for reading text. */
 :root {
-  --coral: #F2665A; --white: #FFFFFF; --tint: #FEF0EF; --line: #FBD1CE;
-  --bg: var(--white); --surface: var(--tint); --fg: var(--coral); --muted: var(--coral); --accent: var(--coral);
+  --coral: #F2665A; --white: #FFFFFF; --charcoal: #3A3A3C; --tint: #FEF0EF; --line: #FBD1CE;
+  --bg: var(--white); --surface: var(--tint); --fg: var(--charcoal); --muted: var(--charcoal); --accent: var(--coral);
   --display: "Fraunces", "Iowan Old Style", Georgia, serif; --body: "Figtree", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   color-scheme: light;
 }
 * { box-sizing: border-box }
-body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; font-weight: 500; line-height: 1.6; margin: 0 }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; margin: 0 }
 .wrap { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block: 0 72px }
-h1, h2, h3 { font-family: var(--display); font-variation-settings: "SOFT" 100; text-wrap: balance; margin: 0; font-weight: 600 }
+h1, h2, h3 { color: var(--coral); font-family: var(--display); font-variation-settings: "SOFT" 100; text-wrap: balance; margin: 0; font-weight: 600 }
 h2 { font-size: clamp(28px, 4vw, 38px); line-height: 1.15 }
 h3 { font-size: 21px; line-height: 1.25 }
 p { margin: 0; max-width: 66ch }
-.label { font-weight: 800; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted) }
+.label { font-weight: 800; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--coral) }
 .muted { color: var(--muted) }
 section { border-top: 1px solid var(--line); padding-block: 48px 8px; display: grid; gap: 20px }
 .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) }
@@ -59,7 +59,7 @@ figcaption { font-size: 13px; color: var(--muted); font-variant-numeric: tabular
 .sw { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--bg) }
 .sw .chip { height: 110px; display: flex; align-items: end; padding: 10px 12px; font-weight: 800; font-size: 13px }
 .sw .info { padding: 12px 14px 14px; display: grid; gap: 4px }
-.sw .name { font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 600; font-size: 20px }
+.sw .name { color: var(--coral); font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 600; font-size: 20px }
 .sw .hex { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; color: var(--muted) }
 .sw .means { font-size: 14px }
 .big2 { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) }
@@ -85,17 +85,17 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap }
 
 .split { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); align-items: start }
 .split > * { min-width: 0 }
-.phone { width: 300px; max-width: 100%; border-radius: 36px; border: 8px solid #F2665A; background: #FFFFFF; color: #F2665A; overflow: hidden; justify-self: center }
+.phone { width: 300px; max-width: 100%; border-radius: 36px; border: 8px solid #F2665A; background: #FFFFFF; color: #3A3A3C; overflow: hidden; justify-self: center }
 .phone .top { background: #F2665A; color: #FFFFFF; padding: 22px 18px 18px; display: grid; gap: 4px }
 .phone .top .d { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase }
 .phone .top .t { font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 600; font-size: 26px }
 .phone .body { padding: 14px; display: grid; gap: 10px }
 .phone .card { background: #FEF0EF; border-radius: 14px; padding: 12px 14px; display: grid; gap: 4px }
 .phone .card .k { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #F2665A }
-.phone .card .h { font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 600; font-size: 18px; line-height: 1.2 }
-.phone .card .s { font-size: 14px; color: #F2665A }
+.phone .card .h { color: #F2665A; font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 600; font-size: 18px; line-height: 1.2 }
+.phone .card .s { font-size: 14px; color: #3A3A3C }
 .phone .cta { background: #F2665A; color: #FFFFFF; border-radius: 12px; padding: 12px; text-align: center; font-weight: 800 }
-.phone .tabs { display: flex; justify-content: space-around; border-top: 1px solid #FBD1CE; padding: 10px 6px 14px; font-size: 11px; font-weight: 700; color: #F2665A }
+.phone .tabs { display: flex; justify-content: space-around; border-top: 1px solid #FBD1CE; padding: 10px 6px 14px; font-size: 11px; font-weight: 700; color: #3A3A3C }
 .phone .tabs b { color: #F2665A }
 .voice { display: grid; gap: 10px }
 .say { border-left: 3px solid var(--accent); padding: 4px 0 4px 14px }
@@ -186,10 +186,14 @@ footer { border-top: 1px solid var(--line); margin-top: 48px; padding-top: 20px;
   <section>
     <div class="label">Color</div>
     <h2>Coral and white</h2>
-    <p>Two colors and nothing else: coral and white. Words, the logo, buttons and the top of each screen are coral or white.</p>
+    <p>Coral and white are the brand. Charcoal is only for reading: paragraphs, lists, notes and documents. Titles, labels, buttons, the logo and the top of each screen stay coral or white.</p>
     <div class="swatches big2">
       <div class="sw"><div class="chip" style="background:#F2665A;color:#FFFFFF">Main color</div><div class="info"><div class="name">Coral</div><div class="hex">#F2665A · RGB 242 102 90</div><div class="means">Warmth, love and life. Coral reefs are built by generation after generation and last for thousands of years, much like a family. Use it for the app icon, the top of each screen, main buttons and the logo.</div></div></div>
       <div class="sw"><div class="chip" style="background:#FFFFFF;color:#F2665A;border-bottom:1px solid #FBD1CE">Background</div><div class="info"><div class="name">White</div><div class="hex">#FFFFFF · RGB 255 255 255</div><div class="means">Light, peace and a clean, calm home. The page behind everything, and the logo on coral.</div></div></div>
+    </div>
+    <div class="label">For reading text</div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#3A3A3C;color:#FFFFFF">Reading text</div><div class="info"><div class="name">Charcoal</div><div class="hex">#3A3A3C · RGB 58 58 60</div><div class="means">Paragraphs, lists, notes, recipes and documents. Softer than black, easy on the eyes.</div></div></div>
     </div>
     <div class="label">Lighter coral for cards and lines</div>
     <div class="swatches">
@@ -197,18 +201,20 @@ footer { border-top: 1px solid var(--line); margin-top: 48px; padding-top: 20px;
       <div class="sw"><div class="chip" style="background:#FBD1CE;color:#F2665A">Lines</div><div class="info"><div class="name">Coral 30%</div><div class="hex">#FBD1CE</div><div class="means">Dividers and card edges.</div></div></div>
     </div>
     <div class="label">How much of each</div>
-    <div class="bar" role="img" aria-label="White about 75 percent, coral about 25 percent">
-      <span style="flex:75;background:#FFFFFF;color:#F2665A">White 75%</span><span style="flex:25;background:#F2665A;color:#FFFFFF">Coral 25%</span>
+    <div class="bar" role="img" aria-label="White about 70 percent, coral about 22 percent, charcoal text about 8 percent">
+      <span style="flex:70;background:#FFFFFF;color:#3A3A3C">White 70%</span><span style="flex:22;background:#F2665A;color:#FFFFFF">Coral 22%</span><span style="flex:8;background:#3A3A3C;color:#FFFFFF">Text</span>
     </div>
     <div class="label">Keeping words easy to read</div>
     <div class="tablewrap"><table>
       <thead><tr><th>Words</th><th>On</th><th>Contrast</th><th>How to use it</th></tr></thead>
       <tbody>
-        <tr><td><span class="dot" style="background:#F2665A"></span>Coral</td><td>White</td><td class="num">3.1 : 1</td><td>All text. Use Figtree Medium 500 or heavier, 15 pt and up.</td></tr>
+        <tr><td><span class="dot" style="background:#3A3A3C"></span>Charcoal</td><td>White</td><td class="num">11.3 : 1</td><td>All reading text, any size</td></tr>
+        <tr><td><span class="dot" style="background:#3A3A3C"></span>Charcoal</td><td>Coral 10%</td><td class="num">10.2 : 1</td><td>Text on cards</td></tr>
+        <tr><td><span class="dot" style="background:#F2665A"></span>Coral</td><td>White</td><td class="num">3.1 : 1</td><td>Titles and labels. Bold, 15 pt and up.</td></tr>
         <tr><td><span class="dot" style="background:#FFFFFF"></span>White</td><td>Coral</td><td class="num">3.1 : 1</td><td>Titles and buttons on coral. Bold, 17 pt and up.</td></tr>
       </tbody>
     </table></div>
-    <p>Coral is lighter than the usual dark text color, so keep words a little bigger and a little bolder than you would in black. The app's “Larger text” setting still works for anyone who wants more.</p>
+    <p>Coral is a light color, so use it for titles, labels and buttons, never for long paragraphs. Those are charcoal.</p>
   </section>
 
   <section>
@@ -216,15 +222,15 @@ footer { border-top: 1px solid var(--line); margin-top: 48px; padding-top: 20px;
     <h2>An heirloom voice and an everyday hand</h2>
     <div class="split">
       <div class="panel specimen"><div class="label">Fraunces · titles and the logo</div><div class="big-fraunces">Keep your family well</div><p>A warm serif with soft, rounded edges. It feels like a family Bible, a wedding invitation or a recipe card handed down, which suits a brand about family and forever. Use SemiBold 600 with the "soft" setting turned all the way up.</p><div class="alpha" style="font-family:var(--display);font-variation-settings:'SOFT' 100">Aa Bb Cc Dd Ee Ff Gg 1 2 3 4 5 6 7 8 9 0</div></div>
-      <div class="panel specimen"><div class="label">Figtree · everything else</div><div class="big-figtree">Dinner at 6:00</div><p>A clean, friendly sans with open letters that stay easy to read on a phone, even at small sizes. It does the daily work: lists, menus, reminders and buttons. Medium 500 for reading, Bold 700 for headlines, ExtraBold 800 for small capital labels.</p><div class="alpha">Aa Bb Cc Dd Ee Ff Gg 1 2 3 4 5 6 7 8 9 0</div></div>
+      <div class="panel specimen"><div class="label">Figtree · everything else</div><div class="big-figtree">Dinner at 6:00</div><p>A clean, friendly sans with open letters that stay easy to read on a phone, even at small sizes. It does the daily work: lists, menus, reminders and buttons. Regular 400 in charcoal for reading, Bold 700 for headlines, ExtraBold 800 for small capital labels.</p><div class="alpha">Aa Bb Cc Dd Ee Ff Gg 1 2 3 4 5 6 7 8 9 0</div></div>
     </div>
     <div class="label">Sizes in the app (iPhone points)</div>
     <div class="scale">
       <div class="row"><div class="spec">Large title · Fraunces 600 · 34/40</div><div style="font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:600;font-size:34px;line-height:40px">Good morning, Lewis family</div></div>
       <div class="row"><div class="spec">Title · Fraunces 600 · 24/30</div><div style="font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:600;font-size:24px;line-height:30px">This week’s menu</div></div>
-      <div class="row"><div class="spec">Headline · Figtree 700 · 17/22</div><div style="font-weight:700;font-size:17px;line-height:22px">Date night is Friday at 7</div></div>
-      <div class="row"><div class="spec">Body · Figtree 500 · 17/24</div><div style="font-size:17px;line-height:24px">Lindy picked the Italian place. The sitter is booked until 10.</div></div>
-      <div class="row"><div class="spec">Footnote · Figtree 500 · 15/20</div><div class="muted" style="font-size:15px;line-height:20px">Added by Levi · 2 hours ago</div></div>
+      <div class="row"><div class="spec">Headline · Figtree 700 · 17/22</div><div style="color:#3A3A3C;font-weight:700;font-size:17px;line-height:22px">Date night is Friday at 7</div></div>
+      <div class="row"><div class="spec">Body · Figtree 400 charcoal · 17/24</div><div style="font-size:17px;line-height:24px">Lindy picked the Italian place. The sitter is booked until 10.</div></div>
+      <div class="row"><div class="spec">Footnote · Figtree 400 charcoal · 15/20</div><div class="muted" style="font-size:15px;line-height:20px">Added by Levi · 2 hours ago</div></div>
       <div class="row"><div class="spec">Label · Figtree 800 · 12, wide spacing</div><div class="label">Coming up</div></div>
     </div>
     <p class="muted">Both fonts are free from Google Fonts and work in the app, on the website and in print.</p>

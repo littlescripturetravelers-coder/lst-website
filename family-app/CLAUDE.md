@@ -38,7 +38,7 @@ Levi Lewis owns this app and is not technical. I am his developer. **His compute
 
 ## Brand: NestWork (approved name; not applied to the app yet)
 - Name **NestWork** (capital W; nest + network + "nest work", the upkeep of family life; Levi first picked "Family Wellness", then changed it), tagline "Family, well kept.", endorsed "An LST company" (App Store seller line, website footer, About screen only; the full "Little Scripture Travelers" name stays out of the app). Brand book: https://claude.ai/artifact/L1y3q3UfSD6mu8Ls9cymfC (source `brand/nestwork-brand-book.html`).
-- Colors: **coral #F2665A and white #FFFFFF only** (Levi rejected indigo/rose/olive and any darker coral). Tints of the same coral for cards (#FEF0EF) and lines (#FBD1CE). Text is coral, Figtree Medium 500+, 15 pt and up. No LST colors or fonts.
+- Colors: **coral #F2665A and white #FFFFFF**, plus charcoal for reading text (Levi rejected indigo/rose/olive and any darker coral). Tints of the same coral for cards (#FEF0EF) and lines (#FBD1CE). Reading text (paragraphs, lists, notes, documents) is **charcoal #3A3A3C**, Figtree Regular; titles, labels, buttons and the logo stay coral or white. No LST colors or fonts.
 - Fonts: Fraunces SemiBold, soft 100 (titles, logo) and Figtree (everything else).
 - Logo files in `brand/`: the woven nest with the light inside an unbroken ring (eternity), on coral and on white; the name-only logo (the "o" in Work is the ring and light), one line and stacked; the app icon (1024 PNG and SVG).
 - When applying it: add a "NestWork" theme (default for new families), and **keep today's look as a "Classic" theme** in Settings → Appearance so Levi can switch back with one tap. The last commit before the brand is `e67a9e1`.
