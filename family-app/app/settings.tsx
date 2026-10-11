@@ -7,7 +7,7 @@ import { ListRow } from '@/components/list-row';
 import { Avatar } from '@/components/avatar';
 import { Text } from '@/components/text';
 import { Button } from '@/components/button';
-import { useTheme, PRESETS, DisplayFont, UiFont } from '@/theme/theme-provider';
+import { LOOKS, useTheme, PRESETS, DisplayFont, UiFont } from '@/theme/theme-provider';
 import { useFamily } from '@/hooks/use-family';
 import { useSetup } from '@/lib/setup';
 import { ageOn, yearsMarried } from '@/lib/family';
@@ -55,8 +55,11 @@ export default function Settings() {
     </Card>)}</Gutter>}
     <SectionHead title="Appearance" />
     <Gutter><Card>
-      <Lbl s="Light or dark" />
-      <View style={{ flexDirection: 'row', backgroundColor: t.paper[3], borderRadius: 9, padding: 2 }}>{([['light', 'Light'], ['dark', 'Dark'], ['auto', 'Match iPhone']] as const).map(([v, l]) => <Pressable key={v} onPress={() => setChoice({ ...c, mode: v })} style={{ flex: 1, height: 32, borderRadius: 7, alignItems: 'center', justifyContent: 'center', backgroundColor: (c.mode ?? 'auto') === v ? t.paper[0] : 'transparent' }}><Text v="subhead" weight={(c.mode ?? 'auto') === v ? 'bold' : 'regular'}>{l}</Text></Pressable>)}</View>
+      <Lbl s="Background" />
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{LOOKS.map(([v, l, sw]) => { const on = (c.mode ?? 'tan') === v;
+        return <Pressable key={v} onPress={() => setChoice({ ...c, mode: v })} accessibilityRole="radio" accessibilityState={{ selected: on }} style={{ flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 12, height: 40, borderRadius: 20, borderWidth: on ? 2 : 1, borderColor: on ? t.brand[500] : t.line[2], backgroundColor: t.paper[0] }}>
+          <View style={{ width: 18, height: 18, borderRadius: 9, borderWidth: 1, borderColor: t.line[2], overflow: 'hidden', flexDirection: 'row', backgroundColor: sw || '#FFFFFF' }}>{!sw && <View style={{ flex: 1, marginLeft: 9, backgroundColor: '#000000' }} />}</View>
+          <Text v="subhead" weight={on ? 'bold' : 'regular'}>{l}</Text></Pressable>; })}</View>
       <Lbl s="Text size" />
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
         <Pressable onPress={() => setChoice({ ...c, textScale: Math.max(.85, +((c.textScale ?? 1) - .05).toFixed(2)) })} style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: t.paper[2], alignItems: 'center', justifyContent: 'center' }}><Text v="footnote" weight="heavy">A−</Text></Pressable>

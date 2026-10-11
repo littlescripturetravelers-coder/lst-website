@@ -3,7 +3,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useColorScheme } from 'react-native';
 import { palette } from './tokens';
 
-export type ThemeMode = 'light' | 'dark' | 'auto';
+/** Background looks: Light (white), Dark (black), Traditional navy, Gray, Tan, or Match iPhone (Light by day, Dark at night). */
+export type ThemeMode = 'light' | 'dark' | 'navy' | 'gray' | 'tan' | 'auto';
+export const LOOKS: [ThemeMode, string, string][] = [['light', 'Light', '#FFFFFF'], ['dark', 'Dark', '#000000'], ['navy', 'Traditional navy', '#1B2D5F'], ['gray', 'Gray', '#E6E8EC'], ['tan', 'Tan', '#F4EFE6'], ['auto', 'Match iPhone', '']];
+const LOOK_PAPER: Partial<Record<ThemeMode, string>> = { light: '#FFFFFF', gray: '#E6E8EC' }; // tan uses the theme's own warm paper (linen for the default theme)
 export type ThemeChoice = { preset: string; brand: string; highlight: string; paper: string; ink: string; display: DisplayFont; ui: UiFont; mode?: ThemeMode; textScale?: number };
 export type DisplayFont = 'fredoka' | 'youngSerif' | 'lora' | 'nunito';
 export type UiFont = 'nunito' | 'figtree' | 'atkinson' | 'system';
@@ -23,10 +26,25 @@ const toHex = (c: number[]) => '#' + c.map(v => Math.round(Math.max(0, Math.min(
 export const mix = (a: string, b: string, p: number) => { const A = hex(a), B = hex(b); return toHex(A.map((v, i) => v * p + B[i] * (1 - p))); };
 
 export function buildTheme(t: ThemeChoice, systemDark = false) {
-  const B = t.brand, H = t.highlight, P = t.paper, I = t.ink;
-  const dark = t.mode === 'dark' || (t.mode === 'auto' && systemDark);
+  const look: ThemeMode = t.mode === 'auto' ? (systemDark ? 'dark' : 'light') : t.mode ?? 'tan';
+  const B = t.brand, H = t.highlight, P = LOOK_PAPER[look] ?? t.paper, I = t.ink;
   const scale = t.textScale ?? 1;
-  if (dark) {
+  if (look === 'dark') {
+    // True black, like iPhone dark mode.
+    const bg = '#000000', light = '#F2F2F7';
+    const areaDark = Object.fromEntries(Object.entries(palette.area).map(([k, [c]]) => [k, [c, mix(c, bg, .26)]])) as any;
+    return {
+      choice: t, dark: true, scale, highlightInk: bg,
+      brand: { 50: mix(B, '#000000', .3), 100: mix(B, '#000000', .42), 200: mix(B, '#ffffff', .6), 300: mix(B, '#ffffff', .45), 400: mix(B, '#ffffff', .35), 500: mix(B, '#ffffff', .3), 600: mix(B, '#ffffff', .22), 700: mix(B, '#ffffff', .15) },
+      gold: { 50: mix(H, bg, .16), 100: mix(H, bg, .3), 500: H, 600: mix(H, '#000000', .82) },
+      paper: { 0: '#1C1C1E', 1: bg, 2: '#2C2C2E', 3: '#3A3A3C' },
+      ink: { 1: light, 2: mix(light, bg, .8), 3: mix(light, bg, .6), 4: mix(light, bg, .4), inverse: bg },
+      line: { 1: '#2C2C2E', 2: '#3A3A3C' },
+      teal: '#0E6A72', area: areaDark, success: ['#7CC79B', '#1f3a2c'], warning: ['#F0B57A', '#3d2a1a'], danger: ['#F08A7E', '#3d1f1c'],
+      font: fontsFor(t),
+    };
+  }
+  if (look === 'navy') {
     const bg = mix(B, '#070a14', .42), card = mix(B, '#0b0f1c', .55), light = mix(P, B, .94);
     const areaDark = Object.fromEntries(Object.entries(palette.area).map(([k, [c]]) => [k, [c, mix(c, bg, .24)]])) as any;
     return {
@@ -55,7 +73,7 @@ const fontsFor = (t: ThemeChoice) => ({ display: FONT.display[t.display][0], dis
 export type Theme = ReturnType<typeof buildTheme>;
 const Ctx = createContext<{ theme: Theme; setChoice: (c: ThemeChoice) => void }>({ theme: buildTheme(PRESETS[0]), setChoice: () => {} });
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [choice, setChoice] = useState<ThemeChoice>({ ...PRESETS[0], mode: 'auto', textScale: 1 });
+  const [choice, setChoice] = useState<ThemeChoice>({ ...PRESETS[0], mode: 'tan', textScale: 1 });
   const systemDark = useColorScheme() === 'dark';
   useEffect(() => { AsyncStorage.getItem('theme').then(v => v && setChoice(JSON.parse(v))); }, []);
   const value = useMemo(() => ({ theme: buildTheme(choice, systemDark), setChoice: (c: ThemeChoice) => { setChoice(c); AsyncStorage.setItem('theme', JSON.stringify(c)); } }), [choice, systemDark]);

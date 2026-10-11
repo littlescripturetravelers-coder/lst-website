@@ -632,8 +632,16 @@ var Faiths = (() => {
   var mix = function (a, b, p) { var A = hex(a), B = hex(b); return toHex(A.map(function (v, i) { return v * p + B[i] * (1 - p); })); };
   var sysDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : { matches: false };
   function themeVars(c) {
-    var B = c.brand, H = c.highlight, P = c.paper, I = c.ink, dark = c.mode === 'dark' || (c.mode === 'auto' && sysDark.matches), v = {};
-    if (dark) {
+    // Looks match the real app: Light (white), Dark (black), Traditional navy, Gray, Tan (the theme's linen), Match iPhone.
+    var look = c.mode === 'auto' ? (sysDark.matches ? 'dark' : 'light') : (c.mode || 'tan');
+    var B = c.brand, H = c.highlight, P = { light: '#FFFFFF', gray: '#E6E8EC' }[look] || c.paper, I = c.ink, dark = look === 'dark' || look === 'navy', v = {};
+    if (look === 'dark') {
+      var bk = '#000000', li = '#F2F2F7';
+      v = { brand50: mix(B, '#000000', .3), brand200: mix(B, '#ffffff', .6), brand400: mix(B, '#ffffff', .35), brand500: mix(B, '#ffffff', .3), brand700: mix(B, '#ffffff', .15),
+        gold50: mix(H, bk, .16), gold500: H, gold600: mix(H, '#000000', .82), paper0: '#1C1C1E', paper1: bk, paper2: '#2C2C2E', paper3: '#3A3A3C',
+        ink1: li, ink2: mix(li, bk, .8), ink3: mix(li, bk, .6), ink4: mix(li, bk, .4), inverse: bk, line1: '#2C2C2E', line2: '#3A3A3C', teal: '#5BD3DC', hlink: bk };
+      Object.keys(AREA).forEach(function (k) { v['a_' + k] = AREA[k][0]; v['t_' + k] = mix(AREA[k][0], bk, .26); });
+    } else if (look === 'navy') {
       var bg = mix(B, '#070a14', .42), card = mix(B, '#0b0f1c', .55), light = mix(P, B, .94);
       v = { brand50: mix(B, '#141a2e', .6), brand200: mix(B, '#ffffff', .6), brand400: mix(B, '#ffffff', .35), brand500: mix(B, '#ffffff', .3), brand700: mix(B, '#ffffff', .15),
         gold50: mix(H, bg, .16), gold500: H, gold600: mix(H, '#000000', .82), paper0: card, paper1: bg, paper2: mix(B, '#0a0d18', .48), paper3: mix(B, '#1a2033', .62),
@@ -718,7 +726,7 @@ var Faiths = (() => {
   }
   function sampleState() {
     return {
-      theme: { preset: 'evening', brand: '#1B2D5F', highlight: '#F5C518', paper: '#F4EFE6', ink: '#1B2D5F', display: 'fredoka', ui: 'nunito', mode: 'auto', scale: 1 },
+      theme: { preset: 'evening', brand: '#1B2D5F', highlight: '#F5C518', paper: '#F4EFE6', ink: '#1B2D5F', display: 'fredoka', ui: 'nunito', mode: 'tan', scale: 1 },
       rems: [
         { id: 'r1', title: 'Pick up prescriptions', list: 'family', due: TODAY, time: '17:30' },
         { id: 'r2', title: 'Milk, eggs, bananas', list: 'groceries', due: TODAY, notes: 'And the good bread' },
@@ -1493,7 +1501,7 @@ var Faiths = (() => {
       sect('Kids’ privacy') + '<div class="gut">' + card({ flush: true, body: kids.map(function (k) { var on = !!S.privOk[k.id]; return '<div class="swrow">' + avatar(k, 30) + '<div style="flex:1"><p class="bd">' + esc(k.name) + ' · Can keep private goals and plans</p><p class="cp m3">When on, ' + esc(k.name) + ' can make goals, reminders and plans only she can see.</p></div><button class="switch' + (on ? ' on' : '') + '" role="switch" aria-checked="' + on + '" aria-label="' + esc(k.name) + ' can keep private goals and plans" data-a="privok" data-id="' + k.id + '"></button></div>'; }).join('') }) + '<p class="cp m3" style="margin-top:6px">Family things are seen by everyone. Private things are seen only by the person who made them. Turning this off stops new private items; ones already made stay private.</p></div>' +
       (!secOn('work') ? '' : sect('Work & personal schedules') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'briefcase', color: '#2F6FB4', title: 'Work calendars & tasks', sub: 'Outlook, Google, Asana, Todoist and more', chev: true, a: 'go', id: 'connections' }) }) + '</div>') +
       sect('Appearance') + '<div class="gut">' + card({ body:
-        lbl('Light or dark') + '<div class="seg">' + [['light', 'Light'], ['dark', 'Dark'], ['auto', 'Match iPhone']].map(function (o) { return '<button class="' + (c.mode === o[0] ? 'on' : '') + '" data-a="mode" data-id="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>' +
+        lbl('Background') + '<div style="display:flex;flex-wrap:wrap;gap:8px">' + [['light', 'Light', '#FFFFFF'], ['dark', 'Dark', '#000000'], ['navy', 'Traditional navy', '#1B2D5F'], ['gray', 'Gray', '#E6E8EC'], ['tan', 'Tan', '#F4EFE6'], ['auto', 'Match iPhone', '']].map(function (o) { var on = (c.mode || 'tan') === o[0]; return '<button class="pickchip" style="height:40px;padding:0 12px;font-size:15px;border-radius:20px;background:var(--paper0);' + (on ? 'border:2px solid var(--brand500)' : '') + '" role="radio" aria-checked="' + on + '" data-a="mode" data-id="' + o[0] + '"><i class="dt" style="width:18px;height:18px;border:1px solid var(--line2);background:' + (o[2] || 'linear-gradient(90deg,#fff 50%,#000 50%)') + '"></i>' + o[1] + '</button>'; }).join('') + '</div>' +
         lbl('Text size') + '<div style="display:flex;align-items:center;gap:8px"><button class="btn secondary sm" data-a="scale" data-id="-1" aria-label="Smaller text">A−</button><div style="flex:1;height:6px;border-radius:3px;background:var(--paper3)"><div style="width:' + ((c.scale - .85) / .5 * 100) + '%;height:6px;border-radius:3px;background:var(--brand500)"></div></div><button class="btn secondary sm" data-a="scale" data-id="1" aria-label="Bigger text">A+</button></div><p class="cp m3" style="text-align:center;margin-top:4px">' + Math.round(c.scale * 100) + '%</p>' +
         lbl('Theme') + '<div style="display:flex;gap:8px">' + PRESETS.map(function (p) { return '<button class="preset' + (c.preset === p.preset ? ' on' : '') + '" style="background:' + p.paper + '" data-a="preset" data-id="' + p.preset + '"><span class="top" style="display:block;background:' + p.brand + '"><i style="background:' + p.highlight + '"></i></span><span style="color:' + p.ink + '">' + p.preset + '</span></button>'; }).join('') + '</div>' +
         lbl('Main color') + '<div style="display:flex;gap:12px;flex-wrap:wrap">' + ACCENTS.map(function (a) { return '<button class="sw' + (c.brand === a ? ' on' : '') + '" style="background:' + a + '" data-a="brand" data-id="' + a + '" aria-label="Main color ' + a + '"></button>'; }).join('') + '</div>' +
