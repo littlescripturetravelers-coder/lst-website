@@ -25,6 +25,7 @@ export default function Root() {
       <Stack.Screen name="reminder-sheet" options={{ presentation: 'formSheet', sheetGrabberVisible: true }} />
       <Stack.Screen name="event" options={{ presentation: 'card' }} />
       <Stack.Screen name="our-list" options={{ presentation: 'card' }} />
+      <Stack.Screen name="setup" options={{ presentation: 'card', gestureEnabled: false }} />
       <Stack.Screen name="event-edit" options={{ presentation: 'modal' }} />
     </Stack>
   </SessionGate></ThemeProvider>;

@@ -9,6 +9,7 @@ import { Text } from '@/components/text';
 import { Button } from '@/components/button';
 import { useTheme, PRESETS, DisplayFont, UiFont } from '@/theme/theme-provider';
 import { useFamily } from '@/hooks/use-family';
+import { useSetup } from '@/lib/setup';
 import { ageOn, yearsMarried } from '@/lib/family';
 import { APP_NAME } from '@/lib/brand';
 import { fmtLong } from '@/lib/dates';
@@ -19,7 +20,7 @@ const ACCENTS = ['#1B2D5F', '#2E6E8E', '#355845', '#A8502F', '#B5536B', '#4E3563
 const DISPLAY: [DisplayFont, string][] = [['fredoka', 'Fredoka'], ['youngSerif', 'Young Serif'], ['lora', 'Lora'], ['nunito', 'Nunito']];
 const UI: [UiFont, string][] = [['nunito', 'Nunito'], ['figtree', 'Figtree'], ['atkinson', 'Atkinson Hyperlegible'], ['system', 'iPhone system']];
 export default function Settings() {
-  const { theme: t, setChoice } = useTheme(); const c = t.choice; const { family, saveMember, saveAnniversary, setPrivateOk } = useFamily();
+  const { theme: t, setChoice } = useTheme(); const c = t.choice; const { family, saveMember, saveAnniversary, setPrivateOk } = useFamily(); const setup = useSetup(family?.id);
   const [edit, setEdit] = useState<string | null>(null); const [val, setVal] = useState(''); const [invite, setInvite] = useState<string | null>(null);
   const makeInvite = async (slug: string) => { const { data, error } = await supabase.from('family_invites').insert({ family_id: family!.id, member_slug: slug }).select('code').single(); if (!error) setInvite(data.code); };
   const Sw = ({ color, on, onPress }: any) => <Pressable onPress={onPress} style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: color, borderWidth: on ? 3 : 0, borderColor: t.ink[1] }} />;
@@ -35,8 +36,12 @@ export default function Settings() {
       {family.members.filter((m: any) => (m.role === 'dad' || m.role === 'mom') && !m.user_id).map(m => <View key={'inv' + m.id} style={{ marginTop: 10 }}><Button full variant="tinted" icon="user-plus" title={'Invite ' + m.name} onPress={() => makeInvite(m.id)} /></View>)}
       {invite && <Card variant="accent" style={{ marginTop: 10 }}><Text v="footnote" color={t.ink[2]}>Invite code (good for 14 days)</Text><Text v="title1" style={{ letterSpacing: 4 }}>{invite}</Text><View style={{ marginTop: 8 }}><Button size="sm" variant="secondary" icon="share" title="Share" onPress={() => Share.share({ message: 'Join our family in the app. Sign in, tap “I have an invite code” and enter ' + invite })} /></View></Card>}
       <Text v="caption" color={t.ink[3]} style={{ marginTop: 6 }}>Ages, stages, health checks, ideas and studies all update from these dates.</Text></Gutter>}
+    <SectionHead title="Priorities & season" />
+    <Gutter><Card padding={0}><ListRow icon="compass" iconColor={t.brand[500]} title="Check in" subtitle={setup.setup ? 'What matters most right now. Change it any time.' : 'Tell the app what matters most (3 minutes)'} chevron divider={false} onPress={() => router.push('/setup')} /></Card></Gutter>
+    {setup.on('work') && <>
     <SectionHead title="Work & personal schedules" />
     <Gutter><Card padding={0}><ListRow icon="briefcase" iconColor={t.area.growth[0]} title="Work calendars & tasks" subtitle="Google, Outlook, Asana, Todoist and more. Private unless you share." chevron divider={false} onPress={() => router.push('/connections')} /></Card></Gutter>
+    </>}
     <SectionHead title="What matters to each of us" />
     <Gutter><Card padding={0}><ListRow icon="star" iconColor={t.area.growth[0]} title="Hobbies, people & shows" subtitle="Added to the calendar and reminders on their own" chevron divider={false} onPress={() => router.push('/interests')} /></Card></Gutter>
     <SectionHead title="Kids’ profiles" />

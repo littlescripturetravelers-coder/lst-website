@@ -1,5 +1,5 @@
 // Financial advisor bot: Claude with tools over the family's real (Plaid-synced) data. Educational guidance, read-only access.
-import { familyFor, ok, cors, underLimit } from '../_shared/ctx.ts';
+import { familyFor, ok, cors, underLimit, privateAnswers } from '../_shared/ctx.ts';
 import { claude, text } from '../_shared/claude.ts';
 
 const SYSTEM = (ctx: any) => `You are this family's personal financial advisor inside their family app. Family: ${JSON.stringify(ctx)}.
@@ -34,7 +34,7 @@ function simulate(debts: any[], strategy: string, extra: number) {
 
 Deno.serve(async req => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
-  const f = await familyFor(req); const { db, family } = f;
+  const f = await familyFor(req); const { db, family } = f; const mine = await privateAnswers(db, f.uid);
   const { message } = await req.json();
   if (!await underLimit(db, family.id, 'advisor', 20)) return ok({ answer: 'You have reached today\u2019s limit for the money coach. It resets tomorrow.' });
   await db.from('advisor_messages').insert({ family_id: family.id, user_id: f.uid, role: 'user', content: message });
@@ -54,7 +54,7 @@ Deno.serve(async req => {
   };
   let r: any;
   for (let i = 0; i < 6; i++) {
-    r = await claude({ system: SYSTEM(f.context), messages, tools, max_tokens: 1200 });
+    r = await claude({ system: SYSTEM(f.context) + (mine ? ' The person asking privately shared these answers (use them quietly to personalize; they are not from their spouse): ' + JSON.stringify(mine) : ''), messages, tools, max_tokens: 1200 });
     if (r.stop_reason !== 'tool_use') break;
     messages.push({ role: 'assistant', content: r.content });
     const results = [];

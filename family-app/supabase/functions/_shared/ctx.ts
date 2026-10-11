@@ -19,12 +19,22 @@ export async function familyFor(req: Request, userId?: string) {
   return loadFamily(db, me!.family_id, uid, me!.slug);
 }
 export async function loadFamily(db: ReturnType<typeof admin>, familyId: string, uid?: string, meSlug?: string) {
-  const [{ data: fam }, { data: members }] = await Promise.all([db.from('families').select('*').eq('id', familyId).single(), db.from('family_members').select('*').eq('family_id', familyId)]);
+  const [{ data: fam }, { data: members }, { data: setup }] = await Promise.all([db.from('families').select('*').eq('id', familyId).single(), db.from('family_members').select('*').eq('family_id', familyId), db.from('family_setup').select('sections, priorities, season').eq('family_id', familyId).maybeSingle()]);
   const today = new Date().toLocaleDateString('en-CA', { timeZone: fam!.timezone });
   const age = (b: string) => { const [by, bm, bd] = b.split('-').map(Number), [y, m, d] = today.split('-').map(Number); return y - by - (m < bm || (m === bm && d < bd) ? 1 : 0); };
   const ms = members!.map((m: any) => ({ ...m, age: age(m.birthday) }));
   return { db, uid, meSlug, family: fam, members: ms, today,
     context: { today, surname: fam!.surname, yearsMarried: fam!.anniversary ? age(fam!.anniversary) : null, faith: fam!.faith === 'lds' ? 'The Church of Jesus Christ of Latter-day Saints' : fam!.faith === 'christian' ? 'Christian (non-denominational)' : 'No faith content',
-      members: ms.map((m: any) => ({ name: m.name, role: m.role, sex: m.sex, age: m.age, love_languages: m.love_languages?.ranked?.slice(0, 2) })),
+      members: ms.map((m: any) => ({ name: m.name, role: m.role, sex: m.sex, age: m.age, love_languages: m.love_languages?.ranked?.slice(0, 2),
+        ...(m.about?.interests?.length ? { loves: m.about.interests } : {}), ...(m.about?.focus?.length ? { working_on: m.about.focus } : {}) })),
+      // From the setup questionnaire: only suggest things in these sections; lean toward the priorities; fit the season of life.
+      ...(setup ? { sections: setup.sections, priorities: setup.priorities, season: setup.season } : {}),
       loveLanguageRule: 'When suggesting anything one spouse can do for the other, fit it to the RECEIVING spouse’s top love languages (words, service, gifts, time, touch) and say whose it is for.', voice: 'Warm, plain, practical. No guilt, no emoji.' + (fam!.faith === 'lds' ? ' Say "Heavenly Father", never "God".' : fam!.faith === 'none' ? ' Do not include faith or scripture content.' : ' Use warm, non-denominational Christian language.') } };
+}
+
+/** The caller's own PRIVATE questionnaire answers (what they want more of with their spouse, date budget, personal priorities).
+ *  Only for replies that go back to that same person (educator, advisor). Never put these into anything the family shares. */
+export async function privateAnswers(db: ReturnType<typeof admin>, uid?: string) {
+  if (!uid) return null; const { data } = await db.from('member_profiles').select('answers').eq('user_id', uid).maybeSingle();
+  return data?.answers && Object.keys(data.answers).length ? data.answers : null;
 }

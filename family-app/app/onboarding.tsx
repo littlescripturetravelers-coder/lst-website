@@ -25,14 +25,14 @@ export default function Onboarding() {
     setErr(''); const all = [me, ...(spouse.full_name ? [spouse] : []), ...kids.filter(k => k.full_name)].map((m, i) => ({ ...m, slug: slug(m.name!), color: COLORS[i % COLORS.length] }));
     if (all.some(m => !/^\d{4}-\d{2}-\d{2}$/.test(m.birthday ?? ''))) return setErr('Please enter every birthday as YYYY-MM-DD.');
     const { error } = await supabase.rpc('create_family', { p: { surname, anniversary: anniv, faith, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, me_slug: all[0].slug, members: all } });
-    if (error) return setErr(error.message); router.replace('/tabs');
+    if (error) return setErr(error.message); router.replace({ pathname: '/setup', params: { first: '1' } });
   };
   const steps = [
     <View key="0" style={{ gap: 14 }}><Text v="hero">Welcome</Text><Text color={t.ink[2]}>Let’s set up your family. It takes about two minutes, and you can change anything later in Settings.</Text>
       <Field label="Family last name" value={surname} onChange={setSurname} ph="Lewis" />
       {!!surname && <Text v="title2">The {surname}’s</Text>}
       <Card variant="sunken"><Text v="footnote" weight="bold" color={t.ink[2]}>Joining your spouse’s family?</Text><View style={{ flexDirection: 'row', gap: 8, marginTop: 8 }}><View style={{ flex: 1 }}><Field label="Invite code" value={code} onChange={setCode} ph="ABC123" /></View></View>
-        <View style={{ marginTop: 10 }}><Button variant="secondary" title="Join with code" onPress={async () => { const { error } = await supabase.rpc('accept_invite', { code }); error ? setErr(error.message) : router.replace('/tabs'); }} /></View></Card></View>,
+        <View style={{ marginTop: 10 }}><Button variant="secondary" title="Join with code" onPress={async () => { const { error } = await supabase.rpc('accept_invite', { code }); error ? setErr(error.message) : router.replace({ pathname: '/setup', params: { first: '1' } }); }} /></View></Card></View>,
     <Person key="1" p={me} set={setMe} title="You" />,
     <View key="2" style={{ gap: 10 }}><Person p={spouse} set={setSpouse} title="Your spouse (optional)" /><Text v="footnote" color={t.ink[3]}>You’ll get an invite code for them after setup.</Text></View>,
     <View key="3" style={{ gap: 12 }}>{kids.map((k, i) => <Person key={i} p={k} set={x => setKids(ks => ks.map((y, j) => j === i ? x : y))} title={'Child ' + (i + 1)} />)}

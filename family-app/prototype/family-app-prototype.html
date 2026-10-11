@@ -383,7 +383,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
         { id: 'r7', title: 'Call the bank about the car loan', list: 'family', due: addDays(TODAY, -1) },
         { id: 'r8', title: 'Plan Lindy’s birthday surprise', list: 'family', due: addDays(TODAY, 4), priv: true }],
       evs: sampleEvents(),
-      cals: { w1: 'busy', p1: 'private' }, feeds: [], privOk: {}, wishVotes: {}, wishCustom: [],
+      cals: { w1: 'busy', p1: 'private' }, feeds: [], privOk: {}, wishVotes: {}, wishCustom: [], setup: null, myAns: {}, kidAbout: {},
       goals: [{ id: 'g1', title: 'Weekly date night, no phones', area: 'marriage' }, { id: 'g2', title: 'Family scripture study 5 nights a week', area: 'faith' }, { id: 'g3', title: 'Run a 10K by spring', area: 'health', priv: true }],
       ll: {}, answers: {}, lanternDone: null, actDone: {}, home: {}, homeDay: TODAY, planned: 0,
       chores: [{ id: 'c1', who: 'mayble', title: 'Make bed' }, { id: 'c2', who: 'mayble', title: 'Set and clear the table' }, { id: 'c3', who: 'esmay', title: 'Put toys in the bin' }] };
@@ -393,7 +393,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
   try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { S = null; }
   if (!S || !S.theme) S = sampleState();
   if (S.homeDay !== TODAY) { S.home = {}; S.homeDay = TODAY; }
-  (function (d) { ['cals', 'feeds', 'privOk', 'goals', 'evs', 'wishVotes', 'wishCustom'].forEach(function (k) { if (!S[k]) S[k] = d[k]; }); })(sampleState());
+  (function (d) { ['cals', 'feeds', 'privOk', 'goals', 'evs', 'wishVotes', 'wishCustom', 'myAns', 'kidAbout'].forEach(function (k) { if (!S[k]) S[k] = d[k]; }); })(sampleState());
   var save = function () { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 
   // ---------- navigation ----------
@@ -489,11 +489,62 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
 
   // ---------- screens ----------
   var SCREENS = {};
+  // Same lists as src/lib/setup.ts in the real app.
+  var SU_SECTIONS = [
+  ['faith', 'Faith at home'], ['marriage', 'Our marriage'], ['money', 'Money'], ['health', 'Health'], ['home', 'Home upkeep'], ['kids', 'Our kids'], ['work', 'Work schedules'],
+];
+  var SU_PRIORITIES = [
+  ['family-time', 'More family time'], ['marriage', 'A stronger marriage'], ['faith', 'Faith at home'], ['debt', 'Pay off debt'], ['save', 'Save money'],
+  ['health', 'Health and fitness'], ['routines', 'Calmer home routines'], ['behavior', 'Kids’ behavior and big feelings'], ['school', 'School and learning'],
+  ['screens', 'Less screen time'], ['serve', 'Serving others'], ['balance', 'Balance work and family'], ['projects', 'Home projects'], ['rest', 'More rest'],
+];
+  var SU_SEASONS = [
+  ['steady', 'Things are steady'], ['new-baby', 'New baby'], ['expecting', 'Expecting a baby'], ['toddlers', 'Toddler years'], ['moving', 'Moving'],
+  ['job-change', 'New job or job change'], ['money-tight', 'Money is tight'], ['health-challenge', 'A health challenge'], ['grief', 'Grief or loss'],
+  ['busy-work', 'A busy work stretch'], ['school-change', 'Big school changes'], ['single-parent', 'Parenting on my own'],
+];
+  var SU_COUPLE_WANTS = [
+  ['time', 'Time together'], ['romance', 'Romance'], ['fun', 'Fun and laughing'], ['talks', 'Deeper talks'], ['less-conflict', 'Less conflict'],
+  ['closeness', 'Physical closeness'], ['teamwork', 'Teamwork with the kids'], ['faith-together', 'Faith together'],
+];
+  var SU_DATE_BUDGETS = [['free', 'Free'], ['25', 'Under $25'], ['75', 'Under $75'], ['splurge', 'A splurge now and then']];
+  var SU_MY_PRIORITIES = [
+  ['sleep', 'Sleep'], ['exercise', 'Exercise'], ['faith', 'Faith'], ['career', 'Career'], ['friends', 'Friendships'], ['hobbies', 'Hobbies'], ['learning', 'Learning'], ['rest', 'Rest'], ['money', 'Money'],
+];
+  var SU_KID_INTERESTS = [
+  ['art', 'Art'], ['music', 'Music'], ['sports', 'Sports'], ['reading', 'Reading'], ['outdoors', 'Outdoors'], ['building', 'Building'], ['animals', 'Animals'],
+  ['science', 'Science'], ['dance', 'Dance'], ['pretend', 'Pretend play'], ['cooking', 'Cooking'], ['games', 'Games'],
+];
+  var SU_KID_FOCUS = [
+  ['sleep', 'Sleep'], ['feelings', 'Big feelings'], ['reading', 'Reading'], ['potty', 'Potty training'], ['sharing', 'Sharing'], ['listening', 'Listening'],
+  ['screens', 'Screen time'], ['friends', 'Making friends'], ['school', 'School'], ['chores', 'Helping at home'], ['confidence', 'Confidence'],
+];
+  var lbl2 = function (opts, k) { var o = opts.filter(function (x) { return x[0] === k; })[0]; return o ? o[1] : k; };
+  /** A section shows unless the family turned it off. Before anyone answers, everything shows. */
+  var secOn = function (k) { return !S.setup || S.setup.sections.indexOf(k) >= 0; };
+  var faithOn = function () { return secOn('faith') && FAMILY.faith !== 'none'; };
+  var su = null;
+  function startSetup(first) { var st = S.setup || { sections: SU_SECTIONS.map(function (x) { return x[0]; }), priorities: [], season: [] };
+    su = { first: first, i: 0, sections: st.sections.slice(), priorities: st.priorities.slice(), season: st.season.slice(), wants: (S.myAns.coupleWants || []).slice(), budget: S.myAns.dateBudget || '', mine: (S.myAns.myPriorities || []).slice(), about: JSON.parse(JSON.stringify(S.kidAbout)) }; go('setup'); }
+  SCREENS.setup = function () {
+    var steps = ['sections', 'priorities', 'season', 'me', 'kids'], step = steps[su.i];
+    var chips = function (opts, list, field, max) { return '<div style="display:flex;flex-wrap:wrap;gap:8px">' + opts.map(function (o) { var on = list.indexOf(o[0]) >= 0; return '<button class="pickchip" style="height:40px;padding:0 14px;font-size:15px;border-radius:20px;' + (on ? 'background:var(--brand500);border-color:var(--brand500);color:var(--inverse)' : 'background:var(--paper0)') + '" role="checkbox" aria-checked="' + on + '" data-a="suchip" data-id="' + field + '|' + o[0] + '|' + (max || '') + '">' + o[1] + '</button>'; }).join('') + '</div>'; };
+    var head = { sections: ['What do you want help with?', 'Pick every part of family life you want in the app. You can change this any time.'], priorities: ['Your family’s top 3 right now', 'Pick up to three. The app puts these first and the ideas lean toward them.'], season: ['What season are you in?', 'Pick any that fit. Ideas and advice will fit where you are.'], me: ['Just you', 'Only you see these answers. They shape your own ideas and advice.'], kids: ['Your kids', 'What each child loves and what you’re working on together. Ideas for them will fit.'] }[step];
+    var body = step === 'sections' ? chips(SU_SECTIONS, su.sections, 'sections') : step === 'priorities' ? chips(SU_PRIORITIES, su.priorities, 'priorities', 3) + '<p class="fn m3">' + su.priorities.length + ' of 3 picked</p>' : step === 'season' ? chips(SU_SEASONS, su.season, 'season')
+      : step === 'me' ? (su.sections.indexOf('marriage') >= 0 ? card({ body: '<p class="hl" style="margin-bottom:10px">What do you want more of with your spouse?</p>' + chips(SU_COUPLE_WANTS, su.wants, 'wants') + '<p class="hl" style="margin:16px 0 10px">Date budget</p>' + chips(SU_DATE_BUDGETS, su.budget ? [su.budget] : [], 'budget', 1) }) : '') + card({ body: '<p class="hl" style="margin-bottom:10px">Your own top 3</p>' + chips(SU_MY_PRIORITIES, su.mine, 'mine', 3) })
+      : kids.map(function (k) { var a = su.about[k.id] || { interests: [], focus: [] }; return card({ body: '<div style="display:flex;gap:10px;align-items:center;margin-bottom:12px">' + avatar(k, 32) + '<p class="t3">' + k.name + '</p></div><p class="sh b m2" style="margin-bottom:8px">Loves</p>' + chips(SU_KID_INTERESTS, a.interests, 'kid:' + k.id + ':interests') + '<p class="sh b m2" style="margin:14px 0 8px">Working on</p>' + chips(SU_KID_FOCUS, a.focus, 'kid:' + k.id + ':focus') }); }).join('');
+    return '<div style="display:flex;align-items:center;padding:8px 20px 0"><p class="fn b br4" style="flex:1">' + (su.first ? 'Set up' : 'Check in') + ' · Step ' + (su.i + 1) + ' of ' + steps.length + '</p>' + (su.first ? '' : '<button class="link" data-a="back">Cancel</button>') + '</div>' +
+      '<div style="margin:8px 20px 0;height:4px;border-radius:2px;background:var(--paper3)"><div style="width:' + ((su.i + 1) / steps.length * 100) + '%;height:4px;border-radius:2px;background:var(--brand500)"></div></div>' +
+      '<div class="gut gap" style="padding-top:20px"><h1 class="t1" style="font-family:var(--display)">' + head[0] + '</h1><p class="bd m2">' + head[1] + '</p>' + body +
+      '<div style="display:flex;gap:10px;margin-top:10px">' + (su.i > 0 ? '<button class="btn secondary" data-a="sustep" data-id="-1">Back</button>' : '') + '<button class="btn full" style="flex:1"' + (step === 'sections' && !su.sections.length ? ' disabled' : '') + ' data-a="sustep" data-id="1">' + (su.i === steps.length - 1 ? 'Finish' : 'Next') + '</button></div></div>';
+  };
   SCREENS.today = function () {
     var dates = upcoming().filter(function (d) { return d.days <= 60; });
     var ideas = IDEAS.girls.slice(0, 3).map(function (x, i) { return ['girls', i, x]; });
     var due = openRems(function (r) { return r.due && r.due <= TODAY; });
     return header('Today', { sub: fmtDay(TODAY) }) +
+      (!S.setup ? '<div class="gut">' + card({ v: 'accent', a: 'setup', eyebrow: 'Make the app yours', title: 'Tell us what matters most', body: '<p class="sh m2">About 3 minutes of tapping. Sections, ideas and advice will fit your family.</p>' }) + '</div>'
+        : S.setup.priorities.length ? '<div class="gut">' + card({ a: 'setup', eyebrow: 'Our focus right now', body: '<p class="hl">' + S.setup.priorities.map(function (k) { return lbl2(SU_PRIORITIES, k); }).join(' · ') + '</p><p class="fn" style="color:var(--brand500);margin-top:4px">Change</p>' }) + '</div>' : '') +
       (dates.length ? rail({ title: 'Coming up', sub: 'Birthdays and anniversaries' }, dates.map(function (d) { return tile({ area: d.kind === 'anniversary' ? 'marriage' : d.m.role === 'daughter' ? 'girls' : 'home', icon: d.kind === 'anniversary' ? 'heart' : 'cake', title: d.title, meta: fmtLong(d.date) + ' · ' + inDays(d.days), badge: d.days <= 14 ? 'Soon' : '' }); })) : '') +
       rail({ title: 'Today with ' + KIDS, sub: 'New every day', action: 'See all', act: 'tab-family' }, ideas.map(function (x) { return tile({ size: 'wide', area: x[0] === 'couple' ? 'marriage' : 'girls', icon: x[2].icon, eyebrow: x[0] === 'couple' ? 'Just us' : 'With ' + KIDS, title: x[2].title, meta: x[2].meta, att: (x[2].attachments || []).length, a: 'idea', id: x[0] + ':' + x[1] }); })) +
       sect('Reminders', 'All', 'tab-reminders') +
@@ -752,13 +803,13 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
   'Marriage is finding the one person you want to annoy for the rest of your life.',
   'What did the cow say to her sweetheart? “I’m so into moo.”',
 ];
-  function marriageDaily() { var faith = FAMILY.faith && FAMILY.faith !== 'none', qs = QUOTES.filter(function (x) { return !x.scripture || (faith && (!x.lds || FAMILY.faith === 'lds')); }), n = Math.floor(Date.UTC(NOW.getFullYear(), NOW.getMonth(), NOW.getDate()) / 864e5); return { quote: qs[n % qs.length], joke: JOKES[(n * 7) % JOKES.length] }; }
+  function marriageDaily() { var faith = faithOn(), qs = QUOTES.filter(function (x) { return !x.scripture || (faith && (!x.lds || FAMILY.faith === 'lds')); }), n = Math.floor(Date.UTC(NOW.getFullYear(), NOW.getMonth(), NOW.getDate()) / 864e5); return { quote: qs[n % qs.length], joke: JOKES[(n * 7) % JOKES.length] }; }
   SCREENS.family = function () {
     return header('Family') +
-      '<div class="gut">' + card({ v: 'accent', a: 'go', id: 'story', eyebrow: 'Tonight’s story · ' + NIGHT.title, title: ACTIVITY.title, body: '<p class="sh m2">' + esc(ACTIVITY.line) + '</p>' }) + '</div>' +
+      (faithOn() ? '<div class="gut">' + card({ v: 'accent', a: 'go', id: 'story', eyebrow: 'Tonight’s story · ' + NIGHT.title, title: ACTIVITY.title, body: '<p class="sh m2">' + esc(ACTIVITY.line) + '</p>' }) + '</div>' : '') +
       rail({ title: 'Our girls' }, kids.map(function (k, i) { var a = ageOn(k.birthday); return tile({ size: 'tall', area: i % 2 ? 'health' : 'girls', leading: avatar(k, 72), eyebrow: a + ' years', title: k.name, meta: stageFor(a).label, a: 'child', id: k.id }); })) +
       rail({ title: 'Today with ' + KIDS, sub: 'New every day', action: 'More ideas', act: 'more-ideas' }, IDEAS.girls.map(function (x, i) { return tile({ area: 'girls', icon: x.icon, title: x.title, meta: x.meta, badge: 'New', att: (x.attachments || []).length, a: 'idea', id: 'girls:' + i }); })) +
-      rail({ title: 'Family faith' }, [tile({ size: 'wide', area: 'girls', icon: ACTIVITY.icon, badge: 'Tonight', title: ACTIVITY.title, meta: 'Story activity with ' + KIDS, a: 'go', id: 'story' })]);
+      (!faithOn() ? '' : rail({ title: 'Family faith' }, [tile({ size: 'wide', area: 'girls', icon: ACTIVITY.icon, badge: 'Tonight', title: ACTIVITY.title, meta: 'Story activity with ' + KIDS, a: 'go', id: 'story' })]));
   };
   // Same ideas as src/lib/wish-catalog.ts in the real app.
   var WKINDS = [
@@ -865,7 +916,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
     var dates = []; for (var i = 0; i < 45 && dates.length < 4; i++) { var dd = addDays(TODAY, i); S.evs.forEach(function (e) { if (e.area === 'marriage' && occurs(e, dd) && dates.length < 4) dates.push({ e: e, d: dd }); }); }
     var goals = S.goals.filter(function (g) { return g.area === 'marriage' && !g.priv; });
     return header(title, { sub: sub, right: '<button class="iconbtn" data-a="planDate" aria-label="Plan a date">' + I('plus') + '</button>' }) +
-      '<div class="gut">' + card({ v: 'inverse', a: 'go', id: 'lantern', eyebrow: 'Morning Lantern · 10 min together', title: NIGHT.scripture, body: '<p class="sh">Read it, answer one question each, and pick one way to live it today.</p>' }) + '</div>' +
+      (faithOn() ? '<div class="gut">' + card({ v: 'inverse', a: 'go', id: 'lantern', eyebrow: 'Morning Lantern · 10 min together', title: NIGHT.scripture, body: '<p class="sh">Read it, answer one question each, and pick one way to live it today.</p>' }) + '</div>' : '') +
       rail({ title: 'Just the two of us', sub: 'A love quote and a joke, new every day' }, ['<div style="width:272px;flex:none">' + card({ v: 'accent', eyebrow: 'Love quote of the day', body: '<p class="hl"' + (md.quote.scripture ? ' style="font-style:italic"' : '') + '>“' + esc(md.quote.text) + '”</p><p class="sh m3" style="margin-top:8px">' + esc(md.quote.by) + '</p>' }) + '</div>', '<div style="width:272px;flex:none">' + card({ eyebrow: 'Joke of the day', body: '<p class="hl">' + esc(md.joke) + '</p>' }) + '</div>']) +
       rail({ title: 'Our list', sub: 'Only what you both say yes to' }, WKINDS.map(function (k) { var c = wishCounts(k.kind); return tile({ area: 'marriage', icon: k.icon, title: k.name, meta: c.both + ' we both want' + (c.todo ? ' · ' + c.todo + ' to answer' : ''), a: 'ourlist', id: k.kind }); })) +
       sect('Coming up for us', 'Plan a date', 'planDate') + '<div class="gut gap" style="gap:8px">' + (dates.map(function (x) { var it = { key: 'ev:' + x.e.id + ':' + x.d, kind: 'event', id: x.e.id, title: x.e.title, area: 'marriage', allDay: !!x.e.allDay, sm: toMin(x.e.start), em: toMin(x.e.end), location: x.e.location, occ: x.d };
@@ -916,13 +967,13 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
   };
   SCREENS.more = function () {
     return header('More') + sect('Plan') + '<div class="gut">' + card({ flush: true, body:
-      row({ icon: 'bot', color: 'var(--a_money)', title: 'Money advisor', sub: 'Linked banks, cards & loans', chev: true, a: 'go', id: 'advisor' }) +
-      row({ icon: 'house', color: 'var(--a_home)', title: 'Home upkeep', sub: 'Cleaning, yard, vehicles, seasonal', chev: true, a: 'go', id: 'home' }) +
-      row({ icon: 'heart-pulse', color: 'var(--a_health)', title: 'Health', sub: 'Check-ups, screenings, staying strong', chev: true, a: 'go', id: 'health' }) +
+      (secOn('money') ? row({ icon: 'bot', color: 'var(--a_money)', title: 'Money advisor', sub: 'Linked banks, cards & loans', chev: true, a: 'go', id: 'advisor' }) : '') +
+      (secOn('home') ? row({ icon: 'house', color: 'var(--a_home)', title: 'Home upkeep', sub: 'Cleaning, yard, vehicles, seasonal', chev: true, a: 'go', id: 'home' }) : '') +
+      (secOn('health') ? row({ icon: 'heart-pulse', color: 'var(--a_health)', title: 'Health', sub: 'Check-ups, screenings, staying strong', chev: true, a: 'go', id: 'health' }) : '') +
       row({ icon: 'compass', color: 'var(--a_growth)', title: 'Goals', sub: 'Roles, big rocks, weekly planning', chev: true, a: 'go', id: 'goals' }) }) + '</div>' +
       sect('Think & learn') + '<div class="gut">' + card({ flush: true, body:
-      row({ icon: 'lamp', color: 'var(--a_faith)', title: 'Morning Lantern', sub: 'Today’s couple scripture study', chev: true, a: 'go', id: 'lantern' }) +
-      row({ icon: 'puzzle', color: 'var(--a_girls)', title: 'Tonight’s story activity', sub: 'Learn the story with ' + KIDS, chev: true, a: 'go', id: 'story' }) +
+      (faithOn() ? row({ icon: 'lamp', color: 'var(--a_faith)', title: 'Morning Lantern', sub: 'Today’s couple scripture study', chev: true, a: 'go', id: 'lantern' }) : '') +
+      (faithOn() ? row({ icon: 'puzzle', color: 'var(--a_girls)', title: 'Tonight’s story activity', sub: 'Learn the story with ' + KIDS, chev: true, a: 'go', id: 'story' }) : '') +
       row({ icon: 'lightbulb', color: 'var(--gold600)', title: 'Think it through', sub: 'Work a problem into a plan', chev: true, a: 'go', id: 'think' }) +
       row({ icon: 'graduation-cap', color: 'var(--brand500)', title: 'Family Life Educator', sub: 'Ask, build programs, handouts', chev: true, a: 'go', id: 'educator' }) }) + '</div>' +
       '<div class="gut" style="margin-top:24px">' + card({ flush: true, body: row({ icon: 'settings', color: 'var(--ink3)', title: 'Settings', sub: 'Family, colors, fonts, notifications, Siri & Alexa', chev: true, a: 'go', id: 'settings' }) }) + '</div>';
@@ -989,7 +1040,8 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       '<div style="margin-top:10px"><button class="btn tinted full" data-a="invite">' + I('user-plus') + 'Invite Lindy</button></div>' + (S.invite ? '<div style="margin-top:10px">' + card({ v: 'accent', body: '<p class="fn m2">Invite code (good for 14 days)</p><p class="t1" style="letter-spacing:4px">' + S.invite + '</p><p class="cp m3">Sample code. The real one comes from your database.</p>' }) + '</div>' : '') +
       '<p class="cp m3" style="margin-top:6px">Ages, stages, health checks, ideas and studies all update from these dates.</p></div>' +
       sect('Kids’ privacy') + '<div class="gut">' + card({ flush: true, body: kids.map(function (k) { var on = !!S.privOk[k.id]; return '<div class="swrow">' + avatar(k, 30) + '<div style="flex:1"><p class="bd">' + esc(k.name) + ' · Can keep private goals and plans</p><p class="cp m3">When on, ' + esc(k.name) + ' can make goals, reminders and plans only she can see.</p></div><button class="switch' + (on ? ' on' : '') + '" role="switch" aria-checked="' + on + '" aria-label="' + esc(k.name) + ' can keep private goals and plans" data-a="privok" data-id="' + k.id + '"></button></div>'; }).join('') }) + '<p class="cp m3" style="margin-top:6px">Family things are seen by everyone. Private things are seen only by the person who made them. Turning this off stops new private items; ones already made stay private.</p></div>' +
-      sect('Work & personal schedules') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'briefcase', color: '#2F6FB4', title: 'Work calendars & tasks', sub: 'Outlook, Google, Asana, Todoist and more', chev: true, a: 'go', id: 'connections' }) }) + '</div>' +
+      sect('Priorities & season') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'compass', color: 'var(--brand500)', title: 'Check in', sub: S.setup ? 'What matters most right now. Change it any time.' : 'Tell the app what matters most (3 minutes)', chev: true, a: 'setup' }) }) + '</div>' +
+      (!secOn('work') ? '' : sect('Work & personal schedules') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'briefcase', color: '#2F6FB4', title: 'Work calendars & tasks', sub: 'Outlook, Google, Asana, Todoist and more', chev: true, a: 'go', id: 'connections' }) }) + '</div>') +
       sect('Appearance') + '<div class="gut">' + card({ body:
         lbl('Light or dark') + '<div class="seg">' + [['light', 'Light'], ['dark', 'Dark'], ['auto', 'Match iPhone']].map(function (o) { return '<button class="' + (c.mode === o[0] ? 'on' : '') + '" data-a="mode" data-id="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>' +
         lbl('Text size') + '<div style="display:flex;align-items:center;gap:8px"><button class="btn secondary sm" data-a="scale" data-id="-1" aria-label="Smaller text">A−</button><div style="flex:1;height:6px;border-radius:3px;background:var(--paper3)"><div style="width:' + ((c.scale - .85) / .5 * 100) + '%;height:6px;border-radius:3px;background:var(--brand500)"></div></div><button class="btn secondary sm" data-a="scale" data-id="1" aria-label="Bigger text">A+</button></div><p class="cp m3" style="text-align:center;margin-top:4px">' + Math.round(c.scale * 100) + '%</p>' +
@@ -1069,7 +1121,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
     var root = TABS.map(function (t) { return t[0]; }).indexOf(c.r) >= 0;
     tabbar.hidden = !root && nav.length > 1 && ['detail', 'quiz'].indexOf(c.r) >= 0;
     var activeTab = nav[0].r;
-    tabbar.innerHTML = TABS.map(function (t) { return '<button class="' + (activeTab === t[0] ? 'on' : '') + '" data-a="tab" data-id="' + t[0] + '" aria-label="' + t[1] + '"' + (activeTab === t[0] ? ' aria-current="page"' : '') + '>' + I(t[2]) + '<span>' + t[1] + '</span></button>'; }).join('');
+    tabbar.innerHTML = TABS.filter(function (t) { return t[0] !== 'marriage' || secOn('marriage'); }).map(function (t) { return '<button class="' + (activeTab === t[0] ? 'on' : '') + '" data-a="tab" data-id="' + t[0] + '" aria-label="' + t[1] + '"' + (activeTab === t[0] ? ' aria-current="page"' : '') + '>' + I(t[2]) + '<span>' + t[1] + '</span></button>'; }).join('');
     if (window.lucide) { try { window.lucide.createIcons(); } catch (e) {} }
     if (top) scroller.scrollTop = 0;
     if (pendingScroll != null) { var gd = scroller.querySelector('[data-grid]'); if (gd) scroller.scrollTop = Math.max(0, gd.offsetTop + pendingScroll - 40); pendingScroll = null; }
@@ -1091,6 +1143,15 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       case 'tab': tab(id); return;
       case 'planDate': evDraft = blankEvent(TODAY); evDraft.area = 'marriage'; evDraft.who = parents.map(function (p) { return p.id; }); go('eventedit'); return;
       case 'gogoals': go('goals'); return;
+      case 'setup': startSetup(!S.setup); return;
+      case 'suchip': { var sp = id.split('|'), key = sp[1], max = +sp[2] || 0, f = sp[0], list;
+        if (f.indexOf('kid:') === 0) { var kp = f.split(':'); su.about[kp[1]] = su.about[kp[1]] || { interests: [], focus: [] }; list = su.about[kp[1]][kp[2]]; }
+        else if (f === 'budget') { su.budget = su.budget === key ? '' : key; render(); return; }
+        else list = su[f];
+        var at = list.indexOf(key); if (at >= 0) list.splice(at, 1); else { if (max && list.length >= max) list.shift(); list.push(key); }
+        render(); return; }
+      case 'sustep': { var n = +id; if (n > 0 && su.i === 4) { S.setup = { sections: su.sections, priorities: su.priorities, season: su.season, updated_at: new Date().toISOString() }; S.myAns = { coupleWants: su.wants, dateBudget: su.budget, myPriorities: su.mine }; S.kidAbout = su.about; save(); var wasFirst = su.first; su = null; if (wasFirst) tab('today'); else back(); toast('Saved. The app now fits these answers.'); return; }
+        su.i = Math.max(0, su.i + n); render(true); return; }
       case 'ourlist': wishTab = 'answer'; go('ourlist', id); return;
       case 'wishtab': wishTab = id; render(); return;
       case 'wishvote': { var wv = id.split('|'), was = isMatch(wv[0]); S.wishVotes[wv[0]] = wv[1]; save(); if (!was && isMatch(wv[0])) toast('You both want this one. It’s on your list.'); render(); return; }

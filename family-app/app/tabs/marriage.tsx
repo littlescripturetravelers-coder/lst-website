@@ -15,6 +15,7 @@ import { useLantern } from '@/hooks/use-lantern';
 import { useReminders } from '@/hooks/use-reminders';
 import { useWishes } from '@/hooks/use-wishes';
 import { KINDS } from '@/lib/wish-catalog';
+import { useSetup } from '@/lib/setup';
 import { marriageDaily } from '@/lib/marriage-daily';
 import { LOVE } from '@/lib/love-languages';
 import { parents, yearsMarried, nextOccurrence } from '@/lib/family';
@@ -27,7 +28,7 @@ import { CalItem, EventRow, expandEvent, hm, setPeek, DAY } from '@/lib/calendar
  *  children's accounts never get this data (RLS, migration 0015). */
 export default function MarriageTab() {
   const { theme: t } = useTheme(); const { family, me, uid } = useFamily();
-  const ideas = useDailyIdeas(); const { night } = useLantern(); const rem = useReminders(family?.id); const wishes = useWishes(family?.id, uid);
+  const ideas = useDailyIdeas(); const { night } = useLantern(); const rem = useReminders(family?.id); const wishes = useWishes(family?.id, uid); const setup = useSetup(family?.id);
   const [dates, setDates] = useState<CalItem[]>([]); const [goals, setGoals] = useState<any[]>([]);
   const isParent = me?.role === 'dad' || me?.role === 'mom';
   const open = isParent;
@@ -46,14 +47,14 @@ export default function MarriageTab() {
   const ann = family.anniversary ? nextOccurrence(family.anniversary) : null;
   const sub = family.anniversary ? 'Married ' + yearsMarried(family) + ' years · ' + (ann!.days === 0 ? 'happy anniversary' : 'anniversary in ' + ann!.days + (ann!.days === 1 ? ' day' : ' days')) : 'Just the two of you';
 
-  const { quote, joke } = marriageDaily(family);
+  const faithOn = setup.on('faith') && family.faith !== 'none'; const { quote, joke } = marriageDaily({ ...family, faith: faithOn ? family.faith : 'none' });
   const coupleList = rem.lists.find(l => l.color === 'marriage');
   const plan = (x: any) => { setDetail({ ...x, area: 'marriage', onPlan: () => rem.add({ title: x.title, notes: x.why, list_id: coupleList?.id, due_date: addDays(todayISO(), 2), on_calendar: true, alert: '60', source: 'idea' }) }); router.push('/detail'); };
   const cards = ps.flatMap((p: any) => { const top = p.love_languages?.ranked?.[0] as keyof typeof LOVE | undefined; if (!top) return []; const day = new Date().getDate(); return [{ p, l: top, idea: LOVE[top].ideas[day % LOVE[top].ideas.length] }]; });
   const quizFor = ps.find((p: any) => !p.love_languages?.ranked);
 
   return <Screen title={title} subtitle={sub} trailing={<Pressable onPress={() => router.push({ pathname: '/event-edit', params: { area: 'marriage', date: todayISO() } })} accessibilityLabel="Plan a date"><Icon name="plus" size={26} color={t.brand[500]} /></Pressable>}>
-    {family.faith !== 'none' && <Gutter><Card variant="inverse" eyebrow="Morning Lantern · 10 min together" title={night?.scripture ?? 'Lighting the lantern…'} onPress={() => router.push('/lantern')}>
+    {faithOn && <Gutter><Card variant="inverse" eyebrow="Morning Lantern · 10 min together" title={night?.scripture ?? 'Lighting the lantern…'} onPress={() => router.push('/lantern')}>
       <Text v="subhead" color={t.ink.inverse}>Read it, answer one question each, and pick one way to live it today.</Text></Card></Gutter>}
     <Rail title="Just the two of us" subtitle="A love quote and a joke, new every day" itemWidth={272} data={['quote', 'joke']} render={k => <View style={{ width: 272 }}>{k === 'quote'
       ? <Card variant="accent" eyebrow="Love quote of the day"><Text v="headline" style={quote.scripture ? { fontStyle: 'italic' } : undefined}>“{quote.text}”</Text><Text v="subhead" color={t.ink[3]} style={{ marginTop: 8 }}>{quote.by}</Text></Card>
