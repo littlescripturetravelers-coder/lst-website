@@ -5,7 +5,6 @@ import type { LinkSuccess } from 'react-native-plaid-link-sdk';
 import Constants from 'expo-constants';
 // Plaid is a native module that isn't inside Expo Go (the free preview app), so it only loads in the App Store version.
 const IN_EXPO_GO = Constants.executionEnvironment === 'storeClient';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const Plaid: typeof import('react-native-plaid-link-sdk') | null = IN_EXPO_GO ? null : require('react-native-plaid-link-sdk');
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from '@/components/text';

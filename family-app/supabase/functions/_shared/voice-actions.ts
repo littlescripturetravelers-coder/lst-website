@@ -4,7 +4,9 @@ import { claude, text, MODEL_FAST } from './claude.ts';
 export async function addReminder(f: any, title: string, when?: string, list?: string) {
   const due = when ? parseWhen(when, f.today) : null;
   const { data: lists } = await f.db.from('reminder_lists').select('id,name').eq('family_id', f.family.id);
-  const l = (lists || []).find((x: any) => list && x.name.toLowerCase().includes(list.toLowerCase())) || (lists || [])[0];
+  // "shopping list" and "grocery list" mean the Groceries list.
+  const want = list && /shop|grocer/i.test(list) ? 'groceries' : list?.toLowerCase();
+  const l = (lists || []).find((x: any) => want && x.name.toLowerCase().includes(want)) || (lists || [])[0];
   await f.db.from('reminders').insert({ family_id: f.family.id, list_id: l?.id, title, due_date: due?.date ?? null, due_time: due?.time ?? null, on_calendar: !!due, alert: due ? 'at' : 'none', source: 'voice', created_by: f.uid });
   return `Okay, I added "${title}"${due ? ' for ' + speakDate(due.date, f.today) + (due.time ? ' at ' + speakTime(due.time) : '') : ''} to ${l?.name ?? 'your family list'}.`;
 }
@@ -22,6 +24,14 @@ export async function todaySummary(f: any) {
   if (rem?.length) parts.push(`${rem.length} reminder${rem.length > 1 ? 's' : ''} due, starting with ${rem[0].title}.`);
   if (study?.scripture) parts.push(`Today's Morning Lantern scripture is ${study.scripture}.`);
   return parts.join(' ');
+}
+/** "What's for dinner?": the meal chosen for today (or the next planned one). */
+export async function whatsForMeal(f: any, meal = 'dinner') {
+  const m = ['breakfast', 'lunch', 'dinner', 'snacks'].includes(meal) ? meal : 'dinner';
+  const { data } = await f.db.from('recipes').select('title,minutes,planned_for').eq('family_id', f.family.id).eq('meal', m).eq('for_whom', 'family').gte('planned_for', f.today).order('planned_for').limit(1);
+  const r = data?.[0];
+  if (!r) return `Nothing is planned for ${m} yet. Open Meals in the app to pick from new ideas.`;
+  return `${r.planned_for === f.today ? 'Today' : speakDate(r.planned_for, f.today).replace(/^./, (c: string) => c.toUpperCase())}'s ${m} is ${r.title}${r.minutes ? ', about ' + r.minutes + ' minutes' : ''}.`;
 }
 export async function dateIdea(f: any, kind: 'couple' | 'girls' = 'couple') {
   const { data } = await f.db.from('daily_ideas').select('title,why').eq('family_id', f.family.id).eq('for_date', f.today).eq('kind', kind).limit(4);

@@ -1,4 +1,5 @@
-import { Linking, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Linking, Pressable, View } from 'react-native';
 import { router } from 'expo-router';
 import { Screen, Gutter, SectionHead } from '@/components/screen';
 import { Card } from '@/components/card';
@@ -14,6 +15,8 @@ import { fmtLong, inDays, todayISO, fmtWhen } from '@/lib/today-helpers';
 import { setDetail } from '@/lib/detail-store';
 import { useTheme } from '@/theme/theme-provider';
 import { kidsLabel } from '@/lib/brand';
+import { supabase } from '@/lib/supabase';
+import { MEALS } from '@/lib/meals';
 import { useLantern } from '@/hooks/use-lantern';
 import { useSetup } from '@/lib/setup';
 import { marriageDaily } from '@/lib/marriage-daily';
@@ -32,6 +35,9 @@ export default function Today() {
   const plain = family ? marriageDaily({ ...family, faith: 'none' }).quote : null;
   const quote = lt?.quote ? { text: lt.quote, by: lt.quote_by ?? '' } : daily?.quote ?? plain;
   const teach = TEACHINGS[faith];
+  // Today's menu (family meals chosen for today).
+  const [menu, setMenu] = useState<{ id: string; meal: string; title: string }[]>([]);
+  useEffect(() => { if (!family || family.id === 'local') return; supabase.from('recipes').select('id,meal,title').eq('family_id', family.id).eq('for_whom', 'family').eq('planned_for', today).then(({ data }) => setMenu((data || []).sort((a, b) => MEALS.findIndex(x => x[0] === a.meal) - MEALS.findIndex(x => x[0] === b.meal)))); }, [family?.id, today]);
   return <Screen subtitle={new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} title="Today">
     {family && <Gutter>{faithOn && ref
       ? <Card variant="inverse" eyebrow={ed ? 'Morning Lantern · today’s scripture' : 'Today’s reading'} title={ref}>
@@ -49,6 +55,10 @@ export default function Today() {
     <Rail title={'Today with ' + kids} subtitle="New every day" action="See all" onAction={() => router.push('/tabs/family')} itemWidth={272}
       data={ideas.girls.slice(0, 3)} render={x => <ContentTile size="wide" area={x.kind === 'couple' ? 'marriage' : 'girls'} icon={x.icon} eyebrow={x.kind === 'couple' ? 'Just us' : 'With ' + kids} title={x.title} meta={x.meta} attachments={x.attachments?.length}
         onPress={() => open({ ...x, area: x.kind === 'couple' ? 'marriage' : 'girls', onPlan: () => rem.add({ title: x.title, notes: x.why, due_date: today, on_calendar: true, alert: '60', source: 'idea' }) })} />} />
+    <SectionHead title="Today’s menu" action={menu.length ? 'Meals' : 'Plan meals'} onAction={() => router.push('/meals')} />
+    <Gutter>{menu.length ? <Card padding={0}>{menu.map((r, i) => <Pressable key={r.id} onPress={() => router.push({ pathname: '/recipe', params: { id: r.id } })} style={{ padding: 14, borderBottomWidth: i < menu.length - 1 ? .5 : 0, borderColor: t.line[2] }}>
+        <Text v="footnote" weight="bold" color={t.brand[400]}>{MEALS.find(x => x[0] === r.meal)?.[1]}</Text><Text v="headline">{r.title}</Text></Pressable>)}</Card>
+      : <Text v="subhead" color={t.ink[3]}>No meals planned for today. Tap Plan meals to get recipe ideas.</Text>}</Gutter>
     <SectionHead title="Reminders" action="All" onAction={() => router.push('/tabs/reminders')} />
     <Gutter><Card padding={0}>{rem.items.filter(r => !r.done && r.due_date && r.due_date <= today).map((r, i, a) => <ListRow key={r.id} title={r.title} subtitle={fmtWhen(r)} divider={i < a.length - 1} onPress={() => rem.toggle(r)} leading={<View style={{ width: 24, height: 24, borderRadius: 12, borderWidth: 1.5, borderColor: t.ink[4] }} />} />)}</Card></Gutter>
   </Screen>;

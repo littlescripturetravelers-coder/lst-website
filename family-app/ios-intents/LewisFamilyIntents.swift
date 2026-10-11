@@ -48,6 +48,17 @@ struct TodaysScripture: AppIntent {
   static var title: LocalizedStringResource = "Today’s Morning Lantern scripture"
   func perform() async throws -> some IntentResult & ProvidesDialog { .result(dialog: IntentDialog(stringLiteral: try await LF.call(["action": "lantern"]))) }
 }
+struct WhatsForDinner: AppIntent {
+  static var title: LocalizedStringResource = "What’s for dinner"
+  @Parameter(title: "Meal", default: "dinner") var meal: String
+  func perform() async throws -> some IntentResult & ProvidesDialog { .result(dialog: IntentDialog(stringLiteral: try await LF.call(["action": "meal", "meal": meal]))) }
+}
+struct AddToShoppingList: AppIntent {
+  static var title: LocalizedStringResource = "Add to the shopping list"
+  @Parameter(title: "Item") var item: String
+  static var parameterSummary: some ParameterSummary { Summary("Add \(\.$item) to the shopping list") }
+  func perform() async throws -> some IntentResult & ProvidesDialog { .result(dialog: IntentDialog(stringLiteral: try await LF.call(["action": "add_shopping", "title": item]))) }
+}
 struct AskLewisFamily: AppIntent {
   static var title: LocalizedStringResource = "Ask Lewis Family"
   @Parameter(title: "Question") var question: String
@@ -60,6 +71,8 @@ struct LewisFamilyShortcuts: AppShortcutsProvider {
     AppShortcut(intent: WhatsToday(), phrases: ["What’s on today in \(.applicationName)", "What’s our day in \(.applicationName)"], shortTitle: "Today", systemImageName: "sun.max")
     AppShortcut(intent: DateIdea(), phrases: ["Give us a date idea in \(.applicationName)", "\(.applicationName) date idea"], shortTitle: "Date idea", systemImageName: "heart")
     AppShortcut(intent: TodaysScripture(), phrases: ["Today’s scripture in \(.applicationName)", "Morning Lantern in \(.applicationName)"], shortTitle: "Scripture", systemImageName: "book")
+    AppShortcut(intent: WhatsForDinner(), phrases: ["What’s for dinner in \(.applicationName)", "\(.applicationName) dinner"], shortTitle: "Dinner", systemImageName: "fork.knife")
+    AppShortcut(intent: AddToShoppingList(), phrases: ["Add to the shopping list in \(.applicationName)", "\(.applicationName) shopping list"], shortTitle: "Shopping list", systemImageName: "cart")
     AppShortcut(intent: AskLewisFamily(), phrases: ["Ask \(.applicationName)"], shortTitle: "Ask", systemImageName: "bubble.left")
   }
 }

@@ -1,7 +1,7 @@
 // Siri / Shortcuts endpoint. The iOS App Intents call this with the user's Supabase JWT (shared via the app group keychain).
 // Also handles the 7 AM morning-summary push from cron.
 import { admin, familyFor, loadFamily, ok, cors, isService, underLimit } from '../_shared/ctx.ts';
-import { addReminder, todaySummary, dateIdea, lanternVerse, askAnything } from '../_shared/voice-actions.ts';
+import { addReminder, todaySummary, dateIdea, lanternVerse, askAnything, whatsForMeal } from '../_shared/voice-actions.ts';
 
 async function pushMorning() {
   const db = admin(); const { data: fams } = await db.from('families').select('id');
@@ -22,6 +22,8 @@ Deno.serve(async req => {
     : b.action === 'today' ? await todaySummary(f)
     : b.action === 'date_idea' ? await dateIdea(f, b.kind ?? 'couple')
     : b.action === 'lantern' ? await lanternVerse(f)
+    : b.action === 'meal' ? await whatsForMeal(f, b.meal)
+    : b.action === 'add_shopping' ? await addReminder(f, b.title, undefined, 'groceries')
     : await askAnything(f, b.question ?? '');
   return ok({ say });
 });

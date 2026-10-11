@@ -6,13 +6,11 @@ function ThemedStatusBar() { const { theme } = useTheme(); return <StatusBar sty
 import { SessionGate } from '@/components/session-gate';
 export default function Root() {
   // Only the default fonts load at start; every other font choice loads when it's picked (src/theme/fonts.ts), so the app starts fast.
-  /* eslint-disable @typescript-eslint/no-require-imports */
   const [ok] = useFonts({
     Fredoka_600SemiBold: require('@expo-google-fonts/fredoka/Fredoka_600SemiBold.ttf'), Fredoka_700Bold: require('@expo-google-fonts/fredoka/Fredoka_700Bold.ttf'),
     Nunito_400Regular: require('@expo-google-fonts/nunito/Nunito_400Regular.ttf'), Nunito_700Bold: require('@expo-google-fonts/nunito/Nunito_700Bold.ttf'), Nunito_800ExtraBold: require('@expo-google-fonts/nunito/Nunito_800ExtraBold.ttf'),
     Anton_400Regular: require('@expo-google-fonts/anton/Anton_400Regular.ttf'),
   });
-  /* eslint-enable @typescript-eslint/no-require-imports */
   if (!ok) return null;
   return <ThemeProvider><ThemedStatusBar /><SessionGate>
     <Stack screenOptions={{ headerShown: false }}>
@@ -25,6 +23,9 @@ export default function Root() {
       <Stack.Screen name="reminder-sheet" options={{ presentation: 'formSheet', sheetGrabberVisible: true }} />
       <Stack.Screen name="event" options={{ presentation: 'card' }} />
       <Stack.Screen name="our-list" options={{ presentation: 'card' }} />
+      <Stack.Screen name="meals" options={{ presentation: 'card' }} />
+      <Stack.Screen name="recipe" options={{ presentation: 'card' }} />
+      <Stack.Screen name="meal-prefs" options={{ presentation: 'modal' }} />
       <Stack.Screen name="setup" options={{ presentation: 'card', gestureEnabled: false }} />
       <Stack.Screen name="event-edit" options={{ presentation: 'modal' }} />
     </Stack>

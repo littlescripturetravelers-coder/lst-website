@@ -761,7 +761,7 @@ var Faiths = (() => {
         { id: 'r7', title: 'Call the bank about the car loan', list: 'family', due: addDays(TODAY, -1) },
         { id: 'r8', title: 'Plan Lindy’s birthday surprise', list: 'family', due: addDays(TODAY, 4), priv: true }],
       evs: sampleEvents(),
-      cals: { w1: 'busy', p1: 'private' }, feeds: [], privOk: {}, wishVotes: {}, wishCustom: [], setup: null, myAns: {}, kidAbout: {},
+      cals: { w1: 'busy', p1: 'private' }, feeds: [], privOk: {}, wishVotes: {}, wishCustom: [], mealPrefs: null, recipes: [], setup: null, myAns: {}, kidAbout: {},
       goals: [{ id: 'g1', title: 'Weekly date night, no phones', area: 'marriage' }, { id: 'g2', title: 'Family scripture study 5 nights a week', area: 'faith' }, { id: 'g3', title: 'Run a 10K by spring', area: 'health', priv: true }],
       ll: {}, answers: {}, lanternDone: null, actDone: {}, home: {}, homeDay: TODAY, planned: 0,
       chores: [{ id: 'c1', who: 'mayble', title: 'Make bed' }, { id: 'c2', who: 'mayble', title: 'Set and clear the table' }, { id: 'c3', who: 'esmay', title: 'Put toys in the bin' }] };
@@ -772,7 +772,7 @@ var Faiths = (() => {
   if (!S || !S.theme) S = sampleState();
   if (S.homeDay !== TODAY) { S.home = {}; S.homeDay = TODAY; }
   if (S.faith) FAMILY.faith = S.faith;
-  (function (d) { ['cals', 'feeds', 'privOk', 'goals', 'evs', 'wishVotes', 'wishCustom', 'myAns', 'kidAbout'].forEach(function (k) { if (!S[k]) S[k] = d[k]; }); })(sampleState());
+  (function (d) { ['cals', 'feeds', 'privOk', 'goals', 'evs', 'wishVotes', 'wishCustom', 'myAns', 'kidAbout', 'recipes'].forEach(function (k) { if (!S[k]) S[k] = d[k]; }); })(sampleState());
   var save = function () { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 
   // ---------- navigation ----------
@@ -792,7 +792,7 @@ var Faiths = (() => {
   var avatar = function (m, size) { return '<span class="avatar" style="width:' + size + 'px;height:' + size + 'px;background:' + m.color + ';font-size:' + Math.round(size * .42) + 'px">' + esc(m.name[0]) + '</span>'; };
   function header(title, opts) { opts = opts || {}; return '<div class="head"><div>' + (opts.sub ? '<p class="fn b br4">' + esc(opts.sub) + '</p>' : '') + '<h1 class="lt">' + esc(title) + '</h1></div>' + (opts.right || '') + '</div>'; }
   var backLink = function (label) { return '<button class="link" data-a="back">' + esc(label) + '</button>'; };
-  var sect = function (t, action, act) { return '<div class="sect"><span>' + esc(t) + '</span>' + (action ? '<button class="link sh" data-a="' + act + '">' + esc(action) + '</button>' : '') + '</div>'; };
+  var sect = function (t, action, act) { return '<div class="sect"><span>' + esc(t) + '</span>' + (action ? '<button class="link sh" data-a="' + act.split(':')[0] + '"' + (act.indexOf(':') > 0 ? ' data-id="' + act.split(':')[1] + '"' : '') + '>' + esc(action) + '</button>' : '') + '</div>'; };
   function card(o) {
     var tag = o.a ? 'button' : 'div';
     return '<' + tag + ' class="card ' + (o.v || '') + (o.flush ? ' flush' : '') + '"' + (o.a ? ' data-a="' + o.a + '"' + (o.id != null ? ' data-id="' + o.id + '"' : '') : '') + (o.style ? ' style="' + o.style + '"' : '') + '>' +
@@ -1448,6 +1448,7 @@ var Faiths = (() => {
   };
   SCREENS.more = function () {
     return header('More') + sect('Plan') + '<div class="gut">' + card({ flush: true, body:
+      row({ icon: 'utensils', color: 'var(--a_health)', title: 'Meals', sub: 'Meal ideas, recipes and the shopping list', chev: true, a: 'go', id: 'meals' }) +
       (secOn('money') ? row({ icon: 'bot', color: 'var(--a_money)', title: 'Money advisor', sub: 'Linked banks, cards & loans', chev: true, a: 'go', id: 'advisor' }) : '') +
       (secOn('home') ? row({ icon: 'house', color: 'var(--a_home)', title: 'Home upkeep', sub: 'Cleaning, yard, vehicles, seasonal', chev: true, a: 'go', id: 'home' }) : '') +
       (secOn('health') ? row({ icon: 'heart-pulse', color: 'var(--a_health)', title: 'Health', sub: 'Check-ups, screenings, staying strong', chev: true, a: 'go', id: 'health' }) : '') +
@@ -1501,6 +1502,97 @@ var Faiths = (() => {
   SCREENS.advisor = stub('Money advisor', 'bot', 'money', ['Link your banks, cards and loans (read-only) and ask anything: “How fast can we pay off the car?”', 'It looks at your real numbers, gives one clear next step, and can save a payoff plan with reminders.', 'Educational guidance, not a licensed advisor. It can never move money.']);
   var GOAL_AREAS = ['marriage', 'kids', 'faith', 'money', 'health', 'growth', 'home', 'work'], goalArea = 'marriage', goalMine = false, goalDraft = '';
   var goalTint = function (a) { return a === 'kids' ? 'girls' : a === 'work' ? 'growth' : a; };
+  // ---------- Meals (the real app asks the AI; this preview uses sample recipes) ----------
+  var MEAL_NAMES = [['breakfast', 'Breakfast'], ['lunch', 'Lunch'], ['dinner', 'Dinner'], ['snacks', 'Snacks']];
+  var M_DIETS = [['kid-friendly', 'Kid-friendly'], ['high-protein', 'High protein'], ['low-carb', 'Low carb'], ['keto', 'Keto'], ['paleo', 'Paleo'], ['mediterranean', 'Mediterranean'], ['vegetarian', 'Vegetarian'], ['vegan', 'Vegan'], ['pescatarian', 'Pescatarian'], ['gluten-free', 'Gluten-free'], ['dairy-free', 'Dairy-free'], ['low-sodium', 'Low sodium'], ['heart-healthy', 'Heart healthy'], ['diabetic-friendly', 'Diabetic-friendly'], ['whole30', 'Whole30'], ['halal', 'Halal'], ['kosher', 'Kosher'], ['budget', 'Budget-friendly']];
+  var M_AVOID = [['peanuts', 'Peanuts'], ['tree nuts', 'Tree nuts'], ['dairy', 'Dairy'], ['eggs', 'Eggs'], ['gluten', 'Gluten'], ['shellfish', 'Shellfish'], ['fish', 'Fish'], ['soy', 'Soy'], ['sesame', 'Sesame'], ['pork', 'Pork'], ['beef', 'Beef'], ['mushrooms', 'Mushrooms'], ['onions', 'Onions'], ['spicy food', 'Spicy food'], ['coconut', 'Coconut'], ['corn', 'Corn']];
+  var g = function (name, qty, unit, aisle) { return { name: name, qty: qty, unit: unit, aisle: aisle }; };
+  var RECIPE_BANK = {
+    breakfast: [
+      { title: 'Banana oat pancakes', summary: 'Fluffy whole-grain pancakes the kids can help flip.', minutes: 20, cal: 380, p: 14, c: 58, f: 10, ing: [g('rolled oat', 2, 'cups', 'Pantry'), g('banana', 2, '', 'Produce'), g('egg', 2, '', 'Dairy and eggs'), g('milk', 1, 'cup', 'Dairy and eggs'), g('baking powder', 2, 'tsp', 'Pantry')], steps: ['Blend oats into flour.', 'Mash bananas and whisk with eggs and milk.', 'Stir in oat flour and baking powder.', 'Cook ¼ cup at a time on a hot buttered pan, 2 minutes a side.'] },
+      { title: 'Veggie egg muffins', summary: 'Make-ahead egg bites full of vegetables.', minutes: 25, cal: 210, p: 16, c: 6, f: 13, ing: [g('egg', 10, '', 'Dairy and eggs'), g('spinach', 2, 'cups', 'Produce'), g('bell pepper', 1, '', 'Produce'), g('shredded cheddar', 1, 'cup', 'Dairy and eggs')], steps: ['Heat oven to 350°F and grease a muffin pan.', 'Chop spinach and pepper.', 'Whisk eggs, stir in vegetables and cheese.', 'Fill cups ¾ full and bake 20 minutes.'] },
+      { title: 'Greek yogurt parfaits', summary: 'Yogurt, berries and granola in layers.', minutes: 5, cal: 290, p: 18, c: 40, f: 7, ing: [g('greek yogurt', 4, 'cups', 'Dairy and eggs'), g('mixed berries', 2, 'cups', 'Produce'), g('granola', 1, 'cup', 'Pantry'), g('honey', 2, 'tbsp', 'Pantry')], steps: ['Spoon yogurt into cups.', 'Add berries, then granola.', 'Drizzle with honey.'] },
+      { title: 'Breakfast burritos', summary: 'Scrambled eggs, potatoes and cheese, wrapped to go.', minutes: 25, cal: 450, p: 22, c: 42, f: 20, ing: [g('egg', 8, '', 'Dairy and eggs'), g('flour tortilla', 5, '', 'Bakery'), g('frozen hash browns', 2, 'cups', 'Frozen'), g('shredded cheddar', 1, 'cup', 'Dairy and eggs'), g('salsa', 0.5, 'cup', 'Pantry')], steps: ['Crisp hash browns in a pan.', 'Scramble eggs.', 'Fill tortillas with eggs, potatoes, cheese and salsa.', 'Roll up and toast seam-side down.'] }],
+    lunch: [
+      { title: 'Turkey avocado wraps', summary: 'Quick wraps with crunchy veggies.', minutes: 10, cal: 420, p: 28, c: 36, f: 18, ing: [g('flour tortilla', 5, '', 'Bakery'), g('sliced turkey', 1, 'lb', 'Meat and seafood'), g('avocado', 2, '', 'Produce'), g('lettuce', 1, 'head', 'Produce'), g('cucumber', 1, '', 'Produce')], steps: ['Mash avocado onto each tortilla.', 'Layer turkey, lettuce and sliced cucumber.', 'Roll tightly and cut in half.'] },
+      { title: 'Chicken noodle soup', summary: 'Cozy, simple and great for leftovers.', minutes: 35, cal: 340, p: 26, c: 34, f: 9, ing: [g('chicken breast', 1, 'lb', 'Meat and seafood'), g('egg noodles', 8, 'oz', 'Pantry'), g('carrot', 3, '', 'Produce'), g('celery', 2, 'stalks', 'Produce'), g('chicken broth', 8, 'cups', 'Pantry')], steps: ['Simmer chicken in broth 15 minutes, then shred.', 'Add sliced carrot and celery, cook 8 minutes.', 'Add noodles and cook until tender.', 'Return chicken and season.'] },
+      { title: 'Quesadilla bar', summary: 'Everyone builds their own.', minutes: 15, cal: 480, p: 24, c: 40, f: 24, ing: [g('flour tortilla', 8, '', 'Bakery'), g('shredded cheese', 2, 'cups', 'Dairy and eggs'), g('black beans', 1, 'can', 'Pantry'), g('cooked chicken', 2, 'cups', 'Meat and seafood')], steps: ['Set out fillings.', 'Fill half a tortilla, fold.', 'Toast 2 minutes a side until melty.'] }],
+    dinner: [
+      { title: 'Sheet-pan chicken fajitas', summary: 'One pan, bright peppers, warm tortillas.', minutes: 30, cal: 520, p: 38, c: 46, f: 19, ing: [g('chicken breast', 1.5, 'lb', 'Meat and seafood'), g('bell pepper', 3, '', 'Produce'), g('onion', 1, '', 'Produce'), g('flour tortilla', 10, '', 'Bakery'), g('fajita seasoning', 2, 'tbsp', 'Spices'), g('olive oil', 2, 'tbsp', 'Pantry')], steps: ['Heat oven to 425°F.', 'Slice chicken, peppers and onion.', 'Toss with oil and seasoning on a sheet pan.', 'Roast 20 minutes and serve in warm tortillas.'] },
+      { title: 'Spaghetti and turkey meatballs', summary: 'A family favorite with a lighter meatball.', minutes: 40, cal: 610, p: 36, c: 72, f: 18, ing: [g('ground turkey', 1, 'lb', 'Meat and seafood'), g('spaghetti', 1, 'lb', 'Pantry'), g('marinara sauce', 24, 'oz', 'Pantry'), g('egg', 1, '', 'Dairy and eggs'), g('breadcrumbs', 0.5, 'cup', 'Pantry'), g('parmesan', 0.5, 'cup', 'Dairy and eggs')], steps: ['Mix turkey, egg, breadcrumbs and half the parmesan.', 'Roll into 1-inch balls and bake at 400°F for 18 minutes.', 'Cook spaghetti.', 'Warm sauce, add meatballs, serve over pasta.'] },
+      { title: 'Honey garlic salmon bowls', summary: 'Rice, salmon and broccoli with a sweet glaze.', minutes: 25, cal: 560, p: 34, c: 58, f: 20, ing: [g('salmon fillet', 1.5, 'lb', 'Meat and seafood'), g('rice', 2, 'cups', 'Pantry'), g('broccoli', 2, 'heads', 'Produce'), g('honey', 3, 'tbsp', 'Pantry'), g('soy sauce', 3, 'tbsp', 'Pantry'), g('garlic', 3, 'cloves', 'Produce')], steps: ['Cook rice.', 'Whisk honey, soy sauce and minced garlic.', 'Roast salmon and broccoli at 400°F for 12 minutes, brushing with glaze.', 'Serve over rice.'] },
+      { title: 'Slow-cooker beef chili', summary: 'Set it in the morning, dinner is done.', minutes: 15, cal: 480, p: 32, c: 38, f: 20, ing: [g('ground beef', 1.5, 'lb', 'Meat and seafood'), g('kidney beans', 2, 'cans', 'Pantry'), g('diced tomatoes', 2, 'cans', 'Pantry'), g('onion', 1, '', 'Produce'), g('chili powder', 2, 'tbsp', 'Spices')], steps: ['Brown beef with chopped onion.', 'Add everything to the slow cooker.', 'Cook on low 6–8 hours.', 'Top with cheese or sour cream.'] }],
+    snacks: [
+      { title: 'Apple nachos', summary: 'Apple slices with peanut butter and a sprinkle.', minutes: 5, cal: 220, p: 6, c: 28, f: 11, ing: [g('apple', 3, '', 'Produce'), g('peanut butter', 0.25, 'cup', 'Pantry'), g('mini chocolate chips', 2, 'tbsp', 'Pantry')], steps: ['Slice apples thin onto a plate.', 'Drizzle warmed peanut butter.', 'Sprinkle chips.'] },
+      { title: 'Hummus snack boxes', summary: 'Crunchy veggies and crackers to dip.', minutes: 10, cal: 190, p: 6, c: 22, f: 9, ing: [g('hummus', 10, 'oz', 'Dairy and eggs'), g('baby carrots', 2, 'cups', 'Produce'), g('cucumber', 1, '', 'Produce'), g('crackers', 1, 'box', 'Pantry')], steps: ['Slice cucumber.', 'Divide hummus into small cups.', 'Pack with veggies and crackers.'] },
+      { title: 'Protein energy bites', summary: 'No-bake oat bites, great after school.', minutes: 15, cal: 160, p: 7, c: 18, f: 7, ing: [g('rolled oat', 1, 'cup', 'Pantry'), g('peanut butter', 0.5, 'cup', 'Pantry'), g('honey', 0.33, 'cup', 'Pantry'), g('protein powder', 0.5, 'cup', 'Pantry')], steps: ['Stir everything together.', 'Chill 10 minutes.', 'Roll into balls.'] }]
+  };
+  var mealWho = 'family', mealDraft = null;
+  var mprefs = function () { return S.mealPrefs || { meals: ['breakfast', 'lunch', 'dinner', 'snacks'], diets: [], avoid: [], notes: '', ideas: 4, maxMin: null, people: {} }; };
+  var fmtQ = function (q) { if (q == null) return ''; var w = Math.floor(q), fr = q - w, F = [[.125, '⅛'], [.25, '¼'], [.333, '⅓'], [.5, '½'], [.667, '⅔'], [.75, '¾']], best = F.reduce(function (b, x) { return Math.abs(fr - x[0]) < Math.abs(fr - b[0]) ? x : b; }, [0, '']);
+    if (fr > .9) return String(w + 1); if (Math.abs(fr - best[0]) > .06) return String(Math.round(q * 10) / 10); return (w ? String(w) : '') + best[1] || '0'; };
+  var famServ = function () { return FAMILY.members.reduce(function (s, m) { var a = ageOn(m.birthday); return s + (a < 6 ? .5 : a < 12 ? .75 : 1); }, 0); };
+  function mealIdeas(meal) {
+    var P = mprefs(), have = S.recipes.filter(function (r) { return r.meal === meal && r.who === mealWho; }).map(function (r) { return r.title; });
+    var bank = RECIPE_BANK[meal].filter(function (x) { return have.indexOf(x.title) < 0; }).slice(0, P.ideas);
+    if (!bank.length) { toast('In this preview that’s all the sample ' + meal + ' ideas. The real app makes new ones every time.'); return; }
+    var serv = mealWho === 'family' ? famServ() : 1, base = 4;
+    bank.forEach(function (x, i) { S.recipes.unshift({ id: 'rc' + Date.now() + i, meal: meal, who: mealWho, title: x.title, summary: x.summary, minutes: x.minutes, cal: x.cal, p: x.p, c: x.c, f: x.f, servings: serv,
+      ing: x.ing.map(function (y) { return { name: y.name, qty: Math.round(y.qty * serv / base * 100) / 100, unit: y.unit, aisle: y.aisle }; }), steps: x.steps, planned: null }); });
+    save(); render();
+  }
+  function addShopping(r, scale) {
+    var n = 0;
+    r.ing.forEach(function (y) { var raw = y.qty * scale, qty = y.unit ? Math.max(.25, Math.round(raw * 4) / 4) : Math.ceil(raw - .01), nm = y.name.charAt(0).toUpperCase() + y.name.slice(1);
+      var ex = S.rems.filter(function (x) { return x.list === 'groceries' && !x.done && x.title.split(' · ')[0].toLowerCase() === nm.toLowerCase() && (x.title.split(' · ')[1] || '').replace(/^[\d.]+\s*/, '') === y.unit; })[0];
+      if (ex) { var cur = parseFloat((ex.title.split(' · ')[1] || '0')) || 0; ex.title = nm + ' · ' + [Math.round((cur + qty) * 4) / 4, y.unit].filter(Boolean).join(' '); }
+      else S.rems.push({ id: 'g' + Date.now() + n, title: nm + ' · ' + [qty, y.unit].filter(Boolean).join(' '), list: 'groceries', notes: y.aisle + ' · for ' + r.title });
+      n++; });
+    return n;
+  }
+  SCREENS.meals = function () {
+    var P = mprefs(), people = FAMILY.members.filter(function (m) { return P.people[m.id] && P.people[m.id].on; }), per = mealWho === 'family' ? null : P.people[mealWho];
+    var meals = (per && per.meals && per.meals.length ? per.meals : P.meals), mine = S.recipes.filter(function (r) { return r.who === mealWho; });
+    var menu = mine.filter(function (r) { return r.planned && r.planned >= TODAY; }).sort(function (a, b) { return a.planned < b.planned ? -1 : 1; });
+    var chip = function (k, l) { return '<button class="chip' + (mealWho === k ? ' on' : '') + '" style="height:34px;border-radius:17px;padding:0 14px" data-a="mealwho" data-id="' + k + '">' + l + '</button>'; };
+    var meta = function (r) { return [r.minutes + ' min', r.cal + ' cal', r.p + 'g protein'].join(' · '); };
+    return header('Meals', { sub: 'Plan, cook, shop', right: '<button class="link" data-a="go" data-id="mealprefs">Preferences</button>' }) +
+      '<div class="gut" style="display:flex;flex-wrap:wrap;gap:8px">' + chip('family', 'Family') + people.map(function (m) { return chip(m.id, m.name); }).join('') + '</div>' +
+      (!people.length ? '<div class="gut" style="margin-top:8px"><p class="fn m3">Want a plan with your own calories and macros? Turn it on for each person in Preferences.</p></div>' : '') +
+      sect('On the menu', 'Shopping list', 'shoplist') + '<div class="gut gap" style="gap:8px">' + (menu.map(function (r) { return '<button class="ev" style="background:var(--paper0);border:1px solid var(--line1)" data-a="go" data-id="recipe:' + r.id + '"><span style="flex:1"><p class="fn b br4">' + fmtDay(r.planned) + ' · ' + lbl(MEAL_NAMES, r.meal) + '</p><p class="hl">' + esc(r.title) + '</p></span></button>'; }).join('') || '<p class="sh m3">Nothing planned yet. Get ideas below and choose the ones you want.</p>') + '</div>' +
+      meals.map(function (meal) { var list = mine.filter(function (r) { return r.meal === meal && !r.planned; }); var name = lbl(MEAL_NAMES, meal);
+        return sect(name, list.length ? 'More ideas' : 'Get ' + P.ideas + ' ideas', 'mealideas:' + meal) + '<div class="gut gap" style="gap:8px">' + (list.map(function (r) { return card({ a: 'go', id: 'recipe:' + r.id, body: '<p class="hl">' + esc(r.title) + '</p><p class="sh m2" style="margin-top:2px">' + esc(r.summary) + '</p><p class="fn m3" style="margin-top:6px">' + meta(r) + '</p>' }); }).join('') || '<p class="sh m3">Tap “Get ' + P.ideas + ' ideas” for ' + name.toLowerCase() + '.</p>') + '</div>'; }).join('') +
+      '<div class="gut" style="margin-top:14px"><p class="cp m3">In this preview the ideas are samples. In the app they’re new recipes made for your family’s wants, restrictions, time and budget.</p></div>';
+  };
+  SCREENS.recipe = function (id) {
+    var r = S.recipes.filter(function (x) { return x.id === id; })[0]; if (!r) return header('Recipe', { right: backLink('Meals') });
+    var serv = r.view || r.servings, scale = serv / r.servings, aisles = [];
+    r.ing.forEach(function (y) { if (aisles.indexOf(y.aisle) < 0) aisles.push(y.aisle); });
+    var who = r.who === 'family' ? 'the family' : member(r.who).name;
+    return header(r.title, { sub: lbl(MEAL_NAMES, r.meal) + ' · for ' + who, right: backLink('Meals') }) +
+      '<div class="gut gap"><p class="bd m2">' + esc(r.summary) + '</p><div style="display:flex;flex-wrap:wrap;gap:8px">' + [r.minutes + ' min', r.cal + ' cal', r.p + 'g protein', r.c + 'g carbs', r.f + 'g fat'].map(function (x) { return '<span class="pill" style="background:var(--paper2);padding:6px 10px">' + x + '</span>'; }).join('') + '</div><p class="cp m3">Calories and macros are per serving.</p>' +
+      card({ body: '<div style="display:flex;align-items:center;margin-bottom:10px"><p class="bd" style="flex:1">Servings</p><button class="btn secondary sm" data-a="serv" data-id="' + r.id + '|-1" aria-label="Fewer servings">−</button><span class="hl" style="width:48px;text-align:center">' + fmtQ(serv) + '</span><button class="btn secondary sm" data-a="serv" data-id="' + r.id + '|1" aria-label="More servings">+</button></div>' +
+        aisles.map(function (a) { return '<p class="fn hv m3" style="text-transform:uppercase;margin-top:8px">' + a + '</p>' + r.ing.filter(function (y) { return y.aisle === a; }).map(function (y) { return '<p class="bd" style="margin-top:4px">• ' + [fmtQ(y.qty * scale), y.unit, y.name].filter(Boolean).join(' ') + '</p>'; }).join(''); }).join('') }) +
+      '<h2 class="t3" style="margin-top:6px">How to make it</h2>' + r.steps.map(function (st, i) { return '<div class="step"><span class="num">' + (i + 1) + '</span><p class="co">' + esc(st) + '</p></div>'; }).join('') +
+      '<div class="frow" style="background:var(--paper0);border-radius:10px;border:1px solid var(--line1)"><span>Day</span><input type="date" id="mealday" value="' + (r.planned || TODAY) + '" min="' + TODAY + '"></div>' +
+      '<button class="btn cta full" data-a="mealchoose" data-id="' + r.id + '">' + I('shopping-cart') + (r.planned ? 'Move to this day' : 'Add to the menu and shopping list') + '</button>' +
+      (r.planned ? '<button class="btn secondary full" data-a="mealagain" data-id="' + r.id + '">Add the ingredients again</button><button class="link" style="color:#B43A2E;padding:10px" data-a="mealunplan" data-id="' + r.id + '">Take off the menu</button>' : '') + '</div>';
+  };
+  SCREENS.mealprefs = function () {
+    var P = mealDraft || (mealDraft = JSON.parse(JSON.stringify(mprefs())));
+    var ch = function (opts, on, a) { return '<div style="display:flex;flex-wrap:wrap;gap:8px">' + opts.map(function (o) { var sel = on(o[0]); return '<button class="pickchip" style="height:36px;border-radius:18px;' + (sel ? 'background:var(--brand500);border-color:var(--brand500);color:var(--inverse)' : 'background:var(--paper0)') + '" role="checkbox" aria-checked="' + sel + '" data-a="' + a + '" data-id="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>'; };
+    var H = function (t, sub) { return '<p class="hl" style="margin:14px 0 8px">' + t + (sub ? '</p><p class="fn m3" style="margin:-6px 0 8px">' + sub : '') + '</p>'; };
+    return '<div class="formhead"><button class="link" data-a="mpcancel">Cancel</button><span class="hl">Meal preferences</span><button class="link b" data-a="mpsave">Save</button></div><div class="gut gap">' +
+      card({ body: H('Meals to plan') + ch(MEAL_NAMES, function (k) { return P.meals.indexOf(k) >= 0; }, 'mpmeal') +
+        H('How many ideas at a time') + '<div style="display:flex;align-items:center;gap:14px"><button class="btn secondary sm" data-a="mpcount" data-id="-1" aria-label="Fewer">−</button><span class="t2">' + P.ideas + '</span><button class="btn secondary sm" data-a="mpcount" data-id="1" aria-label="More">+</button></div>' +
+        H('Longest cooking time') + ch([['15', '15 min'], ['30', '30 min'], ['45', '45 min'], ['60', '1 hour'], ['', 'Any']], function (k) { return String(P.maxMin || '') === k; }, 'mpmin') }) +
+      card({ body: H('What the family wants', 'Every family recipe follows these.') + ch(M_DIETS, function (k) { return P.diets.indexOf(k) >= 0; }, 'mpdiet') +
+        H('Never include', 'Allergies and foods someone won’t eat.') + ch(M_AVOID, function (k) { return P.avoid.indexOf(k) >= 0; }, 'mpavoid') }) +
+      '<h2 class="t3">Each person’s own plan</h2><p class="fn m3" style="margin-top:-6px">Turn on a plan for anyone who wants their own calories, macros or diet.</p>' +
+      FAMILY.members.map(function (m) { var pp = P.people[m.id] || {}; return card({ flush: true, body: '<div class="swrow">' + avatar(m, 30) + '<p class="bd" style="flex:1">' + m.name + '</p><button class="switch' + (pp.on ? ' on' : '') + '" role="switch" aria-checked="' + !!pp.on + '" aria-label="Own plan for ' + m.name + '" data-a="mpperson" data-id="' + m.id + '"></button></div>' +
+        (pp.on ? '<div style="padding:0 14px 14px">' + H('Diet') + ch([['', 'No special diet']].concat(M_DIETS.slice(0, 10)), function (k) { return (pp.diet || '') === k; }, 'mppdiet:' + m.id) + H('Daily targets', 'Grams for protein, carbs and fat.') +
+          [['cal', 'Calories', 2000], ['p', 'Protein (g)', 150], ['c', 'Carbs (g)', 180], ['f', 'Fat (g)', 65]].map(function (x) { return '<div class="frow" style="padding:0;border:0;min-height:44px"><span>' + x[1] + '</span><input class="field" style="width:90px;text-align:center" inputmode="numeric" data-mp="' + m.id + ':' + x[0] + '" placeholder="' + x[2] + '" value="' + (pp[x[0]] || '') + '"></div>'; }).join('') + '</div>' : '') }); }).join('') + '</div>';
+  };
   SCREENS.goals = function () {
     var gc = function (g) { return card({ eyebrow: g.area, body: '<div style="display:flex;gap:8px;align-items:center"><p class="t3" style="flex:1;font-family:var(--display)">' + esc(g.title) + '</p>' + (g.priv ? '<span class="m3" aria-label="Only you see this">' + I('lock', 'ic16') + '</span>' : '') + '<button class="link sh" style="color:var(--ink3)" data-a="rmgoal" data-id="' + g.id + '">Remove</button></div>' }); };
     var fam = S.goals.filter(function (g) { return !g.priv; }), mine = S.goals.filter(function (g) { return g.priv; });
@@ -1631,6 +1723,21 @@ var Faiths = (() => {
       case 'tab': tab(id); return;
       case 'planDate': evDraft = blankEvent(TODAY); evDraft.area = 'marriage'; evDraft.who = parents.map(function (p) { return p.id; }); go('eventedit'); return;
       case 'gogoals': go('goals'); return;
+      case 'mealwho': mealWho = id; render(); return;
+      case 'mealideas': mealIdeas(id); return;
+      case 'shoplist': tab('reminders'); go('list', 'groceries'); return;
+      case 'serv': { var sv = id.split('|'), rr = S.recipes.filter(function (x) { return x.id === sv[0]; })[0]; rr.view = Math.max(1, Math.round(((rr.view || rr.servings) + (+sv[1])) * 2) / 2); save(); render(); return; }
+      case 'mealchoose': { var rc = S.recipes.filter(function (x) { return x.id === id; })[0], dd = (app.querySelector('#mealday') || {}).value || TODAY;
+        if (rc.planned) { rc.planned = dd; save(); toast('Moved to ' + fmtDay(dd).toLowerCase()); render(); return; }
+        rc.planned = dd; var n = addShopping(rc, (rc.view || rc.servings) / rc.servings); save(); back(); toast(rc.title + ' is on the menu. ' + n + ' ingredients went on Groceries.'); return; }
+      case 'mealagain': { var ra = S.recipes.filter(function (x) { return x.id === id; })[0]; var n2 = addShopping(ra, (ra.view || ra.servings) / ra.servings); save(); toast(n2 + ' ingredients went on Groceries.'); render(); return; }
+      case 'mealunplan': { S.recipes.forEach(function (x) { if (x.id === id) x.planned = null; }); save(); render(); return; }
+      case 'mpcancel': mealDraft = null; back(); return;
+      case 'mpsave': app.querySelectorAll('[data-mp]').forEach(function (inp) { var k = inp.getAttribute('data-mp').split(':'); mealDraft.people[k[0]] = mealDraft.people[k[0]] || {}; mealDraft.people[k[0]][k[1]] = +inp.value || null; }); S.mealPrefs = mealDraft; mealDraft = null; save(); back(); toast('Saved'); return;
+      case 'mpmeal': case 'mpdiet': case 'mpavoid': { var key = { mpmeal: 'meals', mpdiet: 'diets', mpavoid: 'avoid' }[a], L = mealDraft[key], at2 = L.indexOf(id); if (at2 >= 0) L.splice(at2, 1); else L.push(id); render(); return; }
+      case 'mpcount': mealDraft.ideas = Math.max(1, Math.min(10, mealDraft.ideas + (+id))); render(); return;
+      case 'mpmin': mealDraft.maxMin = id ? +id : null; render(); return;
+      case 'mpperson': mealDraft.people[id] = mealDraft.people[id] || {}; mealDraft.people[id].on = !mealDraft.people[id].on; render(); return;
       case 'setup': startSetup(!S.setup); return;
       case 'sufaith': su.faith = id; render(); return;
       case 'suchip': { var sp = id.split('|'), key = sp[1], max = +sp[2] || 0, f = sp[0], list;
@@ -1651,7 +1758,7 @@ var Faiths = (() => {
       case 'tab-family': tab('family'); return;
       case 'tab-reminders': tab('reminders'); return;
       case 'back': quiz = null; back(); return;
-      case 'go': go(id); return;
+      case 'go': if (id && id.indexOf('recipe:') === 0) { go('recipe', id.slice(7)); return; } go(id); return;
       case 'idea': go('detail', id); return;
       case 'child': go('child', id); return;
       case 'list': go('list', id); return;

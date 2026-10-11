@@ -12,6 +12,7 @@ export default function More() {
   return <Screen title="More">
     <SectionHead title="Plan" />
     <Gutter><Card padding={0}>
+      <ListRow icon="utensils" iconColor={t.area.health[0]} title="Meals" subtitle="Meal ideas, recipes and the shopping list" chevron onPress={() => router.push('/meals')} />
       {s.on('money') && <ListRow icon="bot" iconColor={t.area.money[0]} title="Money advisor" subtitle="Linked banks, cards & loans" chevron onPress={() => router.push('/advisor')} />}
       {s.on('home') && <ListRow icon="house" iconColor={t.area.home[0]} title="Home upkeep" subtitle="Cleaning, yard, vehicles, seasonal" chevron onPress={() => router.push('/home')} />}
       {s.on('health') && <ListRow icon="heart-pulse" iconColor={t.area.health[0]} title="Health" subtitle="Check-ups, screenings, staying strong" chevron onPress={() => router.push('/health')} />}

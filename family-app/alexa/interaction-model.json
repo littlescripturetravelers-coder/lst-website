@@ -94,6 +94,35 @@
         {
           "name": "AMAZON.FallbackIntent",
           "samples": []
+        },
+        {
+          "name": "MealIntent",
+          "slots": [
+            {
+              "name": "meal",
+              "type": "MealType"
+            }
+          ],
+          "samples": [
+            "what's for {meal}",
+            "what are we having for {meal}",
+            "what's for dinner",
+            "what's the plan for {meal}"
+          ]
+        },
+        {
+          "name": "ShoppingIntent",
+          "slots": [
+            {
+              "name": "item",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "add {item} to the shopping list",
+            "put {item} on the shopping list",
+            "add {item} to the grocery list"
+          ]
         }
       ],
       "types": [
@@ -158,6 +187,31 @@
             {
               "name": {
                 "value": "my husband"
+              }
+            }
+          ]
+        },
+        {
+          "name": "MealType",
+          "values": [
+            {
+              "name": {
+                "value": "breakfast"
+              }
+            },
+            {
+              "name": {
+                "value": "lunch"
+              }
+            },
+            {
+              "name": {
+                "value": "dinner"
+              }
+            },
+            {
+              "name": {
+                "value": "snacks"
               }
             }
           ]

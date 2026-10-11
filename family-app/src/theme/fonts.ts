@@ -2,7 +2,6 @@
 // They load only when someone opens the font choices or picks one, so the app still starts fast.
 import * as Font from 'expo-font';
 
-/* eslint-disable @typescript-eslint/no-require-imports */
 const FILES: Record<string, number> = {
   YoungSerif_400Regular: require('@expo-google-fonts/young-serif/400Regular/YoungSerif_400Regular.ttf'),
   Lora_600SemiBold: require('@expo-google-fonts/lora/Lora_600SemiBold.ttf'),
@@ -50,7 +49,6 @@ const FILES: Record<string, number> = {
   WorkSans_700Bold: require('@expo-google-fonts/work-sans/WorkSans_700Bold.ttf'),
   WorkSans_800ExtraBold: require('@expo-google-fonts/work-sans/WorkSans_800ExtraBold.ttf'),
 };
-/* eslint-enable @typescript-eslint/no-require-imports */
 
 /** Loads the given extra font names (others, like Fredoka or System, are skipped). Safe to call often. */
 export async function loadFonts(names: readonly string[]) {
