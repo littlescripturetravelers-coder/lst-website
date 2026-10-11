@@ -17,8 +17,9 @@ import { addDays, todayISO } from '@/lib/dates';
 import { setDetail } from '@/lib/detail-store';
 import { kidsLabel } from '@/lib/brand';
 import { useSetup } from '@/lib/setup';
+import { lanternEdition } from '@/lib/faiths';
 export default function FamilyTab() {
-  const { theme: t } = useTheme(); const { family } = useFamily(); const s = useSetup(family?.id); const faithOn = s.on('faith') && family?.faith !== 'none'; const ideas = useDailyIdeas(); const { activity, night } = useLantern(); const rem = useReminders(family?.id);
+  const { theme: t } = useTheme(); const { family } = useFamily(); const s = useSetup(family?.id); const faithOn = s.on('faith') && !!lanternEdition(family?.faith); const ideas = useDailyIdeas(); const { activity, night } = useLantern(); const rem = useReminders(family?.id);
   const [girl, setGirl] = useState<string | null>(null);
   const kids = family ? children(family) : [];
   const open = (x: any, area: any) => { setDetail({ ...x, area, onPlan: () => rem.add({ title: x.title, notes: x.why, due_date: addDays(todayISO(), area === 'girls' ? 1 : 2), on_calendar: true, alert: '60', source: 'idea' }) }); router.push('/detail'); };

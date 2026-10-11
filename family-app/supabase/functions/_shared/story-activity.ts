@@ -1,13 +1,14 @@
 // Reads tonight's Morning Lantern story (the edition HTML's story card) and builds a play-based activity for each child at her CURRENT stage.
 import { claude, text, json } from './claude.ts';
+import { lanternEdition } from './ctx.ts';
 function storyText(html: string) {
   const i = html.indexOf('card-story'); if (i < 0) return '';
   const chunk = html.slice(i, i + 20000);
   return chunk.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/g, m => ({ '&mdash;': '—', '&ndash;': '–', '&ldquo;': '“', '&rdquo;': '”', '&rsquo;': '’', '&lsquo;': '‘', '&hellip;': '…', '&amp;': '&' } as any)[m] ?? ' ').replace(/\s+/g, ' ').slice(0, 6000);
 }
 export async function storyActivity(f: any, night: any) {
-  if (f.family.faith === 'none') return null;
-  if (f.family.faith === 'christian') night = { ...night, edition_url: night.edition_url.replace('morning-lantern-lds.html', 'morning-lantern-christian.html') };
+  const ed = lanternEdition(f.family.faith); if (!ed) return null; // the story activity follows the Morning Lantern (LDS and Christian editions)
+  if (ed === 'christian') night = { ...night, edition_url: night.edition_url.replace('morning-lantern-lds.html', 'morning-lantern-christian.html') };
   const { data: have } = await f.db.from('story_activities').select('*').eq('family_id', f.family.id).eq('for_date', f.today).maybeSingle();
   if (have) return have;
   let story = '';

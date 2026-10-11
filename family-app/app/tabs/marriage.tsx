@@ -16,6 +16,7 @@ import { useReminders } from '@/hooks/use-reminders';
 import { useWishes } from '@/hooks/use-wishes';
 import { KINDS } from '@/lib/wish-catalog';
 import { useSetup } from '@/lib/setup';
+import { lanternEdition } from '@/lib/faiths';
 import { marriageDaily } from '@/lib/marriage-daily';
 import { LOVE } from '@/lib/love-languages';
 import { parents, yearsMarried, nextOccurrence } from '@/lib/family';
@@ -47,7 +48,7 @@ export default function MarriageTab() {
   const ann = family.anniversary ? nextOccurrence(family.anniversary) : null;
   const sub = family.anniversary ? 'Married ' + yearsMarried(family) + ' years · ' + (ann!.days === 0 ? 'happy anniversary' : 'anniversary in ' + ann!.days + (ann!.days === 1 ? ' day' : ' days')) : 'Just the two of you';
 
-  const faithOn = setup.on('faith') && family.faith !== 'none'; const { quote, joke } = marriageDaily({ ...family, faith: faithOn ? family.faith : 'none' });
+  const faithOn = setup.on('faith') && !!lanternEdition(family.faith); const { quote, joke } = marriageDaily({ ...family, faith: faithOn ? family.faith : 'none' });
   const coupleList = rem.lists.find(l => l.color === 'marriage');
   const plan = (x: any) => { setDetail({ ...x, area: 'marriage', onPlan: () => rem.add({ title: x.title, notes: x.why, list_id: coupleList?.id, due_date: addDays(todayISO(), 2), on_calendar: true, alert: '60', source: 'idea' }) }); router.push('/detail'); };
   const cards = ps.flatMap((p: any) => { const top = p.love_languages?.ranked?.[0] as keyof typeof LOVE | undefined; if (!top) return []; const day = new Date().getDate(); return [{ p, l: top, idea: LOVE[top].ideas[day % LOVE[top].ideas.length] }]; });

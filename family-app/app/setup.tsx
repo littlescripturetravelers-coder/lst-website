@@ -7,7 +7,9 @@ import { Card } from '@/components/card';
 import { Button } from '@/components/button';
 import { Avatar } from '@/components/avatar';
 import { useTheme } from '@/theme/theme-provider';
-import { useFamily } from '@/hooks/use-family';
+import { useFamily, familyChanged } from '@/hooks/use-family';
+import { FaithPicker } from '@/components/faith-picker';
+import { FaithKey } from '@/lib/faiths';
 import { supabase } from '@/lib/supabase';
 import { children, parents } from '@/lib/family';
 import { useSetup, SECTIONS, ALL_SECTIONS, PRIORITY_GROUPS, MAX_PRIORITIES, SEASONS, COUPLE_WANTS, DATE_BUDGETS, MY_PRIORITIES, KID_INTERESTS, KID_FOCUS, Opt } from '@/lib/setup';
@@ -19,7 +21,7 @@ export default function Setup() {
   const { theme: t } = useTheme(); const p = useLocalSearchParams<{ first?: string }>(); const { family, me } = useFamily(); const s = useSetup(family?.id);
   const [sections, setSections] = useState<string[]>(ALL_SECTIONS); const [priorities, setPriorities] = useState<string[]>([]); const [season, setSeason] = useState<string[]>([]);
   const [wants, setWants] = useState<string[]>([]); const [budget, setBudget] = useState(''); const [mine, setMine] = useState<string[]>([]);
-  const [about, setAbout] = useState<Record<string, { interests: string[]; focus: string[] }>>({}); const [i, setI] = useState(0); const [busy, setBusy] = useState(false);
+  const [about, setAbout] = useState<Record<string, { interests: string[]; focus: string[] }>>({}); const [i, setI] = useState(0); const [busy, setBusy] = useState(false); const [faith, setFaith] = useState<FaithKey | null>(null);
   const kids = family ? children(family) : []; const hasSpouse = family ? parents(family).length > 1 : false;
   useEffect(() => { if (!s.loaded) return;
     if (s.setup) { setSections(s.setup.sections); setPriorities(s.setup.priorities); setSeason(s.setup.season); }
@@ -38,6 +40,8 @@ export default function Setup() {
     await s.saveFamily({ sections, priorities, season });
     await s.saveMine({ coupleWants: wants, dateBudget: budget || undefined, myPriorities: mine });
     for (const k of kids) await supabase.from('family_members').update({ about: about[k.id] ?? {} }).eq('family_id', family.id).eq('slug', k.id);
+    if (faith && faith !== family.faith) await supabase.from('families').update({ faith }).eq('id', family.id);
+    familyChanged();
     setBusy(false); if (p.first) router.replace('/tabs'); else router.back();
   };
   const head = { sections: ['What do you want help with?', 'Pick every part of family life you want in the app. You can change this any time.'],
@@ -53,7 +57,9 @@ export default function Setup() {
     <View style={{ marginHorizontal: 20, marginTop: 8, height: 4, borderRadius: 2, backgroundColor: t.paper[3] }}><View style={{ width: `${(i + 1) / steps.length * 100}%`, height: 4, borderRadius: 2, backgroundColor: t.brand[500] }} /></View>
     <ScrollView contentContainerStyle={{ padding: 20, gap: 14, paddingBottom: 40 }}>
       <Text v="title1">{head[0]}</Text><Text color={t.ink[2]}>{head[1]}</Text>
-      {step === 'sections' && chips(SECTIONS, sections, setSections)}
+      {step === 'sections' && <>{chips(SECTIONS, sections, setSections)}
+        {sections.includes('faith') && <Card><Text v="headline" style={{ marginBottom: 4 }}>Your faith</Text><Text v="subhead" color={t.ink[2]} style={{ marginBottom: 10 }}>Sets the daily scripture or sacred text, the quote, and links to your faith’s teachings.</Text>
+          <FaithPicker value={faith ?? family?.faith} onChange={setFaith} /></Card>}</>}
       {step === 'priorities' && <>{PRIORITY_GROUPS.map(([g, opts]) => <View key={g} style={{ gap: 8 }}><Text v="footnote" weight="heavy" color={t.ink[3]} style={{ textTransform: 'uppercase', letterSpacing: .8, marginTop: 6 }}>{g}</Text>{chips(opts, priorities, setPriorities, MAX_PRIORITIES)}</View>)}
         <Text v="footnote" color={t.ink[3]}>{priorities.length} of {MAX_PRIORITIES} picked{priorities.length >= MAX_PRIORITIES ? '. Tap one to remove it before adding another.' : ''}</Text></>}
       {step === 'season' && chips(SEASONS, season, setSeason)}

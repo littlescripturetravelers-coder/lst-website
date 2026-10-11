@@ -1,8 +1,9 @@
 // Single source of truth for anything age-based. Never store an age: compute it.
 import { todayISO, daysBetween } from './dates';
+import { FaithKey, faithLabel, hasFaith } from './faiths';
 export type Role = 'dad' | 'mom' | 'daughter' | 'son';
 export type Member = { id: string; name: string; full: string; role: Role; sex: 'm' | 'f'; birthday: string; color: string; love_languages?: { ranked: string[] } };
-export type Family = { id: string; surname: string; display_name?: string; faith?: 'lds' | 'christian' | 'none'; anniversary: string; members: Member[] };
+export type Family = { id: string; surname: string; display_name?: string; faith?: FaithKey; anniversary: string; members: Member[] };
 export const SEED_FAMILY: Omit<Family, 'id'> = {
   surname: 'Lewis', anniversary: '2019-09-28',
   members: [
@@ -44,7 +45,7 @@ export const stageFor = (age: number) => STAGES.find(s => age <= s.max)!;
 /** Compact description sent with every AI prompt so answers always match current ages. */
 export function familyContext(f: Family, iso = todayISO()) {
   return {
-    today: iso, surname: f.surname, yearsMarried: yearsMarried(f, iso), faith: f.faith === 'christian' ? 'Christian' : f.faith === 'none' ? undefined : 'The Church of Jesus Christ of Latter-day Saints',
+    today: iso, surname: f.surname, yearsMarried: yearsMarried(f, iso), faith: f.faith === 'lds' ? 'The Church of Jesus Christ of Latter-day Saints' : hasFaith(f.faith) ? faithLabel(f.faith) : undefined,
     members: f.members.map(m => ({ name: m.name, role: m.role, age: ageOn(m.birthday, iso), stage: m.role === 'daughter' || m.role === 'son' ? stageFor(ageOn(m.birthday, iso)).label : undefined })),
     rules: 'Warm, plain, practical. Say "Heavenly Father", never "God". No guilt, no emoji.',
   };

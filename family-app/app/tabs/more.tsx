@@ -6,6 +6,7 @@ import { useTheme } from '@/theme/theme-provider';
 import { useFamily } from '@/hooks/use-family';
 import { kidsLabel } from '@/lib/brand';
 import { useSetup } from '@/lib/setup';
+import { lanternEdition } from '@/lib/faiths';
 export default function More() {
   const { theme: t } = useTheme(); const { family } = useFamily(); const s = useSetup(family?.id);
   return <Screen title="More">
@@ -18,8 +19,8 @@ export default function More() {
     </Card></Gutter>
     <SectionHead title="Think & learn" />
     <Gutter><Card padding={0}>
-      {s.on('faith') && family?.faith !== 'none' && <ListRow icon="lamp" iconColor={t.area.faith[0]} title="Morning Lantern" subtitle="Today’s couple scripture study" chevron onPress={() => router.push('/lantern')} />}
-      {s.on('faith') && family?.faith !== 'none' && <ListRow icon="puzzle" iconColor={t.area.girls[0]} title="Tonight’s story activity" subtitle={'Learn the story with ' + kidsLabel(family)} chevron onPress={() => router.push('/story-activity')} />}
+      {s.on('faith') && !!lanternEdition(family?.faith) && <ListRow icon="lamp" iconColor={t.area.faith[0]} title="Morning Lantern" subtitle="Today’s couple scripture study" chevron onPress={() => router.push('/lantern')} />}
+      {s.on('faith') && !!lanternEdition(family?.faith) && <ListRow icon="puzzle" iconColor={t.area.girls[0]} title="Tonight’s story activity" subtitle={'Learn the story with ' + kidsLabel(family)} chevron onPress={() => router.push('/story-activity')} />}
       <ListRow icon="lightbulb" iconColor={t.gold[600]} title="Think it through" subtitle="Work a problem into a plan" chevron onPress={() => router.push('/think')} />
       <ListRow icon="graduation-cap" iconColor={t.brand[500]} title="Family Life Educator" subtitle="Ask, build programs, handouts" chevron divider={false} onPress={() => router.push('/educator')} />
     </Card></Gutter>

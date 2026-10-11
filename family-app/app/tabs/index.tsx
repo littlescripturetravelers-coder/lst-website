@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Linking, View } from 'react-native';
 import { router } from 'expo-router';
 import { Screen, Gutter, SectionHead } from '@/components/screen';
 import { Card } from '@/components/card';
@@ -17,21 +17,34 @@ import { kidsLabel } from '@/lib/brand';
 import { useLantern } from '@/hooks/use-lantern';
 import { useSetup } from '@/lib/setup';
 import { marriageDaily } from '@/lib/marriage-daily';
+import { faithDaily, hasFaith, lanternEdition, readUrl, TEACHINGS, FaithKey } from '@/lib/faiths';
 export default function Today() {
   const { theme: t } = useTheme(); const { family } = useFamily(); const rem = useReminders(family?.id); const ideas = useDailyIdeas();
   const kids = kidsLabel(family); const today = todayISO(); const dates = family ? upcomingDates(family).filter(d => d.days <= 60) : [];
   const open = (x: any) => { setDetail(x); router.push('/detail'); };
   // Top of Today: the Morning Lantern scripture (for families who chose a faith and kept it on) and a quote of the day.
-  const setup = useSetup(family?.id); const faithOn = !!family && family.faith !== 'none' && setup.on('faith'); const { night, study } = useLantern();
-  const quote = family ? marriageDaily({ ...family, faith: 'none' }).quote : null;
+  // LDS and Christian families follow the Morning Lantern's verse and "Remember this" quote; every other faith gets its own daily text and quote.
+  const setup = useSetup(family?.id); const faith = (family?.faith ?? 'none') as FaithKey; const faithOn = !!family && hasFaith(faith) && setup.on('faith');
+  const { night, study } = useLantern(); const ed = lanternEdition(faith); const daily = faithDaily(faith); const lt = ed ? night?.texts?.[ed] : null;
+  const ref: string | undefined = lt?.ref ?? (ed ? night?.scripture : undefined) ?? daily?.text?.ref;
+  const verse: string | undefined = lt?.verse ?? (ed && night?.scripture ? undefined : daily?.text?.text);
+  const readLink = ref ? (lt || (ed && night) ? readUrl(faith, ref) : daily?.text?.url) : undefined;
+  const plain = family ? marriageDaily({ ...family, faith: 'none' }).quote : null;
+  const quote = lt?.quote ? { text: lt.quote, by: lt.quote_by ?? '' } : daily?.quote ?? plain;
+  const teach = TEACHINGS[faith];
   return <Screen subtitle={new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} title="Today">
-    {family && <Gutter>{faithOn
-      ? <Card variant="inverse" eyebrow="Morning Lantern · today’s scripture" title={night?.scripture ?? 'Lighting the lantern…'} onPress={() => router.push('/lantern')}>
-          {!!study?.says && <Text v="subhead" color={t.ink.inverse}>{study.says}</Text>}
-          {quote && <View style={{ marginTop: 12, paddingTop: 12, borderTopWidth: .5, borderColor: t.ink.inverse + '55' }}><Text v="headline" color={t.ink.inverse}>“{quote.text}”</Text><Text v="footnote" color={t.ink.inverse} style={{ marginTop: 4, opacity: .8 }}>{quote.by}</Text></View>}
-          <Text v="footnote" weight="bold" color={t.gold[500]} style={{ marginTop: 10 }}>Open today’s study</Text>
+    {family && <Gutter>{faithOn && ref
+      ? <Card variant="inverse" eyebrow={ed ? 'Morning Lantern · today’s scripture' : 'Today’s reading'} title={ref}>
+          {!!verse && <Text v="callout" color={t.ink.inverse} style={{ fontStyle: 'italic' }}>“{verse}”</Text>}
+          {!verse && !!study?.says && <Text v="subhead" color={t.ink.inverse}>{study.says}</Text>}
+          {!!readLink && <Text v="footnote" weight="bold" color={t.gold[500]} style={{ marginTop: 8 }} onPress={() => Linking.openURL(readLink)} accessibilityRole="link">{faith === 'lds' ? 'Read in Gospel Library' : 'Read it'}</Text>}
+          {quote && <View style={{ marginTop: 12, paddingTop: 12, borderTopWidth: .5, borderColor: t.ink.inverse + '55' }}><Text v="headline" color={t.ink.inverse}>“{quote.text}”</Text>{!!quote.by && <Text v="footnote" color={t.ink.inverse} style={{ marginTop: 4, opacity: .8 }}>{quote.by}</Text>}</View>}
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 16, marginTop: 12 }}>
+            {!!ed && <Text v="footnote" weight="bold" color={t.ink.inverse} onPress={() => router.push('/lantern')} accessibilityRole="link">Open today’s study</Text>}
+            {!!teach && <Text v="footnote" weight="bold" color={t.ink.inverse} onPress={() => Linking.openURL(teach[1])} accessibilityRole="link">{teach[0]}</Text>}
+          </View>
         </Card>
-      : quote && <Card variant="accent" eyebrow="Quote of the day"><Text v="headline">“{quote.text}”</Text><Text v="footnote" color={t.ink[3]} style={{ marginTop: 4 }}>{quote.by}</Text></Card>}</Gutter>}
+      : plain && <Card variant="accent" eyebrow="Quote of the day"><Text v="headline">“{plain.text}”</Text><Text v="footnote" color={t.ink[3]} style={{ marginTop: 4 }}>{plain.by}</Text></Card>}</Gutter>}
     {dates.length > 0 && <Rail title="Coming up" subtitle="Birthdays and anniversaries" data={dates} render={d => <ContentTile area={d.kind === 'anniversary' ? 'marriage' : d.member?.role === 'daughter' || d.member?.role === 'son' ? 'girls' : 'home'} icon={d.kind === 'anniversary' ? 'heart' : 'cake'} title={d.title} meta={fmtLong(d.date) + ' · ' + inDays(d.days)} badge={d.days <= 14 ? 'Soon' : undefined} />} />}
     <Rail title={'Today with ' + kids} subtitle="New every day" action="See all" onAction={() => router.push('/tabs/family')} itemWidth={272}
       data={ideas.girls.slice(0, 3)} render={x => <ContentTile size="wide" area={x.kind === 'couple' ? 'marriage' : 'girls'} icon={x.icon} eyebrow={x.kind === 'couple' ? 'Just us' : 'With ' + kids} title={x.title} meta={x.meta} attachments={x.attachments?.length}

@@ -253,6 +253,351 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
     <nav class="tabbar" id="tabbar" aria-label="App tabs"></nav>
   </div></div>
 </div>
+<script>
+// Built from src/lib/faiths.ts in the real app (same lists and links).
+"use strict";
+var Faiths = (() => {
+  var __defProp = Object.defineProperty, __defProps = Object.defineProperties, __getOwnPropDesc = Object.getOwnPropertyDescriptor, __getOwnPropDescs = Object.getOwnPropertyDescriptors, __getOwnPropNames = Object.getOwnPropertyNames, __getOwnPropSymbols = Object.getOwnPropertySymbols;
+  var __hasOwnProp = Object.prototype.hasOwnProperty, __propIsEnum = Object.prototype.propertyIsEnumerable;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: !0, configurable: !0, writable: !0, value }) : obj[key] = value, __spreadValues = (a, b) => {
+    for (var prop in b || (b = {}))
+      __hasOwnProp.call(b, prop) && __defNormalProp(a, prop, b[prop]);
+    if (__getOwnPropSymbols)
+      for (var prop of __getOwnPropSymbols(b))
+        __propIsEnum.call(b, prop) && __defNormalProp(a, prop, b[prop]);
+    return a;
+  }, __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: !0 });
+  }, __copyProps = (to, from, except, desc) => {
+    if (from && typeof from == "object" || typeof from == "function")
+      for (let key of __getOwnPropNames(from))
+        !__hasOwnProp.call(to, key) && key !== except && __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+    return to;
+  };
+  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: !0 }), mod);
+
+  // src/lib/faiths.ts
+  var faiths_exports = {};
+  __export(faiths_exports, {
+    FAITH_OPTIONS: () => FAITH_OPTIONS,
+    QUOTES_BY_FAITH: () => QUOTES_BY_FAITH,
+    TEACHINGS: () => TEACHINGS,
+    TEXTS: () => TEXTS,
+    bibleUrl: () => bibleUrl,
+    faithDaily: () => faithDaily,
+    faithLabel: () => faithLabel,
+    gospelLibraryUrl: () => gospelLibraryUrl,
+    hasFaith: () => hasFaith,
+    lanternEdition: () => lanternEdition,
+    parseRef: () => parseRef,
+    readUrl: () => readUrl
+  });
+  var FAITH_OPTIONS = [
+    ["lds", "Latter-day Saint"],
+    ["christian", "Christian"],
+    ["catholic", "Catholic"],
+    ["orthodox", "Orthodox Christian"],
+    ["jewish", "Jewish"],
+    ["muslim", "Muslim"],
+    ["hindu", "Hindu"],
+    ["buddhist", "Buddhist"],
+    ["sikh", "Sikh"],
+    ["bahai", "Bah\xE1\u2019\xED"],
+    ["spiritual", "Spiritual, no one tradition"],
+    ["none", "None"]
+  ], faithLabel = (f) => {
+    var _a, _b;
+    return (_b = (_a = FAITH_OPTIONS.find((x) => x[0] === f)) == null ? void 0 : _a[1]) != null ? _b : "None";
+  }, lanternEdition = (f) => f === "lds" ? "lds" : f === "christian" || f === "catholic" || f === "orthodox" ? "christian" : null, hasFaith = (f) => !!f && f !== "none", GL = {}, add = (vol, list) => list.forEach(([names, code]) => names.forEach((n) => {
+    GL[n.toLowerCase()] = [vol, code];
+  }));
+  add("ot", [
+    [["Genesis"], "gen"],
+    [["Exodus"], "ex"],
+    [["Leviticus"], "lev"],
+    [["Numbers"], "num"],
+    [["Deuteronomy"], "deut"],
+    [["Joshua"], "josh"],
+    [["Judges"], "judg"],
+    [["Ruth"], "ruth"],
+    [["1 Samuel"], "1-sam"],
+    [["2 Samuel"], "2-sam"],
+    [["1 Kings"], "1-kgs"],
+    [["2 Kings"], "2-kgs"],
+    [["1 Chronicles"], "1-chr"],
+    [["2 Chronicles"], "2-chr"],
+    [["Ezra"], "ezra"],
+    [["Nehemiah"], "neh"],
+    [["Esther"], "esth"],
+    [["Job"], "job"],
+    [["Psalm", "Psalms"], "ps"],
+    [["Proverbs"], "prov"],
+    [["Ecclesiastes"], "eccl"],
+    [["Song of Solomon", "Song of Songs"], "song"],
+    [["Isaiah"], "isa"],
+    [["Jeremiah"], "jer"],
+    [["Lamentations"], "lam"],
+    [["Ezekiel"], "ezek"],
+    [["Daniel"], "dan"],
+    [["Hosea"], "hosea"],
+    [["Joel"], "joel"],
+    [["Amos"], "amos"],
+    [["Obadiah"], "obad"],
+    [["Jonah"], "jonah"],
+    [["Micah"], "micah"],
+    [["Nahum"], "nahum"],
+    [["Habakkuk"], "hab"],
+    [["Zephaniah"], "zeph"],
+    [["Haggai"], "hag"],
+    [["Zechariah"], "zech"],
+    [["Malachi"], "mal"]
+  ]);
+  add("nt", [
+    [["Matthew"], "matt"],
+    [["Mark"], "mark"],
+    [["Luke"], "luke"],
+    [["John"], "john"],
+    [["Acts"], "acts"],
+    [["Romans"], "rom"],
+    [["1 Corinthians"], "1-cor"],
+    [["2 Corinthians"], "2-cor"],
+    [["Galatians"], "gal"],
+    [["Ephesians"], "eph"],
+    [["Philippians"], "philip"],
+    [["Colossians"], "col"],
+    [["1 Thessalonians"], "1-thes"],
+    [["2 Thessalonians"], "2-thes"],
+    [["1 Timothy"], "1-tim"],
+    [["2 Timothy"], "2-tim"],
+    [["Titus"], "titus"],
+    [["Philemon"], "philem"],
+    [["Hebrews"], "heb"],
+    [["James"], "james"],
+    [["1 Peter"], "1-pet"],
+    [["2 Peter"], "2-pet"],
+    [["1 John"], "1-jn"],
+    [["2 John"], "2-jn"],
+    [["3 John"], "3-jn"],
+    [["Jude"], "jude"],
+    [["Revelation"], "rev"]
+  ]);
+  add("bofm", [
+    [["1 Nephi"], "1-ne"],
+    [["2 Nephi"], "2-ne"],
+    [["Jacob"], "jacob"],
+    [["Enos"], "enos"],
+    [["Jarom"], "jarom"],
+    [["Omni"], "omni"],
+    [["Words of Mormon"], "w-of-m"],
+    [["Mosiah"], "mosiah"],
+    [["Alma"], "alma"],
+    [["Helaman"], "hel"],
+    [["3 Nephi"], "3-ne"],
+    [["4 Nephi"], "4-ne"],
+    [["Mormon"], "morm"],
+    [["Ether"], "ether"],
+    [["Moroni"], "moro"]
+  ]);
+  add("dc-testament", [[["Doctrine and Covenants", "D&C"], "dc"]]);
+  add("pgp", [[["Moses"], "moses"], [["Abraham"], "abr"], [["Joseph Smith\u2014Matthew", "Joseph Smith-Matthew"], "js-m"], [["Joseph Smith\u2014History", "Joseph Smith-History"], "js-h"], [["Articles of Faith"], "a-of-f"]]);
+  function parseRef(ref) {
+    let m = ref.replace(/\s*\(.*?\)\s*$/, "").trim().match(/^(.+?)\s+(\d+)(?::(\d+)(?:\s*[-–]\s*(\d+))?)?$/);
+    return m ? { book: m[1], ch: m[2], v1: m[3], v2: m[4] } : null;
+  }
+  function gospelLibraryUrl(ref) {
+    let r = parseRef(ref), b = r && GL[r.book.toLowerCase()];
+    if (!r || !b) return "https://www.churchofjesuschrist.org/study/scriptures?lang=eng";
+    let id = r.v1 ? "&id=p" + r.v1 + (r.v2 ? "-p" + r.v2 : "") + "#p" + r.v1 : "";
+    return "https://www.churchofjesuschrist.org/study/scriptures/" + b[0] + "/" + b[1] + "/" + r.ch + "?lang=eng" + id;
+  }
+  var BIBLE_VERSION = { christian: "NIV", catholic: "NABRE", orthodox: "NKJV", lds: "KJV" }, bibleUrl = (ref, faith = "christian") => {
+    var _a;
+    return "https://www.biblegateway.com/passage/?search=" + encodeURIComponent(ref.replace(/\s*\(.*?\)\s*$/, "")) + "&version=" + ((_a = BIBLE_VERSION[faith]) != null ? _a : "KJV");
+  };
+  function readUrl(faith, ref, url) {
+    if (url) return url;
+    if (faith === "lds") return gospelLibraryUrl(ref);
+    if (lanternEdition(faith)) return bibleUrl(ref, faith);
+  }
+  var TEACHINGS = {
+    lds: ["Open Gospel Library", "https://www.churchofjesuschrist.org/study?lang=eng"],
+    christian: ["Read the Bible", "https://www.biblegateway.com/"],
+    catholic: ["Today\u2019s Mass readings", "https://bible.usccb.org/daily-bible-reading"],
+    orthodox: ["Today\u2019s readings", "https://www.goarch.org/chapel"],
+    jewish: ["Learn on Sefaria", "https://www.sefaria.org/texts"],
+    muslim: ["Read the Quran", "https://quran.com/"],
+    hindu: ["Read the Bhagavad Gita", "https://www.holy-bhagavad-gita.org/"],
+    buddhist: ["Read the Dhammapada", "https://www.accesstoinsight.org/tipitaka/kn/dhp/index.html"],
+    sikh: ["Read Gurbani", "https://www.sikhitothemax.org/"],
+    bahai: ["Bah\xE1\u2019\xED Reference Library", "https://www.bahai.org/library/"]
+  }, CHRISTIAN = [
+    { text: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.", ref: "John 3:16" },
+    { text: "I can do all things through Christ which strengtheneth me.", ref: "Philippians 4:13" },
+    { text: "The Lord is my shepherd; I shall not want.", ref: "Psalm 23:1" },
+    { text: "Trust in the Lord with all thine heart; and lean not unto thine own understanding.", ref: "Proverbs 3:5" },
+    { text: "And we know that all things work together for good to them that love God.", ref: "Romans 8:28" },
+    { text: "Be strong and of a good courage; be not afraid, neither be thou dismayed: for the Lord thy God is with thee whithersoever thou goest.", ref: "Joshua 1:9" },
+    { text: "They that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles.", ref: "Isaiah 40:31" },
+    { text: "Blessed are the peacemakers: for they shall be called the children of God.", ref: "Matthew 5:9" },
+    { text: "Come unto me, all ye that labour and are heavy laden, and I will give you rest.", ref: "Matthew 11:28" },
+    { text: "Be still, and know that I am God.", ref: "Psalm 46:10" },
+    { text: "And let us not be weary in well doing: for in due season we shall reap, if we faint not.", ref: "Galatians 6:9" },
+    { text: "And above all these things put on charity, which is the bond of perfectness.", ref: "Colossians 3:14" },
+    { text: "This is the day which the Lord hath made; we will rejoice and be glad in it.", ref: "Psalm 118:24" },
+    { text: "Charity suffereth long, and is kind.", ref: "1 Corinthians 13:4" }
+  ], TEXTS = {
+    lds: [
+      { text: "Adam fell that men might be; and men are, that they might have joy.", ref: "2 Nephi 2:25" },
+      { text: "I will go and do the things which the Lord hath commanded.", ref: "1 Nephi 3:7" },
+      { text: "When ye are in the service of your fellow beings ye are only in the service of your God.", ref: "Mosiah 2:17" },
+      { text: "Look unto me in every thought; doubt not, fear not.", ref: "Doctrine and Covenants 6:36" },
+      { text: "Be thou humble; and the Lord thy God shall lead thee by the hand, and give thee answer to thy prayers.", ref: "Doctrine and Covenants 112:10" },
+      { text: "Remember the worth of souls is great in the sight of God.", ref: "Doctrine and Covenants 18:10" },
+      { text: "By small and simple things are great things brought to pass.", ref: "Alma 37:6" },
+      { text: "Counsel with the Lord in all thy doings, and he will direct thee for good.", ref: "Alma 37:37" },
+      { text: "Charity never faileth.", ref: "Moroni 7:46" },
+      { text: "Let virtue garnish thy thoughts unceasingly; then shall thy confidence wax strong in the presence of God.", ref: "Doctrine and Covenants 121:45" },
+      { text: "Trust in the Lord with all thine heart; and lean not unto thine own understanding.", ref: "Proverbs 3:5" },
+      { text: "Come unto me, all ye that labour and are heavy laden, and I will give you rest.", ref: "Matthew 11:28" },
+      { text: "Be still, and know that I am God.", ref: "Psalm 46:10" },
+      { text: "I will praise thee; for I am fearfully and wonderfully made.", ref: "Psalm 139:14" }
+    ],
+    christian: CHRISTIAN,
+    catholic: CHRISTIAN,
+    orthodox: CHRISTIAN,
+    jewish: [
+      { text: "Hear, O Israel: the LORD our God, the LORD is one.", ref: "Deuteronomy 6:4", url: "https://www.sefaria.org/Deuteronomy.6.4" },
+      { text: "And thou shalt teach them diligently unto thy children.", ref: "Deuteronomy 6:7", url: "https://www.sefaria.org/Deuteronomy.6.7" },
+      { text: "Thou shalt love thy neighbour as thyself.", ref: "Leviticus 19:18", url: "https://www.sefaria.org/Leviticus.19.18" },
+      { text: "What doth the LORD require of thee, but to do justly, and to love mercy, and to walk humbly with thy God?", ref: "Micah 6:8", url: "https://www.sefaria.org/Micah.6.8" },
+      { text: "Behold, how good and how pleasant it is for brethren to dwell together in unity!", ref: "Psalms 133:1", url: "https://www.sefaria.org/Psalms.133.1" },
+      { text: "This is the day which the LORD hath made; we will rejoice and be glad in it.", ref: "Psalms 118:24", url: "https://www.sefaria.org/Psalms.118.24" },
+      { text: "Train up a child in the way he should go, and even when he is old, he will not depart from it.", ref: "Proverbs 22:6", url: "https://www.sefaria.org/Proverbs.22.6" },
+      { text: "If I am not for myself, who will be for me? But if I am only for myself, what am I? And if not now, when?", ref: "Pirkei Avot 1:14", url: "https://www.sefaria.org/Pirkei_Avot.1.14" },
+      { text: "The world stands on three things: on Torah, on service, and on acts of loving-kindness.", ref: "Pirkei Avot 1:2", url: "https://www.sefaria.org/Pirkei_Avot.1.2" },
+      { text: "Who is wise? One who learns from every person.", ref: "Pirkei Avot 4:1", url: "https://www.sefaria.org/Pirkei_Avot.4.1" },
+      { text: "It is not your duty to finish the work, but neither are you free to neglect it.", ref: "Pirkei Avot 2:16", url: "https://www.sefaria.org/Pirkei_Avot.2.16" },
+      { text: "Be strong and of good courage.", ref: "Joshua 1:9", url: "https://www.sefaria.org/Joshua.1.9" }
+    ],
+    muslim: [
+      { text: "Indeed, with hardship comes ease.", ref: "Quran 94:6", url: "https://quran.com/94/6" },
+      { text: "Allah does not burden a soul beyond that it can bear.", ref: "Quran 2:286", url: "https://quran.com/2/286" },
+      { text: "So remember Me; I will remember you.", ref: "Quran 2:152", url: "https://quran.com/2/152" },
+      { text: "Indeed, Allah is with the patient.", ref: "Quran 2:153", url: "https://quran.com/2/153" },
+      { text: "And of His signs is that He created for you from yourselves mates that you may find tranquillity in them; and He placed between you affection and mercy.", ref: "Quran 30:21", url: "https://quran.com/30/21" },
+      { text: "And speak to people good words.", ref: "Quran 2:83", url: "https://quran.com/2/83" },
+      { text: "Indeed, Allah will not change the condition of a people until they change what is in themselves.", ref: "Quran 13:11", url: "https://quran.com/13/11" },
+      { text: "And whoever relies upon Allah, then He is sufficient for him.", ref: "Quran 65:3", url: "https://quran.com/65/3" },
+      { text: "My Lord, increase me in knowledge.", ref: "Quran 20:114", url: "https://quran.com/20/114" },
+      { text: "Unquestionably, by the remembrance of Allah hearts are assured.", ref: "Quran 13:28", url: "https://quran.com/13/28" },
+      { text: "And He is with you wherever you are.", ref: "Quran 57:4", url: "https://quran.com/57/4" },
+      { text: "And He found you lost and guided you.", ref: "Quran 93:7", url: "https://quran.com/93/7" }
+    ],
+    hindu: [
+      { text: "You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions.", ref: "Bhagavad Gita 2.47", url: "https://www.holy-bhagavad-gita.org/chapter/2/verse/47" },
+      { text: "Perform your duty with evenness of mind, giving up attachment to success and failure. Such evenness of mind is called yoga.", ref: "Bhagavad Gita 2.48", url: "https://www.holy-bhagavad-gita.org/chapter/2/verse/48" },
+      { text: "The soul is never born, nor does it ever die.", ref: "Bhagavad Gita 2.20", url: "https://www.holy-bhagavad-gita.org/chapter/2/verse/20" },
+      { text: "Lift yourself up by your own mind, and do not let yourself be dragged down.", ref: "Bhagavad Gita 6.5", url: "https://www.holy-bhagavad-gita.org/chapter/6/verse/5" },
+      { text: "For one who has conquered the mind, the mind is the best of friends.", ref: "Bhagavad Gita 6.6", url: "https://www.holy-bhagavad-gita.org/chapter/6/verse/6" },
+      { text: "Whatever you do, whatever you eat, whatever you offer, whatever you give, do it as an offering to Me.", ref: "Bhagavad Gita 9.27", url: "https://www.holy-bhagavad-gita.org/chapter/9/verse/27" },
+      { text: "Those who see Me everywhere and see all things in Me, I am never lost to them, nor are they ever lost to Me.", ref: "Bhagavad Gita 6.30", url: "https://www.holy-bhagavad-gita.org/chapter/6/verse/30" },
+      { text: "Lead me from the unreal to the real, from darkness to light, from death to immortality.", ref: "Brihadaranyaka Upanishad 1.3.28" }
+    ],
+    buddhist: [
+      { text: "Hatred is never appeased by hatred in this world. By non-hatred alone is hatred appeased. This is a law eternal.", ref: "Dhammapada 5", url: "https://www.accesstoinsight.org/tipitaka/kn/dhp/dhp.01.budd.html" },
+      { text: "Mind precedes all mental states. Mind is their chief; they are all mind-wrought.", ref: "Dhammapada 1", url: "https://www.accesstoinsight.org/tipitaka/kn/dhp/dhp.01.budd.html" },
+      { text: "As a solid rock is not shaken by the storm, even so the wise are not affected by praise or blame.", ref: "Dhammapada 81", url: "https://www.accesstoinsight.org/tipitaka/kn/dhp/dhp.06.budd.html" },
+      { text: "Better than a thousand useless words is one useful word, hearing which one attains peace.", ref: "Dhammapada 100", url: "https://www.accesstoinsight.org/tipitaka/kn/dhp/dhp.08.budd.html" },
+      { text: "Though one may conquer a thousand times a thousand men in battle, yet he indeed is the noblest victor who conquers himself.", ref: "Dhammapada 103", url: "https://www.accesstoinsight.org/tipitaka/kn/dhp/dhp.08.budd.html" },
+      { text: "Health is the highest gain and contentment the greatest wealth.", ref: "Dhammapada 204", url: "https://www.accesstoinsight.org/tipitaka/kn/dhp/dhp.15.budd.html" },
+      { text: "Overcome the angry by non-anger; overcome the wicked by goodness; overcome the miser by generosity; overcome the liar by truth.", ref: "Dhammapada 223", url: "https://www.accesstoinsight.org/tipitaka/kn/dhp/dhp.17.budd.html" }
+    ],
+    sikh: [
+      { text: "There is but One God. Truth is His Name. The Creator, without fear, without hate.", ref: "Mool Mantar, Japji Sahib (Ang 1)", url: "https://www.sikhitothemax.org/ang?ang=1&source=G" },
+      { text: "Truth is higher than everything; but higher still is truthful living.", ref: "Sri Raag (Ang 62)", url: "https://www.sikhitothemax.org/ang?ang=62&source=G" },
+      { text: "Recognize the Lord\u2019s Light within all, and do not consider social class or status.", ref: "Raag Aasaa (Ang 349)", url: "https://www.sikhitothemax.org/ang?ang=349&source=G" },
+      { text: "May the Name bring ever-rising spirits; by Your will, may all be blessed.", ref: "Ardas" },
+      { text: "I tell the truth, listen all: those who love, they alone realize the Lord.", ref: "Guru Gobind Singh" }
+    ],
+    bahai: [
+      { text: "The earth is but one country, and mankind its citizens.", ref: "Bah\xE1\u2019u\u2019ll\xE1h, Gleanings CXVII", url: "https://www.bahai.org/library/authoritative-texts/bahaullah/gleanings-writings-bahaullah/" },
+      { text: "Let your vision be world-embracing, rather than confined to your own self.", ref: "Bah\xE1\u2019u\u2019ll\xE1h, Gleanings XLIII", url: "https://www.bahai.org/library/authoritative-texts/bahaullah/gleanings-writings-bahaullah/" },
+      { text: "Be generous in prosperity, and thankful in adversity.", ref: "Bah\xE1\u2019u\u2019ll\xE1h, Gleanings CXXX", url: "https://www.bahai.org/library/authoritative-texts/bahaullah/gleanings-writings-bahaullah/" },
+      { text: "Regard man as a mine rich in gems of inestimable value. Education can, alone, cause it to reveal its treasures.", ref: "Bah\xE1\u2019u\u2019ll\xE1h, Gleanings CXXII", url: "https://www.bahai.org/library/authoritative-texts/bahaullah/gleanings-writings-bahaullah/" },
+      { text: "So powerful is the light of unity that it can illuminate the whole earth.", ref: "Bah\xE1\u2019u\u2019ll\xE1h, Epistle to the Son of the Wolf", url: "https://www.bahai.org/library/authoritative-texts/bahaullah/epistle-son-wolf/" }
+    ],
+    spiritual: [
+      { text: "The journey of a thousand miles begins with a single step.", ref: "Tao Te Ching 64" },
+      { text: "Knowing others is intelligence; knowing yourself is true wisdom.", ref: "Tao Te Ching 33" },
+      { text: "Waste no more time arguing about what a good man should be. Be one.", ref: "Marcus Aurelius, Meditations 10.16" },
+      { text: "Wherever there is a human being, there is an opportunity for a kindness.", ref: "Seneca" },
+      { text: "Be kind whenever possible. It is always possible.", ref: "The Dalai Lama" }
+    ]
+  }, QUOTES_BY_FAITH = {
+    lds: [
+      { text: "Joy has little to do with the circumstances of our lives and everything to do with the focus of our lives.", by: "Russell M. Nelson" },
+      { text: "Never let a problem to be solved become more important than a person to be loved.", by: "Thomas S. Monson" },
+      { text: "Try a little harder to be a little better.", by: "Gordon B. Hinckley" },
+      { text: "Don\u2019t you quit. You keep walking. You keep trying. There is help and happiness ahead.", by: "Jeffrey R. Holland" },
+      { text: "Choose your love; love your choice.", by: "Thomas S. Monson" }
+    ],
+    christian: [
+      { text: "Darkness cannot drive out darkness; only light can do that. Hate cannot drive out hate; only love can do that.", by: "Martin Luther King Jr." },
+      { text: "There is no pit so deep that God\u2019s love is not deeper still.", by: "Betsie ten Boom, in The Hiding Place" },
+      { text: "Thou hast made us for Thyself, and our heart is restless, until it repose in Thee.", by: "Augustine, Confessions" },
+      { text: "We can do little things for God.", by: "Brother Lawrence" }
+    ],
+    catholic: [
+      { text: "Have patience with all things, but first of all with yourself.", by: "Francis de Sales" },
+      { text: "Thou hast made us for Thyself, and our heart is restless, until it repose in Thee.", by: "Augustine, Confessions" },
+      { text: "Do small things with great love.", by: "Mother Teresa" }
+    ],
+    orthodox: [
+      { text: "Acquire the spirit of peace, and thousands around you will be saved.", by: "Seraphim of Sarov" },
+      { text: "Thou hast made us for Thyself, and our heart is restless, until it repose in Thee.", by: "Augustine, Confessions" }
+    ],
+    jewish: [
+      { text: "When I was young, I admired clever people. Now that I am old, I admire kind people.", by: "Abraham Joshua Heschel" },
+      { text: "The whole world is a very narrow bridge, and the main thing is not to be afraid at all.", by: "Rebbe Nachman of Breslov" },
+      { text: "What is hateful to you, do not do to your fellow. That is the whole Torah; the rest is commentary.", by: "Hillel, Shabbat 31a" }
+    ],
+    muslim: [
+      { text: "None of you truly believes until he loves for his brother what he loves for himself.", by: "Prophet Muhammad, Sahih al-Bukhari" },
+      { text: "The best of you are those who are best to their families.", by: "Prophet Muhammad, Jami at-Tirmidhi" },
+      { text: "A good word is charity.", by: "Prophet Muhammad, Sahih al-Bukhari" }
+    ],
+    hindu: [
+      { text: "Arise, awake, and stop not till the goal is reached.", by: "Swami Vivekananda" },
+      { text: "Where there is love there is life.", by: "Mahatma Gandhi" }
+    ],
+    buddhist: [
+      { text: "Smile, breathe and go slowly.", by: "Thich Nhat Hanh" },
+      { text: "Be kind whenever possible. It is always possible.", by: "The Dalai Lama" }
+    ],
+    sikh: [
+      { text: "Truth is higher than everything; but higher still is truthful living.", by: "Guru Nanak" }
+    ],
+    bahai: [
+      { text: "Be ye as the fingers of one hand, the members of one body.", by: "\u2018Abdu\u2019l-Bah\xE1" },
+      { text: "Love gives life to the lifeless.", by: "\u2018Abdu\u2019l-Bah\xE1, Paris Talks" }
+    ],
+    spiritual: [
+      { text: "The happiness of your life depends upon the quality of your thoughts.", by: "Marcus Aurelius" },
+      { text: "Nature does not hurry, yet everything is accomplished.", by: "Lao Tzu" }
+    ]
+  }, dayNumber = (d = /* @__PURE__ */ new Date()) => Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5);
+  function faithDaily(faith, d = /* @__PURE__ */ new Date()) {
+    var _a, _b, _c;
+    if (!hasFaith(faith)) return null;
+    let f = faith, texts = (_a = TEXTS[f]) != null ? _a : [], quotes = (_b = QUOTES_BY_FAITH[f]) != null ? _b : [], n = dayNumber(d), t = texts.length ? texts[n % texts.length] : null;
+    return { text: t ? __spreadProps(__spreadValues({}, t), { url: readUrl(f, t.ref, t.url) }) : null, quote: quotes.length ? quotes[n * 3 % quotes.length] : null, teachings: (_c = TEACHINGS[f]) != null ? _c : null };
+  }
+  return __toCommonJS(faiths_exports);
+})();
+
+</script>
 <script id="proto">
 (function () {
   // ---------- dates ----------
@@ -342,7 +687,8 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       { title: 'Leaf-hunt nature walk', meta: 'Free · 30 min · Out', icon: 'leaf', min: 3, why: 'Fall colors are out and it gets wiggles out before dinner.', steps: ['Give each girl a bag', 'Find red, yellow and brown leaves', 'Sort them by color at home'] },
       { title: 'Kitchen helper muffins', meta: '$ · 40 min · Home', icon: 'cookie', min: 3, why: 'Measuring and stirring build counting skills and patience.', steps: ['Mayble measures, Esmay stirs', 'Count the scoops out loud', 'Share one with a neighbor'] },
       { title: 'Living-room obstacle course', meta: 'Free · 20 min · Home', icon: 'tent', min: 3, why: 'Big-body play helps with sleep and listening.', steps: ['Pillows to jump, a blanket tunnel, a tape line to balance on', 'Time each run', 'Let the girls design the last round'] }] };
-  var NIGHT = { title: 'The Lord Is My Shepherd', scripture: 'Psalm 23' };
+  // Tonight's Morning Lantern: its verse and "Remember this" quote (the real app reads these from each night's edition).
+  var NIGHT = { title: 'The Lord Is My Shepherd', scripture: 'Psalm 23:1', verse: 'The Lord is my shepherd; I shall not want.', quote: 'Heavenly Father takes care of us like a good shepherd takes care of his sheep.', quoteBy: 'Remember this, from tonight’s story' };
   var STUDY = {
     read: 'Read Psalm 23 out loud, one verse each. Stop after verse 4 and let it sit for a moment.',
     says: 'Heavenly Father leads and feeds His children the way a good shepherd cares for sheep. Even in the darkest valley, we are not alone.',
@@ -393,6 +739,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
   try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { S = null; }
   if (!S || !S.theme) S = sampleState();
   if (S.homeDay !== TODAY) { S.home = {}; S.homeDay = TODAY; }
+  if (S.faith) FAMILY.faith = S.faith;
   (function (d) { ['cals', 'feeds', 'privOk', 'goals', 'evs', 'wishVotes', 'wishCustom', 'myAns', 'kidAbout'].forEach(function (k) { if (!S[k]) S[k] = d[k]; }); })(sampleState());
   var save = function () { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 
@@ -539,15 +886,17 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
   var lbl2 = function (opts, k) { var o = opts.filter(function (x) { return x[0] === k; })[0]; return o ? o[1] : k; };
   /** A section shows unless the family turned it off. Before anyone answers, everything shows. */
   var secOn = function (k) { return !S.setup || S.setup.sections.indexOf(k) >= 0; };
-  var faithOn = function () { return secOn('faith') && FAMILY.faith !== 'none'; };
+  // Morning Lantern pieces (couple study, story activity, scripture quotes) are for LDS and Christian families; every faith gets its own daily reading.
+  var faithOn = function () { return secOn('faith') && !!Faiths.lanternEdition(FAMILY.faith); };
+  var anyFaith = function () { return secOn('faith') && Faiths.hasFaith(FAMILY.faith); };
   var su = null;
   function startSetup(first) { var st = S.setup || { sections: SU_SECTIONS.map(function (x) { return x[0]; }), priorities: [], season: [] };
-    su = { first: first, i: 0, sections: st.sections.slice(), priorities: st.priorities.slice(), season: st.season.slice(), wants: (S.myAns.coupleWants || []).slice(), budget: S.myAns.dateBudget || '', mine: (S.myAns.myPriorities || []).slice(), about: JSON.parse(JSON.stringify(S.kidAbout)) }; go('setup'); }
+    su = { first: first, i: 0, faith: FAMILY.faith, sections: st.sections.slice(), priorities: st.priorities.slice(), season: st.season.slice(), wants: (S.myAns.coupleWants || []).slice(), budget: S.myAns.dateBudget || '', mine: (S.myAns.myPriorities || []).slice(), about: JSON.parse(JSON.stringify(S.kidAbout)) }; go('setup'); }
   SCREENS.setup = function () {
     var steps = ['sections', 'priorities', 'season', 'me', 'kids'], step = steps[su.i];
     var chips = function (opts, list, field, max) { return '<div style="display:flex;flex-wrap:wrap;gap:8px">' + opts.map(function (o) { var on = list.indexOf(o[0]) >= 0; return '<button class="pickchip" style="height:40px;padding:0 14px;font-size:15px;border-radius:20px;' + (on ? 'background:var(--brand500);border-color:var(--brand500);color:var(--inverse)' : 'background:var(--paper0)') + '" role="checkbox" aria-checked="' + on + '" data-a="suchip" data-id="' + field + '|' + o[0] + '|' + (max || '') + '">' + o[1] + '</button>'; }).join('') + '</div>'; };
     var head = { sections: ['What do you want help with?', 'Pick every part of family life you want in the app. You can change this any time.'], priorities: ['What matters most right now?', 'Pick up to ' + SU_MAX + '. The app puts these first and the ideas and advice lean toward them.'], season: ['What season are you in?', 'Pick any that fit. Ideas and advice will fit where you are.'], me: ['Just you', 'Only you see these answers. They shape your own ideas and advice.'], kids: ['Your kids', 'What each child loves and what you’re working on together. Ideas for them will fit.'] }[step];
-    var body = step === 'sections' ? chips(SU_SECTIONS, su.sections, 'sections') : step === 'priorities' ? SU_PRIORITY_GROUPS.map(function (g) { return '<p class="fn hv m3" style="text-transform:uppercase;letter-spacing:.8px;margin-top:6px">' + g[0] + '</p>' + chips(g[1], su.priorities, 'priorities', SU_MAX); }).join('') + '<p class="fn m3">' + su.priorities.length + ' of ' + SU_MAX + ' picked' + (su.priorities.length >= SU_MAX ? '. Tap one to remove it before adding another.' : '') + '</p>' : step === 'season' ? chips(SU_SEASONS, su.season, 'season')
+    var body = step === 'sections' ? chips(SU_SECTIONS, su.sections, 'sections') + (su.sections.indexOf('faith') >= 0 ? card({ body: '<p class="hl">Your faith</p><p class="sh m2" style="margin:4px 0 10px">Sets the daily scripture or sacred text, the quote, and links to your faith’s teachings.</p><div style="display:flex;flex-wrap:wrap;gap:8px">' + Faiths.FAITH_OPTIONS.map(function (o) { var on = su.faith === o[0]; return '<button class="pickchip" style="height:40px;padding:0 14px;font-size:15px;border-radius:20px;' + (on ? 'background:var(--brand500);border-color:var(--brand500);color:var(--inverse)' : 'background:var(--paper0)') + '" role="radio" aria-checked="' + on + '" data-a="sufaith" data-id="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>' }) : '') : step === 'priorities' ? SU_PRIORITY_GROUPS.map(function (g) { return '<p class="fn hv m3" style="text-transform:uppercase;letter-spacing:.8px;margin-top:6px">' + g[0] + '</p>' + chips(g[1], su.priorities, 'priorities', SU_MAX); }).join('') + '<p class="fn m3">' + su.priorities.length + ' of ' + SU_MAX + ' picked' + (su.priorities.length >= SU_MAX ? '. Tap one to remove it before adding another.' : '') + '</p>' : step === 'season' ? chips(SU_SEASONS, su.season, 'season')
       : step === 'me' ? (su.sections.indexOf('marriage') >= 0 ? card({ body: '<p class="hl" style="margin-bottom:10px">What do you want more of with your spouse?</p>' + chips(SU_COUPLE_WANTS, su.wants, 'wants') + '<p class="hl" style="margin:16px 0 10px">Date budget</p>' + chips(SU_DATE_BUDGETS, su.budget ? [su.budget] : [], 'budget', 1) }) : '') + card({ body: '<p class="hl" style="margin-bottom:10px">Your own priorities (up to ' + SU_MAX + ')</p>' + chips(SU_MY_PRIORITIES, su.mine, 'mine', SU_MAX) })
       : kids.map(function (k) { var a = su.about[k.id] || { interests: [], focus: [] }; return card({ body: '<div style="display:flex;gap:10px;align-items:center;margin-bottom:12px">' + avatar(k, 32) + '<p class="t3">' + k.name + '</p></div><p class="sh b m2" style="margin-bottom:8px">Loves</p>' + chips(SU_KID_INTERESTS, a.interests, 'kid:' + k.id + ':interests') + '<p class="sh b m2" style="margin:14px 0 8px">Working on</p>' + chips(SU_KID_FOCUS, a.focus, 'kid:' + k.id + ':focus') }); }).join('');
     return '<div style="display:flex;align-items:center;padding:8px 20px 0"><p class="fn b br4" style="flex:1">' + (su.first ? 'Set up' : 'Check in') + ' · Step ' + (su.i + 1) + ' of ' + steps.length + '</p>' + (su.first ? '' : '<button class="link" data-a="back">Cancel</button>') + '</div>' +
@@ -560,9 +909,16 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
     var ideas = IDEAS.girls.slice(0, 3).map(function (x, i) { return ['girls', i, x]; });
     var due = openRems(function (r) { return r.due && r.due <= TODAY; });
     var qs = QUOTES.filter(function (x) { return !x.scripture; }), q = qs[Math.floor(Date.UTC(NOW.getFullYear(), NOW.getMonth(), NOW.getDate()) / 864e5) % qs.length];
+    var fa = FAMILY.faith, ed = Faiths.lanternEdition(fa), daily = Faiths.faithDaily(fa), teach = Faiths.TEACHINGS[fa];
+    var ref = ed ? NIGHT.scripture : daily && daily.text && daily.text.ref, verse = ed ? NIGHT.verse : daily && daily.text && daily.text.text;
+    var link = ref ? (ed ? Faiths.readUrl(fa, ref) : daily.text.url) : null, fq = ed ? { text: NIGHT.quote, by: NIGHT.quoteBy } : (daily && daily.quote) || q;
+    var lk = function (label, href, a) { return href ? '<a href="' + esc(href) + '" target="_blank" rel="noopener" class="fn b" style="color:' + (a ? 'var(--gold500)' : 'inherit') + ';text-decoration:none">' + label + '</a>' : ''; };
     return header('Today', { sub: fmtDay(TODAY) }) +
-      '<div class="gut">' + (faithOn()
-        ? card({ v: 'inverse', a: 'go', id: 'lantern', eyebrow: 'Morning Lantern · today’s scripture', title: NIGHT.scripture, body: '<p class="sh">' + esc(STUDY.says) + '</p><div style="margin-top:12px;padding-top:12px;border-top:.5px solid rgba(255,255,255,.35)"><p class="hl">“' + esc(q.text) + '”</p><p class="fn" style="margin-top:4px;opacity:.8">' + esc(q.by) + '</p></div><p class="fn b" style="margin-top:10px;color:var(--gold500)">Open today’s study</p>' })
+      '<div class="gut">' + (anyFaith() && ref
+        ? card({ v: 'inverse', eyebrow: ed ? 'Morning Lantern · today’s scripture' : 'Today’s reading', title: ref, body: (verse ? '<p class="bd" style="font-style:italic">“' + esc(verse) + '”</p>' : '') +
+            (link ? '<p style="margin-top:8px">' + lk(fa === 'lds' ? 'Read in Gospel Library' : 'Read it', link, true) + '</p>' : '') +
+            '<div style="margin-top:12px;padding-top:12px;border-top:.5px solid rgba(255,255,255,.35)"><p class="hl">“' + esc(fq.text) + '”</p><p class="fn" style="margin-top:4px;opacity:.8">' + esc(fq.by) + '</p></div>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:12px">' + (ed ? '<button class="link fn b" style="color:inherit" data-a="go" data-id="lantern">Open today’s study</button>' : '') + (teach ? lk(teach[0], teach[1]) : '') + '</div>' })
         : card({ v: 'accent', eyebrow: 'Quote of the day', body: '<p class="hl">“' + esc(q.text) + '”</p><p class="fn m3" style="margin-top:4px">' + esc(q.by) + '</p>' })) + '</div>' +
       (dates.length ? rail({ title: 'Coming up', sub: 'Birthdays and anniversaries' }, dates.map(function (d) { return tile({ area: d.kind === 'anniversary' ? 'marriage' : d.m.role === 'daughter' ? 'girls' : 'home', icon: d.kind === 'anniversary' ? 'heart' : 'cake', title: d.title, meta: fmtLong(d.date) + ' · ' + inDays(d.days), badge: d.days <= 14 ? 'Soon' : '' }); })) : '') +
       rail({ title: 'Today with ' + KIDS, sub: 'New every day', action: 'See all', act: 'tab-family' }, ideas.map(function (x) { return tile({ size: 'wide', area: x[0] === 'couple' ? 'marriage' : 'girls', icon: x[2].icon, eyebrow: x[0] === 'couple' ? 'Just us' : 'With ' + KIDS, title: x[2].title, meta: x[2].meta, att: (x[2].attachments || []).length, a: 'idea', id: x[0] + ':' + x[1] }); })) +
@@ -1238,13 +1594,14 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       case 'planDate': evDraft = blankEvent(TODAY); evDraft.area = 'marriage'; evDraft.who = parents.map(function (p) { return p.id; }); go('eventedit'); return;
       case 'gogoals': go('goals'); return;
       case 'setup': startSetup(!S.setup); return;
+      case 'sufaith': su.faith = id; render(); return;
       case 'suchip': { var sp = id.split('|'), key = sp[1], max = +sp[2] || 0, f = sp[0], list;
         if (f.indexOf('kid:') === 0) { var kp = f.split(':'); su.about[kp[1]] = su.about[kp[1]] || { interests: [], focus: [] }; list = su.about[kp[1]][kp[2]]; }
         else if (f === 'budget') { su.budget = su.budget === key ? '' : key; render(); return; }
         else list = su[f];
         var at = list.indexOf(key); if (at >= 0) list.splice(at, 1); else if (!max || list.length < max) list.push(key);
         render(); return; }
-      case 'sustep': { var n = +id; if (n > 0 && su.i === 4) { S.setup = { sections: su.sections, priorities: su.priorities, season: su.season, updated_at: new Date().toISOString() }; S.myAns = { coupleWants: su.wants, dateBudget: su.budget, myPriorities: su.mine }; S.kidAbout = su.about; save(); var wasFirst = su.first; su = null; if (wasFirst) tab('today'); else back(); toast('Saved. The app now fits these answers.'); return; }
+      case 'sustep': { var n = +id; if (n > 0 && su.i === 4) { S.setup = { sections: su.sections, priorities: su.priorities, season: su.season, updated_at: new Date().toISOString() }; S.faith = su.faith; FAMILY.faith = su.faith; S.myAns = { coupleWants: su.wants, dateBudget: su.budget, myPriorities: su.mine }; S.kidAbout = su.about; save(); var wasFirst = su.first; su = null; if (wasFirst) tab('today'); else back(); toast('Saved. The app now fits these answers.'); return; }
         su.i = Math.max(0, su.i + n); render(true); return; }
       case 'ourlist': wishTab = 'answer'; go('ourlist', id); return;
       case 'wishtab': wishTab = id; render(); return;
@@ -1385,7 +1742,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       return c.openComposer({ element: target }).then(function (r) { notice.textContent = r && r.opened ? 'Type what you want changed, then post it. Choose to send it to Claude if you see that option.' : 'Tap Leave a note again, then tap the spot once more.'; });
     }).catch(function () { notice.textContent = 'That note didn’t open. Send Claude a screenshot in your chat instead.'; });
   }, true);
-  document.getElementById('resetBtn').addEventListener('click', function () { S = sampleState(); save(); nav = [{ r: 'today' }]; sheet = null; quiz = null; calSel = TODAY; calMode = 'month'; calQ = null; evDraft = null; calView = 'everyone'; feedErr = ''; goalMine = false; startSetup(true); notice.textContent = 'Back to the sample family.'; });
+  document.getElementById('resetBtn').addEventListener('click', function () { S = sampleState(); FAMILY.faith = 'lds'; save(); nav = [{ r: 'today' }]; sheet = null; quiz = null; calSel = TODAY; calMode = 'month'; calQ = null; evDraft = null; calView = 'everyone'; feedErr = ''; goalMine = false; startSetup(true); notice.textContent = 'Back to the sample family.'; });
   if (sysDark.addEventListener) sysDark.addEventListener('change', function () { render(); });
 
   if (!S.setup) startSetup(true); else render(true);

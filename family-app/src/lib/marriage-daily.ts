@@ -1,6 +1,7 @@
 // A love quote and a clean joke for the two of you, new every day. Both spouses see the same ones that day.
 // Kept on the phone (no AI, no cost). Scripture quotes only show for families who chose a faith; they display in italics.
 import { Family } from './family';
+import { lanternEdition } from './faiths';
 
 type Quote = { text: string; by: string; scripture?: boolean; lds?: boolean };
 export const QUOTES: Quote[] = [
@@ -87,7 +88,7 @@ const dayNumber = (d = new Date()) => Math.floor((Date.UTC(d.getFullYear(), d.ge
 
 /** Today's quote and joke. Same for both spouses; quotes and jokes cycle on their own so pairs don't repeat together. */
 export function marriageDaily(family?: Family | null, d = new Date()) {
-  const faith = family?.faith && family.faith !== 'none';
+  const faith = !!lanternEdition(family?.faith); // these scripture quotes are from the Bible and the Doctrine and Covenants
   const quotes = QUOTES.filter(q => !q.scripture || (faith && (!q.lds || family?.faith === 'lds')));
   const n = dayNumber(d);
   return { quote: quotes[n % quotes.length], joke: JOKES[(n * 7) % JOKES.length] };

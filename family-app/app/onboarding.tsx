@@ -7,6 +7,8 @@ import { Button } from '@/components/button';
 import { Card } from '@/components/card';
 import { useTheme } from '@/theme/theme-provider';
 import { supabase } from '@/lib/supabase';
+import { FaithKey } from '@/lib/faiths';
+import { FaithPicker } from '@/components/faith-picker';
 type M = { slug: string; name: string; full_name: string; role: 'dad' | 'mom' | 'daughter' | 'son'; sex: 'm' | 'f'; birthday: string; color: string };
 const COLORS = ['#4F63A0', '#B5536B', '#D9823A', '#2E8C94', '#7E6697', '#3D7A58', '#D9A227'];
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'member';
@@ -14,7 +16,7 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(
 export default function Onboarding() {
   const { theme: t } = useTheme(); const [step, setStep] = useState(0); const [err, setErr] = useState('');
   const [surname, setSurname] = useState(''); const [me, setMe] = useState<Partial<M>>({ role: 'dad', sex: 'm' }); const [spouse, setSpouse] = useState<Partial<M>>({ role: 'mom', sex: 'f' });
-  const [kids, setKids] = useState<Partial<M>[]>([{ role: 'daughter', sex: 'f' }]); const [anniv, setAnniv] = useState(''); const [faith, setFaith] = useState<'lds' | 'christian' | 'none'>('lds'); const [code, setCode] = useState('');
+  const [kids, setKids] = useState<Partial<M>[]>([{ role: 'daughter', sex: 'f' }]); const [anniv, setAnniv] = useState(''); const [faith, setFaith] = useState<FaithKey>('lds'); const [code, setCode] = useState('');
   const Field = ({ label, value, onChange, ph }: any) => <View style={{ gap: 4 }}><Text v="footnote" weight="bold" color={t.ink[2]}>{label}</Text><TextInput value={value} onChangeText={onChange} placeholder={ph} placeholderTextColor={t.ink[4]} style={{ height: 48, borderRadius: 8, borderWidth: 1, borderColor: t.line[2], paddingHorizontal: 14, fontSize: 17, fontFamily: t.font.body, color: t.ink[1], backgroundColor: t.paper[0] }} /></View>;
   const Seg = ({ opts, value, onChange }: any) => <View style={{ flexDirection: 'row', backgroundColor: t.paper[3], borderRadius: 9, padding: 2 }}>{opts.map(([v, l]: any) => <Pressable key={v} onPress={() => onChange(v)} style={{ flex: 1, height: 32, borderRadius: 7, alignItems: 'center', justifyContent: 'center', backgroundColor: value === v ? '#fff' : 'transparent' }}><Text v="subhead" weight={value === v ? 'bold' : 'regular'}>{l}</Text></Pressable>)}</View>;
   const Person = ({ p, set, title }: { p: Partial<M>; set: (x: Partial<M>) => void; title: string }) => <Card title={title} style={{ gap: 10 }}>
@@ -38,9 +40,9 @@ export default function Onboarding() {
     <View key="3" style={{ gap: 12 }}>{kids.map((k, i) => <Person key={i} p={k} set={x => setKids(ks => ks.map((y, j) => j === i ? x : y))} title={'Child ' + (i + 1)} />)}
       <Button variant="tinted" icon="plus" title="Add another child" onPress={() => setKids(k => [...k, { role: 'daughter', sex: 'f' }])} /></View>,
     <View key="4" style={{ gap: 12 }}><Field label="Wedding anniversary (optional)" value={anniv} onChange={setAnniv} ph="YYYY-MM-DD" />
-      <Text v="footnote" weight="bold" color={t.ink[2]}>Faith content</Text>
-      <Seg opts={[['lds', 'Latter-day Saint'], ['christian', 'Christian'], ['none', 'None']]} value={faith} onChange={setFaith} />
-      <Text v="footnote" color={t.ink[3]}>This sets which Morning Lantern edition and scripture language you see.</Text></View>,
+      <Text v="footnote" weight="bold" color={t.ink[2]}>Your faith</Text>
+      <FaithPicker value={faith} onChange={setFaith} />
+      <Text v="footnote" color={t.ink[3]}>Sets the daily scripture or sacred text, the quote, and links to your faith’s teachings. You can change it later in Settings.</Text></View>,
   ];
   const canNext = [!!surname, !!me.full_name && !!me.birthday, true, true, true][step];
   return <SafeAreaView style={{ flex: 1, backgroundColor: t.paper[1] }}><ScrollView contentContainerStyle={{ padding: 20, gap: 16 }}>
