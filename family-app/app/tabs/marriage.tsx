@@ -1,12 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
-import { Pressable, Switch, View } from 'react-native';
-import { router, useFocusEffect } from 'expo-router';
+import { useEffect, useState } from 'react';
+import { Pressable, View } from 'react-native';
+import { router } from 'expo-router';
 import { Screen, Gutter, SectionHead } from '@/components/screen';
 import { Rail } from '@/components/rail';
 import { ContentTile } from '@/components/content-tile';
 import { Card } from '@/components/card';
 import { Text } from '@/components/text';
-import { Button } from '@/components/button';
 import { Icon } from '@/components/icon';
 import { ListRow } from '@/components/list-row';
 import { useTheme } from '@/theme/theme-provider';
@@ -14,7 +13,6 @@ import { useFamily } from '@/hooks/use-family';
 import { useDailyIdeas } from '@/hooks/use-daily-ideas';
 import { useLantern } from '@/hooks/use-lantern';
 import { useReminders } from '@/hooks/use-reminders';
-import { useCoupleLock, unlockCouple, setCoupleLock } from '@/lib/couple-lock';
 import { marriageDaily } from '@/lib/marriage-daily';
 import { LOVE } from '@/lib/love-languages';
 import { parents, yearsMarried, nextOccurrence } from '@/lib/family';
@@ -23,17 +21,14 @@ import { setDetail } from '@/lib/detail-store';
 import { supabase } from '@/lib/supabase';
 import { CalItem, EventRow, expandEvent, hm, setPeek, DAY } from '@/lib/calendar';
 
-/** Everything about the two parents' relationship. Parents only: children's accounts never get this data (RLS, migration 0015),
- *  and on a parent's phone it is locked with Face ID so the kids can't open it. */
+/** Everything about the two parents' relationship. Parents only: the tab is hidden on kids' profiles and
+ *  children's accounts never get this data (RLS, migration 0015). */
 export default function MarriageTab() {
-  const { theme: t } = useTheme(); const { family, me } = useFamily(); const lock = useCoupleLock();
+  const { theme: t } = useTheme(); const { family, me } = useFamily();
   const ideas = useDailyIdeas(); const { night } = useLantern(); const rem = useReminders(family?.id);
   const [dates, setDates] = useState<CalItem[]>([]); const [goals, setGoals] = useState<any[]>([]);
   const isParent = me?.role === 'dad' || me?.role === 'mom';
-  const open = !lock.locked && isParent;
-
-  // Ask for Face ID as soon as the tab opens.
-  useFocusEffect(useCallback(() => { if (lock.ready && lock.locked && isParent) unlockCouple().catch(() => {}); }, [lock.ready, lock.locked, isParent]));
+  const open = isParent;
   useEffect(() => {
     if (!family || !open) return; const now = new Date(), to = new Date(+now + 45 * DAY);
     supabase.from('events').select('*').eq('family_id', family.id).eq('area', 'marriage').lt('starts_at', to.toISOString()).or('repeat.not.is.null,starts_at.gte.' + new Date(+now - DAY).toISOString())
@@ -46,13 +41,6 @@ export default function MarriageTab() {
   const ps = parents(family); const title = ps.map(p => p.name).join(' & ') || 'Us';
   const ann = family.anniversary ? nextOccurrence(family.anniversary) : null;
   const sub = family.anniversary ? 'Married ' + yearsMarried(family) + ' years · ' + (ann!.days === 0 ? 'happy anniversary' : 'anniversary in ' + ann!.days + (ann!.days === 1 ? ' day' : ' days')) : 'Just the two of you';
-  if (lock.locked) return <Screen title={title} subtitle={sub}>
-    <Gutter style={{ alignItems: 'center', gap: 14, paddingTop: 40 }}>
-      <View style={{ width: 96, height: 96, borderRadius: 48, backgroundColor: t.area.marriage[1], alignItems: 'center', justifyContent: 'center' }}><Icon name="lock" size={42} color={t.area.marriage[0]} /></View>
-      <Text v="title2" style={{ textAlign: 'center' }}>Just for the two of you</Text>
-      <Text color={t.ink[2]} style={{ textAlign: 'center' }}>Unlock with Face ID to open your Marriage section.</Text>
-      <Button title="Unlock" icon="scan-face" onPress={() => unlockCouple()} />
-    </Gutter></Screen>;
 
   const { quote, joke } = marriageDaily(family);
   const coupleList = rem.lists.find(l => l.color === 'marriage');
@@ -81,11 +69,7 @@ export default function MarriageTab() {
     <SectionHead title="Our marriage goals" action="Goals" onAction={() => router.push('/goals')} />
     <Gutter style={{ gap: 8 }}>{goals.map(g => <Card key={g.id} eyebrow="marriage" title={g.title} />)}
       {!goals.length && <Text v="subhead" color={t.ink[3]}>Set a goal together, like a weekly date night or a yearly getaway.</Text>}</Gutter>
-    <SectionHead title="Privacy" />
-    <Gutter><Card padding={0}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, padding: 14 }}><View style={{ flex: 1 }}><Text>Lock with Face ID</Text><Text v="footnote" color={t.ink[3]}>Locks again whenever you leave this tab or close the app.</Text></View>
-        <Switch value={lock.enabled} onValueChange={v => { setCoupleLock(v); }} trackColor={{ true: t.brand[500] }} /></View></Card>
-      <Text v="footnote" color={t.ink[3]} style={{ marginTop: 6 }}>Your kids’ own accounts never see anything here: not this tab, your date nights, the Date night list or your couple ideas.</Text></Gutter>
+    <Gutter><Text v="footnote" color={t.ink[3]} style={{ marginTop: 16 }}>Only the two of you see this. It isn’t on your kids’ profiles, and their accounts never get your date nights, the Date night list or your couple ideas.</Text></Gutter>
     <View style={{ height: 30 }} />
   </Screen>;
 }
