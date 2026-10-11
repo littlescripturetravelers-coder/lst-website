@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Pressable, View } from 'react-native';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { Screen, Gutter, SectionHead } from '@/components/screen';
 import { Rail } from '@/components/rail';
 import { ContentTile } from '@/components/content-tile';
@@ -13,6 +13,8 @@ import { useFamily } from '@/hooks/use-family';
 import { useDailyIdeas } from '@/hooks/use-daily-ideas';
 import { useLantern } from '@/hooks/use-lantern';
 import { useReminders } from '@/hooks/use-reminders';
+import { useWishes } from '@/hooks/use-wishes';
+import { KINDS } from '@/lib/wish-catalog';
 import { marriageDaily } from '@/lib/marriage-daily';
 import { LOVE } from '@/lib/love-languages';
 import { parents, yearsMarried, nextOccurrence } from '@/lib/family';
@@ -24,11 +26,13 @@ import { CalItem, EventRow, expandEvent, hm, setPeek, DAY } from '@/lib/calendar
 /** Everything about the two parents' relationship. Parents only: the tab is hidden on kids' profiles and
  *  children's accounts never get this data (RLS, migration 0015). */
 export default function MarriageTab() {
-  const { theme: t } = useTheme(); const { family, me } = useFamily();
-  const ideas = useDailyIdeas(); const { night } = useLantern(); const rem = useReminders(family?.id);
+  const { theme: t } = useTheme(); const { family, me, uid } = useFamily();
+  const ideas = useDailyIdeas(); const { night } = useLantern(); const rem = useReminders(family?.id); const wishes = useWishes(family?.id, uid);
   const [dates, setDates] = useState<CalItem[]>([]); const [goals, setGoals] = useState<any[]>([]);
   const isParent = me?.role === 'dad' || me?.role === 'mom';
   const open = isParent;
+  // Coming back from a list refreshes its counts.
+  useFocusEffect(useCallback(() => { wishes.reload(); }, [wishes.reload]));
   useEffect(() => {
     if (!family || !open) return; const now = new Date(), to = new Date(+now + 45 * DAY);
     supabase.from('events').select('*').eq('family_id', family.id).eq('area', 'marriage').lt('starts_at', to.toISOString()).or('repeat.not.is.null,starts_at.gte.' + new Date(+now - DAY).toISOString())
@@ -54,6 +58,8 @@ export default function MarriageTab() {
     <Rail title="Just the two of us" subtitle="A love quote and a joke, new every day" itemWidth={272} data={['quote', 'joke']} render={k => <View style={{ width: 272 }}>{k === 'quote'
       ? <Card variant="accent" eyebrow="Love quote of the day"><Text v="headline" style={quote.scripture ? { fontStyle: 'italic' } : undefined}>“{quote.text}”</Text><Text v="subhead" color={t.ink[3]} style={{ marginTop: 8 }}>{quote.by}</Text></Card>
       : <Card eyebrow="Joke of the day"><Text v="headline">{joke}</Text></Card>}</View>} />
+    <Rail title="Our list" subtitle="Only what you both say yes to" itemWidth={156} data={KINDS} render={k => { const c = wishes.counts(k.kind);
+      return <ContentTile area="marriage" icon={k.icon} title={k.name} meta={c.both + ' we both want' + (c.toAnswer ? ' · ' + c.toAnswer + ' to answer' : '')} onPress={() => router.push({ pathname: '/our-list', params: { kind: k.kind } })} />; }} />
     <SectionHead title="Coming up for us" action="Plan a date" onAction={() => router.push({ pathname: '/event-edit', params: { area: 'marriage', date: todayISO() } })} />
     <Gutter style={{ gap: 8 }}>
       {dates.map(d => <Pressable key={d.key} onPress={() => { setPeek(d); router.push({ pathname: '/event', params: { id: d.id!, occ: d.occ } }); }} style={{ flexDirection: 'row', gap: 10, padding: 12, borderRadius: 10, backgroundColor: t.area.marriage[1] }}>

@@ -383,7 +383,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
         { id: 'r7', title: 'Call the bank about the car loan', list: 'family', due: addDays(TODAY, -1) },
         { id: 'r8', title: 'Plan Lindy’s birthday surprise', list: 'family', due: addDays(TODAY, 4), priv: true }],
       evs: sampleEvents(),
-      cals: { w1: 'busy', p1: 'private' }, feeds: [], privOk: {},
+      cals: { w1: 'busy', p1: 'private' }, feeds: [], privOk: {}, wishVotes: {}, wishCustom: [],
       goals: [{ id: 'g1', title: 'Weekly date night, no phones', area: 'marriage' }, { id: 'g2', title: 'Family scripture study 5 nights a week', area: 'faith' }, { id: 'g3', title: 'Run a 10K by spring', area: 'health', priv: true }],
       ll: {}, answers: {}, lanternDone: null, actDone: {}, home: {}, homeDay: TODAY, planned: 0,
       chores: [{ id: 'c1', who: 'mayble', title: 'Make bed' }, { id: 'c2', who: 'mayble', title: 'Set and clear the table' }, { id: 'c3', who: 'esmay', title: 'Put toys in the bin' }] };
@@ -393,7 +393,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
   try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { S = null; }
   if (!S || !S.theme) S = sampleState();
   if (S.homeDay !== TODAY) { S.home = {}; S.homeDay = TODAY; }
-  (function (d) { ['cals', 'feeds', 'privOk', 'goals', 'evs'].forEach(function (k) { if (!S[k]) S[k] = d[k]; }); })(sampleState());
+  (function (d) { ['cals', 'feeds', 'privOk', 'goals', 'evs', 'wishVotes', 'wishCustom'].forEach(function (k) { if (!S[k]) S[k] = d[k]; }); })(sampleState());
   var save = function () { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 
   // ---------- navigation ----------
@@ -760,6 +760,103 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       rail({ title: 'Today with ' + KIDS, sub: 'New every day', action: 'More ideas', act: 'more-ideas' }, IDEAS.girls.map(function (x, i) { return tile({ area: 'girls', icon: x.icon, title: x.title, meta: x.meta, badge: 'New', att: (x.attachments || []).length, a: 'idea', id: 'girls:' + i }); })) +
       rail({ title: 'Family faith' }, [tile({ size: 'wide', area: 'girls', icon: ACTIVITY.icon, badge: 'Tonight', title: ACTIVITY.title, meta: 'Story activity with ' + KIDS, a: 'go', id: 'story' })]);
   };
+  // Same ideas as src/lib/wish-catalog.ts in the real app.
+  var WKINDS = [
+  { kind: 'date', name: 'Date nights', icon: 'heart', blurb: 'Dates you’d both enjoy' },
+  { kind: 'trip', name: 'Trips', icon: 'map', blurb: 'Getaways and yearly trips' },
+  { kind: 'project', name: 'Home projects', icon: 'hammer', blurb: 'Things to build or fix together' },
+  { kind: 'intimacy', name: 'Intimacy', icon: 'flame', blurb: 'Just between the two of you' },
+];
+  var WCAT = {
+  date: [
+    { key: 'd:picnic-sunset', title: 'Sunset picnic', detail: 'Simple food, a blanket, and a view.' },
+    { key: 'd:cook-new', title: 'Cook a new recipe together', detail: 'Pick a cuisine neither of you has made.' },
+    { key: 'd:first-date', title: 'Recreate our first date', detail: 'Same place or the closest thing to it.' },
+    { key: 'd:stargaze', title: 'Stargazing', detail: 'Drive out of town, bring cocoa and a blanket.' },
+    { key: 'd:dance-class', title: 'Take a dance class', detail: 'Salsa, swing or line dancing.' },
+    { key: 'd:game-night', title: 'Board game night for two', detail: 'Loser plans the next date.' },
+    { key: 'd:hike', title: 'Hike to a lookout', detail: 'Pack a snack for the top.' },
+    { key: 'd:movie-fort', title: 'Living room movie fort', detail: 'Blankets, pillows and a favorite movie.' },
+    { key: 'd:breakfast-out', title: 'Breakfast date', detail: 'Before the day gets busy.' },
+    { key: 'd:temple-walk', title: 'Walk the temple grounds or a garden', detail: 'Slow, quiet and talking.' },
+    { key: 'd:concert', title: 'Live music or a local concert' },
+    { key: 'd:service', title: 'Serve someone together', detail: 'Bring a meal, rake a neighbor’s leaves.' },
+    { key: 'd:painting', title: 'Paint-and-sip at home', detail: 'Same picture, side by side.' },
+    { key: 'd:bucket', title: 'Write our bucket list', detail: 'Ten things each, then compare.' },
+  ],
+  trip: [
+    { key: 't:cabin', title: 'Cabin weekend', detail: 'Fireplace, books and no schedule.' },
+    { key: 't:beach', title: 'Beach trip' },
+    { key: 't:city', title: 'City weekend', detail: 'Museums, food and walking.' },
+    { key: 't:national-park', title: 'A national park', detail: 'Pick one neither of us has seen.' },
+    { key: 't:road-trip', title: 'Road trip with no plan', detail: 'Choose a direction and go.' },
+    { key: 't:anniversary', title: 'Yearly anniversary getaway', detail: 'Same weekend every year.' },
+    { key: 't:hot-springs', title: 'Hot springs or a spa' },
+    { key: 't:family-trip', title: 'Big family trip with the kids' },
+    { key: 't:camping', title: 'Camping under the stars' },
+    { key: 't:abroad', title: 'A trip abroad someday', detail: 'Start saving a little each month.' },
+  ],
+  project: [
+    { key: 'p:garden', title: 'Plant a garden', detail: 'Start with herbs or tomatoes.' },
+    { key: 'p:paint-room', title: 'Paint a room' },
+    { key: 'p:declutter', title: 'Declutter one room a month' },
+    { key: 'p:backyard', title: 'Make the backyard cozy', detail: 'String lights, chairs, a fire pit.' },
+    { key: 'p:photo-wall', title: 'Family photo wall' },
+    { key: 'p:reading-nook', title: 'A reading nook for the kids' },
+    { key: 'p:garage', title: 'Organize the garage' },
+    { key: 'p:bedroom-refresh', title: 'Refresh our bedroom', detail: 'New bedding, calm colors, no clutter.' },
+    { key: 'p:build', title: 'Build something together', detail: 'A bench, a shelf, a planter box.' },
+    { key: 'p:budget', title: 'Set up a family budget we both like' },
+  ],
+  intimacy: [
+    { key: 'i:long-kiss', group: 'Connection', title: 'A slow kiss for a full minute', detail: 'No rushing, no phones.' },
+    { key: 'i:massage', group: 'Connection', title: 'Massage night', detail: 'Warm oil, take turns, no agenda.' },
+    { key: 'i:shower', group: 'Connection', title: 'Shower or bath together' },
+    { key: 'i:candles', group: 'Connection', title: 'Candles and our own playlist' },
+    { key: 'i:undress', group: 'Connection', title: 'Undress each other slowly' },
+    { key: 'i:compliments', group: 'Connection', title: 'Say what you love about each other’s body', detail: 'One thing each, out loud.' },
+    { key: 'i:morning', group: 'Connection', title: 'Morning time before the kids wake up' },
+    { key: 'i:touch-only', group: 'Something new', title: 'A night of touch only', detail: 'Go slow and see where it leads.' },
+    { key: 'i:new-position', group: 'Something new', title: 'Try a new position', detail: 'Pick one together beforehand.' },
+    { key: 'i:new-room', group: 'Something new', title: 'Somewhere other than the bedroom', detail: 'At home, kids asleep, door locked.' },
+    { key: 'i:blindfold', group: 'Something new', title: 'Blindfold for the one receiving' },
+    { key: 'i:in-charge', group: 'Something new', title: 'Take turns being in charge', detail: 'One of you leads the whole night.' },
+    { key: 'i:hotel', group: 'Something new', title: 'A hotel night without the kids' },
+    { key: 'i:all-day-tease', group: 'Something new', title: 'Build anticipation all day', detail: 'Notes, texts and a plan for tonight.' },
+    { key: 'i:strangers', group: 'Role play and fantasy', title: 'Meet as strangers', detail: 'Arrive separately and “pick each other up”.' },
+    { key: 'i:share-fantasy', group: 'Role play and fantasy', title: 'Share one fantasy each', detail: 'Just talk about it. No judgment, no pressure.' },
+    { key: 'i:dress-up', group: 'Role play and fantasy', title: 'Dress up for each other' },
+    { key: 'i:outfit', group: 'Role play and fantasy', title: 'An outfit chosen by your spouse' },
+    { key: 'i:letter', group: 'Role play and fantasy', title: 'Write each other a steamy letter' },
+    { key: 'i:role-play', group: 'Role play and fantasy', title: 'A role play you choose together' },
+    { key: 'i:truth-dare', group: 'Playful', title: 'Truth or dare, couples edition' },
+    { key: 'i:dice', group: 'Playful', title: 'A dice game for what comes next' },
+    { key: 'i:strip-game', group: 'Playful', title: 'A strip version of a card game' },
+    { key: 'i:slow-dance', group: 'Playful', title: 'Slow dance in the dark' },
+  ],
+};
+  // In this preview Lindy's answers are made up, so you can see what a match looks like.
+  var LINDY_YES = ['d:picnic-sunset', 'd:stargaze', 'd:dance-class', 'd:cook-new', 't:cabin', 't:national-park', 'p:garden', 'p:backyard', 'i:massage', 'i:long-kiss', 'i:candles', 'i:hotel', 'i:share-fantasy', 'i:slow-dance'];
+  var wishTab = 'answer';
+  function wishItems(kind) { return WCAT[kind].concat(S.wishCustom.filter(function (c) { return c.kind === kind; }).map(function (c) { return { key: 'c:' + c.id, title: c.title, detail: c.detail, mine: true, group: 'Ideas you added' }; })); }
+  var isMatch = function (k) { return S.wishVotes[k] === 'yes' && LINDY_YES.indexOf(k) >= 0; };
+  function wishCounts(kind) { var it = wishItems(kind); return { both: it.filter(function (i) { return isMatch(i.key); }).length, todo: it.filter(function (i) { return !S.wishVotes[i.key]; }).length }; }
+  SCREENS.ourlist = function (kind) {
+    var info = WKINDS.filter(function (k) { return k.kind === kind; })[0], items = wishItems(kind);
+    var both = items.filter(function (i) { return isMatch(i.key); }), todo = items.filter(function (i) { return !S.wishVotes[i.key]; }), answered = items.filter(function (i) { return !!S.wishVotes[i.key]; });
+    var shown = wishTab === 'both' ? both : wishTab === 'answer' ? todo : answered, groups = {}, order = [];
+    shown.forEach(function (i) { var g = i.group || ''; if (!groups[g]) { groups[g] = []; order.push(g); } groups[g].push(i); });
+    var ans = function (i) { return '<div style="display:flex;gap:6px;margin-top:10px">' + [['yes', 'Yes'], ['maybe', 'Maybe'], ['no', 'No thanks']].map(function (a) { var on = S.wishVotes[i.key] === a[0]; return '<button class="btn sm ' + (on ? '' : 'secondary') + '" style="flex:1;justify-content:center;white-space:nowrap;padding:0 6px' + (on ? '' : ';background:var(--paper2)') + '" data-a="wishvote" data-id="' + esc(i.key) + '|' + a[0] + '">' + a[1] + '</button>'; }).join('') + '</div>'; };
+    return header(info.name, { sub: 'Our list', right: backLink('Marriage') }) +
+      '<div class="gut">' + card({ v: 'sunken', body: '<p class="sh m2">Answer each idea on your own. Your spouse never sees your Maybe or No thanks. An idea shows under “We both want” only when you both say Yes.</p>' }) + '</div>' +
+      '<div class="gut" style="margin-top:12px"><div class="seg">' + [['both', 'We both want (' + both.length + ')'], ['answer', 'To answer (' + todo.length + ')'], ['mine', 'My answers']].map(function (o) { return '<button class="' + (wishTab === o[0] ? 'on' : '') + '" style="font-size:13px" data-a="wishtab" data-id="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div></div>' +
+      order.map(function (g) { return (g ? sect(g) : '<div style="height:12px"></div>') + '<div class="gut gap" style="gap:10px">' + groups[g].map(function (i) {
+        return card({ v: wishTab === 'both' ? 'accent' : '', body: '<div style="display:flex;gap:8px;align-items:flex-start"><div style="flex:1"><p class="hl">' + esc(i.title) + '</p>' + (i.detail ? '<p class="sh m2" style="margin-top:2px">' + esc(i.detail) + '</p>' : '') + (i.mine ? '<p class="cp m3" style="margin-top:4px">You added this. It stays on your list until you remove it.</p>' : '') + '</div>' + (i.mine ? '<button class="link" style="color:var(--ink3)" data-a="wishrm" data-id="' + esc(i.key) + '" aria-label="Remove ' + esc(i.title) + '">' + I('x', 'ic16') + '</button>' : '') + '</div>' +
+          (wishTab === 'both' ? (kind !== 'intimacy' ? '<div style="margin-top:10px"><button class="btn sm" data-a="wishplan" data-id="' + esc(i.title) + '|' + kind + '">' + I('calendar-plus') + 'Plan it</button></div>' : '') : ans(i)) }); }).join('') + '</div>'; }).join('') +
+      (!shown.length ? '<div class="gut" style="margin-top:16px"><p class="bd m3">' + (wishTab === 'both' ? 'Nothing here yet. Once you both say Yes to an idea, it shows up here.' : wishTab === 'answer' ? 'You’ve answered everything. Add your own idea below.' : 'Ideas you answer show here so you can change your mind any time.') + '</p></div>' : '') +
+      sect('Add your own idea') + '<div class="gut">' + card({ body: '<form data-f="wishadd" data-id="' + kind + '" class="gap" style="gap:8px"><input class="field" name="t" maxlength="140" placeholder="Your idea" aria-label="Your idea"><input class="field" name="d" maxlength="500" placeholder="A few words about it (optional)" aria-label="Details"><p class="cp m3">Your spouse will see it to answer. It counts as a Yes from you.</p><div><button class="btn sm" type="submit">' + I('plus') + 'Add idea</button></div></form>' }) + '</div>' +
+      '<div class="gut" style="margin-top:12px"><p class="cp m3">In this preview, Lindy’s answers are made up so you can see a match. In the real app they come from her own phone, and you never see her Maybe or No thanks.</p></div>';
+  };
   SCREENS.marriage = function () {
     var ann = nextOcc(FAMILY.anniversary), title = parents.map(function (p) { return p.name; }).join(' & ');
     var sub = 'Married ' + ageOn(FAMILY.anniversary) + ' years · ' + (ann.days === 0 ? 'happy anniversary' : 'anniversary in ' + ann.days + (ann.days === 1 ? ' day' : ' days'));
@@ -770,6 +867,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
     return header(title, { sub: sub, right: '<button class="iconbtn" data-a="planDate" aria-label="Plan a date">' + I('plus') + '</button>' }) +
       '<div class="gut">' + card({ v: 'inverse', a: 'go', id: 'lantern', eyebrow: 'Morning Lantern · 10 min together', title: NIGHT.scripture, body: '<p class="sh">Read it, answer one question each, and pick one way to live it today.</p>' }) + '</div>' +
       rail({ title: 'Just the two of us', sub: 'A love quote and a joke, new every day' }, ['<div style="width:272px;flex:none">' + card({ v: 'accent', eyebrow: 'Love quote of the day', body: '<p class="hl"' + (md.quote.scripture ? ' style="font-style:italic"' : '') + '>“' + esc(md.quote.text) + '”</p><p class="sh m3" style="margin-top:8px">' + esc(md.quote.by) + '</p>' }) + '</div>', '<div style="width:272px;flex:none">' + card({ eyebrow: 'Joke of the day', body: '<p class="hl">' + esc(md.joke) + '</p>' }) + '</div>']) +
+      rail({ title: 'Our list', sub: 'Only what you both say yes to' }, WKINDS.map(function (k) { var c = wishCounts(k.kind); return tile({ area: 'marriage', icon: k.icon, title: k.name, meta: c.both + ' we both want' + (c.todo ? ' · ' + c.todo + ' to answer' : ''), a: 'ourlist', id: k.kind }); })) +
       sect('Coming up for us', 'Plan a date', 'planDate') + '<div class="gut gap" style="gap:8px">' + (dates.map(function (x) { var it = { key: 'ev:' + x.e.id + ':' + x.d, kind: 'event', id: x.e.id, title: x.e.title, area: 'marriage', allDay: !!x.e.allDay, sm: toMin(x.e.start), em: toMin(x.e.end), location: x.e.location, occ: x.d };
         return '<button class="ev" style="background:var(--t_marriage)" data-a="openitem" data-id="' + esc(it.key) + '"><span class="bar" style="background:var(--a_marriage)"></span><span style="flex:1"><p class="sh b">' + esc(it.title) + '</p><p class="fn m2">' + mdy(x.d, { weekday: 'short', month: 'short', day: 'numeric' }) + ' · ' + (it.allDay ? 'All day' : hmm(it.sm)) + (it.location ? ' · ' + esc(it.location) : '') + '</p></span></button>'; }).join('') || '<p class="sh m3">Nothing on your Marriage calendar yet. Tap Plan a date, or plan one of the ideas below.</p>') + '</div>' +
       (cards.length ? rail({ title: 'Love each other today', sub: 'Fitted to your love languages' }, cards.map(function (c) { return tile({ size: 'wide', area: 'marriage', icon: LOVE[c.l].icon, eyebrow: 'For ' + c.p.name + ' · ' + LOVE[c.l].name, title: c.idea, a: 'love', id: c.p.id }); })) : '') +
@@ -993,6 +1091,11 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       case 'tab': tab(id); return;
       case 'planDate': evDraft = blankEvent(TODAY); evDraft.area = 'marriage'; evDraft.who = parents.map(function (p) { return p.id; }); go('eventedit'); return;
       case 'gogoals': go('goals'); return;
+      case 'ourlist': wishTab = 'answer'; go('ourlist', id); return;
+      case 'wishtab': wishTab = id; render(); return;
+      case 'wishvote': { var wv = id.split('|'), was = isMatch(wv[0]); S.wishVotes[wv[0]] = wv[1]; save(); if (!was && isMatch(wv[0])) toast('You both want this one. It’s on your list.'); render(); return; }
+      case 'wishrm': { var cid = id.slice(2); S.wishCustom = S.wishCustom.filter(function (c) { return c.id !== cid; }); delete S.wishVotes[id]; save(); toast('Removed'); render(); return; }
+      case 'wishplan': { var wp = id.split('|'); evDraft = blankEvent(TODAY); evDraft.title = wp[0]; evDraft.area = wp[1] === 'project' ? 'home' : 'marriage'; evDraft.who = parents.map(function (x) { return x.id; }); go('eventedit'); return; }
       case 'tab-family': tab('family'); return;
       case 'tab-reminders': tab('reminders'); return;
       case 'back': quiz = null; back(); return;
@@ -1082,6 +1185,11 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       if (!ok) { feedErr = 'That link should start with https:// or webcal://'; feedDraft = [f.n.value, raw]; render(); return; }
       feedDraft = ['', ''];
       feedErr = ''; S.feeds.push({ id: 'f' + Date.now(), name: f.n.value.trim() || 'Work tasks', url: url, share: 'private' }); save(); toast('Added. Its tasks show on your calendar.'); render(); }
+  });
+  app.addEventListener('submit', function (e) {
+    var f = e.target; if (f.getAttribute('data-f') !== 'wishadd') return; e.preventDefault();
+    var t = f.t.value.trim(); if (!t) return; var id = 'w' + Date.now();
+    S.wishCustom.push({ id: id, kind: f.getAttribute('data-id'), title: t.slice(0, 140), detail: f.d.value.trim() }); S.wishVotes['c:' + id] = 'yes'; save(); toast('Added. Lindy will see it to answer.'); render();
   });
   app.addEventListener('input', function (e) { if (e.target.id === 'calq') { calQ = e.target.value; var hb = app.querySelector('#calhits'); if (hb) { hb.innerHTML = searchResults(); if (window.lucide) { try { window.lucide.createIcons(); } catch (x) {} } } } });
   app.addEventListener('change', function (e) { if (e.target.closest('form[data-f=eventedit]') && ['date', 'start', 'endDate', 'end', 'repeat', 'until'].indexOf(e.target.name) >= 0) { readDraft(); render(); } });
