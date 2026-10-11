@@ -45,7 +45,7 @@ export default function Setup() {
     setBusy(false); if (p.first) router.replace('/tabs'); else router.back();
   };
   const head = { sections: ['What do you want help with?', 'Pick every part of family life you want in the app. You can change this any time.'],
-    priorities: ['What matters most right now?', 'Pick up to ' + MAX_PRIORITIES + '. The app puts these first and the ideas and advice lean toward them.'],
+    priorities: ['What matters most right now?', 'Pick up to ' + MAX_PRIORITIES + ' in each group. The app puts these first and the ideas and advice lean toward them.'],
     season: ['What season are you in?', 'Pick any that fit. Ideas and advice will fit where you are.'],
     me: ['Just you', 'Only you see these answers. They shape your own ideas and advice.'],
     kids: ['Your kids', 'What each child loves and what you’re working on together. Ideas for them will fit.'] }[step];
@@ -60,8 +60,11 @@ export default function Setup() {
       {step === 'sections' && <>{chips(SECTIONS, sections, setSections)}
         {sections.includes('faith') && <Card><Text v="headline" style={{ marginBottom: 4 }}>Your faith</Text><Text v="subhead" color={t.ink[2]} style={{ marginBottom: 10 }}>Sets the daily scripture or sacred text, the quote, and links to your faith’s teachings.</Text>
           <FaithPicker value={faith ?? family?.faith} onChange={setFaith} /></Card>}</>}
-      {step === 'priorities' && <>{PRIORITY_GROUPS.map(([g, opts]) => <View key={g} style={{ gap: 8 }}><Text v="footnote" weight="heavy" color={t.ink[3]} style={{ textTransform: 'uppercase', letterSpacing: .8, marginTop: 6 }}>{g}</Text>{chips(opts, priorities, setPriorities, MAX_PRIORITIES)}</View>)}
-        <Text v="footnote" color={t.ink[3]}>{priorities.length} of {MAX_PRIORITIES} picked{priorities.length >= MAX_PRIORITIES ? '. Tap one to remove it before adding another.' : ''}</Text></>}
+      {step === 'priorities' && PRIORITY_GROUPS.map(([g, opts]) => { const keys = opts.map(o => o[0]); const picked = priorities.filter(k => keys.includes(k));
+        // Up to MAX_PRIORITIES in each group: the group's picks are swapped in, the other groups' picks stay as they are.
+        return <View key={g} style={{ gap: 8 }}><View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: 6 }}><Text v="footnote" weight="heavy" color={t.ink[3]} style={{ flex: 1, textTransform: 'uppercase', letterSpacing: .8 }}>{g}</Text>
+          <Text v="footnote" color={picked.length >= MAX_PRIORITIES ? t.brand[500] : t.ink[3]}>{picked.length} of {MAX_PRIORITIES}</Text></View>
+          {chips(opts, picked, x => setPriorities([...priorities.filter(k => !keys.includes(k)), ...x]), MAX_PRIORITIES)}</View>; })}
       {step === 'season' && chips(SEASONS, season, setSeason)}
       {step === 'me' && <>
         {hasSpouse && sections.includes('marriage') && <Card><Text v="headline" style={{ marginBottom: 10 }}>What do you want more of with your spouse?</Text>{chips(COUPLE_WANTS, wants, setWants)}

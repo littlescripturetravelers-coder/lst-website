@@ -26,6 +26,7 @@ export const PRIORITY_GROUPS: [string, Opt[]][] = [
     ['hobbies', 'Time for hobbies'], ['our-friends', 'Friendships for us'], ['community', 'Community and neighbors'], ['volunteer', 'Volunteering']]],
 ];
 export const PRIORITIES: Opt[] = PRIORITY_GROUPS.flatMap(g => g[1]);
+/** Most picks in each priority group (and in your own priorities). */
 export const MAX_PRIORITIES = 5;
 export const SEASONS: Opt[] = [
   ['steady', 'Things are steady'], ['new-baby', 'New baby'], ['expecting', 'Expecting a baby'], ['trying', 'Trying for a baby'], ['toddlers', 'Toddler years'], ['moving', 'Moving'],
