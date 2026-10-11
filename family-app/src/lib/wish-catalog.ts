@@ -3,7 +3,15 @@
 // Intimacy ideas are text only, tasteful, for a married couple, and never shown to children (parents-only RLS, migration 0016).
 
 export type WishKind = 'date' | 'trip' | 'project' | 'intimacy';
-export type Wish = { key: string; title: string; detail?: string; group?: string; custom?: boolean; mine?: boolean };
+export type Wish = { key: string; title: string; detail?: string; group?: string; custom?: boolean; mine?: boolean; tips?: string[]; focus?: string[] };
+
+/** "Tonight I'd love…": each spouse picks privately for today. Only the moods you BOTH pick are shown, with the ideas you both said yes to
+ *  that fit them. Stored as wish_votes with key 'mood:<date>:<focus>', so wish_matches() keeps the same both-must-agree rule. */
+export const MOODS: [string, string][] = [
+  ['slow', 'Slow and close'], ['adventure', 'Adventurous'], ['breasts', 'Breasts'], ['clitoral', 'Clitoral'], ['vaginal', 'Vaginal'],
+  ['oral-her', 'Oral for her'], ['oral-him', 'Oral for him'], ['anal', 'Anal play'], ['ears', 'Ears and neck'], ['edging', 'Edging'],
+];
+export const moodKey = (date: string, focus: string) => 'mood:' + date + ':' + focus;
 
 export const KINDS: { kind: WishKind; name: string; icon: string; blurb: string }[] = [
   { kind: 'date', name: 'Date nights', icon: 'heart', blurb: 'Dates you’d both enjoy' },
@@ -78,5 +86,71 @@ export const CATALOG: Record<WishKind, Wish[]> = {
     { key: 'i:dice', group: 'Playful', title: 'A dice game for what comes next' },
     { key: 'i:strip-game', group: 'Playful', title: 'A strip version of a card game' },
     { key: 'i:slow-dance', group: 'Playful', title: 'Slow dance in the dark' },
+
+    { key: 'i:pos-missionary-close', group: 'Positions', focus: ['slow', 'clitoral', 'vaginal'], title: 'Close missionary', detail: 'Face to face, lots of kissing.',
+      tips: ['A pillow under her hips changes the angle and can feel deeper.', 'Grind instead of thrusting: he moves up her body a little so there is steady contact on the clitoris.', 'Keep it slow and look at each other.'] },
+    { key: 'i:pos-her-on-top', group: 'Positions', focus: ['clitoral', 'vaginal', 'breasts'], title: 'Her on top', detail: 'She sets the pace and the depth.',
+      tips: ['Rock forward and back instead of up and down for more clitoral contact.', 'His hands are free for her breasts and hips.', 'Leaning back changes the angle toward the G-spot.'] },
+    { key: 'i:pos-reverse-top', group: 'Positions', focus: ['vaginal', 'adventure'], title: 'Her on top, facing away', detail: 'A different angle and a different view.',
+      tips: ['Go slow at first. She can lean forward or back to find what feels best.', 'He can massage her back and hips.'] },
+    { key: 'i:pos-spooning', group: 'Positions', focus: ['slow', 'breasts', 'ears', 'clitoral'], title: 'Spooning', detail: 'Side by side, him behind her. Easy and close.',
+      tips: ['Great for lazy mornings or tired nights.', 'His hands are free for her breasts and clitoris, and his mouth is right by her ear and neck.', 'She can bend her top knee forward to change the angle.'] },
+    { key: 'i:pos-from-behind', group: 'Positions', focus: ['vaginal', 'adventure'], title: 'From behind', detail: 'She is on hands and knees, him behind.',
+      tips: ['If she lowers her chest to the bed, the angle gets deeper.', 'Reach around to touch her breasts or clitoris.', 'Start slow and let her set how deep.'] },
+    { key: 'i:pos-flat', group: 'Positions', focus: ['slow', 'ears', 'vaginal'], title: 'Lying flat', detail: 'She lies on her stomach, him over her.',
+      tips: ['A snug, very close feeling.', 'Perfect for kisses on her neck, shoulders and ears.', 'A pillow under her hips helps.'] },
+    { key: 'i:pos-lotus', group: 'Positions', focus: ['slow', 'breasts'], title: 'Seated face to face', detail: 'He sits cross-legged or against the headboard; she sits on his lap facing him.',
+      tips: ['Rock together instead of thrusting.', 'Lots of eye contact, kissing and breathing together.', 'Easy to kiss and touch her breasts.'] },
+    { key: 'i:pos-edge-bed', group: 'Positions', focus: ['vaginal', 'oral-her', 'adventure'], title: 'Edge of the bed', detail: 'She lies back at the edge, he stands or kneels.',
+      tips: ['A pillow under her hips sets the angle.', 'Easy to move to oral and back.', 'His hands are free for her clitoris.'] },
+    { key: 'i:pos-legs-up', group: 'Positions', focus: ['vaginal', 'adventure'], title: 'Her legs on his shoulders', detail: 'She lies back with her legs up on his shoulders.',
+      tips: ['This is deep. Go slow and let her guide.', 'Bend her knees more if it feels like too much.'] },
+    { key: 'i:pos-standing', group: 'Positions', focus: ['adventure'], title: 'Standing', detail: 'Against a wall or a counter.',
+      tips: ['If you are different heights, she can stand on a step or a sturdy book.', 'Great for a quick, spontaneous moment.'] },
+    { key: 'i:pos-chair', group: 'Positions', focus: ['breasts', 'slow', 'adventure'], title: 'In a chair', detail: 'He sits in a sturdy chair without arms; she sits on his lap.',
+      tips: ['Facing him: close and easy to kiss. Facing away: his hands are free.', 'She controls the pace with her feet on the floor.'] },
+    { key: 'i:pos-scissors', group: 'Positions', focus: ['slow', 'clitoral'], title: 'Scissors', detail: 'Lying on your sides, legs woven together.',
+      tips: ['Slow grinding more than thrusting.', 'Good when you want to go slow and stay close.'] },
+
+    { key: 'i:oral-her-back', group: 'Oral', focus: ['oral-her', 'clitoral'], title: 'For her: lying back', detail: 'She lies back with a pillow under her hips.',
+      tips: ['Start slow, kissing her inner thighs before going to the center.', 'Circle around the clitoris before touching it directly. When she gets close, keep the same rhythm. Do not speed up or change.', 'Add a finger or two curled in a “come here” motion for the G-spot.', 'Ask “softer or firmer?” and listen.'] },
+    { key: 'i:oral-her-above', group: 'Oral', focus: ['oral-her', 'adventure'], title: 'For her: she is above', detail: 'She kneels over him and controls the pressure.',
+      tips: ['She can hold the headboard to steady herself.', 'Great for her to set exactly the pressure and speed she likes.'] },
+    { key: 'i:oral-her-edge', group: 'Oral', focus: ['oral-her'], title: 'For her: edge of the bed', detail: 'She sits or lies at the edge; he kneels on a pillow.',
+      tips: ['Comfortable for him for a long time.', 'His hands are free for her breasts.'] },
+    { key: 'i:oral-him-back', group: 'Oral', focus: ['oral-him'], title: 'For him: lying back', detail: 'He lies back; she is between his legs.',
+      tips: ['Use your hand together with your mouth so you can rest without stopping.', 'The underside just below the tip is the most sensitive spot.', 'Vary the speed, and make eye contact.'] },
+    { key: 'i:oral-him-seated', group: 'Oral', focus: ['oral-him', 'adventure'], title: 'For him: he sits on the edge of the bed', detail: 'She kneels on a pillow in front of him.',
+      tips: ['A pillow under her knees makes it comfortable.', 'He can run his hands through her hair and tell her what feels good.'] },
+    { key: 'i:oral-69-side', group: 'Oral', focus: ['oral-her', 'oral-him', 'adventure'], title: 'At the same time, side by side', detail: 'Lying on your sides, head to toe.',
+      tips: ['Easier and more relaxed than one on top.', 'Take turns focusing so each of you can enjoy it.'] },
+
+    { key: 'i:tech-tease', group: 'Techniques and sensations', focus: ['slow', 'edging'], title: 'The slow tease', detail: 'Touch everywhere except the obvious places until they ask.',
+      tips: ['Kiss and touch the neck, inner arms, back, inner thighs.', 'The waiting makes everything after feel stronger.'] },
+    { key: 'i:tech-edging', group: 'Techniques and sensations', focus: ['edging', 'adventure'], title: 'Edging', detail: 'Bring them close, then pause. Repeat a few times.',
+      tips: ['Works for her and for him.', 'Slow down or stop just before the peak, wait a little, then start again.', 'Usually makes the finish much stronger.'] },
+    { key: 'i:tech-ice-warm', group: 'Techniques and sensations', focus: ['adventure', 'breasts'], title: 'Ice and warmth', detail: 'Trade between an ice cube and warm breath or a warm mouth.',
+      tips: ['Try it on the neck, breasts and inner thighs.', 'A sip of warm tea warms the mouth.'] },
+    { key: 'i:tech-light-touch', group: 'Techniques and sensations', focus: ['slow', 'ears'], title: 'Feather-light touch', detail: 'Fingertips, a feather or a silk scarf, barely touching.',
+      tips: ['Slow strokes up the back, arms and legs give goosebumps.', 'Pairs well with a blindfold.'] },
+    { key: 'i:tech-oil', group: 'Techniques and sensations', focus: ['slow'], title: 'Warm oil or a warming lube', detail: 'Slippery, warm and relaxing.',
+      tips: ['Lube helps almost everything feel better.', 'Water-based lube is safe with toys and condoms; silicone lube lasts longer but not with silicone toys.'] },
+    { key: 'i:tech-vibe', group: 'Techniques and sensations', focus: ['clitoral', 'adventure'], title: 'A small vibrator for couples', detail: 'Used on the clitoris during sex or foreplay.',
+      tips: ['Positions where her clitoris is easy to reach: her on top, spooning, from behind.', 'Start on low.'] },
+    { key: 'i:tech-breathe', group: 'Techniques and sensations', focus: ['slow'], title: 'Slow sex and breathing together', detail: 'Move slowly and match your breathing.',
+      tips: ['Pause often just to hold each other.', 'It is less about finishing and more about feeling close.'] },
+    { key: 'i:tech-kiss-map', group: 'Techniques and sensations', focus: ['slow', 'ears', 'breasts'], title: 'Kiss every part', detail: 'Take turns kissing each other from head to toe.',
+      tips: ['Notice where they react and come back to it.'] },
+
+    { key: 'i:focus-breasts', group: 'Focus areas', focus: ['breasts'], title: 'Breasts and nipples', detail: 'For a night when she wants more attention here.',
+      tips: ['Start around, not straight at the nipple. Slow circles first.', 'Change between fingers, lips, tongue and, if she likes it, very light teeth.', 'Ask about pressure: some days she will want gentle, some days firmer.', 'Positions that free your hands: her on top, spooning, seated face to face.'] },
+    { key: 'i:focus-clitoral', group: 'Focus areas', focus: ['clitoral'], title: 'Clitoris', detail: 'Most women need clitoral touch to finish.',
+      tips: ['Go around it first; the tip can be too sensitive at the start.', 'Once she likes a rhythm, keep it steady.', 'Positions: close missionary with grinding, her on top rocking, spooning with his hand.'] },
+    { key: 'i:focus-vaginal', group: 'Focus areas', focus: ['vaginal'], title: 'Vaginal and the G-spot', detail: 'Deeper, fuller sensations.',
+      tips: ['Lots of foreplay and lube first.', 'The G-spot is a couple of inches in, on the front wall: fingers curled in a “come here” motion.', 'Positions: pillow under her hips, her on top leaning back, from behind.'] },
+    { key: 'i:focus-anal', group: 'Focus areas', focus: ['anal', 'adventure'], title: 'Anal play', detail: 'Only if you both want it. Go very slow and stop any time.',
+      tips: ['Start with touch on the outside only.', 'Use lots of lube. It is not optional here.', 'Relax, breathe, and talk the whole time.', 'Never go from anal to vaginal without washing first.', 'Toys must have a flared base.', 'Her on top or spooning lets her control everything.'] },
+    { key: 'i:focus-ears', group: 'Focus areas', focus: ['ears'], title: 'Ears and neck', detail: 'A very sensitive area many people forget.',
+      tips: ['Warm breath, soft kisses and whispering in her ear.', 'Gently nibble the earlobe and kiss slowly down the side of the neck.', 'Best with spooning or from behind, where your mouth is right there.'] },
   ],
 };
