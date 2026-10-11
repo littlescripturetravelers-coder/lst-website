@@ -13,7 +13,7 @@ export function SessionGate({ children }: { children: React.ReactNode }) {
   useEffect(() => { if (!session) return; supabase.from('family_members').select('family_id, role').eq('user_id', session.user.id).maybeSingle().then(({ data }) => { if (!data) router.replace('/onboarding'); else if (data.role === 'daughter' || data.role === 'son') router.replace('/kid');
     // A parent's first sign-in lands on the questionnaire (once they've answered, it lives in Settings, Personalization).
     else supabase.from('member_profiles').select('user_id').eq('user_id', session.user.id).maybeSingle().then(({ data: p }) => { if (!p) router.replace({ pathname: '/setup', params: { first: '1' } }); }); }); }, [session?.user?.id]);
-  // The emailed sign-in link opens the app as lewisfamily://#access_token=…&refresh_token=…; turn that into a session.
+  // The emailed sign-in link opens the app (lewisfamily://… in the App Store version, exp://… in Expo Go) with #access_token=…&refresh_token=…; turn that into a session.
   const url = Linking.useURL();
   useEffect(() => { if (!url) return; const q = url.split('#')[1] ?? url.split('?')[1]; if (!q) return; const p = new URLSearchParams(q); const access_token = p.get('access_token'), refresh_token = p.get('refresh_token'); if (access_token && refresh_token) supabase.auth.setSession({ access_token, refresh_token }); }, [url]);
   useEffect(() => { supabase.auth.getSession().then(({ data }) => setSession(data.session)); const { data } = supabase.auth.onAuthStateChange((_e, s) => setSession(s)); return () => data.subscription.unsubscribe(); }, []);
@@ -23,7 +23,7 @@ export function SessionGate({ children }: { children: React.ReactNode }) {
     <Text v="hero" color={t.ink.inverse}>{APP_NAME}</Text><Text color={t.ink.inverse}>Your family’s calendar, reminders, ideas and faith, all in one place.</Text><View style={{ width: 48, height: 2, backgroundColor: t.gold[600] }} />
     {sent ? <Text color={t.ink.inverse}>Check your email for a sign-in link.</Text> : <>
       <TextInput value={email} onChangeText={setEmail} placeholder="Email" autoCapitalize="none" keyboardType="email-address" placeholderTextColor={t.brand[200]} style={{ height: 48, borderRadius: 8, paddingHorizontal: 14, backgroundColor: 'rgba(255,255,255,.1)', color: t.ink.inverse, fontSize: 17 }} />
-      <Button variant="cta" full title="Send sign-in link" onPress={async () => { await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: 'lewisfamily://' } }); setSent(true); }} />
+      <Button variant="cta" full title="Send sign-in link" onPress={async () => { await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: Linking.createURL('/') } }); setSent(true); }} />
     </>}
   </View>;
 }
