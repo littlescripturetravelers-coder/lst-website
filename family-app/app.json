@@ -16,8 +16,9 @@
       "infoPlist": {
         "NSCalendarsFullAccessUsageDescription": "Shows family events next to the work and personal calendars you choose, and adds family events to your Calendar. Your work events stay on your phone unless you choose to share them.",
         "NSRemindersFullAccessUsageDescription": "Keeps family reminders in sync with Apple Reminders so Siri can use them.",
-        "NSSiriUsageDescription": "Lets you add reminders and hear today\u2019s plan with Siri.",
-        "ITSAppUsesNonExemptEncryption": false
+        "NSSiriUsageDescription": "Lets you add reminders and hear today’s plan with Siri.",
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSFaceIDUsageDescription": "Keeps your Marriage section private. Only you can open it, so the kids can’t see it if they pick up your phone."
       },
       "entitlements": {
         "com.apple.developer.siri": true,
@@ -34,8 +35,14 @@
       [
         "expo-calendar",
         {
-          "calendarPermission": "Family calendar",
-          "remindersPermission": "Family reminders"
+          "calendarPermission": "Shows family events next to the work and personal calendars you choose, and adds family events to your Calendar. Your work events stay on your phone unless you choose to share them.",
+          "remindersPermission": "Keeps your family reminders in step with Apple Reminders, so “Hey Siri, remind me…” lands in the right list."
+        }
+      ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Keeps your Marriage section private. Only you can open it, so the kids can’t see it if they pick up your phone."
         }
       ],
       "./ios-intents/with-app-intents.js"

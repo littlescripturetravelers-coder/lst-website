@@ -128,6 +128,7 @@ button.card { cursor: pointer; }
 .sharechip svg, .ic15 { width: 15px; height: 15px; }
 .cbox { width: 24px; height: 24px; border-radius: 6px; border: 1.5px solid var(--ink4); background: transparent; flex: none; display: grid; place-items: center; padding: 0; cursor: pointer; color: #fff; }
 .cbox svg { width: 16px; height: 16px; }
+.ic40 { width: 42px; height: 42px; }
 .field { width: 100%; min-height: 44px; border-radius: 8px; border: 1px solid var(--line2); background: var(--paper0); color: var(--ink1); padding: 10px 12px; font-family: var(--body); font-size: calc(17px * var(--s)); }
 textarea.field { min-height: 70px; resize: vertical; }
 .step { display: flex; gap: 12px; align-items: flex-start; }
@@ -397,7 +398,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
 
   // ---------- navigation ----------
   var nav = [{ r: 'today' }], sheet = null, toastMsg = '', toastTimer = null;
-  var TABS = [['today', 'Today', 'sun'], ['calendar', 'Calendar', 'calendar'], ['reminders', 'Reminders', 'list-checks'], ['family', 'Family', 'heart-handshake'], ['more', 'More', 'layout-grid']];
+  var TABS = [['today', 'Today', 'sun'], ['calendar', 'Calendar', 'calendar'], ['reminders', 'Reminders', 'list-checks'], ['family', 'Family', 'users'], ['marriage', 'Marriage', 'heart'], ['more', 'More', 'layout-grid']];
   var cur = function () { return nav[nav.length - 1]; };
   var go = function (r, p) { nav.push({ r: r, p: p }); render(true); };
   var back = function () { if (nav.length > 1) nav.pop(); render(true); };
@@ -490,12 +491,11 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
   var SCREENS = {};
   SCREENS.today = function () {
     var dates = upcoming().filter(function (d) { return d.days <= 60; });
-    var ideas = IDEAS.couple.slice(0, 2).map(function (x, i) { return ['couple', i, x]; }).concat(IDEAS.girls.slice(0, 2).map(function (x, i) { return ['girls', i, x]; }));
+    var ideas = IDEAS.girls.slice(0, 3).map(function (x, i) { return ['girls', i, x]; });
     var due = openRems(function (r) { return r.due && r.due <= TODAY; });
     return header('Today', { sub: fmtDay(TODAY) }) +
-      '<div class="gut">' + card({ v: 'inverse', a: 'go', id: 'lantern', eyebrow: 'Morning Lantern · 10 min together', title: NIGHT.scripture, body: '<p class="sh">Read it, answer one question each, and pick one way to live it with ' + KIDS + ' today.' + (S.lanternDone === TODAY ? ' <b>Done today.</b>' : '') + '</p>' }) + '</div>' +
       (dates.length ? rail({ title: 'Coming up', sub: 'Birthdays and anniversaries' }, dates.map(function (d) { return tile({ area: d.kind === 'anniversary' ? 'marriage' : d.m.role === 'daughter' ? 'girls' : 'home', icon: d.kind === 'anniversary' ? 'heart' : 'cake', title: d.title, meta: fmtLong(d.date) + ' · ' + inDays(d.days), badge: d.days <= 14 ? 'Soon' : '' }); })) : '') +
-      rail({ title: 'Today’s ideas', sub: 'New every day', action: 'See all', act: 'tab-family' }, ideas.map(function (x) { return tile({ size: 'wide', area: x[0] === 'couple' ? 'marriage' : 'girls', icon: x[2].icon, eyebrow: x[0] === 'couple' ? 'Just us' : 'With ' + KIDS, title: x[2].title, meta: x[2].meta, att: (x[2].attachments || []).length, a: 'idea', id: x[0] + ':' + x[1] }); })) +
+      rail({ title: 'Today with ' + KIDS, sub: 'New every day', action: 'See all', act: 'tab-family' }, ideas.map(function (x) { return tile({ size: 'wide', area: x[0] === 'couple' ? 'marriage' : 'girls', icon: x[2].icon, eyebrow: x[0] === 'couple' ? 'Just us' : 'With ' + KIDS, title: x[2].title, meta: x[2].meta, att: (x[2].attachments || []).length, a: 'idea', id: x[0] + ':' + x[1] }); })) +
       sect('Reminders', 'All', 'tab-reminders') +
       '<div class="gut">' + card({ flush: true, body: due.length ? due.map(function (r) { return row({ leading: '<span class="circle" data-a="toggle" data-id="' + r.id + '" role="checkbox" aria-checked="false" aria-label="Complete ' + esc(r.title) + '"></span>', title: r.title, sub: fmtWhen(r), a: 'toggle', id: r.id }); }).join('') : '<p class="sh m3" style="padding:16px">All caught up for today.</p>' }) + '</div>';
   };
@@ -754,18 +754,32 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
 ];
   function marriageDaily() { var faith = FAMILY.faith && FAMILY.faith !== 'none', qs = QUOTES.filter(function (x) { return !x.scripture || (faith && (!x.lds || FAMILY.faith === 'lds')); }), n = Math.floor(Date.UTC(NOW.getFullYear(), NOW.getMonth(), NOW.getDate()) / 864e5); return { quote: qs[n % qs.length], joke: JOKES[(n * 7) % JOKES.length] }; }
   SCREENS.family = function () {
-    var md = marriageDaily();
-    var cards = parents.map(function (p) { var top = (S.ll[p.id] || [])[0]; return top ? { p: p, l: top, idea: LOVE[top].ideas[NOW.getDate() % LOVE[top].ideas.length] } : null; }).filter(Boolean);
     return header('Family') +
       '<div class="gut">' + card({ v: 'accent', a: 'go', id: 'story', eyebrow: 'Tonight’s story · ' + NIGHT.title, title: ACTIVITY.title, body: '<p class="sh m2">' + esc(ACTIVITY.line) + '</p>' }) + '</div>' +
       rail({ title: 'Our girls' }, kids.map(function (k, i) { var a = ageOn(k.birthday); return tile({ size: 'tall', area: i % 2 ? 'health' : 'girls', leading: avatar(k, 72), eyebrow: a + ' years', title: k.name, meta: stageFor(a).label, a: 'child', id: k.id }); })) +
       rail({ title: 'Today with ' + KIDS, sub: 'New every day', action: 'More ideas', act: 'more-ideas' }, IDEAS.girls.map(function (x, i) { return tile({ area: 'girls', icon: x.icon, title: x.title, meta: x.meta, badge: 'New', att: (x.attachments || []).length, a: 'idea', id: 'girls:' + i }); })) +
+      rail({ title: 'Family faith' }, [tile({ size: 'wide', area: 'girls', icon: ACTIVITY.icon, badge: 'Tonight', title: ACTIVITY.title, meta: 'Story activity with ' + KIDS, a: 'go', id: 'story' })]);
+  };
+  var coupleUnlocked = false;
+  SCREENS.marriage = function () {
+    var ann = nextOcc(FAMILY.anniversary), title = parents.map(function (p) { return p.name; }).join(' & ');
+    var sub = 'Married ' + ageOn(FAMILY.anniversary) + ' years · ' + (ann.days === 0 ? 'happy anniversary' : 'anniversary in ' + ann.days + (ann.days === 1 ? ' day' : ' days'));
+    if (S.coupleLock !== false && !coupleUnlocked) return header(title, { sub: sub }) + '<div class="gut gap" style="justify-items:center;text-align:center;padding-top:40px"><div style="width:96px;height:96px;border-radius:50%;background:var(--t_marriage);color:var(--a_marriage);display:grid;place-items:center">' + I('lock', 'ic40') + '</div><h2 class="t2">Just for the two of you</h2><p class="bd m2">Unlock with Face ID to open your Marriage section.</p><button class="btn" data-a="faceid">' + I('scan-face') + 'Unlock</button><p class="cp m3">In this preview, Unlock just opens it. On the iPhone it asks for your face or passcode.</p></div>';
+    var md = marriageDaily();
+    var cards = parents.map(function (p) { var top = (S.ll[p.id] || [])[0]; return top ? { p: p, l: top, idea: LOVE[top].ideas[NOW.getDate() % LOVE[top].ideas.length] } : null; }).filter(Boolean);
+    var dates = []; for (var i = 0; i < 45 && dates.length < 4; i++) { var dd = addDays(TODAY, i); S.evs.forEach(function (e) { if (e.area === 'marriage' && occurs(e, dd) && dates.length < 4) dates.push({ e: e, d: dd }); }); }
+    var goals = S.goals.filter(function (g) { return g.area === 'marriage' && !g.priv; });
+    return header(title, { sub: sub, right: '<button class="iconbtn" data-a="planDate" aria-label="Plan a date">' + I('plus') + '</button>' }) +
+      '<div class="gut">' + card({ v: 'inverse', a: 'go', id: 'lantern', eyebrow: 'Morning Lantern · 10 min together', title: NIGHT.scripture, body: '<p class="sh">Read it, answer one question each, and pick one way to live it today.</p>' }) + '</div>' +
       rail({ title: 'Just the two of us', sub: 'A love quote and a joke, new every day' }, ['<div style="width:272px;flex:none">' + card({ v: 'accent', eyebrow: 'Love quote of the day', body: '<p class="hl"' + (md.quote.scripture ? ' style="font-style:italic"' : '') + '>“' + esc(md.quote.text) + '”</p><p class="sh m3" style="margin-top:8px">' + esc(md.quote.by) + '</p>' }) + '</div>', '<div style="width:272px;flex:none">' + card({ eyebrow: 'Joke of the day', body: '<p class="hl">' + esc(md.joke) + '</p>' }) + '</div>']) +
-      (cards.length ? rail({ title: 'Love each other today', sub: 'Fitted to your love languages' }, cards.map(function (c) { return tile({ size: 'wide', area: 'marriage', icon: LOVE[c.l].icon, eyebrow: 'For ' + c.p.name + ' · ' + LOVE[c.l].name, title: c.idea, a: 'love', id: c.p.id }); })) +
-        (cards.length < 2 ? '<div class="gut" style="margin-top:12px">' + card({ v: 'sunken', a: 'quiz', id: parents.filter(function (p) { return !S.ll[p.id]; })[0].id, eyebrow: 'Love languages', body: '<p class="sh">' + esc(parents.filter(function (p) { return !S.ll[p.id]; })[0].name) + ' hasn’t taken the quiz yet. Tap to take it.</p>' }) + '</div>' : '')
-        : '<div class="gut" style="margin-top:20px">' + card({ v: 'accent', a: 'quiz', id: 'levi', eyebrow: 'Love languages', title: 'Take the 2-minute quiz', body: '<p class="sh m2">Ideas and daily suggestions will fit how each of you feels most loved.</p>' }) + '</div>') +
+      sect('Coming up for us', 'Plan a date', 'planDate') + '<div class="gut gap" style="gap:8px">' + (dates.map(function (x) { var it = { key: 'ev:' + x.e.id + ':' + x.d, kind: 'event', id: x.e.id, title: x.e.title, area: 'marriage', allDay: !!x.e.allDay, sm: toMin(x.e.start), em: toMin(x.e.end), location: x.e.location, occ: x.d };
+        return '<button class="ev" style="background:var(--t_marriage)" data-a="openitem" data-id="' + esc(it.key) + '"><span class="bar" style="background:var(--a_marriage)"></span><span style="flex:1"><p class="sh b">' + esc(it.title) + '</p><p class="fn m2">' + mdy(x.d, { weekday: 'short', month: 'short', day: 'numeric' }) + ' · ' + (it.allDay ? 'All day' : hmm(it.sm)) + (it.location ? ' · ' + esc(it.location) : '') + '</p></span></button>'; }).join('') || '<p class="sh m3">Nothing on your Marriage calendar yet. Tap Plan a date, or plan one of the ideas below.</p>') + '</div>' +
+      (cards.length ? rail({ title: 'Love each other today', sub: 'Fitted to your love languages' }, cards.map(function (c) { return tile({ size: 'wide', area: 'marriage', icon: LOVE[c.l].icon, eyebrow: 'For ' + c.p.name + ' · ' + LOVE[c.l].name, title: c.idea, a: 'love', id: c.p.id }); })) : '') +
       rail({ title: 'Date ideas for today', sub: 'New every day', action: 'More ideas', act: 'more-ideas' }, IDEAS.couple.map(function (x, i) { return tile({ size: 'wide', area: 'marriage', icon: x.icon, title: x.title, meta: x.meta, badge: 'New today', att: (x.attachments || []).length, a: 'idea', id: 'couple:' + i }); })) +
-      rail({ title: 'Family faith' }, [tile({ size: 'wide', area: 'faith', icon: 'lamp', badge: 'Today', title: 'Morning Lantern couple study', meta: NIGHT.scripture + ' · 10 min', a: 'go', id: 'lantern' }), tile({ size: 'wide', area: 'girls', icon: ACTIVITY.icon, badge: 'Tonight', title: ACTIVITY.title, meta: 'Story activity with ' + KIDS, a: 'go', id: 'story' })]) + '<div style="height:20px"></div>';
+      sect('Love languages') + '<div class="gut">' + card({ flush: true, body: parents.map(function (m) { var l = S.ll[m.id]; return row({ icon: 'heart', color: 'var(--a_marriage)', title: m.name, sub: l ? l.slice(0, 2).map(function (x) { return LOVE[x].name; }).join(' · ') : 'Take the 2-minute quiz', chev: true, a: 'quiz', id: m.id }); }).join('') }) + (cards.length < 2 ? '<p class="cp m3" style="margin-top:6px">When you both take the quiz, the daily ideas fit how each of you feels most loved.</p>' : '') + '</div>' +
+      sect('Our marriage goals', 'Goals', 'gogoals') + '<div class="gut gap" style="gap:8px">' + (goals.map(function (g) { return card({ eyebrow: 'marriage', body: '<p class="t3" style="font-family:var(--display)">' + esc(g.title) + '</p>' }); }).join('') || '<p class="sh m3">Set a goal together, like a weekly date night or a yearly getaway.</p>') + '</div>' +
+      sect('Privacy') + '<div class="gut">' + card({ flush: true, body: '<div class="swrow" style="border:0"><div style="flex:1"><p class="bd">Lock with Face ID</p><p class="cp m3">Locks again whenever you leave this tab or close the app.</p></div><button class="switch' + (S.coupleLock !== false ? ' on' : '') + '" role="switch" aria-checked="' + (S.coupleLock !== false) + '" aria-label="Lock with Face ID" data-a="couplelock"></button></div>' }) +
+      '<p class="cp m3" style="margin-top:6px">Your kids’ own accounts never see anything here: not this tab, your date nights, the Date night list or your couple ideas.</p></div>';
   };
   SCREENS.child = function (id) {
     var g = member(id), a = ageOn(g.birthday), s = stageFor(a);
@@ -881,7 +895,6 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       '<p class="cp m3" style="margin-top:6px">Ages, stages, health checks, ideas and studies all update from these dates.</p></div>' +
       sect('Kids’ privacy') + '<div class="gut">' + card({ flush: true, body: kids.map(function (k) { var on = !!S.privOk[k.id]; return '<div class="swrow">' + avatar(k, 30) + '<div style="flex:1"><p class="bd">' + esc(k.name) + ' · Can keep private goals and plans</p><p class="cp m3">When on, ' + esc(k.name) + ' can make goals, reminders and plans only she can see.</p></div><button class="switch' + (on ? ' on' : '') + '" role="switch" aria-checked="' + on + '" aria-label="' + esc(k.name) + ' can keep private goals and plans" data-a="privok" data-id="' + k.id + '"></button></div>'; }).join('') }) + '<p class="cp m3" style="margin-top:6px">Family things are seen by everyone. Private things are seen only by the person who made them. Turning this off stops new private items; ones already made stay private.</p></div>' +
       sect('Work & personal schedules') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'briefcase', color: '#2F6FB4', title: 'Work calendars & tasks', sub: 'Outlook, Google, Asana, Todoist and more', chev: true, a: 'go', id: 'connections' }) }) + '</div>' +
-      sect('Love languages') + '<div class="gut">' + card({ flush: true, body: parents.map(function (m) { var l = S.ll[m.id]; return row({ icon: 'heart', color: 'var(--a_marriage)', title: m.name, sub: l ? l.slice(0, 2).map(function (x) { return LOVE[x].name; }).join(' · ') : 'Take the 2-minute quiz', chev: true, a: 'quiz', id: m.id }); }).join('') }) + '</div>' +
       sect('Appearance') + '<div class="gut">' + card({ body:
         lbl('Light or dark') + '<div class="seg">' + [['light', 'Light'], ['dark', 'Dark'], ['auto', 'Match iPhone']].map(function (o) { return '<button class="' + (c.mode === o[0] ? 'on' : '') + '" data-a="mode" data-id="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>' +
         lbl('Text size') + '<div style="display:flex;align-items:center;gap:8px"><button class="btn secondary sm" data-a="scale" data-id="-1" aria-label="Smaller text">A−</button><div style="flex:1;height:6px;border-radius:3px;background:var(--paper3)"><div style="width:' + ((c.scale - .85) / .5 * 100) + '%;height:6px;border-radius:3px;background:var(--brand500)"></div></div><button class="btn secondary sm" data-a="scale" data-id="1" aria-label="Bigger text">A+</button></div><p class="cp m3" style="text-align:center;margin-top:4px">' + Math.round(c.scale * 100) + '%</p>' +
@@ -980,7 +993,11 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
   // ---------- actions ----------
   function act(a, id, el) {
     switch (a) {
-      case 'tab': tab(id); return;
+      case 'tab': if (id !== 'marriage') coupleUnlocked = false; tab(id); return;
+      case 'faceid': coupleUnlocked = true; render(); return;
+      case 'couplelock': S.coupleLock = S.coupleLock === false; save(); toast(S.coupleLock ? 'Marriage locks with Face ID' : 'Face ID lock is off'); render(); return;
+      case 'planDate': evDraft = blankEvent(TODAY); evDraft.area = 'marriage'; evDraft.who = parents.map(function (p) { return p.id; }); go('eventedit'); return;
+      case 'gogoals': go('goals'); return;
       case 'tab-family': tab('family'); return;
       case 'tab-reminders': tab('reminders'); return;
       case 'back': quiz = null; back(); return;
@@ -1108,7 +1125,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       return c.openComposer({ element: target }).then(function (r) { notice.textContent = r && r.opened ? 'Type what you want changed, then post it. Choose to send it to Claude if you see that option.' : 'Tap Leave a note again, then tap the spot once more.'; });
     }).catch(function () { notice.textContent = 'That note didn’t open. Send Claude a screenshot in your chat instead.'; });
   }, true);
-  document.getElementById('resetBtn').addEventListener('click', function () { S = sampleState(); save(); nav = [{ r: 'today' }]; sheet = null; quiz = null; calSel = TODAY; calMode = 'month'; calQ = null; evDraft = null; calView = 'everyone'; feedErr = ''; goalMine = false; render(true); notice.textContent = 'Back to the sample family.'; });
+  document.getElementById('resetBtn').addEventListener('click', function () { coupleUnlocked = false; S = sampleState(); save(); nav = [{ r: 'today' }]; sheet = null; quiz = null; calSel = TODAY; calMode = 'month'; calQ = null; evDraft = null; calView = 'everyone'; feedErr = ''; goalMine = false; render(true); notice.textContent = 'Back to the sample family.'; });
   if (sysDark.addEventListener) sysDark.addEventListener('change', function () { render(); });
 
   render(true);

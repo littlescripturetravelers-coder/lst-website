@@ -12,7 +12,6 @@ import { useFamily } from '@/hooks/use-family';
 import { ageOn, yearsMarried } from '@/lib/family';
 import { APP_NAME } from '@/lib/brand';
 import { fmtLong } from '@/lib/dates';
-import { LOVE } from '@/lib/love-languages';
 import { KID_SECTIONS } from '@/lib/home-schedule';
 import { supabase } from '@/lib/supabase';
 import { Share } from 'react-native';
@@ -49,8 +48,6 @@ export default function Settings() {
       <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 12 }}><View style={{ flex: 1 }}><Text>Can keep private goals and plans</Text><Text v="caption" color={t.ink[3]}>When on, {k.name} can make goals, reminders and plans only {k.sex === 'm' ? 'he' : 'she'} can see.</Text></View><Switch value={!!k.private_ok} onValueChange={v => setPrivateOk(k.id, v)} /></View>
       {k.can_login && <View style={{ marginTop: 10 }}><Button size="sm" variant="tinted" icon="user-plus" title={'Invite code for ' + k.name} onPress={() => makeInvite(k.id)} /></View>}
     </Card>)}</Gutter>}
-    <SectionHead title="Love languages" />
-    {family && <Gutter><Card padding={0}>{family.members.filter(m => m.role === 'dad' || m.role === 'mom').map((m: any, i, a) => <ListRow key={m.id} icon="heart" iconColor={t.area.marriage[0]} title={m.name} subtitle={m.love_languages?.ranked ? m.love_languages.ranked.slice(0, 2).map((l: any) => LOVE[l as keyof typeof LOVE].name).join(' · ') : 'Take the 2-minute quiz'} chevron divider={i < a.length - 1} onPress={() => router.push({ pathname: '/love-languages', params: { who: m.id } })} />)}</Card></Gutter>}
     <SectionHead title="Appearance" />
     <Gutter><Card>
       <Lbl s="Light or dark" />

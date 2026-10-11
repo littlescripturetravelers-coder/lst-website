@@ -16,14 +16,14 @@ import { todayISO } from '@/lib/dates';
 const AREAS: [string, string][] = [['home', 'Family'], ['marriage', 'Marriage'], ['girls', 'Kids'], ['faith', 'Faith'], ['money', 'Money'], ['health', 'Health'], ['growth', 'Growth']];
 /** New Event / Edit Event, laid out like Apple Calendar's. */
 export default function EventEdit() {
-  const { theme: t } = useTheme(); const p = useLocalSearchParams<{ id?: string; occ?: string; date?: string; hour?: string; minute?: string }>(); const { family, uid, canPrivate } = useFamily();
+  const { theme: t } = useTheme(); const p = useLocalSearchParams<{ id?: string; occ?: string; date?: string; hour?: string; minute?: string; area?: string }>(); const { family, uid, canPrivate } = useFamily();
   const first = (() => { const d = p.date ?? todayISO(); const s = atMidnight(d);
     if (p.hour != null) s.setHours(+p.hour, +(p.minute ?? 0)); else { const n = new Date(); s.setHours(d === todayISO() ? Math.min(23, n.getHours() + 1) : 9, 0); } return s; })();
   const [row, setRow] = useState<EventRow | null>(null); const [shown, setShown] = useState(0); // days between the series start and the occurrence being edited
   const [title, setTitle] = useState(''); const [location, setLocation] = useState(''); const [allDay, setAllDay] = useState(false);
   const [start, setStart] = useState(first); const [end, setEnd] = useState(new Date(+first + 3600e3));
   const [repeat, setRepeat] = useState(''); const [until, setUntil] = useState<Date | null>(null); const [alert, setAlert] = useState('none');
-  const [area, setArea] = useState('home'); const [who, setWho] = useState<string[]>([]); const [priv, setPriv] = useState(false);
+  const [area, setArea] = useState(p.area ?? 'home'); const [who, setWho] = useState<string[]>([]); const [priv, setPriv] = useState(false);
   const [url, setUrl] = useState(''); const [notes, setNotes] = useState(''); const [openList, setOpenList] = useState<'' | 'repeat' | 'alert'>(''); const [busy, setBusy] = useState(false);
 
   useEffect(() => { if (!p.id) return; supabase.from('events').select('*').eq('id', p.id).maybeSingle().then(({ data: e }) => { if (!e) return; setRow(e);

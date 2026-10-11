@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Linking, TextInput, View } from 'react-native';
-import { router } from 'expo-router';
+import { Redirect, router } from 'expo-router';
 import { Screen, Gutter } from '@/components/screen';
 import { Card } from '@/components/card';
 import { Text } from '@/components/text';
@@ -12,8 +12,9 @@ import { useFamily } from '@/hooks/use-family';
 import { kidsLabel } from '@/lib/brand';
 /** Morning Lantern couple study: scripture of the day, then marriage + parenting application. Links to tonight's story activity for the kids. */
 export default function Lantern() {
-  const { theme: t } = useTheme(); const { night, study, answers, answer, done, activity } = useLantern(); const { family } = useFamily();
+  const { theme: t } = useTheme(); const { night, study, answers, answer, done, activity } = useLantern(); const { family, me } = useFamily();
   const [local, setLocal] = useState<Record<string, string>>({});
+  if (me && me.role !== 'dad' && me.role !== 'mom') return <Redirect href="/kid" />; // couple study is parents-only
   const L = (s: string) => <Text v="overline" color={t.brand[400]} style={{ marginTop: 22, marginBottom: 8 }}>{s}</Text>;
   if (!night || !study) return <Screen title="Morning Lantern"><Gutter><Text color={t.ink[3]}>Lighting the lantern…</Text></Gutter></Screen>;
   return <Screen title="Morning Lantern" subtitle="Couple study · 10 minutes" trailing={<Text color={t.brand[500]} onPress={() => router.back()}>Done</Text>}>

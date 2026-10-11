@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
-import { router, useLocalSearchParams } from 'expo-router';
+import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import { Screen, Gutter } from '@/components/screen';
 import { Text } from '@/components/text';
 import { Card } from '@/components/card';
@@ -11,8 +11,9 @@ import { supabase } from '@/lib/supabase';
 import { LOVE, QUIZ, score, LL } from '@/lib/love-languages';
 /** 10-question love-languages quiz for one spouse. Saved on their family_members row; every AI prompt reads it. */
 export default function LoveLanguages() {
-  const { theme: t } = useTheme(); const { who } = useLocalSearchParams<{ who: string }>(); const { family } = useFamily();
+  const { theme: t } = useTheme(); const { who } = useLocalSearchParams<{ who: string }>(); const { family, me } = useFamily();
   const m = family?.members.find(x => x.id === who); const [ans, setAns] = useState<LL[]>([]); const i = ans.length;
+  if (me && me.role !== 'dad' && me.role !== 'mom') return <Redirect href="/kid" />; // part of the Marriage section
   if (!m) return null;
   if (i === QUIZ.length) { const r = score(ans);
     return <Screen title={m.name + '’s love languages'}><Gutter style={{ gap: 10 }}>
