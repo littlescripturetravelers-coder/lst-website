@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import { router } from 'expo-router';
 import { Screen, Gutter, SectionHead } from '@/components/screen';
 import { Card } from '@/components/card';
+import { Text } from '@/components/text';
 import { Rail } from '@/components/rail';
 import { ContentTile } from '@/components/content-tile';
 import { ListRow } from '@/components/list-row';
@@ -13,11 +14,24 @@ import { fmtLong, inDays, todayISO, fmtWhen } from '@/lib/today-helpers';
 import { setDetail } from '@/lib/detail-store';
 import { useTheme } from '@/theme/theme-provider';
 import { kidsLabel } from '@/lib/brand';
+import { useLantern } from '@/hooks/use-lantern';
+import { useSetup } from '@/lib/setup';
+import { marriageDaily } from '@/lib/marriage-daily';
 export default function Today() {
   const { theme: t } = useTheme(); const { family } = useFamily(); const rem = useReminders(family?.id); const ideas = useDailyIdeas();
   const kids = kidsLabel(family); const today = todayISO(); const dates = family ? upcomingDates(family).filter(d => d.days <= 60) : [];
   const open = (x: any) => { setDetail(x); router.push('/detail'); };
+  // Top of Today: the Morning Lantern scripture (for families who chose a faith and kept it on) and a quote of the day.
+  const setup = useSetup(family?.id); const faithOn = !!family && family.faith !== 'none' && setup.on('faith'); const { night, study } = useLantern();
+  const quote = family ? marriageDaily({ ...family, faith: 'none' }).quote : null;
   return <Screen subtitle={new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} title="Today">
+    {family && <Gutter>{faithOn
+      ? <Card variant="inverse" eyebrow="Morning Lantern · today’s scripture" title={night?.scripture ?? 'Lighting the lantern…'} onPress={() => router.push('/lantern')}>
+          {!!study?.says && <Text v="subhead" color={t.ink.inverse}>{study.says}</Text>}
+          {quote && <View style={{ marginTop: 12, paddingTop: 12, borderTopWidth: .5, borderColor: t.ink.inverse + '55' }}><Text v="headline" color={t.ink.inverse}>“{quote.text}”</Text><Text v="footnote" color={t.ink.inverse} style={{ marginTop: 4, opacity: .8 }}>{quote.by}</Text></View>}
+          <Text v="footnote" weight="bold" color={t.gold[500]} style={{ marginTop: 10 }}>Open today’s study</Text>
+        </Card>
+      : quote && <Card variant="accent" eyebrow="Quote of the day"><Text v="headline">“{quote.text}”</Text><Text v="footnote" color={t.ink[3]} style={{ marginTop: 4 }}>{quote.by}</Text></Card>}</Gutter>}
     {dates.length > 0 && <Rail title="Coming up" subtitle="Birthdays and anniversaries" data={dates} render={d => <ContentTile area={d.kind === 'anniversary' ? 'marriage' : d.member?.role === 'daughter' || d.member?.role === 'son' ? 'girls' : 'home'} icon={d.kind === 'anniversary' ? 'heart' : 'cake'} title={d.title} meta={fmtLong(d.date) + ' · ' + inDays(d.days)} badge={d.days <= 14 ? 'Soon' : undefined} />} />}
     <Rail title={'Today with ' + kids} subtitle="New every day" action="See all" onAction={() => router.push('/tabs/family')} itemWidth={272}
       data={ideas.girls.slice(0, 3)} render={x => <ContentTile size="wide" area={x.kind === 'couple' ? 'marriage' : 'girls'} icon={x.icon} eyebrow={x.kind === 'couple' ? 'Just us' : 'With ' + kids} title={x.title} meta={x.meta} attachments={x.attachments?.length}

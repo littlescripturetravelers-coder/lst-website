@@ -559,7 +559,11 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
     var dates = upcoming().filter(function (d) { return d.days <= 60; });
     var ideas = IDEAS.girls.slice(0, 3).map(function (x, i) { return ['girls', i, x]; });
     var due = openRems(function (r) { return r.due && r.due <= TODAY; });
+    var qs = QUOTES.filter(function (x) { return !x.scripture; }), q = qs[Math.floor(Date.UTC(NOW.getFullYear(), NOW.getMonth(), NOW.getDate()) / 864e5) % qs.length];
     return header('Today', { sub: fmtDay(TODAY) }) +
+      '<div class="gut">' + (faithOn()
+        ? card({ v: 'inverse', a: 'go', id: 'lantern', eyebrow: 'Morning Lantern · today’s scripture', title: NIGHT.scripture, body: '<p class="sh">' + esc(STUDY.says) + '</p><div style="margin-top:12px;padding-top:12px;border-top:.5px solid rgba(255,255,255,.35)"><p class="hl">“' + esc(q.text) + '”</p><p class="fn" style="margin-top:4px;opacity:.8">' + esc(q.by) + '</p></div><p class="fn b" style="margin-top:10px;color:var(--gold500)">Open today’s study</p>' })
+        : card({ v: 'accent', eyebrow: 'Quote of the day', body: '<p class="hl">“' + esc(q.text) + '”</p><p class="fn m3" style="margin-top:4px">' + esc(q.by) + '</p>' })) + '</div>' +
       (dates.length ? rail({ title: 'Coming up', sub: 'Birthdays and anniversaries' }, dates.map(function (d) { return tile({ area: d.kind === 'anniversary' ? 'marriage' : d.m.role === 'daughter' ? 'girls' : 'home', icon: d.kind === 'anniversary' ? 'heart' : 'cake', title: d.title, meta: fmtLong(d.date) + ' · ' + inDays(d.days), badge: d.days <= 14 ? 'Soon' : '' }); })) : '') +
       rail({ title: 'Today with ' + KIDS, sub: 'New every day', action: 'See all', act: 'tab-family' }, ideas.map(function (x) { return tile({ size: 'wide', area: x[0] === 'couple' ? 'marriage' : 'girls', icon: x[2].icon, eyebrow: x[0] === 'couple' ? 'Just us' : 'With ' + KIDS, title: x[2].title, meta: x[2].meta, att: (x[2].attachments || []).length, a: 'idea', id: x[0] + ':' + x[1] }); })) +
       sect('Reminders', 'All', 'tab-reminders') +
