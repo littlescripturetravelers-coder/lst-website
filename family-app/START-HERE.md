@@ -57,9 +57,9 @@ About 15 minutes, one time only. Written for Windows.
    node -v
    ```
 3. Go to desktop.github.com, download GitHub Desktop, open it and sign in.
-4. In GitHub Desktop, click File, then Clone repository. Click littlescripturetravelers-coder/lst-website. In the Local path box, delete what's there and paste this instead (it keeps the app out of OneDrive, which would slow it down). Then click Clone.
+4. In GitHub Desktop, click File, then Clone repository. Click littlescripturetravelers-coder/lst-website (make sure that line is the blue one, not lst-app). In the Local path box, delete what's there and paste this instead (it keeps the app out of OneDrive). Then click Clone and give it up to 15 minutes.
    ```
-   C:\Users\User\GitHub\lst-website
+   C:\Users\User\lst-website
    ```
 5. At the top, click Current branch and pick claude/compassionate-keller-5hmdld. (After this work is merged, pick main instead.)
 6. Back in PowerShell, install Expo's tool. If it says "running scripts is disabled on this system", see the tip at the bottom of this page, then try again.
@@ -68,7 +68,7 @@ About 15 minutes, one time only. Written for Windows.
    ```
 7. Walk into the app folder:
    ```
-   cd $HOME\GitHub\lst-website\family-app
+   cd $HOME\lst-website\family-app
    ```
 8. Unpack the app's parts (takes a minute or two):
    ```
