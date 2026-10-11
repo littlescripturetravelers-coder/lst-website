@@ -1,18 +1,18 @@
 import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
-import { Fredoka_600SemiBold, Fredoka_700Bold } from '@expo-google-fonts/fredoka';
-import { Nunito_400Regular, Nunito_700Bold, Nunito_800ExtraBold } from '@expo-google-fonts/nunito';
-import { Anton_400Regular } from '@expo-google-fonts/anton';
-import { YoungSerif_400Regular } from '@expo-google-fonts/young-serif';
-import { Lora_600SemiBold, Lora_700Bold } from '@expo-google-fonts/lora';
-import { Figtree_400Regular, Figtree_700Bold, Figtree_800ExtraBold } from '@expo-google-fonts/figtree';
-import { AtkinsonHyperlegible_400Regular, AtkinsonHyperlegible_700Bold } from '@expo-google-fonts/atkinson-hyperlegible';
 import { ThemeProvider, useTheme } from '@/theme/theme-provider';
 import { StatusBar } from 'expo-status-bar';
 function ThemedStatusBar() { const { theme } = useTheme(); return <StatusBar style={theme.dark ? 'light' : 'dark'} />; }
 import { SessionGate } from '@/components/session-gate';
 export default function Root() {
-  const [ok] = useFonts({ Fredoka_600SemiBold, Fredoka_700Bold, Nunito_400Regular, Nunito_700Bold, Nunito_800ExtraBold, Anton_400Regular, YoungSerif_400Regular, Lora_600SemiBold, Lora_700Bold, Figtree_400Regular, Figtree_700Bold, Figtree_800ExtraBold, AtkinsonHyperlegible_400Regular, AtkinsonHyperlegible_700Bold });
+  // Only the default fonts load at start; every other font choice loads when it's picked (src/theme/fonts.ts), so the app starts fast.
+  /* eslint-disable @typescript-eslint/no-require-imports */
+  const [ok] = useFonts({
+    Fredoka_600SemiBold: require('@expo-google-fonts/fredoka/Fredoka_600SemiBold.ttf'), Fredoka_700Bold: require('@expo-google-fonts/fredoka/Fredoka_700Bold.ttf'),
+    Nunito_400Regular: require('@expo-google-fonts/nunito/Nunito_400Regular.ttf'), Nunito_700Bold: require('@expo-google-fonts/nunito/Nunito_700Bold.ttf'), Nunito_800ExtraBold: require('@expo-google-fonts/nunito/Nunito_800ExtraBold.ttf'),
+    Anton_400Regular: require('@expo-google-fonts/anton/Anton_400Regular.ttf'),
+  });
+  /* eslint-enable @typescript-eslint/no-require-imports */
   if (!ok) return null;
   return <ThemeProvider><ThemedStatusBar /><SessionGate>
     <Stack screenOptions={{ headerShown: false }}>

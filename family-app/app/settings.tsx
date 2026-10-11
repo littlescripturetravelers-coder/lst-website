@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Linking, Pressable, Switch, TextInput, View } from 'react-native';
 import { router } from 'expo-router';
 import { Screen, Gutter, SectionHead } from '@/components/screen';
@@ -7,7 +7,8 @@ import { ListRow } from '@/components/list-row';
 import { Avatar } from '@/components/avatar';
 import { Text } from '@/components/text';
 import { Button } from '@/components/button';
-import { LOOKS, useTheme, PRESETS, DisplayFont, UiFont } from '@/theme/theme-provider';
+import { LOOKS, useTheme, PRESETS, ACCENTS, HIGHLIGHTS, DISPLAY_FONTS, UI_FONTS, FONT_NAMES } from '@/theme/theme-provider';
+import { loadAllFonts } from '@/theme/fonts';
 import { useFamily } from '@/hooks/use-family';
 import { useSetup } from '@/lib/setup';
 import { ageOn, yearsMarried } from '@/lib/family';
@@ -16,13 +17,12 @@ import { fmtLong } from '@/lib/dates';
 import { KID_SECTIONS } from '@/lib/home-schedule';
 import { supabase } from '@/lib/supabase';
 import { Share } from 'react-native';
-const ACCENTS = ['#1B2D5F', '#2E6E8E', '#355845', '#A8502F', '#B5536B', '#4E3563'], HIGHLIGHTS = ['#F5C518', '#5BD3DC', '#F0B37E', '#E9C46A'];
-const DISPLAY: [DisplayFont, string][] = [['fredoka', 'Fredoka'], ['youngSerif', 'Young Serif'], ['lora', 'Lora'], ['nunito', 'Nunito']];
-const UI: [UiFont, string][] = [['nunito', 'Nunito'], ['figtree', 'Figtree'], ['atkinson', 'Atkinson Hyperlegible'], ['system', 'iPhone system']];
 export default function Settings() {
   const { theme: t, setChoice } = useTheme(); const c = t.choice; const { family, saveMember, saveAnniversary, setPrivateOk } = useFamily(); const setup = useSetup(family?.id);
   const [edit, setEdit] = useState<string | null>(null); const [val, setVal] = useState(''); const [invite, setInvite] = useState<string | null>(null);
   const makeInvite = async (slug: string) => { const { data, error } = await supabase.from('family_invites').insert({ family_id: family!.id, member_slug: slug }).select('code').single(); if (!error) setInvite(data.code); };
+  // Load every font so each choice previews in its own style.
+  const [fontsReady, setFontsReady] = useState(false); useEffect(() => { loadAllFonts().then(() => setFontsReady(true)); }, []);
   const Sw = ({ color, on, onPress }: any) => <Pressable onPress={onPress} style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: color, borderWidth: on ? 3 : 0, borderColor: t.ink[1] }} />;
   const Lbl = ({ s }: { s: string }) => <Text v="footnote" weight="heavy" color={t.ink[3]} style={{ marginTop: 14, marginBottom: 8, textTransform: 'uppercase' }}>{s}</Text>;
   return <Screen title="Settings" trailing={<Text color={t.brand[500]} onPress={() => router.back()}>More</Text>}>
@@ -67,12 +67,12 @@ export default function Settings() {
         <Pressable onPress={() => setChoice({ ...c, textScale: Math.min(1.35, +((c.textScale ?? 1) + .05).toFixed(2)) })} style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: t.paper[2], alignItems: 'center', justifyContent: 'center' }}><Text v="headline" weight="heavy">A+</Text></Pressable>
       </View>
       <Text v="caption" color={t.ink[3]} style={{ textAlign: 'center', marginTop: 4 }}>{Math.round((c.textScale ?? 1) * 100)}% · also follows your iPhone’s text size setting</Text>
-      <Lbl s="Theme" /><View style={{ flexDirection: 'row', gap: 8 }}>{PRESETS.map(p => <Pressable key={p.preset} onPress={() => setChoice({ ...p, display: c.display, ui: c.ui, mode: c.mode, textScale: c.textScale })} style={{ flex: 1, borderRadius: 10, overflow: 'hidden', borderWidth: c.preset === p.preset ? 2 : 1, borderColor: c.preset === p.preset ? t.ink[1] : t.line[2], backgroundColor: p.paper }}>
+      <Lbl s="Theme" /><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{PRESETS.map(p => <Pressable key={p.preset} onPress={() => setChoice({ ...p, display: c.display, ui: c.ui, mode: c.mode, textScale: c.textScale })} style={{ width: '31%', borderRadius: 10, overflow: 'hidden', borderWidth: c.preset === p.preset ? 2 : 1, borderColor: c.preset === p.preset ? t.ink[1] : t.line[2], backgroundColor: p.paper }}>
         <View style={{ height: 30, backgroundColor: p.brand }}><View style={{ position: 'absolute', left: 8, bottom: 6, width: 20, height: 3, backgroundColor: p.highlight }} /></View><Text v="footnote" weight="bold" color={p.ink} style={{ textAlign: 'center', paddingVertical: 6, textTransform: 'capitalize' }}>{p.preset}</Text></Pressable>)}</View>
-      <Lbl s="Main color" /><View style={{ flexDirection: 'row', gap: 12 }}>{ACCENTS.map(a => <Sw key={a} color={a} on={c.brand === a} onPress={() => setChoice({ ...c, brand: a, preset: 'custom' })} />)}</View>
-      <Lbl s="Highlight color" /><View style={{ flexDirection: 'row', gap: 12 }}>{HIGHLIGHTS.map(a => <Sw key={a} color={a} on={c.highlight === a} onPress={() => setChoice({ ...c, highlight: a, preset: 'custom' })} />)}</View>
-      <Lbl s="Title font" /><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{DISPLAY.map(([id, n]) => <Pressable key={id} onPress={() => setChoice({ ...c, display: id })} style={{ width: '48%', padding: 10, borderRadius: 8, borderWidth: c.display === id ? 2 : 1, borderColor: c.display === id ? t.brand[500] : t.line[2] }}><Text v="title3">{n}</Text></Pressable>)}</View>
-      <Lbl s="Text font" />{UI.map(([id, n]) => <Pressable key={id} onPress={() => setChoice({ ...c, ui: id })} style={{ padding: 10, marginBottom: 6, borderRadius: 8, borderWidth: c.ui === id ? 2 : 1, borderColor: c.ui === id ? t.brand[500] : t.line[2] }}><Text>{n}</Text></Pressable>)}
+      <Lbl s="Main color" /><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{ACCENTS.map(a => <Sw key={a} color={a} on={c.brand === a} onPress={() => setChoice({ ...c, brand: a, preset: 'custom' })} />)}</View>
+      <Lbl s="Highlight color" /><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{HIGHLIGHTS.map(a => <Sw key={a} color={a} on={c.highlight === a} onPress={() => setChoice({ ...c, highlight: a, preset: 'custom' })} />)}</View>
+      <Lbl s="Title font" /><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{DISPLAY_FONTS.map(([id, n]) => <Pressable key={id} onPress={() => setChoice({ ...c, display: id })} style={{ width: '48%', padding: 10, borderRadius: 8, borderWidth: c.display === id ? 2 : 1, borderColor: c.display === id ? t.brand[500] : t.line[2] }}><Text v="title3" style={fontsReady ? { fontFamily: FONT_NAMES.display[id][1] } : undefined}>{n}</Text></Pressable>)}</View>
+      <Lbl s="Text font" />{UI_FONTS.map(([id, n]) => <Pressable key={id} onPress={() => setChoice({ ...c, ui: id })} style={{ padding: 10, marginBottom: 6, borderRadius: 8, borderWidth: c.ui === id ? 2 : 1, borderColor: c.ui === id ? t.brand[500] : t.line[2] }}><Text style={fontsReady && id !== 'system' ? { fontFamily: FONT_NAMES.ui[id][0] } : undefined}>{n}</Text></Pressable>)}
     </Card></Gutter>
     <SectionHead title="Voice assistants" />
     <Gutter><Card padding={0}>

@@ -215,7 +215,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
 .toast { position: absolute; left: 16px; right: 16px; bottom: 92px; background: var(--brand500); color: var(--inverse); border-radius: 10px; padding: 12px 14px; font-weight: 700; font-size: 14px; z-index: 6; }
 .sw { width: 36px; height: 36px; border-radius: 50%; border: 0; cursor: pointer; }
 .sw.on { box-shadow: 0 0 0 3px var(--paper0), 0 0 0 5px var(--ink1); }
-.preset { flex: 1; border-radius: 10px; overflow: hidden; border: 1px solid var(--line2); cursor: pointer; padding: 0; background: none; }
+.preset { min-width: 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--line2); cursor: pointer; padding: 0; background: none; }
 .preset.on { border: 2px solid var(--ink1); }
 .preset .top { height: 30px; position: relative; } .preset .top i { position: absolute; left: 8px; bottom: 6px; width: 20px; height: 3px; }
 .preset span { display: block; padding: 6px 0; font-weight: 700; font-size: 13px; text-transform: capitalize; }
@@ -620,13 +620,37 @@ var Faiths = (() => {
   // ---------- design system (ported from src/theme) ----------
   var AREA = { faith: ['#D9A227', '#F8EDCF'], marriage: ['#B5536B', '#F4E0E5'], girls: ['#D9823A', '#F9E6D3'], money: ['#3D7A58', '#DCEDE2'], health: ['#2E8C94', '#D8EEF0'], growth: ['#4F63A0', '#E0E5F3'], home: ['#7E6697', '#ECE4F1'] };
   var PRESETS = [
-    { preset: 'evening', brand: '#1B2D5F', highlight: '#F5C518', paper: '#F4EFE6', ink: '#1B2D5F' },
-    { preset: 'clay', brand: '#A8502F', highlight: '#F2B84B', paper: '#FAF6EF', ink: '#2A211B' },
-    { preset: 'sage', brand: '#355845', highlight: '#E9C46A', paper: '#F2F0E8', ink: '#1F2E26' },
-    { preset: 'plum', brand: '#4E3563', highlight: '#F0B37E', paper: '#F6F1EE', ink: '#2B2135' }];
-  var ACCENTS = ['#1B2D5F', '#2E6E8E', '#355845', '#A8502F', '#B5536B', '#4E3563'], HIGHLIGHTS = ['#F5C518', '#5BD3DC', '#F0B37E', '#E9C46A'];
-  var DISPLAY = [['fredoka', 'Fredoka', '"Fredoka", "Nunito", sans-serif'], ['youngSerif', 'Young Serif', '"Young Serif", Georgia, serif'], ['lora', 'Lora', '"Lora", Georgia, serif'], ['nunito', 'Nunito', '"Nunito", sans-serif']];
-  var UI = [['nunito', 'Nunito', '"Nunito", system-ui, sans-serif'], ['figtree', 'Figtree', '"Figtree", system-ui, sans-serif'], ['atkinson', 'Atkinson Hyperlegible', '"Atkinson Hyperlegible", system-ui, sans-serif'], ['system', 'iPhone system', '-apple-system, system-ui, "Segoe UI", sans-serif']];
+  { preset: 'evening', brand: '#1B2D5F', highlight: '#F5C518', paper: '#F4EFE6', ink: '#1B2D5F' },
+  { preset: 'clay', brand: '#A8502F', highlight: '#F2B84B', paper: '#FAF6EF', ink: '#2A211B' },
+  { preset: 'sage', brand: '#355845', highlight: '#E9C46A', paper: '#F2F0E8', ink: '#1F2E26' },
+  { preset: 'plum', brand: '#4E3563', highlight: '#F0B37E', paper: '#F6F1EE', ink: '#2B2135' },
+  { preset: 'ocean', brand: '#1F5F8B', highlight: '#F6C453', paper: '#F1F6F9', ink: '#13293D' },
+  { preset: 'forest', brand: '#2F5233', highlight: '#E9C46A', paper: '#F1F3EC', ink: '#1C2B1E' },
+  { preset: 'rose', brand: '#9E3D5C', highlight: '#F4B9B2', paper: '#FBF3F3', ink: '#2E1A22' },
+  { preset: 'sunset', brand: '#C2552D', highlight: '#F7B267', paper: '#FBF4EC', ink: '#2B1A12' },
+  { preset: 'slate', brand: '#3F4E63', highlight: '#7FD1CC', paper: '#F1F3F6', ink: '#1D2430' },
+  { preset: 'berry', brand: '#6B2D5C', highlight: '#F2A65A', paper: '#F8F1F5', ink: '#2A1424' },
+  { preset: 'mocha', brand: '#6B4A3A', highlight: '#E3B778', paper: '#F6F0EA', ink: '#2B1F18' },
+  { preset: 'teal', brand: '#1E6F72', highlight: '#F4D35E', paper: '#EEF6F5', ink: '#14302F' },
+  { preset: 'lavender', brand: '#6A5A9E', highlight: '#F7C59F', paper: '#F5F3FA', ink: '#24203A' },
+  { preset: 'mint', brand: '#2F7A63', highlight: '#F2CC8F', paper: '#EFF7F2', ink: '#173229' },
+  { preset: 'coral', brand: '#C2504E', highlight: '#FFD166', paper: '#FDF4F1', ink: '#3A1F1E' },
+  { preset: 'charcoal', brand: '#2E2E33', highlight: '#E4B363', paper: '#F3F3F2', ink: '#1A1A1E' },
+  { preset: 'gold', brand: '#7A5E14', highlight: '#F5C518', paper: '#FAF6EA', ink: '#2A2210' },
+  { preset: 'sky', brand: '#2F6E96', highlight: '#FFC857', paper: '#F2F7FB', ink: '#16324A' },
+  { preset: 'cranberry', brand: '#8E1B32', highlight: '#F4C95D', paper: '#FAF2F2', ink: '#2D0F16' },
+  { preset: 'olive', brand: '#5B6B2E', highlight: '#E9A23B', paper: '#F4F4EA', ink: '#24291A' },
+];
+  var ACCENTS = ['#1B2D5F', '#2E6E8E', '#1F5F8B', '#2F6E96', '#1E6F72', '#2F7A63', '#355845', '#2F5233', '#5B6B2E', '#7A5E14', '#6B4A3A', '#A8502F',
+  '#C2552D', '#C2504E', '#B5536B', '#9E3D5C', '#8E1B32', '#6B2D5C', '#4E3563', '#6A5A9E', '#3F4E63', '#2E2E33', '#0E5A7A', '#5C3D8A'], HIGHLIGHTS = ['#F5C518', '#FFD166', '#F4D35E', '#E9C46A', '#F6C453', '#FFC857', '#E4B363', '#F2B84B', '#E9A23B', '#F7B267', '#F0B37E',
+  '#F2A65A', '#F7C59F', '#F4B9B2', '#F2CC8F', '#5BD3DC', '#7FD1CC', '#A3D9A5'];
+  var DISPLAY = [['fredoka', 'Fredoka', '"Fredoka", "Nunito", sans-serif'], ['youngSerif', 'Young Serif', '"Young Serif", Georgia, serif'], ['lora', 'Lora', '"Lora", Georgia, serif'], ['nunito', 'Nunito', '"Nunito", sans-serif'],
+    ['playfair', 'Playfair Display', '"Playfair Display", Georgia, serif'], ['merriweather', 'Merriweather', '"Merriweather", Georgia, serif'], ['dmSerif', 'DM Serif', '"DM Serif Display", Georgia, serif'], ['poppins', 'Poppins', '"Poppins", sans-serif'],
+    ['quicksand', 'Quicksand', '"Quicksand", sans-serif'], ['comfortaa', 'Comfortaa', '"Comfortaa", sans-serif'], ['raleway', 'Raleway', '"Raleway", sans-serif'], ['montserrat', 'Montserrat', '"Montserrat", sans-serif'],
+    ['caveat', 'Caveat (handwritten)', '"Caveat", cursive'], ['pacifico', 'Pacifico (script)', '"Pacifico", cursive']];
+  var UI = [['nunito', 'Nunito', '"Nunito", system-ui, sans-serif'], ['figtree', 'Figtree', '"Figtree", system-ui, sans-serif'], ['atkinson', 'Atkinson Hyperlegible (easiest to read)', '"Atkinson Hyperlegible", system-ui, sans-serif'], ['system', 'iPhone system', '-apple-system, system-ui, "Segoe UI", sans-serif'],
+    ['inter', 'Inter', '"Inter", sans-serif'], ['lato', 'Lato', '"Lato", sans-serif'], ['openSans', 'Open Sans', '"Open Sans", sans-serif'], ['sourceSans', 'Source Sans', '"Source Sans 3", sans-serif'], ['workSans', 'Work Sans', '"Work Sans", sans-serif'],
+    ['poppins', 'Poppins', '"Poppins", sans-serif'], ['quicksand', 'Quicksand', '"Quicksand", sans-serif'], ['raleway', 'Raleway', '"Raleway", sans-serif'], ['montserrat', 'Montserrat', '"Montserrat", sans-serif'], ['merriweather', 'Merriweather', '"Merriweather", serif']];
   var hex = function (h) { return [1, 3, 5].map(function (i) { return parseInt(h.slice(i, i + 2), 16); }); };
   var toHex = function (c) { return '#' + c.map(function (v) { return Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0'); }).join(''); };
   var mix = function (a, b, p) { var A = hex(a), B = hex(b); return toHex(A.map(function (v, i) { return v * p + B[i] * (1 - p); })); };
@@ -1491,7 +1515,12 @@ var Faiths = (() => {
   };
   SCREENS.think = stub('Think it through', 'lightbulb', 'faith', ['Work through a hard decision step by step: the facts, the feelings, each side, then one next step.', 'Keep it just for you: private sessions and the reminders they make are seen only by you.']);
   SCREENS.educator = stub('Family Life Educator', 'graduation-cap', 'growth', ['Ask parenting and marriage questions, or build a short family program or handout, fitted to your family’s ages and stage.']);
+  var moreFonts = false;
+  function loadMoreFonts() { if (moreFonts) return; moreFonts = true; var l = document.createElement('link'); l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Comfortaa:wght@600;700&family=DM+Serif+Display&family=Inter:wght@400;700;800&family=Lato:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;700;800&family=Pacifico&family=Playfair+Display:wght@600;700&family=Poppins:wght@400;600;700;800&family=Quicksand:wght@400;600;700&family=Raleway:wght@400;700;800&family=Source+Sans+3:wght@400;700;800&family=Work+Sans:wght@400;700;800&display=swap';
+    document.head.appendChild(l); }
   SCREENS.settings = function () {
+    loadMoreFonts();
     var c = S.theme, lbl = function (s) { return '<p class="fn hv m3" style="margin:14px 0 8px;text-transform:uppercase">' + s + '</p>'; };
     return header('Settings', { right: backLink('More') }) +
       sect('Personalization') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'compass', color: 'var(--brand500)', title: 'Priorities, season & sections', sub: S.setup ? 'What matters most right now, and which parts of the app you use. Change it any time.' : 'Tell the app what matters most (3 minutes)', chev: true, a: 'setup' }) }) + '</div>' +
@@ -1503,7 +1532,7 @@ var Faiths = (() => {
       sect('Appearance') + '<div class="gut">' + card({ body:
         lbl('Background') + '<div style="display:flex;flex-wrap:wrap;gap:8px">' + [['light', 'Light', '#FFFFFF'], ['dark', 'Dark', '#000000'], ['navy', 'Traditional navy', '#1B2D5F'], ['gray', 'Gray', '#E6E8EC'], ['tan', 'Tan', '#F4EFE6'], ['auto', 'Match iPhone', '']].map(function (o) { var on = (c.mode || 'tan') === o[0]; return '<button class="pickchip" style="height:40px;padding:0 12px;font-size:15px;border-radius:20px;background:var(--paper0);' + (on ? 'border:2px solid var(--brand500)' : '') + '" role="radio" aria-checked="' + on + '" data-a="mode" data-id="' + o[0] + '"><i class="dt" style="width:18px;height:18px;border:1px solid var(--line2);background:' + (o[2] || 'linear-gradient(90deg,#fff 50%,#000 50%)') + '"></i>' + o[1] + '</button>'; }).join('') + '</div>' +
         lbl('Text size') + '<div style="display:flex;align-items:center;gap:8px"><button class="btn secondary sm" data-a="scale" data-id="-1" aria-label="Smaller text">A−</button><div style="flex:1;height:6px;border-radius:3px;background:var(--paper3)"><div style="width:' + ((c.scale - .85) / .5 * 100) + '%;height:6px;border-radius:3px;background:var(--brand500)"></div></div><button class="btn secondary sm" data-a="scale" data-id="1" aria-label="Bigger text">A+</button></div><p class="cp m3" style="text-align:center;margin-top:4px">' + Math.round(c.scale * 100) + '%</p>' +
-        lbl('Theme') + '<div style="display:flex;gap:8px">' + PRESETS.map(function (p) { return '<button class="preset' + (c.preset === p.preset ? ' on' : '') + '" style="background:' + p.paper + '" data-a="preset" data-id="' + p.preset + '"><span class="top" style="display:block;background:' + p.brand + '"><i style="background:' + p.highlight + '"></i></span><span style="color:' + p.ink + '">' + p.preset + '</span></button>'; }).join('') + '</div>' +
+        lbl('Theme') + '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">' + PRESETS.map(function (p) { return '<button class="preset' + (c.preset === p.preset ? ' on' : '') + '" style="background:' + p.paper + '" data-a="preset" data-id="' + p.preset + '"><span class="top" style="display:block;background:' + p.brand + '"><i style="background:' + p.highlight + '"></i></span><span style="color:' + p.ink + '">' + p.preset + '</span></button>'; }).join('') + '</div>' +
         lbl('Main color') + '<div style="display:flex;gap:12px;flex-wrap:wrap">' + ACCENTS.map(function (a) { return '<button class="sw' + (c.brand === a ? ' on' : '') + '" style="background:' + a + '" data-a="brand" data-id="' + a + '" aria-label="Main color ' + a + '"></button>'; }).join('') + '</div>' +
         lbl('Highlight color') + '<div style="display:flex;gap:12px;flex-wrap:wrap">' + HIGHLIGHTS.map(function (a) { return '<button class="sw' + (c.highlight === a ? ' on' : '') + '" style="background:' + a + '" data-a="hl" data-id="' + a + '" aria-label="Highlight color ' + a + '"></button>'; }).join('') + '</div>' +
         lbl('Title font') + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">' + DISPLAY.map(function (d) { return '<button class="opt' + (c.display === d[0] ? ' on' : '') + '" data-a="display" data-id="' + d[0] + '"><span class="t3" style="font-family:' + d[2].replace(/"/g, '&quot;') + '">' + d[1] + '</span></button>'; }).join('') + '</div>' +
@@ -1565,6 +1594,7 @@ var Faiths = (() => {
   // ---------- render ----------
   var app = document.getElementById('app'), scroller = document.getElementById('scroll'), tabbar = document.getElementById('tabbar');
   function applyTheme() {
+    if (S.theme.display !== 'fredoka' && S.theme.display !== 'nunito' || ['nunito', 'figtree', 'atkinson', 'system'].indexOf(S.theme.ui) < 0) loadMoreFonts();
     var v = themeVars(S.theme);
     Object.keys(v).forEach(function (k) { if (k !== 'dark') app.style.setProperty('--' + k, v[k]); });
     app.style.setProperty('--s', S.theme.scale);
