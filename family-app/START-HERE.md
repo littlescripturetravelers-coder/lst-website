@@ -2,7 +2,7 @@
 
 The same guide, with copy buttons and tick boxes: https://claude.ai/artifact/79QEfgCeMZBaWE1WtMS2z9
 
-Claude already built the app, set up the database and turned on the server helpers. These are the only steps that need you. Do them in order, one at a time. Tap Copy, paste into Command Prompt (right-click pastes), then press Enter. If you ever see red words, copy them into Claude and say "please fix this."
+Claude already built the app, set up the database and turned on the server helpers. These are the only steps that need you. Do them in order, one at a time. Tap Copy, paste into PowerShell (right-click or Ctrl+V pastes), then press Enter. If you ever see red words, copy them into Claude and say "please fix this."
 
 Think of it like a bakery:
 - **Pantry:** Supabase holds your family's information (already stocked).
@@ -52,20 +52,20 @@ About 5 minutes. Costs $5 one time, and it lasts a long time.
 About 15 minutes, one time only. Written for Windows.
 
 1. Go to nodejs.org and click the big green Get Node.js button. Halfway down the next page, click Windows Installer (.msi), not the Docker box. Open the downloaded file from your Downloads folder. Click Next, tick "I accept the terms", and keep clicking Next. Leave "Tools for Native Modules" unticked. Click Install, click Yes if Windows asks, then Finish.
-2. Open Command Prompt: press the Windows key, type cmd, press Enter. A black window opens. Type this and press Enter. It should show something like v24.21.0.
+2. Open PowerShell: press the Windows key, type PowerShell, press Enter. A blue or black window opens. Type this and press Enter. It should show something like v24.21.0.
    ```
    node -v
    ```
 3. Go to desktop.github.com, download GitHub Desktop, open it and sign in.
 4. In GitHub Desktop, click File, then Clone repository. Pick lst-website and click Clone. (Leave the folder it suggests as it is.)
 5. At the top, click Current branch and pick claude/compassionate-keller-5hmdld. (After this work is merged, pick main instead.)
-6. Back in Command Prompt, install Expo's tool:
+6. Back in PowerShell, install Expo's tool. If it says "running scripts is disabled on this system", see the tip at the bottom of this page, then try again.
    ```
    npm install -g eas-cli
    ```
 7. Walk into the app folder:
    ```
-   cd %USERPROFILE%\Documents\GitHub\lst-website\family-app
+   cd $HOME\Documents\GitHub\lst-website\family-app
    ```
 8. Unpack the app's parts (takes a minute or two):
    ```
@@ -76,7 +76,7 @@ About 15 minutes, one time only. Written for Windows.
 
 About 30 minutes, mostly waiting. Expo's free plan.
 
-1. In the same Command Prompt window, log in to Expo with the same email and password you use on expo.dev:
+1. In the same PowerShell window, log in to Expo with the same email and password you use on expo.dev:
    ```
    eas login
    ```
@@ -138,4 +138,5 @@ The bakery is open.
 - Morning Lantern studies need one more key so the app can read tonight's story from your private website repo. Claude will walk you through it when you're ready.
 - No sign-in email? Check spam. Supabase's free email sends only a few per hour, so wait a bit before trying again.
 - "Bundle identifier already in use": tell Claude, and it changes it for you.
-- If you close Command Prompt, open it again and run the "Walk into the app folder" line before any other command.
+- If you close PowerShell, open it again and run the "Walk into the app folder" line before any other command.
+- PowerShell says "running scripts is disabled on this system"? Paste this line, press Enter, type Y, press Enter, then try your command again: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
