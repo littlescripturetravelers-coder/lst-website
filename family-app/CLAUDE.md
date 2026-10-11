@@ -37,10 +37,10 @@ Levi Lewis owns this app and is not technical. I am his developer. **His compute
 - Sign-in is an email link that opens `lewisfamily://#access_token=…` (or `exp://…` inside Expo Go, via `Linking.createURL('/')`); `src/components/session-gate.tsx` turns it into a session. Supabase needs `lewisfamily://**` and `exp://**` in Authentication, then URL Configuration, then Redirect URLs.
 
 ## Brand: Family Wellness (approved name; not applied to the app yet)
-- Name **Family Wellness**, tagline "Family, well kept.", endorsed "An LST company" (App Store seller line, website footer, About screen only; the full "Little Scripture Travelers" name stays out of the app). Brand book: https://claude.ai/artifact/L1y3q3UfSD6mu8Ls9cymfC (source ).
+- Name **Family Wellness**, tagline "Family, well kept.", endorsed "An LST company" (App Store seller line, website footer, About screen only; the full "Little Scripture Travelers" name stays out of the app). Brand book: https://claude.ai/artifact/L1y3q3UfSD6mu8Ls9cymfC (source `brand/family-wellness-brand-book.html`).
 - Colors: **coral #F2665A and white #FFFFFF only** (Levi rejected indigo/rose/olive and any darker coral). Tints of the same coral for cards (#FEF0EF) and lines (#FBD1CE). Text is coral, Figtree Medium 500+, 15 pt and up. No LST colors or fonts.
 - Fonts: Fraunces SemiBold, soft 100 (titles, logo) and Figtree (everything else).
-- Logo files in : the woven nest with the light inside an unbroken ring (eternity), on coral and on white; the name-only logo (the "i" dot is the ring and light), one line and stacked; the app icon (1024 PNG and SVG).
+- Logo files in `brand/`: the woven nest with the light inside an unbroken ring (eternity), on coral and on white; the name-only logo (the "i" dot is the ring and light), one line and stacked; the app icon (1024 PNG and SVG).
 - When applying it: add a "Family Wellness" theme (default for new families), and **keep today's look as a "Classic" theme** in Settings → Appearance so Levi can switch back with one tap. The last commit before the brand is `e67a9e1`.
 
 ## Product rules
