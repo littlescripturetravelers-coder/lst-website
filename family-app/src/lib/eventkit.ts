@@ -11,6 +11,8 @@ async function familyCalendar(entity: 'event' | 'reminder') {
   const src = (await Calendar.getDefaultCalendarAsync()).source;
   return Calendar.createCalendarAsync({ title: CAL_TITLE, color: '#1B2D5F', entityType: type, sourceId: src.id, source: src, name: CAL_TITLE, ownerAccount: 'personal', accessLevel: Calendar.CalendarAccessLevel.OWNER });
 }
+/** The app's own calendar inside Apple Calendar (made the first time). Null when calendar access is off. */
+export const appleFamilyCalendar = () => familyCalendar('event');
 export async function upsertAppleReminder(r: { apple_id?: string | null; title: string; notes?: string | null; date?: string | null; time?: string | null; done?: boolean }) {
   const cal = await familyCalendar('reminder'); if (!cal) return null;
   const due = r.date ? new Date(r.date + 'T' + (r.time || '09:00') + ':00') : undefined;

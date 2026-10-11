@@ -1,5 +1,5 @@
 import * as Notifications from 'expo-notifications';
-export const ALERT_OFFSETS: Record<string, number> = { at: 0, '5': 5, '15': 15, '60': 60, '1d': 1440 };
+export const ALERT_OFFSETS: Record<string, number> = { at: 0, '5': 5, '15': 15, '30': 30, '60': 60, '120': 120, '1d': 1440, '2d': 2880, '1w': 10080 };
 Notifications.setNotificationHandler({ handleNotification: async () => ({ shouldShowBanner: true, shouldShowList: true, shouldPlaySound: true, shouldSetBadge: false }) });
 export async function ensurePermission() { const s = await Notifications.getPermissionsAsync(); if (s.granted) return true; return (await Notifications.requestPermissionsAsync()).granted; }
 /** Schedules (or reschedules) a local notification for a reminder. Returns the notification id. */
