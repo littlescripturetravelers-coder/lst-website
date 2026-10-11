@@ -9,7 +9,7 @@ export type Wish = { key: string; title: string; detail?: string; group?: string
  *  that fit them. Stored as wish_votes with key 'mood:<date>:<focus>', so wish_matches() keeps the same both-must-agree rule. */
 export const MOODS: [string, string][] = [
   ['slow', 'Slow and close'], ['adventure', 'Adventurous'], ['breasts', 'Breasts'], ['clitoral', 'Clitoral'], ['vaginal', 'Vaginal'],
-  ['oral-her', 'Oral for her'], ['oral-him', 'Oral for him'], ['anal', 'Anal play'], ['ears', 'Ears and neck'], ['edging', 'Edging'],
+  ['oral-her', 'Oral for her'], ['oral-him', 'Oral for him'], ['booty', 'Booty play'], ['ears', 'Ears and neck'],
 ];
 export const moodKey = (date: string, focus: string) => 'mood:' + date + ':' + focus;
 
@@ -125,10 +125,8 @@ export const CATALOG: Record<WishKind, Wish[]> = {
     { key: 'i:oral-69-side', group: 'Oral', focus: ['oral-her', 'oral-him', 'adventure'], title: 'At the same time, side by side', detail: 'Lying on your sides, head to toe.',
       tips: ['Easier and more relaxed than one on top.', 'Take turns focusing so each of you can enjoy it.'] },
 
-    { key: 'i:tech-tease', group: 'Techniques and sensations', focus: ['slow', 'edging'], title: 'The slow tease', detail: 'Touch everywhere except the obvious places until they ask.',
+    { key: 'i:tech-tease', group: 'Techniques and sensations', focus: ['slow'], title: 'The slow tease', detail: 'Touch everywhere except the obvious places until they ask.',
       tips: ['Kiss and touch the neck, inner arms, back, inner thighs.', 'The waiting makes everything after feel stronger.'] },
-    { key: 'i:tech-edging', group: 'Techniques and sensations', focus: ['edging', 'adventure'], title: 'Edging', detail: 'Bring them close, then pause. Repeat a few times.',
-      tips: ['Works for her and for him.', 'Slow down or stop just before the peak, wait a little, then start again.', 'Usually makes the finish much stronger.'] },
     { key: 'i:tech-ice-warm', group: 'Techniques and sensations', focus: ['adventure', 'breasts'], title: 'Ice and warmth', detail: 'Trade between an ice cube and warm breath or a warm mouth.',
       tips: ['Try it on the neck, breasts and inner thighs.', 'A sip of warm tea warms the mouth.'] },
     { key: 'i:tech-light-touch', group: 'Techniques and sensations', focus: ['slow', 'ears'], title: 'Feather-light touch', detail: 'Fingertips, a feather or a silk scarf, barely touching.',
@@ -148,8 +146,8 @@ export const CATALOG: Record<WishKind, Wish[]> = {
       tips: ['Go around it first; the tip can be too sensitive at the start.', 'Once she likes a rhythm, keep it steady.', 'Positions: close missionary with grinding, her on top rocking, spooning with his hand.'] },
     { key: 'i:focus-vaginal', group: 'Focus areas', focus: ['vaginal'], title: 'Vaginal and the G-spot', detail: 'Deeper, fuller sensations.',
       tips: ['Lots of foreplay and lube first.', 'The G-spot is a couple of inches in, on the front wall: fingers curled in a “come here” motion.', 'Positions: pillow under her hips, her on top leaning back, from behind.'] },
-    { key: 'i:focus-anal', group: 'Focus areas', focus: ['anal', 'adventure'], title: 'Anal play', detail: 'Only if you both want it. Go very slow and stop any time.',
-      tips: ['Start with touch on the outside only.', 'Use lots of lube. It is not optional here.', 'Relax, breathe, and talk the whole time.', 'Never go from anal to vaginal without washing first.', 'Toys must have a flared base.', 'Her on top or spooning lets her control everything.'] },
+    { key: 'i:focus-booty', group: 'Focus areas', focus: ['booty', 'adventure'], title: 'Booty play', detail: 'Lots of attention for her bottom.',
+      tips: ['Start with a slow massage using warm oil, kneading with your whole hands.', 'Kiss and nibble softly across her cheeks and the backs of her thighs.', 'Squeeze and hold while you are close. Many people love being grabbed here.', 'A light, playful spank only if you both like it. Ask first and check in.', 'Positions that put it front and center: from behind, lying flat, and her on top facing away.'] },
     { key: 'i:focus-ears', group: 'Focus areas', focus: ['ears'], title: 'Ears and neck', detail: 'A very sensitive area many people forget.',
       tips: ['Warm breath, soft kisses and whispering in her ear.', 'Gently nibble the earlobe and kiss slowly down the side of the neck.', 'Best with spooning or from behind, where your mouth is right there.'] },
   ],

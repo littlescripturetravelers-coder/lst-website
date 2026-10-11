@@ -10,7 +10,7 @@ import { useTheme } from '@/theme/theme-provider';
 import { useFamily } from '@/hooks/use-family';
 import { supabase } from '@/lib/supabase';
 import { children, parents } from '@/lib/family';
-import { useSetup, SECTIONS, ALL_SECTIONS, PRIORITIES, SEASONS, COUPLE_WANTS, DATE_BUDGETS, MY_PRIORITIES, KID_INTERESTS, KID_FOCUS, Opt } from '@/lib/setup';
+import { useSetup, SECTIONS, ALL_SECTIONS, PRIORITY_GROUPS, MAX_PRIORITIES, SEASONS, COUPLE_WANTS, DATE_BUDGETS, MY_PRIORITIES, KID_INTERESTS, KID_FOCUS, Opt } from '@/lib/setup';
 
 type Step = 'sections' | 'priorities' | 'season' | 'me' | 'kids';
 /** The setup questionnaire, about 3 minutes of tapping. Shown after a family is created, and any time from Settings ("Check in").
@@ -28,7 +28,7 @@ export default function Setup() {
   if (me && me.role !== 'dad' && me.role !== 'mom') return <Redirect href="/kid" />;
 
   const steps: Step[] = ['sections', 'priorities', 'season', 'me', ...(kids.length ? ['kids' as Step] : [])]; const step = steps[i];
-  const toggle = (list: string[], set: (x: string[]) => void, k: string, max?: number) => set(list.includes(k) ? list.filter(x => x !== k) : max && list.length >= max ? [...list.slice(1), k] : [...list, k]);
+  const toggle = (list: string[], set: (x: string[]) => void, k: string, max?: number) => set(list.includes(k) ? list.filter(x => x !== k) : max === 1 ? [k] : max && list.length >= max ? list : [...list, k]);
   const chips = (opts: Opt[], list: string[], set: (x: string[]) => void, max?: number) => <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
     {opts.map(([k, l]) => { const on = list.includes(k); return <Pressable key={k} onPress={() => toggle(list, set, k, max)} accessibilityRole="checkbox" accessibilityState={{ checked: on }}
       style={{ paddingHorizontal: 14, height: 40, borderRadius: 20, justifyContent: 'center', borderWidth: 1.5, borderColor: on ? t.brand[500] : t.line[2], backgroundColor: on ? t.brand[500] : t.paper[0] }}>
@@ -41,7 +41,7 @@ export default function Setup() {
     setBusy(false); if (p.first) router.replace('/tabs'); else router.back();
   };
   const head = { sections: ['What do you want help with?', 'Pick every part of family life you want in the app. You can change this any time.'],
-    priorities: ['Your family’s top 3 right now', 'Pick up to three. The app puts these first and the ideas lean toward them.'],
+    priorities: ['What matters most right now?', 'Pick up to ' + MAX_PRIORITIES + '. The app puts these first and the ideas and advice lean toward them.'],
     season: ['What season are you in?', 'Pick any that fit. Ideas and advice will fit where you are.'],
     me: ['Just you', 'Only you see these answers. They shape your own ideas and advice.'],
     kids: ['Your kids', 'What each child loves and what you’re working on together. Ideas for them will fit.'] }[step];
@@ -54,12 +54,13 @@ export default function Setup() {
     <ScrollView contentContainerStyle={{ padding: 20, gap: 14, paddingBottom: 40 }}>
       <Text v="title1">{head[0]}</Text><Text color={t.ink[2]}>{head[1]}</Text>
       {step === 'sections' && chips(SECTIONS, sections, setSections)}
-      {step === 'priorities' && <>{chips(PRIORITIES, priorities, setPriorities, 3)}<Text v="footnote" color={t.ink[3]}>{priorities.length} of 3 picked</Text></>}
+      {step === 'priorities' && <>{PRIORITY_GROUPS.map(([g, opts]) => <View key={g} style={{ gap: 8 }}><Text v="footnote" weight="heavy" color={t.ink[3]} style={{ textTransform: 'uppercase', letterSpacing: .8, marginTop: 6 }}>{g}</Text>{chips(opts, priorities, setPriorities, MAX_PRIORITIES)}</View>)}
+        <Text v="footnote" color={t.ink[3]}>{priorities.length} of {MAX_PRIORITIES} picked{priorities.length >= MAX_PRIORITIES ? '. Tap one to remove it before adding another.' : ''}</Text></>}
       {step === 'season' && chips(SEASONS, season, setSeason)}
       {step === 'me' && <>
         {hasSpouse && sections.includes('marriage') && <Card><Text v="headline" style={{ marginBottom: 10 }}>What do you want more of with your spouse?</Text>{chips(COUPLE_WANTS, wants, setWants)}
           <Text v="headline" style={{ marginTop: 16, marginBottom: 10 }}>Date budget</Text>{chips(DATE_BUDGETS, budget ? [budget] : [], x => setBudget(x[x.length - 1] ?? ''), 1)}</Card>}
-        <Card><Text v="headline" style={{ marginBottom: 10 }}>Your own top 3</Text>{chips(MY_PRIORITIES, mine, setMine, 3)}</Card>
+        <Card><Text v="headline" style={{ marginBottom: 10 }}>Your own priorities (up to {MAX_PRIORITIES})</Text>{chips(MY_PRIORITIES, mine, setMine, MAX_PRIORITIES)}</Card>
       </>}
       {step === 'kids' && kids.map(k => { const a = about[k.id] ?? { interests: [], focus: [] }; const set = (key: 'interests' | 'focus') => (x: string[]) => setAbout(o => ({ ...o, [k.id]: { ...a, [key]: x } }));
         return <Card key={k.id}><View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 12 }}><Avatar name={k.name} color={k.color} size={32} /><Text v="title3">{k.name}</Text></View>

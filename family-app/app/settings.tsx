@@ -26,6 +26,8 @@ export default function Settings() {
   const Sw = ({ color, on, onPress }: any) => <Pressable onPress={onPress} style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: color, borderWidth: on ? 3 : 0, borderColor: t.ink[1] }} />;
   const Lbl = ({ s }: { s: string }) => <Text v="footnote" weight="heavy" color={t.ink[3]} style={{ marginTop: 14, marginBottom: 8, textTransform: 'uppercase' }}>{s}</Text>;
   return <Screen title="Settings" trailing={<Text color={t.brand[500]} onPress={() => router.back()}>More</Text>}>
+    <SectionHead title="Personalization" />
+    <Gutter><Card padding={0}><ListRow icon="compass" iconColor={t.brand[500]} title="Priorities, season & sections" subtitle={setup.setup ? 'What matters most right now, and which parts of the app you use. Change it any time.' : 'Tell the app what matters most (3 minutes)'} chevron divider={false} onPress={() => router.push('/setup')} /></Card></Gutter>
     <SectionHead title="Our family" />
     {family && <Gutter><Card padding={0}>
       {family.members.map(m => <View key={m.id}><ListRow leading={<Avatar name={m.name} color={m.color} size={30} />} title={m.full} subtitle={'Born ' + fmtLong(m.birthday)} value={String(ageOn(m.birthday))} chevron onPress={() => { setEdit(m.id); setVal(m.birthday); }} />
@@ -36,8 +38,6 @@ export default function Settings() {
       {family.members.filter((m: any) => (m.role === 'dad' || m.role === 'mom') && !m.user_id).map(m => <View key={'inv' + m.id} style={{ marginTop: 10 }}><Button full variant="tinted" icon="user-plus" title={'Invite ' + m.name} onPress={() => makeInvite(m.id)} /></View>)}
       {invite && <Card variant="accent" style={{ marginTop: 10 }}><Text v="footnote" color={t.ink[2]}>Invite code (good for 14 days)</Text><Text v="title1" style={{ letterSpacing: 4 }}>{invite}</Text><View style={{ marginTop: 8 }}><Button size="sm" variant="secondary" icon="share" title="Share" onPress={() => Share.share({ message: 'Join our family in the app. Sign in, tap “I have an invite code” and enter ' + invite })} /></View></Card>}
       <Text v="caption" color={t.ink[3]} style={{ marginTop: 6 }}>Ages, stages, health checks, ideas and studies all update from these dates.</Text></Gutter>}
-    <SectionHead title="Priorities & season" />
-    <Gutter><Card padding={0}><ListRow icon="compass" iconColor={t.brand[500]} title="Check in" subtitle={setup.setup ? 'What matters most right now. Change it any time.' : 'Tell the app what matters most (3 minutes)'} chevron divider={false} onPress={() => router.push('/setup')} /></Card></Gutter>
     {setup.on('work') && <>
     <SectionHead title="Work & personal schedules" />
     <Gutter><Card padding={0}><ListRow icon="briefcase" iconColor={t.area.growth[0]} title="Work calendars & tasks" subtitle="Google, Outlook, Asana, Todoist and more. Private unless you share." chevron divider={false} onPress={() => router.push('/connections')} /></Card></Gutter>

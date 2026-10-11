@@ -493,15 +493,29 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
   var SU_SECTIONS = [
   ['faith', 'Faith at home'], ['marriage', 'Our marriage'], ['money', 'Money'], ['health', 'Health'], ['home', 'Home upkeep'], ['kids', 'Our kids'], ['work', 'Work schedules'],
 ];
-  var SU_PRIORITIES = [
-  ['family-time', 'More family time'], ['marriage', 'A stronger marriage'], ['faith', 'Faith at home'], ['debt', 'Pay off debt'], ['save', 'Save money'],
-  ['health', 'Health and fitness'], ['routines', 'Calmer home routines'], ['behavior', 'Kids’ behavior and big feelings'], ['school', 'School and learning'],
-  ['screens', 'Less screen time'], ['serve', 'Serving others'], ['balance', 'Balance work and family'], ['projects', 'Home projects'], ['rest', 'More rest'],
+  var SU_PRIORITY_GROUPS = [
+  ['Family and home', [['family-time', 'More family time'], ['routines', 'Calmer home routines'], ['meals', 'Family dinners together'], ['traditions', 'Family traditions'],
+    ['organize', 'A more organized home'], ['projects', 'Home projects'], ['outdoors', 'More time outdoors'], ['travel', 'Travel and adventures'], ['extended', 'Time with grandparents and cousins'], ['less-busy', 'A less busy schedule']]],
+  ['Our marriage', [['marriage', 'A stronger marriage'], ['date-nights', 'Regular date nights'], ['communication', 'Better communication'], ['intimacy', 'More intimacy'],
+    ['less-arguing', 'Less arguing'], ['teamwork', 'Parenting as a team'], ['couple-fun', 'More fun together'], ['couple-goals', 'Shared goals and dreams']]],
+  ['Our kids', [['behavior', 'Kids’ behavior and big feelings'], ['school', 'School and learning'], ['screens', 'Less screen time'], ['reading', 'Reading together'],
+    ['one-on-one', 'One-on-one time with each child'], ['kids-sleep', 'Better sleep for the kids'], ['activities', 'Sports and activities'], ['kids-friends', 'Kids’ friendships'],
+    ['kindness', 'Kindness and confidence'], ['chores', 'Kids helping at home'], ['life-skills', 'Life skills and responsibility'], ['siblings', 'Siblings getting along']]],
+  ['Faith', [['faith', 'Faith at home'], ['scripture', 'Daily scripture study'], ['prayer', 'Family prayer'], ['church', 'Church and worship'], ['serve', 'Serving others'], ['sabbath', 'Keeping the Sabbath'], ['temple', 'Temple or church attendance']]],
+  ['Money', [['debt', 'Pay off debt'], ['save', 'Save money'], ['budget', 'Stick to a budget'], ['emergency', 'Emergency fund'], ['home-buy', 'Buy or pay off a home'],
+    ['retire', 'Retirement'], ['college', 'Kids’ education fund'], ['income', 'Grow our income'], ['giving', 'Giving and tithing'], ['spend-less', 'Spend less on little things']]],
+  ['Health', [['health', 'Health and fitness'], ['rest', 'More rest'], ['our-sleep', 'Better sleep for us'], ['eat-well', 'Healthier eating'], ['stress', 'Less stress and better mental health'],
+    ['exercise-together', 'Exercise together'], ['checkups', 'Keep up with check-ups'], ['weight', 'Reach a healthy weight']]],
+  ['Work and growth', [['balance', 'Balance work and family'], ['career', 'Career growth'], ['business', 'Grow a business'], ['learning', 'Learn new skills'],
+    ['hobbies', 'Time for hobbies'], ['our-friends', 'Friendships for us'], ['community', 'Community and neighbors'], ['volunteer', 'Volunteering']]],
 ];
+  var SU_PRIORITIES = [].concat.apply([], SU_PRIORITY_GROUPS.map(function (g) { return g[1]; })), SU_MAX = 5;
   var SU_SEASONS = [
-  ['steady', 'Things are steady'], ['new-baby', 'New baby'], ['expecting', 'Expecting a baby'], ['toddlers', 'Toddler years'], ['moving', 'Moving'],
-  ['job-change', 'New job or job change'], ['money-tight', 'Money is tight'], ['health-challenge', 'A health challenge'], ['grief', 'Grief or loss'],
-  ['busy-work', 'A busy work stretch'], ['school-change', 'Big school changes'], ['single-parent', 'Parenting on my own'],
+  ['steady', 'Things are steady'], ['new-baby', 'New baby'], ['expecting', 'Expecting a baby'], ['trying', 'Trying for a baby'], ['toddlers', 'Toddler years'], ['moving', 'Moving'],
+  ['job-change', 'New job or job change'], ['job-loss', 'Looking for work'], ['money-tight', 'Money is tight'], ['health-challenge', 'A health challenge'], ['grief', 'Grief or loss'],
+  ['busy-work', 'A busy work stretch'], ['school-change', 'Big school changes'], ['single-parent', 'Parenting on my own'], ['blended', 'Blending families'],
+  ['caregiving', 'Caring for an aging parent'], ['new-marriage', 'Newly married'], ['rough-patch', 'A rough patch in our marriage'], ['teens', 'Raising teenagers'],
+  ['empty-nest', 'Kids leaving home'], ['deployment', 'Time apart for work or service'], ['building', 'Building or remodeling a home'],
 ];
   var SU_COUPLE_WANTS = [
   ['time', 'Time together'], ['romance', 'Romance'], ['fun', 'Fun and laughing'], ['talks', 'Deeper talks'], ['less-conflict', 'Less conflict'],
@@ -509,7 +523,10 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
 ];
   var SU_DATE_BUDGETS = [['free', 'Free'], ['25', 'Under $25'], ['75', 'Under $75'], ['splurge', 'A splurge now and then']];
   var SU_MY_PRIORITIES = [
-  ['sleep', 'Sleep'], ['exercise', 'Exercise'], ['faith', 'Faith'], ['career', 'Career'], ['friends', 'Friendships'], ['hobbies', 'Hobbies'], ['learning', 'Learning'], ['rest', 'Rest'], ['money', 'Money'],
+  ['sleep', 'Sleep'], ['exercise', 'Exercise'], ['eat-well', 'Eating well'], ['faith', 'Faith'], ['scripture', 'Personal scripture study'], ['career', 'Career'],
+  ['business', 'A side business'], ['friends', 'Friendships'], ['hobbies', 'Hobbies'], ['learning', 'Learning'], ['reading', 'Reading'], ['rest', 'Rest'],
+  ['money', 'Money'], ['stress', 'Less stress'], ['creativity', 'Creativity'], ['outdoors', 'Time outdoors'], ['service', 'Serving others'], ['me-time', 'Time for myself'],
+  ['patience', 'Patience with the kids'], ['spouse', 'Being a better spouse'], ['organized', 'Getting organized'], ['screens', 'Less phone time'],
 ];
   var SU_KID_INTERESTS = [
   ['art', 'Art'], ['music', 'Music'], ['sports', 'Sports'], ['reading', 'Reading'], ['outdoors', 'Outdoors'], ['building', 'Building'], ['animals', 'Animals'],
@@ -529,9 +546,9 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
   SCREENS.setup = function () {
     var steps = ['sections', 'priorities', 'season', 'me', 'kids'], step = steps[su.i];
     var chips = function (opts, list, field, max) { return '<div style="display:flex;flex-wrap:wrap;gap:8px">' + opts.map(function (o) { var on = list.indexOf(o[0]) >= 0; return '<button class="pickchip" style="height:40px;padding:0 14px;font-size:15px;border-radius:20px;' + (on ? 'background:var(--brand500);border-color:var(--brand500);color:var(--inverse)' : 'background:var(--paper0)') + '" role="checkbox" aria-checked="' + on + '" data-a="suchip" data-id="' + field + '|' + o[0] + '|' + (max || '') + '">' + o[1] + '</button>'; }).join('') + '</div>'; };
-    var head = { sections: ['What do you want help with?', 'Pick every part of family life you want in the app. You can change this any time.'], priorities: ['Your family’s top 3 right now', 'Pick up to three. The app puts these first and the ideas lean toward them.'], season: ['What season are you in?', 'Pick any that fit. Ideas and advice will fit where you are.'], me: ['Just you', 'Only you see these answers. They shape your own ideas and advice.'], kids: ['Your kids', 'What each child loves and what you’re working on together. Ideas for them will fit.'] }[step];
-    var body = step === 'sections' ? chips(SU_SECTIONS, su.sections, 'sections') : step === 'priorities' ? chips(SU_PRIORITIES, su.priorities, 'priorities', 3) + '<p class="fn m3">' + su.priorities.length + ' of 3 picked</p>' : step === 'season' ? chips(SU_SEASONS, su.season, 'season')
-      : step === 'me' ? (su.sections.indexOf('marriage') >= 0 ? card({ body: '<p class="hl" style="margin-bottom:10px">What do you want more of with your spouse?</p>' + chips(SU_COUPLE_WANTS, su.wants, 'wants') + '<p class="hl" style="margin:16px 0 10px">Date budget</p>' + chips(SU_DATE_BUDGETS, su.budget ? [su.budget] : [], 'budget', 1) }) : '') + card({ body: '<p class="hl" style="margin-bottom:10px">Your own top 3</p>' + chips(SU_MY_PRIORITIES, su.mine, 'mine', 3) })
+    var head = { sections: ['What do you want help with?', 'Pick every part of family life you want in the app. You can change this any time.'], priorities: ['What matters most right now?', 'Pick up to ' + SU_MAX + '. The app puts these first and the ideas and advice lean toward them.'], season: ['What season are you in?', 'Pick any that fit. Ideas and advice will fit where you are.'], me: ['Just you', 'Only you see these answers. They shape your own ideas and advice.'], kids: ['Your kids', 'What each child loves and what you’re working on together. Ideas for them will fit.'] }[step];
+    var body = step === 'sections' ? chips(SU_SECTIONS, su.sections, 'sections') : step === 'priorities' ? SU_PRIORITY_GROUPS.map(function (g) { return '<p class="fn hv m3" style="text-transform:uppercase;letter-spacing:.8px;margin-top:6px">' + g[0] + '</p>' + chips(g[1], su.priorities, 'priorities', SU_MAX); }).join('') + '<p class="fn m3">' + su.priorities.length + ' of ' + SU_MAX + ' picked' + (su.priorities.length >= SU_MAX ? '. Tap one to remove it before adding another.' : '') + '</p>' : step === 'season' ? chips(SU_SEASONS, su.season, 'season')
+      : step === 'me' ? (su.sections.indexOf('marriage') >= 0 ? card({ body: '<p class="hl" style="margin-bottom:10px">What do you want more of with your spouse?</p>' + chips(SU_COUPLE_WANTS, su.wants, 'wants') + '<p class="hl" style="margin:16px 0 10px">Date budget</p>' + chips(SU_DATE_BUDGETS, su.budget ? [su.budget] : [], 'budget', 1) }) : '') + card({ body: '<p class="hl" style="margin-bottom:10px">Your own priorities (up to ' + SU_MAX + ')</p>' + chips(SU_MY_PRIORITIES, su.mine, 'mine', SU_MAX) })
       : kids.map(function (k) { var a = su.about[k.id] || { interests: [], focus: [] }; return card({ body: '<div style="display:flex;gap:10px;align-items:center;margin-bottom:12px">' + avatar(k, 32) + '<p class="t3">' + k.name + '</p></div><p class="sh b m2" style="margin-bottom:8px">Loves</p>' + chips(SU_KID_INTERESTS, a.interests, 'kid:' + k.id + ':interests') + '<p class="sh b m2" style="margin:14px 0 8px">Working on</p>' + chips(SU_KID_FOCUS, a.focus, 'kid:' + k.id + ':focus') }); }).join('');
     return '<div style="display:flex;align-items:center;padding:8px 20px 0"><p class="fn b br4" style="flex:1">' + (su.first ? 'Set up' : 'Check in') + ' · Step ' + (su.i + 1) + ' of ' + steps.length + '</p>' + (su.first ? '' : '<button class="link" data-a="back">Cancel</button>') + '</div>' +
       '<div style="margin:8px 20px 0;height:4px;border-radius:2px;background:var(--paper3)"><div style="width:' + ((su.i + 1) / steps.length * 100) + '%;height:4px;border-radius:2px;background:var(--brand500)"></div></div>' +
@@ -543,8 +560,6 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
     var ideas = IDEAS.girls.slice(0, 3).map(function (x, i) { return ['girls', i, x]; });
     var due = openRems(function (r) { return r.due && r.due <= TODAY; });
     return header('Today', { sub: fmtDay(TODAY) }) +
-      (!S.setup ? '<div class="gut">' + card({ v: 'accent', a: 'setup', eyebrow: 'Make the app yours', title: 'Tell us what matters most', body: '<p class="sh m2">About 3 minutes of tapping. Sections, ideas and advice will fit your family.</p>' }) + '</div>'
-        : S.setup.priorities.length ? '<div class="gut">' + card({ a: 'setup', eyebrow: 'Our focus right now', body: '<p class="hl">' + S.setup.priorities.map(function (k) { return lbl2(SU_PRIORITIES, k); }).join(' · ') + '</p><p class="fn" style="color:var(--brand500);margin-top:4px">Change</p>' }) + '</div>' : '') +
       (dates.length ? rail({ title: 'Coming up', sub: 'Birthdays and anniversaries' }, dates.map(function (d) { return tile({ area: d.kind === 'anniversary' ? 'marriage' : d.m.role === 'daughter' ? 'girls' : 'home', icon: d.kind === 'anniversary' ? 'heart' : 'cake', title: d.title, meta: fmtLong(d.date) + ' · ' + inDays(d.days), badge: d.days <= 14 ? 'Soon' : '' }); })) : '') +
       rail({ title: 'Today with ' + KIDS, sub: 'New every day', action: 'See all', act: 'tab-family' }, ideas.map(function (x) { return tile({ size: 'wide', area: x[0] === 'couple' ? 'marriage' : 'girls', icon: x[2].icon, eyebrow: x[0] === 'couple' ? 'Just us' : 'With ' + KIDS, title: x[2].title, meta: x[2].meta, att: (x[2].attachments || []).length, a: 'idea', id: x[0] + ':' + x[1] }); })) +
       sect('Reminders', 'All', 'tab-reminders') +
@@ -923,10 +938,8 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
     { key: 'i:oral-69-side', group: 'Oral', focus: ['oral-her', 'oral-him', 'adventure'], title: 'At the same time, side by side', detail: 'Lying on your sides, head to toe.',
       tips: ['Easier and more relaxed than one on top.', 'Take turns focusing so each of you can enjoy it.'] },
 
-    { key: 'i:tech-tease', group: 'Techniques and sensations', focus: ['slow', 'edging'], title: 'The slow tease', detail: 'Touch everywhere except the obvious places until they ask.',
+    { key: 'i:tech-tease', group: 'Techniques and sensations', focus: ['slow'], title: 'The slow tease', detail: 'Touch everywhere except the obvious places until they ask.',
       tips: ['Kiss and touch the neck, inner arms, back, inner thighs.', 'The waiting makes everything after feel stronger.'] },
-    { key: 'i:tech-edging', group: 'Techniques and sensations', focus: ['edging', 'adventure'], title: 'Edging', detail: 'Bring them close, then pause. Repeat a few times.',
-      tips: ['Works for her and for him.', 'Slow down or stop just before the peak, wait a little, then start again.', 'Usually makes the finish much stronger.'] },
     { key: 'i:tech-ice-warm', group: 'Techniques and sensations', focus: ['adventure', 'breasts'], title: 'Ice and warmth', detail: 'Trade between an ice cube and warm breath or a warm mouth.',
       tips: ['Try it on the neck, breasts and inner thighs.', 'A sip of warm tea warms the mouth.'] },
     { key: 'i:tech-light-touch', group: 'Techniques and sensations', focus: ['slow', 'ears'], title: 'Feather-light touch', detail: 'Fingertips, a feather or a silk scarf, barely touching.',
@@ -946,18 +959,18 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       tips: ['Go around it first; the tip can be too sensitive at the start.', 'Once she likes a rhythm, keep it steady.', 'Positions: close missionary with grinding, her on top rocking, spooning with his hand.'] },
     { key: 'i:focus-vaginal', group: 'Focus areas', focus: ['vaginal'], title: 'Vaginal and the G-spot', detail: 'Deeper, fuller sensations.',
       tips: ['Lots of foreplay and lube first.', 'The G-spot is a couple of inches in, on the front wall: fingers curled in a “come here” motion.', 'Positions: pillow under her hips, her on top leaning back, from behind.'] },
-    { key: 'i:focus-anal', group: 'Focus areas', focus: ['anal', 'adventure'], title: 'Anal play', detail: 'Only if you both want it. Go very slow and stop any time.',
-      tips: ['Start with touch on the outside only.', 'Use lots of lube. It is not optional here.', 'Relax, breathe, and talk the whole time.', 'Never go from anal to vaginal without washing first.', 'Toys must have a flared base.', 'Her on top or spooning lets her control everything.'] },
+    { key: 'i:focus-booty', group: 'Focus areas', focus: ['booty', 'adventure'], title: 'Booty play', detail: 'Lots of attention for her bottom.',
+      tips: ['Start with a slow massage using warm oil, kneading with your whole hands.', 'Kiss and nibble softly across her cheeks and the backs of her thighs.', 'Squeeze and hold while you are close. Many people love being grabbed here.', 'A light, playful spank only if you both like it. Ask first and check in.', 'Positions that put it front and center: from behind, lying flat, and her on top facing away.'] },
     { key: 'i:focus-ears', group: 'Focus areas', focus: ['ears'], title: 'Ears and neck', detail: 'A very sensitive area many people forget.',
       tips: ['Warm breath, soft kisses and whispering in her ear.', 'Gently nibble the earlobe and kiss slowly down the side of the neck.', 'Best with spooning or from behind, where your mouth is right there.'] },
   ],
 };
   // In this preview Lindy's answers are made up, so you can see what a match looks like.
-  var LINDY_YES = ['d:picnic-sunset', 'd:stargaze', 'd:dance-class', 'd:cook-new', 't:cabin', 't:national-park', 'p:garden', 'p:backyard', 'i:massage', 'i:long-kiss', 'i:candles', 'i:hotel', 'i:share-fantasy', 'i:slow-dance', 'i:pos-spooning', 'i:pos-lotus', 'i:pos-her-on-top', 'i:oral-her-back', 'i:tech-tease', 'i:tech-light-touch', 'i:focus-breasts', 'i:focus-ears', 'i:tech-edging'];
+  var LINDY_YES = ['d:picnic-sunset', 'd:stargaze', 'd:dance-class', 'd:cook-new', 't:cabin', 't:national-park', 'p:garden', 'p:backyard', 'i:massage', 'i:long-kiss', 'i:candles', 'i:hotel', 'i:share-fantasy', 'i:slow-dance', 'i:pos-spooning', 'i:pos-lotus', 'i:pos-her-on-top', 'i:oral-her-back', 'i:tech-tease', 'i:tech-light-touch', 'i:focus-breasts', 'i:focus-ears'];
   var wishTab = 'answer', openTips = {};
   var MOODS = [
   ['slow', 'Slow and close'], ['adventure', 'Adventurous'], ['breasts', 'Breasts'], ['clitoral', 'Clitoral'], ['vaginal', 'Vaginal'],
-  ['oral-her', 'Oral for her'], ['oral-him', 'Oral for him'], ['anal', 'Anal play'], ['ears', 'Ears and neck'], ['edging', 'Edging'],
+  ['oral-her', 'Oral for her'], ['oral-him', 'Oral for him'], ['booty', 'Booty play'], ['ears', 'Ears and neck'],
 ];
   var moodKey = function (d, f) { return 'mood:' + d + ':' + f; };
   // In this preview Lindy is in the mood for these today, so you can see a match.
@@ -1112,11 +1125,12 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
   SCREENS.educator = stub('Family Life Educator', 'graduation-cap', 'growth', ['Ask parenting and marriage questions, or build a short family program or handout, fitted to your family’s ages and stage.']);
   SCREENS.settings = function () {
     var c = S.theme, lbl = function (s) { return '<p class="fn hv m3" style="margin:14px 0 8px;text-transform:uppercase">' + s + '</p>'; };
-    return header('Settings', { right: backLink('More') }) + sect('Our family') + '<div class="gut">' + card({ flush: true, body: FAMILY.members.map(function (m) { return row({ leading: avatar(m, 30), title: m.full, sub: 'Born ' + fmtLong(m.birthday), value: String(ageOn(m.birthday)) }); }).join('') + row({ icon: 'heart', color: 'var(--a_marriage)', title: 'Anniversary', sub: fmtLong(FAMILY.anniversary), value: ageOn(FAMILY.anniversary) + ' yrs' }) }) +
+    return header('Settings', { right: backLink('More') }) +
+      sect('Personalization') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'compass', color: 'var(--brand500)', title: 'Priorities, season & sections', sub: S.setup ? 'What matters most right now, and which parts of the app you use. Change it any time.' : 'Tell the app what matters most (3 minutes)', chev: true, a: 'setup' }) }) + '</div>' +
+      sect('Our family') + '<div class="gut">' + card({ flush: true, body: FAMILY.members.map(function (m) { return row({ leading: avatar(m, 30), title: m.full, sub: 'Born ' + fmtLong(m.birthday), value: String(ageOn(m.birthday)) }); }).join('') + row({ icon: 'heart', color: 'var(--a_marriage)', title: 'Anniversary', sub: fmtLong(FAMILY.anniversary), value: ageOn(FAMILY.anniversary) + ' yrs' }) }) +
       '<div style="margin-top:10px"><button class="btn tinted full" data-a="invite">' + I('user-plus') + 'Invite Lindy</button></div>' + (S.invite ? '<div style="margin-top:10px">' + card({ v: 'accent', body: '<p class="fn m2">Invite code (good for 14 days)</p><p class="t1" style="letter-spacing:4px">' + S.invite + '</p><p class="cp m3">Sample code. The real one comes from your database.</p>' }) + '</div>' : '') +
       '<p class="cp m3" style="margin-top:6px">Ages, stages, health checks, ideas and studies all update from these dates.</p></div>' +
       sect('Kids’ privacy') + '<div class="gut">' + card({ flush: true, body: kids.map(function (k) { var on = !!S.privOk[k.id]; return '<div class="swrow">' + avatar(k, 30) + '<div style="flex:1"><p class="bd">' + esc(k.name) + ' · Can keep private goals and plans</p><p class="cp m3">When on, ' + esc(k.name) + ' can make goals, reminders and plans only she can see.</p></div><button class="switch' + (on ? ' on' : '') + '" role="switch" aria-checked="' + on + '" aria-label="' + esc(k.name) + ' can keep private goals and plans" data-a="privok" data-id="' + k.id + '"></button></div>'; }).join('') }) + '<p class="cp m3" style="margin-top:6px">Family things are seen by everyone. Private things are seen only by the person who made them. Turning this off stops new private items; ones already made stay private.</p></div>' +
-      sect('Priorities & season') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'compass', color: 'var(--brand500)', title: 'Check in', sub: S.setup ? 'What matters most right now. Change it any time.' : 'Tell the app what matters most (3 minutes)', chev: true, a: 'setup' }) }) + '</div>' +
       (!secOn('work') ? '' : sect('Work & personal schedules') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'briefcase', color: '#2F6FB4', title: 'Work calendars & tasks', sub: 'Outlook, Google, Asana, Todoist and more', chev: true, a: 'go', id: 'connections' }) }) + '</div>') +
       sect('Appearance') + '<div class="gut">' + card({ body:
         lbl('Light or dark') + '<div class="seg">' + [['light', 'Light'], ['dark', 'Dark'], ['auto', 'Match iPhone']].map(function (o) { return '<button class="' + (c.mode === o[0] ? 'on' : '') + '" data-a="mode" data-id="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>' +
@@ -1224,7 +1238,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
         if (f.indexOf('kid:') === 0) { var kp = f.split(':'); su.about[kp[1]] = su.about[kp[1]] || { interests: [], focus: [] }; list = su.about[kp[1]][kp[2]]; }
         else if (f === 'budget') { su.budget = su.budget === key ? '' : key; render(); return; }
         else list = su[f];
-        var at = list.indexOf(key); if (at >= 0) list.splice(at, 1); else { if (max && list.length >= max) list.shift(); list.push(key); }
+        var at = list.indexOf(key); if (at >= 0) list.splice(at, 1); else if (!max || list.length < max) list.push(key);
         render(); return; }
       case 'sustep': { var n = +id; if (n > 0 && su.i === 4) { S.setup = { sections: su.sections, priorities: su.priorities, season: su.season, updated_at: new Date().toISOString() }; S.myAns = { coupleWants: su.wants, dateBudget: su.budget, myPriorities: su.mine }; S.kidAbout = su.about; save(); var wasFirst = su.first; su = null; if (wasFirst) tab('today'); else back(); toast('Saved. The app now fits these answers.'); return; }
         su.i = Math.max(0, su.i + n); render(true); return; }
@@ -1367,9 +1381,9 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
       return c.openComposer({ element: target }).then(function (r) { notice.textContent = r && r.opened ? 'Type what you want changed, then post it. Choose to send it to Claude if you see that option.' : 'Tap Leave a note again, then tap the spot once more.'; });
     }).catch(function () { notice.textContent = 'That note didn’t open. Send Claude a screenshot in your chat instead.'; });
   }, true);
-  document.getElementById('resetBtn').addEventListener('click', function () { S = sampleState(); save(); nav = [{ r: 'today' }]; sheet = null; quiz = null; calSel = TODAY; calMode = 'month'; calQ = null; evDraft = null; calView = 'everyone'; feedErr = ''; goalMine = false; render(true); notice.textContent = 'Back to the sample family.'; });
+  document.getElementById('resetBtn').addEventListener('click', function () { S = sampleState(); save(); nav = [{ r: 'today' }]; sheet = null; quiz = null; calSel = TODAY; calMode = 'month'; calQ = null; evDraft = null; calView = 'everyone'; feedErr = ''; goalMine = false; startSetup(true); notice.textContent = 'Back to the sample family.'; });
   if (sysDark.addEventListener) sysDark.addEventListener('change', function () { render(); });
 
-  render(true);
+  if (!S.setup) startSetup(true); else render(true);
 })();
 </script>
