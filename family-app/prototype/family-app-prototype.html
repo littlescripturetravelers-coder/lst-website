@@ -1,0 +1,683 @@
+<title>Family App Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Atkinson+Hyperlegible:wght@400;700&family=Figtree:wght@400;700;800&family=Fredoka:wght@600;700&family=Lora:wght@600;700&family=Nunito:ital,wght@0,400;0,700;0,800;1,400&family=Young+Serif&display=swap">
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<style>
+/* Layout: LST parent-brand page chrome (navy band, linen ground) around one iPhone-sized frame that runs the app's own design system. */
+:root {
+  --navy: #1B2D5F; --gold: #F5C518; --amber: #D9A227; --teal: #5BD3DC; --linen: #F4EFE6; --oat: #DFD2BE; --caption: #5A6B93;
+  --page: var(--linen); --page-ink: var(--navy); --page-muted: var(--caption); --page-line: var(--oat); --frame: #0E1630;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --page: #121E40; --page-ink: #F4EFE6; --page-muted: #A9B4CF; --page-line: #2C3F72; --frame: #05080F; color-scheme: dark; } }
+:root[data-theme="dark"] { --page: #121E40; --page-ink: #F4EFE6; --page-muted: #A9B4CF; --page-line: #2C3F72; --frame: #05080F; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--page-ink); font-family: "Nunito", system-ui, sans-serif; }
+.band { background: var(--navy); color: #F4EFE6; border-bottom: 3px solid var(--gold); padding: 0 16px; }
+.band-in { max-width: 1040px; margin: 0 auto; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding-block: 10px; font-size: .72rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.band span { color: #A9B4CF; } .band em { color: var(--gold); font-style: normal; }
+.stage { max-width: 1040px; margin: 0 auto; padding: 0 16px; padding-block: 24px 40px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: start; }
+@media (max-width: 860px) { .stage { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 18px; } }
+.intro { display: grid; gap: 14px; max-width: 46ch; }
+.eyebrow { margin: 0; font-size: .74rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--amber); }
+.intro h1 { margin: 0; font-family: "Fredoka", sans-serif; font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 1.1; text-wrap: balance; }
+.intro h1::after { content: ""; display: block; width: 64px; height: 4px; background: var(--gold); margin-top: 12px; }
+.intro p { margin: 0; line-height: 1.55; }
+.intro ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; line-height: 1.45; }
+.intro .muted { color: var(--page-muted); font-size: .9rem; }
+.tools { display: flex; gap: 10px; flex-wrap: wrap; }
+.tool { font: inherit; font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; border-radius: 2px; border: 1.5px solid var(--page-ink); background: transparent; color: var(--page-ink); padding: 10px 14px; cursor: pointer; }
+.tool.on, .tool:hover { background: var(--page-ink); color: var(--page); }
+.tool:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+.notice { font-size: .9rem; color: var(--page-muted); min-height: 1.3em; }
+@media (max-width: 860px) { .intro { max-width: 390px; order: 2; } .intro .long { display: none; } }
+
+/* Phone */
+.phone { position: relative; width: 390px; max-width: 100%; height: min(820px, calc(100dvh - 90px)); min-height: 560px; border-radius: 44px; border: 10px solid var(--frame); background: var(--frame); overflow: hidden; box-shadow: 0 30px 60px -30px rgba(10, 20, 50, .55); }
+@media (max-width: 440px) { .phone { border-width: 6px; border-radius: 30px; } }
+.phone.noting { outline: 4px dashed var(--amber); outline-offset: 4px; cursor: crosshair; }
+.app { position: absolute; inset: 0; border-radius: 34px; overflow: hidden; background: var(--paper1); color: var(--ink1); font-family: var(--body); display: flex; flex-direction: column; }
+@media (max-width: 440px) { .app { border-radius: 24px; } }
+.status { flex: none; height: 40px; display: flex; justify-content: space-between; align-items: center; padding: 6px 26px 0; font-family: var(--body); font-weight: 700; font-size: 14px; color: var(--ink1); background: var(--paper1); }
+.scroll { flex: 1; overflow-y: auto; overflow-x: hidden; padding-bottom: 96px; scrollbar-width: none; }
+.scroll::-webkit-scrollbar { display: none; }
+.tabbar { position: absolute; left: 0; right: 0; bottom: 0; height: 78px; padding: 6px 4px 22px; display: flex; background: color-mix(in srgb, var(--paper1) 88%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: .5px solid var(--line2); }
+.tabbar button { flex: 1; display: grid; justify-items: center; gap: 2px; background: none; border: 0; color: var(--ink3); font-family: var(--body); font-weight: 700; font-size: 10px; cursor: pointer; padding: 0; }
+.tabbar button.on { color: var(--brand500); }
+.tabbar svg { width: 24px; height: 24px; }
+
+/* App type scale (matches src/theme/tokens.ts; --s is the in-app text size) */
+.app { --s: 1; }
+.hero { font-family: var(--display); font-size: calc(40px * var(--s)); line-height: 1.1; }
+.lt { font-family: var(--display); font-size: calc(32px * var(--s)); line-height: 1.19; margin: 0; }
+.t1 { font-family: var(--display); font-size: calc(26px * var(--s)); line-height: 1.23; margin: 0; }
+.t2 { font-family: var(--display); font-size: calc(21px * var(--s)); line-height: 1.28; margin: 0; }
+.t3 { font-family: var(--body); font-weight: 700; font-size: calc(19px * var(--s)); line-height: 1.26; margin: 0; }
+.hl { font-weight: 700; font-size: calc(17px * var(--s)); line-height: 1.3; }
+.bd { font-size: calc(17px * var(--s)); line-height: 1.41; }
+.co { font-size: calc(16px * var(--s)); line-height: 1.38; }
+.sh { font-size: calc(15px * var(--s)); line-height: 1.33; }
+.fn { font-size: calc(13px * var(--s)); line-height: 1.38; }
+.cp { font-size: calc(12px * var(--s)); line-height: 1.33; }
+.ov { font-weight: 800; font-size: calc(11px * var(--s)); line-height: 1.27; letter-spacing: 1.5px; text-transform: uppercase; }
+.b { font-weight: 700; } .hv { font-weight: 800; }
+.m2 { color: var(--ink2); } .m3 { color: var(--ink3); } .br4 { color: var(--brand400); } .brand { color: var(--brand500); }
+p { margin: 0; }
+
+.head { padding: 8px 20px 10px; display: flex; align-items: flex-end; gap: 10px; }
+.head > div { flex: 1; min-width: 0; }
+.link { background: none; border: 0; padding: 0; font: inherit; font-family: var(--body); font-weight: 700; color: var(--brand500); cursor: pointer; font-size: calc(17px * var(--s)); }
+.link.sh { font-size: calc(15px * var(--s)); }
+.iconbtn { background: none; border: 0; padding: 4px; color: var(--brand500); cursor: pointer; }
+.iconbtn svg { width: 26px; height: 26px; }
+.gut { padding: 0 20px; }
+.gap { display: grid; gap: 12px; }
+.sect { display: flex; padding: 20px 24px 8px; align-items: baseline; }
+.sect span { flex: 1; color: var(--ink3); font-weight: 800; font-size: calc(13px * var(--s)); text-transform: uppercase; letter-spacing: .8px; }
+.card { background: var(--paper0); border: 1px solid var(--line1); border-radius: 10px; padding: 16px; display: block; width: 100%; text-align: left; color: inherit; font: inherit; }
+button.card { cursor: pointer; }
+.card.sunken { background: var(--paper2); border: 0; } .card.accent { background: var(--gold50); border: 0; } .card.inverse { background: var(--brand500); border: 0; color: var(--inverse); }
+.card.inverse .ov { color: var(--teal); }
+.card.flush { padding: 0; overflow: hidden; }
+.card .eb { margin-bottom: 4px; } .card .ct { margin-bottom: 10px; }
+.rail-h { display: flex; align-items: flex-end; padding: 0 20px; margin: 24px 0 10px; gap: 10px; }
+.rail-h > div { flex: 1; min-width: 0; }
+.rail { display: flex; gap: 12px; overflow-x: auto; padding: 0 20px 4px; scroll-snap-type: x mandatory; scroll-padding: 20px; scrollbar-width: none; }
+.rail::-webkit-scrollbar { display: none; }
+.tile { flex: none; scroll-snap-align: start; display: grid; gap: 8px; background: none; border: 0; padding: 0; text-align: left; color: inherit; font: inherit; cursor: pointer; }
+.tile .art { position: relative; border-radius: 10px; display: grid; place-items: center; overflow: hidden; }
+.tile .art svg { width: 40px; height: 40px; }
+.tile.sm .art svg { width: 30px; height: 30px; }
+.tile.sel .art { outline: 2px solid var(--brand500); outline-offset: -2px; }
+.badge { position: absolute; top: 8px; left: 8px; background: var(--brand500); color: var(--inverse); border-radius: 4px; padding: 3px 7px; }
+.clip { position: absolute; right: 8px; bottom: 8px; background: rgba(255, 255, 255, .92); color: #1B2D5F; border-radius: 4px; padding: 3px 7px; display: flex; gap: 3px; align-items: center; font-weight: 700; font-size: 12px; }
+.clip svg { width: 12px; height: 12px; }
+.tile .cap { padding: 0 2px; display: grid; gap: 1px; }
+.row { display: flex; align-items: center; gap: 12px; min-height: 52px; padding-left: 16px; width: 100%; background: none; border: 0; text-align: left; color: inherit; font: inherit; cursor: pointer; }
+.row:disabled { cursor: default; }
+.row .ri { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; color: #fff; flex: none; }
+.row .ri svg { width: 17px; height: 17px; }
+.row .rb { flex: 1; display: flex; align-items: center; gap: 8px; padding: 10px 16px 10px 0; border-bottom: .5px solid var(--line2); align-self: stretch; min-width: 0; }
+.row:last-child .rb { border-bottom: 0; }
+.row .rt { flex: 1; min-width: 0; }
+.row .chev { width: 18px; height: 18px; color: var(--ink4); }
+.circle { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--ink4); flex: none; display: grid; place-items: center; background: none; padding: 0; cursor: pointer; }
+.circle.done { border: 2px solid var(--c, var(--brand500)); }
+.circle.done::after { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--c, var(--brand500)); }
+.btn { height: 44px; padding: 0 20px; border-radius: 10px; border: 0; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--body); font-weight: 700; font-size: calc(17px * var(--s)); cursor: pointer; background: var(--brand500); color: var(--inverse); }
+.btn svg { width: 18px; height: 18px; }
+.btn.sm { height: 32px; padding: 0 14px; font-size: calc(15px * var(--s)); } .btn.sm svg { width: 16px; height: 16px; }
+.btn.lg { height: 52px; }
+.btn.full { width: 100%; }
+.btn.cta { background: var(--gold500); color: var(--hlink); }
+.btn.tinted { background: var(--brand50); color: var(--brand700); }
+.btn.secondary { background: var(--paper0); color: var(--ink1); border: 1px solid var(--line2); }
+.btn.ghost { background: transparent; color: var(--brand500); }
+.btn:active, .tile:active, button.card:active { transform: scale(.97); }
+.avatar { border-radius: 50%; display: grid; place-items: center; color: #fff; font-family: var(--display); flex: none; }
+.seg { display: flex; background: var(--paper3); border-radius: 9px; padding: 2px; }
+.seg button { flex: 1; height: 32px; border-radius: 7px; border: 0; background: transparent; color: var(--ink1); font-family: var(--body); font-size: calc(15px * var(--s)); cursor: pointer; }
+.seg button.on { background: var(--paper0); font-weight: 700; }
+.chip { padding: 6px 10px; border-radius: 6px; border: 0; background: var(--paper2); color: var(--ink2); font-family: var(--body); font-weight: 700; font-size: calc(13px * var(--s)); cursor: pointer; }
+.chip.on { background: var(--brand500); color: var(--inverse); }
+.field { width: 100%; min-height: 44px; border-radius: 8px; border: 1px solid var(--line2); background: var(--paper0); color: var(--ink1); padding: 10px 12px; font-family: var(--body); font-size: calc(17px * var(--s)); }
+textarea.field { min-height: 70px; resize: vertical; }
+.step { display: flex; gap: 12px; align-items: flex-start; }
+.num { width: 24px; height: 24px; border-radius: 50%; background: var(--brand500); color: var(--inverse); display: grid; place-items: center; font-weight: 800; font-size: 13px; flex: none; }
+.lbl { margin: 22px 0 8px; color: var(--brand400); }
+.scripture { font-style: italic; }
+.cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); padding: 0 8px; }
+.cal .dow { text-align: center; padding: 4px 0; color: var(--ink3); font-weight: 700; font-size: 12px; }
+.cal button { height: 50px; border: 0; border-top: .5px solid var(--line1); background: none; display: grid; justify-items: center; align-content: start; padding-top: 5px; gap: 3px; cursor: pointer; color: var(--ink1); font-family: var(--body); }
+.cal .d { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: calc(17px * var(--s)); }
+.cal .today .d { border: 2px solid var(--gold500); font-weight: 800; }
+.cal .sel .d { background: var(--brand500); color: var(--inverse); font-weight: 800; border: 0; }
+.cal .sel.today .d { background: var(--gold500); color: var(--hlink); }
+.dots { display: flex; gap: 2px; height: 5px; } .dots i { width: 5px; height: 5px; border-radius: 50%; }
+.ev { display: flex; gap: 10px; padding: 10px; border-radius: 8px; }
+.ev .bar { width: 4px; border-radius: 2px; flex: none; }
+.smart { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.smart button { background: var(--paper0); border: 1px solid var(--line1); border-radius: 12px; padding: 12px; display: grid; gap: 8px; text-align: left; cursor: pointer; color: inherit; font: inherit; }
+.smart .top { display: flex; justify-content: space-between; align-items: center; }
+.dotic { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: #fff; }
+.dotic svg { width: 17px; height: 17px; }
+.sheet { position: absolute; inset: 0; background: rgba(5, 10, 25, .45); display: flex; align-items: flex-end; z-index: 5; }
+.sheet > div { background: var(--paper0); width: 100%; max-height: 88%; overflow-y: auto; border-radius: 20px 20px 0 0; padding: 10px 20px 28px; display: grid; gap: 12px; }
+.grab { width: 36px; height: 5px; border-radius: 3px; background: var(--line2); margin: 0 auto 6px; }
+.qcard { background: var(--brand500); color: var(--inverse); border-radius: 10px; padding: 16px; display: grid; gap: 4px; }
+.qcard .ov { color: var(--teal); }
+.dhero { height: 240px; display: grid; place-items: center; position: relative; }
+.dhero svg { width: 72px; height: 72px; }
+.back { position: absolute; top: 10px; left: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, .9); border: 0; display: grid; place-items: center; color: #1B2D5F; cursor: pointer; }
+.back svg { width: 20px; height: 20px; }
+.toast { position: absolute; left: 16px; right: 16px; bottom: 92px; background: var(--brand500); color: var(--inverse); border-radius: 10px; padding: 12px 14px; font-weight: 700; font-size: 14px; z-index: 6; }
+.sw { width: 36px; height: 36px; border-radius: 50%; border: 0; cursor: pointer; }
+.sw.on { box-shadow: 0 0 0 3px var(--paper0), 0 0 0 5px var(--ink1); }
+.preset { flex: 1; border-radius: 10px; overflow: hidden; border: 1px solid var(--line2); cursor: pointer; padding: 0; background: none; }
+.preset.on { border: 2px solid var(--ink1); }
+.preset .top { height: 30px; position: relative; } .preset .top i { position: absolute; left: 8px; bottom: 6px; width: 20px; height: 3px; }
+.preset span { display: block; padding: 6px 0; font-weight: 700; font-size: 13px; text-transform: capitalize; }
+.opt { padding: 10px; border-radius: 8px; border: 1px solid var(--line2); background: none; color: var(--ink1); cursor: pointer; text-align: left; }
+.opt.on { border: 2px solid var(--brand500); }
+.pill { border-radius: 10px; padding: 2px 8px; font-weight: 800; font-size: 12px; }
+.quiz button.choice { width: 100%; text-align: left; padding: 16px; border-radius: 10px; border: 1px solid var(--line2); background: var(--paper0); color: var(--ink1); font: inherit; font-size: calc(17px * var(--s)); cursor: pointer; }
+.quiz .bar { height: 6px; border-radius: 3px; background: var(--paper3); overflow: hidden; } .quiz .bar i { display: block; height: 100%; background: var(--brand500); }
+.ic16 { width: 16px; height: 16px; } .ic64 { width: 64px; height: 64px; } .ic18 { width: 18px; height: 18px; } .ic20 { width: 20px; height: 20px; }
+.app button:focus-visible, .app input:focus-visible, .app textarea:focus-visible, .app select:focus-visible { outline: 3px solid var(--gold500); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .btn:active, .tile:active, button.card:active { transform: none; } }
+</style>
+<div class="band"><div class="band-in"><div>Little Scripture Travelers <span>&middot; Family App</span></div><em>Prototype</em></div></div>
+<div class="stage">
+  <section class="intro" aria-label="About this prototype">
+    <p class="eyebrow">Try it before TestFlight</p>
+    <h1>Your family app, to tap through</h1>
+    <p>This is a working model of the app, built from the real app’s screens, colors and words. It uses your family as sample data. Nothing here touches the real app or your database.</p>
+    <ul class="long">
+      <li>Tap the tabs at the bottom, open ideas, check off reminders, and add your own.</li>
+      <li>Try More, then Settings, to change colors, fonts, dark mode and text size.</li>
+      <li>Take the love-languages quiz from the Family tab and watch the ideas change.</li>
+    </ul>
+    <p><b>Want something changed?</b> Tap <b>Leave a note</b>, then tap the part of the app you mean, and type what you want. Screenshots in our chat work too.</p>
+    <div class="tools">
+      <button class="tool" id="noteBtn" type="button">Leave a note</button>
+      <button class="tool" id="resetBtn" type="button">Start over</button>
+    </div>
+    <p class="notice" id="notice" role="status"></p>
+    <p class="muted long">What you change here is kept on this device only. The real app gets your changes when Claude builds them in.</p>
+  </section>
+  <div class="phone" id="phone"><div class="app" id="app">
+    <div class="status"><span id="clock">9:41</span><span>&#9679;&#9679;&#9679;</span></div>
+    <div class="scroll" id="scroll"></div>
+    <nav class="tabbar" id="tabbar" aria-label="App tabs"></nav>
+  </div></div>
+</div>
+<script id="proto">
+(function () {
+  // ---------- dates ----------
+  var NOW = new Date();
+  var pad = function (n) { return String(n).padStart(2, '0'); };
+  var isoOf = function (d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+  var TODAY = isoOf(NOW);
+  var addDays = function (iso, n) { var d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n); return isoOf(d); };
+  var daysBetween = function (a, b) { return Math.round((new Date(b + 'T12:00:00') - new Date(a + 'T12:00:00')) / 864e5); };
+  var ageOn = function (b, iso) { iso = iso || TODAY; var B = b.split('-').map(Number), T = iso.split('-').map(Number); return T[0] - B[0] - ((T[1] < B[1] || (T[1] === B[1] && T[2] < B[2])) ? 1 : 0); };
+  var nextOcc = function (orig) { var md = orig.slice(4), y = +TODAY.slice(0, 4), n = y + md; if (n < TODAY) n = (y + 1) + md; return { date: n, days: daysBetween(TODAY, n), years: +n.slice(0, 4) - +orig.slice(0, 4) }; };
+  var fmtLong = function (iso) { return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric' }); };
+  var fmtDay = function (iso) { return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }); };
+  var monthYear = function (iso) { return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', year: 'numeric' }); };
+  var inDays = function (n) { return n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : 'In ' + n + ' days'; };
+  var fmtTime = function (t) { var p = t.split(':').map(Number), h = p[0] % 12 || 12; return h + (p[1] ? ':' + pad(p[1]) : '') + ' ' + (p[0] >= 12 ? 'PM' : 'AM'); };
+  var fmtWhen = function (r) { if (!r.due) return ''; var d = r.due === TODAY ? 'Today' : r.due === addDays(TODAY, 1) ? 'Tomorrow' : r.due < TODAY ? fmtLong(r.due) : new Date(r.due + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }); return d + (r.time ? ', ' + fmtTime(r.time) : ''); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+
+  // ---------- design system (ported from src/theme) ----------
+  var AREA = { faith: ['#D9A227', '#F8EDCF'], marriage: ['#B5536B', '#F4E0E5'], girls: ['#D9823A', '#F9E6D3'], money: ['#3D7A58', '#DCEDE2'], health: ['#2E8C94', '#D8EEF0'], growth: ['#4F63A0', '#E0E5F3'], home: ['#7E6697', '#ECE4F1'] };
+  var PRESETS = [
+    { preset: 'evening', brand: '#1B2D5F', highlight: '#F5C518', paper: '#F4EFE6', ink: '#1B2D5F' },
+    { preset: 'clay', brand: '#A8502F', highlight: '#F2B84B', paper: '#FAF6EF', ink: '#2A211B' },
+    { preset: 'sage', brand: '#355845', highlight: '#E9C46A', paper: '#F2F0E8', ink: '#1F2E26' },
+    { preset: 'plum', brand: '#4E3563', highlight: '#F0B37E', paper: '#F6F1EE', ink: '#2B2135' }];
+  var ACCENTS = ['#1B2D5F', '#2E6E8E', '#355845', '#A8502F', '#B5536B', '#4E3563'], HIGHLIGHTS = ['#F5C518', '#5BD3DC', '#F0B37E', '#E9C46A'];
+  var DISPLAY = [['fredoka', 'Fredoka', '"Fredoka", "Nunito", sans-serif'], ['youngSerif', 'Young Serif', '"Young Serif", Georgia, serif'], ['lora', 'Lora', '"Lora", Georgia, serif'], ['nunito', 'Nunito', '"Nunito", sans-serif']];
+  var UI = [['nunito', 'Nunito', '"Nunito", system-ui, sans-serif'], ['figtree', 'Figtree', '"Figtree", system-ui, sans-serif'], ['atkinson', 'Atkinson Hyperlegible', '"Atkinson Hyperlegible", system-ui, sans-serif'], ['system', 'iPhone system', '-apple-system, system-ui, "Segoe UI", sans-serif']];
+  var hex = function (h) { return [1, 3, 5].map(function (i) { return parseInt(h.slice(i, i + 2), 16); }); };
+  var toHex = function (c) { return '#' + c.map(function (v) { return Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, '0'); }).join(''); };
+  var mix = function (a, b, p) { var A = hex(a), B = hex(b); return toHex(A.map(function (v, i) { return v * p + B[i] * (1 - p); })); };
+  var sysDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : { matches: false };
+  function themeVars(c) {
+    var B = c.brand, H = c.highlight, P = c.paper, I = c.ink, dark = c.mode === 'dark' || (c.mode === 'auto' && sysDark.matches), v = {};
+    if (dark) {
+      var bg = mix(B, '#070a14', .42), card = mix(B, '#0b0f1c', .55), light = mix(P, B, .94);
+      v = { brand50: mix(B, '#141a2e', .6), brand200: mix(B, '#ffffff', .6), brand400: mix(B, '#ffffff', .35), brand500: mix(B, '#ffffff', .3), brand700: mix(B, '#ffffff', .15),
+        gold50: mix(H, bg, .16), gold500: H, gold600: mix(H, '#000000', .82), paper0: card, paper1: bg, paper2: mix(B, '#0a0d18', .48), paper3: mix(B, '#1a2033', .62),
+        ink1: light, ink2: mix(light, bg, .82), ink3: mix(light, bg, .64), ink4: mix(light, bg, .42), inverse: bg, line1: mix(B, '#20283d', .62), line2: mix(B, '#2a3350', .66), teal: '#5BD3DC', hlink: bg };
+      Object.keys(AREA).forEach(function (k) { v['a_' + k] = AREA[k][0]; v['t_' + k] = mix(AREA[k][0], bg, .24); });
+    } else {
+      v = { brand50: mix(B, '#ffffff', .07), brand200: mix(B, '#ffffff', .3), brand400: mix(B, '#ffffff', .72), brand500: B, brand700: mix(B, '#000000', .7),
+        gold50: mix(H, '#ffffff', .14), gold500: H, gold600: mix(H, '#000000', .82), paper0: '#FFFFFF', paper1: P, paper2: mix(P, I, .92), paper3: mix(P, I, .84),
+        ink1: I, ink2: mix(I, P, .82), ink3: mix(I, P, .64), ink4: mix(I, P, .4), inverse: P, line1: mix(P, I, .9), line2: mix(P, I, .84), teal: '#5BD3DC', hlink: B };
+      Object.keys(AREA).forEach(function (k) { v['a_' + k] = AREA[k][0]; v['t_' + k] = AREA[k][1]; });
+    }
+    v.display = DISPLAY.filter(function (d) { return d[0] === c.display; })[0][2];
+    v.body = UI.filter(function (d) { return d[0] === c.ui; })[0][2];
+    v.dark = dark; return v;
+  }
+
+  // ---------- sample family (mirrors SEED_FAMILY in src/lib/family.ts) ----------
+  var FAMILY = { surname: 'Lewis', anniversary: '2019-09-28', faith: 'lds', members: [
+    { id: 'levi', name: 'Levi', full: 'Levi Lewis', role: 'dad', sex: 'm', birthday: '1986-10-21', color: '#4F63A0' },
+    { id: 'lindy', name: 'Lindy', full: 'Lindy Frost', role: 'mom', sex: 'f', birthday: '1983-08-22', color: '#B5536B' },
+    { id: 'mayble', name: 'Mayble', full: 'Mayble Lynn', role: 'daughter', sex: 'f', birthday: '2021-04-13', color: '#D9823A' },
+    { id: 'esmay', name: 'Esmay', full: 'Esmay', role: 'daughter', sex: 'f', birthday: '2022-11-15', color: '#2E8C94' }] };
+  var kids = FAMILY.members.filter(function (m) { return m.role === 'daughter' || m.role === 'son'; });
+  var parents = FAMILY.members.filter(function (m) { return m.role === 'dad' || m.role === 'mom'; });
+  var member = function (id) { return FAMILY.members.filter(function (m) { return m.id === id; })[0]; };
+  var KIDS = 'the girls';
+  var STAGES = [
+    { max: 2, label: 'Toddler', growth: [['Emotional', 'Big feelings, short fuse; needs you to stay close'], ['Language', 'Learning new words every week'], ['Physical', 'Walking, climbing, exploring everything'], ['Spiritual', 'Learns reverence by watching you']], feelings: ['Happy', 'Sad', 'Mad', 'Scared'], say: [['“No!”', '“Feet stay on the floor. Let’s climb outside.”'], ['“Stop crying.”', '“You’re sad. I’m holding you.”']] },
+    { max: 4, label: 'Preschool', growth: [['Emotional', 'Can wait a short time with help'], ['Language', 'Uses 4–5 word sentences and asks “why?”'], ['Physical', 'Pedals a tricycle, climbs well'], ['Social', 'Starting to play with other kids, not just beside them'], ['Spiritual', 'Folds arms and says short prayers with help']], feelings: ['Happy', 'Sad', 'Mad', 'Scared', 'Silly', 'Tired'], say: [['“Be nice to your sister.”', '“Gentle hands. Show me gentle.”'], ['“Hurry up!”', '“Shoes on, then we go see the ducks.”'], ['“Stop crying.”', '“You’re sad. I’m right here. Let’s take a big breath.”']] },
+    { max: 6, label: 'Kindergarten', growth: [['Emotional', 'Names 6+ feelings and calms down with help'], ['Social', 'Takes turns and follows game rules'], ['Language', 'Retells a story in order'], ['Physical', 'Hops, skips, learning to ride a bike'], ['Learning', 'Knows letter sounds; counts to 20 and beyond'], ['Spiritual', 'Says her own simple prayer']], feelings: ['Happy', 'Sad', 'Mad', 'Scared', 'Frustrated', 'Proud', 'Nervous', 'Jealous'], say: [['“Stop crying, it’s fine.”', '“You’re really sad the game is over. I’m here.”'], ['“Because I said so.”', '“We leave at 5 so we have time for dinner. Two more minutes.”'], ['“Good job.”', '“You kept trying even when it was hard.”']] },
+    { max: 9, label: 'Middle childhood', growth: [['Emotional', 'Uses a calm-down plan on her own sometimes'], ['Social', 'Cares a lot about fairness and friends'], ['Responsibility', 'Does 2–3 chores without reminders']], feelings: ['Happy', 'Sad', 'Frustrated', 'Proud', 'Embarrassed', 'Grateful'], say: [['“You’re fine.”', '“That sounds really hard. Want to talk now or at bedtime?”']] },
+    { max: 120, label: 'Tween and up', growth: [['Emotional', 'Handles bigger feelings, sometimes privately'], ['Social', 'Friend groups shift; peer opinion grows']], feelings: ['Happy', 'Anxious', 'Proud', 'Overwhelmed'], say: [['“Fix your attitude.”', '“You seem upset. I’m here when you want to talk.”']] }];
+  var stageFor = function (age) { return STAGES.filter(function (s) { return age <= s.max; })[0]; };
+  var LOVE = {
+    words: { name: 'Words of affirmation', icon: 'message-circle-heart', ideas: ['Text one specific thing you admired today', 'Leave a note on the bathroom mirror', 'Tell the kids, in front of them, what you love about their mom/dad', 'Write a letter for your anniversary box'] },
+    service: { name: 'Acts of service', icon: 'hand-helping', ideas: ['Take a chore off their list without being asked', 'Handle bedtime solo tonight', 'Fill up their car with gas', 'Prep tomorrow’s lunches'] },
+    gifts: { name: 'Receiving gifts', icon: 'gift', ideas: ['Pick up their favorite treat on the way home', 'A small “saw this and thought of you”', 'Frame a photo of the two of you', 'Let the kids make them a card'] },
+    time: { name: 'Quality time', icon: 'clock', ideas: ['20 minutes, phones in another room', 'Walk after the kids are down', 'Cook dinner together', 'Plan a date this week, and you book the sitter'] },
+    touch: { name: 'Physical touch', icon: 'hand-heart', ideas: ['A long hug when they get home', 'Hold hands on the walk', 'Back or shoulder rub tonight', 'Sit close on the couch'] } };
+  var QUIZ = [['Hearing “I’m proud of you”', 'words', 'A long, unhurried talk', 'time'], ['Coming home to the dishes done', 'service', 'A hug the second I walk in', 'touch'], ['A little surprise “thinking of you” gift', 'gifts', 'A sweet note or text', 'words'], ['A whole evening, just us', 'time', 'Help with something I’ve been dreading', 'service'], ['Holding hands', 'touch', 'Something thoughtful they picked out', 'gifts'], ['Being thanked for what I do', 'words', 'Help without having to ask', 'service'], ['A walk together with no phones', 'time', 'Sitting close on the couch', 'touch'], ['A gift on an ordinary day', 'gifts', 'Them taking the kids so I can rest', 'service'], ['A kiss goodbye', 'touch', 'Hearing what they love about me', 'words'], ['Planning a date for us', 'time', 'A souvenir from their trip', 'gifts']];
+
+  // Sample AI content: in the real app these are written fresh each day for your family.
+  var IDEAS = {
+    couple: [
+      { title: 'Porch picnic after bedtime', meta: 'Free · 45 min · Home', icon: 'moon-star', why: 'Time just for the two of you, no sitter needed, right after the girls are down.', steps: ['Lay a blanket on the porch or living-room floor', 'Bring two drinks and something sweet', 'Phones stay inside', 'Take turns with the question cards'], attachments: [{ type: 'questions', title: 'Questions for tonight', meta: '3 cards', body: ['What is one moment this week you felt proud of us?', 'What is something small I could do that would help you most this week?', 'Where do you want our family to be a year from now?'] }] },
+      { title: 'Sunset drive and shakes', meta: '$ · 1 hr · Out', icon: 'car', why: 'A change of scene and a long, easy talk in the car.', steps: ['Pick a road with a view', 'Stop for two shakes', 'Park and watch the sun go down'] },
+      { title: 'Cook something new together', meta: '$$ · 1 hr · Home', icon: 'chef-hat', why: 'Working side by side counts as quality time, and dinner gets made.', steps: ['Pick one recipe neither of you has made', 'Split the jobs', 'Eat at the table with candles'], attachments: [{ type: 'checklist', title: 'Shopping list', meta: '5 items', body: ['Chicken thighs', 'Lemons', 'Garlic', 'Fresh basil', 'Crusty bread'] }] },
+      { title: 'Temple grounds walk', meta: 'Free · 1 hr · Out', icon: 'footprints', why: 'A peaceful walk that brings you closer to each other and to Heavenly Father.', steps: ['Go in the early evening', 'Walk the grounds slowly', 'Share one thing you are grateful for'] }],
+    girls: [
+      { title: 'Paper-plate sheep craft', meta: 'Free · 25 min · Home', icon: 'scissors', min: 3, why: 'Goes with tonight’s story about the Good Shepherd.', steps: ['Glue cotton balls on a paper plate', 'Add a face and ears from black paper', 'Hang it where the girls can see it'], attachments: [{ type: 'scripture', title: 'Scripture to share', meta: 'Psalm 23:1', body: ['The Lord is my shepherd; I shall not want.', 'Ask: who takes care of you?'] }] },
+      { title: 'Leaf-hunt nature walk', meta: 'Free · 30 min · Out', icon: 'leaf', min: 3, why: 'Fall colors are out and it gets wiggles out before dinner.', steps: ['Give each girl a bag', 'Find red, yellow and brown leaves', 'Sort them by color at home'] },
+      { title: 'Kitchen helper muffins', meta: '$ · 40 min · Home', icon: 'cookie', min: 3, why: 'Measuring and stirring build counting skills and patience.', steps: ['Mayble measures, Esmay stirs', 'Count the scoops out loud', 'Share one with a neighbor'] },
+      { title: 'Living-room obstacle course', meta: 'Free · 20 min · Home', icon: 'tent', min: 3, why: 'Big-body play helps with sleep and listening.', steps: ['Pillows to jump, a blanket tunnel, a tape line to balance on', 'Time each run', 'Let the girls design the last round'] }] };
+  var NIGHT = { title: 'The Lord Is My Shepherd', scripture: 'Psalm 23' };
+  var STUDY = {
+    read: 'Read Psalm 23 out loud, one verse each. Stop after verse 4 and let it sit for a moment.',
+    says: 'Heavenly Father leads and feeds His children the way a good shepherd cares for sheep. Even in the darkest valley, we are not alone.',
+    marriage: [{ who: 'Levi', q: 'When have you felt led to “still waters” this year, and how can I protect that kind of rest for you?' }, { who: 'Lindy', q: 'What is one “valley” you are walking through right now that I could walk through with you?' }],
+    parenting: [{ who: 'Mayble', how: 'At 5 she can retell a story. Ask her to tell you what the shepherd does when a sheep is lost.' }, { who: 'Esmay', how: 'At 3 she learns by doing. Let her be the little lamb and you be the shepherd who finds her.' }],
+    act: 'Levi: write Lindy a note naming one way she shepherds the girls well. Lindy: send Levi a text thanking him for something he did this week.',
+    pray: 'Thank Heavenly Father for leading your family, and ask for help to be gentle shepherds at home today.' };
+  var ACTIVITY = { title: 'Find the Lost Lamb', icon: 'search', minutes: 20, line: 'A kind shepherd looks and looks until he finds his lost little lamb and carries it home.',
+    materials: ['Cotton balls', 'A small stuffed animal', 'A blanket'], setup: 'Hide the stuffed animal somewhere in the living room before you start.',
+    together: ['Read Psalm 23:1 together', 'Everyone is a shepherd: count the cotton-ball sheep in the “field”', 'Discover one lamb is missing', 'Search the room together until you find it', 'Wrap the lamb in the blanket and carry it “home”'],
+    per: [{ name: 'Mayble', role: 'Head shepherd', adapt: 'Let her count the sheep to 10 and give the search clues.', say: 'The shepherd never stops looking. Heavenly Father never stops loving you.', got: 'She can tell you why the shepherd kept looking.' },
+      { name: 'Esmay', role: 'Little lamb finder', adapt: 'Hide the lamb in an easy spot near her. Celebrate big when she finds it.', say: 'You found the lamb! Jesus finds us too.', got: 'She hugs the lamb and says “found.”' }],
+    feelings: 'Name the feeling the lost lamb had (scared) and the feeling when it was found (safe and happy). Ask each girl to show both faces.',
+    tie: { ref: 'Psalm 23:1', qs: [['Mayble', 'Who is our shepherd?'], ['Esmay', 'Who loves you?']] },
+    bedtime: 'At bedtime, ask: “What did the shepherd do when a lamb was lost?”' };
+  var LISTS = [{ id: 'family', name: 'Family', color: 'brand', icon: 'house' }, { id: 'groceries', name: 'Groceries', color: 'money', icon: 'shopping-cart' }, { id: 'date', name: 'Date night', color: 'marriage', icon: 'heart' }, { id: 'kids', name: 'Our kids', color: 'girls', icon: 'flower-2' }, { id: 'projects', name: 'Home projects', color: 'home', icon: 'hammer' }, { id: 'health', name: 'Health', color: 'health', icon: 'stethoscope' }];
+  function sampleState() {
+    return {
+      theme: { preset: 'evening', brand: '#1B2D5F', highlight: '#F5C518', paper: '#F4EFE6', ink: '#1B2D5F', display: 'fredoka', ui: 'nunito', mode: 'auto', scale: 1 },
+      rems: [
+        { id: 'r1', title: 'Pick up prescriptions', list: 'family', due: TODAY, time: '17:30' },
+        { id: 'r2', title: 'Milk, eggs, bananas', list: 'groceries', due: TODAY, notes: 'And the good bread' },
+        { id: 'r3', title: 'Book a sitter for Friday', list: 'date', due: addDays(TODAY, 2), flagged: true },
+        { id: 'r4', title: 'Mayble’s library books due', list: 'kids', due: addDays(TODAY, 3) },
+        { id: 'r5', title: 'Replace furnace filter', list: 'projects', due: addDays(TODAY, 5) },
+        { id: 'r6', title: 'Esmay well-child visit', list: 'health', due: addDays(TODAY, 12), time: '10:00', cal: true },
+        { id: 'r7', title: 'Call the bank about the car loan', list: 'family', due: addDays(TODAY, -1) }],
+      events: [
+        { title: 'Family home evening', area: 'faith', day: 1, time: '18:30' },
+        { title: 'Mayble’s soccer', area: 'girls', day: 6, time: '09:00' },
+        { title: 'Date night', area: 'marriage', day: 5, time: '19:00' }],
+      ll: {}, answers: {}, lanternDone: null, actDone: {}, home: {}, homeDay: TODAY, planned: 0,
+      chores: [{ id: 'c1', who: 'mayble', title: 'Make bed' }, { id: 'c2', who: 'mayble', title: 'Set and clear the table' }, { id: 'c3', who: 'esmay', title: 'Put toys in the bin' }] };
+  }
+  var KEY = 'family-app-prototype-v1';
+  var S;
+  try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { S = null; }
+  if (!S || !S.theme) S = sampleState();
+  if (S.homeDay !== TODAY) { S.home = {}; S.homeDay = TODAY; }
+  var save = function () { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+
+  // ---------- navigation ----------
+  var nav = [{ r: 'today' }], sheet = null, toastMsg = '', toastTimer = null;
+  var TABS = [['today', 'Today', 'sun'], ['calendar', 'Calendar', 'calendar'], ['reminders', 'Reminders', 'list-checks'], ['family', 'Family', 'heart-handshake'], ['more', 'More', 'layout-grid']];
+  var cur = function () { return nav[nav.length - 1]; };
+  var go = function (r, p) { nav.push({ r: r, p: p }); render(true); };
+  var back = function () { if (nav.length > 1) nav.pop(); render(true); };
+  var tab = function (r) { nav = [{ r: r }]; render(true); };
+  var toast = function (m) { toastMsg = m; clearTimeout(toastTimer); toastTimer = setTimeout(function () { toastMsg = ''; render(); }, 2200); };
+
+  // ---------- small builders ----------
+  var I = function (name, cls) { return '<i data-lucide="' + name + '"' + (cls ? ' class="' + cls + '"' : '') + '></i>'; };
+  var area = function (a) { return ['var(--a_' + a + ')', 'var(--t_' + a + ')']; };
+  var listColor = function (l) { return l.color === 'brand' ? 'var(--brand500)' : 'var(--a_' + l.color + ')'; };
+  var listOf = function (id) { return LISTS.filter(function (l) { return l.id === id; })[0] || LISTS[0]; };
+  var avatar = function (m, size) { return '<span class="avatar" style="width:' + size + 'px;height:' + size + 'px;background:' + m.color + ';font-size:' + Math.round(size * .42) + 'px">' + esc(m.name[0]) + '</span>'; };
+  function header(title, opts) { opts = opts || {}; return '<div class="head"><div>' + (opts.sub ? '<p class="fn b br4">' + esc(opts.sub) + '</p>' : '') + '<h1 class="lt">' + esc(title) + '</h1></div>' + (opts.right || '') + '</div>'; }
+  var backLink = function (label) { return '<button class="link" data-a="back">' + esc(label) + '</button>'; };
+  var sect = function (t, action, act) { return '<div class="sect"><span>' + esc(t) + '</span>' + (action ? '<button class="link sh" data-a="' + act + '">' + esc(action) + '</button>' : '') + '</div>'; };
+  function card(o) {
+    var tag = o.a ? 'button' : 'div';
+    return '<' + tag + ' class="card ' + (o.v || '') + (o.flush ? ' flush' : '') + '"' + (o.a ? ' data-a="' + o.a + '"' + (o.id != null ? ' data-id="' + o.id + '"' : '') : '') + (o.style ? ' style="' + o.style + '"' : '') + '>' +
+      (o.eyebrow ? '<p class="ov br4 eb">' + esc(o.eyebrow) + '</p>' : '') + (o.title ? '<h3 class="t2 ct">' + esc(o.title) + '</h3>' : '') + (o.body || '') + '</' + tag + '>';
+  }
+  var SIZES = { sm: [120, 96], md: [156, 120], wide: [272, 150], tall: [150, 200] };
+  function tile(o) {
+    var sz = SIZES[o.size || 'md'], c = o.area ? area(o.area) : ['var(--brand500)', 'var(--brand50)'];
+    return '<button class="tile ' + (o.size || 'md') + (o.sel ? ' sel' : '') + '" style="width:' + sz[0] + 'px"' + (o.a ? ' data-a="' + o.a + '" data-id="' + esc(o.id) + '"' : '') + '>' +
+      '<span class="art" style="width:' + sz[0] + 'px;height:' + sz[1] + 'px;background:' + c[1] + ';color:' + c[0] + '">' + (o.leading || I(o.icon || 'sparkles')) +
+      (o.badge ? '<span class="badge ov">' + esc(o.badge) + '</span>' : '') + (o.att ? '<span class="clip">' + I('paperclip') + o.att + '</span>' : '') + '</span>' +
+      '<span class="cap">' + (o.eyebrow ? '<span class="ov br4">' + esc(o.eyebrow) + '</span>' : '') + '<span class="sh b">' + esc(o.title) + '</span>' + (o.meta ? '<span class="fn m3">' + esc(o.meta) + '</span>' : '') + '</span></button>';
+  }
+  function rail(o, items) { return '<div class="rail-h"><div>' + (o.title ? '<h2 class="t2">' + esc(o.title) + '</h2>' : '') + (o.sub ? '<p class="fn m3">' + esc(o.sub) + '</p>' : '') + '</div>' + (o.action ? '<button class="link sh" data-a="' + o.act + '">' + esc(o.action) + '</button>' : '') + '</div><div class="rail">' + items.join('') + '</div>'; }
+  function row(o) {
+    var lead = o.leading || (o.icon ? '<span class="ri" style="background:' + (o.color || 'var(--brand500)') + '">' + I(o.icon) + '</span>' : '');
+    return '<button class="row"' + (o.a ? ' data-a="' + o.a + '"' + (o.id != null ? ' data-id="' + esc(o.id) + '"' : '') : ' disabled') + '>' + lead + '<span class="rb"><span class="rt"><span class="bd" style="display:block">' + esc(o.title) + '</span>' + (o.sub ? '<span class="fn m3" style="display:block">' + esc(o.sub) + '</span>' : '') + '</span>' + (o.value ? '<span class="bd m3">' + esc(o.value) + '</span>' : '') + (o.trail || '') + (o.chev ? I('chevron-right', 'chev') : '') + '</span></button>';
+  }
+
+  // ---------- data helpers ----------
+  function upcoming() {
+    var out = FAMILY.members.map(function (m) { var n = nextOcc(m.birthday); return { kind: 'birthday', title: m.name + ' turns ' + n.years, date: n.date, days: n.days, m: m }; });
+    var a = nextOcc(FAMILY.anniversary); out.push({ kind: 'anniversary', title: a.years + ' years married', date: a.date, days: a.days });
+    return out.sort(function (x, y) { return x.days - y.days; });
+  }
+  var openRems = function (f) { return S.rems.filter(function (r) { return !r.done && f(r); }); };
+  function ideaById(id) { var p = id.split(':'); return IDEAS[p[0]][+p[1]]; }
+  function eventsOn(iso) {
+    var dow = new Date(iso + 'T12:00:00').getDay(), out = [];
+    FAMILY.members.forEach(function (m) { if (m.birthday.slice(5) === iso.slice(5)) out.push({ title: m.name + '’s birthday · ' + ageOn(m.birthday, iso), area: m.role === 'daughter' ? 'girls' : 'home', time: 'All day' }); });
+    if (FAMILY.anniversary.slice(5) === iso.slice(5)) out.push({ title: 'Anniversary · ' + ageOn(FAMILY.anniversary, iso) + ' years', area: 'marriage', time: 'All day' });
+    S.events.forEach(function (e) { if (e.day === dow && iso >= addDays(TODAY, -35) && iso <= addDays(TODAY, 60)) out.push({ title: e.title, area: e.area, time: fmtTime(e.time) }); });
+    return out;
+  }
+
+  // ---------- screens ----------
+  var SCREENS = {};
+  SCREENS.today = function () {
+    var dates = upcoming().filter(function (d) { return d.days <= 60; });
+    var ideas = IDEAS.couple.slice(0, 2).map(function (x, i) { return ['couple', i, x]; }).concat(IDEAS.girls.slice(0, 2).map(function (x, i) { return ['girls', i, x]; }));
+    var due = openRems(function (r) { return r.due && r.due <= TODAY; });
+    return header('Today', { sub: fmtDay(TODAY) }) +
+      '<div class="gut">' + card({ v: 'inverse', a: 'go', id: 'lantern', eyebrow: 'Morning Lantern · 10 min together', title: NIGHT.scripture, body: '<p class="sh">Read it, answer one question each, and pick one way to live it with ' + KIDS + ' today.' + (S.lanternDone === TODAY ? ' <b>Done today.</b>' : '') + '</p>' }) + '</div>' +
+      (dates.length ? rail({ title: 'Coming up', sub: 'Birthdays and anniversaries' }, dates.map(function (d) { return tile({ area: d.kind === 'anniversary' ? 'marriage' : d.m.role === 'daughter' ? 'girls' : 'home', icon: d.kind === 'anniversary' ? 'heart' : 'cake', title: d.title, meta: fmtLong(d.date) + ' · ' + inDays(d.days), badge: d.days <= 14 ? 'Soon' : '' }); })) : '') +
+      rail({ title: 'Today’s ideas', sub: 'New every day', action: 'See all', act: 'tab-family' }, ideas.map(function (x) { return tile({ size: 'wide', area: x[0] === 'couple' ? 'marriage' : 'girls', icon: x[2].icon, eyebrow: x[0] === 'couple' ? 'Just us' : 'With ' + KIDS, title: x[2].title, meta: x[2].meta, att: (x[2].attachments || []).length, a: 'idea', id: x[0] + ':' + x[1] }); })) +
+      sect('Reminders', 'All', 'tab-reminders') +
+      '<div class="gut">' + card({ flush: true, body: due.length ? due.map(function (r) { return row({ leading: '<span class="circle" data-a="toggle" data-id="' + r.id + '" role="checkbox" aria-checked="false" aria-label="Complete ' + esc(r.title) + '"></span>', title: r.title, sub: fmtWhen(r), a: 'toggle', id: r.id }); }).join('') : '<p class="sh m3" style="padding:16px">All caught up for today.</p>' }) + '</div>';
+  };
+  var calYM = null, calSel = TODAY;
+  SCREENS.calendar = function () {
+    if (!calYM) calYM = [+TODAY.slice(0, 4), +TODAY.slice(5, 7)];
+    var y = calYM[0], m = calYM[1], iso = function (d) { return y + '-' + pad(m) + '-' + pad(d); };
+    var start = new Date(y, m - 1, 1).getDay(), days = new Date(y, m, 0).getDate(), cells = '';
+    ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(function (d) { cells += '<span class="dow">' + d + '</span>'; });
+    for (var i = 0; i < start; i++) cells += '<span></span>';
+    for (var d = 1; d <= days; d++) {
+      var s = iso(d), dots = eventsOn(s).map(function (e) { return 'var(--a_' + e.area + ')'; }).concat(openRems(function (r) { return r.cal && r.due === s; }).map(function () { return 'var(--ink3)'; })).slice(0, 3);
+      cells += '<button class="' + (s === TODAY ? 'today ' : '') + (s === calSel ? 'sel' : '') + '" data-a="calsel" data-id="' + s + '" aria-label="' + fmtDay(s) + '"><span class="d">' + d + '</span><span class="dots">' + dots.map(function (c) { return '<i style="background:' + c + '"></i>'; }).join('') + '</span></button>';
+    }
+    var items = eventsOn(calSel), rs = S.rems.filter(function (r) { return r.cal && r.due === calSel; });
+    return header(new Date(y, m - 1, 1).toLocaleDateString('en-US', { month: 'long' }), { sub: String(y), right: '<button class="iconbtn" data-a="newrem" data-id="cal" aria-label="New calendar item">' + I('plus') + '</button>' }) +
+      '<div class="cal">' + cells + '</div>' +
+      '<div style="display:flex;justify-content:center;gap:8px;margin:6px 0"><button class="btn ghost sm" data-a="calprev">' + I('chevron-left') + 'Previous</button><button class="btn ghost sm" data-a="calnext">Next' + I('chevron-right') + '</button></div>' +
+      '<div style="background:var(--paper0);border-top:.5px solid var(--line2);padding:12px 0 30px"><div class="gut gap" style="gap:6px"><p class="sh b m2">' + fmtDay(calSel) + '</p>' +
+      items.map(function (e) { var c = area(e.area); return '<div class="ev" style="background:' + c[1] + '"><span class="bar" style="background:' + c[0] + '"></span><div><p class="sh b">' + esc(e.title) + '</p><p class="fn m2">' + e.time + '</p></div></div>'; }).join('') +
+      rs.map(function (r) { return '<div class="ev" style="border:1px solid var(--line1)"><button class="circle' + (r.done ? ' done' : '') + '" data-a="toggle" data-id="' + r.id + '" aria-label="Complete"></button><div><p class="sh b' + (r.done ? ' m3' : '') + '">' + esc(r.title) + '</p><p class="fn m2">' + (r.time ? fmtTime(r.time) : 'All day') + ' · Reminders</p></div></div>'; }).join('') +
+      (!items.length && !rs.length ? '<p class="sh m3">Nothing planned. Tap + to add something.</p>' : '') + '</div></div>';
+  };
+  var SMART = [
+    { id: 'today', name: 'Today', icon: 'calendar-days', color: 'var(--brand500)', f: function (r) { return !r.done && r.due && r.due <= TODAY; } },
+    { id: 'scheduled', name: 'Scheduled', icon: 'calendar', color: '#B43A2E', f: function (r) { return !r.done && !!r.due; } },
+    { id: 'all', name: 'All', icon: 'inbox', color: 'var(--ink2)', f: function (r) { return !r.done; } },
+    { id: 'flagged', name: 'Flagged', icon: 'flag', color: 'var(--gold600)', f: function (r) { return !r.done && r.flagged; } }];
+  function remRow(r) {
+    var l = listOf(r.list), late = !r.done && r.due && r.due < TODAY;
+    return '<div style="display:flex;gap:12px;padding:11px 0 0 16px"><button class="circle' + (r.done ? ' done' : '') + '" style="--c:' + listColor(l) + '" data-a="toggle" data-id="' + r.id + '" aria-label="' + (r.done ? 'Mark not done' : 'Complete') + ': ' + esc(r.title) + '"></button>' +
+      '<div style="flex:1;padding:0 16px 11px 0;border-bottom:.5px solid var(--line2);min-width:0"><div style="display:flex;gap:6px"><p class="bd" style="flex:1' + (r.done ? ';color:var(--ink3)' : '') + '">' + esc(r.title) + '</p>' + (r.flagged ? '<span style="color:var(--gold600)">' + I('flag', 'ic16') + '</span>' : '') + '</div>' +
+      (r.notes ? '<p class="sh m3">' + esc(r.notes) + '</p>' : '') + (r.due ? '<p class="sh" style="color:' + (late ? '#B43A2E' : 'var(--ink3)') + '">' + fmtWhen(r) + (r.cal ? '  ·  on calendar' : '') + '</p>' : '') + '</div></div>';
+  }
+  SCREENS.reminders = function () {
+    return header('Reminders', { right: '<button class="iconbtn" data-a="newrem" aria-label="New reminder">' + I('plus') + '</button>' }) +
+      '<div class="gut smart">' + SMART.map(function (s) { return '<button data-a="list" data-id="' + s.id + '"><span class="top"><span class="dotic" style="background:' + s.color + '">' + I(s.icon) + '</span><span class="t1">' + S.rems.filter(s.f).length + '</span></span><span class="sh b m2">' + s.name + '</span></button>'; }).join('') + '</div>' +
+      sect('My lists') + '<div class="gut">' + card({ flush: true, body: LISTS.map(function (l) { return row({ icon: l.icon, color: listColor(l), title: l.name, value: String(openRems(function (r) { return r.list === l.id; }).length), chev: true, a: 'list', id: l.id }); }).join('') }) + '</div>';
+  };
+  SCREENS.list = function (id) {
+    var smart = SMART.filter(function (s) { return s.id === id; })[0], l = LISTS.filter(function (x) { return x.id === id; })[0];
+    var rows = S.rems.filter(smart ? smart.f : function (r) { return r.list === id && !r.done; });
+    return header(smart ? smart.name : l.name, { right: backLink('Lists') }) + rows.map(remRow).join('') +
+      '<form data-f="quickadd" data-id="' + id + '" style="display:flex;gap:12px;padding:16px"><span class="circle" style="border-style:dashed"></span><input class="bd" name="t" placeholder="New reminder" aria-label="New reminder" style="flex:1;border:0;background:none;color:var(--ink1);font-family:var(--body)"></form>';
+  };
+  SCREENS.family = function () {
+    var cards = parents.map(function (p) { var top = (S.ll[p.id] || [])[0]; return top ? { p: p, l: top, idea: LOVE[top].ideas[NOW.getDate() % LOVE[top].ideas.length] } : null; }).filter(Boolean);
+    return header('Family') +
+      '<div class="gut">' + card({ v: 'accent', a: 'go', id: 'story', eyebrow: 'Tonight’s story · ' + NIGHT.title, title: ACTIVITY.title, body: '<p class="sh m2">' + esc(ACTIVITY.line) + '</p>' }) + '</div>' +
+      rail({ title: 'Our girls' }, kids.map(function (k, i) { var a = ageOn(k.birthday); return tile({ size: 'tall', area: i % 2 ? 'health' : 'girls', leading: avatar(k, 72), eyebrow: a + ' years', title: k.name, meta: stageFor(a).label, a: 'child', id: k.id }); })) +
+      rail({ title: 'Today with ' + KIDS, sub: 'New every day', action: 'More ideas', act: 'more-ideas' }, IDEAS.girls.map(function (x, i) { return tile({ area: 'girls', icon: x.icon, title: x.title, meta: x.meta, badge: 'New', att: (x.attachments || []).length, a: 'idea', id: 'girls:' + i }); })) +
+      (cards.length ? rail({ title: 'Love each other today', sub: 'Fitted to your love languages' }, cards.map(function (c) { return tile({ size: 'wide', area: 'marriage', icon: LOVE[c.l].icon, eyebrow: 'For ' + c.p.name + ' · ' + LOVE[c.l].name, title: c.idea, a: 'love', id: c.p.id }); })) +
+        (cards.length < 2 ? '<div class="gut" style="margin-top:12px">' + card({ v: 'sunken', a: 'quiz', id: parents.filter(function (p) { return !S.ll[p.id]; })[0].id, eyebrow: 'Love languages', body: '<p class="sh">' + esc(parents.filter(function (p) { return !S.ll[p.id]; })[0].name) + ' hasn’t taken the quiz yet. Tap to take it.</p>' }) + '</div>' : '')
+        : '<div class="gut" style="margin-top:20px">' + card({ v: 'accent', a: 'quiz', id: 'levi', eyebrow: 'Love languages', title: 'Take the 2-minute quiz', body: '<p class="sh m2">Ideas and daily suggestions will fit how each of you feels most loved.</p>' }) + '</div>') +
+      rail({ title: 'Date ideas for today', sub: 'New every day', action: 'More ideas', act: 'more-ideas' }, IDEAS.couple.map(function (x, i) { return tile({ size: 'wide', area: 'marriage', icon: x.icon, title: x.title, meta: x.meta, badge: 'New today', att: (x.attachments || []).length, a: 'idea', id: 'couple:' + i }); })) +
+      rail({ title: 'Family faith' }, [tile({ size: 'wide', area: 'faith', icon: 'lamp', badge: 'Today', title: 'Morning Lantern couple study', meta: NIGHT.scripture + ' · 10 min', a: 'go', id: 'lantern' }), tile({ size: 'wide', area: 'girls', icon: ACTIVITY.icon, badge: 'Tonight', title: ACTIVITY.title, meta: 'Story activity with ' + KIDS, a: 'go', id: 'story' })]) + '<div style="height:20px"></div>';
+  };
+  SCREENS.child = function (id) {
+    var g = member(id), a = ageOn(g.birthday), s = stageFor(a);
+    return header(g.name, { sub: g.full + ' · ' + s.label + ' · ' + a, right: backLink('Family') }) + sect('Growing right now') +
+      '<div class="gut gap">' + s.growth.map(function (x) { return card({ body: '<p class="ov m3">' + x[0] + '</p><p class="bd">' + esc(x[1]) + '</p>' }); }).join('') + '</div>' +
+      rail({ title: 'Feelings to name' }, s.feelings.map(function (f) { return tile({ size: 'sm', area: 'girls', icon: 'smile', title: f }); })) +
+      sect('How to talk to her') + '<div class="gut gap">' + s.say.map(function (x) { return card({ body: '<p class="ov" style="color:#B43A2E">Instead of</p><p class="sh m3">' + esc(x[0]) + '</p><p class="ov" style="color:#3D7A58;margin-top:8px">Try</p><p class="bd">' + esc(x[1]) + '</p>' }); }).join('') + '</div>' +
+      rail({ title: 'Today with ' + g.name }, IDEAS.girls.map(function (x, i) { return x.min <= a ? tile({ size: 'wide', area: 'girls', icon: x.icon, title: x.title, meta: x.meta, att: (x.attachments || []).length, a: 'idea', id: 'girls:' + i }) : ''; }));
+  };
+  SCREENS.detail = function (id) {
+    var d = ideaById(id), ar = id.split(':')[0] === 'couple' ? 'marriage' : 'girls', c = area(ar);
+    return '<div class="dhero" style="background:' + c[1] + ';color:' + c[0] + '">' + I(d.icon) + '<button class="back" data-a="back" aria-label="Back">' + I('chevron-left') + '</button></div>' +
+      '<div style="padding:20px;display:grid;gap:8px"><p class="ov br4">' + (ar === 'marriage' ? 'Just us' : 'With ' + KIDS) + '</p><h1 class="t1">' + esc(d.title) + '</h1><p class="sh m3">' + esc(d.meta) + '</p><p class="bd m2" style="margin-top:4px">' + esc(d.why) + '</p>' +
+      '<div style="margin-top:12px"><button class="btn cta full" data-a="plan" data-id="' + id + '">' + I('calendar-plus') + 'Plan it</button></div>' +
+      '<p class="ov br4" style="margin-top:20px">What you’ll do</p>' + d.steps.map(function (s, i) { return '<div class="step"><span class="num">' + (i + 1) + '</span><p class="co">' + esc(s) + '</p></div>'; }).join('') + '</div>' +
+      (d.attachments ? rail({ title: 'Attachments', sub: 'Tap to open' }, d.attachments.map(function (a, i) { return tile({ area: ar, icon: a.type === 'scripture' ? 'book-open' : a.type === 'checklist' ? 'list-checks' : 'message-circle-heart', title: a.title, meta: a.meta, a: 'att', id: id + ':' + i }); })) : '');
+  };
+  SCREENS.lantern = function () {
+    var L = function (s) { return '<p class="ov lbl">' + s + '</p>'; };
+    return header('Morning Lantern', { sub: 'Couple study · 10 minutes', right: backLink('Done') }) + '<div class="gut">' +
+      card({ v: 'inverse', eyebrow: 'Scripture of the day', title: NIGHT.scripture, body: '<div style="height:2px;width:48px;background:var(--gold500);margin-bottom:10px"></div><p class="sh">Tonight’s story for ' + KIDS + ': ' + esc(NIGHT.title) + '</p><div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><a class="btn cta sm" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/23?lang=eng" target="_blank" rel="noopener">' + I('book-open') + 'Read the verse</a></div>' }) +
+      L('1 · Read together') + '<p class="bd">' + esc(STUDY.read) + '</p>' + L('2 · What it teaches') + '<p class="bd">' + esc(STUDY.says) + '</p>' + L('3 · For our marriage') +
+      '<div class="gap">' + STUDY.marriage.map(function (m) { var who = parents.filter(function (p) { return p.name === m.who; })[0]; return card({ body: '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">' + avatar(who, 28) + '<span class="bd hv">' + m.who + '</span></div><p class="co" style="margin-bottom:10px">' + esc(m.q) + '</p><textarea class="field" data-ans="' + m.who + '" placeholder="Your answer" aria-label="' + m.who + '’s answer">' + esc(S.answers[m.who] || '') + '</textarea>' }); }).join('') + '</div>' +
+      L('4 · For our parenting') + card({ flush: true, body: STUDY.parenting.map(function (p) { return '<div style="padding:14px;border-bottom:.5px solid var(--line2)"><p class="bd b">' + p.who + '</p><p class="sh m2">' + esc(p.how) + '</p></div>'; }).join('') }) +
+      '<div style="margin-top:12px">' + card({ v: 'accent', a: 'go', id: 'story', eyebrow: 'Tonight with ' + KIDS, title: ACTIVITY.title, body: '<p class="sh m2">' + ACTIVITY.minutes + ' min · a hands-on way to learn tonight’s story</p>' }) + '</div>' +
+      L('5 · One small act today') + card({ v: 'accent', body: '<p class="bd">' + esc(STUDY.act) + '</p>' }) + L('6 · Pray together') + '<p class="bd">' + esc(STUDY.pray) + '</p>' +
+      '<div style="margin-top:22px"><button class="btn cta lg full" data-a="lanterndone">' + I('check') + (S.lanternDone === TODAY ? 'Done today' : 'We did it today') + '</button></div></div>';
+  };
+  SCREENS.story = function () {
+    var a = ACTIVITY, L = function (s) { return '<p class="ov lbl">' + s + '</p>'; }, c = area('girls');
+    return header(a.title, { sub: NIGHT.title + ' · ' + a.minutes + ' min', right: backLink('Done') }) + '<div class="gut">' +
+      '<div style="height:170px;border-radius:10px;background:' + c[1] + ';color:' + c[0] + ';display:grid;place-items:center">' + I(a.icon, 'ic64') + '</div>' +
+      '<p class="t3" style="margin-top:16px">' + esc(a.line) + '</p>' + L('You’ll need') + '<p class="bd">' + a.materials.join(' · ') + '</p><p class="sh m3" style="margin-top:4px">' + esc(a.setup) + '</p>' +
+      L('Together') + '<div class="gap" style="gap:10px">' + a.together.map(function (s, i) { return '<div class="step"><span class="num">' + (i + 1) + '</span><p class="co">' + esc(s) + '</p></div>'; }).join('') + '</div>' +
+      L('For each child') + '<div class="gap">' + a.per.map(function (p) { var m = member(p.name.toLowerCase()), done = S.actDone[TODAY + p.name]; return card({ body: '<div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">' + avatar(m, 36) + '<div><p class="bd hv">' + p.name + ' · ' + ageOn(m.birthday) + '</p><p class="fn m3">' + esc(p.role) + '</p></div></div><p class="sh m2">' + esc(p.adapt) + '</p><p class="ov" style="color:#3D7A58;margin-top:10px">Say</p><p class="bd b">“' + esc(p.say) + '”</p><p class="ov br4" style="margin-top:10px">Got it if</p><p class="sh">' + esc(p.got) + '</p><div style="margin-top:12px"><button class="btn sm ' + (done ? 'tinted' : 'secondary') + '" data-a="actdone" data-id="' + p.name + '">' + (done ? I('check') + 'Done tonight' : 'Mark done') + '</button></div>' }); }).join('') + '</div>' +
+      L('Name the feeling') + card({ v: 'accent', body: '<p class="bd">' + esc(a.feelings) + '</p>' }) +
+      L('Tie it to the scripture') + card({ body: '<p class="bd b scripture">' + a.tie.ref + '</p>' + a.tie.qs.map(function (q) { return '<p class="sh" style="margin-top:6px"><b>' + q[0] + ':</b> ' + esc(q[1]) + '</p>'; }).join('') }) +
+      L('At bedtime') + '<p class="bd">' + esc(a.bedtime) + '</p></div>';
+  };
+  SCREENS.more = function () {
+    return header('More') + sect('Plan') + '<div class="gut">' + card({ flush: true, body:
+      row({ icon: 'bot', color: 'var(--a_money)', title: 'Money advisor', sub: 'Linked banks, cards & loans', chev: true, a: 'go', id: 'advisor' }) +
+      row({ icon: 'house', color: 'var(--a_home)', title: 'Home upkeep', sub: 'Cleaning, yard, vehicles, seasonal', chev: true, a: 'go', id: 'home' }) +
+      row({ icon: 'heart-pulse', color: 'var(--a_health)', title: 'Health', sub: 'Check-ups, screenings, staying strong', chev: true, a: 'go', id: 'health' }) +
+      row({ icon: 'compass', color: 'var(--a_growth)', title: 'Goals', sub: 'Roles, big rocks, weekly planning', chev: true, a: 'go', id: 'goals' }) }) + '</div>' +
+      sect('Think & learn') + '<div class="gut">' + card({ flush: true, body:
+      row({ icon: 'lamp', color: 'var(--a_faith)', title: 'Morning Lantern', sub: 'Today’s couple scripture study', chev: true, a: 'go', id: 'lantern' }) +
+      row({ icon: 'puzzle', color: 'var(--a_girls)', title: 'Tonight’s story activity', sub: 'Learn the story with ' + KIDS, chev: true, a: 'go', id: 'story' }) +
+      row({ icon: 'lightbulb', color: 'var(--gold600)', title: 'Think it through', sub: 'Work a problem into a plan', chev: true, a: 'go', id: 'think' }) +
+      row({ icon: 'graduation-cap', color: 'var(--brand500)', title: 'Family Life Educator', sub: 'Ask, build programs, handouts', chev: true, a: 'go', id: 'educator' }) }) + '</div>' +
+      '<div class="gut" style="margin-top:24px">' + card({ flush: true, body: row({ icon: 'settings', color: 'var(--ink3)', title: 'Settings', sub: 'Family, colors, fonts, notifications, Siri & Alexa', chev: true, a: 'go', id: 'settings' }) }) + '</div>';
+  };
+  var WEEKDAY = [['Sunday', 'Rest & reset', ['10-minute family tidy', 'Plan the week’s meals', 'Set out church clothes']], ['Monday', 'Kitchen', ['Wipe counters, stovetop and appliances', 'Clean out the fridge', 'Take out trash and recycling']], ['Tuesday', 'Bathrooms', ['Scrub toilets, sinks and mirrors', 'Wipe showers and tubs', 'Swap towels and bath mats']], ['Wednesday', 'Dust & surfaces', ['Dust shelves, TV and ceiling fans', 'Wipe light switches and door handles', 'Clear the “drop zone” by the door']], ['Thursday', 'Floors', ['Vacuum all rooms', 'Mop kitchen and bathrooms', 'Shake out entry rugs']], ['Friday', 'Bedrooms', ['Wash sheets and make beds', 'Tidy closets and drawers', 'Empty all trash cans']], ['Saturday', 'Outside & car', ['Sweep porch and entry', 'Clean out the car', 'Water plants and pull weeds']]];
+  var KID_CHORES = [[2, ['Put toys in the bin', 'Put dirty clothes in the hamper', 'Help feed a pet']], [4, ['Make bed (with help)', 'Set napkins and spoons', 'Match socks', 'Water a plant']], [5, ['Make bed', 'Set and clear the table', 'Sort laundry by color', 'Wipe the bathroom sink']], [7, ['Load the dishwasher', 'Fold and put away laundry', 'Vacuum one room', 'Take out small trash cans']]];
+  var homeSeg = 'today';
+  SCREENS.home = function () {
+    var dow = NOW.getDay(), wf = WEEKDAY[dow];
+    var hr = function (id, title, meta, who) { var done = !!S.home[id], m = who && member(who); return '<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:.5px solid var(--line2)"><button class="circle' + (done ? ' done' : '') + '" style="--c:var(--a_home)" data-a="homechk" data-id="' + esc(id) + '" aria-label="Done: ' + esc(title) + '"></button><div style="flex:1"><p class="bd" style="' + (done ? 'color:var(--ink3);text-decoration:line-through' : '') + '">' + esc(title) + '</p>' + (meta ? '<p class="fn m3">' + esc(meta) + '</p>' : '') + '</div>' + (m ? '<span style="display:flex;gap:4px;align-items:center;border:1px solid var(--line2);border-radius:13px;padding:2px 8px">' + avatar(m, 18) + '<span class="cp b">' + m.name + '</span></span>' : '') + '</div>'; };
+    var body;
+    if (homeSeg === 'today') {
+      body = sect('Every day') + '<div class="gut">' + card({ flush: true, body: hr('dishes', 'Dishes', 'Run and empty the dishwasher; sink clear before bed.') + hr('laundry', 'Laundry', 'One load a day: wash, dry, fold, put away.') + hr('reset', '10-minute evening reset', 'Everyone picks up before bedtime.') }) + '</div>' +
+        sect(wf[0] + '’s focus · ' + wf[1]) + '<div class="gut">' + card({ flush: true, body: wf[2].map(function (x, i) { return hr('f' + i, x); }).join('') }) + '</div>' +
+        sect('Also due') + '<div class="gut">' + card({ flush: true, body: hr('smoke', 'Test smoke and CO detectors', 'Press test on each one; replace batteries yearly.') + hr('hvac', 'Replace furnace/AC filter', 'Every 1–3 months.') }) + '</div>' +
+        sect('Kids’ chores') + '<div class="gut">' + card({ flush: true, body: S.chores.map(function (c) { return hr('kid:' + c.id, c.title, '', c.who); }).join('') }) + '</div>';
+    } else {
+      body = kids.map(function (k) { var a = ageOn(k.birthday), mine = S.chores.filter(function (c) { return c.who === k.id; }), fits = [].concat.apply([], KID_CHORES.filter(function (x) { return a >= x[0]; }).map(function (x) { return x[1]; })).filter(function (t) { return !mine.some(function (m) { return m.title === t; }); });
+        return sect(k.name + ' · ' + a) + '<div class="gut">' + card({ flush: true, body: mine.length ? mine.map(function (c) { return '<div style="display:flex;padding:12px;border-bottom:.5px solid var(--line2)"><p class="bd" style="flex:1">' + esc(c.title) + '</p><button class="link sh" style="color:var(--ink3)" data-a="rmchore" data-id="' + c.id + '">Remove</button></div>'; }).join('') : '<p class="sh m3" style="padding:12px">No chores yet. Pick one below.</p>' }) + '</div>' +
+          rail({ title: 'Good fits at ' + a }, fits.map(function (t) { return tile({ size: 'sm', area: 'girls', icon: 'plus', title: t, a: 'addchore', id: k.id + '|' + t }); }));
+      }).join('');
+    }
+    return header('Home', { sub: wf[0] + ' · ' + wf[1], right: backLink('More') }) + '<div class="gut"><div class="seg">' + ['today', 'kids'].map(function (s) { return '<button class="' + (homeSeg === s ? 'on' : '') + '" data-a="homeseg" data-id="' + s + '">' + (s === 'today' ? 'Today' : 'Kids') + '</button>'; }).join('') + '</div></div>' + body;
+  };
+  var HEALTH = [['wellchild', 'Well-child visit', 'stethoscope', 0, 17, 12, '', 'Growth, development, vision and hearing checks, plus shots that are due.'], ['kdental', 'Dental cleaning + fluoride', 'smile', 1, 17, 6, '', 'Every 6 months.'], ['kvision', 'Vision screening', 'eye', 3, 17, 12, '', 'Yearly from age 3.'], ['khearing', 'Hearing screening', 'ear', 4, 10, 12, '', 'At ages 4, 5, 6, 8 and 10.'], ['boost46', 'Kindergarten vaccine boosters', 'syringe', 4, 6, 0, '', 'DTaP, polio, MMR and chickenpox boosters between the 4th and 6th birthday.'], ['flu', 'Flu shot', 'syringe', .5, 120, 12, '', 'Every fall for everyone 6 months and older.'], ['physical', 'Annual physical', 'stethoscope', 18, 120, 12, '', 'A yearly check-in with your doctor.'], ['bp', 'Blood pressure', 'heart-pulse', 18, 120, 12, '', 'At least yearly from 40.'], ['lipids', 'Cholesterol panel', 'droplet', 20, 120, 60, '', 'Every 4–6 years.'], ['a1c', 'Diabetes screening (A1C)', 'activity', 35, 70, 36, '', 'Every 3 years from 35.'], ['adental', 'Dental cleaning', 'smile', 18, 120, 6, '', 'Every 6 months.'], ['eye', 'Eye exam', 'eye', 18, 120, 24, '', 'Every 2 years; a baseline exam at 40.'], ['skin', 'Skin check', 'sun', 30, 120, 12, '', 'Yearly look at moles and spots.'], ['mammo', 'Mammogram', 'shield-check', 40, 74, 24, 'f', 'Every 2 years from 40.'], ['cervical', 'Cervical screening (HPV/Pap)', 'shield-check', 21, 65, 60, 'f', 'HPV test every 5 years from 30.'], ['colon', 'Colon cancer screening', 'shield-check', 45, 75, 120, '', 'Starts at 45.']];
+  var SAMPLE_LAST = { kdental: 4, wellchild: 7, kvision: 7, physical: 14, adental: 8, eye: 30, lipids: 20, bp: 14, skin: 6, cervical: 30, a1c: 20 };
+  var healthWho = 'levi';
+  SCREENS.health = function () {
+    var m = member(healthWho), age = ageOn(m.birthday), items = HEALTH.filter(function (r) { return age >= r[3] && age <= r[4] && (!r[6] || r[6] === m.sex); }).map(function (r) {
+      var ago = S.home['h:' + m.id + ':' + r[0]] ? 0 : SAMPLE_LAST[r[0]], last = ago != null ? addDays(TODAY, -Math.round(ago * 30.4)) : null, due = last && r[5] ? addDays(last, Math.round(r[5] * 30.4)) : TODAY;
+      if (r[0] === 'flu' && !S.home['h:' + m.id + ':flu']) { last = null; due = TODAY; }
+      var gap = daysBetween(TODAY, due), st = r[5] === 0 && ago != null ? 'ok' : gap < -30 ? 'overdue' : gap <= 30 ? 'due' : gap <= 90 ? 'soon' : 'ok';
+      return { id: r[0], title: r[1], icon: r[2], why: r[7], last: last, due: due, st: st }; });
+    var tone = { overdue: ['#B43A2E', '#F9E2DE'], due: ['#94440F', '#F8E9DA'], soon: ['#94440F', '#F8E9DA'], ok: ['#3D7A58', '#E4F1E8'] };
+    var lab = function (r) { return r.st === 'overdue' ? 'Overdue' : r.st === 'due' ? 'Due now' : r.st === 'soon' ? 'Due ' + monthYear(r.due) : 'Up to date'; };
+    var todo = items.filter(function (r) { return r.st !== 'ok'; }), ok = items.filter(function (r) { return r.st === 'ok'; });
+    return header('Health', { right: backLink('More') }) +
+      rail({}, FAMILY.members.map(function (x) { return tile({ size: 'sm', sel: x.id === healthWho, leading: avatar(x, 48), title: x.name, meta: String(ageOn(x.birthday)), a: 'healthwho', id: x.id }); })) +
+      sect('To do for ' + m.name + ' · ' + age) + '<div class="gut">' + card({ flush: true, body: todo.length ? todo.map(function (r) { return row({ icon: r.icon, color: 'var(--a_health)', title: r.title, sub: r.last ? 'Last: ' + monthYear(r.last) : 'No record yet', trail: '<span class="pill" style="background:' + tone[r.st][1] + ';color:' + tone[r.st][0] + '">' + lab(r) + '</span>', a: 'healthdone', id: m.id + ':' + r.id }); }).join('') : '<p class="sh m3" style="padding:16px">Nothing due right now.</p>' }) + '<p class="cp m3" style="margin-top:6px">Tap an item to mark it done today.</p></div>' +
+      sect('Up to date') + '<div class="gut">' + card({ flush: true, body: ok.map(function (r) { return row({ icon: r.icon, color: '#3D7A58', title: r.title, sub: 'Next: ' + monthYear(r.due) }); }).join('') || '<p class="sh m3" style="padding:16px">Nothing yet.</p>' }) + '</div>' +
+      '<div class="gut"><p class="cp m3" style="margin-top:16px">Sample records. Based on general US guidelines (USPSTF, AAP, CDC). Your doctors may recommend a different schedule based on your history.</p></div>';
+  };
+  var stub = function (title, icon, ar, lines) { return function () { var c = area(ar); return header(title, { right: backLink('More') }) + '<div class="gut gap"><div style="height:150px;border-radius:10px;background:' + c[1] + ';color:' + c[0] + ';display:grid;place-items:center">' + I(icon, 'ic64') + '</div>' + lines.map(function (l) { return card({ body: '<p class="bd">' + esc(l) + '</p>' }); }).join('') + card({ v: 'sunken', body: '<p class="sh m2">In the prototype this screen is a preview. In the real app it works with your own family’s information.</p>' }) + '</div>'; }; };
+  SCREENS.advisor = stub('Money advisor', 'bot', 'money', ['Link your banks, cards and loans (read-only) and ask anything: “How fast can we pay off the car?”', 'It looks at your real numbers, gives one clear next step, and can save a payoff plan with reminders.', 'Educational guidance, not a licensed advisor. It can never move money.']);
+  SCREENS.goals = stub('Goals', 'compass', 'growth', ['Set a goal for each role: marriage, the girls, faith, money, health, growth and home.', 'Sort tasks by urgent and important, then plan the week around the big rocks.']);
+  SCREENS.think = stub('Think it through', 'lightbulb', 'faith', ['Work through a hard decision step by step: the facts, the feelings, each side, then one next step.']);
+  SCREENS.educator = stub('Family Life Educator', 'graduation-cap', 'growth', ['Ask parenting and marriage questions, or build a short family program or handout, fitted to your family’s ages and stage.']);
+  SCREENS.settings = function () {
+    var c = S.theme, lbl = function (s) { return '<p class="fn hv m3" style="margin:14px 0 8px;text-transform:uppercase">' + s + '</p>'; };
+    return header('Settings', { right: backLink('More') }) + sect('Our family') + '<div class="gut">' + card({ flush: true, body: FAMILY.members.map(function (m) { return row({ leading: avatar(m, 30), title: m.full, sub: 'Born ' + fmtLong(m.birthday), value: String(ageOn(m.birthday)) }); }).join('') + row({ icon: 'heart', color: 'var(--a_marriage)', title: 'Anniversary', sub: fmtLong(FAMILY.anniversary), value: ageOn(FAMILY.anniversary) + ' yrs' }) }) +
+      '<div style="margin-top:10px"><button class="btn tinted full" data-a="invite">' + I('user-plus') + 'Invite Lindy</button></div>' + (S.invite ? '<div style="margin-top:10px">' + card({ v: 'accent', body: '<p class="fn m2">Invite code (good for 14 days)</p><p class="t1" style="letter-spacing:4px">' + S.invite + '</p><p class="cp m3">Sample code. The real one comes from your database.</p>' }) + '</div>' : '') +
+      '<p class="cp m3" style="margin-top:6px">Ages, stages, health checks, ideas and studies all update from these dates.</p></div>' +
+      sect('Love languages') + '<div class="gut">' + card({ flush: true, body: parents.map(function (m) { var l = S.ll[m.id]; return row({ icon: 'heart', color: 'var(--a_marriage)', title: m.name, sub: l ? l.slice(0, 2).map(function (x) { return LOVE[x].name; }).join(' · ') : 'Take the 2-minute quiz', chev: true, a: 'quiz', id: m.id }); }).join('') }) + '</div>' +
+      sect('Appearance') + '<div class="gut">' + card({ body:
+        lbl('Light or dark') + '<div class="seg">' + [['light', 'Light'], ['dark', 'Dark'], ['auto', 'Match iPhone']].map(function (o) { return '<button class="' + (c.mode === o[0] ? 'on' : '') + '" data-a="mode" data-id="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</div>' +
+        lbl('Text size') + '<div style="display:flex;align-items:center;gap:8px"><button class="btn secondary sm" data-a="scale" data-id="-1" aria-label="Smaller text">A−</button><div style="flex:1;height:6px;border-radius:3px;background:var(--paper3)"><div style="width:' + ((c.scale - .85) / .5 * 100) + '%;height:6px;border-radius:3px;background:var(--brand500)"></div></div><button class="btn secondary sm" data-a="scale" data-id="1" aria-label="Bigger text">A+</button></div><p class="cp m3" style="text-align:center;margin-top:4px">' + Math.round(c.scale * 100) + '%</p>' +
+        lbl('Theme') + '<div style="display:flex;gap:8px">' + PRESETS.map(function (p) { return '<button class="preset' + (c.preset === p.preset ? ' on' : '') + '" style="background:' + p.paper + '" data-a="preset" data-id="' + p.preset + '"><span class="top" style="display:block;background:' + p.brand + '"><i style="background:' + p.highlight + '"></i></span><span style="color:' + p.ink + '">' + p.preset + '</span></button>'; }).join('') + '</div>' +
+        lbl('Main color') + '<div style="display:flex;gap:12px;flex-wrap:wrap">' + ACCENTS.map(function (a) { return '<button class="sw' + (c.brand === a ? ' on' : '') + '" style="background:' + a + '" data-a="brand" data-id="' + a + '" aria-label="Main color ' + a + '"></button>'; }).join('') + '</div>' +
+        lbl('Highlight color') + '<div style="display:flex;gap:12px;flex-wrap:wrap">' + HIGHLIGHTS.map(function (a) { return '<button class="sw' + (c.highlight === a ? ' on' : '') + '" style="background:' + a + '" data-a="hl" data-id="' + a + '" aria-label="Highlight color ' + a + '"></button>'; }).join('') + '</div>' +
+        lbl('Title font') + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">' + DISPLAY.map(function (d) { return '<button class="opt' + (c.display === d[0] ? ' on' : '') + '" data-a="display" data-id="' + d[0] + '"><span class="t3" style="font-family:' + d[2].replace(/"/g, '&quot;') + '">' + d[1] + '</span></button>'; }).join('') + '</div>' +
+        lbl('Text font') + '<div style="display:grid;gap:6px">' + UI.map(function (d) { return '<button class="opt' + (c.ui === d[0] ? ' on' : '') + '" data-a="ui" data-id="' + d[0] + '"><span class="bd" style="font-family:' + d[2].replace(/"/g, '&quot;') + '">' + d[1] + '</span></button>'; }).join('') + '</div>' }) + '</div>' +
+      sect('Voice assistants') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'mic', color: 'var(--ink1)', title: 'Siri & Shortcuts', sub: '“Add a family reminder in Lewis Family”' }) + row({ icon: 'speaker', color: 'var(--a_growth)', title: 'Alexa', sub: 'Enable the Lewis Family skill, then link your account' }) }) + '</div>';
+  };
+  var quiz = null;
+  SCREENS.quiz = function (id) {
+    var m = member(id);
+    if (!quiz || quiz.who !== id) quiz = { who: id, i: 0, ans: [] };
+    if (quiz.i >= QUIZ.length) {
+      var l = S.ll[id];
+      return header('Love languages', { sub: m.name, right: backLink('Done') }) + '<div class="gut gap">' + card({ v: 'inverse', eyebrow: m.name + ' feels most loved through', title: LOVE[l[0]].name, body: '<p class="sh">Then ' + LOVE[l[1]].name.toLowerCase() + '. Ideas and the daily small act will now fit this.</p>' }) + card({ body: '<p class="ov br4">Try today</p><p class="bd">' + esc(LOVE[l[0]].ideas[0]) + '</p>' }) + '<button class="btn full" data-a="back">Done</button></div>';
+    }
+    var q = QUIZ[quiz.i];
+    return header('Love languages', { sub: m.name + ' · question ' + (quiz.i + 1) + ' of ' + QUIZ.length, right: backLink('Cancel') }) + '<div class="gut gap quiz"><div class="bar"><i style="width:' + (quiz.i / QUIZ.length * 100) + '%"></i></div><p class="t3">Which means more to you?</p>' +
+      '<button class="choice" data-a="qpick" data-id="' + q[1] + '">' + esc(q[0]) + '</button><button class="choice" data-a="qpick" data-id="' + q[3] + '">' + esc(q[2]) + '</button><p class="cp m3">Our own short quiz, not the official one.</p></div>';
+  };
+
+  // ---------- sheets ----------
+  function sheetHTML() {
+    if (!sheet) return '';
+    if (sheet.k === 'att') { var p = sheet.id.split(':'), a = ideaById(p[0] + ':' + p[1]).attachments[+p[2]];
+      return '<div class="sheet" data-a="closesheet"><div role="dialog" aria-label="' + esc(a.title) + '"><span class="grab"></span><h2 class="t1">' + esc(a.title) + '</h2><p class="sh m3">' + esc(a.meta) + '</p>' +
+        a.body.map(function (b, i) { return a.type === 'questions' ? '<div class="qcard"><p class="ov">Card ' + (i + 1) + ' of ' + a.body.length + '</p><p class="t3" style="font-family:var(--display)">' + esc(b) + '</p></div>' : '<p class="bd' + (a.type === 'scripture' && i === 0 ? ' scripture' : '') + '">' + (a.type === 'checklist' ? '○  ' : '') + esc(b) + '</p>'; }).join('') +
+        '<button class="btn secondary full" data-a="closesheet">Close</button></div></div>'; }
+    if (sheet.k === 'newrem') { var d = sheet.cal ? calSel : '';
+      return '<div class="sheet" data-a="closesheet"><div role="dialog" aria-label="New reminder"><span class="grab"></span><div style="display:flex;justify-content:space-between;align-items:center"><button class="link" data-a="closesheet">Cancel</button><span class="hl">' + (sheet.cal ? 'New on calendar' : 'New reminder') + '</span><span style="width:52px"></span></div>' +
+        '<form data-f="newrem" class="gap"><input class="field" name="t" placeholder="Title" aria-label="Title" required><textarea class="field" name="n" placeholder="Notes" aria-label="Notes"></textarea>' +
+        '<label class="fn hv m3">LIST<select class="field" name="l" style="margin-top:6px">' + LISTS.map(function (l) { return '<option value="' + l.id + '">' + l.name + '</option>'; }).join('') + '</select></label>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><label class="fn hv m3">DATE<input class="field" type="date" name="d" value="' + d + '" style="margin-top:6px"></label><label class="fn hv m3">TIME<input class="field" type="time" name="tm" style="margin-top:6px"></label></div>' +
+        '<label class="bd" style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="c"' + (sheet.cal ? ' checked' : '') + '> Show on calendar</label><label class="bd" style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="f"> Flag it</label>' +
+        '<button class="btn full" type="submit">Add</button></form></div></div>'; }
+    return '';
+  }
+
+  // ---------- render ----------
+  var app = document.getElementById('app'), scroller = document.getElementById('scroll'), tabbar = document.getElementById('tabbar');
+  function applyTheme() {
+    var v = themeVars(S.theme);
+    Object.keys(v).forEach(function (k) { if (k !== 'dark') app.style.setProperty('--' + k, v[k]); });
+    app.style.setProperty('--s', S.theme.scale);
+    app.style.colorScheme = v.dark ? 'dark' : 'light';
+  }
+  function render(top) {
+    applyTheme();
+    var c = cur(), fn = SCREENS[c.r];
+    scroller.innerHTML = fn(c.p) + (toastMsg ? '<div class="toast" role="status">' + esc(toastMsg) + '</div>' : '');
+    var old = app.querySelector('.sheet'); if (old) old.remove();
+    if (sheet) app.insertAdjacentHTML('beforeend', sheetHTML());
+    var root = TABS.map(function (t) { return t[0]; }).indexOf(c.r) >= 0;
+    tabbar.hidden = !root && nav.length > 1 && ['detail', 'quiz'].indexOf(c.r) >= 0;
+    var activeTab = nav[0].r;
+    tabbar.innerHTML = TABS.map(function (t) { return '<button class="' + (activeTab === t[0] ? 'on' : '') + '" data-a="tab" data-id="' + t[0] + '" aria-label="' + t[1] + '"' + (activeTab === t[0] ? ' aria-current="page"' : '') + '>' + I(t[2]) + '<span>' + t[1] + '</span></button>'; }).join('');
+    if (window.lucide) { try { window.lucide.createIcons(); } catch (e) {} }
+    if (top) scroller.scrollTop = 0;
+    document.getElementById('clock').textContent = NOW.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).replace(/\s?[AP]M/, '');
+  }
+
+  // ---------- actions ----------
+  function act(a, id, el) {
+    switch (a) {
+      case 'tab': tab(id); return;
+      case 'tab-family': tab('family'); return;
+      case 'tab-reminders': tab('reminders'); return;
+      case 'back': quiz = null; back(); return;
+      case 'go': go(id); return;
+      case 'idea': go('detail', id); return;
+      case 'child': go('child', id); return;
+      case 'list': go('list', id); return;
+      case 'quiz': quiz = null; go('quiz', id); return;
+      case 'love': go('quiz', id); return;
+      case 'toggle': { var r = S.rems.filter(function (x) { return x.id === id; })[0]; if (r) { r.done = !r.done; save(); toast(r.done ? 'Done: ' + r.title : 'Back on the list'); render(); } return; }
+      case 'plan': { var d = ideaById(id); S.rems.push({ id: 'p' + Date.now(), title: d.title, notes: d.why, list: id.indexOf('couple') === 0 ? 'date' : 'kids', due: addDays(TODAY, 1), time: '19:00', cal: true }); save(); back(); toast('Planned for tomorrow at 7 PM, on the calendar'); return; }
+      case 'att': sheet = { k: 'att', id: id }; render(); return;
+      case 'closesheet': sheet = null; render(); return;
+      case 'newrem': sheet = { k: 'newrem', cal: id === 'cal' }; render(); setTimeout(function () { var f = app.querySelector('.sheet input[name=t]'); if (f) f.focus(); }, 50); return;
+      case 'calsel': calSel = id; render(); return;
+      case 'calprev': case 'calnext': { var dd = new Date(calYM[0], calYM[1] - 1 + (a === 'calprev' ? -1 : 1), 1); calYM = [dd.getFullYear(), dd.getMonth() + 1]; render(); return; }
+      case 'more-ideas': toast('In the real app, a fresh set of ideas appears (up to 3 sets a day).'); render(); return;
+      case 'lanterndone': S.lanternDone = TODAY; save(); back(); toast('Lovely. Today’s study is marked done.'); return;
+      case 'actdone': S.actDone[TODAY + id] = !S.actDone[TODAY + id]; save(); render(); return;
+      case 'homeseg': homeSeg = id; render(); return;
+      case 'homechk': S.home[id] = !S.home[id]; save(); render(); return;
+      case 'rmchore': S.chores = S.chores.filter(function (c) { return c.id !== id; }); save(); render(); return;
+      case 'addchore': { var p = id.split('|'); S.chores.push({ id: 'c' + Date.now(), who: p[0], title: p[1] }); save(); toast('Added for ' + member(p[0]).name); render(); return; }
+      case 'healthwho': healthWho = id; render(); return;
+      case 'healthdone': { S.home['h:' + id] = true; save(); toast('Marked done today'); render(); return; }
+      case 'invite': S.invite = 'K7Q2MP'; save(); render(); return;
+      case 'mode': S.theme.mode = id; save(); render(); return;
+      case 'scale': S.theme.scale = Math.min(1.35, Math.max(.85, +(S.theme.scale + (+id) * .05).toFixed(2))); save(); render(); return;
+      case 'preset': { var pr = PRESETS.filter(function (x) { return x.preset === id; })[0]; S.theme.preset = pr.preset; S.theme.brand = pr.brand; S.theme.highlight = pr.highlight; S.theme.paper = pr.paper; S.theme.ink = pr.ink; save(); render(); return; }
+      case 'brand': S.theme.brand = id; S.theme.preset = 'custom'; save(); render(); return;
+      case 'hl': S.theme.highlight = id; S.theme.preset = 'custom'; save(); render(); return;
+      case 'display': S.theme.display = id; save(); render(); return;
+      case 'ui': S.theme.ui = id; save(); render(); return;
+      case 'qpick': { quiz.ans.push(id); quiz.i++; if (quiz.i >= QUIZ.length) { var sc = { words: 0, service: 0, gifts: 0, time: 0, touch: 0 }; quiz.ans.forEach(function (x) { sc[x]++; }); S.ll[quiz.who] = Object.keys(sc).sort(function (a, b) { return sc[b] - sc[a]; }); save(); } render(true); return; }
+    }
+  }
+  app.addEventListener('click', function (e) {
+    if (noting) return;
+    var el = e.target.closest('[data-a]'); if (!el || !app.contains(el)) return;
+    if (el.classList.contains('sheet') && e.target !== el) return;
+    if (el.tagName === 'A') return;
+    e.preventDefault(); e.stopPropagation();
+    act(el.getAttribute('data-a'), el.getAttribute('data-id'), el);
+  });
+  app.addEventListener('submit', function (e) {
+    e.preventDefault(); var f = e.target, k = f.getAttribute('data-f');
+    if (k === 'quickadd') { var t = f.t.value.trim(); if (!t) return; var id = f.getAttribute('data-id'), isList = LISTS.some(function (l) { return l.id === id; });
+      S.rems.push({ id: 'q' + Date.now(), title: t, list: isList ? id : 'family', due: id === 'today' ? TODAY : null, flagged: id === 'flagged' }); save(); render(); var n = app.querySelector('input[name=t]'); if (n) n.focus(); }
+    if (k === 'newrem') { var tt = f.t.value.trim(); if (!tt) return; S.rems.push({ id: 'n' + Date.now(), title: tt, notes: f.n.value.trim() || null, list: f.l.value, due: f.d.value || null, time: f.tm.value || null, cal: f.c.checked && !!f.d.value, flagged: f.f.checked }); save(); sheet = null; toast('Added: ' + tt); render(); }
+  });
+  app.addEventListener('change', function (e) { var a = e.target.getAttribute('data-ans'); if (a) { S.answers[a] = e.target.value; save(); } });
+
+  // ---------- notes (comments) ----------
+  var noting = false, phone = document.getElementById('phone'), noteBtn = document.getElementById('noteBtn'), notice = document.getElementById('notice');
+  var commentsP = window.claude && window.claude.use ? window.claude.use('comments') : Promise.resolve(null);
+  var setNoting = function (on) { noting = on; phone.classList.toggle('noting', on); noteBtn.classList.toggle('on', on); noteBtn.textContent = on ? 'Cancel note' : 'Leave a note'; notice.textContent = on ? 'Now tap the part of the app you want changed.' : ''; };
+  noteBtn.addEventListener('click', function () { setNoting(!noting); });
+  phone.addEventListener('click', function (e) {
+    if (!noting) return;
+    e.preventDefault(); e.stopPropagation();
+    var target = e.target.closest('.card, .tile, .row, .btn, .head, .sect, .rail-h, .cal, .smart, .tabbar button, .step, .seg, p, h1, h2, h3') || e.target;
+    setNoting(false);
+    commentsP.then(function (c) {
+      if (!c) { notice.textContent = 'Notes aren’t available in this view. Send Claude a screenshot in your chat instead.'; return; }
+      return c.openComposer({ element: target }).then(function (r) { notice.textContent = r && r.opened ? 'Type what you want changed, then post it. Choose to send it to Claude if you see that option.' : 'Tap Leave a note again, then tap the spot once more.'; });
+    }).catch(function () { notice.textContent = 'That note didn’t open. Send Claude a screenshot in your chat instead.'; });
+  }, true);
+  document.getElementById('resetBtn').addEventListener('click', function () { S = sampleState(); save(); nav = [{ r: 'today' }]; sheet = null; quiz = null; calYM = null; calSel = TODAY; render(true); notice.textContent = 'Back to the sample family.'; });
+  if (sysDark.addEventListener) sysDark.addEventListener('change', function () { render(); });
+
+  render(true);
+})();
+</script>
