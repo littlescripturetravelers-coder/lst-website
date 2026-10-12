@@ -1,9 +1,13 @@
 import * as Notifications from 'expo-notifications';
+import { Platform } from 'react-native';
+// The web app has no phone notifications: nothing is scheduled there.
+const WEB = Platform.OS === 'web';
 export const ALERT_OFFSETS: Record<string, number> = { at: 0, '5': 5, '15': 15, '30': 30, '60': 60, '120': 120, '1d': 1440, '2d': 2880, '1w': 10080 };
-Notifications.setNotificationHandler({ handleNotification: async () => ({ shouldShowBanner: true, shouldShowList: true, shouldPlaySound: true, shouldSetBadge: false }) });
-export async function ensurePermission() { const s = await Notifications.getPermissionsAsync(); if (s.granted) return true; return (await Notifications.requestPermissionsAsync()).granted; }
+if (!WEB) Notifications.setNotificationHandler({ handleNotification: async () => ({ shouldShowBanner: true, shouldShowList: true, shouldPlaySound: true, shouldSetBadge: false }) });
+export async function ensurePermission() { if (WEB) return false; const s = await Notifications.getPermissionsAsync(); if (s.granted) return true; return (await Notifications.requestPermissionsAsync()).granted; }
 /** Schedules (or reschedules) a local notification for a reminder. Returns the notification id. */
 export async function scheduleReminder(r: { id: string; title: string; date?: string | null; time?: string | null; alert?: string | null; list_name?: string }) {
+  if (WEB) return null;
   await Notifications.cancelScheduledNotificationAsync('rem-' + r.id).catch(() => {});
   if (!r.date || !r.alert || r.alert === 'none' || !(await ensurePermission())) return null;
   const at = new Date(r.date + 'T' + (r.time || '09:00') + ':00'); at.setMinutes(at.getMinutes() - (ALERT_OFFSETS[r.alert] ?? 0));

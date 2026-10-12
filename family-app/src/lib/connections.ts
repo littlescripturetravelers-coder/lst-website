@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 // Work and personal calendars from outside the app, read on this phone only.
 // 1) Calendars already on the iPhone (Settings > Calendar > Accounts): Google, Outlook / Microsoft 365, Exchange, iCloud, Yahoo.
 // 2) Feed links (.ics / webcal) from task and project tools: Asana, Todoist, Trello, Jira, ClickUp, Monday and others.
@@ -24,6 +25,7 @@ export const savePrefs = (p: Prefs) => AsyncStorage.setItem(KEY, JSON.stringify(
 
 /** Every calendar on this iPhone except the app's own family calendar (that one already holds family items). */
 export async function deviceCalendars() {
+  if (Platform.OS === 'web') return null; // the web app can't see the iPhone's calendars
   const perm = await Calendar.requestCalendarPermissionsAsync();
   if (perm.status !== 'granted') return null;
   const cals = await Calendar.getCalendarsAsync(Calendar.EntityTypes.EVENT);

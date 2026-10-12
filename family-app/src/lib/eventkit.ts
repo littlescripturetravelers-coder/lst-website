@@ -1,8 +1,10 @@
+import { Platform } from 'react-native';
 // Two-way-ish sync with Apple Calendar + Apple Reminders so Siri's built-in commands and the iPhone apps see family items.
 import * as Calendar from 'expo-calendar';
 import { APP_NAME, OLD_APP_NAMES } from './brand';
 const CAL_TITLE = APP_NAME;
 async function familyCalendar(entity: 'event' | 'reminder') {
+  if (Platform.OS === 'web') return null; // no Apple Calendar or Reminders in the web app
   const type = entity === 'event' ? Calendar.EntityTypes.EVENT : Calendar.EntityTypes.REMINDER;
   const perm = entity === 'event' ? await Calendar.requestCalendarPermissionsAsync() : await Calendar.requestRemindersPermissionsAsync();
   if (perm.status !== 'granted') return null;

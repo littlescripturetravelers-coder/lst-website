@@ -1,3 +1,4 @@
+import '@/lib/web-alert';
 import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { ThemeProvider, useTheme } from '@/theme/theme-provider';

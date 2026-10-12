@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import { useCallback, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Calendar from 'expo-calendar';
@@ -75,6 +76,7 @@ const MAP_KEY = 'apple-event-map';
  *  app's own calendar inside Apple Calendar (so Siri, widgets and CarPlay see them). Also refreshes this person's shared busy time.
  *  Safe to call often: it only rewrites what changed. */
 export async function syncEventsToPhone(familyId: string) {
+  if (Platform.OS === 'web') return; // the web app has no phone alerts or Apple Calendar
   const now = new Date(), soon = new Date(+now + 14 * DAY);
   const { data } = await supabase.from('events').select('*').eq('family_id', familyId)
     .or('repeat.not.is.null,starts_at.gte.' + new Date(+now - DAY).toISOString() + ',ends_at.gte.' + now.toISOString());

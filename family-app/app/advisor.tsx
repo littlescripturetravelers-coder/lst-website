@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { KeyboardAvoidingView, ScrollView, TextInput, View, Pressable } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, TextInput, View, Pressable } from 'react-native';
 import { router } from 'expo-router';
 import type { LinkSuccess } from 'react-native-plaid-link-sdk';
 import Constants from 'expo-constants';
 // Plaid is a native module that isn't inside Expo Go (the free preview app), so it only loads in the App Store version.
-const IN_EXPO_GO = Constants.executionEnvironment === 'storeClient';
+// Bank linking needs the App Store build: not in Expo Go, and not in the web app.
+const IN_EXPO_GO = Constants.executionEnvironment === 'storeClient' || Platform.OS === 'web';
 const Plaid: typeof import('react-native-plaid-link-sdk') | null = IN_EXPO_GO ? null : require('react-native-plaid-link-sdk');
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from '@/components/text';
@@ -32,7 +33,7 @@ export default function Advisor() {
       <View style={{ flexDirection: 'row', gap: 8 }}><Card style={{ flex: 1 }} padding={12}><Text v="footnote" color={t.ink[3]}>Cash & savings</Text><Text v="title2">{money(cash)}</Text></Card><Card style={{ flex: 1 }} padding={12}><Text v="footnote" color={t.ink[3]}>Owed</Text><Text v="title2">{money(owe)}</Text></Card></View>
       <Card padding={0}>{accts.map((a, i) => <ListRow key={a.id} icon={a.type === 'credit' ? 'credit-card' : a.type === 'loan' ? 'landmark' : 'wallet'} iconColor={a.type === 'credit' ? t.danger[0] : a.type === 'loan' ? t.area.home[0] : t.area.money[0]}
         title={a.name} subtitle={a.institution + ' ••' + a.mask + (a.apr ? ' · ' + a.apr + '% APR' : '') + (a.min_payment ? ' · min ' + money(a.min_payment) : '')} value={money(Number(a.balance || 0))} divider={i < accts.length - 1} />)}</Card>
-      {IN_EXPO_GO && <Text v="footnote" color={t.ink[3]}>Linking banks works in the App Store version of the app.</Text>}
+      {IN_EXPO_GO && <Text v="footnote" color={t.ink[3]}>Linking banks works in the iPhone app from the App Store.</Text>}
       {linkToken && Plaid && <Plaid.PlaidLink tokenConfig={{ token: linkToken }} onSuccess={async (s: LinkSuccess) => { await fn('plaid-exchange', { public_token: s.publicToken, institution: s.metadata.institution?.name }); load(); }}>
         <Button full variant="secondary" icon="link" title="Link a bank, card or loan" /></Plaid.PlaidLink>}
       {msgs.map((m, i) => <View key={i} style={{ alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '88%', padding: 12, borderRadius: 14, backgroundColor: m.role === 'user' ? t.brand[500] : t.paper[0], borderWidth: m.role === 'user' ? 0 : 1, borderColor: t.line[1] }}>

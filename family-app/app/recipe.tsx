@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Alert, Pressable, View } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from '@/components/date-time-picker';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Screen, Gutter, SectionHead } from '@/components/screen';
 import { Card } from '@/components/card';

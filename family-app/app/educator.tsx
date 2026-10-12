@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { View } from 'react-native';
+import { createElement, useRef } from 'react';
+import { Platform, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { router } from 'expo-router';
 import { Asset } from 'expo-asset';
@@ -33,7 +33,13 @@ export default function Educator() {
   const vars = { '--bg': t.paper[1], '--ink': t.ink[1], '--muted': t.ink[3], '--line': t.paper[3], '--soft': t.paper[2], '--accent': t.brand[500], '--cta': t.gold[500], '--cta-ink': t.choice.brandOnly ? t.highlightInk : t.brand[500], '--band': t.brand[500], '--band-gold': t.onBrand.highlight, '--link': t.brand[500] };
   return <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: t.brand[500] }}>
     <View style={{ flexDirection: 'row', padding: 12 }}><Text color={t.ink.inverse} onPress={() => router.back()}>‹ More</Text></View>
-    <WebView ref={ref} source={{ uri }} originWhitelist={['*']} allowFileAccess injectedJavaScriptBeforeContentLoaded={SHIM(process.env.EXPO_PUBLIC_SUPABASE_URL!, token, vars)}
-      onMessage={async e => { const m = JSON.parse(e.nativeEvent.data); if (m.type === 'save') { const p = FileSystem.documentDirectory + m.filename; await FileSystem.writeAsStringAsync(p, m.b64, { encoding: FileSystem.EncodingType.Base64 }); await Sharing.shareAsync(p); } }} />
+    {Platform.OS === 'web'
+      // Web app: the same page in a frame, with the same shim added once it loads; saving a file downloads it.
+      ? createElement('iframe', { src: uri, title: 'Family Life Educator', style: { flex: 1, border: 0, width: '100%', height: '100%', background: t.paper[1] },
+          onLoad: (e: any) => { const w = e.target.contentWindow; if (!w) return;
+            w.ReactNativeWebView = { postMessage: (msg: string) => { const m = JSON.parse(msg); if (m.type !== 'save') return; const a = w.document.createElement('a'); a.href = 'data:application/octet-stream;base64,' + m.b64; a.download = m.filename; a.click(); } };
+            w.eval(SHIM(process.env.EXPO_PUBLIC_SUPABASE_URL!, token, vars)); } })
+      : <WebView ref={ref} source={{ uri }} originWhitelist={['*']} allowFileAccess injectedJavaScriptBeforeContentLoaded={SHIM(process.env.EXPO_PUBLIC_SUPABASE_URL!, token, vars)}
+      onMessage={async e => { const m = JSON.parse(e.nativeEvent.data); if (m.type === 'save') { const p = FileSystem.documentDirectory + m.filename; await FileSystem.writeAsStringAsync(p, m.b64, { encoding: FileSystem.EncodingType.Base64 }); await Sharing.shareAsync(p); } }} />}
   </SafeAreaView>;
 }
