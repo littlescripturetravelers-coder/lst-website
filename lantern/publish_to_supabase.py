@@ -109,6 +109,10 @@ def fetch(url):
     status, body = http("GET", url, headers={"User-Agent": "lantern-publish"})
     return body if status == 200 else ""
 
+def whole_book(html):
+    """A book is whole when it closes: a copy cut mid-picture opens blank in the app."""
+    return bool(html) and len(html) > 2000 and html.rstrip().endswith("</html>")
+
 def shrink_book(html):
     """The illustrated story, small enough for a phone to keep.
 
@@ -315,6 +319,14 @@ def main():
         book_html, book_link = "", ""
         if os.path.exists(book_path):
             book_html = read(book_path)
+            # Whole or not at all. Levi, 12 Oct 2026: a book reached the account cut off in
+            # the middle of a picture (no </html>) and the app's page opened blank. A cut
+            # book is not sent; the night carries the book's address instead, and the next
+            # run sends the book once the file is whole.
+            if book_html and not whole_book(book_html):
+                print(f"{slug}: NOT KEPT - {slug}.html is cut short ({len(book_html)} chars, no </html>); "
+                      f"the night goes out with the book's address only, and the book follows when the file is whole")
+                book_html = ""
             # In full, not by name. The app matches the Lantern's own "Tonight's
             # Story" button to this by file name either way, and when the book is
             # too big for the phone to keep, this address is the only way back to
@@ -324,6 +336,9 @@ def main():
         elif night.get("book_page"):
             book_html = fetch(APP_BASE + "/" + str(night["book_page"]).lstrip("/"))
             book_link = APP_BASE + "/" + str(night["book_page"]).lstrip("/")
+            if book_html and not whole_book(book_html):
+                print(f"{slug}: NOT KEPT - the story page {night['book_page']} came back cut short ({len(book_html)} chars); publishing without the book")
+                book_html = ""
             if not book_html:
                 print(f"{slug}: could not fetch the story page {night['book_page']} - publishing without the book")
 
@@ -385,6 +400,9 @@ def main():
         if book_html:
             small, note = shrink_book(book_html)
             if note: print(f"    {note}")
+            if not whole_book(small):
+                print(f"    the shrunk book lost its end ({len(small)} chars) - the book goes at full size")
+                small = book_html
             row["book_html"] = small
             # The same by name, so the app can match the devotional's own
             # "Tonight's Story" button to the book it holds.
