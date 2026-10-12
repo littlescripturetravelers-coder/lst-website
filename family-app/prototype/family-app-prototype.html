@@ -229,7 +229,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
 .app button:focus-visible, .app input:focus-visible, .app textarea:focus-visible, .app select:focus-visible { outline: 3px solid var(--gold500); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .btn:active, .tile:active, button.card:active { transform: none; } }
 </style>
-<div class="band"><div class="band-in"><div>Little Scripture Travelers <span>&middot; Family App</span></div><em>Prototype</em></div></div>
+<div class="band"><div class="band-in"><div>Little Scripture Travelers <span>&middot; NestWork</span></div><em>Prototype</em></div></div>
 <div class="stage">
   <section class="intro" aria-label="About this prototype">
     <p class="eyebrow">Try it before TestFlight</p>
@@ -237,10 +237,15 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
     <p>This is a working model of the app, built from the real app’s screens, colors and words. It uses your family as sample data. Nothing here touches the real app or your database.</p>
     <ul class="long">
       <li>Tap the tabs at the bottom, open ideas, check off reminders, and add your own.</li>
-      <li>Try More, then Settings, to change colors, fonts, dark mode and text size.</li>
+      <li>Switch between the two NestWork looks below, or try More, then Settings, to change colors, fonts, dark mode and text size.</li>
       <li>Take the love-languages quiz from the Family tab and watch the ideas change.</li>
     </ul>
     <p><b>Want something changed?</b> Tap <b>Leave a note</b>, then tap the part of the app you mean, and type what you want. Screenshots in our chat work too.</p>
+    <p class="eyebrow" style="margin-top:6px">Look</p>
+    <div class="tools" role="group" aria-label="Look">
+      <button class="tool" id="lookLst" type="button" aria-pressed="false">NestWork · LST colors</button>
+      <button class="tool" id="lookCoral" type="button" aria-pressed="false">Coral</button>
+    </div>
     <div class="tools">
       <button class="tool" id="noteBtn" type="button">Leave a note</button>
       <button class="tool" id="resetBtn" type="button">Start over</button>
@@ -602,7 +607,7 @@ var Faiths = (() => {
 <script id="proto">
 (function () {
   // ---------- dates ----------
-  var NOW = new Date();
+  var NOW = new Date(), lookLst, lookCoral, syncLook = null;
   var pad = function (n) { return String(n).padStart(2, '0'); };
   var isoOf = function (d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
   var TODAY = isoOf(NOW);
@@ -1729,6 +1734,7 @@ var Faiths = (() => {
     if (top) scroller.scrollTop = 0;
     if (pendingScroll != null) { var gd = scroller.querySelector('[data-grid]'); if (gd) scroller.scrollTop = Math.max(0, gd.offsetTop + pendingScroll - 40); pendingScroll = null; }
     document.getElementById('clock').textContent = NOW.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).replace(/\s?[AP]M/, '');
+    if (syncLook) syncLook();
   }
 
   function gridToNow() { pendingScroll = calSel === TODAY ? Math.max(0, NOW.getHours() - 1.5) * HOUR : 7.5 * HOUR; }
@@ -1902,6 +1908,14 @@ var Faiths = (() => {
   // ---------- notes (comments) ----------
   var noting = false, phone = document.getElementById('phone'), noteBtn = document.getElementById('noteBtn'), notice = document.getElementById('notice');
   var commentsP = window.claude && window.claude.use ? window.claude.use('comments') : Promise.resolve(null);
+  // The two NestWork looks, one tap each (the same as Settings, Theme, NestWork or Coral).
+  lookLst = document.getElementById('lookLst'); lookCoral = document.getElementById('lookCoral');
+  syncLook = function () { var coral = S.theme.preset === 'nestwork', lst = S.theme.preset === 'evening';
+    lookLst.classList.toggle('on', lst); lookLst.setAttribute('aria-pressed', lst); lookCoral.classList.toggle('on', coral); lookCoral.setAttribute('aria-pressed', coral); };
+  var setLook = function (t) { S.theme = Object.assign({}, t, { scale: S.theme.scale || 1 }); save(); render(); syncLook(); };
+  lookLst.addEventListener('click', function () { setLook(NESTWORK); });
+  lookCoral.addEventListener('click', function () { setLook(CORAL); });
+  syncLook();
   var setNoting = function (on) { noting = on; phone.classList.toggle('noting', on); noteBtn.classList.toggle('on', on); noteBtn.textContent = on ? 'Cancel note' : 'Leave a note'; notice.textContent = on ? 'Now tap the part of the app you want changed.' : ''; };
   noteBtn.addEventListener('click', function () { setNoting(!noting); });
   phone.addEventListener('click', function (e) {
