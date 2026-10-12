@@ -80,6 +80,13 @@ button.card { cursor: pointer; }
 .card.inverse .ov { color: var(--obaccent); } .card.inverse .btn.cta { background: var(--obhl); color: var(--obink); }
 .card.flush { padding: 0; overflow: hidden; }
 .card .eb { margin-bottom: 4px; } .card .ct { margin-bottom: 10px; }
+.kbar { height: 4px; border-radius: 2px; background: var(--paper3); margin-top: 10px; } .kbar i { display: block; height: 4px; border-radius: 2px; background: var(--brand500); }
+.kcheck { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 0; border: 0; border-top: 1px solid var(--line1); background: none; font: inherit; font-size: calc(17px * var(--s)); color: var(--ink1); text-align: left; cursor: pointer; }
+.kcheck:first-of-type { border-top: 0; margin-top: 6px; } .kcheck.on { color: var(--ink3); }
+.kbox { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--line2); flex: none; display: grid; place-items: center; color: var(--inverse); }
+.kcheck.on .kbox { background: var(--brand500); border-color: var(--brand500); } .kbox svg { width: 16px; height: 16px; }
+.kpill { display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--brand50); color: var(--brand500); font-weight: 700; font-size: 13px; }
+.plainbtn { border: 0; background: none; padding: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; width: 100%; } .card.plainbtn { padding: 16px; background: var(--paper0); border: 1px solid var(--line1); }
 .rail-h { display: flex; align-items: flex-end; padding: 0 20px; margin: 24px 0 10px; gap: 10px; }
 .rail-h > div { flex: 1; min-width: 0; }
 .rail { display: flex; gap: 12px; overflow-x: auto; padding: 0 20px 4px; scroll-snap-type: x mandatory; scroll-padding: 20px; scrollbar-width: none; }
@@ -1434,13 +1441,66 @@ var Faiths = (() => {
       sect('Our marriage goals', 'Goals', 'gogoals') + '<div class="gut gap" style="gap:8px">' + (goals.map(function (g) { return card({ eyebrow: 'marriage', body: '<p class="t3" style="font-family:var(--display)">' + esc(g.title) + '</p>' }); }).join('') || '<p class="sh m3">Set a goal together, like a weekly date night or a yearly getaway.</p>') + '</div>' +
       '<div class="gut"><p class="cp m3" style="margin-top:16px">Only the two of you see this. It isn’t on your kids’ profiles, and their accounts never get your date nights, the Date night list or your couple ideas.</p></div>';
   };
+  // ---------- a child's page (mirrors app/child.tsx): one-on-one, checklists by area, things to do, our list ----------
+  var KG = window.KidGrowth, kidState = { area: 'all', more: 0, ahead: {} };
+  var kprog = function (m) { S.kid = S.kid || {}; S.kid[m] = S.kid[m] || {}; return S.kid[m]; };
+  var kst = function (m, k) { var r = kprog(m)[k]; return r && r.status; };
+  var kdomains = function () { return KG.DOMAINS.filter(function (d) { return d[0] !== 'faith' || secOn('faith'); }); };
+  var kchristian = function () { return !!Faiths.lanternEdition(FAMILY.faith); };
+  var kworking = function (m, band, d) { var nb = KG.nextBand(band), cur = KG.SKILLS[band][d];
+    return nb && (kidState.ahead[m + d] || cur.every(function (x) { return kst(m, x.key) === 'done'; })) ? nb : band; };
+  var kmeta = function (a) { return a.minutes + ' min · ' + a.cost; };
+  var kweek = function () { return KG.mondayOf(TODAY); };
+  var kones = function (g, band) { return KG.shuffled(KG.ONE_ON_ONE.filter(function (a) { return a.bands.indexOf(band) >= 0 && (!a.christian || kchristian()); }), kweek() + ':' + g.id); };
+  var kpick = function (g, band, par, i) { var ones = kones(g, band), r = kprog(g.id)['one:' + par.id], parts = (r && r.note || '').split('|');
+    return (parts[0] === kweek() && ones.filter(function (a) { return a.key === parts[1]; })[0]) || ones[(i * 3) % Math.max(ones.length, 1)]; };
+  var kfind = function (key) { return KG.ACTIVITIES.concat(KG.ONE_ON_ONE).filter(function (a) { return a.key === key; })[0]; };
   SCREENS.child = function (id) {
-    var g = member(id), a = ageOn(g.birthday), s = stageFor(a);
-    return header(g.name, { sub: g.full + ' · ' + s.label + ' · ' + a, right: backLink('Family') }) + sect('Growing right now') +
-      '<div class="gut gap">' + s.growth.map(function (x) { return card({ body: '<p class="ov m3">' + x[0] + '</p><p class="bd">' + esc(x[1]) + '</p>' }); }).join('') + '</div>' +
+    var g = member(id), a = ageOn(g.birthday), s = stageFor(a), band = KG.bandFor(a), N = function (x) { return KG.named(x, g.name); };
+    var doms = kdomains();
+    var pool = KG.ACTIVITIES.filter(function (x) { return (!x.christian || kchristian()) && doms.some(function (d) { return d[0] === x.domain; }) && (kidState.area === 'all' || x.domain === kidState.area) && x.bands.indexOf(kworking(g.id, band, x.domain)) >= 0 && kst(g.id, x.key) !== 'done'; });
+    var sh = KG.shuffled(pool, kweek() + ':' + id + ':' + kidState.area); pool = sh.slice((kidState.more * 8) % Math.max(sh.length, 1)).concat(sh).slice(0, 8);
+    var saved = KG.ACTIVITIES.concat(KG.ONE_ON_ONE).filter(function (x) { return kst(g.id, x.key) === 'saved'; });
+    var doneN = Object.keys(kprog(g.id)).filter(function (k) { var r = kprog(g.id)[k]; return r.kind === 'activity' && r.status === 'done'; }).length;
+    var wide = 'width:calc(100vw - 56px);max-width:318px;flex:none;scroll-snap-align:start';
+    var ones = parents.map(function (par, i) { var x = kpick(g, band, par, i); if (!x) return '';
+      var lab = (par.role === 'dad' ? 'Dad' : 'Mom') + ' time · ' + par.name;
+      return '<div class="card" style="' + wide + '"><button class="plainbtn" data-a="kact" data-id="' + id + '|' + x.key + '|' + esc(lab) + '"><p class="ov br4">' + esc(lab) + '</p><p class="t2" style="margin-top:4px">' + esc(N(x.title)) + '</p><p class="sh m2" style="margin-top:4px">' + esc(N(x.summary)) + '</p><p class="fn m3" style="margin-top:6px">' + kmeta(x) + ' · ' + x.place + '</p></button>' +
+        '<div style="display:flex;gap:18px;margin-top:12px"><button class="link sh" data-a="kone" data-id="' + id + '|' + par.id + '|' + i + '">Another idea</button><button class="link sh" data-a="kplan" data-id="' + id + '|' + x.key + '|' + esc(par.name + ' and ' + g.name + ': ' + N(x.title)) + '">Plan it</button></div></div>'; });
+    var checks = doms.map(function (d) { var wb = kworking(g.id, band, d[0]), list = KG.SKILLS[wb][d[0]], done = list.filter(function (x) { return kst(g.id, x.key) === 'done'; }).length, nb = KG.nextBand(wb);
+      return '<div class="card" style="' + wide + '"><div style="display:flex;align-items:center;gap:10px"><span class="brand">' + I(d[2]) + '</span><p class="t3" style="flex:1">' + d[1] + '</p><p class="fn b m3">' + done + ' of ' + list.length + '</p></div>' +
+        (wb !== band ? '<p class="fn b br4" style="text-transform:uppercase;letter-spacing:1px;margin-top:4px">Next stage</p>' : '') +
+        '<div class="kbar"><i style="width:' + (done / list.length * 100) + '%"></i></div>' +
+        list.map(function (x) { var on = kst(g.id, x.key) === 'done'; return '<button class="kcheck' + (on ? ' on' : '') + '" role="checkbox" aria-checked="' + on + '" data-a="kskill" data-id="' + id + '|' + x.key + '"><span class="kbox">' + (on ? I('check') : '') + '</span><span>' + esc(x.text) + '</span></button>'; }).join('') +
+        '<div style="display:flex;gap:18px;margin-top:8px;flex-wrap:wrap"><button class="link sh" data-a="karea" data-id="' + d[0] + '">Ideas for ' + d[1].toLowerCase() + '</button>' +
+        (wb === band && nb && done >= Math.ceil(list.length / 2) ? '<button class="link sh" data-a="knext" data-id="' + id + d[0] + '">What’s next</button>' : '') +
+        (wb !== band && kidState.ahead[id + d[0]] && !list.every(function (x) { return kst(g.id, x.key) === 'done'; }) ? '<button class="link sh" data-a="kback" data-id="' + id + d[0] + '">Back to this stage</button>' : '') + '</div></div>'; });
+    var chip = function (k, l) { return '<button class="chip' + (kidState.area === k ? ' on' : '') + '" data-a="karea" data-id="' + k + '">' + l + '</button>'; };
+    var acts = pool.map(function (x) { var lab = KG.DOMAINS.filter(function (d) { return d[0] === x.domain; })[0][1];
+      return '<button class="card plainbtn" style="width:240px;min-height:190px;flex:none;scroll-snap-align:start;text-align:left" data-a="kact" data-id="' + id + '|' + x.key + '|' + lab + '"><span style="display:flex;align-items:center"><span class="kpill">' + lab + '</span><span style="flex:1"></span>' + (kst(g.id, x.key) === 'saved' ? '<span class="brand">' + I('bookmark-check') + '</span>' : '') + '</span>' +
+        '<p class="hl" style="margin-top:8px">' + esc(N(x.title)) + '</p><p class="sh m2" style="margin-top:4px">' + esc(N(x.summary)) + '</p><p class="fn m3" style="margin-top:6px">' + kmeta(x) + '</p></button>'; });
+    var sv = saved.map(function (x) { return '<button class="card plainbtn" style="width:200px;min-height:120px;flex:none;scroll-snap-align:start;text-align:left" data-a="kact" data-id="' + id + '|' + x.key + '|Our list"><p class="ov br4">' + (KG.DOMAINS.filter(function (d) { return d[0] === x.domain; })[0] || ['', ''])[1] + '</p><p class="hl" style="margin-top:4px">' + esc(N(x.title)) + '</p><p class="fn m3" style="margin-top:4px">' + kmeta(x) + '</p></button>'; });
+    return header(g.name, { sub: s.label + ' · ' + a + ' years', right: backLink('Family') }) +
+      rail({ title: 'One-on-one this week', sub: 'Time alone with ' + g.name }, ones).replace('class="rail"', 'class="rail" data-keep="ones' + id + '"') +
+      '<div class="rail-h"><div><h2 class="t2">What ' + esc(g.name) + ' is working on</h2><p class="fn m3">Swipe through each area. Check a skill when ' + esc(g.name) + ' does it most of the time.</p></div></div>' +
+      '<div class="rail" data-keep="checks' + id + '">' + checks.join('') + '</div>' +
+      '<div class="rail-h"><div><h2 class="t2">Things to do with ' + esc(g.name) + '</h2><p class="fn m3">Tap one for how to do it</p></div><button class="link sh" data-a="kmore">More ideas</button></div>' +
+      '<div class="rail" style="gap:8px" data-keep="chips' + id + '">' + chip('all', 'All') + doms.map(function (d) { return chip(d[0], d[1]); }).join('') + '</div>' +
+      '<div class="rail" style="margin-top:12px" data-keep="acts' + id + '">' + (acts.length ? acts.join('') : '<p class="sh m3">You’ve done every idea here. Tap More ideas or pick another area.</p>') + '</div>' +
+      rail({ title: 'Our list with ' + g.name, sub: saved.length ? 'Saved to do together' + (doneN ? ' · ' + doneN + ' done so far' : '') : 'Tap an idea, then Save to our list' }, sv) + (saved.length ? '' : '<div class="gut"><p class="sh m3">Nothing saved yet.</p></div>') +
+      rail({ title: 'How to talk to ' + g.name }, s.say.map(function (x) { return '<div class="card" style="width:260px;flex:none;scroll-snap-align:start"><p class="ov" style="color:#B43A2E">Instead of</p><p class="sh m3">' + esc(x[0]) + '</p><p class="ov" style="color:#3D7A58;margin-top:8px">Try</p><p class="bd">' + esc(x[1]) + '</p></div>'; })) +
       rail({ title: 'Feelings to name' }, s.feelings.map(function (f) { return tile({ size: 'sm', area: 'girls', icon: 'smile', title: f }); })) +
-      sect('How to talk to her') + '<div class="gut gap">' + s.say.map(function (x) { return card({ body: '<p class="ov" style="color:#B43A2E">Instead of</p><p class="sh m3">' + esc(x[0]) + '</p><p class="ov" style="color:#3D7A58;margin-top:8px">Try</p><p class="bd">' + esc(x[1]) + '</p>' }); }).join('') + '</div>' +
-      rail({ title: 'Today with ' + g.name }, IDEAS.girls.map(function (x, i) { return x.min <= a ? tile({ size: 'wide', area: 'girls', icon: x.icon, title: x.title, meta: x.meta, att: (x.attachments || []).length, a: 'idea', id: 'girls:' + i }) : ''; }));
+      rail({ title: 'Today with ' + g.name }, IDEAS.girls.map(function (x, i) { return x.min <= a ? tile({ size: 'wide', area: 'girls', icon: x.icon, title: x.title, meta: x.meta, att: (x.attachments || []).length, a: 'idea', id: 'girls:' + i }) : ''; })) + '<div style="height:30px"></div>';
+  };
+  SCREENS.kidact = function (pid) {
+    var parts = pid.split('|'), g = member(parts[0]), x = kfind(parts[1]), N = function (t) { return KG.named(t, g.name); }, c = area('girls'), saved = kst(g.id, x.key) === 'saved';
+    var dom = KG.DOMAINS.filter(function (d) { return d[0] === x.domain; })[0];
+    return '<div class="dhero" style="background:' + c[1] + ';color:' + c[0] + '">' + I(dom[2]) + '<button class="back" data-a="back" aria-label="Back">' + I('chevron-left') + '</button></div>' +
+      '<div style="padding:20px;display:grid;gap:8px"><p class="ov br4">' + esc(parts[2]) + '</p><h1 class="t1">' + esc(N(x.title)) + '</h1><p class="sh m3">' + kmeta(x) + ' · ' + x.place + '</p><p class="bd m2" style="margin-top:4px">' + esc(N(x.summary) + ' ' + N(x.why)) + '</p>' +
+      '<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn cta" style="flex:1" data-a="kplan" data-id="' + g.id + '|' + x.key + '|' + esc(g.name + ': ' + N(x.title)) + '">' + I('calendar-plus') + 'Plan it</button>' +
+      '<button class="btn secondary" data-a="ksave" data-id="' + g.id + '|' + x.key + '">' + I(saved ? 'bookmark-check' : 'bookmark') + (saved ? 'Saved' : 'Save to our list') + '</button>' +
+      '<button class="btn secondary" data-a="kdone" data-id="' + g.id + '|' + x.key + '">' + I('check') + 'We did it</button></div>' +
+      '<p class="ov br4" style="margin-top:20px">What you’ll do</p>' + x.steps.map(function (t, i) { return '<div class="step"><span class="num">' + (i + 1) + '</span><p class="co">' + esc(N(t)) + '</p></div>'; }).join('') + '</div>';
   };
   SCREENS.detail = function (id) {
     var d = ideaById(id), ar = id.split(':')[0] === 'couple' ? 'marriage' : 'girls', c = area(ar);
@@ -1723,6 +1783,7 @@ var Faiths = (() => {
   function render(top) {
     applyTheme();
     var c = cur(), fn = SCREENS[c.r];
+    var keep = {}; Array.prototype.forEach.call(scroller.querySelectorAll('[data-keep]'), function (el) { keep[el.getAttribute('data-keep')] = el.scrollLeft; });
     scroller.innerHTML = fn(c.p) + (toastMsg ? '<div class="toast" role="status">' + esc(toastMsg) + '</div>' : '');
     var old = app.querySelector('.sheet'); if (old) old.remove();
     if (sheet) app.insertAdjacentHTML('beforeend', sheetHTML());
@@ -1731,6 +1792,7 @@ var Faiths = (() => {
     var activeTab = nav[0].r;
     tabbar.innerHTML = TABS.filter(function (t) { return t[0] !== 'marriage' || secOn('marriage'); }).map(function (t) { return '<button class="' + (activeTab === t[0] ? 'on' : '') + '" data-a="tab" data-id="' + t[0] + '" aria-label="' + t[1] + '"' + (activeTab === t[0] ? ' aria-current="page"' : '') + '>' + I(t[2]) + '<span>' + t[1] + '</span></button>'; }).join('');
     if (window.lucide) { try { window.lucide.createIcons(); } catch (e) {} }
+    Array.prototype.forEach.call(scroller.querySelectorAll('[data-keep]'), function (el) { var k = el.getAttribute('data-keep'); if (keep[k] != null) el.scrollLeft = keep[k]; });
     if (top) scroller.scrollTop = 0;
     if (pendingScroll != null) { var gd = scroller.querySelector('[data-grid]'); if (gd) scroller.scrollTop = Math.max(0, gd.offsetTop + pendingScroll - 40); pendingScroll = null; }
     document.getElementById('clock').textContent = NOW.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }).replace(/\s?[AP]M/, '');
@@ -1789,7 +1851,20 @@ var Faiths = (() => {
       case 'back': quiz = null; back(); return;
       case 'go': if (id && id.indexOf('recipe:') === 0) { go('recipe', id.slice(7)); return; } go(id); return;
       case 'idea': go('detail', id); return;
-      case 'child': go('child', id); return;
+      case 'child': kidState = { area: 'all', more: 0, ahead: {} }; go('child', id); return;
+      case 'kskill': { var q = id.split('|'), on = kst(q[0], q[1]) === 'done'; kprog(q[0])[q[1]] = { kind: 'skill', status: on ? 'cleared' : 'done' }; save(); render(); return; }
+      case 'karea': kidState.area = id; kidState.more = 0; render(); return;
+      case 'kmore': kidState.more++; render(); return;
+      case 'knext': kidState.ahead[id] = true; render(); return;
+      case 'kback': kidState.ahead[id] = false; render(); return;
+      case 'kact': go('kidact', id); return;
+      case 'ksave': { var q2 = id.split('|'), sv = kst(q2[0], q2[1]) === 'saved'; kprog(q2[0])[q2[1]] = { kind: 'activity', status: sv ? 'cleared' : 'saved' }; save(); back(); toast(sv ? 'Taken off your list' : 'Saved to your list'); return; }
+      case 'kdone': { var q3 = id.split('|'); kprog(q3[0])[q3[1]] = { kind: 'activity', status: 'done' }; save(); back(); toast('Nice work. Marked as done.'); return; }
+      case 'kplan': { var q4 = id.split('|'), xa = kfind(q4[1]); S.rems.push({ id: 'p' + Date.now(), title: q4[2], notes: xa ? KG.named(xa.summary, member(q4[0]).name) : '', list: 'kids', due: addDays(TODAY, 2), time: '19:00', cal: true }); save(); if (cur().r === 'kidact') back(); toast('Planned for ' + fmtLong(addDays(TODAY, 2)) + '. It’s on the calendar.'); return; }
+      case 'kone': { var q5 = id.split('|'), gg = member(q5[0]), bd = KG.bandFor(ageOn(gg.birthday)), ones = kones(gg, bd), curx = kpick(gg, bd, member(q5[1]), +q5[2]);
+        var others = parents.filter(function (x) { return x.id !== q5[1]; }).map(function (x, j) { var o = kpick(gg, bd, x, j); return o && o.key; });
+        var k = (ones.indexOf(curx) + 1) % ones.length; while (others.indexOf(ones[k].key) >= 0 && ones.length > 2) k = (k + 1) % ones.length;
+        kprog(gg.id)['one:' + q5[1]] = { kind: 'one', status: 'pick', note: kweek() + '|' + ones[k].key }; save(); render(); return; }
       case 'list': go('list', id); return;
       case 'quiz': quiz = null; go('quiz', id); return;
       case 'love': go('quiz', id); return;

@@ -20,6 +20,7 @@ export default function Root() {
       <Stack.Screen name="love-languages" options={{ presentation: 'modal' }} />
       <Stack.Screen name="kid" options={{ gestureEnabled: false }} />
       <Stack.Screen name="detail" options={{ presentation: 'card' }} />
+      <Stack.Screen name="child" options={{ presentation: 'card' }} />
       <Stack.Screen name="reminder-sheet" options={{ presentation: 'formSheet', sheetGrabberVisible: true }} />
       <Stack.Screen name="event" options={{ presentation: 'card' }} />
       <Stack.Screen name="our-list" options={{ presentation: 'card' }} />
