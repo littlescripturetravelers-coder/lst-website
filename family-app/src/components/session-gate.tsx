@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, Platform } from 'react-native';
 import { supabase } from '@/lib/supabase';
 import { Text } from './text';
 import { Button } from './button';
@@ -11,6 +11,8 @@ import { NestMark } from './nest-mark';
 /** Email magic-link sign in. Both parents sign in to the same family (see supabase/seed.sql). */
 export function SessionGate({ children }: { children: React.ReactNode }) {
   const { theme: t } = useTheme(); const [session, setSession] = useState<any>(undefined); const [email, setEmail] = useState(''); const [sent, setSent] = useState(false);
+  // On the web (Add to Home Screen), the emailed link opens in Safari, which keeps a separate sign-in from the Home Screen app, so the code in the same email is typed here instead.
+  const [code, setCode] = useState(''); const [codeError, setCodeError] = useState('');
   useEffect(() => { if (!session) return; supabase.from('family_members').select('family_id, role').eq('user_id', session.user.id).maybeSingle().then(({ data }) => { if (!data) router.replace('/onboarding'); else if (data.role === 'daughter' || data.role === 'son') router.replace('/kid');
     // A parent's first sign-in lands on the questionnaire (once they've answered, it lives in Settings, Personalization).
     else supabase.from('member_profiles').select('user_id').eq('user_id', session.user.id).maybeSingle().then(({ data: p }) => { if (!p) router.replace({ pathname: '/setup', params: { first: '1' } }); }); }); }, [session?.user?.id]);
@@ -23,7 +25,13 @@ export function SessionGate({ children }: { children: React.ReactNode }) {
   return <View style={{ flex: 1, backgroundColor: t.brand[500], justifyContent: 'center', padding: 28, gap: 16 }}>
     <NestMark size={88} fg={t.ink.inverse} bg={t.brand[500]} light={t.onBrand.highlight} />
     <Text v="hero" color={t.ink.inverse}>{APP_NAME}</Text><Text v="title3" color={t.ink.inverse}>Family, well kept.</Text><Text color={t.ink.inverse}>Your family’s calendar, reminders, ideas and faith, all in one place.</Text><View style={{ width: 48, height: 2, backgroundColor: t.onBrand.highlight }} />
-    {sent ? <Text color={t.ink.inverse}>Check your email for a sign-in link.</Text> : <>
+    {sent && Platform.OS === 'web' ? <>
+      <Text color={t.ink.inverse}>Check your email, then type the code from it here.</Text>
+      <TextInput value={code} onChangeText={c => { setCode(c.replace(/\D/g, '')); setCodeError(''); }} placeholder="Code" keyboardType="number-pad" autoComplete="one-time-code" maxLength={10} placeholderTextColor={t.brand[200]} style={{ height: 48, borderRadius: 8, paddingHorizontal: 14, backgroundColor: 'rgba(255,255,255,.1)', color: t.ink.inverse, fontSize: 17 }} />
+      {codeError ? <Text color={t.ink.inverse}>{codeError}</Text> : null}
+      <Button variant="cta" onBrand full title="Sign in" onPress={async () => { const { error } = await supabase.auth.verifyOtp({ email: email.trim(), token: code, type: 'email' }); if (error) setCodeError('That code didn’t work. Check it, or send a new one.'); }} />
+      <Button variant="tinted" title="Send a new code" onPress={() => { setSent(false); setCode(''); setCodeError(''); }} />
+    </> : sent ? <Text color={t.ink.inverse}>Check your email for a sign-in link.</Text> : <>
       <TextInput value={email} onChangeText={setEmail} placeholder="Email" autoCapitalize="none" keyboardType="email-address" placeholderTextColor={t.brand[200]} style={{ height: 48, borderRadius: 8, paddingHorizontal: 14, backgroundColor: 'rgba(255,255,255,.1)', color: t.ink.inverse, fontSize: 17 }} />
       <Button variant="cta" onBrand full title="Send sign-in link" onPress={async () => { await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: Linking.createURL('/') } }); setSent(true); }} />
     </>}
