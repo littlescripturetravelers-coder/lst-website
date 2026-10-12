@@ -69,7 +69,7 @@ export default function Settings() {
         <Pressable onPress={() => setChoice({ ...c, textScale: Math.min(1.35, +((c.textScale ?? 1) + .05).toFixed(2)) })} style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: t.paper[2], alignItems: 'center', justifyContent: 'center' }}><Text v="headline" weight="heavy">A+</Text></Pressable>
       </View>
       <Text v="caption" color={t.ink[3]} style={{ textAlign: 'center', marginTop: 4 }}>{Math.round((c.textScale ?? 1) * 100)}% · also follows your iPhone’s text size setting</Text>
-      <Lbl s="Theme" /><Text v="caption" color={t.ink[3]} style={{ marginTop: -4, marginBottom: 8 }}>NestWork is the app’s own look. Classic is the original look, so you can always go back.</Text>
+      <Lbl s="Theme" /><Text v="caption" color={t.ink[3]} style={{ marginTop: -4, marginBottom: 8 }}>NestWork is the navy, gold and linen look (the app’s original colors). Coral is the coral and white look.</Text>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{PRESETS.map(p => <Pressable key={p.preset} accessibilityRole="radio" accessibilityState={{ selected: c.preset === p.preset }} accessibilityLabel={(p.label ?? p.preset) + ' theme'}
         // NestWork and Classic are whole looks (colors, fonts and background); the other themes only change colors and keep your fonts and background.
         onPress={() => setChoice(p.label ? { ...p, textScale: c.textScale } : { ...p, display: c.display, ui: c.ui, mode: c.mode, textScale: c.textScale })} style={{ width: '31%', borderRadius: 10, overflow: 'hidden', borderWidth: c.preset === p.preset ? 2 : 1, borderColor: c.preset === p.preset ? t.ink[1] : t.line[2], backgroundColor: p.paper }}>
@@ -86,7 +86,7 @@ export default function Settings() {
     </Card></Gutter>
     <SectionHead title="About" />
     <Gutter><Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}>
-      <NestMark size={52} fg={t.brand[500]} bg={t.paper[0]} />
+      <NestMark size={52} fg={t.brand[500]} bg={t.paper[0]} light={t.gold[600]} />
       <View style={{ flex: 1 }}><Text v="title3" color={t.ink.title}>{APP_NAME}</Text><Text v="subhead" color={t.ink[2]}>Family, well kept.</Text>
         <Text v="caption" weight="heavy" color={t.ink.label} style={{ marginTop: 4, letterSpacing: 1.2, textTransform: 'uppercase' }}>An LST company · version {Constants.expoConfig?.version ?? '1.0.0'}</Text></View>
     </View></Card></Gutter>

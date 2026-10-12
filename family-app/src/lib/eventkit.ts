@@ -12,7 +12,7 @@ async function familyCalendar(entity: 'event' | 'reminder') {
   const old = cals.find(c => OLD_APP_NAMES.includes(c.title));
   if (old) { await Calendar.updateCalendarAsync(old.id, { title: CAL_TITLE }).catch(() => {}); return old.id; }
   const src = (await Calendar.getDefaultCalendarAsync()).source;
-  return Calendar.createCalendarAsync({ title: CAL_TITLE, color: '#F2665A', entityType: type, sourceId: src.id, source: src, name: CAL_TITLE, ownerAccount: 'personal', accessLevel: Calendar.CalendarAccessLevel.OWNER });
+  return Calendar.createCalendarAsync({ title: CAL_TITLE, color: '#1B2D5F', entityType: type, sourceId: src.id, source: src, name: CAL_TITLE, ownerAccount: 'personal', accessLevel: Calendar.CalendarAccessLevel.OWNER });
 }
 /** The app's own calendar inside Apple Calendar (made the first time). Null when calendar access is off. */
 export const appleFamilyCalendar = () => familyCalendar('event');

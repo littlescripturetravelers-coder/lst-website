@@ -13,11 +13,12 @@ const LOOK_PAPER: Partial<Record<ThemeMode, string>> = { light: '#FFFFFF', gray:
 export type ThemeChoice = { preset: string; brand: string; highlight: string; paper: string; ink: string; display: DisplayFont; ui: UiFont; mode?: ThemeMode; textScale?: number; label?: string; brandOnly?: boolean };
 export type DisplayFont = 'fraunces' | 'fredoka' | 'youngSerif' | 'lora' | 'nunito' | 'playfair' | 'merriweather' | 'dmSerif' | 'poppins' | 'quicksand' | 'comfortaa' | 'raleway' | 'montserrat' | 'caveat' | 'pacifico';
 export type UiFont = 'nunito' | 'figtree' | 'atkinson' | 'system' | 'inter' | 'lato' | 'openSans' | 'sourceSans' | 'workSans' | 'poppins' | 'quicksand' | 'raleway' | 'montserrat' | 'merriweather';
-// NestWork is the default look (coral and white, charcoal reading text, Fraunces + Figtree). Classic is the app's original look, kept so anyone can go back.
-export const NESTWORK: ThemeChoice = { preset: 'nestwork', label: 'NestWork', brandOnly: true, brand: '#F2665A', highlight: '#F2665A', paper: '#FFFFFF', ink: '#3A3A3C', display: 'fraunces', ui: 'figtree', mode: 'light' };
-export const CLASSIC: ThemeChoice = { preset: 'evening', label: 'Classic', brand: '#1B2D5F', highlight: '#F5C518', paper: '#F4EFE6', ink: '#1B2D5F', display: 'fredoka', ui: 'nunito', mode: 'tan' };
+// NestWork is the default look: the LST colors and fonts (navy, gold and linen; Fredoka, Nunito and Anton), which is also the app's original look.
+// Coral is the coral-and-white look (Fraunces + Figtree), kept as a one-tap choice. Preset keys are stored on phones: never rename them.
+export const NESTWORK: ThemeChoice = { preset: 'evening', label: 'NestWork', brand: '#1B2D5F', highlight: '#F5C518', paper: '#F4EFE6', ink: '#1B2D5F', display: 'fredoka', ui: 'nunito', mode: 'tan' };
+export const CORAL: ThemeChoice = { preset: 'nestwork', label: 'Coral', brandOnly: true, brand: '#F2665A', highlight: '#F2665A', paper: '#FFFFFF', ink: '#3A3A3C', display: 'fraunces', ui: 'figtree', mode: 'light' };
 export const PRESETS: ThemeChoice[] = [
-  NESTWORK, CLASSIC,
+  NESTWORK, CORAL,
   { preset: 'clay', brand: '#A8502F', highlight: '#F2B84B', paper: '#FAF6EF', ink: '#2A211B', display: 'fredoka', ui: 'nunito' },
   { preset: 'sage', brand: '#355845', highlight: '#E9C46A', paper: '#F2F0E8', ink: '#1F2E26', display: 'fredoka', ui: 'nunito' },
   { preset: 'plum', brand: '#4E3563', highlight: '#F0B37E', paper: '#F6F1EE', ink: '#2B2135', display: 'fredoka', ui: 'nunito' },
@@ -136,17 +137,17 @@ const fontsFor = (t: ThemeChoice) => ({ display: (FONT.display[t.display] ?? FON
 export type Theme = ReturnType<typeof buildTheme>;
 const Ctx = createContext<{ theme: Theme; setChoice: (c: ThemeChoice) => void }>({ theme: buildTheme(NESTWORK), setChoice: () => {} });
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Everyone starts on NestWork; a saved choice (Classic or anything picked in Settings) replaces it as soon as it's read.
+  // Everyone starts on NestWork; a saved choice (Coral or anything picked in Settings) replaces it as soon as it's read.
   const [choice, setChoice] = useState<ThemeChoice>({ ...NESTWORK, textScale: 1 });
   const systemDark = useColorScheme() === 'dark'; const [ready, setReady] = useState(false);
   // Extra fonts load before the theme switches to them, so text never flashes in a missing font.
   const apply = async (c: ThemeChoice) => { await loadFonts([...(FONT.display[c.display] ?? []), ...(FONT.ui[c.ui] ?? []), shoutFont(c)]); setChoice(c); };
-  // Wait for the saved look (a few milliseconds) so someone on Classic never sees NestWork flash first.
-  // One time only: a saved original look moves to NestWork (keeping text size). Picking Classic again after that sticks.
+  // Wait for the saved look (a few milliseconds) so someone on another look never sees NestWork flash first.
+  // One time only: a saved coral look (the default for a short while) moves to NestWork's LST colors (keeping text size). Picking Coral after that sticks.
   useEffect(() => { (async () => {
-    const [v, moved] = await Promise.all([AsyncStorage.getItem('theme'), AsyncStorage.getItem('theme-nestwork')]);
+    const [v, moved] = await Promise.all([AsyncStorage.getItem('theme'), AsyncStorage.getItem('theme-lst')]);
     let c: ThemeChoice | null = v ? JSON.parse(v) : null;
-    if (!moved) { if (c?.preset === 'evening') { c = { ...NESTWORK, textScale: c.textScale ?? 1 }; await AsyncStorage.setItem('theme', JSON.stringify(c)); } await AsyncStorage.setItem('theme-nestwork', '1'); }
+    if (!moved) { if (c?.preset === 'nestwork') { c = { ...NESTWORK, textScale: c.textScale ?? 1 }; await AsyncStorage.setItem('theme', JSON.stringify(c)); } await AsyncStorage.setItem('theme-lst', '1'); }
     if (c) await apply(c);
   })().catch(() => {}).finally(() => setReady(true)); }, []);
   const value = useMemo(() => ({ theme: buildTheme(choice, systemDark), setChoice: (c: ThemeChoice) => { apply(c); AsyncStorage.setItem('theme', JSON.stringify(c)); } }), [choice, systemDark]);
