@@ -982,6 +982,82 @@ var KidGrowth=(()=>{var b=Object.defineProperty;var H=Object.getOwnPropertyDescr
       '<div class="gut gap" style="padding-top:20px"><h1 class="t1" style="font-family:var(--display)">' + head[0] + '</h1><p class="bd m2">' + head[1] + '</p>' + body +
       '<div style="display:flex;gap:10px;margin-top:10px">' + (su.i > 0 ? '<button class="btn secondary" data-a="sustep" data-id="-1">Back</button>' : '') + '<button class="btn full" style="flex:1"' + (step === 'sections' && !su.sections.length ? ' disabled' : '') + ' data-a="sustep" data-id="1">' + (su.i === steps.length - 1 ? 'Finish' : 'Next') + '</button></div></div>';
   };
+  // ---------- First things first (Covey: big rocks from the family's priorities, in ranked order) ----------
+  // The real app asks AI (function `compass`) for these, fitted around the day; the model picks from a small bank by priority group.
+  var DIMS = [['body', 'Body'], ['mind', 'Mind'], ['heart', 'Heart'], ['spirit', 'Spirit']];
+  var ROCK_BANK = {
+    'Our marriage': [['Plan this week’s date night with {spouse}', 'Spouse', 'heart', 15, ['Offer {spouse} two ideas', 'Pick a night and line up a sitter']], ['Ten-minute couch talk after bedtime', 'Spouse', 'heart', 10, ['Phones in another room', 'Ask: what was the best part of your day?']], ['Leave {spouse} a short thank-you note', 'Spouse', 'heart', 5, ['Name one thing they did this week', 'Put it where they’ll find it']]],
+    'Our kids': [['Read a picture book with {kid}', 'Parent', 'mind', 20, ['Let {kid} pick the book', 'Ask one question about the story']], ['Ten minutes of floor play with {kid}', 'Parent', 'heart', 10, ['Let {kid} lead', 'No phone, just follow along']], ['Bedtime question with each child', 'Parent', 'heart', 10, ['Ask: what made you happy today?', 'Listen without fixing']]],
+    'Family and home': [['Family dinner with one good question', 'Home', 'heart', 30, ['Everyone at the table', 'Ask: what was hard and what was good today?']], ['Fifteen-minute family tidy with music', 'Home', 'body', 15, ['Pick three songs', 'Everyone takes one room']], ['After-dinner walk together', 'Home', 'body', 20, ['Shoes on right after dinner', 'Let the kids choose the route']]],
+    'Faith': [['Ten-minute family prayer walk', 'Faith', 'spirit', 10, ['After dinner', 'Each person says one thanks']], ['Read one verse together at breakfast', 'Faith', 'spirit', 5, ['Read it slowly', 'Ask what it means for today']], ['Do one quiet act of service', 'Faith', 'spirit', 15, ['Pick a neighbor or friend', 'Do it without being asked']]],
+    'Money': [['Fifteen-minute money check-in', 'Home', 'mind', 15, ['Look at this week’s spending', 'Choose one thing to skip']], ['Move a little into savings today', 'Home', 'mind', 5, ['Pick an amount you won’t miss', 'Set it to repeat']]],
+    'Health': [['Twenty-minute walk or workout', 'Self', 'body', 20, ['Put it on the calendar', 'Go even if it’s short']], ['Lights out thirty minutes earlier', 'Self', 'body', 5, ['Set a phone reminder', 'Leave the phone outside the bedroom']]],
+    'Work and growth': [['Protect one hour of focused work', 'Work', 'mind', 60, ['Pick the most important task', 'Notifications off for the hour']], ['Read ten pages of a good book', 'Self', 'mind', 15, ['Keep it by the bed', 'Read before the phone']]],
+  };
+  // A few priorities have their own rocks (checked before the group's bank).
+  var ROCK_FOR = { 'reading': ['Read a picture book with {kid}', 'Parent', 'mind', 20, ['Let {kid} pick the book', 'Ask one question about the story']],
+    'date-nights': ['Plan this week’s date night with {spouse}', 'Spouse', 'heart', 15, ['Offer {spouse} two ideas', 'Pick a night and line up a sitter']],
+    'prayer': ['Ten-minute family prayer walk', 'Faith', 'spirit', 10, ['After dinner', 'Each person says one thanks']], 'scripture': ['Read one verse together at breakfast', 'Faith', 'spirit', 5, ['Read it slowly', 'Ask what it means for today']],
+    'one-on-one': ['Ten minutes of one-on-one with {kid}', 'Parent', 'heart', 10, ['Let {kid} choose what to do', 'Phone in another room']], 'health': ['Twenty-minute walk or workout', 'Self', 'body', 20, ['Put it on the calendar', 'Go even if it’s short']] };
+  var FOCUS = ['Put {p} first today.', 'Begin with the end in mind: {p}.', 'Big rocks first. Today that’s {p}.'];
+  var rockNames = function (s) { var sp = FAMILY.members.filter(function (m) { return m.role === 'mom'; })[0], kid = FAMILY.members.filter(function (m) { return m.role === 'daughter' || m.role === 'son'; })[0];
+    return s.replace(/\{spouse\}/g, sp ? sp.name : 'your spouse').replace(/\{kid\}/g, kid ? kid.name : 'your child'); };
+  var rockDay = function (d) { S.rocks = S.rocks || {}; return S.rocks[d || TODAY]; };
+  function makeRocks(round) {
+    var ranked = (S.setup && S.setup.priorities.length ? S.setup.priorities : ['marriage', 'one-on-one', 'prayer']), out = [], seen = {}, keep = ((rockDay() || {}).items || []).filter(function (r) { return r.done || r.source === 'mine'; });
+    ranked.forEach(function (k, i) { var g = suGroupOf(k); if (!g || out.length + keep.length >= 4) return; var bank = ROCK_BANK[g[0]] || [], x = round === 0 && ROCK_FOR[k] ? ROCK_FOR[k] : bank[(round + i) % bank.length];
+      if (!x || seen[x[0]] || keep.some(function (r) { return r.title === rockNames(x[0]) || r.priority === k; })) return; seen[x[0]] = 1;
+      out.push({ id: 'k' + Date.now() + i, title: rockNames(x[0]), role: x[1], dimension: x[2], minutes: x[3], steps: x[4].map(rockNames), priority: k, why: 'Your #' + (i + 1) + ' priority: ' + lbl(SU_PRIORITIES, k) + '.', source: 'ai', done: false }); });
+    var top = ranked[0] ? lbl(SU_PRIORITIES, ranked[0]).toLowerCase() : 'what matters most', y = rockDay(addDays(TODAY, -1)), yd = y ? y.items.filter(function (r) { return r.done; }).length : 0;
+    S.rocks[TODAY] = { round: round, focus: FOCUS[round % FOCUS.length].replace('{p}', top), look_back: yd ? 'Yesterday you kept ' + yd + ' big rock' + (yd > 1 ? 's' : '') + '.' : '', items: keep.concat(out) };
+    save();
+  }
+  function rockWeek() { var mon = KidGrowth.mondayOf(TODAY), w = { rocks: 0, body: 0, mind: 0, heart: 0, spirit: 0 };
+    Object.keys(S.rocks || {}).forEach(function (d) { if (d >= mon && d <= TODAY) S.rocks[d].items.forEach(function (r) { if (r.done) { w.rocks++; if (r.dimension) w[r.dimension]++; } }); });
+    w.rems = S.rems.filter(function (r) { return r.done; }).length;
+    w.kids = Object.keys(S.kid || {}).reduce(function (n, m) { return n + Object.keys(S.kid[m]).filter(function (k) { return S.kid[m][k] && S.kid[m][k].status === 'done'; }).length; }, 0);
+    return w; }
+  var rockAdding = false;
+  function compassCard() {
+    if (!rockDay()) makeRocks(0);
+    var day = rockDay(), w = rockWeek(), today = day.items.filter(function (r) { return r.done; }).length;
+    var meta = function (r) { return [r.role, r.priority ? lbl(SU_PRIORITIES.concat(SU_MY_PRIORITIES), r.priority) : '', (DIMS.filter(function (d) { return d[0] === r.dimension; })[0] || [])[1], r.minutes ? r.minutes + ' min' : ''].filter(Boolean).join(' · '); };
+    return '<div class="gut" style="margin-bottom:12px">' + card({ eyebrow: 'First things first', title: day.focus, body:
+      '<button class="link fn b" style="position:absolute;top:14px;right:16px;font-size:13px" data-a="go" data-id="priorities">Priorities</button>' +
+      (day.look_back ? '<p class="sh m3" style="margin-bottom:8px">' + esc(day.look_back) + '</p>' : '') +
+      day.items.map(function (r, i) { return '<div style="display:flex;gap:12px;padding:10px 0;' + (i ? 'border-top:.5px solid var(--line2)' : '') + '">' +
+        '<button class="circle' + (r.done ? ' done' : '') + '" data-a="rockdone" data-id="' + r.id + '" role="checkbox" aria-checked="' + r.done + '" aria-label="' + esc(r.title) + '">' + (r.done ? '' : '<span class="fn hv m3" style="font-size:12px">' + (i + 1) + '</span>') + '</button>' +
+        '<button style="flex:1;text-align:left;background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer" data-a="go" data-id="rock:' + r.id + '"><p class="hl' + (r.done ? ' m3' : '') + '" style="' + (r.done ? 'text-decoration:line-through' : '') + '">' + esc(r.title) + '</p><p class="fn m3">' + esc(meta(r)) + '</p></button></div>'; }).join('') +
+      (rockAdding ? '<div style="display:flex;gap:8px;margin-top:8px"><input id="rocknew" class="inp" placeholder="One thing that matters today" style="flex:1;height:40px;border-radius:8px;border:1px solid var(--line2);padding:0 12px;font:inherit;background:var(--paper0);color:var(--ink1)"><button class="btn sm" data-a="rockadd">Add</button></div>'
+        : '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"><button class="btn sm tinted" data-a="rockadding">' + I('plus') + 'Add my own</button><button class="btn sm tinted" data-a="rocknew">' + I('refresh-cw') + 'New suggestions</button></div>') +
+      '<div style="margin-top:14px;padding-top:12px;border-top:.5px solid var(--line2);display:grid;gap:8px"><p class="fn hv m3" style="text-transform:uppercase;letter-spacing:.8px">This week</p>' +
+      '<p class="sh">' + w.rocks + ' big rocks kept' + (today ? ' (' + today + ' today)' : '') + ' · ' + w.rems + ' to-dos done · ' + w.kids + ' wins with the kids</p>' +
+      '<div style="display:flex;gap:8px">' + DIMS.map(function (d) { var n = w[d[0]]; return '<div style="flex:1;padding:8px;border-radius:8px;text-align:center;background:' + (n ? 'var(--brand50)' : 'var(--paper2)') + '"><p class="hl" style="color:' + (n ? 'var(--brand700)' : 'var(--ink3)') + '">' + n + '</p><p class="fn m3" style="font-size:12px">' + d[1] + '</p></div>'; }).join('') + '</div></div>',
+      style: 'position:relative' }) + '</div>';
+  }
+  var findRock = function (id) { return ((rockDay() || {}).items || []).filter(function (r) { return r.id === id; })[0]; };
+  SCREENS.rock = function (id) {
+    var r = findRock(id); if (!r) return header('Big rock', { right: backLink('Today') });
+    var ar = r.role === 'Spouse' ? 'marriage' : r.role === 'Parent' ? 'girls' : 'home', c = area(ar);
+    return '<div class="dhero" style="background:' + c[1] + ';color:' + c[0] + '">' + I(r.done ? 'circle-check' : 'target') + '<button class="back" data-a="back" aria-label="Back">' + I('chevron-left') + '</button></div>' +
+      '<div style="padding:20px;display:grid;gap:8px"><p class="ov br4">' + esc([r.role, r.priority ? lbl(SU_PRIORITIES.concat(SU_MY_PRIORITIES), r.priority) : ''].filter(Boolean).join(' · ') || 'Big rock') + '</p><h1 class="t1">' + esc(r.title) + '</h1>' +
+      (r.minutes ? '<p class="sh m3">' + esc([(DIMS.filter(function (d) { return d[0] === r.dimension; })[0] || [])[1], r.minutes + ' min'].filter(Boolean).join(' · ')) + '</p>' : '') + (r.why ? '<p class="bd m2" style="margin-top:4px">' + esc(r.why) + '</p>' : '') +
+      '<div style="display:flex;gap:8px;margin-top:12px"><button class="btn cta" style="flex:1" data-a="rockplan" data-id="' + r.id + '">' + I('calendar-plus') + 'Plan it</button><button class="btn secondary" data-a="rockdone" data-id="' + r.id + '|back">' + I('check') + (r.done ? 'Not done yet' : 'Done') + '</button><button class="btn secondary" data-a="rockrm" data-id="' + r.id + '">' + I('trash-2') + 'Remove</button></div>' +
+      ((r.steps || []).length ? '<p class="ov br4" style="margin-top:20px">What you’ll do</p>' + r.steps.map(function (s, i) { return '<div class="step"><span class="num">' + (i + 1) + '</span><p class="co">' + esc(s) + '</p></div>'; }).join('') : '') + '</div>';
+  };
+  SCREENS.priorities = function () {
+    var fam = S.setup ? S.setup.priorities : [], mine = S.myAns.myPriorities || [];
+    var rowp = function (k, i, n, text, sub, kind) { return '<div style="display:flex;align-items:center;gap:12px;padding:10px 0;' + (i < n - 1 ? 'border-bottom:.5px solid var(--line2)' : '') + '">' +
+      '<span style="width:28px;height:28px;border-radius:14px;display:grid;place-items:center;flex:none;background:' + (i < 3 ? 'var(--brand500);color:var(--inverse)' : 'var(--paper2);color:var(--ink2)') + '" class="fn hv">' + (i + 1) + '</span>' +
+      '<span style="flex:1"><p class="hl">' + esc(text) + '</p>' + (sub ? '<p class="fn m3">' + esc(sub) + '</p>' : '') + '</span>' +
+      '<button class="link" style="padding:6px;opacity:' + (i ? 1 : .3) + '" data-a="prmove" data-id="' + kind + '|' + i + '|-1" aria-label="Move ' + esc(text) + ' up"' + (i ? '' : ' disabled') + '>' + I('chevron-up') + '</button>' +
+      '<button class="link" style="padding:6px;opacity:' + (i < n - 1 ? 1 : .3) + '" data-a="prmove" data-id="' + kind + '|' + i + '|1" aria-label="Move ' + esc(text) + ' down"' + (i < n - 1 ? '' : ' disabled') + '>' + I('chevron-down') + '</button></div>'; };
+    return header('Priorities in order', { right: backLink('Done') }) + '<div class="gut gap">' +
+      '<p class="sh m3">Put first things first. Move what matters most to the top. Today’s big rocks follow this order.</p>' +
+      card({ eyebrow: 'Our family', body: fam.length ? fam.map(function (k, i) { var g = suGroupOf(k); return rowp(k, i, fam.length, lbl(SU_PRIORITIES, k), g ? g[0] : '', 'fam'); }).join('') : '<p class="sh m3">Choose them in the check-in, then put them in order here.</p>' }) +
+      card({ eyebrow: 'Just you', body: mine.length ? mine.map(function (k, i) { return rowp(k, i, mine.length, lbl(SU_MY_PRIORITIES, k), '', 'mine'); }).join('') : '<p class="sh m3">Only you see these.</p>' }) +
+      '<button class="btn secondary full" data-a="setup">' + I('list-checks') + 'Change which priorities</button></div>';
+  };
   SCREENS.today = function () {
     var dates = upcoming().filter(function (d) { return d.days <= 60; });
     var ideas = IDEAS.girls.slice(0, 3).map(function (x, i) { return ['girls', i, x]; });
@@ -991,13 +1067,17 @@ var KidGrowth=(()=>{var b=Object.defineProperty;var H=Object.getOwnPropertyDescr
     var ref = ed ? NIGHT.scripture : daily && daily.text && daily.text.ref, verse = ed ? NIGHT.verse : daily && daily.text && daily.text.text;
     var link = ref ? (ed ? Faiths.readUrl(fa, ref) : daily.text.url) : null, fq = ed ? { text: NIGHT.quote, by: NIGHT.quoteBy } : (daily && daily.quote) || q;
     var lk = function (label, href, a) { return href ? '<a href="' + esc(href) + '" target="_blank" rel="noopener" class="fn b" style="color:' + (a ? 'var(--obhl)' : 'inherit') + ';text-decoration:none">' + label + '</a>' : ''; };
-    return header('Today', { sub: fmtDay(TODAY) }) +
+    var sched = itemsOn(TODAY, 'everyone').filter(function (it) { return it.kind !== 'reminder'; });
+    var menu = S.recipes.filter(function (r) { return r.who === 'family' && r.planned === TODAY; });
+    return header('Today', { sub: fmtDay(TODAY) }) + compassCard() +
       '<div class="gut">' + (anyFaith() && ref
         ? card({ v: 'inverse', eyebrow: ed ? 'Morning Lantern · today’s scripture' : 'Today’s reading', title: ref, body: (verse ? '<p class="bd" style="font-style:italic">“' + esc(verse) + '”</p>' : '') +
             (link ? '<p style="margin-top:8px">' + lk(fa === 'lds' ? 'Read in Gospel Library' : 'Read it', link, true) + '</p>' : '') +
             '<div style="margin-top:12px;padding-top:12px;border-top:.5px solid rgba(255,255,255,.35)"><p class="hl">“' + esc(fq.text) + '”</p><p class="fn" style="margin-top:4px;opacity:.8">' + esc(fq.by) + '</p></div>' +
             '<div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:12px">' + (ed ? '<button class="link fn b" style="color:inherit" data-a="go" data-id="lantern">Open today’s study</button>' : '') + (teach ? lk(teach[0], teach[1]) : '') + '</div>' })
         : card({ v: 'accent', eyebrow: 'Quote of the day', body: '<p class="hl">“' + esc(q.text) + '”</p><p class="fn m3" style="margin-top:4px">' + esc(q.by) + '</p>' })) + '</div>' +
+      sect('Today’s schedule', 'Calendar', 'tab-calendar') + '<div class="gut">' + card({ flush: true, body: sched.length ? sched.map(function (it, i) { return '<button class="row" style="gap:12px" data-a="openitem" data-id="' + esc(it.key) + '"><span style="width:4px;align-self:stretch;border-radius:2px;background:' + itemColor(it) + '"></span><span class="fn b m3" style="width:64px;flex:none">' + (it.allDay ? 'All day' : hmm(it.sm)) + '</span><span class="rb"><span class="rt"><span class="hl" style="display:block">' + esc(it.title) + '</span>' + (it.location || it.sub ? '<span class="fn m3" style="display:block">' + esc(it.location || it.sub) + '</span>' : '') + '</span></span></button>'; }).join('') : '<p class="sh m3" style="padding:16px">Nothing on the calendar today.</p>' }) + '</div>' +
+      sect('Today’s menu', menu.length ? 'Meals' : 'Plan meals', 'go:meals') + '<div class="gut">' + (menu.length ? card({ flush: true, body: menu.map(function (r) { return '<button class="row" data-a="go" data-id="recipe:' + r.id + '"><span class="rb"><span class="rt"><span class="fn b br4" style="display:block">' + lbl(MEAL_NAMES, r.meal) + '</span><span class="hl" style="display:block">' + esc(r.title) + '</span></span></span></button>'; }).join('') }) : '<p class="sh m3">No meals planned for today. Tap Plan meals to get recipe ideas.</p>') + '</div>' +
       (dates.length ? rail({ title: 'Coming up', sub: 'Birthdays and anniversaries' }, dates.map(function (d) { return tile({ area: d.kind === 'anniversary' ? 'marriage' : d.m.role === 'daughter' ? 'girls' : 'home', icon: d.kind === 'anniversary' ? 'heart' : 'cake', title: d.title, meta: fmtLong(d.date) + ' · ' + inDays(d.days), badge: d.days <= 14 ? 'Soon' : '' }); })) : '') +
       rail({ title: 'Today with ' + KIDS, sub: 'New every day', action: 'See all', act: 'tab-family' }, ideas.map(function (x) { return tile({ size: 'wide', area: x[0] === 'couple' ? 'marriage' : 'girls', icon: x[2].icon, eyebrow: x[0] === 'couple' ? 'Just us' : 'With ' + KIDS, title: x[2].title, meta: x[2].meta, att: (x[2].attachments || []).length, a: 'idea', id: x[0] + ':' + x[1] }); })) +
       sect('Reminders', 'All', 'tab-reminders') +
@@ -1859,11 +1939,19 @@ var KidGrowth=(()=>{var b=Object.defineProperty;var H=Object.getOwnPropertyDescr
       case 'wishvote': { var wv = id.split('|'), was = isMatch(wv[0]); S.wishVotes[wv[0]] = wv[1]; save(); if (!was && isMatch(wv[0])) toast('You both want this one. It’s on your list.'); render(); return; }
       case 'wishrm': { var cid = id.slice(2); S.wishCustom = S.wishCustom.filter(function (c) { return c.id !== cid; }); delete S.wishVotes[id]; save(); toast('Removed'); render(); return; }
       case 'wishplan': { var wp = id.split('|'); evDraft = blankEvent(TODAY); evDraft.title = wp[0]; evDraft.area = wp[1] === 'project' ? 'home' : 'marriage'; evDraft.who = parents.map(function (x) { return x.id; }); go('eventedit'); return; }
+      case 'tab-calendar': tab('calendar'); return;
       case 'tab-family': tab('family'); return;
       case 'tab-reminders': tab('reminders'); return;
       case 'back': quiz = null; back(); return;
-      case 'go': if (id && id.indexOf('recipe:') === 0) { go('recipe', id.slice(7)); return; } go(id); return;
+      case 'go': if (id && id.indexOf('recipe:') === 0) { go('recipe', id.slice(7)); return; } if (id && id.indexOf('rock:') === 0) { go('rock', id.slice(5)); return; } go(id); return;
       case 'idea': go('detail', id); return;
+      case 'rockdone': { var rq = id.split('|'), rk = findRock(rq[0]); if (rk) { rk.done = !rk.done; save(); if (rq[1]) back(); else render(); toast(rk.done ? 'Big rock kept: ' + rk.title : 'Back on today’s list'); } return; }
+      case 'rockadding': rockAdding = true; render(); var ri = app.querySelector('#rocknew'); if (ri) ri.focus(); return;
+      case 'rockadd': { var rv = ((app.querySelector('#rocknew') || {}).value || '').trim(); rockAdding = false; if (rv) { rockDay().items.push({ id: 'm' + Date.now(), title: rv.slice(0, 140), source: 'mine', done: false }); save(); } render(); return; }
+      case 'rocknew': makeRocks((rockDay().round || 0) + 1); render(); toast('New suggestions from your priorities'); return;
+      case 'rockrm': { var rd = rockDay(); rd.items = rd.items.filter(function (r) { return r.id !== id; }); save(); back(); return; }
+      case 'rockplan': { var rp = findRock(id); S.rems.push({ id: 'p' + Date.now(), title: rp.title, notes: rp.why || '', list: 'kids', due: TODAY, time: '19:00', cal: true }); save(); back(); toast('Planned for today at 7 PM, on the calendar'); return; }
+      case 'prmove': { var pm = id.split('|'), arr = pm[0] === 'fam' ? S.setup.priorities : (S.myAns.myPriorities = S.myAns.myPriorities || []), pi = +pm[1], pj = pi + (+pm[2]); if (pj >= 0 && pj < arr.length) { var tmp = arr[pi]; arr[pi] = arr[pj]; arr[pj] = tmp; save(); } render(); return; }
       case 'child': kidState = { area: 'all', more: 0, ahead: {} }; go('child', id); return;
       case 'kskill': { var q = id.split('|'), on = kst(q[0], q[1]) === 'done'; kprog(q[0])[q[1]] = { kind: 'skill', status: on ? 'cleared' : 'done' }; save(); render(); return; }
       case 'karea': kidState.area = id; kidState.more = 0; render(); return;
