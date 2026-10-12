@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "db:push": "supabase db push",
     "fn:serve": "supabase functions serve",
-    "build:web": "node scripts/build-web.js"
+    "build:web": "node scripts/build-web.js",
+    "deploy:web": "node scripts/deploy-web.js"
   },
   "dependencies": {
     "@expo-google-fonts/anton": "^0.2.3",
