@@ -133,7 +133,7 @@ export default function Child() {
       <Text v="overline" color={t.success[0]} style={{ marginTop: 8 }}>Try</Text><Text>{yes}</Text></Card>} />
     <Rail title="Feelings to name" data={stage.feelings} itemWidth={120} render={f => <ContentTile size="sm" area="girls" icon="smile" title={f} />} />
     <Rail title={'Today with ' + name} subtitle="New every day" itemWidth={272} data={ideas.girls.filter(x => !x.min_age || x.min_age <= age)} render={x => <ContentTile size="wide" area="girls" icon={x.icon} title={x.title} meta={x.meta} attachments={x.attachments?.length}
-      onPress={() => { setDetail({ ...x, area: 'girls', onPlan: () => plan(x.title, x.why) }); router.push('/detail'); }} />} />
+      onPress={() => { setDetail({ ...x, area: 'girls', onPlan: () => plan(x.title, x.why ?? '') }); router.push('/detail'); }} />} />
     <View style={{ height: 30 }} />
   </Screen>;
 }
