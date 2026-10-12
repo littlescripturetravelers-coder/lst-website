@@ -1,13 +1,19 @@
 {
   "expo": {
-    "name": "Lewis Family",
+    "name": "NestWork",
     "slug": "lewis-family",
     "scheme": "lewisfamily",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F2665A"
+    },
     "userInterfaceStyle": "automatic",
     "extra": {
-      "appName": "Lewis Family",
+      "appName": "NestWork",
       "paywallEnabled": false
     },
     "ios": {

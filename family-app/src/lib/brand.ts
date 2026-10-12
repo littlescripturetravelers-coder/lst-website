@@ -2,6 +2,8 @@
 import Constants from 'expo-constants';
 import type { Family } from './family';
 export const APP_NAME: string = (Constants.expoConfig?.extra as any)?.appName ?? 'Our Family';
+/** Names the app used before (its own Apple calendar was made with these), so that calendar is found and renamed instead of duplicated. */
+export const OLD_APP_NAMES = ['Lewis Family'];
 /** "The Lewis's" — uses the family's own display name if they set one. */
 export const familyTitle = (f?: (Family & { display_name?: string }) | null) => f?.display_name || (f ? 'The ' + f.surname + '’s' : APP_NAME);
 /** "the girls" / "the boys" / "the kids" / "Mayble" — so copy reads right for every family. */

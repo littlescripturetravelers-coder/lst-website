@@ -16,7 +16,7 @@ enum LF {
     return j["access_token"] as? String
   }
   static func call(_ body: [String: Any]) async throws -> String {
-    guard let token = jwt() else { return "Open the Lewis Family app and sign in first." }
+    guard let token = jwt() else { return "Open the NestWork app and sign in first." }
     var r = URLRequest(url: URL(string: base + "/functions/v1/voice")!); r.httpMethod = "POST"
     r.setValue("Bearer " + token, forHTTPHeaderField: "Authorization"); r.setValue(anon, forHTTPHeaderField: "apikey"); r.setValue("application/json", forHTTPHeaderField: "Content-Type")
     r.httpBody = try JSONSerialization.data(withJSONObject: body)
@@ -60,7 +60,7 @@ struct AddToShoppingList: AppIntent {
   func perform() async throws -> some IntentResult & ProvidesDialog { .result(dialog: IntentDialog(stringLiteral: try await LF.call(["action": "add_shopping", "title": item]))) }
 }
 struct AskLewisFamily: AppIntent {
-  static var title: LocalizedStringResource = "Ask Lewis Family"
+  static var title: LocalizedStringResource = "Ask NestWork"
   @Parameter(title: "Question") var question: String
   func perform() async throws -> some IntentResult & ProvidesDialog { .result(dialog: IntentDialog(stringLiteral: try await LF.call(["action": "ask", "question": question]))) }
 }

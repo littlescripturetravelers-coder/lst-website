@@ -30,7 +30,7 @@ export default function Educator() {
   const { theme: t } = useTheme(); const ref = useRef<WebView>(null);
   const uri = Asset.fromModule(html).uri;
   const token = (supabase as any).auth?.currentSession?.access_token ?? '';
-  const vars = { '--bg': t.paper[1], '--ink': t.ink[1], '--muted': t.ink[3], '--line': t.paper[3], '--soft': t.paper[2], '--accent': t.brand[500], '--cta': t.gold[500], '--cta-ink': t.brand[500], '--band': t.brand[500], '--band-gold': t.gold[500], '--link': t.brand[500] };
+  const vars = { '--bg': t.paper[1], '--ink': t.ink[1], '--muted': t.ink[3], '--line': t.paper[3], '--soft': t.paper[2], '--accent': t.brand[500], '--cta': t.gold[500], '--cta-ink': t.choice.brandOnly ? t.highlightInk : t.brand[500], '--band': t.brand[500], '--band-gold': t.onBrand.highlight, '--link': t.brand[500] };
   return <SafeAreaView edges={['top']} style={{ flex: 1, backgroundColor: t.brand[500] }}>
     <View style={{ flexDirection: 'row', padding: 12 }}><Text color={t.ink.inverse} onPress={() => router.back()}>‹ More</Text></View>
     <WebView ref={ref} source={{ uri }} originWhitelist={['*']} allowFileAccess injectedJavaScriptBeforeContentLoaded={SHIM(process.env.EXPO_PUBLIC_SUPABASE_URL!, token, vars)}

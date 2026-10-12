@@ -22,7 +22,7 @@ export default function Think() {
     await rem.add({ title: 'Check in: is it helping?', due_date: addDays(todayISO(), 7), due_time: '20:30', on_calendar: true, alert: 'at', source: 'think', private: priv }); router.back(); };
   return <Screen title={STEPS[step]} subtitle={'Step ' + (step + 1) + ' of 6'} trailing={<Text color={t.brand[500]} onPress={() => step ? setStep(step - 1) : router.back()}>{step ? 'Back' : 'Close'}</Text>}>
     <Gutter style={{ gap: 12 }}>
-      {step === 0 && <Card variant="inverse"><Text v="shout" color={t.ink.inverse}>One problem. <Text v="shout" color={t.gold[500]}>One next step.</Text></Text></Card>}
+      {step === 0 && <Card variant="inverse"><Text v="shout" color={t.ink.inverse}>One problem. <Text v="shout" color={t.onBrand.highlight}>One next step.</Text></Text></Card>}
       {step === 0 && canPrivate && <Card padding={12}><View style={{ flexDirection: 'row', alignItems: 'center' }}><View style={{ flex: 1 }}><Text>Keep this just for me</Text><Text v="caption" color={t.ink[3]}>{mine ? 'Only you will see this and the reminders it makes.' : 'The family will see this plan.'}</Text></View><Switch value={mine} onValueChange={setMine} trackColor={{ true: t.brand[500] }} /></View></Card>}
       <Text color={t.ink[2]}>{PROMPTS[step]}</Text>
       <TextInput multiline value={a[step]} onChangeText={v => setA(x => x.map((y, i) => i === step ? v : y))} style={{ minHeight: 140, borderRadius: 8, borderWidth: 1, borderColor: t.line[2], padding: 12, fontSize: 17, fontFamily: t.font.body, color: t.ink[1], backgroundColor: t.paper[0] }} />

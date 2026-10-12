@@ -1,6 +1,6 @@
 <title>Family App Prototype</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Atkinson+Hyperlegible:wght@400;700&family=Figtree:wght@400;700;800&family=Fredoka:wght@600;700&family=Lora:wght@600;700&family=Nunito:ital,wght@0,400;0,700;0,800;1,400&family=Young+Serif&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght,SOFT@36,600,100;36,700,100&family=Atkinson+Hyperlegible:wght@400;700&family=Figtree:wght@400;700;800&family=Fredoka:wght@600;700&family=Lora:wght@600;700&family=Nunito:ital,wght@0,400;0,700;0,800;1,400&family=Young+Serif&display=swap">
 <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
 <style>
 /* Layout: LST parent-brand page chrome (navy band, linen ground) around one iPhone-sized frame that runs the app's own design system. */
@@ -47,6 +47,7 @@ body { background: var(--page); color: var(--page-ink); font-family: "Nunito", s
 
 /* App type scale (matches src/theme/tokens.ts; --s is the in-app text size) */
 .app { --s: 1; }
+.hero, .lt, .t1, .t2 { color: var(--title); } .card.inverse .t1, .card.inverse .t2, .qcard .t1, .qcard .t2 { color: inherit; }
 .hero { font-family: var(--display); font-size: calc(40px * var(--s)); line-height: 1.1; }
 .lt { font-family: var(--display); font-size: calc(32px * var(--s)); line-height: 1.19; margin: 0; }
 .t1 { font-family: var(--display); font-size: calc(26px * var(--s)); line-height: 1.23; margin: 0; }
@@ -72,11 +73,11 @@ p { margin: 0; }
 .gut { padding: 0 20px; }
 .gap { display: grid; gap: 12px; }
 .sect { display: flex; padding: 20px 24px 8px; align-items: baseline; }
-.sect span { flex: 1; color: var(--ink3); font-weight: 800; font-size: calc(13px * var(--s)); text-transform: uppercase; letter-spacing: .8px; }
+.sect span { flex: 1; color: var(--label); font-weight: 800; font-size: calc(13px * var(--s)); text-transform: uppercase; letter-spacing: .8px; }
 .card { background: var(--paper0); border: 1px solid var(--line1); border-radius: 10px; padding: 16px; display: block; width: 100%; text-align: left; color: inherit; font: inherit; }
 button.card { cursor: pointer; }
 .card.sunken { background: var(--paper2); border: 0; } .card.accent { background: var(--gold50); border: 0; } .card.inverse { background: var(--brand500); border: 0; color: var(--inverse); }
-.card.inverse .ov { color: var(--teal); }
+.card.inverse .ov { color: var(--obaccent); } .card.inverse .btn.cta { background: var(--obhl); color: var(--obink); }
 .card.flush { padding: 0; overflow: hidden; }
 .card .eb { margin-bottom: 4px; } .card .ct { margin-bottom: 10px; }
 .rail-h { display: flex; align-items: flex-end; padding: 0 20px; margin: 24px 0 10px; gap: 10px; }
@@ -207,7 +208,7 @@ button.ev { border: 0; width: 100%; text-align: left; font-family: var(--body); 
 .sheet > div { background: var(--paper0); width: 100%; max-height: 88%; overflow-y: auto; border-radius: 20px 20px 0 0; padding: 10px 20px 28px; display: grid; gap: 12px; }
 .grab { width: 36px; height: 5px; border-radius: 3px; background: var(--line2); margin: 0 auto 6px; }
 .qcard { background: var(--brand500); color: var(--inverse); border-radius: 10px; padding: 16px; display: grid; gap: 4px; }
-.qcard .ov { color: var(--teal); }
+.qcard .ov { color: var(--obaccent); }
 .dhero { height: 240px; display: grid; place-items: center; position: relative; }
 .dhero svg { width: 72px; height: 72px; }
 .back { position: absolute; top: 10px; left: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, .9); border: 0; display: grid; place-items: center; color: #1B2D5F; cursor: pointer; }
@@ -619,8 +620,11 @@ var Faiths = (() => {
 
   // ---------- design system (ported from src/theme) ----------
   var AREA = { faith: ['#D9A227', '#F8EDCF'], marriage: ['#B5536B', '#F4E0E5'], girls: ['#D9823A', '#F9E6D3'], money: ['#3D7A58', '#DCEDE2'], health: ['#2E8C94', '#D8EEF0'], growth: ['#4F63A0', '#E0E5F3'], home: ['#7E6697', '#ECE4F1'] };
+  // NestWork is the default look; Classic is the app's original look (mirrors NESTWORK and CLASSIC in src/theme/theme-provider.tsx).
+  var NESTWORK = { preset: 'nestwork', label: 'NestWork', brandOnly: true, brand: '#F2665A', highlight: '#F2665A', paper: '#FFFFFF', ink: '#3A3A3C', display: 'fraunces', ui: 'figtree', mode: 'light' };
+  var CLASSIC = { preset: 'evening', label: 'Classic', brand: '#1B2D5F', highlight: '#F5C518', paper: '#F4EFE6', ink: '#1B2D5F', display: 'fredoka', ui: 'nunito', mode: 'tan' };
   var PRESETS = [
-  { preset: 'evening', brand: '#1B2D5F', highlight: '#F5C518', paper: '#F4EFE6', ink: '#1B2D5F' },
+  NESTWORK, CLASSIC,
   { preset: 'clay', brand: '#A8502F', highlight: '#F2B84B', paper: '#FAF6EF', ink: '#2A211B' },
   { preset: 'sage', brand: '#355845', highlight: '#E9C46A', paper: '#F2F0E8', ink: '#1F2E26' },
   { preset: 'plum', brand: '#4E3563', highlight: '#F0B37E', paper: '#F6F1EE', ink: '#2B2135' },
@@ -644,7 +648,7 @@ var Faiths = (() => {
   var ACCENTS = ['#1B2D5F', '#2E6E8E', '#1F5F8B', '#2F6E96', '#1E6F72', '#2F7A63', '#355845', '#2F5233', '#5B6B2E', '#7A5E14', '#6B4A3A', '#A8502F',
   '#C2552D', '#C2504E', '#B5536B', '#9E3D5C', '#8E1B32', '#6B2D5C', '#4E3563', '#6A5A9E', '#3F4E63', '#2E2E33', '#0E5A7A', '#5C3D8A'], HIGHLIGHTS = ['#F5C518', '#FFD166', '#F4D35E', '#E9C46A', '#F6C453', '#FFC857', '#E4B363', '#F2B84B', '#E9A23B', '#F7B267', '#F0B37E',
   '#F2A65A', '#F7C59F', '#F4B9B2', '#F2CC8F', '#5BD3DC', '#7FD1CC', '#A3D9A5'];
-  var DISPLAY = [['fredoka', 'Fredoka', '"Fredoka", "Nunito", sans-serif'], ['youngSerif', 'Young Serif', '"Young Serif", Georgia, serif'], ['lora', 'Lora', '"Lora", Georgia, serif'], ['nunito', 'Nunito', '"Nunito", sans-serif'],
+  var DISPLAY = [['fraunces', 'Fraunces', '"Fraunces", Georgia, serif'], ['fredoka', 'Fredoka', '"Fredoka", "Nunito", sans-serif'], ['youngSerif', 'Young Serif', '"Young Serif", Georgia, serif'], ['lora', 'Lora', '"Lora", Georgia, serif'], ['nunito', 'Nunito', '"Nunito", sans-serif'],
     ['playfair', 'Playfair Display', '"Playfair Display", Georgia, serif'], ['merriweather', 'Merriweather', '"Merriweather", Georgia, serif'], ['dmSerif', 'DM Serif', '"DM Serif Display", Georgia, serif'], ['poppins', 'Poppins', '"Poppins", sans-serif'],
     ['quicksand', 'Quicksand', '"Quicksand", sans-serif'], ['comfortaa', 'Comfortaa', '"Comfortaa", sans-serif'], ['raleway', 'Raleway', '"Raleway", sans-serif'], ['montserrat', 'Montserrat', '"Montserrat", sans-serif'],
     ['caveat', 'Caveat (handwritten)', '"Caveat", cursive'], ['pacifico', 'Pacifico (script)', '"Pacifico", cursive']];
@@ -663,20 +667,29 @@ var Faiths = (() => {
       var bk = '#000000', li = '#F2F2F7';
       v = { brand50: mix(B, '#000000', .3), brand200: mix(B, '#ffffff', .6), brand400: mix(B, '#ffffff', .35), brand500: mix(B, '#ffffff', .3), brand700: mix(B, '#ffffff', .15),
         gold50: mix(H, bk, .16), gold500: H, gold600: mix(H, '#000000', .82), paper0: '#1C1C1E', paper1: bk, paper2: '#2C2C2E', paper3: '#3A3A3C',
-        ink1: li, ink2: mix(li, bk, .8), ink3: mix(li, bk, .6), ink4: mix(li, bk, .4), inverse: bk, line1: '#2C2C2E', line2: '#3A3A3C', teal: '#5BD3DC', hlink: bk };
+        ink1: li, ink2: mix(li, bk, .8), ink3: mix(li, bk, .6), ink4: mix(li, bk, .4), inverse: bk, line1: '#2C2C2E', line2: '#3A3A3C', teal: '#5BD3DC', hlink: bk, title: li, label: mix(li, bk, .6) };
       Object.keys(AREA).forEach(function (k) { v['a_' + k] = AREA[k][0]; v['t_' + k] = mix(AREA[k][0], bk, .26); });
     } else if (look === 'navy') {
       var bg = mix(B, '#070a14', .42), card = mix(B, '#0b0f1c', .55), light = mix(P, B, .94);
       v = { brand50: mix(B, '#141a2e', .6), brand200: mix(B, '#ffffff', .6), brand400: mix(B, '#ffffff', .35), brand500: mix(B, '#ffffff', .3), brand700: mix(B, '#ffffff', .15),
         gold50: mix(H, bg, .16), gold500: H, gold600: mix(H, '#000000', .82), paper0: card, paper1: bg, paper2: mix(B, '#0a0d18', .48), paper3: mix(B, '#1a2033', .62),
-        ink1: light, ink2: mix(light, bg, .82), ink3: mix(light, bg, .64), ink4: mix(light, bg, .42), inverse: bg, line1: mix(B, '#20283d', .62), line2: mix(B, '#2a3350', .66), teal: '#5BD3DC', hlink: bg };
+        ink1: light, ink2: mix(light, bg, .82), ink3: mix(light, bg, .64), ink4: mix(light, bg, .42), inverse: bg, line1: mix(B, '#20283d', .62), line2: mix(B, '#2a3350', .66), teal: '#5BD3DC', hlink: bg, title: light, label: mix(light, bg, .64) };
       Object.keys(AREA).forEach(function (k) { v['a_' + k] = AREA[k][0]; v['t_' + k] = mix(AREA[k][0], bg, .24); });
+    } else if (c.brandOnly) {
+      // One-color brand (NestWork): white page, tints of the main color for cards and lines, charcoal reading text, titles and labels in the main color.
+      var T = function (p) { return mix(P, B, p); };
+      v = { brand50: T(.93), brand200: T(.7), brand400: mix(B, '#ffffff', .72), brand500: B, brand700: B,
+        gold50: T(.93), gold500: H, gold600: H, paper0: '#FFFFFF', paper1: P, paper2: T(.93), paper3: T(.86),
+        ink1: I, ink2: mix(I, P, .82), ink3: mix(I, P, .64), ink4: mix(I, P, .4), inverse: P, line1: T(.82), line2: T(.7), teal: '#5BD3DC', hlink: '#FFFFFF', title: B, label: B };
+      Object.keys(AREA).forEach(function (k) { v['a_' + k] = AREA[k][0]; v['t_' + k] = T(.93); });
     } else {
       v = { brand50: mix(B, '#ffffff', .07), brand200: mix(B, '#ffffff', .3), brand400: mix(B, '#ffffff', .72), brand500: B, brand700: mix(B, '#000000', .7),
         gold50: mix(H, '#ffffff', .14), gold500: H, gold600: mix(H, '#000000', .82), paper0: '#FFFFFF', paper1: P, paper2: mix(P, I, .92), paper3: mix(P, I, .84),
-        ink1: I, ink2: mix(I, P, .82), ink3: mix(I, P, .64), ink4: mix(I, P, .4), inverse: P, line1: mix(P, I, .9), line2: mix(P, I, .84), teal: '#5BD3DC', hlink: B };
+        ink1: I, ink2: mix(I, P, .82), ink3: mix(I, P, .64), ink4: mix(I, P, .4), inverse: P, line1: mix(P, I, .9), line2: mix(P, I, .84), teal: '#5BD3DC', hlink: B, title: I, label: mix(I, P, .64) };
       Object.keys(AREA).forEach(function (k) { v['a_' + k] = AREA[k][0]; v['t_' + k] = AREA[k][1]; });
     }
+    // What sits on the main color (inverse cards): with a one-color brand, white instead of the highlight.
+    v.obaccent = c.brandOnly ? v.inverse : v.teal; v.obhl = c.brandOnly ? v.inverse : v.gold500; v.obink = c.brandOnly ? v.brand500 : v.hlink;
     v.display = DISPLAY.filter(function (d) { return d[0] === c.display; })[0][2];
     v.body = UI.filter(function (d) { return d[0] === c.ui; })[0][2];
     v.dark = dark; return v;
@@ -750,7 +763,7 @@ var Faiths = (() => {
   }
   function sampleState() {
     return {
-      theme: { preset: 'evening', brand: '#1B2D5F', highlight: '#F5C518', paper: '#F4EFE6', ink: '#1B2D5F', display: 'fredoka', ui: 'nunito', mode: 'tan', scale: 1 },
+      theme: Object.assign({}, NESTWORK, { scale: 1 }), nestwork: true,
       rems: [
         { id: 'r1', title: 'Pick up prescriptions', list: 'family', due: TODAY, time: '17:30' },
         { id: 'r2', title: 'Milk, eggs, bananas', list: 'groceries', due: TODAY, notes: 'And the good bread' },
@@ -770,6 +783,8 @@ var Faiths = (() => {
   var S;
   try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { S = null; }
   if (!S || !S.theme) S = sampleState();
+  // One time only: a saved original look moves to NestWork (same as the app). Picking Classic after that sticks.
+  if (!S.nestwork) { if (S.theme.preset === 'evening') S.theme = Object.assign({}, NESTWORK, { scale: S.theme.scale || 1 }); S.nestwork = true; }
   if (S.homeDay !== TODAY) { S.home = {}; S.homeDay = TODAY; }
   if (S.faith) FAMILY.faith = S.faith;
   (function (d) { ['cals', 'feeds', 'privOk', 'goals', 'evs', 'wishVotes', 'wishCustom', 'myAns', 'kidAbout', 'recipes'].forEach(function (k) { if (!S[k]) S[k] = d[k]; }); })(sampleState());
@@ -792,6 +807,9 @@ var Faiths = (() => {
   var avatar = function (m, size) { return '<span class="avatar" style="width:' + size + 'px;height:' + size + 'px;background:' + m.color + ';font-size:' + Math.round(size * .42) + 'px">' + esc(m.name[0]) + '</span>'; };
   function header(title, opts) { opts = opts || {}; return '<div class="head"><div>' + (opts.sub ? '<p class="fn b br4">' + esc(opts.sub) + '</p>' : '') + '<h1 class="lt">' + esc(title) + '</h1></div>' + (opts.right || '') + '</div>'; }
   var backLink = function (label) { return '<button class="link" data-a="back">' + esc(label) + '</button>'; };
+  // The NestWork mark (same drawing as brand/mark-on-*.svg and src/components/nest-mark.tsx).
+  var nestN = 0, NEST_SVG = '<svg width="@SZ@" height="@SZ@" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="NestWork mark"><defs><clipPath id="@ID@b"><path d="M15 57 H85 A35 31 0 0 1 15 57 Z"/></clipPath><clipPath id="@ID@r"><rect x="9" y="47" width="82" height="11" rx="5.5"/></clipPath></defs><circle cx="50" cy="40" r="19" fill="none" style="stroke:@FG@" stroke-width="2.6"/><circle cx="50" cy="40" r="13" style="fill:@FG@"/><g clip-path="url(#@ID@b)"><rect x="0" y="57" width="100" height="40" style="fill:@FG@"/><line x1="-12" y1="67.5" x2="-6" y2="57" style="stroke:@BG@" stroke-width="2.6"/><line x1="0" y1="67.5" x2="6" y2="57" style="stroke:@BG@" stroke-width="2.6"/><line x1="12" y1="67.5" x2="18" y2="57" style="stroke:@BG@" stroke-width="2.6"/><line x1="24" y1="67.5" x2="30" y2="57" style="stroke:@BG@" stroke-width="2.6"/><line x1="36" y1="67.5" x2="42" y2="57" style="stroke:@BG@" stroke-width="2.6"/><line x1="48" y1="67.5" x2="54" y2="57" style="stroke:@BG@" stroke-width="2.6"/><line x1="60" y1="67.5" x2="66" y2="57" style="stroke:@BG@" stroke-width="2.6"/><line x1="72" y1="67.5" x2="78" y2="57" style="stroke:@BG@" stroke-width="2.6"/><line x1="84" y1="67.5" x2="90" y2="57" style="stroke:@BG@" stroke-width="2.6"/><line x1="96" y1="67.5" x2="102" y2="57" style="stroke:@BG@" stroke-width="2.6"/><line x1="108" y1="67.5" x2="114" y2="57" style="stroke:@BG@" stroke-width="2.6"/><line x1="-12" y1="78" x2="-18" y2="67.5" style="stroke:@BG@" stroke-width="2.6"/><line x1="0" y1="78" x2="-6" y2="67.5" style="stroke:@BG@" stroke-width="2.6"/><line x1="12" y1="78" x2="6" y2="67.5" style="stroke:@BG@" stroke-width="2.6"/><line x1="24" y1="78" x2="18" y2="67.5" style="stroke:@BG@" stroke-width="2.6"/><line x1="36" y1="78" x2="30" y2="67.5" style="stroke:@BG@" stroke-width="2.6"/><line x1="48" y1="78" x2="42" y2="67.5" style="stroke:@BG@" stroke-width="2.6"/><line x1="60" y1="78" x2="54" y2="67.5" style="stroke:@BG@" stroke-width="2.6"/><line x1="72" y1="78" x2="66" y2="67.5" style="stroke:@BG@" stroke-width="2.6"/><line x1="84" y1="78" x2="78" y2="67.5" style="stroke:@BG@" stroke-width="2.6"/><line x1="96" y1="78" x2="90" y2="67.5" style="stroke:@BG@" stroke-width="2.6"/><line x1="108" y1="78" x2="102" y2="67.5" style="stroke:@BG@" stroke-width="2.6"/><line x1="-12" y1="97" x2="-6" y2="78" style="stroke:@BG@" stroke-width="2.6"/><line x1="0" y1="97" x2="6" y2="78" style="stroke:@BG@" stroke-width="2.6"/><line x1="12" y1="97" x2="18" y2="78" style="stroke:@BG@" stroke-width="2.6"/><line x1="24" y1="97" x2="30" y2="78" style="stroke:@BG@" stroke-width="2.6"/><line x1="36" y1="97" x2="42" y2="78" style="stroke:@BG@" stroke-width="2.6"/><line x1="48" y1="97" x2="54" y2="78" style="stroke:@BG@" stroke-width="2.6"/><line x1="60" y1="97" x2="66" y2="78" style="stroke:@BG@" stroke-width="2.6"/><line x1="72" y1="97" x2="78" y2="78" style="stroke:@BG@" stroke-width="2.6"/><line x1="84" y1="97" x2="90" y2="78" style="stroke:@BG@" stroke-width="2.6"/><line x1="96" y1="97" x2="102" y2="78" style="stroke:@BG@" stroke-width="2.6"/><line x1="108" y1="97" x2="114" y2="78" style="stroke:@BG@" stroke-width="2.6"/><rect x="0" y="66.2" width="100" height="2.6" style="fill:@BG@"/><rect x="0" y="76.7" width="100" height="2.6" style="fill:@BG@"/></g><rect x="7.5" y="45.5" width="85" height="14" rx="7" style="fill:@BG@"/><g clip-path="url(#@ID@r)"><rect x="9" y="47" width="82" height="11" style="fill:@FG@"/><line x1="2" y1="58" x2="7" y2="47" style="stroke:@BG@" stroke-width="2"/><line x1="13" y1="58" x2="18" y2="47" style="stroke:@BG@" stroke-width="2"/><line x1="24" y1="58" x2="29" y2="47" style="stroke:@BG@" stroke-width="2"/><line x1="35" y1="58" x2="40" y2="47" style="stroke:@BG@" stroke-width="2"/><line x1="46" y1="58" x2="51" y2="47" style="stroke:@BG@" stroke-width="2"/><line x1="57" y1="58" x2="62" y2="47" style="stroke:@BG@" stroke-width="2"/><line x1="68" y1="58" x2="73" y2="47" style="stroke:@BG@" stroke-width="2"/><line x1="79" y1="58" x2="84" y2="47" style="stroke:@BG@" stroke-width="2"/><line x1="90" y1="58" x2="95" y2="47" style="stroke:@BG@" stroke-width="2"/></g></svg>';
+  var nestMark = function (fg, bg, size) { var id = 'nm' + (++nestN); return NEST_SVG.replace(/@FG@/g, fg).replace(/@BG@/g, bg).replace(/@ID@/g, id).replace(/@SZ@/g, size); };
   var sect = function (t, action, act) { return '<div class="sect"><span>' + esc(t) + '</span>' + (action ? '<button class="link sh" data-a="' + act.split(':')[0] + '"' + (act.indexOf(':') > 0 ? ' data-id="' + act.split(':')[1] + '"' : '') + '>' + esc(action) + '</button>' : '') + '</div>'; };
   function card(o) {
     var tag = o.a ? 'button' : 'div';
@@ -947,7 +965,7 @@ var Faiths = (() => {
     var fa = FAMILY.faith, ed = Faiths.lanternEdition(fa), daily = Faiths.faithDaily(fa), teach = Faiths.TEACHINGS[fa];
     var ref = ed ? NIGHT.scripture : daily && daily.text && daily.text.ref, verse = ed ? NIGHT.verse : daily && daily.text && daily.text.text;
     var link = ref ? (ed ? Faiths.readUrl(fa, ref) : daily.text.url) : null, fq = ed ? { text: NIGHT.quote, by: NIGHT.quoteBy } : (daily && daily.quote) || q;
-    var lk = function (label, href, a) { return href ? '<a href="' + esc(href) + '" target="_blank" rel="noopener" class="fn b" style="color:' + (a ? 'var(--gold500)' : 'inherit') + ';text-decoration:none">' + label + '</a>' : ''; };
+    var lk = function (label, href, a) { return href ? '<a href="' + esc(href) + '" target="_blank" rel="noopener" class="fn b" style="color:' + (a ? 'var(--obhl)' : 'inherit') + ';text-decoration:none">' + label + '</a>' : ''; };
     return header('Today', { sub: fmtDay(TODAY) }) +
       '<div class="gut">' + (anyFaith() && ref
         ? card({ v: 'inverse', eyebrow: ed ? 'Morning Lantern · today’s scripture' : 'Today’s reading', title: ref, body: (verse ? '<p class="bd" style="font-style:italic">“' + esc(verse) + '”</p>' : '') +
@@ -1430,7 +1448,7 @@ var Faiths = (() => {
   SCREENS.lantern = function () {
     var L = function (s) { return '<p class="ov lbl">' + s + '</p>'; };
     return header('Morning Lantern', { sub: 'Couple study · 10 minutes', right: backLink('Done') }) + '<div class="gut">' +
-      card({ v: 'inverse', eyebrow: 'Scripture of the day', title: NIGHT.scripture, body: '<div style="height:2px;width:48px;background:var(--gold500);margin-bottom:10px"></div><p class="sh">Tonight’s story for ' + KIDS + ': ' + esc(NIGHT.title) + '</p><div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><a class="btn cta sm" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/23?lang=eng" target="_blank" rel="noopener">' + I('book-open') + 'Read the verse</a></div>' }) +
+      card({ v: 'inverse', eyebrow: 'Scripture of the day', title: NIGHT.scripture, body: '<div style="height:2px;width:48px;background:var(--obhl);margin-bottom:10px"></div><p class="sh">Tonight’s story for ' + KIDS + ': ' + esc(NIGHT.title) + '</p><div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><a class="btn cta sm" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/23?lang=eng" target="_blank" rel="noopener">' + I('book-open') + 'Read the verse</a></div>' }) +
       L('1 · Read together') + '<p class="bd">' + esc(STUDY.read) + '</p>' + L('2 · What it teaches') + '<p class="bd">' + esc(STUDY.says) + '</p>' + L('3 · For our marriage') +
       '<div class="gap">' + STUDY.marriage.map(function (m) { var who = parents.filter(function (p) { return p.name === m.who; })[0]; return card({ body: '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">' + avatar(who, 28) + '<span class="bd hv">' + m.who + '</span></div><p class="co" style="margin-bottom:10px">' + esc(m.q) + '</p><textarea class="field" data-ans="' + m.who + '" placeholder="Your answer" aria-label="' + m.who + '’s answer">' + esc(S.answers[m.who] || '') + '</textarea>' }); }).join('') + '</div>' +
       L('4 · For our parenting') + card({ flush: true, body: STUDY.parenting.map(function (p) { return '<div style="padding:14px;border-bottom:.5px solid var(--line2)"><p class="bd b">' + p.who + '</p><p class="sh m2">' + esc(p.how) + '</p></div>'; }).join('') }) +
@@ -1627,12 +1645,14 @@ var Faiths = (() => {
       sect('Appearance') + '<div class="gut">' + card({ body:
         lbl('Background') + '<div style="display:flex;flex-wrap:wrap;gap:8px">' + [['light', 'Light', '#FFFFFF'], ['dark', 'Dark', '#000000'], ['navy', 'Traditional navy', '#1B2D5F'], ['gray', 'Gray', '#E6E8EC'], ['tan', 'Tan', '#F4EFE6'], ['auto', 'Match iPhone', '']].map(function (o) { var on = (c.mode || 'tan') === o[0]; return '<button class="pickchip" style="height:40px;padding:0 12px;font-size:15px;border-radius:20px;background:var(--paper0);' + (on ? 'border:2px solid var(--brand500)' : '') + '" role="radio" aria-checked="' + on + '" data-a="mode" data-id="' + o[0] + '"><i class="dt" style="width:18px;height:18px;border:1px solid var(--line2);background:' + (o[2] || 'linear-gradient(90deg,#fff 50%,#000 50%)') + '"></i>' + o[1] + '</button>'; }).join('') + '</div>' +
         lbl('Text size') + '<div style="display:flex;align-items:center;gap:8px"><button class="btn secondary sm" data-a="scale" data-id="-1" aria-label="Smaller text">A−</button><div style="flex:1;height:6px;border-radius:3px;background:var(--paper3)"><div style="width:' + ((c.scale - .85) / .5 * 100) + '%;height:6px;border-radius:3px;background:var(--brand500)"></div></div><button class="btn secondary sm" data-a="scale" data-id="1" aria-label="Bigger text">A+</button></div><p class="cp m3" style="text-align:center;margin-top:4px">' + Math.round(c.scale * 100) + '%</p>' +
-        lbl('Theme') + '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">' + PRESETS.map(function (p) { return '<button class="preset' + (c.preset === p.preset ? ' on' : '') + '" style="background:' + p.paper + '" data-a="preset" data-id="' + p.preset + '"><span class="top" style="display:block;background:' + p.brand + '"><i style="background:' + p.highlight + '"></i></span><span style="color:' + p.ink + '">' + p.preset + '</span></button>'; }).join('') + '</div>' +
+        lbl('Theme') + '<p class="fn m3" style="margin:-4px 0 8px">NestWork is the app’s own look. Classic is the original look, so you can always go back.</p><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">' + PRESETS.map(function (p) { return '<button class="preset' + (c.preset === p.preset ? ' on' : '') + '" style="background:' + p.paper + '" data-a="preset" data-id="' + p.preset + '"><span class="top" style="display:block;background:' + p.brand + '"><i style="background:' + p.highlight + '"></i></span><span style="color:' + (p.brandOnly ? p.brand : p.ink) + '">' + (p.label || p.preset) + '</span></button>'; }).join('') + '</div>' +
         lbl('Main color') + '<div style="display:flex;gap:12px;flex-wrap:wrap">' + ACCENTS.map(function (a) { return '<button class="sw' + (c.brand === a ? ' on' : '') + '" style="background:' + a + '" data-a="brand" data-id="' + a + '" aria-label="Main color ' + a + '"></button>'; }).join('') + '</div>' +
         lbl('Highlight color') + '<div style="display:flex;gap:12px;flex-wrap:wrap">' + HIGHLIGHTS.map(function (a) { return '<button class="sw' + (c.highlight === a ? ' on' : '') + '" style="background:' + a + '" data-a="hl" data-id="' + a + '" aria-label="Highlight color ' + a + '"></button>'; }).join('') + '</div>' +
         lbl('Title font') + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">' + DISPLAY.map(function (d) { return '<button class="opt' + (c.display === d[0] ? ' on' : '') + '" data-a="display" data-id="' + d[0] + '"><span class="t3" style="font-family:' + d[2].replace(/"/g, '&quot;') + '">' + d[1] + '</span></button>'; }).join('') + '</div>' +
         lbl('Text font') + '<div style="display:grid;gap:6px">' + UI.map(function (d) { return '<button class="opt' + (c.ui === d[0] ? ' on' : '') + '" data-a="ui" data-id="' + d[0] + '"><span class="bd" style="font-family:' + d[2].replace(/"/g, '&quot;') + '">' + d[1] + '</span></button>'; }).join('') + '</div>' }) + '</div>' +
-      sect('Voice assistants') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'mic', color: 'var(--ink1)', title: 'Siri & Shortcuts', sub: '“Add a family reminder in Lewis Family”' }) + row({ icon: 'speaker', color: 'var(--a_growth)', title: 'Alexa', sub: 'Enable the Lewis Family skill, then link your account' }) }) + '</div>';
+      sect('Voice assistants') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'mic', color: 'var(--ink1)', title: 'Siri & Shortcuts', sub: '“Add a family reminder in NestWork”' }) + row({ icon: 'speaker', color: 'var(--a_growth)', title: 'Alexa', sub: 'Enable the NestWork skill, then link your account' }) }) + '</div>' +
+      sect('About') + '<div class="gut">' + card({ body: '<div style="display:flex;align-items:center;gap:14px">' + nestMark('var(--brand500)', 'var(--paper0)', 52) +
+        '<div style="flex:1;min-width:0"><p class="t3" style="font-family:var(--display);color:var(--title)">NestWork</p><p class="sh m2">Family, well kept.</p><p class="fn" style="margin-top:4px;color:var(--label);font-weight:800;letter-spacing:1.2px;text-transform:uppercase">An LST company · version 1.0.0</p></div></div>' }) + '</div>';
   };
   SCREENS.connections = function () {
     var chip = function (s, a, id) { return '<button class="sharechip" data-a="' + a + '" data-id="' + id + '">' + I(SHARE[s][1]) + SHARE[s][0] + '</button>'; };
@@ -1818,9 +1838,13 @@ var Faiths = (() => {
       case 'invite': S.invite = 'K7Q2MP'; save(); render(); return;
       case 'mode': S.theme.mode = id; save(); render(); return;
       case 'scale': S.theme.scale = Math.min(1.35, Math.max(.85, +(S.theme.scale + (+id) * .05).toFixed(2))); save(); render(); return;
-      case 'preset': { var pr = PRESETS.filter(function (x) { return x.preset === id; })[0]; S.theme.preset = pr.preset; S.theme.brand = pr.brand; S.theme.highlight = pr.highlight; S.theme.paper = pr.paper; S.theme.ink = pr.ink; save(); render(); return; }
-      case 'brand': S.theme.brand = id; S.theme.preset = 'custom'; save(); render(); return;
-      case 'hl': S.theme.highlight = id; S.theme.preset = 'custom'; save(); render(); return;
+      case 'preset': { var pr = PRESETS.filter(function (x) { return x.preset === id; })[0];
+        // NestWork and Classic are whole looks (colors, fonts, background); other themes only change colors.
+        if (pr.label) S.theme = Object.assign({}, pr, { scale: S.theme.scale || 1 });
+        else { S.theme.preset = pr.preset; S.theme.brand = pr.brand; S.theme.highlight = pr.highlight; S.theme.paper = pr.paper; S.theme.ink = pr.ink; S.theme.brandOnly = false; S.theme.label = undefined; }
+        save(); render(); return; }
+      case 'brand': S.theme.brand = id; S.theme.preset = 'custom'; S.theme.brandOnly = false; save(); render(); return;
+      case 'hl': S.theme.highlight = id; S.theme.preset = 'custom'; S.theme.brandOnly = false; save(); render(); return;
       case 'display': S.theme.display = id; save(); render(); return;
       case 'ui': S.theme.ui = id; save(); render(); return;
       case 'qpick': { quiz.ans.push(id); quiz.i++; if (quiz.i >= QUIZ.length) { var sc = { words: 0, service: 0, gifts: 0, time: 0, touch: 0 }; quiz.ans.forEach(function (x) { sc[x]++; }); S.ll[quiz.who] = Object.keys(sc).sort(function (a, b) { return sc[b] - sc[a]; }); save(); } render(true); return; }

@@ -20,10 +20,10 @@ export default function Lantern() {
   return <Screen title="Morning Lantern" subtitle="Couple study · 10 minutes" trailing={<Text color={t.brand[500]} onPress={() => router.back()}>Done</Text>}>
     <Gutter>
       <Card variant="inverse" eyebrow="Scripture of the day" title={night.scripture}>
-        <View style={{ height: 2, width: 48, backgroundColor: t.gold[500], marginBottom: 10 }} />
+        <View style={{ height: 2, width: 48, backgroundColor: t.onBrand.highlight, marginBottom: 10 }} />
         <Text v="subhead" color={t.ink.inverse}>Tonight’s story for {kidsLabel(family)}: {night.title}</Text>
         <View style={{ flexDirection: 'row', gap: 8, marginTop: 14 }}>
-          <Button size="sm" variant="cta" icon="book-open" title="Read the verse" onPress={() => Linking.openURL('https://www.churchofjesuschrist.org/search?query=' + encodeURIComponent(night.scripture))} />
+          <Button size="sm" variant="cta" onBrand icon="book-open" title="Read the verse" onPress={() => Linking.openURL('https://www.churchofjesuschrist.org/search?query=' + encodeURIComponent(night.scripture))} />
           <Button size="sm" variant="secondary" icon="lamp" title="Tonight’s Lantern" onPress={() => Linking.openURL(night.edition_url)} />
         </View>
       </Card>

@@ -1,6 +1,6 @@
 // Two-way-ish sync with Apple Calendar + Apple Reminders so Siri's built-in commands and the iPhone apps see family items.
 import * as Calendar from 'expo-calendar';
-import { APP_NAME } from './brand';
+import { APP_NAME, OLD_APP_NAMES } from './brand';
 const CAL_TITLE = APP_NAME;
 async function familyCalendar(entity: 'event' | 'reminder') {
   const type = entity === 'event' ? Calendar.EntityTypes.EVENT : Calendar.EntityTypes.REMINDER;
@@ -8,8 +8,11 @@ async function familyCalendar(entity: 'event' | 'reminder') {
   if (perm.status !== 'granted') return null;
   const cals = await Calendar.getCalendarsAsync(type);
   const found = cals.find(c => c.title === CAL_TITLE); if (found) return found.id;
+  // Made under the app's old name: rename it and keep using it, so events aren't copied twice.
+  const old = cals.find(c => OLD_APP_NAMES.includes(c.title));
+  if (old) { await Calendar.updateCalendarAsync(old.id, { title: CAL_TITLE }).catch(() => {}); return old.id; }
   const src = (await Calendar.getDefaultCalendarAsync()).source;
-  return Calendar.createCalendarAsync({ title: CAL_TITLE, color: '#1B2D5F', entityType: type, sourceId: src.id, source: src, name: CAL_TITLE, ownerAccount: 'personal', accessLevel: Calendar.CalendarAccessLevel.OWNER });
+  return Calendar.createCalendarAsync({ title: CAL_TITLE, color: '#F2665A', entityType: type, sourceId: src.id, source: src, name: CAL_TITLE, ownerAccount: 'personal', accessLevel: Calendar.CalendarAccessLevel.OWNER });
 }
 /** The app's own calendar inside Apple Calendar (made the first time). Null when calendar access is off. */
 export const appleFamilyCalendar = () => familyCalendar('event');

@@ -1,8 +1,14 @@
-// Every font except the defaults loaded at start (Fredoka, Nunito, Anton in app/_layout.tsx).
+// Every font except the NestWork defaults loaded at start (Fraunces and Figtree in app/_layout.tsx), including Classic's Fredoka, Nunito and Anton.
 // They load only when someone opens the font choices or picks one, so the app still starts fast.
 import * as Font from 'expo-font';
 
 const FILES: Record<string, number> = {
+  Fredoka_600SemiBold: require('@expo-google-fonts/fredoka/Fredoka_600SemiBold.ttf'),
+  Fredoka_700Bold: require('@expo-google-fonts/fredoka/Fredoka_700Bold.ttf'),
+  Nunito_400Regular: require('@expo-google-fonts/nunito/Nunito_400Regular.ttf'),
+  Nunito_700Bold: require('@expo-google-fonts/nunito/Nunito_700Bold.ttf'),
+  Nunito_800ExtraBold: require('@expo-google-fonts/nunito/Nunito_800ExtraBold.ttf'),
+  Anton_400Regular: require('@expo-google-fonts/anton/Anton_400Regular.ttf'),
   YoungSerif_400Regular: require('@expo-google-fonts/young-serif/400Regular/YoungSerif_400Regular.ttf'),
   Lora_600SemiBold: require('@expo-google-fonts/lora/Lora_600SemiBold.ttf'),
   Lora_700Bold: require('@expo-google-fonts/lora/Lora_700Bold.ttf'),
@@ -50,7 +56,7 @@ const FILES: Record<string, number> = {
   WorkSans_800ExtraBold: require('@expo-google-fonts/work-sans/WorkSans_800ExtraBold.ttf'),
 };
 
-/** Loads the given extra font names (others, like Fredoka or System, are skipped). Safe to call often. */
+/** Loads the given extra font names (others, like Fraunces or System, are skipped). Safe to call often. */
 export async function loadFonts(names: readonly string[]) {
   const want = Object.fromEntries(names.filter(n => FILES[n] && !Font.isLoaded(n)).map(n => [n, FILES[n]]));
   if (Object.keys(want).length) await Font.loadAsync(want).catch(() => {});

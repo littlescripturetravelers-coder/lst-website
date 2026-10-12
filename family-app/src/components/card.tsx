@@ -10,7 +10,7 @@ export function Card({ variant = 'plain', eyebrow, title, action, children, onPr
   return <W onPress={onPress} style={[{ backgroundColor: bg, borderRadius: radius.card, padding, borderWidth: variant === 'plain' ? 1 : 0, borderColor: t.line[1] }, style]}>
     {(eyebrow || title || action) && <View style={{ flexDirection: 'row', gap: 12, marginBottom: children ? 12 : 0 }}>
       <View style={{ flex: 1 }}>
-        {eyebrow && <Text v="overline" color={variant === 'inverse' ? t.teal : t.brand[400]} style={{ marginBottom: 4 }}>{eyebrow}</Text>}
+        {eyebrow && <Text v="overline" color={variant === 'inverse' ? t.onBrand.accent : t.brand[400]} style={{ marginBottom: 4 }}>{eyebrow}</Text>}
         {title && <Text v="title2" color={fg}>{title}</Text>}
       </View>{action}
     </View>}

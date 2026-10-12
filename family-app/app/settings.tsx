@@ -13,6 +13,8 @@ import { useFamily } from '@/hooks/use-family';
 import { useSetup } from '@/lib/setup';
 import { ageOn, yearsMarried } from '@/lib/family';
 import { APP_NAME } from '@/lib/brand';
+import Constants from 'expo-constants';
+import { NestMark } from '@/components/nest-mark';
 import { fmtLong } from '@/lib/dates';
 import { KID_SECTIONS } from '@/lib/home-schedule';
 import { supabase } from '@/lib/supabase';
@@ -67,10 +69,13 @@ export default function Settings() {
         <Pressable onPress={() => setChoice({ ...c, textScale: Math.min(1.35, +((c.textScale ?? 1) + .05).toFixed(2)) })} style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: t.paper[2], alignItems: 'center', justifyContent: 'center' }}><Text v="headline" weight="heavy">A+</Text></Pressable>
       </View>
       <Text v="caption" color={t.ink[3]} style={{ textAlign: 'center', marginTop: 4 }}>{Math.round((c.textScale ?? 1) * 100)}% · also follows your iPhone’s text size setting</Text>
-      <Lbl s="Theme" /><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{PRESETS.map(p => <Pressable key={p.preset} onPress={() => setChoice({ ...p, display: c.display, ui: c.ui, mode: c.mode, textScale: c.textScale })} style={{ width: '31%', borderRadius: 10, overflow: 'hidden', borderWidth: c.preset === p.preset ? 2 : 1, borderColor: c.preset === p.preset ? t.ink[1] : t.line[2], backgroundColor: p.paper }}>
-        <View style={{ height: 30, backgroundColor: p.brand }}><View style={{ position: 'absolute', left: 8, bottom: 6, width: 20, height: 3, backgroundColor: p.highlight }} /></View><Text v="footnote" weight="bold" color={p.ink} style={{ textAlign: 'center', paddingVertical: 6, textTransform: 'capitalize' }}>{p.preset}</Text></Pressable>)}</View>
-      <Lbl s="Main color" /><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{ACCENTS.map(a => <Sw key={a} color={a} on={c.brand === a} onPress={() => setChoice({ ...c, brand: a, preset: 'custom' })} />)}</View>
-      <Lbl s="Highlight color" /><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{HIGHLIGHTS.map(a => <Sw key={a} color={a} on={c.highlight === a} onPress={() => setChoice({ ...c, highlight: a, preset: 'custom' })} />)}</View>
+      <Lbl s="Theme" /><Text v="caption" color={t.ink[3]} style={{ marginTop: -4, marginBottom: 8 }}>NestWork is the app’s own look. Classic is the original look, so you can always go back.</Text>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{PRESETS.map(p => <Pressable key={p.preset} accessibilityRole="radio" accessibilityState={{ selected: c.preset === p.preset }} accessibilityLabel={(p.label ?? p.preset) + ' theme'}
+        // NestWork and Classic are whole looks (colors, fonts and background); the other themes only change colors and keep your fonts and background.
+        onPress={() => setChoice(p.label ? { ...p, textScale: c.textScale } : { ...p, display: c.display, ui: c.ui, mode: c.mode, textScale: c.textScale })} style={{ width: '31%', borderRadius: 10, overflow: 'hidden', borderWidth: c.preset === p.preset ? 2 : 1, borderColor: c.preset === p.preset ? t.ink[1] : t.line[2], backgroundColor: p.paper }}>
+        <View style={{ height: 30, backgroundColor: p.brand }}><View style={{ position: 'absolute', left: 8, bottom: 6, width: 20, height: 3, backgroundColor: p.highlight }} /></View><Text v="footnote" weight="bold" color={p.brandOnly ? p.brand : p.ink} style={{ textAlign: 'center', paddingVertical: 6, textTransform: 'capitalize' }}>{p.label ?? p.preset}</Text></Pressable>)}</View>
+      <Lbl s="Main color" /><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{ACCENTS.map(a => <Sw key={a} color={a} on={c.brand === a} onPress={() => setChoice({ ...c, brand: a, preset: 'custom', brandOnly: false, label: undefined })} />)}</View>
+      <Lbl s="Highlight color" /><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{HIGHLIGHTS.map(a => <Sw key={a} color={a} on={c.highlight === a} onPress={() => setChoice({ ...c, highlight: a, preset: 'custom', brandOnly: false, label: undefined })} />)}</View>
       <Lbl s="Title font" /><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{DISPLAY_FONTS.map(([id, n]) => <Pressable key={id} onPress={() => setChoice({ ...c, display: id })} style={{ width: '48%', padding: 10, borderRadius: 8, borderWidth: c.display === id ? 2 : 1, borderColor: c.display === id ? t.brand[500] : t.line[2] }}><Text v="title3" style={fontsReady ? { fontFamily: FONT_NAMES.display[id][1] } : undefined}>{n}</Text></Pressable>)}</View>
       <Lbl s="Text font" />{UI_FONTS.map(([id, n]) => <Pressable key={id} onPress={() => setChoice({ ...c, ui: id })} style={{ padding: 10, marginBottom: 6, borderRadius: 8, borderWidth: c.ui === id ? 2 : 1, borderColor: c.ui === id ? t.brand[500] : t.line[2] }}><Text style={fontsReady && id !== 'system' ? { fontFamily: FONT_NAMES.ui[id][0] } : undefined}>{n}</Text></Pressable>)}
     </Card></Gutter>
@@ -79,5 +84,11 @@ export default function Settings() {
       <ListRow icon="mic" iconColor={t.ink[1]} title="Siri & Shortcuts" subtitle={'“Add a family reminder in ' + APP_NAME + '”'} chevron onPress={() => Linking.openURL('shortcuts://')} />
       <ListRow icon="speaker" iconColor={t.area.growth[0]} title="Alexa" subtitle={'Enable the ' + APP_NAME + ' skill, then link your account'} chevron divider={false} onPress={() => Linking.openURL('https://alexa.amazon.com/spa/index.html#skills')} />
     </Card></Gutter>
+    <SectionHead title="About" />
+    <Gutter><Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}>
+      <NestMark size={52} fg={t.brand[500]} bg={t.paper[0]} />
+      <View style={{ flex: 1 }}><Text v="title3" color={t.ink.title}>{APP_NAME}</Text><Text v="subhead" color={t.ink[2]}>Family, well kept.</Text>
+        <Text v="caption" weight="heavy" color={t.ink.label} style={{ marginTop: 4, letterSpacing: 1.2, textTransform: 'uppercase' }}>An LST company · version {Constants.expoConfig?.version ?? '1.0.0'}</Text></View>
+    </View></Card></Gutter>
   </Screen>;
 }

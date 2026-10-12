@@ -10,7 +10,7 @@ Deno.serve(async req => {
   const body = await req.json();
   if (body.context?.System?.application?.applicationId !== Deno.env.get('ALEXA_SKILL_ID')) return new Response('bad app', { status: 403 });
   const token = body.context?.System?.user?.accessToken;
-  if (!token) return ok({ version: '1.0', response: { outputSpeech: { type: 'PlainText', text: 'Please link your Lewis Family account in the Alexa app.' }, card: { type: 'LinkAccount' }, shouldEndSession: true } });
+  if (!token) return ok({ version: '1.0', response: { outputSpeech: { type: 'PlainText', text: 'Please link your NestWork account in the Alexa app.' }, card: { type: 'LinkAccount' }, shouldEndSession: true } });
   const f = await familyFor(new Request('http://x', { headers: { authorization: 'Bearer ' + token } }));
   const r = body.request;
   if (r.type === 'LaunchRequest') return speak('Hi from the Lewis family app. You can say, what’s today, add a reminder, give us a date idea, or what’s today’s scripture.', false, 'What would you like?');

@@ -5,11 +5,10 @@ import { StatusBar } from 'expo-status-bar';
 function ThemedStatusBar() { const { theme } = useTheme(); return <StatusBar style={theme.dark ? 'light' : 'dark'} />; }
 import { SessionGate } from '@/components/session-gate';
 export default function Root() {
-  // Only the default fonts load at start; every other font choice loads when it's picked (src/theme/fonts.ts), so the app starts fast.
+  // Only the NestWork fonts load at start; every other font choice (Classic's Fredoka, Nunito and Anton included) loads when it's picked (src/theme/fonts.ts), so the app starts fast.
   const [ok] = useFonts({
-    Fredoka_600SemiBold: require('@expo-google-fonts/fredoka/Fredoka_600SemiBold.ttf'), Fredoka_700Bold: require('@expo-google-fonts/fredoka/Fredoka_700Bold.ttf'),
-    Nunito_400Regular: require('@expo-google-fonts/nunito/Nunito_400Regular.ttf'), Nunito_700Bold: require('@expo-google-fonts/nunito/Nunito_700Bold.ttf'), Nunito_800ExtraBold: require('@expo-google-fonts/nunito/Nunito_800ExtraBold.ttf'),
-    Anton_400Regular: require('@expo-google-fonts/anton/Anton_400Regular.ttf'),
+    Fraunces_600SemiBoldSoft: require('../assets/fonts/Fraunces_600SemiBoldSoft.ttf'), Fraunces_700BoldSoft: require('../assets/fonts/Fraunces_700BoldSoft.ttf'),
+    Figtree_400Regular: require('@expo-google-fonts/figtree/Figtree_400Regular.ttf'), Figtree_700Bold: require('@expo-google-fonts/figtree/Figtree_700Bold.ttf'), Figtree_800ExtraBold: require('@expo-google-fonts/figtree/Figtree_800ExtraBold.ttf'),
   });
   if (!ok) return null;
   return <ThemeProvider><ThemedStatusBar /><SessionGate>

@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "lewis family",
+      "invocationName": "nest work",
       "intents": [
         {
           "name": "AddReminderIntent",

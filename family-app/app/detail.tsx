@@ -35,7 +35,7 @@ export default function Detail() {
     {att && <ScrollView style={{ backgroundColor: t.paper[0] }} contentContainerStyle={{ padding: 20, gap: 12 }}>
       <Text v="title1">{att.title}</Text>{att.meta && <Text v="subhead" color={t.ink[3]}>{att.meta}</Text>}
       {att.body.map((b: string, i: number) => att.type === 'questions'
-        ? <View key={i} style={{ backgroundColor: t.brand[500], borderRadius: 10, padding: 16 }}><Text v="overline" color={t.teal}>Card {i + 1} of {att.body.length}</Text><Text v="title3" color={t.ink.inverse} style={{ fontFamily: t.font.display }}>{b}</Text></View>
+        ? <View key={i} style={{ backgroundColor: t.brand[500], borderRadius: 10, padding: 16 }}><Text v="overline" color={t.onBrand.accent}>Card {i + 1} of {att.body.length}</Text><Text v="title3" color={t.ink.inverse} style={{ fontFamily: t.font.display }}>{b}</Text></View>
         : <Text key={i} style={{ fontStyle: att.type === 'scripture' && i === 0 ? 'italic' : 'normal' }}>{att.type === 'checklist' ? '○  ' : ''}{b}</Text>)}
       <Button full variant="secondary" title="Close" onPress={() => setAtt(null)} />
     </ScrollView>}

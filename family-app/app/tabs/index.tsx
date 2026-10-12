@@ -43,7 +43,7 @@ export default function Today() {
       ? <Card variant="inverse" eyebrow={ed ? 'Morning Lantern · today’s scripture' : 'Today’s reading'} title={ref}>
           {!!verse && <Text v="callout" color={t.ink.inverse} style={{ fontStyle: 'italic' }}>“{verse}”</Text>}
           {!verse && !!study?.says && <Text v="subhead" color={t.ink.inverse}>{study.says}</Text>}
-          {!!readLink && <Text v="footnote" weight="bold" color={t.gold[500]} style={{ marginTop: 8 }} onPress={() => Linking.openURL(readLink)} accessibilityRole="link">{faith === 'lds' ? 'Read in Gospel Library' : 'Read it'}</Text>}
+          {!!readLink && <Text v="footnote" weight="bold" color={t.onBrand.highlight} style={{ marginTop: 8 }} onPress={() => Linking.openURL(readLink)} accessibilityRole="link">{faith === 'lds' ? 'Read in Gospel Library' : 'Read it'}</Text>}
           {quote && <View style={{ marginTop: 12, paddingTop: 12, borderTopWidth: .5, borderColor: t.ink.inverse + '55' }}><Text v="headline" color={t.ink.inverse}>“{quote.text}”</Text>{!!quote.by && <Text v="footnote" color={t.ink.inverse} style={{ marginTop: 4, opacity: .8 }}>{quote.by}</Text>}</View>}
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 16, marginTop: 12 }}>
             {!!ed && <Text v="footnote" weight="bold" color={t.ink.inverse} onPress={() => router.push('/lantern')} accessibilityRole="link">Open today’s study</Text>}

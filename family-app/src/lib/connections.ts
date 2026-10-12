@@ -6,7 +6,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Calendar from 'expo-calendar';
 import { supabase } from './supabase';
-import { APP_NAME } from './brand';
+import { APP_NAME, OLD_APP_NAMES } from './brand';
 import { parseFeed, feedUrl, OutsideItem } from './ics';
 
 export type Share = 'private' | 'busy' | 'details';
@@ -27,7 +27,7 @@ export async function deviceCalendars() {
   const perm = await Calendar.requestCalendarPermissionsAsync();
   if (perm.status !== 'granted') return null;
   const cals = await Calendar.getCalendarsAsync(Calendar.EntityTypes.EVENT);
-  return cals.filter(c => c.title !== APP_NAME).map(c => ({ id: c.id, title: c.title, color: c.color, account: c.source?.name || 'On my iPhone' }));
+  return cals.filter(c => c.title !== APP_NAME && !OLD_APP_NAMES.includes(c.title)).map(c => ({ id: c.id, title: c.title, color: c.color, account: c.source?.name || 'On my iPhone' }));
 }
 
 export async function addFeed(p: Prefs, name: string, raw: string): Promise<{ prefs?: Prefs; error?: string }> {
