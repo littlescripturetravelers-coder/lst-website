@@ -26,6 +26,8 @@ export const PRIORITY_GROUPS: [string, Opt[]][] = [
     ['hobbies', 'Time for hobbies'], ['our-friends', 'Friendships for us'], ['community', 'Community and neighbors'], ['volunteer', 'Volunteering']]],
 ];
 export const PRIORITIES: Opt[] = PRIORITY_GROUPS.flatMap(g => g[1]);
+/** Which group a priority is in ("Our marriage"); used as the Covey role on Today's big rocks. */
+export const priorityGroup = (k: string) => PRIORITY_GROUPS.find(g => g[1].some(o => o[0] === k))?.[0] ?? '';
 /** Most picks in each priority group (and in your own priorities). */
 export const MAX_PRIORITIES = 5;
 export const SEASONS: Opt[] = [
@@ -72,11 +74,15 @@ export function useSetup(familyId?: string) {
   const saveFamily = async (x: Pick<FamilySetup, 'sections' | 'priorities' | 'season'>) => {
     if (!familyId) return; await supabase.from('family_setup').upsert({ family_id: familyId, ...x, updated_at: new Date().toISOString() }); await load();
   };
+  /** Ranks the priorities (the order is the ranking: first = most important). Keeps updated_at, so the 30-day check-in timer doesn't reset. */
+  const rankFamily = async (priorities: string[]) => {
+    if (!familyId || !setup) return; setSetup({ ...setup, priorities }); await supabase.from('family_setup').update({ priorities }).eq('family_id', familyId);
+  };
   const saveMine = async (a: MyAnswers) => {
     if (!familyId) return; await supabase.from('member_profiles').upsert({ family_id: familyId, answers: a, updated_at: new Date().toISOString() }); await load();
   };
   /** A section shows unless the family turned it off. Before anyone answers, everything shows (same as before). */
   const on = (section: string) => !setup || setup.sections.includes(section);
   const stale = !!setup && Date.now() - +new Date(setup.updated_at) > 30 * 864e5;
-  return { loaded, setup, mine, on, stale, saveFamily, saveMine, reload: load };
+  return { loaded, setup, mine, on, stale, saveFamily, rankFamily, saveMine, reload: load };
 }

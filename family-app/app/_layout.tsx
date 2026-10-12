@@ -28,6 +28,7 @@ export default function Root() {
       <Stack.Screen name="meals" options={{ presentation: 'card' }} />
       <Stack.Screen name="recipe" options={{ presentation: 'card' }} />
       <Stack.Screen name="meal-prefs" options={{ presentation: 'modal' }} />
+      <Stack.Screen name="priorities" options={{ presentation: 'modal' }} />
       <Stack.Screen name="setup" options={{ presentation: 'card', gestureEnabled: false }} />
       <Stack.Screen name="event-edit" options={{ presentation: 'modal' }} />
     </Stack>

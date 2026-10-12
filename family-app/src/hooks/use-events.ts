@@ -12,12 +12,15 @@ import { Reminder } from './use-reminders';
 import { CalItem, EventRow, expandEvent, iso, DAY } from '@/lib/calendar';
 
 export type CalView = 'everyone' | 'me';
+// Each screen gets its own live-update channel (Today and Calendar can both show the same day).
+let channels = 0;
 
 /** Every calendar item between from and to: family events (repeats expanded), birthdays, the anniversary,
  *  calendar reminders, this person's work and personal calendars, and the busy time others share.
  *  "me" keeps only this person's own items. */
 export function useCalendarItems(family: Family | null | undefined, uid: string | null | undefined, reminders: Reminder[], from: Date, to: Date, view: CalView) {
   const [events, setEvents] = useState<EventRow[]>([]); const [outside, setOutside] = useState<CalItem[]>([]); const [busy, setBusy] = useState<any[]>([]);
+  const [loaded, setLoaded] = useState(false);
   const fid = family?.id, a = +from, b = +to;
   const load = useCallback(async () => {
     if (!fid) return; const f = new Date(a), t = new Date(b);
@@ -25,12 +28,12 @@ export function useCalendarItems(family: Family | null | undefined, uid: string 
       supabase.from('events').select('*').eq('family_id', fid).lt('starts_at', new Date(b + DAY).toISOString())
         .or('repeat.not.is.null,starts_at.gte.' + new Date(a - DAY).toISOString() + ',ends_at.gte.' + new Date(a - DAY).toISOString()),
       supabase.from('busy_blocks').select('*').eq('family_id', fid).lt('starts_at', t.toISOString()).gt('ends_at', f.toISOString())]);
-    setEvents(ev || []); setBusy(bb || []);
+    setEvents(ev || []); setBusy(bb || []); setLoaded(true);
     myOutside(f, t).then(xs => setOutside(xs.map(x => ({ key: 'out:' + x.key, kind: 'outside' as const, title: x.title, start: x.start, end: x.end, allDay: x.allDay, color: x.color, lock: x.share === 'private', sub: x.source, source: x.source, occ: iso(x.start) })))).catch(() => setOutside([]));
   }, [fid, a, b]);
   useEffect(() => {
     load(); if (!fid) return;
-    const ch = supabase.channel('ev-' + fid + '-' + a).on('postgres_changes', { event: '*', schema: 'public', table: 'events', filter: 'family_id=eq.' + fid }, load).subscribe();
+    const ch = supabase.channel('ev-' + fid + '-' + a + '-' + (++channels)).on('postgres_changes', { event: '*', schema: 'public', table: 'events', filter: 'family_id=eq.' + fid }, load).subscribe();
     return () => { supabase.removeChannel(ch); };
   }, [load]);
 
@@ -51,7 +54,7 @@ export function useCalendarItems(family: Family | null | undefined, uid: string 
     if (s < t && +s + DAY > +f) items.push({ key: 'rem:' + r.id, kind: 'reminder', id: r.id, title: r.title, start: s, end: r.due_time ? new Date(+s + 30 * 60e3) : new Date(+s + DAY), allDay: !r.due_time, lock: !!r.private, done: !!r.done, occ: r.due_date, row: r });
   }
   items.sort((x, y) => Number(y.allDay) - Number(x.allDay) || +x.start - +y.start);
-  return { items, reload: load };
+  return { items, loaded, reload: load };
 }
 
 /** Save a family event. Returns the saved row. */

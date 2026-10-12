@@ -64,7 +64,7 @@ export default function Setup() {
         // Up to MAX_PRIORITIES in each group: the group's picks are swapped in, the other groups' picks stay as they are.
         return <View key={g} style={{ gap: 8 }}><View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: 6 }}><Text v="footnote" weight="heavy" color={t.ink[3]} style={{ flex: 1, textTransform: 'uppercase', letterSpacing: .8 }}>{g}</Text>
           <Text v="footnote" color={picked.length >= MAX_PRIORITIES ? t.brand[500] : t.ink[3]}>{picked.length} of {MAX_PRIORITIES}</Text></View>
-          {chips(opts, picked, x => setPriorities([...priorities.filter(k => !keys.includes(k)), ...x]), MAX_PRIORITIES)}</View>; })}
+          {chips(opts, picked, x => setPriorities([...priorities.filter(k => !keys.includes(k) || x.includes(k)), ...x.filter(k => !priorities.includes(k))]), MAX_PRIORITIES)}</View>; })}
       {step === 'season' && chips(SEASONS, season, setSeason)}
       {step === 'me' && <>
         {hasSpouse && sections.includes('marriage') && <Card><Text v="headline" style={{ marginBottom: 10 }}>What do you want more of with your spouse?</Text>{chips(COUPLE_WANTS, wants, setWants)}
