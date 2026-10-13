@@ -1935,3 +1935,28 @@ else. The only trustworthy source is Levi pasting the address from his own Amazo
 
 *As of 19 Sep 2026:* June through October are all out and all live. November and December are the
 next to come.
+
+## 38. A night on `main` that the live site never showed (13 Oct 2026)
+
+On 12 Oct at 19:29 UTC the Morning Lantern pushed Night 13 (`lantern/go-out-with-joy/`) to
+`main`. The next morning the live site still answered **404** for every file in that folder,
+while the commit before it (`d678b19`, 13:14 UTC the same day) was live. Vercel had simply not
+deployed the later push; nothing in the repo was wrong, and `git log` showed the night in place.
+
+Two things made it worse than usual:
+
+- GitHub had stopped running every Action on both repos since 11 Oct (account billing, see
+  lst-app issue #20), so the Lantern sync never published the night's book to the account either.
+  The night was put in the account by hand, with its story link pointing at the website folder
+  that was not there, and the app's Tonight's Story opened a 404 page.
+- The hourly "is the site up" check (`uptime.yml`) was stopped by the same billing block, so
+  nobody was told.
+
+**What brings the night back:** any new push to `main`. Vercel deploys the whole tree, the
+missing folder included. This section is that push.
+
+**What to check when a night is "on main but not on the site":** fetch
+`https://www.littlescripturetravelers.com/lantern/<slug>/night.json` with curl. A 404 means the
+deploy did not happen; a 200 means the folder is live and the trouble is elsewhere (the account,
+the app). The Vercel project that serves the site is not the one the lst-app Vercel token can
+see, so its deploy list cannot be read from a session; the live address is the only witness.
