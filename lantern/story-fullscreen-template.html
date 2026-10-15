@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#152449">
+<title>__TITLE__ · Little Scripture Travelers</title>
+__FONTS__
+<!--
+  THE FULL-SCREEN STORY (Levi, 15 October 2026; first used for November 2026).
+
+  Every page is the whole screen. The picture fills it edge to edge, its edges
+  melting softly into a blurred copy of itself; the words rise over it when the
+  reader swipes up, as they always have. The page follows the phone: held
+  upright it shows the tall phone picture, turned sideways the wide one. Each
+  picture was made for a phone screen (2,160 x 3,840 and 3,840 x 2,160, faces
+  in the middle 80%), so filling the screen only ever trims background. Where a
+  page has only its book picture it fills the screen around the picture's
+  focal point instead.
+
+  It keeps everything the app relies on from lantern/story-template.html: the
+  theme the reader chose (URL, window.LST_APP_THEME, data-theme, lst_theme, the
+  device), the back button (LSTApp.back / lst:back / history), the lullaby
+  link the app opens itself (lstOpenSite), and the page the reader stopped on.
+
+  Three slots (the title, the font links and the STORY data) are filled by
+  lantern/builder/story_fullscreen.js. Nothing else changes per night.
+-->
+<style>
+  :root{
+    --navy:#1B2D5F; --gold:#F5C518; --teal:#5BD3DC; --amber:#D9A227;
+    --beau:#8A4B2A; --scout:#4F9E5F; --willow:#8E63B5; --wren:#E0603C;
+    --display:'Fredoka', ui-rounded, 'Nunito', system-ui, sans-serif;
+    --body:'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    /* Traditional (the night sky) */
+    --art-bg:#101B39; --ink:#F4F6FB; --muted:#B6C1DC; --accent:#F5C518; --teal2:#5BD3DC;
+    --chrome:rgba(10,18,44,.58); --chrome-line:rgba(255,255,255,.14); --chrome-ink:#F4F6FB;
+    --scrim-a:rgba(8,15,38,.5); --scrim-b:rgba(8,15,38,.84);
+    --ov-ink:#FFFFFF; --ov-title:#F5C518; --ov-eyebrow:#5BD3DC; --ov-shadow:0 1px 3px rgba(0,0,0,.55);
+    --rule:rgba(255,255,255,.16); --glow:rgba(91,211,220,.16);
+    --spot:#6EC3E6; --name:#F4C61F; --find:#7BC98A; --fork:#F08A5F; --calm:#BE95DE;
+    --blur-filter:blur(46px) saturate(1.25); --blur-opacity:1;
+    color-scheme:dark;
+  }
+  [data-theme="light"]{
+    --art-bg:#DDE3EE; --ink:#1B2D5F; --muted:#4D5E87; --accent:#8F6A0B; --teal2:#0E7C85;
+    --chrome:rgba(248,250,253,.78); --chrome-line:rgba(27,45,95,.16); --chrome-ink:#1B2D5F;
+    --scrim-a:rgba(246,248,252,.62); --scrim-b:rgba(246,248,252,.93);
+    --ov-ink:#1B2D5F; --ov-title:#8F6A0B; --ov-eyebrow:#0E7C85; --ov-shadow:none;
+    --rule:rgba(27,45,95,.14); --glow:rgba(14,124,133,.12);
+    --spot:#3E90BA; --name:#B98A05; --find:#3F7A2E; --fork:#C4522C; --calm:#7E4FA8;
+    --blur-filter:blur(40px) saturate(1.1) brightness(1.1); --blur-opacity:.85;
+    color-scheme:light;
+  }
+  [data-theme="dark"]{
+    --art-bg:#05060A; --ink:#ECEEF4; --muted:#9DA3B5; --accent:#F5C518; --teal2:#5BD3DC;
+    --chrome:rgba(0,0,0,.55); --chrome-line:rgba(255,255,255,.12); --chrome-ink:#ECEEF4;
+    --scrim-a:rgba(0,0,0,.5); --scrim-b:rgba(0,0,0,.86);
+    --ov-ink:#ECEEF4; --ov-title:#F5C518; --ov-eyebrow:#5BD3DC; --ov-shadow:0 1px 3px rgba(0,0,0,.6);
+    --rule:rgba(255,255,255,.12); --glow:rgba(245,197,24,.08);
+    --spot:#6EC3E6; --name:#F4C61F; --find:#79BE88; --fork:#E8794F; --calm:#B98FD6;
+    --blur-filter:blur(40px) brightness(.62); --blur-opacity:1;
+    color-scheme:dark;
+  }
+  [hidden]{display:none!important}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden;background:var(--art-bg);font-family:var(--body);color:var(--ink)}
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:10px}
+
+  .stage{position:fixed;inset:0;overflow:hidden;background:var(--art-bg);touch-action:none;container-type:size;user-select:none;-webkit-user-select:none}
+  .track{position:absolute;inset:0;display:flex;will-change:transform}
+  .track.ease{transition:transform .42s cubic-bezier(.2,.8,.25,1)}
+  .pg{position:relative;flex:0 0 100%;height:100%;overflow:hidden;background:var(--art-bg)}
+
+  /* the picture fills the screen; its edges melt into a blurred copy of itself */
+  .pg .blur{position:absolute;inset:-12%;background-size:cover;background-position:center;
+    filter:var(--blur-filter);opacity:var(--blur-opacity);transform:scale(1.15)}
+  .pg .pic{
+    position:absolute;inset:0;width:100%;height:100%;display:block;
+    object-fit:cover;object-position:50% 50%;-webkit-user-drag:none;
+    --f:clamp(16px, 4cqh, 30px);
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0, #000 var(--f), #000 calc(100% - var(--f)), transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 var(--f), #000 calc(100% - var(--f)), transparent 100%);
+    -webkit-mask-composite:source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0, #000 var(--f), #000 calc(100% - var(--f)), transparent 100%),
+      linear-gradient(to bottom, transparent 0, #000 var(--f), #000 calc(100% - var(--f)), transparent 100%);
+    mask-composite:intersect;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  }
+  .pg::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+    background:radial-gradient(ellipse at 50% 42%, rgba(0,0,0,0) 55%, rgba(0,0,0,.22) 100%)}
+  [data-theme="light"] .pg::after{background:radial-gradient(ellipse at 50% 42%, rgba(0,0,0,0) 60%, rgba(0,0,0,.08) 100%)}
+  .pg.noart::after{display:none}
+
+  /* the words: a layer over the whole picture that rises when you swipe up */
+  .words{position:absolute;inset:0;z-index:2;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;touch-action:none}
+  .words::-webkit-scrollbar{display:none}
+  .sheet{
+    position:relative;isolation:isolate;margin-top:100cqh;min-height:100cqh;
+    padding:clamp(3.2rem, 15cqh, 4.6rem) max(1.4rem, 6cqw) calc(env(safe-area-inset-bottom, 0px) + max(2.6rem, 10cqh));
+    color:var(--ov-ink);text-shadow:var(--ov-shadow);
+  }
+  .sheet::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(to bottom, rgba(0,0,0,0) 0, var(--scrim-a) 46px, var(--scrim-b) 150px, var(--scrim-b) 100%);
+    -webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 80px);mask-image:linear-gradient(to bottom, transparent 0, #000 80px);
+  }
+  .inner{width:100%;max-width:38rem;margin:0 auto;font-size:clamp(1.02rem, 4.8cqh, 1.22rem);line-height:1.62;user-select:text;-webkit-user-select:text}
+  .eyebrow{margin:0 0 .3rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--ov-eyebrow)}
+  .heading{margin:0 0 .6rem;font-family:var(--display);font-weight:600;font-size:clamp(1.4rem, 8cqh, 1.9rem);line-height:1.12;color:var(--ov-title)}
+  .para{margin:0 0 .8em}
+  .para:last-child{margin-bottom:0}
+  .list{margin:0;padding-left:1.15rem;display:flex;flex-direction:column;gap:.6em}
+  .list li::marker{color:var(--ov-title)}
+  .stones{margin:1rem 0 0;display:flex;flex-direction:column;gap:.5rem}
+  .stone{display:grid;grid-template-columns:4.2rem minmax(0,1fr);gap:.75rem;align-items:baseline;padding-top:.5rem;border-top:1px solid var(--rule)}
+  .stone dt{font-weight:800;letter-spacing:.12em;font-size:.76rem}
+  .stone dd{margin:0;font-size:.95em;line-height:1.5}
+  .stone dt.spot{color:var(--spot)} .stone dt.name{color:var(--name)} .stone dt.find{color:var(--find)}
+  .stone dt.fork{color:var(--fork)} .stone dt.calm{color:var(--calm)}
+
+  /* pages with no picture: the words sit on the theme colour, centred */
+  .pg.noart{background:radial-gradient(80% 90% at 50% 40%, var(--glow), transparent 70%), var(--art-bg)}
+  .pg.noart .sheet{margin-top:0;display:flex;align-items:center;padding-top:max(4.6rem, 16cqh);color:var(--ink);text-shadow:none}
+  .pg.noart .sheet::before{display:none}
+  .pg.noart .heading{color:var(--accent)}
+  .pg.noart .eyebrow{color:var(--teal2)}
+
+  /* the goodnight plate */
+  .endplate{text-align:center}
+  .endplate h2{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem, 10cqh, 2.5rem);line-height:1.1;margin:0;color:var(--accent)}
+  .endplate h3{font-family:var(--display);font-weight:600;font-size:clamp(1.2rem, 6.5cqh, 1.5rem);margin:.1rem 0 .8rem;color:var(--scout)}
+  .endplate p{margin:0 auto .9rem;max-width:34ch;color:var(--muted)}
+  .endplate .sig{font-size:.78rem;opacity:.8;margin-top:1rem}
+  .travelers{display:flex;gap:8px;justify-content:center;margin-top:.9rem}
+  .travelers span{width:11px;height:11px;border-radius:50%}
+  .btns{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
+  .pillbtn{
+    display:inline-flex;flex-direction:column;align-items:center;padding:.7rem 1.2rem;border-radius:999px;cursor:pointer;
+    font-weight:800;text-decoration:none;border:1px solid var(--chrome-line);background:transparent;color:var(--ink);line-height:1.2;
+  }
+  .pillbtn small{font-weight:600;font-size:.72rem;opacity:.85}
+  .pillbtn.songlink{background:var(--accent);color:#0B1430;border-color:transparent}
+  [data-theme="light"] .pillbtn.songlink{color:#fff}
+
+  /* cover: the title card */
+  .plate{
+    position:absolute;left:max(18px, 3.5cqw);bottom:calc(env(safe-area-inset-bottom, 0px) + max(18px, 5cqh));z-index:3;max-width:min(30rem, calc(100cqw - 36px));
+    background:var(--chrome);border:1px solid var(--chrome-line);color:var(--chrome-ink);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-radius:20px;padding:1rem 1.2rem 1.05rem;
+  }
+  .plate .ey{margin:0;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--teal2)}
+  .plate h1{font-family:var(--display);font-weight:600;font-size:clamp(1.5rem, 7.5cqh, 2.4rem);line-height:1.05;margin:.3rem 0 .35rem;text-wrap:balance}
+  .plate .rf{margin:0;font-weight:800;font-style:italic;color:var(--accent);font-size:1rem}
+  .plate .bk{margin:.35rem 0 0;font-size:.85rem;color:var(--muted)}
+
+  /* cues */
+  .cue{
+    position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom, 0px) + max(14px, 3.4cqh));z-index:3;transform:translateX(-50%);
+    display:flex;align-items:center;gap:.5rem;cursor:pointer;white-space:nowrap;
+    padding:.6rem 1.1rem .6rem .85rem;border-radius:999px;font-weight:800;font-size:.92rem;
+    background:var(--chrome);border:1px solid var(--chrome-line);color:var(--chrome-ink);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:opacity .25s, transform .3s;
+  }
+  .cue svg{width:18px;height:18px;stroke:var(--accent);animation:nudge 2.4s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translateY(1px)}50%{transform:translateY(-3px)}}
+  .pg.reading .cue{opacity:0;pointer-events:none;transform:translate(-50%, 10px)}
+  .cue.begin{left:auto;right:max(18px, 3.5cqw);transform:none}
+  /* on a narrow upright phone the title card takes the width, so "begin" sits above it */
+  @container (max-aspect-ratio: 1/1){
+    .cue.begin{right:auto;left:max(18px, 3.5cqw);bottom:calc(env(safe-area-inset-bottom, 0px) + max(18px, 5cqh) + 9.5rem)}
+  }
+
+  /* chrome */
+  .top{
+    position:absolute;left:0;right:0;top:0;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:.75rem;
+    padding:calc(env(safe-area-inset-top, 0px) + max(10px, 2.2cqh)) max(14px, env(safe-area-inset-right, 0px)) 0 max(14px, env(safe-area-inset-left, 0px));
+    pointer-events:none;
+  }
+  .top > *{pointer-events:auto}
+  .cbtn{
+    width:42px;height:42px;border-radius:50%;display:grid;place-items:center;cursor:pointer;
+    background:var(--chrome);border:1px solid var(--chrome-line);color:var(--chrome-ink);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:transform .15s, opacity .2s;
+  }
+  .cbtn:active{transform:scale(.92)}
+  .cbtn svg{width:20px;height:20px;stroke:currentColor}
+  .dots{display:flex;gap:6px;padding:9px 12px;border-radius:999px;background:var(--chrome);border:1px solid var(--chrome-line);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+  .dots i{width:7px;height:7px;border-radius:50%;background:var(--chrome-ink);opacity:.3;transition:opacity .25s, width .25s, background .25s}
+  .dots i.on{opacity:1;width:20px;border-radius:4px;background:var(--accent)}
+  .side{position:absolute;top:50%;z-index:5;transform:translateY(-50%);opacity:.75}
+  .side.prev{left:max(12px, env(safe-area-inset-left, 0px))}
+  .side.next{right:max(12px, env(safe-area-inset-right, 0px))}
+  .side[disabled]{opacity:0;pointer-events:none}
+  @container (max-width: 520px){ .side{display:none} }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+<main class="stage" id="stage" aria-roledescription="story book">
+  <div class="track" id="track"></div>
+  <div class="top">
+    <button class="cbtn" id="backBtn" type="button" aria-label="Back">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <button class="cbtn" id="themeBtn" type="button" aria-label="Colour theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+  <button class="cbtn side prev" id="prev" type="button" aria-label="Previous page">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="cbtn side next" id="next" type="button" aria-label="Next page">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</main>
+
+<script>
+/* ============================================================
+   STORY DATA — the only block that changes per night.
+   ============================================================ */
+const STORY = __STORY__;
+
+
+/* ============================================================
+   THEME — Traditional / Light / Dark (same order as story-template.html)
+     1. ?theme=blue|light|dark on the URL
+     2. window.LST_APP_THEME set before this script runs
+     3. data-theme already on <html>
+     4. lst_theme in storage (what the app saves)
+     5. the device's own colour scheme
+   ============================================================ */
+(function(){
+  var THEMES = ['blue', 'light', 'dark'];
+  var LABEL = { blue:'Traditional', light:'Light', dark:'Dark' };
+  var BAR = { blue:'#152449', light:'#E8EBF2', dark:'#05060A' };
+  var chosen = false, current = 'blue';
+  function norm(n){ n = String(n || '').toLowerCase(); if (n === 'traditional' || n === 'navy') n = 'blue'; return THEMES.indexOf(n) > -1 ? n : null; }
+  function apply(name){
+    current = norm(name) || 'blue';
+    if (current === 'blue') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', current);
+    var meta = document.querySelector('meta[name="theme-color"]'); if (meta) meta.content = BAR[current];
+    var btn = document.getElementById('themeBtn');
+    if (btn) btn.setAttribute('aria-label', 'Colour theme: ' + LABEL[current] + '. Tap to change.');
+  }
+  function save(name){ try { localStorage.setItem('lst_theme', name); } catch(e){} }
+  var fromUrl = null;
+  try { var m = location.search.match(/[?&]theme=([a-z]+)/i); if (m) fromUrl = norm(m[1]); } catch(e){}
+  var preset = norm(document.documentElement.getAttribute('data-theme'));
+  var saved = null; try { saved = norm(localStorage.getItem('lst_theme')); } catch(e){}
+  var system = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : null;
+  apply(fromUrl || norm(window.LST_APP_THEME) || preset || saved || system || 'blue');
+  chosen = !!(fromUrl || window.LST_APP_THEME || preset || saved);
+  try {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var onScheme = function(e){ if (!chosen) apply(e.matches ? 'dark' : 'blue'); };
+    if (mq.addEventListener) mq.addEventListener('change', onScheme); else if (mq.addListener) mq.addListener(onScheme);
+  } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(e){
+    e.stopPropagation();
+    var next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
+    chosen = true; apply(next); save(next);
+  });
+  window.setStoryTheme = function(name){ var n = norm(name); if (n){ chosen = true; apply(n); save(n); } };
+  window.addEventListener('message', function(e){ var d = e && e.data; if (d && d.type === 'lst-theme' && d.theme) window.setStoryTheme(d.theme); });
+})();
+
+
+/* ============================================================
+   ENGINE — generic below this line.
+   ============================================================ */
+const $ = s => document.querySelector(s);
+const stage = $('#stage'), track = $('#track');
+const KEY = 'lst:' + STORY.id + ':beat';
+document.title = STORY.title + ' · Little Scripture Travelers';
+
+function el(tag, cls, text){ const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+const ICON_UP = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>';
+const ICON_RIGHT = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>';
+
+function words(b){
+  const f = document.createDocumentFragment();
+  if (b.eyebrow) f.append(el('p', 'eyebrow', b.eyebrow));
+  if (b.heading) f.append(el('h2', 'heading', b.heading));
+  (b.text || []).forEach(t => f.append(el('p', 'para', t)));
+  if (b.list){ const ul = el('ul', 'list'); b.list.forEach(t => ul.append(el('li', null, t))); f.append(ul); }
+  if (b.stones){
+    const dl = el('dl', 'stones');
+    b.stones.forEach(([k, v]) => { const row = el('div', 'stone'); row.append(el('dt', String(k).toLowerCase(), k), el('dd', null, v)); dl.append(row); });
+    f.append(dl);
+  }
+  return f;
+}
+function wordsLayer(content){
+  const w = el('div', 'words'), sh = el('div', 'sheet'), inner = el('div', 'inner');
+  inner.append(content); sh.append(inner); w.append(sh);
+  return w;
+}
+function endplate(){
+  const f = document.createDocumentFragment(), box = el('div', 'endplate');
+  box.append(el('h2', null, 'Sweet Dreams,'), el('h3', null, 'Little Traveler'),
+    el('p', null, 'Until our next adventure, may these stories tuck themselves gently into your heart, like the warmth of a hug at the end of the day.'));
+  const btns = el('div', 'btns');
+  if (STORY.lullabyUrl){
+    const a = el('a', 'pillbtn songlink'); a.href = STORY.lullabyUrl;
+    a.append(el('span', null, '♫ Sing tonight’s lullaby'), el('small', null, (STORY.lullabyTitle ? STORY.lullabyTitle + ' · ' : '') + 'lyrics & music'));
+    btns.append(a);
+  }
+  const again = el('button', 'pillbtn', 'Read it again'); again.type = 'button'; again.addEventListener('click', () => goTo(0));
+  btns.append(again); box.append(btns);
+  box.append(el('p', 'sig', 'Little Scripture Travelers · ' + (STORY.series || 'Old Testament') + (STORY.bookTitle ? ' · ' + STORY.bookTitle : '') + '\n~ Beau, Scout, Willow, & Wren ~'));
+  const t = el('div', 'travelers');
+  ['--beau', '--scout', '--willow', '--wren'].forEach(c => { const s = el('span'); s.style.background = 'var(' + c + ')'; t.append(s); });
+  box.append(t); f.append(box);
+  return f;
+}
+
+/* each picture page carries a wide picture, a tall one, or both */
+const pages = [];
+STORY.beats.forEach((b, i) => {
+  const pg = el('section', 'pg');
+  pg.setAttribute('aria-label', 'Page ' + (i + 1) + ' of ' + STORY.beats.length);
+  if (b.wide || b.tall){
+    const blur = el('div', 'blur'), im = new Image();
+    im.className = 'pic'; im.decoding = 'async'; im.alt = b.alt || ''; im.draggable = false;
+    pg.append(blur, im);
+    pg._b = b; pg._im = im; pg._blur = blur;
+  } else pg.classList.add('noart');
+
+  if (b.type === 'cover'){
+    const p = el('div', 'plate');
+    p.append(el('p', 'ey', (STORY.storyNumber ? 'Story ' + STORY.storyNumber : '') + (STORY.night ? ' · ' + STORY.night : '')),
+             el('h1', null, STORY.title), el('p', 'rf', STORY.reference));
+    if (STORY.bookTitle) p.append(el('p', 'bk', 'From ' + STORY.bookTitle));
+    const go = el('button', 'cue begin'); go.type = 'button';
+    go.innerHTML = ICON_RIGHT + '<span>Swipe to begin</span>';
+    go.addEventListener('click', () => goTo(1));
+    pg.append(p, go);
+  } else if (b.type === 'end'){
+    pg.append(wordsLayer(endplate()));
+  } else if (!(b.wide || b.tall)){
+    pg.append(wordsLayer(words(b)));
+  } else {
+    const w = wordsLayer(words(b));
+    const cue = el('button', 'cue'); cue.type = 'button';
+    cue.innerHTML = ICON_UP + '<span>Swipe up to read</span>';
+    cue.addEventListener('click', () => reveal(true));
+    w.addEventListener('scroll', () => pg.classList.toggle('reading', w.scrollTop > 14), { passive: true });
+    pg.append(w, cue);
+  }
+  track.append(pg); pages.push(pg);
+  $('#dots').append(el('i'));
+});
+
+/* choose the picture made for this shape of screen, and keep its focal point in view */
+function layout(){
+  const W = stage.clientWidth, H = stage.clientHeight, sa = W / H, upright = H > W;
+  pages.forEach(pg => {
+    const b = pg._b; if (!b) return;
+    const pick = upright ? (b.tall || b.wide) : (b.wide || b.tall);
+    if (pg._src !== pick.src){
+      pg._src = pick.src; pg._im.src = pick.src;
+      pg._blur.style.backgroundImage = 'url("' + pick.src + '")';
+    }
+    const ia = pick.w / pick.h, vis = Math.min(ia / sa, sa / ia);
+    const fx = (pick.focus || [50, 50])[0], fy = (pick.focus || [50, 50])[1];
+    if (vis < 0.999){
+      const at = c => Math.max(0, Math.min(100, (c / 100 - vis / 2) / (1 - vis) * 100)).toFixed(1);
+      pg._im.style.objectPosition = ia > sa ? at(fx) + '% 50%' : '50% ' + at(fy) + '%';
+    } else pg._im.style.objectPosition = '';
+  });
+  place(false);
+}
+
+let page = 0;
+function place(animate, offset){
+  track.classList.toggle('ease', !!animate);
+  track.style.transform = 'translateX(calc(' + (-page * 100) + '% + ' + (offset || 0) + 'px))';
+}
+function updateChrome(){
+  [...$('#dots').children].forEach((d, i) => d.classList.toggle('on', i === page));
+  $('#prev').disabled = page === 0;
+  $('#next').disabled = page === pages.length - 1;
+}
+function goTo(n, instant){
+  n = Math.max(0, Math.min(pages.length - 1, n));
+  if (n !== page){
+    const w = pages[page].querySelector('.words');   /* the page being left goes back to its picture */
+    if (w) setTimeout(() => { w.scrollTop = 0; }, 450);
+  }
+  page = n;
+  place(!instant);
+  updateChrome();
+  try { localStorage.setItem(KEY, String(page)); } catch(e){}
+}
+function wordsOf(){ return pages[page] && pages[page].querySelector('.words'); }
+function reveal(show){
+  const w = wordsOf(); if (!w) return;
+  w.scrollTo({ top: show ? Math.min(w.scrollHeight - w.clientHeight, w.clientHeight * 0.62) : 0, behavior: 'smooth' });
+}
+
+/* touch: a sideways swipe turns the page, an upward one brings the words up */
+let d = null, coast = 0;
+stage.addEventListener('pointerdown', e => {
+  if (e.target.closest('button, a')) return;
+  cancelAnimationFrame(coast);
+  const w = wordsOf();
+  d = { id: e.pointerId, x: e.clientX, y: e.clientY, axis: null, w, top: w ? w.scrollTop : 0, samples: [] };
+  try { stage.setPointerCapture(e.pointerId); } catch(err){}
+});
+stage.addEventListener('pointermove', e => {
+  if (!d || d.id !== e.pointerId) return;
+  const cx = e.clientX - d.x, cy = e.clientY - d.y;
+  if (!d.axis && Math.hypot(cx, cy) > 8) d.axis = Math.abs(cx) > Math.abs(cy) ? 'x' : 'y';
+  if (d.axis === 'x'){
+    const edge = (page === 0 && cx > 0) || (page === pages.length - 1 && cx < 0);
+    place(false, edge ? cx * 0.3 : cx);
+  } else if (d.axis === 'y' && d.w){
+    d.w.scrollTop = d.top - cy;
+  }
+  d.samples.push([performance.now(), cx, cy]);
+  if (d.samples.length > 6) d.samples.shift();
+});
+function speed(s, i){ if (s.length < 2) return 0; const a = s[0], b = s[s.length - 1], dt = b[0] - a[0]; return dt > 0 ? (b[i] - a[i]) / dt : 0; }
+stage.addEventListener('pointerup', e => {
+  if (!d || d.id !== e.pointerId) return;
+  const cx = e.clientX - d.x, g = d; d = null;
+  if (g.axis === 'x'){
+    const vx = speed(g.samples, 1);
+    if (cx < -50 || vx < -0.35) goTo(page + 1);
+    else if (cx > 50 || vx > 0.35) goTo(page - 1);
+    else place(true);
+  } else if (g.axis === 'y' && g.w){
+    let v = -speed(g.samples, 2) * 16; const w = g.w;
+    const step = () => { if (Math.abs(v) < 0.4) return; w.scrollTop += v; v *= 0.94; coast = requestAnimationFrame(step); };
+    coast = requestAnimationFrame(step);
+  } else if (!g.axis){
+    const fx = e.clientX / stage.clientWidth, w = wordsOf();
+    if (fx > 0.72) goTo(page + 1);
+    else if (fx < 0.28) goTo(page - 1);
+    else if (w && pages[page]._b) reveal(w.scrollTop < 14);
+  }
+});
+stage.addEventListener('pointercancel', () => { if (d && d.axis === 'x') place(true); d = null; });
+stage.addEventListener('wheel', e => { const w = wordsOf(); if (w){ w.scrollTop += e.deltaY; e.preventDefault(); } }, { passive: false });
+
+$('#prev').addEventListener('click', () => goTo(page - 1));
+$('#next').addEventListener('click', () => goTo(page + 1));
+document.addEventListener('keydown', e => {
+  const w = wordsOf();
+  if (e.key === 'ArrowRight') goTo(page + 1);
+  else if (e.key === 'ArrowLeft') goTo(page - 1);
+  else if (e.key === 'ArrowUp' && w){ e.preventDefault(); reveal(true); }
+  else if (e.key === 'ArrowDown' && w){ e.preventDefault(); reveal(false); }
+});
+
+/* ---------- back: the app's own back first, then the frame around us, then history ---------- */
+(function(){
+  const dest = (STORY.devotionalUrl || '').trim();
+  $('#backBtn').addEventListener('click', function(e){
+    e.stopPropagation();
+    if (dest && dest !== '#'){ location.href = dest; return; }
+    if (typeof window.LSTApp !== 'undefined' && window.LSTApp.back){ window.LSTApp.back(); return; }
+    if (window.parent !== window){ window.parent.postMessage({ type: 'lst:back' }, '*'); return; }
+    if (window.history.length > 1) window.history.back();
+  });
+})();
+
+/* ---------- the lullaby: inside the app, the app opens it with its own player ---------- */
+document.addEventListener('click', function(e){
+  const a = e.target && e.target.closest ? e.target.closest('a.songlink') : null;
+  if (!a) return;
+  e.stopPropagation();
+  let host = null;
+  try { if (window.parent && window.parent !== window && window.parent.lstOpenSite) host = window.parent; } catch(err){}
+  if (!host) return;
+  e.preventDefault();
+  try { host.lstOpenSite(a.getAttribute('href'), STORY.lullabyTitle || 'Tonight’s lullaby'); }
+  catch(err){ location.href = a.href; }
+}, true);
+
+window.addEventListener('resize', layout);
+if (screen.orientation) screen.orientation.addEventListener('change', () => setTimeout(layout, 120));
+layout();
+let start = 0;
+try { start = parseInt(localStorage.getItem(KEY) || '0', 10) || 0; } catch(e){}
+if (start >= pages.length - 1) start = 0;
+goTo(start, true);
+</script>
+</body>
+</html>
