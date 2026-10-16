@@ -203,10 +203,15 @@ def upsert(row):
         return False, f"{status}: {body[:300]}"
     return False, "gave up after dropping eight columns"
 
-def narrate(date):
+def narrate(date, edition=None):
+    """Record a night's two voices. EACH EDITION READS ITS OWN WORDS (Levi, 16 Oct 2026: the
+    Christian Morning Lantern read the Latter-day Saint recording): edition="christian" records
+    story_text_nondenom into eli_christian / hannah_christian."""
     hdr = {"Authorization": "Bearer " + KEY, "Content-Type": "application/json"}
-    status, body = http("POST", URL + "/functions/v1/narrate", {"date": date}, hdr, timeout=300)
-    return status, body[:300]
+    body = {"date": date}
+    if edition: body["edition"] = edition
+    status, resp = http("POST", URL + "/functions/v1/narrate", body, hdr, timeout=300)
+    return status, resp[:300]
 
 # THE MARKETING RULE. The moment a night is in the account, its marketing is
 # drafted from it - one piece each for Instagram, Facebook, TikTok, Pinterest,
@@ -372,7 +377,7 @@ def main():
         if night.get("christian_only"):
             if not chr_:
                 print(f"{slug}: christian_only, but no morning-lantern-christian.html yet - waiting"); continue
-            ok, why = upsert({"publish_date": date, "story_html_nondenom": chr_})
+            ok, why = upsert({"publish_date": date, "story_html_nondenom": chr_, "story_text_nondenom": quick_text(chr_)})
             if not ok:
                 print(f"{slug}: Christian edition NOT published - {why}"); failures += 1; continue
             print(f"{slug}: Christian edition added for {date} (nothing else touched)")
@@ -386,7 +391,9 @@ def main():
             "story_text": quick_text(lds),
             "published_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         })
-        if chr_:      row["story_html_nondenom"] = chr_
+        if chr_:
+            row["story_html_nondenom"] = chr_
+            row["story_text_nondenom"] = quick_text(chr_)
         if song:
             # By name, as Admin writes it: the Morning Lantern's own "Tonight's
             # Lullaby" button points at this file name, and the app opens the
@@ -421,6 +428,10 @@ def main():
             status, body = narrate(date)
             if status == 200: print(f"    narration: recorded")
             else:             print(f"    narration: not recorded ({status}) {body}")
+            if row.get("story_text_nondenom"):
+                status, body = narrate(date, "christian")
+                if status == 200: print(f"    Christian narration: recorded")
+                else:             print(f"    Christian narration: not recorded ({status}) {body}")
 
         if MARKET and live_night(date):
             status, body = market(date)
@@ -441,22 +452,57 @@ def main():
 
 def sweep_voices(limit=6):
     hdr = {"apikey": KEY, "Authorization": "Bearer " + KEY}
-    status, body = http("GET", URL + "/rest/v1/daily_content?select=publish_date,narration_urls,story_text"
+    status, body = http("GET", URL + "/rest/v1/daily_content?select=publish_date,narration_urls,story_text,story_text_nondenom"
                         "&published_at=not.is.null&order=publish_date.desc&limit=60", None, hdr)
+    if status == 400 and "story_text_nondenom" in body:   # a database from before the Christian voices
+        status, body = http("GET", URL + "/rest/v1/daily_content?select=publish_date,narration_urls,story_text"
+                            "&published_at=not.is.null&order=publish_date.desc&limit=60", None, hdr)
     if status != 200:
         print(f"voices: could not list nights ({status})"); return
     try:
         rows = json.loads(body)
     except Exception:
         print("voices: could not read the list"); return
+    urls = lambda r: r["narration_urls"] if isinstance(r.get("narration_urls"), dict) else {}
     todo = [r for r in rows if (r.get("story_text") or "").strip() and live_night(r.get("publish_date"))
-            and not (isinstance(r.get("narration_urls"), dict) and any(r["narration_urls"].values()))]
+            and not any(v for k, v in urls(r).items() if not k.endswith("_christian"))]
     if not todo:
-        print("voices: every night with words has its recording"); return
-    print(f"voices: {len(todo)} night(s) without a recording; asking for up to {limit}")
-    for r in todo[:limit]:
-        st, resp = narrate(r["publish_date"])
-        print(f"    {r['publish_date']}: {'recorded' if st == 200 else f'not recorded ({st}) {resp}'}")
+        print("voices: every night with words has its recording")
+    else:
+        print(f"voices: {len(todo)} night(s) without a recording; asking for up to {limit}")
+        for r in todo[:limit]:
+            st, resp = narrate(r["publish_date"])
+            print(f"    {r['publish_date']}: {'recorded' if st == 200 else f'not recorded ({st}) {resp}'}")
+    # The Christian edition's own voices, the same way. A night published before it had its
+    # own words gets them from its Christian page first (the account holds the page).
+    if rows and "story_text_nondenom" not in rows[0]:
+        return
+    ctodo = [r for r in rows if live_night(r.get("publish_date"))
+             and not (urls(r).get("eli_christian") and urls(r).get("hannah_christian"))]
+    if not ctodo:
+        print("voices: every Christian night has its own recording"); return
+    print(f"voices: {len(ctodo)} Christian night(s) without their own recording; asking for up to {limit}")
+    asked = 0
+    for r in ctodo:
+        if asked >= limit: break
+        d = r["publish_date"]
+        if not (r.get("story_text_nondenom") or "").strip():
+            st, one = http("GET", URL + f"/rest/v1/daily_content?select=story_html_nondenom&publish_date=eq.{d}", None, hdr)
+            try:
+                page = (json.loads(one)[0].get("story_html_nondenom") or "") if st == 200 else ""
+            except Exception:
+                page = ""
+            if not page:
+                print(f"    {d}: no Christian edition in the account - skipped"); continue
+            txt = quick_text(page)
+            if not txt:
+                print(f"    {d}: the Christian page has no Quick reading - skipped"); continue
+            ok, why = upsert({"publish_date": d, "story_text_nondenom": txt})
+            if not ok:
+                print(f"    {d}: could not save the Christian words - {why}"); continue
+        asked += 1
+        st, resp = narrate(d, "christian")
+        print(f"    {d} (Christian): {'recorded' if st == 200 else f'not recorded ({st}) {resp}'}")
 
 if __name__ == "__main__":
     sys.exit(main())
