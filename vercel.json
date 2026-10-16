@@ -41,5 +41,17 @@
       "native-peoples": false,
       "remember-this-and-story-lullaby": false
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/store",
+      "destination": "https://app.littlescripturetravelers.com/store/",
+      "permanent": false
+    },
+    {
+      "source": "/store/:path*",
+      "destination": "https://app.littlescripturetravelers.com/store/:path*",
+      "permanent": false
+    }
+  ]
 }
