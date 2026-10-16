@@ -102,9 +102,10 @@
   document.addEventListener("click", function (e) {
     var t = e.target && e.target.closest ? e.target.closest("[data-app-shot]") : null;
     if (!t) {
-      /* the little eye beside a perk opens that perk's screen too */
-      var eye = e.target && e.target.closest ? e.target.closest(".lantern-perks .perk-eye") : null;
-      if (eye) t = eye.closest("li") && eye.closest("li").querySelector("[data-app-shot]");
+      /* a tap anywhere on a perk opens that perk's screen full size, straight away -
+         no small preview first (Levi, 16 Oct 2026) */
+      var li = e.target && e.target.closest ? e.target.closest(".lantern-perks li.has-preview") : null;
+      if (li) t = li.querySelector("[data-app-shot]");
     }
     if (!t) return;
     e.preventDefault();
