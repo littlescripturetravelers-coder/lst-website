@@ -25,7 +25,8 @@
     box.innerHTML =
       '<div class="app-peek-box">' +
         '<button type="button" class="app-peek-close" aria-label="Close">&#x2715;</button>' +
-        '<div class="app-peek-phone"><img alt=""></div>' +
+        '<div class="app-peek-phones"><div class="app-peek-phone"><img alt=""></div>' +
+        '<div class="app-peek-phone app-peek-phone2"><img alt=""></div></div>' +
         '<div class="app-peek-text">' +
           '<div class="app-peek-kicker">In the app</div>' +
           '<h3 class="app-peek-title"></h3>' +
@@ -59,7 +60,7 @@
       var src = el.getAttribute("data-app-shot");
       if (!src || seen[src]) return;
       seen[src] = 1;
-      out.push({ src: src, title: el.getAttribute("data-app-title") || "", desc: el.getAttribute("data-app-desc") || "" });
+      out.push({ src: src, src2: el.getAttribute("data-app-shot2") || "", title: el.getAttribute("data-app-title") || "", desc: el.getAttribute("data-app-desc") || "" });
     });
     return out;
   }
@@ -70,6 +71,10 @@
     var it = list[at];
     var img = box.querySelector(".app-peek-phone img");
     img.src = it.src;
+    /* a feature with two screens (tonight's song and the Lantern Lullaby) shows both, side by side */
+    var p2 = box.querySelector(".app-peek-phone2");
+    box.classList.toggle("two", !!it.src2);
+    if (it.src2) { p2.querySelector("img").src = it.src2; p2.querySelector("img").alt = "The Lantern Lullaby's page in the Little Scripture Travelers app"; }
     img.alt = it.title ? "The " + it.title.replace(/^The /, "") + " screen in the Little Scripture Travelers app" : "A screen from the Little Scripture Travelers app";
     box.querySelector(".app-peek-title").textContent = it.title;
     box.querySelector(".app-peek-desc").textContent = it.desc;

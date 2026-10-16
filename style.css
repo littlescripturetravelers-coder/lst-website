@@ -3749,3 +3749,15 @@ html[data-theme="light"] .bs-art {
 /* A perk opens its screen full size on a tap; the small hover preview is retired (Levi, 16 Oct 2026). */
 .lantern-perks li.has-preview .perk-popup{display:none!important;}
 .lantern-perks li.has-preview{cursor:pointer;}
+
+/* two screens for one feature, side by side (js/lst-app-peek.js, data-app-shot2) */
+.app-peek-phones{display:flex;gap:14px;align-items:flex-start;flex:0 0 auto;}
+.app-peek-phone2{display:none;}
+.app-peek.two .app-peek-phone2{display:block;}
+@media (max-width: 760px){
+  .app-peek.two .app-peek-phones{width:100%;justify-content:center;gap:10px;}
+  .app-peek.two .app-peek-phone{width:calc(50% - 5px) !important;max-width:240px;}
+}
+.app-peek.two .app-peek-box{max-width:1120px;}
+.app-peek.two .app-peek-phone{height:min(70vh,620px);}
+@media (max-width: 760px){ .app-peek.two .app-peek-phone{height:auto;} }

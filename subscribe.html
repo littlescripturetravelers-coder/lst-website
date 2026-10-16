@@ -1160,52 +1160,7 @@
   <section class="subscribe-section" id="plans">
     <div class="section-inner">
 
-        <!-- THE STORY ON A PHONE (Levi, 16 Oct 2026): a real night's picture book, turned the way it is in the app. -->
-        <div class="app-tour story-demo" id="story-demo">
-          <div class="app-tour-kicker">&#10022; Try it yourself &#10022;</div>
-          <h3>Flip through a real Story of the Night</h3>
-          <p class="app-tour-sub">This is a real night from the app. Tap the page, or swipe it, to turn to the next one, just like on a phone.</p>
-          <script>
-          /* The story's last page asks its host to open the lullaby, the way the app does.
-             Here the song opens over the story, inside the phone; Back to the story closes
-             it and the book is still on the page it was on (Levi, 16 Oct 2026). */
-          function sdDress(f){ try{ var d=f.contentDocument; if(!d||!d.head) return; var s=d.createElement('style');
-            s.textContent='#backLink,.back{visibility:hidden!important}'; d.head.appendChild(s);
-            /* one tap on the song's Play or Listen starts the music, the way the app's headphones do */
-            if(f.id==='sdSong') d.addEventListener('click',function(e){
-              var t=e.target&&e.target.closest&&e.target.closest('[data-lantern-open]'); if(!t) return;
-              setTimeout(function(){ try{ var a=d.getElementById('player'), b=d.querySelector('.lp-play'); if(a&&a.paused&&b) b.click(); }catch(x){} },120);
-            },true);
-          }catch(e){} }
-          window.lstOpenSite=function(href){
-            var u=String(href||'').replace(/^https?:\/\/(www\.)?littlescripturetravelers\.com\//i,'/');
-            var song=document.getElementById('sdSong'); song.src=u; song.hidden=false;
-            document.getElementById('sdBack').hidden=false;
-          };
-          /* Inside a frame the song page hands its Play to "the app" (lst:play). On the website
-             there is no app, so its own player is started here instead. */
-          window.addEventListener('message',function(e){
-            var song=document.getElementById('sdSong'); if(!song||e.source!==song.contentWindow) return;
-            if(!e.data||e.data.type!=='lst:play') return;
-            try{ var w=song.contentWindow, d=song.contentDocument;
-              if(w.LanternPlayer){ w.LanternPlayer.show(); setTimeout(function(){ var b=d.querySelector('.lp-play'); if(b) b.click(); },60); }
-              else { var a=d.getElementById('player'); if(a) a.play(); } }catch(err){}
-          });
-          function sdBackToStory(){
-            var song=document.getElementById('sdSong');
-            try{ var a=song.contentDocument&&song.contentDocument.querySelectorAll('audio'); if(a) for(var i=0;i<a.length;i++) a[i].pause(); }catch(e){}
-            song.hidden=true; song.src='about:blank'; document.getElementById('sdBack').hidden=true;
-          }
-          </script>
-          <div class="sd-phone"><span class="sd-notch" aria-hidden="true"></span>
-            <iframe class="sd-screen" id="sdStory" src="lantern/the-day-called-delight/the-day-called-delight.html" loading="lazy" title="The Day Called Delight, a Little Scripture Travelers story to flip through"
-              onload="sdDress(this)"></iframe>
-            <iframe class="sd-screen sd-song" id="sdSong" hidden title="The story's lullaby" onload="sdDress(this)"></iframe>
-            <button type="button" class="sd-back" id="sdBack" hidden onclick="sdBackToStory()">&lsaquo; Back to the story</button>
-          </div>
 
-          <p class="app-tour-swipe">Every night brings a new one, with its own song at the end.</p>
-        </div>
       <!-- Draws nothing unless data/founding-offer.js is switched on. -->
       <div id="lst-founding"></div>
       <h2 class="section-title">The Lantern</h2>
@@ -1251,8 +1206,8 @@
               <span class="perk-label"><span class="perk-title">Tonight’s Song &amp; the Lantern Lullaby</span><span class="perk-line">A song written for each night’s story, and our signature lullaby, with the words on screen to sing along.</span></span>
               <span class="perk-eye" title="See it in the app">&#128065;</span>
               <div class="perk-popup">
-                <div class="perk-popup-media" data-product="app-songs" data-app-shot="images/app/app-songs.jpg" data-app-title="Tonight’s Song &amp; the Lantern Lullaby" data-app-desc="Every story has a song of its own, and the Lantern Lullaby is the same comforting song every night, so your child knows bedtime is here. The lyrics sit right under the player, each line lighting up as it is sung. Tap a line and the song starts from there. The Lantern Lullaby plays with one tap from the Lullabies page." style="cursor:zoom-in;">
-                  <img class="app-thumb" src="images/app/app-songs.jpg" alt="A lullaby in the app’s player, the line being sung lit up" loading="lazy" style="width:100%;border-radius:20px;display:block;">
+                <div class="perk-popup-media" data-product="app-songs" data-app-shot="images/app/app-songs.jpg" data-app-shot2="images/app/app-lullaby.jpg" data-app-title="Tonight’s Song &amp; the Lantern Lullaby" data-app-desc="Every story has a song of its own, and the Lantern Lullaby is the same comforting song every night, so your child knows bedtime is here. The lyrics sit right under the player, each line lighting up as it is sung. Tap a line and the song starts from there. The Lantern Lullaby plays with one tap from the Lullabies page." style="cursor:zoom-in;">
+                  <img class="app-thumb" src="images/app/app-songs.jpg" alt="Tonight’s song page in the app, with its words to sing" loading="lazy" style="width:100%;border-radius:20px;display:block;">
                   <div style="text-align:center;font-family: var(--font-body);font-size:0.65rem;color:var(--gold-ink-70);margin-top:4px;">Click to see it full size &#8599;</div>
                 </div>
                 <strong class="perk-popup-name">Tonight’s Song &amp; the Lantern Lullaby</strong>
@@ -1426,6 +1381,46 @@
   <!-- ── A look inside the app ── -->
   <section class="subscribe-section" id="inside-app-section" style="padding-top:1rem;">
     <div class="section-inner">
+        <!-- THE STORY ON A PHONE (Levi, 16 Oct 2026): a real night's picture book, turned the way it is in the app. -->
+        <div class="app-tour story-demo" id="story-demo">
+          <div class="app-tour-kicker">&#10022; Try it yourself &#10022;</div>
+          <h3>Flip through a real Story of the Night</h3>
+          <p class="app-tour-sub">This is a real night from the app. Tap the page, or swipe it, to turn to the next one, just like on a phone.</p>
+          <script>
+          /* The story's last page asks its host to open the lullaby, the way the app does.
+             Here the song opens over the story, inside the phone; Back to the story closes
+             it and the book is still on the page it was on (Levi, 16 Oct 2026). */
+          function sdDress(f){ try{ var d=f.contentDocument; if(!d||!d.head) return; var s=d.createElement('style');
+            s.textContent='#backLink,.back{visibility:hidden!important}'; d.head.appendChild(s);
+            /* one tap on the song's Play or Listen starts the music, the way the app's headphones do */
+            if(f.id==='sdSong') d.addEventListener('click',function(e){
+              var t=e.target&&e.target.closest&&e.target.closest('[data-lantern-open]'); if(!t) return;
+              setTimeout(function(){ try{ var a=d.getElementById('player'), b=d.querySelector('.lp-play'); if(a&&a.paused&&b) b.click(); }catch(x){} },120);
+            },true);
+          }catch(e){} }
+          window.lstOpenSite=function(href,title){
+            /* the app itself, locked to this one song page, so it plays exactly as it does on a phone */
+            var u=String(href||'').replace(/^https?:\/\/(www\.)?littlescripturetravelers\.com\//i,'https://littlescripturetravelers.com/');
+            var ph=document.querySelector('.sd-phone');
+            var song=document.getElementById('sdSong');
+            song.src='https://app.littlescripturetravelers.com/?demo-song='+encodeURIComponent(u)+'&date='+encodeURIComponent(ph.getAttribute('data-night-date')||'')+'&title='+encodeURIComponent(title||ph.getAttribute('data-song-title')||'');
+            song.hidden=false; document.getElementById('sdBack').hidden=false;
+          };
+          function sdBackToStory(){
+            var song=document.getElementById('sdSong');
+            try{ var a=song.contentDocument&&song.contentDocument.querySelectorAll('audio'); if(a) for(var i=0;i<a.length;i++) a[i].pause(); }catch(e){}
+            song.hidden=true; song.src='about:blank'; document.getElementById('sdBack').hidden=true;   /* leaving the page stops the song */
+          }
+          </script>
+          <div class="sd-phone" data-night-date="2026-10-16" data-song-title="I Call the Sabbath a Delight"><span class="sd-notch" aria-hidden="true"></span>
+            <iframe class="sd-screen" id="sdStory" src="lantern/the-day-called-delight/the-day-called-delight.html" loading="lazy" title="The Day Called Delight, a Little Scripture Travelers story to flip through"
+              onload="sdDress(this)"></iframe>
+            <iframe class="sd-screen sd-song" id="sdSong" hidden title="The story's lullaby" allow="autoplay"></iframe>
+            <button type="button" class="sd-back" id="sdBack" hidden onclick="sdBackToStory()">&lsaquo; Back to the story</button>
+          </div>
+
+          <p class="app-tour-swipe">Every night brings a new one, with its own song at the end.</p>
+        </div>
       <!-- A look inside the app: real screens from the app (images/app/). A tap opens one full size (js/lst-app-peek.js). -->
       <div class="app-tour" id="inside-app">
         <div class="app-tour-kicker">&#10022; A look inside the app &#10022;</div>
@@ -1434,7 +1429,7 @@
         <div class="app-tour-track">
           <button type="button" class="app-shot" data-app-shot="images/app/app-lantern.jpg" data-app-title="The Morning Lantern" data-app-desc="Waiting by 5 AM every morning: tonight’s scripture, the gospel principle behind it, and the background that brings it to life. Pick Quick for a few minutes, Medium for a little more, or Deep for a full study. A Parent’s Heart gives you three questions to ponder all day, so you reach bedtime with your own story ready to share. It comes in two editions, The Church of Jesus Christ of Latter-day Saints and Christian, each read aloud in its own recording." aria-label="See The Morning Lantern full size"><span class="app-shot-phone"><img src="images/app/app-lantern.jpg" alt="The Morning Lantern in the app: tonight’s scripture and Tonight’s Resources, the lullaby, the story and the Lantern Lullaby" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">The Morning Lantern<span class="app-shot-line">Quick, Medium or Deep</span></span></button>
           <button type="button" class="app-shot" data-app-shot="images/app/app-story.jpg" data-app-title="A New Bedtime Story Every Night" data-app-desc="A short, gentle scripture story for every night, told in the smallest words that still carry the meaning, with one of the four Travelers beside it. It is a picture book you flip through on the phone: a big picture and a few lines on every page. Read it to your children yourself, or tap the headphones and the app reads it aloud. On the last page, one tap opens tonight’s song." aria-label="See A New Bedtime Story Every Night full size"><span class="app-shot-phone"><img src="images/app/app-story.jpg" alt="Tonight’s picture book in the app, a big picture and a few lines on each page" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">A New Bedtime Story Every Night<span class="app-shot-line">A new one every night</span></span></button>
-          <button type="button" class="app-shot" data-app-shot="images/app/app-songs.jpg" data-app-title="Tonight’s Song &amp; the Lantern Lullaby" data-app-desc="Every story has a song of its own, and the Lantern Lullaby is the same comforting song every night, so your child knows bedtime is here. The lyrics sit right under the player, each line lighting up as it is sung. Tap a line and the song starts from there. The Lantern Lullaby plays with one tap from the Lullabies page." aria-label="See Tonight’s Song &amp; the Lantern Lullaby full size"><span class="app-shot-phone"><img src="images/app/app-songs.jpg" alt="A lullaby in the app’s player, the line being sung lit up" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">Tonight’s Song &amp; the Lantern Lullaby<span class="app-shot-line">Lyrics to sing along</span></span></button>
+          <button type="button" class="app-shot" data-app-shot="images/app/app-songs.jpg" data-app-shot2="images/app/app-lullaby.jpg" data-app-title="Tonight’s Song &amp; the Lantern Lullaby" data-app-desc="Every story has a song of its own, and the Lantern Lullaby is the same comforting song every night, so your child knows bedtime is here. The lyrics sit right under the player, each line lighting up as it is sung. Tap a line and the song starts from there. The Lantern Lullaby plays with one tap from the Lullabies page." aria-label="See Tonight’s Song &amp; the Lantern Lullaby full size"><span class="app-shot-phone"><img src="images/app/app-songs.jpg" alt="Tonight’s song page in the app, with its words to sing" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">Tonight’s Song &amp; the Lantern Lullaby<span class="app-shot-line">Lyrics to sing along</span></span></button>
           <button type="button" class="app-shot" data-app-shot="images/app/app-library.jpg" data-app-title="The Virtue Library" data-app-desc="Your child is facing something real tonight: a fib, a lost temper, a hard goodbye. Look it up by virtue, by character, by life situation, by feeling or by scripture, and the story that fits is already there." aria-label="See The Virtue Library full size"><span class="app-shot-phone"><img src="images/app/app-library.jpg" alt="The Virtue Library in the app, with stories sorted by virtue" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">The Virtue Library<span class="app-shot-line">Find tonight’s story</span></span></button>
           <button type="button" class="app-shot" data-app-shot="images/app/app-archive.jpg" data-app-title="Daily Stories" data-app-desc="Every night that has gone out, newest first, with its story, its Morning Lantern and its song kept together. Search by date, title or scripture to find a favorite again." aria-label="See Daily Stories full size"><span class="app-shot-phone"><img src="images/app/app-archive.jpg" alt="Daily Stories in the app, a list of past nights with their scriptures" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">Daily Stories<span class="app-shot-line">Every night kept</span></span></button>
           <button type="button" class="app-shot" data-app-shot="images/app/app-journal.jpg" data-app-title="The Journal" data-app-desc="Your own private book. Type, or just talk and the app writes it down. Keep voice memos, write from a daily prompt, and look back by calendar or on a map of where you were. The night’s reflections are filed here too." aria-label="See The Journal full size"><span class="app-shot-phone"><img src="images/app/app-journal.jpg" alt="The Journal in the app, today’s entries, a daily prompt and Just talk" loading="lazy" width="390" height="844"></span><span class="app-shot-cap">The Journal<span class="app-shot-line">Your private diary</span></span></button>
