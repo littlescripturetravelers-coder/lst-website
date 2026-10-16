@@ -12,7 +12,7 @@ import { loadAllFonts } from '@/theme/fonts';
 import { useFamily } from '@/hooks/use-family';
 import { useSetup } from '@/lib/setup';
 import { ageOn, yearsMarried } from '@/lib/family';
-import { APP_NAME } from '@/lib/brand';
+import { APP_NAME, STUDIO } from '@/lib/brand';
 import Constants from 'expo-constants';
 import { NestMark } from '@/components/nest-mark';
 import { fmtLong } from '@/lib/dates';
@@ -87,7 +87,8 @@ export default function Settings() {
     <SectionHead title="About" />
     <Gutter><Card><View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}>
       <NestMark size={52} fg={t.brand[500]} bg={t.paper[0]} light={t.gold[600]} />
-      <View style={{ flex: 1 }}><Text v="title3" color={t.ink.title}>{APP_NAME}</Text><Text v="subhead" color={t.ink[2]}>Family, well kept.</Text>
+      <View style={{ flex: 1 }}><Text v="title3" color={t.ink.title}>{APP_NAME}</Text><Text v="footnote" weight="bold" color={t.ink[2]}>by {STUDIO}</Text>
+        <Text v="subhead" color={t.ink[2]} style={{ marginTop: 4 }}>Family, well kept.</Text>
         <Text v="caption" weight="heavy" color={t.ink.label} style={{ marginTop: 4, letterSpacing: 1.2, textTransform: 'uppercase' }}>An LST company · version {Constants.expoConfig?.version ?? '1.0.0'}</Text></View>
     </View></Card></Gutter>
   </Screen>;

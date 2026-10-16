@@ -6,7 +6,7 @@ import { Button } from './button';
 import { useTheme } from '@/theme/theme-provider';
 import { router } from 'expo-router';
 import * as Linking from 'expo-linking';
-import { APP_NAME } from '@/lib/brand';
+import { APP_NAME, STUDIO } from '@/lib/brand';
 import { NestMark } from './nest-mark';
 /** Email magic-link sign in. Both parents sign in to the same family (see supabase/seed.sql). */
 export function SessionGate({ children }: { children: React.ReactNode }) {
@@ -24,7 +24,7 @@ export function SessionGate({ children }: { children: React.ReactNode }) {
   if (session) return <>{children}</>;
   return <View style={{ flex: 1, backgroundColor: t.brand[500], justifyContent: 'center', padding: 28, gap: 16 }}>
     <NestMark size={88} fg={t.ink.inverse} bg={t.brand[500]} light={t.onBrand.highlight} />
-    <Text v="hero" color={t.ink.inverse}>{APP_NAME}</Text><Text v="title3" color={t.ink.inverse}>Family, well kept.</Text><Text color={t.ink.inverse}>Your family’s calendar, reminders, ideas and faith, all in one place.</Text><View style={{ width: 48, height: 2, backgroundColor: t.onBrand.highlight }} />
+    <View><Text v="hero" color={t.ink.inverse}>{APP_NAME}</Text><Text v="footnote" weight="bold" color={t.ink.inverse} style={{ opacity: .8 }}>by {STUDIO}</Text></View><Text v="title3" color={t.ink.inverse}>Family, well kept.</Text><Text color={t.ink.inverse}>Your family’s calendar, reminders, ideas and faith, all in one place.</Text><View style={{ width: 48, height: 2, backgroundColor: t.onBrand.highlight }} />
     {sent && Platform.OS === 'web' ? <>
       <Text color={t.ink.inverse}>Check your email, then type the code from it here.</Text>
       <TextInput value={code} onChangeText={c => { setCode(c.replace(/\D/g, '')); setCodeError(''); }} placeholder="Code" keyboardType="number-pad" autoComplete="one-time-code" maxLength={10} placeholderTextColor={t.brand[200]} style={{ height: 48, borderRadius: 8, paddingHorizontal: 14, backgroundColor: 'rgba(255,255,255,.1)', color: t.ink.inverse, fontSize: 17 }} />

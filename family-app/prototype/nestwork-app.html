@@ -245,7 +245,7 @@ body { background: var(--frame); margin: 0; }
 .app { border-radius: 0; }
 .scroll { overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-top: 4px; }
 </style>
-<div class="band"><div class="band-in"><div>Little Scripture Travelers <span>&middot; NestWork</span></div><em>Prototype</em></div></div>
+<div class="band"><div class="band-in"><div>Little Scripture Travelers <span>&middot; NestWork &mdash; by Lewis Family Studio</span></div><em>Prototype</em></div></div>
 <div class="stage">
   <section class="intro" aria-label="About this prototype">
     <p class="eyebrow">Try it before TestFlight</p>
@@ -1810,7 +1810,7 @@ var KidGrowth=(()=>{var b=Object.defineProperty;var H=Object.getOwnPropertyDescr
         lbl('Text font') + '<div style="display:grid;gap:6px">' + UI.map(function (d) { return '<button class="opt' + (c.ui === d[0] ? ' on' : '') + '" data-a="ui" data-id="' + d[0] + '"><span class="bd" style="font-family:' + d[2].replace(/"/g, '&quot;') + '">' + d[1] + '</span></button>'; }).join('') + '</div>' }) + '</div>' +
       sect('Voice assistants') + '<div class="gut">' + card({ flush: true, body: row({ icon: 'mic', color: 'var(--ink1)', title: 'Siri & Shortcuts', sub: '“Add a family reminder in NestWork”' }) + row({ icon: 'speaker', color: 'var(--a_growth)', title: 'Alexa', sub: 'Enable the NestWork skill, then link your account' }) }) + '</div>' +
       sect('About') + '<div class="gut">' + card({ body: '<div style="display:flex;align-items:center;gap:14px">' + nestMark('var(--brand500)', 'var(--paper0)', 52, 'var(--gold600)') +
-        '<div style="flex:1;min-width:0"><p class="t3" style="font-family:var(--display);color:var(--title)">NestWork</p><p class="sh m2">Family, well kept.</p><p class="fn" style="margin-top:4px;color:var(--label);font-weight:800;letter-spacing:1.2px;text-transform:uppercase">An LST company · version 1.0.0</p></div></div>' }) + '</div>';
+        '<div style="flex:1;min-width:0"><p class="t3" style="font-family:var(--display);color:var(--title)">NestWork</p><p class="fn b m2">by Lewis Family Studio</p><p class="sh m2" style="margin-top:4px">Family, well kept.</p><p class="fn" style="margin-top:4px;color:var(--label);font-weight:800;letter-spacing:1.2px;text-transform:uppercase">An LST company · version 1.0.0</p></div></div>' }) + '</div>';
   };
   SCREENS.connections = function () {
     var chip = function (s, a, id) { return '<button class="sharechip" data-a="' + a + '" data-id="' + id + '">' + I(SHARE[s][1]) + SHARE[s][0] + '</button>'; };

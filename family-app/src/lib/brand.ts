@@ -2,6 +2,8 @@
 import Constants from 'expo-constants';
 import type { Family } from './family';
 export const APP_NAME: string = (Constants.expoConfig?.extra as any)?.appName ?? 'Our Family';
+/** The studio that makes NestWork. Shown as the byline "NestWork — by Lewis Family Studio" (sign-in screen, Settings → About, web page, brand book). */
+export const STUDIO = 'Lewis Family Studio';
 /** Names the app used before (its own Apple calendar was made with these), so that calendar is found and renamed instead of duplicated. */
 export const OLD_APP_NAMES = ['Lewis Family'];
 /** "The Lewis's" — uses the family's own display name if they set one. */
