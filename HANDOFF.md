@@ -1960,3 +1960,40 @@ missing folder included. This section is that push.
 deploy did not happen; a 200 means the folder is live and the trouble is elsewhere (the account,
 the app). The Vercel project that serves the site is not the one the lst-app Vercel token can
 see, so its deploy list cannot be read from a session; the live address is the only witness.
+
+## 39. Scriptures, Study & Tests and Printables — the app's own pages (18 Oct 2026)
+
+> "I need all the new things I've added to the app to be on the website."
+
+Three members' pages, in the member bar and the phone menu of every page after Timeline:
+
+| page | what it is |
+|---|---|
+| `scriptures.html` | The scriptures. Latter-day Saint edition: all five books; Christian edition: Old and New Testament (King James), never the NIV. Each chapter has our own summary (italic box), CHAPTER n, a heading over each part; a verse a published night was written about wears a gold edge and its Traveler, which opens `story.html?date=…`. Highlights, underlines and notes. |
+| `study.html` | Study & Tests (homeschool, Quizlet-like): the World Timeline a time period at a time, this month's stories, a person's own flashcard sets; Flashcards, Learn, Match, Test. "Print this test" goes to Printables with that test offered at the top. |
+| `printables.html` | Weekly charts, crosswords, quizzes, each night's story book and song words, history tests, the Lantern Lullaby, the coloring book PDF, and Levi's own song sheets (Primary songs to the Latter-day Saint edition only). |
+
+**One copy of everything, like the Coloring Books.** None of these is written twice. Each page
+loads the web app's own module from `https://app.littlescripturetravelers.com/`
+(`js/scriptures.js`, `js/study.js` + `data/study.js`, `js/printables.js`, and the files they read:
+`scriptures/*.json`, `js/vendor/pdf-lib…`, `fonts/print/…`, `lullaby-lantern.html`,
+`coloring/index.js`). **`js/lst-app-pages.js`** stands in for the app's index.html — it gives the
+modules `S`/`saveS` (kept in this browser, one copy per person signed in), `render`, `go`,
+`isLds` (the website's edition), `toast`, the nights, and the few account calls they make. When
+the app changes one of these pages, the website has it the moment the app deploys.
+
+* The modules read the app's address from `window.LST_APP_BASE` (app commits b77ec11 / c979a57); the app's
+  `vercel.json` sends `Access-Control-Allow-Origin: *` for those files. **The pages work only
+  once that app deploy is live.**
+* Marks and study progress are the person's `personal_data` rows (`scr_marks`, `study`), merged
+  exactly as the app merges them, so they follow a person between the app and the website.
+* The owner's "Add a PDF" never shows here (`S.isAdmin` is never set). Nothing paid is ever
+  called from these pages (no narration, no helps writer). The headphones (read aloud) are an
+  app thing and are not on the website.
+* ⚠️ Two of the app's helpers are copied word for word into `lst-app-pages.js`
+  (`storyBeatsEnd`, `feelingPictureToRemember` — THE FEELING MOMENT PICTURE RULE for the story-book
+  PDF). The app's `tests/website-app-pages.js` fails if they drift; copy the app's version over.
+* Styles: the block "THE APP'S OWN PAGES" at the foot of `style.css`, scoped to `.lav`.
+* Testing: `?app=http://localhost:PORT/` points a page at a local copy of the app (only
+  localhost is accepted). `cd lst-app && WEBSITE=../lst-website node tests/website-app-pages.js`
+  checks both editions, all three looks, phone and computer, a chapter, a flashcard, and PDFs.

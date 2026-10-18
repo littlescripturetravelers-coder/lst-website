@@ -3761,3 +3761,91 @@ html[data-theme="light"] .bs-art {
 .app-peek.two .app-peek-box{max-width:1120px;}
 .app-peek.two .app-peek-phone{height:min(70vh,620px);}
 @media (max-width: 760px){ .app-peek.two .app-peek-phone{height:auto;} }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   THE APP'S OWN PAGES — Scriptures, Study & Tests, Printables (18 Oct 2026)
+   scriptures.html / study.html / printables.html draw the web app's own modules
+   (js/lst-app-pages.js). The modules are written in the app's classes and the
+   app's colour names; these give them the website's three looks. Everything is
+   scoped to .lav (and the panels the modules hang on <body>), so nothing here
+   reaches the rest of the site. Writing colours are the site's tokens.
+   ═══════════════════════════════════════════════════════════════════════ */
+body.lav-page {
+  --teal: #5BD3DC; --amber: #D9A227; --navy: #1B2D5F; --navy2: #132449; --navy3: #0C1932;
+  --card: var(--fill-06); --line: rgba(217,162,39,0.28); --muted: var(--ink-62); --bg: var(--page);
+  --f-disp: var(--font-display); --f-body: var(--font-body); --f-cap: var(--font-accent);
+  --f-read: var(--font-body); --read-lh: 1.75; --fscale: 1;
+}
+html[data-theme="dark"] body.lav-page { --navy2: #141b2b; --line: rgba(217,162,39,0.22); --card: rgba(255,255,255,0.05); }
+html[data-theme="light"] body.lav-page { --card: #ffffff; --line: rgba(27,45,95,0.16); --muted: var(--ink-62); }
+
+.lav-hero.mp-hero { padding-bottom: 1.6rem; }
+.lav-wrap { max-width: 46rem; margin: 0 auto; }
+.lav { color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+.lav *, .lav *::before, .lav *::after { box-sizing: border-box; }
+.lav .pad { padding: 4px 0 22px; }
+.lav .pad > .h1:first-child { display: none; }          /* the page's own heading says it */
+.lav .h1 { font-family: var(--f-disp); font-weight: 700; font-size: 1.75rem; margin: 2px 0 4px; color: var(--ink); line-height: 1.15; }
+.lav .h2 { font-family: var(--f-disp); font-weight: 700; font-size: 1.35rem; margin: 2px 0 3px; color: var(--ink); }
+.lav .muted { color: var(--muted); }
+.lav p { color: inherit; max-width: none; }
+.lav .kicker { font-family: var(--f-cap); letter-spacing: .14em; text-transform: uppercase; color: var(--gold-ink); font-size: 11px; display: block; }
+.lav .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px; margin: 14px 0; color: var(--ink); box-shadow: none; }
+html[data-theme="light"] .lav .card { box-shadow: 0 3px 14px rgba(27,45,95,.08); }
+.lav .btn, .lav button.btn {
+  display: flex; align-items: center; gap: 12px; width: 100%; border: 1px solid var(--line); cursor: pointer; text-decoration: none;
+  background: var(--fill-06); color: var(--ink); border-radius: 14px; padding: 14px 16px; font-family: var(--f-body); font-weight: 800;
+  font-size: 15px; margin: 10px 0; text-align: left; transition: transform .15s, background .15s, border-color .15s; box-shadow: none;
+  text-transform: none; letter-spacing: 0; line-height: 1.35; min-height: 0;
+}
+.lav .btn:hover { border-color: rgba(245,197,24,.55); background: var(--fill-08); transform: none; }
+.lav .btn:active { transform: scale(.985); }
+.lav .btn .ic { font-size: 20px; width: 26px; text-align: center; flex: 0 0 auto; }
+.lav .btn .arrow { margin-left: auto; color: var(--gold-ink); font-weight: 900; }
+.lav .btn .lbl small { display: block; font-weight: 700; font-size: 12px; color: var(--muted); margin-top: 1px; }
+.lav .btn.primary { background: var(--gold); color: var(--on-gold); border-color: var(--gold); }
+.lav .btn.primary:hover { background: #ffd23a; }
+.lav .btn.primary .lbl small, .lav .btn.primary .arrow { color: var(--on-gold); }
+.lav .btn.ctr { justify-content: center; } .lav .btn.ctr .lbl { text-align: center; width: 100%; }
+html[data-theme="light"] .lav .btn:not(.primary) { background: #ffffff; border-color: rgba(27,45,95,.2); }
+.lav .chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 4px; }
+.lav .chip { border: 1px solid var(--line); background: var(--fill-06); color: var(--ink); border-radius: 999px; padding: 9px 15px;
+  font-family: var(--f-body); font-weight: 800; font-size: 13px; cursor: pointer; transition: border-color .15s; }
+.lav .chip:hover { border-color: rgba(245,197,24,.6); }
+html[data-theme="light"] .lav .chip { background: #ffffff; }
+.lav .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--gold-ink); font-weight: 800; font-size: 14px; cursor: pointer; margin-bottom: 6px; }
+.lav input, .lav select, .lav textarea { font-family: var(--f-body); }
+.lav button { font-family: inherit; }
+/* the scriptures */
+.lav .scr-v { scroll-margin-top: 140px; }
+.lav .scr-banner b { color: #ffffff !important; }
+@media (min-width: 700px) {
+  .lav .scr-shelf { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .lav .scr-cover span { font-size: 15px; }
+  .lav .scr-v { font-size: 18px; }
+}
+/* the app's panels, hung on <body>: above the site's sticky header */
+#scrBar, #scrDrop { z-index: 1100 !important; color: var(--ink); font-family: var(--f-body); }
+#scrNoteS { z-index: 1300 !important; color: var(--ink); font-family: var(--f-body); }
+html:not([data-theme]) #scrNoteS { background: #0F1D3D; }
+html[data-theme="dark"] #scrNoteS { background: #101828; }
+.lav-overlay { position: fixed; inset: 0; z-index: 1250; background: rgba(4,8,20,.6); display: none; align-items: center; justify-content: center; padding: 16px; }
+.lav-overlay.open { display: flex; }
+.lav-modalhost .modal { position: relative; width: 100%; background: var(--page-2); border: 1px solid var(--line); border-radius: 22px; padding: 22px 20px; box-shadow: 0 24px 60px rgba(0,0,0,.4); }
+html[data-theme="light"] .lav-modalhost .modal { background: #ffffff; }
+.lav-modalhost .modal .x { position: absolute; top: 10px; right: 12px; border: 0; background: transparent; color: var(--ink); font-size: 18px; cursor: pointer; }
+/* Printables: the one a family came from Study & Tests to make */
+.lav .lav-asked { padding-bottom: 0; }
+.lav .lav-asked .card { border-color: rgba(245,197,24,.55); background: rgba(245,197,24,.08); }
+.lav .lav-asked b { display: block; font-family: var(--f-disp); font-size: 1.15rem; margin: 4px 0 2px; }
+/* the toast */
+#lav-toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 160%); z-index: 1400; background: var(--navy); color: #ffffff;
+  border: 1px solid rgba(245,197,24,.45); border-radius: 999px; padding: 11px 20px; font: 800 14px var(--font-body); box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  transition: transform .25s cubic-bezier(.22,1,.36,1); max-width: calc(100vw - 32px); text-align: center; pointer-events: none; }
+#lav-toast.show { transform: translate(-50%, 0); }
+.lav .pad > .h1:first-child + p.muted { display: none; }   /* …and so does its introduction */
+@media (max-width: 700px) {
+  .lav-hero.mp-hero { padding-top: 2rem; padding-bottom: 1.2rem; }
+  .lav-hero.mp-hero p { font-size: .95rem; line-height: 1.6; }
+  .lav-page .mp-body { padding-top: 1.2rem; }
+}
