@@ -16,7 +16,10 @@ name: Lantern sync
 
 on:
   schedule:
-    - cron: '*/30 * * * *'      # every 30 minutes (UTC)
+    # Every 3 hours (Levi, 18 Oct 2026: no money for GitHub - this repo is private, so it has about
+    # 2,000 free minutes a month; every 30 minutes alone used ~2,900). A night pushed into lantern/
+    # still publishes within a minute through the push trigger below; this is only the safety net.
+    - cron: '7 */3 * * *'       # every 3 hours (UTC)
   workflow_dispatch:            # lets you press "Run workflow" by hand
     inputs:
       time_slugs:
