@@ -514,7 +514,9 @@ jobs:
         # Pillow re-encodes a book's photographs on the way to the account. Without
         # it the publisher says so and sends the book at full size, so a bad install
         # day costs picture weight, never the night.
-        if: github.ref == 'refs/heads/main'
+        # THE DAILY LANTERN COMES FIRST (Levi): a song that could not be sung (ElevenLabs
+        # unpaid, 18 Oct 2026, run 522) must never keep the night out of the account.
+        if: ${{ !cancelled() && github.ref == 'refs/heads/main' }}
         env:
           DEST: lantern
           SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
