@@ -1997,3 +1997,7 @@ the app changes one of these pages, the website has it the moment the app deploy
 * Testing: `?app=http://localhost:PORT/` points a page at a local copy of the app (only
   localhost is accepted). `cd lst-app && WEBSITE=../lst-website node tests/website-app-pages.js`
   checks both editions, all three looks, phone and computer, a chapter, a flashcard, and PDFs.
+
+## 40. The Child's Story Rule (20 Oct 2026)
+
+Levi, 20 Oct 2026: "I have to be the number one trustworthy source for parents teaching their kids the scriptures." Every scripture story on this site, in the app, in the printed book and in every reel or post made from it must make sense to a three-to-five-year-old and be something they can relate to their own life. Before a month's stories go out, and every night the Lantern builds, each story is checked and rewritten where it fails: plain, short words; where the prophet is speaking of Jesus, say so plainly; every picture-word or symbol explained in one simple sentence; the history a child needs, in a sentence; a last line in the child's own life tonight. Nothing invented, nothing doctrinally loose. October 2026's twenty Isaiah stories were rewritten this way in the story books and both editions of every devotional (the app repo's docs/OCTOBER-STORY-EDITS.md lists every changed line for the Amazon book); the nightly skill carries the rule as a QA step.
