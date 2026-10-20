@@ -2,5 +2,5 @@
   "sha": "da10373291f806ec04e015db4c42e71e778f969ecbf88904ce37531ec8697528",
   "date": "2026-10-13",
   "at": "2026-10-20T04:18:18Z",
-  "guarded": true
+  "guard_tries": 1
 }

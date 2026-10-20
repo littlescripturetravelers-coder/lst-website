@@ -431,7 +431,10 @@ def main():
         stamp = sha(PUBLISH_REV, json.dumps(night, sort_keys=True), lds, chr_, song, book_html,
                     "mp3" if has_mp3 else "")
         marker = os.path.join(folder, ".published.json")
+        prior_marker = {}
         if os.path.exists(marker):
+            try: prior_marker = json.load(open(marker))
+            except Exception: prior_marker = {}
             try:
                 if json.load(open(marker)).get("sha") == stamp:
                     expect = {
@@ -447,12 +450,15 @@ def main():
                         gone = missing_in_account(date, expect)
                     if not gone:
                         if GUARD and date >= GUARD_FROM and not json.load(open(marker)).get("guarded"):
-                            # Published before the guard rail: rated once as a new night is, the
-                            # rewrite put in under 9, and marked so it is not rated again.
+                            # Published before the guard rail, or still under 9 after one try: rated
+                            # as a new night is, the rewrite put in under 9, and marked guarded once it
+                            # reaches 9 or has had two tries (so no night is rated every three hours).
                             print(f"{slug}: unchanged, but not yet rated by the guard rail - rating it now")
+                            gone = []
                         else:
                             print(f"{slug}: unchanged since it was published - nothing to do"); continue
-                    print(f"{slug}: the account has lost {', '.join(gone)} (an Admin save?) - publishing again")
+                    if gone:
+                        print(f"{slug}: the account has lost {', '.join(gone)} (an Admin save?) - publishing again")
             except Exception:
                 pass
 
@@ -531,7 +537,10 @@ def main():
 
         with open(marker, "w", encoding="utf-8") as fh:
             mk = {"sha": stamp, "date": date, "at": row["published_at"]}
-            if score is not None: mk["guarded"] = True
+            if score is not None:
+                tries = (prior_marker.get("guard_tries") or 0) + 1
+                mk["guard_tries"] = tries
+                if score >= 9 or tries >= 2: mk["guarded"] = True
             json.dump(mk, fh, indent=2)
 
     # The voices. Every night in the account that has words to read but no
