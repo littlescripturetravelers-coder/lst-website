@@ -304,6 +304,33 @@ MARKET = os.environ.get("MARKET", "1") != "0"
 # are not news): only a night on or after FIRST_LIVE_NIGHT does. The phone's own voice still
 # reads a backfilled night aloud.
 FIRST_LIVE_NIGHT = os.environ.get("FIRST_LIVE_NIGHT", "2026-08-24")
+def score_catch_up(slug, date):
+    """A night already in the account from before the guard rail (its story_score is empty) is
+    rated once, as it stands, so every story the account holds has its 1-10 (Levi, 20 Oct 2026:
+    "examine every story created and give it a rating"). The words are not changed here: a night
+    the folder still holds unchanged is only scored, and an under-9 is printed for the owner."""
+    if not GUARD or not live_night(date):
+        return
+    hdr = {"apikey": KEY, "Authorization": "Bearer " + KEY}
+    status, body = http("GET", f"{URL}/rest/v1/daily_content?publish_date=eq.{date}&select=story_score,book_html", headers=hdr)
+    if status != 200:
+        return
+    try:
+        rows = json.loads(body)
+    except Exception:
+        return
+    if not rows or rows[0].get("story_score") is not None or not rows[0].get("book_html"):
+        return
+    hdr["Content-Type"] = "application/json"
+    status, resp = http("POST", URL + "/functions/v1/story-guard", {"date": date, "rewrite": False}, hdr, timeout=300)
+    if status != 200:
+        print(f"    guard rail: could not rate the night already in the account ({status}) {resp[:200]}"); return
+    try:
+        score = json.loads(resp).get("score")
+    except Exception:
+        return
+    print(f"    guard rail: {score}/10" + ("" if (score or 0) >= 9 else " - under 9; the owner should look at this night"))
+
 def live_night(date):
     return str(date or "") >= FIRST_LIVE_NIGHT
 def market(date):
@@ -443,7 +470,8 @@ def main():
                     else:
                         gone = missing_in_account(date, expect)
                     if not gone:
-                        print(f"{slug}: unchanged since it was published - nothing to do"); continue
+                        print(f"{slug}: unchanged since it was published - nothing to do")
+                        score_catch_up(slug, date); continue
                     print(f"{slug}: the account has lost {', '.join(gone)} (an Admin save?) - publishing again")
             except Exception:
                 pass
