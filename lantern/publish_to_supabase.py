@@ -42,6 +42,7 @@ SITE_BASE = os.environ.get("SITE_BASE", "https://littlescripturetravelers.com").
 APP_BASE  = os.environ.get("APP_BASE", "https://app.littlescripturetravelers.com").rstrip("/")
 NARRATE   = os.environ.get("NARRATE", "1") != "0"
 GUARD = os.environ.get("LANTERN_GUARD", "1") != "0"   # the guard rail (story-guard) before a night goes in
+GUARD_FROM = os.environ.get("LANTERN_GUARD_FROM", "2026-10-01")   # nights from here back are rated once (catch-up)
 
 # The illustrated story, on its way to the account. A book is mostly photographs;
 # these are the size the phone actually shows them at. 0 leaves them alone.
@@ -281,13 +282,15 @@ def guard_night(slug, folder, lds, chr_, book_html):
     print(f"    guard rail: {score}/10 after a rewrite ({r.get('passes')} passes) - the better words are in")
     return lds, chr_, book_html, score, True
 
-def narrate(date, edition=None):
+def narrate(date, edition=None, force=False):
     """Record a night's two voices. EACH EDITION READS ITS OWN WORDS (Levi, 16 Oct 2026: the
     Christian Morning Lantern read the Latter-day Saint recording): edition="christian" records
-    story_text_nondenom into eli_christian / hannah_christian."""
+    story_text_nondenom into eli_christian / hannah_christian. force=True records again: the
+    guard rail changed the words, so the old recording reads the wrong story."""
     hdr = {"Authorization": "Bearer " + KEY, "Content-Type": "application/json"}
     body = {"date": date}
     if edition: body["edition"] = edition
+    if force: body["force"] = True
     status, resp = http("POST", URL + "/functions/v1/narrate", body, hdr, timeout=300)
     return status, resp[:300]
 
@@ -304,33 +307,6 @@ MARKET = os.environ.get("MARKET", "1") != "0"
 # are not news): only a night on or after FIRST_LIVE_NIGHT does. The phone's own voice still
 # reads a backfilled night aloud.
 FIRST_LIVE_NIGHT = os.environ.get("FIRST_LIVE_NIGHT", "2026-08-24")
-def score_catch_up(slug, date):
-    """A night already in the account from before the guard rail (its story_score is empty) is
-    rated once, as it stands, so every story the account holds has its 1-10 (Levi, 20 Oct 2026:
-    "examine every story created and give it a rating"). The words are not changed here: a night
-    the folder still holds unchanged is only scored, and an under-9 is printed for the owner."""
-    if not GUARD or not live_night(date):
-        return
-    hdr = {"apikey": KEY, "Authorization": "Bearer " + KEY}
-    status, body = http("GET", f"{URL}/rest/v1/daily_content?publish_date=eq.{date}&select=story_score,book_html", headers=hdr)
-    if status != 200:
-        return
-    try:
-        rows = json.loads(body)
-    except Exception:
-        return
-    if not rows or rows[0].get("story_score") is not None or not rows[0].get("book_html"):
-        return
-    hdr["Content-Type"] = "application/json"
-    status, resp = http("POST", URL + "/functions/v1/story-guard", {"date": date, "rewrite": False}, hdr, timeout=300)
-    if status != 200:
-        print(f"    guard rail: could not rate the night already in the account ({status}) {resp[:200]}"); return
-    try:
-        score = json.loads(resp).get("score")
-    except Exception:
-        return
-    print(f"    guard rail: {score}/10" + ("" if (score or 0) >= 9 else " - under 9; the owner should look at this night"))
-
 def live_night(date):
     return str(date or "") >= FIRST_LIVE_NIGHT
 def market(date):
@@ -470,8 +446,12 @@ def main():
                     else:
                         gone = missing_in_account(date, expect)
                     if not gone:
-                        print(f"{slug}: unchanged since it was published - nothing to do")
-                        score_catch_up(slug, date); continue
+                        if GUARD and date >= GUARD_FROM and not json.load(open(marker)).get("guarded"):
+                            # Published before the guard rail: rated once as a new night is, the
+                            # rewrite put in under 9, and marked so it is not rated again.
+                            print(f"{slug}: unchanged, but not yet rated by the guard rail - rating it now")
+                        else:
+                            print(f"{slug}: unchanged since it was published - nothing to do"); continue
                     print(f"{slug}: the account has lost {', '.join(gone)} (an Admin save?) - publishing again")
             except Exception:
                 pass
@@ -536,11 +516,11 @@ def main():
         if not live_night(date):
             print(f"    a night from before the app began: no recording, no marketing (the backfill line)")
         elif NARRATE and row["story_text"]:
-            status, body = narrate(date)
-            if status == 200: print(f"    narration: recorded")
+            status, body = narrate(date, force=guarded)
+            if status == 200: print(f"    narration: recorded" + (" again (new words)" if guarded else ""))
             else:             print(f"    narration: not recorded ({status}) {body}")
             if row.get("story_text_nondenom"):
-                status, body = narrate(date, "christian")
+                status, body = narrate(date, "christian", force=guarded)
                 if status == 200: print(f"    Christian narration: recorded")
                 else:             print(f"    Christian narration: not recorded ({status}) {body}")
 
@@ -550,7 +530,9 @@ def main():
             else:             print(f"    marketing: not drafted ({status}) {body}")
 
         with open(marker, "w", encoding="utf-8") as fh:
-            json.dump({"sha": stamp, "date": date, "at": row["published_at"]}, fh, indent=2)
+            mk = {"sha": stamp, "date": date, "at": row["published_at"]}
+            if score is not None: mk["guarded"] = True
+            json.dump(mk, fh, indent=2)
 
     # The voices. Every night in the account that has words to read but no
     # recording yet gets asked for one - not only tonight's. For a while the
