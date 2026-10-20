@@ -41,6 +41,8 @@ KEY       = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
 SITE_BASE = os.environ.get("SITE_BASE", "https://littlescripturetravelers.com").rstrip("/")
 APP_BASE  = os.environ.get("APP_BASE", "https://app.littlescripturetravelers.com").rstrip("/")
 NARRATE   = os.environ.get("NARRATE", "1") != "0"
+GUARD = os.environ.get("LANTERN_GUARD", "1") != "0"   # the guard rail (story-guard) before a night goes in
+
 # The illustrated story, on its way to the account. A book is mostly photographs;
 # these are the size the phone actually shows them at. 0 leaves them alone.
 BOOK_MAX_SIDE = int(os.environ.get("BOOK_MAX_SIDE", "1200"))
@@ -202,6 +204,82 @@ def upsert(row):
             continue
         return False, f"{status}: {body[:300]}"
     return False, "gave up after dropping eight columns"
+
+# THE GUARD RAIL (Levi, 20 Oct 2026: "examine every story created and give it a rating on a
+# scale of 1-10 ... if it is below a 9 it needs to be redone"). Before a night goes into the
+# account, story-guard (Claude) reads its story book as a four-year-old and a careful parent
+# and scores it on the Child's Story Rule. Under 9 it hands back a rewrite: the five story
+# paragraphs, the Five Stones, Remember This and the questions, which are put into the book
+# and both editions' story card here, written back to the night's files (the Action commits
+# them), and the night goes out with the better words. The score rides along in story_score.
+def _ent(t):
+    return (t.replace('\u2014','&mdash;').replace('\u2013','&ndash;').replace('\u201c','&ldquo;').replace('\u201d','&rdquo;')
+             .replace('\u2018','&lsquo;').replace('\u2019','&rsquo;').replace('\u2026','&hellip;'))
+def _god(t):
+    return t.replace('Heavenly Father\u2019s','God\u2019s').replace("Heavenly Father's","God's").replace('Heavenly Father','God')
+def _straight(t):
+    return t.replace('\u2019',"'").replace('\u2018',"'").replace('\u201c','"').replace('\u201d','"')
+def _swap(html, old, new, chr_=False):
+    nn = _ent(_god(new) if chr_ else new)
+    for oo in {old, _ent(old), _god(old), _ent(_god(old)), _straight(old)}:
+        if oo and oo in html: html = html.replace(oo, nn)
+    return html
+def guard_night(slug, folder, lds, chr_, book_html):
+    """Returns (lds, chr_, book_html, score, changed)."""
+    if not book_html or not GUARD:
+        return lds, chr_, book_html, None, False
+    m = re.search(r'const STORY = (\{.*?\});\n', book_html, flags=re.S)
+    if not m:
+        return lds, chr_, book_html, None, False
+    try:
+        st = json.loads(m.group(1))
+    except Exception:
+        return lds, chr_, book_html, None, False
+    B = st.get("beats", []); story = [b for b in B if b.get("type") == "story"]
+    fm = next((b for b in B if b.get("heading") == "A Feeling Moment"), None)
+    rem = next((b for b in B if b.get("heading") == "Remember This"), None)
+    pr = next((b for b in B if b.get("heading") == "Parent Prompt"), None)
+    if len(story) != 2:
+        return lds, chr_, book_html, None, False
+    payload = {"title": st.get("title", ""), "scripture": st.get("reference", ""), "p1": story[0].get("text", []), "p2": story[1].get("text", []),
+               "stones": (fm or {}).get("stones", []), "remember": ((rem or {}).get("text") or [""])[0],
+               "prompts": [re.sub(r'^[\u201c"]|[\u201d"]$', '', q) for q in ((pr or {}).get("text") or [])]}
+    hdr = {"Authorization": "Bearer " + KEY, "Content-Type": "application/json"}
+    status, resp = http("POST", URL + "/functions/v1/story-guard", {"story": payload, "rewrite": True}, hdr, timeout=300)
+    if status != 200:
+        print(f"    guard rail: could not rate ({status}) {resp[:200]}"); return lds, chr_, book_html, None, False
+    try:
+        r = json.loads(resp)
+    except Exception:
+        print("    guard rail: no answer to read"); return lds, chr_, book_html, None, False
+    score = r.get("score"); rw = r.get("rewritten")
+    if not rw:
+        print(f"    guard rail: {score}/10" + ("" if (score or 0) >= 9 else " - under 9 and no rewrite came back; the owner should look"))
+        return lds, chr_, book_html, score, False
+    # the rewrite, into the book
+    old1, old2 = list(story[0]["text"]), list(story[1]["text"])
+    pairs = list(zip(old1 + old2, list(rw.get("p1", old1)) + list(rw.get("p2", old2))))
+    if rw.get("p1") and rw.get("p2"):
+        story[0]["text"] = rw["p1"]; story[1]["text"] = rw["p2"]; story[0]["alt"] = "Illustration: " + rw["p1"][0]
+    if rw.get("stones") and fm is not None:
+        fm["stones"] = rw["stones"]
+    if rw.get("remember") and rem is not None:
+        pairs.append((((rem.get("text") or [""])[0]), rw["remember"])); rem["text"] = [rw["remember"]]
+    if rw.get("prompts") and pr is not None:
+        for o, n in zip(pr.get("text") or [], rw["prompts"]):
+            pairs.append((re.sub(r'^[\u201c"]|[\u201d"]$', '', o), n))
+        pr["text"] = ["\u201c" + q + "\u201d" for q in rw["prompts"]]
+    book_html = book_html[:m.start(1)] + json.dumps(st, ensure_ascii=False) + book_html[m.end(1):]
+    for o, n in pairs:
+        if o and n and o != n:
+            lds = _swap(lds, o, n); chr_ = _swap(chr_, o, n, True) if chr_ else chr_
+    # written back, so the files, the website and the account agree
+    for name, text in ((f"{slug}.html", book_html), ("morning-lantern-lds.html", lds), ("morning-lantern-christian.html", chr_)):
+        path = os.path.join(folder, name)
+        if text and os.path.exists(path):
+            with open(path, "w", encoding="utf-8") as fh: fh.write(text)
+    print(f"    guard rail: {score}/10 after a rewrite ({r.get('passes')} passes) - the better words are in")
+    return lds, chr_, book_html, score, True
 
 def narrate(date, edition=None):
     """Record a night's two voices. EACH EDITION READS ITS OWN WORDS (Levi, 16 Oct 2026: the
@@ -385,7 +463,12 @@ def main():
                 json.dump({"sha": stamp, "date": date, "christian_only": True}, fh, indent=2)
             continue
 
+        lds, chr_, book_html, score, guarded = guard_night(slug, folder, lds, chr_, book_html)
+        if guarded:
+            stamp = sha(PUBLISH_REV, json.dumps(night, sort_keys=True), lds, chr_, song, book_html, "mp3" if has_mp3 else "")
         row = {NIGHT_KEYS[k]: night[k] for k in NIGHT_KEYS if night.get(k) not in (None, "")}
+        if score is not None:
+            row["story_score"] = score; row["story_score_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         row.update({
             "story_html": lds,
             "story_text": quick_text(lds),
