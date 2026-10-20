@@ -1,5 +1,7 @@
 {
-  "sha": "59e3f8fc895443d0e6904e0db09f32bc3c1bca320a2233ad17b47f8a96b1962e",
+  "sha": "9361990c6f3a491b47cb2a2fa8ed2d68418fa62257a50aad20f7fe676b11478c",
   "date": "2026-10-02",
-  "at": "2026-10-20T05:46:25Z"
+  "at": "2026-10-20T08:26:47Z",
+  "guard_tries": 1,
+  "guarded": true
 }
