@@ -345,6 +345,9 @@ html.tl-lite .hand-label{-webkit-backdrop-filter:none !important;backdrop-filter
   border-radius:50%;background:rgba(255,255,255,.4);transition:all .2s;}
 .lp-toggle.on::after{left:14px;background:#F5C518;}
 .lp-div{height:1px;background:rgba(255,255,255,.06);margin:4px 12px;}
+.lp-all{display:flex;gap:6px;padding:52px 12px 4px;} /* below the round buttons at the top (#tl-fab) */
+.lp-all button{flex:1;padding:6px 4px;border-radius:999px;border:1px solid rgba(245,197,24,.45);background:rgba(245,197,24,.12);color:#F5C518;font-family:Nunito,sans-serif;font-weight:800;font-size:9.5px;cursor:pointer;white-space:nowrap;}
+.lp-all button:active{transform:scale(.97);}
 
 /* STAGE */
 #stage{position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:10;overflow:hidden;cursor:grab;background:transparent;}
@@ -976,6 +979,7 @@ body.hand-active .hand-label{display:block;}
 .sl-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px;}
 .sl-tag{font-family:var(--font-body);font-weight:800;font-size:8.5px;padding:3px 8px;border-radius:99px;background:rgba(245,197,24,.12);color:#F5C518;border:1px solid rgba(245,197,24,.35);}
 .sl-tag.teal{background:rgba(91,211,220,.1);color:#5BD3DC;border-color:rgba(91,211,220,.35);}
+.sl-open.sl-map{margin-left:6px;background:rgba(245,197,24,.16);color:#F5C518;border:1px solid rgba(245,197,24,.5);}
 .sl-open{display:inline-block;margin-top:10px;padding:8px 14px;border-radius:99px;border:0;background:#F5C518;color:#1B2D5F;font-family:var(--font-display);font-weight:700;font-size:11.5px;cursor:pointer;}
 .sl-wait{font-family:var(--font-body);font-size:10.5px;color:rgba(255,255,255,.5);padding:8px 0;line-height:1.55;}
 /* Technology for Good, Evidence & Discoveries and the in-depth studies */
@@ -1602,6 +1606,7 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
 
 <!-- LAYER PANEL -->
 <div id="lpanel">
+  <div class="lp-all"><button type="button" id="lp-selall" onclick="tglAll(true)">Select all</button><button type="button" id="lp-unselall" onclick="tglAll(false)">Unselect all</button></div>
   <div class="lp-section">Gospel Layers</div>
   <div class="lp-row" onclick="tgl('gospel')"><div class="lp-dot" style="background:#F5C518"></div><span class="lp-name" style="color:#F5C518">&#10022; Gospel Stories</span><div class="lp-toggle on" id="tog-gospel"></div></div>
   <div class="lp-row" onclick="tgl('bom')"><div class="lp-dot" style="background:#7BC67E"></div><span class="lp-name" style="color:#7BC67E">&#128220; Book of Mormon</span><div class="lp-toggle on" id="tog-bom"></div></div>
@@ -2551,7 +2556,7 @@ var EVS=[
   {id:"sm02",l:"invent",y:2016,em:"&#127926;",t:"TikTok",date:"2016 AD",conf:"confirmed",loc:"Beijing, China",lat:39.9,lng:116.4,de:"TikTok launches with the most sophisticated attention-capture algorithm ever built.",gospel:"TikTok missionaries reach millions of young people. But the same algorithm pushes harmful content to vulnerable teens."},
   {id:"fa01",l:"faith",y:-2000,em:"&#9998;",t:"Judaism - The Covenant Faith",date:"c. 2000 BC onward",conf:"confirmed",loc:"Canaan to Israel to Worldwide",lat:31.78,lng:35.23,de:"Judaism is the covenant faith from which Christianity traces its roots.",gospel:"Every LST Old Testament story is a Jewish story. Christianity is the fulfillment of the covenant Heavenly Father made with Abraham."},
   {id:"fa02",l:"faith",y:-563,em:"&#127800;",t:"Buddhism",date:"c. 563 BC",conf:"confirmed",loc:"Bodh Gaya, India",lat:24.69,lng:84.99,de:"Siddhartha Gautama teaches the path to end suffering through wisdom and compassion. Today approximately 500 million followers.",gospel:"Buddhism&#39;s teaching of compassion echoes Christ&#39;s own ministry. Heavenly Father places seeds of light in every culture."},
-  {id:"fa03",l:"faith",y:570,em:"&#9790;",t:"Islam Founded",date:"570-632 AD",conf:"confirmed",loc:"Mecca, Saudi Arabia",lat:21.42,lng:39.82,de:"Muhammad receives revelations forming the Quran. Islam preserves ancient Greek knowledge during the Dark Ages.",gospel:"Islam&#39;s reverence for Jesus as sinless born of a virgin carries truths about the Savior across 14 centuries."},
+  {id:"fa03",l:"faith",y:570,em:"&#9790;",t:"Islam Founded",date:"570-632 AD",conf:"confirmed",loc:"Mecca, Saudi Arabia",lat:21.42,lng:39.82,de:"Muhammad receives revelations forming the Quran. Islam preserves ancient Greek knowledge during the Dark Ages.",gospel:"Muslims believe Jesus was a prophet, but not that He is our Lord and Savior Jesus Christ. They honor Him as a great prophet born of a virgin who did miracles, but they do not believe He is the Son of God who died for our sins and rose again. That is the great difference between Islam and Christianity."},
   {id:"fp01",l:"famous",y:-384,em:"&#11088;",t:"Aristotle",date:"384-322 BC",conf:"confirmed",loc:"Stagira, Greece",lat:40.53,lng:23.73,de:"Greek philosopher whose systematic thinking shaped Western civilization for 2000 years. Taught Alexander the Great.",gospel:"Aristotle&#39;s logic provided the intellectual framework that Christian scholars used to articulate doctrine."},
   {id:"fp02",l:"famous",y:1452,em:"&#11088;",t:"Leonardo da Vinci",date:"1452-1519 AD",conf:"confirmed",loc:"Vinci, Italy",lat:43.78,lng:10.93,de:"The ultimate Renaissance man - painter scientist inventor anatomist. His notebooks contain designs for flying machines centuries before their invention.",gospel:"Leonardo&#39;s The Last Supper remains the most famous painting of Christ. His anatomical drawings advanced medicine."},
   {id:"fp03",l:"famous",y:1564,em:"&#11088;",t:"William Shakespeare",date:"1564-1616 AD",conf:"confirmed",loc:"Stratford-upon-Avon, England",lat:52.19,lng:-1.71,de:"Shakespeare wrote 37 plays and 154 sonnets that remain the most performed works in the English language.",gospel:"Shakespeare wrote during the same decades as the King James Bible. His mastery of English helped create the literary atmosphere in which scripture was most beautifully expressed."},
@@ -4008,7 +4013,7 @@ var FAITH_DB=[
    founder:{name:"Muhammad ibn Abdullah — the Prophet and Messenger of Allah",dates:"570-632 AD",
     bio:"Muhammad was born c. 570 AD in Mecca in the Arabian Peninsula into the noble Quraysh tribe. He was orphaned early and raised by his grandfather and uncle. He became known for his honesty and trustworthiness — earning the title Al-Amin (the Trustworthy). He worked as a merchant and married Khadijah a wealthy businesswoman who was his first and most beloved wife. In 610 AD at age 40 while meditating in a cave on Mount Hira outside Mecca the angel Jibreel (Gabriel) appeared to him and began revealing the words of the Quran. He continued to receive revelations for 23 years. He began preaching monotheism in polytheistic Mecca facing intense persecution. In 622 AD he and his followers migrated to Medina (the Hijra) — this marks year 1 of the Islamic calendar. He returned to Mecca in 630 AD peacefully conquering it. He died in 632 AD in Medina.",
     role:"Muhammad is the final Prophet and Messenger of Allah — the Seal of the Prophets (Khatam an-Nabiyyin). He is not divine and not worshipped — he is the human being through whom Allah delivered His final and complete revelation to humanity. He is the perfect model of human submission to Allah."},
-   christ:{view:"Jesus (Isa ibn Maryam) is one of the greatest prophets and messengers of Allah. He was born of the Virgin Maryam (Mary) through a miraculous conception — the Quran affirms this explicitly. He performed miracles by Allah&#39;s permission: healing the blind curing lepers raising the dead. He is described as the Messiah (al-Masih) and the Word of Allah (Kalimatullah) and a spirit from Allah. He was not crucified — Allah raised him up to Himself and a likeness was made to appear crucified in his place (Quran 4:157-158). He will return before the Day of Judgment to kill the Antichrist and establish justice. He is not divine and not the Son of God in the physical sense — saying Allah has a son is considered shirk (associating partners with Allah).",
+   christ:{view:"In short: Muslims believe Jesus was a prophet, but not that He is our Lord and Savior Jesus Christ, the Son of God who died for our sins and rose again. Jesus (Isa ibn Maryam) is one of the greatest prophets and messengers of Allah. He was born of the Virgin Maryam (Mary) through a miraculous conception — the Quran affirms this explicitly. He performed miracles by Allah&#39;s permission: healing the blind curing lepers raising the dead. He is described as the Messiah (al-Masih) and the Word of Allah (Kalimatullah) and a spirit from Allah. He was not crucified — Allah raised him up to Himself and a likeness was made to appear crucified in his place (Quran 4:157-158). He will return before the Day of Judgment to kill the Antichrist and establish justice. He is not divine and not the Son of God in the physical sense — saying Allah has a son is considered shirk (associating partners with Allah).",
     source:"Quran 3:45-55; 4:157-158; 19:16-34; 5:75"},
    prelife:"Islam does not teach a detailed premortal existence in the way some traditions do. However the Quran describes the Covenant of Alast (7:172): Allah gathered all the souls of humanity from Adam&#39;s descendants and asked them Am I not your Lord? and all souls responded Yes we testify. This primordial covenant establishes the innate knowledge (fitra) of Allah in every human soul. Every person is born in a state of fitra — natural submission to Allah — and becomes Muslim Jew Christian or other through their upbringing.",
    life:"The purpose of human life is ibadah — worship and submission to Allah in every aspect of life. Islam is a complete way of life (deen) governing worship business family law politics and personal conduct. The Five Pillars structure Muslim life: Shahada (testimony of faith: La ilaha illa Allah Muhammad rasul Allah — There is no god but Allah and Muhammad is the Messenger of Allah); Salah (five daily prayers facing Mecca); Zakat (obligatory almsgiving — 2.5% of savings); Sawm (fasting during Ramadan); Hajj (pilgrimage to Mecca once in a lifetime if able). Halal (permissible) and haram (forbidden) categories govern daily life.",
@@ -4022,7 +4027,7 @@ var FAITH_DB=[
     {t:"Muhammad as Final Prophet",v:"Muhammad is the Seal of the Prophets — the last and final messenger. No prophet comes after him. The revelation is complete in the Quran and Sunnah."},
     {t:"Sharia",v:"Islamic law derived from the Quran and Sunnah governing all aspects of life. Fiqh (Islamic jurisprudence) developed four major Sunni schools: Hanafi Maliki Shafi&#39;i Hanbali — varying in interpretation."},
     {t:"Sunni and Shia",v:"The major division in Islam arose over succession after Muhammad&#39;s death. Sunni Muslims (85-90%) believe in the elected caliphate. Shia Muslims (10-15%) believe leadership belonged to Ali (Muhammad&#39;s cousin and son-in-law) and the Imams descended from him."},
-    {t:"Jesus in Islam",v:"Jesus (Isa) is a great prophet born of a virgin who performed miracles and will return before the Day of Judgment. He is not divine not crucified and not the Son of God in a divine sense — he is fully human and fully a prophet."}
+    {t:"Jesus in Islam",v:"Muslims believe Jesus was a prophet, but not our Lord and Savior Jesus Christ. Jesus (Isa) is a great prophet born of a virgin who performed miracles and will return before the Day of Judgment. He is not divine not crucified and not the Son of God in a divine sense — he is fully human and fully a prophet."}
    ]},
 
   // ── JUDAISM ────────────────────────────────────────────────
@@ -6173,7 +6178,7 @@ function openStoryMod(n,bk){
   document.getElementById("dmod").classList.add("open");
 }
 
-function openBookMod(bk){
+function openBookMod(bk,fromShelf){
   curEv=null;
   var G="#F5C518";
   var hdr=document.getElementById("dmod-hdr");
@@ -6187,6 +6192,9 @@ function openBookMod(bk){
   document.getElementById("d-date").textContent=decodeT(bk.month+" \u00B7 "+bk.sub);
   document.getElementById("d-conf").innerHTML="";
   var body=document.getElementById("dmod-body");body.innerHTML="";
+  if(LST_BOOKS.length>1){ var back=document.createElement("button");back.className="bk-back";
+    back.style.cssText="display:inline-flex;align-items:center;gap:6px;margin:0 0 10px;padding:6px 12px;border-radius:999px;background:rgba(245,197,24,.14);border:1px solid rgba(245,197,24,.45);color:#F5C518;font-family:Nunito,sans-serif;font-weight:800;font-size:11px;cursor:pointer;";
+    back.innerHTML="&#8592; All books";back.onclick=function(){ openBooks(); };body.appendChild(back); }
 
   var th=document.createElement("div");th.className="dsec";
   th.innerHTML="<div class='dsec-t'>Theme</div><div class='dsec-c'>"+bk.theme+"</div>";
@@ -6218,7 +6226,40 @@ function openBookMod(bk){
   }
   document.getElementById("dmod").classList.add("open");
 }
-function openBooks(){ if(LST_BOOKS.length)openBookMod(LST_BOOKS[0]); }
+/* THE BOOK LIBRARY (Levi, 21 Oct 2026): the chip opens a shelf of every published book in LST_BOOKS,
+   newest first, and a tap on a book opens all of its stories; a book's page has "All books" to come back.
+   A new month's book goes into LST_BOOKS (tests/timeline-books.js fails when the app's Books has a month
+   the timeline lacks). */
+function bookCover(bk){ return "images/book-cover-"+String(bk.month||"").toLowerCase()+".jpg"; }
+function openBooks(){
+  curEv=null;
+  var hdr=document.getElementById("dmod-hdr");
+  hdr.style.background="linear-gradient(135deg,rgba(245,197,24,.16),rgba(27,45,95,.9))";
+  hdr.style.borderBottom="2px solid rgba(245,197,24,.5)";
+  document.getElementById("d-em").textContent=decodeT("&#128218;");
+  var cat=document.getElementById("d-cat");cat.textContent="LITTLE SCRIPTURE TRAVELERS";
+  cat.style.cssText="background:rgba(245,197,24,.2);color:#F5C518;border:1px solid rgba(245,197,24,.5);font-family:Nunito,sans-serif;font-size:8px;letter-spacing:2px;padding:2px 9px;border-radius:4px;display:inline-block;margin-bottom:6px;font-weight:800;";
+  var ti=document.getElementById("d-title");ti.textContent="Book Library";
+  ti.style.color="#F5C518";ti.style.fontSize="20px";ti.style.textShadow="0 0 14px rgba(245,197,24,.4)";
+  document.getElementById("d-date").textContent=LST_BOOKS.length+" books · tap one to see its stories";
+  document.getElementById("d-conf").innerHTML="";
+  var body=document.getElementById("dmod-body");body.innerHTML="";
+  var grid=document.createElement("div");grid.className="bk-shelf";
+  grid.style.cssText="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:4px;";
+  LST_BOOKS.slice().reverse().forEach(function(bk){
+    var b=document.createElement("button");b.className="bk-pick";b.setAttribute("data-book",bk.id);
+    b.style.cssText="display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:8px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid transparent;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;text-align:left;color:inherit;font:inherit;";
+    b.innerHTML="<img src='"+bookCover(bk)+"' alt='' loading='lazy' style='width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;background:rgba(245,197,24,.12);' onerror=\"this.style.visibility='hidden'\">"+
+      "<span style='font-family:Nunito,sans-serif;font-weight:800;font-size:8px;letter-spacing:1.6px;text-transform:uppercase;color:#D9A227;'>"+bk.month+" · Book "+bk.n+"</span>"+
+      "<span style='font-family:Fredoka,sans-serif;font-weight:600;font-size:13px;line-height:1.2;color:#fff;'>"+bk.t+"</span>"+
+      "<span style='font-family:Nunito,sans-serif;font-size:10px;color:rgba(255,255,255,.6);'>"+bk.nights.length+" stories</span>";
+    b.onclick=function(){ openBookMod(bk,true); var bd=document.getElementById("dmod-body"); if(bd) bd.scrollTop=0; };
+    grid.appendChild(b);
+  });
+  body.appendChild(grid);
+  body.scrollTop=0;
+  document.getElementById("dmod").classList.add("open");
+}
 
 // ── TRUTH & PROPAGANDA MODAL ────────────────────────────────
 function openPropMod(x){
@@ -7014,6 +7055,19 @@ function tgl(l){
   var chip=document.getElementById("lc-"+l);
   if(chip)chip.classList.toggle("on",AL[l]);
   buildTL();
+}
+/* SELECT ALL / UNSELECT ALL (Levi, 21 Oct 2026): the two buttons at the top of Layers turn every layer the
+   panel shows on or off at once (a layer the edition hides, like the Latter-day Saint lanes in the Christian
+   edition, stays off). */
+function tglAll(on){
+  var rows=document.querySelectorAll("#lpanel .lp-row");
+  for(var i=0;i<rows.length;i++){ var m=/tgl\('([a-z]+)'\)/.exec(rows[i].getAttribute("onclick")||""); if(!m) continue;
+    var k=m[1]; if(on && rows[i].offsetParent===null && getComputedStyle(rows[i]).display==="none") continue;
+    if(on && typeof tlChristian==="function" && tlChristian() && TL_LDS_LANES.indexOf(k)>=0) continue;
+    AL[k]=!!on; var tog=document.getElementById("tog-"+k); if(tog) tog.classList.toggle("on",AL[k]);
+    var chip=document.getElementById("lc-"+k); if(chip) chip.classList.toggle("on",AL[k]); }
+  buildTL();
+  try{ toast(on?"Every layer on":"Every layer off"); }catch(e){}
 }
 function togglePanel(){
   panelOpen=!panelOpen;
@@ -8797,7 +8851,28 @@ var LST_OCT={id:"bk10",n:10,t:"He Gathers the Lambs",month:"October",
   {wk:4,nt:7,t:"A Little Fire Inside",y:-605,ref:"Jeremiah 20:9, 13",loc:"Jerusalem, Judah",lat:31.78,lng:35.22,de:"Some days were tired days for Jeremiah. People did not want the words he carried, and he thought about staying quiet. But the words would not sit still. They felt like a small warm fire tucked away inside…"}
 ]};
 
-var LST_BOOKS=[LST_JUNE,LST_JULY,LST_AUG,LST_SEPT,LST_OCT];
+var LST_NOV={id:"bk11",n:11,t:"Mercies New Every Morning",month:"November",
+  sub:"Book 11 of 12 &#183; Old Testament",
+  scripture:"Lamentations &#183; Jeremiah &#183; Ezekiel",
+  s:-605,e:-573,
+  theme:"Lamentations, Jeremiah and Ezekiel: far from home, Heavenly Father's mercies are new every morning, and He promises new hearts and a way home.",
+  nights:[
+  {wk:1,nt:1,t:"New Every Morning",y:-586,ref:"Lamentations 3:22–23",loc:"Jerusalem, Judah",lat:31.78,lng:35.22,de:"Long ago, an army from Babylon came to Jerusalem, the home city of Heavenly Father’s people. Babylon was a big, strong kingdom far away. The people lost their homes, and their hearts felt heavy as…"},
+  {wk:1,nt:2,t:"Loved With an Everlasting Love",y:-587,ref:"Jeremiah 31:3–4",loc:"Jerusalem, Judah",lat:31.78,lng:35.22,de:"Heavenly Father’s people had been taken far from their homes to faraway lands. Far from home, it was easy to feel forgotten and alone. Then Heavenly Father sent a message through Jeremiah, His…"},
+  {wk:1,nt:3,t:"Call and He Will Answer",y:-587,ref:"Jeremiah 33:3",loc:"Jerusalem, Judah",lat:31.78,lng:35.22,de:"The king did not like Jeremiah’s messages, so his guards kept Jeremiah shut in a courtyard. A courtyard is an open yard with walls all around. Jeremiah could not go out. But Heavenly Father’s words…"},
+  {wk:1,nt:4,t:"A Field for Tomorrow",y:-587,ref:"Jeremiah 32:6–15",loc:"Jerusalem, Judah",lat:31.78,lng:35.22,de:"An army from Babylon was all around Jerusalem, and Jeremiah was kept in the guards’ courtyard. It was a very hard time, and soon the army would take the land. Heavenly Father told Jeremiah, “Your…"},
+  {wk:1,nt:5,t:"Mourning Turned Into Joy",y:-587,ref:"Jeremiah 31:12–13",loc:"Jerusalem, Judah",lat:31.78,lng:35.22,de:"Heavenly Father’s people were very sad. Many had been taken far from home. So He gave them a happy picture of what was coming. “They shall come and sing in the height of Zion,” He said. Zion was the…"},
+  {wk:1,nt:6,t:"Written on Our Hearts",y:-587,ref:"Jeremiah 31:31–34",loc:"Jerusalem, Judah",lat:31.78,lng:35.22,de:"Heavenly Father made a promise through Jeremiah. “I will make a new covenant,” He said. A covenant is a special two-way promise between Heavenly Father and His people. Long before, His law was…"},
+  {wk:1,nt:7,t:"The Words Written Again",y:-605,ref:"Jeremiah 36:27–32",loc:"Jerusalem, Judah",lat:31.78,lng:35.22,de:"Jeremiah spoke Heavenly Father’s words out loud. His friend Baruch wrote every word on a scroll. A scroll is a long paper rolled up like a tube. Baruch read the words in the temple, Heavenly Father’s…"},
+  {wk:2,nt:1,t:"The Sky Opened Wide",y:-593,ref:"Ezekiel 1:1, 26–28",loc:"River Chebar, Babylon",lat:32.13,lng:45.23,de:"Ezekiel was a prophet. A prophet is someone Heavenly Father talks to, so he can teach the people. The army of Babylon had taken Ezekiel’s people far from home. One day, by a river in that faraway…"},
+  {wk:2,nt:2,t:"Sweet as Honey",y:-593,ref:"Ezekiel 3:1–3",loc:"River Chebar, Babylon",lat:32.13,lng:45.23,de:"Heavenly Father held out a scroll to Ezekiel. A scroll is a long paper with writing on it, rolled up like a tube. People wrote on scrolls back then, because there were no books like ours. This was in…"},
+  {wk:2,nt:3,t:"The One Who Watches",y:-585,ref:"Ezekiel 33:7, 11",loc:"Babylon",lat:32.54,lng:44.42,de:"Long ago, cities had tall stone walls. A watchman stood high on the wall, looking far, far away over the land. If he saw danger coming, he blew a loud trumpet so everyone could get safe. Heavenly…"},
+  {wk:2,nt:4,t:"The Shepherd Finds His Sheep",y:-585,ref:"Ezekiel 34:11–16",loc:"Babylon",lat:32.54,lng:44.42,de:"Many families in Israel kept sheep. A shepherd is a person who cares for sheep, finds them food and water, and keeps them safe. The leaders of Israel were supposed to care for the people like…"},
+  {wk:2,nt:5,t:"A New Heart",y:-585,ref:"Ezekiel 36:26",loc:"Babylon",lat:32.54,lng:44.42,de:"Heavenly Father’s people had stopped listening to Him. Their hearts had grown hard, like a stone. You can squeeze a stone all day, and it never gets soft. So Heavenly Father made a promise: “A new…"},
+  {wk:2,nt:6,t:"The Valley That Woke Up",y:-585,ref:"Ezekiel 37:1–10",loc:"Babylon",lat:32.54,lng:44.42,de:"Heavenly Father showed Ezekiel a vision, a picture from Heavenly Father. He saw a wide valley full of very dry bones. Heavenly Father led Ezekiel all around them. Everything was very still and quiet.…"},
+  {wk:2,nt:7,t:"The River That Kept Rising",y:-573,ref:"Ezekiel 47:1–12",loc:"Babylon",lat:32.54,lng:44.42,de:"In a vision, a picture from Heavenly Father, Ezekiel saw the temple. A temple is Heavenly Father’s holy house. A little stream came trickling out from under the temple door, flowing east. A man with…"}
+  ]};
+var LST_BOOKS=[LST_JUNE,LST_JULY,LST_AUG,LST_SEPT,LST_OCT,LST_NOV];
 
 
 // ============================================================
@@ -10262,6 +10337,8 @@ function slStudyData(cb){
   _studyLoad.push(cb);
 }
 function slInApp(){ try{ return window.parent!==window; }catch(e){ return false; } }
+function slMapNight(bid,wk,nt){ try{ var bk=LST_BOOKS.filter(function(b){ return b.id===bid; })[0]; if(!bk) return;
+  var n=bk.nights.filter(function(x){ return x.wk===wk&&x.nt===nt; })[0]; if(n) openMapFor(slWhere({night:n})); }catch(e){} }
 function slOpenBook(id){ try{ window.parent.postMessage({type:"lst-open-story",id:id},"*"); }catch(e){} }
 function slStudyHtml(it,st){
   var n=it.night, bk=it.book, L=window.LST_LIBRARY, lib=null;
@@ -10287,6 +10364,7 @@ function slStudyHtml(it,st){
   h+="<div class='sl-blk sl-blk-gospel'><b>Read It Together:</b> "+slEsc(n.ref)+" &#183; then Week "+n.wk+", Night "+n.nt+" in "+slEsc(bk.t)+" (the "+slEsc(bk.month)+" book).</div>";
   for(var b=0;b<it.blocks.length;b++){ var bl=it.blocks[b]; h+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>"; }
   if(slInApp()) h+="<button class='sl-open' onclick=\"slOpenBook('"+nightId(bk,n)+"')\">&#128214; Open the picture book</button>";
+  if(typeof n.lat==="number") h+="<button class='sl-open sl-map' onclick=\"slMapNight('"+bk.id+"',"+n.wk+","+n.nt+")\">&#128205; See it on the map</button>";
   h+=slSources(it);
   return h;
 }
@@ -10427,6 +10505,8 @@ var SL_WHERE_LISTS=["EMPIRES","WARS","FAMOUS","MIGRATIONS","EXPLORATIONS","SEEDS
 function slWhere(it){
   try{
     var hit=null, id=it&&it.id;
+    /* a night of an LST book carries its own place (Levi, 21 Oct 2026: "click the map and see it on the map") */
+    if(it&&it.night&&typeof it.night.lat==="number") return {t:it.night.t,loc:it.night.loc||"",lat:it.night.lat,lng:it.night.lng,y:it.night.y,l:"lstbook",color:"#F5C518"};
     if(it&&it.tech&&it.tech.lat!=null) hit=it.tech;
     else if(it&&it.find&&it.find.lat!=null) hit=it.find;
     if(!hit&&id){
