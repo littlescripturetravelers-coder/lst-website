@@ -72,7 +72,8 @@
   var BOOK_ART = { 6: "images/book-cover-june.jpg", 7: "images/book-cover-july.jpg",
                    8: "images/book-cover-august.jpg",
                    9: "images/book-cover-september.jpg",
-                   10: "images/book-cover-october.jpg" };
+                   10: "images/book-cover-october.jpg",
+                   11: "images/book-cover-november.jpg" };
   function artFor(n) { return BOOK_ART[n && n.book] || "images/cover-ot.jpg"; }
 
   function load() {
@@ -170,7 +171,8 @@
   }
   var BOOK_NAMES = { 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December" };
   var BOOK_TITLES = { 6: "A Heart That Follows the Lord", 7: "There Is a Prophet in Israel",
-                      8: "I Will Trust and Sing", 9: "Wonderful Is His Way", 10: "He Gathers the Lambs" };
+                      8: "I Will Trust and Sing", 9: "Wonderful Is His Way", 10: "He Gathers the Lambs",
+                      11: "Mercies New Every Morning" };
   function bookOfNight(n) {
     if (n.book) return Number(n.book);
     var p = String(n.date || "").split("-");
