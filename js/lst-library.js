@@ -172,7 +172,7 @@
   var BOOK_NAMES = { 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December" };
   var BOOK_TITLES = { 6: "A Heart That Follows the Lord", 7: "There Is a Prophet in Israel",
                       8: "I Will Trust and Sing", 9: "Wonderful Is His Way", 10: "He Gathers the Lambs",
-                      11: "Mercies New Every Morning" };
+                      11: "Morning by Morning" };
   function bookOfNight(n) {
     if (n.book) return Number(n.book);
     var p = String(n.date || "").split("-");

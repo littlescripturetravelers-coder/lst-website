@@ -12,4 +12,4 @@ display face loses its ll/tt in the PDF ("Wi ow"); the headings and Traveler nam
 The same nights as PDFs are in lst-app www/stories/pdf/<mon>/ (served at
 app.littlescripturetravelers.com/stories/pdf/<mon>/).
 
-November 2026 (Mercies New Every Morning, 35 nights) was added on 21 Oct 2026.
+November 2026 (Morning by Morning, 35 nights) was added on 21 Oct 2026.
