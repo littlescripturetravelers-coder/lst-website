@@ -10339,7 +10339,7 @@ function slStudyData(cb){
 function slInApp(){ try{ return window.parent!==window; }catch(e){ return false; } }
 function slMapNight(bid,wk,nt){ try{ var bk=LST_BOOKS.filter(function(b){ return b.id===bid; })[0]; if(!bk) return;
   var n=bk.nights.filter(function(x){ return x.wk===wk&&x.nt===nt; })[0]; if(n) openMapFor(slWhere({night:n})); }catch(e){} }
-function slOpenBook(id){ try{ window.parent.postMessage({type:"lst-open-story",id:id},"*"); }catch(e){} }
+function slOpenBook(id){ var ti=""; try{ LST_BOOKS.forEach(function(bk){ bk.nights.forEach(function(n){ if(nightId(bk,n)===id) ti=decodeT(n.t); }); }); }catch(e){} try{ window.parent.postMessage({type:"lst-open-story",id:id,title:ti},"*"); }catch(e){} }
 function slStudyHtml(it,st){
   var n=it.night, bk=it.book, L=window.LST_LIBRARY, lib=null;
   try{ if(L&&L.stories) lib=L.stories.filter(function(s){ return s.id===nightId(bk,n); })[0]||null; }catch(e){}
