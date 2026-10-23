@@ -552,6 +552,10 @@ jobs:
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}   # the talking presenter (lip sync), pay per video
           TALKER_MODEL: ${{ vars.TALKER_MODEL }}                    # optional; default lucataco/sadtalker
         run: |
+          # MARKETING OFF (Levi, 23 Oct 2026: "put a stop to the marketing posts that are created in the app each day ...
+          # I will let you know when I want to start that up again"): while lantern/MARKETING-OFF exists, nothing is
+          # drafted, no media is made, nothing is posted. Delete that file to start it again.
+          if [ -f lantern/MARKETING-OFF ]; then echo "Marketing is off (lantern/MARKETING-OFF)."; exit 0; fi
           # A day Levi says "no marketing today": lantern/.marketing-skip holds that date (Denver).
           # It ends by itself the next day.
           if [ "$(cat lantern/.marketing-skip 2>/dev/null | tr -d '[:space:]')" = "$(TZ=America/Denver date +%F)" ]; then

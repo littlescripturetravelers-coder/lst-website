@@ -305,6 +305,8 @@ def narrate(date, edition=None, force=False):
 # Desk. Nothing is posted by this. The function itself skips a night that
 # already has its tree, so a re-publish never doubles the queue.
 MARKET = os.environ.get("MARKET", "1") != "0"
+# MARKETING OFF (Levi, 23 Oct 2026): while lantern/MARKETING-OFF exists, no night is drafted for marketing.
+if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "MARKETING-OFF")): MARKET = False
 # THE BACKFILL LINE (7 Oct 2026). Levi asked for a devotional night for every story back to
 # June, the first book - nights from before the app's first night (24 Aug 2026) published now.
 # Those get no voices recorded (ElevenLabs credits need Levi's go) and no marketing drafted (they
