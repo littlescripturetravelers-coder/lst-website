@@ -60,7 +60,7 @@ Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, OPENAI_API_KEY (generated pictures
      MEDIA_LIMIT (default 20).
 Runs on the Action's Ubuntu runner (ffmpeg installed by the workflow, DejaVu fonts present).
 """
-import os, re, io, json, glob, base64, subprocess, tempfile, urllib.request, urllib.error, uuid, sys, math, hashlib
+import os, re, io, json, glob, base64, subprocess, tempfile, urllib.request, urllib.error, uuid, sys, math, hashlib, time
 
 URL   = os.environ.get("SUPABASE_URL", "").rstrip("/")
 KEY   = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")

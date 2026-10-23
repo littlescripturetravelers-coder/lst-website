@@ -1,0 +1,50 @@
+# THE STUDIO's renderer (Levi, 23 Oct 2026: "my own tool that is like CapCut ... have AI do it").
+# The app's Studio (Edge Function `studio`) starts this the moment a video is planned, revised or
+# sent to render again (a repository_dispatch, which needs the Supabase secret GITHUB_DISPATCH_TOKEN);
+# without that token the nightly Lantern sync renders whatever is waiting, every three hours.
+# It runs ONLY when there is a video to make, so it costs GitHub minutes only then
+# (this repo is private: about 2,000 free minutes a month; a 30-second reel takes about 3 minutes).
+name: Studio render
+
+on:
+  repository_dispatch:
+    types: [studio-render]
+  workflow_dispatch:
+    inputs:
+      id:
+        description: "A video's id to make first (optional)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: studio-render
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tools (ffmpeg, Pillow, the card photographer)
+        run: |
+          python3 -m pip install --quiet --disable-pip-version-check Pillow
+          if ! command -v ffprobe >/dev/null 2>&1; then sudo apt-get -qq update >/dev/null && sudo apt-get -qq install -y ffmpeg >/dev/null; fi
+          npm install --no-save --silent playwright@1.56.1 >/dev/null 2>&1 && npx playwright install --with-deps chromium >/dev/null 2>&1 || echo "no chromium - Lantern card scenes become brand cards"
+      - name: Make the videos
+        env:
+          SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+          ELEVENLABS_VOICE_ID_DAD: ${{ secrets.ELEVENLABS_VOICE_ID_DAD }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}            # Grok Imagine: new pictures and moving clips
+          HEYGEN_API_KEY: ${{ secrets.HEYGEN_API_KEY }}      # the talking presenter (lifelike avatar)
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+          DID_API_KEY: ${{ secrets.DID_API_KEY }}
+          STUDIO_ID: ${{ github.event.client_payload.id || github.event.inputs.id }}
+        run: python3 lantern/studio_render.py

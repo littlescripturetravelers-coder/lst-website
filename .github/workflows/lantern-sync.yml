@@ -551,6 +551,8 @@ jobs:
           DID_API_KEY: ${{ secrets.DID_API_KEY }}
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}   # the talking presenter (lip sync), pay per video
           TALKER_MODEL: ${{ vars.TALKER_MODEL }}                    # optional; default lucataco/sadtalker
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}                   # the Studio: Grok Imagine pictures and clips
+          HEYGEN_API_KEY: ${{ secrets.HEYGEN_API_KEY }}             # the Studio: the talking presenter
         run: |
           # A day Levi says "no marketing today": lantern/.marketing-skip holds that date (Denver).
           # It ends by itself the next day.
@@ -589,6 +591,16 @@ jobs:
           curl -sS -X POST "$SUPABASE_URL/functions/v1/marketing-post" \
             -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" -H "Content-Type: application/json" \
             -d '{"action":"status"}' | head -c 400; echo
+          # THE STUDIO (Levi, 23 Oct 2026): the daily prompt (once a day, when it is on in the app's
+          # Studio), then any video still waiting to be made (studio-render.yml makes them at once
+          # when the Supabase secret GITHUB_DISPATCH_TOKEN is set; this is the safety net).
+          echo "Studio daily prompt:"
+          curl -sS -X POST "$SUPABASE_URL/functions/v1/studio" \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" -H "Content-Type: application/json" \
+            -d '{"action":"daily"}' | head -c 300; echo
+          python3 -m pip install --quiet --disable-pip-version-check Pillow >/dev/null 2>&1 || true
+          command -v ffprobe >/dev/null 2>&1 || { sudo apt-get -qq update >/dev/null 2>&1; sudo apt-get -qq install -y ffmpeg >/dev/null 2>&1; } || true
+          python3 lantern/studio_render.py || echo "studio step had trouble - the videos wait for the next run."
           echo "Sweep (posts anything approved whose time has come):"
           curl -sS -X POST "$SUPABASE_URL/functions/v1/marketing-post" \
             -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" -H "Content-Type: application/json" \
