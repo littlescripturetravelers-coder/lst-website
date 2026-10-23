@@ -229,6 +229,10 @@ def guard_night(slug, folder, lds, chr_, book_html):
     """Returns (lds, chr_, book_html, score, changed)."""
     if not book_html or not GUARD:
         return lds, chr_, book_html, None, False
+    # THE OWNER'S OWN WORDS (Levi, 23 Oct 2026: "redo the scripture story of the night for today to match the exact
+    # words and story" of the book): a night whose folder holds KEEP-WORDS goes out word for word, never rewritten.
+    if os.path.exists(os.path.join(folder, "KEEP-WORDS")):
+        print("    guard rail: KEEP-WORDS - the owner's own words, not rewritten"); return lds, chr_, book_html, None, False
     m = re.search(r'const STORY = (\{.*?\});\n', book_html, flags=re.S)
     if not m:
         return lds, chr_, book_html, None, False
