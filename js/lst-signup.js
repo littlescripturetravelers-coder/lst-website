@@ -216,11 +216,15 @@
     if (code) {
       /* Payhip's checkout has its own box for a coupon. Say the code plainly, copy it, and let
          them go on when they are ready, so a code never goes missing on the way. */
-      try { if (navigator.clipboard) navigator.clipboard.writeText(code); } catch (e) {}
+      /* a browser may refuse the copy: then the words say "type", never "copied", and no page error */
+      var say = function (copied) {
+        err.innerHTML = 'Your code <b style="letter-spacing:0.05em;">' + code.replace(/[<>&"]/g, "") + '</b>' + (copied ? ' is copied. ' : '. ') +
+          'On the next page, find the box for a <b>coupon or discount code</b>, ' + (copied ? 'paste or type' : 'type') + ' your code in, and apply it. Your discount shows before you pay anything.';
+      };
       if (btn) btn.disabled = false;
       err.style.color = "var(--gold-ink)";
-      err.innerHTML = 'Your code <b style="letter-spacing:0.05em;">' + code.replace(/[<>&"]/g, "") + '</b> is copied. ' +
-        'On the next page, find the box for a <b>coupon or discount code</b>, paste or type your code in, and apply it. Your discount shows before you pay anything.';
+      say(false);
+      try { if (navigator.clipboard) navigator.clipboard.writeText(code).then(function () { say(true); }, function () {}); } catch (e) {}
       if (btn) { btn.innerHTML = "Continue to secure checkout &rarr;"; btn.onclick = function () { window.location.href = go; }; }
       return;
     }
