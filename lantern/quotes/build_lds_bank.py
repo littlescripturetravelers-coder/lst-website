@@ -1,5 +1,5 @@
 import re, json, html as H, subprocess, os, sys, time
-CONFS = ['2024/04','2024/10','2025/04','2025/10','2026/04']
+CONFS = ['2024/04','2024/10','2025/04','2025/10','2026/04','2026/10']
 from themes import THEMES, clean, standalone
 out = []
 for c in CONFS:

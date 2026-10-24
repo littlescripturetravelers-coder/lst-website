@@ -5,7 +5,7 @@ fetching anything at build time (THE QUOTES RULE). Each entry is a paragraph
 read **verbatim** off its source page by the scripts beside this file, with
 the page's own address, the speaker, the talk or sermon title, and theme tags.
 
-- Latter-day Saint edition: General Conference talks (the last five conferences),
+- Latter-day Saint edition: General Conference talks (April 2024 through October 2026, the newest last in CONFS),
   read from churchofjesuschrist.org by `build_lds_bank.py`.
 - Christian edition: Charles Spurgeon (New Park Street sermons, vol. 1) and John
   Wesley (Sermons, 1872 edition), read from ccel.org by `build_chr_bank.py`.
@@ -27,7 +27,9 @@ python3 -c "import json; json.dump(json.load(open('lds-bank.json'))+json.load(op
 rm -f talk-*.html chr-*.html idx-*.html lds-bank.json chr-bank.json
 ```
 
-Commit `bank.json`. Nothing else changes: `quotes.py` reads it by theme.
+Commit `bank.json`. Nothing else changes: `quotes.py` reads it by theme, and gives every Latter-day Saint card one talk from the newest conference in the bank when one fits the night.
+
+A quicker refresh that keeps the Christian half: run only `build_lds_bank.py`, then join `lds-bank.json` with the bank's entries whose edition is not `lds`.
 
 ## Rules
 - Never hand-type a quote into the bank. Entries come from the page, by script.

@@ -42,7 +42,26 @@ def pick(edition, themes, n=2, seed=None, exclude_ids=()):
         if score(q) == 0 and out: break       # never pad with off-theme voices once we have one
         seen_talk.add(key); out.append(q)
         if len(out) == n: break
+    # THE NEWEST CONFERENCE (Levi, 24 Oct 2026: "start including the general conference talks from October 2026"):
+    # the Latter-day Saint card always carries one talk from the newest conference in the bank when one fits the night.
+    newest = _newest_conf(bank)
+    if newest and out and not any(q.get('source') == newest for q in out):
+        fresh = [q for q in scored if q.get('source') == newest and score(q) > 0]
+        if fresh:
+            out = [fresh[0]] + [q for q in out if (q['speaker'], q['title']) != (fresh[0]['speaker'], fresh[0]['title'])]
+            out = out[:n]
     return out
+
+def _newest_conf(bank):
+    """'October 2026 General Conference' - the newest conference the bank holds (None for the Christian side)."""
+    best = None
+    for q in bank:
+        src = q.get('source', '')
+        parts = src.split()
+        if len(parts) < 3 or 'Conference' not in src or not parts[1].isdigit(): continue
+        k = (int(parts[1]), 10 if parts[0] == 'October' else 4)
+        if best is None or k > best[0]: best = (k, src)
+    return best[1] if best else None
 
 def _talk(q, edition):
     link_txt = 'Read the full talk at ChurchofJesusChrist.org' if edition == 'lds' else 'Read it in full at ccel.org'
