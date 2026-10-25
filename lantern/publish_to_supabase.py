@@ -528,6 +528,13 @@ def main():
         if not live_night(date):
             print(f"    a night from before the app began: no recording, no marketing (the backfill line)")
         elif NARRATE and row["story_text"]:
+            # THE OWNER'S OWN WORDS changed on a night already recorded (Levi, 24 Oct 2026): record it again,
+            # so the voice never reads the old words. `words` in the marker is the stamp of the two editions.
+            words = sha(lds or "", chr_ or "")
+            reword = bool(prior_marker.get("sha")) and prior_marker.get("words") not in (None, words) \
+                     or (bool(prior_marker.get("sha")) and "words" not in prior_marker
+                         and os.path.exists(os.path.join(folder, "KEEP-WORDS")))
+            guarded = guarded or reword
             status, body = narrate(date, force=guarded)
             if status == 200: print(f"    narration: recorded" + (" again (new words)" if guarded else ""))
             else:             print(f"    narration: not recorded ({status}) {body}")
@@ -542,7 +549,7 @@ def main():
             else:             print(f"    marketing: not drafted ({status}) {body}")
 
         with open(marker, "w", encoding="utf-8") as fh:
-            mk = {"sha": stamp, "date": date, "at": row["published_at"]}
+            mk = {"sha": stamp, "date": date, "at": row["published_at"], "words": sha(lds or "", chr_ or "")}
             if score is not None:
                 tries = (prior_marker.get("guard_tries") or 0) + 1
                 mk["guard_tries"] = tries
