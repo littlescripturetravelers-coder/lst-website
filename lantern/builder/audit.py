@@ -53,6 +53,28 @@ for key, n in expected.items():
     missing = [l for l in prev if l not in tiers[key]]
     check(not missing, f'{key} contains all of previous tier' + (f' MISSING {missing}' if missing else ''))
     prev = tiers[key]
+# 4b. THE STAGES AND THE GROWN-UP'S LIFE (Levi, 25 Oct 2026: "applied to parent life or adult life ... one section
+# ... titled applying it to all children and adolescent development stages ... for all future morning lanterns";
+# "do the different human development stages in the same box as the one above. Don't add a new box"). In every
+# depth The Heart of Tonight's Story ends with the stages section naming all six stages; the rest of the night speaks
+# to the grown-up reading it, so the child talk lives in that section, the Parent's Heart and the conversation cards.
+_STAGES = ['Early Years', 'Early Elementary', 'Late Elementary', 'Early Adolescence', 'Teen', 'Young Adult']
+for key in expected:
+    body = re.search(rf'id="tab-{key}">(.*?)</div><!-- /{key} -->', html, re.S).group(1)
+    heart = re.search(r"The Heart of Tonight(?:&#39;|'|&rsquo;)s Story</div>(.*?)\n  </div>", body, re.S)
+    hb = heart.group(1) if heart else ''
+    check('Applying It to All Children and Adolescent Development Stages' in hb and 'class="stages-block"' in hb
+          and all(f'<strong>{st}</strong>' in hb for st in _STAGES),
+          f"{key}: The Heart of Tonight's Story carries the stages section with all six stages")
+_deep = re.search(r'id="tab-heavenly">(.*?)</div><!-- /heavenly -->', html, re.S).group(1)
+_rest = re.sub(r'<div class="stages-block".*?\n    </div>', '', _deep, flags=re.S)
+_rest = re.sub(r'<div class="card [^"]*(?:pinned-card|card-story)[^"]*">.*?\n  </div>', '', _rest, flags=re.S)
+_rest = re.sub(r'<div class="card [^"]*">\s*<div class="card-label[^>]*>[^<]*(?:Conversation|Scripture Traveler)[^<]*</div>.*?\n  </div>', '', _rest, flags=re.S)
+_rest = re.sub(r'<div class="quote-text">.*?</div>|<div class="conf-body">.*?</div>', '', _rest, flags=re.S)
+_kid = re.findall(r"\b(?:child|children|kids?)\b", re.sub(r"\bas (?:a )?little child(?:ren)?\b|\bas a child\b", ' ', re.sub(r'<[^>]+>', ' ', _rest), flags=re.I), re.I)   # "become as a little child" is scripture, not child talk
+check(len(_kid) <= 6, f"the Deep read speaks to the grown-up's own life ({len(_kid)} child words outside the stages, Parent's Heart, story, Traveler and conversation cards; at most 6)")
+check('For young children:' not in html and 'at a child&rsquo;s size' not in html and "at a child’s size" not in html,
+      'no "For young children" line or "at a child’s size" (the stages teach each age)')
 print('   deep-read order:', [re.sub(r'&#\d+; ?', '', l) for l in tiers['heavenly']])
 
 # 5. resources

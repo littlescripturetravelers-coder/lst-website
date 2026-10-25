@@ -27,12 +27,22 @@ PARENT_HEART = f'''
   </div>
 '''
 
+# THE STAGES (Levi, 25 Oct 2026): inside The Heart of Tonight, the one place the night is taught to each age.
+STAGES = stages_block([
+ "Hold them close and say the verse in a few words: the Shepherd carries the lambs. Carry them to bed tonight and say, God carries you like this.",
+ "Read verse 11 together and ask what a shepherd does. Let them act out feed, gather, carry and lead with a stuffed lamb.",
+ "Ask when they last felt too tired to keep going. Show them that Jesus carries people in hard times, and ask who in their class needs carrying.",
+ "They may feel they must carry everything alone. Tell them about a time you were carried, and that leaning on the Lord is strength, not weakness.",
+ "Talk about stress, school and friends honestly. Ask what is weighing on them, and remind them the Shepherd gathers, not scolds. Pray for them by name where they can hear.",
+ "Share the verse by text on a hard week. Invite them to notice who carried them as they left home, and to become someone who carries others.",
+])
+
 HEART_OF_TONIGHT = f'''
   <div class="card card-navy reveal">
     <div class="card-label lbl-white">&#9733; The Heart of Tonight's Story</div>
     <div class="bt-white"><strong>Biblical Principle:</strong> {ent("Comfort comes before correction. Isaiah’s chapter opens with a command to comfort, and the comfort is given before anyone has earned it. The people were tired and sad after years of their own wrong turns. God’s first word to them was still <em>Comfort</em>. Then He told them how He would come: like a shepherd, slow, with the lambs in His arms. The Lord’s strength is real, and verse 10 says so. But verse 11 says what He does with it. He carries.")}</div>
     <div class="bt-white" style="margin-top:8px;"><strong>Virtue:</strong> {ent("Compassion &amp; Tenderness, because a child learns what God is like from the arms that hold them. Tonight’s feeling word is <em>weary</em>. It is a better word than tired. Tired is a body. Weary is a body and a heart at once, and it is how a child feels at the end of a long day. Isaiah names it so a child can name it. Then he gives it somewhere to go.")}</div>
-    <div class="bt-white" style="margin-top:8px;"><strong>For young children:</strong> {ent("When you are too tired to walk, God does not hurry you. He picks you up, the way a shepherd picks up a little lamb, and holds you close to His heart. You are one of His lambs.")}</div>
+{STAGES}
   </div>
 '''
 
@@ -324,6 +334,8 @@ ONE_INVITATION = f'''
 ])}
   </div>
 '''
+
+
 
 # ───────────────────────── COMPOSE ─────────────────────────
 RES = resources_card(); STORYC = story_card(); TRAV = traveler_card()

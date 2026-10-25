@@ -169,3 +169,32 @@ def build(edition_cards, verse_ref_html, out_path, page_title):
     assert count_links(html) >= 8, f'{out_path}: only {count_links(html)} outbound links - a night is never published without them'
     open(out_path, 'w', encoding='utf-8').write(html)
     return html
+
+
+# ───────────────── THE STAGES (Levi, 25 Oct 2026) ─────────────────
+# "I want the morning lantern devotional to be applied to parent life or adult life. I do want one section on
+# how to teach this to all the development stages as a parent ... titled applying it to all children and
+# adolescent development stages ... for all future morning lanterns" - then: "do the different human development
+# stages in the same box as the one above. Don't add a new box." So the stages sit INSIDE The Heart of Tonight's
+# Story, where "For young children" used to be, and every other card speaks to the grown-up reading it.
+# The same six stages as the app's library ("Built to grow with your child").
+STAGES = [
+    ('Early Years', 'Ages 3–5'),
+    ('Early Elementary', 'Ages 6–8'),
+    ('Late Elementary', 'Ages 9–11'),
+    ('Early Adolescence', 'Ages 12–14'),
+    ('Teen', 'Ages 15–17'),
+    ('Young Adult', 'Ages 18+'),
+]
+STAGES_LABEL = 'Applying It to All Children and Adolescent Development Stages'
+
+def stages_block(lines):
+    """The section that ends The Heart of Tonight's Story (a navy card, so bt-white). lines: six strings,
+    one per STAGES entry, in order - how a parent teaches or lives tonight's truth with a child of that age."""
+    assert len(lines) == len(STAGES), f'the stages need {len(STAGES)} lines, one per stage'
+    rows = '\n'.join(f'      <div class="bt-white" style="margin-top:6px;"><strong>{ent(n)}</strong> ({ent(a)}): {ent(t)}</div>'
+                     for (n, a), t in zip(STAGES, lines))
+    return f'''    <div class="stages-block" style="margin-top:12px;">
+      <div class="bt-white"><strong>{STAGES_LABEL}</strong></div>
+{rows}
+    </div>'''
