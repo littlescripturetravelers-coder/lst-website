@@ -381,8 +381,12 @@
     grab(".heart-q, .prompt-q", function (el) {
       out += '<p class="rd-q">' + inlineHtml(el) + "</p>";
     });
+    /* THE ATONEMENT'S OWN BOX (Levi, 26 Oct 2026, on the website: "separate the atonement into its own box and have
+       the nightly questions in its own box"; the app does the same, `_atone`): the teaching that closes A Parent's
+       Heart is drawn as a section of its own, "The Atonement of Jesus Christ", right after the questions. */
+    var atone = "";
     grab(".atonement-q", function (el) {
-      out += '<p class="rd-atone">' + inlineHtml(el) + "</p>";
+      atone += '<p class="rd-atone">' + inlineHtml(el).replace(/^\s*<strong>\s*The Atonement:?\s*<\/strong>\s*/i, "") + "</p>";
     });
     grab(".bt, .bt-white, .conf-body, .card-body, .toolkit-sub", function (el) {
       var t = inlineHtml(el);
@@ -400,9 +404,10 @@
       if (t && t !== label) out += "<p>" + esc(t) + "</p>";
     }
 
-    if (!out && !label) return "";
+    var atoneBox = atone ? '<section class="rd-card rd-study rd-atone-card"><h3 class="rd-label">\u2605 The Atonement of Jesus Christ</h3>' + atone + "</section>" : "";
+    if (!out && !label) return atoneBox;
     return '<section class="rd-card ' + accentOf(cls) + '">' +
-      (label ? '<h3 class="rd-label">' + esc(label) + "</h3>" : "") + out + "</section>";
+      (label ? '<h3 class="rd-label">' + esc(label) + "</h3>" : "") + out + "</section>" + atoneBox;
   }
 
   /* One `.edition` → one readable article. */

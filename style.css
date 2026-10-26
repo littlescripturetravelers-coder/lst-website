@@ -2497,6 +2497,8 @@ cite strong { color: var(--gold-ink); display: block; }
 }
 .rd-atone strong { color: var(--teal-ink); }
 .rd-atone em { color: var(--ink); font-style: italic; }
+/* the Atonement in its own box (Levi, 26 Oct 2026): the words sit plainly in it */
+.rd-atone-card .rd-atone { margin: 0 !important; padding: 0; background: none; border: 0; }
 
 /* Who said it, and where it came from. */
 .rd-who {
