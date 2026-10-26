@@ -28,6 +28,7 @@
       (window.LSTTheme
         ? '<div class="mp-card" style="margin-top:1.25rem;">' +
             row("Colour theme", themePicker()) +
+            (window.LSTScrLinks ? row("Scripture links", window.LSTScrLinks.pickerHtml()) : "") +
           "</div>"
         : "");
   }
@@ -94,6 +95,7 @@
             "sign in there with this same email and everything is already waiting.") +
         row("Your Lantern", faithPicker()) +
         row("Colour theme", themePicker()) +
+        (window.LSTScrLinks ? row("Scripture links", window.LSTScrLinks.pickerHtml()) : "") +
       "</div>" +
 
       '<div class="mp-bar" style="margin-top:1.25rem;">' +

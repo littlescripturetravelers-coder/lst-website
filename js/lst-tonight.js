@@ -391,6 +391,7 @@
   window.addEventListener("beforeunload", stopReading);
 
   window.LSTTonight = {
+    keepSpot: keepSpot,
     mount: function (elm) {
       root = typeof elm === "string" ? document.getElementById(elm) : elm;
       if (!root || !auth()) return;

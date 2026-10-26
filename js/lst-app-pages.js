@@ -357,8 +357,32 @@ function feelingPictureToRemember(html){
     if (PAGE === "study" || PAGE === "printables") personalPull("study");
   }
 
+  /* A SCRIPTURE LINK OPENED HERE (Levi, 26 Oct 2026: "when I click on the links of the scriptures on the website I
+     should be able to choose whether it takes me to the church website ... or to the scriptures in little scripture
+     travelers ... like it is in the app"): js/lst-scr-links.js sends a Gospel Library chapter link here as
+     scriptures.html?open=<gospel library slug>/<chapter>&v=<verse>&from=<the page it was tapped on>; the chapter
+     opens at the verse, with the gold way back to where it was tapped (S.scrFrom, as in the app). */
+  var OPEN = (function () { try { var q = new URLSearchParams(location.search); var o = q.get("open"); if (!o) return null;
+    var m = o.match(/^([a-z0-9-]+(?:\/[a-z0-9-]+)?)\/(\d+)$/); if (!m) return null;
+    var from = q.get("from") || ""; if (!/^[a-z-]+\.html/.test(from)) from = "";
+    return { slug: m[1], ch: +m[2], vs: parseInt(q.get("v"), 10) || 0, from: from }; } catch (e) { return null; } })();
+  window.scrBackFrom = function () { var f = S.scrFrom; S.scrFrom = null; saveS(); location.href = (f && f.href) || "tonight.html"; };
+  function openAsked() {
+    if (!OPEN || PAGE !== "scriptures" || !ready) return;
+    var o = OPEN; OPEN = null;
+    fetch(APP + "scriptures/slugs.json" + V).then(function (r) { return r.json(); }).then(function (sl) {
+      var hit = sl[o.slug]; if (hit == null) { window.open("https://www.churchofjesuschrist.org/study/scriptures/" + o.slug + "/" + o.ch + (o.vs ? "?id=p" + o.vs + "#p" + o.vs : ""), "_blank", "noopener"); return; }
+      var dc = o.slug === "dc";
+      S.scr = { v: "read", vol: dc ? "dc" : hit[0], book: dc ? 0 : hit[1], ch: o.ch, vs: o.vs || 0 };
+      S.scrFrom = o.from ? { page: "back", href: o.from, label: /^tonight|^archive/.test(o.from) ? "Back to the Morning Lantern" : "Back to where you were" } : null;
+      saveS(); render();
+      if (o.vs) setTimeout(function () { try { scrToVerse(o.vs, true); } catch (e) {} }, 700);
+      try { history.replaceState(null, "", "scriptures.html"); } catch (e) {}
+    }).catch(function () {});
+  }
+
   render();
-  loadModule().then(function () { ready = true; render(); },
+  loadModule().then(function () { ready = true; render(); if (auth() && auth().ready) auth().ready(openAsked); else openAsked(); },
     function () {
       var el = host();
       if (el) el.innerHTML = '<div class="pad"><p class="muted">This page could not open just now. Check the connection and reload the page.</p></div>';

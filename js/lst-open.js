@@ -326,6 +326,7 @@
     var d = f.contentDocument || (f.contentWindow && f.contentWindow.document);
     if (!d) return;
     d.open(); d.write(n.bookHtml); d.close();
+    if (window.LSTScrLinks) window.LSTScrLinks.hook(d);   /* a scripture link in the book opens where My Account says */
     var q = nightQuery(n);
     var go = function (url) { window.location.href = url; };
     /* The book's back link knows only the app; here it means the night's Lantern.
