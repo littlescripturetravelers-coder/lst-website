@@ -504,7 +504,11 @@
     function ask() {
       if (!window.LSTData || !window.LSTData.bookNights) { shut(id); return; }
       window.LSTData.bookNights.one(id).then(function (night) {
-        if (night && night.beats && night.beats.length) begin(night);
+        if (night && night.beats && night.beats.length) {
+          begin(night);
+          /* the corner headphones read it in Eli's voice, the app's own recording (js/lst-story-voice.js) */
+          if (window.LSTStoryVoice) window.LSTStoryVoice.mount({ id: id, title: night.title || "" });
+        }
         else shut(id);
       }).catch(function () { shut(id); });
     }

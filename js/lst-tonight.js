@@ -27,7 +27,28 @@
 */
 (function () {
   var root = null, night = null, loaded = false, loadError = "";
-  var depth = 0;          /* which reading depth of the night is showing */
+  /* which reading depth of the night is showing. KEPT (Levi, 26 Oct 2026: "when I click on story of the night
+     and I have chosen deep read it should stay deep read ... and save the spot on the webpage you had left"):
+     the depth chosen stays chosen on this device, and the spot on the page is kept per night for the way back. */
+  var depth = 0;
+  try { var kd = parseInt(localStorage.getItem("lst:tonight:depth"), 10); if (kd >= 0 && kd < 6) depth = kd; } catch (e) {}
+  function keepDepth() { try { localStorage.setItem("lst:tonight:depth", String(depth)); } catch (e) {} }
+  /* the story and the lullaby open in this same tab (as in the app), and the way back finds the spot: kept when
+     one of them is opened, used once on the way back within two hours, then let go */
+  var SPOT = "lst:tonight:spot";
+  function keepSpot() { try { if (night && loaded) localStorage.setItem(SPOT, JSON.stringify({ d: night.date || "", y: Math.round(window.scrollY || 0), at: Date.now() })); } catch (e) {} }
+  var spotBack = false;   /* the spot is put back once, the first time the night is drawn */
+  function backToSpot() {
+    if (spotBack || !night) return; spotBack = true;
+    var y = 0;
+    try { var k = JSON.parse(localStorage.getItem(SPOT) || "null"); localStorage.removeItem(SPOT);
+      if (k && k.d === (night.date || "") && Date.now() - k.at < 2 * 3600 * 1000) y = k.y || 0; } catch (e) {}
+    if (!y) return;
+    /* the page grows as its pictures and fonts arrive: put the spot back now and again as it settles */
+    [0, 120, 400, 900, 1600].forEach(function (ms) { setTimeout(function () {
+      if (Math.abs(window.scrollY - y) > 4 && document.documentElement.scrollHeight > y) window.scrollTo(0, y);
+    }, ms); });
+  }
 
   /* Text size, remembered on this device. The app has the same idea in its
      settings; a family that needs bigger letters needs them every night. */
@@ -256,7 +277,7 @@
     return '<h3 class="rd-label" style="margin-top:2.4rem;">&#127769; Tonight&rsquo;s resources</h3>' +
       '<div class="rd-kit">' + items.map(function (it) {
         return '<a class="rd-kit-btn' + (it.primary ? " rd-kit-primary" : "") + '" href="' +
-          esc(it.href) + '" target="_blank" rel="noopener">' +
+          esc(it.href) + '"' + (/^https?:/i.test(it.href) ? ' target="_blank" rel="noopener"' : "") + ">" +
           '<span class="rd-kit-ico">' + it.ico + "</span>" +
           "<span><span class=\"rd-kit-title\">" + it.title + "</span>" +
           (it.sub ? '<span class="rd-kit-sub">' + it.sub + "</span>" : "") + "</span>" +
@@ -348,10 +369,17 @@
       window.LSTKeep.bottom("lst-keep", night);
     }
 
+    /* leaving for the story (or anywhere) keeps the spot to come back to */
+    root.querySelectorAll('a[href^="story.html"],a[href^="lullaby.html"]').forEach(function (a) {
+      a.addEventListener("click", keepSpot);
+    });
+    backToSpot();
+
     root.querySelectorAll("[data-depth]").forEach(function (b) {
       b.addEventListener("click", function () {
         stopReading();
         depth = parseInt(this.getAttribute("data-depth"), 10) || 0;
+        keepDepth();
         var y = window.scrollY;
         render();
         window.scrollTo(0, y);      /* stay where you were reading */
@@ -371,7 +399,7 @@
       });
       auth().onChange(function () {
         stopReading();
-        loaded = false; depth = 0;
+        loaded = false; spotBack = false;
         if (auth().signedIn()) { render(); load().then(render); }
         else { night = null; loaded = true; render(); }
       });

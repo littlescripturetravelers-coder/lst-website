@@ -536,6 +536,23 @@ def main():
                          and os.path.exists(os.path.join(folder, "KEEP-WORDS")))
             guarded = guarded or reword
             status, body = narrate(date, force=guarded)
+            if reword:
+                # the picture book's own reading (narration/story/<date>-<voice>.mp3, the app's and the website's
+                # headphones) read the old words: take it away, and the next tap on the headphones records it anew
+                names = [f"story/{date}-{v}{x}.mp3" for v in ("eli", "hannah") for x in ("", "-start")]
+                st, rp = http("DELETE", URL + "/storage/v1/object/narration", {"prefixes": names},
+                              {"apikey": KEY, "Authorization": "Bearer " + KEY, "Content-Type": "application/json"})
+                print("    story voice: the old reading " + ("taken away; it is recorded again on the next play" if st == 200 else f"not taken away ({st}) {rp[:160]}"))
+                st, one = http("GET", URL + f"/rest/v1/daily_content?select=narration_urls&publish_date=eq.{date}", None,
+                               {"apikey": KEY, "Authorization": "Bearer " + KEY})
+                try:
+                    nu = (json.loads(one)[0].get("narration_urls") or {}) if st == 200 else {}
+                    if any(k.startswith("story_") for k in nu):
+                        nu = {k: v for k, v in nu.items() if not k.startswith("story_")}
+                        http("PATCH", URL + f"/rest/v1/daily_content?publish_date=eq.{date}", {"narration_urls": nu},
+                             {"apikey": KEY, "Authorization": "Bearer " + KEY, "Content-Type": "application/json", "Prefer": "return=minimal"})
+                except Exception as e:
+                    print(f"    story voice: could not tidy its link ({e})")
             if status == 200: print(f"    narration: recorded" + (" again (new words)" if guarded else ""))
             else:             print(f"    narration: not recorded ({status}) {body}")
             if row.get("story_text_nondenom"):

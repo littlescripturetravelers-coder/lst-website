@@ -305,8 +305,10 @@
         "body.lst-book-open .mp-hero,body.lst-book-open .site-footer{display:none !important}" +
         "body.lst-book-open .mp-body{padding:0 !important;min-height:0 !important;background:#0a1020 !important}" +
         "body.lst-book-open .mp-in{max-width:none !important;margin:0 !important;padding:0 !important;width:100%}" +
-        ".lst-bookwrap{position:relative;width:100%;height:calc(100vh - var(--lst-head,72px));" +
-        "height:calc(100dvh - var(--lst-head,72px));background:#0a1020;overflow:hidden}" +
+        /* THE WHOLE SCREEN (Levi, 26 Oct 2026: "the scripture stories to cover the entire screen just like the
+           ones in the app do"): the book covers the window, the site's menu too; its own Devotional link leads back. */
+        "body.lst-book-open{overflow:hidden !important}" +
+        ".lst-bookwrap{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;z-index:2147483000;background:#0a1020;overflow:hidden}" +
         ".lst-bookwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#0a1020}";
       document.head.appendChild(st);
     }
@@ -421,6 +423,8 @@
       root.innerHTML = bookFrameView(night);
       writeBookFrame(night);
       var plain = window.LSTRead ? window.LSTRead.decode(night.title || "") : (night.title || "");
+      /* the corner headphones read it in Eli's voice, the app's own recording (js/lst-story-voice.js) */
+      if (window.LSTStoryVoice && night.date) window.LSTStoryVoice.mount({ story: night.date, title: plain });
       if (plain) document.title = plain + " \u2014 Little Scripture Travelers";
       return;
     }
