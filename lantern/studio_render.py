@@ -12,14 +12,16 @@ makes it real:
        avatar     the mom or dad presenter SPEAKING the scene's narration, lip-synced:
                   HeyGen (HEYGEN_API_KEY, the presenter picture as a talking photo, our ElevenLabs
                   voice file as the audio); else the old talker (Replicate / D-ID); else the still
-       grok-image a new picture from Grok Imagine (XAI_API_KEY), the brand's style rules added
+       chatgpt-image a new picture from ChatGPT (OPENAI_API_KEY, gpt-image-1), drawn from the brand kit
+                  (the Travelers and cast sheet for kids, the presenter's own picture for parents)
+       grok-image a new picture from Grok Imagine (XAI_API_KEY), the brand's style rules added (optional)
        grok-video a moving clip from Grok Imagine, started from the scene's picture when it has one
        card       a Morning Lantern card, photographed as the app shows it
        brand      a navy brand card with the on-screen words
        upload     the owner's own picture or clip (already a url)
      and every scene's VOICE (ElevenLabs, with each word's timing for the captions), kept by a
      hash of its words so an unchanged line is never paid for twice.
-     THE CAPS: marketing_settings.studio.caps (Grok pictures, Grok clips, avatars per day) - past
+     THE CAPS: marketing_settings.studio.caps (ChatGPT pictures, Grok pictures, Grok clips, avatars per day) - past
      the cap a scene falls back to the free picture (the book, the still presenter).
   2. RENDER - ffmpeg: each still moves (zoom, pan), each scene runs as long as its words, the
      transitions between them (fade, slide, wipe, zoom, circle ... ffmpeg's xfade), the on-screen
@@ -74,7 +76,7 @@ class Spend:
     """Today's paid pieces against the owner's caps (marketing_settings.studio.caps)."""
     def __init__(self, st):
         self.st = st; caps = st.get("caps") or {}
-        self.caps = {"grok_images": int(caps.get("grok_images", 12)), "grok_videos": int(caps.get("grok_videos", 2)), "avatars": int(caps.get("avatars", 1))}
+        self.caps = {"chatgpt_images": int(caps.get("chatgpt_images", 12)), "grok_images": int(caps.get("grok_images", 12)), "grok_videos": int(caps.get("grok_videos", 2)), "avatars": int(caps.get("avatars", 1))}
         today = datetime.date.today().isoformat(); sp = st.get("spent") or {}
         self.spent = sp if sp.get("date") == today else {"date": today}
     def may(self, what): return not LOCAL and self.spent.get(what, 0) < self.caps.get(what, 0)
@@ -139,6 +141,24 @@ def outro_card(W, H, cover):
     return im
 
 # ---------------------------------------------------------------- pictures that cost (Grok, HeyGen)
+def chatgpt_image(prompt, aspect, kids, who=None):
+    """A new picture from ChatGPT's picture maker (OpenAI gpt-image-1), drawn FROM the brand kit so the
+    characters never drift: kids - the cast sheet and the four Travelers, the style lock and the room
+    locks; parents - the mom or dad presenter's own picture, photoreal, the people rule."""
+    size = "1536x1024" if aspect == "16:9" else ("1024x1024" if aspect == "1:1" else "1024x1536")
+    if kids:
+        refs = [mm.CAST] + [os.path.join(mm.BRAND, t + ".jpg") for t in mm.TRAVELERS]
+        text = "\n\n".join([mm.CAST_TEXT, mm.STYLE_LOCK, "ADULTS IN THE SCENE (storybook style, but the same standard): " + mm.PEOPLE_RULE]
+                            + mm.locks_for(prompt) + [f"Scene: {prompt}"])
+        return mm.generate_with_refs(text, refs, size)
+    if who in ("mom", "dad", "both"):
+        refs = [mm.presenter_file(False), mm.presenter_file(True)] if who == "both" else [mm.presenter_file(who == "dad")]
+        same = ("The same woman (first reference image) and the same man (second reference image) together as husband and wife"
+                if who == "both" else ("The same man as in the reference image - same face, hair, build and warmth" if who == "dad"
+                                       else "The same woman as in the reference image - same face, hair, makeup, dress style and warmth"))
+        return mm.generate_with_refs(f"{same} - photoreal, not cartoon. {mm.PEOPLE_RULE}\n\nScene: {prompt}", refs, size)
+    return mm.generate(f"Photoreal, warm natural light, a real modern home, cinematic shallow depth of field. {mm.PEOPLE_RULE}\n\nScene: {prompt}", size)
+
 def grok_image(prompt, aspect, kids):
     style = mm.STYLE_LOCK if kids else ("Photoreal, warm natural light, a real modern home, cinematic shallow depth of field. " + getattr(mm, "PEOPLE_RULE", ""))
     full = f"{prompt}\n\n{style}\n{mm.locks_for(prompt) if hasattr(mm, 'locks_for') else ''}".strip()
@@ -297,6 +317,14 @@ def build(p, tmp, spend, st):
                 if shots:
                     im = mm.card_picture(shots[0][1], W, H); pth = os.path.join(tmp, f"card{i}.jpg"); im.save(pth, quality=92)
                     m.update({"url": keep(pid, f"card-{h(m.get('card'))}.jpg", open(pth, "rb").read(), "image/jpeg"), "kind": "image"}); continue
+                src = "brand"
+            if src == "chatgpt-image":
+                if mm.OPENAI and spend.may("chatgpt_images"):
+                    data = chatgpt_image(m.get("prompt") or text, p.get("aspect") or "9:16", kids, m.get("who")); spend.took("chatgpt_images")
+                    m.update({"url": keep(pid, f"gpt-{h(m.get('prompt'), m.get('who'), i)}.jpg", mm.to_bytes(mm.load_rgb(data)), "image/jpeg"), "kind": "image"}); continue
+                notes.append(f"scene {i+1}: no OpenAI key or today's ChatGPT pictures are used - the book picture instead")
+                pic = book_picture(night, i)
+                if pic: m.update({"path": pic, "kind": "image"}); continue
                 src = "brand"
             if src == "grok-image":
                 if XAI and spend.may("grok_images"):
