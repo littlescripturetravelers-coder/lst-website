@@ -233,6 +233,15 @@ def guard_night(slug, folder, lds, chr_, book_html):
     # words and story" of the book): a night whose folder holds KEEP-WORDS goes out word for word, never rewritten.
     if os.path.exists(os.path.join(folder, "KEEP-WORDS")):
         print("    guard rail: KEEP-WORDS - the owner's own words, not rewritten"); return lds, chr_, book_html, None, False
+    # A night whose words were written ahead and already rated 9 or 10 (lantern/child-stories/<slug>.json with
+    # "score" >= 9; Levi, 29 Oct 2026, the November stories) goes out as written, so the book, the app and the
+    # website keep the same words.
+    _cs = os.path.join(os.path.dirname(os.path.abspath(__file__)), "child-stories", slug + ".json")
+    try:
+        if os.path.exists(_cs) and int(json.load(open(_cs, encoding="utf-8")).get("score") or 0) >= 9:
+            print("    guard rail: child-stories words already rated 9+, not rewritten"); return lds, chr_, book_html, None, False
+    except Exception:
+        pass
     m = re.search(r'const STORY = (\{.*?\});\n', book_html, flags=re.S)
     if not m:
         return lds, chr_, book_html, None, False
