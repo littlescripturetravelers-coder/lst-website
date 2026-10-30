@@ -69,11 +69,15 @@
   /* The cover a night's tile wears. A night knows its book number, and the
      books have covers already; anything we have no cover for still gets a
      tile that opens. */
-  var BOOK_ART = { 6: "images/book-cover-june.jpg", 7: "images/book-cover-july.jpg",
-                   8: "images/book-cover-august.jpg",
-                   9: "images/book-cover-september.jpg",
-                   10: "images/book-cover-october.jpg",
-                   11: "images/book-cover-november.jpg" };
+  var BOOK_ART = { 1: "images/book-cover-january.jpg", 2: "images/book-cover-february.jpg",
+                   3: "images/book-cover-march.jpg", 4: "images/book-cover-april.jpg",
+                   5: "images/book-cover-may.jpg", 6: "images/book-cover-june.jpg",
+                   7: "images/book-cover-july.jpg", 8: "images/book-cover-august.jpg",
+                   9: "images/book-cover-september.jpg", 10: "images/book-cover-october.jpg",
+                   11: "images/book-cover-november.jpg", 12: "images/book-cover-december.jpg" };
+  /* the New Testament year, books 13-24 (Levi, 29 Oct 2026) */
+  ["january","february","march","april","may","june","july","august","september","october","november","december"]
+    .forEach(function (m, i) { BOOK_ART[13 + i] = "images/book-cover-nt-" + m + ".jpg"; });
   function artFor(n) { return BOOK_ART[n && n.book] || "images/cover-ot.jpg"; }
 
   function load() {

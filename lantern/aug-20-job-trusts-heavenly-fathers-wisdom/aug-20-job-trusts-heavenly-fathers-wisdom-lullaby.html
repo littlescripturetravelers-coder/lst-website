@@ -593,7 +593,7 @@ const RESOURCES = {
     { kind: "Story",
       title: "Job Trusts Heavenly Father’s Wisdom",
       note:  "Job Trusts Heavenly Father’s Wisdom — Job 1–3; 12–14; 19; 21–24; 38–40; 42. August, Story 20.",
-      url:   "https://littlescripturetravelers.com/read.html?id=b8-w3-n6" },
+      url:   "" },
     { kind: "Lullaby",
       title: "A Little Travelers’ Lullaby",
       note:  "All four Travelers, one verse each. Sing it slow.",
@@ -710,7 +710,7 @@ function partHTML(p){
 /* ---------- resources card ---------- */
 function resourcesHTML(){
   if (!RESOURCES || !RESOURCES.items || !RESOURCES.items.length) return '';
-  const rows = RESOURCES.items.map(function(r){
+  const rows = RESOURCES.items.filter(function(r){ return !!r.url; }).map(function(r){
     return '<a class="res" href="' + r.url + '">' +
              '<span class="res-kind">' + r.kind + '</span>' +
              '<span class="res-title">' + r.title + '</span>' +

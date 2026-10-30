@@ -32,6 +32,8 @@ IMG  = os.path.join(SITE, "images", "book")
 # a book is numbered by its month (June was the first, book 6)
 MONTH = {"jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
          "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12}
+# the New Testament year (2027) is books 13-24, its pages njan-01-..., nfeb-01-... (Levi, 29 Oct 2026)
+MONTH.update({"n" + k: v + 12 for k, v in list(MONTH.items())})
 KEEP = ("type", "img", "alt", "focus", "eyebrow", "heading",
         "text", "stones", "list", "forParent")
 
@@ -50,10 +52,10 @@ def main():
     out, notes = {}, []
     missing_img = 0
     files = sorted(f for f in os.listdir(APP)
-                   if f.endswith(".html") and f[:3] in MONTH and f[3] == "-")
+                   if f.endswith(".html") and f.split("-")[0] in MONTH and re.match(r"[a-z]{3,4}-\d\d-", f))
     for name in files:
         slug = "-".join(name.split("-")[:2])          # sep-08
-        book = MONTH[name[:3]]
+        book = MONTH[name.split("-")[0]]
         o = story_of(os.path.join(APP, name))
         if not o:
             notes.append(f"{name}: no STORY object"); continue

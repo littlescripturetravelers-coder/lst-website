@@ -15,7 +15,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-01-ruth-stays-with-naomi/jun-01-ruth-stays-with-naomi-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-01-ruth-stays-with-naomi/jun-01-ruth-stays-with-naomi-lullaby.mp3",
   "readId": "b6-w1-n1",
-  "appPage": "stories/jun-01-ruth-stays-with-naomi.html",
+  "appPage": "stories/jun-01-where-you-go-i-will-go.html",
   "sung": true
  },
  {
@@ -31,7 +31,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-02-ruth-works-in-the-field/jun-02-ruth-works-in-the-field-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-02-ruth-works-in-the-field/jun-02-ruth-works-in-the-field-lullaby.mp3",
   "readId": "b6-w1-n2",
-  "appPage": "stories/jun-02-ruth-works-in-the-field.html",
+  "appPage": "stories/jun-02-ruth-in-boazs-field.html",
   "sung": true
  },
  {
@@ -47,7 +47,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-03-boaz-marries-ruth/jun-03-boaz-marries-ruth-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-03-boaz-marries-ruth/jun-03-boaz-marries-ruth-lullaby.mp3",
   "readId": "b6-w1-n3",
-  "appPage": "stories/jun-03-boaz-marries-ruth.html",
+  "appPage": "stories/jun-03-a-baby-named-obed.html",
   "sung": true
  },
  {
@@ -79,7 +79,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-05-samuel-goes-to-the-temple/jun-05-samuel-goes-to-the-temple-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-05-samuel-goes-to-the-temple/jun-05-samuel-goes-to-the-temple-lullaby.mp3",
   "readId": "b6-w1-n5",
-  "appPage": "stories/jun-05-samuel-goes-to-the-temple.html",
+  "appPage": "stories/jun-05-my-heart-rejoices.html",
   "sung": true
  },
  {
@@ -95,7 +95,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-06-the-lord-calls-samuel/jun-06-the-lord-calls-samuel-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-06-the-lord-calls-samuel/jun-06-the-lord-calls-samuel-lullaby.mp3",
   "readId": "b6-w1-n6",
-  "appPage": "stories/jun-06-the-lord-calls-samuel.html",
+  "appPage": "stories/jun-06-samuel-hears-the-lord.html",
   "sung": true
  },
  {
@@ -110,8 +110,8 @@ window.LST_STORY_SONGS = [
   "title": "The Golden Box Comes Home",
   "page": "https://littlescripturetravelers.com/lantern/jun-07-gods-power-and-the-ark/jun-07-gods-power-and-the-ark-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-07-gods-power-and-the-ark/jun-07-gods-power-and-the-ark-lullaby.mp3",
-  "readId": "b6-w1-n7",
-  "appPage": "stories/jun-07-gods-power-and-the-ark.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -127,7 +127,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-08-israel-wants-a-king/jun-08-israel-wants-a-king-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-08-israel-wants-a-king/jun-08-israel-wants-a-king-lullaby.mp3",
   "readId": "b6-w2-n1",
-  "appPage": "stories/jun-08-israel-wants-a-king.html",
+  "appPage": "stories/jun-08-we-want-a-king.html",
   "sung": true
  },
  {
@@ -159,7 +159,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-10-saul-is-anointed-king/jun-10-saul-is-anointed-king-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-10-saul-is-anointed-king/jun-10-saul-is-anointed-king-lullaby.mp3",
   "readId": "b6-w2-n3",
-  "appPage": "stories/jun-10-saul-is-anointed-king.html",
+  "appPage": "stories/jun-10-oil-on-sauls-head.html",
   "sung": true
  },
  {
@@ -175,7 +175,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-11-saul-doesnt-wait/jun-11-saul-doesnt-wait-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-11-saul-doesnt-wait/jun-11-saul-doesnt-wait-lullaby.mp3",
   "readId": "b6-w2-n4",
-  "appPage": "stories/jun-11-saul-doesnt-wait.html",
+  "appPage": "stories/jun-11-saul-did-not-wait.html",
   "sung": true
  },
  {
@@ -191,7 +191,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-12-obey-is-better-than-sacrifice/jun-12-obey-is-better-than-sacrifice-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-12-obey-is-better-than-sacrifice/jun-12-obey-is-better-than-sacrifice-lullaby.mp3",
   "readId": "b6-w2-n5",
-  "appPage": "stories/jun-12-obey-is-better-than-sacrifice.html",
+  "appPage": "stories/jun-12-to-obey-is-best.html",
   "sung": true
  },
  {
@@ -207,7 +207,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-13-god-chooses-david/jun-13-god-chooses-david-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-13-god-chooses-david/jun-13-god-chooses-david-lullaby.mp3",
   "readId": "b6-w2-n6",
-  "appPage": "stories/jun-13-god-chooses-david.html",
+  "appPage": "stories/jun-13-the-lord-sees-the-heart.html",
   "sung": true
  },
  {
@@ -223,7 +223,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-14-david-plays-music-for-saul/jun-14-david-plays-music-for-saul-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-14-david-plays-music-for-saul/jun-14-david-plays-music-for-saul-lullaby.mp3",
   "readId": "b6-w2-n7",
-  "appPage": "stories/jun-14-david-plays-music-for-saul.html",
+  "appPage": "stories/jun-14-davids-gentle-harp.html",
   "sung": true
  },
  {
@@ -238,8 +238,8 @@ window.LST_STORY_SONGS = [
   "title": "Five Smooth Stones and a Sling",
   "page": "https://littlescripturetravelers.com/lantern/jun-15-david-and-goliath/jun-15-david-and-goliath-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-15-david-and-goliath/jun-15-david-and-goliath-lullaby.mp3",
-  "readId": "b6-w3-n1",
-  "appPage": "stories/jun-15-david-and-goliath.html",
+  "readId": "b6-w3-n3",
+  "appPage": "stories/jun-17-five-smooth-stones.html",
   "sung": true
  },
  {
@@ -254,8 +254,8 @@ window.LST_STORY_SONGS = [
   "title": "A Prince Gives Away His Robe",
   "page": "https://littlescripturetravelers.com/lantern/jun-16-david-and-jonathan-are-best-friends/jun-16-david-and-jonathan-are-best-friends-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-16-david-and-jonathan-are-best-friends/jun-16-david-and-jonathan-are-best-friends-lullaby.mp3",
-  "readId": "b6-w3-n2",
-  "appPage": "stories/jun-16-david-and-jonathan-are-best-friends.html",
+  "readId": "b6-w3-n4",
+  "appPage": "stories/jun-18-david-and-jonathan.html",
   "sung": true
  },
  {
@@ -270,8 +270,8 @@ window.LST_STORY_SONGS = [
   "title": "A Jealous King, a Kind Heart",
   "page": "https://littlescripturetravelers.com/lantern/jun-17-saul-gets-jealous-of-david/jun-17-saul-gets-jealous-of-david-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-17-saul-gets-jealous-of-david/jun-17-saul-gets-jealous-of-david-lullaby.mp3",
-  "readId": "b6-w3-n3",
-  "appPage": "stories/jun-17-saul-gets-jealous-of-david.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -286,8 +286,8 @@ window.LST_STORY_SONGS = [
   "title": "A Piece of the King's Robe",
   "page": "https://littlescripturetravelers.com/lantern/jun-18-david-forgives-saul-in-the-cave/jun-18-david-forgives-saul-in-the-cave-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-18-david-forgives-saul-in-the-cave/jun-18-david-forgives-saul-in-the-cave-lullaby.mp3",
-  "readId": "b6-w3-n4",
-  "appPage": "stories/jun-18-david-forgives-saul-in-the-cave.html",
+  "readId": "b6-w3-n5",
+  "appPage": "stories/jun-19-david-was-kind-to-saul.html",
   "sung": true
  },
  {
@@ -302,8 +302,8 @@ window.LST_STORY_SONGS = [
   "title": "Abigail Rides Out with Bread",
   "page": "https://littlescripturetravelers.com/lantern/jun-19-wise-abigail-stops-trouble/jun-19-wise-abigail-stops-trouble-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-19-wise-abigail-stops-trouble/jun-19-wise-abigail-stops-trouble-lullaby.mp3",
-  "readId": "b6-w3-n5",
-  "appPage": "stories/jun-19-wise-abigail-stops-trouble.html",
+  "readId": "b6-w3-n6",
+  "appPage": "stories/jun-20-abigail-the-peacemaker.html",
   "sung": true
  },
  {
@@ -318,8 +318,8 @@ window.LST_STORY_SONGS = [
   "title": "A Crown Worth Waiting For",
   "page": "https://littlescripturetravelers.com/lantern/jun-20-david-becomes-king/jun-20-david-becomes-king-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-20-david-becomes-king/jun-20-david-becomes-king-lullaby.mp3",
-  "readId": "b6-w3-n6",
-  "appPage": "stories/jun-20-david-becomes-king.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -335,7 +335,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-21-david-dances-before-the-lord/jun-21-david-dances-before-the-lord-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-21-david-dances-before-the-lord/jun-21-david-dances-before-the-lord-lullaby.mp3",
   "readId": "b6-w3-n7",
-  "appPage": "stories/jun-21-david-dances-before-the-lord.html",
+  "appPage": "stories/jun-21-a-king-forever.html",
   "sung": true
  },
  {
@@ -350,8 +350,8 @@ window.LST_STORY_SONGS = [
   "title": "Look Away, Choose the Good",
   "page": "https://littlescripturetravelers.com/lantern/jun-22-david-makes-a-big-mistake/jun-22-david-makes-a-big-mistake-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-22-david-makes-a-big-mistake/jun-22-david-makes-a-big-mistake-lullaby.mp3",
-  "readId": "b6-w4-n1",
-  "appPage": "stories/jun-22-david-makes-a-big-mistake.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -366,8 +366,8 @@ window.LST_STORY_SONGS = [
   "title": "One Little Lamb, One Sorry Heart",
   "page": "https://littlescripturetravelers.com/lantern/jun-23-david-says-sorry/jun-23-david-says-sorry-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-23-david-says-sorry/jun-23-david-says-sorry-lullaby.mp3",
-  "readId": "b6-w4-n2",
-  "appPage": "stories/jun-23-david-says-sorry.html",
+  "readId": "b6-w4-n1",
+  "appPage": "stories/jun-22-the-poor-mans-little-lamb.html",
   "sung": true
  },
  {
@@ -382,8 +382,8 @@ window.LST_STORY_SONGS = [
   "title": "A Dream and One Wise Wish",
   "page": "https://littlescripturetravelers.com/lantern/jun-24-solomon-asks-for-wisdom/jun-24-solomon-asks-for-wisdom-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-24-solomon-asks-for-wisdom/jun-24-solomon-asks-for-wisdom-lullaby.mp3",
-  "readId": "b6-w4-n3",
-  "appPage": "stories/jun-24-solomon-asks-for-wisdom.html",
+  "readId": "b6-w4-n2",
+  "appPage": "stories/jun-23-an-understanding-heart.html",
   "sung": true
  },
  {
@@ -398,8 +398,8 @@ window.LST_STORY_SONGS = [
   "title": "The Mother Who Cried No",
   "page": "https://littlescripturetravelers.com/lantern/jun-25-two-mothers-and-one-baby/jun-25-two-mothers-and-one-baby-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-25-two-mothers-and-one-baby/jun-25-two-mothers-and-one-baby-lullaby.mp3",
-  "readId": "b6-w4-n4",
-  "appPage": "stories/jun-25-two-mothers-and-one-baby.html",
+  "readId": "b6-w4-n3",
+  "appPage": "stories/jun-24-two-mothers-and-a-baby.html",
   "sung": true
  },
  {
@@ -414,8 +414,8 @@ window.LST_STORY_SONGS = [
   "title": "Stones Laid Without a Sound",
   "page": "https://littlescripturetravelers.com/lantern/jun-26-building-the-temple/jun-26-building-the-temple-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-26-building-the-temple/jun-26-building-the-temple-lullaby.mp3",
-  "readId": "b6-w4-n5",
-  "appPage": "stories/jun-26-building-the-temple.html",
+  "readId": "b6-w4-n4",
+  "appPage": "stories/jun-25-no-hammer-was-heard.html",
   "sung": true
  },
  {
@@ -431,7 +431,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-27-solomons-prayer-at-the-temple/jun-27-solomons-prayer-at-the-temple-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-27-solomons-prayer-at-the-temple/jun-27-solomons-prayer-at-the-temple-lullaby.mp3",
   "readId": "b6-w4-n6",
-  "appPage": "stories/jun-27-solomons-prayer-at-the-temple.html",
+  "appPage": "stories/jun-27-hear-thou-in-heaven.html",
   "sung": true
  },
  {
@@ -447,7 +447,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jun-28-keep-your-heart-close-to-god/jun-28-keep-your-heart-close-to-god-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jun-28-keep-your-heart-close-to-god/jun-28-keep-your-heart-close-to-god-lullaby.mp3",
   "readId": "b6-w4-n7",
-  "appPage": "stories/jun-28-keep-your-heart-close-to-god.html",
+  "appPage": "stories/jun-28-keep-your-heart-close.html",
   "sung": true
  },
  {
@@ -462,8 +462,8 @@ window.LST_STORY_SONGS = [
   "title": "Listen to the Wise and Kind",
   "page": "https://littlescripturetravelers.com/lantern/jul-01-two-kings-one-choice/jul-01-two-kings-one-choice-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-01-two-kings-one-choice/jul-01-two-kings-one-choice-lullaby.mp3",
-  "readId": "b7-w1-n1",
-  "appPage": "stories/jul-01-two-kings-one-choice.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -478,8 +478,8 @@ window.LST_STORY_SONGS = [
   "title": "Black Wings Bringing Bread",
   "page": "https://littlescripturetravelers.com/lantern/jul-02-the-ravens-feed-elijah/jul-02-the-ravens-feed-elijah-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-02-the-ravens-feed-elijah/jul-02-the-ravens-feed-elijah-lullaby.mp3",
-  "readId": "b7-w1-n2",
-  "appPage": "stories/jul-02-the-ravens-feed-elijah.html",
+  "readId": "b7-w1-n1",
+  "appPage": "stories/jul-01-bread-from-the-ravens.html",
   "sung": true
  },
  {
@@ -494,8 +494,8 @@ window.LST_STORY_SONGS = [
   "title": "A Little Flour, Always Enough",
   "page": "https://littlescripturetravelers.com/lantern/jul-03-the-jar-that-never-ran-out/jul-03-the-jar-that-never-ran-out-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-03-the-jar-that-never-ran-out/jul-03-the-jar-that-never-ran-out-lullaby.mp3",
-  "readId": "b7-w1-n3",
-  "appPage": "stories/jul-03-the-jar-that-never-ran-out.html",
+  "readId": "b7-w1-n2",
+  "appPage": "stories/jul-02-flour-that-lasted.html",
   "sung": true
  },
  {
@@ -510,8 +510,8 @@ window.LST_STORY_SONGS = [
   "title": "The Boy Who Breathed Again",
   "page": "https://littlescripturetravelers.com/lantern/jul-04-elijah-prays-for-the-little-boy/jul-04-elijah-prays-for-the-little-boy-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-04-elijah-prays-for-the-little-boy/jul-04-elijah-prays-for-the-little-boy-lullaby.mp3",
-  "readId": "b7-w1-n4",
-  "appPage": "stories/jul-04-elijah-prays-for-the-little-boy.html",
+  "readId": "b7-w1-n3",
+  "appPage": "stories/jul-03-see-your-son-lives.html",
   "sung": true
  },
  {
@@ -526,8 +526,8 @@ window.LST_STORY_SONGS = [
   "title": "Even the Water Burned",
   "page": "https://littlescripturetravelers.com/lantern/jul-05-fire-from-heaven/jul-05-fire-from-heaven-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-05-fire-from-heaven/jul-05-fire-from-heaven-lullaby.mp3",
-  "readId": "b7-w1-n5",
-  "appPage": "stories/jul-05-fire-from-heaven.html",
+  "readId": "b7-w1-n4",
+  "appPage": "stories/jul-04-fire-on-mount-carmel.html",
   "sung": true
  },
  {
@@ -558,8 +558,8 @@ window.LST_STORY_SONGS = [
   "title": "Only What the Lord Says",
   "page": "https://littlescripturetravelers.com/lantern/jul-07-micaiah-tells-the-truth/jul-07-micaiah-tells-the-truth-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-07-micaiah-tells-the-truth/jul-07-micaiah-tells-the-truth-lullaby.mp3",
-  "readId": "b7-w1-n7",
-  "appPage": "stories/jul-07-micaiah-tells-the-truth.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -575,7 +575,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jul-08-elijah-goes-up-to-heaven/jul-08-elijah-goes-up-to-heaven-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-08-elijah-goes-up-to-heaven/jul-08-elijah-goes-up-to-heaven-lullaby.mp3",
   "readId": "b7-w2-n1",
-  "appPage": "stories/jul-08-elijah-goes-up-to-heaven.html",
+  "appPage": "stories/jul-08-the-chariot-of-fire.html",
   "sung": true
  },
  {
@@ -590,8 +590,8 @@ window.LST_STORY_SONGS = [
   "title": "Jars and Jars and Jars",
   "page": "https://littlescripturetravelers.com/lantern/jul-09-the-widows-oil/jul-09-the-widows-oil-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-09-the-widows-oil/jul-09-the-widows-oil-lullaby.mp3",
-  "readId": "b7-w2-n2",
-  "appPage": "stories/jul-09-the-widows-oil.html",
+  "readId": "b7-w2-n3",
+  "appPage": "stories/jul-10-the-oil-kept-pouring.html",
   "sung": true
  },
  {
@@ -606,8 +606,8 @@ window.LST_STORY_SONGS = [
   "title": "A Bed, a Chair, a Lamp",
   "page": "https://littlescripturetravelers.com/lantern/jul-10-a-special-room-for-the-prophet/jul-10-a-special-room-for-the-prophet-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-10-a-special-room-for-the-prophet/jul-10-a-special-room-for-the-prophet-lullaby.mp3",
-  "readId": "b7-w2-n3",
-  "appPage": "stories/jul-10-a-special-room-for-the-prophet.html",
+  "readId": "b7-w2-n4",
+  "appPage": "stories/jul-11-a-little-room-for-elisha.html",
   "sung": true
  },
  {
@@ -622,8 +622,8 @@ window.LST_STORY_SONGS = [
   "title": "Seven Dips in the River",
   "page": "https://littlescripturetravelers.com/lantern/jul-11-naaman-washes-seven-times/jul-11-naaman-washes-seven-times-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-11-naaman-washes-seven-times/jul-11-naaman-washes-seven-times-lullaby.mp3",
-  "readId": "b7-w2-n4",
-  "appPage": "stories/jul-11-naaman-washes-seven-times.html",
+  "readId": "b7-w2-n5",
+  "appPage": "stories/jul-12-naaman-washes-seven-times.html",
   "sung": true
  },
  {
@@ -638,8 +638,8 @@ window.LST_STORY_SONGS = [
   "title": "The Iron That Floated Up",
   "page": "https://littlescripturetravelers.com/lantern/jul-12-the-floating-axe-head/jul-12-the-floating-axe-head-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-12-the-floating-axe-head/jul-12-the-floating-axe-head-lullaby.mp3",
-  "readId": "b7-w2-n5",
-  "appPage": "stories/jul-12-the-floating-axe-head.html",
+  "readId": "b7-w2-n6",
+  "appPage": "stories/jul-13-the-axe-head-that-floated.html",
   "sung": true
  },
  {
@@ -654,8 +654,8 @@ window.LST_STORY_SONGS = [
   "title": "More With Us Than With Them",
   "page": "https://littlescripturetravelers.com/lantern/jul-13-horses-of-fire-all-around/jul-13-horses-of-fire-all-around-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-13-horses-of-fire-all-around/jul-13-horses-of-fire-all-around-lullaby.mp3",
-  "readId": "b7-w2-n6",
-  "appPage": "stories/jul-13-horses-of-fire-all-around.html",
+  "readId": "b7-w2-n7",
+  "appPage": "stories/jul-14-more-are-with-us.html",
   "sung": true
  },
  {
@@ -670,8 +670,8 @@ window.LST_STORY_SONGS = [
   "title": "Run and Tell the City",
   "page": "https://littlescripturetravelers.com/lantern/jul-14-good-news-to-share/jul-14-good-news-to-share-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-14-good-news-to-share/jul-14-good-news-to-share-lullaby.mp3",
-  "readId": "b7-w2-n7",
-  "appPage": "stories/jul-14-good-news-to-share.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -686,8 +686,8 @@ window.LST_STORY_SONGS = [
   "title": "Holding Tight to the Lord",
   "page": "https://littlescripturetravelers.com/lantern/jul-15-good-king-hezekiah-trusts-god/jul-15-good-king-hezekiah-trusts-god-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-15-good-king-hezekiah-trusts-god/jul-15-good-king-hezekiah-trusts-god-lullaby.mp3",
-  "readId": "b7-w3-n1",
-  "appPage": "stories/jul-15-good-king-hezekiah-trusts-god.html",
+  "readId": "b7-w3-n2",
+  "appPage": "stories/jul-16-hezekiah-trusted-the-lord.html",
   "sung": true
  },
  {
@@ -702,8 +702,8 @@ window.LST_STORY_SONGS = [
   "title": "The Letter Spread Before God",
   "page": "https://littlescripturetravelers.com/lantern/jul-16-hezekiah-shows-god-the-letter/jul-16-hezekiah-shows-god-the-letter-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-16-hezekiah-shows-god-the-letter/jul-16-hezekiah-shows-god-the-letter-lullaby.mp3",
-  "readId": "b7-w3-n2",
-  "appPage": "stories/jul-16-hezekiah-shows-god-the-letter.html",
+  "readId": "b7-w3-n3",
+  "appPage": "stories/jul-17-the-letter-before-the-lord.html",
   "sung": true
  },
  {
@@ -718,8 +718,8 @@ window.LST_STORY_SONGS = [
   "title": "The Shadow That Went Backward",
   "page": "https://littlescripturetravelers.com/lantern/jul-17-god-gives-hezekiah-more-days/jul-17-god-gives-hezekiah-more-days-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-17-god-gives-hezekiah-more-days/jul-17-god-gives-hezekiah-more-days-lullaby.mp3",
-  "readId": "b7-w3-n3",
-  "appPage": "stories/jul-17-god-gives-hezekiah-more-days.html",
+  "readId": "b7-w3-n5",
+  "appPage": "stories/jul-19-fifteen-more-years.html",
   "sung": true
  },
  {
@@ -734,8 +734,8 @@ window.LST_STORY_SONGS = [
   "title": "A Little King with a Good Heart",
   "page": "https://littlescripturetravelers.com/lantern/jul-18-the-boy-who-became-king/jul-18-the-boy-who-became-king-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-18-the-boy-who-became-king/jul-18-the-boy-who-became-king-lullaby.mp3",
-  "readId": "b7-w3-n4",
-  "appPage": "stories/jul-18-the-boy-who-became-king.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -750,8 +750,8 @@ window.LST_STORY_SONGS = [
   "title": "The Treasure in the Temple",
   "page": "https://littlescripturetravelers.com/lantern/jul-19-the-lost-book-is-found/jul-19-the-lost-book-is-found-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-19-the-lost-book-is-found/jul-19-the-lost-book-is-found-lullaby.mp3",
-  "readId": "b7-w3-n5",
-  "appPage": "stories/jul-19-the-lost-book-is-found.html",
+  "readId": "b7-w3-n7",
+  "appPage": "stories/jul-21-josiah-and-the-found-book.html",
   "sung": true
  },
  {
@@ -766,8 +766,8 @@ window.LST_STORY_SONGS = [
   "title": "Huldah’s Brave True Message",
   "page": "https://littlescripturetravelers.com/lantern/jul-20-huldah-speaks-for-god/jul-20-huldah-speaks-for-god-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-20-huldah-speaks-for-god/jul-20-huldah-speaks-for-god-lullaby.mp3",
-  "readId": "b7-w3-n6",
-  "appPage": "stories/jul-20-huldah-speaks-for-god.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -782,8 +782,8 @@ window.LST_STORY_SONGS = [
   "title": "A Promise Made Together",
   "page": "https://littlescripturetravelers.com/lantern/jul-21-king-josiah-makes-a-promise/jul-21-king-josiah-makes-a-promise-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-21-king-josiah-makes-a-promise/jul-21-king-josiah-makes-a-promise-lullaby.mp3",
-  "readId": "b7-w3-n7",
-  "appPage": "stories/jul-21-king-josiah-makes-a-promise.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -799,7 +799,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jul-22-king-asa-calls-on-god/jul-22-king-asa-calls-on-god-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-22-king-asa-calls-on-god/jul-22-king-asa-calls-on-god-lullaby.mp3",
   "readId": "b7-w4-n1",
-  "appPage": "stories/jul-22-king-asa-calls-on-god.html",
+  "appPage": "stories/jul-22-we-rest-on-you.html",
   "sung": true
  },
  {
@@ -814,8 +814,8 @@ window.LST_STORY_SONGS = [
   "title": "Be Strong, Little Hands",
   "page": "https://littlescripturetravelers.com/lantern/jul-23-be-strong-and-dont-give-up/jul-23-be-strong-and-dont-give-up-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-23-be-strong-and-dont-give-up/jul-23-be-strong-and-dont-give-up-lullaby.mp3",
-  "readId": "b7-w4-n2",
-  "appPage": "stories/jul-23-be-strong-and-dont-give-up.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -830,8 +830,8 @@ window.LST_STORY_SONGS = [
   "title": "God’s Eyes Look Everywhere",
   "page": "https://littlescripturetravelers.com/lantern/jul-24-when-asa-forgot-to-trust/jul-24-when-asa-forgot-to-trust-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-24-when-asa-forgot-to-trust/jul-24-when-asa-forgot-to-trust-lullaby.mp3",
-  "readId": "b7-w4-n3",
-  "appPage": "stories/jul-24-when-asa-forgot-to-trust.html",
+  "readId": "b7-w4-n2",
+  "appPage": "stories/jul-23-the-eyes-of-the-lord.html",
   "sung": true
  },
  {
@@ -846,8 +846,8 @@ window.LST_STORY_SONGS = [
   "title": "Fair and Kind to Everyone",
   "page": "https://littlescripturetravelers.com/lantern/jul-25-judges-who-are-fair/jul-25-judges-who-are-fair-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-25-judges-who-are-fair/jul-25-judges-who-are-fair-lullaby.mp3",
-  "readId": "b7-w4-n4",
-  "appPage": "stories/jul-25-judges-who-are-fair.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -862,8 +862,8 @@ window.LST_STORY_SONGS = [
   "title": "Stand Still and Watch Him Win",
   "page": "https://littlescripturetravelers.com/lantern/jul-26-our-eyes-are-upon-thee/jul-26-our-eyes-are-upon-thee-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-26-our-eyes-are-upon-thee/jul-26-our-eyes-are-upon-thee-lullaby.mp3",
-  "readId": "b7-w4-n5",
-  "appPage": "stories/jul-26-our-eyes-are-upon-thee.html",
+  "readId": "b7-w4-n4",
+  "appPage": "stories/jul-25-our-eyes-are-on-you.html",
   "sung": true
  },
  {
@@ -879,7 +879,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jul-27-the-king-who-forgot-to-stay-humble/jul-27-the-king-who-forgot-to-stay-humble-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-27-the-king-who-forgot-to-stay-humble/jul-27-the-king-who-forgot-to-stay-humble-lullaby.mp3",
   "readId": "b7-w4-n6",
-  "appPage": "stories/jul-27-the-king-who-forgot-to-stay-humble.html",
+  "appPage": "stories/jul-27-king-uzziah-grew-proud.html",
   "sung": true
  },
  {
@@ -895,7 +895,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/jul-28-come-celebrate-with-god/jul-28-come-celebrate-with-god-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/jul-28-come-celebrate-with-god/jul-28-come-celebrate-with-god-lullaby.mp3",
   "readId": "b7-w4-n7",
-  "appPage": "stories/jul-28-come-celebrate-with-god.html",
+  "appPage": "stories/jul-28-everyone-is-invited.html",
   "sung": true
  },
  {
@@ -911,7 +911,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/aug-01-the-king-says-you-may-go-home/aug-01-the-king-says-you-may-go-home-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-01-the-king-says-you-may-go-home/aug-01-the-king-says-you-may-go-home-lullaby.mp3",
   "readId": "b8-w1-n1",
-  "appPage": "stories/aug-01-the-king-says-you-may-go-home.html",
+  "appPage": "stories/aug-01-time-to-go-home.html",
   "sung": true
  },
  {
@@ -927,7 +927,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/aug-02-the-first-big-stone/aug-02-the-first-big-stone-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-02-the-first-big-stone/aug-02-the-first-big-stone-lullaby.mp3",
   "readId": "b8-w1-n2",
-  "appPage": "stories/aug-02-the-first-big-stone.html",
+  "appPage": "stories/aug-02-a-great-shout-of-joy.html",
   "sung": true
  },
  {
@@ -943,7 +943,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/aug-03-the-temple-is-finished/aug-03-the-temple-is-finished-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-03-the-temple-is-finished/aug-03-the-temple-is-finished-lullaby.mp3",
   "readId": "b8-w1-n3",
-  "appPage": "stories/aug-03-the-temple-is-finished.html",
+  "appPage": "stories/aug-03-the-work-starts-again.html",
   "sung": true
  },
  {
@@ -958,8 +958,8 @@ window.LST_STORY_SONGS = [
   "title": "A Treasure Carried Home",
   "page": "https://littlescripturetravelers.com/lantern/aug-04-ezra-loves-the-scriptures/aug-04-ezra-loves-the-scriptures-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-04-ezra-loves-the-scriptures/aug-04-ezra-loves-the-scriptures-lullaby.mp3",
-  "readId": "b8-w1-n4",
-  "appPage": "stories/aug-04-ezra-loves-the-scriptures.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -974,8 +974,8 @@ window.LST_STORY_SONGS = [
   "title": "A Heavy Heart Made Brave",
   "page": "https://littlescripturetravelers.com/lantern/aug-05-nehemiahs-brave-idea/aug-05-nehemiahs-brave-idea-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-05-nehemiahs-brave-idea/aug-05-nehemiahs-brave-idea-lullaby.mp3",
-  "readId": "b8-w1-n5",
-  "appPage": "stories/aug-05-nehemiahs-brave-idea.html",
+  "readId": "b8-w1-n4",
+  "appPage": "stories/aug-04-nehemiah-prayed-first.html",
   "sung": true
  },
  {
@@ -1007,7 +1007,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/aug-07-the-happiest-reading-day/aug-07-the-happiest-reading-day-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-07-the-happiest-reading-day/aug-07-the-happiest-reading-day-lullaby.mp3",
   "readId": "b8-w1-n7",
-  "appPage": "stories/aug-07-the-happiest-reading-day.html",
+  "appPage": "stories/aug-07-the-joy-of-the-lord.html",
   "sung": true
  },
  {
@@ -1023,7 +1023,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/aug-08-a-kind-girl-becomes-queen/aug-08-a-kind-girl-becomes-queen-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-08-a-kind-girl-becomes-queen/aug-08-a-kind-girl-becomes-queen-lullaby.mp3",
   "readId": "b8-w2-n1",
-  "appPage": "stories/aug-08-a-kind-girl-becomes-queen.html",
+  "appPage": "stories/aug-08-esther-becomes-queen.html",
   "sung": true
  },
  {
@@ -1038,8 +1038,8 @@ window.LST_STORY_SONGS = [
   "title": "He Bowed to God Alone",
   "page": "https://littlescripturetravelers.com/lantern/aug-09-mordecai-stands-tall/aug-09-mordecai-stands-tall-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-09-mordecai-stands-tall/aug-09-mordecai-stands-tall-lullaby.mp3",
-  "readId": "b8-w2-n2",
-  "appPage": "stories/aug-09-mordecai-stands-tall.html",
+  "readId": "b8-w2-n3",
+  "appPage": "stories/aug-10-hamans-mean-plan.html",
   "sung": true
  },
  {
@@ -1054,8 +1054,8 @@ window.LST_STORY_SONGS = [
   "title": "Placed Right Where You Are",
   "page": "https://littlescripturetravelers.com/lantern/aug-10-for-such-a-time-as-this/aug-10-for-such-a-time-as-this-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-10-for-such-a-time-as-this/aug-10-for-such-a-time-as-this-lullaby.mp3",
-  "readId": "b8-w2-n3",
-  "appPage": "stories/aug-10-for-such-a-time-as-this.html",
+  "readId": "b8-w2-n4",
+  "appPage": "stories/aug-11-for-such-a-time-as-this.html",
   "sung": true
  },
  {
@@ -1070,8 +1070,8 @@ window.LST_STORY_SONGS = [
   "title": "The Golden Scepter Held Out",
   "page": "https://littlescripturetravelers.com/lantern/aug-11-esthers-brave-choice/aug-11-esthers-brave-choice-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-11-esthers-brave-choice/aug-11-esthers-brave-choice-lullaby.mp3",
-  "readId": "b8-w2-n4",
-  "appPage": "stories/aug-11-esthers-brave-choice.html",
+  "readId": "b8-w2-n5",
+  "appPage": "stories/aug-12-the-golden-scepter.html",
   "sung": true
  },
  {
@@ -1086,8 +1086,8 @@ window.LST_STORY_SONGS = [
   "title": "Waiting for the Right Moment",
   "page": "https://littlescripturetravelers.com/lantern/aug-12-esthers-wise-plan/aug-12-esthers-wise-plan-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-12-esthers-wise-plan/aug-12-esthers-wise-plan-lullaby.mp3",
-  "readId": "b8-w2-n5",
-  "appPage": "stories/aug-12-esthers-wise-plan.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -1102,8 +1102,8 @@ window.LST_STORY_SONGS = [
   "title": "Brave Words at the Table",
   "page": "https://littlescripturetravelers.com/lantern/aug-13-the-king-saves-the-people/aug-13-the-king-saves-the-people-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-13-the-king-saves-the-people/aug-13-the-king-saves-the-people-lullaby.mp3",
-  "readId": "b8-w2-n6",
-  "appPage": "stories/aug-13-the-king-saves-the-people.html",
+  "readId": "b8-w2-n7",
+  "appPage": "stories/aug-14-esther-saves-her-people.html",
   "sung": true
  },
  {
@@ -1118,8 +1118,8 @@ window.LST_STORY_SONGS = [
   "title": "Treats and Gifts to Share",
   "page": "https://littlescripturetravelers.com/lantern/aug-14-a-happy-celebration/aug-14-a-happy-celebration-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-14-a-happy-celebration/aug-14-a-happy-celebration-lullaby.mp3",
-  "readId": "b8-w2-n7",
-  "appPage": "stories/aug-14-a-happy-celebration.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -1134,8 +1134,8 @@ window.LST_STORY_SONGS = [
   "title": "Job's Thankful Morning Prayer",
   "page": "https://littlescripturetravelers.com/lantern/aug-15-job-loved-heavenly-father/aug-15-job-loved-heavenly-father-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-15-job-loved-heavenly-father/aug-15-job-loved-heavenly-father-lullaby.mp3",
-  "readId": "b8-w3-n1",
-  "appPage": "stories/aug-15-job-loved-heavenly-father.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -1150,8 +1150,8 @@ window.LST_STORY_SONGS = [
   "title": "A Strong Little Anchor",
   "page": "https://littlescripturetravelers.com/lantern/aug-16-job-keeps-trusting/aug-16-job-keeps-trusting-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-16-job-keeps-trusting/aug-16-job-keeps-trusting-lullaby.mp3",
-  "readId": "b8-w3-n2",
-  "appPage": "stories/aug-16-job-keeps-trusting.html",
+  "readId": "b8-w3-n1",
+  "appPage": "stories/aug-15-blessed-be-the-lords-name.html",
   "sung": true
  },
  {
@@ -1166,8 +1166,8 @@ window.LST_STORY_SONGS = [
   "title": "Friends Who Sit Close By",
   "page": "https://littlescripturetravelers.com/lantern/aug-17-kind-friends-come-to-sit/aug-17-kind-friends-come-to-sit-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-17-kind-friends-come-to-sit/aug-17-kind-friends-come-to-sit-lullaby.mp3",
-  "readId": "b8-w3-n3",
-  "appPage": "stories/aug-17-kind-friends-come-to-sit.html",
+  "readId": "b8-w3-n2",
+  "appPage": "stories/aug-16-friends-who-sat-close.html",
   "sung": true
  },
  {
@@ -1183,7 +1183,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/aug-18-job-tells-heavenly-father-his-feelings/aug-18-job-tells-heavenly-father-his-feelings-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-18-job-tells-heavenly-father-his-feelings/aug-18-job-tells-heavenly-father-his-feelings-lullaby.mp3",
   "readId": "b8-w3-n4",
-  "appPage": "stories/aug-18-job-tells-heavenly-father-his-feelings.html",
+  "appPage": "stories/aug-18-my-redeemer-lives.html",
   "sung": true
  },
  {
@@ -1199,7 +1199,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/aug-19-heavenly-father-shows-his-wonders/aug-19-heavenly-father-shows-his-wonders-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-19-heavenly-father-shows-his-wonders/aug-19-heavenly-father-shows-his-wonders-lullaby.mp3",
   "readId": "b8-w3-n5",
-  "appPage": "stories/aug-19-heavenly-father-shows-his-wonders.html",
+  "appPage": "stories/aug-19-when-the-stars-sang.html",
   "sung": true
  },
  {
@@ -1214,8 +1214,8 @@ window.LST_STORY_SONGS = [
   "title": "I Don't Need All the Answers",
   "page": "https://littlescripturetravelers.com/lantern/aug-20-job-trusts-heavenly-fathers-wisdom/aug-20-job-trusts-heavenly-fathers-wisdom-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-20-job-trusts-heavenly-fathers-wisdom/aug-20-job-trusts-heavenly-fathers-wisdom-lullaby.mp3",
-  "readId": "b8-w3-n6",
-  "appPage": "stories/aug-20-job-trusts-heavenly-fathers-wisdom.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -1231,7 +1231,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/aug-21-heavenly-father-blesses-job-again/aug-21-heavenly-father-blesses-job-again-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-21-heavenly-father-blesses-job-again/aug-21-heavenly-father-blesses-job-again-lullaby.mp3",
   "readId": "b8-w3-n7",
-  "appPage": "stories/aug-21-heavenly-father-blesses-job-again.html",
+  "appPage": "stories/aug-21-the-lord-blessed-job.html",
   "sung": true
  },
  {
@@ -1247,7 +1247,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/aug-22-the-happy-little-tree/aug-22-the-happy-little-tree-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-22-the-happy-little-tree/aug-22-the-happy-little-tree-lullaby.mp3",
   "readId": "b8-w4-n1",
-  "appPage": "stories/aug-22-the-happy-little-tree.html",
+  "appPage": "stories/aug-22-a-tree-by-the-river.html",
   "sung": true
  },
  {
@@ -1263,7 +1263,7 @@ window.LST_STORY_SONGS = [
   "page": "https://littlescripturetravelers.com/lantern/aug-23-look-at-the-stars/aug-23-look-at-the-stars-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-23-look-at-the-stars/aug-23-look-at-the-stars-lullaby.mp3",
   "readId": "b8-w4-n2",
-  "appPage": "stories/aug-23-look-at-the-stars.html",
+  "appPage": "stories/aug-23-the-moon-and-the-stars.html",
   "sung": true
  },
  {
@@ -1278,8 +1278,8 @@ window.LST_STORY_SONGS = [
   "title": "Green Grass and Quiet Water",
   "page": "https://littlescripturetravelers.com/lantern/aug-24-the-good-shepherd/aug-24-the-good-shepherd-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-24-the-good-shepherd/aug-24-the-good-shepherd-lullaby.mp3",
-  "readId": "b8-w4-n3",
-  "appPage": "stories/aug-24-the-good-shepherd.html",
+  "readId": "b8-w4-n4",
+  "appPage": "stories/aug-25-the-lord-is-my-shepherd.html",
   "sung": true
  },
  {
@@ -1294,8 +1294,8 @@ window.LST_STORY_SONGS = [
   "title": "His Light Never Goes Out",
   "page": "https://littlescripturetravelers.com/lantern/aug-25-heavenly-father-is-my-light/aug-25-heavenly-father-is-my-light-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-25-heavenly-father-is-my-light/aug-25-heavenly-father-is-my-light-lullaby.mp3",
-  "readId": "b8-w4-n4",
-  "appPage": "stories/aug-25-heavenly-father-is-my-light.html",
+  "readId": "b8-w4-n6",
+  "appPage": "stories/aug-27-the-lord-is-my-light.html",
   "sung": true
  },
  {
@@ -1310,8 +1310,8 @@ window.LST_STORY_SONGS = [
   "title": "Quiet Heart, He Is Near",
   "page": "https://littlescripturetravelers.com/lantern/aug-26-be-still-and-know/aug-26-be-still-and-know-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-26-be-still-and-know/aug-26-be-still-and-know-lullaby.mp3",
-  "readId": "b8-w4-n5",
-  "appPage": "stories/aug-26-be-still-and-know.html",
+  "readId": "b8-w4-n7",
+  "appPage": "stories/aug-28-be-still.html",
   "sung": true
  },
  {
@@ -1326,8 +1326,8 @@ window.LST_STORY_SONGS = [
   "title": "Lifted Up and Singing",
   "page": "https://littlescripturetravelers.com/lantern/aug-27-a-brand-new-song/aug-27-a-brand-new-song-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-27-a-brand-new-song/aug-27-a-brand-new-song-lullaby.mp3",
-  "readId": "b8-w4-n6",
-  "appPage": "stories/aug-27-a-brand-new-song.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -1342,8 +1342,8 @@ window.LST_STORY_SONGS = [
   "title": "Harps and Horns and Happy Hearts",
   "page": "https://littlescripturetravelers.com/lantern/aug-28-sing-with-all-your-heart/aug-28-sing-with-all-your-heart-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-28-sing-with-all-your-heart/aug-28-sing-with-all-your-heart-lullaby.mp3",
-  "readId": "b8-w4-n7",
-  "appPage": "stories/aug-28-sing-with-all-your-heart.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -1358,8 +1358,8 @@ window.LST_STORY_SONGS = [
   "title": "Washed Clean Like Warm Water",
   "page": "https://littlescripturetravelers.com/lantern/aug-29-a-clean-new-heart/aug-29-a-clean-new-heart-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-29-a-clean-new-heart/aug-29-a-clean-new-heart-lullaby.mp3",
-  "readId": "b8-w5-n1",
-  "appPage": "stories/aug-29-a-clean-new-heart.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -1374,8 +1374,8 @@ window.LST_STORY_SONGS = [
   "title": "Standing on the Steady Rock",
   "page": "https://littlescripturetravelers.com/lantern/aug-30-my-strong-safe-rock/aug-30-my-strong-safe-rock-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-30-my-strong-safe-rock/aug-30-my-strong-safe-rock-lullaby.mp3",
-  "readId": "b8-w5-n2",
-  "appPage": "stories/aug-30-my-strong-safe-rock.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -1390,8 +1390,8 @@ window.LST_STORY_SONGS = [
   "title": "Snuggle Down and Think of Him",
   "page": "https://littlescripturetravelers.com/lantern/aug-31-thinking-of-heavenly-father-at-night/aug-31-thinking-of-heavenly-father-at-night-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-31-thinking-of-heavenly-father-at-night/aug-31-thinking-of-heavenly-father-at-night-lullaby.mp3",
-  "readId": "b8-w5-n3",
-  "appPage": "stories/aug-31-thinking-of-heavenly-father-at-night.html",
+  "readId": "b8-w5-n4",
+  "appPage": "stories/aug-32-in-the-shadow-of-his-wings.html",
   "sung": true
  },
  {
@@ -1406,8 +1406,8 @@ window.LST_STORY_SONGS = [
   "title": "Sharing the Happy News",
   "page": "https://littlescripturetravelers.com/lantern/aug-32-come-and-hear/aug-32-come-and-hear-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-32-come-and-hear/aug-32-come-and-hear-lullaby.mp3",
-  "readId": "b8-w5-n4",
-  "appPage": "stories/aug-32-come-and-hear.html",
+  "readId": "b8-w5-n5",
+  "appPage": "stories/aug-33-come-and-hear.html",
   "sung": true
  },
  {
@@ -1422,8 +1422,8 @@ window.LST_STORY_SONGS = [
   "title": "From Tiny Child to Gray Hair",
   "page": "https://littlescripturetravelers.com/lantern/aug-33-my-hope-since-i-was-little/aug-33-my-hope-since-i-was-little-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-33-my-hope-since-i-was-little/aug-33-my-hope-since-i-was-little-lullaby.mp3",
-  "readId": "b8-w5-n5",
-  "appPage": "stories/aug-33-my-hope-since-i-was-little.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -1438,8 +1438,8 @@ window.LST_STORY_SONGS = [
   "title": "A Chain of Love, Passed On",
   "page": "https://littlescripturetravelers.com/lantern/aug-34-tell-the-children/aug-34-tell-the-children-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-34-tell-the-children/aug-34-tell-the-children-lullaby.mp3",
-  "readId": "b8-w5-n6",
-  "appPage": "stories/aug-34-tell-the-children.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  },
  {
@@ -1454,8 +1454,8 @@ window.LST_STORY_SONGS = [
   "title": "Teach Me Your Kind Way",
   "page": "https://littlescripturetravelers.com/lantern/aug-35-heavenly-father-is-so-good/aug-35-heavenly-father-is-so-good-lullaby.html",
   "audio": "https://littlescripturetravelers.com/lantern/aug-35-heavenly-father-is-so-good/aug-35-heavenly-father-is-so-good-lullaby.mp3",
-  "readId": "b8-w5-n7",
-  "appPage": "stories/aug-35-heavenly-father-is-so-good.html",
+  "readId": "",
+  "appPage": "",
   "sung": true
  }
 ];

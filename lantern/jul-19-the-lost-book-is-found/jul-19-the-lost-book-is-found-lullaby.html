@@ -593,7 +593,7 @@ const RESOURCES = {
     { kind: "Story",
       title: "The Lost Book Is Found",
       note:  "The Lost Book Is Found — 2 Kings 22. July, Story 19.",
-      url:   "https://littlescripturetravelers.com/read.html?id=b7-w3-n5" },
+      url:   "https://littlescripturetravelers.com/read.html?id=b7-w3-n7" },
     { kind: "Lullaby",
       title: "A Little Travelers’ Lullaby",
       note:  "All four Travelers, one verse each. Sing it slow.",
@@ -710,7 +710,7 @@ function partHTML(p){
 /* ---------- resources card ---------- */
 function resourcesHTML(){
   if (!RESOURCES || !RESOURCES.items || !RESOURCES.items.length) return '';
-  const rows = RESOURCES.items.map(function(r){
+  const rows = RESOURCES.items.filter(function(r){ return !!r.url; }).map(function(r){
     return '<a class="res" href="' + r.url + '">' +
              '<span class="res-kind">' + r.kind + '</span>' +
              '<span class="res-title">' + r.title + '</span>' +

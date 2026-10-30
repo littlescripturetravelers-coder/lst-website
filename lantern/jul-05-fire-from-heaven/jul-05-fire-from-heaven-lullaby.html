@@ -593,7 +593,7 @@ const RESOURCES = {
     { kind: "Story",
       title: "Fire from Heaven",
       note:  "Fire from Heaven — 1 Kings 18. July, Story 5.",
-      url:   "https://littlescripturetravelers.com/read.html?id=b7-w1-n5" },
+      url:   "https://littlescripturetravelers.com/read.html?id=b7-w1-n4" },
     { kind: "Lullaby",
       title: "A Little Travelers’ Lullaby",
       note:  "All four Travelers, one verse each. Sing it slow.",
@@ -710,7 +710,7 @@ function partHTML(p){
 /* ---------- resources card ---------- */
 function resourcesHTML(){
   if (!RESOURCES || !RESOURCES.items || !RESOURCES.items.length) return '';
-  const rows = RESOURCES.items.map(function(r){
+  const rows = RESOURCES.items.filter(function(r){ return !!r.url; }).map(function(r){
     return '<a class="res" href="' + r.url + '">' +
              '<span class="res-kind">' + r.kind + '</span>' +
              '<span class="res-title">' + r.title + '</span>' +

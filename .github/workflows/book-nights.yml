@@ -18,11 +18,11 @@ on:
   workflow_dispatch:
     inputs:
       month:
-        description: "the month, as its contents page is named (october)"
+        description: "the month, as its contents page is named (october; a New Testament book: nt-january)"
         default: "october"
         required: true
       book:
-        description: "the book number (June was 6, so October is 10)"
+        description: "the book number (June was 6, so October is 10; the New Testament January is 13)"
         default: "10"
         required: true
 
@@ -52,7 +52,9 @@ jobs:
           def get(u):
               return urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': 'lst-book-nights'}), timeout=120).read()
           index = get(base + month + '.html').decode('utf-8', 'ignore')
-          files = sorted(set(re.findall(r'href="(%s-\d\d-[^"]+\.html)"' % month[:3], index)))
+          # a New Testament book (nt-january) links its nights as njan-01-...
+          prefix = ('n' + month[3:6]) if month.startswith('nt-') else month[:3]
+          files = sorted(set(re.findall(r'href="(%s-\d\d-[^"]+\.html)"' % prefix, index)))
           if not files: raise SystemExit('no night pages linked from ' + month + '.html')
           for f in files:
               open('/tmp/stories/' + f, 'wb').write(get(base + f))

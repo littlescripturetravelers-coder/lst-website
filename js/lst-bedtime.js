@@ -131,11 +131,18 @@
      missing, so "Wonderful Is His Way" showed "The World's Most Treasured True
      Stories" on the shelf. Add each month as its book is published. */
   var BOOK_ART = {
+    january: "images/book-cover-january.jpg",
+    february: "images/book-cover-february.jpg",
+    march: "images/book-cover-march.jpg",
+    april: "images/book-cover-april.jpg",
+    may: "images/book-cover-may.jpg",
     june: "images/book-cover-june.jpg",
     july: "images/book-cover-july.jpg",
     august: "images/book-cover-august.jpg",
     september: "images/book-cover-september.jpg",
-    october: "images/book-cover-october.jpg"
+    october: "images/book-cover-october.jpg",
+    november: "images/book-cover-november.jpg",
+    december: "images/book-cover-december.jpg"
   };
   var VOLUME_ART = {
     ot: "images/cover-ot.jpg",
@@ -144,6 +151,9 @@
     dc: "images/cover-dc.jpg"
   };
   function artFor(s) {
+    /* the New Testament year (books 13-24) has its own covers, by month (Levi, 29 Oct 2026) */
+    if (String(s.volume || "").toLowerCase() === "nt" && s.month)
+      return "images/book-cover-nt-" + String(s.month).toLowerCase() + ".jpg";
     return BOOK_ART[String(s.month || "").toLowerCase()] ||
            VOLUME_ART[String(s.volume || "").toLowerCase()] || "";
   }
