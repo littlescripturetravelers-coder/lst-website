@@ -89,7 +89,7 @@ def main():
                 for k in ("img", "alt", "focus"):
                     if k in b:
                         pic[k] = b.pop(k)
-        if pic:
+        if pic.get("img"):          # a words-only night (pictures still coming) has none to move
             for b in beats:
                 if b.get("heading") == "Remember This" and "img" not in b:
                     b["img"] = pic["img"]
