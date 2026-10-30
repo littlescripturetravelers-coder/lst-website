@@ -19,7 +19,7 @@ def main(srcdir, mon):
     n = 0
     for name in files:
         src = open(os.path.join(srcdir, name), encoding="utf-8", errors="ignore").read()
-        st = json.loads(re.search(r"const STORY\s*=\s*(\{.*?\n\});", src, re.S).group(1))
+        st = json.JSONDecoder().raw_decode(src[re.search(r"const STORY\s*=\s*(?=\{)", src).end():])[0]
         slug = "-".join(name.split("-")[:2])
         for i, b in enumerate(st.get("beats", [])):
             img = b.get("img") or ""

@@ -42,10 +42,12 @@ DATA_URI = re.compile(r'data:[a-zA-Z0-9/+.-]+;base64,[A-Za-z0-9+/=\s]+')
 
 def story_of(path):
     src = open(path, encoding="utf-8", errors="ignore").read()
-    m = re.search(r'const STORY\s*=\s*(\{.*?\n\});', src, re.S)
+    # the object is read as JSON from its first brace to its own end (a page may write it on one line,
+    # with more script after it - November's do)
+    m = re.search(r'const STORY\s*=\s*(?=\{)', src)
     if not m:
         return None
-    return json.loads(DATA_URI.sub("__IMG__", m.group(1)))
+    return json.JSONDecoder().raw_decode(DATA_URI.sub("__IMG__", src[m.end():]))[0]
 
 
 def main():
