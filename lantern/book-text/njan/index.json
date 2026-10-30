@@ -1,0 +1,359 @@
+{
+ "month": "January",
+ "year": 2027,
+ "volume": "The New Testament",
+ "book": 13,
+ "bookTitle": "Come and See!",
+ "nights": [
+  {
+   "Night": 1,
+   "Week": 1,
+   "Night in Week": 1,
+   "Title": "An Angel in the Temple",
+   "Scripture": "Luke 1:5–25",
+   "Traveler": "Wren the Wonderer",
+   "Slug": "an-angel-in-the-temple",
+   "Text File": "Story-01_W1-N1_An-Angel-in-the-Temple.txt"
+  },
+  {
+   "Night": 2,
+   "Week": 1,
+   "Night in Week": 2,
+   "Title": "Mary Says Yes",
+   "Scripture": "Luke 1:26–38",
+   "Traveler": "Beau the Brave",
+   "Slug": "mary-says-yes",
+   "Text File": "Story-02_W1-N2_Mary-Says-Yes.txt"
+  },
+  {
+   "Night": 3,
+   "Week": 1,
+   "Night in Week": 3,
+   "Title": "The Baby Who Jumped for Joy",
+   "Scripture": "Luke 1:39–45",
+   "Traveler": "Willow the Warm",
+   "Slug": "the-baby-who-jumped-for-joy",
+   "Text File": "Story-03_W1-N3_The-Baby-Who-Jumped-for-Joy.txt"
+  },
+  {
+   "Night": 4,
+   "Week": 1,
+   "Night in Week": 4,
+   "Title": "Mary's Thank-You Song",
+   "Scripture": "Luke 1:46–56",
+   "Traveler": "Wren the Wonderer",
+   "Slug": "marys-thank-you-song",
+   "Text File": "Story-04_W1-N4_Marys-Thank-You-Song.txt"
+  },
+  {
+   "Night": 5,
+   "Week": 1,
+   "Night in Week": 5,
+   "Title": "His Name Is John",
+   "Scripture": "Luke 1:57–66",
+   "Traveler": "Scout the Seeker",
+   "Slug": "his-name-is-john",
+   "Text File": "Story-05_W1-N5_His-Name-Is-John.txt"
+  },
+  {
+   "Night": 6,
+   "Week": 1,
+   "Night in Week": 6,
+   "Title": "A Song About the Sunrise",
+   "Scripture": "Luke 1:67–80",
+   "Traveler": "Willow the Warm",
+   "Slug": "a-song-about-the-sunrise",
+   "Text File": "Story-06_W1-N6_A-Song-About-the-Sunrise.txt"
+  },
+  {
+   "Night": 7,
+   "Week": 1,
+   "Night in Week": 7,
+   "Title": "Joseph's Dream",
+   "Scripture": "Matthew 1:18–25",
+   "Traveler": "Beau the Brave",
+   "Slug": "josephs-dream",
+   "Text File": "Story-07_W1-N7_Josephs-Dream.txt"
+  },
+  {
+   "Night": 8,
+   "Week": 2,
+   "Night in Week": 1,
+   "Title": "No Room at the Inn",
+   "Scripture": "Luke 2:1–7",
+   "Traveler": "Willow the Warm",
+   "Slug": "no-room-at-the-inn",
+   "Text File": "Story-08_W2-N1_No-Room-at-the-Inn.txt"
+  },
+  {
+   "Night": 9,
+   "Week": 2,
+   "Night in Week": 2,
+   "Title": "Angels and Shepherds",
+   "Scripture": "Luke 2:8–20",
+   "Traveler": "Scout the Seeker",
+   "Slug": "angels-and-shepherds",
+   "Text File": "Story-09_W2-N2_Angels-and-Shepherds.txt"
+  },
+  {
+   "Night": 10,
+   "Week": 2,
+   "Night in Week": 3,
+   "Title": "Simeon and Anna Wait for Jesus",
+   "Scripture": "Luke 2:21–38",
+   "Traveler": "Wren the Wonderer",
+   "Slug": "simeon-and-anna-wait-for-jesus",
+   "Text File": "Story-10_W2-N3_Simeon-and-Anna-Wait-for-Jesus.txt"
+  },
+  {
+   "Night": 11,
+   "Week": 2,
+   "Night in Week": 4,
+   "Title": "The Wise Men Follow the Star",
+   "Scripture": "Matthew 2:1–12",
+   "Traveler": "Scout the Seeker",
+   "Slug": "the-wise-men-follow-the-star",
+   "Text File": "Story-11_W2-N4_The-Wise-Men-Follow-the-Star.txt"
+  },
+  {
+   "Night": 12,
+   "Week": 2,
+   "Night in Week": 5,
+   "Title": "Safe in Egypt",
+   "Scripture": "Matthew 2:13–23",
+   "Traveler": "Beau the Brave",
+   "Slug": "safe-in-egypt",
+   "Text File": "Story-12_W2-N5_Safe-in-Egypt.txt"
+  },
+  {
+   "Night": 13,
+   "Week": 2,
+   "Night in Week": 6,
+   "Title": "Jesus Grows Up",
+   "Scripture": "Luke 2:39–40, 51–52",
+   "Traveler": "Willow the Warm",
+   "Slug": "jesus-grows-up",
+   "Text File": "Story-13_W2-N6_Jesus-Grows-Up.txt"
+  },
+  {
+   "Night": 14,
+   "Week": 2,
+   "Night in Week": 7,
+   "Title": "Jesus in His Father's House",
+   "Scripture": "Luke 2:41–52",
+   "Traveler": "Wren the Wonderer",
+   "Slug": "jesus-in-his-fathers-house",
+   "Text File": "Story-14_W2-N7_Jesus-in-His-Fathers-House.txt"
+  },
+  {
+   "Night": 15,
+   "Week": 3,
+   "Night in Week": 1,
+   "Title": "The Light of the World",
+   "Scripture": "John 1:1–5, 14",
+   "Traveler": "Wren the Wonderer",
+   "Slug": "the-light-of-the-world-2027",
+   "Text File": "Story-15_W3-N1_The-Light-of-the-World.txt"
+  },
+  {
+   "Night": 16,
+   "Week": 3,
+   "Night in Week": 2,
+   "Title": "Children of Heavenly Father",
+   "Scripture": "John 1:6–13",
+   "Traveler": "Willow the Warm",
+   "Slug": "children-of-heavenly-father",
+   "Text File": "Story-16_W3-N2_Children-of-Heavenly-Father.txt"
+  },
+  {
+   "Night": 17,
+   "Week": 3,
+   "Night in Week": 3,
+   "Title": "I Am Not the Christ",
+   "Scripture": "John 1:19–28",
+   "Traveler": "Scout the Seeker",
+   "Slug": "i-am-not-the-christ",
+   "Text File": "Story-17_W3-N3_I-Am-Not-the-Christ.txt"
+  },
+  {
+   "Night": 18,
+   "Week": 3,
+   "Night in Week": 4,
+   "Title": "The Lamb and the Dove",
+   "Scripture": "John 1:29–34",
+   "Traveler": "Beau the Brave",
+   "Slug": "the-lamb-and-the-dove",
+   "Text File": "Story-18_W3-N4_The-Lamb-and-the-Dove.txt"
+  },
+  {
+   "Night": 19,
+   "Week": 3,
+   "Night in Week": 5,
+   "Title": "Come and See",
+   "Scripture": "John 1:35–39",
+   "Traveler": "Scout the Seeker",
+   "Slug": "come-and-see",
+   "Text File": "Story-19_W3-N5_Come-and-See.txt"
+  },
+  {
+   "Night": 20,
+   "Week": 3,
+   "Night in Week": 6,
+   "Title": "Andrew Finds His Brother",
+   "Scripture": "John 1:40–42",
+   "Traveler": "Willow the Warm",
+   "Slug": "andrew-finds-his-brother",
+   "Text File": "Story-20_W3-N6_Andrew-Finds-His-Brother.txt"
+  },
+  {
+   "Night": 21,
+   "Week": 3,
+   "Night in Week": 7,
+   "Title": "Nathanael Under the Fig Tree",
+   "Scripture": "John 1:43–51",
+   "Traveler": "Wren the Wonderer",
+   "Slug": "nathanael-under-the-fig-tree",
+   "Text File": "Story-21_W3-N7_Nathanael-Under-the-Fig-Tree.txt"
+  },
+  {
+   "Night": 22,
+   "Week": 4,
+   "Night in Week": 1,
+   "Title": "A Voice in the Wilderness",
+   "Scripture": "Matthew 3:1–6; Mark 1:1–6; Luke 3:1–6",
+   "Traveler": "Scout the Seeker",
+   "Slug": "a-voice-in-the-wilderness",
+   "Text File": "Story-22_W4-N1_A-Voice-in-the-Wilderness.txt"
+  },
+  {
+   "Night": 23,
+   "Week": 4,
+   "Night in Week": 2,
+   "Title": "Two Coats",
+   "Scripture": "Luke 3:7–14",
+   "Traveler": "Willow the Warm",
+   "Slug": "two-coats",
+   "Text File": "Story-23_W4-N2_Two-Coats.txt"
+  },
+  {
+   "Night": 24,
+   "Week": 4,
+   "Night in Week": 3,
+   "Title": "Someone Greater Is Coming",
+   "Scripture": "Luke 3:15–18; Matthew 3:11–12",
+   "Traveler": "Wren the Wonderer",
+   "Slug": "someone-greater-is-coming",
+   "Text File": "Story-24_W4-N3_Someone-Greater-Is-Coming.txt"
+  },
+  {
+   "Night": 25,
+   "Week": 4,
+   "Night in Week": 4,
+   "Title": "Jesus Is Baptized",
+   "Scripture": "Matthew 3:13–17; Mark 1:9–11",
+   "Traveler": "Beau the Brave",
+   "Slug": "jesus-is-baptized",
+   "Text File": "Story-25_W4-N4_Jesus-Is-Baptized.txt"
+  },
+  {
+   "Night": 26,
+   "Week": 4,
+   "Night in Week": 5,
+   "Title": "Fishers of Men",
+   "Scripture": "Mark 1:14–20",
+   "Traveler": "Scout the Seeker",
+   "Slug": "fishers-of-men",
+   "Text File": "Story-26_W4-N5_Fishers-of-Men.txt"
+  },
+  {
+   "Night": 27,
+   "Week": 4,
+   "Night in Week": 6,
+   "Title": "Jesus Heals Peter's Family",
+   "Scripture": "Mark 1:21–34",
+   "Traveler": "Willow the Warm",
+   "Slug": "jesus-heals-peters-family",
+   "Text File": "Story-27_W4-N6_Jesus-Heals-Peters-Family.txt"
+  },
+  {
+   "Night": 28,
+   "Week": 4,
+   "Night in Week": 7,
+   "Title": "Jesus Prays in the Morning",
+   "Scripture": "Mark 1:35–39",
+   "Traveler": "Beau the Brave",
+   "Slug": "jesus-prays-in-the-morning",
+   "Text File": "Story-28_W4-N7_Jesus-Prays-in-the-Morning.txt"
+  },
+  {
+   "Night": 29,
+   "Week": 5,
+   "Night in Week": 1,
+   "Title": "Jesus Says No",
+   "Scripture": "Matthew 4:1–11; Luke 4:1–13",
+   "Traveler": "Beau the Brave",
+   "Slug": "jesus-says-no",
+   "Text File": "Story-29_W5-N1_Jesus-Says-No.txt"
+  },
+  {
+   "Night": 30,
+   "Week": 5,
+   "Night in Week": 2,
+   "Title": "The Spirit of the Lord Is upon Me",
+   "Scripture": "Luke 4:14–22",
+   "Traveler": "Wren the Wonderer",
+   "Slug": "the-spirit-of-the-lord-is-upon-me",
+   "Text File": "Story-30_W5-N2_The-Spirit-of-the-Lord-Is-upon-Me.txt"
+  },
+  {
+   "Night": 31,
+   "Week": 5,
+   "Night in Week": 3,
+   "Title": "A Great Light",
+   "Scripture": "Matthew 4:12–17",
+   "Traveler": "Scout the Seeker",
+   "Slug": "a-great-light",
+   "Text File": "Story-31_W5-N3_A-Great-Light.txt"
+  },
+  {
+   "Night": 32,
+   "Week": 5,
+   "Night in Week": 4,
+   "Title": "Launch Out into the Deep",
+   "Scripture": "Luke 5:1–11",
+   "Traveler": "Scout the Seeker",
+   "Slug": "launch-out-into-the-deep",
+   "Text File": "Story-32_W5-N4_Launch-Out-into-the-Deep.txt"
+  },
+  {
+   "Night": 33,
+   "Week": 5,
+   "Night in Week": 5,
+   "Title": "I Will. Be Clean.",
+   "Scripture": "Luke 5:12–15",
+   "Traveler": "Willow the Warm",
+   "Slug": "i-will-be-clean",
+   "Text File": "Story-33_W5-N5_I-Will-Be-Clean.txt"
+  },
+  {
+   "Night": 34,
+   "Week": 5,
+   "Night in Week": 6,
+   "Title": "Friends on the Roof",
+   "Scripture": "Luke 5:17–26",
+   "Traveler": "Beau the Brave",
+   "Slug": "friends-on-the-roof",
+   "Text File": "Story-34_W5-N6_Friends-on-the-Roof.txt"
+  },
+  {
+   "Night": 35,
+   "Week": 5,
+   "Night in Week": 7,
+   "Title": "Jesus Calls Matthew",
+   "Scripture": "Luke 5:27–32",
+   "Traveler": "Wren the Wonderer",
+   "Slug": "jesus-calls-matthew",
+   "Text File": "Story-35_W5-N7_Jesus-Calls-Matthew.txt"
+  }
+ ]
+}
