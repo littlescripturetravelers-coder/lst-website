@@ -26,7 +26,7 @@ concurrency:
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 150     # a whole YouTube episode (58 clips) can take an hour or more
     steps:
       - uses: actions/checkout@v4
       - name: Tools (ffmpeg, Pillow, the card photographer)
@@ -44,7 +44,10 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}            # Grok Imagine: new pictures and moving clips
           HEYGEN_API_KEY: ${{ secrets.HEYGEN_API_KEY }}      # the talking presenter (lifelike avatar)
+          FAL_KEY: ${{ secrets.FAL_KEY }}                    # the episode clip makers (Kling, Seedance, Veo, Grok, Hailuo)
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
           DID_API_KEY: ${{ secrets.DID_API_KEY }}
           STUDIO_ID: ${{ github.event.client_payload.id || github.event.inputs.id }}
+          STUDIO_EPISODES: '1'                               # YouTube episodes are made here only
+          STUDIO_LIMIT: '1'
         run: python3 lantern/studio_render.py

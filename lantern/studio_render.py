@@ -62,7 +62,25 @@ def settings():
     return (rows[0].get("value") if rows else {}) or {}
 
 def save_settings(v):
+    """Writes back what the video maker learned (its keys, today's spending, the account's voices, the
+    reuse library, sheets and music it made, voices it chose) WITHOUT undoing what the owner changed in
+    the app meanwhile: the owner's newer choices win."""
     if LOCAL: return
+    try: fresh = settings()
+    except Exception: fresh = {}
+    out = dict(fresh)
+    for k in ("env", "spent", "voices", "cache"):
+        if k in v: out[k] = v[k]
+    out["reuse"] = {**(v.get("reuse") or {}), **(fresh.get("reuse") or {})} if (v.get("reuse") or fresh.get("reuse")) else {}
+    for k in ("reuse",):
+        for sid, r in (v.get("reuse") or {}).items():
+            out["reuse"][sid] = {**r, **(fresh.get("reuse") or {}).get(sid, {})} if sid in (fresh.get("reuse") or {}) else r
+    keys = {r.get("key") for r in fresh.get("refs") or []}
+    out["refs"] = list(fresh.get("refs") or []) + [r for r in v.get("refs") or [] if r.get("key") not in keys]
+    urls = {m.get("url") for m in fresh.get("music") or []}
+    out["music"] = list(fresh.get("music") or []) + [m for m in v.get("music") or [] if m.get("url") not in urls]
+    out["cast"] = {**(v.get("cast") or {}), **(fresh.get("cast") or {})}
+    v = out
     mm.http("POST", f"{mm.URL}/rest/v1/marketing_settings", {"key": "studio", "value": v, "updated_at": datetime.datetime.utcnow().isoformat() + "Z"},
             {"apikey": mm.KEY, "Authorization": "Bearer " + mm.KEY, "Content-Type": "application/json", "Prefer": "resolution=merge-duplicates"})
 
@@ -439,6 +457,7 @@ def chunks(words, most, chars):
     return out
 
 def captions_ass(scenes, W, H, style, path):
+    # THE BRAND SHEET (v2.0): captions are Nunito (body and captions), bold, white on the navy outline; the word said lights Scripture Gold
     kind = style.get("captions") or "karaoke"
     m = min(W, H); portrait = H > W
     size = int(m * (0.085 if kind == "pop" else 0.066)) if portrait else int(H * (0.058 if kind != "line" else 0.05))
@@ -447,7 +466,7 @@ def captions_ass(scenes, W, H, style, path):
     white, gold = ass_color(style.get("color") or "#FFFFFF"), ass_color(style.get("highlight") or "#F5C518")
     head = (f"[Script Info]\nScriptType: v4.00+\nPlayResX: {W}\nPlayResY: {H}\nWrapStyle: 0\n\n[V4+ Styles]\n"
             "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\n"
-            f"Style: Cap,Fredoka,{size},{white},{white},&H00371B0F&,&H96000000&,-1,0,0,0,100,100,0,0,1,{max(3, size // 14)},2,2,{int(W*0.07)},{int(W*0.07)},{marg},1\n\n"
+            f"Style: Cap,Nunito,{size},{white},{white},&H00371B0F&,&H96000000&,-1,0,0,0,100,100,0,0,1,{max(3, size // 14)},2,2,{int(W*0.07)},{int(W*0.07)},{marg},1\n\n"
             "[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n")
     ev = []
     esc = lambda s: s.replace("{", "(").replace("}", ")").replace("\\", "/")
@@ -586,6 +605,18 @@ def one(p, st, spend):
     tmp = tempfile.mkdtemp(prefix="studio-"); pid = p["id"]
     patch(pid, {"status": "building", "render_error": None})
     t0 = time.time()
+    if (p.get("timeline") or {}).get("mode") == "episode":            # THE EPISODE BUILDER (episode_render.py)
+        import episode_render as er
+        notes = []
+        try:
+            pt = er.run(p, st, notes)
+        except Exception as e:                                         # keep what was made; say what stopped it
+            patch(pid, {"status": "failed", "render_error": str(e)[:600], "timeline": p["timeline"],
+                        "render_log": "\n".join(notes)[-4000:]}); raise
+        pt.update({"rendered_at": datetime.datetime.utcnow().isoformat() + "Z",
+                   "render_log": "\n".join(notes + [f"{p['timeline'].get('stage')} in {int(time.time() - t0)} s"])[-4000:]})
+        patch(pid, pt); shutil.rmtree(tmp, ignore_errors=True)
+        return pt.get("render_url") or "(storyboard)", pt.get("thumb_url"), notes
     notes = build(p, tmp, spend, st)
     cover = mm.month_cover(p.get("night_date")) if p.get("night_date") else None
     out, thumb = render(p, tmp, st, cover)
@@ -610,15 +641,19 @@ def main():
         print(json.dumps({"total": tl.get("total"), "scenes": [(s.get("start"), s.get("dur")) for s in tl["scenes"]]})); return 0
     if not (mm.URL and mm.KEY): print("SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY missing"); return 1
     st = settings()
-    st["env"] = {"elevenlabs": bool(mm.ELEVEN), "grok": bool(XAI), "heygen": bool(HEYGEN), "openai": bool(mm.OPENAI),
+    st["env"] = {"elevenlabs": bool(mm.ELEVEN), "grok": bool(XAI), "heygen": bool(HEYGEN), "openai": bool(mm.OPENAI), "fal": bool(os.environ.get("FAL_KEY", "").strip()),
                  "replicate": bool(mm.REPLICATE), "at": datetime.datetime.utcnow().isoformat() + "Z"}
     spend = Spend(st)
     first = os.environ.get("STUDIO_ID", "").strip()
     rows = mm.sb_get("video_projects?select=*&status=in.(queued,building)&order=created_at.asc&limit=10")
     if first: rows = sorted(rows, key=lambda r: r["id"] != first)
+    # an episode is made only by its own workflow (studio-render.yml), never inside the nightly Lantern run
+    if not os.environ.get("STUDIO_EPISODES"): rows = [r for r in rows if (r.get("timeline") or {}).get("mode") != "episode"]
     stale = datetime.datetime.utcnow() - datetime.timedelta(minutes=40)
+    long_ago = datetime.datetime.utcnow() - datetime.timedelta(minutes=150)    # an episode can take an hour
     todo = [r for r in rows if r["status"] == "queued" or r["id"] == first or
-            datetime.datetime.fromisoformat(str(r["updated_at"]).replace("Z", "+00:00")).replace(tzinfo=None) < stale][:LIMIT]
+            datetime.datetime.fromisoformat(str(r["updated_at"]).replace("Z", "+00:00")).replace(tzinfo=None)
+            < (long_ago if (r.get("timeline") or {}).get("mode") == "episode" else stale)][:LIMIT]
     if not todo: print("studio: nothing waiting"); st["spent"] = spend.spent; save_settings(st); return 0
     for p in todo:
         try:
