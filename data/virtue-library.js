@@ -1013,7 +1013,8 @@ window.LST_LIBRARY = {
   {
    "book": 6,
    "month": "June",
-   "title": "The Lord Looks on the Heart"
+   "title": "A Heart That Follows the Lord",
+   "amazon": "https://www.amazon.com/Follows-Scripture-Travelers-Bedtime-Stories/dp/B0H3ZDCFSR/"
   },
   {
    "book": 7,
@@ -5125,104 +5126,95 @@ window.LST_LIBRARY = {
   },
   {
    "id": "b6-w1-n1",
-   "title": "Where You Go, I Will Go",
+   "title": "Ruth Stays with Naomi",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 1,
    "night": 1,
-   "scripture": "Ruth 1:1–22",
+   "scripture": "Ruth 1",
    "scriptureBook": "Ruth",
-   "traveler": "willow",
-   "feeling": "loved",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "family-love",
-    "faith"
+    "compassion"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "family-love",
-   "teachingNote": "Reach for this when your child feels afraid to be left and needs a picture of someone who stays, like Ruth beside Naomi.",
-   "teaser": "Long ago, there was no food in Bethlehem. So Naomi’s family moved far away, to a land called Moab. In Moab, Naomi’s husband died. Her two sons married Ruth and Orpah. The sons died too. Naomi was sad and far from…",
-   "wordCount": 125,
-   "aka": [
-    "Ruth Stays with Naomi"
-   ]
+   "teachingNote": "Reach for this when your child wants to walk away from someone who is sad or struggling instead of staying close.",
+   "teaser": "Long ago, there was no food in Bethlehem. So Naomi’s family moved far away, to a land called Moab. In Moab, Naomi’s husband died. Her two sons married Ruth and Orpah. The sons died too. Naomi was sad and far…",
+   "wordCount": 125
   },
   {
    "id": "b6-w1-n2",
-   "title": "Ruth in Boaz’s Field",
+   "title": "Ruth Works in the Field",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 1,
    "night": 2,
-   "scripture": "Ruth 2:2–16; Leviticus 19:9–10",
+   "scripture": "Ruth 2",
    "scriptureBook": "Ruth",
-   "traveler": "beau",
-   "feeling": "grateful",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "generosity",
-    "kindness"
+    "diligence",
+    "service"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "generosity",
-   "teachingNote": "Reach for this when your child is learning to share and needs to see how leftover grain fed Ruth and Naomi.",
-   "teaser": "Ruth and Naomi needed food. Ruth said, “Let me go to the field and pick up grain.” The Lord told farmers to leave some grain behind. It was “for the poor and the stranger,” people from far away. Then hungry people…",
-   "wordCount": 121,
-   "aka": [
-    "Ruth Works in the Field"
-   ]
+   "primaryVirtue": "diligence",
+   "teachingNote": "Reach for this when chores feel boring and your child needs a reason to work cheerfully instead of complaining.",
+   "teaser": "Ruth and Naomi needed food. Ruth said, “Let me go to the field and pick up grain.” The Lord told farmers to leave some grain behind. It was “for the poor and the stranger,” people from far away. Then hungry…",
+   "wordCount": 121
   },
   {
    "id": "b6-w1-n3",
-   "title": "A Baby Named Obed",
+   "title": "Boaz Marries Ruth",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 1,
    "night": 3,
-   "scripture": "Ruth 4:13–17; Matthew 1:5",
+   "scripture": "Ruth 3-4",
    "scriptureBook": "Ruth",
-   "traveler": "wren",
-   "feeling": "comforted",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "trust-in-god",
-    "family-love"
+    "perseverance",
+    "hope"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child feels forgotten and needs to know Heavenly Father brought joy back to Naomi.",
-   "teaser": "Boaz was a good man. He wanted to take care of Ruth and Naomi. So Boaz and Ruth got married. Then the Lord gave them a baby boy! Naomi had been very sad. Now she held the baby close and took care of him. Naomi’s…",
-   "wordCount": 125,
-   "aka": [
-    "Boaz Marries Ruth"
-   ]
+   "primaryVirtue": "perseverance",
+   "teachingNote": "Reach for this when your child is discouraged during a hard season and needs hope that staying faithful leads somewhere good.",
+   "teaser": "Boaz was a good man. He wanted to take care of Ruth and Naomi. So Boaz and Ruth got married. Then the Lord gave them a baby boy! Naomi had been very sad. Now she held the baby close and…",
+   "wordCount": 125
   },
   {
    "id": "b6-w1-n4",
    "title": "Hannah Prays for a Baby",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 1,
    "night": 4,
-   "scripture": "1 Samuel 1:1–18",
-   "scriptureBook": "1 Samuel",
-   "traveler": "beau",
-   "feeling": "calm",
+   "scripture": null,
+   "scriptureBook": null,
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "prayer",
     "trust-in-god"
@@ -5232,191 +5224,179 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "prayer",
-   "teachingNote": "Reach for this when your child has a worry too big for words and needs to know quiet prayers are heard.",
-   "teaser": "Hannah’s husband, Elkanah, loved her very much. But Hannah had no children. She felt so sad that she cried and would not eat. Each year, the family went to the Lord’s house at Shiloh. There, Hannah went to pray…",
+   "teachingNote": "Reach for this when your child wants something very badly, or needs to know that Heavenly Father hears a prayer prayed with a whole heart.",
+   "teaser": "Hannah’s husband, Elkanah, loved her very much. But Hannah had no children. She felt so sad that she cried and would not eat. Each year, the family went to the Lord’s house at Shiloh. There, Hannah went to pray. Hannah…",
    "wordCount": 118
   },
   {
    "id": "b6-w1-n5",
-   "title": "My Heart Rejoices",
+   "title": "Samuel Goes to the Temple",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 1,
    "night": 5,
-   "scripture": "1 Samuel 1:20–28; 2:1–2, 19",
+   "scripture": "1 Samuel 2",
    "scriptureBook": "1 Samuel",
-   "traveler": "willow",
-   "feeling": "happy",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "gratitude",
-    "faith"
+    "courage",
+    "obedience"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "gratitude",
-   "teachingNote": "Reach for this when your child has received an answered prayer and needs words to sing thanks like Hannah.",
-   "teaser": "The Lord gave Hannah a baby boy! She named him Samuel. She said, “I asked the Lord for him.” When Samuel was a little older, Hannah took him to the Lord’s house. She told Eli, “I prayed for this child, and the Lord…",
-   "wordCount": 120,
-   "aka": [
-    "Samuel Goes to the Temple"
-   ]
+   "primaryVirtue": "courage",
+   "teachingNote": "Reach for this when your child faces something new and scary, like a first day somewhere unfamiliar.",
+   "teaser": "The Lord gave Hannah a baby boy! She named him Samuel. She said, “I asked the Lord for him.” When Samuel was a little older, Hannah took him to the Lord’s house. She told Eli, “I prayed for this child…",
+   "wordCount": 120
   },
   {
    "id": "b6-w1-n6",
-   "title": "Samuel Hears the Lord",
+   "title": "The Lord Calls Samuel",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 1,
    "night": 6,
-   "scripture": "1 Samuel 3:1–10",
+   "scripture": "1 Samuel 3",
    "scriptureBook": "1 Samuel",
-   "traveler": "scout",
-   "feeling": "calm",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "reverence",
-    "prayer"
+    "prayer",
+    "pondering"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "reverence",
-   "teachingNote": "Reach for this when your child is too busy to listen and needs to practice saying, Speak, for I am listening.",
-   "teaser": "Young Samuel helped Eli at the Lord’s house. Eli was old, and his eyes could not see well. One night, the lamp still glowed, and Samuel lay down to sleep. A voice called, “Samuel!” Samuel ran to Eli. “Here I am! You…",
-   "wordCount": 125,
-   "aka": [
-    "The Lord Calls Samuel"
-   ]
+   "primaryVirtue": "prayer",
+   "teachingNote": "Reach for this when teaching your child to recognize and respond to Heavenly Father's voice, especially at bedtime.",
+   "teaser": "Young Samuel helped Eli at the Lord’s house. Eli was old, and his eyes could not see well. One night, the lamp still glowed, and Samuel lay down to sleep. A voice called, “Samuel!” Samuel ran to Eli. “Here I…",
+   "wordCount": 125
   },
   {
    "id": "b6-w1-n7",
-   "title": "The Stone of Help",
+   "title": "God's Power and the Ark",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 1,
    "night": 7,
-   "scripture": "1 Samuel 3:19–20; 7:3–12",
+   "scripture": "1 Samuel 4-7",
    "scriptureBook": "1 Samuel",
-   "traveler": "wren",
-   "feeling": "safe",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "trust-in-god",
+    "courage"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "trust-in-god",
+   "teachingNote": "Reach for this when your child needs reassurance that Heavenly Father is more powerful than anything that feels scary.",
+   "teaser": "Long ago, Heavenly Father's people had a special golden box. Inside it were flat stones, and on the stones were His rules for being good and kind. The box helped the people remember that Heavenly Father was close to them…",
+   "wordCount": 285
+  },
+  {
+   "id": "b6-w2-n1",
+   "title": "Israel Wants a King",
+   "volume": "ot",
+   "book": 6,
+   "bookTitle": "A Heart That Follows the Lord",
+   "month": "June",
+   "week": 2,
+   "night": 1,
+   "scripture": "1 Samuel 8",
+   "scriptureBook": "1 Samuel",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "contentment",
     "gratitude"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child doubts help will come again and needs a stone that says, Hitherto the Lord has helped us.",
-   "teaser": "Samuel grew up, and the Lord was with him. Everyone knew Samuel spoke for the Lord. But the people had been praying to other gods. Samuel said, “Turn your hearts back to the Lord.” So the people put the other gods…",
-   "wordCount": 123
-  },
-  {
-   "id": "b6-w2-n1",
-   "title": "We Want a King!",
-   "volume": "ot",
-   "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
-   "month": "June",
-   "week": 2,
-   "night": 1,
-   "scripture": "1 Samuel 8:4–7, 19–22",
-   "scriptureBook": "1 Samuel",
-   "traveler": "wren",
-   "feeling": "sad",
-   "virtues": [
-    "contentment",
-    "trust-in-god"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
    "primaryVirtue": "contentment",
-   "teachingNote": "Reach for this when your child wants what everyone else has and needs to remember the Lord is already their King.",
-   "teaser": "Samuel was now old. For many years, he had taught the people what Heavenly Father said. One day the leaders of Israel came to him. They said, “Give us a king, like all the other lands have.” This made Samuel sad. So…",
-   "wordCount": 122,
-   "aka": [
-    "Israel Wants a King"
-   ]
+   "teachingNote": "Reach for this when your child wants something just because a friend has it and needs help feeling grateful instead.",
+   "teaser": "Samuel was now old. For many years, he had taught the people what Heavenly Father said. One day the leaders of Israel came to him. They said, “Give us a king, like all the other lands have.” This made Samuel…",
+   "wordCount": 122
   },
   {
    "id": "b6-w2-n2",
    "title": "Saul Looks for Donkeys",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 2,
    "night": 2,
-   "scripture": "1 Samuel 9:3–6, 15–20",
+   "scripture": "1 Samuel 9",
    "scriptureBook": "1 Samuel",
-   "traveler": "scout",
-   "feeling": "worried",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "trust-in-god",
-    "patience"
+    "diligence"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child is anxious about something lost and needs to know Heavenly Father sees where they are.",
-   "teaser": "Saul was a tall young man. One day his father’s donkeys were lost. Saul and a helper went to find them. They walked through many lands, but found no donkeys! Saul said, “Let’s go home, or my father will worry.” The…",
+   "teachingNote": "Reach for this when your child thinks their ordinary chores and small jobs do not matter — Heavenly Father was preparing Saul while he looked for lost donkeys.",
+   "teaser": "Saul was a tall young man. One day his father’s donkeys were lost. Saul and a helper went to find them. They walked through many lands, but found no donkeys! Saul said, “Let’s go home, or my father will worry.”…",
    "wordCount": 125
   },
   {
    "id": "b6-w2-n3",
-   "title": "Oil on Saul’s Head",
+   "title": "Saul is Anointed King",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 2,
    "night": 3,
-   "scripture": "1 Samuel 9:27; 10:1, 6, 9",
-   "scriptureBook": "1 Samuel",
-   "traveler": "willow",
-   "feeling": "loved",
+   "scripture": null,
+   "scriptureBook": null,
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "identity",
-    "humility"
+    "courage",
+    "obedience"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "identity",
-   "teachingNote": "Reach for this when your child doubts they matter and needs to hear Heavenly Father chose and knows them.",
-   "teaser": "Samuel walked with Saul to the edge of the city. He had a message from Heavenly Father just for Saul. Samuel poured a little bottle of oil on Saul’s head and kissed him. The oil showed the Lord had chosen Saul to…",
-   "wordCount": 121,
-   "aka": [
-    "Saul is Anointed King"
-   ]
+   "primaryVirtue": "courage",
+   "teachingNote": "Reach for this when your child is asked to do something that feels too big and wants to hide, the way Saul hid among the baggage.",
+   "teaser": "Samuel walked with Saul to the edge of the city. He had a message from Heavenly Father just for Saul. Samuel poured a little bottle of oil on Saul’s head and kissed him. The oil showed the Lord had chosen…",
+   "wordCount": 121
   },
   {
    "id": "b6-w2-n4",
-   "title": "Saul Did Not Wait",
+   "title": "Saul Doesn't Wait",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 2,
    "night": 4,
-   "scripture": "1 Samuel 10:8; 13:8–14",
+   "scripture": "1 Samuel 13",
    "scriptureBook": "1 Samuel",
-   "traveler": "wren",
-   "feeling": "impatient",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "patience",
     "obedience"
@@ -5426,113 +5406,101 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "patience",
-   "teachingNote": "Reach for this when your child cannot wait and needs to see why Saul's hurry cost him.",
-   "teaser": "Samuel told Saul, “Wait seven days, until I come.” Then Samuel would offer a sacrifice, a gift to the Lord. Those gifts helped people remember that Jesus would come. Saul waited and waited. Enemies gathered close…",
-   "wordCount": 125,
-   "aka": [
-    "Saul Doesn’t Wait"
-   ]
+   "teachingNote": "Reach for this when waiting feels unbearable and your child is tempted to act now instead of holding on a little longer.",
+   "teaser": "Samuel told Saul, “Wait seven days, until I come.” Then Samuel would offer a sacrifice, a gift to the Lord. Those gifts helped people remember that Jesus would come. Saul waited and waited. Enemies gathered close by, and many people…",
+   "wordCount": 125
   },
   {
    "id": "b6-w2-n5",
-   "title": "To Obey Is Best",
+   "title": "Obey is Better Than Sacrifice",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 2,
    "night": 5,
-   "scripture": "1 Samuel 15:13–15, 22, 24",
+   "scripture": "1 Samuel 15",
    "scriptureBook": "1 Samuel",
-   "traveler": "beau",
-   "feeling": "nervous",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "obedience",
-    "honesty"
+    "integrity"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "obedience",
-   "teachingNote": "Reach for this when your child gives in to what others think and needs to know that obeying is better than any offering.",
-   "teaser": "The Lord gave King Saul a job and told him how to do it. But Saul did not obey all the way. He kept the best sheep and the big, strong cows called oxen. Then Samuel came. Saul said, “I have done what the Lord said!”…",
-   "wordCount": 125,
-   "aka": [
-    "Obey is Better Than Sacrifice"
-   ]
+   "teachingNote": "Reach for this when your child obeys only part of an instruction and needs to learn that halfway isn't really obeying.",
+   "teaser": "The Lord gave King Saul a job and told him how to do it. But Saul did not obey all the way. He kept the best sheep and the big, strong cows called oxen. Then Samuel came. Saul said, “I…",
+   "wordCount": 125
   },
   {
    "id": "b6-w2-n6",
-   "title": "The Lord Sees the Heart",
+   "title": "God Chooses David",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 2,
    "night": 6,
-   "scripture": "1 Samuel 16:1, 6–13",
+   "scripture": "1 Samuel 16:1-13",
    "scriptureBook": "1 Samuel",
-   "traveler": "scout",
-   "feeling": "loved",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "identity",
-    "wisdom"
+    "kindness"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "identity",
-   "teachingNote": "Reach for this when your child feels overlooked and needs to know the Lord looks at the heart, as with young David.",
-   "teaser": "The Lord sent Samuel to Bethlehem, to a man named Jesse. The Lord said, “I have chosen a king from his sons.” Jesse’s son Eliab came. He was tall and fine-looking. Samuel said, “This must be the one!” But the Lord…",
-   "wordCount": 122,
-   "aka": [
-    "God Chooses David"
-   ]
+   "teachingNote": "Reach for this when your child feels overlooked for being small or young and needs to know their heart matters most.",
+   "teaser": "The Lord sent Samuel to Bethlehem, to a man named Jesse. The Lord said, “I have chosen a king from his sons.” Jesse’s son Eliab came. He was tall and fine-looking. Samuel said, “This must be the one!” But the…",
+   "wordCount": 122
   },
   {
    "id": "b6-w2-n7",
-   "title": "David’s Gentle Harp",
+   "title": "David Plays Music for Saul",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 2,
    "night": 7,
-   "scripture": "1 Samuel 16:14–23",
+   "scripture": "1 Samuel 16:14-23",
    "scriptureBook": "1 Samuel",
-   "traveler": "willow",
-   "feeling": "calm",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "kindness",
-    "service"
+    "service",
+    "compassion"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "kindness",
-   "teachingNote": "Reach for this when your child is upset and needs a gentle song, like David's harp, to settle a hard day.",
-   "teaser": "King Saul had stopped following the Lord. Now he often felt troubled and unhappy inside. His helpers said, “Let us find someone who plays the harp well.” When the king felt unhappy, soft music could help him feel…",
-   "wordCount": 107,
-   "aka": [
-    "David Plays Music for Saul"
-   ]
+   "primaryVirtue": "service",
+   "teachingNote": "Reach for this when your child has a talent and needs encouragement to use it to help someone who is struggling.",
+   "teaser": "King Saul had stopped following the Lord. Now he often felt troubled and unhappy inside. His helpers said, “Let us find someone who plays the harp well.” When the king felt unhappy, soft music could help him feel well. One…",
+   "wordCount": 107
   },
   {
    "id": "b6-w3-n1",
-   "title": "David Brings Bread",
+   "title": "David and Goliath",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 3,
    "night": 1,
-   "scripture": "1 Samuel 17:4, 10–11, 17–26",
+   "scripture": "1 Samuel 17",
    "scriptureBook": "1 Samuel",
-   "traveler": "scout",
-   "feeling": "safe",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "courage",
     "trust-in-god"
@@ -5542,136 +5510,101 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "courage",
-   "teachingNote": "Reach for this when your child faces something huge and scary and needs to remember Heavenly Father is bigger.",
-   "teaser": "David was the youngest boy in his family. He took care of his father’s sheep. His three big brothers were in the king’s army. His father, Jesse, said, “Take this bread to your brothers. See how they are.” David got…",
-   "wordCount": 123
+   "teachingNote": "Reach for this when your child feels small next to a big problem and needs courage that Heavenly Father is near.",
+   "teaser": "David went down to a little stream. He chose five smooth stones from the water. He put them in his shepherd’s bag. He held his sling, a strap for throwing stones far. Then David walked toward the giant. Goliath had…",
+   "wordCount": 125
   },
   {
    "id": "b6-w3-n2",
-   "title": "The Lion and the Bear",
+   "title": "David and Jonathan Are Best Friends",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 3,
    "night": 2,
-   "scripture": "1 Samuel 17:32–37",
+   "scripture": "1 Samuel 18",
    "scriptureBook": "1 Samuel",
-   "traveler": "wren",
-   "feeling": "safe",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "faith",
-    "hope"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "faith",
-   "teachingNote": "Reach for this when your child doubts they can do hard things and needs to remember how the Lord helped before, like David and the lion.",
-   "teaser": "David went to King Saul and said, “Don’t be afraid of the giant. I will go and fight him.” Saul said, “You are only a boy. He has been a soldier since he was young.” David said, “I keep my father’s sheep. A lion and…",
-   "wordCount": 115
-  },
-  {
-   "id": "b6-w3-n3",
-   "title": "Five Smooth Stones",
-   "volume": "ot",
-   "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
-   "month": "June",
-   "week": 3,
-   "night": 3,
-   "scripture": "1 Samuel 17:40, 45–50",
-   "scriptureBook": "1 Samuel",
-   "traveler": "beau",
-   "feeling": "brave",
-   "virtues": [
-    "courage",
-    "faith"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "courage",
-   "teachingNote": "Reach for this when your child must face a giant-sized task and needs to know the battle is the Lord's.",
-   "teaser": "David went down to a little stream. He chose five smooth stones from the water. He put them in his shepherd’s bag. He held his sling, a strap for throwing stones far. Then David walked toward the giant. Goliath had…",
-   "wordCount": 125,
-   "aka": [
-    "David and Goliath"
-   ]
-  },
-  {
-   "id": "b6-w3-n4",
-   "title": "David and Jonathan",
-   "volume": "ot",
-   "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
-   "month": "June",
-   "week": 3,
-   "night": 4,
-   "scripture": "1 Samuel 18:1–4",
-   "scriptureBook": "1 Samuel",
-   "traveler": "willow",
-   "feeling": "loved",
-   "virtues": [
-    "family-love",
+    "generosity",
     "kindness"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "family-love",
-   "teachingNote": "Reach for this when your child is making a new friend and needs a picture of loyal love like David and Jonathan's.",
-   "teaser": "After the giant fell, David talked with King Saul. Saul’s son Jonathan, a prince, was there listening. Jonathan’s heart felt tied to David’s heart. Jonathan loved David as much as he loved himself. The two became…",
-   "wordCount": 122,
-   "aka": [
-    "David and Jonathan Are Best Friends"
-   ]
+   "primaryVirtue": "generosity",
+   "teachingNote": "Reach for this when your child sees a friend succeed and needs help feeling happy for them instead of jealous.",
+   "teaser": "After the giant fell, David talked with King Saul. Saul’s son Jonathan, a prince, was there listening. Jonathan’s heart felt tied to David’s heart. Jonathan loved David as much as he loved himself. The two became best friends. Then Jonathan…",
+   "wordCount": 122
   },
   {
-   "id": "b6-w3-n5",
-   "title": "David Was Kind to Saul",
+   "id": "b6-w3-n3",
+   "title": "Saul Gets Jealous of David",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 3,
-   "night": 5,
-   "scripture": "1 Samuel 24:2–17; 26:7–12",
+   "night": 3,
+   "scripture": "1 Samuel 18:6-16",
    "scriptureBook": "1 Samuel",
-   "traveler": "beau",
-   "feeling": "calm",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "self-control",
-    "forgiveness"
+    "contentment"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "self-control",
-   "teachingNote": "Reach for this when your child is tempted to get even and needs to see David choose kindness in the cave.",
-   "teaser": "King Saul was upset that the people loved David. Saul wanted to hurt him, so David and his men hid. Saul brought soldiers to look for David. One day Saul went into a cave. He did not know David was hiding inside…",
-   "wordCount": 124,
-   "aka": [
-    "David Forgives Saul in the Cave"
-   ]
+   "teachingNote": "Reach for this when jealousy is creeping into your child's heart over someone else's praise or good fortune.",
+   "teaser": "A long time ago, a man named Saul was the king. A king is the leader of the whole land. A young man named David helped keep the people safe, and the people were so glad. When David and the…",
+   "wordCount": 224
   },
   {
-   "id": "b6-w3-n6",
-   "title": "Abigail the Peacemaker",
+   "id": "b6-w3-n4",
+   "title": "David Forgives Saul in the Cave",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 3,
-   "night": 6,
-   "scripture": "1 Samuel 25:2–35",
+   "night": 4,
+   "scripture": "1 Samuel 24",
    "scriptureBook": "1 Samuel",
-   "traveler": "willow",
-   "feeling": "calm",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "forgiveness",
+    "self-control"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "forgiveness",
+   "teachingNote": "Reach for this when your child has a chance to get back at someone who was unkind but could choose mercy instead.",
+   "teaser": "King Saul was upset that the people loved David. Saul wanted to hurt him, so David and his men hid. Saul brought soldiers to look for David. One day Saul went into a cave. He did not know David was…",
+   "wordCount": 124
+  },
+  {
+   "id": "b6-w3-n5",
+   "title": "Wise Abigail Stops Trouble",
+   "volume": "ot",
+   "book": 6,
+   "bookTitle": "A Heart That Follows the Lord",
+   "month": "June",
+   "week": 3,
+   "night": 5,
+   "scripture": "1 Samuel 25",
+   "scriptureBook": "1 Samuel",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "peacemaking",
     "wisdom"
@@ -5681,55 +5614,101 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "peacemaking",
-   "teachingNote": "Reach for this when your child's friends are quarreling and needs to see how Abigail's gentle words stopped a fight.",
-   "teaser": "A rich man named Nabal had many sheep. David’s men had kept his shepherds safe, like a wall around them. So David asked for some food. But Nabal said unkind words and gave nothing. David got very angry and set out…",
-   "wordCount": 120,
-   "aka": [
-    "Wise Abigail Stops Trouble"
-   ]
+   "teachingNote": "Reach for this when tempers are rising at home and your child could use kind words to calm things down.",
+   "teaser": "A rich man named Nabal had many sheep. David’s men had kept his shepherds safe, like a wall around them. So David asked for some food. But Nabal said unkind words and gave nothing. David got very angry and set…",
+   "wordCount": 120
   },
   {
-   "id": "b6-w3-n7",
-   "title": "A King Forever",
+   "id": "b6-w3-n6",
+   "title": "David Becomes King",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 3,
-   "night": 7,
-   "scripture": "2 Samuel 5:3–4; 6:12–15; 7:4, 12–16",
+   "night": 6,
+   "scripture": "2 Samuel 5",
    "scriptureBook": "2 Samuel",
-   "traveler": "scout",
-   "feeling": "happy",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "gratitude",
-    "hope"
+    "patience",
+    "trust-in-god"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "gratitude",
-   "teachingNote": "Reach for this when your child needs to know the Lord keeps His promises, like David's family line forever.",
-   "teaser": "The leaders of the people made David their king. David was thirty years old, and he was king for forty years. Then David brought the Lord’s ark, a holy box, into Jerusalem, his city. The ark showed the Lord was with…",
-   "wordCount": 115,
-   "aka": [
-    "David Dances Before the Lord"
-   ]
+   "primaryVirtue": "patience",
+   "teachingNote": "Reach for this when your child wants to rush or grab for something good instead of waiting for the right time.",
+   "teaser": "When David was just a boy, a prophet named Samuel came to his house. A prophet is someone Heavenly Father talks to. Samuel poured a little oil on David's head. Pouring oil was the way people said, \"Heavenly Father has…",
+   "wordCount": 332
+  },
+  {
+   "id": "b6-w3-n7",
+   "title": "David Dances Before the Lord",
+   "volume": "ot",
+   "book": 6,
+   "bookTitle": "A Heart That Follows the Lord",
+   "month": "June",
+   "week": 3,
+   "night": 7,
+   "scripture": "2 Samuel 6",
+   "scriptureBook": "2 Samuel",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "worship-together",
+    "gratitude"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "worship-together",
+   "teachingNote": "Reach for this when your child feels shy about showing joy for Heavenly Father and worries what others will think.",
+   "teaser": "The leaders of the people made David their king. David was thirty years old, and he was king for forty years. Then David brought the Lord’s ark, a holy box, into Jerusalem, his city. The ark showed the Lord was…",
+   "wordCount": 115
   },
   {
    "id": "b6-w4-n1",
-   "title": "The Poor Man’s Little Lamb",
+   "title": "David Makes a Big Mistake",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 4,
    "night": 1,
-   "scripture": "2 Samuel 12:1–7, 13; Psalm 51:10",
+   "scripture": "2 Samuel 11",
    "scriptureBook": "2 Samuel",
-   "traveler": "willow",
-   "feeling": "guilty",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "self-control",
+    "obedience"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "self-control",
+   "teachingNote": "Reach for this when your child is tempted by something that isn't theirs and needs help looking away early.",
+   "teaser": "A long, long time ago there was a king named David. A king is the leader of a whole country. When David was a boy he kept sheep, and he sang happy songs to Heavenly Father. He grew up and…",
+   "wordCount": 391
+  },
+  {
+   "id": "b6-w4-n2",
+   "title": "David Says Sorry",
+   "volume": "ot",
+   "book": 6,
+   "bookTitle": "A Heart That Follows the Lord",
+   "month": "June",
+   "week": 4,
+   "night": 2,
+   "scripture": "2 Samuel 12",
+   "scriptureBook": "2 Samuel",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "repentance",
     "honesty"
@@ -5739,226 +5718,203 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "repentance",
-   "teachingNote": "Reach for this when your child has done wrong and needs to learn that saying sorry lets the Lord clean the heart.",
-   "teaser": "King David made a very wrong choice that hurt others. So the Lord sent Nathan, His prophet, to help David see. Nathan told David a story. A rich man had many sheep. A poor man had one little lamb. It slept in his…",
-   "wordCount": 125,
-   "aka": [
-    "David Says Sorry"
-   ]
+   "teachingNote": "Reach for this when your child has done something wrong and needs the words and steps for making it right.",
+   "teaser": "King David made a very wrong choice that hurt others. So the Lord sent Nathan, His prophet, to help David see. Nathan told David a story. A rich man had many sheep. A poor man had one little lamb. It…",
+   "wordCount": 125
   },
   {
-   "id": "b6-w4-n2",
-   "title": "An Understanding Heart",
+   "id": "b6-w4-n3",
+   "title": "Solomon Asks for Wisdom",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 4,
-   "night": 2,
-   "scripture": "1 Kings 3:5–13",
+   "night": 3,
+   "scripture": "1 Kings 3:1-15",
    "scriptureBook": "1 Kings",
-   "traveler": "wren",
-   "feeling": "calm",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "wisdom",
-    "humility"
+    "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "wisdom",
-   "teachingNote": "Reach for this when your child faces a hard choice and needs to ask for an understanding heart, as Solomon did.",
-   "teaser": "King David grew old, and his son Solomon became king. Solomon was young, with so many people to lead! One night at Gibeon, the Lord came to Solomon in a dream. The Lord was Jesus. He said, “Ask what I shall give…",
-   "wordCount": 123,
-   "aka": [
-    "Solomon Asks for Wisdom"
-   ]
-  },
-  {
-   "id": "b6-w4-n3",
-   "title": "Two Mothers and a Baby",
-   "volume": "ot",
-   "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
-   "month": "June",
-   "week": 4,
-   "night": 3,
-   "scripture": "1 Kings 3:16–28",
-   "scriptureBook": "1 Kings",
-   "traveler": "willow",
-   "feeling": "loved",
-   "virtues": [
-    "family-love",
-    "wisdom"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "family-love",
-   "teachingNote": "Reach for this when your child sees real love wants others safe, like the mother who gave up her baby.",
-   "teaser": "Two mothers came to King Solomon with one little baby boy. Each mother said, “This baby is mine!” No one else had been in the house to see. So how could the king know who the real mother was? Solomon gave them a…",
-   "wordCount": 120,
-   "aka": [
-    "Two Mothers and One Baby"
-   ]
+   "teachingNote": "Reach for this when talking with your child about what's truly worth praying and asking for.",
+   "teaser": "King David grew old, and his son Solomon became king. Solomon was young, with so many people to lead! One night at Gibeon, the Lord came to Solomon in a dream. The Lord was Jesus. He said, “Ask what I…",
+   "wordCount": 123
   },
   {
    "id": "b6-w4-n4",
-   "title": "No Hammer Was Heard",
+   "title": "Two Mothers and One Baby",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 4,
    "night": 4,
-   "scripture": "1 Kings 6:1, 7, 14, 21–22, 29, 38",
+   "scripture": "1 Kings 3:16-28",
    "scriptureBook": "1 Kings",
-   "traveler": "scout",
-   "feeling": "calm",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "reverence",
-    "worship-together"
+    "wisdom",
+    "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "reverence",
-   "teachingNote": "Reach for this when your child is loud in a holy place and needs to hear how quietly the temple was built.",
-   "teaser": "King Solomon built a temple, a house for the Lord. It would be a holy place, so it was built with care. The big stones were cut and made ready somewhere else first. Then they were carried to the temple, ready to set…",
-   "wordCount": 124,
-   "aka": [
-    "Building the Temple"
-   ]
+   "primaryVirtue": "wisdom",
+   "teachingNote": "Reach for this when teaching your child that real love means wanting what's best for someone else, even a hard sacrifice.",
+   "teaser": "Two mothers came to King Solomon with one little baby boy. Each mother said, “This baby is mine!” No one else had been in the house to see. So how could the king know who the real mother was? Solomon…",
+   "wordCount": 120
   },
   {
    "id": "b6-w4-n5",
-   "title": "Glory in the Lord’s House",
+   "title": "Building the Temple",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 4,
    "night": 5,
-   "scripture": "1 Kings 8:1–11",
+   "scripture": "1 Kings 6",
    "scriptureBook": "1 Kings",
-   "traveler": "wren",
-   "feeling": "amazed",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "reverence",
-    "wonder"
+    "diligence",
+    "reverence"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "reverence",
-   "teachingNote": "Reach for this when your child needs a sense of awe, picturing the glory filling Solomon's temple.",
-   "teaser": "At last the temple was finished! King Solomon called all the people to come together in Jerusalem. The priests, who served in the Lord’s house, carried in the ark. This ark was not a boat. It was a holy box, set in…",
-   "wordCount": 119
+   "primaryVirtue": "diligence",
+   "teachingNote": "Reach for this when your child is tempted to do a job halfway and needs encouragement to give their very best.",
+   "teaser": "King Solomon built a temple, a house for the Lord. It would be a holy place, so it was built with care. The big stones were cut and made ready somewhere else first. Then they were carried to the temple…",
+   "wordCount": 124
   },
   {
    "id": "b6-w4-n6",
-   "title": "Hear Thou in Heaven",
+   "title": "Solomon's Prayer at the Temple",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 4,
    "night": 6,
-   "scripture": "1 Kings 8:22–30, 54–57",
+   "scripture": "1 Kings 8",
    "scriptureBook": "1 Kings",
-   "traveler": "beau",
-   "feeling": "safe",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "prayer",
-    "trust-in-god"
+    "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "prayer",
-   "teachingNote": "Reach for this when your child wonders if anyone hears and needs to hear Solomon's prayer: hear thou in heaven.",
+   "teachingNote": "Reach for this when introducing your child to praying for other people, not just for themselves.",
    "teaser": "King Solomon stood before the people at the temple. He spread his hands toward heaven and prayed. He said, “Lord, there is no one like You, in heaven or on earth. You keep Your promises.” Solomon knew even the whole…",
-   "wordCount": 115,
-   "aka": [
-    "Solomon’s Prayer at the Temple"
-   ]
+   "wordCount": 115
   },
   {
    "id": "b6-w4-n7",
-   "title": "Keep Your Heart Close",
+   "title": "Keep Your Heart Close to God",
    "volume": "ot",
    "book": 6,
-   "bookTitle": "The Lord Looks on the Heart",
+   "bookTitle": "A Heart That Follows the Lord",
    "month": "June",
    "week": 4,
    "night": 7,
-   "scripture": "1 Kings 9:1–5; 11:4",
+   "scripture": "1 Kings 9; 11",
    "scriptureBook": "1 Kings",
-   "traveler": "beau",
-   "feeling": "connected",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "faith",
-    "perseverance"
+    "obedience"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "faith",
-   "teachingNote": "Reach for this when your child is drifting and needs to be reminded to keep their heart close to the Lord.",
-   "teaser": "When the temple was done, the Lord came to Solomon again. The Lord was Jesus. He said, “I have heard your prayer.” He said, “I have made this house holy for My name forever. My eyes and My heart will always be…",
-   "wordCount": 116,
-   "aka": [
-    "Keep Your Heart Close to God"
-   ]
+   "teachingNote": "Reach for this when talking about choosing Heavenly Father every day, not just on the easy days.",
+   "teaser": "When the temple was done, the Lord came to Solomon again. The Lord was Jesus. He said, “I have heard your prayer.” He said, “I have made this house holy for My name forever. My eyes and My heart will…",
+   "wordCount": 116
   },
   {
    "id": "b7-w1-n1",
-   "title": "Bread from the Ravens",
+   "title": "Two Kings, One Choice",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 1,
    "night": 1,
-   "scripture": "1 Kings 12:6–16, 28–30; 17:1–6",
+   "scripture": "1 Kings 12",
    "scriptureBook": "1 Kings",
-   "traveler": "scout",
-   "feeling": "grateful",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "gratitude",
-    "trust-in-god"
+    "heeding-counsel",
+    "obedience"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "gratitude",
-   "teachingNote": "Reach for this when your child wonders who will provide what they need and needs a picture of ravens bringing bread.",
-   "teaser": "Long ago, King Rehoboam would not listen to the wise old men. So his kingdom broke in two. One king made gold calves for people to pray to. Later, many people stopped following the Lord. So Elijah told King Ahab…",
-   "wordCount": 120,
-   "aka": [
-    "The Ravens Feed Elijah"
-   ]
+   "primaryVirtue": "heeding-counsel",
+   "teachingNote": "Reach for this when your child needs to hear why listening to wise parents matters more than listening to peers.",
+   "teaser": "Long, long ago there was a king named Solomon. A king is the one who makes the rules for a whole land. Solomon built a temple. A temple is a holy house, a special quiet place built for Heavenly Father.…",
+   "wordCount": 275
   },
   {
    "id": "b7-w1-n2",
-   "title": "Flour That Lasted",
+   "title": "The Ravens Feed Elijah",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 1,
    "night": 2,
-   "scripture": "1 Kings 17:7–16",
+   "scripture": "1 Kings 17",
    "scriptureBook": "1 Kings",
-   "traveler": "beau",
-   "feeling": "brave",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "trust-in-god"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "trust-in-god",
+   "teachingNote": "Reach for this when your child worries whether their needs will be met and needs reassurance that Heavenly Father provides.",
+   "teaser": "Long ago, King Rehoboam would not listen to the wise old men. So his kingdom broke in two. One king made gold calves for people to pray to. Later, many people stopped following the Lord. So Elijah told King Ahab…",
+   "wordCount": 120
+  },
+  {
+   "id": "b7-w1-n3",
+   "title": "The Jar That Never Ran Out",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 1,
+   "night": 3,
+   "scripture": "1 Kings 17",
+   "scriptureBook": "1 Kings",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "generosity",
     "faith"
@@ -5968,249 +5924,177 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "generosity",
-   "teachingNote": "Reach for this when your child is afraid to share the little they have and needs to see a jar of flour that never ran out.",
-   "teaser": "With no rain, the brook dried up. The Lord sent Elijah to a town called Zarephath. A woman whose husband had died was picking up sticks. Elijah asked her for water and a little bread. She said, “I have only a…",
-   "wordCount": 117,
-   "aka": [
-    "The Jar That Never Ran Out"
-   ]
-  },
-  {
-   "id": "b7-w1-n3",
-   "title": "See, Your Son Lives",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 1,
-   "night": 3,
-   "scripture": "1 Kings 17:17–24",
-   "scriptureBook": "1 Kings",
-   "traveler": "willow",
-   "feeling": "comforted",
-   "virtues": [
-    "prayer",
-    "faith"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "prayer",
-   "teachingNote": "Reach for this when your child is scared for someone they love and needs to know the Lord hears every prayer.",
-   "teaser": "One day the woman’s little boy got very, very sick. Then he stopped breathing. His mother was so sad. Elijah said, “Give me your son.” He carried the boy upstairs and laid him on his own bed. Elijah prayed with all…",
-   "wordCount": 119,
-   "aka": [
-    "Elijah Prays for the Little Boy"
-   ]
+   "teachingNote": "Reach for this when your child is afraid there isn't enough to share and needs courage to give anyway.",
+   "teaser": "With no rain, the brook dried up. The Lord sent Elijah to a town called Zarephath. A woman whose husband had died was picking up sticks. Elijah asked her for water and a little bread. She said, “I have only…",
+   "wordCount": 117
   },
   {
    "id": "b7-w1-n4",
-   "title": "Fire on Mount Carmel",
+   "title": "Elijah Prays for the Little Boy",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 1,
    "night": 4,
-   "scripture": "1 Kings 18:21–24, 30–39",
+   "scripture": "1 Kings 17",
    "scriptureBook": "1 Kings",
-   "traveler": "beau",
-   "feeling": "brave",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "stand-for-truth",
-    "faith"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "stand-for-truth",
-   "teachingNote": "Reach for this when your child must choose whom to follow and needs the picture of fire falling on Mount Carmel.",
-   "teaser": "Many people prayed to a pretend god named Baal. Elijah called everyone to Mount Carmel. He asked, “How long will you go back and forth? If the Lord is the true one, follow Him!” Elijah said, “The one who answers…",
-   "wordCount": 120,
-   "aka": [
-    "Fire from Heaven"
-   ]
-  },
-  {
-   "id": "b7-w1-n5",
-   "title": "A Cloud Like a Hand",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 1,
-   "night": 5,
-   "scripture": "1 Kings 18:41–45",
-   "scriptureBook": "1 Kings",
-   "traveler": "scout",
-   "feeling": "eager",
-   "virtues": [
-    "hope",
     "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child is waiting for an answer and needs the picture of a tiny cloud that grew into rain.",
-   "teaser": "There had been no rain for a long, long time. The ground was dry and dusty. Elijah climbed to the top of Mount Carmel. He bowed down low to the ground and prayed. He told his helper, “Go and look toward the sea.”…",
-   "wordCount": 122
-  },
-  {
-   "id": "b7-w1-n6",
-   "title": "The Still Small Voice",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 1,
-   "night": 6,
-   "scripture": "1 Kings 19:4–13",
-   "scriptureBook": "1 Kings",
-   "traveler": "wren",
-   "feeling": "calm",
-   "virtues": [
-    "reverence",
-    "trust-in-god"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "reverence",
-   "teachingNote": "Reach for this when your child feels the world is too loud and needs to learn the Lord often speaks in a quiet voice.",
-   "teaser": "Elijah felt tired and sad. He thought he was all alone. He lay under a desert tree. An angel touched him and said, “Get up and eat.” Bread and water were by his head! Then Elijah walked to a mountain cave. The Lord…",
-   "wordCount": 125,
-   "aka": [
-    "The Still, Small Voice"
-   ]
-  },
-  {
-   "id": "b7-w1-n7",
-   "title": "Elisha Followed",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 1,
-   "night": 7,
-   "scripture": "1 Kings 19:16, 19–21",
-   "scriptureBook": "1 Kings",
-   "traveler": "willow",
-   "feeling": "eager",
-   "virtues": [
-    "obedience",
-    "service"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "obedience",
-   "teachingNote": "Reach for this when your child hesitates to follow a good call and needs to see Elisha leave his oxen and go.",
-   "teaser": "The Lord told Elijah to find Elisha. Elisha would be the next one to speak for the Lord. Elisha was plowing a field, making long rows for seeds. Twelve pairs of big, strong oxen pulled the plows. Elijah walked by…",
+   "primaryVirtue": "prayer",
+   "teachingNote": "Reach for this when your child faces something that feels too big or scary and needs to know prayer really helps.",
+   "teaser": "One day the woman’s little boy got very, very sick. Then he stopped breathing. His mother was so sad. Elijah said, “Give me your son.” He carried the boy upstairs and laid him on his own bed. Elijah prayed with…",
    "wordCount": 119
   },
   {
-   "id": "b7-w2-n1",
-   "title": "The Chariot of Fire",
+   "id": "b7-w1-n5",
+   "title": "Fire from Heaven",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
-   "week": 2,
-   "night": 1,
-   "scripture": "2 Kings 2:1–15",
-   "scriptureBook": "2 Kings",
-   "traveler": "wren",
-   "feeling": "amazed",
+   "week": 1,
+   "night": 5,
+   "scripture": "1 Kings 18",
+   "scriptureBook": "1 Kings",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "wonder",
-    "heeding-counsel"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "wonder",
-   "teachingNote": "Reach for this when your child needs to feel awe and to see how Elisha stayed close to the prophet who guided him.",
-   "teaser": "Elijah and Elisha walked together. Elijah said, “Stay here.” But Elisha said, “I will not leave you.” At the Jordan River, Elijah rolled up his big coat, called a mantle. He hit the water with it. The water opened…",
-   "wordCount": 125,
-   "aka": [
-    "Elijah Goes Up to Heaven"
-   ]
-  },
-  {
-   "id": "b7-w2-n2",
-   "title": "Salt in the Spring",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 2,
-   "night": 2,
-   "scripture": "2 Kings 2:19–22",
-   "scriptureBook": "2 Kings",
-   "traveler": "scout",
-   "feeling": "comforted",
-   "virtues": [
-    "faith",
-    "hope"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "faith",
-   "teachingNote": "Reach for this when your child sees something spoiled and needs to know the Lord can make hard things good again.",
-   "teaser": "Elisha told people what Heavenly Father said. One day he came to the city of Jericho. The men of the city said, “Our city is a nice place. But the water is bad, and nothing grows.” They could have just lived with…",
-   "wordCount": 124
-  },
-  {
-   "id": "b7-w2-n3",
-   "title": "The Oil Kept Pouring",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 2,
-   "night": 3,
-   "scripture": "2 Kings 4:1–7",
-   "scriptureBook": "2 Kings",
-   "traveler": "beau",
-   "feeling": "comforted",
-   "virtues": [
-    "trust-in-god",
     "faith"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child hears worry about money or needs at home and needs the picture of oil that kept pouring.",
-   "teaser": "A mother came to Elisha, who spoke for Heavenly Father. Her husband had died, and she owed money. A man was coming to take her two sons away to work. Elisha asked, “What do you have in your house?” She said, “Only…",
-   "wordCount": 125,
-   "aka": [
-    "The Widow’s Oil"
-   ]
+   "primaryVirtue": "faith",
+   "teachingNote": "Reach for this when your child is choosing between Heavenly Father and something else that's competing for first place.",
+   "teaser": "Many people prayed to a pretend god named Baal. Elijah called everyone to Mount Carmel. He asked, “How long will you go back and forth? If the Lord is the true one, follow Him!” Elijah said, “The one who answers…",
+   "wordCount": 120
   },
   {
-   "id": "b7-w2-n4",
-   "title": "A Little Room for Elisha",
+   "id": "b7-w1-n6",
+   "title": "The Still, Small Voice",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 1,
+   "night": 6,
+   "scripture": "1 Kings 19",
+   "scriptureBook": "1 Kings",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "pondering",
+    "prayer"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "pondering",
+   "teachingNote": "Reach for this when your child is too wound up to notice Heavenly Father's quiet promptings and needs to practice being still.",
+   "teaser": "Elijah felt tired and sad. He thought he was all alone. He lay under a desert tree. An angel touched him and said, “Get up and eat.” Bread and water were by his head! Then Elijah walked to a mountain…",
+   "wordCount": 125
+  },
+  {
+   "id": "b7-w1-n7",
+   "title": "Micaiah Tells the Truth",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 1,
+   "night": 7,
+   "scripture": "1 Kings 22",
+   "scriptureBook": "1 Kings",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "honesty",
+    "stand-for-truth"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "honesty",
+   "teachingNote": "Reach for this when your child is tempted to say what others want to hear instead of what's true.",
+   "teaser": "Long ago, in a land called Israel, there was a king named Ahab. A king is the man who tells everybody what to do. King Ahab wanted to go fight in a war, and he wanted someone to tell him…",
+   "wordCount": 307
+  },
+  {
+   "id": "b7-w2-n1",
+   "title": "Elijah Goes Up to Heaven",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 2,
-   "night": 4,
-   "scripture": "2 Kings 4:8–37",
+   "night": 1,
+   "scripture": "2 Kings 2",
    "scriptureBook": "2 Kings",
-   "traveler": "willow",
-   "feeling": "happy",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "heeding-counsel",
+    "obedience"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "heeding-counsel",
+   "teachingNote": "Reach for this when a friendship or family bond is changing and your child needs comfort that loving loyalty carries on.",
+   "teaser": "Elijah and Elisha walked together. Elijah said, “Stay here.” But Elisha said, “I will not leave you.” At the Jordan River, Elijah rolled up his big coat, called a mantle. He hit the water with it. The water opened, and…",
+   "wordCount": 125
+  },
+  {
+   "id": "b7-w2-n2",
+   "title": "The Widow's Oil",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 2,
+   "night": 2,
+   "scripture": "2 Kings 4",
+   "scriptureBook": "2 Kings",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "obedience",
+    "trust-in-god"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "obedience",
+   "teachingNote": "Reach for this when your child needs to see that cheerfully following instructions can lead to surprising blessings.",
+   "teaser": "A mother came to Elisha, who spoke for Heavenly Father. Her husband had died, and she owed money. A man was coming to take her two sons away to work. Elisha asked, “What do you have in your house?” She…",
+   "wordCount": 125
+  },
+  {
+   "id": "b7-w2-n3",
+   "title": "A Special Room for the Prophet",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 2,
+   "night": 3,
+   "scripture": "2 Kings 4",
+   "scriptureBook": "2 Kings",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "kindness",
     "service"
@@ -6220,26 +6104,23 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "kindness",
-   "teachingNote": "Reach for this when your child wants to welcome someone and needs to see a family make a little room for a guest.",
-   "teaser": "In a town called Shunem lived a kind woman. Whenever Elisha came by, she fed him. She told her husband, “He is a holy man who serves the Lord. Let’s make him a little room.” They put in a bed, a table, a stool and a…",
-   "wordCount": 125,
-   "aka": [
-    "A Special Room for the Prophet"
-   ]
+   "teachingNote": "Reach for this when encouraging your child to make room for someone else with a quiet, generous gesture.",
+   "teaser": "In a town called Shunem lived a kind woman. Whenever Elisha came by, she fed him. She told her husband, “He is a holy man who serves the Lord. Let’s make him a little room.” They put in a bed…",
+   "wordCount": 125
   },
   {
-   "id": "b7-w2-n5",
+   "id": "b7-w2-n4",
    "title": "Naaman Washes Seven Times",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 2,
-   "night": 5,
-   "scripture": "2 Kings 5:1–15",
+   "night": 4,
+   "scripture": "2 Kings 5",
    "scriptureBook": "2 Kings",
-   "traveler": "wren",
-   "feeling": "calm",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "humility",
     "obedience"
@@ -6249,136 +6130,126 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "humility",
-   "teachingNote": "Reach for this when your child scoffs at a simple instruction and needs the picture of Naaman washing seven times.",
-   "teaser": "Naaman led the soldiers of a land called Syria. But he had a sickness on his skin. A little girl from Israel helped Naaman’s wife. She said, “I wish Naaman could see the prophet in Israel! He would heal him.” So…",
+   "teachingNote": "Reach for this when your child thinks a simple instruction is beneath them and resists doing the easy thing anyway.",
+   "teaser": "Naaman led the soldiers of a land called Syria. But he had a sickness on his skin. A little girl from Israel helped Naaman’s wife. She said, “I wish Naaman could see the prophet in Israel! He would heal him.”…",
    "wordCount": 122
   },
   {
-   "id": "b7-w2-n6",
-   "title": "The Axe Head That Floated",
+   "id": "b7-w2-n5",
+   "title": "The Floating Axe Head",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 2,
-   "night": 6,
-   "scripture": "2 Kings 6:1–7",
+   "night": 5,
+   "scripture": "2 Kings 6",
    "scriptureBook": "2 Kings",
-   "traveler": "scout",
-   "feeling": "worried",
-   "virtues": [
-    "prayer",
-    "trust-in-god"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "prayer",
-   "teachingNote": "Reach for this when your child is upset over losing something small and needs to know the Lord cares about little worries too.",
-   "teaser": "Some young men learned from Elisha, who spoke for Heavenly Father. They said, “Our home is too small. Let’s cut trees by the Jordan River and build more room.” Elisha went with them. They chopped trees with axes…",
-   "wordCount": 116,
-   "aka": [
-    "The Floating Axe Head"
-   ]
-  },
-  {
-   "id": "b7-w2-n7",
-   "title": "More Are with Us",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 2,
-   "night": 7,
-   "scripture": "2 Kings 6:13–23",
-   "scriptureBook": "2 Kings",
-   "traveler": "beau",
-   "feeling": "brave",
-   "virtues": [
-    "courage",
-    "faith"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "courage",
-   "teachingNote": "Reach for this when your child feels outnumbered or alone and needs the picture of fiery horses all around the hill.",
-   "teaser": "One night, the king of Syria sent soldiers all around Elisha’s city. They had horses and chariots, carts pulled by horses. In the morning, Elisha’s helper saw them. He was afraid. He said, “Oh no, master! What shall…",
-   "wordCount": 120,
-   "aka": [
-    "Horses of Fire All Around"
-   ]
-  },
-  {
-   "id": "b7-w3-n1",
-   "title": "Don’t Forget the Promise",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 3,
-   "night": 1,
-   "scripture": "2 Kings 17:6, 13–14, 37–39",
-   "scriptureBook": "2 Kings",
-   "traveler": "wren",
-   "feeling": "loved",
-   "virtues": [
-    "keeping-promises",
-    "heeding-counsel"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "keeping-promises",
-   "teachingNote": "Reach for this when your child forgets a promise and needs to hear how the Lord remembers His and invites us back.",
-   "teaser": "Long ago, the Lord sent prophets to His people in Israel. Again and again, they shared His words. The prophets said, “Turn away from your wrong ways. Keep My commandments.” But many people would not listen. They…",
-   "wordCount": 113
-  },
-  {
-   "id": "b7-w3-n2",
-   "title": "Hezekiah Trusted the Lord",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 3,
-   "night": 2,
-   "scripture": "2 Kings 18:1–7",
-   "scriptureBook": "2 Kings",
-   "traveler": "beau",
-   "feeling": "safe",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "trust-in-god",
-    "faith"
+    "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child needs someone steady to lean on and needs the picture of a king who held tight to the Lord.",
-   "teaser": "Hezekiah became king of Judah when he was twenty-five years old. He did what was right in the Lord’s eyes. Many people prayed to statues called idols instead of the Lord. So Hezekiah broke the idols into pieces…",
-   "wordCount": 118,
-   "aka": [
-    "Good King Hezekiah Trusts God"
-   ]
+   "teachingNote": "Reach for this when your child loses something small and needs to know no worry is too little for Heavenly Father.",
+   "teaser": "Some young men learned from Elisha, who spoke for Heavenly Father. They said, “Our home is too small. Let’s cut trees by the Jordan River and build more room.” Elisha went with them. They chopped trees with axes, tools with…",
+   "wordCount": 116
   },
   {
-   "id": "b7-w3-n3",
-   "title": "The Letter Before the Lord",
+   "id": "b7-w2-n6",
+   "title": "Horses of Fire All Around",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 2,
+   "night": 6,
+   "scripture": "2 Kings 6",
+   "scriptureBook": "2 Kings",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "courage",
+    "trust-in-god"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "courage",
+   "teachingNote": "Reach for this when your child is scared of something they can't see and needs reassurance they're never truly alone.",
+   "teaser": "One night, the king of Syria sent soldiers all around Elisha’s city. They had horses and chariots, carts pulled by horses. In the morning, Elisha’s helper saw them. He was afraid. He said, “Oh no, master! What shall we do?”…",
+   "wordCount": 120
+  },
+  {
+   "id": "b7-w2-n7",
+   "title": "Good News to Share",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 2,
+   "night": 7,
+   "scripture": "2 Kings 7",
+   "scriptureBook": "2 Kings",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "generosity",
+    "service"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "generosity",
+   "teachingNote": "Reach for this when your child has good news and needs a nudge to share it instead of keeping it to themselves.",
+   "teaser": "A long, long time ago there was a city with a big stone wall all around it, like a fence made of rocks. Soldiers from another land camped outside the wall. Nobody could go out, so nobody could bring food…",
+   "wordCount": 363
+  },
+  {
+   "id": "b7-w3-n1",
+   "title": "Good King Hezekiah Trusts God",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 3,
-   "night": 3,
-   "scripture": "2 Kings 19:9–10, 14–19",
+   "night": 1,
+   "scripture": "2 Kings 18",
    "scriptureBook": "2 Kings",
-   "traveler": "willow",
-   "feeling": "worried",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "trust-in-god"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "trust-in-god",
+   "teachingNote": "Reach for this when your child needs a model of choosing Heavenly Father first, ahead of every other distraction.",
+   "teaser": "Hezekiah became king of Judah when he was twenty-five years old. He did what was right in the Lord’s eyes. Many people prayed to statues called idols instead of the Lord. So Hezekiah broke the idols into pieces. Long ago…",
+   "wordCount": 118
+  },
+  {
+   "id": "b7-w3-n2",
+   "title": "Hezekiah Shows God the Letter",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 3,
+   "night": 2,
+   "scripture": "2 Kings 19",
+   "scriptureBook": "2 Kings",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "prayer",
     "trust-in-god"
@@ -6388,52 +6259,23 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "prayer",
-   "teachingNote": "Reach for this when your child carries a worry that will not go away and needs the picture of spreading it out before the Lord.",
-   "teaser": "A big army from far-off Assyria came near Jerusalem. Its king sent King Hezekiah a letter. The letter said, “The Lord you trust will not keep Jerusalem safe.” It was a scary letter. What would Hezekiah do? Hezekiah…",
-   "wordCount": 112,
-   "aka": [
-    "Hezekiah Shows God the Letter"
-   ]
+   "teachingNote": "Reach for this when your child is carrying a big worry alone and needs to bring it to Heavenly Father in prayer.",
+   "teaser": "A big army from far-off Assyria came near Jerusalem. Its king sent King Hezekiah a letter. The letter said, “The Lord you trust will not keep Jerusalem safe.” It was a scary letter. What would Hezekiah do? Hezekiah carried the…",
+   "wordCount": 112
   },
   {
-   "id": "b7-w3-n4",
-   "title": "I Will Save This City",
+   "id": "b7-w3-n3",
+   "title": "God Gives Hezekiah More Days",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 3,
-   "night": 4,
-   "scripture": "2 Kings 19:20, 32–34, 36",
+   "night": 3,
+   "scripture": "2 Kings 20",
    "scriptureBook": "2 Kings",
-   "traveler": "beau",
-   "feeling": "comforted",
-   "virtues": [
-    "prayer",
-    "faith"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "prayer",
-   "teachingNote": "Reach for this when your child has prayed and is waiting, and needs to know the Lord keeps His promises.",
-   "teaser": "King Hezekiah had prayed for help, and he waited. Soon a message came from Isaiah, who shared the Lord’s words. The message was from the Lord: “I have heard your prayer.” The Lord had listened to Hezekiah! The Lord…",
-   "wordCount": 113
-  },
-  {
-   "id": "b7-w3-n5",
-   "title": "Fifteen More Years",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 3,
-   "night": 5,
-   "scripture": "2 Kings 20:1–6",
-   "scriptureBook": "2 Kings",
-   "traveler": "willow",
-   "feeling": "comforted",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "prayer",
     "comfort"
@@ -6443,304 +6285,329 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "prayer",
-   "teachingNote": "Reach for this when your child is crying and needs to know the Lord sees every tear and hears every prayer.",
+   "teachingNote": "Reach for this when your child is sick, sad, or scared and needs to know Heavenly Father hears every prayer.",
    "teaser": "King Hezekiah became very sick. The prophet Isaiah came and told him he would not get well. Hezekiah turned his face to the wall and prayed. “Lord, remember how I have followed You with all my heart.” Then he cried…",
-   "wordCount": 113,
-   "aka": [
-    "God Gives Hezekiah More Days"
-   ]
+   "wordCount": 113
+  },
+  {
+   "id": "b7-w3-n4",
+   "title": "The Boy Who Became King",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 3,
+   "night": 4,
+   "scripture": "2 Kings 22",
+   "scriptureBook": "2 Kings",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "identity",
+    "obedience"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "identity",
+   "teachingNote": "Reach for this when your child says they're too little to make a good choice — age is no excuse.",
+   "teaser": "A long, long time ago there was a boy named Josiah. He was only eight years old when he became the king. Eight! That is just a little older than you. A king is the person who gets to say…",
+   "wordCount": 338
+  },
+  {
+   "id": "b7-w3-n5",
+   "title": "The Lost Book Is Found",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 3,
+   "night": 5,
+   "scripture": "2 Kings 22",
+   "scriptureBook": "2 Kings",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "love-of-scripture"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "love-of-scripture",
+   "teachingNote": "Reach for this when you want your child to treasure scripture time as something special, not just routine.",
+   "teaser": "Josiah was only eight years old when he became king! Even as a boy, he did what was right in the Lord’s eyes. Years later, workers fixed up the temple, the Lord’s house. There Hilkiah the priest found a lost…",
+   "wordCount": 124
   },
   {
    "id": "b7-w3-n6",
-   "title": "The Shadow Went Back",
+   "title": "Huldah Speaks for God",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 3,
    "night": 6,
-   "scripture": "2 Kings 20:8–11",
+   "scripture": "2 Kings 22",
    "scriptureBook": "2 Kings",
-   "traveler": "scout",
-   "feeling": "amazed",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "wonder",
-    "faith"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "wonder",
-   "teachingNote": "Reach for this when your child asks for a sign and needs the picture of the sun's shadow going back on the steps.",
-   "teaser": "The Lord promised to heal King Hezekiah. Hezekiah asked Isaiah, “What sign will show me it is true?” Long ago, people told time by watching a shadow on a sundial. As the sun moved, the shadow crept across little…",
-   "wordCount": 114
-  },
-  {
-   "id": "b7-w3-n7",
-   "title": "Josiah and the Found Book",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 3,
-   "night": 7,
-   "scripture": "2 Kings 22:1–2, 8–11; 23:1–3",
-   "scriptureBook": "2 Kings",
-   "traveler": "scout",
-   "feeling": "eager",
-   "virtues": [
-    "love-of-scripture",
+    "heeding-counsel",
     "courage"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "love-of-scripture",
-   "teachingNote": "Reach for this when your child feels too young to matter and needs the picture of a boy king who loved the found book.",
-   "teaser": "Josiah was only eight years old when he became king! Even as a boy, he did what was right in the Lord’s eyes. Years later, workers fixed up the temple, the Lord’s house. There Hilkiah the priest found a lost book of…",
-   "wordCount": 124,
-   "aka": [
-    "The Lost Book Is Found"
-   ]
+   "primaryVirtue": "heeding-counsel",
+   "teachingNote": "Reach for this when helping your child understand why they should listen to trusted teachers and leaders.",
+   "teaser": "A long time ago there was a king named Josiah. He was still young. Long before he was born, God had given His people a book of His words — a big roll of paper called a scroll. But the…",
+   "wordCount": 281
+  },
+  {
+   "id": "b7-w3-n7",
+   "title": "King Josiah Makes a Promise",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 3,
+   "night": 7,
+   "scripture": "2 Kings 23",
+   "scriptureBook": "2 Kings",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "keeping-promises",
+    "obedience"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "keeping-promises",
+   "teachingNote": "Reach for this when your child makes a commitment, like a baptismal or family promise, and needs to understand keeping it matters.",
+   "teaser": "A long, long time ago there was a boy named Josiah. He was only eight years old when he became king of a land called Judah. That is very young to be a king! In Josiah's land, the people had…",
+   "wordCount": 342
   },
   {
    "id": "b7-w4-n1",
-   "title": "We Rest on You",
+   "title": "King Asa Calls on God",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 4,
    "night": 1,
-   "scripture": "2 Chronicles 14:2–4, 11; 15:1–2",
+   "scripture": "2 Chronicles 14",
    "scriptureBook": "2 Chronicles",
-   "traveler": "beau",
-   "feeling": "safe",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "trust-in-god",
-    "faith"
+    "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child feels outnumbered or weak and needs to learn to lean back and rest on the Lord.",
-   "teaser": "Asa was a good king of Judah. He asked his people to look for the Lord and keep His commandments. One day a very big army came to fight. Asa’s army was much smaller. So Asa prayed, “Help us, O Lord, for we rest on…",
-   "wordCount": 118,
-   "aka": [
-    "King Asa Calls on God"
-   ]
+   "teachingNote": "Reach for this when your child feels outmatched by a problem and needs to know Heavenly Father's help is bigger.",
+   "teaser": "Asa was a good king of Judah. He asked his people to look for the Lord and keep His commandments. One day a very big army came to fight. Asa’s army was much smaller. So Asa prayed, “Help us, O…",
+   "wordCount": 118
   },
   {
    "id": "b7-w4-n2",
-   "title": "The Eyes of the Lord",
+   "title": "Be Strong and Don't Give Up",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 4,
    "night": 2,
-   "scripture": "2 Chronicles 16:2–3, 7–9",
+   "scripture": "2 Chronicles 15",
    "scriptureBook": "2 Chronicles",
-   "traveler": "wren",
-   "feeling": "safe",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "trust-in-god",
-    "humility"
+    "perseverance",
+    "diligence"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child tries to fix everything alone and needs to know the Lord sees and helps hearts that trust Him.",
-   "teaser": "Many years later, another king made trouble for King Asa. This time, Asa did not ask the Lord for help. Instead, he sent silver and gold to the king of Syria for help. Then Hanani, a prophet who saw what others…",
-   "wordCount": 119,
-   "aka": [
-    "When Asa Forgot to Trust"
-   ]
+   "primaryVirtue": "perseverance",
+   "teachingNote": "Reach for this when your child wants to quit doing something good because it has gotten hard or boring.",
+   "teaser": "A long, long time ago there was a young king named Asa. He was king of a land called Judah. Before Asa was king, many people there had stopped praying to Heavenly Father. They bowed down to statues made of…",
+   "wordCount": 334
   },
   {
    "id": "b7-w4-n3",
-   "title": "Teachers in Every Town",
+   "title": "When Asa Forgot to Trust",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 4,
    "night": 3,
-   "scripture": "2 Chronicles 17:3–9; 19:4",
+   "scripture": "2 Chronicles 16",
    "scriptureBook": "2 Chronicles",
-   "traveler": "scout",
-   "feeling": "eager",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "love-of-scripture",
-    "curiosity"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "love-of-scripture",
-   "teachingNote": "Reach for this when your child is curious about scripture and needs the picture of teachers carrying the book to every town.",
-   "teaser": "Asa’s son Jehoshaphat became king. He kept the Lord’s commandments, and the Lord was with him. He wanted all his people to learn about the Lord. So he sent teachers to the towns. Priests who served the Lord went…",
-   "wordCount": 104
-  },
-  {
-   "id": "b7-w4-n4",
-   "title": "Our Eyes Are on You",
-   "volume": "ot",
-   "book": 7,
-   "bookTitle": "There Is a Prophet in Israel",
-   "month": "July",
-   "week": 4,
-   "night": 4,
-   "scripture": "2 Chronicles 20:1–5, 12–13",
-   "scriptureBook": "2 Chronicles",
-   "traveler": "willow",
-   "feeling": "worried",
-   "virtues": [
-    "prayer",
+    "trust-in-god",
     "humility"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "prayer",
-   "teachingNote": "Reach for this when your child does not know what to do and needs the words, our eyes are on You.",
-   "teaser": "One day King Jehoshaphat heard that a big army was coming. He felt afraid. He asked everyone in Judah to fast: to skip food and pray very hard. People came from every town to the Lord’s house. There Jehoshaphat…",
-   "wordCount": 117,
-   "aka": [
-    "Our Eyes Are upon Thee"
-   ]
+   "primaryVirtue": "trust-in-god",
+   "teachingNote": "Reach for this when your child tries to solve everything alone and forgets to ask for help first.",
+   "teaser": "Many years later, another king made trouble for King Asa. This time, Asa did not ask the Lord for help. Instead, he sent silver and gold to the king of Syria for help. Then Hanani, a prophet who saw what…",
+   "wordCount": 119
+  },
+  {
+   "id": "b7-w4-n4",
+   "title": "Judges Who Are Fair",
+   "volume": "ot",
+   "book": 7,
+   "bookTitle": "There Is a Prophet in Israel",
+   "month": "July",
+   "week": 4,
+   "night": 4,
+   "scripture": "2 Chronicles 19",
+   "scriptureBook": "2 Chronicles",
+   "traveler": null,
+   "feeling": null,
+   "virtues": [
+    "kindness"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "kindness",
+   "teachingNote": "Reach for this when your child needs to learn about fairness, like taking turns and not leaving anyone out.",
+   "teaser": "A long, long time ago there was a good king named Jehoshaphat. He was king of a land called Judah, where Heavenly Father's people lived. Jehoshaphat loved Heavenly Father very much, and he wanted his people to love Him too.…",
+   "wordCount": 336
   },
   {
    "id": "b7-w4-n5",
-   "title": "The Singers Went First",
+   "title": "Our Eyes Are upon Thee",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 4,
    "night": 5,
-   "scripture": "2 Chronicles 20:14–17, 21–22, 27–28",
+   "scripture": "2 Chronicles 20",
    "scriptureBook": "2 Chronicles",
-   "traveler": "beau",
-   "feeling": "happy",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "trust-in-god",
-    "gratitude"
+    "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child faces something hard and needs the picture of singers going first, and the Lord fighting for them.",
-   "teaser": "As Judah prayed, the Spirit of the Lord came upon a man named Jahaziel. He gave them the Lord’s words. Jahaziel said, “Do not be afraid. The battle is not yours. It is the Lord’s.” “You will not need to fight. Just…",
-   "wordCount": 112
+   "teachingNote": "Reach for this when your child doesn't know what to do and needs to look to Heavenly Father instead of panicking.",
+   "teaser": "One day King Jehoshaphat heard that a big army was coming. He felt afraid. He asked everyone in Judah to fast: to skip food and pray very hard. People came from every town to the Lord’s house. There Jehoshaphat prayed…",
+   "wordCount": 117
   },
   {
    "id": "b7-w4-n6",
-   "title": "King Uzziah Grew Proud",
+   "title": "The King Who Forgot to Stay Humble",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 4,
    "night": 6,
-   "scripture": "2 Chronicles 26:3–5, 10, 15–18",
+   "scripture": "2 Chronicles 26",
    "scriptureBook": "2 Chronicles",
-   "traveler": "wren",
-   "feeling": "discouraged",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
     "humility",
-    "self-control"
+    "gratitude"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "humility",
-   "teachingNote": "Reach for this when your child feels proud of what they can do and needs to remember the Lord is the one who makes them strong.",
-   "teaser": "Uzziah became king when he was only sixteen years old. He did what was right in the Lord’s eyes. While a wise man named Zechariah lived, Uzziah looked to the Lord. As long as he did, the Lord helped him do well…",
-   "wordCount": 120,
-   "aka": [
-    "The King Who Forgot to Stay Humble"
-   ]
+   "teachingNote": "Reach for this when success is going to your child's head and they need a reminder that blessings come from Heavenly Father.",
+   "teaser": "Uzziah became king when he was only sixteen years old. He did what was right in the Lord’s eyes. While a wise man named Zechariah lived, Uzziah looked to the Lord. As long as he did, the Lord helped him…",
+   "wordCount": 120
   },
   {
    "id": "b7-w4-n7",
-   "title": "Everyone Is Invited",
+   "title": "Come Celebrate with God",
    "volume": "ot",
    "book": 7,
    "bookTitle": "There Is a Prophet in Israel",
    "month": "July",
    "week": 4,
    "night": 7,
-   "scripture": "2 Chronicles 30:1, 5–9, 18–20, 26–27",
+   "scripture": "2 Chronicles 30",
    "scriptureBook": "2 Chronicles",
-   "traveler": "willow",
-   "feeling": "loved",
+   "traveler": null,
+   "feeling": null,
    "virtues": [
-    "forgiveness",
     "worship-together"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "forgiveness",
-   "teachingNote": "Reach for this when your child fears they have messed up too much and needs the picture of a king inviting everyone to come back.",
-   "teaser": "King Hezekiah sent letters through all the land. He invited everyone to the Lord’s house for the Passover. The Passover was a special meal remembering when the Lord set His people free. Prophets teach that its…",
-   "wordCount": 120,
-   "aka": [
-    "Come Celebrate with God"
-   ]
+   "primaryVirtue": "worship-together",
+   "teachingNote": "Reach for this when inviting your child to feel the joy of coming back to Heavenly Father with a humble heart.",
+   "teaser": "King Hezekiah sent letters through all the land. He invited everyone to the Lord’s house for the Passover. The Passover was a special meal remembering when the Lord set His people free. Prophets teach that its little lamb was a…",
+   "wordCount": 120
   },
   {
    "id": "b8-w1-n1",
-   "title": "Time to Go Home!",
+   "title": "The King Says, \"You May Go Home!\"",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 1,
    "night": 1,
-   "scripture": "Ezra 1:1–7",
+   "scripture": "Ezra 1; 3–7; Nehemiah 2; 4–6; 8",
    "scriptureBook": "Ezra",
    "traveler": "scout",
-   "feeling": "eager",
+   "feeling": "excited",
    "virtues": [
-    "hope",
-    "trust-in-god"
+    "trust-in-god",
+    "courage"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child is far from home or missing something and needs to know Heavenly Father never forgets them.",
-   "teaser": "Long ago, Heavenly Father’s people were taken far away to Babylon. Their real home was Jerusalem. The Lord’s house there had been knocked down. Years later, a new king named Cyrus ruled the land. The Lord put a good…",
-   "wordCount": 111,
-   "aka": [
-    "The King Says, \"You May Go Home!\""
-   ]
+   "primaryVirtue": "trust-in-god",
+   "teachingNote": "Reach for this when your child needs reassurance that Heavenly Father always keeps His promises, even after a long wait.",
+   "teaser": "Long ago, Heavenly Father’s people were taken far away to Babylon. Their real home was Jerusalem. The Lord’s house there had been knocked down. Years later, a new king named Cyrus ruled the land. The Lord put a good idea…",
+   "wordCount": 111
   },
   {
    "id": "b8-w1-n2",
-   "title": "A Great Shout of Joy",
+   "title": "The First Big Stone",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 1,
    "night": 2,
-   "scripture": "Ezra 3:10–13",
+   "scripture": "Ezra 1; 3– 7; Nehemiah 2; 4–6; 8",
    "scriptureBook": "Ezra",
    "traveler": "willow",
    "feeling": "happy",
@@ -6753,278 +6620,75 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "gratitude",
-   "teachingNote": "Reach for this when your child feels happy and sad at once and needs to know both feelings can sit together while we praise.",
-   "teaser": "Heavenly Father’s people were home in Jerusalem at last. They began to build the Lord’s house again. First they laid the foundation, the strong bottom part that holds it up. Then the priests, who served in the…",
-   "wordCount": 121,
-   "aka": [
-    "The First Big Stone"
-   ]
+   "teachingNote": "Reach for this when your child has big mixed feelings and needs to know it's okay to feel happy and cry together.",
+   "teaser": "Heavenly Father’s people were home in Jerusalem at last. They began to build the Lord’s house again. First they laid the foundation, the strong bottom part that holds it up. Then the priests, who served in the Lord’s house, blew…",
+   "wordCount": 121
   },
   {
    "id": "b8-w1-n3",
-   "title": "The Work Starts Again",
+   "title": "The Temple Is Finished!",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 1,
    "night": 3,
-   "scripture": "Ezra 4:24; 5:1–2; 6:14–16",
+   "scripture": "Ezra 1; 3–7; Nehemiah 2; 4–6; 8",
    "scriptureBook": "Ezra",
    "traveler": "beau",
-   "feeling": "brave",
+   "feeling": "discouraged",
    "virtues": [
     "perseverance",
-    "faith"
+    "trust-in-god"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "perseverance",
-   "teachingNote": "Reach for this when your child wants to quit a hard job and needs to hear that the Lord helps us start again.",
-   "teaser": "Heavenly Father’s people were building the Lord’s house. But some people nearby did not want it built. They made trouble until the work stopped. For years and years, the Lord’s house sat unfinished. Then the Lord…",
-   "wordCount": 116,
-   "aka": [
-    "The Temple Is Finished!"
-   ]
+   "teachingNote": "Reach for this when your child feels discouraged partway through a hard task and wants to quit.",
+   "teaser": "Heavenly Father’s people were building the Lord’s house. But some people nearby did not want it built. They made trouble until the work stopped. For years and years, the Lord’s house sat unfinished. Then the Lord sent two prophets, Haggai…",
+   "wordCount": 116
   },
   {
    "id": "b8-w1-n4",
-   "title": "Nehemiah Prayed First",
+   "title": "Ezra Loves the Scriptures",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 1,
    "night": 4,
-   "scripture": "Nehemiah 2:1–8",
-   "scriptureBook": "Nehemiah",
-   "traveler": "wren",
-   "feeling": "calm",
-   "virtues": [
-    "prayer",
-    "faith"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "prayer",
-   "teachingNote": "Reach for this when your child is scared to ask for something big and needs to know a quick quiet prayer can go up anytime.",
-   "teaser": "Nehemiah worked for a great king far away. His job was to bring the king his wine. One day, Nehemiah’s face looked sad. The king asked, “Why is your face so sad?” Nehemiah felt very afraid. Nehemiah said…",
-   "wordCount": 116,
-   "aka": [
-    "Nehemiah’s Brave Idea"
-   ]
-  },
-  {
-   "id": "b8-w1-n5",
-   "title": "A Mind to Work",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 1,
-   "night": 5,
-   "scripture": "Nehemiah 4:6, 9, 14–15, 21",
-   "scriptureBook": "Nehemiah",
-   "traveler": "willow",
-   "feeling": "connected",
-   "virtues": [
-    "service",
-    "diligence"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "service",
-   "teachingNote": "Reach for this when your child faces a big chore and needs to see how working together with the Lord gets it done.",
-   "teaser": "Nehemiah came home to Jerusalem. He asked everyone to build the city wall again. It was like a big stone fence to keep them safe. Everyone worked on the wall together. They worked from early morning until the stars…",
-   "wordCount": 111
-  },
-  {
-   "id": "b8-w1-n6",
-   "title": "I Am Doing a Great Work",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 1,
-   "night": 6,
-   "scripture": "Nehemiah 6:1–4, 15–16",
-   "scriptureBook": "Nehemiah",
-   "traveler": "beau",
-   "feeling": "brave",
-   "virtues": [
-    "perseverance",
-    "integrity"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "perseverance",
-   "teachingNote": "Reach for this when your child is pulled away from a good job by others and needs to say, I am doing a great work.",
-   "teaser": "The wall around Jerusalem was almost done. Only the doors for the gates were left. Some men did not want the wall finished. They sent Nehemiah a message: “Come down and meet with us.” But they wanted to make trouble…",
-   "wordCount": 117,
-   "aka": [
-    "“I Am Doing a Great Work”"
-   ]
-  },
-  {
-   "id": "b8-w1-n7",
-   "title": "The Joy of the Lord",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 1,
-   "night": 7,
-   "scripture": "Ezra 7:10; Nehemiah 8:1–12",
+   "scripture": "Ezra 1; 3–7; Nehemiah 2; 4–6; 8",
    "scriptureBook": "Ezra",
-   "traveler": "scout",
-   "feeling": "happy",
+   "traveler": "wren",
+   "feeling": "eager",
    "virtues": [
     "love-of-scripture",
-    "worship-together"
+    "pondering"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "love-of-scripture",
-   "teachingNote": "Reach for this when your child lights up after understanding something from the scriptures and needs to know that joy is strength.",
-   "teaser": "Ezra loved the Lord’s words. He got his heart ready to learn them, live them and teach them. All the people gathered in Jerusalem. Men, women and all who could understand came to listen. Ezra stood up high on a…",
-   "wordCount": 123,
-   "aka": [
-    "The Happiest Reading Day"
-   ]
+   "teachingNote": "Reach for this when you want your child to slow down and treasure scripture time instead of rushing through it.",
+   "teaser": "A long, long time ago, Heavenly Father's people had to live far away from home, in a land called Babylon. Their own city, Jerusalem, was empty. After many years, the king said, \"You may go home!\" So the people packed…",
+   "wordCount": 268
   },
   {
-   "id": "b8-w2-n1",
-   "title": "Esther Becomes Queen",
+   "id": "b8-w1-n5",
+   "title": "Nehemiah's Brave Idea",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
-   "week": 2,
-   "night": 1,
-   "scripture": "Esther 1:1–2; 2:5–7, 10, 17",
-   "scriptureBook": "Esther",
-   "traveler": "willow",
-   "feeling": "loved",
-   "virtues": [
-    "family-love",
-    "identity"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "family-love",
-   "teachingNote": "Reach for this when your child is in a new place or home and needs to know Heavenly Father gives them people who care.",
-   "teaser": "Long ago, King Ahasuerus ruled a very big land. He lived in a palace in the city of Shushan. In Shushan lived a man named Mordecai. He was a Jew, one of Heavenly Father’s people of Israel. Mordecai’s young cousin…",
-   "wordCount": 115,
-   "aka": [
-    "A Kind Girl Becomes Queen"
-   ]
-  },
-  {
-   "id": "b8-w2-n2",
-   "title": "Mordecai Helps the King",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 2,
-   "night": 2,
-   "scripture": "Esther 2:21–23",
-   "scriptureBook": "Esther",
-   "traveler": "beau",
-   "feeling": "brave",
-   "virtues": [
-    "courage",
-    "honesty"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "courage",
-   "teachingNote": "Reach for this when your child sees a danger or a wrong and needs the courage to tell a trusted grown-up.",
-   "teaser": "Mordecai sat at the king’s gate, the big doorway into the palace. Two of the king’s helpers guarded the doors. They grew very angry and made a plan to hurt the king. Mordecai found out about the bad plan. He did not…",
-   "wordCount": 107
-  },
-  {
-   "id": "b8-w2-n3",
-   "title": "Haman’s Mean Plan",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 2,
-   "night": 3,
-   "scripture": "Esther 3:1–2, 5–6, 8–11",
-   "scriptureBook": "Esther",
-   "traveler": "willow",
-   "feeling": "angry",
-   "virtues": [
-    "humility",
-    "kindness"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "humility",
-   "teachingNote": "Reach for this when your child feels better than someone else and needs to learn that Jesus asks us to be kind, not proud.",
-   "teaser": "The king made a man named Haman his most important leader. Everyone had to bow low to Haman to show him honor. But Mordecai would not bow. Haman was full of anger and pride. He thought he was better than everyone…",
-   "wordCount": 110,
-   "aka": [
-    "Mordecai Stands Tall"
-   ]
-  },
-  {
-   "id": "b8-w2-n4",
-   "title": "For Such a Time as This",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 2,
-   "night": 4,
-   "scripture": "Esther 4:1–14",
-   "scriptureBook": "Esther",
-   "traveler": "wren",
-   "feeling": "worried",
-   "virtues": [
-    "courage",
-    "faith"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "courage",
-   "teachingNote": "Reach for this when your child wonders why they are here and needs to hear that Heavenly Father has good work for them.",
-   "teaser": "When Mordecai heard about Haman’s plan, he cried a loud, sad cry. Jews in every land cried too. Mordecai sent a message to Queen Esther. “Please go to the king. Ask him to help your people.” But there was a strict…",
-   "wordCount": 118
-  },
-  {
-   "id": "b8-w2-n5",
-   "title": "The Golden Scepter",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 2,
+   "week": 1,
    "night": 5,
-   "scripture": "Esther 4:15–17; 5:1–3",
-   "scriptureBook": "Esther",
+   "scripture": "Ezra 1; 3–7; Nehemiah 2; 4–6; 8",
+   "scriptureBook": "Ezra",
    "traveler": "beau",
-   "feeling": "nervous",
+   "feeling": "worried",
    "virtues": [
     "courage",
     "prayer"
@@ -7034,25 +6698,256 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "courage",
-   "teachingNote": "Reach for this when your child has a hard thing to do and needs to pray first, then step forward shaky but strong.",
-   "teaser": "Esther sent a message to Mordecai. “Gather all the Jews here, and fast for me for three days. My helpers and I will fast too.” When people fast, they go without food and drink for a little while. It shows Heavenly…",
-   "wordCount": 123,
-   "aka": [
-    "Esther’s Brave Choice"
-   ]
+   "teachingNote": "Reach for this when your child's heart feels heavy or worried and needs prayer to turn worry into bravery.",
+   "teaser": "Nehemiah worked for a great king far away. His job was to bring the king his wine. One day, Nehemiah’s face looked sad. The king asked, “Why is your face so sad?” Nehemiah felt very afraid. Nehemiah said, “Jerusalem, my…",
+   "wordCount": 116
+  },
+  {
+   "id": "b8-w1-n6",
+   "title": "\"I Am Doing a Great Work\"",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 1,
+   "night": 6,
+   "scripture": "Ezra 1; 3–7; Nehemiah 2; 4–6; 8",
+   "scriptureBook": "Ezra",
+   "traveler": "wren",
+   "feeling": "distracted",
+   "virtues": [
+    "diligence",
+    "self-control"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "diligence",
+   "teachingNote": "Reach for this when your child is being teased or distracted from a good task and needs to stay focused and finish.",
+   "teaser": "The wall around Jerusalem was almost done. Only the doors for the gates were left. Some men did not want the wall finished. They sent Nehemiah a message: “Come down and meet with us.” But they wanted to make trouble…",
+   "wordCount": 117
+  },
+  {
+   "id": "b8-w1-n7",
+   "title": "The Happiest Reading Day",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 1,
+   "night": 7,
+   "scripture": "Ezra 1; 3–7; Nehemiah 2; 4–6; 8",
+   "scriptureBook": "Ezra",
+   "traveler": "scout",
+   "feeling": "comforted",
+   "virtues": [
+    "love-of-scripture",
+    "comfort"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "love-of-scripture",
+   "teachingNote": "Reach for this when your child feels sorry about a mistake and needs to know scripture brings joy, not just guilt.",
+   "teaser": "Ezra loved the Lord’s words. He got his heart ready to learn them, live them and teach them. All the people gathered in Jerusalem. Men, women and all who could understand came to listen. Ezra stood up high on a…",
+   "wordCount": 123
+  },
+  {
+   "id": "b8-w2-n1",
+   "title": "A Kind Girl Becomes Queen",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 2,
+   "night": 1,
+   "scripture": "Esther",
+   "scriptureBook": "Esther",
+   "traveler": "willow",
+   "feeling": "nervous",
+   "virtues": [
+    "kindness",
+    "humility"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "kindness",
+   "teachingNote": "Reach for this when your shy or quiet child needs to know a kind heart matters more than being noticed or praised.",
+   "teaser": "Long ago, King Ahasuerus ruled a very big land. He lived in a palace in the city of Shushan. In Shushan lived a man named Mordecai. He was a Jew, one of Heavenly Father’s people of Israel. Mordecai’s young cousin…",
+   "wordCount": 115
+  },
+  {
+   "id": "b8-w2-n2",
+   "title": "Mordecai Stands Tall",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 2,
+   "night": 2,
+   "scripture": "Esther",
+   "scriptureBook": "Esther",
+   "traveler": "beau",
+   "feeling": "brave",
+   "virtues": [
+    "stand-for-truth",
+    "courage"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "stand-for-truth",
+   "teachingNote": "Reach for this when your child feels pressure to go along with the crowd instead of quietly doing what's right.",
+   "teaser": "The king made a man named Haman his most important leader. Everyone had to bow low to Haman to show him honor. But Mordecai would not bow. Haman was full of anger and pride. He thought he was better than…",
+   "wordCount": 110
+  },
+  {
+   "id": "b8-w2-n3",
+   "title": "For Such a Time as This",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 2,
+   "night": 3,
+   "scripture": "Esther",
+   "scriptureBook": "Esther",
+   "traveler": "wren",
+   "feeling": "nervous",
+   "virtues": [
+    "identity",
+    "service"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "identity",
+   "teachingNote": "Reach for this when your child wonders if they matter and needs to know Heavenly Father placed them there for a reason.",
+   "teaser": "When Mordecai heard about Haman’s plan, he cried a loud, sad cry. Jews in every land cried too. Mordecai sent a message to Queen Esther. “Please go to the king. Ask him to help your people.” But there was a…",
+   "wordCount": 118
+  },
+  {
+   "id": "b8-w2-n4",
+   "title": "Esther's Brave Choice",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 2,
+   "night": 4,
+   "scripture": "Esther",
+   "scriptureBook": "Esther",
+   "traveler": "beau",
+   "feeling": "worried",
+   "virtues": [
+    "courage",
+    "prayer"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "courage",
+   "teachingNote": "Reach for this when your child is scared to do a hard, right thing and needs to pray first, then be brave.",
+   "teaser": "Esther sent a message to Mordecai. “Gather all the Jews here, and fast for me for three days. My helpers and I will fast too.” When people fast, they go without food and drink for a little while. It shows…",
+   "wordCount": 123
+  },
+  {
+   "id": "b8-w2-n5",
+   "title": "Esther's Wise Plan",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 2,
+   "night": 5,
+   "scripture": "Esther",
+   "scriptureBook": "Esther",
+   "traveler": "wren",
+   "feeling": "impatient",
+   "virtues": [
+    "patience",
+    "wisdom"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "patience",
+   "teachingNote": "Reach for this when your child wants to blurt something out right away and needs help waiting for the right moment.",
+   "teaser": "Long, long ago, a girl named Esther lived in a land called Persia. It was far from the land her family came from. Her people, the Jews, had been taken away from home, so they lived there too, and they…",
+   "wordCount": 338
   },
   {
    "id": "b8-w2-n6",
-   "title": "The King Could Not Sleep",
+   "title": "The King Saves the People",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 2,
    "night": 6,
-   "scripture": "Esther 6:1–3, 6–11",
+   "scripture": "Esther",
    "scriptureBook": "Esther",
    "traveler": "scout",
+   "feeling": "brave",
+   "virtues": [
+    "honesty",
+    "courage"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "honesty",
+   "teachingNote": "Reach for this when your child is scared to tell the truth but the truth could protect someone they love.",
+   "teaser": "Esther made a big, special dinner for the king and Haman. The king asked, “Queen Esther, what do you want? I will give it to you.” Esther said, “Please save my life and my people. Someone has a plan to…",
+   "wordCount": 122
+  },
+  {
+   "id": "b8-w2-n7",
+   "title": "A Happy Celebration",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 2,
+   "night": 7,
+   "scripture": "Esther",
+   "scriptureBook": "Esther",
+   "traveler": "willow",
+   "feeling": "grateful",
+   "virtues": [
+    "gratitude",
+    "generosity"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "gratitude",
+   "teachingNote": "Reach for this when your child receives something good and needs to learn that sharing the joy makes it bigger.",
+   "teaser": "Long ago, Heavenly Father's people lived far, far away from their old home, in a land called Persia. A girl named Esther lived there too. The king picked her to be his queen. Nobody knew that Esther was one of…",
+   "wordCount": 268
+  },
+  {
+   "id": "b8-w3-n1",
+   "title": "Job Loved Heavenly Father",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 3,
+   "night": 1,
+   "scripture": "Job 1–3; 12–14; 19; 21–24; 38–40; 42",
+   "scriptureBook": "Job",
+   "traveler": "willow",
    "feeling": "grateful",
    "virtues": [
     "gratitude",
@@ -7063,49 +6958,20 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "gratitude",
-   "teachingNote": "Reach for this when your child feels unnoticed and needs to know Heavenly Father sees every good thing they do.",
-   "teaser": "One night, the king could not sleep. So his helpers read to him from his big book of what had happened. They read how Mordecai had saved the king from a bad plan. The king asked, “What did we do to thank Mordecai?”…",
-   "wordCount": 122
+   "teachingNote": "Reach for this when you want your child to thank Heavenly Father every day, not just when things are easy.",
+   "teaser": "Long, long ago, before Jesus was born on the earth, there lived a good man named Job. Job loved Heavenly Father with his whole heart. He was kind to everybody — to his children, to his helpers, and to people…",
+   "wordCount": 288
   },
   {
-   "id": "b8-w2-n7",
-   "title": "Esther Saves Her People",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 2,
-   "night": 7,
-   "scripture": "Esther 7:2–6; 8:16; 9:22, 26",
-   "scriptureBook": "Esther",
-   "traveler": "wren",
-   "feeling": "happy",
-   "virtues": [
-    "hope",
-    "courage"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child's sad day has turned around and needs to see how Jesus changes sorrow into joy.",
-   "teaser": "Esther made a big, special dinner for the king and Haman. The king asked, “Queen Esther, what do you want? I will give it to you.” Esther said, “Please save my life and my people. Someone has a plan to hurt us all.”…",
-   "wordCount": 122,
-   "aka": [
-    "The King Saves the People"
-   ]
-  },
-  {
-   "id": "b8-w3-n1",
-   "title": "Blessed Be the Lord’s Name",
+   "id": "b8-w3-n2",
+   "title": "Job Keeps Trusting",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 3,
-   "night": 1,
-   "scripture": "Job 1:1–5, 13–22",
+   "night": 2,
+   "scripture": "Job 1–3; 12–14; 19; 21–24; 38–40; 42",
    "scriptureBook": "Job",
    "traveler": "beau",
    "feeling": "sad",
@@ -7118,331 +6984,228 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child lost something they loved and needs to know they can still love the Lord on sad days.",
-   "teaser": "In the land of Uz lived a good man named Job. He loved the Lord. Job had seven sons and three daughters. Job had many sheep, camels and oxen. Early each morning, he gave gifts to the Lord for his children. Then a…",
-   "wordCount": 123,
-   "aka": [
-    "Job Keeps Trusting"
-   ]
+   "teachingNote": "Reach for this when hard things happen and your child needs to see you can be sad and still trust Heavenly Father.",
+   "teaser": "In the land of Uz lived a good man named Job. He loved the Lord. Job had seven sons and three daughters. Job had many sheep, camels and oxen. Early each morning, he gave gifts to the Lord for his…",
+   "wordCount": 123
   },
   {
-   "id": "b8-w3-n2",
-   "title": "Friends Who Sat Close",
+   "id": "b8-w3-n3",
+   "title": "Kind Friends Come to Sit",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 3,
-   "night": 2,
-   "scripture": "Job 2:7–13; 3:1",
+   "night": 3,
+   "scripture": "Job 1–3; 12–14; 19; 21–24; 38–40; 42",
    "scriptureBook": "Job",
    "traveler": "willow",
-   "feeling": "sad",
+   "feeling": "comforted",
    "virtues": [
     "compassion",
-    "family-love"
+    "comfort"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "compassion",
-   "teachingNote": "Reach for this when your child sees a friend hurting and needs to learn that sitting close and loving is enough.",
+   "teachingNote": "Reach for this when your child isn't sure how to help a sad friend and needs to know sitting close is enough.",
    "teaser": "Then Job got very sick, with sore spots from his feet to his head. He sat in the ashes, sad and hurting. Three friends heard about Job’s troubles: Eliphaz, Bildad and Zophar. They came to comfort Job and help him…",
-   "wordCount": 118,
-   "aka": [
-    "Kind Friends Come to Sit"
-   ]
-  },
-  {
-   "id": "b8-w3-n3",
-   "title": "Yet Will I Trust Him",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 3,
-   "night": 3,
-   "scripture": "Job 13:15; 23:8–10",
-   "scriptureBook": "Job",
-   "traveler": "beau",
-   "feeling": "worried",
-   "virtues": [
-    "trust-in-god",
-    "perseverance"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child cannot see Heavenly Father in a hard time and needs to hold on tight and trust Him anyway.",
-   "teaser": "Job’s friends thought his troubles came because he did something wrong. But that was not true. Job felt like he could not find the Lord. He said, “I go forward, but He is not there.” But Job did not stop trusting…",
-   "wordCount": 120
+   "wordCount": 118
   },
   {
    "id": "b8-w3-n4",
-   "title": "My Redeemer Lives",
+   "title": "Job Tells Heavenly Father His Feelings",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 3,
    "night": 4,
-   "scripture": "Job 14:7, 14; 19:23–27",
+   "scripture": "Job1–3;12–14;19;21–24;38–40;42",
    "scriptureBook": "Job",
    "traveler": "wren",
-   "feeling": "comforted",
+   "feeling": "confused",
    "virtues": [
-    "hope",
-    "faith"
+    "prayer",
+    "comfort"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child is afraid of loss or sadness and needs to hear that Jesus, their Redeemer, lives.",
-   "teaser": "Job said that when a tree is cut down, it can sprout again. New green branches can grow! Then Job wondered, “If a person dies, will he live again?” That was his big question. Job wished his words could be carved in…",
-   "wordCount": 121,
-   "aka": [
-    "Job Tells Heavenly Father His Feelings"
-   ]
+   "primaryVirtue": "prayer",
+   "teachingNote": "Reach for this when your child is holding back tears or hard feelings and needs permission to tell Heavenly Father honestly.",
+   "teaser": "Job said that when a tree is cut down, it can sprout again. New green branches can grow! Then Job wondered, “If a person dies, will he live again?” That was his big question. Job wished his words could be…",
+   "wordCount": 121
   },
   {
    "id": "b8-w3-n5",
-   "title": "When the Stars Sang",
+   "title": "Heavenly Father Shows His Wonders",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 3,
    "night": 5,
-   "scripture": "Job 38:1–7; 40:3–4",
+   "scripture": "Job 1–3; 12–14; 19; 21–24; 38–40; 42",
    "scriptureBook": "Job",
    "traveler": "scout",
    "feeling": "amazed",
    "virtues": [
     "wonder",
+    "trust-in-god"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "wonder",
+   "teachingNote": "Reach for this when looking at the night sky or nature together, to help your child feel Heavenly Father's greatness.",
+   "teaser": "At last the Lord spoke to Job out of a whirlwind, a spinning wind. The Lord was Jesus, speaking for Heavenly Father. He asked Job, “Where were you when I made the earth?” The Lord had measured it, the way…",
+   "wordCount": 125
+  },
+  {
+   "id": "b8-w3-n6",
+   "title": "Job Trusts Heavenly Father's Wisdom",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 3,
+   "night": 6,
+   "scripture": "Job 1–3; 12–14; 19; 21–24; 38–40; 42",
+   "scriptureBook": "Job",
+   "traveler": "wren",
+   "feeling": "calm",
+   "virtues": [
+    "trust-in-god",
     "humility"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "wonder",
-   "teachingNote": "Reach for this when your child gazes at the stars and needs to feel how big the Lord is and that He still knows them.",
-   "teaser": "At last the Lord spoke to Job out of a whirlwind, a spinning wind. The Lord was Jesus, speaking for Heavenly Father. He asked Job, “Where were you when I made the earth?” The Lord had measured it, the way a builder…",
-   "wordCount": 125,
-   "aka": [
-    "Heavenly Father Shows His Wonders"
-   ]
-  },
-  {
-   "id": "b8-w3-n6",
-   "title": "Who Feeds the Ravens?",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 3,
-   "night": 6,
-   "scripture": "Job 12:7–10; 38:41; 39:19, 27",
-   "scriptureBook": "Job",
-   "traveler": "willow",
-   "feeling": "safe",
-   "virtues": [
-    "trust-in-god",
-    "wonder"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
    "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child worries about having enough and needs to picture the Lord feeding the little ravens.",
-   "teaser": "The Lord told Job about the animals He made. He asked, “Who feeds the raven, the big black bird?” When baby ravens are hungry, they cry to Heavenly Father. The Lord gives them food. He asked, “Did you make the horse…",
-   "wordCount": 124
+   "teachingNote": "Reach for this when your child wants an explanation you can't give and needs peace in trusting Heavenly Father anyway.",
+   "teaser": "A long, long time ago there was a good man named Job. Job loved Heavenly Father. Then Job had many sad, hard days, and he did not know why. His friends came and said, \"You must have done something bad.\"…",
+   "wordCount": 302
   },
   {
    "id": "b8-w3-n7",
-   "title": "The Lord Blessed Job",
+   "title": "Heavenly Father Blesses Job Again",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 3,
    "night": 7,
-   "scripture": "Job 42:5, 7–17",
+   "scripture": "Job 1–3; 12–14; 19; 21–24; 38–40; 42",
    "scriptureBook": "Job",
-   "traveler": "wren",
+   "traveler": "beau",
    "feeling": "happy",
    "virtues": [
     "hope",
-    "trust-in-god"
+    "comfort"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child has come through a hard season and needs to see that the Lord brings joy again.",
-   "teaser": "Job told the Lord, “I had heard about You. But now I see You with my own eyes.” The Lord told Job’s friends, “You have not said what is right about Me.” He said Job would pray for them. So Job prayed for his…",
-   "wordCount": 120,
-   "aka": [
-    "Heavenly Father Blesses Job Again"
-   ]
+   "teachingNote": "Reach for this when your child is in a hard season and needs hope that joy and good days will come again.",
+   "teaser": "Job told the Lord, “I had heard about You. But now I see You with my own eyes.” The Lord told Job’s friends, “You have not said what is right about Me.” He said Job would pray for them. So…",
+   "wordCount": 120
   },
   {
    "id": "b8-w4-n1",
-   "title": "A Tree by the River",
+   "title": "The Happy Little Tree",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 4,
    "night": 1,
-   "scripture": "Psalm 1:1–3",
-   "scriptureBook": "Psalm",
-   "traveler": "scout",
-   "feeling": "happy",
+   "scripture": "Psalms 1–2; 8; 19–33; 40; 46",
+   "scriptureBook": "Psalms",
+   "traveler": "wren",
+   "feeling": "brave",
    "virtues": [
-    "love-of-scripture",
-    "pondering"
+    "love-of-scripture"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "love-of-scripture",
-   "teachingNote": "Reach for this when your child wants to grow strong and needs the picture of a tree planted by a river of the Lord's words.",
-   "teaser": "The first song in Psalms tells about a happy person. That person loves the Lord’s words and thinks about them “day and night.” He stays away from people who choose wrong. The song says he is “like a tree planted by…",
-   "wordCount": 124,
-   "aka": [
-    "The Happy Little Tree"
-   ]
+   "teachingNote": "Reach for this when encouraging a daily habit of scripture time by showing how it helps hearts grow strong.",
+   "teaser": "The first song in Psalms tells about a happy person. That person loves the Lord’s words and thinks about them “day and night.” He stays away from people who choose wrong. The song says he is “like a tree planted…",
+   "wordCount": 124
   },
   {
    "id": "b8-w4-n2",
-   "title": "The Moon and the Stars",
+   "title": "Look at the Stars!",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 4,
    "night": 2,
-   "scripture": "Psalm 8:3–5",
-   "scriptureBook": "Psalm",
-   "traveler": "wren",
-   "feeling": "amazed",
+   "scripture": "Psalms 1–2; 8; 19–33; 40; 46",
+   "scriptureBook": "Psalms",
+   "traveler": "scout",
+   "feeling": null,
    "virtues": [
-    "wonder",
-    "identity"
+    "identity",
+    "wonder"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "wonder",
-   "teachingNote": "Reach for this when your child feels small under a big night sky and needs to know the Lord who made the stars thinks of them.",
-   "teaser": "Long ago there were no city lights. At night, the whole sky sparkled with stars. David looked up and sang to the Lord. “I see Your heavens, the work of Your fingers, the moon and the stars!” Then David asked, “What…",
-   "wordCount": 115,
-   "aka": [
-    "Look at the Stars!"
-   ]
+   "primaryVirtue": "identity",
+   "teachingNote": "Reach for this when your child feels small or unnoticed and needs to know Heavenly Father knows and loves them personally.",
+   "teaser": "Long ago there were no city lights. At night, the whole sky sparkled with stars. David looked up and sang to the Lord. “I see Your heavens, the work of Your fingers, the moon and the stars!” Then David asked…",
+   "wordCount": 115
   },
   {
    "id": "b8-w4-n3",
-   "title": "Sweeter Than Honey",
+   "title": "The Good Shepherd",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 4,
    "night": 3,
-   "scripture": "Psalm 19:1, 7–10",
-   "scriptureBook": "Psalm",
+   "scripture": "Psalms 1–2; 8; 19–33; 40; 46",
+   "scriptureBook": "Psalms",
    "traveler": "willow",
-   "feeling": "happy",
+   "feeling": "safe",
    "virtues": [
-    "love-of-scripture",
-    "wisdom"
+    "trust-in-god",
+    "comfort"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "love-of-scripture",
-   "teachingNote": "Reach for this when your child finds scripture time dull and needs to taste the Lord's words as sweeter than honey.",
-   "teaser": "David wrote a song that begins with the sky. He sang, “The heavens show how great Heavenly Father is.” Then David sang about the Lord’s words, the things the Lord teaches us. He said they are perfect and true. They…",
-   "wordCount": 122
+   "primaryVirtue": "trust-in-god",
+   "teachingNote": "Reach for this at bedtime when your child is afraid of the dark and needs Heavenly Father's care like a shepherd's.",
+   "teaser": "Before David was king, he took care of his father’s sheep. Later he wrote a song: “The Lord is my shepherd.” David sang, “He makes me lie down in green pastures.” Those are the soft grassy fields where sheep eat…",
+   "wordCount": 123
   },
   {
    "id": "b8-w4-n4",
-   "title": "The Lord Is My Shepherd",
+   "title": "Heavenly Father Is My Light",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 4,
    "night": 4,
-   "scripture": "Psalm 23:1–2, 4–5",
-   "scriptureBook": "Psalm",
-   "traveler": "willow",
-   "feeling": "comforted",
-   "virtues": [
-    "comfort",
-    "trust-in-god"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "comfort",
-   "teachingNote": "Reach for this when your child is afraid of the dark or a dark time and needs to hear that Jesus, the Shepherd, is with them.",
-   "teaser": "Before David was king, he took care of his father’s sheep. Later he wrote a song: “The Lord is my shepherd.” David sang, “He makes me lie down in green pastures.” Those are the soft grassy fields where sheep eat and…",
-   "wordCount": 123,
-   "aka": [
-    "The Good Shepherd"
-   ]
-  },
-  {
-   "id": "b8-w4-n5",
-   "title": "Clean Hands, Pure Heart",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 4,
-   "night": 5,
-   "scripture": "Psalm 24:1, 3–5, 10",
-   "scriptureBook": "Psalm",
-   "traveler": "beau",
-   "feeling": "calm",
-   "virtues": [
-    "integrity",
-    "reverence"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "integrity",
-   "teachingNote": "Reach for this when your child has done the right thing and needs to know clean hands and a pure heart bring them close to the Lord.",
-   "teaser": "David wrote a song that begins, “The earth is the Lord’s.” The whole world and everyone in it belong to Him. Then the song asks, “Who may go up the hill of the Lord?” People climbed that hill to pray and sing at His…",
-   "wordCount": 120
-  },
-  {
-   "id": "b8-w4-n6",
-   "title": "The Lord Is My Light",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 4,
-   "night": 6,
-   "scripture": "Psalm 27:1, 5",
-   "scriptureBook": "Psalm",
+   "scripture": "Psalms 1–2; 8; 19–33; 40; 46",
+   "scriptureBook": "Psalms",
    "traveler": "beau",
    "feeling": "brave",
    "virtues": [
@@ -7454,79 +7217,99 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "courage",
-   "teachingNote": "Reach for this when your child is afraid of the dark and needs to know the Lord is their light, so they need not fear.",
-   "teaser": "David had some hard, scary days, but he trusted the Lord. He sang, “The Lord is my light. Whom shall I fear?” David meant, “Who should I be afraid of? No one!” When it is dark, we cannot see, and that can feel…",
-   "wordCount": 123,
-   "aka": [
-    "Heavenly Father Is My Light"
-   ]
+   "teachingNote": "Reach for this when your child is afraid of the dark or of something scary and needs Heavenly Father's light as comfort.",
+   "teaser": "David had some hard, scary days, but he trusted the Lord. He sang, “The Lord is my light. Whom shall I fear?” David meant, “Who should I be afraid of? No one!” When it is dark, we cannot see, and…",
+   "wordCount": 123
+  },
+  {
+   "id": "b8-w4-n5",
+   "title": "Be Still and Know",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 4,
+   "night": 5,
+   "scripture": "Psalms 1–2; 8; 19–33; 40; 46",
+   "scriptureBook": "Psalms",
+   "traveler": "wren",
+   "feeling": "calm",
+   "virtues": [
+    "pondering",
+    "trust-in-god"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "pondering",
+   "teachingNote": "Reach for this when the day has felt too loud and your child needs to practice slowing down and feeling calm.",
+   "teaser": "This song was for the sons of Korah, a singing family. It begins, “Heavenly Father is our safe place and our strength.” He is “a very present help in trouble,” always near. So the song says, “We will not fear.”…",
+   "wordCount": 122
+  },
+  {
+   "id": "b8-w4-n6",
+   "title": "A Brand-New Song",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 4,
+   "night": 6,
+   "scripture": "Psalms 1–2; 8; 19–33; 40; 46",
+   "scriptureBook": "Psalms",
+   "traveler": "willow",
+   "feeling": "frustrated",
+   "virtues": [
+    "hope",
+    "prayer"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "hope",
+   "teachingNote": "Reach for this when your child feels stuck or frustrated and needs to know calling out to Heavenly Father brings help.",
+   "teaser": "A long, long time ago there was a boy named David. He watched sheep out in the fields, and while he watched he sang songs to Heavenly Father. When David grew up he became the king of his people. Kings…",
+   "wordCount": 371
   },
   {
    "id": "b8-w4-n7",
-   "title": "Be Still",
+   "title": "Sing with All Your Heart",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 4,
    "night": 7,
-   "scripture": "Psalm 46:1–2, 10",
-   "scriptureBook": "Psalm",
-   "traveler": "wren",
-   "feeling": "calm",
-   "virtues": [
-    "trust-in-god",
-    "pondering"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child feels busy or stormy inside and needs to be still and know that Heavenly Father is near.",
-   "teaser": "This song was for the sons of Korah, a singing family. It begins, “Heavenly Father is our safe place and our strength.” He is “a very present help in trouble,” always near. So the song says, “We will not fear.” Then…",
-   "wordCount": 122,
-   "aka": [
-    "Be Still and Know"
-   ]
-  },
-  {
-   "id": "b8-w5-n1",
-   "title": "Every Animal Is His",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 5,
-   "night": 1,
-   "scripture": "Psalm 50:10–12, 14",
-   "scriptureBook": "Psalm",
+   "scripture": "Psalms 1–2; 8; 19–33; 40; 46",
+   "scriptureBook": "Psalms",
    "traveler": "scout",
-   "feeling": "amazed",
+   "feeling": "happy",
    "virtues": [
     "gratitude",
-    "wonder"
+    "worship-together"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "gratitude",
-   "teachingNote": "Reach for this when your child wants to give God something and needs to know He loves their thank-yous best.",
-   "teaser": "Asaph led the singing in King David’s day. He wrote a song with words from the Lord, who is Jesus. Back then, people gave the Lord animals as gifts. The gifts helped them remember that Jesus would come. In Asaph’s…",
-   "wordCount": 119
+   "teachingNote": "Reach for this when helping your child find joyful ways to praise Heavenly Father, like singing or clapping.",
+   "teaser": "A long time ago, a shepherd boy named David grew up to be a king. David loved Heavenly Father so much that he made up songs for Him. Those songs are in our scriptures, and we call them Psalms. A…",
+   "wordCount": 252
   },
   {
-   "id": "b8-w5-n2",
-   "title": "Whiter Than Snow",
+   "id": "b8-w5-n1",
+   "title": "A Clean, New Heart",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 5,
-   "night": 2,
-   "scripture": "Psalm 51:7, 10, 12",
-   "scriptureBook": "Psalm",
+   "night": 1,
+   "scripture": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
+   "scriptureBook": "Psalms",
    "traveler": "willow",
    "feeling": "guilty",
    "virtues": [
@@ -7538,183 +7321,230 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "repentance",
-   "teachingNote": "Reach for this when your child feels sorry for a wrong choice and needs to know Jesus can wash a sorry heart whiter than snow.",
-   "teaser": "King David made a very wrong choice. Nathan, who spoke for the Lord, helped him see it. David felt so sorry. His heart felt heavy, like a stone inside him. He wanted to feel clean again. So David prayed, “Wash me…",
-   "wordCount": 113
+   "teachingNote": "Reach for this when your child feels guilty about a mistake and needs to know saying sorry brings a clean, fresh start.",
+   "teaser": "Sometimes we make mistakes or do things we know are wrong, and our hearts feel yucky and sad inside. One of the Psalms is a gentle song about that. The person sang, “Heavenly Father, please make my heart clean and…",
+   "wordCount": 103
   },
   {
-   "id": "b8-w5-n3",
-   "title": "The Rock Higher Than I",
+   "id": "b8-w5-n2",
+   "title": "My Strong, Safe Rock",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 5,
-   "night": 3,
-   "scripture": "Psalm 61:1–3",
-   "scriptureBook": "Psalm",
+   "night": 2,
+   "scripture": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
+   "scriptureBook": "Psalms",
    "traveler": "beau",
-   "feeling": "worried",
+   "feeling": "nervous",
    "virtues": [
-    "trust-in-god",
-    "prayer"
+    "trust-in-god"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child feels worried or far away and needs to call out to Jesus, a rock higher than they are.",
-   "teaser": "King David wrote this song as a prayer. He sang, “Hear my cry, Heavenly Father. Listen to my prayer.” David felt far away, and his heart was full of worry. He prayed, “Lead me to the rock that is higher than I.”…",
-   "wordCount": 120
+   "teachingNote": "Reach for this when your child feels shaky or overwhelmed and needs Heavenly Father as a steady rock to lean on.",
+   "teaser": "When we feel small or shaky, it helps to stand on something big and strong. One of the Psalms calls Heavenly Father a great big Rock. “Heavenly Father is my Rock,” the person sang. “He is my safe, high place.…",
+   "wordCount": 96
   },
   {
-   "id": "b8-w5-n4",
-   "title": "In the Shadow of His Wings",
+   "id": "b8-w5-n3",
+   "title": "Thinking of Heavenly Father at Night",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 5,
-   "night": 4,
-   "scripture": "Psalm 63:1, 6–7",
-   "scriptureBook": "Psalm",
+   "night": 3,
+   "scripture": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
+   "scriptureBook": "Psalms",
    "traveler": "wren",
-   "feeling": "comforted",
+   "feeling": "calm",
    "virtues": [
-    "comfort",
+    "pondering",
     "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "comfort",
-   "teachingNote": "Reach for this when your child lies awake at bedtime and needs to remember the Lord and rest under His wings.",
-   "teaser": "King David wrote this song in the wilderness of Judah. It was a wide, dry land with very little water. David was thirsty for the Lord, the way dry land needs water. At night he sang, “I remember You on my bed. I…",
-   "wordCount": 121,
-   "aka": [
-    "Thinking of Heavenly Father at Night"
-   ]
+   "primaryVirtue": "pondering",
+   "teachingNote": "Reach for this at bedtime to help your child fall asleep thinking peacefully about Heavenly Father's love.",
+   "teaser": "King David wrote this song in the wilderness of Judah. It was a wide, dry land with very little water. David was thirsty for the Lord, the way dry land needs water. At night he sang, “I remember You on…",
+   "wordCount": 121
   },
   {
-   "id": "b8-w5-n5",
+   "id": "b8-w5-n4",
    "title": "Come and Hear!",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 5,
-   "night": 5,
-   "scripture": "Psalms 66:1, 16, 19; 78:4, 7",
+   "night": 4,
+   "scripture": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
    "scriptureBook": "Psalms",
-   "traveler": "beau",
-   "feeling": "eager",
+   "traveler": "scout",
+   "feeling": "excited",
    "virtues": [
     "gratitude",
-    "family-love"
+    "generosity"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "gratitude",
-   "teachingNote": "Reach for this when your child is bursting to share a blessing and needs to tell the family what Heavenly Father has done.",
-   "teaser": "This happy song does not say who wrote it. It calls the whole world to shout and sing for joy. Then the singer called, “Come and hear! I will tell what the Lord has done for me.” He told how he prayed out loud. Then…",
+   "teachingNote": "Reach for this when your child experiences something good and needs encouragement to share the happy news with family.",
+   "teaser": "This happy song does not say who wrote it. It calls the whole world to shout and sing for joy. Then the singer called, “Come and hear! I will tell what the Lord has done for me.” He told how…",
    "wordCount": 112
   },
   {
-   "id": "b8-w5-n6",
-   "title": "Like Rain on the Grass",
+   "id": "b8-w5-n5",
+   "title": "My Hope Since I Was Little",
    "volume": "ot",
    "book": 8,
    "bookTitle": "I Will Trust and Sing",
    "month": "August",
    "week": 5,
-   "night": 6,
-   "scripture": "Psalm 72:6, 12",
-   "scriptureBook": "Psalm",
-   "traveler": "wren",
-   "feeling": "comforted",
-   "virtues": [
-    "hope",
-    "kindness"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child is dry and weary inside and needs a picture of the kind King coming like gentle rain.",
-   "teaser": "This song is a prayer for Solomon, King David’s son. Solomon was the new king, the leader of the whole land. The song asks that the king would help poor people. It asks him to help anyone who had no helper. It says…",
-   "wordCount": 113
-  },
-  {
-   "id": "b8-w5-n7",
-   "title": "Ready to Forgive",
-   "volume": "ot",
-   "book": 8,
-   "bookTitle": "I Will Trust and Sing",
-   "month": "August",
-   "week": 5,
-   "night": 7,
-   "scripture": "Psalm 86:1, 5, 7",
-   "scriptureBook": "Psalm",
+   "night": 5,
+   "scripture": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
+   "scriptureBook": "Psalms",
    "traveler": "willow",
-   "feeling": "loved",
-   "virtues": [
-    "forgiveness",
-    "kindness"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "forgiveness",
-   "teachingNote": "Reach for this when your child is holding a grudge and needs to see the Lord ready to forgive, so they can forgive too.",
-   "teaser": "King David wrote this prayer. He prayed, “Lord, hear me, for I am poor and need You.” David said, “You, Lord, are good, and ready to forgive.” When the Lord forgives, He lets the wrong go and loves us still. The…",
-   "wordCount": 119
-  },
-  {
-   "id": "b9-w1-n1",
-   "title": "Like a Loving Father",
-   "volume": "ot",
-   "book": 9,
-   "bookTitle": "Wonderful Is His Way",
-   "month": "September",
-   "week": 1,
-   "night": 1,
-   "scripture": "Psalm 103:1–2, 13",
-   "scriptureBook": "Psalm",
-   "traveler": "willow",
-   "feeling": "loved",
+   "feeling": "safe",
    "virtues": [
     "trust-in-god",
-    "gratitude"
+    "identity"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child wonders whether anyone is gentle with them when they fall, and needs the picture of a dad hurrying to help.",
-   "teaser": "King David wrote a happy song. He sang, “Bless the Lord, O my soul.” He was telling the real him, deep inside, to say thank you. David sang, “Forget not all His good gifts.” He did not want to forget one good thing…",
-   "wordCount": 119,
-   "aka": [
-    "Bless the Lord, O My Soul"
-   ]
+   "teachingNote": "Reach for this when your child needs the long view that Heavenly Father has cared for them since before they were born.",
+   "teaser": "A long, long time ago, in a land called Israel, people who loved Heavenly Father sang their prayers to Him. They sang them out loud together at the temple - the temple was Heavenly Father's special house. Those song-prayers were…",
+   "wordCount": 362
+  },
+  {
+   "id": "b8-w5-n6",
+   "title": "Tell the Children",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 5,
+   "night": 6,
+   "scripture": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
+   "scriptureBook": "Psalms",
+   "traveler": "wren",
+   "feeling": "connected",
+   "virtues": [
+    "family-love",
+    "love-of-scripture"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "family-love",
+   "teachingNote": "Reach for this when explaining why your family tells scripture stories together night after night.",
+   "teaser": "One of the Psalms has a very special job for grown-ups and children alike. It says to remember the wonderful things Heavenly Father has done — and to tell them to the children. “We will not hide these things from…",
+   "wordCount": 115
+  },
+  {
+   "id": "b8-w5-n7",
+   "title": "Heavenly Father Is So Good",
+   "volume": "ot",
+   "book": 8,
+   "bookTitle": "I Will Trust and Sing",
+   "month": "August",
+   "week": 5,
+   "night": 7,
+   "scripture": "Psalms 49–51; 61–66; 69–72; 77–78; 85–86",
+   "scriptureBook": "Psalms",
+   "traveler": "scout",
+   "feeling": null,
+   "virtues": [
+    "gratitude",
+    "wisdom"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "gratitude",
+   "teachingNote": "Reach for this when your child wants to grow kinder and needs to know Heavenly Father helps us become like Him.",
+   "teaser": "The very last song this month is full of love and praise. The person sang about how kind and good Heavenly Father is. “Heavenly Father, You are so good and forgiving,” he sang. “You are full of love for everyone…",
+   "wordCount": 111
+  },
+  {
+   "id": "b9-w1-n1",
+   "title": "Bless the Lord, O My Soul",
+   "volume": "ot",
+   "book": 9,
+   "bookTitle": "Wonderful Is His Way",
+   "month": "September",
+   "week": 1,
+   "night": 1,
+   "scripture": "Psalm 103",
+   "scriptureBook": "Psalms",
+   "traveler": "willow",
+   "feeling": "grateful",
+   "virtues": [
+    "gratitude",
+    "forgiveness"
+   ],
+   "stages": [
+    "toddler",
+    "preschool",
+    "early-elementary"
+   ],
+   "primaryVirtue": "gratitude",
+   "teachingNote": "Reach for this when your child has done something wrong and cannot seem to put it down.",
+   "teaser": "King David wrote a happy song. He sang, “Bless the Lord, O my soul.” He was telling the real him, deep inside, to say thank you. David sang, “Forget not all His good gifts.” He did not want to forget…",
+   "wordCount": 119
   },
   {
    "id": "b9-w1-n2",
-   "title": "This Is the Day",
+   "title": "He Hears My Voice",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 1,
    "night": 2,
-   "scripture": "Psalm 118:1, 24",
-   "scriptureBook": "Psalm",
+   "scripture": "Psalm 116",
+   "scriptureBook": "Psalms",
+   "traveler": "beau",
+   "feeling": "worried",
+   "virtues": [
+    "prayer",
+    "trust-in-god"
+   ],
+   "stages": [
+    "toddler",
+    "preschool",
+    "early-elementary"
+   ],
+   "primaryVirtue": "prayer",
+   "teachingNote": "Reach for this when your child wonders whether anyone is really listening.",
+   "teaser": "There once was a person who felt sad and afraid. Big troubles were all around, and he didn’t know what to do. So he did the best thing of all — he called out to Heavenly Father. “Please help me…",
+   "wordCount": 126
+  },
+  {
+   "id": "b9-w1-n3",
+   "title": "This Is the Day!",
+   "volume": "ot",
+   "book": 9,
+   "bookTitle": "Wonderful Is His Way",
+   "month": "September",
+   "week": 1,
+   "night": 3,
+   "scripture": "Psalm 118",
+   "scriptureBook": "Psalms",
    "traveler": "scout",
    "feeling": "happy",
    "virtues": [
@@ -7723,345 +7553,308 @@ window.LST_LIBRARY = {
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
    "primaryVirtue": "gratitude",
-   "teachingNote": "Reach for this when your child wakes up flat and needs to hear that today was made by the Lord and can be glad.",
-   "teaser": "Long ago, the Lord’s people sang a happy song. It began, “O give thanks to the Lord, for He is good.” Then they sang, “This is the day which the Lord has made. We will be happy and glad in it.” The Lord who made…",
-   "wordCount": 112,
-   "aka": [
-    "This Is the Day!"
-   ]
+   "teachingNote": "Reach for this on a morning that started badly, when the day still needs rescuing.",
+   "teaser": "Long ago, the Lord’s people sang a happy song. It began, “O give thanks to the Lord, for He is good.” Then they sang, “This is the day which the Lord has made. We will be happy and glad in…",
+   "wordCount": 112
   },
   {
-   "id": "b9-w1-n3",
+   "id": "b9-w1-n4",
+   "title": "A Lamp for My Feet",
+   "volume": "ot",
+   "book": 9,
+   "bookTitle": "Wonderful Is His Way",
+   "month": "September",
+   "week": 1,
+   "night": 4,
+   "scripture": "Psalm 119",
+   "scriptureBook": "Psalms",
+   "traveler": "wren",
+   "feeling": "confused",
+   "virtues": [
+    "love-of-scripture",
+    "obedience"
+   ],
+   "stages": [
+    "toddler",
+    "preschool",
+    "early-elementary"
+   ],
+   "primaryVirtue": "love-of-scripture",
+   "teachingNote": "Reach for this when your child has a choice to make and does not know how to weigh it.",
+   "teaser": "The longest song in all the Psalms is about something very special: Heavenly Father’s words, the scriptures. The song-writer loved them so much! “Your words are like a lamp for my feet,” he sang, “and a bright light for my…",
+   "wordCount": 137
+  },
+  {
+   "id": "b9-w1-n5",
+   "title": "You Know Me!",
+   "volume": "ot",
+   "book": 9,
+   "bookTitle": "Wonderful Is His Way",
+   "month": "September",
+   "week": 1,
+   "night": 5,
+   "scripture": "Psalm 139",
+   "scriptureBook": "Psalms",
+   "traveler": "wren",
+   "feeling": "loved",
+   "virtues": [
+    "identity",
+    "wonder"
+   ],
+   "stages": [
+    "toddler",
+    "preschool",
+    "early-elementary"
+   ],
+   "primaryVirtue": "identity",
+   "teachingNote": "Reach for this when your child feels ordinary, overlooked, or unsure they matter.",
+   "teaser": "King David wrote a song about the Lord being near. He sang, “If I take the wings of the morning.” He pictured flying far across the sea. Morning light spreads across the whole sky so fast. It is like the…",
+   "wordCount": 114
+  },
+  {
+   "id": "b9-w1-n6",
    "title": "Children Are a Gift",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 1,
-   "night": 3,
-   "scripture": "Psalm 127:2–3",
-   "scriptureBook": "Psalm",
+   "night": 6,
+   "scripture": "Psalm 127",
+   "scriptureBook": "Psalms",
    "traveler": "willow",
    "feeling": "loved",
    "virtues": [
-    "identity",
-    "family-love"
+    "family-love",
+    "gratitude"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
-   "primaryVirtue": "identity",
-   "teachingNote": "Reach for this when your child needs to hear they are a gift to their family, not a chore, and are dearly loved.",
-   "teaser": "Long ago in Israel, parents passed their land down to their children. That land was a precious gift kept in the family. A song in the Bible says children are a gift like that. It sings, “Children are a heritage of…",
+   "primaryVirtue": "family-love",
+   "teachingNote": "Reach for this on a night when home has felt hard and needs remembering as a gift.",
+   "teaser": "Long ago in Israel, parents passed their land down to their children. That land was a precious gift kept in the family. A song in the Bible says children are a gift like that. It sings, “Children are a heritage…",
    "wordCount": 115
   },
   {
-   "id": "b9-w1-n4",
-   "title": "His Mercy Lasts Forever",
-   "volume": "ot",
-   "book": 9,
-   "bookTitle": "Wonderful Is His Way",
-   "month": "September",
-   "week": 1,
-   "night": 4,
-   "scripture": "Psalm 136:1, 7–9, 26",
-   "scriptureBook": "Psalm",
-   "traveler": "wren",
-   "feeling": "calm",
-   "virtues": [
-    "trust-in-god",
-    "hope"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child worries that a mistake might use up the Lord's patience and needs to hear His mercy lasts forever.",
-   "teaser": "This happy song says the same words again and again. Every line ends, “For His mercy endures forever.” It says it twenty-six times! His mercy is His kind, forgiving love. It lasts and lasts, and it never, ever…",
-   "wordCount": 123
-  },
-  {
-   "id": "b9-w1-n5",
-   "title": "Wonderfully Made",
-   "volume": "ot",
-   "book": 9,
-   "bookTitle": "Wonderful Is His Way",
-   "month": "September",
-   "week": 1,
-   "night": 5,
-   "scripture": "Psalm 139:9–10, 13–14",
-   "scriptureBook": "Psalm",
-   "traveler": "beau",
-   "feeling": "safe",
-   "virtues": [
-    "trust-in-god",
-    "identity"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child is afraid of being alone or somewhere new and needs to know the Lord is with them everywhere.",
-   "teaser": "King David wrote a song about the Lord being near. He sang, “If I take the wings of the morning.” He pictured flying far across the sea. Morning light spreads across the whole sky so fast. It is like the light has…",
-   "wordCount": 114,
-   "aka": [
-    "You Know Me!"
-   ]
-  },
-  {
-   "id": "b9-w1-n6",
-   "title": "He Names the Stars",
-   "volume": "ot",
-   "book": 9,
-   "bookTitle": "Wonderful Is His Way",
-   "month": "September",
-   "week": 1,
-   "night": 6,
-   "scripture": "Psalm 147:3–4",
-   "scriptureBook": "Psalm",
-   "traveler": "scout",
-   "feeling": "amazed",
-   "virtues": [
-    "wonder",
-    "identity"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "wonder",
-   "teachingNote": "Reach for this when your child looks up at the night sky and needs to hear the Lord knows every star and knows them too.",
-   "teaser": "This song tells how great and kind the Lord is. It says, “He heals the broken in heart.” When we feel very sad inside, it is like our heart is broken. The song says the Lord wraps up those hurts, like a soft…",
-   "wordCount": 113
-  },
-  {
    "id": "b9-w1-n7",
-   "title": "Praise with Every Breath",
+   "title": "Let Everything Praise Him!",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 1,
    "night": 7,
-   "scripture": "Psalm 150:3–6",
-   "scriptureBook": "Psalm",
-   "traveler": "beau",
-   "feeling": "happy",
+   "scripture": "Psalms 148–150",
+   "scriptureBook": "Psalms",
+   "traveler": "scout",
+   "feeling": "excited",
    "virtues": [
-    "gratitude",
-    "wonder"
+    "worship-together",
+    "gratitude"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
-   "primaryVirtue": "gratitude",
-   "teachingNote": "Reach for this when your child is bursting with energy and needs a way to turn every breath into praise.",
-   "teaser": "The very last psalm is a big, happy song. It says, “Praise Him with the sound of the trumpet. Praise Him with the harp.” It says to praise Him with dancing and a jingly drum called a timbrel. Then come strings…",
-   "wordCount": 113,
-   "aka": [
-    "Let Everything Praise Him!"
-   ]
+   "primaryVirtue": "worship-together",
+   "teachingNote": "Reach for this when your child has more energy than the hour allows — and wants to use it.",
+   "teaser": "The very last psalm is a big, happy song. It says, “Praise Him with the sound of the trumpet. Praise Him with the harp.” It says to praise Him with dancing and a jingly drum called a timbrel. Then come…",
+   "wordCount": 113
   },
   {
    "id": "b9-w2-n1",
-   "title": "Listen to Mom and Dad",
+   "title": "Trust Him to Lead the Way",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 2,
    "night": 1,
-   "scripture": "Proverbs 1:1, 8–9",
+   "scripture": "Proverbs 3",
    "scriptureBook": "Proverbs",
-   "traveler": "wren",
-   "feeling": "calm",
+   "traveler": "beau",
+   "feeling": "nervous",
    "virtues": [
-    "honoring-parents",
-    "heeding-counsel"
+    "trust-in-god"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
-   "primaryVirtue": "honoring-parents",
-   "teachingNote": "Reach for this when your child pushes back on a parent's guidance and needs to see it as a lovely garland to wear.",
-   "teaser": "King Solomon was King David’s son. He asked Heavenly Father to help him be wise. He wrote many short, wise sayings called proverbs. Solomon wrote, “My son, hear what your father teaches. Do not forget what your…",
-   "wordCount": 112
+   "primaryVirtue": "trust-in-god",
+   "teachingNote": "Reach for this before something unknown — a new school, a first night away.",
+   "teaser": "Long ago, people walked everywhere on dusty, rocky paths. A traveler needed someone who knew the way. King Solomon wrote, “Trust in the Lord with all your heart. Do not lean on your own understanding.” The Lord knows so much…",
+   "wordCount": 109
   },
   {
    "id": "b9-w2-n2",
-   "title": "He Will Show the Way",
+   "title": "Wisdom, a Hidden Treasure",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 2,
    "night": 2,
-   "scripture": "Proverbs 3:5–6",
+   "scripture": "Proverbs 2",
    "scriptureBook": "Proverbs",
-   "traveler": "beau",
-   "feeling": "safe",
+   "traveler": "scout",
+   "feeling": "eager",
    "virtues": [
-    "trust-in-god",
-    "faith"
+    "wisdom",
+    "curiosity"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child feels unsure which way to go and needs to trust the Lord to make the path clear.",
-   "teaser": "Long ago, people walked everywhere on dusty, rocky paths. A traveler needed someone who knew the way. King Solomon wrote, “Trust in the Lord with all your heart. Do not lean on your own understanding.” The Lord…",
-   "wordCount": 109,
-   "aka": [
-    "Trust Him to Lead the Way"
-   ]
+   "primaryVirtue": "wisdom",
+   "teachingNote": "Reach for this when your child is asking good questions and you want to keep them asking.",
+   "teaser": "Wise Solomon wanted everyone to have something wonderful called wisdom. Wisdom means knowing the good and right thing to do. “Look for wisdom like you’re searching for hidden treasure!” Solomon said. “Dig for it, hunt for it — it’s more…",
+   "wordCount": 118
   },
   {
    "id": "b9-w2-n3",
-   "title": "A Soft Answer",
+   "title": "A Soft, Kind Answer",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 2,
    "night": 3,
-   "scripture": "Proverbs 15:1; 16:24",
+   "scripture": "Proverbs 15",
    "scriptureBook": "Proverbs",
    "traveler": "willow",
-   "feeling": "calm",
+   "feeling": "angry",
    "virtues": [
-    "peacemaking",
-    "kindness"
+    "self-control",
+    "peacemaking"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
-   "primaryVirtue": "peacemaking",
-   "teachingNote": "Reach for this when your child is ready to snap back in anger and needs to know a soft answer can calm the room.",
-   "teaser": "King Solomon wrote, “A soft answer turns away anger. But hurting words stir up anger.” When someone feels hot and mad, gentle words help cool them down. Hurting words make the mad feeling grow bigger. Solomon also…",
-   "wordCount": 104,
-   "aka": [
-    "A Soft, Kind Answer"
-   ]
+   "primaryVirtue": "self-control",
+   "teachingNote": "Reach for this after a shouting match, when the words have already been said.",
+   "teaser": "King Solomon wrote, “A soft answer turns away anger. But hurting words stir up anger.” When someone feels hot and mad, gentle words help cool them down. Hurting words make the mad feeling grow bigger. Solomon also wrote, “Kind words…",
+   "wordCount": 104
   },
   {
    "id": "b9-w2-n4",
-   "title": "Train Up a Child",
+   "title": "Loving, Helping Hands",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 2,
    "night": 4,
-   "scripture": "Proverbs 22:6",
-   "scriptureBook": "Proverbs",
-   "traveler": "scout",
-   "feeling": "eager",
-   "virtues": [
-    "diligence",
-    "heeding-counsel"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "diligence",
-   "teachingNote": "Reach for this when your child wants to be good at something big and needs to see that small daily steps keep them on the path.",
-   "teaser": "King Solomon wrote, “Train up a child in the way he should go. And when he is old, he will not leave it.” Training means learning the Lord’s good way a little every day, again and again. Long ago, a boy worked…",
-   "wordCount": 114
-  },
-  {
-   "id": "b9-w2-n5",
-   "title": "A Kind and Wise Mother",
-   "volume": "ot",
-   "book": 9,
-   "bookTitle": "Wonderful Is His Way",
-   "month": "September",
-   "week": 2,
-   "night": 5,
-   "scripture": "Proverbs 31:1, 15, 19–20, 26–28",
+   "scripture": "Proverbs 31",
    "scriptureBook": "Proverbs",
    "traveler": "willow",
    "feeling": "grateful",
    "virtues": [
-    "gratitude",
-    "honoring-parents"
+    "honoring-parents",
+    "gratitude"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
-   "primaryVirtue": "gratitude",
-   "teachingNote": "Reach for this when your child takes a mother's daily work for granted and needs a gentle way to say thank you.",
-   "teaser": "The last part of Proverbs has words King Lemuel’s mother taught him. It ends with a poem about a good, wise mother. She gets up while it is still dark to make food for her family. She spins soft wool, twisting it…",
-   "wordCount": 122,
-   "aka": [
-    "Loving, Helping Hands"
-   ]
+   "primaryVirtue": "honoring-parents",
+   "teachingNote": "Reach for this when your child has taken someone's work for granted.",
+   "teaser": "The last part of Proverbs has words King Lemuel’s mother taught him. It ends with a poem about a good, wise mother. She gets up while it is still dark to make food for her family. She spins soft wool…",
+   "wordCount": 122
   },
   {
-   "id": "b9-w2-n6",
+   "id": "b9-w2-n5",
    "title": "A Time for Everything",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 2,
-   "night": 6,
-   "scripture": "Ecclesiastes 1:1; 3:1–8, 11",
+   "night": 5,
+   "scripture": "Ecclesiastes 3",
    "scriptureBook": "Ecclesiastes",
    "traveler": "wren",
-   "feeling": "calm",
+   "feeling": "impatient",
    "virtues": [
     "patience",
     "contentment"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
    "primaryVirtue": "patience",
-   "teachingNote": "Reach for this when your child feels rushed or restless and needs to hear there is a right time for everything, including rest.",
+   "teachingNote": "Reach for this when a child wants something now that can only come later.",
    "teaser": "The Preacher was a son of King David and a king in Jerusalem. He wrote a book of wise sayings called Ecclesiastes. He wrote, “To every thing there is a season.” There is a right time for everything. Farmers knew…",
    "wordCount": 110
   },
   {
+   "id": "b9-w2-n6",
+   "title": "Remember Him While You’re Little",
+   "volume": "ot",
+   "book": 9,
+   "bookTitle": "Wonderful Is His Way",
+   "month": "September",
+   "week": 2,
+   "night": 6,
+   "scripture": "Ecclesiastes 12",
+   "scriptureBook": "Ecclesiastes",
+   "traveler": "scout",
+   "feeling": "eager",
+   "virtues": [
+    "faith"
+   ],
+   "stages": [
+    "toddler",
+    "preschool",
+    "early-elementary"
+   ],
+   "primaryVirtue": "faith",
+   "teachingNote": "Reach for this when your child thinks the important things are for grown-ups.",
+   "teaser": "The Preacher loved the morning sun. He wrote, “Truly the light is sweet. It is a happy thing to see the sun.” Then he wrote, “Remember now your Creator in the days of your youth.” Remember the One who made…",
+   "wordCount": 113
+  },
+  {
    "id": "b9-w2-n7",
-   "title": "Remember Your Creator",
+   "title": "A Good Name",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 2,
    "night": 7,
-   "scripture": "Ecclesiastes 11:7; 12:1, 13",
-   "scriptureBook": "Ecclesiastes",
-   "traveler": "scout",
-   "feeling": "amazed",
+   "scripture": "Proverbs 22",
+   "scriptureBook": "Proverbs",
+   "traveler": "beau",
+   "feeling": "brave",
    "virtues": [
-    "love-of-scripture",
-    "faith"
+    "honesty",
+    "integrity"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
-   "primaryVirtue": "love-of-scripture",
-   "teachingNote": "Reach for this when your child thinks being close to God is for later and needs to remember Him now, while young.",
-   "teaser": "The Preacher loved the morning sun. He wrote, “Truly the light is sweet. It is a happy thing to see the sun.” Then he wrote, “Remember now your Creator in the days of your youth.” Remember the One who made you while…",
-   "wordCount": 113,
-   "aka": [
-    "Remember Him While You’re Little"
-   ]
+   "primaryVirtue": "honesty",
+   "teachingNote": "Reach for this when nobody would have known — and your child chose right anyway, or did not.",
+   "teaser": "Wise Solomon shared one more treasure: he said a good name is better than piles of gold and silver. What is a “good name”? It means being someone people can trust — someone honest, kind, and true. When you do…",
+   "wordCount": 129
   },
   {
    "id": "b9-w3-n1",
@@ -8072,88 +7865,34 @@ window.LST_LIBRARY = {
    "month": "September",
    "week": 3,
    "night": 1,
-   "scripture": "Isaiah 1:1, 16–18",
+   "scripture": "Isaiah 1",
    "scriptureBook": "Isaiah",
    "traveler": "willow",
-   "feeling": "calm",
+   "feeling": "guilty",
    "virtues": [
     "repentance",
     "forgiveness"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
    "primaryVirtue": "repentance",
-   "teachingNote": "Reach for this when your child carries a heavy mistake and needs the picture of a heart made white as fresh snow.",
-   "teaser": "Long ago in Jerusalem, many of Heavenly Father’s people had stopped doing good. So the Lord gave Isaiah a message for them: “Wash, and make yourselves clean.” He did not mean a bath! He wanted to wash the wrong…",
+   "teachingNote": "Reach for this when a mistake feels too big to be forgiven.",
+   "teaser": "Long ago in Jerusalem, many of Heavenly Father’s people had stopped doing good. So the Lord gave Isaiah a message for them: “Wash, and make yourselves clean.” He did not mean a bath! He wanted to wash the wrong things…",
    "wordCount": 122
   },
   {
    "id": "b9-w3-n2",
-   "title": "The Mountain of the Lord",
+   "title": "Here Am I, Send Me",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 3,
    "night": 2,
-   "scripture": "Isaiah 2:1–3",
-   "scriptureBook": "Isaiah",
-   "traveler": "scout",
-   "feeling": "eager",
-   "virtues": [
-    "worship-together",
-    "curiosity"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "worship-together",
-   "teachingNote": "Reach for this when your child is excited to go to church or the temple and needs to know it is the Lord's house of teaching.",
-   "teaser": "Isaiah lived long ago in Jerusalem. The Lord showed him the last days, before Jesus comes again. Isaiah saw the Lord’s holy house, the temple, standing on top of the mountains. It stood higher than all the hills…",
-   "wordCount": 117,
-   "aka": [
-    "Come to Heavenly Father’s House"
-   ]
-  },
-  {
-   "id": "b9-w3-n3",
-   "title": "Swords into Plows",
-   "volume": "ot",
-   "book": 9,
-   "bookTitle": "Wonderful Is His Way",
-   "month": "September",
-   "week": 3,
-   "night": 3,
-   "scripture": "Isaiah 2:4–5",
-   "scriptureBook": "Isaiah",
-   "traveler": "wren",
-   "feeling": "calm",
-   "virtues": [
-    "peacemaking",
-    "kindness"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "peacemaking",
-   "teachingNote": "Reach for this when your child is in a squabble with a sibling and needs to learn how to turn fighting into helping.",
-   "teaser": "In Isaiah’s day, lands often fought each other. Soldiers carried long, sharp swords and spears. But the Lord showed Isaiah a day when the fighting would stop. People would hammer their swords into plowshares, plow…",
-   "wordCount": 115
-  },
-  {
-   "id": "b9-w3-n4",
-   "title": "Here Am I; Send Me",
-   "volume": "ot",
-   "book": 9,
-   "bookTitle": "Wonderful Is His Way",
-   "month": "September",
-   "week": 3,
-   "night": 4,
-   "scripture": "Isaiah 6:1–8",
+   "scripture": "Isaiah 6",
    "scriptureBook": "Isaiah",
    "traveler": "beau",
    "feeling": "brave",
@@ -8163,349 +7902,392 @@ window.LST_LIBRARY = {
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
    "primaryVirtue": "service",
-   "teachingNote": "Reach for this when your child hears a need but hesitates and needs the words, Here am I, send me.",
-   "teaser": "In the year King Uzziah died, Isaiah saw the Lord in the temple. The Lord sat high up on a king’s throne. Heavenly helpers named seraphim called out, “Holy, holy, holy is the Lord! The whole earth is full of His…",
-   "wordCount": 118,
-   "aka": [
-    "Here Am I, Send Me"
-   ]
+   "teachingNote": "Reach for this when there is a hard job nobody wants and your child could be the one.",
+   "teaser": "In the year King Uzziah died, Isaiah saw the Lord in the temple. The Lord sat high up on a king’s throne. Heavenly helpers named seraphim called out, “Holy, holy, holy is the Lord! The whole earth is full of…",
+   "wordCount": 118
   },
   {
-   "id": "b9-w3-n5",
-   "title": "A Great Light",
+   "id": "b9-w3-n3",
+   "title": "Come to Heavenly Father’s House",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 3,
-   "night": 5,
-   "scripture": "Isaiah 9:1–2",
+   "night": 3,
+   "scripture": "Isaiah 2",
    "scriptureBook": "Isaiah",
    "traveler": "scout",
-   "feeling": "comforted",
+   "feeling": "calm",
+   "virtues": [
+    "reverence",
+    "worship-together"
+   ],
+   "stages": [
+    "toddler",
+    "preschool",
+    "early-elementary"
+   ],
+   "primaryVirtue": "reverence",
+   "teachingNote": "Reach for this before a Sunday, or after a restless one.",
+   "teaser": "Isaiah lived long ago in Jerusalem. The Lord showed him the last days, before Jesus comes again. Isaiah saw the Lord’s holy house, the temple, standing on top of the mountains. It stood higher than all the hills. Why up…",
+   "wordCount": 117
+  },
+  {
+   "id": "b9-w3-n4",
+   "title": "A Special Baby Is Coming",
+   "volume": "ot",
+   "book": 9,
+   "bookTitle": "Wonderful Is His Way",
+   "month": "September",
+   "week": 3,
+   "night": 4,
+   "scripture": "Isaiah 9",
+   "scriptureBook": "Isaiah",
+   "traveler": "wren",
+   "feeling": "amazed",
    "virtues": [
     "hope",
     "faith"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
    "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child is afraid of the dark or a gloomy day and needs to know Jesus is the great light.",
-   "teaser": "Isaiah told about a land called Galilee, near the sea. Hard times had come there, and the people felt sad and lost. Isaiah said, “The people that walked in darkness have seen a great light.” Think of walking on a…",
-   "wordCount": 120
+   "teachingNote": "Reach for this in a season of waiting, when something good has been promised but not come.",
+   "teaser": "Isaiah shared the happiest secret of all — a promise about a very special baby who would come someday. “Unto us a child will be born!” Isaiah said. “And He will be wonderful. He will be called the Prince of…",
+   "wordCount": 121
+  },
+  {
+   "id": "b9-w3-n5",
+   "title": "The Peaceful Kingdom",
+   "volume": "ot",
+   "book": 9,
+   "bookTitle": "Wonderful Is His Way",
+   "month": "September",
+   "week": 3,
+   "night": 5,
+   "scripture": "Isaiah 11",
+   "scriptureBook": "Isaiah",
+   "traveler": "willow",
+   "feeling": "safe",
+   "virtues": [
+    "peacemaking",
+    "kindness"
+   ],
+   "stages": [
+    "toddler",
+    "preschool",
+    "early-elementary"
+   ],
+   "primaryVirtue": "peacemaking",
+   "teachingNote": "Reach for this when the world has felt frightening and your child has noticed.",
+   "teaser": "Isaiah said a new green branch would grow from the roots of Jesse’s family. Jesse was King David’s father. Jesus was born into that family. Isaiah was talking about Jesus! Isaiah saw a time of peace Jesus will bring. Prophets…",
+   "wordCount": 124
   },
   {
    "id": "b9-w3-n6",
-   "title": "A Little Child Shall Lead",
+   "title": "I Will Trust and Not Be Afraid",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 3,
    "night": 6,
-   "scripture": "Isaiah 11:1, 6–9",
+   "scripture": "Isaiah 12",
    "scriptureBook": "Isaiah",
-   "traveler": "willow",
-   "feeling": "calm",
+   "traveler": "beau",
+   "feeling": "worried",
    "virtues": [
-    "self-control",
-    "peacemaking"
+    "courage",
+    "trust-in-god"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
-   "primaryVirtue": "self-control",
-   "teachingNote": "Reach for this when your child has rough hands or loud words and needs the picture of a gentle world with a child leading.",
-   "teaser": "Isaiah said a new green branch would grow from the roots of Jesse’s family. Jesse was King David’s father. Jesus was born into that family. Isaiah was talking about Jesus! Isaiah saw a time of peace Jesus will…",
-   "wordCount": 124,
-   "aka": [
-    "The Peaceful Kingdom"
-   ]
+   "primaryVirtue": "courage",
+   "teachingNote": "Reach for this at the door of something your child is afraid of.",
+   "teaser": "Isaiah wrote a happy song for a day still to come. It is a song about trusting the Lord. The song says, “I will trust, and not be afraid.” It says, “The Lord Jehovah is my strength and my song.”…",
+   "wordCount": 122
   },
   {
    "id": "b9-w3-n7",
-   "title": "My Strength and My Song",
+   "title": "Wells of Joy",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 3,
    "night": 7,
-   "scripture": "Isaiah 12:2–3",
+   "scripture": "Isaiah 12",
    "scriptureBook": "Isaiah",
-   "traveler": "wren",
+   "traveler": "scout",
    "feeling": "happy",
    "virtues": [
-    "trust-in-god",
-    "gratitude"
+    "gratitude",
+    "generosity"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child feels afraid and needs a song to sing about Jesus being their strength.",
-   "teaser": "Isaiah wrote a happy song for a day still to come. It is a song about trusting the Lord. The song says, “I will trust, and not be afraid.” It says, “The Lord Jehovah is my strength and my song.” Jehovah is Jesus’s…",
-   "wordCount": 122,
-   "aka": [
-    "I Will Trust and Not Be Afraid"
-   ]
+   "primaryVirtue": "gratitude",
+   "teachingNote": "Reach for this when your child is happy and you want to teach them to spend it on someone.",
+   "teaser": "Isaiah’s happy song had one more joyful part. He sang about drawing up joy like cool water from a deep, wonderful well. “With joy you will draw water from the wells of Heavenly Father’s saving love!” Isaiah sang. Imagine a…",
+   "wordCount": 126
   },
   {
    "id": "b9-w4-n1",
-   "title": "A Nail in a Sure Place",
+   "title": "He Wipes Away Every Tear",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 4,
    "night": 1,
-   "scripture": "Isaiah 22:20–23",
-   "scriptureBook": "Isaiah",
-   "traveler": "wren",
-   "feeling": "safe",
-   "virtues": [
-    "trust-in-god",
-    "family-love"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child worries about losing their place or being let go and needs the picture of a strong nail in a sure place.",
-   "teaser": "Long ago, kings from King David’s family lived in a big house in Jerusalem. Some people trusted only their strong walls and forgot the Lord. So the Lord told Isaiah about a good helper, Eliakim. The Lord would lay…",
-   "wordCount": 122
-  },
-  {
-   "id": "b9-w4-n2",
-   "title": "Shelter from the Storm",
-   "volume": "ot",
-   "book": 9,
-   "bookTitle": "Wonderful Is His Way",
-   "month": "September",
-   "week": 4,
-   "night": 2,
-   "scripture": "Isaiah 25:1, 4",
-   "scriptureBook": "Isaiah",
-   "traveler": "beau",
-   "feeling": "safe",
-   "virtues": [
-    "trust-in-god",
-    "hope"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child is scared of a storm, loud noise, or hard day and needs to know Jesus is their shelter.",
-   "teaser": "Isaiah loved the Lord. He sang, “I will praise Your name, for You have done wonderful things.” Isaiah said the Lord is “a strength to the poor.” He helps people who do not have much. Isaiah said the Lord is “a…",
-   "wordCount": 119
-  },
-  {
-   "id": "b9-w4-n3",
-   "title": "He Will Wipe Away Tears",
-   "volume": "ot",
-   "book": 9,
-   "bookTitle": "Wonderful Is His Way",
-   "month": "September",
-   "week": 4,
-   "night": 3,
-   "scripture": "Isaiah 25:8–9",
+   "scripture": "Isaiah 25",
    "scriptureBook": "Isaiah",
    "traveler": "willow",
-   "feeling": "comforted",
+   "feeling": "sad",
    "virtues": [
     "comfort",
     "hope"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
    "primaryVirtue": "comfort",
-   "teachingNote": "Reach for this when your child is crying about something sad and needs to hear Jesus will wipe away every tear.",
-   "teaser": "Isaiah told about a happy day that will come. On that day, no one will need to be sad anymore. Isaiah said, “The Lord will wipe away tears from off all faces.” Every tear, on every sad face! Think of a mom gently…",
-   "wordCount": 111,
-   "aka": [
-    "He Wipes Away Every Tear"
-   ]
+   "teachingNote": "Reach for this on a night that ended in tears — theirs or yours.",
+   "teaser": "Isaiah told about a happy day that will come. On that day, no one will need to be sad anymore. Isaiah said, “The Lord will wipe away tears from off all faces.” Every tear, on every sad face! Think of…",
+   "wordCount": 111
   },
   {
-   "id": "b9-w4-n4",
+   "id": "b9-w4-n2",
    "title": "Perfect Peace",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 4,
-   "night": 4,
-   "scripture": "Isaiah 26:1–4",
+   "night": 2,
+   "scripture": "Isaiah 26",
    "scriptureBook": "Isaiah",
    "traveler": "wren",
-   "feeling": "calm",
+   "feeling": "worried",
+   "virtues": [
+    "pondering",
+    "trust-in-god"
+   ],
+   "stages": [
+    "toddler",
+    "preschool",
+    "early-elementary"
+   ],
+   "primaryVirtue": "pondering",
+   "teachingNote": "Reach for this when a busy mind will not let your child fall asleep.",
+   "teaser": "Isaiah wrote a song for the people to sing someday. It was a song about trusting the Lord. The song says the Lord will keep you “in perfect peace.” That is a calm, quiet feeling, deep in your heart. That…",
+   "wordCount": 110
+  },
+  {
+   "id": "b9-w4-n3",
+   "title": "A Sure, Strong Rock",
+   "volume": "ot",
+   "book": 9,
+   "bookTitle": "Wonderful Is His Way",
+   "month": "September",
+   "week": 4,
+   "night": 3,
+   "scripture": "Isaiah 26",
+   "scriptureBook": "Isaiah",
+   "traveler": "beau",
+   "feeling": "discouraged",
    "virtues": [
     "trust-in-god",
     "faith"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
    "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child has a busy mind at the end of the day and needs to rest it on Jesus for perfect peace.",
-   "teaser": "Isaiah wrote a song for the people to sing someday. It was a song about trusting the Lord. The song says the Lord will keep you “in perfect peace.” That is a calm, quiet feeling, deep in your heart. That peace comes…",
-   "wordCount": 110
+   "teachingNote": "Reach for this when something your child counted on has given way.",
+   "teaser": "Isaiah taught that Heavenly Father is like the strongest, most reliable rock you could ever build on. “Trust in Heavenly Father forever,” Isaiah said, “for He is like a Rock that lasts always and always.” He also said Heavenly Father…",
+   "wordCount": 116
   },
   {
-   "id": "b9-w4-n5",
-   "title": "A Marvelous Work",
+   "id": "b9-w4-n4",
+   "title": "A Marvellous Work and a Wonder",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 4,
-   "night": 5,
-   "scripture": "Isaiah 29:11–14, 18",
+   "night": 4,
+   "scripture": "Isaiah 29",
    "scriptureBook": "Isaiah",
    "traveler": "scout",
    "feeling": "amazed",
    "virtues": [
-    "love-of-scripture",
     "wonder"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
-   "primaryVirtue": "love-of-scripture",
-   "teachingNote": "Reach for this when your child wonders why the Book of Mormon matters and needs to hear it is part of a marvelous work.",
-   "teaser": "The Lord showed Isaiah things far in the future. Isaiah told about a book that was sealed, closed up tight. Someone asked a wise man to read it. He said, “I cannot; for it is sealed.” Some people praised the Lord…",
-   "wordCount": 120,
-   "aka": [
-    "A Marvellous Work and a Wonder"
-   ]
+   "primaryVirtue": "wonder",
+   "teachingNote": "Reach for this when your child has just noticed something astonishing and you want to name it.",
+   "teaser": "The Lord showed Isaiah things far in the future. Isaiah told about a book that was sealed, closed up tight. Someone asked a wise man to read it. He said, “I cannot; for it is sealed.” Some people praised the…",
+   "wordCount": 120
   },
   {
-   "id": "b9-w4-n6",
+   "id": "b9-w4-n5",
    "title": "This Is the Way",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 4,
-   "night": 6,
-   "scripture": "Isaiah 30:9–10, 18–21",
+   "night": 5,
+   "scripture": "Isaiah 30",
    "scriptureBook": "Isaiah",
-   "traveler": "beau",
-   "feeling": "calm",
+   "traveler": "wren",
+   "feeling": "confused",
    "virtues": [
     "heeding-counsel",
-    "obedience"
+    "pondering"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
    "primaryVirtue": "heeding-counsel",
-   "teachingNote": "Reach for this when your child is unsure which way to go and needs to listen for the voice saying, This is the way.",
-   "teaser": "Many people in Isaiah’s day did not want to listen. They told the prophets, “Do not tell us what is right.” But the Lord still loved them. Isaiah said the Lord was waiting, ready to be kind to them. When you cry out…",
+   "teachingNote": "Reach for this when a decision is close and the answer has not come yet.",
+   "teaser": "Many people in Isaiah’s day did not want to listen. They told the prophets, “Do not tell us what is right.” But the Lord still loved them. Isaiah said the Lord was waiting, ready to be kind to them. When…",
    "wordCount": 112
   },
   {
+   "id": "b9-w4-n6",
+   "title": "The Desert Blooms",
+   "volume": "ot",
+   "book": 9,
+   "bookTitle": "Wonderful Is His Way",
+   "month": "September",
+   "week": 4,
+   "night": 6,
+   "scripture": "Isaiah 35",
+   "scriptureBook": "Isaiah",
+   "traveler": "willow",
+   "feeling": "discouraged",
+   "virtues": [
+    "hope",
+    "faith"
+   ],
+   "stages": [
+    "toddler",
+    "preschool",
+    "early-elementary"
+   ],
+   "primaryVirtue": "hope",
+   "teachingNote": "Reach for this in a long, dry stretch, when nothing seems to be growing.",
+   "teaser": "Much of Isaiah’s land was desert, dry and sandy, with very few plants. Isaiah said, “The desert shall rejoice, and blossom as the rose.” Picture dry sand bursting with roses! Water would break out, and thirsty ground would become a…",
+   "wordCount": 111
+  },
+  {
    "id": "b9-w4-n7",
-   "title": "The Desert Will Blossom",
+   "title": "Be Strong, Don’t Be Afraid",
    "volume": "ot",
    "book": 9,
    "bookTitle": "Wonderful Is His Way",
    "month": "September",
    "week": 4,
    "night": 7,
-   "scripture": "Isaiah 35:1–2, 5–7",
+   "scripture": "Isaiah 35",
    "scriptureBook": "Isaiah",
-   "traveler": "willow",
-   "feeling": "happy",
+   "traveler": "beau",
+   "feeling": "brave",
    "virtues": [
-    "hope",
-    "compassion"
+    "courage",
+    "perseverance"
    ],
    "stages": [
     "toddler",
-    "preschool"
+    "preschool",
+    "early-elementary"
    ],
-   "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child feels dry, hurting, or stuck and needs the picture of a desert blooming.",
-   "teaser": "Much of Isaiah’s land was desert, dry and sandy, with very few plants. Isaiah said, “The desert shall rejoice, and blossom as the rose.” Picture dry sand bursting with roses! Water would break out, and thirsty…",
-   "wordCount": 111,
-   "aka": [
-    "The Desert Blooms"
-   ]
+   "primaryVirtue": "courage",
+   "teachingNote": "Reach for this the night before something your child has to be brave for.",
+   "teaser": "Isaiah’s beautiful message ended with words of courage and joy — a wonderful way to finish the whole month! “Be strong, and don’t be afraid,” Isaiah said. “Heavenly Father is coming to help you and save you!” In Isaiah’s happy…",
+   "wordCount": 125
   },
   {
    "id": "b10-w1-n1",
-   "title": "A Voice in the Wilderness",
+   "title": "He Carries the Lambs",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 1,
    "night": 1,
-   "scripture": "Isaiah 40:1–3",
+   "scripture": "Isaiah 40:1–11",
    "scriptureBook": "Isaiah",
-   "traveler": "scout",
-   "feeling": "eager",
+   "traveler": "willow",
+   "feeling": "comforted",
    "virtues": [
-    "hope",
-    "service"
+    "comfort",
+    "trust-in-god"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child is waiting for something special and needs a way to get ready, like smoothing a road.",
-   "teaser": "Isaiah told the people what Heavenly Father said. He knew hard, sad days were coming for them. So the Lord gave Isaiah gentle words: “Comfort, comfort My people.” Comfort is like a warm hug that helps a sad heart…",
-   "wordCount": 122
+   "primaryVirtue": "comfort",
+   "teachingNote": "Reach for this when your child is worn out and needs to hear that being carried is allowed.",
+   "teaser": "Isaiah wrote about how the Lord takes care of His people. He used a picture everyone in his land knew. Isaiah said, “He shall feed His flock like a shepherd.” A good shepherd finds green grass and cool water for…",
+   "wordCount": 120
   },
   {
    "id": "b10-w1-n2",
-   "title": "Like a Gentle Shepherd",
+   "title": "He Calls the Stars by Name",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 1,
    "night": 2,
-   "scripture": "Isaiah 40:11",
+   "scripture": "Isaiah 40:12–26",
    "scriptureBook": "Isaiah",
-   "traveler": "willow",
-   "feeling": "safe",
+   "traveler": "wren",
+   "feeling": "amazed",
    "virtues": [
-    "trust-in-god",
-    "comfort"
+    "identity",
+    "wonder"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child feels small or tired and needs to picture a shepherd carrying a lamb close to his heart.",
-   "teaser": "Isaiah wrote about how the Lord takes care of His people. He used a picture everyone in his land knew. Isaiah said, “He shall feed His flock like a shepherd.” A good shepherd finds green grass and cool water for his…",
-   "wordCount": 120,
-   "aka": [
-    "He Carries the Lambs"
-   ]
+   "primaryVirtue": "identity",
+   "teachingNote": "Reach for this when your child feels small or overlooked and needs to know Heavenly Father knows their name.",
+   "teaser": "Long ago, Heavenly Father's people had been taken far away from home, to a land called Babylon. They missed their houses and their hills. All around them were big armies and big kings, and the people felt very small. So…",
+   "wordCount": 336
   },
   {
    "id": "b10-w1-n3",
-   "title": "Wings Like Eagles",
+   "title": "Wings Like the Eagles",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
@@ -8515,7 +8297,7 @@ window.LST_LIBRARY = {
    "scripture": "Isaiah 40:28–31",
    "scriptureBook": "Isaiah",
    "traveler": "beau",
-   "feeling": "brave",
+   "feeling": "discouraged",
    "virtues": [
     "perseverance",
     "trust-in-god"
@@ -8525,104 +8307,72 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "perseverance",
-   "teachingNote": "Reach for this when your child is worn out and ready to quit and needs to hear where new strength comes from.",
-   "teaser": "Sometimes the Lord’s people felt tired and weak. They wanted to give up. So Isaiah reminded them of something wonderful. Isaiah said the Lord made the whole earth, and He never gets tired. He gives strength to…",
-   "wordCount": 121,
-   "aka": [
-    "Wings Like the Eagles"
-   ]
+   "teachingNote": "Reach for this when your child is too tired to keep going and needs to learn where new strength comes from.",
+   "teaser": "Sometimes the Lord’s people felt tired and weak. They wanted to give up. So Isaiah reminded them of something wonderful. Isaiah said the Lord made the whole earth, and He never gets tired. He gives strength to people who feel…",
+   "wordCount": 121
   },
   {
    "id": "b10-w1-n4",
-   "title": "Fear Not, I Am with You",
+   "title": "Rivers in the Dry Places",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 1,
    "night": 4,
-   "scripture": "Isaiah 41:10, 13",
-   "scriptureBook": "Isaiah",
-   "traveler": "beau",
-   "feeling": "calm",
-   "virtues": [
-    "courage",
-    "trust-in-god"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "courage",
-   "teachingNote": "Reach for this when your child is afraid and needs to feel a hand holding theirs.",
-   "teaser": "Hard and scary times were coming for the Lord’s people. So the Lord gave Isaiah kind words for anyone who feels afraid. The Lord said, “Fear not, for I am with you. I will help you. I will hold you up.” Then He…",
-   "wordCount": 114
-  },
-  {
-   "id": "b10-w1-n5",
-   "title": "I Called You by Name",
-   "volume": "ot",
-   "book": 10,
-   "bookTitle": "He Gathers the Lambs",
-   "month": "October",
-   "week": 1,
-   "night": 5,
-   "scripture": "Isaiah 43:1–2",
-   "scriptureBook": "Isaiah",
-   "traveler": "wren",
-   "feeling": "connected",
-   "virtues": [
-    "identity",
-    "trust-in-god"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "identity",
-   "teachingNote": "Reach for this when your child wonders if they matter and needs to hear that the Lord knows their name.",
-   "teaser": "Isaiah wrote the Lord’s words for His people. Hard times would come, and they might feel all alone. The Lord said, “Fear not. I have called you by your name. You are Mine.” He knows each person, and He loves them…",
-   "wordCount": 110,
-   "aka": [
-    "I Have Called You by Name"
-   ]
-  },
-  {
-   "id": "b10-w1-n6",
-   "title": "Water for Thirsty Ground",
-   "volume": "ot",
-   "book": 10,
-   "bookTitle": "He Gathers the Lambs",
-   "month": "October",
-   "week": 1,
-   "night": 6,
-   "scripture": "Isaiah 44:2–4",
+   "scripture": "Isaiah 41:17–20",
    "scriptureBook": "Isaiah",
    "traveler": "scout",
-   "feeling": "happy",
+   "feeling": "comforted",
    "virtues": [
     "hope",
-    "humility"
+    "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child feels dry or empty inside and needs the picture of gentle rain on thirsty ground.",
-   "teaser": "In Isaiah’s land, summers were hot and dry. Without rain, the ground cracked and the plants drooped. The Lord told Isaiah, “Fear not. I will pour water on the thirsty, and floods on the dry ground.” Then He said, “I…",
-   "wordCount": 109
+   "teachingNote": "Reach for this when your child feels like nothing good is coming and needs a picture of rivers in dry places.",
+   "teaser": "A long, long time ago, Heavenly Father's people had to leave their homes and live far away in a land called Babylon. They were tired and sad, and they wondered if Heavenly Father had forgotten them. So He sent a…",
+   "wordCount": 318
   },
   {
-   "id": "b10-w1-n7",
+   "id": "b10-w1-n5",
+   "title": "I Have Called You by Name",
+   "volume": "ot",
+   "book": 10,
+   "bookTitle": "He Gathers the Lambs",
+   "month": "October",
+   "week": 1,
+   "night": 5,
+   "scripture": "Isaiah 43:1–3",
+   "scriptureBook": "Isaiah",
+   "traveler": "beau",
+   "feeling": "worried",
+   "virtues": [
+    "courage",
+    "identity"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "courage",
+   "teachingNote": "Reach for this the night before something scary, when your child needs to hear 'you are Mine.'",
+   "teaser": "Isaiah wrote the Lord’s words for His people. Hard times would come, and they might feel all alone. The Lord said, “Fear not. I have called you by your name. You are Mine.” He knows each person, and He loves…",
+   "wordCount": 110
+  },
+  {
+   "id": "b10-w1-n6",
    "title": "Written on His Hands",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 1,
-   "night": 7,
-   "scripture": "Isaiah 49:14–16",
+   "night": 6,
+   "scripture": "Isaiah 49:13–16",
    "scriptureBook": "Isaiah",
    "traveler": "willow",
    "feeling": "loved",
@@ -8635,233 +8385,246 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "identity",
-   "teachingNote": "Reach for this when your child worries they will be forgotten and needs to see their name written on the Lord's hands.",
-   "teaser": "Once the Lord’s people felt sad and all alone. They said, “The Lord has forgotten me.” The Lord answered with a question: “Can a mother forget her baby?” Then He said, “Even if she could, I will not forget you.” He…",
+   "teachingNote": "Reach for this when your child feels forgotten, left out, or passed over.",
+   "teaser": "Once the Lord’s people felt sad and all alone. They said, “The Lord has forgotten me.” The Lord answered with a question: “Can a mother forget her baby?” Then He said, “Even if she could, I will not forget you.”…",
    "wordCount": 109
   },
   {
+   "id": "b10-w1-n7",
+   "title": "Water from the Rock",
+   "volume": "ot",
+   "book": 10,
+   "bookTitle": "He Gathers the Lambs",
+   "month": "October",
+   "week": 1,
+   "night": 7,
+   "scripture": "Isaiah 48:17–21",
+   "scriptureBook": "Isaiah",
+   "traveler": "wren",
+   "feeling": "calm",
+   "virtues": [
+    "heeding-counsel",
+    "obedience"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "heeding-counsel",
+   "teachingNote": "Reach for this when your child struggles to listen and needs to see that commandments are a kindness.",
+   "teaser": "Heavenly Father said to His people, “I am the One who teaches you what is good. I show you the way to go.” He also called Himself their Redeemer. A Redeemer is someone who saves you and brings you back…",
+   "wordCount": 282
+  },
+  {
    "id": "b10-w2-n1",
-   "title": "A Kind Word for the Weary",
+   "title": "A Word for the Weary",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 2,
    "night": 1,
-   "scripture": "Isaiah 50:4",
+   "scripture": "Isaiah 50:4–10",
    "scriptureBook": "Isaiah",
-   "traveler": "willow",
-   "feeling": "comforted",
+   "traveler": "beau",
+   "feeling": "worried",
    "virtues": [
-    "kindness",
+    "trust-in-god",
     "comfort"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "kindness",
-   "teachingNote": "Reach for this when your child is tired or discouraged and needs a kind word, or wants to give one to someone else.",
-   "teaser": "Isaiah wrote some words as if Jesus Himself were talking. Long before Jesus was born, Isaiah knew about Him. In those words, Jesus says the Lord taught Him how to speak. He would know the right word for someone…",
-   "wordCount": 116,
-   "aka": [
-    "A Word for the Weary"
-   ]
+   "primaryVirtue": "trust-in-god",
+   "teachingNote": "Reach for this when your child is afraid of the dark or of what comes next.",
+   "teaser": "Isaiah wrote some words as if Jesus Himself were talking. Long before Jesus was born, Isaiah knew about Him. In those words, Jesus says the Lord taught Him how to speak. He would know the right word for someone weary.…",
+   "wordCount": 116
   },
   {
    "id": "b10-w2-n2",
-   "title": "The Desert Garden",
+   "title": "Look to the Rock",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 2,
    "night": 2,
-   "scripture": "Isaiah 51:3",
+   "scripture": "Isaiah 51:1–3",
    "scriptureBook": "Isaiah",
-   "traveler": "scout",
-   "feeling": "happy",
+   "traveler": "wren",
+   "feeling": "discouraged",
    "virtues": [
     "hope",
-    "gratitude"
+    "family-love"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child is sad about something dry or broken and needs to know the Lord can make it bloom.",
-   "teaser": "Isaiah knew the Lord’s people would have sad times. Their home would have broken, empty places. Picture a hot, dry desert, with dusty rocks and hardly any rain. Few plants can grow there. But Isaiah said the Lord…",
-   "wordCount": 106
+   "teachingNote": "Reach for this when your child needs to know the family standing behind them.",
+   "teaser": "Isaiah was a prophet, and he told Heavenly Father's people something funny-sounding: “Look at the rock you were cut from.” Long ago, workers cut big blocks of stone out of one giant rock to build houses. So Isaiah meant: your…",
+   "wordCount": 282
   },
   {
    "id": "b10-w2-n3",
-   "title": "Beautiful Feet",
+   "title": "Beautiful Feet on the Hills",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 2,
    "night": 3,
-   "scripture": "Isaiah 52:7",
+   "scripture": "Isaiah 52:7–10",
    "scriptureBook": "Isaiah",
-   "traveler": "beau",
+   "traveler": "scout",
    "feeling": "excited",
    "virtues": [
-    "service",
-    "gratitude"
+    "kindness",
+    "service"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "service",
-   "teachingNote": "Reach for this when your child has good news bursting to come out and needs to know that sharing it is beautiful.",
-   "teaser": "Long ago, there were no phones or cars. Important news came with a messenger who ran on foot from town to town. People waited and waited to hear the news. Would it be happy news or sad news? Isaiah said the feet…",
-   "wordCount": 104,
-   "aka": [
-    "Beautiful Feet on the Hills"
-   ]
+   "primaryVirtue": "kindness",
+   "teachingNote": "Reach for this when your child has something kind to share and needs a nudge to carry it.",
+   "teaser": "Long ago, there were no phones or cars. Important news came with a messenger who ran on foot from town to town. People waited and waited to hear the news. Would it be happy news or sad news? Isaiah said…",
+   "wordCount": 104
   },
   {
    "id": "b10-w2-n4",
-   "title": "Kindness That Stays",
+   "title": "He Carried Our Sorrows",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 2,
    "night": 4,
-   "scripture": "Isaiah 54:10, 13",
+   "scripture": "Isaiah 53:3–6",
    "scriptureBook": "Isaiah",
-   "traveler": "beau",
-   "feeling": "calm",
+   "traveler": "willow",
+   "feeling": "sad",
    "virtues": [
-    "trust-in-god",
-    "hope"
+    "comfort"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child feels like everything is changing and needs to hear that the Lord's kindness stays.",
-   "teaser": "Isaiah wrote the Lord’s words for His sad, hurting people. They worried the Lord might leave them. Mountains seem like they will stay forever. What could be bigger or stronger than a mountain? But the Lord said…",
-   "wordCount": 108,
-   "aka": [
-    "Kindness That Never Leaves"
-   ]
+   "primaryVirtue": "comfort",
+   "teachingNote": "Reach for this when your child's heart is heavy and they need to learn that Jesus already knows how it feels.",
+   "teaser": "A long, long time ago, before your grandma's grandma, there was a good man named Isaiah. Heavenly Father showed Isaiah a picture in his mind of Jesus, even though Jesus would not be born for hundreds and hundreds of years.…",
+   "wordCount": 262
   },
   {
    "id": "b10-w2-n5",
-   "title": "Come to the Waters",
+   "title": "Kindness That Never Leaves",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 2,
    "night": 5,
-   "scripture": "Isaiah 55:1–3",
-   "scriptureBook": "Isaiah",
-   "traveler": "scout",
-   "feeling": "connected",
-   "virtues": [
-    "humility",
-    "faith"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "humility",
-   "teachingNote": "Reach for this when your child thinks they must earn a place and needs to hear that the Lord's best gifts are free.",
-   "teaser": "In Isaiah’s land, summers were long, hot and dry. A drink of cool water was a happy gift. At the market, people paid money for bread and milk. Some spent money on things that did not fill them up. But Isaiah shared…",
-   "wordCount": 121
-  },
-  {
-   "id": "b10-w2-n6",
-   "title": "The Trees Clap Their Hands",
-   "volume": "ot",
-   "book": 10,
-   "bookTitle": "He Gathers the Lambs",
-   "month": "October",
-   "week": 2,
-   "night": 6,
-   "scripture": "Isaiah 55:8–9, 12",
+   "scripture": "Isaiah 54:7–10",
    "scriptureBook": "Isaiah",
    "traveler": "wren",
-   "feeling": "safe",
+   "feeling": "loved",
    "virtues": [
     "trust-in-god",
-    "wonder"
+    "comfort"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "trust-in-god",
-   "teachingNote": "Reach for this when your child does not understand why things happen and needs to trust that the Lord knows more.",
-   "teaser": "Sometimes the Lord’s people did not understand His plans. So the Lord spoke to them through Isaiah. The Lord said, “My thoughts are not your thoughts.” Look up at the sky. It is so much higher than the ground! The…",
-   "wordCount": 122,
-   "aka": [
-    "Go Out With Joy"
-   ]
+   "teachingNote": "Reach for this after a mistake, when your child is scared that love might leave.",
+   "teaser": "Isaiah wrote the Lord’s words for His sad, hurting people. They worried the Lord might leave them. Mountains seem like they will stay forever. What could be bigger or stronger than a mountain? But the Lord said, “The mountains may…",
+   "wordCount": 108
   },
   {
-   "id": "b10-w2-n7",
-   "title": "A House of Prayer for All",
+   "id": "b10-w2-n6",
+   "title": "Go Out With Joy",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 2,
-   "night": 7,
-   "scripture": "Isaiah 56:6–7",
+   "night": 6,
+   "scripture": "Isaiah 55:6–12",
    "scriptureBook": "Isaiah",
-   "traveler": "willow",
-   "feeling": "connected",
+   "traveler": "scout",
+   "feeling": "eager",
    "virtues": [
-    "worship-together",
+    "hope",
     "prayer"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "worship-together",
-   "teachingNote": "Reach for this when your child feels left out and needs to hear that the Lord's house has room for everyone.",
-   "teaser": "In Jerusalem stood the temple, the Lord’s holy house, where people came to pray. Some people from other lands had come to love the Lord. They wanted to serve Him and keep His holy day. They worried, “The Lord will…",
-   "wordCount": 106
+   "primaryVirtue": "hope",
+   "teachingNote": "Reach for this when your child is waiting on something good and needs to keep seeking.",
+   "teaser": "Sometimes the Lord’s people did not understand His plans. So the Lord spoke to them through Isaiah. The Lord said, “My thoughts are not your thoughts.” Look up at the sky. It is so much higher than the ground! The…",
+   "wordCount": 122
+  },
+  {
+   "id": "b10-w2-n7",
+   "title": "A Home for Humble Hearts",
+   "volume": "ot",
+   "book": 10,
+   "bookTitle": "He Gathers the Lambs",
+   "month": "October",
+   "week": 2,
+   "night": 7,
+   "scripture": "Isaiah 57:15, 19",
+   "scriptureBook": "Isaiah",
+   "traveler": "beau",
+   "feeling": "guilty",
+   "virtues": [
+    "humility",
+    "honesty"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "humility",
+   "teachingNote": "Reach for this when your child has hidden something and needs a safe way to tell the truth.",
+   "teaser": "Long ago, many of Heavenly Father's people had been taken far away from home to a land called Babylon. They felt small and sad. And some other people acted big and proud, like they did not need Heavenly Father at…",
+   "wordCount": 264
   },
   {
    "id": "b10-w3-n1",
-   "title": "Share Your Bread",
+   "title": "A Light Like the Morning",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 3,
    "night": 1,
-   "scripture": "Isaiah 58:6–7, 10–11",
+   "scripture": "Isaiah 58:6–11",
    "scriptureBook": "Isaiah",
    "traveler": "willow",
-   "feeling": "connected",
+   "feeling": "sad",
    "virtues": [
     "generosity",
-    "compassion"
+    "service"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "generosity",
-   "teachingNote": "Reach for this when your child sees someone hungry or in need and is ready to learn how sharing shows love.",
-   "teaser": "Long ago, Isaiah told the people what Heavenly Father said. Some of them would fast. To fast is to go without food for a little while and pray. But while they fasted, they still argued and fought. They were not…",
-   "wordCount": 121
+   "teachingNote": "Reach for this when your child has something to share and needs to see what giving does to a heart.",
+   "teaser": "Long ago, Heavenly Father's people lived in a city called Jerusalem. Life was hard for them, and they wanted Heavenly Father to help. So they had a special day when they did not eat. That is called a fast. Going…",
+   "wordCount": 315
   },
   {
    "id": "b10-w3-n2",
-   "title": "A Happy Holy Day",
+   "title": "The Day Called Delight",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
@@ -8871,7 +8634,7 @@ window.LST_LIBRARY = {
    "scripture": "Isaiah 58:13–14",
    "scriptureBook": "Isaiah",
    "traveler": "wren",
-   "feeling": "calm",
+   "feeling": "distracted",
    "virtues": [
     "reverence",
     "worship-together"
@@ -8881,26 +8644,49 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "reverence",
-   "teachingNote": "Reach for this when your child finds Sunday hard to slow down for and needs to see the Sabbath as a happy gift.",
-   "teaser": "Long ago, Isaiah told the people what Heavenly Father said. He taught them about the Sabbath, the Lord’s holy day of rest each week. Some people were using His special day just to do whatever they wanted. So the…",
-   "wordCount": 112,
-   "aka": [
-    "The Day Called Delight"
-   ]
+   "teachingNote": "Reach for this on a Saturday night, when your family wants Sunday to feel different.",
+   "teaser": "Long ago, Isaiah told the people what Heavenly Father said. He taught them about the Sabbath, the Lord’s holy day of rest each week. Some people were using His special day just to do whatever they wanted. So the Lord…",
+   "wordCount": 112
   },
   {
    "id": "b10-w3-n3",
-   "title": "Arise and Shine",
+   "title": "His Hand Is Not Too Short",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 3,
    "night": 3,
-   "scripture": "Isaiah 60:1–3",
+   "scripture": "Isaiah 59:1–2, 20",
    "scriptureBook": "Isaiah",
    "traveler": "beau",
-   "feeling": "happy",
+   "feeling": "discouraged",
+   "virtues": [
+    "repentance",
+    "prayer"
+   ],
+   "stages": [
+    "toddler",
+    "preschool"
+   ],
+   "primaryVirtue": "repentance",
+   "teachingNote": "Reach for this when your child feels far from Heavenly Father and needs to know turning back is easy.",
+   "teaser": "Long ago, a prophet named Isaiah lived in a city called Jerusalem. The people there had stopped listening to Heavenly Father. They were doing unkind things, and little by little they stopped feeling Him close. They said, \"Maybe Heavenly Father…",
+   "wordCount": 247
+  },
+  {
+   "id": "b10-w3-n4",
+   "title": "Arise, Little Light",
+   "volume": "ot",
+   "book": 10,
+   "bookTitle": "He Gathers the Lambs",
+   "month": "October",
+   "week": 3,
+   "night": 4,
+   "scripture": "Isaiah 60:1–3, 19–20",
+   "scriptureBook": "Isaiah",
+   "traveler": "scout",
+   "feeling": "worried",
    "virtues": [
     "hope",
     "faith"
@@ -8910,26 +8696,23 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "hope",
-   "teachingNote": "Reach for this when your child feels dim or discouraged and needs to know the Lord's light can make them shine.",
-   "teaser": "Long ago, Isaiah told the people what Heavenly Father said. He gave them happy words: “Arise, shine; for your light has come!” Think of a dark night. Then the sun comes up. People wake up and get up! That is the…",
-   "wordCount": 117,
-   "aka": [
-    "Arise, Little Light"
-   ]
+   "teachingNote": "Reach for this on a dark night, when your child needs to know morning is already on its way.",
+   "teaser": "Long ago, Isaiah told the people what Heavenly Father said. He gave them happy words: “Arise, shine; for your light has come!” Think of a dark night. Then the sun comes up. People wake up and get up! That is…",
+   "wordCount": 117
   },
   {
-   "id": "b10-w3-n4",
+   "id": "b10-w3-n5",
    "title": "Beauty for Ashes",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 3,
-   "night": 4,
-   "scripture": "Isaiah 61:1–3; Luke 4:16–21",
+   "night": 5,
+   "scripture": "Isaiah 61:1–3",
    "scriptureBook": "Isaiah",
-   "traveler": "scout",
-   "feeling": "happy",
+   "traveler": "willow",
+   "feeling": "sad",
    "virtues": [
     "comfort",
     "hope"
@@ -8939,39 +8722,13 @@ window.LST_LIBRARY = {
     "preschool"
    ],
    "primaryVirtue": "comfort",
-   "teachingNote": "Reach for this when your child is sad and needs to hear that Jesus trades beauty for ashes and joy for mourning.",
-   "teaser": "Long ago, Isaiah wrote about Someone Heavenly Father would send. That Someone would “bind up the brokenhearted.” He would gently wrap very sad hearts, like a bandage on a knee. He would also give “beauty for ashes.”…",
-   "wordCount": 124
-  },
-  {
-   "id": "b10-w3-n5",
-   "title": "Carried in His Love",
-   "volume": "ot",
-   "book": 10,
-   "bookTitle": "He Gathers the Lambs",
-   "month": "October",
-   "week": 3,
-   "night": 5,
-   "scripture": "Isaiah 63:7–9",
-   "scriptureBook": "Isaiah",
-   "traveler": "beau",
-   "feeling": "safe",
-   "virtues": [
-    "comfort",
-    "gratitude"
-   ],
-   "stages": [
-    "toddler",
-    "preschool"
-   ],
-   "primaryVirtue": "comfort",
-   "teachingNote": "Reach for this when your child is hurting and needs to know Jesus feels it and carries them.",
-   "teaser": "Long ago, Isaiah thought about all the good things the Lord had done. He said, “I will tell of the Lord’s loving kindness.” He wanted no one to forget. The Lord had said, “They are My people, My children.” So He…",
+   "teachingNote": "Reach for this when your child is grieving and needs someone to sit close before anything gets fixed.",
+   "teaser": "Long ago, Isaiah wrote about Someone Heavenly Father would send. That Someone would “bind up the brokenhearted.” He would gently wrap very sad hearts, like a bandage on a knee. He would also give “beauty for ashes.” Long ago, very…",
    "wordCount": 124
   },
   {
    "id": "b10-w3-n6",
-   "title": "We Are the Clay",
+   "title": "Clay in Kind Hands",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
@@ -8981,110 +8738,101 @@ window.LST_LIBRARY = {
    "scripture": "Isaiah 64:8",
    "scriptureBook": "Isaiah",
    "traveler": "wren",
-   "feeling": "eager",
+   "feeling": "safe",
    "virtues": [
     "humility",
-    "identity"
+    "trust-in-god"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "humility",
-   "teachingNote": "Reach for this when your child is frustrated with their mistakes and needs to remember the Potter is still shaping them.",
-   "teaser": "Long ago, Isaiah’s people had turned away from the Lord. Isaiah wanted them to come close to Him again. So he said a prayer. Isaiah prayed, “O Lord, You are our Father. We are the clay, and You are our potter.” In…",
-   "wordCount": 112,
-   "aka": [
-    "Clay in Kind Hands"
-   ]
+   "teachingNote": "Reach for this when your child feels unfinished or not good enough yet.",
+   "teaser": "Long ago, Isaiah’s people had turned away from the Lord. Isaiah wanted them to come close to Him again. So he said a prayer. Isaiah prayed, “O Lord, You are our Father. We are the clay, and You are our…",
+   "wordCount": 112
   },
   {
    "id": "b10-w3-n7",
-   "title": "Before You Call",
+   "title": "The Wolf and the Lamb",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 3,
    "night": 7,
-   "scripture": "Isaiah 65:24; 66:13",
+   "scripture": "Isaiah 65:17–25",
    "scriptureBook": "Isaiah",
-   "traveler": "willow",
-   "feeling": "comforted",
+   "traveler": "scout",
+   "feeling": "calm",
    "virtues": [
-    "prayer",
-    "comfort"
+    "hope",
+    "peacemaking"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "prayer",
-   "teachingNote": "Reach for this when your child wonders whether their prayers are heard and needs to hear the Lord answers before they call.",
-   "teaser": "Long ago, Isaiah told the people what Heavenly Father said. The Lord made a sweet promise to His people. He said, “Before they call, I will answer. While they are still speaking, I will hear.” We call to Him when we…",
-   "wordCount": 114
+   "primaryVirtue": "hope",
+   "teachingNote": "Reach for this when your child is afraid of someone or something and needs a picture of the peace that is coming.",
+   "teaser": "Long ago, Heavenly Father's people had to live far away from their homes, in a land called Babylon. They were sad. They missed their houses and their gardens. So Heavenly Father gave a helper named Isaiah a happy picture to…",
+   "wordCount": 291
   },
   {
    "id": "b10-w4-n1",
-   "title": "Known Before You Were Born",
+   "title": "Before You Were Born",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 4,
    "night": 1,
-   "scripture": "Jeremiah 1:1, 4–5",
+   "scripture": "Jeremiah 1:4–8",
    "scriptureBook": "Jeremiah",
-   "traveler": "wren",
-   "feeling": "connected",
+   "traveler": "beau",
+   "feeling": "nervous",
    "virtues": [
     "identity",
-    "faith"
+    "courage"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
    "primaryVirtue": "identity",
-   "teachingNote": "Reach for this when your child feels unknown or unimportant and needs to hear Heavenly Father knew them before they were born.",
-   "teaser": "Long ago, Jeremiah grew up in a family of priests who served the Lord. One day the Lord spoke to Jeremiah. The Lord was Jesus, speaking for Heavenly Father. He said, “Before I made you in your mother’s tummy, I knew…",
-   "wordCount": 110,
-   "aka": [
-    "Before You Were Born"
-   ]
+   "teachingNote": "Reach for this when your child says 'I'm too little' and needs to hear that Heavenly Father sends small people.",
+   "teaser": "Long ago, Jeremiah grew up in a family of priests who served the Lord. One day the Lord spoke to Jeremiah. The Lord was Jesus, speaking for Heavenly Father. He said, “Before I made you in your mother’s tummy, I…",
+   "wordCount": 110
   },
   {
    "id": "b10-w4-n2",
-   "title": "Say Not, I Am a Child",
+   "title": "When He Touched My Mouth",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 4,
    "night": 2,
-   "scripture": "Jeremiah 1:6–9",
+   "scripture": "Jeremiah 1:9–10",
    "scriptureBook": "Jeremiah",
-   "traveler": "beau",
-   "feeling": "brave",
+   "traveler": "willow",
+   "feeling": "confused",
    "virtues": [
-    "courage",
-    "faith"
+    "trust-in-god",
+    "courage"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "courage",
-   "teachingNote": "Reach for this when your child says I am too little and needs to hear the Lord puts His words in a child's mouth.",
-   "teaser": "The Lord chose young Jeremiah to tell people Heavenly Father’s words. Jeremiah felt too little. He said, “Oh, Lord, I cannot speak. I am a child.” The Lord said, “Do not say, ‘I am a child.’ Go where I send you. Say…",
-   "wordCount": 121,
-   "aka": [
-    "When He Touched My Mouth"
-   ]
+   "primaryVirtue": "trust-in-god",
+   "teachingNote": "Reach for this when your child wants to help someone but does not know what to say.",
+   "teaser": "The Lord chose young Jeremiah to tell people Heavenly Father’s words. Jeremiah felt too little. He said, “Oh, Lord, I cannot speak. I am a child.” The Lord said, “Do not say, ‘I am a child.’ Go where I send…",
+   "wordCount": 121
   },
   {
    "id": "b10-w4-n3",
-   "title": "The Almond Branch",
+   "title": "The Little Waking Branch",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
@@ -9094,132 +8842,123 @@ window.LST_LIBRARY = {
    "scripture": "Jeremiah 1:11–12",
    "scriptureBook": "Jeremiah",
    "traveler": "scout",
-   "feeling": "safe",
+   "feeling": "amazed",
    "virtues": [
-    "keeping-promises",
+    "wonder",
     "trust-in-god"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "keeping-promises",
-   "teachingNote": "Reach for this when your child doubts a promise will come true and needs the picture of an almond branch waking up.",
+   "primaryVirtue": "wonder",
+   "teachingNote": "Reach for this when your child is waiting on a promise and needs to learn that Heavenly Father never forgets one.",
    "teaser": "The Lord had just chosen Jeremiah to share His words. Then the Lord asked him, “Jeremiah, what do you see?” Jeremiah looked closely. He said, “I see a branch from an almond tree.” In spring, the almond tree wakes up…",
-   "wordCount": 117,
-   "aka": [
-    "The Little Waking Branch"
-   ]
+   "wordCount": 117
   },
   {
    "id": "b10-w4-n4",
-   "title": "A Fountain of Living Water",
+   "title": "The Potter’s Gentle Hands",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 4,
    "night": 4,
-   "scripture": "Jeremiah 2:13; 17:7–8",
+   "scripture": "Jeremiah 18:1–6",
    "scriptureBook": "Jeremiah",
    "traveler": "wren",
-   "feeling": "calm",
+   "feeling": "comforted",
    "virtues": [
-    "faith",
-    "trust-in-god"
+    "hope",
+    "identity"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "faith",
-   "teachingNote": "Reach for this when your child feels empty after chasing other things and needs the picture of a tree by a stream.",
-   "teaser": "Jeremiah lived in a hot, dry land. The best water came from a spring, bubbling up fresh from the ground. Some people cut a big hole in rock, called a cistern, to catch rain. If the rock cracked, the water leaked…",
-   "wordCount": 122
+   "primaryVirtue": "hope",
+   "teachingNote": "Reach for this after something your child made fell apart, when they need to begin again.",
+   "teaser": "The Lord told Jeremiah, “Go down to the potter’s house.” So Jeremiah went to see a man who made pots and bowls from clay. The potter sat at his wheel. It spun around and around while his hands shaped the…",
+   "wordCount": 112
   },
   {
    "id": "b10-w4-n5",
-   "title": "Fishers and Hunters",
+   "title": "Come Home, Little Ones",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 4,
    "night": 5,
-   "scripture": "Jeremiah 3:14; 16:14–16",
+   "scripture": "Jeremiah 3:12, 14–15",
    "scriptureBook": "Jeremiah",
-   "traveler": "scout",
-   "feeling": "eager",
+   "traveler": "willow",
+   "feeling": "loved",
    "virtues": [
-    "service",
+    "repentance",
     "hope"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "service",
-   "teachingNote": "Reach for this when your child wants to help and needs to see how Heavenly Father looks for every one of His children.",
-   "teaser": "Long ago, many of the Lord’s people had wandered away. They were spread far from home. But the Lord still called them His children. He said, “Come back.” He would bring them to Zion, where His people live together…",
-   "wordCount": 122
+   "primaryVirtue": "repentance",
+   "teachingNote": "Reach for this when your child has run off to hide and needs to hear 'come home' instead of a lecture.",
+   "teaser": "A long, long time ago, Heavenly Father's children stopped listening to Him. They walked away from Him a little at a time, until they were very far away. Then soldiers took many of them to a land far up north…",
+   "wordCount": 274
   },
   {
    "id": "b10-w4-n6",
-   "title": "The Pot Made New",
+   "title": "The Tree by the Water",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 4,
    "night": 6,
-   "scripture": "Jeremiah 18:1–6",
+   "scripture": "Jeremiah 17:7–8",
    "scriptureBook": "Jeremiah",
-   "traveler": "willow",
-   "feeling": "comforted",
+   "traveler": "beau",
+   "feeling": "calm",
    "virtues": [
-    "repentance",
-    "humility"
+    "trust-in-god",
+    "perseverance"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "repentance",
-   "teachingNote": "Reach for this when your child made a mistake and needs to know the Potter can make them new.",
-   "teaser": "The Lord told Jeremiah, “Go down to the potter’s house.” So Jeremiah went to see a man who made pots and bowls from clay. The potter sat at his wheel. It spun around and around while his hands shaped the soft, wet…",
-   "wordCount": 112,
-   "aka": [
-    "The Potter’s Gentle Hands"
-   ]
+   "primaryVirtue": "trust-in-god",
+   "teachingNote": "Reach for this on a hard, dry day, when your child needs to keep doing the small good things anyway.",
+   "teaser": "Long, long ago there was a prophet named Jeremiah. A prophet is someone Heavenly Father lets talk to His children for Him. In Jeremiah's time, many people had stopped listening to Heavenly Father. When something hard happened, they ran to…",
+   "wordCount": 240
   },
   {
    "id": "b10-w4-n7",
-   "title": "A Fire in My Bones",
+   "title": "A Little Fire Inside",
    "volume": "ot",
    "book": 10,
    "bookTitle": "He Gathers the Lambs",
    "month": "October",
    "week": 4,
    "night": 7,
-   "scripture": "Jeremiah 7:2, 23; 20:7–9",
+   "scripture": "Jeremiah 20:9, 13",
    "scriptureBook": "Jeremiah",
-   "traveler": "beau",
-   "feeling": "excited",
+   "traveler": "scout",
+   "feeling": "eager",
    "virtues": [
-    "love-of-scripture",
-    "courage"
+    "courage",
+    "worship-together"
    ],
    "stages": [
     "toddler",
     "preschool"
    ],
-   "primaryVirtue": "love-of-scripture",
-   "teachingNote": "Reach for this when your child feels the Lord's words warm inside and needs courage to share them.",
+   "primaryVirtue": "courage",
+   "teachingNote": "Reach for this when your child has something true and happy inside and needs permission to let it out.",
    "teaser": "The Lord sent Jeremiah to stand at the gate of His house, the temple. Jeremiah gave the people the Lord’s words. “Obey My voice, and you will be My people.” Many people did not want to listen. Some laughed at…",
-   "wordCount": 121,
-   "aka": [
-    "A Little Fire Inside"
-   ]
+   "wordCount": 121
   },
   {
    "id": "b11-w1-n1",
