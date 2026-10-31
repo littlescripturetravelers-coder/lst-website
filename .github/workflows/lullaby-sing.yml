@@ -49,6 +49,11 @@ name: lullaby-sing
 on:
   workflow_dispatch:
     inputs:
+      words:
+        description: 'Which words to sing: ot = the Old Testament version (data/lantern-lullaby.js), nt = the New Testament version (data/lantern-lullaby-nt.js, Levi 31 Oct 2026); a nt take is saved as audio/hush-little-traveler-nt-full.mp3'
+        type: choice
+        options: [ot, nt]
+        default: ot
       mode:
         description: 'full = sing the whole song; fix = re-sing one stretch of a take; check = transcribe and check the takes an earlier run sang (no credits spent)'
         type: choice
@@ -159,6 +164,7 @@ jobs:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: ${{ inputs.mode }}
+          WORDS: ${{ inputs.words }}
           FINETUNE: ${{ inputs.finetune }}
           TAKES: ${{ inputs.takes }}
           LENGTH_MS: ${{ inputs.length_ms }}
@@ -210,12 +216,15 @@ jobs:
           # into the new ones ("A comfy n... days of grief")
           CTX=int(os.environ.get('FIX_CTX_MS') or 20000)
           # when the take sings each line (lantern/lullaby-full-lines.json), so a kept stretch can carry its words
-          try: TAKE_LINES=json.load(open('lantern/lullaby-full-lines.json',encoding='utf8'))['lines']
+          WORDS=(os.environ.get('WORDS') or 'ot').strip().lower()
+          try: TAKE_LINES=json.load(open('lantern/lullaby-full-lines.json',encoding='utf8'))['lines'] if WORDS=='ot' else []
           except Exception: TAKE_LINES=[]
 
           # ── the words, exactly as the app prints them ────────────────────────
-          src=open('data/lantern-lullaby.js',encoding='utf8').read()
-          m=re.search(r'window\.LST_LANTERN_LULLABY = (\{.*?\n\});',src,re.S).group(1)
+          # the New Testament version (Levi, 31 Oct 2026) is sung the same way, by the same singer
+          src=open('data/lantern-lullaby-nt.js' if WORDS=='nt' else 'data/lantern-lullaby.js',encoding='utf8').read()
+          m=re.search(r'window\.LST_LANTERN_LULLABY(?:_NT)? = (\{.*?\n\});',src,re.S).group(1)
+          print('words:','New Testament' if WORDS=='nt' else 'Old Testament')
           open('out/obj.js','w').write('const L='+m+';console.log(JSON.stringify(L))')
           L=json.loads(subprocess.check_output(['node','out/obj.js']).decode())
           sections=[]
@@ -747,17 +756,20 @@ jobs:
         if: ${{ inputs.save_branch != '' }}
         env:
           BR: ${{ inputs.save_branch }}
+          WORDS: ${{ inputs.words }}
         run: |
           best=$(cut -d' ' -f1 out/BEST.txt)
+          # the New Testament version keeps its own files beside the Old Testament ones
+          sfx=''; [ "$WORDS" = 'nt' ] && sfx='-nt'
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -B "$BR"
-          cp "out/$best" audio/hush-little-traveler-full.mp3
-          cp "out/${best%.mp3}-report.txt" lantern/lullaby-full-report.txt
-          cp out/plan.json lantern/lullaby-full-plan.json
-          [ -f out/timing.json ] && cp out/timing.json lantern/lullaby-full-timing.json
-          git add audio/hush-little-traveler-full.mp3 lantern/lullaby-full-report.txt lantern/lullaby-full-plan.json
-          [ -f lantern/lullaby-full-timing.json ] && git add lantern/lullaby-full-timing.json
+          cp "out/$best" "audio/hush-little-traveler${sfx}-full.mp3"
+          cp "out/${best%.mp3}-report.txt" "lantern/lullaby${sfx}-full-report.txt"
+          cp out/plan.json "lantern/lullaby${sfx}-full-plan.json"
+          [ -f out/timing.json ] && cp out/timing.json "lantern/lullaby${sfx}-full-timing.json"
+          git add "audio/hush-little-traveler${sfx}-full.mp3" "lantern/lullaby${sfx}-full-report.txt" "lantern/lullaby${sfx}-full-plan.json"
+          [ -f "lantern/lullaby${sfx}-full-timing.json" ] && git add "lantern/lullaby${sfx}-full-timing.json"
           git -c commit.gpgsign=false commit -qm "The full lullaby: best take from run $GITHUB_RUN_ID"
           git push -f origin "$BR"
           echo "pushed $BR"
