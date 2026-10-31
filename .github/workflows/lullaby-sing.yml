@@ -340,7 +340,8 @@ jobs:
           KEY=(os.environ.get('KEY') or '').strip()
           if KEY:
               POS=[x for x in POS if x!="in E major"]+["in "+KEY+", the same key from the first note to the last, never moving to another key","a bright, warm major key"]
-              NEG=NEG+["G minor","a minor key","changing key","drifting pitch","out of tune","a key change after the opening"]
+              # the API takes at most 50 avoid-notes; "a minor key" and "key change" are there already
+              NEG=(NEG+["drifting out of tune"])[:50]
               print('holding the whole song in',KEY)
           def plan_full():
               secs=[]; budget=LENGTH-5000
