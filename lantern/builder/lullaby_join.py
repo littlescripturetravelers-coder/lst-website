@@ -104,6 +104,19 @@ def key_of(chroma):
     return best[1]
 
 
+def same_key(a, b):
+    """True when two key names share their notes: the same key, or a major key and its relative
+    minor (B major and G# minor are one scale; the measure cannot always tell them apart)."""
+    if not a or not b: return False
+    if a == b: return True
+    def tonic(n):
+        root, kind = n.split(" ")
+        i = NOTES.index(root)
+        return i if kind == "major" else (i + 3) % 12
+    try: return tonic(a) == tonic(b)
+    except Exception: return False
+
+
 def seam(a_path, a_last, b_path, b_first, span=40.0):
     """How well the end of the first half meets the start of the second.
     a_last: the second the first half's last word ends; b_first: the second the

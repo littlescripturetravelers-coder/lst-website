@@ -135,6 +135,10 @@ on:
         description: 'fix mode: words the singer should say differently from how they are printed, as "Job=Jobe" (comma between pairs); the printed words stay as they are'
         required: false
         default: ''
+      key:
+        description: 'The key to hold the whole song in, asked for even with a kept opening (the Old Testament recording is B major; 31 Oct 2026 the New Testament takes slid from the opening into G minor and sounded sour). Blank = none'
+        required: false
+        default: ''
       save_all:
         description: 'With save_branch: also push every take (audio/takes/<words>-take-N.mp3 and its report), so Levi can listen to each and choose'
         type: boolean
@@ -169,6 +173,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: ${{ inputs.mode }}
           WORDS: ${{ inputs.words }}
+          KEY: ${{ inputs.key }}
           FINETUNE: ${{ inputs.finetune }}
           TAKES: ${{ inputs.takes }}
           LENGTH_MS: ${{ inputs.length_ms }}
@@ -330,6 +335,13 @@ jobs:
                "rushed phrasing","a fast tempo","harsh tone","busy accompaniment","a minor key","sad","melancholic","dark",
                "abrupt transitions","sudden stops","long silences between verses","a jump in volume","a change of arrangement"]
           if ANCHOR_SONG or mode=='fix': POS=[x for x in POS if x!="in E major"]   # the kept opening sets the key
+          # ...unless a key is named: then the whole song is asked to stay in it (Levi, 31 Oct 2026: the
+          # New Testament takes left the kept opening's key a half step down and sounded distorted)
+          KEY=(os.environ.get('KEY') or '').strip()
+          if KEY:
+              POS=[x for x in POS if x!="in E major"]+["in "+KEY+", the same key from the first note to the last, never moving to another key","a bright, warm major key"]
+              NEG=NEG+["G minor","a minor key","changing key","drifting pitch","out of tune","a key change after the opening"]
+              print('holding the whole song in',KEY)
           def plan_full():
               secs=[]; budget=LENGTH-5000
               rest=[(n,l[:]) for n,l in sections]
@@ -543,7 +555,7 @@ jobs:
                   if mode=='full' and ANCHOR_SONG:
                       try:
                           ko=J.key_of(J.features(J.decode(path,0,ANCHOR_MS/1000.0))['chroma'])
-                          if ko!=mk: score-=40; print(f'   take {t}: the kept opening is in {ko}, the rest in {mk} - not the same voice',flush=True)
+                          if not J.same_key(ko,mk): score-=40; print(f'   take {t}: the kept opening is in {ko}, the rest in {mk} - not the same voice',flush=True)
                           else: print(f'   take {t}: stays in the opening key, {ko}',flush=True)
                       except Exception as e: print('   key check skipped:',e)
                   # "I only want the mother singing": ElevenLabs Scribe is asked who sings each word;
