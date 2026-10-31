@@ -402,8 +402,10 @@ jobs:
                   try: return json.load(urllib.request.urlopen(req,timeout=900))
                   except urllib.error.HTTPError as e:
                       detail=e.read()[:300]; print('   OpenAI whisper: HTTP',e.code,detail,flush=True)
-                      if e.code not in (429,500,502,503,504): raise
                       last=e
+                      # a refused key (401/403, 31 Oct 2026) will not be accepted a minute later: go straight to Scribe
+                      if e.code in (401,403): break
+                      if e.code not in (429,500,502,503,504): raise
                       # an account with no OpenAI credit left will not have any in a minute either
                       if b'quota' in detail.lower() or b'credit' in detail.lower(): break
               # ElevenLabs Scribe: words with their times, gathered into short segments
