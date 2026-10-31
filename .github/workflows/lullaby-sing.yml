@@ -135,6 +135,10 @@ on:
         description: 'fix mode: words the singer should say differently from how they are printed, as "Job=Jobe" (comma between pairs); the printed words stay as they are'
         required: false
         default: ''
+      lines:
+        description: 'Sing only the first N lines (a short, cheap test of a setting; blank = the whole song)'
+        required: false
+        default: ''
       key:
         description: 'The key to hold the whole song in, asked for even with a kept opening (the Old Testament recording is B major; 31 Oct 2026 the New Testament takes slid from the opening into G minor and sounded sour). Blank = none'
         required: false
@@ -174,6 +178,7 @@ jobs:
           MODE: ${{ inputs.mode }}
           WORDS: ${{ inputs.words }}
           KEY: ${{ inputs.key }}
+          LINES_LIMIT: ${{ inputs.lines }}
           FINETUNE: ${{ inputs.finetune }}
           TAKES: ${{ inputs.takes }}
           LENGTH_MS: ${{ inputs.length_ms }}
@@ -248,6 +253,13 @@ jobs:
                   sections.append((p['label']+' (first half)',lines[:len(lines)//2])); lines=lines[len(lines)//2:]
                   sections[-1]=(sections[-1][0],sections[-1][1])
               sections.append((p['label'],lines))
+          LIM=int(os.environ.get('LINES_LIMIT') or 0)
+          if LIM:
+              cut=[]; n=0
+              for nm,ls in sections:
+                  if n>=LIM: break
+                  cut.append((nm,ls[:LIM-n])); n+=len(cut[-1][1])
+              sections=cut; print('a short test: the first',n,'lines only')
           all_lines=[ln for _,ls in sections for ln in ls]
           print('lyrics:',len(all_lines),'lines in',len(sections),'sections')
           if mode=='fix':
