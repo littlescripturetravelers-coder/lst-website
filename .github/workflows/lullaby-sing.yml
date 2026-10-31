@@ -135,6 +135,10 @@ on:
         description: 'fix mode: words the singer should say differently from how they are printed, as "Job=Jobe" (comma between pairs); the printed words stay as they are'
         required: false
         default: ''
+      save_all:
+        description: 'With save_branch: also push every take (audio/takes/<words>-take-N.mp3 and its report), so Levi can listen to each and choose'
+        type: boolean
+        default: false
       save_branch:
         description: 'Push the best take to this branch as audio/hush-little-traveler-full.mp3 (blank = artifact only)'
         required: false
@@ -759,6 +763,7 @@ jobs:
         env:
           BR: ${{ inputs.save_branch }}
           WORDS: ${{ inputs.words }}
+          SAVE_ALL: ${{ inputs.save_all }}
         run: |
           best=$(cut -d' ' -f1 out/BEST.txt)
           # the New Testament version keeps its own files beside the Old Testament ones
@@ -772,6 +777,14 @@ jobs:
           [ -f out/timing.json ] && cp out/timing.json "lantern/lullaby${sfx}-full-timing.json"
           git add "audio/hush-little-traveler${sfx}-full.mp3" "lantern/lullaby${sfx}-full-report.txt" "lantern/lullaby${sfx}-full-plan.json"
           [ -f "lantern/lullaby${sfx}-full-timing.json" ] && git add "lantern/lullaby${sfx}-full-timing.json"
+          if [ "$SAVE_ALL" = "true" ]; then
+            mkdir -p audio/takes
+            for t in out/take-*.mp3; do
+              case "$t" in *-as-sung.mp3|*-raw.mp3|*piece*) continue;; esac
+              n=$(basename "$t" .mp3); cp "$t" "audio/takes/${WORDS:-ot}-$n.mp3"; git add "audio/takes/${WORDS:-ot}-$n.mp3"
+              [ -f "out/$n-report.txt" ] && cp "out/$n-report.txt" "audio/takes/${WORDS:-ot}-$n-report.txt" && git add "audio/takes/${WORDS:-ot}-$n-report.txt"
+            done
+          fi
           git -c commit.gpgsign=false commit -qm "The full lullaby: best take from run $GITHUB_RUN_ID"
           git push -f origin "$BR"
           echo "pushed $BR"
