@@ -18,7 +18,9 @@
   "one melody carried through every verse, the chorus the same tune each time it returns",
   "every word sung clearly, exactly as written, nothing added",
   "one continuous, flowing performance: smooth legato phrasing, each line given room to breathe, a soft instrumental breath of a few seconds between verses, soft and steady dynamics",
-  "a woman's voice: a gentle, loving mother softly singing her own child to sleep, tender and warm, close and intimate, unhurried, the same singer from the first note to the last"
+  "a woman's voice: a gentle, loving mother softly singing her own child to sleep, tender and warm, close and intimate, unhurried, the same singer from the first note to the last",
+  "in B major, the same key from the first note to the last, never moving to another key",
+  "a bright, warm major key"
  ],
  "negative_global_styles": [
   "drums",
@@ -69,7 +71,8 @@
   "sudden stops",
   "long silences between verses",
   "a jump in volume",
-  "a change of arrangement"
+  "a change of arrangement",
+  "drifting out of tune"
  ],
  "sections": [
   {
@@ -78,18 +81,17 @@
     "exactly as recorded"
    ],
    "negative_local_styles": [],
-   "duration_ms": 24300,
+   "duration_ms": 18300,
    "lines": [
     "Hush, little traveler, the day is done,",
     "The moon is up, the stars have come.",
-    "Your pillow\u2019s soft, your covers deep \u2014",
-    "A comfy nest for little sleep."
+    "Your pillow\u2019s soft, your covers deep \u2014"
    ],
    "source_from": {
-    "song_id": "cTrg8UQGXOZGTNpnst1p",
+    "song_id": "I0t41EYZgBzULh5PKuwv",
     "range": {
      "start_ms": 0,
-     "end_ms": 24300
+     "end_ms": 18300
     }
    }
   },
@@ -101,8 +103,9 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35668,
+   "duration_ms": 40234,
    "lines": [
+    "A comfy nest for little sleep.",
     "Mom and Dad are nearby too,",
     "With hearts that watch the whole night through.",
     "And One who loves you even more",
@@ -122,7 +125,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 26751,
+   "duration_ms": 26823,
    "lines": [
     "Goodnight Beau, goodnight Scout,",
     "Goodnight friends both in and out.",
@@ -140,7 +143,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35668,
+   "duration_ms": 35764,
    "lines": [
     "Beau the Brave has stories true \u2014",
     "\u201cBig heart, brave start, that\u2019s me and you!\u201d",
@@ -160,7 +163,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35668,
+   "duration_ms": 35764,
    "lines": [
     "Scout the Seeker, curious and free \u2014",
     "\u201cLook and see \u2014 what could it be?\u201d",
@@ -180,7 +183,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35668,
+   "duration_ms": 35764,
    "lines": [
     "Willow the Warm wraps tight and slow \u2014",
     "\u201cWarm hugs, warm hearts wherever we go.\u201d",
@@ -200,7 +203,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35668,
+   "duration_ms": 35764,
    "lines": [
     "Wren the Wonderer, gentle and slow \u2014",
     "\u201cPause and ponder \u2014 what a wonder we know.\u201d",
@@ -221,7 +224,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 26751,
+   "duration_ms": 26823,
    "lines": [
     "Goodnight Beau, goodnight Scout,",
     "Goodnight friends both in and out.",
@@ -239,7 +242,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 71337,
+   "duration_ms": 71528,
    "lines": [
     "A baby slept on quiet hay",
     "While shepherds watched their fields that day.",
@@ -267,7 +270,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 71337,
+   "duration_ms": 71528,
    "lines": [
     "One little lamb had wandered far",
     "Beneath the quiet evening star.",
@@ -295,7 +298,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 53503,
+   "duration_ms": 53646,
    "lines": [
     "In a garden, dark and still,",
     "He knelt and prayed, \u201cThy will, Thy will.\u201d",
@@ -319,7 +322,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 53503,
+   "duration_ms": 53646,
    "lines": [
     "You are not what the world might say \u2014",
     "Not just a stumble, not yesterday.",
@@ -343,7 +346,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 35668,
+   "duration_ms": 35764,
    "lines": [
     "So drift, little traveler, soft and slow,",
     "With all the friends and stories you know.",
@@ -364,7 +367,7 @@
     "flows straight on from the section before - the same voice, key, tempo and accompaniment, no pause, no jolt"
    ],
    "negative_local_styles": [],
-   "duration_ms": 26751,
+   "duration_ms": 26823,
    "lines": [
     "Goodnight Beau, goodnight Scout,",
     "Goodnight friends both in and out.",
@@ -383,7 +386,7 @@
     "settling and slowing, almost asleep, a soft instrumental close"
    ],
    "negative_local_styles": [],
-   "duration_ms": 31751,
+   "duration_ms": 31823,
    "lines": [
     "Mom and Dad love you deep, love you wide,",
     "And Heavenly Father stays by your side.",
