@@ -1,357 +1,76 @@
-take 1: 596s, 95% of the 132 lines sung; smoothness: 0 break(s) over 2.5 s (longest 2.3 s), level wanders 0.95 dB across 30 stretches
+take 1: 120s, 69% of the 26 lines sung; smoothness: 1 break(s) over 2.5 s (longest 4.0 s), level wanders 1.16 dB across 6 stretches
 
 ## Hush, Little Traveler
-   Hush, little traveler, the day is done,   (0.87)
+   Hush, little traveler, the day is done,   (1.0)
    The moon is up, the stars have come.   (1.0)
    Your pillow’s soft, your covers deep —   (0.99)
-   A comfy nest for little sleep.   (1.0)
+ ~ A comfy nest for little sleep.   (0.78)
    Mom and Dad are nearby too,   (1.0)
    With hearts that watch the whole night through.   (1.0)
    And One who loves you even more   (1.0)
    Is closer than your bedroom door.   (1.0)
-   Heavenly Father knows your name —   (1.0)
- ~ He knew it long before you came.   (0.77)
+ ~ Heavenly Father knows your name —   (0.67)
+   He knew it long before you came.   (1.0)
    You’re loved for who you are inside,   (1.0)
    With loving arms stretched open wide.   (1.0)
 
 ## Goodnight, Friends
-   Goodnight Beau, goodnight Scout,   (0.97)
+   Goodnight Beau, goodnight Scout,   (0.9)
    Goodnight friends both in and out.   (0.99)
    Goodnight Willow, goodnight Wren,   (0.97)
    We will travel here again.   (1.0)
-   Close your eyes and say a prayer —   (1.0)
+   Close your eyes and say a prayer —   (0.98)
    Heavenly Father’s always there.   (1.0)
 
 ## Beau the Brave
    Beau the Brave has stories true —   (0.93)
    “Big heart, brave start, that’s me and you!”   (1.0)
-   When waves grew wild, young Peter knew   (1.0)
-   That Jesus’ hand would pull him through.   (1.0)
-   When Paul and Silas sat in chains,   (1.0)
-   They sang out loud through all their pains.   (0.94)
-   So when you feel a big storm near,   (1.0)
-   Heavenly Father calms your fear.   (1.0)
-
-## Scout the Seeker
-   Scout the Seeker, curious and free —   (1.0)
-   “Look and see — what could it be?”   (1.0)
-   A star arose both bright and new   (1.0)
-   And led the wise men to Jesus, too.   (0.94)
-   Zacchaeus climbed a sycamore tree,   (1.0)
-   A small man hoping he might see.   (1.0)
-   When something’s hard, when roads feel long,   (1.0)
-   Look up, dear one — His light is strong.   (1.0)
-
-## Willow the Warm
-   Willow the Warm wraps tight and slow —   (1.0)
-   “Warm hugs, warm hearts wherever we go.”   (1.0)
-   Like the kind man on the road who stayed   (1.0)
-   Beside a stranger, unafraid.   (1.0)
-   Like the father running down the lane   (1.0)
-   Who welcomed home his son again.   (1.0)
-   When hearts feel small and tears come down,   (1.0)
-   Heavenly Father’s love is all around.   (1.0)
-
-## Wren the Wonderer
-   Wren the Wonderer, gentle and slow —   (0.97)
-   “Pause and ponder — what a wonder we know.”   (1.0)
-   Like Mary, still, with wondering eyes,   (1.0)
-   Who kept His word and pondered why.   (0.89)
-   Like Nicodemus in the night,   (1.0)
-   Who came with questions, seeking light.   (1.0)
-   When questions come and answers hide,   (1.0)
-   The Holy Ghost can whisper inside.   (1.0)
-
-## Goodnight, Friends
-   Goodnight Beau, goodnight Scout,   (0.97)
-   Goodnight friends both in and out.   (0.99)
-   Goodnight Willow, goodnight Wren,   (0.97)
-   We will travel here again.   (1.0)
-   Close your eyes and say a prayer —   (1.0)
-   Heavenly Father’s always there.   (1.0)
-
-## Stories We Remember (first half)
-   A baby slept on quiet hay   (1.0)
-   While shepherds watched their fields that day.   (1.0)
-   The angels filled the sky with song —   (1.0)
-   Heavenly Father’s promise, waited long.   (1.0)
-   The wise men came from far away   (1.0)
- ~ And knelt beside the place He lay.   (0.77)
-   When you feel small or far from home,   (1.0)
-   Heavenly Father sees; you’re not alone.   (1.0)
-   The winds came up, the waves were steep,   (1.0)
-   But Jesus lay in peaceful sleep.   (1.0)
-   He rose and said, “Peace, be still” —   (1.0)
-   And sea and sky obeyed His will.   (1.0)
-   A boy brought loaves and fishes small,   (1.0)
-   Not nearly near enough for all.   (1.0)
-   But Jesus blessed the gift he gave,   (1.0)
-   And thousands ate beside the wave.   (1.0)
-
-## Stories We Remember
-   One little lamb had wandered far   (0.93)
-   Beneath the quiet evening star.   (1.0)
-   The Shepherd searched the hillsides through —   (0.99)
-   That’s how the Savior looks for you.   (1.0)
-   Bartimaeus called beside the way,   (1.0)
-   “Have mercy, Lord!” he cried that day.   (1.0)
-   And Jesus stopped and heard him there —   (1.0)
-   He always stops to hear a prayer.   (1.0)
-   Ten men were healed; then only one   (0.99)
- X Came running back when all was done.   (0.54)
-   He thanked the Lord with all his heart —   (1.0)
-   A grateful word’s a lovely start.   (1.0)
-   When Mary wept and hope was thin,   (1.0)
-   And heavy sorrow settled in,   (1.0)
-   Then Jesus wept beside her too —   (1.0)
-   He knows your tears; He cries with you.   (1.0)
-
-## Then Jesus Gave
-   In a garden, dark and still,   (1.0)
-   He knelt and prayed, “Thy will, Thy will.”   (1.0)
-   He carried every ache and tear,   (1.0)
-   So when you’re sad, He’s always near.   (1.0)
-   Upon the cross He loved us through   (1.0)
-   And said, “Forgive — they never knew.”   (1.0)
-   When we do wrong and want to mend,   (1.0)
-   He lifts it off — He is our Friend.   (1.0)
-   The stone rolled back; the morning came —   (1.0)
-   He rose and called out Mary’s name.   (1.0)
-   Because of Him we live together,   (1.0)
-   With Heavenly Father, home forever.   (1.0)
-
-## You Are His
-   You are not what the world might say —   (1.0)
-   Not just a stumble, not yesterday.   (1.0)
-   Not what you have, not what you wear,   (1.0)
-   But a child of Heavenly Father’s care.   (1.0)
-   A spirit precious, known above,   (1.0)
-   A little wonder wrapped in love.   (1.0)
-   The Holy Ghost is whispering near,   (1.0)
-   A still, small voice your heart can hear.   (1.0)
-   When you are scared, when you’re alone,   (1.0)
-   He’ll teach you truth and guide you home.   (0.88)
-   Like Mary sitting at His feet,   (1.0)
-   You can listen — His voice is sweet.   (1.0)
-
-## Drift, Little Traveler
-   So drift, little traveler, soft and slow,   (0.96)
-   With all the friends and stories you know.   (0.95)
- X Beau’s brave heart, Scout’s seeking eye,   (0.59)
- ~ Willow’s warm hug, Wren’s gentle why —   (0.6)
- X Four little friends who walked with you   (0.6)
-   Through New Testament stories, kind and true.   (0.93)
-   From Bethlehem’s star to the empty tomb,   (1.0)
-   We’ll dream of them beneath the moon.   (1.0)
-
-## Goodnight, Friends
-   Goodnight Beau, goodnight Scout,   (0.97)
-   Goodnight friends both in and out.   (0.99)
-   Goodnight Willow, goodnight Wren,   (0.97)
-   We will travel here again.   (1.0)
-   Close your eyes and say a prayer —   (1.0)
-   Heavenly Father’s always there.   (1.0)
-
-## Sleep Tight
-   Mom and Dad love you deep, love you wide,   (1.0)
-   And Heavenly Father stays by your side.   (1.0)
-   Jesus loves you every day,   (1.0)
-   The Holy Ghost can light your way.   (1.0)
-   Sleep tight, sweet child, you’re never alone —   (0.82)
-   You’re loved in heaven; you’re loved at home.   (0.82)
+ ~ When waves grew wild, young Peter knew   (0.66)
+ X That Jesus’ hand would pull him through.   (0.56)
+ X When Paul and Silas sat in chains,   (0.46)
+ X They sang out loud through all their pains.   (0.49)
+ X So when you feel a big storm near,   (0.52)
+ ~ Heavenly Father calms your fear.   (0.73)
 
 === what was heard ===
-[   5.3-   6.4] Hush now,
-[   6.5-   7.5] traveler,
-[   7.6-   9.7] the day is done.
-[  10.2-  12.8] The moon is up,
-[  12.9-  15.0] the stars have come.
-[  15.6-  18.1] Your pillow soft,
-[  18.2-  20.4] your covers deep.
-[  20.8-  25.9] A comfy nest for little sleep.
-[  26.6-  30.9] Mom and Dad are nearby too,
-[  31.4-  36.3] with hearts that watch the whole night through.
-[  36.8-  42.1] And One who loves you even more is closer than your bedroom
-[  42.2-  42.7] door.
-[  42.8-  45.5] Heavenly Father knows your name.
-[  46.5-  49.9] You were there long before you came.
-[  50.0-  53.5] You're loved for who you are inside,
-[  54.0-  59.2] with loving arms stretched open wide.
-[  60.0-  60.8] Good night,
-[  61.0-  61.3] Bo.
-[  62.7-  63.4] Good night,
-[  63.5-  65.2] Scout.
-[  65.3-  66.0] Good night,
-[  66.2-  70.1] friends both in and out.
-[  70.6-  71.4] Good night,
-[  71.5-  72.0] Willow.
-[  72.1-  72.7] Good night,
-[  72.8-  73.2] Wren.
-[  73.4-  76.3] We will travel here again.
-[  76.7-  81.6] Close your eyes and say a prayer.
-[  82.2-  86.8] Heavenly Father's always there.
-[  87.4-  91.8] Bo the Brave has stories true.
-[  92.3-  93.3] Big heart,
-[  93.5-  94.8] brave start,
-[  94.9-  97.1] that's me and you.
-[  97.7- 100.1] When waves grew wild,
-[ 100.2- 106.6] young Peter knew that Jesus' hand would pull him through.
-[ 107.3- 110.7] When Paul and Silas sat in chains,
-[ 110.8- 114.7] they sang out through all their pains.
-[ 114.8- 118.4] So when you feel a big storm near,
-[ 119.2- 122.7] Heavenly Father calms your fear.
-[ 123.6- 125.5] Scout the Seeker,
-[ 125.7- 127.9] curious and free.
-[ 128.5- 130.5] Look and see,
-[ 130.6- 132.8] what could it be?
-[ 133.5- 136.8] A star arose both bright and new,
-[ 137.3- 141.0] and led the Wise Men to Jesus with you.
-[ 141.4- 144.4] Zacchaeus climbed a sycamore tree,
-[ 144.5- 148.9] a small man hoping he might see.
-[ 149.6- 151.7] When something's hard,
-[ 151.8- 154.0] when roads feel long,
-[ 154.1- 154.8] look up,
-[ 154.9- 155.7] dear one,
-[ 155.8- 158.4] His light is strong.
-[ 160.2- 164.9] Willow the Warm wraps tight and slow.
-[ 165.5- 166.3] Warm hugs,
-[ 166.4- 167.5] warm hearts,
-[ 167.7- 169.8] wherever we go.
-[ 170.3- 175.5] Like the kind man on the road who stayed beside a stranger
-[ 175.6- 176.9] unafraid.
-[ 177.4- 182.4] Like the father running down the lane who welcomed home his son
-[ 182.6- 183.2] again.
-[ 183.7- 188.7] When hearts feel small and tears come down,
-[ 189.3- 194.4] Heavenly Father's love is all around.
-[ 195.9- 198.4] Wren the Wanderer,
-[ 198.6- 200.7] gentle and slow.
-[ 201.2- 205.8] Pause and ponder what a wonder we know.
-[ 206.6- 207.6] Like Mary,
-[ 207.8- 210.7] still with wondering eyes,
-[ 210.7- 215.3] who cupped His word and pondered why.
-[ 215.8- 220.4] Like Nicodemus in the night who came with questions,
-[ 220.5- 221.6] seeking light.
-[ 222.0- 225.7] When questions come and answers hide,
-[ 226.2- 230.1] the Holy Ghost can whisper inside.
-[ 231.7- 232.6] Good night,
-[ 232.8- 233.3] Bo.
-[ 233.4- 234.1] Good night,
-[ 234.3- 234.7] Scout.
-[ 234.8- 235.4] Good night,
-[ 235.6- 239.1] friends both in and out.
-[ 239.6- 240.4] Good night,
-[ 240.5- 241.3] Willow.
-[ 241.4- 242.1] Good night,
-[ 242.2- 242.7] Wren.
-[ 242.8- 245.7] We will travel here again.
-[ 246.2- 251.0] Close your eyes and say a prayer.
-[ 251.6- 256.2] Heavenly Father's always there.
-[ 258.0- 262.9] A baby slept on quiet hay,
-[ 263.0- 266.7] while shepherds watched their fields that day.
-[ 267.2- 271.8] The angels filled the sky with song.
-[ 271.9- 277.4] Heavenly Father's promise waited long.
-[ 277.8- 283.2] The Wise Men came from far away and knelt beside the King's
-[ 283.3- 284.8] manger lay.
-[ 285.0- 288.4] When you feel small or far from home,
-[ 288.6- 291.9] Heavenly Father sees you're not alone.
-[ 292.4- 294.4] The winds came up,
-[ 294.6- 297.1] the waves were steep.
-[ 297.6- 302.2] But Jesus lay in peaceful sleep.
-[ 302.2- 303.4] He rose and said,
-[ 303.5- 307.4] "Peace be still," and sea and sky obeyed His will.
-[ 307.5- 311.6] A boy brought loaves and fishes small.
-[ 312.0- 317.1] Not nearly near enough for all.
-[ 317.5- 322.3] But Jesus blessed the gift he gave,
-[ 322.8- 327.8] and thousands ate beside the wave.
-[ 328.8- 335.5] Little lamb had wandered far beneath the quiet evening star.
-[ 336.0- 340.5] The shepherds searched the hillsides through.
-[ 340.6- 344.6] That's how the Savior looks for you.
-[ 346.8- 349.8] Bartimaeus called beside the way,
-[ 349.9- 350.7] "Have mercy,
-[ 350.9- 354.1] Lord," he cried that day.
-[ 354.6- 357.1] And Jesus stopped and heard him there.
-[ 357.2- 360.7] He always stops to hear a prayer.
-[ 361.3- 363.1] Ten men were healed,
-[ 363.1- 369.9] then only- Done.
-[ 370.4- 374.0] He thanked the Lord with all his heart.
-[ 374.4- 376.7] A grateful words,
-[ 376.9- 379.7] a lovely start.
-[ 380.8- 388.4] When Mary wept and hope was thin and heavy sorrow settled in,
-[ 388.9- 393.7] then Jesus wept beside her too.
-[ 394.3- 396.4] He knows your tears,
-[ 396.5- 398.9] He cries with you.
-[ 399.5- 402.1] In a garden dark and still,
-[ 402.2- 404.3] He knelt and prayed,
-[ 404.4- 405.6] "Thy will,
-[ 405.7- 410.0] Thy will." He carried every ache and tear,
-[ 410.2- 412.2] so when you're sad,
-[ 412.4- 414.9] He's always near.
-[ 415.5- 416.7] Upon the cross,
-[ 416.7- 418.6] He loved us through and said,
-[ 418.7- 419.3] "Forgive,
-[ 419.4- 425.5] they never knew." When we do wrong and want to mend,
-[ 426.0- 428.2] He lifts it off,
-[ 428.3- 430.9] He is our friend.
-[ 431.3- 433.4] The stone rolled back,
-[ 433.6- 436.2] the morning came.
-[ 436.6- 441.4] He rose and called out Mary's name.
-[ 441.9- 444.0] Because of Him,
-[ 444.2- 449.6] we live together with Heavenly Father,
-[ 450.1- 452.2] home forever.
-[ 452.8- 457.2] You are not what the world might say.
-[ 457.6- 460.1] Not just a stumble,
-[ 460.2- 462.5] not yesterday.
-[ 462.9- 465.2] Not what you have,
-[ 465.3- 467.6] not what you wear,
-[ 468.2- 473.2] but a child of Heavenly Father's care.
-[ 473.7- 476.4] A spirit precious,
-[ 476.5- 478.6] known above.
-[ 479.0- 483.8] A little wonder wrapped in love.
-[ 484.3- 487.7] The Holy Ghost is whispering near.
-[ 488.2- 488.9] A still,
-[ 489.1- 491.7] small voice your heart can hear.
-[ 492.5- 494.1] When you are scared,
-[ 494.2- 495.4] when you're alone,
-[ 495.5- 499.5] He'll speak to truth and guide you home.
-[ 500.0- 502.9] Like Mary sitting at His feet,
-[ 503.1- 503.9] you can listen,
-[ 504.0- 505.5] His voice is sweet.
-[ 505.6- 508.0] Drift little traveler,
-[ 508.3- 514.0] soft and slow with all the friends and stars you know.
-[ 514.6- 515.5] Bus trails,
-[ 515.6- 517.0] coyote skies,
-[ 517.1- 519.4] keep hot with sleep,
-[ 519.5- 520.0] quants,
-[ 520.1- 522.7] crowd chance worth thy post,
-[ 522.9- 523.4] wag,
-[ 523.5- 524.7] dress well,
-[ 524.8- 526.3] dilly way.
-[ 526.8- 527.4] Why,
-[ 527.5- 527.9] quote,
-[ 527.9- 529.0] we lack with you,
-[ 529.1- 532.7] New Testament stories kind and true.
-[ 534.5- 537.1] From Bethlehem's star to the empty tomb,
-[ 537.1- 541.4] we'll dream of them beneath the moon.
-[ 541.9- 542.6] Good night,
-[ 542.7- 543.3] Beau.
-[ 544.1- 545.1] Good night,
-[ 545.2- 545.9] Scout.
-[ 546.0- 546.5] Good night,
-[ 546.7- 549.5] friends both in and out.
-[ 550.0- 550.5] Good night,
-[ 550.7- 551.9] Willow.
-[ 552.0- 553.1] Good night,
-[ 553.3- 553.9] Wren.
-[ 554.0- 557.2] We will travel here again.
-[ 557.7- 562.1] Close your eyes and say a prayer.
-[ 562.6- 567.8] Heavenly Father's always there.
-[ 568.5- 571.7] Mom and Dad love you deep,
-[ 571.9- 573.8] love you wide.
-[ 574.1- 579.2] And Heavenly Father stays by your side.
-[ 579.8- 582.1] Jesus loves you every day.
-[ 582.2- 585.5] The Holy Ghost can light your way.
-[ 585.9- 587.0] Sweet child,
-[ 587.1- 589.7] you're never alone.
-[ 590.2- 596.5] The loved in Heaven lays love at home.music bed: quiet moments 11.0 dB under the singing; 0.1% near silence
+[   1.4-   3.4] Hush little traveler,
+[   3.5-   5.5] the day is done.
+[   7.2-   8.9] The moon is up,
+[   9.2-  10.9] the stars have come.
+[  13.1-  15.0] Your pillow soft,
+[  15.1-  16.7] your covers deep.
+[  18.5-  22.7] Lock the cast for little sleep.
+[  24.1-  31.8] Mom and Dad are nearby too with hearts that watch the whole
+[  32.0-  34.1] night through.
+[  35.3-  41.6] And one who loves you even more is closer than your bedroom
+[  41.7-  42.7] door.
+[  46.7-  49.4] He knew it long before you came.
+[  49.5-  55.5] You're loved for who you are inside with loving arms stretched open
+[  55.6-  56.6] wide.
+[  58.4-  59.1] Good night,
+[  59.2-  59.6] Bo.
+[  59.7-  60.3] Good night,
+[  60.4-  61.1] Scout.
+[  61.2-  61.8] Good night,
+[  61.9-  65.9] friends both in and out.
+[  67.0-  67.6] Good night,
+[  67.7-  68.2] Willow.
+[  68.2-  68.9] Good night,
+[  69.1-  69.6] Wren.
+[  69.8-  72.5] We will travel here again.
+[  72.6-  76.8] Close your eye and say a prayer.
+[  77.6-  81.0] Heavenly Father's always there.
+[  81.3-  85.1] Bo the Brave has stories true.
+[  85.2-  86.1] Big heart,
+[  86.2-  87.3] brave start,
+[  87.4-  89.1] that's me and you.
+[  89.6-  93.1] Always grew wild when we were new.
+[  93.9-  97.3] Adventures for one tadpole.
+[  98.4- 101.6] For it all inside the sun and shine.
+[ 102.3- 104.6] We'll see our babies fly.
+[ 104.7- 106.1] That's your call.
+[ 106.2- 109.7] Feel me for real.
+[ 109.9- 111.1] We are one.
+[ 111.2- 119.7] Have some good rock your feet.music bed: quiet moments 12.3 dB under the singing; 4.3% near silence
 
-key G minor; voice 221 Hz; loudest 1.00
+key F major; voice None Hz; loudest 0.97
