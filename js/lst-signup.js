@@ -120,7 +120,7 @@
            Payhip." The code is a Payhip coupon; it goes to checkout with them (in the address,
            and shown on screen to type into Payhip's coupon box, which always works). */
         (FREE_FOR_NOW ? '' :
-          '<input id="ts-code" placeholder="Coupon code (optional)" autocomplete="off" autocapitalize="characters" style="' + IN + 'text-transform:uppercase;letter-spacing:0.04em;">') +
+          '<input id="ts-code" placeholder="Coupon or gift code (optional)" autocomplete="off" autocapitalize="characters" style="' + IN + 'text-transform:uppercase;letter-spacing:0.04em;">') +
         (FREE_FOR_NOW
           ? '<p style="font-size:0.85rem;color:var(--ink-62);line-height:1.5;margin:0.2rem 0 0.6rem;"><b style="color:var(--ink);">The Lantern is free while it is new.</b> Every story, song and study is included with your account, and no card is asked for.</p>'
           : '<p id="ts-terms" style="font-size:0.8rem;color:var(--ink-62);line-height:1.5;margin:0.2rem 0 0.6rem;"></p>') +
@@ -212,6 +212,25 @@
     }
     var codeEl = el("ts-code");
     var code = codeEl ? String(codeEl.value || "").trim().replace(/\s+/g, "") : "";
+    /* GIFT CODES (Levi, 1 Nov 2026): a code the owner made opens everything free, with no card.
+       Try it as a gift first; a code the account does not know goes on to Payhip as a coupon. */
+    if (code && res && res.data && res.data.session) {
+      try {
+        var gr = await sb.rpc("lst_gift_redeem", { gift: code });
+        if (!gr.error) {
+          err.style.color = "var(--gold-ink)";
+          err.textContent = "\ud83c\udf81 Your gift code worked. Everything is open \u2014 here and in the app with this email.";
+          if (window.LSTAuth && LSTAuth.refresh) { try { LSTAuth.refresh(); } catch (e) {} }
+          setTimeout(function () { window.location.href = "account.html"; }, 1400);
+          return;
+        }
+        if (!/not found/i.test(gr.error.message || "")) {
+          if (btn) btn.disabled = false;
+          err.textContent = gr.error.message;
+          return;
+        }
+      } catch (e) {}
+    }
     var go = withEmail(PAYHIP[plan], email) + (code ? "&coupon=" + encodeURIComponent(code) : "");
     if (code) {
       /* Payhip's checkout has its own box for a coupon. Say the code plainly, copy it, and let

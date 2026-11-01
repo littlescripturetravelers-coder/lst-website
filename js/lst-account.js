@@ -76,13 +76,26 @@
       "Kept on this device, the same as in the app.</p>";
   }
 
+  /* GIFT CODES (Levi, 1 Nov 2026): type the code you were given and everything opens, here and in
+     the app, for this email. */
+  function giftBox() {
+    return '<div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;">' +
+      '<input id="ac-gift" type="text" autocomplete="off" autocapitalize="characters" placeholder="Gift code" ' +
+        'style="text-transform:uppercase;padding:.6rem .8rem;border-radius:10px;border:1px solid var(--edge-22);background:var(--fill-06);color:var(--ink);font-size:1rem;min-width:10rem;flex:1;">' +
+      '<button type="button" class="mp-btn mp-btn-gold" id="ac-gift-go">Use code</button></div>' +
+      '<p id="ac-gift-said" style="margin:.4rem 0 0;font-size:.9rem;color:var(--ink-55);">Typed it? Everything opens on the website and in the app when you sign in with this email.</p>';
+  }
+
   function signedInView() {
     var a = auth();
     var isAdmin = a.isAdmin && a.isAdmin();
     var open = a.isSubscriber();
 
+    var gifted = a.hasGift && a.hasGift();
     var status = isAdmin
       ? '<span class="mp-badge mp-badge-w">Admin</span> Full access, no subscription needed'
+      : gifted
+        ? '<span class="mp-badge mp-badge-w">Gift</span> Free with a gift code &mdash; the whole library is unlocked'
       : open
         ? '<span class="mp-badge mp-badge-w">Open</span> The whole library is unlocked'
         : '<span class="mp-badge">Free</span> Sample stories only';
@@ -93,6 +106,7 @@
         row("Subscription", status) +
         row("Your things", "Journal, family stories and subscription are shared with the app &mdash; " +
             "sign in there with this same email and everything is already waiting.") +
+        (!open && !isAdmin ? row("Have a gift code?", giftBox()) : "") +
         row("Your Lantern", faithPicker()) +
         row("Colour theme", themePicker()) +
         (window.LSTScrLinks ? row("Scripture links", window.LSTScrLinks.pickerHtml()) : "") +
@@ -104,7 +118,7 @@
         '<a class="mp-btn" href="virtue-library.html#family-stories" style="text-decoration:none;">&#128106; Family Stories</a>' +
       "</div>" +
 
-      (open && !isAdmin
+      (open && !isAdmin && !gifted
         ? '<p style="color:var(--ink-55);font-size:.92rem;line-height:1.7;margin:1.5rem 0 0;">' +
           'Need to stop? <a href="cancel.html" style="color:var(--gold-ink);">Here is exactly how to cancel</a> ' +
           '&mdash; it takes about a minute and you do it yourself.</p>'
@@ -165,6 +179,20 @@
     if (window.LSTTheme && window.LSTTheme.place) window.LSTTheme.place();
     var out = document.getElementById("ac-out");
     if (out) out.addEventListener("click", function () { auth().signOut(); });
+
+    var gg = document.getElementById("ac-gift-go");
+    if (gg && auth().redeemGift) {
+      gg.addEventListener("click", function () {
+        var box = document.getElementById("ac-gift"), said = document.getElementById("ac-gift-said");
+        var code = box ? box.value.trim() : "";
+        if (!code) { if (said) said.textContent = "Type your gift code first."; return; }
+        gg.disabled = true; if (said) said.textContent = "Checking\u2026";
+        auth().redeemGift(code).then(function (r) {
+          gg.disabled = false;
+          if (!r.ok && said) said.textContent = r.error;
+        });
+      });
+    }
 
     var fs = document.getElementById("ac-faith");
     if (fs && window.LSTData && window.LSTData.faith) {

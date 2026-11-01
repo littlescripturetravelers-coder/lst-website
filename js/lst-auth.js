@@ -160,6 +160,27 @@
       .catch(function () { admin = false; return false; });
   }
 
+  /* GIFT CODES (Levi, 1 Nov 2026: "I need to give a code to family members so they can log into the
+     app for free" ... "And my website as well"). A person who typed a gift code the owner made
+     (My Account here, or the web app's Account) reads everything free while the code stays on.
+     The database decides (lst_gift_mine / lst_user_is_subscribed, the app's migration 0046). */
+  var gift = false;
+  function lookupGift() {
+    gift = false;
+    if (!sb || !user) return Promise.resolve(false);
+    return sb.rpc("lst_gift_mine").then(function (res) {
+      gift = !!(res && !res.error && res.data && res.data.active);
+      return gift;
+    }).catch(function () { gift = false; return false; });
+  }
+  function redeemGift(code) {
+    if (!sb || !user) return Promise.resolve({ ok: false, error: "Please sign in first." });
+    return sb.rpc("lst_gift_redeem", { gift: String(code || "") }).then(function (res) {
+      if (res.error) return { ok: false, error: res.error.message || "That code did not work." };
+      return refresh().then(function () { announce(); return { ok: true }; });
+    }).catch(function () { return { ok: false, error: "Something went wrong. Please try again." }; });
+  }
+
   function lookupTier() {
     if (!sb || !user) { tier = null; admin = false; return Promise.resolve(null); }
 
@@ -181,8 +202,8 @@
           .then(function (r2) { return readRows(r2) || "free"; });
       })
       .then(function (t) {
-        return lookupAdmin().then(function (isAdmin) {
-          tier = (isAdmin || FREE_FOR_NOW) ? "subscriber" : t;
+        return lookupGift().then(function () { return lookupAdmin(); }).then(function (isAdmin) {
+          tier = (isAdmin || FREE_FOR_NOW || gift) ? "subscriber" : t;
           return tier;
         });
       })
@@ -302,6 +323,8 @@
     isSubscriber: function () { return tier === "subscriber"; },
     freeForNow: function () { return FREE_FOR_NOW; },
     isAdmin: function () { return admin; },
+    hasGift: function () { return gift; },
+    redeemGift: function (code) { return redeemGift(code); },
     tier: function () { return tier; },
     resolved: function () { return resolved; },
 
