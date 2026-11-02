@@ -1043,7 +1043,8 @@ window.LST_LIBRARY = {
   {
    "book": 11,
    "month": "November",
-   "title": "Morning by Morning"
+   "title": "Morning by Morning",
+   "amazon": "https://www.amazon.com/Morning-Testament-Kids-Bible-Stories/dp/B0HPTRXL7G"
   },
   {
    "book": 12,
