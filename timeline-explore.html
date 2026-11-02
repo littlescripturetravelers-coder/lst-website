@@ -2392,14 +2392,19 @@ function clusterNights(){
      this scale. Merging anything looser turned whole books into a single marker
      and threw away the one thing a timeline is for: when it happened. Stories
      that are near but distinct get their own marker and are stacked instead. */
-  var out=[],GAP=26;
+  /* ONE MARKER PER BOOK (Levi, 2 Nov 2026: "I'm not seeing any of the New Testament scripture traveler
+     stories on the timeline"): the New Testament's stories all happen within a few years, so merging every
+     story near a year made one "185 stories" coin that hid twelve books. Stories are merged only with their
+     own book's, so each book shows as its own named marker, stacked above the others in the same years. */
+  var out=[],GAP=26,lastBy={},tk=tonightKey();
   for(var i=0;i<all.length;i++){
-    var last=out[out.length-1], it=all[i];
-    var tk=tonightKey(), isTonight=!!(tk && nightId(it.bk,it.n)===tk);
+    var it=all[i], bkey=it.bk.id||it.bk.n||it.bk.t, last=lastBy[bkey];
+    var isTonight=!!(tk && nightId(it.bk,it.n)===tk);
     /* tonight's story stands alone, whatever shares its year */
     if(last && !last.tonight && !isTonight && it.x-last.x0<GAP){ last.items.push(it); last.x=(last.x0+it.x)/2; }
-    else { var c={x:it.x,x0:it.x,items:[it],tonight:isTonight}; out.push(c); if(isTonight) TONIGHT={n:it.n,bk:it.bk,cluster:c}; }
+    else { var c={x:it.x,x0:it.x,items:[it],tonight:isTonight}; out.push(c); if(!isTonight) lastBy[bkey]=c; if(isTonight) TONIGHT={n:it.n,bk:it.bk,cluster:c}; }
   }
+  out.sort(function(a,b){ return a.x-b.x; });
   try{ var tb=document.getElementById("ej-tonight"); if(tb) tb.style.display=TONIGHT?"":"none"; }catch(e){}
   return out;
 }
@@ -5012,12 +5017,19 @@ function buildTL(){
   // LST BOOK STORIES LAYER
   if(AL["lstbook"]&&typeof LST_BOOKS!=="undefined"){
     var lbBase=laneY("lstbook"),lbSpine=TLH/2,lbAbove=(lbBase<lbSpine);
+    /* books whose years overlap (the New Testament's twelve) get a row each, so every name can be read */
+    var barEnds=[], barRow={};
+    LST_BOOKS.slice().sort(function(a,b){ return yx(a.s)-yx(b.s); }).forEach(function(b0){
+      var l0=yx(b0.s), r0=l0+Math.max(150,yx(b0.e)-yx(b0.s))+4, k=-1;
+      for(var q=0;q<barEnds.length;q++){ if(barEnds[q]<=l0){ k=q; break; } }
+      if(k<0){ barEnds.push(r0); k=barEnds.length-1; } else barEnds[k]=r0;
+      barRow[b0.id||b0.n||b0.t]=k; });
     for(var bi=0;bi<LST_BOOKS.length;bi++){
       var bk=LST_BOOKS[bi];
       // book span bar
-      var bx=yx(bk.s),bw=Math.max(30,yx(bk.e)-yx(bk.s));
+      var bx=yx(bk.s),bw=Math.max(150,yx(bk.e)-yx(bk.s)),brow=barRow[bk.id||bk.n||bk.t]||0;
       var bar=document.createElement("div");
-      bar.style.cssText="position:absolute;left:"+bx+"px;top:"+(lbBase-26-((LANE_PLAN.lstbook&&LANE_PLAN.lstbook.rows||1)-1)*laneStep("lstbook"))+"px;width:"+bw+"px;height:15px;border-radius:8px;background:linear-gradient(90deg,rgba(245,197,24,.30),rgba(217,162,39,.18));border:1px solid rgba(245,197,24,.65);cursor:pointer;z-index:20;display:flex;align-items:center;justify-content:center;overflow:hidden;";
+      bar.style.cssText="position:absolute;left:"+bx+"px;top:"+(lbBase-26-((LANE_PLAN.lstbook&&LANE_PLAN.lstbook.rows||1)-1)*laneStep("lstbook")-brow*19*(lbAbove?1:-1))+"px;width:"+bw+"px;height:15px;border-radius:8px;background:linear-gradient(90deg,rgba(245,197,24,.30),rgba(217,162,39,.18));border:1px solid rgba(245,197,24,.65);cursor:pointer;z-index:20;display:flex;align-items:center;justify-content:center;overflow:hidden;";
       var bl=document.createElement("div");
       bl.style.cssText="font-family:var(--font-display);font-weight:700;font-size:8px;color:#F5C518;white-space:nowrap;pointer-events:none;padding:0 6px;";
       bl.textContent=decodeT("\u2726 "+bk.t+" \u00B7 "+bk.month);
@@ -5055,7 +5067,7 @@ function buildTL(){
         "font-family:var(--font-display);font-weight:700;font-size:9px;color:#FFE27A;text-align:center;"+
         "text-shadow:0 1px 6px rgba(0,0,0,1),0 0 12px rgba(0,0,0,.9);line-height:1.15;"+
         "pointer-events:none;z-index:29;";
-      cLbl.textContent=many?(cl.items.length+" stories"):decodeT(cl.items[0].n.t);
+      cLbl.textContent=many?decodeT(cl.items[0].bk.t+" \u00B7 "+cl.items.length+" stories"):decodeT(cl.items[0].n.t);
       world.appendChild(cLbl);
       if(cl.tonight){
         /* the first time tonight's story is drawn, the view flies to it */

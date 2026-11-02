@@ -157,6 +157,8 @@
   }
   window.openOut = function (url) { if (!url) { toast("That one is not linked yet."); return; } window.open(url, "_blank", "noopener"); };
   window.openNightStory = function (n) { if (n && n.date) location.href = "story.html?date=" + encodeURIComponent(n.date); };
+  /* a story of one of the month's books beside its verses (Levi, 2 Nov 2026): its page on the shelf */
+  window.openLibraryStory = function (id) { if (id) location.href = "read.html?id=" + encodeURIComponent(id); };
   window.openColoringBook = function (k) { location.href = "coloring-books.html" + (k ? "#cb-" + encodeURIComponent(k) : ""); };
   /* the Travelers' pictures, from the website's own images */
   window.A = function (name) { return "images/" + name; };
