@@ -259,6 +259,11 @@
               n.night ? "Night " + n.night : "", n.title]
              .filter(Boolean).map(esc).join(" &middot; ") });
     }
+    /* just the narration, without the picture book (Levi, 3 Nov 2026), in the site's story player */
+    if (n.bookHtml && n.date && window.LSTStoryVoice) {
+      items.push({ ico: "&#127911;", listen: n.date, title: "Listen to Tonight&rsquo;s Story",
+        sub: "Read aloud by Eli or Hannah &middot; just the narration", plain: n.title || "Tonight\u2019s story" });
+    }
     if (n.songHtml || n.songAudio) {
       items.push({ ico: "&#127925;", href: "lullaby.html" + d,
         title: "Tonight&rsquo;s Lullaby &mdash; Lyrics &amp; Music",
@@ -276,6 +281,10 @@
 
     return '<h3 class="rd-label" style="margin-top:2.4rem;">&#127769; Tonight&rsquo;s resources</h3>' +
       '<div class="rd-kit">' + items.map(function (it) {
+        if (it.listen) return '<button type="button" class="rd-kit-btn lst-listen-kit" data-lst-listen-story="' + esc(it.listen) + '" data-lst-title="' + esc(it.plain) + '">' +
+          '<span class="rd-kit-ico">' + it.ico + "</span>" +
+          "<span><span class=\"rd-kit-title\">" + it.title + "</span>" + '<span class="rd-kit-sub">' + it.sub + "</span></span>" +
+          '<span class="rd-kit-arrow">&#9654;</span></button>';
         return '<a class="rd-kit-btn' + (it.primary ? " rd-kit-primary" : "") + '" href="' +
           esc(it.href) + '"' + (/^https?:/i.test(it.href) ? ' target="_blank" rel="noopener"' : "") + ">" +
           '<span class="rd-kit-ico">' + it.ico + "</span>" +

@@ -109,6 +109,75 @@
     "#lstVoiceBig .ln{font:600 17px/1.5 Nunito,sans-serif;opacity:.55;padding:5px 0;cursor:pointer;transition:opacity .15s}" +
     "#lstVoiceBig .ln.lnow{opacity:1}#lstVoiceBig .ww{border-radius:4px}" +
     "#lstVoiceBig .ww.wnow{background:rgba(245,197,24,.42);text-decoration:underline;text-decoration-color:#F5C518;text-decoration-thickness:3px;text-underline-offset:4px}";
+  /* THE FOLD (as the app's, Levi, 3 Nov 2026: "collapsible into a very small player and dragged to different
+     spots"): the bar folds into a round button with the time read as a gold ring; drag it anywhere, it parks on
+     the nearer side at that height and is back there next time (lst:chip); a tap opens the bar again, its little
+     badge plays and pauses. */
+  BCSS +=
+    "#lstVoiceBar .ic,#lstVoiceBar .badge{display:none}" +
+    "#lstVoiceBar .fold{background:transparent;color:#fff;padding:4px;flex:none;display:flex}#lstVoiceBar .fold svg{width:18px;height:18px}" +
+    "#lstVoiceBar.chip{width:58px;height:58px;padding:0;border-radius:50%;left:auto;right:auto;bottom:auto;transform:none;gap:0;" +
+    "justify-content:center;overflow:visible;touch-action:none;cursor:grab;border:0;transition:left .22s cubic-bezier(.22,1,.36,1),top .22s cubic-bezier(.22,1,.36,1)}" +
+    "#lstVoiceBar.chip.on{transform:none}#lstVoiceBar.chip:not(.on){display:none}#lstVoiceBar.chip.dragging{transition:none;opacity:.94;cursor:grabbing}" +
+    "#lstVoiceBar.chip .mid,#lstVoiceBar.chip .pp,#lstVoiceBar.chip .up,#lstVoiceBar.chip .x,#lstVoiceBar.chip .fold{display:none}" +
+    "#lstVoiceBar.chip .ic{display:flex;width:48px;height:48px;border-radius:50%;background:#1B2D5F;align-items:center;justify-content:center;color:#fff;position:relative;z-index:1}" +
+    "#lstVoiceBar.chip .ic svg{width:26px;height:26px}" +
+    "#lstVoiceBar.chip::before{content:'';position:absolute;inset:0;border-radius:50%;padding:3px;" +
+    "background:conic-gradient(#F5C518 calc(var(--p,0)*1%),rgba(255,255,255,.2) 0);" +
+    "-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}" +
+    "#lstVoiceBar.chip .badge{display:flex;position:absolute;right:-6px;bottom:-6px;width:26px;height:26px;border-radius:50%;background:#F5C518;" +
+    "color:#1B2D5F;font-size:10px;z-index:2;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.35);padding:0}" +
+    "#lstFullFab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(max(16px,env(safe-area-inset-bottom)) + 126px);" +
+    "z-index:2147483600;width:46px;height:46px;border-radius:50%;border:0;background:#fff;color:#1B2D5F;cursor:pointer;" +
+    "box-shadow:0 8px 22px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center}#lstFullFab svg{width:22px;height:22px}" +
+    ".lst-listen{display:inline-flex;align-items:center;gap:.45em;cursor:pointer}.lst-listen svg{width:1.25em;height:1.25em}";
+  var FOLD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/><path d="M3 21l7-7"/></svg>';
+  var chip = { on: false, side: "right", y: 0.6 }, SZ = 58;
+  try { var kc = JSON.parse(localStorage.getItem("lst:chip") || "null"); if (kc) { chip.on = !!kc.on; chip.side = kc.side === "left" ? "left" : "right"; chip.y = Math.max(0, Math.min(1, Number(kc.y) || 0)); } } catch (e) {}
+  function chipSave() { try { localStorage.setItem("lst:chip", JSON.stringify(chip)); } catch (e) {} }
+  function chipBounds() { var H = innerHeight, W = document.documentElement.clientWidth || innerWidth; return { W: W, minTop: 12, maxTop: Math.max(12, H - SZ - 16), m: 10 }; }
+  function chipPlace() {
+    var b = el("lstVoiceBar"); if (!b || !b.classList.contains("chip")) return;
+    var k = chipBounds();
+    b.style.top = Math.round(k.minTop + (k.maxTop - k.minTop) * chip.y) + "px";
+    b.style.left = (chip.side === "left" ? k.m : k.W - SZ - k.m) + "px";
+  }
+  function fold(on) {
+    var b = el("lstVoiceBar"); if (!b) return;
+    chip.on = on; chipSave();
+    b.classList.toggle("chip", on);
+    if (on) chipPlace(); else { b.style.left = ""; b.style.top = ""; b.classList.remove("dragging"); }
+  }
+  function chipWire(b) {
+    var d = null;
+    b.addEventListener("pointerdown", function (e) {
+      if (!b.classList.contains("chip") || (e.target.closest && e.target.closest(".badge"))) return;
+      var r = b.getBoundingClientRect();
+      d = { id: e.pointerId, x0: e.clientX, y0: e.clientY, ox: e.clientX - r.left, oy: e.clientY - r.top, moved: false };
+      try { b.setPointerCapture(e.pointerId); } catch (x) {}
+      if (e.cancelable) e.preventDefault();
+    });
+    b.addEventListener("pointermove", function (e) {
+      if (!d || e.pointerId !== d.id) return;
+      if (!d.moved && Math.hypot(e.clientX - d.x0, e.clientY - d.y0) < 6) return;
+      d.moved = true; b.classList.add("dragging");
+      var k = chipBounds();
+      b.style.left = Math.max(0, Math.min(k.W - SZ, e.clientX - d.ox)) + "px";
+      b.style.top = Math.max(k.minTop, Math.min(k.maxTop, e.clientY - d.oy)) + "px";
+    });
+    var up = function (e) {
+      if (!d || e.pointerId !== d.id) return;
+      var was = d; d = null; b.classList.remove("dragging");
+      try { b.releasePointerCapture(e.pointerId); } catch (x) {}
+      if (!was.moved) { if (e.type === "pointerup") fold(false); return; }
+      var k = chipBounds(), r = b.getBoundingClientRect();
+      chip.side = (r.left + SZ / 2) < k.W / 2 ? "left" : "right";
+      chip.y = k.maxTop > k.minTop ? Math.max(0, Math.min(1, (r.top - k.minTop) / (k.maxTop - k.minTop))) : 0;
+      chipSave(); chipPlace();
+    };
+    b.addEventListener("pointerup", up); b.addEventListener("pointercancel", up);
+    addEventListener("resize", chipPlace);
+  }
   var CHEV = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9.5 6 6 6-6"/></svg>';
   var UP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14.5 6-6 6 6"/></svg>';
   var BACK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5V2.5L8.2 5.4 12 8.3V5.8a6.2 6.2 0 1 1-6.2 6.2"/></svg>';
@@ -121,12 +190,18 @@
     if (!b) {
       if (!el("lstVoiceCss2")) { var c = document.createElement("style"); c.id = "lstVoiceCss2"; c.textContent = BCSS; document.head.appendChild(c); }
       b = document.createElement("div"); b.id = "lstVoiceBar"; b.setAttribute("role", "region"); b.setAttribute("aria-label", "Story read aloud");
-      b.innerHTML = '<button class="pp" type="button" aria-label="Play">&#9654;</button>' +
+      b.innerHTML = '<span class="ic" aria-hidden="true">' + ICON + '</span>' +
+        '<button class="badge" type="button" aria-label="Play">&#9654;</button>' +
+        '<button class="pp" type="button" aria-label="Play">&#9654;</button>' +
         '<div class="mid" role="button" aria-label="Open the full player"><div class="t">Read aloud</div><input type="range" min="0" max="1000" value="0" aria-label="Where in the story">' +
         '<div class="msg"></div></div>' +
         '<button class="up" type="button" aria-label="Open the full player" title="Open the full player">' + UP + '</button>' +
+        '<button class="fold" type="button" aria-label="Make the player small" title="Make it small">' + FOLD + '</button>' +
         '<button class="x" type="button" aria-label="Close">&#10005;</button>';
       document.body.appendChild(b);
+      b.querySelector(".fold").addEventListener("click", function (e) { e.stopPropagation(); fold(true); });
+      b.querySelector(".badge").addEventListener("click", function (e) { e.stopPropagation(); toggle(); });
+      chipWire(b); if (chip.on) fold(true);
       b.querySelector(".pp").addEventListener("click", toggle);
       b.querySelector(".x").addEventListener("click", stop);
       b.querySelector(".up").addEventListener("click", openBig);
@@ -208,10 +283,12 @@
     var b = bar(), f = el("lstVoiceFab"), g = el("lstVoiceBig"), on = !!(audio && !audio.paused);
     var pp = on ? "&#10074;&#10074;" : "&#9654;", lbl = on ? "Pause" : "Play";
     b.querySelector(".pp").innerHTML = pp; b.querySelector(".pp").setAttribute("aria-label", lbl);
+    b.querySelector(".badge").innerHTML = pp; b.querySelector(".badge").setAttribute("aria-label", lbl);
     if (f) { f.classList.toggle("on", on); f.classList.toggle("wait", busy); }
     var known = audio && isFinite(audio.duration) && !startPart, title = key.title || "The story";
     if (known) {
       b.querySelector("input").value = Math.round(1000 * audio.currentTime / audio.duration);
+      b.style.setProperty("--p", (100 * audio.currentTime / audio.duration).toFixed(1));
       b.querySelector(".t").textContent = title + " · " + fmt(audio.currentTime) + " / " + fmt(audio.duration);
     } else b.querySelector(".t").textContent = title;
     if (g) {
@@ -466,14 +543,66 @@
     };
   })();
 
+  function ensureCss() {
+    if (!el("lstVoiceCss")) { var st = document.createElement("style"); st.id = "lstVoiceCss"; st.textContent = CSS; document.head.appendChild(st); }
+    if (!el("lstVoiceCss2")) { var c = document.createElement("style"); c.id = "lstVoiceCss2"; c.textContent = BCSS; document.head.appendChild(c); }
+  }
+  function setKey(k) {
+    k = k || {};
+    if (k.id && !k.book) k.book = slugFor(k.id);
+    if (!k.story && !k.book) return false;
+    ensureCss();
+    if (key && (key.story !== k.story || key.book !== k.book)) stop();
+    key = k; return true;
+  }
+  /* FULL SCREEN (Levi, 3 Nov 2026: "make the website have full screen for the scripture stories"): a corner button
+     above the headphones fills the whole screen with the story (the browser's own full screen), and back. A phone
+     whose browser has no full screen (an iPhone) does not show it: the story already covers its whole window. */
+  var EXPAND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/></svg>';
+  var SHRINK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4"/><path d="M15 4v5h5"/><path d="M9 20v-5H4"/><path d="M15 20v-5h5"/></svg>';
+  function fsEl() { return document.fullscreenElement || document.webkitFullscreenElement || null; }
+  function fsCan() { var d = document.documentElement; return !!(document.fullscreenEnabled || document.webkitFullscreenEnabled) && !!(d.requestFullscreen || d.webkitRequestFullscreen); }
+  function fsToggle() {
+    var d = document.documentElement;
+    if (fsEl()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+    var r = (d.requestFullscreen || d.webkitRequestFullscreen).call(d, { navigationUI: "hide" }); if (r && r.catch) r.catch(function () {});
+  }
+  function fsPaint() { var f = el("lstFullFab"); if (!f) return; var on = !!fsEl(); f.innerHTML = on ? SHRINK : EXPAND;
+    f.setAttribute("aria-label", on ? "Leave full screen" : "Full screen"); f.title = on ? "Leave full screen" : "Full screen"; }
+  function fullFab() {
+    if (el("lstFullFab") || !fsCan()) return;
+    var f = document.createElement("button"); f.id = "lstFullFab"; f.type = "button"; document.body.appendChild(f);
+    f.addEventListener("click", function () { var going = !fsEl(); try { localStorage.setItem("lst:fullscreen", going ? "on" : "off"); } catch (e) {} fsToggle(); });
+    /* the first tap on the story (a page turned, the headphones) fills the screen by itself, as the app is: only the
+       story, its buttons and the player; a family that left full screen with the button is not put back */
+    var auto = false, pref = "on"; try { pref = localStorage.getItem("lst:fullscreen") || "on"; } catch (e) {}
+    var first = function (e) { if (auto || pref === "off" || fsEl()) return; if (e && e.target && e.target.closest && e.target.closest("#lstFullFab")) return; auto = true; fsToggle(); };
+    document.addEventListener("click", first, true);
+    var hook = function () { var fr = el("lst-book"); try { if (fr && fr.contentDocument && !fr.contentDocument.__lstFs) { fr.contentDocument.__lstFs = 1; fr.contentDocument.addEventListener("click", first, true); } } catch (e) {} };
+    hook(); var fr0 = el("lst-book"); if (fr0) fr0.addEventListener("load", hook); setTimeout(hook, 1500);
+    document.addEventListener("fullscreenchange", fsPaint); document.addEventListener("webkitfullscreenchange", fsPaint);
+    fsPaint();
+  }
+  /* JUST THE NARRATION (Levi, 3 Nov 2026: "open up just the narration on the website as well just like the app"):
+     a "Listen" button (data-lst-listen-story="<date>" or data-lst-listen-id="<shelf id>", data-lst-title) plays the
+     story's own recording in the same player, without opening the picture book; the Transcript holds its words. */
+  var HP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4.5" height="6.5" rx="1.6"/><rect x="16.5" y="14" width="4.5" height="6.5" rx="1.6"/></svg>';
+  function listen(k) {
+    var same = key && audio && ((k.story && k.story === key.story) || (k.id && slugFor(k.id) === key.book) || (k.book && k.book === key.book));
+    if (same) { bar().classList.add("on"); toggle(); return; }
+    if (!setKey({ story: k.story, book: k.book, id: k.id, title: k.title })) return;
+    play(0);
+  }
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest && e.target.closest("[data-lst-listen-story],[data-lst-listen-id]"); if (!t) return;
+    e.preventDefault();
+    listen({ story: t.getAttribute("data-lst-listen-story") || "", id: t.getAttribute("data-lst-listen-id") || "", title: t.getAttribute("data-lst-title") || "" });
+  });
+
   window.LSTStoryVoice = {
     mount: function (k) {
-      k = k || {};
-      if (k.id && !k.book) k.book = slugFor(k.id);
-      if (!k.story && !k.book) return;
-      if (!el("lstVoiceCss")) { var st = document.createElement("style"); st.id = "lstVoiceCss"; st.textContent = CSS; document.head.appendChild(st); }
-      if (key && (key.story !== k.story || key.book !== k.book)) stop();
-      key = k;
+      if (!setKey(k)) return;
+      fullFab();
       var f = el("lstVoiceFab");
       if (!f) {
         f = document.createElement("button"); f.id = "lstVoiceFab"; f.type = "button";
@@ -482,7 +611,15 @@
         f.addEventListener("click", function () { if (!audio && !busy) play(0); else { bar().classList.add("on"); toggle(); } });
       }
     },
+    listen: listen,
+    /* a "Listen" button for a page's own markup */
+    button: function (o) {
+      return '<button type="button" class="lst-listen ' + (o.cls || "") + '"' + (o.story ? ' data-lst-listen-story="' + o.story + '"' : "") +
+        (o.id ? ' data-lst-listen-id="' + o.id + '"' : "") + ' data-lst-title="' + String(o.title || "").replace(/"/g, "&quot;") + '"' +
+        (o.style ? ' style="' + o.style + '"' : "") + ">" + HP + "<span>" + (o.label || "Listen to the story") + "</span></button>";
+    },
     stop: stop
   };
+  ensureCss();
   window.addEventListener("pagehide", function () { try { if (audio) audio.pause(); } catch (e) {} });
 })();

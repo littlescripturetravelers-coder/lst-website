@@ -273,6 +273,7 @@
           (s.teachingNote
             ? '<div class="rd-card"><h3 class="rd-label">When to reach for this one</h3><p>' +
               esc(s.teachingNote) + "</p></div>" : "") +
+          (window.LSTStoryVoice ? '<p style="margin:0 0 1rem;">' + window.LSTStoryVoice.button({ id: s.id, title: s.title || told.title || "", cls: "mp-btn mp-btn-gold", label: "Listen to this story" }) + "</p>" : "") +
           '<div id="sf-host"></div>' +
           '<p class="rd-aside"><a class="bs-illus" href="read.html?id=' +
             encodeURIComponent(s.id) + '">&#10022; Open this story on its own page</a></p>' +

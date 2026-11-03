@@ -2583,6 +2583,7 @@ cite strong { color: var(--gold-ink); display: block; }
 .rd-kit-primary .rd-kit-sub { color: var(--gold-ink-65); }
 .rd-kit-arrow { margin-left: auto; color: var(--ink-55); flex-shrink: 0; }
 .rd-kit-btn:hover .rd-kit-arrow { color: var(--gold-ink); }
+button.rd-kit-btn { width: 100%; font: inherit; color: inherit; text-align: left; cursor: pointer; }
 
 /* ============================================================================
    WHAT THE NIGHT LEAVES BEHIND — the writing half of Tonight's Story.

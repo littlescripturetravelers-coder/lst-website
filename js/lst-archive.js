@@ -124,7 +124,9 @@
        (story.html), the same page the Morning Lantern and the LST Library open. */
     var book = r.bookHtml
       ? '<a class="mp-btn mp-btn-gold" href="story.html?date=' + encodeURIComponent(r.date) + '" ' +
-        'style="text-decoration:none;display:inline-block;margin:0 0 1.4rem;">&#128214; Read that night&rsquo;s story</a>'
+        'style="text-decoration:none;display:inline-block;margin:0 0 1.4rem;">&#128214; Read that night&rsquo;s story</a>' +
+        (window.LSTStoryVoice ? " " + window.LSTStoryVoice.button({ story: r.date, title: r.title || "", cls: "mp-btn", label: "Listen to that night\u2019s story",
+          style: "display:inline-flex;margin:0 0 1.4rem .4rem;" }) : "")
       : "";
 
     return '<article class="mp-card rd">' + head +
