@@ -225,23 +225,30 @@ def _swap(html, old, new, chr_=False):
     for oo in {old, _ent(old), _god(old), _ent(_god(old)), _straight(old)}:
         if oo and oo in html: html = html.replace(oo, nn)
     return html
+def guard_exempt(slug, folder):
+    """Why a night is never rated (its words go out as written), or "" when it is rated.
+    THE OWNER'S OWN WORDS (Levi, 23 Oct 2026): a folder holding KEEP-WORDS. A night whose words were
+    written ahead and already rated 9 or 10 (lantern/child-stories/<slug>.json with "score" >= 9; Levi,
+    29 Oct 2026, the November stories), so the book, the app and the website keep the same words."""
+    if os.path.exists(os.path.join(folder, "KEEP-WORDS")):
+        return "KEEP-WORDS - the owner's own words"
+    _cs = os.path.join(os.path.dirname(os.path.abspath(__file__)), "child-stories", slug + ".json")
+    try:
+        if os.path.exists(_cs) and int(json.load(open(_cs, encoding="utf-8")).get("score") or 0) >= 9:
+            return "child-stories words already rated 9+"
+    except Exception:
+        pass
+    return ""
+
 def guard_night(slug, folder, lds, chr_, book_html):
     """Returns (lds, chr_, book_html, score, changed)."""
     if not book_html or not GUARD:
         return lds, chr_, book_html, None, False
     # THE OWNER'S OWN WORDS (Levi, 23 Oct 2026: "redo the scripture story of the night for today to match the exact
     # words and story" of the book): a night whose folder holds KEEP-WORDS goes out word for word, never rewritten.
-    if os.path.exists(os.path.join(folder, "KEEP-WORDS")):
-        print("    guard rail: KEEP-WORDS - the owner's own words, not rewritten"); return lds, chr_, book_html, None, False
-    # A night whose words were written ahead and already rated 9 or 10 (lantern/child-stories/<slug>.json with
-    # "score" >= 9; Levi, 29 Oct 2026, the November stories) goes out as written, so the book, the app and the
-    # website keep the same words.
-    _cs = os.path.join(os.path.dirname(os.path.abspath(__file__)), "child-stories", slug + ".json")
-    try:
-        if os.path.exists(_cs) and int(json.load(open(_cs, encoding="utf-8")).get("score") or 0) >= 9:
-            print("    guard rail: child-stories words already rated 9+, not rewritten"); return lds, chr_, book_html, None, False
-    except Exception:
-        pass
+    why = guard_exempt(slug, folder)
+    if why:
+        print(f"    guard rail: {why}, not rewritten"); return lds, chr_, book_html, None, False
     m = re.search(r'const STORY = (\{.*?\});\n', book_html, flags=re.S)
     if not m:
         return lds, chr_, book_html, None, False
@@ -580,6 +587,10 @@ def main():
                 tries = (prior_marker.get("guard_tries") or 0) + 1
                 mk["guard_tries"] = tries
                 if score >= 9 or tries >= 2: mk["guarded"] = True
+            elif GUARD and guard_exempt(slug, folder):
+                # its words are never rated, so it is done: without this it was published again
+                # on every run (3 Nov 2026: twelve October nights, every three hours)
+                mk["guarded"] = True
             json.dump(mk, fh, indent=2)
 
     # The voices. Every night in the account that has words to read but no
