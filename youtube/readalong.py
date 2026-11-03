@@ -367,9 +367,12 @@ def build_endcard(work, card, audio_wav, cues, out_mp4):
         pg.add_init_script(f'window.CARD = {json.dumps(card)};')
         pg.goto('file://' + os.path.join(work, 'endcard.html')); pg.wait_for_timeout(1500)
         Cj = json.dumps({k: v + 0.6 for k, v in cues.items()})
+        last_key, frame = None, None
         for i in range(n):
-            pg.evaluate(f'render({i / FPS},{Cj})')
-            a = np.asarray(Image.open(io.BytesIO(pg.screenshot(type='png'))).convert('RGB'))
+            key = pg.evaluate(f'render({i / FPS},{Cj})')
+            if key != last_key or frame is None:
+                frame = np.asarray(Image.open(io.BytesIO(pg.screenshot(type='png'))).convert('RGB')); last_key = key
+            a = frame
             if i < fade_in: a = (a * (i / fade_in)).astype(np.uint8)
             if i > n - fade_out: a = (a * ((n - i) / fade_out)).astype(np.uint8)
             ff.stdin.write(a.tobytes())
