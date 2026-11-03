@@ -17,7 +17,7 @@ PUB = os.path.join(HERE, 'published.json')
 def log(*a): print('[upload]', *a, flush=True)
 
 def first_sentences(text, n=2):
-    s = re.split(r'(?<=[.!?][”"’]?)\s+', text.strip())
+    s = re.split(r'(?<=[.!?])\s+|(?<=[.!?][”"’])\s+', text.strip())
     return ' '.join(s[:n])
 
 def build_metadata(m):
