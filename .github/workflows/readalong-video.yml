@@ -1,39 +1,38 @@
-# DAILY READ-ALONG VIDEO -> YOUTUBE
+# DAILY READ-ALONG VIDEO -> EVERY PLATFORM
 #
-# Levi, 3 Nov 2026: "I want this to become a recurring [task] that happens each day with the
-# morning lantern's scripture of the day that automatically gets uploaded to YouTube."
+# Levi, 3 Nov 2026: "I want this to become a recurring [task] that happens each day with the morning
+# lantern's scripture of the day that automatically gets uploaded to YouTube" ... "create these and post
+# them to each account each day" ... "include this in the Lantern Daily Posts ... scheduled task".
 #
-# Every morning this takes the story the Morning Lantern published for today (lantern/*/night.json,
-# publish_date = today in Denver), turns its five printed pages into a narrated page-flip book video
-# with the end card (Amazon paperback, app, website, like/share/subscribe in Levi's own voice), and
-# uploads it to YouTube as "made for kids". See youtube/README.md.
+# The evening before, this job takes the story the Morning Lantern publishes TOMORROW
+# (lantern/*/night.json, publish_date) and makes:
+#   - the narrated page-flip book video (16:9, with the end card in Levi's own voice),
+#   - a 68-second 9:16 cut with captions (Reels, TikTok, Shorts, Facebook, Pinterest), its cover, a thumbnail,
+#   - youtube/posts/<date>.json: every platform's title, caption, tags and the files' public links.
+# The files are kept as a GitHub release ("readalong-<date>", public links Metricool can fetch).
+# The "Lantern Daily Posts" scheduled task (3:41 AM Mountain) reads the posts file and schedules everything
+# in Metricool: YouTube video + Short, Instagram Reel, Facebook Reel, TikTok and Pinterest.
 #
-# - Nothing to upload yet?  Until the YouTube secrets exist, the video is still made every day and
-#   kept on the run page (Artifacts) for 14 days, so nothing is lost.
 # - To stop it: add an empty file youtube/PAUSED (delete it to start again).
-# - A night is never uploaded twice: youtube/published.json remembers each one.
-name: Read-along video (YouTube)
+# - A day is never made twice: youtube/posts/<date>.json says it is done.
+name: Read-along video (daily posts)
 
 on:
   schedule:
-    - cron: '15 11 * * *'     # 4:15 AM Mountain Standard Time (5:15 AM in summer time)
-    - cron: '15 16 * * *'     # safety net 5 hours later (does nothing if today's is already up)
+    - cron: '15 3 * * *'      # 8:15 PM Mountain (standard time): tomorrow's video
+    - cron: '15 6 * * *'      # 11:15 PM Mountain: safety net, tomorrow's video if the first did not run
+    - cron: '15 10 * * *'     # 3:15 AM Mountain: last safety net, today's video if still missing
   workflow_dispatch:
     inputs:
       date:
-        description: 'Publish date YYYY-MM-DD (blank = today in Denver)'
+        description: 'Publish date YYYY-MM-DD (blank = tomorrow in the evening, today in the morning)'
         required: false
         default: ''
-      privacy:
-        description: 'YouTube privacy for this upload'
+      remake:
+        description: 'Make it again even if that day is already done'
         type: choice
-        options: [public, unlisted, private]
-        default: public
-      upload:
-        description: 'Upload to YouTube (no = make the video only)'
-        type: choice
-        options: ['yes', 'no']
-        default: 'yes'
+        options: ['no', 'yes']
+        default: 'no'
 
 permissions:
   contents: write
@@ -45,7 +44,7 @@ concurrency:
 jobs:
   video:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
 
@@ -53,18 +52,21 @@ jobs:
         id: night
         run: |
           D="${{ github.event.inputs.date }}"
-          [ -z "$D" ] && D=$(TZ=America/Denver date +%F)
+          if [ -z "$D" ]; then
+            H=$(TZ=America/Denver date +%H)
+            if [ "$H" -ge 12 ]; then D=$(TZ=America/Denver date -d tomorrow +%F); else D=$(TZ=America/Denver date +%F); fi
+          fi
           echo "date=$D" >> "$GITHUB_OUTPUT"
-          F=$(grep -l "\"publish_date\": \"$D\"" lantern/*/night.json | head -1 || true)
           if [ -f youtube/PAUSED ]; then echo "youtube/PAUSED is present - stopping."; echo "go=no" >> "$GITHUB_OUTPUT"; exit 0; fi
-          if [ -z "$F" ]; then echo "No Morning Lantern night is dated $D - nothing to make."; echo "go=no" >> "$GITHUB_OUTPUT"; exit 0; fi
+          F=$(grep -l "\"publish_date\": \"$D\"" lantern/*/night.json | head -1 || true)
+          if [ -z "$F" ]; then echo "No Morning Lantern night is dated $D yet - nothing to make."; echo "go=no" >> "$GITHUB_OUTPUT"; exit 0; fi
           SLUG=$(python3 -c "import json;print(json.load(open('$F'))['slug'])")
           echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
-          if [ -f youtube/published.json ] && python3 -c "import json,sys;sys.exit(0 if '$SLUG' in json.load(open('youtube/published.json')) else 1)"; then
-            echo "$SLUG is already on YouTube - nothing to do."; echo "go=no" >> "$GITHUB_OUTPUT"; exit 0
+          if [ -f "youtube/posts/$D.json" ] && [ "${{ github.event.inputs.remake }}" != "yes" ]; then
+            echo "$D ($SLUG) is already made."; echo "go=no" >> "$GITHUB_OUTPUT"; exit 0
           fi
           echo "go=yes" >> "$GITHUB_OUTPUT"
-          echo "Today ($D): $SLUG"
+          echo "Making $D: $SLUG"
 
       - uses: actions/setup-python@v5
         if: steps.night.outputs.go == 'yes'
@@ -89,48 +91,51 @@ jobs:
           [ -f kokoro-v1.0.onnx ] || curl -sSLf -o kokoro-v1.0.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
           [ -f voices-v1.0.bin ]  || curl -sSLf -o voices-v1.0.bin  https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
 
-      - name: Make the video
+      - name: Make the videos
         if: steps.night.outputs.go == 'yes'
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
         run: python youtube/readalong.py --date "${{ steps.night.outputs.date }}"
 
-      - name: Keep the video on this run's page
-        if: steps.night.outputs.go == 'yes' && !cancelled()
+      - name: Publish the files (public links for Metricool)
+        if: steps.night.outputs.go == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D="${{ steps.night.outputs.date }}"; S="${{ steps.night.outputs.slug }}"; TAG="readalong-$D"
+          cd youtube/out
+          gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
+          gh release create "$TAG" --title "Read-along $D: $S" --notes "Daily read-along video for $D ($S). Made by .github/workflows/readalong-video.yml." \
+            --latest=false "$S.mp4" "$S-reel.mp4" "$S-reel-cover.jpg" "$S-thumb.jpg"
+          # keep three weeks of files; older days are already posted
+          gh release list --limit 100 --json tagName --jq '.[].tagName' | grep '^readalong-' | sort | head -n -21 | while read t; do
+            gh release delete "$t" --yes --cleanup-tag || true
+          done
+
+      - name: Write the day's posts
+        if: steps.night.outputs.go == 'yes'
+        run: |
+          D="${{ steps.night.outputs.date }}"
+          python youtube/social_posts.py "${{ steps.night.outputs.slug }}" youtube/out \
+            "https://github.com/${{ github.repository }}/releases/download/readalong-$D"
+          echo "### Read-along for $D ready" >> "$GITHUB_STEP_SUMMARY"
+          echo "https://github.com/${{ github.repository }}/releases/tag/readalong-$D" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep a copy on this run's page
+        if: steps.night.outputs.go == 'yes' && failure()
         uses: actions/upload-artifact@v4
         with:
           name: readalong-${{ steps.night.outputs.slug }}
-          path: |
-            youtube/out/*.mp4
-            youtube/out/*.jpg
-            youtube/out/*-meta.json
-          retention-days: 14
+          path: youtube/out/*.mp4
+          retention-days: 7
 
-      - name: Upload to YouTube
-        if: steps.night.outputs.go == 'yes' && github.event.inputs.upload != 'no'
-        env:
-          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
-          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
-          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
-          YT_PLAYLIST_ID: ${{ secrets.YT_PLAYLIST_ID }}
-          YT_PRIVACY: ${{ github.event.inputs.privacy || 'public' }}
-        run: |
-          set +e
-          python youtube/upload_youtube.py "${{ steps.night.outputs.slug }}"
-          code=$?
-          if [ $code -eq 4 ]; then
-            echo "::warning::YouTube is not connected yet - today's video is under Artifacts on this run. See youtube/README.md."
-            exit 0
-          fi
-          exit $code
-
-      - name: Remember what was uploaded
+      - name: Record it
         if: steps.night.outputs.go == 'yes' && !cancelled()
         run: |
           git config user.name  "lantern-bot"
           git config user.email "lantern-bot@users.noreply.github.com"
-          for f in youtube/published.json youtube/endcard-audio; do if [ -e "$f" ]; then git add "$f"; fi; done
+          for f in youtube/posts youtube/endcard-audio; do if [ -e "$f" ]; then git add "$f"; fi; done
           if git diff --cached --quiet; then echo "Nothing to record."; exit 0; fi
-          git commit -m "Read-along video: ${{ steps.night.outputs.slug }}"
+          git commit -m "Read-along video: ${{ steps.night.outputs.date }} ${{ steps.night.outputs.slug }}"
           for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
           exit 1

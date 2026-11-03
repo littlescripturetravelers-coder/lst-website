@@ -236,6 +236,13 @@ def render_pdf_pages(pdf_path, outdir):
         pix = p.get_pixmap(dpi=200, clip=clip)
         im = Image.frombytes('RGB', (pix.width, pix.height), pix.samples).resize((1720, 1720), Image.LANCZOS)
         im.save(os.path.join(outdir, f'p{i+1}.png'))
+        if i == 1:   # the story page's text boxes (for the vertical cut's camera), in 1720px page pixels
+            k = 1720 / (r.width - 2 * bleed); bl = []
+            for b in p.get_text('blocks'):
+                t = b[4].strip()
+                if len(t) < 3 or 'Little Scripture Travelers' in t: continue
+                bl.append({'x0': (b[0] - bleed) * k, 'y0': (b[1] - bleed) * k, 'x1': (b[2] - bleed) * k, 'y1': (b[3] - bleed) * k, 'text': t})
+            json.dump(bl, open(os.path.join(os.path.dirname(outdir), 'blocks2.json'), 'w'))
 
 def month_cover(mon, idx):
     own = os.path.join(HERE, 'assets', mon, 'front.png')
@@ -496,6 +503,11 @@ def main():
             'app': APP_URL, 'site': SITE_URL, 'endcard_voice': have.get('voice'),
             'story_text': ' '.join(t for t, _ in S['p2']), 'chapters': chapters}
     json.dump(meta, open(os.path.join(args.out, f'{slug}-meta.json'), 'w'), indent=1, ensure_ascii=False)
+    # the 9:16 cut for Reels, TikTok, Shorts, Facebook and Pinterest (title page + story page + Levi's like/subscribe line)
+    json.dump({'cues': have['cues'], 'total': have['total']}, open(os.path.join(work, 'endcues.json'), 'w'))
+    subprocess.run([sys.executable, os.path.join(HERE, 'vertical.py'), work, os.path.join(args.out, f'{slug}-reel.mp4'),
+                    ec_wav, os.path.join(work, 'endcues.json'), title, scripture], check=True)
+    log('vertical cut made')
     log('done:', final); return 0
 
 if __name__ == '__main__':
