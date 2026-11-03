@@ -308,14 +308,17 @@ def nights_for_today():
 
 
 def main(argv):
-    slugs, force = [], False
+    slugs, force, fresh = [], False, set()
     i = 0
     while i < len(argv):
         a = argv[i]
         if a == "--from-file":
             i += 1
             if i < len(argv) and os.path.exists(argv[i]):
-                slugs += [l.strip() for l in open(argv[i], encoding="utf-8") if l.strip()]
+                got = [l.strip() for l in open(argv[i], encoding="utf-8") if l.strip()]
+                # just sung: an old recording's line times never fit a new take (Write It on My Heart,
+                # sung again on 3 Nov 2026, kept the first take's times), so these are always timed afresh
+                slugs += got; fresh.update(got)
         elif a == "--today":
             slugs += nights_for_today()
         elif a == "--force":
@@ -333,7 +336,7 @@ def main(argv):
         return 0
     done = 0
     for s in todo:
-        if time_night(s, force):
+        if time_night(s, force or s in fresh):
             done += 1
     print(f"timed {done} of {len(todo)}")
     return 0
