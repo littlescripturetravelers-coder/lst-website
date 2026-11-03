@@ -64,7 +64,7 @@ subscribe.html          # pricing / plans
 our-story.html          # founder story
 travelers.html          # the four characters (Beau, Scout, Willow, Wren)
 books.html              # monthly book list (card data is a JS array near the bottom)
-watch.html              # video page
+watch.html              # video page: EVERY channel video, live — Reels & Stories (Shorts tab), then Scripture Reading Videos (Videos tab), from lst-app youtube-feed?all=1
 virtue-library.html     # + virtue-library.js and data/virtue-library.js (content data)
 spiritual-tracker.html  # tracker tool
 privacy.html            # privacy policy (required by App Store + Google Play)

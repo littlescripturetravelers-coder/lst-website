@@ -169,6 +169,77 @@
       border: none;
     }
 
+
+    /* ── Every video: Reels & Stories, then Scripture Reading Videos ── */
+    .vid-grid {
+      display: grid;
+      gap: var(--space-8) var(--space-4);
+      width: 100%;
+      text-align: left;
+    }
+    .vid-grid--reels { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .vid-grid--wide  { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    .vid-card { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+    .vid-card[hidden] { display: none; }
+    .vid-art {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 1px solid rgba(245,197,24,0.22);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #000;
+      cursor: pointer;
+      box-shadow: 0 10px 30px var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .vid-art:hover, .vid-art:focus-visible { transform: translateY(-2px); box-shadow: 0 14px 36px var(--shadow), 0 0 0 2px var(--gold-ink-60); outline: none; }
+    .vid-grid--reels .vid-art { aspect-ratio: 9 / 16; }
+    .vid-grid--wide  .vid-art { aspect-ratio: 16 / 9; }
+    .vid-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .vid-play {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(204,0,0,0.92); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; padding-left: 4px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    }
+    .vid-len {
+      position: absolute; right: 8px; bottom: 8px;
+      background: rgba(0,0,0,0.78); color: #fff;
+      font: 700 0.75rem/1 var(--font-body); padding: 4px 6px; border-radius: 4px;
+    }
+    .vid-frame { position: relative; width: 100%; border-radius: var(--radius-md); overflow: hidden; background: #000; border: 1px solid rgba(245,197,24,0.22); }
+    .vid-grid--reels .vid-frame { aspect-ratio: 9 / 16; }
+    .vid-grid--wide  .vid-frame { aspect-ratio: 16 / 9; }
+    .vid-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .vid-t {
+      font-family: var(--font-body); font-weight: 800; font-size: 0.92rem; line-height: 1.35;
+      color: var(--ink);
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .vid-d { font-family: var(--font-body); font-size: 0.8rem; color: var(--ink-62); }
+    .vid-wait { grid-column: 1 / -1; text-align: center; font-family: var(--font-body); color: var(--ink-70); }
+    .vid-more {
+      margin: var(--space-8) auto 0;
+      display: block;
+      background: transparent;
+      color: var(--gold-ink);
+      border: 2px solid var(--gold-ink-60);
+      border-radius: 999px;
+      padding: 0.65rem 1.6rem;
+      font: 800 1rem var(--font-body);
+      cursor: pointer;
+    }
+    .vid-more[hidden] { display: none; }
+    .vid-more:hover { background: rgba(245,197,24,0.1); }
+    @media (max-width: 480px) {
+      .vid-grid--reels { grid-template-columns: repeat(2, 1fr); gap: var(--space-6) var(--space-3); }
+      .vid-grid--wide  { grid-template-columns: 1fr; }
+    }
+
     /* ── What to expect cards ── */
     .what-to-expect {
       margin-top: var(--space-10);
@@ -535,36 +606,30 @@
   <section class="watch-section" id="latest">
     <div class="section-inner">
 
-      <!-- Latest video -->
-      <div class="video-section">
-        <h2>Latest Video</h2>
-        <div class="video-embed-wrap video-embed-wrap--shorts">
-          <iframe
-            src="https://www.youtube.com/embed/xS5HcpNpBGg"
-            title="Little Scripture Travelers | YouTube Short"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+      <!-- Every video on the channel, read live from YouTube through the youtube-feed
+           function (?all=1): the Shorts tab here, the Videos tab below. A new upload
+           shows up by itself within half an hour. -->
+      <div class="video-section" id="reels">
+        <h2>Reels &amp; Stories</h2>
+        <p class="video-desc">Short scripture stories, Come, Follow Me moments, and ideas for parents. Tap one to watch it right here.</p>
+        <div class="vid-grid vid-grid--reels" id="reelGrid" aria-live="polite">
+          <p class="vid-wait">Finding our newest videos&hellip;</p>
         </div>
+        <button type="button" class="vid-more" id="reelMore" hidden>Show all reels</button>
       </div>
 
-      <div class="star-divider" style="margin: var(--space-14) auto;">✦ &nbsp; ✦ &nbsp; ✦</div>
+      <div class="star-divider" style="margin: var(--space-14) auto;">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
 
-      <!-- More videos -->
-      <div class="video-section">
-        <h2>More Videos</h2>
-        <div class="video-embed-wrap">
-          <iframe
-            src="https://www.youtube.com/embed/RVShfndaUoM"
-            title="Little Scripture Travelers | Bedtime Bible Story for Kids"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+      <div class="video-section" id="readings">
+        <h2>Scripture Reading Videos</h2>
+        <p class="video-desc">The full bedtime scripture stories, read aloud page by page from the book.</p>
+        <div class="vid-grid vid-grid--wide" id="readingGrid" aria-live="polite">
+          <p class="vid-wait">Finding our newest videos&hellip;</p>
         </div>
+        <button type="button" class="vid-more" id="readingMore" hidden>Show all reading videos</button>
       </div>
 
-
-      <div class="star-divider" style="margin: var(--space-14) auto;">✦ &nbsp; ✦ &nbsp; ✦</div>
+      <div class="star-divider" style="margin: var(--space-14) auto;">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
 
       <!-- YouTube channel card -->
       <div class="yt-channel-card">
@@ -682,6 +747,67 @@
     });
   </script>
   <script src="main.js"></script>
+
+<script>
+/* Watch page: every video on the YouTube channel. The list comes from the
+   youtube-feed function (?all=1), which reads the channel's Shorts tab (reels)
+   and Videos tab (the full scripture readings); it is kept for half an hour. */
+(function () {
+  var FEED = 'https://rdbvktqgrwhjucocobua.supabase.co/functions/v1/youtube-feed?all=1';
+  var CHANNEL = 'https://www.youtube.com/@LittleScriptureTravelers';
+  var FIRST = { reels: 12, readings: 6 };
+  function esc(s) { return String(s || '').replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function clean(t) { return String(t || '').replace(/\s*#\w+/g, '').trim() || 'Little Scripture Travelers'; }
+  function card(v, i, first) {
+    return '<div class="vid-card"' + (i >= first ? ' hidden' : '') + '>' +
+      '<button type="button" class="vid-art" data-vid="' + esc(v.id) + '" aria-label="Play ' + esc(clean(v.title)) + '">' +
+        '<img src="' + esc(v.thumb || ('https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg')) + '" alt="" loading="lazy" />' +
+        '<span class="vid-play" aria-hidden="true">&#9654;</span>' +
+        (v.length ? '<span class="vid-len">' + esc(v.length) + '</span>' : '') +
+      '</button>' +
+      '<div class="vid-t">' + esc(clean(v.title)) + '</div>' +
+      (v.ago ? '<div class="vid-d">' + esc(v.ago) + '</div>' : '') +
+    '</div>';
+  }
+  function fill(gridId, moreId, list, first) {
+    var grid = document.getElementById(gridId), more = document.getElementById(moreId);
+    if (!grid) return;
+    if (!list || !list.length) {
+      grid.innerHTML = '<p class="vid-wait">Watch them all on <a href="' + CHANNEL + '" target="_blank" rel="noopener" style="color:var(--gold-ink)">our YouTube channel</a>.</p>';
+      return;
+    }
+    grid.innerHTML = list.map(function (v, i) { return card(v, i, first); }).join('');
+    if (more && list.length > first) {
+      more.hidden = false;
+      more.textContent = more.textContent.replace(/^Show all/, 'Show all ' + list.length);
+      more.onclick = function () {
+        grid.querySelectorAll('.vid-card[hidden]').forEach(function (c) { c.hidden = false; });
+        more.hidden = true;
+      };
+    }
+  }
+  function play(btn) {
+    var id = btn.getAttribute('data-vid');
+    var f = document.createElement('div');
+    f.className = 'vid-frame';
+    f.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
+      '?autoplay=1&playsinline=1&rel=0" title="Little Scripture Travelers video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    btn.replaceWith(f);
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('.vid-art[data-vid]');
+    if (b) play(b);
+  });
+  fetch(FEED).then(function (r) { return r.json(); }).then(function (j) {
+    fill('reelGrid', 'reelMore', j.reels, FIRST.reels);
+    fill('readingGrid', 'readingMore', j.readings, FIRST.readings);
+  }).catch(function () {
+    fill('reelGrid', 'reelMore', [], 0);
+    fill('readingGrid', 'readingMore', [], 0);
+  });
+})();
+</script>
+
 
 <script data-pplx-inline-edit>
 (function () {
