@@ -20,6 +20,19 @@ def first_sentences(text, n=2):
     s = re.split(r'(?<=[.!?])\s+|(?<=[.!?][”"’])\s+', text.strip())
     return ' '.join(s[:n])
 
+def hashtags_for(m, kind='youtube'):
+    """Levi approved these for the read-along (3 Nov 2026); YouTube shows the first three above the title."""
+    ch = re.match(r'^(.*?\d+)', m['scripture']); ch = re.sub(r'[^A-Za-z0-9]', '', ch.group(1) if ch else '')
+    sets = {
+        'youtube': ['ComeFollowMe', 'BibleStoriesForKids', 'BedtimeStory', 'ComeFollowMeForKids', ch, 'KidsBibleStory',
+                    'LDSKids', 'ChristianKids', 'FamilyHomeEvening', 'LittleScriptureTravelers'],
+        'instagram': ['ComeFollowMe', 'ComeFollowMeForKids', 'BibleStoriesForKids', 'BedtimeStory', 'LDSKids', 'ChristianMom',
+                      'FamilyHomeEvening', 'LittleScriptureTravelers'],
+        'tiktok': ['ComeFollowMe', 'BibleStoriesForKids', 'BedtimeStory', 'ChristianMom', 'LittleScriptureTravelers'],
+        'facebook': ['ComeFollowMe', 'BibleStoriesForKids', 'BedtimeStory'],
+    }
+    return ' '.join('#' + t for t in sets[kind] if t)
+
 def build_metadata(m):
     title = f"{m['title']} | Bedtime Scripture Story for Kids | {m['scripture']}"
     if len(title) > 100: title = f"{m['title']} | Bedtime Scripture Story | {m['scripture']}"
@@ -34,7 +47,7 @@ def build_metadata(m):
     lines += [f"📱 Read every story in the Little Scripture Travelers app: {m['app']}",
               f"🌙 Website: {m['site']}", '',
               "👍 If you enjoyed tonight's story, please like, share, and subscribe for more bedtime scripture stories!", '',
-              '#ComeFollowMe #BedtimeStories #BibleStoriesForKids']
+              hashtags_for(m)]
     book_name = re.sub(r'\s*\d.*$', '', m['scripture']).strip()
     chap = re.match(r'^(.*?\d+)', m['scripture']); chap = chap.group(1) if chap else book_name
     tags = ['Little Scripture Travelers', 'bedtime stories', 'bible stories for kids', 'scripture stories for kids',

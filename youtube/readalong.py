@@ -236,6 +236,13 @@ def render_pdf_pages(pdf_path, outdir):
         pix = p.get_pixmap(dpi=200, clip=clip)
         im = Image.frombytes('RGB', (pix.width, pix.height), pix.samples).resize((1720, 1720), Image.LANCZOS)
         im.save(os.path.join(outdir, f'p{i+1}.png'))
+        if i in (1, 2, 3):   # the night's own pictures (for the YouTube thumbnail): story scenes, Traveler, Feeling Moment
+            for im_ in p.get_images(full=True):
+                if not p.get_image_rects(im_[0]): continue
+                info = d.extract_image(im_[0])
+                if info['width'] < 400: continue
+                k_ = len([f for f in os.listdir(os.path.dirname(outdir)) if f.startswith('art-')]) + 1
+                open(os.path.join(os.path.dirname(outdir), f"art-p{i+1}-{k_}.{info['ext']}"), 'wb').write(info['image'])
         if i == 1:   # the story page's text boxes (for the vertical cut's camera), in 1720px page pixels
             k = 1720 / (r.width - 2 * bleed); bl = []
             for b in p.get_text('blocks'):
@@ -508,6 +515,11 @@ def main():
     subprocess.run([sys.executable, os.path.join(HERE, 'vertical.py'), work, os.path.join(args.out, f'{slug}-reel.mp4'),
                     ec_wav, os.path.join(work, 'endcues.json'), title, scripture], check=True)
     log('vertical cut made')
+    # the night's pictures, published beside the videos for the thumbnail (page 2 = story scenes,
+    # page 3 = the Traveler of the Night, page 4 = the Feeling Moment picture)
+    for f in sorted(os.listdir(work)):
+        if f.startswith('art-'):
+            Image.open(os.path.join(work, f)).convert('RGB').save(os.path.join(args.out, f'{slug}-{os.path.splitext(f)[0]}.jpg'), quality=92)
     log('done:', final); return 0
 
 if __name__ == '__main__':

@@ -11,7 +11,7 @@ import json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from upload_youtube import build_metadata, first_sentences
+from upload_youtube import build_metadata, first_sentences, hashtags_for
 
 def main():
     slug, out, base = sys.argv[1], sys.argv[2], sys.argv[3].rstrip('/')
@@ -34,16 +34,16 @@ def main():
         hook,
         "Read along together tonight. The pages turn as the story is read, with bedtime questions at the end.",
         f"Little Scripture Travelers: a story a day that lines up with Come, Follow Me. Full read-along, the app and the {m['month']} paperback: link in bio.",
-        f"#ComeFollowMe #ComeFollowMeForKids #BibleStoriesForKids #BedtimeStory #LDSKids #FamilyHomeEvening #ChristianMom #LittleScriptureTravelers",
+        hashtags_for(m, 'instagram'),
     ] if x)
     fb = '\n\n'.join(x for x in [
         f"Tonight's bedtime scripture story for kids: {title} ({scripture}) 💛",
         hook + " Read along with your little ones, then answer the bedtime questions together.",
         "It goes along with Come, Follow Me, one story for every day.",
         book_line, app_line,
-        "#ComeFollowMe #BibleStoriesForKids #BedtimeStory",
+        hashtags_for(m, 'facebook'),
     ] if x)
-    tiktok = f"Bible story for kids at bedtime: {title} 💛 {chap} for little ones, a Come Follow Me story a day. Full read-along in bio.\n\n#ComeFollowMe #BibleStoriesForKids #BedtimeStory #ChristianMom #LittleScriptureTravelers"
+    tiktok = f"Bible story for kids at bedtime: {title} 💛 {chap} for little ones, a Come Follow Me story a day. Full read-along in bio.\n\n" + hashtags_for(m, 'tiktok')
     pin_title = f"{chap} Bible Story for Kids: {title} (Come Follow Me)"
     if len(pin_title) > 100: pin_title = f"{title}: Bible Story for Kids"
     pin_desc = (f"A read-aloud bedtime Bible story for kids ages 3–8 from {scripture}. {hook} "
@@ -52,7 +52,11 @@ def main():
     posts = {
         'date': m['date'], 'slug': slug, 'title': title, 'scripture': scripture, 'traveler': trav,
         'media': {'full': f'{base}/{slug}.mp4', 'reel': f'{base}/{slug}-reel.mp4',
-                  'reel_cover': f'{base}/{slug}-reel-cover.jpg', 'thumb': f'{base}/{slug}-thumb.jpg'},
+                  'reel_cover': f'{base}/{slug}-reel-cover.jpg', 'thumb': f'{base}/{slug}-thumb.jpg',
+                  # the night's own pictures for the YouTube thumbnail (p2 story scenes, p3 Traveler, p4 Feeling Moment)
+                  'art': [{'page': int(re.search(r'-art-p(\d)', f).group(1)), 'url': f'{base}/{f}'}
+                          for f in sorted(os.listdir(out)) if f.startswith(f'{slug}-art-p') and f.endswith('.jpg')]},
+        'hashtags': {k: hashtags_for(m, k) for k in ('youtube', 'instagram', 'tiktok', 'facebook')},
         'times_mountain': {'reel': '10:00', 'youtube': '16:00', 'pinterest': '20:30'},
         'youtube_full': {'title': yt_title, 'description': yt_desc, 'tags': yt_tags, 'madeForKids': True, 'category': 'EDUCATION'},
         'youtube_short': {'title': short_title, 'description': f"{hook} Full read-along on our channel.\n#ComeFollowMe #BibleStoriesForKids #Shorts",

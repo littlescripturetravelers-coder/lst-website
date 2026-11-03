@@ -26,7 +26,13 @@ the job makes the NEXT day's videos and posts; each morning the **Lantern Daily 
 7. **The posts** (`social_posts.py` → `posts/<date>.json`): YouTube (full video with chapters, and a
    Short), Instagram Reel, Facebook Reel, TikTok, Pinterest video pin — titles, captions, tags, alt text.
    The files are a GitHub release `readalong-<date>` (public links; three weeks are kept).
-8. **Posting.** Lantern Daily Posts schedules them in Metricool, made for kids: the Reel at 10 AM on
+8. **The YouTube thumbnail** (`thumb_seo.py`, Levi, 3 Nov 2026, approved example "Mourning Turned Into Joy"):
+   the night's own pictures (page 4's Feeling Moment picture = the feeling before, page 2's story scene =
+   the feeling after) are published with the videos; each morning the Lantern Daily Posts task picks the
+   two words ("Sad ➜ JOY!"), makes the thumbnail, checks it and puts it on the YouTube video.
+   Hashtags (`hashtags_for()` in upload_youtube.py): YouTube ten (the first three show above the title),
+   Instagram eight, TikTok five, Facebook three.
+9. **Posting.** Lantern Daily Posts schedules them in Metricool, made for kids: the Reel at 10 AM on
    Instagram, Facebook, TikTok and YouTube Shorts; the full YouTube video at 4 PM; Pinterest at 8:30 PM.
 
 | Want to… | Do this |

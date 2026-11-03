@@ -106,7 +106,7 @@ jobs:
           cd youtube/out
           gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
           gh release create "$TAG" --title "Read-along $D: $S" --notes "Daily read-along video for $D ($S). Made by .github/workflows/readalong-video.yml." \
-            --latest=false "$S.mp4" "$S-reel.mp4" "$S-reel-cover.jpg" "$S-thumb.jpg"
+            --latest=false "$S.mp4" "$S-reel.mp4" "$S-reel-cover.jpg" "$S-thumb.jpg" $(ls "$S"-art-p*.jpg 2>/dev/null)
           # keep three weeks of files; older days are already posted
           gh release list --limit 100 --json tagName --jq '.[].tagName' | grep '^readalong-' | sort | head -n -21 | while read t; do
             gh release delete "$t" --yes --cleanup-tag || true
