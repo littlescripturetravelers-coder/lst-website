@@ -322,9 +322,14 @@ jobs:
                   out.append((name or f'Verse {len(out) + 1}', body))
               return out
 
+          # THE SUNG-WORDS RULE (Levi, 3 Nov 2026: "pronounces live wrong ... always make sure all words are
+          # pronounced correctly"): the singer is given each line spelled the way it is said ("lives in me" as
+          # "livs", Job as "Jobe"; lantern/builder/sing_words.py); the page keeps its words, and each take is
+          # still held against the page's words.
+          import sys; sys.path.insert(0, 'lantern/builder'); import sing_words as SW
           def plan_for(meta, v, st, colour):
-              """The song as sections, each with the page's own lines and its share of the time."""
-              secs = sections_of(meta['lyrics'])
+              """The song as sections, each with the page's own lines (spelled for the singer) and its share of the time."""
+              secs = sections_of(SW.sing_lyrics(meta['lyrics']))
               if not secs: return None, 0
               n = sum(len(b) for _, b in secs)
               scale = min(1.0, (MAX_SONG_MS - INTRO_MS - OUTRO_MS) / float(n * PER_LINE_MS))
@@ -392,7 +397,8 @@ jobs:
               length = max(int(meta.get('length_ms', 120000)), plan_ms or 0)
               length = min(length, MAX_SONG_MS)
               prompt = (SPINE.format(voice=VOICES[v], style=STYLES[st]) + ('\n\n' + colour if colour else '') +
-                        "\n\nSing exactly these lyrics, every line, in this order, one voice only:\n\n" + meta['lyrics'].strip())
+                        "\n\nSing exactly these lyrics, every line, in this order, one voice only:\n\n" + SW.sing_lyrics(meta['lyrics']).strip())
+              for a, b in SW.changes(meta['lyrics']): print(f'    sung as said: {a.strip()}  ->  {b.strip()}')
               print(f'{slug}: {("colour: " + colour[:80]) if colour else "no colour written for this night - spine only"}')
               if plan: print(f'    plan: {len(plan["sections"])} sections, {sum(len(x["lines"]) for x in plan["sections"])} lines, {plan_ms // 1000}s')
 
