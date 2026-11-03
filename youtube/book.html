@@ -1,0 +1,150 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#0d1530}
+#stage{position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 52%, rgba(255,214,140,.22), rgba(255,214,140,0) 70%),
+    radial-gradient(ellipse at 50% 40%, #233466 0%, #141f45 55%, #0a1028 100%);}
+#stars{position:absolute;inset:0}
+.star{position:absolute;border-radius:50%;background:#fff6d8}
+#vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%);pointer-events:none}
+#scene{position:absolute;left:0;top:0;width:1920px;height:1080px}
+#book{position:absolute;left:960px;top:110px;width:0;height:860px;perspective:3200px;perspective-origin:0 35%}
+.shadow{position:absolute;top:18px;height:860px;border-radius:6px;background:rgba(0,0,0,.55);filter:blur(22px)}
+.stackR,.stackL{position:absolute;top:0;height:860px;width:860px}
+.stackR{left:0}.stackL{left:-860px}
+.edge{position:absolute;top:0;width:860px;height:860px;background:#efe9da;border:1px solid #cfc6b0;box-sizing:border-box}
+.leaf{position:absolute;left:0;top:0;width:860px;height:860px;transform-style:preserve-3d;transform-origin:0 50%}
+.strip{position:absolute;top:0;height:860px;transform-style:preserve-3d;transform-origin:0 50%}
+.face{position:absolute;inset:0;backface-visibility:hidden;background-size:860px 860px;background-repeat:no-repeat}
+.face.back{transform:rotateY(180deg)}
+.shade{position:absolute;inset:0;background:#000;opacity:0}
+.gloss{position:absolute;inset:0;background:#fff;opacity:0}
+.gutterR{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.28),rgba(0,0,0,.08) 4%,rgba(0,0,0,0) 9%)}
+.gutterL{position:absolute;inset:0;background:linear-gradient(270deg,rgba(0,0,0,.28),rgba(0,0,0,.08) 4%,rgba(0,0,0,0) 9%)}
+.cast{position:absolute;top:0;height:860px;pointer-events:none;opacity:0}
+</style></head>
+<body>
+<div id="stage"><div id="stars"></div></div>
+<div id="scene"><div id="book"></div></div>
+<div id="vignette"></div>
+<script>
+// stars (deterministic)
+let seed=7;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647}
+const st=document.getElementById('stars');
+for(let i=0;i<90;i++){const s=document.createElement('div');s.className='star';const r=rnd()*2.2+.6;
+ s.style.cssText=`left:${rnd()*1920}px;top:${rnd()*1080}px;width:${r}px;height:${r}px;opacity:${.25+rnd()*.55}`;st.appendChild(s)}
+
+const P=860, N=20, SW=P/N;
+const LEAVES=window.BOOK_LEAVES||[['front','p1',true],['p2','p3',false],['p4','p5',false],['sweet','back',true]];
+const book=document.getElementById('book');
+const shadow=document.createElement('div');shadow.className='shadow';book.appendChild(shadow);
+const stackR=document.createElement('div');stackR.className='stackR';book.appendChild(stackR);
+const stackL=document.createElement('div');stackL.className='stackL';book.appendChild(stackL);
+const castR=document.createElement('div');castR.className='cast';castR.style.left='0px';
+const castL=document.createElement('div');castL.className='cast';castL.style.left='-860px';
+const leaves=[];
+LEAVES.forEach(([f,b,rigid],k)=>{
+  const leaf=document.createElement('div');leaf.className='leaf';
+  let parent=leaf; const strips=[];
+  for(let i=0;i<N;i++){
+    const s=document.createElement('div');s.className='strip';
+    s.style.width=(SW+1)+'px';s.style.left=(i==0?0:SW)+'px';
+    const fr=document.createElement('div');fr.className='face front';
+    fr.style.backgroundImage=`url(pages/${f}.png)`;fr.style.backgroundPosition=`${-i*SW}px 0`;
+    const bk=document.createElement('div');bk.className='face back';
+    bk.style.backgroundImage=`url(pages/${b}.png)`;bk.style.backgroundPosition=`${-(P-(i+1)*SW)}px 0`;
+    const g1=document.createElement('div');g1.className='gutterR';g1.style.backgroundSize=`${P}px 100%`;g1.style.backgroundPosition=`${-i*SW}px 0`;g1.style.backgroundRepeat='no-repeat';
+    const g2=document.createElement('div');g2.className='gutterL';g2.style.backgroundSize=`${P}px 100%`;g2.style.backgroundPosition=`${-(P-(i+1)*SW)}px 0`;g2.style.backgroundRepeat='no-repeat';
+    if(!rigid){fr.appendChild(g1);bk.appendChild(g2);}
+    const sh1=document.createElement('div');sh1.className='shade';fr.appendChild(sh1);
+    const gl1=document.createElement('div');gl1.className='gloss';fr.appendChild(gl1);
+    const sh2=document.createElement('div');sh2.className='shade';bk.appendChild(sh2);
+    const gl2=document.createElement('div');gl2.className='gloss';bk.appendChild(gl2);
+    s.appendChild(fr);s.appendChild(bk);parent.appendChild(s);
+    strips.push({el:s,sh1,gl1,sh2,gl2}); parent=s;
+  }
+  const flat=document.createElement('div');flat.className='strip';flat.style.width=P+'px';flat.style.left='0px';
+  const ff=document.createElement('div');ff.className='face front';ff.style.backgroundImage=`url(pages/${f}.png)`;
+  const fb=document.createElement('div');fb.className='face back';fb.style.backgroundImage=`url(pages/${b}.png)`;
+  if(!rigid){const a=document.createElement('div');a.className='gutterR';ff.appendChild(a);const c=document.createElement('div');c.className='gutterL';fb.appendChild(c);}
+  const fsh1=document.createElement('div');fsh1.className='shade';ff.appendChild(fsh1);
+  const fsh2=document.createElement('div');fsh2.className='shade';fb.appendChild(fsh2);
+  flat.appendChild(ff);flat.appendChild(fb);leaf.appendChild(flat);
+  book.appendChild(leaf); leaves.push({el:leaf,strips,rigid,flat,fsh1,fsh2});
+});
+book.appendChild(castR);book.appendChild(castL);
+
+function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
+// state: cur = number of leaves already flipped; t = progress of flipping leaf `cur` (0..1)
+window.setState=function(cur,t){
+  const n=leaves.length;
+  // book horizontal shift: closed front -> centered cover; closed back -> centered back
+  let flippedF=cur+t; // continuous
+  let shift=0;
+  if(flippedF<1) shift=-430*(1-ease(Math.min(1,flippedF)));
+  if(flippedF>n-1) shift=430*ease(flippedF-(n-1));
+  book.style.transform=`translateX(${shift}px)`;
+  const leftCount=Math.min(n,flippedF), rightCount=n-flippedF;
+  // stacks thickness
+  stackR.innerHTML='';stackL.innerHTML='';
+  const rightLeaves=n-cur-(t>0?1:0), leftLeaves=cur;
+  for(let i=Math.min(6,rightLeaves);i>=1;i--){const e=document.createElement('div');e.className='edge';e.style.left=(i*1.6)+'px';e.style.top=(i*1.6)+'px';stackR.appendChild(e)}
+  for(let i=Math.min(6,leftLeaves);i>=1;i--){const e=document.createElement('div');e.className='edge';e.style.left=(-i*1.6)+'px';e.style.top=(i*1.6)+'px';stackL.appendChild(e)}
+  // shadow under book
+  const hasL=leftCount>0.02, hasR=rightCount>0.02;
+  const sl=hasL?-860:0, sr=hasR?860:0;
+  shadow.style.left=(sl+10)+'px';shadow.style.width=(sr-sl-20+12)+'px';
+  leaves.forEach((L,k)=>{
+    let theta, curl=0;
+    if(k<cur){theta=180}else if(k>cur||t<=0){theta=0}else{
+      const e=ease(t); theta=180*e; curl=L.rigid?0:Math.sin(Math.PI*e)*(1-0.25*e);
+    }
+    let z; if(k<cur) z=10+k; else if(k===cur&&t>0) z=100; else z=50-k;
+    L.el.style.zIndex=z;
+    L.el.style.display=(k<cur-1||k>cur+1)?'none':'block';
+    const strips=L.strips;
+    const moving=(k===cur&&t>0);
+    if(!moving||L.rigid){
+      strips[0].el.style.display='none'; L.flat.style.display='block';
+      L.flat.style.transform=`rotateY(${-theta}deg)`;
+      const lit=Math.cos(theta*Math.PI/180);
+      L.fsh1.style.opacity=moving?Math.max(0,0.45*(1-Math.max(0,lit))):0;
+      L.fsh2.style.opacity=moving?Math.max(0,0.45*(1-Math.max(0,-lit))):0;
+      return;
+    }
+    strips[0].el.style.display='block'; L.flat.style.display='none';
+    // simpler robust curl: strip i absolute angle = theta + bendAt(i), increments between strips
+    let prev=0;
+    for(let i=0;i<N;i++){
+      const u=(i+0.5)/N;
+      // free edge lags behind spine motion early (curls back), leads later
+      const bend = curl*55*Math.pow(u,1.5)*(theta<90?-1:1)*(-1);
+      const abs=Math.max(0,Math.min(180,theta + curl*40*Math.pow(u,1.4)*Math.cos(Math.PI*theta/180)*1 + curl*25*Math.pow(u,1.4)));
+      const rel=abs-prev; prev=abs;
+      strips[i].el.style.transform=`rotateY(${-rel}deg)`;
+      const a=abs*Math.PI/180;
+      // lighting: light from front-left-top
+      const lit=Math.cos(a); // 1 flat, 0 edge-on, -1 flipped
+      const sF=Math.max(0,0.42*(1-Math.max(0,lit))) ;
+      const sB=Math.max(0,0.42*(1-Math.max(0,-lit)));
+      strips[i].sh1.style.opacity=(k===cur&&t>0)?sF:0;
+      strips[i].sh2.style.opacity=(k===cur&&t>0)?sB:0;
+      const spec=Math.max(0,Math.sin(a*2))*0.10*curl;
+      strips[i].gl1.style.opacity=(k===cur&&t>0&&abs<90)?spec:0;
+      strips[i].gl2.style.opacity=(k===cur&&t>0&&abs>=90)?spec:0;
+    }
+  });
+  // cast shadows on pages under the turning leaf
+  if(t>0&&t<1){
+    const e=ease(t), s=Math.sin(Math.PI*e);
+    if(e<0.5){castR.style.width='860px';castR.style.opacity=s*0.9;
+      const w=Math.max(40,860*Math.cos(Math.PI*e)); castR.style.background=`linear-gradient(90deg,rgba(0,0,0,.45) 0px,rgba(0,0,0,.15) ${w*0.8}px,rgba(0,0,0,0) ${w*1.05}px)`;castL.style.opacity=0}
+    else{castL.style.width='860px';castL.style.opacity=s*0.9;
+      const w=Math.max(40,860*Math.cos(Math.PI*(1-e))); castL.style.background=`linear-gradient(270deg,rgba(0,0,0,.45) 0px,rgba(0,0,0,.15) ${w*0.8}px,rgba(0,0,0,0) ${w*1.05}px)`;castR.style.opacity=0}
+  } else {castR.style.opacity=0;castL.style.opacity=0}
+  castL.style.zIndex=castR.style.zIndex=60;
+};
+window.setState(0,0);
+</script></body></html>

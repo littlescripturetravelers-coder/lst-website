@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Fredoka;src:url(fonts/Fredoka.ttf)}
+@font-face{font-family:Nunito;src:url(fonts/Nunito.ttf)}
+html,body{margin:0;width:1280px;height:720px;overflow:hidden;font-family:Nunito,sans-serif;
+  background:radial-gradient(ellipse 50% 60% at 28% 50%,rgba(255,214,140,.25),rgba(255,214,140,0) 70%),radial-gradient(ellipse at 50% 40%,#26386e 0%,#141f45 60%,#0a1028 100%)}
+#page{position:absolute;left:46px;top:70px;width:560px;height:560px;border-radius:8px;overflow:hidden;
+  box-shadow:0 26px 50px rgba(0,0,0,.6);transform:rotate(-3deg);border:6px solid #fbf7ea}
+#page img{width:100%;height:100%;display:block}
+#right{position:absolute;left:650px;top:0;width:590px;height:720px;display:flex;flex-direction:column;justify-content:center}
+.pill{align-self:flex-start;background:#f5c542;color:#14204a;font:600 30px Fredoka;padding:8px 22px;border-radius:999px;letter-spacing:.02em}
+h1{margin:18px 0 10px;color:#fff;font:600 78px/1.02 Fredoka;text-shadow:0 4px 18px rgba(0,0,0,.45)}
+.ref{color:#7fd6c9;font:700 36px Nunito}
+.brand{margin-top:26px;color:#cfd6f5;font:600 26px Fredoka;letter-spacing:.04em}
+.star{position:absolute;border-radius:50%;background:#fff6d8}
+</style></head><body>
+<div id="stars"></div>
+<div id="page"><img src="title.png"></div>
+<div id="right">
+  <div class="pill">Bedtime Scripture Story</div>
+  <h1 id="t"></h1>
+  <div class="ref" id="r"></div>
+  <div class="brand">★ Little Scripture Travelers</div>
+</div>
+<script>
+const T=window.THUMB||{title:'Mourning Turned Into Joy',scripture:'Jeremiah 31:12–13'};
+const h=document.getElementById('t'); h.textContent=T.title;
+document.getElementById('r').textContent=T.scripture;
+// shrink long titles to fit four lines
+let fs=78; while(h.scrollHeight>330&&fs>40){fs-=4;h.style.fontSize=fs+'px'}
+let seed=5;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647}
+const st=document.getElementById('stars');
+for(let i=0;i<60;i++){const s=document.createElement('div');s.className='star';const r=rnd()*2+.6;
+ s.style.cssText=`left:${rnd()*1280}px;top:${rnd()*720}px;width:${r}px;height:${r}px;opacity:${.25+rnd()*.5}`;st.appendChild(s)}
+</script></body></html>

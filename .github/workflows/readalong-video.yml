@@ -1,0 +1,136 @@
+# DAILY READ-ALONG VIDEO -> YOUTUBE
+#
+# Levi, 3 Nov 2026: "I want this to become a recurring [task] that happens each day with the
+# morning lantern's scripture of the day that automatically gets uploaded to YouTube."
+#
+# Every morning this takes the story the Morning Lantern published for today (lantern/*/night.json,
+# publish_date = today in Denver), turns its five printed pages into a narrated page-flip book video
+# with the end card (Amazon paperback, app, website, like/share/subscribe in Levi's own voice), and
+# uploads it to YouTube as "made for kids". See youtube/README.md.
+#
+# - Nothing to upload yet?  Until the YouTube secrets exist, the video is still made every day and
+#   kept on the run page (Artifacts) for 14 days, so nothing is lost.
+# - To stop it: add an empty file youtube/PAUSED (delete it to start again).
+# - A night is never uploaded twice: youtube/published.json remembers each one.
+name: Read-along video (YouTube)
+
+on:
+  schedule:
+    - cron: '15 11 * * *'     # 4:15 AM Mountain Standard Time (5:15 AM in summer time)
+    - cron: '15 16 * * *'     # safety net 5 hours later (does nothing if today's is already up)
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Publish date YYYY-MM-DD (blank = today in Denver)'
+        required: false
+        default: ''
+      privacy:
+        description: 'YouTube privacy for this upload'
+        type: choice
+        options: [public, unlisted, private]
+        default: public
+      upload:
+        description: 'Upload to YouTube (no = make the video only)'
+        type: choice
+        options: ['yes', 'no']
+        default: 'yes'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: readalong-video
+  cancel-in-progress: false
+
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Which night
+        id: night
+        run: |
+          D="${{ github.event.inputs.date }}"
+          [ -z "$D" ] && D=$(TZ=America/Denver date +%F)
+          echo "date=$D" >> "$GITHUB_OUTPUT"
+          F=$(grep -l "\"publish_date\": \"$D\"" lantern/*/night.json | head -1 || true)
+          if [ -f youtube/PAUSED ]; then echo "youtube/PAUSED is present - stopping."; echo "go=no" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if [ -z "$F" ]; then echo "No Morning Lantern night is dated $D - nothing to make."; echo "go=no" >> "$GITHUB_OUTPUT"; exit 0; fi
+          SLUG=$(python3 -c "import json;print(json.load(open('$F'))['slug'])")
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+          if [ -f youtube/published.json ] && python3 -c "import json,sys;sys.exit(0 if '$SLUG' in json.load(open('youtube/published.json')) else 1)"; then
+            echo "$SLUG is already on YouTube - nothing to do."; echo "go=no" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          echo "go=yes" >> "$GITHUB_OUTPUT"
+          echo "Today ($D): $SLUG"
+
+      - uses: actions/setup-python@v5
+        if: steps.night.outputs.go == 'yes'
+        with:
+          python-version: '3.12'
+
+      - name: Cache the narrator voice model
+        if: steps.night.outputs.go == 'yes'
+        uses: actions/cache@v4
+        with:
+          path: youtube/.models
+          key: kokoro-v1.0
+
+      - name: Install tools
+        if: steps.night.outputs.go == 'yes'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg espeak-ng >/dev/null
+          pip install -q pymupdf kokoro-onnx soundfile qrcode pillow numpy playwright google-api-python-client google-auth
+          python -m playwright install --with-deps chromium >/dev/null
+          mkdir -p youtube/.models
+          cd youtube/.models
+          [ -f kokoro-v1.0.onnx ] || curl -sSLf -o kokoro-v1.0.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+          [ -f voices-v1.0.bin ]  || curl -sSLf -o voices-v1.0.bin  https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
+
+      - name: Make the video
+        if: steps.night.outputs.go == 'yes'
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: python youtube/readalong.py --date "${{ steps.night.outputs.date }}"
+
+      - name: Keep the video on this run's page
+        if: steps.night.outputs.go == 'yes' && !cancelled()
+        uses: actions/upload-artifact@v4
+        with:
+          name: readalong-${{ steps.night.outputs.slug }}
+          path: |
+            youtube/out/*.mp4
+            youtube/out/*.jpg
+            youtube/out/*-meta.json
+          retention-days: 14
+
+      - name: Upload to YouTube
+        if: steps.night.outputs.go == 'yes' && github.event.inputs.upload != 'no'
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_PLAYLIST_ID: ${{ secrets.YT_PLAYLIST_ID }}
+          YT_PRIVACY: ${{ github.event.inputs.privacy || 'public' }}
+        run: |
+          set +e
+          python youtube/upload_youtube.py "${{ steps.night.outputs.slug }}"
+          code=$?
+          if [ $code -eq 4 ]; then
+            echo "::warning::YouTube is not connected yet - today's video is under Artifacts on this run. See youtube/README.md."
+            exit 0
+          fi
+          exit $code
+
+      - name: Remember what was uploaded
+        if: steps.night.outputs.go == 'yes' && !cancelled()
+        run: |
+          git config user.name  "lantern-bot"
+          git config user.email "lantern-bot@users.noreply.github.com"
+          git add youtube/published.json youtube/endcard-audio 2>/dev/null || true
+          if git diff --cached --quiet; then echo "Nothing to record."; exit 0; fi
+          git commit -m "Read-along video: ${{ steps.night.outputs.slug }}"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
