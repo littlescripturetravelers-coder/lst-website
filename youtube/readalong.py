@@ -441,6 +441,18 @@ def main():
     spreads = {1: ('p1', 'p2'), 2: ('p3', 'p4'), 3: ('p5', 'sweet')}
     story_mp4 = os.path.join(work, 'story.mp4'); story_wav = os.path.join(work, 'story.wav')
     total, narr, fsnd = build_story_video(work, leaves, spreads, None, story_mp4, story_wav)
+    # YouTube chapters ("key moments" in search): each at least 10 s, the first at 0:00
+    at = {k: t for t, k in narr}
+    trav_name = row.get('Traveler') or ''
+    marks = [(0.0, 'Opening the book'), (at.get('p1', 0) - 1.9, f'The story: {title}'),
+             (at.get('p3', 0) - 1.9, f'Scripture Traveler of the Night: {trav_name}' if trav_name else 'Scripture Traveler of the Night'),
+             (at.get('p4', 0), 'A Feeling Moment and the Five Stones'), (at.get('p5', 0) - 1.9, 'Question time'),
+             (at.get('sweet', 0), 'Sweet dreams'), (total, 'More stories, the app and the paperback')]
+    chapters = []
+    for t0, name in marks:
+        if chapters and t0 - chapters[-1][0] < 10: continue
+        chapters.append((max(0.0, t0), name))
+    chapters = [f'{int(t0) // 60}:{int(t0) % 60:02d} {name}' for t0, name in chapters]
     story_av = os.path.join(work, 'story_av.mp4')
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', story_mp4, '-i', story_wav, '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-ac', '2', '-shortest', story_av], check=True)
     # end card (Levi's voice, once per month)
@@ -482,7 +494,7 @@ def main():
     meta = {'date': date, 'slug': slug, 'title': title, 'scripture': scripture, 'story': story_no,
             'traveler': trav, 'book_title': idx['bookTitle'], 'month': idx['month'], 'amazon': amazon,
             'app': APP_URL, 'site': SITE_URL, 'endcard_voice': have.get('voice'),
-            'story_text': ' '.join(t for t, _ in S['p2'])}
+            'story_text': ' '.join(t for t, _ in S['p2']), 'chapters': chapters}
     json.dump(meta, open(os.path.join(args.out, f'{slug}-meta.json'), 'w'), indent=1, ensure_ascii=False)
     log('done:', final); return 0
 

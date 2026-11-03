@@ -28,6 +28,7 @@ def build_metadata(m):
              first_sentences(m.get('story_text', '')), '']
     if m.get('traveler'): lines += [f"Tonight's Scripture Traveler: {m['traveler']}.", '']
     lines += ["Read along as the pages turn, then answer the bedtime questions together.", '']
+    if len(m.get('chapters') or []) >= 3: lines += list(m['chapters']) + ['']
     if m.get('amazon'):
         lines.append(f"📖 {m['book_title']} paperback ({m['month']} book), a story a day that lines up with Come, Follow Me: {m['amazon']}")
     lines += [f"📱 Read every story in the Little Scripture Travelers app: {m['app']}",
@@ -35,9 +36,11 @@ def build_metadata(m):
               "👍 If you enjoyed tonight's story, please like, share, and subscribe for more bedtime scripture stories!", '',
               '#ComeFollowMe #BedtimeStories #BibleStoriesForKids']
     book_name = re.sub(r'\s*\d.*$', '', m['scripture']).strip()
+    chap = re.match(r'^(.*?\d+)', m['scripture']); chap = chap.group(1) if chap else book_name
     tags = ['Little Scripture Travelers', 'bedtime stories', 'bible stories for kids', 'scripture stories for kids',
             'come follow me', 'come follow me for kids', 'kids bible story', 'bedtime story', 'read aloud',
-            'christian kids', 'LDS kids', m['title'], m['book_title'], book_name]
+            'christian kids', 'LDS kids', f'{chap} for kids', f"come follow me {m['date'][:4]}", 'family home evening',
+            'christian bedtime story', m['title'], m['book_title'], book_name]
     tags = [t for i, t in enumerate(tags) if t and t not in tags[:i]]
     while sum(len(t) + 2 for t in tags) > 480: tags.pop()
     return title, '\n'.join(lines), tags
