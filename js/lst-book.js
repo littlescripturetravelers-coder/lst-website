@@ -517,6 +517,17 @@
     else ask();
   }
 
+  /* ONE WORD AT A TIME (Levi, 3 Nov 2026): the story voice (js/lst-story-voice.js) lights the word being
+     read on the shown page and turns the page with the voice; this is all it needs to know of the book. */
+  window.LSTBookEngine = {
+    story: function () { return STORY; },
+    beat: function () { return i; },
+    sheet: function () { return sheets[front]; },
+    busy: function () { return busy; },
+    go: function (n) { go(n, true); },
+    doc: function () { return document; }
+  };
+
   if (document.readyState !== "loading") boot();
   else document.addEventListener("DOMContentLoaded", boot);
 })();
