@@ -1,0 +1,20 @@
+{
+ "lines": [
+  "Thank you for joining us tonight!",
+  "You can find the Morning by Morning paperback on Amazon, with a story for every day that lines up with Come, Follow Me.",
+  "You can also read every story in the Little Scripture Travelers app, or on our website.",
+  "The links are in the description.",
+  "If you enjoyed tonight's story, please give it a like, share it with a friend, and subscribe for more bedtime scripture stories.",
+  "See you next time!"
+ ],
+ "voice": "levi",
+ "cues": {
+  "intro": 0.0,
+  "amazon": 2.02125,
+  "app": 9.782625,
+  "links": 17.352166666666665,
+  "like": 19.64345833333333,
+  "bye": 26.989624999999997
+ },
+ "total": 28.695624999999996
+}
