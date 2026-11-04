@@ -7419,6 +7419,8 @@ function init(){
   }
   fitAll();
   setTimeout(function(){
+    /* the Studies menu opened first: the hint would sit on its last row */
+    var sm=document.getElementById("studies-menu"); if(sm&&sm.classList.contains("open")) return;
     toast("&#10022; Tap &#9776; for layers &nbsp;|&nbsp; Tap any event for details &nbsp;|&nbsp; Pinch to zoom");
   },1200);
 }
