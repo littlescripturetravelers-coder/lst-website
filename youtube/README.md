@@ -3,7 +3,8 @@
 Levi, 3 Nov 2026: *"I want this to become a recurring [task] that happens each day with the morning
 lantern's scripture of the day that automatically gets uploaded to YouTube."*
 
-Every evening (`.github/workflows/readalong-video.yml`, 8:15 PM Mountain, safety nets 11:15 PM and 3:15 AM)
+Every evening (`.github/workflows/readalong-video.yml`, six tries from 5:15 PM to 6:15 AM Mountain, since GitHub runs
+scheduled jobs late or skips them; publishing the files is retried five times)
 the job makes the NEXT day's videos and posts; each morning the **Lantern Daily Posts** scheduled task
 (3:41 AM) schedules them in Metricool (Levi, 3 Nov 2026: "create these and post them to each account each day";
 "include this in the Lantern Daily Posts ... scheduled task"):

@@ -19,9 +19,14 @@ name: Read-along video (daily posts)
 
 on:
   schedule:
-    - cron: '15 3 * * *'      # 8:15 PM Mountain (standard time): tomorrow's video
-    - cron: '15 6 * * *'      # 11:15 PM Mountain: safety net, tomorrow's video if the first did not run
-    - cron: '15 10 * * *'     # 3:15 AM Mountain: last safety net, today's video if still missing
+    # GitHub often runs scheduled jobs late or skips them (4 Nov 2026: two of three never ran), so there are
+    # six tries; a day already made is skipped in seconds.
+    - cron: '15 0 * * *'      # 5:15 PM Mountain (standard time): tomorrow's video
+    - cron: '15 3 * * *'      # 8:15 PM Mountain: tomorrow's
+    - cron: '15 6 * * *'      # 11:15 PM Mountain: tomorrow's
+    - cron: '15 8 * * *'      # 1:15 AM Mountain: today's, if still missing
+    - cron: '15 10 * * *'     # 3:15 AM Mountain: today's
+    - cron: '15 13 * * *'     # 6:15 AM Mountain: today's (the 9:41 AM Lantern Daily Posts run still schedules it)
   workflow_dispatch:
     inputs:
       date:
@@ -104,9 +109,15 @@ jobs:
         run: |
           D="${{ steps.night.outputs.date }}"; S="${{ steps.night.outputs.slug }}"; TAG="readalong-$D"
           cd youtube/out
-          gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
-          gh release create "$TAG" --title "Read-along $D: $S" --notes "Daily read-along video for $D ($S). Made by .github/workflows/readalong-video.yml." \
-            --latest=false "$S.mp4" "$S-reel.mp4" "$S-reel-cover.jpg" "$S-thumb.jpg" $(ls "$S"-art-p*.jpg 2>/dev/null)
+          # GitHub sometimes answers 500 (4 Nov 2026); try five times before giving up
+          ok=no
+          for i in 1 2 3 4 5; do
+            gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
+            if gh release create "$TAG" --title "Read-along $D: $S" --notes "Daily read-along video for $D ($S). Made by .github/workflows/readalong-video.yml." \
+                 --latest=false "$S.mp4" "$S-reel.mp4" "$S-reel-cover.jpg" "$S-thumb.jpg" $(ls "$S"-art-p*.jpg 2>/dev/null); then ok=yes; break; fi
+            echo "Release try $i failed; waiting $((i*30)) seconds"; sleep $((i*30))
+          done
+          [ "$ok" = yes ] || exit 1
           # keep three weeks of files; older days are already posted
           gh release list --limit 100 --json tagName --jq '.[].tagName' | grep '^readalong-' | sort | head -n -21 | while read t; do
             gh release delete "$t" --yes --cleanup-tag || true
