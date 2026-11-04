@@ -41,6 +41,8 @@ CLIP_MODELS = {
                  "dur": lambda s: str(int(min(15, max(3, round(s))))), "extra": {"generate_audio": False, "negative_prompt": NEG}},
     "seedance": {"name": "Seedance 2.0", "id": "bytedance/seedance-2.0/image-to-video", "image": "image_url", "max": 15, "price": 0.30,
                  "dur": lambda s: str(int(min(15, max(4, round(s))))), "extra": {"resolution": "720p", "aspect_ratio": "16:9", "generate_audio": False}},
+    "veo-lite": {"name": "Veo 3.1 Lite", "id": "fal-ai/veo3.1/lite/image-to-video", "image": "image_url", "max": 8, "price": 0.03,
+                 "dur": lambda s: "8s" if s > 6 else ("6s" if s > 4 else "4s"), "extra": {"aspect_ratio": "16:9", "resolution": "720p", "generate_audio": False}},
     "veo":      {"name": "Veo 3.1 Fast", "id": "fal-ai/veo3.1/fast/image-to-video", "image": "image_url", "max": 8, "price": 0.10,
                  "dur": lambda s: "8s" if s > 6 else ("6s" if s > 4 else "4s"), "extra": {"aspect_ratio": "16:9", "resolution": "720p", "generate_audio": False}},
     "grok":     {"name": "Grok Imagine 1.5", "id": "xai/grok-imagine-video/v1.5/image-to-video", "image": "image_url", "max": 15, "price": 0.14,
@@ -48,7 +50,7 @@ CLIP_MODELS = {
     "hailuo":   {"name": "Hailuo 2.3", "id": "fal-ai/minimax/hailuo-2.3/standard/image-to-video", "image": "image_url", "max": 10, "price": 0.047,
                  "dur": lambda s: "10" if s > 6 else "6", "extra": {}},
 }
-DEFAULT_MODEL = "kling"
+DEFAULT_MODEL = "veo-lite"      # the Episode Engine v2: motion shots by Veo Lite (Grok Imagine as backup)
 
 def log(*a): print("   ", *a, flush=True)
 def hsh(*p): return hashlib.sha1("|".join(str(x) for x in p).encode()).hexdigest()[:14]
@@ -261,6 +263,9 @@ def stage_pictures(p, st, tmp, notes, spend):
         if m.get("image"): continue
         if s.get("reuse") and reuse.get(s["id"], {}).get("image"):
             m["image"] = reuse[s["id"]]["image"]; m.pop("url", None); continue
+        if not (s.get("image_prompt") or "").strip():                    # an AUDIO shot: the narrator over the still before it
+            i = shots.index(s); prevs = [x for x in shots[:i] if (x.get("media") or {}).get("image")]
+            if prevs: m["image"] = prevs[-1]["media"]["image"]; continue
         keys = list(s.get("refs") or [])
         refs = ref_paths(keys, st, files)
         prev = byid.get(s.get("from") or "")
@@ -283,7 +288,7 @@ def stage_trial(p, st, tmp, notes, spend):
     shot = next((s for s in tl.get("scenes") or [] if s["id"] == tr.get("shot")), None)
     if not shot or not (shot.get("media") or {}).get("image"): notes.append("the trial shot has no picture yet"); tl["stage"] = "storyboard"; return
     out = []
-    for key in tr.get("models") or ["kling", "seedance", "grok"]:
+    for key in tr.get("models") or ["veo-lite", "kling", "grok"]:
         if key not in CLIP_MODELS: continue
         try:
             data = make_clip(key, shot.get("video_prompt") or "", shot["media"]["image"], shot.get("min_dur") or 6); spend["seconds"] += shot.get("min_dur") or 6
@@ -293,6 +298,80 @@ def stage_trial(p, st, tmp, notes, spend):
     tl["trials"] = out; tl["stage"] = tr.get("back") or "storyboard"
 
 # ---------------------------------------------------------------- stage 2: voices, clips, music, the cut
+# ---------------------------------------------------------------- HeyGen: the talking shots (Engine v2)
+HEYGEN = os.environ.get("HEYGEN_API_KEY", "").strip()
+HEYGEN_PRICE = 0.05          # about a dollar a minute... per second of Avatar IV through the API (approximate)
+OFFSCREEN = re.compile(r"^(NARRATOR|ALL|THELORD|LORD|GOD|VOICE)$")
+
+def heygen_voices():
+    """The voices in the owner's HeyGen account (his own saved character voices first)."""
+    s, b = mm.http("GET", "https://api.heygen.com/v2/voices", headers={"X-Api-Key": HEYGEN, "Accept": "application/json"}, timeout=60)
+    if s != 200: raise RuntimeError(f"HeyGen voices: {s} {b[:160]!r}")
+    vs = ((json.loads(b) or {}).get("data") or {}).get("voices") or []
+    out = [{"id": v.get("voice_id"), "name": v.get("name") or v.get("display_name") or "", "gender": (v.get("gender") or "").lower(),
+            "language": v.get("language") or "", "mine": bool(v.get("is_custom") or v.get("type") in ("custom", "cloned", "private"))} for v in vs if v.get("voice_id")]
+    out.sort(key=lambda v: (not v["mine"], not re.search(r"\b(LST|beau|scout|willow|wren|narrator)\b", v["name"], re.I), v["name"]))
+    return out[:400]
+
+def heygen_voice_for(speaker, st):
+    """The character's HeyGen voice: the owner's choice in the Voices tab, else his own voice named for the character
+    ("LST Beau", "Beau's Dad" ...)."""
+    k = norm(speaker); hc = st.get("heygen_cast") or {}
+    if hc.get(k): return hc[k]
+    words = [w for w in re.split(r"[^a-z]+", re.sub(r"['’]s\b", "", str(speaker).lower())) if len(w) > 2 and w not in ("the",)]
+    for v in st.get("heygen_voices") or []:
+        name = v.get("name", "").lower()
+        if words and all(re.search(r"\b" + re.escape(w), name) for w in words): return v["id"]
+    return None
+
+def clean_words(text):
+    return re.sub(r"\s+", " ", re.sub(r"\[[^\]]*\]", "", text or "")).strip()
+
+def heygen_talk(image_bytes, script, voice_id, motion, expressiveness, title):
+    """HeyGen Avatar IV (Photo to Video): the shot's still, its one speaker's line, in his saved voice."""
+    if not HEYGEN: raise RuntimeError("HEYGEN_API_KEY is not set")
+    auth = {"X-Api-Key": HEYGEN}
+    s, b = mm.http("POST", "https://upload.heygen.com/v1/asset", raw=image_bytes, headers={**auth, "Content-Type": "image/jpeg"}, timeout=120)
+    if s != 200: raise RuntimeError(f"HeyGen upload: {s} {b[:200]!r}")
+    d = (json.loads(b) or {}).get("data") or {}
+    key = d.get("image_key") or d.get("id")
+    if not key: raise RuntimeError("HeyGen upload: no image key came back")
+    body = {"image_key": key, "video_title": title[:90], "script": script[:1500], "voice_id": voice_id,
+            "custom_motion_prompt": motion or "gentle natural head movement, warm expression, hands stay still", "enhance_custom_motion_prompt": True}
+    if expressiveness in ("low", "normal", "high"): body["expressiveness"] = expressiveness
+    s, b = mm.http("POST", "https://api.heygen.com/v2/video/av4/generate", body, {**auth, "Content-Type": "application/json"}, timeout=120)
+    if s == 400 and b"expressiveness" in b:
+        body.pop("expressiveness", None)
+        s, b = mm.http("POST", "https://api.heygen.com/v2/video/av4/generate", body, {**auth, "Content-Type": "application/json"}, timeout=120)
+    if s != 200: raise RuntimeError(f"HeyGen Avatar IV: {s} {b[:240]!r}")
+    vid = ((json.loads(b) or {}).get("data") or {}).get("video_id")
+    if not vid: raise RuntimeError("HeyGen Avatar IV: no video id came back")
+    for _ in range(200):                                  # up to twenty minutes
+        time.sleep(6)
+        s, b = mm.http("GET", f"https://api.heygen.com/v1/video_status.get?video_id={vid}", headers=auth, timeout=60)
+        if s != 200: continue
+        d = (json.loads(b) or {}).get("data") or {}
+        if d.get("status") == "completed" and d.get("video_url"):
+            s, mp4 = mm.http("GET", d["video_url"], timeout=300)
+            if s != 200: raise RuntimeError("HeyGen: could not fetch the finished clip")
+            return mp4
+        if d.get("status") == "failed": raise RuntimeError(f"HeyGen: {str(d.get('error') or 'failed')[:200]}")
+    raise RuntimeError("HeyGen: the clip did not finish in time")
+
+def talk_plan(s, tl, st):
+    """(speaker, script, voice_id) for a talking shot, or None (then it is a motion shot with dubbed voices)."""
+    if not s.get("talk"): return None
+    lines = [l for l in tl.get("lines") or [] if l.get("shot") == s["id"]]
+    hg = s.get("heygen") or {}
+    who = [l.get("speaker") for l in lines if not OFFSCREEN.match(norm(l.get("speaker")))]
+    speaker = (who[0] if who else re.sub(r"^LST\s+|\s*[–-].*$", "", hg.get("avatar") or "")).strip()
+    if not speaker or OFFSCREEN.match(norm(speaker)): return None
+    script = (hg.get("script") or "").strip() or " ".join(clean_words(l.get("text")) for l in lines if norm(l.get("speaker")) == norm(speaker))
+    voice = heygen_voice_for(speaker, st)
+    if not (script and voice): return None
+    return speaker, script, voice
+
+# ---------------------------------------------------------------- stage 2: clips, voices, music, the cut
 def stage_clips(p, st, tmp, notes, spend):
     tl = p["timeline"]; pid = p["id"]; files = Files(tmp)
     cfg = st.get("episode") or {}; model = cfg.get("clip_model") or DEFAULT_MODEL
@@ -300,9 +379,53 @@ def stage_clips(p, st, tmp, notes, spend):
     shots = tl.get("scenes") or []; byid = {s["id"]: s for s in shots}
     if any(not (s.get("media") or {}).get("image") for s in shots):
         stage_pictures(p, st, tmp, notes, spend); tl["stage"] = "clips"
-    # 1. the voices
+    if HEYGEN and not st.get("heygen_voices"):
+        try: st["heygen_voices"] = heygen_voices()
+        except Exception as e: notes.append(f"HeyGen voices: {str(e)[:140]}")
+    # 1. the clips: TALK shots by HeyGen (the line spoken in the character's own voice), the rest by the motion clip maker
+    for s in shots:
+        m = s.setdefault("media", {"source": "episode"})
+        if m.get("url") and m.get("kind") == "video": continue
+        if s.get("reuse") and reuse.get(s["id"], {}).get("clip"): m.update({"url": reuse[s["id"]]["clip"], "kind": "video"}); continue
+        if not m.get("image"): continue
+        if s.get("type") == "AUDIO": continue                 # the Narrator over the still: no clip needed
+        plan = talk_plan(s, tl, st) if HEYGEN else None
+        if plan:
+            speaker, script, voice = plan
+            try:
+                hg = s.get("heygen") or {}
+                data = heygen_talk(mm.to_bytes(mm.load_rgb(files.path(m["image"], ".jpg"))), script, voice, hg.get("motion"), hg.get("expressiveness"),
+                                   f"{p.get('title', 'Episode')} {s['id']}")
+                url = keep(pid, f"talk-{s['id']}-{hsh(script, voice, m['image'])}.mp4", data, "video/mp4")
+                cp = files.path(url, ".mp4"); d = duration(cp)
+                m.update({"url": url, "kind": "video", "model": "heygen", "talk": True, "dur": round(d, 2), "said": hsh(script, voice)})
+                spend["talk"] += d
+                log(f"{s['id']} talking clip made (HeyGen, {speaker})")
+                continue
+            except Exception as e:
+                notes.append(f"{s['id']}: HeyGen did not make the talking clip ({str(e)[:160]}); a motion clip with the voice laid over it instead")
+        elif s.get("talk") and HEYGEN:
+            notes.append(f"{s['id']}: no HeyGen voice for this speaker yet (Voices tab); a motion clip with the voice laid over it instead")
+        start = m["image"]
+        prev = byid.get(s.get("from") or "")
+        if prev and (prev.get("media") or {}).get("kind") == "video":
+            try:
+                fr = last_frame(files.path(prev["media"]["url"], ".mp4"), os.path.join(tmp, f"last-{prev['id']}.jpg"))
+                start = keep(pid, f"start-{s['id']}-{hsh(prev['media']['url'])}.jpg", open(fr, "rb").read(), "image/jpeg")
+            except Exception as e: log(f"{s['id']}: last frame: {e}")
+        try:
+            data = make_clip(model, s.get("video_prompt") or "", start, s.get("min_dur") or 6); spend["seconds"] += s.get("min_dur") or 6
+            m.update({"url": keep(pid, f"clip-{s['id']}-{model}-{hsh(s.get('video_prompt'), start)}.mp4", data, "video/mp4"), "kind": "video", "model": model, "talk": False})
+            if s.get("reuse"): reuse[s["id"]] = {**reuse.get(s["id"], {}), "image": m["image"], "clip": m["url"]}
+            log(f"{s['id']} clip made ({CLIP_MODELS.get(model, {}).get('name', model)})")
+        except Exception as e:
+            notes.append(f"{s['id']}: the clip was not made ({str(e)[:160]}); the picture moves gently instead")
+    # 2. the voices: every line HeyGen did not already speak inside its clip
+    talked = {s["id"] for s in shots if (s.get("media") or {}).get("talk")}
     cast = st.setdefault("cast", {}); voices = st.get("voices") or []; used = set(cast.values())
     for ln in tl.get("lines") or []:
+        if ln.get("shot") in talked and not OFFSCREEN.match(norm(ln.get("speaker"))): ln["in_clip"] = True; continue
+        ln.pop("in_clip", None)
         spk = norm(ln.get("speaker"))
         who = ["BEAU", "SCOUT", "WILLOW", "WREN"] if spk == "ALL" else [ln.get("speaker")]
         vids = [pick_voice(w, cast, voices, used) for w in who]
@@ -321,26 +444,6 @@ def stage_clips(p, st, tmp, notes, spend):
             spend["chars"] += len(ln["text"]) * len(vids)
         except Exception as e:
             notes.append(f"line {ln.get('n')}: {str(e)[:140]}")
-    # 2. the clips
-    for s in shots:
-        m = s.setdefault("media", {"source": "episode"})
-        if m.get("url") and m.get("kind") == "video": continue
-        if s.get("reuse") and reuse.get(s["id"], {}).get("clip"): m.update({"url": reuse[s["id"]]["clip"], "kind": "video"}); continue
-        if not m.get("image"): continue
-        start = m["image"]
-        prev = byid.get(s.get("from") or "")
-        if prev and (prev.get("media") or {}).get("kind") == "video":
-            try:
-                fr = last_frame(files.path(prev["media"]["url"], ".mp4"), os.path.join(tmp, f"last-{prev['id']}.jpg"))
-                start = keep(pid, f"start-{s['id']}-{hsh(prev['media']['url'])}.jpg", open(fr, "rb").read(), "image/jpeg")
-            except Exception as e: log(f"{s['id']}: last frame: {e}")
-        try:
-            data = make_clip(model, s.get("video_prompt") or "", start, s.get("min_dur") or 6); spend["seconds"] += s.get("min_dur") or 6
-            m.update({"url": keep(pid, f"clip-{s['id']}-{model}-{hsh(s.get('video_prompt'), start)}.mp4", data, "video/mp4"), "kind": "video", "model": model})
-            if s.get("reuse"): reuse[s["id"]] = {**reuse.get(s["id"], {}), "image": m["image"], "clip": m["url"]}
-            log(f"{s['id']} clip made ({CLIP_MODELS.get(model, {}).get('name', model)})")
-        except Exception as e:
-            notes.append(f"{s['id']}: the clip was not made ({str(e)[:160]}); the picture moves gently instead")
     # 3. the cut
     out, thumb, total = assemble(p, st, files, tmp, notes, cfg)
     v = int(p.get("version") or 1)
@@ -427,6 +530,8 @@ def assemble(p, st, files, tmp, notes, cfg):
         nxt = shots[i + 1] if i + 1 < len(shots) else None
         td = 0.8 if (nxt and nxt.get("cont") == "dissolve") else 0.0     # a dissolve INTO the next shot
         L = float(s.get("min_dur") or 6)
+        tm = s.get("media") or {}
+        if tm.get("talk") and tm.get("dur"): L = max(L, float(tm["dur"]) + 0.2)      # a talking shot lasts as long as its line
         starts[s["id"]] = t; s["_start"], s["_len"], s["_td"] = t, L, td
         segs.append(segment(s, files, tmp, i, L + td)); t += L
     total = t
@@ -437,12 +542,26 @@ def assemble(p, st, files, tmp, notes, cfg):
         else: fc.append(f"{last}[s{i}]concat=n=2:v=1:a=0,settb=1/{FPS}{lab}")
         last = lab
     # the voices at their shots, one after another, never over each other
-    lines = sorted([l for l in tl.get("lines") or [] if l.get("url")], key=lambda l: l["n"])
+    # a talking shot's voice is the HeyGen clip's own sound, laid exactly at the shot so the lips match
+    lines = sorted([l for l in tl.get("lines") or [] if l.get("url") and not l.get("in_clip")], key=lambda l: l["n"])
     placed, end = [], 0.0
-    for l in lines:
-        s0 = starts.get(l.get("shot"), end)
-        at = max(s0 + 0.4, end + 0.25); placed.append((at, files.path(l["url"], ".mp3"))); end = at + float(l.get("dur") or 2)
-        l["at"] = round(at, 2)
+    by_shot = {}
+    for l in lines: by_shot.setdefault(l.get("shot"), []).append(l)
+    for i, s in enumerate(shots):
+        tm = s.get("media") or {}
+        if tm.get("talk") and tm.get("url"):
+            try:
+                wav = os.path.join(tmp, f"talk{i:03d}.wav"); ff("-i", files.path(tm["url"], ".mp4"), "-vn", "-ac", "2", "-ar", "44100", wav)
+                at = s["_start"]; placed.append((at, wav)); end = max(end, at + duration(wav))
+                for l in tl.get("lines") or []:
+                    if l.get("in_clip") and l.get("shot") == s["id"]: l["at"], l["dur"] = round(at, 2), round(float(tm.get("dur") or 2), 2)
+            except Exception as e: notes.append(f"{s['id']}: the talking clip's sound: {str(e)[:120]}")
+        for l in by_shot.pop(s["id"], []):
+            at = max(s["_start"] + 0.4, end + 0.25); placed.append((at, files.path(l["url"], ".mp3"))); end = at + float(l.get("dur") or 2)
+            l["at"] = round(at, 2)
+    for rest in by_shot.values():
+        for l in rest:
+            at = end + 0.25; placed.append((at, files.path(l["url"], ".mp3"))); end = at + float(l.get("dur") or 2); l["at"] = round(at, 2)
     # THE WORDS ON SCREEN, in the brand: the title card as the story opens (the first playroom shot), the scripture
     # reference as the scripture story begins, and (if turned on) captions
     extra_in, n_in = [], len(segs)
@@ -532,10 +651,13 @@ def run(p, st, notes):
     """One stage of one episode. Returns the patch for the row."""
     tmp = tempfile.mkdtemp(prefix="ep-")
     tl = p["timeline"]; stage = tl.get("stage") or "pictures"
-    spend = {"images": 0, "seconds": 0, "chars": 0}
+    spend = {"images": 0, "seconds": 0, "chars": 0, "talk": 0}
     if mm.ELEVEN and not st.get("voices"):
         try: st["voices"] = account_voices()
         except Exception: pass
+    if HEYGEN:
+        try: st["heygen_voices"] = heygen_voices()
+        except Exception as e: notes.append(f"HeyGen voices: {str(e)[:140]}")
     try:
         if stage == "pictures": stage_pictures(p, st, tmp, notes, spend)
         elif stage == "trial": stage_trial(p, st, tmp, notes, spend)
@@ -543,8 +665,8 @@ def run(p, st, notes):
         else: notes.append(f"nothing to do at stage {stage}")
     finally:
         model = (st.get("episode") or {}).get("clip_model") or DEFAULT_MODEL
-        cost = spend["images"] * (0.25 if (st.get("episode") or {}).get("quality") == "high" else 0.07) + spend["seconds"] * CLIP_MODELS.get(model, {}).get("price", 0.12)
-        notes.append(f"this run: {spend['images']} pictures, {spend['seconds']} seconds of clips, {spend['chars']} characters of voice (about ${cost:.2f} before ElevenLabs)")
+        cost = spend["images"] * (0.25 if (st.get("episode") or {}).get("quality") == "high" else 0.07) + spend["seconds"] * CLIP_MODELS.get(model, {}).get("price", 0.12) + spend["talk"] * HEYGEN_PRICE
+        notes.append(f"this run: {spend['images']} pictures, {spend['seconds']} seconds of motion clips, {round(spend['talk'])} seconds of HeyGen talking clips, {spend['chars']} characters of ElevenLabs voice (about ${cost:.2f} before ElevenLabs)")
         shutil.rmtree(tmp, ignore_errors=True)
     patch = {"timeline": tl, "status": "ready", "render_error": None}
     if tl.get("stage") == "final": patch.update({"render_url": p.get("render_url"), "thumb_url": p.get("thumb_url"), "version": int(p.get("version") or 1) + 1})
