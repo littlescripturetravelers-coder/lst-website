@@ -1,0 +1,396 @@
+{
+ "id": "sample-episode",
+ "title": "The Words Written Again (sample)",
+ "kind": "episode",
+ "night": "2026-11-04",
+ "status": "draft",
+ "timeline": {
+  "v": 1,
+  "title": "The Words Written Again (sample)",
+  "kind": "episode",
+  "size": {
+   "w": 1920,
+   "h": 1080,
+   "fps": 30
+  },
+  "night": "2026-11-04",
+  "audience": "lds",
+  "bg": "#1B2D5F",
+  "clips": [
+   {
+    "id": "c1",
+    "shot": "S01-01",
+    "type": "image",
+    "src": "images/sky-star.jpg",
+    "dur": 6,
+    "fit": "cover",
+    "motion": "push-in",
+    "trans": {
+     "type": "fade-black",
+     "dur": 0.8
+    },
+    "gen": {
+     "maker": "still",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": []
+   },
+   {
+    "id": "c2",
+    "shot": "S02-01",
+    "type": "image",
+    "src": "",
+    "dur": 10,
+    "fit": "cover",
+    "motion": "pan-right",
+    "trans": {
+     "type": "crossfade",
+     "dur": 0.6
+    },
+    "gen": {
+     "maker": "book",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": [
+     "l1",
+     "l2"
+    ]
+   },
+   {
+    "id": "c3",
+    "shot": "S02-02",
+    "type": "image",
+    "src": "",
+    "dur": 6,
+    "fit": "cover",
+    "motion": "push-in",
+    "trans": {
+     "type": "cut",
+     "dur": 0
+    },
+    "gen": {
+     "maker": "book",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": [
+     "l3"
+    ]
+   },
+   {
+    "id": "c4",
+    "shot": "S03-01",
+    "type": "image",
+    "src": "images/travelers-group.jpg",
+    "dur": 6,
+    "fit": "cover",
+    "motion": "pull-out",
+    "trans": {
+     "type": "circle-open",
+     "dur": 0.8
+    },
+    "gen": {
+     "maker": "still",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": [
+     "l4"
+    ]
+   },
+   {
+    "id": "c5",
+    "shot": "S06-01",
+    "type": "image",
+    "src": "",
+    "dur": 10,
+    "fit": "cover",
+    "motion": "pan-left",
+    "trans": {
+     "type": "dissolve",
+     "dur": 0.8
+    },
+    "gen": {
+     "maker": "book",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": [
+     "l5"
+    ]
+   },
+   {
+    "id": "c6",
+    "shot": "S06-02",
+    "type": "image",
+    "src": "",
+    "dur": 10,
+    "fit": "cover",
+    "motion": "push-in",
+    "trans": {
+     "type": "slide-left",
+     "dur": 0.5
+    },
+    "gen": {
+     "maker": "book",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": [
+     "l6"
+    ]
+   },
+   {
+    "id": "c7",
+    "shot": "S06-03",
+    "type": "image",
+    "src": "",
+    "dur": 6,
+    "fit": "cover",
+    "motion": "pan-up",
+    "trans": {
+     "type": "wipe-right",
+     "dur": 0.5
+    },
+    "gen": {
+     "maker": "ai-image",
+     "image": "Modern premium children's animated series still, warm hand-painted storybook animation look exactly matching the attached reference pictures (not photo-real, no 3D render look) ...\nSHOT S06-03: Baruch at a low wooden table writing on a new scroll by lamplight; the four Travelers watch from the doorway, glowing faintly.",
+     "who": [
+      "beau",
+      "scout",
+      "willow",
+      "wren"
+     ],
+     "place": null
+    },
+    "lines": []
+   },
+   {
+    "id": "c8",
+    "shot": "S08-01",
+    "type": "image",
+    "src": "",
+    "dur": 10,
+    "fit": "cover",
+    "motion": "push-in",
+    "trans": {
+     "type": "fade-white",
+     "dur": 0.6
+    },
+    "gen": {
+     "maker": "book",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": [
+     "l7"
+    ]
+   },
+   {
+    "id": "c9",
+    "shot": "S10-01",
+    "type": "image",
+    "src": "",
+    "dur": 10,
+    "fit": "cover",
+    "motion": "pull-out",
+    "trans": {
+     "type": "crossfade",
+     "dur": 1.0
+    },
+    "gen": {
+     "maker": "book",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": [
+     "l8"
+    ]
+   },
+   {
+    "id": "c10",
+    "shot": "S10-END",
+    "type": "image",
+    "src": "images/logo-badge.jpg",
+    "dur": 6,
+    "fit": "contain",
+    "motion": "none",
+    "trans": {
+     "type": "cut",
+     "dur": 0
+    },
+    "gen": {
+     "maker": "still",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": []
+   }
+  ],
+  "texts": [
+   {
+    "id": "t1",
+    "clip": "c1",
+    "offset": 0.6,
+    "dur": 4.6,
+    "text": "The Words Written Again",
+    "style": "title",
+    "pos": "middle",
+    "anim": "pop"
+   },
+   {
+    "id": "t2",
+    "clip": "c1",
+    "offset": 1.6,
+    "dur": 3.4,
+    "text": "Little Scripture Travelers · Episode 7",
+    "style": "label",
+    "pos": "top",
+    "anim": "fade"
+   },
+   {
+    "id": "t3",
+    "clip": "c5",
+    "offset": 0.5,
+    "dur": 4,
+    "text": "Jeremiah 36:27–32",
+    "style": "lower-third",
+    "anim": "slide-up"
+   },
+   {
+    "id": "t4",
+    "clip": "c10",
+    "offset": 0.4,
+    "dur": 5,
+    "text": "Sweet dreams",
+    "style": "end",
+    "pos": "bottom",
+    "anim": "type"
+   }
+  ],
+  "audio": [
+   {
+    "id": "l1",
+    "kind": "voice",
+    "speaker": "narrator",
+    "delivery": "[warm]",
+    "text": "One golden evening, four friends were building the tallest block tower in the whole playroom."
+   },
+   {
+    "id": "l2",
+    "kind": "voice",
+    "speaker": "scout",
+    "delivery": "[excited]",
+    "text": "Mine has a window! And a bug door!"
+   },
+   {
+    "id": "l3",
+    "kind": "voice",
+    "speaker": "beau",
+    "delivery": "[quietly]",
+    "text": "Oh no. It fell down. All of it."
+   },
+   {
+    "id": "l4",
+    "kind": "voice",
+    "speaker": "wren",
+    "delivery": "[gently]",
+    "text": "Pause and ponder — what a wonder! Let's open the Travel Chest."
+   },
+   {
+    "id": "l5",
+    "kind": "voice",
+    "speaker": "narrator",
+    "text": "Long ago, a wicked king cut up Jeremiah's scroll and burned it in the fire."
+   },
+   {
+    "id": "l6",
+    "kind": "voice",
+    "speaker": "narrator",
+    "text": "But the word of the Lord came again. Baruch took another roll and wrote every word again."
+   },
+   {
+    "id": "l7",
+    "kind": "voice",
+    "speaker": "beau",
+    "delivery": "[brave]",
+    "text": "Big heart, brave start! I can build it again, from the very bottom."
+   },
+   {
+    "id": "l8",
+    "kind": "voice",
+    "speaker": "narrator",
+    "text": "Something worth making is worth making again. Goodnight, little travelers."
+   },
+   {
+    "id": "m1",
+    "kind": "music",
+    "cue": "lantern-song",
+    "clips": [
+     "c1",
+     "c4"
+    ],
+    "vol": 0.3,
+    "fadeIn": 1.0,
+    "fadeOut": 2.0,
+    "duck": true
+   },
+   {
+    "id": "m2",
+    "kind": "music",
+    "cue": "sacred",
+    "prompt": "soft sustained strings, reverent, slow, no percussion",
+    "clips": [
+     "c5",
+     "c7"
+    ],
+    "vol": 0.25,
+    "fadeIn": 1.5,
+    "fadeOut": 1.5,
+    "duck": true
+   },
+   {
+    "id": "m3",
+    "kind": "music",
+    "cue": "lullaby",
+    "clips": [
+     "c9",
+     "c10"
+    ],
+    "vol": 0.35,
+    "fadeIn": 2.0,
+    "fadeOut": 2.5,
+    "duck": true
+   }
+  ],
+  "captions": {
+   "on": true,
+   "style": "karaoke",
+   "pos": "bottom",
+   "size": 54,
+   "lines": []
+  },
+  "post": {
+   "title": "The Words Written Again | Bedtime Scripture Story for Kids",
+   "caption": "When something we made gets knocked down, we can start again. 🌙",
+   "hashtags": {
+    "youtube": "#ComeFollowMe #BibleStoriesForKids #LittleScriptureTravelers"
+   },
+   "platforms": [
+    "youtube"
+   ],
+   "when": "16:00"
+  }
+ }
+}

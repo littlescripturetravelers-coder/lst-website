@@ -1,0 +1,135 @@
+# VIDEO STUDIO — MAKE THE VIDEO
+#
+# Levi, 4 Nov 2026: "Claude connects to this tool and creates the social media posts all done with
+# captions, narrator, images, and transitions ... and then places it in front of me with the final
+# product and I can edit or just approve and it posts for me."
+#
+# A project in Supabase `studio_projects` whose status is 'making' (the daily Claude task wrote it, or Levi
+# tapped "Make the video" in the app's Video Studio) is made here:
+#   1. studio/produce.py fills the gaps (pictures, voices, talking shots, music, captions)
+#   2. studio/render.py makes the MP4 and its cover (transitions, motion, captions, music under the voices)
+#   3. the files go up as the GitHub release "studio-<id>" (public links Metricool can fetch)
+#   4. the project becomes 'review': it is waiting for Levi in the app.
+# Nothing paid is made unless the repository variable STUDIO_SPEND is "yes" (Levi's go; CLAUDE.md).
+#
+# - To stop it: add an empty file studio/PAUSED (delete it to start again).
+# - This repo is public, so these minutes are free; a run with nothing to make stops in seconds.
+name: Video Studio (make the video)
+
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: 'Project id (blank = every project waiting to be made)'
+        required: false
+        default: ''
+      short:
+        description: 'Also cut a 9:16 Short from it (an episode only)'
+        type: choice
+        options: ['no', 'yes']
+        default: 'no'
+  schedule:
+    - cron: '20 2 * * *'      # 7:20 PM Mountain: a safety net for anything left waiting
+    - cron: '20 14 * * *'     # 7:20 AM Mountain
+
+permissions:
+  contents: write
+
+concurrency:
+  group: studio
+  cancel-in-progress: false
+
+env:
+  SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+  SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: What is waiting
+        id: q
+        env:
+          ID_IN: ${{ github.event.inputs.id }}
+        run: |
+          if [ -f studio/PAUSED ]; then echo "studio/PAUSED is present - stopping."; echo "ids=" >> "$GITHUB_OUTPUT"; exit 0; fi
+          ID="$ID_IN"
+          if [ -n "$ID" ]; then IDS="$ID"; else
+            IDS=$(curl -sS "$SUPABASE_URL/rest/v1/studio_projects?status=eq.making&select=id&order=created_at.asc" \
+              -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+              | python3 -c "import sys,json; d=json.load(sys.stdin); print(' '.join(r['id'] for r in d) if isinstance(d,list) else '')")
+          fi
+          # only plain ids (letters, numbers, - . _) ever reach a command line
+          IDS=$(for i in $IDS; do echo "$i" | grep -E '^[A-Za-z0-9._-]{1,80}$' || echo "skipping an unsafe id" >&2; done | tr '\n' ' ')
+          echo "ids=$IDS" >> "$GITHUB_OUTPUT"
+          if [ -z "$IDS" ]; then echo "Nothing is waiting to be made."; else echo "To make: $IDS"; fi
+
+      - uses: actions/setup-python@v5
+        if: steps.q.outputs.ids != ''
+        with:
+          python-version: '3.12'
+
+      - name: Cache the free voice model
+        if: steps.q.outputs.ids != ''
+        uses: actions/cache@v4
+        with:
+          path: studio/.models
+          key: kokoro-v1.0
+
+      - name: Tools
+        if: steps.q.outputs.ids != ''
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg espeak-ng >/dev/null
+          pip install -q pillow numpy soundfile kokoro-onnx
+          mkdir -p studio/.models && cd studio/.models
+          [ -f kokoro-v1.0.onnx ] || curl -sSLf -o kokoro-v1.0.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+          [ -f voices-v1.0.bin ]  || curl -sSLf -o voices-v1.0.bin  https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
+
+      - name: Make the videos
+        if: steps.q.outputs.ids != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STUDIO_SPEND: ${{ vars.STUDIO_SPEND }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          HEYGEN_API_KEY: ${{ secrets.HEYGEN_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          STUDIO_CHECK_MODEL: ${{ vars.STUDIO_CHECK_MODEL }}
+          IDS: ${{ steps.q.outputs.ids }}
+          SHORT: ${{ github.event.inputs.short }}
+          REPO: ${{ github.repository }}
+        run: |
+          patch_row () {   # id, json body
+            curl -sS -X PATCH "$SUPABASE_URL/rest/v1/studio_projects?id=eq.$1" \
+              -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+              -H "Content-Type: application/json" -H "Prefer: return=minimal" -d "$2" >/dev/null
+          }
+          make_one () {
+            ID="$1"; OUT="studio/out/$ID"; TAG="studio-$ID"; mkdir -p "$OUT"
+            python studio/produce.py --id "$ID" || return 1
+            python studio/render.py --id "$ID" --out "$OUT" --name "$ID" || return 1
+            gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
+            gh release create "$TAG" --title "Video Studio: $ID" --notes "Made by .github/workflows/studio.yml for the app's Video Studio." \
+              "$OUT/$ID.mp4" "$OUT/$ID-cover.jpg" || return 1
+            BASE="https://github.com/$REPO/releases/download/$TAG"
+            patch_row "$ID" "{\"status\":\"review\",\"error\":null,\"render_url\":\"$BASE/$ID.mp4\",\"cover_url\":\"$BASE/$ID-cover.jpg\",\"rendered_at\":\"$(date -u +%FT%TZ)\"}"
+            echo "### $ID" >> "$GITHUB_STEP_SUMMARY"; echo "$BASE/$ID.mp4" >> "$GITHUB_STEP_SUMMARY"
+          }
+          FAILED=0
+          for ID in $IDS; do
+            echo "::group::$ID"
+            if make_one "$ID" 2>&1 | tee "/tmp/$ID.log"; [ "${PIPESTATUS[0]}" = "0" ]; then
+              if [ "$SHORT" = "yes" ]; then
+                python studio/make_short.py --id "$ID" --save && make_one "$ID-short" || echo "The Short for $ID could not be made"
+              fi
+            else
+              FAILED=1
+              ERR=$(tail -c 600 "/tmp/$ID.log" | python3 -c "import sys,json; print(json.dumps(sys.stdin.read()))")
+              patch_row "$ID" "{\"status\":\"failed\",\"error\":$ERR}"
+            fi
+            echo "::endgroup::"
+          done
+          exit $FAILED

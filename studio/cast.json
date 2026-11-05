@@ -1,0 +1,478 @@
+{
+ "_about": "The Video Studio's character bible (Levi, 4 Nov 2026: 'The characters have to be the same always from scene to scene and episode to episode'). The words are the Episode Engine's (studio/EPISODE-ENGINE.md), word for word. Every generated picture is made FROM these refs. Add a picture to studio/refs/<id>.png (or .jpg) and it is used from the next video on. Voice ids: paste an ElevenLabs voice id once and every episode uses it.",
+ "style_lock": "Modern premium children's animated series still, warm hand-painted storybook animation look exactly matching the attached reference pictures (not photo-real, no 3D render look), warm cinematic lighting, gentle rounded shapes, expressive faces with big readable emotions, rich but soft colors, Midnight Navy #1B2D5F shadows, Scripture Gold #F5C518 magical light, Traveler Teal #5BD3DC sparkles, 16:9 frame, no new text, no captions, no watermarks. Keep all four Travelers exactly as in the attached reference sheet and portraits: same faces, hair, skin, eyes, proportions, outfit for this scene, and trait colors. In the playroom, match the attached playroom picture exactly.",
+ "scripture_world": "historically grounded ancient setting, natural earth tones, the Travelers have a faint glowing outline in their trait colors.",
+ "rules": [
+  "Say 'Heavenly Father', never bare 'God', in dialogue and story narration.",
+  "The Travelers never interact with scripture characters; they watch from nearby, glowing faintly in their trait colours.",
+  "Heavenly Father is never shown as a figure: light and/or a voice speaking only scripture words.",
+  "No new text in any picture or video; titles and captions are added by the studio.",
+  "Never use the names Rockwell, Shamrock, Maylyn or Amay."
+ ],
+ "friends": "THE FOUR ARE FRIENDS (not siblings or cousins). Each has their own family. Parents have no names: they are just \"Mom\" and \"Dad\" (for example \"Beau's Mom\").",
+ "chant": {
+  "launch": "Brave hearts, bright sparks, kind hands, wise eyes — to the world's most treasured true stories we fly!",
+  "return": "Treasure in our hearts, light to lead the way — home we fly to live it every day!"
+ },
+ "brand": {
+  "colors": {
+   "navy": "#1B2D5F",
+   "gold": "#F5C518",
+   "teal": "#5BD3DC",
+   "amber": "#D9A227",
+   "white": "#FFFFFF"
+  },
+  "fonts": {
+   "display": "lantern/brand/fonts/Fredoka.ttf",
+   "body": "lantern/brand/fonts/Nunito.ttf",
+   "accent": "lantern/brand/fonts/Anton-Regular.ttf"
+  },
+  "logo": "lantern/brand/logo.png"
+ },
+ "characters": [
+  {
+   "id": "beau",
+   "name": "Beau",
+   "role": "Traveler",
+   "trait": "BEAU — \"Bo the Brave.\" Color: warm brown. Trait: courage and faith. Catchphrase: \"Big heart, brave start!\" Acts first, steps up, sometimes too fast; protective; grows by learning courage comes from trusting Heavenly Father, not from being loud.",
+   "look": "BEAU (boy): slightly sturdy toddler build; warm light tan skin; rounded face, full cheeks, light freckles; large dark brown eyes; thick dark brown eyebrows; dark brown thick curly hair, short faded sides, fuller curls on top; brave, warm, confident smile. Weakness: acts before he asks.",
+   "all_four": "ALL FOUR: toddlers, age 4, head = 1/3 of body height, always appear together, same face structure, hair, skin, eyes and proportions every time. Heights: Beau 100%, Scout 102%, Willow 98%, Wren 97% of Beau. (Ignore any \"of Rockwell\" text printed on the reference sheets; it means \"of Beau.\")",
+   "outfits": {
+    "modern": "brown short-sleeve henley with buttons and chest pocket, khaki cargo joggers with cuffed ankles, brown-and-white sneakers.",
+    "biblical": "ancient Israelite brown tunic, short sleeves, decorative trim, woven belt/sash, brown sandals. Their modern clothes shimmer into these during the fly-through and shimmer back on the way home.",
+    "pajamas": "brown long-sleeve pajamas with star print and henley buttons."
+   },
+   "color": "#8B5A2B",
+   "catchphrase": "Big heart, brave start!",
+   "refs": [
+    "lantern/brand/beau.jpg",
+    "images/beau.jpg",
+    "lantern/brand/travelers-cast.jpg"
+   ],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "am_puck",
+    "speed": 1.0
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/beau"
+  },
+  {
+   "id": "scout",
+   "name": "Scout",
+   "role": "Traveler",
+   "trait": "SCOUT — \"Scout the Seeker.\" Color: bright green. Trait: curiosity and discovery. Catchphrase: \"Look and see — what could it be?\" Asks a hundred questions, notices tiny details, gets distracted by bugs and maps; the comic engine.",
+   "look": "SCOUT (boy): slim, energetic; fair skin with freckles; bright green eyes; golden blond modern textured haircut, messy spiky top, tapered sides; medium blond eyebrows; excited joyful smile. Weakness: struggles to be still.",
+   "all_four": "ALL FOUR: toddlers, age 4, head = 1/3 of body height, always appear together, same face structure, hair, skin, eyes and proportions every time. Heights: Beau 100%, Scout 102%, Willow 98%, Wren 97% of Beau. (Ignore any \"of Rockwell\" text printed on the reference sheets; it means \"of Beau.\")",
+   "outfits": {
+    "modern": "bright green short-sleeve hoodie tee with kangaroo pocket, tan joggers, white sneakers with green details.",
+    "biblical": "ancient Israelite green tunic, short sleeves, decorative trim, woven belt/sash, brown sandals. Their modern clothes shimmer into these during the fly-through and shimmer back on the way home.",
+    "pajamas": "green dinosaur-print pajamas with chest pocket."
+   },
+   "color": "#3FA34D",
+   "catchphrase": "Look and see — what could it be?",
+   "refs": [
+    "lantern/brand/scout.jpg",
+    "images/scout.jpg",
+    "lantern/brand/travelers-cast.jpg"
+   ],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "am_echo",
+    "speed": 1.0
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/scout"
+  },
+  {
+   "id": "willow",
+   "name": "Willow",
+   "role": "Traveler",
+   "trait": "WILLOW — \"Willow the Warm.\" Color: purple. Trait: compassion and tenderness. Catchphrase: \"Warm hugs, warm hearts!\" Notices who is sad or left out, comforts others, cries at kind moments.",
+   "look": "WILLOW (girl): slim childlike build; fair skin, rosy cheeks, freckles; large warm brown eyes; bright copper-red long wavy hair below the shoulders, soft straight bangs; purple headband with small gold stars; tender, nurturing smile. Weakness: carries feelings that aren't hers to carry.",
+   "all_four": "ALL FOUR: toddlers, age 4, head = 1/3 of body height, always appear together, same face structure, hair, skin, eyes and proportions every time. Heights: Beau 100%, Scout 102%, Willow 98%, Wren 97% of Beau. (Ignore any \"of Rockwell\" text printed on the reference sheets; it means \"of Beau.\")",
+   "outfits": {
+    "modern": "purple star-print ruffle-sleeve top, layered purple/lavender tulle skirt with sparkles, white-and-lavender high-top sneakers.",
+    "biblical": "ancient Israelite purple dress with star pattern, short sleeves, decorative trim, woven belt/sash, brown sandals. Their modern clothes shimmer into these during the fly-through and shimmer back on the way home.",
+    "pajamas": "purple top with a big star, lavender star-print pants."
+   },
+   "color": "#8E5CC9",
+   "catchphrase": "Warm hugs, warm hearts!",
+   "refs": [
+    "lantern/brand/willow.jpg",
+    "images/willow.jpg",
+    "lantern/brand/travelers-cast.jpg"
+   ],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "af_bella",
+    "speed": 1.0
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/willow"
+  },
+  {
+   "id": "wren",
+   "name": "Wren",
+   "role": "Traveler",
+   "trait": "WREN — \"Wren the Wonderer.\" Color: coral red. Trait: wisdom and reflection. Catchphrase: \"Pause and ponder — what a wonder!\" Slows the group down, connects dots, asks \"why\" questions, the quiet thinker.",
+   "look": "WREN (girl): soft toddler build; warm deep brown skin, light freckles on cheeks; large dark brown eyes; black shoulder-length tight curls; golden-yellow braided headband; wise, thoughtful, loving expression. Weakness: thinks she already knows.",
+   "all_four": "ALL FOUR: toddlers, age 4, head = 1/3 of body height, always appear together, same face structure, hair, skin, eyes and proportions every time. Heights: Beau 100%, Scout 102%, Willow 98%, Wren 97% of Beau. (Ignore any \"of Rockwell\" text printed on the reference sheets; it means \"of Beau.\")",
+   "outfits": {
+    "modern": "coral-red dotted peplum top with ruffle sleeves, light denim jeans with rolled cuffs and a small heart patch on one knee, coral-and-yellow sneakers.",
+    "biblical": "ancient Israelite coral-red dress with tiny dots, short sleeves, decorative trim, woven belt/sash, brown sandals. Their modern clothes shimmer into these during the fly-through and shimmer back on the way home.",
+    "pajamas": "coral pajamas with white polka dots. All ribbed cuffs, barefoot."
+   },
+   "color": "#F26B5B",
+   "catchphrase": "Pause and ponder — what a wonder!",
+   "refs": [
+    "lantern/brand/wren.jpg",
+    "images/wren.jpg",
+    "lantern/brand/travelers-cast.jpg"
+   ],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "af_nicole",
+    "speed": 1.0
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/wren"
+  },
+  {
+   "id": "beau-dad",
+   "name": "Beau's Dad",
+   "role": "family",
+   "look": "Dad (100% height): late 20s–early 30s, warm golden tan skin, soft square jaw, warm brown eyes, thick dark brows, thick dark-brown textured slightly messy waves, light neatly trimmed beard and mustache, lean athletic with broad shoulders, earth-tone henley (brown/tan/olive/rust), dark jeans, brown boots, no logos.",
+   "refs": [],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "am_michael"
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/beau-dad"
+  },
+  {
+   "id": "beau-mom",
+   "name": "Beau's Mom",
+   "role": "family",
+   "look": "Mom (94% of Dad): late 20s–early 30s, warm golden tan skin, soft oval face, large warm brown eyes, long dark chocolate-brown wavy hair, gold hoop earrings and delicate gold necklace, slender and graceful, warm earthy floral dresses (terracotta/cinnamon/rust), sandals. Beau = 48% of Dad's height.",
+   "refs": [],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "af_sarah"
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/beau-mom"
+  },
+  {
+   "id": "scout-dad",
+   "name": "Scout's Dad",
+   "role": "family",
+   "look": "Dad (100%): bald, thick dark-brown full beard, bright emerald-green eyes, thick dark eyebrows, warm tan skin, muscular with broad chest, green T-shirt, dark blue jeans, brown shoes.",
+   "refs": [],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "am_fenrir"
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/scout-dad"
+  },
+  {
+   "id": "scout-mom",
+   "name": "Scout's Mom",
+   "role": "family",
+   "look": "Mom (92% of Dad): long rich wavy brown hair, emerald-green eyes, light freckles, warm fair skin, slim, green floral puff-sleeve dress, green pendant necklace and green earrings, brown flats. Scout = 52% of Dad's height.",
+   "refs": [],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "af_jessica"
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/scout-mom"
+  },
+  {
+   "id": "willow-dad",
+   "name": "Willow's Dad",
+   "role": "family",
+   "look": "Dad: 30s, tall and stocky with broad shoulders, short curly reddish-brown hair, green eyes, warm tan skin, round friendly face, light beard, purple polo, blue jeans, brown shoes.",
+   "refs": [],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "am_liam"
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/willow-dad"
+  },
+  {
+   "id": "willow-mom",
+   "name": "Willow's Mom",
+   "role": "family",
+   "look": "Mom: 30s, slim, long wavy auburn-red hair, brown eyes, warm tan skin with freckles, purple wrap dress with subtle pattern, tan sandals.",
+   "refs": [],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "af_river"
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/willow-mom"
+  },
+  {
+   "id": "wren-dad",
+   "name": "Wren's Dad",
+   "role": "family",
+   "look": "Dad: warm brown skin, dark curly hair with natural volume, large brown eyes, expressive brows, bright smile, red henley with 3 buttons, dark blue jeans, red-and-white sneakers.",
+   "refs": [],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "am_onyx"
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/wren-dad"
+  },
+  {
+   "id": "wren-mom",
+   "name": "Wren's Mom",
+   "role": "family",
+   "look": "Mom: warm brown skin, long dark curly hair, large brown eyes with long lashes, gold hoop earrings and gold necklace, red dress with puff sleeves, buttons and waist tie, tan ballet flats.",
+   "refs": [],
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "af_nova"
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/wren-mom"
+  },
+  {
+   "id": "grandma",
+   "name": "Grandma Lewis",
+   "role": "family",
+   "look": "GRANDMA LEWIS — 74, 5'8\", slim and active, fair skin with warm rosy undertones and freckles, long oval face, green-hazel eyes, long chestnut-brown hair with auburn undertones, center part, usually a low ponytail, gold hoop earrings, warm comforting smile. Outfits from her sheet only (cream cardigan with sage joggers and pink slippers; pink floral pajamas; lavender hoodie; green gingham shirt; navy track set; blue cardigan with floral skirt). Loving, wise, a family storyteller; loves scripture stories, temple visits, homemade treats, gardening and hymns. For Christian-audience episodes she reads \"the scriptures\" (show a Bible); for Latter-day Saint episodes she may hold the Book of Mormon.",
+   "refs": [],
+   "lock": "lantern/brand/locks/grandma-room.md",
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "bf_emma"
+   },
+   "heygen": {
+    "talking_photo_id": ""
+   },
+   "refs_dir": "studio/refs/grandma"
+  },
+  {
+   "id": "margo",
+   "name": "Margo the dog",
+   "role": "pet",
+   "look": "MARGO the dog (brown-and-white curly-coated doodle, long floppy ears, happy pink tongue)",
+   "refs": [],
+   "refs_dir": "studio/refs/margo"
+  },
+  {
+   "id": "sparkles",
+   "name": "Sparkles the bunny",
+   "role": "pet",
+   "look": "SPARKLES the bunny (fluffy white bunny with black ears and black eye patches)",
+   "refs": [],
+   "refs_dir": "studio/refs/sparkles"
+  },
+  {
+   "id": "narrator",
+   "name": "Narrator",
+   "role": "voice",
+   "look": null,
+   "voice": {
+    "elevenlabs": "",
+    "kokoro": "af_heart",
+    "speed": 0.92
+   },
+   "note": "Warm storyteller. Never shown."
+  }
+ ],
+ "places": [
+  {
+   "id": "playroom",
+   "name": "The playroom",
+   "look": "SET LOCK — THE PLAYROOM (must look identical every episode; match the uploaded playroom picture): a cozy attic room with a slanted white wood-plank ceiling and wooden beams; a big slanted skylight window on the left looking out at pine trees and blue sky; warm string lights and copper pendant lamps; a full wall of wooden bookshelves with colorful books and small scripture-verse plaques, colorful pillows along the top, a globe and a plant; a rolling library ladder on the right; a framed painting of Jesus Christ in a white robe with radiant light on the right wall; a \"Build · Create · Imagine\" pegboard and wooden workbench with building blocks; a whiteboard easel; a white play-kitchen sink on the left; a small wooden kids' table with chairs and colored pencils; two round red braided rugs; four wooden rocking chairs in a row (Beau, Scout, Willow, Wren, left to right); the two real pets, MARGO the dog (brown-and-white curly-coated doodle, long floppy ears, happy pink tongue) and SPARKLES the bunny (fluffy white bunny with black ears and black eye patches), usually lying on the two round rugs (they replace the plush toys seen in the empty-playroom picture); a teddy bear in a basket on the right. CENTER: THE TRAVEL CHEST — an old wooden chest with iron bands and rivets and a front plaque reading \"The Travel Chest — World's Most Treasured True Stories.\" Never move, add or remove furniture. Never add new words to the room; only the signs already in the reference may appear.",
+   "refs": [],
+   "refs_dir": "studio/refs/playroom"
+  },
+  {
+   "id": "travel-chest",
+   "name": "The Travel Chest",
+   "look": "THE TRAVEL CHEST — an old wooden chest with iron bands and rivets and a front plaque reading \"The Travel Chest — World's Most Treasured True Stories.\"",
+   "times": [
+    "day",
+    "sunset",
+    "dusk",
+    "night"
+   ],
+   "refs": [],
+   "refs_dir": "studio/refs/travel-chest"
+  },
+  {
+   "id": "starry-sky",
+   "name": "The starry sky (fly-through and end card)",
+   "look": "navy sky, guiding gold star, golden clouds",
+   "refs": [
+    "images/sky-star.jpg",
+    "images/sky-blue.jpg"
+   ],
+   "refs_dir": "studio/refs/starry-sky"
+  },
+  {
+   "id": "beau-room",
+   "name": "Beau's bedroom",
+   "look": "Beau — brown, navy and gold courage room with framed motto signs, football helmet, lion plush, round navy rug.",
+   "lock": "lantern/brand/locks/beau-room.md",
+   "refs": [],
+   "refs_dir": "studio/refs/beau-room"
+  },
+  {
+   "id": "scout-room",
+   "name": "Scout's bedroom",
+   "look": "Scout — green sports room with basketball hoop, #23 jersey, baseball pillow, green bean bag, round green rug.",
+   "lock": "lantern/brand/locks/scout-room.md",
+   "refs": [],
+   "refs_dir": "studio/refs/scout-room"
+  },
+  {
+   "id": "willow-room",
+   "name": "Willow's bedroom",
+   "look": "Willow — purple attic room with round mountain-view window, gymnastics beam and mat, medals, white bed, braided purple rug, lanterns.",
+   "lock": "lantern/brand/locks/willow-room.md",
+   "refs": [],
+   "refs_dir": "studio/refs/willow-room"
+  },
+  {
+   "id": "wren-room",
+   "name": "Wren's bedroom",
+   "look": "Wren — coral-red cozy room with string lights, heart light, big moonlit window with window seat, desk, fluffy round coral rug, teddy bear, star lanterns.",
+   "lock": "lantern/brand/locks/wren.md",
+   "refs": [],
+   "refs_dir": "studio/refs/wren-room"
+  },
+  {
+   "id": "front-room",
+   "name": "The front room (Grandma Lewis)",
+   "look": "See the lock.",
+   "lock": "lantern/brand/locks/front-room.md",
+   "refs": [],
+   "refs_dir": "studio/refs/front-room"
+  }
+ ],
+ "refs_needed": [
+  {
+   "id": "beau-dad",
+   "what": "A reference picture of Beau's Dad (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/beau-dad.png"
+  },
+  {
+   "id": "beau-mom",
+   "what": "A reference picture of Beau's Mom (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/beau-mom.png"
+  },
+  {
+   "id": "scout-dad",
+   "what": "A reference picture of Scout's Dad (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/scout-dad.png"
+  },
+  {
+   "id": "scout-mom",
+   "what": "A reference picture of Scout's Mom (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/scout-mom.png"
+  },
+  {
+   "id": "willow-dad",
+   "what": "A reference picture of Willow's Dad (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/willow-dad.png"
+  },
+  {
+   "id": "willow-mom",
+   "what": "A reference picture of Willow's Mom (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/willow-mom.png"
+  },
+  {
+   "id": "wren-dad",
+   "what": "A reference picture of Wren's Dad (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/wren-dad.png"
+  },
+  {
+   "id": "wren-mom",
+   "what": "A reference picture of Wren's Mom (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/wren-mom.png"
+  },
+  {
+   "id": "grandma",
+   "what": "A reference picture of Grandma Lewis (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/grandma.png"
+  },
+  {
+   "id": "margo",
+   "what": "A reference picture of Margo the dog (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/margo.png"
+  },
+  {
+   "id": "sparkles",
+   "what": "A reference picture of Sparkles the bunny (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/sparkles.png"
+  },
+  {
+   "id": "playroom",
+   "what": "A reference picture of The playroom (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/playroom.png"
+  },
+  {
+   "id": "travel-chest",
+   "what": "A reference picture of The Travel Chest (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/travel-chest.png"
+  },
+  {
+   "id": "beau-room",
+   "what": "A reference picture of Beau's bedroom (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/beau-room.png"
+  },
+  {
+   "id": "scout-room",
+   "what": "A reference picture of Scout's bedroom (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/scout-room.png"
+  },
+  {
+   "id": "willow-room",
+   "what": "A reference picture of Willow's bedroom (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/willow-room.png"
+  },
+  {
+   "id": "wren-room",
+   "what": "A reference picture of Wren's bedroom (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/wren-room.png"
+  },
+  {
+   "id": "front-room",
+   "what": "A reference picture of The front room (Grandma Lewis) (full body front view, or the room/place as it must always look)",
+   "put_it_at": "studio/refs/front-room.png"
+  }
+ ]
+}

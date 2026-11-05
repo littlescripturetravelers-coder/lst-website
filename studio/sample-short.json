@@ -1,0 +1,203 @@
+{
+ "id": "sample-short",
+ "title": "When it all falls down (sample short)",
+ "kind": "short",
+ "night": "2026-11-04",
+ "status": "draft",
+ "timeline": {
+  "v": 1,
+  "title": "When it all falls down (sample short)",
+  "kind": "short",
+  "size": {
+   "w": 1080,
+   "h": 1920,
+   "fps": 30
+  },
+  "night": "2026-11-04",
+  "audience": "both",
+  "bg": "#1B2D5F",
+  "clips": [
+   {
+    "id": "c1",
+    "shot": "H-01",
+    "type": "image",
+    "src": "",
+    "dur": 4,
+    "fit": "cover",
+    "motion": "push-in",
+    "trans": {
+     "type": "zoom-in",
+     "dur": 0.5
+    },
+    "gen": {
+     "maker": "book",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": [
+     "s1"
+    ]
+   },
+   {
+    "id": "c2",
+    "shot": "H-02",
+    "type": "image",
+    "src": "",
+    "dur": 6,
+    "fit": "cover",
+    "motion": "pan-down",
+    "trans": {
+     "type": "slide-up",
+     "dur": 0.4
+    },
+    "gen": {
+     "maker": "book",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": [
+     "s2"
+    ]
+   },
+   {
+    "id": "c3",
+    "shot": "H-03",
+    "type": "image",
+    "src": "",
+    "dur": 6,
+    "fit": "cover",
+    "motion": "push-in",
+    "trans": {
+     "type": "crossfade",
+     "dur": 0.5
+    },
+    "gen": {
+     "maker": "book",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": [
+     "s3"
+    ]
+   },
+   {
+    "id": "c4",
+    "shot": "H-04",
+    "type": "image",
+    "src": "",
+    "dur": 6,
+    "fit": "cover",
+    "motion": "pull-out",
+    "trans": {
+     "type": "fade-black",
+     "dur": 0.6
+    },
+    "gen": {
+     "maker": "book",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": []
+   },
+   {
+    "id": "c5",
+    "shot": "H-END",
+    "type": "image",
+    "src": "images/logo-badge.jpg",
+    "dur": 5,
+    "fit": "contain",
+    "motion": "none",
+    "trans": {
+     "type": "cut",
+     "dur": 0
+    },
+    "gen": {
+     "maker": "still",
+     "image": "",
+     "who": [],
+     "place": null
+    },
+    "lines": []
+   }
+  ],
+  "texts": [
+   {
+    "id": "t1",
+    "clip": "c1",
+    "offset": 0.2,
+    "dur": 3.4,
+    "text": "When it all falls down…",
+    "style": "hook",
+    "pos": "top",
+    "anim": "pop"
+   },
+   {
+    "id": "t2",
+    "clip": "c5",
+    "offset": 0.3,
+    "dur": 4.5,
+    "text": "Read it tonight in the app",
+    "style": "end",
+    "pos": "bottom",
+    "anim": "slide-up"
+   }
+  ],
+  "audio": [
+   {
+    "id": "s1",
+    "kind": "voice",
+    "speaker": "beau",
+    "text": "My tower fell down. All of it!"
+   },
+   {
+    "id": "s2",
+    "kind": "voice",
+    "speaker": "narrator",
+    "text": "Long ago, a king burned Jeremiah's scroll. So Baruch wrote every word again."
+   },
+   {
+    "id": "s3",
+    "kind": "voice",
+    "speaker": "beau",
+    "text": "Big heart, brave start! I'll build it again."
+   },
+   {
+    "id": "m1",
+    "kind": "music",
+    "cue": "lantern-song",
+    "start": 0,
+    "to_end": true,
+    "vol": 0.3,
+    "fadeIn": 0.5,
+    "fadeOut": 2,
+    "duck": true
+   }
+  ],
+  "captions": {
+   "on": true,
+   "style": "karaoke",
+   "pos": "bottom",
+   "size": 66,
+   "lines": []
+  },
+  "post": {
+   "title": "When it all falls down",
+   "caption": "Something worth making is worth making again. 🧱✨ #ComeFollowMe",
+   "hashtags": {
+    "instagram": "#ComeFollowMe #BibleStoriesForKids #LittleScriptureTravelers",
+    "tiktok": "#ComeFollowMe #BibleStoriesForKids"
+   },
+   "platforms": [
+    "instagram",
+    "facebook",
+    "tiktok",
+    "youtube"
+   ],
+   "when": "10:00"
+  }
+ }
+}

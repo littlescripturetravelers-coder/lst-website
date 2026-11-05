@@ -5,3 +5,6 @@ __pycache__/
 *.pyc
 
 node_modules
+
+# the Video Studio crew's local test output
+studio/out/
