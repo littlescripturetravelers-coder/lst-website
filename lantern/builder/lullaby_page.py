@@ -124,6 +124,12 @@ def parts_from_lyrics(lyrics):
         assert chorus, 'a [Chorus] label appears but no chorus words were given'
     return parts, chorus
 
+# A title or line written with a web code for a mark ("Watchman&rsquo;s") is the mark itself, or it is escaped
+# again and the code shows on the song page and in the player (The Watchman's Call, 7 Nov 2026).
+LULLABY_TITLE = H.unescape(LULLABY_TITLE)
+TITLE = H.unescape(TITLE)
+LYRICS = H.unescape(LYRICS)
+
 def build():
     parts, chorus = parts_from_lyrics(LYRICS)
     lull = {
