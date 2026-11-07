@@ -66,8 +66,13 @@ The main video is a **5–10 minute YouTube episode** (16:9), built the Episode 
    `POST https://api.heygen.com/v2/video/av4/generate`, then `GET https://api.heygen.com/v1/video_status.get`.
 
 ## Music
-Shots can have music by cue: `lullaby`, `lullaby-nt`, `lantern-song` (the night's own song). Any other cue
-(`theme`, `sacred`, `wonder`, `adventure` …) plays `studio/music/<cue>.mp3` if you put one there; with paid
+**Your theme song opens every episode.** It is `audio/little-scripture-travelers-theme.mp3`. It plays over
+Scene 1 (the theme open) and fades out as Scene 2 begins; the other music comes in as it fades. To use a new
+version of the song, replace that file with the same name (and `www/audio/Little_Scripture_Travelers_Theme.mp3`
+in the app, for the editor's Music list).
+
+Shots can have music by cue: `theme`, `lullaby`, `lullaby-nt`, `lantern-song` (the night's own song). Any other cue
+(`sacred`, `wonder`, `adventure` …) plays `studio/music/<cue>.mp3` if you put one there; with paid
 making ON, ElevenLabs makes it from the item's `prompt`. Music always gets quieter under the voices.
 
 ## Pause it

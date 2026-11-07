@@ -63,6 +63,20 @@ ok("every voice line has a start inside the video", all("start" in a and a["star
 ok("captions rebuilt from the voices", len(ep["captions"]["lines"]) == 3)
 ok("music follows its shots", abs(ep["audio"][-1]["dur"] - common.total(ep)) < 0.01 and ep["audio"][-1]["src"])
 
+# THE THEME SONG OPENS EVERY EPISODE (Levi, 7 Nov 2026): over Scene 1, then the bed comes in as it fades
+th = common.defaults({"title": "T", "kind": "episode", "size": {"w": 640, "h": 360, "fps": 24}, "night": None,
+      "clips": [{"id": "a", "shot": "S01-01", "src": pics[0], "dur": 10, "trans": {"type": "crossfade", "dur": 0.5}},
+                {"id": "b", "shot": "S01-02", "src": pics[1], "dur": 15, "trans": {"type": "cut"}},
+                {"id": "c", "shot": "S02-01", "src": pics[2], "dur": 6}],
+      "texts": [], "audio": [], "captions": {"on": True, "lines": []}})
+produce.make_music("t", th)
+tm = next((a for a in th["audio"] if a.get("cue") == "theme"), None)
+bed = next((a for a in th["audio"] if a.get("id") == "m-bed"), None)
+ok("the theme song plays over Scene 1", tm and tm["start"] == 0 and abs(tm["dur"] - 24.5) < 0.01
+   and tm["src"] and tm["src"].endswith("little-scripture-travelers-theme.mp3"), tm)
+ok("the music bed comes in as the theme fades", bed and abs(bed["start"] - 22.0) < 0.01 and abs(bed["start"] + bed["dur"] - common.total(th)) < 0.01, bed)
+ok("no Scene 1, no theme laid over the talking", not any(a.get("cue") == "theme" for a in ep["audio"]))
+
 mp4, cover = render.render(copy.deepcopy(ep), work, "ep", jobs=2)
 p = probe(mp4); v = [s for s in p["streams"] if s["codec_type"] == "video"][0]
 ok("episode size and frame rate", (v["width"], v["height"], v["r_frame_rate"]) == (640, 360, "24/1"), v)

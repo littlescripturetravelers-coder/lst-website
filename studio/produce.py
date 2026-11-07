@@ -215,6 +215,13 @@ def anchor(tl):
             a["dur"] = round(st[i1] + float(tl["clips"][i1]["dur"]) - a["start"], 3)
         elif a.get("to_end") and "start" in a:
             a["dur"] = round(T - float(a["start"]), 3)
+    # a music bed with "after": <id> comes in as that one (the theme) fades out
+    by = {a.get("id"): a for a in tl.get("audio", [])}
+    for a in tl.get("audio", []):
+        b = by.get(a.get("after")) if a.get("after") else None
+        if b and "start" in b and b.get("dur"):
+            a["start"] = round(max(0.0, float(b["start"]) + float(b["dur"]) - float(b.get("fadeOut") or 0)), 3)
+            if a.get("to_end"): a["dur"] = round(max(0.1, T - a["start"]), 3)
 
 
 def rebuild_captions(tl):
@@ -229,6 +236,7 @@ def rebuild_captions(tl):
 
 # ------------------------------------------------------------------ music
 MUSIC = {
+    "theme": "audio/little-scripture-travelers-theme.mp3",   # Levi's theme song (7 Nov 2026), every episode's opening
     "lullaby": "audio/hush-little-traveler.mp3",
     "lullaby-nt": "audio/hush-little-traveler-nt.mp3",
     "lullaby-short": "audio/hush-little-traveler-short.mp3",
@@ -248,13 +256,29 @@ def music_for(cue, tl):
     return None
 
 
+def add_theme(tl):
+    """THE THEME SONG OPENS EVERY EPISODE (Levi, 7 Nov 2026: "Here is the theme song that should be played
+    at the beginning"): over Scene 1 (the theme open), full and undimmed, fading out as Scene 2 begins.
+    Added when the episode has no theme cue of its own; a theme cue already there keeps its own settings."""
+    if (tl.get("kind") or "episode") != "episode": return
+    if any(a.get("kind") == "music" and a.get("cue") == "theme" for a in tl["audio"]): return
+    clips = tl.get("clips") or []
+    s01 = [c["id"] for c in clips if str(c.get("shot") or "").startswith("S01")]
+    if not s01: return          # no theme open in this edit: never laid over talking (add it from the editor's Music)
+    tl["audio"].insert(0, {"id": "m-theme", "kind": "music", "cue": "theme", "clips": [s01[0], s01[-1]],
+                           "vol": 0.9, "fadeIn": 0, "fadeOut": 2.5, "duck": False})
+
+
 def make_music(pid, tl):
-    music = [a for a in tl["audio"] if a.get("kind") == "music"]
+    add_theme(tl)
+    music = [a for a in tl["audio"] if a.get("kind") == "music" and a.get("cue") != "theme"]
     if not music:
         cue = "lantern-song" if music_for("lantern-song", tl) else "lullaby"
+        # the bed starts after the theme open, so the two never play over each other
+        th = next((a for a in tl["audio"] if a.get("cue") == "theme"), None)
         tl["audio"].append({"id": "m-bed", "kind": "music", "cue": cue, "start": 0, "to_end": True, "vol": 0.28,
-                            "fadeIn": 1.5, "fadeOut": 3, "duck": True})
-        music = tl["audio"][-1:]
+                            "fadeIn": 1.5, "fadeOut": 3, "duck": True, "after": "m-theme" if th else None})
+    music = [a for a in tl["audio"] if a.get("kind") == "music"]
     for a in music:
         if a.get("src"): continue
         p = music_for(a.get("cue") or "", tl)
