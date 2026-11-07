@@ -351,5 +351,5 @@ HEAVENLY = BASE + [WHY_MATTERS, HISTORICAL, SOURCES_TONIGHT, WORD_STUDY, ISAIAH_
 if __name__ == '__main__':
     print('tiers', len(QUICK), len(DEEP), len(HEAVENLY))
     build({'quick': QUICK, 'deep': DEEP, 'heavenly': HEAVENLY},
-          VERSE_REF, f'{OUT_DIR}/morning-lantern-lds.html', TITLE)
+          VERSE_REF, f'{OUT_DIR}/morning-lantern-lds.html', TITLE_HTML)
     print('built morning-lantern-lds.html')

@@ -169,3 +169,18 @@ r = subprocess.run([sys.executable, dc, path], capture_output=True, text=True)
 if r.stdout.strip(): print(r.stdout.rstrip())
 check(r.returncode == 0, "doctrine: the edition's own teaching (lantern/DOCTRINE.md; see above)")
 print('ALL PASS (with doctrine)' if ok else 'FAILURES PRESENT')
+
+# 12. THE PLAIN-TITLES RULE (Levi, 7 Nov 2026): a title is plain text wherever it is stored
+# (night.json, lullaby.json, the song page's JSON, window.LST_NIGHT); entity code (&rsquo; &amp; ...)
+# lives only in the page markup common.py writes. On 6 Nov a song title saved as "The Watchman&rsquo;s
+# Call" was escaped twice and the song page showed the code. title_check.py sits beside this file.
+# Fix the title, never the check.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+try:
+    from title_check import check_night as _title_problems
+    _tp = _title_problems(night_dir, slug=SLUG)
+except Exception as e:
+    _tp = [('title_check.py could not run', f'{type(e).__name__}: {e}')]
+check(not _tp, 'plain titles: no entity code in titles, the song page or window.LST_NIGHT '
+      + ('' if not _tp else str([f'{w}: {f}' for w, f in _tp][:4])))
+print('ALL PASS (with plain titles)' if ok else 'FAILURES PRESENT')

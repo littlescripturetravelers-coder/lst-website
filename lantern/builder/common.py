@@ -1,4 +1,5 @@
 import re, os
+import html as _html
 
 # Paths are overridable so the very same scripts run both in the nightly task
 # and inside the GitHub Action (lantern/build_from_inbox.py sets these).
@@ -33,6 +34,39 @@ def ent(s):
              .replace('‘', '&lsquo;').replace('’', '&rsquo;')
              .replace('…', '&hellip;'))
 
+# THE PLAIN-TITLES RULE (Levi, 7 Nov 2026). On 6 Nov a song title typed above as
+# 'The Watchman&rsquo;s Call' (entity form, the way card text is written here) went into the
+# song page's JSON and was escaped a second time, so the page showed the code itself.
+# Type titles as ordinary text (’ or ') - no entities. TITLE and LULLABY_TITLE stay exactly
+# as typed; typed either way, the names below are derived from them:
+#   TITLE_PLAIN / LULLABY_TITLE_PLAIN - the clean text, for JSON, html.escape and the app's window.LST_NIGHT
+#   TITLE_HTML  / LULLABY_TITLE_HTML  - the entity-safe form for the authored page markup,
+#                                       where audit.py forbids raw typographic characters
+_ENTITY = re.compile(r'&(?:#\d+|#[xX][0-9A-Fa-f]+|[A-Za-z][A-Za-z0-9]*);')
+
+def plain(s):
+    """Ordinary text from a string typed with or without HTML entities (&rsquo;, &amp;rsquo; ...).
+    Only whole entities ending in ; are decoded, repeated until nothing changes."""
+    for _ in range(8):
+        t = _ENTITY.sub(lambda m: _html.unescape(m.group(0)), s)
+        if t == s:
+            break
+        s = t
+    return s
+
+def js_str(s):
+    """A plain string made safe inside a single-quoted JS literal."""
+    return s.replace('\\', '\\\\').replace("'", "\\'")
+
+def markup(s):
+    """Plain text made safe for the authored page markup: escaped once, typographic marks as entities."""
+    return ent(_html.escape(s, quote=False))
+
+TITLE_PLAIN = plain(TITLE)
+LULLABY_TITLE_PLAIN = plain(LULLABY_TITLE)
+TITLE_HTML = markup(TITLE_PLAIN)
+LULLABY_TITLE_HTML = markup(LULLABY_TITLE_PLAIN)
+
 def paras(cls, ps, gap=8):
     out = []
     for i, p in enumerate(ps):
@@ -62,7 +96,7 @@ def hero(depth_note, verse_ref_html):
     </div>
     <div class="hero-eyebrow">{EYEBROW}</div>
 
-    <div class="hero-title">{TITLE}</div>
+    <div class="hero-title">{TITLE_HTML}</div>
     <div class="tonight-verse-label">Tonight's Scripture</div>
     <div class="tonight-verse-ref">
       {verse_ref_html}
@@ -79,11 +113,11 @@ def resources_card():
     <div class="toolkit-grid">
       <a class="toolkit-btn" href="{SLUG}-lullaby.html" target="_blank">
         <div class="toolkit-icon">&#127925;</div>
-        <div><div class="toolkit-title">Tonight's Lullaby &mdash; Lyrics &amp; Music</div><div class="toolkit-sub">{LULLABY_TITLE}</div></div>
+        <div><div class="toolkit-title">Tonight's Lullaby &mdash; Lyrics &amp; Music</div><div class="toolkit-sub">{LULLABY_TITLE_HTML}</div></div>
       </a>
       <a class="toolkit-btn toolkit-btn-primary" href="{SLUG}.html" target="_blank">
         <div class="toolkit-icon">&#128214;</div>
-        <div><div class="toolkit-title">Tonight's Story</div><div class="toolkit-sub">Week {WEEK} &middot; Night {NIGHT} &middot; {TITLE}</div></div>
+        <div><div class="toolkit-title">Tonight's Story</div><div class="toolkit-sub">Week {WEEK} &middot; Night {NIGHT} &middot; {TITLE_HTML}</div></div>
       </a>
       <a class="toolkit-btn" href="travelers-lullaby.html" target="_blank">
         <div class="toolkit-icon">&#127926;</div>
@@ -105,7 +139,7 @@ def story_card():
     return f'''
   <div class="card card-story reveal">
     <div class="card-label lbl-white">&#128214; Tonight's Scripture Story</div>
-    <div class="card-title ct-white">{TITLE}</div>
+    <div class="card-title ct-white">{TITLE_HTML}</div>
 {paras('bt-white', STORY_PARAS)}
   </div>
 '''
@@ -150,10 +184,10 @@ def build(edition_cards, verse_ref_html, out_path, page_title):
     html = re.sub(r'<title>.*?</title>', f'<title>The Morning Lantern &middot; {page_title}</title>', html, count=1, flags=re.S)
     new_night = f"""window.LST_NIGHT = {{
   id:         '{NIGHT_ID}',
-  storyTitle: '{TITLE}',
+  storyTitle: '{js_str(TITLE_PLAIN)}',
   scripture:  '{SCRIPTURE_REF}',
   traveler:   '{TRAVELER}',
-  virtue:     '{VIRTUE_PLAIN}'
+  virtue:     '{js_str(plain(VIRTUE_PLAIN))}'
 }};"""
     html, n = re.subn(r"window\.LST_NIGHT = \{.*?\};", lambda m: new_night, html, count=1, flags=re.S)
     assert n == 1, 'window.LST_NIGHT block not found in canonical'
