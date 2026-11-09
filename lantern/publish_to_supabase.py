@@ -67,6 +67,21 @@ def read(path):
     with open(path, encoding="utf-8") as fh:
         return fh.read()
 
+def story_stamp(book_html):
+    """The stamp of a picture book's own words (its STORY), so a night whose devotional changed but whose story did not
+    keeps its rating and its recorded reading."""
+    m = re.search(r'const STORY = (\{.*?\});\n', book_html or "", flags=re.S)
+    if not m: return ""
+    try:
+        st = json.loads(m.group(1))
+    except Exception:
+        return sha(re.sub(r'data:[^"]+', '', m.group(1)))
+    # the words only: the pictures are made smaller on the way to the account, the words never are
+    words = [st.get("title", ""), st.get("reference", "")] + [
+        json.dumps({k: b.get(k) for k in ("type", "eyebrow", "heading", "text", "stones", "list")}, sort_keys=True, ensure_ascii=False)
+        for b in st.get("beats", [])]
+    return sha(*words)
+
 def sha(*parts):
     h = hashlib.sha256()
     for p in parts:
@@ -499,7 +514,22 @@ def main():
                 json.dump({"sha": stamp, "date": date, "christian_only": True}, fh, indent=2)
             continue
 
-        lds, chr_, book_html, score, guarded = guard_night(slug, folder, lds, chr_, book_html)
+        # THE STORY'S OWN WORDS (9 Nov 2026): a night republished because its devotional changed (the doctrine
+        # review) keeps its story, its rating and its story recording; only a changed story is rated and recorded anew.
+        story_now = story_stamp(book_html)
+        story_before = prior_marker.get("story")
+        if story_before is None and story_now and prior_marker.get("sha"):
+            st0, one0 = http("GET", URL + f"/rest/v1/daily_content?select=book_html&publish_date=eq.{date}", None,
+                             {"apikey": KEY, "Authorization": "Bearer " + KEY})
+            try: story_before = story_stamp((json.loads(one0)[0].get("book_html") or "") if st0 == 200 else "")
+            except Exception: story_before = None
+        story_changed = not (story_now and story_before == story_now)
+        if prior_marker.get("guarded") and not story_changed:
+            score, guarded = None, False
+            print("    guard rail: the story is unchanged and was rated before - not rated again")
+        else:
+            lds, chr_, book_html, score, guarded = guard_night(slug, folder, lds, chr_, book_html)
+            if guarded: story_now = story_stamp(book_html); story_changed = True
         if guarded:
             stamp = sha(PUBLISH_REV, json.dumps(night, sort_keys=True), lds, chr_, song, book_html, "mp3" if has_mp3 else "")
         row = {NIGHT_KEYS[k]: night[k] for k in NIGHT_KEYS if night.get(k) not in (None, "")}
@@ -552,7 +582,7 @@ def main():
                          and os.path.exists(os.path.join(folder, "KEEP-WORDS")))
             guarded = guarded or reword
             status, body = narrate(date, force=guarded)
-            if reword:
+            if reword and story_changed:
                 # the picture book's own reading (narration/story/<date>-<voice>.mp3, the app's and the website's
                 # headphones) read the old words: take it away, and the next tap on the headphones records it anew
                 names = [f"story/{date}-{v}{x}.mp3" for v in ("eli", "hannah") for x in ("", "-start")]
@@ -582,7 +612,8 @@ def main():
             else:             print(f"    marketing: not drafted ({status}) {body}")
 
         with open(marker, "w", encoding="utf-8") as fh:
-            mk = {"sha": stamp, "date": date, "at": row["published_at"], "words": sha(lds or "", chr_ or "")}
+            mk = {"sha": stamp, "date": date, "at": row["published_at"], "words": sha(lds or "", chr_ or ""), "story": story_now}
+            if prior_marker.get("guarded") and not story_changed: mk["guarded"] = True
             if score is not None:
                 tries = (prior_marker.get("guard_tries") or 0) + 1
                 mk["guard_tries"] = tries

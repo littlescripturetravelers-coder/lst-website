@@ -160,3 +160,12 @@ if os.path.exists(lj) and not os.path.exists(os.path.join(night_dir, slug_here +
     check(not found, 'daytime song: no bed, sleep, dreams, night-time, closing eyes or "Shh" in the lyrics '
           + ('' if not found else str([s for _, s in found])))
     print('ALL PASS (with the daytime song)' if ok else 'FAILURES PRESENT')
+
+# 11. THE DOCTRINE RULE (Levi, 9 Nov 2026: "make sure everything in the devotional or morning lanterns lines up with
+# LDS Doctrine and teachings ... on the christian side ... with the christian doctrines and teachings"): the plainest
+# wrong wordings by edition (doctrine.py). lantern/DOCTRINE.md is the rule; read every teaching sentence against it.
+dc = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'doctrine.py')
+r = subprocess.run([sys.executable, dc, path], capture_output=True, text=True)
+if r.stdout.strip(): print(r.stdout.rstrip())
+check(r.returncode == 0, "doctrine: the edition's own teaching (lantern/DOCTRINE.md; see above)")
+print('ALL PASS (with doctrine)' if ok else 'FAILURES PRESENT')
