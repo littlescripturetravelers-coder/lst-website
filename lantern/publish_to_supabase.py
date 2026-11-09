@@ -327,6 +327,14 @@ def narrate(date, edition=None, force=False):
     if edition: body["edition"] = edition
     if force: body["force"] = True
     status, resp = http("POST", URL + "/functions/v1/narrate", body, hdr, timeout=300)
+    # narrate answers 200 even when Google refused every voice (9 Nov 2026: billing off, and the log said
+    # "recorded"): a 200 with failures is not a recording
+    if status == 200:
+        try:
+            j = json.loads(resp)
+            if j.get("failures"): return 502, "; ".join(j["failures"])[:300]
+        except Exception:
+            pass
     return status, resp[:300]
 
 # THE MARKETING RULE. The moment a night is in the account, its marketing is
