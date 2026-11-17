@@ -1,0 +1,59 @@
+# THE VOICES, CAUGHT UP (Levi, 17 Nov 2026: "Please have the correct voices read the scripture stories and also
+# please have it highlight and underline the word as the word is read"). Google's billing was off 8-17 Nov, so no
+# night of those days has Eli's or Hannah's reading, and the nights the doctrine review rewrote (9 Nov) still read
+# their old words. Run by hand: it records the Morning Lantern's reading (both voices, both editions) for each date in
+# `lantern` (force: recorded again), and the picture book's word-timed reading (both voices; the word lights as it
+# is said) for each date in `story`. Google text-to-speech, inside its free monthly allowance.
+name: Narrate backfill
+
+on:
+  workflow_dispatch:
+    inputs:
+      lantern:
+        description: "Morning Lantern readings to record again (dates, comma-separated)"
+        default: ""
+      story:
+        description: "Picture-book word-timed readings to record (dates, comma-separated)"
+        default: ""
+
+jobs:
+  narrate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Record
+        env:
+          SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          LANTERN: ${{ inputs.lantern }}
+          STORY: ${{ inputs.story }}
+        run: |
+          python3 - <<'PY'
+          import json, os, time, urllib.request, urllib.error
+          URL = os.environ["SUPABASE_URL"] + "/functions/v1/narrate"; KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
+          def call(body):
+              req = urllib.request.Request(URL, json.dumps(body).encode(), {"Authorization": "Bearer " + KEY, "Content-Type": "application/json"})
+              try:
+                  with urllib.request.urlopen(req, timeout=300) as r: return r.status, json.loads(r.read() or b"{}")
+              except urllib.error.HTTPError as e: return e.code, {"error": e.read()[:300].decode("utf-8", "ignore")}
+              except Exception as e: return 0, {"error": str(e)}
+          dates = lambda s: [d.strip() for d in (s or "").split(",") if d.strip()]
+          bad = 0
+          for d in dates(os.environ["LANTERN"]):
+              for ed in ("lds", "christian"):
+                  st, j = call({"date": d, "edition": ed, "force": True})
+                  ok = st == 200 and not j.get("failures")
+                  bad += not ok
+                  why = j.get("failures") or j.get("error")
+                  print(f"lantern {d} {ed}: " + ("recorded" if ok else f"NOT recorded ({st}) {why}"))
+          for d in dates(os.environ["STORY"]):
+              for v in ("eli", "hannah"):
+                  st, j = call({"story": d, "voice": v, "timed": True})
+                  ok = st == 200 and j.get("ok")
+                  bad += not ok
+                  why = j.get("error")
+                  print(f"story {d} {v}: " + (("recorded" + (" (finishing)" if j.get("pending") else "")) if ok else f"NOT recorded ({st}) {why}"))
+                  time.sleep(20 if j.get("pending") else 1)   # let a long one finish before the next starts
+          print(f"\n{bad} failed" if bad else "\nall recorded")
+          raise SystemExit(1 if bad else 0)
+          PY
