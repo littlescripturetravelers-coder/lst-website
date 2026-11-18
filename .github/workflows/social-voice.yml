@@ -1,0 +1,55 @@
+# LEVI'S VOICE LINES FOR SOCIAL VIDEOS
+# Levi, 17 Nov 2026: wants his own ElevenLabs voice to introduce the Song of the Night and the
+# Scripture Story of the Night posts, and to give the closing invitation.
+# Drop a JSON list [{"name": "...", "text": "..."}] into social/requests/<anything>.json and push;
+# this job speaks each line in Levi's voice and commits social/voice/<name>.mp3 (+ <name>.json status).
+name: Social voice lines
+on:
+  push:
+    paths: ['social/requests/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: social-voice
+  cancel-in-progress: false
+jobs:
+  speak:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Speak the lines
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          python3 - <<'PY'
+          import os, json, glob, urllib.request, urllib.error
+          key = os.environ.get('ELEVENLABS_API_KEY', '').strip()
+          VOICE = 'Nz2AS3P86Xwn1ptANiRG'   # ElevenLabs "Levi" (professional clone)
+          os.makedirs('social/voice', exist_ok=True)
+          for req_file in sorted(glob.glob('social/requests/*.json')):
+              for item in json.load(open(req_file)):
+                  name, text = item['name'], item['text']
+                  mp3, st = f'social/voice/{name}.mp3', f'social/voice/{name}.json'
+                  if os.path.exists(mp3) and json.load(open(st)).get('text') == text:
+                      continue
+                  body = json.dumps({'text': text, 'model_id': 'eleven_multilingual_v2',
+                      'voice_settings': {'stability': 0.5, 'similarity_boost': 0.8, 'style': 0.15, 'use_speaker_boost': True}}).encode()
+                  r = urllib.request.Request(f'https://api.elevenlabs.io/v1/text-to-speech/{VOICE}?output_format=mp3_44100_128',
+                      data=body, headers={'xi-api-key': key, 'Content-Type': 'application/json'})
+                  try:
+                      open(mp3, 'wb').write(urllib.request.urlopen(r, timeout=120).read())
+                      json.dump({'text': text, 'ok': True}, open(st, 'w'))
+                      print('made', name)
+                  except urllib.error.HTTPError as e:
+                      err = e.read()[:400].decode('utf-8', 'replace')
+                      json.dump({'text': text, 'ok': False, 'error': f'HTTP {e.code}: {err}'}, open(st, 'w'))
+                      print('FAILED', name, e.code, err)
+          PY
+      - name: Save
+        run: |
+          git config user.name "Morning Lantern"; git config user.email "lantern-bot@users.noreply.github.com"
+          git add social/voice
+          git diff --cached --quiet && exit 0
+          git commit -m "Social voice lines in Levi's voice"
+          for i in 1 2 3; do git pull --rebase -q && git push -q && exit 0; sleep 10; done; exit 1
