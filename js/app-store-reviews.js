@@ -9,7 +9,10 @@
      "Reviews coming soon".
    - The average is shown only from five ratings up, as the App Store itself does; "5.0 from 1 rating" tells
      a family nothing. Fewer than that, the written reviews are shown on their own.
-   - The reviews are the latest ones as written, low stars included. Nothing is picked.
+   - The reviews are the latest ones as written (a long one is shortened), low stars included. Nothing is picked.
+   - The numbers cover the English-speaking App Stores (US, Canada, UK, Australia, New Zealand, Ireland, South
+     Africa, Philippines, Singapore), because Apple counts ratings per country and there is no single world
+     total; the page says so rather than claim more.
    - Every word from the file goes in as text, never as markup. */
 (function () {
   "use strict";
@@ -24,7 +27,7 @@
   var url = link(d.url) || FALLBACK, allUrl = link(d.reviewsUrl) || url;
 
   var reviews = (Array.isArray(d.reviews) ? d.reviews : []).filter(function (r) {
-    return r && typeof r === "object" && r.stars >= 1 && r.stars <= 5 && (r.text || r.title);
+    return r && typeof r === "object" && typeof r.stars === "number" && r.stars >= 1 && r.stars <= 5 && (r.text || r.title);
   }).slice(0, SHOW);
   var showAvg = count >= 5 && rating >= 1 && rating <= 5;
   if (!showAvg && !reviews.length) return;
@@ -53,10 +56,10 @@
   if (showAvg) {
     var sum = el("div", "asr-summary");
     sum.setAttribute("role", "img");
-    sum.setAttribute("aria-label", "Rated " + rating.toFixed(1) + " out of 5 stars, from " + count + " ratings on the App Store");
+    sum.setAttribute("aria-label", "Rated " + rating.toFixed(1) + " out of 5 stars, from " + count + " ratings in English-speaking App Stores");
     sum.appendChild(el("span", "asr-avg", rating.toFixed(1)));
     sum.appendChild(stars(rating));
-    sum.appendChild(el("span", "asr-count", "from " + count.toLocaleString("en-US") + (count === 1 ? " rating" : " ratings") + " on the App Store"));
+    sum.appendChild(el("span", "asr-count", "from " + count.toLocaleString("en-US") + (count === 1 ? " rating" : " ratings") + " in English-speaking App Stores"));
     wrap.appendChild(sum);
   }
 
@@ -82,7 +85,7 @@
   a.href = allUrl; a.target = "_blank"; a.rel = "noopener";
   more.appendChild(a);
   wrap.appendChild(more);
-  if (reviews.length) wrap.appendChild(el("p", "asr-note", "Reviews are written by App Store users and shown as they wrote them. The newest are shown, whatever their stars."));
+  if (reviews.length) wrap.appendChild(el("p", "asr-note", "Reviews are written by App Store users and shown as they wrote them (long ones are shortened). The newest are shown, whatever their stars."));
 
   mount.appendChild(wrap);
   mount.hidden = false;
