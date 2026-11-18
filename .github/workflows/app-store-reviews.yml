@@ -6,13 +6,15 @@
 # Every day this asks Apple's public pages (no key, no credits) for the app's star rating, how many
 # people gave one, and the newest written reviews, with tools/app-store-reviews.py. It writes
 # data/app-store-reviews.js, which the home page reads. A day when nothing changed writes nothing and
-# makes no commit, so it causes no new deploy. A read that fails keeps the last good file and says so
-# in the run's warnings. (Run it by hand any time from Actions: App Store rating and reviews, Run workflow.)
+# makes no commit, so it causes no new deploy. A read that fails, or looks wrong (fewer ratings or reviews
+# than yesterday), keeps the last good file and turns THIS RUN RED with the reason, so GitHub emails the
+# owner and a broken read can never sit quietly for weeks with the page frozen. (Run it by hand any time
+# from Actions: App Store rating and reviews, Run workflow. This repository is public, so it costs nothing.)
 name: App Store rating and reviews
 
 on:
   schedule:
-    - cron: '23 13 * * *'     # every day at 13:23 UTC (about 7:23 AM Mountain)
+    - cron: '41 12 * * *'     # every day at 12:41 UTC (about 5:41 AM Mountain in winter), a quiet minute: the other jobs push on :07, :15, :37
   workflow_dispatch:
 
 permissions:
@@ -25,7 +27,7 @@ concurrency:
 jobs:
   read:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -39,6 +41,10 @@ jobs:
           git add data/app-store-reviews.js
           if git diff --cached --quiet; then echo "nothing changed today"; else
             git commit -m "App Store rating and reviews $(date -u +%Y-%m-%d)"
-            git pull --rebase origin "${GITHUB_REF_NAME}" || true
-            git push || (git pull --rebase origin "${GITHUB_REF_NAME}" && git push)
+            # another job may push at the same moment: take its commit in and try again
+            for i in 1 2 3; do
+              git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0
+              sleep 5
+            done
+            echo "::error::could not push the new App Store numbers"; exit 1
           fi
