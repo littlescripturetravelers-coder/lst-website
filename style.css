@@ -1028,6 +1028,27 @@ cite {
 }
 cite strong { color: var(--gold-ink); display: block; }
 
+/* ========== APP STORE RATING AND REVIEWS (js/app-store-reviews.js fills #app-store-reviews) ========== */
+#app-store-reviews[hidden], .testimonial-inner[hidden] { display: none; }
+.asr-wrap { text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
+.asr-wrap h2 { margin: 0; }
+.asr-summary { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.35rem var(--space-3); color: var(--white-70); font-size: var(--text-sm); }
+.asr-avg { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.4rem, 2rem + 2vw, 3.4rem); line-height: 1; color: var(--white); }
+.asr-stars { font-size: 1.35rem; letter-spacing: 0.12em; line-height: 1; white-space: nowrap;
+  background: linear-gradient(90deg, var(--gold-ink) var(--fill, 100%), var(--white-08) var(--fill, 100%));
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.asr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: var(--space-4); width: 100%; max-width: 1060px; margin-top: var(--space-4); text-align: left; }
+.asr-card { background: var(--white-08); border: 1.5px solid rgba(245,197,24,0.2); border-radius: var(--radius-lg); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); }
+.asr-top { display: flex; align-items: center; }
+.asr-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.asr-title { font-size: var(--text-base); color: var(--gold-ink); font-weight: 800; margin: 0; }
+.asr-text { font-size: var(--text-sm); color: var(--white); line-height: 1.6; margin: 0; display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical; overflow: hidden; }
+.asr-who { font-size: var(--text-xs, 0.8rem); color: var(--white-70); margin: auto 0 0; padding-top: var(--space-2); }
+.asr-more { margin: var(--space-4) 0 0; }
+.asr-link { color: var(--gold-ink); font-family: var(--font-body); font-weight: 800; font-size: var(--text-base); text-decoration: underline; text-underline-offset: 0.2em; }
+.asr-link:hover, .asr-link:focus-visible { text-decoration-thickness: 2px; }
+.asr-note { font-size: var(--text-xs, 0.8rem); color: var(--white-70); max-width: 52ch; margin: 0; }
+
 /* ========== OUR STORY ========== */
 .story-section { background: var(--navy-deep); }
 .story-layout {

@@ -1,0 +1,44 @@
+# THE APP STORE'S RATING AND REVIEWS, KEPT UP TO DATE ON THEIR OWN.
+#
+# Levi, 18 Nov 2026: "I would like to include the ratings and reviews in the Apple App Store
+# on my website."
+#
+# Every day this asks Apple's public pages (no key, no credits) for the app's star rating, how many
+# people gave one, and the newest written reviews, with tools/app-store-reviews.py. It writes
+# data/app-store-reviews.js, which the home page reads. A day when nothing changed writes nothing and
+# makes no commit, so it causes no new deploy. A read that fails keeps the last good file and says so
+# in the run's warnings. (Run it by hand any time from Actions: App Store rating and reviews, Run workflow.)
+name: App Store rating and reviews
+
+on:
+  schedule:
+    - cron: '23 13 * * *'     # every day at 13:23 UTC (about 7:23 AM Mountain)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: app-store-reviews
+  cancel-in-progress: false
+
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the App Store's rating and reviews
+        run: python3 tools/app-store-reviews.py
+
+      - name: Keep the new numbers here
+        run: |
+          git config user.name "app-store-reviews"
+          git config user.email "app-store-reviews@users.noreply.github.com"
+          git add data/app-store-reviews.js
+          if git diff --cached --quiet; then echo "nothing changed today"; else
+            git commit -m "App Store rating and reviews $(date -u +%Y-%m-%d)"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push || (git pull --rebase origin "${GITHUB_REF_NAME}" && git push)
+          fi

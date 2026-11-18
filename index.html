@@ -1258,6 +1258,9 @@
           <a href="/subscribe.html#plans" style="color:var(--gold-ink);font-family: var(--font-body);font-size:1rem;text-decoration:underline;" onclick="return openTrialSignup()">Try the First 7 Days Free →</a>
         </cite>
       </div>
+      <!-- The App Store's own rating and latest reviews: js/app-store-reviews.js fills this from data/app-store-reviews.js
+           (written daily by tools/app-store-reviews.py) and hides the "coming soon" note above. Nothing real to show: it stays hidden. -->
+      <div id="app-store-reviews" hidden></div>
     </section>
 
 
@@ -3057,6 +3060,8 @@
 
 </script><script src="js/vendor/supabase.js"></script>
 <script src="data/faiths.js"></script>
+<script src="data/app-store-reviews.js"></script>
+<script src="js/app-store-reviews.js"></script>
 <script src="js/lst-auth.js"></script>
 <script src="data/founding-offer.js"></script>
 <script src="js/lst-founding.js"></script>
