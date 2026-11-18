@@ -31,14 +31,15 @@ jobs:
               for item in json.load(open(req_file)):
                   name, text = item['name'], item['text']
                   mp3, st = f'social/voice/{name}.mp3', f'social/voice/{name}.json'
-                  if os.path.exists(mp3) and json.load(open(st)).get('text') == text:
+                  if os.path.exists(st) and json.load(open(st)).get('ok') and json.load(open(st)).get('text') == text and os.path.getsize(mp3) > 0:
                       continue
                   body = json.dumps({'text': text, 'model_id': 'eleven_multilingual_v2',
                       'voice_settings': {'stability': 0.5, 'similarity_boost': 0.8, 'style': 0.15, 'use_speaker_boost': True}}).encode()
                   r = urllib.request.Request(f'https://api.elevenlabs.io/v1/text-to-speech/{VOICE}?output_format=mp3_44100_128',
                       data=body, headers={'xi-api-key': key, 'Content-Type': 'application/json'})
                   try:
-                      open(mp3, 'wb').write(urllib.request.urlopen(r, timeout=120).read())
+                      data = urllib.request.urlopen(r, timeout=120).read()
+                      open(mp3, 'wb').write(data)
                       json.dump({'text': text, 'ok': True}, open(st, 'w'))
                       print('made', name)
                   except urllib.error.HTTPError as e:
