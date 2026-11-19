@@ -57,7 +57,7 @@ FAQ_HOME = [
     ("How much does it cost?",
      "The first 7 days are free. After that it is $6.99 a month or $49 a year, and you can cancel anytime."),
     ("What else comes with the subscription?",
-     "Coloring pages you can color online or print, printables (story book pages, crossword puzzles, quizzes, history tests and weekly charts), Quizlet-style flashcards and tests, the scriptures with chapter summaries and study guides, the Virtue Library, Family Stories, a Journal and the Sacred World Timeline."),
+     "Coloring pages you can color online or print, printables (story book pages, crossword puzzles, quizzes, history tests and weekly charts), Quizlet-style flashcards and tests, the scriptures with chapter summaries and study guides, the Virtue Library, Family Stories, a Journal, a family scrapbook that can turn a loved one's handwriting into a font, and the Five Stones feelings tool in every story. The Sacred World Timeline is free for everyone."),
     ("Can I read a story before I sign up?",
      "Yes. A whole night is free to read with nothing to join, on the free sample page."),
 ]
@@ -185,6 +185,8 @@ HUBS = {
      "<p>Every morning ends with three questions written for you, never a quiz for your child. They sit with you through the day, so by bedtime you have something true of your own to share: a prayer that was answered, an ancestor's courage, your testimony. That is the part your children will remember.</p>"),
     ("Two editions",
      "<p>The Latter-day Saint edition follows Come, Follow Me and draws on the scriptures and words of latter-day prophets. The Christian edition is written for Christian families of any church.</p>"),
+    ("All the scriptures, with study guides",
+     "<p>Your subscription opens the scriptures themselves, every book, chapter and verse. The Latter-day Saint edition has the Old Testament, New Testament, Book of Mormon, Doctrine and Covenants and Pearl of Great Price. The Christian edition has the Old and New Testaments (King James). Each chapter has a family-friendly summary and a study guide with a big-picture overview and notes on the verses. Highlight in ten colors, underline, take notes, tag and bookmark, and it all follows you between the website and the app.</p>"),
    ],
    faq=[
     ("What is the Morning Lantern?",
@@ -192,6 +194,7 @@ HUBS = {
     ("How long does it take?",
      "As long as you have: Quick takes a few minutes, Medium a little more, and Deep is a full study."),
     ("Does the LDS edition follow Come, Follow Me?", "Yes."),
+    ("Are the full scriptures included?", "Yes. The Latter-day Saint edition includes the Old Testament, New Testament, Book of Mormon, Doctrine and Covenants and Pearl of Great Price; the Christian edition includes the Old and New Testaments (King James), with chapter summaries, study guides, highlighting and notes."),
     ("How much does it cost?", FAQ_HOME[4][1]),
    ],
    list_title="Recent Morning Lantern studies",
@@ -372,6 +375,52 @@ HUBS = {
     ("How much does it cost?", FAQ_HOME[4][1]),
    ],
    list_title="", kw="Bible quiz and flashcards"),
+ "emotional-regulation-for-kids.html": dict(
+   title="Emotional Regulation for Kids — The Five Stones, Taught Through Scripture",
+   desc="Help young children name big feelings and calm down with the Five Stones (Spot, Name, Find, Fork, Calm), practiced every night inside a short scripture bedtime story.",
+   eyebrow="FEELINGS & EMOTIONAL REGULATION",
+   h1="Teaching little kids to handle big feelings, one bedtime story at a time",
+   lede="Every Little Scripture Travelers story has a Feeling Moment. Inside it, your child walks the same five small steps every night, the Five Stones, until handling a big feeling becomes a habit.",
+   no_list=True,
+   body=[
+    ("The Five Stones",
+     "<ol><li><strong>Spot</strong>: notice the feeling in the story's character first: their face, their body. It is easier to see a feeling in someone else before you see it in yourself.</li>"
+     "<li><strong>Name</strong>: give it a plain word, like happy, sad, mad, scared, worried or frustrated, and notice where it shows up in the body.</li>"
+     "<li><strong>Find</strong>: your child looks inward: Have I felt that? Where do I feel it?</li>"
+     "<li><strong>Fork</strong>: a feeling is a fork in the road. It can grab the wheel, or we can hold it and choose the wise path anyway. The story shows which way the character went.</li>"
+     "<li><strong>Calm</strong>: borrow one small calm-down tool together, like a slow breath, a hug or a prayer, and end with one slow breath.</li></ol>"
+     "<p>It is short on purpose. Little ones learn by repetition, not lectures, and walking the same path every night is what makes it stick.</p>"),
+    ("Why scripture stories work so well",
+     "<p>The people of the scriptures felt afraid, sad, jealous and brave, just like our children. Seeing a feeling in Esther, Daniel or Ruth first, and then in a Traveler living the same thing at home, gives a child a safe picture of what to do with their own. Read the full idea in our article \"The Feeling Path.\"</p>"),
+   ],
+   faq=[
+    ("What are the Five Stones?", "Spot, Name, Find, Fork, Calm: five short steps for noticing a feeling, naming it, finding it in yourself, choosing what to do with it, and calming down."),
+    ("What ages is this for?", FAQ_HOME[2][1]),
+    ("Is this a replacement for professional help?", "No. It is an everyday, story-based habit for families. If you are worried about your child's feelings or behavior, talk with your pediatrician."),
+    ("How much does it cost?", FAQ_HOME[4][1]),
+   ],
+   list_title="", kw="Emotional regulation for kids"),
+ "family-scrapbook.html": dict(
+   title="Digital Family Scrapbook — Turn Handwriting Into a Font & Print Family Books",
+   desc="A digital family scrapbook for faith-filled families: make memories from your photos, turn a loved one's handwriting into a font with Handwriting Twin, and gather it into real printed family books.",
+   eyebrow="SCRAPBOOK & FAMILY BOOKS",
+   h1="A family scrapbook in your own handwriting",
+   lede="Make a memory from your photos, write it in a loved one's own handwriting, and gather it all into a family book you can hold. It lives right beside your family's stories and journal.",
+   no_list=True,
+   body=[
+    ("What you can make",
+     "<ul><li><strong>Memories from your photos</strong>: a line each, laid out for you.</li>"
+     "<li><strong>Handwriting Twin</strong>: scan a loved one's handwriting once and it becomes a font of their own, so new words appear in their hand. Use your own, or a grandparent's from an old letter.</li>"
+     "<li><strong>Family books</strong>: gather it all together and print real books.</li></ul>"),
+    ("Part of your family's story",
+     "<p>The scrapbook sits beside Family Stories, the Journal and the Sacred World Timeline, where you can place your ancestors in history. Together they help your children know who they come from, the heart of family history for kids.</p>"),
+   ],
+   faq=[
+    ("Can I turn my handwriting into a font?", "Yes. Handwriting Twin scans a loved one's handwriting once and turns it into a font of their own."),
+    ("Can I print the scrapbook?", "Yes. Gather your memories into a family book and print real books."),
+    ("How much does it cost?", FAQ_HOME[4][1]),
+   ],
+   list_title="", kw="Family scrapbook"),
 }
 
 # Title / description rewrites for existing pages (CTR). None = keep what is there.
@@ -393,6 +442,8 @@ META = {
  "watch.html": ("Watch Scripture Stories for Kids | Little Scripture Travelers", None),
  "blog.html": ("LDS & Christian Parenting Blog | Little Scripture Travelers", None),
  "sample.html": (None, None),
+ "timeline.html": ("Bible Timeline for Kids & Families — Free Interactive Map of History",
+   "A free interactive Bible and world history timeline: see when and where every scripture story happened on a map, how it points to Christ, and add your own family history. No account needed."),
 }
 META["index-default.html"] = META["index.html"]
 META["index-july.html"] = META["index.html"]
@@ -578,6 +629,9 @@ FOOTER_COL = """<!-- SEO:FOOTER -->
           <li><a href="bible-coloring-pages-for-kids.html">Bible Coloring Pages</a></li>
           <li><a href="come-follow-me-printables.html">Printables &amp; Crosswords</a></li>
           <li><a href="bible-quiz-and-flashcards.html">Quizzes &amp; Flashcards</a></li>
+          <li><a href="timeline.html">Free Bible Timeline</a></li>
+          <li><a href="emotional-regulation-for-kids.html">Big Feelings: The Five Stones</a></li>
+          <li><a href="family-scrapbook.html">Family Scrapbook</a></li>
           <li><a href="sample.html">Read a Free Story</a></li>
         </ul>
       </div>
@@ -631,6 +685,7 @@ def home_faq(s):
              '<a href="homeschool-bible-stories.html">Homeschool</a><a href="scripture-study-for-parents.html">Scripture study for parents</a>'
              '<a href="kids-technology-by-age.html">Kids &amp; technology by age</a><a href="family-history-for-kids.html">Family history for kids</a><a href="teaching-kids-virtues.html">Teaching kids virtues</a>'
              '<a href="bible-coloring-pages-for-kids.html">Coloring pages</a><a href="come-follow-me-printables.html">Printables</a><a href="bible-quiz-and-flashcards.html">Quizzes &amp; flashcards</a>'
+             '<a href="timeline.html">Free Bible timeline</a><a href="emotional-regulation-for-kids.html">Big feelings</a><a href="family-scrapbook.html">Family scrapbook</a>'
              '<a href="sample.html">Read a free story</a></div>')
     block = "<!-- SEO:FAQ -->\n" + SEO_CSS + "\n" + faq_html(FAQ_HOME).replace("</div>\n</section>", links + "\n  </div>\n</section>") + "\n<!-- /SEO:FAQ -->\n  "
     i = s.find('<footer class="site-footer"')
@@ -757,7 +812,7 @@ def main():
 
     # sitemap
     pri = {"index.html": "1.0", "come-follow-me-for-kids.html": "0.9", "bible-stories-for-kids.html": "0.9",
-           "lds-parenting.html": "0.8", "christian-parenting.html": "0.8", "homeschool-bible-stories.html": "0.8", "scripture-study-for-parents.html": "0.8", "kids-technology-by-age.html": "0.8", "family-history-for-kids.html": "0.8", "teaching-kids-virtues.html": "0.9", "bible-coloring-pages-for-kids.html": "0.9", "come-follow-me-printables.html": "0.9", "bible-quiz-and-flashcards.html": "0.9", "subscribe.html": "0.8", "sample.html": "0.8"}
+           "lds-parenting.html": "0.8", "christian-parenting.html": "0.8", "homeschool-bible-stories.html": "0.8", "scripture-study-for-parents.html": "0.8", "kids-technology-by-age.html": "0.8", "family-history-for-kids.html": "0.8", "teaching-kids-virtues.html": "0.9", "bible-coloring-pages-for-kids.html": "0.9", "come-follow-me-printables.html": "0.9", "bible-quiz-and-flashcards.html": "0.9", "emotional-regulation-for-kids.html": "0.9", "family-scrapbook.html": "0.8", "timeline.html": "0.9", "subscribe.html": "0.8", "sample.html": "0.8"}
     urls = []
     for p in sorted(set(indexable), key=lambda p: (p != "index.html", p)):
         loc = SITE + "/" if p == "index.html" else SITE + "/" + p
@@ -802,6 +857,9 @@ Made by Little Scripture Travelers Bedtime Stories, LLC (founder Levi Lewis, Mon
 - [Bible coloring pages]({SITE}/bible-coloring-pages-for-kids.html): every night's story picture as a coloring page, online or printed
 - [Come, Follow Me and Bible printables]({SITE}/come-follow-me-printables.html): story pages, crosswords, quizzes, history tests, weekly charts
 - [Bible quizzes and flashcards]({SITE}/bible-quiz-and-flashcards.html): Quizlet-style Flashcards, Learn, Match, Test, own sets, scripture memorization
+- [Free Bible timeline]({SITE}/timeline.html): free interactive Bible and world history timeline with maps; add your own family history
+- [Emotional regulation for kids]({SITE}/emotional-regulation-for-kids.html): the Five Stones (Spot, Name, Find, Fork, Calm) in every nightly story
+- [Family scrapbook]({SITE}/family-scrapbook.html): photo memories, Handwriting Twin (your handwriting as a font), printed family books
 - [Free sample story]({SITE}/sample.html): a whole night free, nothing to join
 - [Plans and free trial]({SITE}/subscribe.html)
 - [Meet the Travelers]({SITE}/travelers.html): Beau the Brave, Scout the Seeker, Willow the Warm, Wren the Wonderer
