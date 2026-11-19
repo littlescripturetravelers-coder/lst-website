@@ -243,6 +243,33 @@ HUBS = {
      "Child, Content, Calm, Crowding out and Communication: a simple way to decide how technology fits your family at each age."),
    ],
    list_title="", kw="Kids and technology by age"),
+ "family-history-for-kids.html": dict(
+   title="Family History & Journaling for Kids — Stories That Build Faith",
+   desc="Simple ways to share family history and keep a journal with young kids: tell your own and your ancestors' stories, write down what your child says, and tie it to a nightly scripture story.",
+   eyebrow="FAMILY HISTORY & JOURNALING FOR KIDS",
+   h1="Family history for kids starts with the stories you tell tonight",
+   lede="Your child does not need a pedigree chart to love family history. They need to hear the stories: how Grandma kept going, how a prayer was answered, how you came to know the Savior. Write them down, and they last.",
+   blog=True,
+   body=[
+    ("Easy ways to start, even with toddlers",
+     "<ul><li><strong>Tell one true story at bedtime.</strong> After the scripture story, add a short one from your own life or an ancestor's that teaches the same thing.</li>"
+     "<li><strong>Write down what your child says.</strong> The funny questions and sweet prayers are family history too, and they are gone fast.</li>"
+     "<li><strong>Ask a grandparent one question.</strong> \"What was your house like when you were little?\" Record the answer on your phone.</li>"
+     "<li><strong>Look at old photos together.</strong> Say the names out loud so little ones learn who came before them.</li>"
+     "<li><strong>Keep it short and often.</strong> Two minutes most nights beats one long project once a year.</li></ul>"),
+    ("How Little Scripture Travelers helps",
+     "<p>Every morning the Morning Lantern gives you three questions in <em>A Parent's Heart</em>, so by bedtime you have a true story of your own ready to tell beside the scripture story. Inside the subscription, <strong>Family Stories</strong> is your family's own half of the library: tag the stories your family lives by with the same virtues, feelings and scriptures as the nightly stories. The <strong>Journal</strong> holds what your child actually said tonight. Both are the same on the website and in the app.</p>"),
+   ],
+   faq=[
+    ("How do I teach family history to young kids?",
+     "Tell short, true stories about yourself, grandparents and ancestors, often, and connect each one to something your child already knows, like that night's scripture story."),
+    ("What should a child's journal include?",
+     "For little ones, a parent writes it: what they said, what they asked, what they prayed about and what made them laugh. Older children can add their own drawings and words."),
+    ("Is Family Stories included in the subscription?",
+     "Yes. Family Stories and the Journal are part of the subscription, on the website and in the iPhone app. The first 7 days are free."),
+   ],
+   list_title="Recent scripture stories to pair with a family story",
+   kw="Family history for kids"),
 }
 
 # Title / description rewrites for existing pages (CTR). None = keep what is there.
@@ -415,6 +442,7 @@ FOOTER_COL = """<!-- SEO:FOOTER -->
           <li><a href="homeschool-bible-stories.html">For Homeschool Families</a></li>
           <li><a href="scripture-study-for-parents.html">Scripture Study for Parents</a></li>
           <li><a href="kids-technology-by-age.html">Kids &amp; Technology by Age</a></li>
+          <li><a href="family-history-for-kids.html">Family History for Kids</a></li>
           <li><a href="sample.html">Read a Free Story</a></li>
         </ul>
       </div>
@@ -466,7 +494,7 @@ def home_faq(s):
              '<a href="bible-stories-for-kids.html">Bible Stories for Kids</a>'
              '<a href="lds-parenting.html">LDS Parenting</a><a href="christian-parenting.html">Christian Parenting</a>'
              '<a href="homeschool-bible-stories.html">Homeschool</a><a href="scripture-study-for-parents.html">Scripture study for parents</a>'
-             '<a href="kids-technology-by-age.html">Kids &amp; technology by age</a>'
+             '<a href="kids-technology-by-age.html">Kids &amp; technology by age</a><a href="family-history-for-kids.html">Family history for kids</a>'
              '<a href="sample.html">Read a free story</a></div>')
     block = "<!-- SEO:FAQ -->\n" + SEO_CSS + "\n" + faq_html(FAQ_HOME).replace("</div>\n</section>", links + "\n  </div>\n</section>") + "\n<!-- /SEO:FAQ -->\n  "
     i = s.find('<footer class="site-footer"')
@@ -584,7 +612,7 @@ def main():
 
     # sitemap
     pri = {"index.html": "1.0", "come-follow-me-for-kids.html": "0.9", "bible-stories-for-kids.html": "0.9",
-           "lds-parenting.html": "0.8", "christian-parenting.html": "0.8", "homeschool-bible-stories.html": "0.8", "scripture-study-for-parents.html": "0.8", "kids-technology-by-age.html": "0.8", "subscribe.html": "0.8", "sample.html": "0.8"}
+           "lds-parenting.html": "0.8", "christian-parenting.html": "0.8", "homeschool-bible-stories.html": "0.8", "scripture-study-for-parents.html": "0.8", "kids-technology-by-age.html": "0.8", "family-history-for-kids.html": "0.8", "subscribe.html": "0.8", "sample.html": "0.8"}
     urls = []
     for p in sorted(set(indexable), key=lambda p: (p != "index.html", p)):
         loc = SITE + "/" if p == "index.html" else SITE + "/" + p
@@ -624,6 +652,7 @@ Made by Little Scripture Travelers Bedtime Stories, LLC (founder Levi Lewis, Mon
 - [Homeschool Bible stories]({SITE}/homeschool-bible-stories.html): a daily scripture story, printables and study pages for homeschool families
 - [Scripture study for parents]({SITE}/scripture-study-for-parents.html): the Morning Lantern, a daily devotional for moms and dads (Quick, Medium or Deep)
 - [Kids and technology by age]({SITE}/kids-technology-by-age.html): a parent guide to screens at every age, based on AAP and WHO guidance
+- [Family history and journaling for kids]({SITE}/family-history-for-kids.html): sharing family stories and keeping a journal with young children
 - [Free sample story]({SITE}/sample.html): a whole night free, nothing to join
 - [Plans and free trial]({SITE}/subscribe.html)
 - [Meet the Travelers]({SITE}/travelers.html): Beau the Brave, Scout the Seeker, Willow the Warm, Wren the Wonderer

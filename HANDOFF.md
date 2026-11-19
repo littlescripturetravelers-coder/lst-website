@@ -2022,10 +2022,10 @@ is replaced, never stacked. `.github/workflows/seo-refresh.yml` runs it every da
 and commits only if something changed.
 
 It makes / maintains:
-- **Seven topic pages** (generated — edit the `HUBS` dict, not the .html):
+- **Eight topic pages** (generated — edit the `HUBS` dict, not the .html):
   `come-follow-me-for-kids.html`, `bible-stories-for-kids.html`, `lds-parenting.html`,
   `christian-parenting.html`, `homeschool-bible-stories.html`, `scripture-study-for-parents.html`,
-  `kids-technology-by-age.html` (AAP 5 Cs + WHO, sources linked on the page). The story lists
+  `kids-technology-by-age.html` (AAP 5 Cs + WHO, sources linked on the page), `family-history-for-kids.html`. The story lists
   come from `lantern/*/night.json`, only nights dated today or earlier — titles + scripture only,
   the stories themselves stay behind the trial.
 - **Every public page's head:** canonical (www), Open Graph + Twitter with absolute image, the iPhone
