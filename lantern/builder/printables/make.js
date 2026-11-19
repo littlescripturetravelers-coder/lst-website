@@ -21,7 +21,14 @@ const ROOT = path.resolve(__dirname, '..', '..', '..');
 const LAN = path.join(ROOT, 'lantern'), OUT_INDEX = path.join(ROOT, 'data', 'printables.json');
 const PAGE = path.join(__dirname, 'page.html');
 const LULLABY_PAGE = path.join(__dirname, 'lullaby.html');   // the Lantern Lullaby's own one-page design (Levi's Canva sheet, 19 Nov 2026)
-const VERSION = '1';   // raise to make every printable again after a design change
+const VERSION = '1';
+/* THE FREE PRINTABLES (Levi, 19 Nov 2026: "make it so the free samples they can print so they can test out if they like
+   that too"): anyone may open these; every other printable is handed out only by the `printable` edge function to a
+   family lst_is_subscriber() lets in, stamped with their name. The free sample night (sample.html) and the Virtue
+   Library's free stories (data/virtue-library.js meta.freeStoryIds: David and Goliath, David Forgives Saul, Micaiah),
+   plus both Lantern Lullabies. A new free night is one more slug here. */
+const FREE_NIGHTS = ['children-are-a-gift', 'jun-15-david-and-goliath', 'jun-18-david-forgives-saul-in-the-cave', 'jul-07-micaiah-tells-the-truth'];
+const isFree = x => x.type === 'lullaby' || FREE_NIGHTS.includes(x.story);   // raise to make every printable again after a design change
 
 function playwright() { for (const t of [process.env.PLAYWRIGHT, 'playwright', '/opt/node22/lib/node_modules/playwright'].filter(Boolean)) { try { return require(t); } catch (e) {} } throw new Error('Playwright is not installed'); }
 function chromePath() { try { for (const d of fs.readdirSync('/opt/pw-browsers')) { const p = path.join('/opt/pw-browsers', d, 'chrome-linux', 'chrome'); if (/^chromium-/.test(d) && fs.existsSync(p)) return p; } } catch (e) {} return undefined; }
@@ -61,6 +68,36 @@ function songOf(lyrics) {   // "[Verse 1]\n...\n\n[Chorus]\n..." into sections; 
   return secs.filter(s => s.lines.length || s.chorus);
 }
 function loadLullaby(file, key) { const w = {}; new Function('window', fs.readFileSync(path.join(ROOT, 'data', file), 'utf8'))(w); return w[key]; }
+
+/* THE MASTERS GO TO THE PRIVATE BUCKET (migration 0049 in lst-app). The edge function `printable` reads them there,
+   checks the family, stamps their name and hands back their copy. Only a printable whose `src` changed since it was
+   last stored is sent again (`stored`). Needs SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (the Action has both);
+   without them nothing is sent and the next run tries again. A failed upload never holds anything back. */
+async function storeMasters(items) {
+  const URL_ = process.env.SUPABASE_URL, KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!URL_ || !KEY) { console.log('printables: no Supabase key here, the masters are not stored this run'); return; }
+  const jobs = [];
+  for (const x of items) {
+    if (x.stored === x.src) continue;
+    const paths = Object.values(x.files || {}).map(f => String(f.url || '').split('?')[0].replace(/^\/+/, '')).filter(Boolean);
+    if (!paths.length || !paths.every(p => fs.existsSync(path.join(ROOT, p)))) continue;
+    jobs.push({ x, paths });
+  }
+  let ok = 0, bad = 0;
+  const send = async ({ x, paths }) => {
+    try {
+      for (const p of paths) {
+        const r = await fetch(`${URL_}/storage/v1/object/printables-locked/${p}`, { method: 'POST',
+          headers: { Authorization: 'Bearer ' + KEY, apikey: KEY, 'Content-Type': 'application/pdf', 'x-upsert': 'true' },
+          body: fs.readFileSync(path.join(ROOT, p)) });
+        if (!r.ok) throw new Error(p + ' ' + r.status + ' ' + (await r.text()).slice(0, 120));
+      }
+      x.stored = x.src; ok++;
+    } catch (e) { bad++; if (bad <= 5) console.log('    ! not stored: ' + e.message); }
+  };
+  for (let i = 0; i < jobs.length; i += 6) await Promise.all(jobs.slice(i, i + 6).map(send));
+  console.log(`printables: ${ok} stored in the private bucket` + (bad ? `, ${bad} to try again next run` : ''));
+}
 
 async function render(browser, doc, pdfOut, thumbOut, page) {
   const ctx = await browser.newContext({ viewport: { width: 816, height: 1056 }, deviceScaleFactor: 0.75 });
@@ -150,6 +187,8 @@ async function render(browser, doc, pdfOut, thumbOut, page) {
   await browser.close();
   if (only) (index.warnings || []).forEach(w => { if (!only.includes(w.story)) warnings.push(w); });   // the nights not looked at keep their warnings
   items.sort((a, b) => (a.type === 'lullaby') - (b.type === 'lullaby') || ((b.date || '') < (a.date || '') ? -1 : (b.date || '') > (a.date || '') ? 1 : 0) || (a.type < b.type ? 1 : -1));
+  items.forEach(x => { if (isFree(x)) x.free = true; else delete x.free; });
+  await storeMasters(items);
   fs.writeFileSync(OUT_INDEX, JSON.stringify({ updated: new Date().toISOString(), base: 'https://littlescripturetravelers.com', items, warnings }, null, 1) + '\n');
   console.log(`printables: ${made} made, ${kept} unchanged, ${items.length} listed, ${warnings.length} warning(s)`);
   warnings.forEach(w => console.log('  WARNING ' + w.date + ' ' + w.story + ': ' + w.why));

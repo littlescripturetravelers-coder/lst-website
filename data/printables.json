@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T23:32:11.882Z",
+ "updated": "2026-11-19T23:43:15.732Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
   {
@@ -4393,7 +4393,8 @@
    "thumb": "/lantern/children-are-a-gift/printables/story.jpg?v=7dcce3bea5",
    "src": "7dcce3bea548c5eedd2669741d4231331857c499db6da0d84280318ed57b7a35",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "free": true
   },
   {
    "id": "song-children-are-a-gift",
@@ -4420,7 +4421,8 @@
    "thumb": "/lantern/children-are-a-gift/printables/song.jpg?v=35eab74c9c",
    "src": "35eab74c9ce8b4dc70a04b981ded4372143e3a5c2578c9ea344dff24f44ea908",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "free": true
   },
   {
    "id": "story-you-know-me",
@@ -7443,7 +7445,8 @@
    "thumb": "/lantern/jul-07-micaiah-tells-the-truth/printables/story.jpg?v=6497bbc6ce",
    "src": "6497bbc6ce6a5f8e5e852afd8c3cb6da88c383f3c4967d4913f3fd8aa2250b98",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "free": true
   },
   {
    "id": "song-jul-07-micaiah-tells-the-truth",
@@ -7470,7 +7473,8 @@
    "thumb": "/lantern/jul-07-micaiah-tells-the-truth/printables/song.jpg?v=ae99e53f5e",
    "src": "ae99e53f5e39ae58ac8ed2db0b8e5d3c0d024043b397eab271d4d87dad9e89e8",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "free": true
   },
   {
    "id": "song-jul-06-the-still-small-voice",
@@ -8025,7 +8029,8 @@
    "thumb": "/lantern/jun-18-david-forgives-saul-in-the-cave/printables/song.jpg?v=d9733ad557",
    "src": "d9733ad55724d70e68b9c2dafd9bf7bed61d376ff0d005b0618c2ada4e5a56e4",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "free": true
   },
   {
    "id": "story-jun-17-saul-gets-jealous-of-david",
@@ -8138,7 +8143,8 @@
    "thumb": "/lantern/jun-15-david-and-goliath/printables/song.jpg?v=c80559c0ac",
    "src": "c80559c0ac2782d192c69cbf92c711242eefd1a17d6b1e648adcf66b3a830382",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "free": true
   },
   {
    "id": "song-jun-14-david-plays-music-for-saul",
@@ -8567,7 +8573,8 @@
    "thumb": "/print/lullaby-nt.jpg?v=c7674094d5",
    "src": "c7674094d552ac154aac93ea3a06160b9c7db31590e600f28bdaf177e603c599",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "free": true
   },
   {
    "id": "lullaby-ot",
@@ -8586,7 +8593,8 @@
    "thumb": "/print/lullaby-ot.jpg?v=59b34810b7",
    "src": "59b34810b789fabefaddbc3147fcdef4e42efc457acd4ff9c9660292d0510d57",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "free": true
   }
  ],
  "warnings": [

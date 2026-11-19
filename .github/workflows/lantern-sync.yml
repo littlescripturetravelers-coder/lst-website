@@ -552,6 +552,9 @@ jobs:
       - name: Make the printables (Story, Song, Lullaby PDFs)
         if: github.ref == 'refs/heads/main'
         continue-on-error: true
+        env:
+          SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           npm install --no-save --silent playwright@1.56.1 >/dev/null 2>&1 || echo "playwright did not install - printables wait for the next run"
           npx playwright install --with-deps chromium >/dev/null 2>&1 || echo "chromium did not install - printables wait for the next run"
