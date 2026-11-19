@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T23:43:15.732Z",
+ "updated": "2026-11-19T23:46:37.590Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
   {
@@ -32,7 +32,8 @@
    "thumb": "/lantern/cords-of-love/printables/story.jpg?v=1b2b67c392",
    "src": "1b2b67c392352beb2bb7776284a20ec3f550a062b903e99ed905a75cc40512cd",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "1b2b67c392352beb2bb7776284a20ec3f550a062b903e99ed905a75cc40512cd"
   },
   {
    "id": "song-cords-of-love",
@@ -59,7 +60,8 @@
    "thumb": "/lantern/cords-of-love/printables/song.jpg?v=a83cd68f64",
    "src": "a83cd68f64fc53a3398998adf7235feffe63e7844a8a17557c84c9c6a2079746",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a83cd68f64fc53a3398998adf7235feffe63e7844a8a17557c84c9c6a2079746"
   },
   {
    "id": "story-he-taught-me-how-to-walk",
@@ -91,7 +93,8 @@
    "thumb": "/lantern/he-taught-me-how-to-walk/printables/story.jpg?v=a7092dfefd",
    "src": "a7092dfefdbec72b7a9d4a0660f28dfa53b12a5b987321f6fab0bec53918c0c3",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a7092dfefdbec72b7a9d4a0660f28dfa53b12a5b987321f6fab0bec53918c0c3"
   },
   {
    "id": "song-he-taught-me-how-to-walk",
@@ -118,7 +121,8 @@
    "thumb": "/lantern/he-taught-me-how-to-walk/printables/song.jpg?v=cdc7afde70",
    "src": "cdc7afde70c6f9fca1fe0bfbc25b13dfb83cab7e1dbcea6e9fe277ef33b3f2ad",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "cdc7afde70c6f9fca1fe0bfbc25b13dfb83cab7e1dbcea6e9fe277ef33b3f2ad"
   },
   {
    "id": "story-the-ancient-of-days",
@@ -150,7 +154,8 @@
    "thumb": "/lantern/the-ancient-of-days/printables/story.jpg?v=26b0f191fa",
    "src": "26b0f191fa5020390f79ccdd82138650574cc9df361f178e59306b4ea8393d28",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "26b0f191fa5020390f79ccdd82138650574cc9df361f178e59306b4ea8393d28"
   },
   {
    "id": "song-the-ancient-of-days",
@@ -177,7 +182,8 @@
    "thumb": "/lantern/the-ancient-of-days/printables/song.jpg?v=5965882c80",
    "src": "5965882c802af725a3dfd067052552dc5653226356d198bfe81327cc05c541ce",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "5965882c802af725a3dfd067052552dc5653226356d198bfe81327cc05c541ce"
   },
   {
    "id": "story-the-lions-lay-down-quiet",
@@ -209,7 +215,8 @@
    "thumb": "/lantern/the-lions-lay-down-quiet/printables/story.jpg?v=be9551d95c",
    "src": "be9551d95cf0a3afb7f717271cb75332b60e39411322ea2a961738b785d6551b",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "be9551d95cf0a3afb7f717271cb75332b60e39411322ea2a961738b785d6551b"
   },
   {
    "id": "song-the-lions-lay-down-quiet",
@@ -236,7 +243,8 @@
    "thumb": "/lantern/the-lions-lay-down-quiet/printables/song.jpg?v=29096497ff",
    "src": "29096497ff378b23c7cb46194ba05e2008c1de43c04a30a1308c4df948b56c19",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "29096497ff378b23c7cb46194ba05e2008c1de43c04a30a1308c4df948b56c19"
   },
   {
    "id": "story-the-hand-upon-the-wall",
@@ -268,7 +276,8 @@
    "thumb": "/lantern/the-hand-upon-the-wall/printables/story.jpg?v=c25a4d2103",
    "src": "c25a4d21034125fb5e0564bd1c26b4c0ceb5013f94e3c351e82bb9a3ea802ddd",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "c25a4d21034125fb5e0564bd1c26b4c0ceb5013f94e3c351e82bb9a3ea802ddd"
   },
   {
    "id": "song-the-hand-upon-the-wall",
@@ -295,7 +304,8 @@
    "thumb": "/lantern/the-hand-upon-the-wall/printables/song.jpg?v=de8bda6324",
    "src": "de8bda6324134584b7f8829deaae73c677451f4fcdb04e1befb356311b0732d0",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "de8bda6324134584b7f8829deaae73c677451f4fcdb04e1befb356311b0732d0"
   },
   {
    "id": "story-the-king-who-looked-up",
@@ -327,7 +337,8 @@
    "thumb": "/lantern/the-king-who-looked-up/printables/story.jpg?v=a90db90203",
    "src": "a90db90203341746f9bebaef2e2b6d46c84d28066ebdfe3d5b0f4554c18ce647",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a90db90203341746f9bebaef2e2b6d46c84d28066ebdfe3d5b0f4554c18ce647"
   },
   {
    "id": "song-the-king-who-looked-up",
@@ -354,7 +365,8 @@
    "thumb": "/lantern/the-king-who-looked-up/printables/song.jpg?v=0a39341a49",
    "src": "0a39341a49f692d2b2aa0e9991da1b4b59d227c75f0cb91d6ee53c929199c89e",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "0a39341a49f692d2b2aa0e9991da1b4b59d227c75f0cb91d6ee53c929199c89e"
   },
   {
    "id": "story-the-fourth-walking-with-them",
@@ -386,7 +398,8 @@
    "thumb": "/lantern/the-fourth-walking-with-them/printables/story.jpg?v=4c1922ff11",
    "src": "4c1922ff114dd9f209ea1c58c0f3edce198ffce06554c7f42a9ac57044f31703",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "4c1922ff114dd9f209ea1c58c0f3edce198ffce06554c7f42a9ac57044f31703"
   },
   {
    "id": "song-the-fourth-walking-with-them",
@@ -413,7 +426,8 @@
    "thumb": "/lantern/the-fourth-walking-with-them/printables/song.jpg?v=4ebfe6a8c3",
    "src": "4ebfe6a8c382f9c1fffcd20ac8c3056dc9594f27d40784515a24fe1418d44b20",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "4ebfe6a8c382f9c1fffcd20ac8c3056dc9594f27d40784515a24fe1418d44b20"
   },
   {
    "id": "story-the-secret-in-the-night",
@@ -445,7 +459,8 @@
    "thumb": "/lantern/the-secret-in-the-night/printables/story.jpg?v=4f13434bc5",
    "src": "4f13434bc595b90e5b27831cedf6b92ebd5a542772894b5e143545b7a51c0fdc",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "4f13434bc595b90e5b27831cedf6b92ebd5a542772894b5e143545b7a51c0fdc"
   },
   {
    "id": "song-the-secret-in-the-night",
@@ -472,7 +487,8 @@
    "thumb": "/lantern/the-secret-in-the-night/printables/song.jpg?v=147aad5a75",
    "src": "147aad5a7527c50af3165d654190b5409632a006ae7ebf372ae1cfc3665ff910",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "147aad5a7527c50af3165d654190b5409632a006ae7ebf372ae1cfc3665ff910"
   },
   {
    "id": "story-ten-days-and-a-cup-of-water",
@@ -504,7 +520,8 @@
    "thumb": "/lantern/ten-days-and-a-cup-of-water/printables/story.jpg?v=de57dbbefa",
    "src": "de57dbbefa46082d50048dd98f84b79c6accb76390f1e02c94babcdf1488b01a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "de57dbbefa46082d50048dd98f84b79c6accb76390f1e02c94babcdf1488b01a"
   },
   {
    "id": "song-ten-days-and-a-cup-of-water",
@@ -531,7 +548,8 @@
    "thumb": "/lantern/ten-days-and-a-cup-of-water/printables/song.jpg?v=310be5d7b5",
    "src": "310be5d7b5bbec716972962912c74466bac1dd4a2a759ec14bc43dbfe92db991",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "310be5d7b5bbec716972962912c74466bac1dd4a2a759ec14bc43dbfe92db991"
   },
   {
    "id": "story-the-river-that-kept-rising",
@@ -563,7 +581,8 @@
    "thumb": "/lantern/the-river-that-kept-rising/printables/story.jpg?v=37e16967e3",
    "src": "37e16967e36bcd56e566689813d2b01fef89c50b95342ae406930942dda6732d",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "37e16967e36bcd56e566689813d2b01fef89c50b95342ae406930942dda6732d"
   },
   {
    "id": "song-the-river-that-kept-rising",
@@ -590,7 +609,8 @@
    "thumb": "/lantern/the-river-that-kept-rising/printables/song.jpg?v=810ea39a9c",
    "src": "810ea39a9cd1a3d8077d0fafdc54431315fdec9688f2932d2e8d34bd6369cd0c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "810ea39a9cd1a3d8077d0fafdc54431315fdec9688f2932d2e8d34bd6369cd0c"
   },
   {
    "id": "story-the-valley-that-woke-up",
@@ -622,7 +642,8 @@
    "thumb": "/lantern/the-valley-that-woke-up/printables/story.jpg?v=e2a1eed79b",
    "src": "e2a1eed79b33cd5da9779377933fc49dd8f54e7790f890e9ba3dd43eb2055815",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e2a1eed79b33cd5da9779377933fc49dd8f54e7790f890e9ba3dd43eb2055815"
   },
   {
    "id": "song-the-valley-that-woke-up",
@@ -649,7 +670,8 @@
    "thumb": "/lantern/the-valley-that-woke-up/printables/song.jpg?v=776e722f54",
    "src": "776e722f547cb378734a2609cf88d46e8bab8fe2de95a2ae69a9b2b6133f749b",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "776e722f547cb378734a2609cf88d46e8bab8fe2de95a2ae69a9b2b6133f749b"
   },
   {
    "id": "story-a-new-heart",
@@ -681,7 +703,8 @@
    "thumb": "/lantern/a-new-heart/printables/story.jpg?v=b6d61b9cbe",
    "src": "b6d61b9cbeb1675e245857136c47116b5d11b29b8567c6474fb02524859e2d05",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "b6d61b9cbeb1675e245857136c47116b5d11b29b8567c6474fb02524859e2d05"
   },
   {
    "id": "song-a-new-heart",
@@ -708,7 +731,8 @@
    "thumb": "/lantern/a-new-heart/printables/song.jpg?v=669d58babb",
    "src": "669d58babba4b1c53af523db6e119f6619dc8d0081371314f510f79e0eb0c485",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "669d58babba4b1c53af523db6e119f6619dc8d0081371314f510f79e0eb0c485"
   },
   {
    "id": "story-the-shepherd-finds-his-sheep",
@@ -740,7 +764,8 @@
    "thumb": "/lantern/the-shepherd-finds-his-sheep/printables/story.jpg?v=a9ce4f01a7",
    "src": "a9ce4f01a77ccae6075340e4f09483f45fd835f351e910720fb3b6d2c5806787",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a9ce4f01a77ccae6075340e4f09483f45fd835f351e910720fb3b6d2c5806787"
   },
   {
    "id": "song-the-shepherd-finds-his-sheep",
@@ -767,7 +792,8 @@
    "thumb": "/lantern/the-shepherd-finds-his-sheep/printables/song.jpg?v=92218ac32c",
    "src": "92218ac32ccc3a4dcd5480426502b262576ab7e05e5587da4a2aa06fd8587742",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "92218ac32ccc3a4dcd5480426502b262576ab7e05e5587da4a2aa06fd8587742"
   },
   {
    "id": "story-the-one-who-watches",
@@ -799,7 +825,8 @@
    "thumb": "/lantern/the-one-who-watches/printables/story.jpg?v=ba66b53a43",
    "src": "ba66b53a436f0a6a434cb6ce3367b1fcd3cbe707fd4e17b05ae3901e22f25d31",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "ba66b53a436f0a6a434cb6ce3367b1fcd3cbe707fd4e17b05ae3901e22f25d31"
   },
   {
    "id": "song-the-one-who-watches",
@@ -826,7 +853,8 @@
    "thumb": "/lantern/the-one-who-watches/printables/song.jpg?v=75c7f26186",
    "src": "75c7f2618625119673914f28d9dd74330b5a6e6889c107f8193e72bddf00b557",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "75c7f2618625119673914f28d9dd74330b5a6e6889c107f8193e72bddf00b557"
   },
   {
    "id": "story-sweet-as-honey",
@@ -858,7 +886,8 @@
    "thumb": "/lantern/sweet-as-honey/printables/story.jpg?v=64d976c2fa",
    "src": "64d976c2fa3fe4a53cc312d84c4b3747137dabb5147170e322ca8fe1c0538f24",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "64d976c2fa3fe4a53cc312d84c4b3747137dabb5147170e322ca8fe1c0538f24"
   },
   {
    "id": "song-sweet-as-honey",
@@ -885,7 +914,8 @@
    "thumb": "/lantern/sweet-as-honey/printables/song.jpg?v=84c7152f0a",
    "src": "84c7152f0af8c33908bf0dc7e76cc42981e762f3fd3bef63e636245a24460f9c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "84c7152f0af8c33908bf0dc7e76cc42981e762f3fd3bef63e636245a24460f9c"
   },
   {
    "id": "story-the-sky-opened-wide",
@@ -917,7 +947,8 @@
    "thumb": "/lantern/the-sky-opened-wide/printables/story.jpg?v=844ad84635",
    "src": "844ad846354de7f9cae40ac77cbbfc6740db1afb55bb3a7177ae7cc18b15acba",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "844ad846354de7f9cae40ac77cbbfc6740db1afb55bb3a7177ae7cc18b15acba"
   },
   {
    "id": "song-the-sky-opened-wide",
@@ -944,7 +975,8 @@
    "thumb": "/lantern/the-sky-opened-wide/printables/song.jpg?v=5dbf5a6d9c",
    "src": "5dbf5a6d9cf5fee579a7d6b28d4fc63d9c1039080ab6bb48e5321a6c69821953",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "5dbf5a6d9cf5fee579a7d6b28d4fc63d9c1039080ab6bb48e5321a6c69821953"
   },
   {
    "id": "story-the-words-written-again",
@@ -976,7 +1008,8 @@
    "thumb": "/lantern/the-words-written-again/printables/story.jpg?v=cd976298f8",
    "src": "cd976298f8a992fa5dacbcc1afb3f0cc7dc7aee71be717d1f03261f8477a93ab",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "cd976298f8a992fa5dacbcc1afb3f0cc7dc7aee71be717d1f03261f8477a93ab"
   },
   {
    "id": "song-the-words-written-again",
@@ -1003,7 +1036,8 @@
    "thumb": "/lantern/the-words-written-again/printables/song.jpg?v=15f10a934c",
    "src": "15f10a934c4b9dc0ae9f92091bb04c63601e12ca72a59e2f2443218490d600db",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "15f10a934c4b9dc0ae9f92091bb04c63601e12ca72a59e2f2443218490d600db"
   },
   {
    "id": "story-written-on-our-hearts",
@@ -1035,7 +1069,8 @@
    "thumb": "/lantern/written-on-our-hearts/printables/story.jpg?v=f95f24ab80",
    "src": "f95f24ab80af20bcc22c5b7699b015289dba514845fe90f84452cab7892d9e17",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f95f24ab80af20bcc22c5b7699b015289dba514845fe90f84452cab7892d9e17"
   },
   {
    "id": "song-written-on-our-hearts",
@@ -1062,7 +1097,8 @@
    "thumb": "/lantern/written-on-our-hearts/printables/song.jpg?v=121ea5a822",
    "src": "121ea5a8223c8f10d75c586038c43a98268be0544925e600c8175f58a210fb72",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "121ea5a8223c8f10d75c586038c43a98268be0544925e600c8175f58a210fb72"
   },
   {
    "id": "story-mourning-turned-into-joy",
@@ -1094,7 +1130,8 @@
    "thumb": "/lantern/mourning-turned-into-joy/printables/story.jpg?v=9f3d4322b3",
    "src": "9f3d4322b3f402f718855080487b07b41b65d64c4d4f139ce58461a45eb41022",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9f3d4322b3f402f718855080487b07b41b65d64c4d4f139ce58461a45eb41022"
   },
   {
    "id": "song-mourning-turned-into-joy",
@@ -1121,7 +1158,8 @@
    "thumb": "/lantern/mourning-turned-into-joy/printables/song.jpg?v=3c2974826e",
    "src": "3c2974826ea92a91bd25723be28d230b8086c6314f42e6a8d54499549ed9e4b1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "3c2974826ea92a91bd25723be28d230b8086c6314f42e6a8d54499549ed9e4b1"
   },
   {
    "id": "story-a-field-for-tomorrow",
@@ -1153,7 +1191,8 @@
    "thumb": "/lantern/a-field-for-tomorrow/printables/story.jpg?v=8a9fb75dd3",
    "src": "8a9fb75dd3491b4dabcd31e1404e34a3d8ad1939721c22dcade98ec9765dcb5b",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "8a9fb75dd3491b4dabcd31e1404e34a3d8ad1939721c22dcade98ec9765dcb5b"
   },
   {
    "id": "song-a-field-for-tomorrow",
@@ -1180,7 +1219,8 @@
    "thumb": "/lantern/a-field-for-tomorrow/printables/song.jpg?v=973f6cf650",
    "src": "973f6cf6503f41cbd4dbe4184efd200a5132ba5bcb34b8260418b6da01ef1c6f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "973f6cf6503f41cbd4dbe4184efd200a5132ba5bcb34b8260418b6da01ef1c6f"
   },
   {
    "id": "story-call-and-he-will-answer",
@@ -1212,7 +1252,8 @@
    "thumb": "/lantern/call-and-he-will-answer/printables/story.jpg?v=5cf87d1949",
    "src": "5cf87d1949ef8d43a439633e2f39eefd17cccfc6e167af5914fb7f8f0ac92385",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "5cf87d1949ef8d43a439633e2f39eefd17cccfc6e167af5914fb7f8f0ac92385"
   },
   {
    "id": "song-call-and-he-will-answer",
@@ -1239,7 +1280,8 @@
    "thumb": "/lantern/call-and-he-will-answer/printables/song.jpg?v=9c31bc68c5",
    "src": "9c31bc68c56c1896a1bc9f623b40d68ed28a2b873c248952727bfdf020858552",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9c31bc68c56c1896a1bc9f623b40d68ed28a2b873c248952727bfdf020858552"
   },
   {
    "id": "story-loved-with-an-everlasting-love",
@@ -1271,7 +1313,8 @@
    "thumb": "/lantern/loved-with-an-everlasting-love/printables/story.jpg?v=f4bea93c0a",
    "src": "f4bea93c0adf65bbd990e72203f02560e81f3a645f6cda5c50bca5417a08b999",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f4bea93c0adf65bbd990e72203f02560e81f3a645f6cda5c50bca5417a08b999"
   },
   {
    "id": "song-loved-with-an-everlasting-love",
@@ -1298,7 +1341,8 @@
    "thumb": "/lantern/loved-with-an-everlasting-love/printables/song.jpg?v=08ca526d5f",
    "src": "08ca526d5f2b5172edde02bb0d3626df424ff24e5d2f784546614cff18a47eae",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "08ca526d5f2b5172edde02bb0d3626df424ff24e5d2f784546614cff18a47eae"
   },
   {
    "id": "story-new-every-morning",
@@ -1330,7 +1374,8 @@
    "thumb": "/lantern/new-every-morning/printables/story.jpg?v=c20eacda56",
    "src": "c20eacda5641002c1c891185dc5e4f364cd935ce84670b09af1d7689a3b90a3f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "c20eacda5641002c1c891185dc5e4f364cd935ce84670b09af1d7689a3b90a3f"
   },
   {
    "id": "song-new-every-morning",
@@ -1357,7 +1402,8 @@
    "thumb": "/lantern/new-every-morning/printables/song.jpg?v=2446476d4b",
    "src": "2446476d4b012cf480f29f1ac910758cd36ccba0363010295f327b6bff3c1415",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2446476d4b012cf480f29f1ac910758cd36ccba0363010295f327b6bff3c1415"
   },
   {
    "id": "story-a-little-fire-inside",
@@ -1389,7 +1435,8 @@
    "thumb": "/lantern/a-little-fire-inside/printables/story.jpg?v=9c8e772bf6",
    "src": "9c8e772bf69642e7ea6a605f7eef3f263d269225acf3386170e8a86230e92ba5",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9c8e772bf69642e7ea6a605f7eef3f263d269225acf3386170e8a86230e92ba5"
   },
   {
    "id": "song-a-little-fire-inside",
@@ -1416,7 +1463,8 @@
    "thumb": "/lantern/a-little-fire-inside/printables/song.jpg?v=a13b1501a6",
    "src": "a13b1501a65e66a7ef6c990642c2735d76368d64b8dbf6ad0939d150dced9da6",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a13b1501a65e66a7ef6c990642c2735d76368d64b8dbf6ad0939d150dced9da6"
   },
   {
    "id": "story-the-tree-by-the-water",
@@ -1448,7 +1496,8 @@
    "thumb": "/lantern/the-tree-by-the-water/printables/story.jpg?v=fbbf2f4f76",
    "src": "fbbf2f4f7646ecb55c749fc7e990a9d582ccc556c7a9c850dcaa9b803d88af4c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "fbbf2f4f7646ecb55c749fc7e990a9d582ccc556c7a9c850dcaa9b803d88af4c"
   },
   {
    "id": "song-the-tree-by-the-water",
@@ -1475,7 +1524,8 @@
    "thumb": "/lantern/the-tree-by-the-water/printables/song.jpg?v=e55800d8a7",
    "src": "e55800d8a79f5a2f5c16d0c5eb5efd1754b7cf4dfccc8d23b3c507e829cac70e",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e55800d8a79f5a2f5c16d0c5eb5efd1754b7cf4dfccc8d23b3c507e829cac70e"
   },
   {
    "id": "story-come-home-little-ones",
@@ -1507,7 +1557,8 @@
    "thumb": "/lantern/come-home-little-ones/printables/story.jpg?v=5744d7dbf6",
    "src": "5744d7dbf6085eea5bc38cac8ce0102b03b67dca4559e16d4a9e9b3b9a6727c6",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "5744d7dbf6085eea5bc38cac8ce0102b03b67dca4559e16d4a9e9b3b9a6727c6"
   },
   {
    "id": "song-come-home-little-ones",
@@ -1534,7 +1585,8 @@
    "thumb": "/lantern/come-home-little-ones/printables/song.jpg?v=2b961ea060",
    "src": "2b961ea060d5e030edd17dfecefd83aa45ab79a0fa0c57e093a59c0eca138d0e",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2b961ea060d5e030edd17dfecefd83aa45ab79a0fa0c57e093a59c0eca138d0e"
   },
   {
    "id": "story-the-potters-gentle-hands",
@@ -1566,7 +1618,8 @@
    "thumb": "/lantern/the-potters-gentle-hands/printables/story.jpg?v=a78832c6ba",
    "src": "a78832c6ba30754b1665fa0d34350870ea0296dfca0f19cb289bad2af7754237",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a78832c6ba30754b1665fa0d34350870ea0296dfca0f19cb289bad2af7754237"
   },
   {
    "id": "song-the-potters-gentle-hands",
@@ -1593,7 +1646,8 @@
    "thumb": "/lantern/the-potters-gentle-hands/printables/song.jpg?v=fa2b7467ee",
    "src": "fa2b7467ee793a90f2eddb74e36e24a540687d780af1fe2286ece128f433d4aa",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "fa2b7467ee793a90f2eddb74e36e24a540687d780af1fe2286ece128f433d4aa"
   },
   {
    "id": "story-the-little-waking-branch",
@@ -1625,7 +1679,8 @@
    "thumb": "/lantern/the-little-waking-branch/printables/story.jpg?v=0cabca48a7",
    "src": "0cabca48a700b089149b1585bb19715bfa9487b3849986765b3261a35736198a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "0cabca48a700b089149b1585bb19715bfa9487b3849986765b3261a35736198a"
   },
   {
    "id": "song-the-little-waking-branch",
@@ -1652,7 +1707,8 @@
    "thumb": "/lantern/the-little-waking-branch/printables/song.jpg?v=35cef0342e",
    "src": "35cef0342ef304db2b8dd09330d5d2665b5d105a72b4829c69c866f050d256a1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "35cef0342ef304db2b8dd09330d5d2665b5d105a72b4829c69c866f050d256a1"
   },
   {
    "id": "story-when-he-touched-my-mouth",
@@ -1684,7 +1740,8 @@
    "thumb": "/lantern/when-he-touched-my-mouth/printables/story.jpg?v=acbedc7508",
    "src": "acbedc750813848c5664294698ca582f5f629656d2a6a3cea10cb5eea00952be",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "acbedc750813848c5664294698ca582f5f629656d2a6a3cea10cb5eea00952be"
   },
   {
    "id": "song-when-he-touched-my-mouth",
@@ -1711,7 +1768,8 @@
    "thumb": "/lantern/when-he-touched-my-mouth/printables/song.jpg?v=4febefebd4",
    "src": "4febefebd4d6b92500741777731130fb7e4f0fa39223b705ba425570b8780d6b",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "4febefebd4d6b92500741777731130fb7e4f0fa39223b705ba425570b8780d6b"
   },
   {
    "id": "story-before-you-were-born",
@@ -1743,7 +1801,8 @@
    "thumb": "/lantern/before-you-were-born/printables/story.jpg?v=64a8ce4ed2",
    "src": "64a8ce4ed29247a1438278d9d58f08c8d1b400f325dcc197f0df7a62a67b476d",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "64a8ce4ed29247a1438278d9d58f08c8d1b400f325dcc197f0df7a62a67b476d"
   },
   {
    "id": "song-before-you-were-born",
@@ -1770,7 +1829,8 @@
    "thumb": "/lantern/before-you-were-born/printables/song.jpg?v=2ef0383502",
    "src": "2ef0383502d150204088619e60397e8382bc92c880ed9460fbc25bb86cc25ff4",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2ef0383502d150204088619e60397e8382bc92c880ed9460fbc25bb86cc25ff4"
   },
   {
    "id": "story-the-wolf-and-the-lamb",
@@ -1802,7 +1862,8 @@
    "thumb": "/lantern/the-wolf-and-the-lamb/printables/story.jpg?v=81395d0b94",
    "src": "81395d0b949c0a60995384b45242568bfa3e2aa3116ef3c7097bff295edec5af",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "81395d0b949c0a60995384b45242568bfa3e2aa3116ef3c7097bff295edec5af"
   },
   {
    "id": "song-the-wolf-and-the-lamb",
@@ -1829,7 +1890,8 @@
    "thumb": "/lantern/the-wolf-and-the-lamb/printables/song.jpg?v=bef70a61df",
    "src": "bef70a61dfcac5ec52621dc16e6e198943e2cddb2f149ddd099546f9358fca4f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "bef70a61dfcac5ec52621dc16e6e198943e2cddb2f149ddd099546f9358fca4f"
   },
   {
    "id": "story-clay-in-kind-hands",
@@ -1861,7 +1923,8 @@
    "thumb": "/lantern/clay-in-kind-hands/printables/story.jpg?v=be5e4ef955",
    "src": "be5e4ef955a5eb7c65e21d62891f511d4f42b24e9e3e3ccbad82a1448318f034",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "be5e4ef955a5eb7c65e21d62891f511d4f42b24e9e3e3ccbad82a1448318f034"
   },
   {
    "id": "song-clay-in-kind-hands",
@@ -1888,7 +1951,8 @@
    "thumb": "/lantern/clay-in-kind-hands/printables/song.jpg?v=3f3681a0ea",
    "src": "3f3681a0eafd68ee6b7aa2a3ac869c4cabfc685af01e4835bd60ccaf680c049f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "3f3681a0eafd68ee6b7aa2a3ac869c4cabfc685af01e4835bd60ccaf680c049f"
   },
   {
    "id": "story-beauty-for-ashes",
@@ -1920,7 +1984,8 @@
    "thumb": "/lantern/beauty-for-ashes/printables/story.jpg?v=ea532c9542",
    "src": "ea532c95426262affb7eb2b751392121469a238cae6da98be5cff77a802f886a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "ea532c95426262affb7eb2b751392121469a238cae6da98be5cff77a802f886a"
   },
   {
    "id": "song-beauty-for-ashes",
@@ -1947,7 +2012,8 @@
    "thumb": "/lantern/beauty-for-ashes/printables/song.jpg?v=f553097d31",
    "src": "f553097d31e7906e9647310be230def160cfaa2f72f49360a9a9cab358a4074e",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f553097d31e7906e9647310be230def160cfaa2f72f49360a9a9cab358a4074e"
   },
   {
    "id": "story-arise-little-light",
@@ -1979,7 +2045,8 @@
    "thumb": "/lantern/arise-little-light/printables/story.jpg?v=766cbb5011",
    "src": "766cbb5011d93229cdcd4103037349e4c1667dd4dae400a6609a55a35056fd62",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "766cbb5011d93229cdcd4103037349e4c1667dd4dae400a6609a55a35056fd62"
   },
   {
    "id": "song-arise-little-light",
@@ -2006,7 +2073,8 @@
    "thumb": "/lantern/arise-little-light/printables/song.jpg?v=7ca0e5aada",
    "src": "7ca0e5aada55715c88ed0efece5ff4be2e443f02aa69f02877503a6343143465",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "7ca0e5aada55715c88ed0efece5ff4be2e443f02aa69f02877503a6343143465"
   },
   {
    "id": "story-his-hand-is-not-too-short",
@@ -2038,7 +2106,8 @@
    "thumb": "/lantern/his-hand-is-not-too-short/printables/story.jpg?v=b9a2711df5",
    "src": "b9a2711df5b8242d696f075f2f9fa7a9cd0e6d355309f30118ac8463b52f4c65",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "b9a2711df5b8242d696f075f2f9fa7a9cd0e6d355309f30118ac8463b52f4c65"
   },
   {
    "id": "song-his-hand-is-not-too-short",
@@ -2065,7 +2134,8 @@
    "thumb": "/lantern/his-hand-is-not-too-short/printables/song.jpg?v=35c870a742",
    "src": "35c870a742a9f74dd495870145a1be72287d07c322dd184f1308ebd3ab35a7eb",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "35c870a742a9f74dd495870145a1be72287d07c322dd184f1308ebd3ab35a7eb"
   },
   {
    "id": "story-the-day-called-delight",
@@ -2097,7 +2167,8 @@
    "thumb": "/lantern/the-day-called-delight/printables/story.jpg?v=0065bfd88c",
    "src": "0065bfd88c2569121898cbe536de33122c785b0c1099376941855315d4a727c9",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "0065bfd88c2569121898cbe536de33122c785b0c1099376941855315d4a727c9"
   },
   {
    "id": "song-the-day-called-delight",
@@ -2124,7 +2195,8 @@
    "thumb": "/lantern/the-day-called-delight/printables/song.jpg?v=391bbce8b7",
    "src": "391bbce8b708abd87de3d6779de78e5dba0f54af4b8ee82f5e33505e463a9712",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "391bbce8b708abd87de3d6779de78e5dba0f54af4b8ee82f5e33505e463a9712"
   },
   {
    "id": "story-a-light-like-the-morning",
@@ -2156,7 +2228,8 @@
    "thumb": "/lantern/a-light-like-the-morning/printables/story.jpg?v=1defd33ef3",
    "src": "1defd33ef3ad40a8b71f2c914943cc52cdcd197ae851f1c19dcec5caed622b1f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "1defd33ef3ad40a8b71f2c914943cc52cdcd197ae851f1c19dcec5caed622b1f"
   },
   {
    "id": "song-a-light-like-the-morning",
@@ -2183,7 +2256,8 @@
    "thumb": "/lantern/a-light-like-the-morning/printables/song.jpg?v=26d90cbf52",
    "src": "26d90cbf52913e18057b80fbf16a681a4685c91182923ce54cc0a872291b8239",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "26d90cbf52913e18057b80fbf16a681a4685c91182923ce54cc0a872291b8239"
   },
   {
    "id": "story-a-home-for-humble-hearts",
@@ -2215,7 +2289,8 @@
    "thumb": "/lantern/a-home-for-humble-hearts/printables/story.jpg?v=78e82b0225",
    "src": "78e82b0225d8555a156e646d07a39957d1a416770ef9c5295875542a89309392",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "78e82b0225d8555a156e646d07a39957d1a416770ef9c5295875542a89309392"
   },
   {
    "id": "song-a-home-for-humble-hearts",
@@ -2242,7 +2317,8 @@
    "thumb": "/lantern/a-home-for-humble-hearts/printables/song.jpg?v=04306040d8",
    "src": "04306040d8143f53b8eb1c47b4adec2258724cc8e4d6f7484c512b4db024f2ec",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "04306040d8143f53b8eb1c47b4adec2258724cc8e4d6f7484c512b4db024f2ec"
   },
   {
    "id": "story-go-out-with-joy",
@@ -2274,7 +2350,8 @@
    "thumb": "/lantern/go-out-with-joy/printables/story.jpg?v=d6228f917b",
    "src": "d6228f917bd7ef0823f4c558d452b58a561e7db0e642a5890a50eef13274a8ed",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "d6228f917bd7ef0823f4c558d452b58a561e7db0e642a5890a50eef13274a8ed"
   },
   {
    "id": "song-go-out-with-joy",
@@ -2301,7 +2378,8 @@
    "thumb": "/lantern/go-out-with-joy/printables/song.jpg?v=e39b8a80c1",
    "src": "e39b8a80c1f128d05f06b52c72a0412e191896059b8a7af970062a82fc4480d3",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e39b8a80c1f128d05f06b52c72a0412e191896059b8a7af970062a82fc4480d3"
   },
   {
    "id": "story-kindness-that-never-leaves",
@@ -2333,7 +2411,8 @@
    "thumb": "/lantern/kindness-that-never-leaves/printables/story.jpg?v=3cc80b3872",
    "src": "3cc80b3872a12785a0fa0468befb4fe9c3da1454d5751123c74c1f7ea60674a5",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "3cc80b3872a12785a0fa0468befb4fe9c3da1454d5751123c74c1f7ea60674a5"
   },
   {
    "id": "song-kindness-that-never-leaves",
@@ -2360,7 +2439,8 @@
    "thumb": "/lantern/kindness-that-never-leaves/printables/song.jpg?v=38adf5222e",
    "src": "38adf5222e010ef259ba76bf5a46a4b98c74810d6516582198d9a87b64a47819",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "38adf5222e010ef259ba76bf5a46a4b98c74810d6516582198d9a87b64a47819"
   },
   {
    "id": "story-he-carried-our-sorrows",
@@ -2392,7 +2472,8 @@
    "thumb": "/lantern/he-carried-our-sorrows/printables/story.jpg?v=e3dcce6651",
    "src": "e3dcce6651d5900f7d159cab186896d66f6f56c9e2278891b8ccda5853147699",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e3dcce6651d5900f7d159cab186896d66f6f56c9e2278891b8ccda5853147699"
   },
   {
    "id": "song-he-carried-our-sorrows",
@@ -2419,7 +2500,8 @@
    "thumb": "/lantern/he-carried-our-sorrows/printables/song.jpg?v=15c680f681",
    "src": "15c680f681cc20ef52730d28b839f5cb5d1c154547649c12c1e62d3f4542ce4e",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "15c680f681cc20ef52730d28b839f5cb5d1c154547649c12c1e62d3f4542ce4e"
   },
   {
    "id": "story-beautiful-feet-on-the-hills",
@@ -2451,7 +2533,8 @@
    "thumb": "/lantern/beautiful-feet-on-the-hills/printables/story.jpg?v=c7cf477e71",
    "src": "c7cf477e71ba5a32db8c189aedf414281af182bdc69b1926cb0883dbb5034afe",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "c7cf477e71ba5a32db8c189aedf414281af182bdc69b1926cb0883dbb5034afe"
   },
   {
    "id": "song-beautiful-feet-on-the-hills",
@@ -2478,7 +2561,8 @@
    "thumb": "/lantern/beautiful-feet-on-the-hills/printables/song.jpg?v=a4d7e60c83",
    "src": "a4d7e60c83b33d2671a71c46145cfbdf7aa3cebcfd0ba9f1824da98ab901adb1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a4d7e60c83b33d2671a71c46145cfbdf7aa3cebcfd0ba9f1824da98ab901adb1"
   },
   {
    "id": "story-look-to-the-rock",
@@ -2510,7 +2594,8 @@
    "thumb": "/lantern/look-to-the-rock/printables/story.jpg?v=07cc3a2a18",
    "src": "07cc3a2a18d3583ba3b76eb2829d5fbdb0fa1b37b38ab9c0d8febe4607fed5a4",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "07cc3a2a18d3583ba3b76eb2829d5fbdb0fa1b37b38ab9c0d8febe4607fed5a4"
   },
   {
    "id": "song-look-to-the-rock",
@@ -2537,7 +2622,8 @@
    "thumb": "/lantern/look-to-the-rock/printables/song.jpg?v=bdb42e7e5e",
    "src": "bdb42e7e5eccfbdcebcac01289db4e99ba7119d0d23c5d21d427397d37436cc1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "bdb42e7e5eccfbdcebcac01289db4e99ba7119d0d23c5d21d427397d37436cc1"
   },
   {
    "id": "story-a-word-for-the-weary",
@@ -2569,7 +2655,8 @@
    "thumb": "/lantern/a-word-for-the-weary/printables/story.jpg?v=2592aafce7",
    "src": "2592aafce7f0c6ac960c73a304905bf2009673b02ee3cebe0f050733fe9f798e",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2592aafce7f0c6ac960c73a304905bf2009673b02ee3cebe0f050733fe9f798e"
   },
   {
    "id": "song-a-word-for-the-weary",
@@ -2596,7 +2683,8 @@
    "thumb": "/lantern/a-word-for-the-weary/printables/song.jpg?v=17153c0f90",
    "src": "17153c0f904b5a5ee71f8cd4a95cedd3ae170451ec361825393648bffbb86c55",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "17153c0f904b5a5ee71f8cd4a95cedd3ae170451ec361825393648bffbb86c55"
   },
   {
    "id": "story-water-from-the-rock",
@@ -2628,7 +2716,8 @@
    "thumb": "/lantern/water-from-the-rock/printables/story.jpg?v=f9ce758adc",
    "src": "f9ce758adcdd0500e3929d9dc577fdb391b74dc4008d5f9b00489afe84723b07",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f9ce758adcdd0500e3929d9dc577fdb391b74dc4008d5f9b00489afe84723b07"
   },
   {
    "id": "song-water-from-the-rock",
@@ -2655,7 +2744,8 @@
    "thumb": "/lantern/water-from-the-rock/printables/song.jpg?v=af3a511e8e",
    "src": "af3a511e8e57da751fdc2726197211e60d7aa15d8b69b4b3e3d22365aa1d80ba",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "af3a511e8e57da751fdc2726197211e60d7aa15d8b69b4b3e3d22365aa1d80ba"
   },
   {
    "id": "story-written-on-his-hands",
@@ -2687,7 +2777,8 @@
    "thumb": "/lantern/written-on-his-hands/printables/story.jpg?v=10da6faa0e",
    "src": "10da6faa0eec4b9e2f34bf39077235ad3c234251326ecf219d27a5bd454527c5",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "10da6faa0eec4b9e2f34bf39077235ad3c234251326ecf219d27a5bd454527c5"
   },
   {
    "id": "song-written-on-his-hands",
@@ -2714,7 +2805,8 @@
    "thumb": "/lantern/written-on-his-hands/printables/song.jpg?v=8fcb369268",
    "src": "8fcb369268ccce40ce206288d4efe71efa96ef208da38b66aef728d5094477ff",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "8fcb369268ccce40ce206288d4efe71efa96ef208da38b66aef728d5094477ff"
   },
   {
    "id": "story-i-have-called-you-by-name",
@@ -2746,7 +2838,8 @@
    "thumb": "/lantern/i-have-called-you-by-name/printables/story.jpg?v=75f6853e99",
    "src": "75f6853e9928acd9eee3e7b57fb8d1fced5b00c0ffb6bb263350fe3db5fdba8b",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "75f6853e9928acd9eee3e7b57fb8d1fced5b00c0ffb6bb263350fe3db5fdba8b"
   },
   {
    "id": "song-i-have-called-you-by-name",
@@ -2773,7 +2866,8 @@
    "thumb": "/lantern/i-have-called-you-by-name/printables/song.jpg?v=3f9479c117",
    "src": "3f9479c117332e8b1aedeb989bfe10570953cafa21567279368cb76616c76df1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "3f9479c117332e8b1aedeb989bfe10570953cafa21567279368cb76616c76df1"
   },
   {
    "id": "story-rivers-in-the-dry-places",
@@ -2805,7 +2899,8 @@
    "thumb": "/lantern/rivers-in-the-dry-places/printables/story.jpg?v=4ae6538976",
    "src": "4ae6538976ac8d8578bb57ebee08497987449b2d310d2638ff84ab6f77e6984b",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "4ae6538976ac8d8578bb57ebee08497987449b2d310d2638ff84ab6f77e6984b"
   },
   {
    "id": "song-rivers-in-the-dry-places",
@@ -2832,7 +2927,8 @@
    "thumb": "/lantern/rivers-in-the-dry-places/printables/song.jpg?v=fdaabf162a",
    "src": "fdaabf162a4dcd23f0880a4b30f450e92bc7d998646016b3995f5a314f5cf8bc",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "fdaabf162a4dcd23f0880a4b30f450e92bc7d998646016b3995f5a314f5cf8bc"
   },
   {
    "id": "story-wings-like-the-eagles",
@@ -2864,7 +2960,8 @@
    "thumb": "/lantern/wings-like-the-eagles/printables/story.jpg?v=59c63f060f",
    "src": "59c63f060fc78ea80c3528e894b7694ce43eb88d78a21c771e80e899c116561d",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "59c63f060fc78ea80c3528e894b7694ce43eb88d78a21c771e80e899c116561d"
   },
   {
    "id": "song-wings-like-the-eagles",
@@ -2891,7 +2988,8 @@
    "thumb": "/lantern/wings-like-the-eagles/printables/song.jpg?v=ddb250484e",
    "src": "ddb250484ebf4a9615e829ac42395ca6ecb2061447b64d4cbfb76417c498daae",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "ddb250484ebf4a9615e829ac42395ca6ecb2061447b64d4cbfb76417c498daae"
   },
   {
    "id": "story-he-calls-the-stars-by-name",
@@ -2923,7 +3021,8 @@
    "thumb": "/lantern/he-calls-the-stars-by-name/printables/story.jpg?v=e83caf56e1",
    "src": "e83caf56e15f7e51a59fe7c43c03ec651a87e67ff2bbc77adc0e3abd2b6b03a9",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e83caf56e15f7e51a59fe7c43c03ec651a87e67ff2bbc77adc0e3abd2b6b03a9"
   },
   {
    "id": "song-he-calls-the-stars-by-name",
@@ -2950,7 +3049,8 @@
    "thumb": "/lantern/he-calls-the-stars-by-name/printables/song.jpg?v=e595fa7ee3",
    "src": "e595fa7ee36f073fde538d9c7aa58b7417d0508975d29f45cb880d6769f3818a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e595fa7ee36f073fde538d9c7aa58b7417d0508975d29f45cb880d6769f3818a"
   },
   {
    "id": "story-he-carries-the-lambs",
@@ -2982,7 +3082,8 @@
    "thumb": "/lantern/he-carries-the-lambs/printables/story.jpg?v=f63c92422b",
    "src": "f63c92422be70f106ebe75d64b3457db8c369d253d7b3a83e9f41aebc7604d6d",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f63c92422be70f106ebe75d64b3457db8c369d253d7b3a83e9f41aebc7604d6d"
   },
   {
    "id": "song-he-carries-the-lambs",
@@ -3009,7 +3110,8 @@
    "thumb": "/lantern/he-carries-the-lambs/printables/song.jpg?v=2be14a355c",
    "src": "2be14a355cbc8a7301b335764873abfebb5eb080a203a8fb41285e997199e77e",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2be14a355cbc8a7301b335764873abfebb5eb080a203a8fb41285e997199e77e"
   },
   {
    "id": "story-the-gospel-dispensations",
@@ -3041,7 +3143,8 @@
    "thumb": "/lantern/the-gospel-dispensations/printables/story.jpg?v=163205a0fb",
    "src": "163205a0fb00b236fbc011749d02ea6b53374184e12786d4ca2e9e133db7d94b",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "163205a0fb00b236fbc011749d02ea6b53374184e12786d4ca2e9e133db7d94b"
   },
   {
    "id": "song-the-gospel-dispensations",
@@ -3068,7 +3171,8 @@
    "thumb": "/lantern/the-gospel-dispensations/printables/song.jpg?v=2a0da32dea",
    "src": "2a0da32deaf67bb8cc194c4ed5cbf9f1378857488b1afd3e900fea51f3d2b5c5",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2a0da32deaf67bb8cc194c4ed5cbf9f1378857488b1afd3e900fea51f3d2b5c5"
   },
   {
    "id": "story-be-strong-dont-be-afraid",
@@ -3100,7 +3204,8 @@
    "thumb": "/lantern/be-strong-dont-be-afraid/printables/story.jpg?v=a105f97308",
    "src": "a105f973086b2d7338161682b78f3f74561537dbaebf5204046784bd89e396db",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a105f973086b2d7338161682b78f3f74561537dbaebf5204046784bd89e396db"
   },
   {
    "id": "song-be-strong-dont-be-afraid",
@@ -3127,7 +3232,8 @@
    "thumb": "/lantern/be-strong-dont-be-afraid/printables/song.jpg?v=56f1c06346",
    "src": "56f1c06346300f9d8889660b6328553f5618678d31c0785e8efe758f50006423",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "56f1c06346300f9d8889660b6328553f5618678d31c0785e8efe758f50006423"
   },
   {
    "id": "story-the-desert-blooms",
@@ -3159,7 +3265,8 @@
    "thumb": "/lantern/the-desert-blooms/printables/story.jpg?v=cc8e314774",
    "src": "cc8e314774c8d8039f1b593997f8343b57e77f45d3b2950495362c7ab2f5e8a7",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "cc8e314774c8d8039f1b593997f8343b57e77f45d3b2950495362c7ab2f5e8a7"
   },
   {
    "id": "song-the-desert-blooms",
@@ -3186,7 +3293,8 @@
    "thumb": "/lantern/the-desert-blooms/printables/song.jpg?v=f59f398c9b",
    "src": "f59f398c9b45212d4793fc9320225b5c6061b04a5b31f49f65edcd518e18066a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f59f398c9b45212d4793fc9320225b5c6061b04a5b31f49f65edcd518e18066a"
   },
   {
    "id": "story-this-is-the-way",
@@ -3218,7 +3326,8 @@
    "thumb": "/lantern/this-is-the-way/printables/story.jpg?v=b19b00f527",
    "src": "b19b00f5274ac004b1614b721a45d5933810d6ebd3ff169f04b4614dc2819346",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "b19b00f5274ac004b1614b721a45d5933810d6ebd3ff169f04b4614dc2819346"
   },
   {
    "id": "song-this-is-the-way",
@@ -3245,7 +3354,8 @@
    "thumb": "/lantern/this-is-the-way/printables/song.jpg?v=7a417de8b8",
    "src": "7a417de8b898c07c1ad3e5394681cf2804b6e646202c2a4b2701e6ca012ef91e",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "7a417de8b898c07c1ad3e5394681cf2804b6e646202c2a4b2701e6ca012ef91e"
   },
   {
    "id": "story-a-marvellous-work-and-a-wonder",
@@ -3277,7 +3387,8 @@
    "thumb": "/lantern/a-marvellous-work-and-a-wonder/printables/story.jpg?v=2ca7b776f0",
    "src": "2ca7b776f07a7c2132fbd4756b18b78f004106c91216ea52adc7d13b70663c80",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2ca7b776f07a7c2132fbd4756b18b78f004106c91216ea52adc7d13b70663c80"
   },
   {
    "id": "song-a-marvellous-work-and-a-wonder",
@@ -3304,7 +3415,8 @@
    "thumb": "/lantern/a-marvellous-work-and-a-wonder/printables/song.jpg?v=85cebc1c43",
    "src": "85cebc1c433391c9c06aa3e4d97ef5f738e94b4f4c11c4421692434ba834aeb5",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "85cebc1c433391c9c06aa3e4d97ef5f738e94b4f4c11c4421692434ba834aeb5"
   },
   {
    "id": "story-a-sure-strong-rock",
@@ -3336,7 +3448,8 @@
    "thumb": "/lantern/a-sure-strong-rock/printables/story.jpg?v=e0cf09c8d9",
    "src": "e0cf09c8d93ea4f136ef32d6448dad3cc7f6da0c39c0d868c22893b01e94e51f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e0cf09c8d93ea4f136ef32d6448dad3cc7f6da0c39c0d868c22893b01e94e51f"
   },
   {
    "id": "song-a-sure-strong-rock",
@@ -3363,7 +3476,8 @@
    "thumb": "/lantern/a-sure-strong-rock/printables/song.jpg?v=f6e09e8d62",
    "src": "f6e09e8d624613f8f1ed52ff780d58279ef05749f0c7f25c27f9082b58b0c8a4",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f6e09e8d624613f8f1ed52ff780d58279ef05749f0c7f25c27f9082b58b0c8a4"
   },
   {
    "id": "story-perfect-peace",
@@ -3395,7 +3509,8 @@
    "thumb": "/lantern/perfect-peace/printables/story.jpg?v=b57672b951",
    "src": "b57672b951629edb3a08cde9300e5593c0f3d018c6285d1b609270c67e723117",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "b57672b951629edb3a08cde9300e5593c0f3d018c6285d1b609270c67e723117"
   },
   {
    "id": "song-perfect-peace",
@@ -3422,7 +3537,8 @@
    "thumb": "/lantern/perfect-peace/printables/song.jpg?v=760a4ba85c",
    "src": "760a4ba85c53cdcb212474c8f8f52a61d5d8cfcc74ddf69544096c0a7dcafb70",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "760a4ba85c53cdcb212474c8f8f52a61d5d8cfcc74ddf69544096c0a7dcafb70"
   },
   {
    "id": "story-he-wipes-away-every-tear",
@@ -3454,7 +3570,8 @@
    "thumb": "/lantern/he-wipes-away-every-tear/printables/story.jpg?v=1e4191aa66",
    "src": "1e4191aa66953120753fc57122ac4f6c1c2f87154e7b138795bd667564e48e12",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "1e4191aa66953120753fc57122ac4f6c1c2f87154e7b138795bd667564e48e12"
   },
   {
    "id": "song-he-wipes-away-every-tear",
@@ -3481,7 +3598,8 @@
    "thumb": "/lantern/he-wipes-away-every-tear/printables/song.jpg?v=1215c0b494",
    "src": "1215c0b49404ef2124d226a3d4f6cf3425006dcb40f27af271ab610f5f67d50e",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "1215c0b49404ef2124d226a3d4f6cf3425006dcb40f27af271ab610f5f67d50e"
   },
   {
    "id": "story-wells-of-joy",
@@ -3513,7 +3631,8 @@
    "thumb": "/lantern/wells-of-joy/printables/story.jpg?v=427b238a45",
    "src": "427b238a45bcc70b822e6b93d75cf0f4585c1ae5d840de93b911f4207a00f184",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "427b238a45bcc70b822e6b93d75cf0f4585c1ae5d840de93b911f4207a00f184"
   },
   {
    "id": "song-wells-of-joy",
@@ -3540,7 +3659,8 @@
    "thumb": "/lantern/wells-of-joy/printables/song.jpg?v=745a85045b",
    "src": "745a85045b4be25b7e84eed23fe52ec62d56069aab9e1f2bda0d525527fb36fb",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "745a85045b4be25b7e84eed23fe52ec62d56069aab9e1f2bda0d525527fb36fb"
   },
   {
    "id": "story-i-will-trust-and-not-be-afraid",
@@ -3572,7 +3692,8 @@
    "thumb": "/lantern/i-will-trust-and-not-be-afraid/printables/story.jpg?v=0ad538bba1",
    "src": "0ad538bba117cddae4fc979a96a80d38b5a8c14dc3a6a55446b04ca124af093b",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "0ad538bba117cddae4fc979a96a80d38b5a8c14dc3a6a55446b04ca124af093b"
   },
   {
    "id": "song-i-will-trust-and-not-be-afraid",
@@ -3599,7 +3720,8 @@
    "thumb": "/lantern/i-will-trust-and-not-be-afraid/printables/song.jpg?v=eedc6b9b42",
    "src": "eedc6b9b4235bf097a4dd76375a28e3a18805c9963c6af518fca9bba0b5fadb6",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "eedc6b9b4235bf097a4dd76375a28e3a18805c9963c6af518fca9bba0b5fadb6"
   },
   {
    "id": "story-the-peaceful-kingdom",
@@ -3631,7 +3753,8 @@
    "thumb": "/lantern/the-peaceful-kingdom/printables/story.jpg?v=07cc202915",
    "src": "07cc20291587f6892be81ef04e80d7ea63b75290a00ffba30c99f378bd374bb4",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "07cc20291587f6892be81ef04e80d7ea63b75290a00ffba30c99f378bd374bb4"
   },
   {
    "id": "song-the-peaceful-kingdom",
@@ -3658,7 +3781,8 @@
    "thumb": "/lantern/the-peaceful-kingdom/printables/song.jpg?v=2ed3fd849d",
    "src": "2ed3fd849dafbae199af5ce7d28b113c77bbcbafc3c916732d38e7b3e9c92442",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2ed3fd849dafbae199af5ce7d28b113c77bbcbafc3c916732d38e7b3e9c92442"
   },
   {
    "id": "story-a-special-baby-is-coming",
@@ -3690,7 +3814,8 @@
    "thumb": "/lantern/a-special-baby-is-coming/printables/story.jpg?v=60102f9f3d",
    "src": "60102f9f3d81d4f4cd330ba3b6c6a3734505221a41edb45e54d9c777490feca0",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "60102f9f3d81d4f4cd330ba3b6c6a3734505221a41edb45e54d9c777490feca0"
   },
   {
    "id": "song-a-special-baby-is-coming",
@@ -3717,7 +3842,8 @@
    "thumb": "/lantern/a-special-baby-is-coming/printables/song.jpg?v=66a0213dff",
    "src": "66a0213dffd0247f9f11a58682e89130dd227455bd5800230ba7708a939e2b89",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "66a0213dffd0247f9f11a58682e89130dd227455bd5800230ba7708a939e2b89"
   },
   {
    "id": "story-come-to-heavenly-fathers-house",
@@ -3749,7 +3875,8 @@
    "thumb": "/lantern/come-to-heavenly-fathers-house/printables/story.jpg?v=4c62d5a469",
    "src": "4c62d5a469054e0e1a5da91efb7ecc9b932272d3ca61b3a905b1503a92ea4758",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "4c62d5a469054e0e1a5da91efb7ecc9b932272d3ca61b3a905b1503a92ea4758"
   },
   {
    "id": "song-come-to-heavenly-fathers-house",
@@ -3776,7 +3903,8 @@
    "thumb": "/lantern/come-to-heavenly-fathers-house/printables/song.jpg?v=3f79d865bc",
    "src": "3f79d865bc844c8ae087166327388296428ae81f14caab916ec90c8b460ecf8d",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "3f79d865bc844c8ae087166327388296428ae81f14caab916ec90c8b460ecf8d"
   },
   {
    "id": "story-here-am-i-send-me",
@@ -3808,7 +3936,8 @@
    "thumb": "/lantern/here-am-i-send-me/printables/story.jpg?v=8bcc0f6119",
    "src": "8bcc0f6119737e827df0802bd6c631232fc3133daeb507dd574e24f3c28215ce",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "8bcc0f6119737e827df0802bd6c631232fc3133daeb507dd574e24f3c28215ce"
   },
   {
    "id": "song-here-am-i-send-me",
@@ -3835,7 +3964,8 @@
    "thumb": "/lantern/here-am-i-send-me/printables/song.jpg?v=af597eb71e",
    "src": "af597eb71e531e87e4775d032239873c64218498090a9f736baa60869bd0e326",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "af597eb71e531e87e4775d032239873c64218498090a9f736baa60869bd0e326"
   },
   {
    "id": "story-white-as-snow",
@@ -3867,7 +3997,8 @@
    "thumb": "/lantern/white-as-snow/printables/story.jpg?v=abdbd409ff",
    "src": "abdbd409ffac5ad9186036ed07eddee7164140d343f5654127a5adb7bf929c75",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "abdbd409ffac5ad9186036ed07eddee7164140d343f5654127a5adb7bf929c75"
   },
   {
    "id": "song-white-as-snow",
@@ -3894,7 +4025,8 @@
    "thumb": "/lantern/white-as-snow/printables/song.jpg?v=df9d8685cc",
    "src": "df9d8685cce690ef859f9342d406293ce702820bb072e4cd683579c83a5d2d0f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "df9d8685cce690ef859f9342d406293ce702820bb072e4cd683579c83a5d2d0f"
   },
   {
    "id": "story-a-good-name",
@@ -3926,7 +4058,8 @@
    "thumb": "/lantern/a-good-name/printables/story.jpg?v=7a17f4d76c",
    "src": "7a17f4d76cfce4235408f497fb299c59627897b12f97cd40fa7a1714b2f780eb",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "7a17f4d76cfce4235408f497fb299c59627897b12f97cd40fa7a1714b2f780eb"
   },
   {
    "id": "song-a-good-name",
@@ -3953,7 +4086,8 @@
    "thumb": "/lantern/a-good-name/printables/song.jpg?v=cb2559d7dc",
    "src": "cb2559d7dc03093edb3ccdeabcada30ab3fc09170ea89bc2afc5422d770dff5e",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "cb2559d7dc03093edb3ccdeabcada30ab3fc09170ea89bc2afc5422d770dff5e"
   },
   {
    "id": "story-remember-him-while-youre-little",
@@ -3985,7 +4119,8 @@
    "thumb": "/lantern/remember-him-while-youre-little/printables/story.jpg?v=46985f16c0",
    "src": "46985f16c09efe9f520149a586fa2038526a9b8f11a0f5ff38b66b806cfa55aa",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "46985f16c09efe9f520149a586fa2038526a9b8f11a0f5ff38b66b806cfa55aa"
   },
   {
    "id": "song-remember-him-while-youre-little",
@@ -4012,7 +4147,8 @@
    "thumb": "/lantern/remember-him-while-youre-little/printables/song.jpg?v=45158ac4fa",
    "src": "45158ac4fa8f43f62dd5cbcd5374cf1df97569841b59b408c342d0018127c6b2",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "45158ac4fa8f43f62dd5cbcd5374cf1df97569841b59b408c342d0018127c6b2"
   },
   {
    "id": "story-a-time-for-everything",
@@ -4044,7 +4180,8 @@
    "thumb": "/lantern/a-time-for-everything/printables/story.jpg?v=834c4857b2",
    "src": "834c4857b272b8d3dc12f2c74387d19445931ff6378c07e6838afba4a1e36521",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "834c4857b272b8d3dc12f2c74387d19445931ff6378c07e6838afba4a1e36521"
   },
   {
    "id": "song-a-time-for-everything",
@@ -4071,7 +4208,8 @@
    "thumb": "/lantern/a-time-for-everything/printables/song.jpg?v=b3b7d80b5b",
    "src": "b3b7d80b5bc229ccb407a113e8e837e957afab6e8237177b0af5378152fd29ad",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "b3b7d80b5bc229ccb407a113e8e837e957afab6e8237177b0af5378152fd29ad"
   },
   {
    "id": "story-loving-helping-hands",
@@ -4103,7 +4241,8 @@
    "thumb": "/lantern/loving-helping-hands/printables/story.jpg?v=9e7092c6a5",
    "src": "9e7092c6a5e1bff27f502fa6b877fefaf0fc183c6ee94e2fe5330b882a3633c6",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9e7092c6a5e1bff27f502fa6b877fefaf0fc183c6ee94e2fe5330b882a3633c6"
   },
   {
    "id": "song-loving-helping-hands",
@@ -4130,7 +4269,8 @@
    "thumb": "/lantern/loving-helping-hands/printables/song.jpg?v=7dfc927805",
    "src": "7dfc927805f49c104eb006dd844b23941465b155cd54261bc1b86385a32fa94f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "7dfc927805f49c104eb006dd844b23941465b155cd54261bc1b86385a32fa94f"
   },
   {
    "id": "story-a-soft-kind-answer",
@@ -4157,7 +4297,8 @@
    "thumb": "/lantern/a-soft-kind-answer/printables/story.jpg?v=a96375e63d",
    "src": "a96375e63df13b3c9849169c9292e4ea9d7b8c631ef70bafbb75bd09f2122af1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a96375e63df13b3c9849169c9292e4ea9d7b8c631ef70bafbb75bd09f2122af1"
   },
   {
    "id": "song-a-soft-kind-answer",
@@ -4184,7 +4325,8 @@
    "thumb": "/lantern/a-soft-kind-answer/printables/song.jpg?v=62c2b890f7",
    "src": "62c2b890f7dd971525b083d240a01ee2b72eece2e8f81b75da90e2e58e29e5ae",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "62c2b890f7dd971525b083d240a01ee2b72eece2e8f81b75da90e2e58e29e5ae"
   },
   {
    "id": "story-wisdom-a-hidden-treasure",
@@ -4216,7 +4358,8 @@
    "thumb": "/lantern/wisdom-a-hidden-treasure/printables/story.jpg?v=86de9400fb",
    "src": "86de9400fb4202dc2a531c4aef7b4c76a0cfafca498552c378d7ccfe56a4b8bb",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "86de9400fb4202dc2a531c4aef7b4c76a0cfafca498552c378d7ccfe56a4b8bb"
   },
   {
    "id": "song-wisdom-a-hidden-treasure",
@@ -4243,7 +4386,8 @@
    "thumb": "/lantern/wisdom-a-hidden-treasure/printables/song.jpg?v=8a40d01662",
    "src": "8a40d01662e505fed7438aeaedbca9f080e4fddc2de899b4fe466a3810565fef",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "8a40d01662e505fed7438aeaedbca9f080e4fddc2de899b4fe466a3810565fef"
   },
   {
    "id": "story-trust-him-to-lead-the-way",
@@ -4275,7 +4419,8 @@
    "thumb": "/lantern/trust-him-to-lead-the-way/printables/story.jpg?v=7f18f5e4b6",
    "src": "7f18f5e4b6a618709aff0875e4ec8a0966aea29b2bc668c2c3d5288f776f524c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "7f18f5e4b6a618709aff0875e4ec8a0966aea29b2bc668c2c3d5288f776f524c"
   },
   {
    "id": "song-trust-him-to-lead-the-way",
@@ -4302,7 +4447,8 @@
    "thumb": "/lantern/trust-him-to-lead-the-way/printables/song.jpg?v=cc8934530d",
    "src": "cc8934530dc395c6d0ef382f4761d6bbe7297603a18ffeb9ad49d5709b4c3a99",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "cc8934530dc395c6d0ef382f4761d6bbe7297603a18ffeb9ad49d5709b4c3a99"
   },
   {
    "id": "story-let-everything-praise-him",
@@ -4334,7 +4480,8 @@
    "thumb": "/lantern/let-everything-praise-him/printables/story.jpg?v=1ad1bf12d3",
    "src": "1ad1bf12d38192c197944612c09ec0985597b1b978b046044271b736678da1c6",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "1ad1bf12d38192c197944612c09ec0985597b1b978b046044271b736678da1c6"
   },
   {
    "id": "song-let-everything-praise-him",
@@ -4361,7 +4508,8 @@
    "thumb": "/lantern/let-everything-praise-him/printables/song.jpg?v=1fae359134",
    "src": "1fae3591342e5d87c8bc6d23f65fce55471bd9c7bc0b8c0c26337df7c5022e51",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "1fae3591342e5d87c8bc6d23f65fce55471bd9c7bc0b8c0c26337df7c5022e51"
   },
   {
    "id": "story-children-are-a-gift",
@@ -4394,7 +4542,8 @@
    "src": "7dcce3bea548c5eedd2669741d4231331857c499db6da0d84280318ed57b7a35",
    "updated": "2026-11-19",
    "created": "2026-11-19",
-   "free": true
+   "free": true,
+   "stored": "7dcce3bea548c5eedd2669741d4231331857c499db6da0d84280318ed57b7a35"
   },
   {
    "id": "song-children-are-a-gift",
@@ -4422,7 +4571,8 @@
    "src": "35eab74c9ce8b4dc70a04b981ded4372143e3a5c2578c9ea344dff24f44ea908",
    "updated": "2026-11-19",
    "created": "2026-11-19",
-   "free": true
+   "free": true,
+   "stored": "35eab74c9ce8b4dc70a04b981ded4372143e3a5c2578c9ea344dff24f44ea908"
   },
   {
    "id": "story-you-know-me",
@@ -4454,7 +4604,8 @@
    "thumb": "/lantern/you-know-me/printables/story.jpg?v=d8769dc7f1",
    "src": "d8769dc7f1493ba0a62097ef22989a1fd99befcdef9961c56e25e2b0c93d8a4b",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "d8769dc7f1493ba0a62097ef22989a1fd99befcdef9961c56e25e2b0c93d8a4b"
   },
   {
    "id": "song-you-know-me",
@@ -4481,7 +4632,8 @@
    "thumb": "/lantern/you-know-me/printables/song.jpg?v=7ec4c0dc98",
    "src": "7ec4c0dc98ed9e5727180d85acef2783f5df4fd3de2e76ae98a11093ed364ce1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "7ec4c0dc98ed9e5727180d85acef2783f5df4fd3de2e76ae98a11093ed364ce1"
   },
   {
    "id": "story-a-lamp-for-my-feet",
@@ -4513,7 +4665,8 @@
    "thumb": "/lantern/a-lamp-for-my-feet/printables/story.jpg?v=9b2cfd98b6",
    "src": "9b2cfd98b6c2a499c2ae6474ea4e3ef9f34198968a995d115696323a4eb99331",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9b2cfd98b6c2a499c2ae6474ea4e3ef9f34198968a995d115696323a4eb99331"
   },
   {
    "id": "song-a-lamp-for-my-feet",
@@ -4540,7 +4693,8 @@
    "thumb": "/lantern/a-lamp-for-my-feet/printables/song.jpg?v=2f6dc4faa5",
    "src": "2f6dc4faa5ecb12c0767a349e50c934529f75b3a4a906089de75169620b11206",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2f6dc4faa5ecb12c0767a349e50c934529f75b3a4a906089de75169620b11206"
   },
   {
    "id": "story-this-is-the-day",
@@ -4572,7 +4726,8 @@
    "thumb": "/lantern/this-is-the-day/printables/story.jpg?v=e5bb800a4d",
    "src": "e5bb800a4da1bcfe35d16cdc42c03eba4c10b60d5d8dd0e7994a03cc1edd19ab",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e5bb800a4da1bcfe35d16cdc42c03eba4c10b60d5d8dd0e7994a03cc1edd19ab"
   },
   {
    "id": "song-this-is-the-day",
@@ -4599,7 +4754,8 @@
    "thumb": "/lantern/this-is-the-day/printables/song.jpg?v=c3221f2840",
    "src": "c3221f284060f3b0f06a9baaa456b305da955ac3823d079eef411069b03998e3",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "c3221f284060f3b0f06a9baaa456b305da955ac3823d079eef411069b03998e3"
   },
   {
    "id": "story-he-hears-my-voice",
@@ -4631,7 +4787,8 @@
    "thumb": "/lantern/he-hears-my-voice/printables/story.jpg?v=d7514349f5",
    "src": "d7514349f5ba6b664f72b9bc5b4b79b242af5f1f23b381d2f8493fb951734ea9",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "d7514349f5ba6b664f72b9bc5b4b79b242af5f1f23b381d2f8493fb951734ea9"
   },
   {
    "id": "song-he-hears-my-voice",
@@ -4658,7 +4815,8 @@
    "thumb": "/lantern/he-hears-my-voice/printables/song.jpg?v=46c381155c",
    "src": "46c381155c6c5ce129ca36676511f2caae3268c06637abdaac0f6c8c55ea654a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "46c381155c6c5ce129ca36676511f2caae3268c06637abdaac0f6c8c55ea654a"
   },
   {
    "id": "story-bless-the-lord-o-my-soul",
@@ -4690,7 +4848,8 @@
    "thumb": "/lantern/bless-the-lord-o-my-soul/printables/story.jpg?v=32d36d5afc",
    "src": "32d36d5afcdacb23c64c09d146a803c7a9315d6ab5250a75d0a36753e86e65c9",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "32d36d5afcdacb23c64c09d146a803c7a9315d6ab5250a75d0a36753e86e65c9"
   },
   {
    "id": "song-bless-the-lord-o-my-soul",
@@ -4717,7 +4876,8 @@
    "thumb": "/lantern/bless-the-lord-o-my-soul/printables/song.jpg?v=4a5a3c0828",
    "src": "4a5a3c08286cdaa9e2cdfc1736de028c87c395c6f2d63092919c97973f554d1b",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "4a5a3c08286cdaa9e2cdfc1736de028c87c395c6f2d63092919c97973f554d1b"
   },
   {
    "id": "story-aug-33-my-hope-since-i-was-little",
@@ -4749,7 +4909,8 @@
    "thumb": "/lantern/aug-33-my-hope-since-i-was-little/printables/story.jpg?v=e416045d8d",
    "src": "e416045d8d41f5a5d8be183f4a3f942166debac8fdb47c8842f7337f7851e672",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e416045d8d41f5a5d8be183f4a3f942166debac8fdb47c8842f7337f7851e672"
   },
   {
    "id": "song-aug-33-my-hope-since-i-was-little",
@@ -4776,7 +4937,8 @@
    "thumb": "/lantern/aug-33-my-hope-since-i-was-little/printables/song.jpg?v=b3850cf8c7",
    "src": "b3850cf8c768aec7740c53eeb62849017ac71abf7ca10756cddebe9e9549c757",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "b3850cf8c768aec7740c53eeb62849017ac71abf7ca10756cddebe9e9549c757"
   },
   {
    "id": "story-aug-32-come-and-hear",
@@ -4808,7 +4970,8 @@
    "thumb": "/lantern/aug-32-come-and-hear/printables/story.jpg?v=ae484c3adc",
    "src": "ae484c3adcd825a7200593ef762de7563e958a0a216aff88df2f95291d5f6a9d",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "ae484c3adcd825a7200593ef762de7563e958a0a216aff88df2f95291d5f6a9d"
   },
   {
    "id": "song-aug-32-come-and-hear",
@@ -4835,7 +4998,8 @@
    "thumb": "/lantern/aug-32-come-and-hear/printables/song.jpg?v=9a7fa8792a",
    "src": "9a7fa8792a5073b417b12e9e4913eb14946f9cf908e6ed325d513cfc5789ced1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9a7fa8792a5073b417b12e9e4913eb14946f9cf908e6ed325d513cfc5789ced1"
   },
   {
    "id": "story-aug-30-my-strong-safe-rock",
@@ -4867,7 +5031,8 @@
    "thumb": "/lantern/aug-30-my-strong-safe-rock/printables/story.jpg?v=4bca34025d",
    "src": "4bca34025d3b7aea2596a894a84d12377e18c242e916a7b7194a7eed37303ab1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "4bca34025d3b7aea2596a894a84d12377e18c242e916a7b7194a7eed37303ab1"
   },
   {
    "id": "song-aug-30-my-strong-safe-rock",
@@ -4894,7 +5059,8 @@
    "thumb": "/lantern/aug-30-my-strong-safe-rock/printables/song.jpg?v=e2f24092b9",
    "src": "e2f24092b99ee384dcf85d89116102ecc6ab7220a2b8d782a5f80b99029ff6b3",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e2f24092b99ee384dcf85d89116102ecc6ab7220a2b8d782a5f80b99029ff6b3"
   },
   {
    "id": "story-aug-31-thinking-of-heavenly-father-at-night",
@@ -4926,7 +5092,8 @@
    "thumb": "/lantern/aug-31-thinking-of-heavenly-father-at-night/printables/story.jpg?v=e0952c1251",
    "src": "e0952c1251e2359045fa9c2b8f863c43643de24123c1f74d5d66040fa497f45c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e0952c1251e2359045fa9c2b8f863c43643de24123c1f74d5d66040fa497f45c"
   },
   {
    "id": "song-aug-31-thinking-of-heavenly-father-at-night",
@@ -4953,7 +5120,8 @@
    "thumb": "/lantern/aug-31-thinking-of-heavenly-father-at-night/printables/song.jpg?v=dbd7087af0",
    "src": "dbd7087af051ffc143154ba55fb0ee7c0473ac0049cb65436fc38256e7123e78",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "dbd7087af051ffc143154ba55fb0ee7c0473ac0049cb65436fc38256e7123e78"
   },
   {
    "id": "story-aug-29-a-clean-new-heart",
@@ -4985,7 +5153,8 @@
    "thumb": "/lantern/aug-29-a-clean-new-heart/printables/story.jpg?v=c62742551f",
    "src": "c62742551fe12769126821c3127202636980d06a117cde62418f0cc26fe73517",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "c62742551fe12769126821c3127202636980d06a117cde62418f0cc26fe73517"
   },
   {
    "id": "song-aug-29-a-clean-new-heart",
@@ -5012,7 +5181,8 @@
    "thumb": "/lantern/aug-29-a-clean-new-heart/printables/song.jpg?v=66f8f2c631",
    "src": "66f8f2c6318f83d5143368046e4b595a7cfb633c0229ff3a00904a52185363c4",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "66f8f2c6318f83d5143368046e4b595a7cfb633c0229ff3a00904a52185363c4"
   },
   {
    "id": "story-aug-28-sing-with-all-your-heart",
@@ -5044,7 +5214,8 @@
    "thumb": "/lantern/aug-28-sing-with-all-your-heart/printables/story.jpg?v=6473bb5674",
    "src": "6473bb567492f6ed7dadd58e5e15c4806d724379a5b3c76414a9049603426014",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "6473bb567492f6ed7dadd58e5e15c4806d724379a5b3c76414a9049603426014"
   },
   {
    "id": "song-aug-28-sing-with-all-your-heart",
@@ -5071,7 +5242,8 @@
    "thumb": "/lantern/aug-28-sing-with-all-your-heart/printables/song.jpg?v=e0f03f08d8",
    "src": "e0f03f08d83cfa7de9f7a6d8c8e37a2569849220be9119af55ea6de489e8fd1a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e0f03f08d83cfa7de9f7a6d8c8e37a2569849220be9119af55ea6de489e8fd1a"
   },
   {
    "id": "story-aug-27-a-brand-new-song",
@@ -5103,7 +5275,8 @@
    "thumb": "/lantern/aug-27-a-brand-new-song/printables/story.jpg?v=6395d8f8e9",
    "src": "6395d8f8e937553113d8cfb747ea258376036d66db611b618cf509ff9661f65d",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "6395d8f8e937553113d8cfb747ea258376036d66db611b618cf509ff9661f65d"
   },
   {
    "id": "song-aug-27-a-brand-new-song",
@@ -5130,7 +5303,8 @@
    "thumb": "/lantern/aug-27-a-brand-new-song/printables/song.jpg?v=83723b079f",
    "src": "83723b079f49e1a798482b569a03b1a9dce039f85b71904af917dc404e781725",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "83723b079f49e1a798482b569a03b1a9dce039f85b71904af917dc404e781725"
   },
   {
    "id": "story-aug-26-be-still-and-know",
@@ -5162,7 +5336,8 @@
    "thumb": "/lantern/aug-26-be-still-and-know/printables/story.jpg?v=2504559a94",
    "src": "2504559a946dda49ebe9dac3bcb468b85f8a19d36b3d3a492723568aca4d79fe",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2504559a946dda49ebe9dac3bcb468b85f8a19d36b3d3a492723568aca4d79fe"
   },
   {
    "id": "song-aug-26-be-still-and-know",
@@ -5189,7 +5364,8 @@
    "thumb": "/lantern/aug-26-be-still-and-know/printables/song.jpg?v=d72bb0b2d2",
    "src": "d72bb0b2d2b981642e4ab077fc6866e790755e7639b270cafdf7f07d8cec5255",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "d72bb0b2d2b981642e4ab077fc6866e790755e7639b270cafdf7f07d8cec5255"
   },
   {
    "id": "story-aug-25-heavenly-father-is-my-light",
@@ -5221,7 +5397,8 @@
    "thumb": "/lantern/aug-25-heavenly-father-is-my-light/printables/story.jpg?v=a5cb3a1707",
    "src": "a5cb3a1707c9b337877ac870b0ef746c2d428447160f584b537394b46ed496e6",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a5cb3a1707c9b337877ac870b0ef746c2d428447160f584b537394b46ed496e6"
   },
   {
    "id": "song-aug-25-heavenly-father-is-my-light",
@@ -5248,7 +5425,8 @@
    "thumb": "/lantern/aug-25-heavenly-father-is-my-light/printables/song.jpg?v=a1732eda7c",
    "src": "a1732eda7c4e9579cdb367ec57109b95ea273a22a49e4423311c007a1ae541c4",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a1732eda7c4e9579cdb367ec57109b95ea273a22a49e4423311c007a1ae541c4"
   },
   {
    "id": "story-aug-24-the-good-shepherd",
@@ -5280,7 +5458,8 @@
    "thumb": "/lantern/aug-24-the-good-shepherd/printables/story.jpg?v=4ce2a455ab",
    "src": "4ce2a455abd5ff2f223fcceeebc4384c8f861076dec92e2a992ad5e9a6225967",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "4ce2a455abd5ff2f223fcceeebc4384c8f861076dec92e2a992ad5e9a6225967"
   },
   {
    "id": "song-aug-24-the-good-shepherd",
@@ -5307,7 +5486,8 @@
    "thumb": "/lantern/aug-24-the-good-shepherd/printables/song.jpg?v=f15ad53fd4",
    "src": "f15ad53fd4695a1d266637557efc8ed5bf68c4ebf53ce3a8d45a1e521d073a33",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f15ad53fd4695a1d266637557efc8ed5bf68c4ebf53ce3a8d45a1e521d073a33"
   },
   {
    "id": "story-aug-23-look-at-the-stars",
@@ -5339,7 +5519,8 @@
    "thumb": "/lantern/aug-23-look-at-the-stars/printables/story.jpg?v=ce3f52ce61",
    "src": "ce3f52ce6171d3514519305518fb7bc6ae0941dec86d03f09f93ad58f28b0191",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "ce3f52ce6171d3514519305518fb7bc6ae0941dec86d03f09f93ad58f28b0191"
   },
   {
    "id": "song-aug-23-look-at-the-stars",
@@ -5366,7 +5547,8 @@
    "thumb": "/lantern/aug-23-look-at-the-stars/printables/song.jpg?v=699c31239d",
    "src": "699c31239d2821a78ee6dea5028ffdcf836c4c2f3bcd96074f6892ffe40cc07c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "699c31239d2821a78ee6dea5028ffdcf836c4c2f3bcd96074f6892ffe40cc07c"
   },
   {
    "id": "story-aug-22-the-happy-little-tree",
@@ -5398,7 +5580,8 @@
    "thumb": "/lantern/aug-22-the-happy-little-tree/printables/story.jpg?v=2588b6b0c6",
    "src": "2588b6b0c66b8512fd2b15204b50ad173788837bc1438b9e5499448367db2dad",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2588b6b0c66b8512fd2b15204b50ad173788837bc1438b9e5499448367db2dad"
   },
   {
    "id": "song-aug-22-the-happy-little-tree",
@@ -5425,7 +5608,8 @@
    "thumb": "/lantern/aug-22-the-happy-little-tree/printables/song.jpg?v=233dbe1e92",
    "src": "233dbe1e92c2df89485fa09d25f2c89668ed14d1b8af1d8dedec90bf4b50e2d2",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "233dbe1e92c2df89485fa09d25f2c89668ed14d1b8af1d8dedec90bf4b50e2d2"
   },
   {
    "id": "story-aug-21-heavenly-father-blesses-job-again",
@@ -5457,7 +5641,8 @@
    "thumb": "/lantern/aug-21-heavenly-father-blesses-job-again/printables/story.jpg?v=c25f012236",
    "src": "c25f012236ff4b1327f1aaefceab1fc217e332dda25edeade98ea75ff16a3e8d",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "c25f012236ff4b1327f1aaefceab1fc217e332dda25edeade98ea75ff16a3e8d"
   },
   {
    "id": "song-aug-21-heavenly-father-blesses-job-again",
@@ -5484,7 +5669,8 @@
    "thumb": "/lantern/aug-21-heavenly-father-blesses-job-again/printables/song.jpg?v=102f332708",
    "src": "102f33270811aeb151a850d398e4d0d02487000eaa9668175589792391bed952",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "102f33270811aeb151a850d398e4d0d02487000eaa9668175589792391bed952"
   },
   {
    "id": "story-aug-20-job-trusts-heavenly-fathers-wisdom",
@@ -5516,7 +5702,8 @@
    "thumb": "/lantern/aug-20-job-trusts-heavenly-fathers-wisdom/printables/story.jpg?v=639c759aa4",
    "src": "639c759aa43186de234be4dd580674ac4ee5c2ff1a613ac680cba2d1ba3d42b9",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "639c759aa43186de234be4dd580674ac4ee5c2ff1a613ac680cba2d1ba3d42b9"
   },
   {
    "id": "song-aug-20-job-trusts-heavenly-fathers-wisdom",
@@ -5543,7 +5730,8 @@
    "thumb": "/lantern/aug-20-job-trusts-heavenly-fathers-wisdom/printables/song.jpg?v=f2cae650e9",
    "src": "f2cae650e9065f9e442abace3178a32a36c83b69bad992e3c22c3e4bee3f874f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f2cae650e9065f9e442abace3178a32a36c83b69bad992e3c22c3e4bee3f874f"
   },
   {
    "id": "story-aug-19-heavenly-father-shows-his-wonders",
@@ -5575,7 +5763,8 @@
    "thumb": "/lantern/aug-19-heavenly-father-shows-his-wonders/printables/story.jpg?v=73b9a03a2b",
    "src": "73b9a03a2bb900e13328613908ad8c2260fabd9d24f66763c88e436c1186d98a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "73b9a03a2bb900e13328613908ad8c2260fabd9d24f66763c88e436c1186d98a"
   },
   {
    "id": "song-aug-19-heavenly-father-shows-his-wonders",
@@ -5602,7 +5791,8 @@
    "thumb": "/lantern/aug-19-heavenly-father-shows-his-wonders/printables/song.jpg?v=91f3cbc667",
    "src": "91f3cbc667bed1adf1c1ba3750b4342083f0df461109a5141fb0e7975cf6eaa1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "91f3cbc667bed1adf1c1ba3750b4342083f0df461109a5141fb0e7975cf6eaa1"
   },
   {
    "id": "story-aug-18-job-tells-heavenly-father-his-feelings",
@@ -5634,7 +5824,8 @@
    "thumb": "/lantern/aug-18-job-tells-heavenly-father-his-feelings/printables/story.jpg?v=8d896ac692",
    "src": "8d896ac69243f41550e80dce18bf70b1c810f006537cddec27cd60649c2ccfa3",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "8d896ac69243f41550e80dce18bf70b1c810f006537cddec27cd60649c2ccfa3"
   },
   {
    "id": "song-aug-18-job-tells-heavenly-father-his-feelings",
@@ -5661,7 +5852,8 @@
    "thumb": "/lantern/aug-18-job-tells-heavenly-father-his-feelings/printables/song.jpg?v=6052d12347",
    "src": "6052d1234711ae056045684354e402aaaa89d80937904741948dd60587a51df6",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "6052d1234711ae056045684354e402aaaa89d80937904741948dd60587a51df6"
   },
   {
    "id": "story-aug-17-kind-friends-come-to-sit",
@@ -5688,7 +5880,8 @@
    "thumb": "/lantern/aug-17-kind-friends-come-to-sit/printables/story.jpg?v=34db8dd740",
    "src": "34db8dd740405690adf30e6a68d8de896395e86175b219d26a66e5a238c67039",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "34db8dd740405690adf30e6a68d8de896395e86175b219d26a66e5a238c67039"
   },
   {
    "id": "song-aug-17-kind-friends-come-to-sit",
@@ -5715,7 +5908,8 @@
    "thumb": "/lantern/aug-17-kind-friends-come-to-sit/printables/song.jpg?v=40e94d0ab4",
    "src": "40e94d0ab4abdb6956ddfd9ed83e52561cc9940bf311f462cb5bf34282ca65d8",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "40e94d0ab4abdb6956ddfd9ed83e52561cc9940bf311f462cb5bf34282ca65d8"
   },
   {
    "id": "story-aug-16-job-keeps-trusting",
@@ -5747,7 +5941,8 @@
    "thumb": "/lantern/aug-16-job-keeps-trusting/printables/story.jpg?v=422f07af5c",
    "src": "422f07af5cbfba7addcd4cd482e4fb41bcc10e9c313639090284902b97f558b9",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "422f07af5cbfba7addcd4cd482e4fb41bcc10e9c313639090284902b97f558b9"
   },
   {
    "id": "song-aug-16-job-keeps-trusting",
@@ -5774,7 +5969,8 @@
    "thumb": "/lantern/aug-16-job-keeps-trusting/printables/song.jpg?v=e9f438248d",
    "src": "e9f438248d78af653e15b2eb8f8f6885102c3ade606578bfbd1ff1fae6ebefc6",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e9f438248d78af653e15b2eb8f8f6885102c3ade606578bfbd1ff1fae6ebefc6"
   },
   {
    "id": "story-aug-15-job-loved-heavenly-father",
@@ -5806,7 +6002,8 @@
    "thumb": "/lantern/aug-15-job-loved-heavenly-father/printables/story.jpg?v=342e84ec83",
    "src": "342e84ec83c8c9dda0dc97cfd200d1e9908c8593b4adbd9706eeb70f0a2fdb52",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "342e84ec83c8c9dda0dc97cfd200d1e9908c8593b4adbd9706eeb70f0a2fdb52"
   },
   {
    "id": "song-aug-15-job-loved-heavenly-father",
@@ -5833,7 +6030,8 @@
    "thumb": "/lantern/aug-15-job-loved-heavenly-father/printables/song.jpg?v=9538c0c836",
    "src": "9538c0c8367934e1a8ceede931436620092b603bce9bc88480deb1c59d4ef345",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9538c0c8367934e1a8ceede931436620092b603bce9bc88480deb1c59d4ef345"
   },
   {
    "id": "story-aug-14-a-happy-celebration",
@@ -5865,7 +6063,8 @@
    "thumb": "/lantern/aug-14-a-happy-celebration/printables/story.jpg?v=8e12d0ebd9",
    "src": "8e12d0ebd929a61a9cb1916dfbf862e2924b06632fb7572ab27dce4af1a5e6c2",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "8e12d0ebd929a61a9cb1916dfbf862e2924b06632fb7572ab27dce4af1a5e6c2"
   },
   {
    "id": "song-aug-14-a-happy-celebration",
@@ -5892,7 +6091,8 @@
    "thumb": "/lantern/aug-14-a-happy-celebration/printables/song.jpg?v=819395dcb6",
    "src": "819395dcb67c662e7ab0896529c9b0f5b436b92fdd7d03915ebacb2c705c6768",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "819395dcb67c662e7ab0896529c9b0f5b436b92fdd7d03915ebacb2c705c6768"
   },
   {
    "id": "story-aug-13-the-king-saves-the-people",
@@ -5919,7 +6119,8 @@
    "thumb": "/lantern/aug-13-the-king-saves-the-people/printables/story.jpg?v=dc30bb1985",
    "src": "dc30bb1985d97c810e4d44f894e2df125c40dd7fbc93e1bf5e21447e5f4c96c8",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "dc30bb1985d97c810e4d44f894e2df125c40dd7fbc93e1bf5e21447e5f4c96c8"
   },
   {
    "id": "song-aug-13-the-king-saves-the-people",
@@ -5946,7 +6147,8 @@
    "thumb": "/lantern/aug-13-the-king-saves-the-people/printables/song.jpg?v=9d309eecfc",
    "src": "9d309eecfc0b8c205b21d9119244a96e34cabe2f9e57badcbee24b7b94ace9d3",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9d309eecfc0b8c205b21d9119244a96e34cabe2f9e57badcbee24b7b94ace9d3"
   },
   {
    "id": "story-aug-12-esthers-wise-plan",
@@ -5978,7 +6180,8 @@
    "thumb": "/lantern/aug-12-esthers-wise-plan/printables/story.jpg?v=9331a533a0",
    "src": "9331a533a0b722547b66d88a490fe9c230c92a3c59345a8634824ff2b62db02a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9331a533a0b722547b66d88a490fe9c230c92a3c59345a8634824ff2b62db02a"
   },
   {
    "id": "song-aug-12-esthers-wise-plan",
@@ -6005,7 +6208,8 @@
    "thumb": "/lantern/aug-12-esthers-wise-plan/printables/song.jpg?v=477db1e7d0",
    "src": "477db1e7d02d1bdad204aa3fca13f34b26abb063922b588c5e6363ebfd29b275",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "477db1e7d02d1bdad204aa3fca13f34b26abb063922b588c5e6363ebfd29b275"
   },
   {
    "id": "story-aug-11-esthers-brave-choice",
@@ -6037,7 +6241,8 @@
    "thumb": "/lantern/aug-11-esthers-brave-choice/printables/story.jpg?v=d0bf3cde2a",
    "src": "d0bf3cde2a495237925e616243d5f640079bc965ca9d6885a17a07844db92c62",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "d0bf3cde2a495237925e616243d5f640079bc965ca9d6885a17a07844db92c62"
   },
   {
    "id": "song-aug-11-esthers-brave-choice",
@@ -6064,7 +6269,8 @@
    "thumb": "/lantern/aug-11-esthers-brave-choice/printables/song.jpg?v=ee7293bc27",
    "src": "ee7293bc27b1870f3e32bf2e5be98fb3ab4a4aa8db9baaad23e3e4617c7172c3",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "ee7293bc27b1870f3e32bf2e5be98fb3ab4a4aa8db9baaad23e3e4617c7172c3"
   },
   {
    "id": "story-aug-10-for-such-a-time-as-this",
@@ -6096,7 +6302,8 @@
    "thumb": "/lantern/aug-10-for-such-a-time-as-this/printables/story.jpg?v=c8c8d309d1",
    "src": "c8c8d309d1e41b8eaa740f3edf1abaff8551e2942830f8a9c905bc435692382c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "c8c8d309d1e41b8eaa740f3edf1abaff8551e2942830f8a9c905bc435692382c"
   },
   {
    "id": "song-aug-10-for-such-a-time-as-this",
@@ -6123,7 +6330,8 @@
    "thumb": "/lantern/aug-10-for-such-a-time-as-this/printables/song.jpg?v=b048d17baf",
    "src": "b048d17baf0719b86f1d7d5e444a913d1093844bdec6b60e38782de314de9247",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "b048d17baf0719b86f1d7d5e444a913d1093844bdec6b60e38782de314de9247"
   },
   {
    "id": "story-aug-09-mordecai-stands-tall",
@@ -6155,7 +6363,8 @@
    "thumb": "/lantern/aug-09-mordecai-stands-tall/printables/story.jpg?v=afbc52164e",
    "src": "afbc52164e0888e802da6dbe3f1fce1760abce24be6d3bd7fe5ffb78b00b2bd0",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "afbc52164e0888e802da6dbe3f1fce1760abce24be6d3bd7fe5ffb78b00b2bd0"
   },
   {
    "id": "song-aug-09-mordecai-stands-tall",
@@ -6182,7 +6391,8 @@
    "thumb": "/lantern/aug-09-mordecai-stands-tall/printables/song.jpg?v=0ef4882b92",
    "src": "0ef4882b92289408651e77d0eef6af051273d2e9ea0e3609712c7c5397082571",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "0ef4882b92289408651e77d0eef6af051273d2e9ea0e3609712c7c5397082571"
   },
   {
    "id": "story-aug-08-a-kind-girl-becomes-queen",
@@ -6214,7 +6424,8 @@
    "thumb": "/lantern/aug-08-a-kind-girl-becomes-queen/printables/story.jpg?v=9b8ab0b4a8",
    "src": "9b8ab0b4a8097a3ec3bda53ef860a2badccea5bf3ff8da3cdbfbb2909c753cb5",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9b8ab0b4a8097a3ec3bda53ef860a2badccea5bf3ff8da3cdbfbb2909c753cb5"
   },
   {
    "id": "song-aug-08-a-kind-girl-becomes-queen",
@@ -6241,7 +6452,8 @@
    "thumb": "/lantern/aug-08-a-kind-girl-becomes-queen/printables/song.jpg?v=dbda43abdd",
    "src": "dbda43abdd4b5573f75d477661233384b8458fd19bc335a4bb521759dd357499",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "dbda43abdd4b5573f75d477661233384b8458fd19bc335a4bb521759dd357499"
   },
   {
    "id": "story-aug-07-the-happiest-reading-day",
@@ -6273,7 +6485,8 @@
    "thumb": "/lantern/aug-07-the-happiest-reading-day/printables/story.jpg?v=835e1b89cc",
    "src": "835e1b89ccd667c082793c07b5af0e47464833e4b8db745ae49d783f639d4785",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "835e1b89ccd667c082793c07b5af0e47464833e4b8db745ae49d783f639d4785"
   },
   {
    "id": "song-aug-07-the-happiest-reading-day",
@@ -6300,7 +6513,8 @@
    "thumb": "/lantern/aug-07-the-happiest-reading-day/printables/song.jpg?v=d62b97327a",
    "src": "d62b97327ab39efdd03350d256f27bd739f999f93a472fc4008b9f1ec0b6742c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "d62b97327ab39efdd03350d256f27bd739f999f93a472fc4008b9f1ec0b6742c"
   },
   {
    "id": "story-aug-06-i-am-doing-a-great-work",
@@ -6332,7 +6546,8 @@
    "thumb": "/lantern/aug-06-i-am-doing-a-great-work/printables/story.jpg?v=123ffcf2b1",
    "src": "123ffcf2b15801d6f0de03cf0e0ec2b829f9120d51ee837ad87187371453c1dd",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "123ffcf2b15801d6f0de03cf0e0ec2b829f9120d51ee837ad87187371453c1dd"
   },
   {
    "id": "song-aug-06-i-am-doing-a-great-work",
@@ -6359,7 +6574,8 @@
    "thumb": "/lantern/aug-06-i-am-doing-a-great-work/printables/song.jpg?v=64d50e879f",
    "src": "64d50e879fd435253bd776a52d73f12822b203eafe1c2e0ab11061a4853f3b95",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "64d50e879fd435253bd776a52d73f12822b203eafe1c2e0ab11061a4853f3b95"
   },
   {
    "id": "story-aug-05-nehemiahs-brave-idea",
@@ -6391,7 +6607,8 @@
    "thumb": "/lantern/aug-05-nehemiahs-brave-idea/printables/story.jpg?v=77d2019e78",
    "src": "77d2019e785ef5ef31a31dce46b9166c1e96fc9b94eda97f8f8b7c30cebc2a34",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "77d2019e785ef5ef31a31dce46b9166c1e96fc9b94eda97f8f8b7c30cebc2a34"
   },
   {
    "id": "song-aug-05-nehemiahs-brave-idea",
@@ -6418,7 +6635,8 @@
    "thumb": "/lantern/aug-05-nehemiahs-brave-idea/printables/song.jpg?v=16ede1dd09",
    "src": "16ede1dd09db83381184d8cfc72c64ac249da49ca0a353d80bbdc9130b7ddae8",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "16ede1dd09db83381184d8cfc72c64ac249da49ca0a353d80bbdc9130b7ddae8"
   },
   {
    "id": "story-aug-04-ezra-loves-the-scriptures",
@@ -6450,7 +6668,8 @@
    "thumb": "/lantern/aug-04-ezra-loves-the-scriptures/printables/story.jpg?v=5357786816",
    "src": "53577868161df1ad9db4fdbb87806ecc2ff1322ad14f3a8dfad520ef1bee0f9c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "53577868161df1ad9db4fdbb87806ecc2ff1322ad14f3a8dfad520ef1bee0f9c"
   },
   {
    "id": "song-aug-04-ezra-loves-the-scriptures",
@@ -6477,7 +6696,8 @@
    "thumb": "/lantern/aug-04-ezra-loves-the-scriptures/printables/song.jpg?v=3f300c9963",
    "src": "3f300c996338412ebf5e5ed05997f9d6c53ae3415f6a679b99eb70766d69d974",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "3f300c996338412ebf5e5ed05997f9d6c53ae3415f6a679b99eb70766d69d974"
   },
   {
    "id": "story-aug-03-the-temple-is-finished",
@@ -6509,7 +6729,8 @@
    "thumb": "/lantern/aug-03-the-temple-is-finished/printables/story.jpg?v=375eda7cf7",
    "src": "375eda7cf7d56bbd3990d6e827412d9d573a0fbc7587fe9c7f97ccf7ce55e0cf",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "375eda7cf7d56bbd3990d6e827412d9d573a0fbc7587fe9c7f97ccf7ce55e0cf"
   },
   {
    "id": "song-aug-03-the-temple-is-finished",
@@ -6536,7 +6757,8 @@
    "thumb": "/lantern/aug-03-the-temple-is-finished/printables/song.jpg?v=eba9801b01",
    "src": "eba9801b01257e3bfb7c58354d6e0d31e5b417c81d4503fa7e5f97550293d762",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "eba9801b01257e3bfb7c58354d6e0d31e5b417c81d4503fa7e5f97550293d762"
   },
   {
    "id": "story-aug-02-the-first-big-stone",
@@ -6568,7 +6790,8 @@
    "thumb": "/lantern/aug-02-the-first-big-stone/printables/story.jpg?v=a252e7cfdf",
    "src": "a252e7cfdf1661d9f1e2d608ec05a310304b840499f2ba8bde8bcfe6f28f20de",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a252e7cfdf1661d9f1e2d608ec05a310304b840499f2ba8bde8bcfe6f28f20de"
   },
   {
    "id": "song-aug-02-the-first-big-stone",
@@ -6595,7 +6818,8 @@
    "thumb": "/lantern/aug-02-the-first-big-stone/printables/song.jpg?v=3c8704b9d7",
    "src": "3c8704b9d7a8964c660776d1f8e0120476d40142eaada3f8f1b4a8870020b4b5",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "3c8704b9d7a8964c660776d1f8e0120476d40142eaada3f8f1b4a8870020b4b5"
   },
   {
    "id": "story-aug-01-the-king-says-you-may-go-home",
@@ -6627,7 +6851,8 @@
    "thumb": "/lantern/aug-01-the-king-says-you-may-go-home/printables/story.jpg?v=e4833acf0d",
    "src": "e4833acf0d80583a6451d3d7addcb42e8f24a5458a6479588998081ad9097303",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e4833acf0d80583a6451d3d7addcb42e8f24a5458a6479588998081ad9097303"
   },
   {
    "id": "song-aug-01-the-king-says-you-may-go-home",
@@ -6654,7 +6879,8 @@
    "thumb": "/lantern/aug-01-the-king-says-you-may-go-home/printables/song.jpg?v=51a282b3a2",
    "src": "51a282b3a24b47dfe7e7776a3f625eda4981d33bb2969d874495a0ee9ba6f869",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "51a282b3a24b47dfe7e7776a3f625eda4981d33bb2969d874495a0ee9ba6f869"
   },
   {
    "id": "song-jul-28-come-celebrate-with-god",
@@ -6681,7 +6907,8 @@
    "thumb": "/lantern/jul-28-come-celebrate-with-god/printables/song.jpg?v=1c02976707",
    "src": "1c02976707d4a846743c01ff6ab32c2b9cb24b45411719d50e2f9c9f526e1ab5",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "1c02976707d4a846743c01ff6ab32c2b9cb24b45411719d50e2f9c9f526e1ab5"
   },
   {
    "id": "song-jul-27-the-king-who-forgot-to-stay-humble",
@@ -6708,7 +6935,8 @@
    "thumb": "/lantern/jul-27-the-king-who-forgot-to-stay-humble/printables/song.jpg?v=d8a018d7bb",
    "src": "d8a018d7bb1caf0c0cf6c8a3500733b5fc4daf908608179fa6e5c9ac91767377",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "d8a018d7bb1caf0c0cf6c8a3500733b5fc4daf908608179fa6e5c9ac91767377"
   },
   {
    "id": "song-jul-26-our-eyes-are-upon-thee",
@@ -6735,7 +6963,8 @@
    "thumb": "/lantern/jul-26-our-eyes-are-upon-thee/printables/song.jpg?v=05883accff",
    "src": "05883accffe65de42c874cf2ff0e0a85823017eb17a4ae0f9c061397de202172",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "05883accffe65de42c874cf2ff0e0a85823017eb17a4ae0f9c061397de202172"
   },
   {
    "id": "story-jul-25-judges-who-are-fair",
@@ -6767,7 +6996,8 @@
    "thumb": "/lantern/jul-25-judges-who-are-fair/printables/story.jpg?v=9f652503e9",
    "src": "9f652503e96084b91a2254b49fe08e30145568e7f0f452b14508a24cc90bfff2",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9f652503e96084b91a2254b49fe08e30145568e7f0f452b14508a24cc90bfff2"
   },
   {
    "id": "song-jul-25-judges-who-are-fair",
@@ -6794,7 +7024,8 @@
    "thumb": "/lantern/jul-25-judges-who-are-fair/printables/song.jpg?v=803add255c",
    "src": "803add255ca326a4b5e5b4b59262b4487934d926e307e03cc8992ec079d0fe57",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "803add255ca326a4b5e5b4b59262b4487934d926e307e03cc8992ec079d0fe57"
   },
   {
    "id": "song-jul-24-when-asa-forgot-to-trust",
@@ -6821,7 +7052,8 @@
    "thumb": "/lantern/jul-24-when-asa-forgot-to-trust/printables/song.jpg?v=a1df93d62f",
    "src": "a1df93d62f1272953ffd4cc6f322a143e806ea5d22ea9e0d7d9ffa48e972aedc",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a1df93d62f1272953ffd4cc6f322a143e806ea5d22ea9e0d7d9ffa48e972aedc"
   },
   {
    "id": "story-jul-23-be-strong-and-dont-give-up",
@@ -6853,7 +7085,8 @@
    "thumb": "/lantern/jul-23-be-strong-and-dont-give-up/printables/story.jpg?v=40044ca398",
    "src": "40044ca39895d6a4cc894c6e0ba0645871317148b60cd32a537012d3fb765f8f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "40044ca39895d6a4cc894c6e0ba0645871317148b60cd32a537012d3fb765f8f"
   },
   {
    "id": "song-jul-23-be-strong-and-dont-give-up",
@@ -6880,7 +7113,8 @@
    "thumb": "/lantern/jul-23-be-strong-and-dont-give-up/printables/song.jpg?v=0f12f42af1",
    "src": "0f12f42af1240bf4fd8e8e10f292ae750978e21d72f5c01554c30a8020b893a9",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "0f12f42af1240bf4fd8e8e10f292ae750978e21d72f5c01554c30a8020b893a9"
   },
   {
    "id": "song-jul-22-king-asa-calls-on-god",
@@ -6907,7 +7141,8 @@
    "thumb": "/lantern/jul-22-king-asa-calls-on-god/printables/song.jpg?v=af9c51a8ea",
    "src": "af9c51a8ea009f8a79d08aa0fd96ccd78abc8bd937520bd593f48935cf7b5e7a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "af9c51a8ea009f8a79d08aa0fd96ccd78abc8bd937520bd593f48935cf7b5e7a"
   },
   {
    "id": "story-jul-21-king-josiah-makes-a-promise",
@@ -6939,7 +7174,8 @@
    "thumb": "/lantern/jul-21-king-josiah-makes-a-promise/printables/story.jpg?v=07f81297c8",
    "src": "07f81297c8b7f0a6892b8859f0dd5f2d383d44a9b3924cc1ae320e8218e5fa50",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "07f81297c8b7f0a6892b8859f0dd5f2d383d44a9b3924cc1ae320e8218e5fa50"
   },
   {
    "id": "song-jul-21-king-josiah-makes-a-promise",
@@ -6966,7 +7202,8 @@
    "thumb": "/lantern/jul-21-king-josiah-makes-a-promise/printables/song.jpg?v=f59f8dc4a0",
    "src": "f59f8dc4a0116484b535622fe74d469141164e0f2992be884a60522251bc77b1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f59f8dc4a0116484b535622fe74d469141164e0f2992be884a60522251bc77b1"
   },
   {
    "id": "story-jul-20-huldah-speaks-for-god",
@@ -6998,7 +7235,8 @@
    "thumb": "/lantern/jul-20-huldah-speaks-for-god/printables/story.jpg?v=1f3c6b69eb",
    "src": "1f3c6b69ebf31b7a39c14053722597f7ffc89b67723bc7fbdee6fb7d87c9621f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "1f3c6b69ebf31b7a39c14053722597f7ffc89b67723bc7fbdee6fb7d87c9621f"
   },
   {
    "id": "song-jul-20-huldah-speaks-for-god",
@@ -7025,7 +7263,8 @@
    "thumb": "/lantern/jul-20-huldah-speaks-for-god/printables/song.jpg?v=5726647d3b",
    "src": "5726647d3bc8c74e6adc3f0d76e8d0663c8ae7f3333580d193af4ea375295903",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "5726647d3bc8c74e6adc3f0d76e8d0663c8ae7f3333580d193af4ea375295903"
   },
   {
    "id": "song-jul-19-the-lost-book-is-found",
@@ -7052,7 +7291,8 @@
    "thumb": "/lantern/jul-19-the-lost-book-is-found/printables/song.jpg?v=83972173b3",
    "src": "83972173b3317d6de0e88c7ee22c71ee053532b41b7239fe47e0fd727f712607",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "83972173b3317d6de0e88c7ee22c71ee053532b41b7239fe47e0fd727f712607"
   },
   {
    "id": "story-jul-18-the-boy-who-became-king",
@@ -7084,7 +7324,8 @@
    "thumb": "/lantern/jul-18-the-boy-who-became-king/printables/story.jpg?v=b27db3857d",
    "src": "b27db3857d58cbc47327ed218de9aa1170042b654cdaeaf606d38dd56c5addca",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "b27db3857d58cbc47327ed218de9aa1170042b654cdaeaf606d38dd56c5addca"
   },
   {
    "id": "song-jul-18-the-boy-who-became-king",
@@ -7111,7 +7352,8 @@
    "thumb": "/lantern/jul-18-the-boy-who-became-king/printables/song.jpg?v=a1deeff8a8",
    "src": "a1deeff8a872bd6096b738bf371613f5d7381da138c843862606a76f11963009",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a1deeff8a872bd6096b738bf371613f5d7381da138c843862606a76f11963009"
   },
   {
    "id": "song-jul-17-god-gives-hezekiah-more-days",
@@ -7138,7 +7380,8 @@
    "thumb": "/lantern/jul-17-god-gives-hezekiah-more-days/printables/song.jpg?v=e1deb6714e",
    "src": "e1deb6714e9093f0d01ea86bd0f24c08769aa71ba6c141c7345b57aebfa0fe6d",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e1deb6714e9093f0d01ea86bd0f24c08769aa71ba6c141c7345b57aebfa0fe6d"
   },
   {
    "id": "song-jul-16-hezekiah-shows-god-the-letter",
@@ -7165,7 +7408,8 @@
    "thumb": "/lantern/jul-16-hezekiah-shows-god-the-letter/printables/song.jpg?v=39f9d7848b",
    "src": "39f9d7848b454dc53113b8e0053767a240a92c30a2a5f6c50a7ca3d1dd3d53f0",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "39f9d7848b454dc53113b8e0053767a240a92c30a2a5f6c50a7ca3d1dd3d53f0"
   },
   {
    "id": "song-jul-15-good-king-hezekiah-trusts-god",
@@ -7192,7 +7436,8 @@
    "thumb": "/lantern/jul-15-good-king-hezekiah-trusts-god/printables/song.jpg?v=74da783599",
    "src": "74da7835991bf0bbb0252f6a196aca5a27622ee074ad8c70f2ee496a7a15a2d5",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "74da7835991bf0bbb0252f6a196aca5a27622ee074ad8c70f2ee496a7a15a2d5"
   },
   {
    "id": "story-jul-14-good-news-to-share",
@@ -7224,7 +7469,8 @@
    "thumb": "/lantern/jul-14-good-news-to-share/printables/story.jpg?v=9710e559f6",
    "src": "9710e559f6543ad39ca600d2c5c0678f6cf4b0ee900491662c107fb6b1a89c17",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9710e559f6543ad39ca600d2c5c0678f6cf4b0ee900491662c107fb6b1a89c17"
   },
   {
    "id": "song-jul-14-good-news-to-share",
@@ -7251,7 +7497,8 @@
    "thumb": "/lantern/jul-14-good-news-to-share/printables/song.jpg?v=287b9da96f",
    "src": "287b9da96f150dbf62309f3d1f708db997e671145aaa48df4003e4859dd8028f",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "287b9da96f150dbf62309f3d1f708db997e671145aaa48df4003e4859dd8028f"
   },
   {
    "id": "song-jul-13-horses-of-fire-all-around",
@@ -7278,7 +7525,8 @@
    "thumb": "/lantern/jul-13-horses-of-fire-all-around/printables/song.jpg?v=9cbcdf2b72",
    "src": "9cbcdf2b72f145caf530a1e90a6b0b440b7d20664a26d53f1d24ee99debd66ca",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9cbcdf2b72f145caf530a1e90a6b0b440b7d20664a26d53f1d24ee99debd66ca"
   },
   {
    "id": "song-jul-12-the-floating-axe-head",
@@ -7305,7 +7553,8 @@
    "thumb": "/lantern/jul-12-the-floating-axe-head/printables/song.jpg?v=1d1a74ccdc",
    "src": "1d1a74ccdc9ed0441a2ca638320197264930d281f70831d13bbdf739bf734242",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "1d1a74ccdc9ed0441a2ca638320197264930d281f70831d13bbdf739bf734242"
   },
   {
    "id": "song-jul-11-naaman-washes-seven-times",
@@ -7332,7 +7581,8 @@
    "thumb": "/lantern/jul-11-naaman-washes-seven-times/printables/song.jpg?v=8ed1c28d76",
    "src": "8ed1c28d76060cd5fa0904e3fe534d2577d334f82c7ae5c0a4f2cc38b9ab1bae",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "8ed1c28d76060cd5fa0904e3fe534d2577d334f82c7ae5c0a4f2cc38b9ab1bae"
   },
   {
    "id": "song-jul-10-a-special-room-for-the-prophet",
@@ -7359,7 +7609,8 @@
    "thumb": "/lantern/jul-10-a-special-room-for-the-prophet/printables/song.jpg?v=4122db1856",
    "src": "4122db1856d9bb924554b77c4168f22c02688661e4a4e29c047bd67dfc3e8edb",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "4122db1856d9bb924554b77c4168f22c02688661e4a4e29c047bd67dfc3e8edb"
   },
   {
    "id": "song-jul-09-the-widows-oil",
@@ -7386,7 +7637,8 @@
    "thumb": "/lantern/jul-09-the-widows-oil/printables/song.jpg?v=9bc37e9b63",
    "src": "9bc37e9b630c13e415b1a22175451476427742b631e4f8aaec05e1960df323e2",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9bc37e9b630c13e415b1a22175451476427742b631e4f8aaec05e1960df323e2"
   },
   {
    "id": "song-jul-08-elijah-goes-up-to-heaven",
@@ -7413,7 +7665,8 @@
    "thumb": "/lantern/jul-08-elijah-goes-up-to-heaven/printables/song.jpg?v=458cd68af7",
    "src": "458cd68af7740b243a8f344395a637ce84132075dba6ff536bd4de1a60b2a975",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "458cd68af7740b243a8f344395a637ce84132075dba6ff536bd4de1a60b2a975"
   },
   {
    "id": "story-jul-07-micaiah-tells-the-truth",
@@ -7446,7 +7699,8 @@
    "src": "6497bbc6ce6a5f8e5e852afd8c3cb6da88c383f3c4967d4913f3fd8aa2250b98",
    "updated": "2026-11-19",
    "created": "2026-11-19",
-   "free": true
+   "free": true,
+   "stored": "6497bbc6ce6a5f8e5e852afd8c3cb6da88c383f3c4967d4913f3fd8aa2250b98"
   },
   {
    "id": "song-jul-07-micaiah-tells-the-truth",
@@ -7474,7 +7728,8 @@
    "src": "ae99e53f5e39ae58ac8ed2db0b8e5d3c0d024043b397eab271d4d87dad9e89e8",
    "updated": "2026-11-19",
    "created": "2026-11-19",
-   "free": true
+   "free": true,
+   "stored": "ae99e53f5e39ae58ac8ed2db0b8e5d3c0d024043b397eab271d4d87dad9e89e8"
   },
   {
    "id": "song-jul-06-the-still-small-voice",
@@ -7501,7 +7756,8 @@
    "thumb": "/lantern/jul-06-the-still-small-voice/printables/song.jpg?v=e72025cd1d",
    "src": "e72025cd1def82be2dca5e6f907320d86bac968e7558d4f2411935ca263a502e",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "e72025cd1def82be2dca5e6f907320d86bac968e7558d4f2411935ca263a502e"
   },
   {
    "id": "song-jul-05-fire-from-heaven",
@@ -7528,7 +7784,8 @@
    "thumb": "/lantern/jul-05-fire-from-heaven/printables/song.jpg?v=f9b7043afd",
    "src": "f9b7043afd873aa0c9e4e7d9f70c7e0b67c7cd74f99c3f2af3182e2d18b0a0f2",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f9b7043afd873aa0c9e4e7d9f70c7e0b67c7cd74f99c3f2af3182e2d18b0a0f2"
   },
   {
    "id": "song-jul-04-elijah-prays-for-the-little-boy",
@@ -7555,7 +7812,8 @@
    "thumb": "/lantern/jul-04-elijah-prays-for-the-little-boy/printables/song.jpg?v=dea6076737",
    "src": "dea6076737b2233c85dd62baca3f449fca24eb20da4782c0e94f8d0d7369bc37",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "dea6076737b2233c85dd62baca3f449fca24eb20da4782c0e94f8d0d7369bc37"
   },
   {
    "id": "song-jul-03-the-jar-that-never-ran-out",
@@ -7582,7 +7840,8 @@
    "thumb": "/lantern/jul-03-the-jar-that-never-ran-out/printables/song.jpg?v=5797bbb31b",
    "src": "5797bbb31b4ae3b7b6586d37de828e22d5e76a303643b6c116fe5b2cae398c81",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "5797bbb31b4ae3b7b6586d37de828e22d5e76a303643b6c116fe5b2cae398c81"
   },
   {
    "id": "song-jul-02-the-ravens-feed-elijah",
@@ -7609,7 +7868,8 @@
    "thumb": "/lantern/jul-02-the-ravens-feed-elijah/printables/song.jpg?v=619ed2a58f",
    "src": "619ed2a58fe46d5c57c7e8133936d1cbbef6f7ede1337a7801dd94eb6c656b81",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "619ed2a58fe46d5c57c7e8133936d1cbbef6f7ede1337a7801dd94eb6c656b81"
   },
   {
    "id": "story-jul-01-two-kings-one-choice",
@@ -7641,7 +7901,8 @@
    "thumb": "/lantern/jul-01-two-kings-one-choice/printables/story.jpg?v=bfd56bc5a9",
    "src": "bfd56bc5a92a5a6056daed69104fd60faa36a91f4ca61e3ec927857d8a76b6e5",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "bfd56bc5a92a5a6056daed69104fd60faa36a91f4ca61e3ec927857d8a76b6e5"
   },
   {
    "id": "song-jul-01-two-kings-one-choice",
@@ -7668,7 +7929,8 @@
    "thumb": "/lantern/jul-01-two-kings-one-choice/printables/song.jpg?v=a92e027fc7",
    "src": "a92e027fc7912093bf40151606a855d998d952359d1fb3aa487534e3c151c4e4",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a92e027fc7912093bf40151606a855d998d952359d1fb3aa487534e3c151c4e4"
   },
   {
    "id": "song-jun-28-keep-your-heart-close-to-god",
@@ -7695,7 +7957,8 @@
    "thumb": "/lantern/jun-28-keep-your-heart-close-to-god/printables/song.jpg?v=f8a28e44d2",
    "src": "f8a28e44d24958357219366921f39670ebb91e7d14abb5a1941fc8501e24e2ad",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "f8a28e44d24958357219366921f39670ebb91e7d14abb5a1941fc8501e24e2ad"
   },
   {
    "id": "song-jun-27-solomons-prayer-at-the-temple",
@@ -7722,7 +7985,8 @@
    "thumb": "/lantern/jun-27-solomons-prayer-at-the-temple/printables/song.jpg?v=dcc232088d",
    "src": "dcc232088ddd85a813659da54125814f06ffd0c96619b66d5d1350aeebf1a911",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "dcc232088ddd85a813659da54125814f06ffd0c96619b66d5d1350aeebf1a911"
   },
   {
    "id": "song-jun-26-building-the-temple",
@@ -7749,7 +8013,8 @@
    "thumb": "/lantern/jun-26-building-the-temple/printables/song.jpg?v=238ed9d7d2",
    "src": "238ed9d7d2f44579dc31c35f85b93ffe12db6c7eb3fe4955df65a44ab14746e1",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "238ed9d7d2f44579dc31c35f85b93ffe12db6c7eb3fe4955df65a44ab14746e1"
   },
   {
    "id": "song-jun-25-two-mothers-and-one-baby",
@@ -7776,7 +8041,8 @@
    "thumb": "/lantern/jun-25-two-mothers-and-one-baby/printables/song.jpg?v=52a7bdf043",
    "src": "52a7bdf04389fa0c1809028ced6e238c9dbb62195f4db28f894035a26985109c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "52a7bdf04389fa0c1809028ced6e238c9dbb62195f4db28f894035a26985109c"
   },
   {
    "id": "song-jun-24-solomon-asks-for-wisdom",
@@ -7803,7 +8069,8 @@
    "thumb": "/lantern/jun-24-solomon-asks-for-wisdom/printables/song.jpg?v=6591f80078",
    "src": "6591f8007887f81d1af37c77567c5ffd269c6fdde3c5add4a8637407436ff2cb",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "6591f8007887f81d1af37c77567c5ffd269c6fdde3c5add4a8637407436ff2cb"
   },
   {
    "id": "song-jun-23-david-says-sorry",
@@ -7830,7 +8097,8 @@
    "thumb": "/lantern/jun-23-david-says-sorry/printables/song.jpg?v=a337a35407",
    "src": "a337a354078a3788a4904667177ab1eb030d797b867659a7a6bd90fa233a154c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "a337a354078a3788a4904667177ab1eb030d797b867659a7a6bd90fa233a154c"
   },
   {
    "id": "story-jun-22-david-makes-a-big-mistake",
@@ -7862,7 +8130,8 @@
    "thumb": "/lantern/jun-22-david-makes-a-big-mistake/printables/story.jpg?v=c1694dbe70",
    "src": "c1694dbe70f1392dab1b3d055261ee3e6cecbe299fa90ce41495f649f1db60f9",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "c1694dbe70f1392dab1b3d055261ee3e6cecbe299fa90ce41495f649f1db60f9"
   },
   {
    "id": "song-jun-22-david-makes-a-big-mistake",
@@ -7889,7 +8158,8 @@
    "thumb": "/lantern/jun-22-david-makes-a-big-mistake/printables/song.jpg?v=bf9fe5d7f3",
    "src": "bf9fe5d7f30aa3044698cf3e6561e23146dea0b216b47633e92873d9450621d5",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "bf9fe5d7f30aa3044698cf3e6561e23146dea0b216b47633e92873d9450621d5"
   },
   {
    "id": "song-jun-21-david-dances-before-the-lord",
@@ -7916,7 +8186,8 @@
    "thumb": "/lantern/jun-21-david-dances-before-the-lord/printables/song.jpg?v=be5355a1f2",
    "src": "be5355a1f25ed5ccd60a2fc304bb4afcc02ba08e2edb6c40b5cb79e91130375a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "be5355a1f25ed5ccd60a2fc304bb4afcc02ba08e2edb6c40b5cb79e91130375a"
   },
   {
    "id": "story-jun-20-david-becomes-king",
@@ -7948,7 +8219,8 @@
    "thumb": "/lantern/jun-20-david-becomes-king/printables/story.jpg?v=60f3ca1704",
    "src": "60f3ca170457975815e1d14200d1507a5457d0566860e35428024eac4da12e69",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "60f3ca170457975815e1d14200d1507a5457d0566860e35428024eac4da12e69"
   },
   {
    "id": "song-jun-20-david-becomes-king",
@@ -7975,7 +8247,8 @@
    "thumb": "/lantern/jun-20-david-becomes-king/printables/song.jpg?v=edd647b3ce",
    "src": "edd647b3ce91b84873893d15ff1da6726c0cf574259f4084ff4e73488a409c0c",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "edd647b3ce91b84873893d15ff1da6726c0cf574259f4084ff4e73488a409c0c"
   },
   {
    "id": "song-jun-19-wise-abigail-stops-trouble",
@@ -8002,7 +8275,8 @@
    "thumb": "/lantern/jun-19-wise-abigail-stops-trouble/printables/song.jpg?v=566d3355f8",
    "src": "566d3355f8dd2564a35e3395a6dcf7fc30fbc53cf67e97dd8aeea46b5ff8cebe",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "566d3355f8dd2564a35e3395a6dcf7fc30fbc53cf67e97dd8aeea46b5ff8cebe"
   },
   {
    "id": "song-jun-18-david-forgives-saul-in-the-cave",
@@ -8030,7 +8304,8 @@
    "src": "d9733ad55724d70e68b9c2dafd9bf7bed61d376ff0d005b0618c2ada4e5a56e4",
    "updated": "2026-11-19",
    "created": "2026-11-19",
-   "free": true
+   "free": true,
+   "stored": "d9733ad55724d70e68b9c2dafd9bf7bed61d376ff0d005b0618c2ada4e5a56e4"
   },
   {
    "id": "story-jun-17-saul-gets-jealous-of-david",
@@ -8062,7 +8337,8 @@
    "thumb": "/lantern/jun-17-saul-gets-jealous-of-david/printables/story.jpg?v=7a9a52777f",
    "src": "7a9a52777fc0c13345018e6cba990d109a23e84d9a76fa814af0daf286a40be2",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "7a9a52777fc0c13345018e6cba990d109a23e84d9a76fa814af0daf286a40be2"
   },
   {
    "id": "song-jun-17-saul-gets-jealous-of-david",
@@ -8089,7 +8365,8 @@
    "thumb": "/lantern/jun-17-saul-gets-jealous-of-david/printables/song.jpg?v=d438dee8ad",
    "src": "d438dee8ad8b24b4adf6882aafa1c55e4ec6d2130a38b5d67de6eff2b197d8fe",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "d438dee8ad8b24b4adf6882aafa1c55e4ec6d2130a38b5d67de6eff2b197d8fe"
   },
   {
    "id": "song-jun-16-david-and-jonathan-are-best-friends",
@@ -8116,7 +8393,8 @@
    "thumb": "/lantern/jun-16-david-and-jonathan-are-best-friends/printables/song.jpg?v=8b29315327",
    "src": "8b29315327110b147373d8536f1c010d48ec2f1371f99fa1a30fc3248c6488bd",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "8b29315327110b147373d8536f1c010d48ec2f1371f99fa1a30fc3248c6488bd"
   },
   {
    "id": "song-jun-15-david-and-goliath",
@@ -8144,7 +8422,8 @@
    "src": "c80559c0ac2782d192c69cbf92c711242eefd1a17d6b1e648adcf66b3a830382",
    "updated": "2026-11-19",
    "created": "2026-11-19",
-   "free": true
+   "free": true,
+   "stored": "c80559c0ac2782d192c69cbf92c711242eefd1a17d6b1e648adcf66b3a830382"
   },
   {
    "id": "song-jun-14-david-plays-music-for-saul",
@@ -8171,7 +8450,8 @@
    "thumb": "/lantern/jun-14-david-plays-music-for-saul/printables/song.jpg?v=81dce10e81",
    "src": "81dce10e81cdcac985b6c286d05e8cd7487b4602b2209253c483efc3e2caf524",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "81dce10e81cdcac985b6c286d05e8cd7487b4602b2209253c483efc3e2caf524"
   },
   {
    "id": "song-jun-13-god-chooses-david",
@@ -8198,7 +8478,8 @@
    "thumb": "/lantern/jun-13-god-chooses-david/printables/song.jpg?v=2b77120811",
    "src": "2b771208118bf7bd9aebfbc59ad40427e66536f141d98b90d4e8cbc0d0818ff0",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "2b771208118bf7bd9aebfbc59ad40427e66536f141d98b90d4e8cbc0d0818ff0"
   },
   {
    "id": "song-jun-12-obey-is-better-than-sacrifice",
@@ -8225,7 +8506,8 @@
    "thumb": "/lantern/jun-12-obey-is-better-than-sacrifice/printables/song.jpg?v=61dda01b26",
    "src": "61dda01b26e0f3e1dc3763b19e4e0d76586cc028edda78ff50f21e09ad484e49",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "61dda01b26e0f3e1dc3763b19e4e0d76586cc028edda78ff50f21e09ad484e49"
   },
   {
    "id": "song-jun-11-saul-doesnt-wait",
@@ -8252,7 +8534,8 @@
    "thumb": "/lantern/jun-11-saul-doesnt-wait/printables/song.jpg?v=91e0f53ade",
    "src": "91e0f53ade05996f54c285504a856e73ea2394c7fdf0e87a0ac7d1be1c8954e3",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "91e0f53ade05996f54c285504a856e73ea2394c7fdf0e87a0ac7d1be1c8954e3"
   },
   {
    "id": "song-jun-10-saul-is-anointed-king",
@@ -8279,7 +8562,8 @@
    "thumb": "/lantern/jun-10-saul-is-anointed-king/printables/song.jpg?v=18d625678c",
    "src": "18d625678c518d98fdc9b6e4280ff81a4641755bb869092651415ccbcf9d7fb8",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "18d625678c518d98fdc9b6e4280ff81a4641755bb869092651415ccbcf9d7fb8"
   },
   {
    "id": "song-jun-09-saul-looks-for-donkeys",
@@ -8306,7 +8590,8 @@
    "thumb": "/lantern/jun-09-saul-looks-for-donkeys/printables/song.jpg?v=046836e6ee",
    "src": "046836e6eeede07267dcefc557218ad7f887e723b9316cf7c36a665fbb60a911",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "046836e6eeede07267dcefc557218ad7f887e723b9316cf7c36a665fbb60a911"
   },
   {
    "id": "song-jun-08-israel-wants-a-king",
@@ -8333,7 +8618,8 @@
    "thumb": "/lantern/jun-08-israel-wants-a-king/printables/song.jpg?v=9317eccf7e",
    "src": "9317eccf7e97d4cbad14dc3fadb62372f9bddd40546fcdb98ab44c868348ab15",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9317eccf7e97d4cbad14dc3fadb62372f9bddd40546fcdb98ab44c868348ab15"
   },
   {
    "id": "story-jun-07-gods-power-and-the-ark",
@@ -8365,7 +8651,8 @@
    "thumb": "/lantern/jun-07-gods-power-and-the-ark/printables/story.jpg?v=bca311be6c",
    "src": "bca311be6cc158a6201ca5edf3a49c42c790496d20f15a547bd1d9a456b0387a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "bca311be6cc158a6201ca5edf3a49c42c790496d20f15a547bd1d9a456b0387a"
   },
   {
    "id": "song-jun-07-gods-power-and-the-ark",
@@ -8392,7 +8679,8 @@
    "thumb": "/lantern/jun-07-gods-power-and-the-ark/printables/song.jpg?v=9c75626adb",
    "src": "9c75626adb11dea9458f9cb0731fd1d750d2201ac18a83a193427251d4821ba2",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "9c75626adb11dea9458f9cb0731fd1d750d2201ac18a83a193427251d4821ba2"
   },
   {
    "id": "song-jun-06-the-lord-calls-samuel",
@@ -8419,7 +8707,8 @@
    "thumb": "/lantern/jun-06-the-lord-calls-samuel/printables/song.jpg?v=03b3023f33",
    "src": "03b3023f331ed15a162b13d17eb7c49b5bdf77708eca0d9db2491d009a741228",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "03b3023f331ed15a162b13d17eb7c49b5bdf77708eca0d9db2491d009a741228"
   },
   {
    "id": "song-jun-05-samuel-goes-to-the-temple",
@@ -8446,7 +8735,8 @@
    "thumb": "/lantern/jun-05-samuel-goes-to-the-temple/printables/song.jpg?v=163b7ac923",
    "src": "163b7ac923042be47c56151f6492551bc63a8c852368a68f4bd267d56584e40a",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "163b7ac923042be47c56151f6492551bc63a8c852368a68f4bd267d56584e40a"
   },
   {
    "id": "song-jun-04-hannah-prays-for-a-baby",
@@ -8473,7 +8763,8 @@
    "thumb": "/lantern/jun-04-hannah-prays-for-a-baby/printables/song.jpg?v=48ba6b8dcb",
    "src": "48ba6b8dcbb9192a0e35fd34e7a25683c603ac9117b42dd1e7a8f0b80dc92425",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "48ba6b8dcbb9192a0e35fd34e7a25683c603ac9117b42dd1e7a8f0b80dc92425"
   },
   {
    "id": "song-jun-03-boaz-marries-ruth",
@@ -8500,7 +8791,8 @@
    "thumb": "/lantern/jun-03-boaz-marries-ruth/printables/song.jpg?v=ca24347f6e",
    "src": "ca24347f6e3329a9598bc0135da75dc5c304236ce77194bdb271bff23f63dd14",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "ca24347f6e3329a9598bc0135da75dc5c304236ce77194bdb271bff23f63dd14"
   },
   {
    "id": "song-jun-02-ruth-works-in-the-field",
@@ -8527,7 +8819,8 @@
    "thumb": "/lantern/jun-02-ruth-works-in-the-field/printables/song.jpg?v=87bd0bcc90",
    "src": "87bd0bcc90ec3c9f93fa2131001e37a03e3e555a8494f834e85e4fcac55938ca",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "87bd0bcc90ec3c9f93fa2131001e37a03e3e555a8494f834e85e4fcac55938ca"
   },
   {
    "id": "song-jun-01-ruth-stays-with-naomi",
@@ -8554,7 +8847,8 @@
    "thumb": "/lantern/jun-01-ruth-stays-with-naomi/printables/song.jpg?v=c235538cb8",
    "src": "c235538cb8de82cab50bb76c95071a845392bad5f8b4c125cea29735ffeb1b36",
    "updated": "2026-11-19",
-   "created": "2026-11-19"
+   "created": "2026-11-19",
+   "stored": "c235538cb8de82cab50bb76c95071a845392bad5f8b4c125cea29735ffeb1b36"
   },
   {
    "id": "lullaby-nt",
@@ -8574,7 +8868,8 @@
    "src": "c7674094d552ac154aac93ea3a06160b9c7db31590e600f28bdaf177e603c599",
    "updated": "2026-11-19",
    "created": "2026-11-19",
-   "free": true
+   "free": true,
+   "stored": "c7674094d552ac154aac93ea3a06160b9c7db31590e600f28bdaf177e603c599"
   },
   {
    "id": "lullaby-ot",
@@ -8594,7 +8889,8 @@
    "src": "59b34810b789fabefaddbc3147fcdef4e42efc457acd4ff9c9660292d0510d57",
    "updated": "2026-11-19",
    "created": "2026-11-19",
-   "free": true
+   "free": true,
+   "stored": "59b34810b789fabefaddbc3147fcdef4e42efc457acd4ff9c9660292d0510d57"
   }
  ],
  "warnings": [
