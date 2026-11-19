@@ -25,7 +25,18 @@ jobs:
           python3 - <<'PY'
           import os, json, glob, urllib.request, urllib.error
           key = os.environ.get('ELEVENLABS_API_KEY', '').strip()
-          VOICE = 'Nz2AS3P86Xwn1ptANiRG'   # ElevenLabs "Levi" (professional clone)
+          # Levi's own voice, found by its name "Levi" on whichever ElevenLabs account the key belongs to
+          # (19 Nov 2026: the account changed, and a voice id belongs to one account), the old clone's id if none.
+          VOICE = 'Nz2AS3P86Xwn1ptANiRG'
+          try:
+              vs = json.load(urllib.request.urlopen(urllib.request.Request('https://api.elevenlabs.io/v1/voices',
+                   headers={'xi-api-key': key}), timeout=60)).get('voices') or []
+              mine = [v for v in vs if (v.get('name') or '').strip().lower() == 'levi'] or \
+                     [v for v in vs if (v.get('name') or '').strip().lower().startswith('levi') and v.get('category') != 'premade']
+              if mine: VOICE = mine[0]['voice_id']; print('voice: ' + mine[0]['name'] + ' (' + str(mine[0].get('category')) + ')')
+              else: print('no voice named Levi on this account; using the old id')
+          except Exception as e:
+              print('could not list the voices (' + str(e)[:120] + '); using the old id')
           os.makedirs('social/voice', exist_ok=True)
           for req_file in sorted(glob.glob('social/requests/*.json')):
               for item in json.load(open(req_file)):
