@@ -130,6 +130,25 @@
       "Buy the paperback on Amazon &rarr;</a></section>";
   }
 
+  /* THE PRINTABLES ROW (Levi, 19 Nov 2026): this story's Story and Song PDFs and the Lantern Lullaby, each
+     opening in the Printables page's viewer (printables.html?open=<id>). From data/printables.json, which the
+     nightly job writes (lantern/builder/printables/make.js); a story with no printables yet shows no row. */
+  var PRINT = null;
+  function printBlock(s) {
+    (PRINT = PRINT || fetch("data/printables.json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }))
+      .then(function (j) {
+        var items = (j && j.items) || [], slot = document.getElementById("sf-print-slot"); if (!slot) return;
+        var mine = items.filter(function (x) { return x.storyId && x.storyId === s.id; });
+        if (!mine.length) return;
+        var nt = mine[0].volume === "nt", lul = items.filter(function (x) { return x.id === (nt ? "lullaby-nt" : "lullaby-ot"); });
+        var label = { story: "Print the Story", song: "Print the Song", lullaby: "Print the Lullaby" };
+        var btns = mine.concat(lul).sort(function (a, b) { return ["story", "song", "lullaby"].indexOf(a.type) - ["story", "song", "lullaby"].indexOf(b.type); });
+        slot.innerHTML = '<section class="sf-block"><h3 class="sf-h">Printables</h3><div class="sf-chips">' + btns.map(function (x) {
+          return '<a class="sf-chip" href="printables.html?open=' + encodeURIComponent(x.id) + '">&#128424;&#65039; ' + esc(label[x.type] || x.title) + "</a>";
+        }).join("") + "</div></section>";
+      });
+  }
+
   /* ------------------------------------------------------------------- mount
      Draws what it can straight away, then fills the family's memories in when
      the database answers. Nothing waits on anything else. */
@@ -137,8 +156,9 @@
     if (!host || !s) return;
     host.innerHTML =
       '<div class="sf">' + virtuesBlock(s) +
-        '<div id="sf-mem-slot"></div>' + bookBlock(s) +
+        '<div id="sf-print-slot"></div><div id="sf-mem-slot"></div>' + bookBlock(s) +
       "</div>";
+    printBlock(s);
 
     var a = window.LSTAuth;
     if (!a || !a.signedIn() || !window.LSTData || !window.LSTData.familyStories) return;

@@ -1,0 +1,232 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- THE PRINTABLES' LOOK (Levi, 19 Nov 2026, his Printables Design Prompt): US Letter, the storybook design.
+     make.js fills window.DOC and opens this page in Chromium; render() lays it out, fits every card,
+     and sets window.READY; Chromium prints it to PDF (printBackground). Colours come only from THEME. -->
+<!-- the brand faces as static files beside this page (Fontsource, OFL), so the PDF embeds small real fonts -->
+<style>
+@font-face{font-family:Fredoka;font-weight:500;font-style:normal;src:url(fonts/fredoka-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:Fredoka;font-weight:600;font-style:normal;src:url(fonts/fredoka-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Fredoka;font-weight:700;font-style:normal;src:url(fonts/fredoka-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:Nunito;font-weight:400;font-style:normal;src:url(fonts/nunito-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Nunito;font-weight:700;font-style:normal;src:url(fonts/nunito-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:Nunito;font-weight:800;font-style:normal;src:url(fonts/nunito-latin-800-normal.woff2) format('woff2')}
+@font-face{font-family:Nunito;font-weight:400;font-style:italic;src:url(fonts/nunito-latin-400-italic.woff2) format('woff2')}
+@page{size:8.5in 11in;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:Nunito,sans-serif;color:#3A3F4A}
+.page{width:8.5in;height:11in;padding:.5in .55in .45in;display:flex;flex-direction:column;overflow:hidden;page-break-after:always;break-after:page;position:relative;background:#fff}
+.page:last-child{page-break-after:auto;break-after:auto}
+.bar{border-radius:999px;background:var(--navy);border:2px solid var(--gold);color:#fff;font-family:Fredoka;font-weight:500;font-size:15.5pt;text-align:center;padding:6px 20px;display:flex;align-items:center;justify-content:space-between;flex:none}
+.bar .st{color:var(--gold);font-size:13pt}
+.band{margin-top:12px;border-radius:999px;background:var(--band);color:#fff;font-family:Fredoka;font-weight:600;font-size:19pt;text-align:center;padding:5px 22px;flex:none;line-height:1.2}
+.sub{margin-top:7px;text-align:center;font-family:Fredoka;font-weight:500;font-size:11.5pt;color:var(--accent);flex:none}
+.content{flex:1;min-height:0;margin-top:14px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.content>.card,.content>.cols{flex:none}
+.card{background:var(--card);border:1.5px dashed var(--dash);border-radius:16px;padding:13px 15px;break-inside:avoid;overflow:hidden;min-height:0}
+.card h3{font-family:Fredoka;font-weight:600;font-size:13.5pt;color:var(--navy);margin-bottom:5px;line-height:1.2}
+.card.refrain{background:var(--tint);border-color:var(--accent)}
+.card.refrain .tx{font-style:italic;color:#2F5D3A}
+.card.refrain h3:before{content:"☾ ";color:var(--accent)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:middle;position:relative;top:-1px}
+.lab{font-family:Nunito;font-weight:800;font-size:10.5pt;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);margin-bottom:4px}
+.img{border-radius:18px;overflow:hidden;min-height:0;background:var(--card)}
+.img img{width:100%;height:100%;object-fit:cover;display:block}
+.foot{margin-top:12px;border:1.5px solid #EBC276;border-radius:999px;padding:5px 16px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;font-size:8pt;color:#9AA0A8;flex:none}
+.foot .dots{display:flex;gap:5px}.foot .dots i{width:7px;height:7px;border-radius:50%;display:block}
+.foot .pn{font-weight:700;font-size:9.5pt;color:var(--accent);text-align:center}
+.foot .vl{text-align:right}
+.tx{font-size:10.6pt;line-height:1.45}
+.tx p+p{margin-top:7px}
+.center{text-align:center}
+.quote{font-style:italic;color:var(--accent)}
+/* story */
+.opener-img{flex:1}
+.opener{text-align:center;flex:none}
+.opener .sn{font-family:Fredoka;font-weight:500;color:var(--accent);font-size:11pt}
+.opener h1{font-family:Fredoka;font-weight:600;font-size:24pt;color:var(--navy);line-height:1.15;margin:3px 0}
+.opener .ref{font-family:Fredoka;font-weight:500;color:var(--accent);font-size:12.5pt}
+.rule{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;color:var(--gold)}
+.rule:before,.rule:after{content:"";width:70px;height:2px;background:var(--gold);border-radius:2px}
+.grid2{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px 16px}
+.grid1{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.grid2 .card,.grid1 .card{display:flex;flex-direction:column;justify-content:center}
+.storytx{text-align:center;font-size:10.5pt;line-height:1.5}
+.trav-img{flex:1}
+.trav .eb{font-family:Fredoka;font-weight:600;color:var(--gold);font-size:10.5pt;text-transform:uppercase;letter-spacing:.05em;text-align:center;text-shadow:0 0 1px #a07c10}
+.trav .nm{font-family:Fredoka;font-weight:600;font-size:21pt;text-align:center;line-height:1.15}
+.trav .tr{text-align:center;font-weight:700;font-size:10.5pt;margin-top:2px}
+.trav .mo{text-align:center;font-style:italic;color:var(--accent);margin:2px 0 6px}
+.feel{flex:1;min-height:0;display:grid;grid-template-columns:1.35fr 1fr;gap:14px 16px}
+.stones{display:grid;grid-template-columns:auto 1fr;gap:5px 9px;margin-top:4px;font-size:9.8pt;line-height:1.38}
+.stones b{font-family:Nunito;font-weight:800;letter-spacing:.04em}
+.subhead{font-family:Fredoka;font-weight:500;color:var(--accent);font-size:10.5pt;margin:-2px 0 6px}
+.heart{color:var(--accent)}
+.remember{flex:none;text-align:center}
+.remember .big{font-family:Fredoka;font-weight:500;font-size:14pt;color:var(--navy);line-height:1.3}
+.qs p{text-align:center;font-style:italic}
+.qs p+p{margin-top:8px}
+ol.num{padding-left:18px}ol.num li+li{margin-top:7px}
+/* lullaby */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.stanza{white-space:pre-line}
+.stanza+.stanza{margin-top:7px}
+.inner2{column-count:2;column-gap:18px;font-size:11.6pt}
+.inner2 .stanza{break-inside:avoid}
+/* song */
+.song{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.song .card{display:flex;flex-direction:column;justify-content:center}
+.song .lines{font-size:11.6pt;line-height:1.5;white-space:pre;overflow:hidden}
+.song.one{grid-template-columns:1fr}
+</style></head>
+<body><div id="out"></div>
+<script>
+const D = window.DOC, T = D.theme;
+const R = document.documentElement.style;
+for (const k of ['navy','gold','dash','band','accent','card','tint']) R.setProperty('--'+k, T[k]);
+const CH = {beau:'#8B5A3C',scout:'#2E9E52',willow:'#9C6FB6',wren:'#E2574C'};
+const STONE = {SPOT:'#5BAFD3',NAME:'#F4C61F',FIND:'#4F7A3A',FORK:'#D4623C',CALM:'#9C6FB6'};
+const out = document.getElementById('out');
+const esc = s => String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+// words that arrive as HTML entities (&middot;, &amp;) read as plain text first
+const plain = s => { const t=document.createElement('textarea'); t.innerHTML=String(s==null?'':s).replace(/<[^>]+>/g,''); return t.value; };
+const P = s => esc(plain(s));
+let pageNo = 0;
+function page(barText, opts){ opts=opts||{};
+  const p=document.createElement('section'); p.className='page';
+  p.innerHTML=`<div class="bar"><span class="st">★</span><span>${esc(barText)}</span><span class="st">★</span></div>`+
+    (opts.band?`<div class="band">${P(opts.band)}</div>`:'')+(opts.sub?`<div class="sub">${P(opts.sub)}</div>`:'')+
+    `<div class="content"></div><div class="foot"><div class="dots">${Object.values(CH).map(c=>`<i style="background:${c}"></i>`).join('')}</div><div class="pn"></div><div class="vl">Little Scripture Travelers · ${esc(T.label)}</div></div>`;
+  out.appendChild(p); return p.querySelector('.content'); }
+function img(src, cls){ return src?`<div class="img ${cls||''}"><img src="${src}" alt=""></div>`:''; }
+function numberPages(){ const ps=[...document.querySelectorAll('.page')];
+  ps.forEach((p,i)=>{ p.querySelector('.pn').textContent = ps.length===1 ? 'littlescripturetravelers.com' : String(i+1); }); }
+/* shrink a box's words until they fit inside it (never below `min` pt) */
+function fit(el, start, min){ if(!el) return; let s=start; el.style.fontSize=s+'pt';
+  while((el.scrollHeight>el.clientHeight+1 || el.scrollWidth>el.clientWidth+1) && s>min){ s-=0.25; el.style.fontSize=s+'pt'; } }
+
+/* ---------- the daily story ---------- */
+function story(){ const S=D.story, beats=S.beats||[];
+  const bar = S.night ? plain(S.night) : T.label+' · Bedtime Story';
+  const cover=beats.find(b=>b.type==='cover'), st=beats.filter(b=>b.type==='story'&&(b.text||[]).length);
+  const mom=h=>beats.find(b=>b.type==='moment'&&plain(b.heading)===h);
+  const trav=beats.find(b=>b.type==='moment'&&/Traveler of the Night/i.test(plain(b.eyebrow||'')));
+  const feel=mom('A Feeling Moment'), rem=mom('Remember This'), pp=mom('Parent Prompt'), pe=mom('Parent Experience');
+  // 1. the opener
+  let c=page(bar);
+  c.innerHTML=(cover&&cover.img?img(cover.img,'opener-img'):'')+
+   `<div class="card opener"><div class="sn">~ Story ${esc(S.storyNumber||'')} ~</div><h1>${P(S.title)}</h1><div class="ref">${P(S.reference)}</div><div class="rule">★</div></div>`;
+  if(!(cover&&cover.img)) c.querySelector('.opener').style.flex='1';
+  // 2. the story pages, two beats a page: picture | words, then words | picture
+  for(let i=0;i<st.length;i+=2){ c=page(bar,{band:S.title});
+    const two=st.slice(i,i+2), g=document.createElement('div'); g.className=two.length===2?'grid2':'grid1';
+    two.forEach((b,k)=>{ const t=`<div class="card"><div class="storytx">${b.text.map(x=>'<p>'+P(x)+'</p>').join('')}</div></div>`;
+      const im=b.img?img(b.img):`<div class="card"><div class="storytx"><p>${P(b.alt||'')}</p></div></div>`;
+      g.insertAdjacentHTML('beforeend', k===0?im+t:t+im); });
+    c.appendChild(g); }
+  // 3. the Traveler of the Night
+  if(trav){ c=page(bar+' · Traveler'); const id=(D.traveler||'').toLowerCase(), info=D.travInfo||{};
+    c.innerHTML=(trav.img?img(trav.img,'trav-img'):'')+
+     `<div class="card trav" style="flex:none"><div class="eb">Scripture Traveler of the Night</div><div class="nm" style="color:${CH[id]||'var(--navy)'}">${P(trav.heading||info.name)}</div>`+
+     (info.virtue?`<div class="tr">${P(info.virtue)}</div>`:'')+(info.motto?`<div class="mo">${P(info.motto)}</div>`:'')+
+     `<div class="tx fitme">${(trav.text||[]).map(x=>'<p>'+P(x)+'</p>').join('')}</div></div>`;
+    if(!trav.img) c.querySelector('.trav').style.flex='1'; }
+  // 4. a feeling moment, the Five Stones, remember this
+  c=page(bar+' · Feeling · Remember');
+  const stones=(feel&&feel.stones)||[];
+  c.innerHTML=`<div class="feel"><div class="card"><h3><span class="heart">♥</span> A Feeling Moment</h3><div class="subhead">An activity, then the Five Stones</div><div class="fitme" style="overflow:hidden;flex:1">`+
+    `<div class="lab">1. Move &amp; Imagine</div><div class="tx">${((feel&&feel.text)||[]).map(x=>'<p>'+P(x)+'</p>').join('')}</div>`+
+    `<div class="lab" style="margin-top:10px">2. The Five Stones</div><div class="stones">${stones.map(([k,v])=>`<b style="color:${STONE[String(k).toUpperCase()]||'var(--accent)'}">${P(k).toUpperCase()}</b><span>${P(v)}</span>`).join('')}</div></div></div>`+
+    (rem&&rem.img?img(rem.img):`<div class="card"></div>`)+`</div>`+
+    `<div class="card remember"><h3>Remember This</h3><div class="subhead">Sweet Boys &amp; Girls</div><div class="big">${((rem&&rem.text)||[]).map(P).join(' ')}</div></div>`;
+  const fc=c.querySelector('.feel>.card'); fc.style.display='flex'; fc.style.flexDirection='column';
+  // 5. the parent's prompt and experience
+  if(pp||pe){ c=page(bar+' · Prompt · Experience'); const g=document.createElement('div'); g.className='grid2';
+    const prompt=`<div class="card"><h3 class="center">☾ Parent Prompt</h3><div class="subhead center">Question for the Child</div><div class="tx qs fitme">${((pp&&pp.text)||[]).map(x=>'<p>'+P(x)+'</p>').join('')}</div></div>`;
+    const exp=`<div class="card"><h3 class="center">Parent Experience</h3><div class="subhead center">Testimony</div><div class="tx fitme"><ol class="num">${((pe&&(pe.list||pe.text))||[]).map(x=>'<li>'+P(x)+'</li>').join('')}</ol></div></div>`;
+    g.innerHTML=(pp&&pp.img?img(pp.img):'<div class="card"></div>')+prompt+exp+(pe&&pe.img?img(pe.img):'<div class="card"></div>');
+    c.appendChild(g); }
+  numberPages();
+  document.querySelectorAll('.grid2 .card, .grid1 .card').forEach(card=>{ card.style.overflow='hidden'; const t=card.querySelector('.storytx,.fitme'); if(t){ t.style.overflow='hidden'; t.style.maxHeight='100%'; } });
+  document.querySelectorAll('.storytx').forEach(t=>{ t.parentElement.style.justifyContent='center'; fitCard(t,12.5,7.5); });
+  document.querySelectorAll('.fitme').forEach(t=>fitCard(t,10.6,7.5));
+}
+/* the words inside a card may not run past the card: shrink them until the card holds them */
+function fitCard(t,start,min){ const card=t.closest('.card'); let s=start; t.style.fontSize=s+'pt';
+  const over=()=>card.scrollHeight>card.clientHeight+1;
+  while(over() && s>min){ s-=0.25; t.style.fontSize=s+'pt'; } }
+
+/* ---------- the Lantern Lullaby ---------- */
+function lullaby(){ const L=D.lullaby, parts=L.parts||[];
+  const bar='Bedtime Lullaby · '+T.label+' Version';
+  const card=p=>{ const isRef=p.kind==='chorus', tr=p.kind==='traveler'||CH[p.id];
+    const sts=isRef?(()=>{ const ls=String((p.stanzas||[]).join('\n')).split('\n'); const h=Math.ceil(ls.length/2); return [ls.slice(0,h).join('\n'),ls.slice(h).join('\n')].filter(Boolean); })():(p.stanzas||[]);
+    const body=sts.map(s=>`<div class="stanza">${String(s).split('\n').map(l=>/["“”]/.test(l)&&tr?`<span class="quote">${P(l)}</span>`:P(l)).join('\n')}</div>`).join('');
+    const wide=(p.stanzas||[]).length>=6||isRef||!!p._wide;   /* the refrain runs across the page, its lines in two columns */
+    return {wide, label:plain(p.label), html:`<div class="card${isRef?' refrain':''}"><h3>${tr&&CH[p.id]?`<span class="dot" style="background:${CH[p.id]}"></span>`:''}${P(p.label)}</h3><div class="tx${wide?' inner2':''}">${body}</div></div>`}; };
+  const cards=parts.map(card);
+  const el=h=>{ const w=document.createElement('div'); w.innerHTML=h; return w.firstChild; };
+  /* a run of side-by-side cards: as many as fit, split down the left column then the right so the two
+     columns come out as even as they can (Levi's sheet: "Fill each page well") */
+  function placeRun(c,run,fits,force){ const cols=document.createElement('div'); cols.className='cols'; cols.innerHTML='<div class="col"></div><div class="col"></div>'; c.appendChild(cols);
+    const [L,Rt]=cols.children; const els=run.map(k=>el(k.html));
+    for(let k=run.length;k>=1;k--){ let best=null;
+      for(let j=Math.ceil(k/2);j<=k;j++){ L.innerHTML=''; Rt.innerHTML=''; els.slice(0,j).forEach(e=>L.appendChild(e)); els.slice(j,k).forEach(e=>Rt.appendChild(e));
+        if(!fits()) continue; const h=Math.max(L.offsetHeight,Rt.offsetHeight); if(!best||h<best.h) best={j,h}; }
+      if(best){ L.innerHTML=''; Rt.innerHTML=''; els.slice(0,best.j).forEach(e=>L.appendChild(e)); els.slice(best.j,k).forEach(e=>Rt.appendChild(e)); return k; } }
+    if(force){ L.innerHTML=''; Rt.innerHTML=''; L.appendChild(els[0]); return 1; }
+    cols.remove(); return 0; }
+  let i=0, n=0;
+  while(i<cards.length){ n++;
+    const c=page(bar,{band:L.title, sub: n===1?'~ Beau, Scout, Willow, & Wren ~':'~ '+cards[i].label+' ~'});
+    const fits=()=>{ const lim=c.getBoundingClientRect().bottom+0.5; return c.scrollHeight<=c.clientHeight+1 && [...c.querySelectorAll('.card')].every(k=>k.getBoundingClientRect().bottom<=lim); };
+    let placedHere=0;
+    while(i<cards.length){ const k=cards[i];
+      if(k.wide){ const e=el(k.html); c.appendChild(e); if(!fits()&&placedHere){ e.remove(); break; } placedHere++; i++; continue; }
+      let z=i; while(z<cards.length&&!cards[z].wide) z++;
+      if(z===i+1){ /* a card on its own runs across the page, its stanzas side by side */ cards[i]=card(Object.assign({},parts[i],{_wide:true})); continue; }
+      const got=placeRun(c,cards.slice(i,z),fits,!placedHere); if(!got) break; i+=got; placedHere+=got; if(i<z) break; }
+  }
+  // fill the columns top to bottom: balance the two columns of each page by moving cards left-to-right where it evens them
+  /* then each page's words grow (to 12.6pt) until the page is full */
+  document.querySelectorAll('.content').forEach(c=>{ const tx=[...c.querySelectorAll('.tx')]; const ok=()=>{ const lim=c.getBoundingClientRect().bottom+0.5; return c.scrollHeight<=c.clientHeight+1&&[...c.querySelectorAll('.card')].every(k=>k.getBoundingClientRect().bottom<=lim); };
+    /* a sung line is never broken in two (Levi's sheet: "Keep each line break exactly as written") */
+    const wraps=()=>[...c.querySelectorAll('.stanza')].some(st=>{ const n=st.textContent.split('\n').length, lh=parseFloat(getComputedStyle(st).lineHeight)||16; return st.offsetHeight>n*lh+lh*0.5; });
+    let s=10.6; tx.forEach(t=>t.style.fontSize=s+'pt'); while(wraps()&&s>8.6){ s-=0.2; tx.forEach(t=>t.style.fontSize=s+'pt'); }
+    while(s<12.6){ tx.forEach(t=>t.style.fontSize=(s+0.2)+'pt'); if(!ok()||wraps()){ tx.forEach(t=>t.style.fontSize=s+'pt'); break; } s+=0.2; } });
+  numberPages();
+  document.querySelectorAll('.content').forEach(c=>{ if(c.scrollHeight>c.clientHeight+1){ let s=10.6; while(c.scrollHeight>c.clientHeight+1&&s>8){ s-=0.2; c.querySelectorAll('.tx').forEach(t=>t.style.fontSize=s+'pt'); } } });
+}
+
+/* ---------- the night's song, on one page ---------- */
+function song(){ const G=D.song;
+  const c=page('Little Scripture Travelers · Song',{band:G.title, sub:G.reference});
+  const verses=G.sections.filter(s=>!s.chorus), chorus=G.sections.find(s=>s.chorus&&s.lines.length);
+  const g=document.createElement('div'); g.className='song'+(chorus?'':' one');
+  g.style.gridTemplateRows=`repeat(${Math.max(1,verses.length)},1fr)`;
+  g.innerHTML=verses.map((v,k)=>`<div class="card"><div class="lab">${P(v.label||('Verse '+(k+1)))}</div><div class="lines">${v.lines.map(P).join('\n')}</div></div>`+
+    (chorus?`<div class="card refrain"><div class="lab">☾ Chorus</div><div class="lines tx">${chorus.lines.map(P).join('\n')}</div></div>`:'')).join('');
+  c.appendChild(g); numberPages();
+  let s=11.6; const all=[...g.querySelectorAll('.lines')], over=()=>all.some(l=>{ const cd=l.closest('.card'); return cd.scrollHeight>cd.clientHeight+1||l.scrollWidth>l.clientWidth+1; });
+  all.forEach(l=>l.style.fontSize=s+'pt'); while(over()&&s>7.5){ s-=0.2; all.forEach(l=>l.style.fontSize=s+'pt'); }
+}
+
+/* pictures go into the PDF at print size, not their full upload size */
+async function shrinkImages(max){ const ims=[...document.querySelectorAll('img')];
+  await Promise.all(ims.map(im=>im.decode().catch(()=>{})));
+  for(const im of ims){ if(!im.naturalWidth) continue; const k=Math.min(1, max/Math.max(im.naturalWidth, im.naturalHeight)); if(k>=1&&im.src.length<180000) continue;
+    const cv=document.createElement('canvas'); cv.width=Math.round(im.naturalWidth*k); cv.height=Math.round(im.naturalHeight*k);
+    const x=cv.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,cv.width,cv.height); x.drawImage(im,0,0,cv.width,cv.height);
+    im.src=cv.toDataURL('image/jpeg',0.66); await im.decode().catch(()=>{}); } }
+
+(async()=>{ try{ /* the faces load only when asked for: ask for every one before anything is measured */
+  await Promise.all(['500 12px Fredoka','600 12px Fredoka','700 12px Fredoka','400 12px Nunito','700 12px Nunito','800 12px Nunito','italic 400 12px Nunito'].map(f=>document.fonts.load(f)));
+  await document.fonts.ready;
+  if(D.kind==='story') story(); else if(D.kind==='lullaby') lullaby(); else song();
+  await shrinkImages(800);
+  const over=[...document.querySelectorAll('.page')].filter(p=>{ const c=p.querySelector('.content'); return c.scrollHeight>c.clientHeight+2; }).length;
+  window.RESULT={pages:document.querySelectorAll('.page').length, overflow:over};
+ }catch(e){ window.RESULT={error:String(e&&e.stack||e)}; } window.READY=true; })();
+</script></body></html>
