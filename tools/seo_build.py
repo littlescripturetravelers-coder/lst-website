@@ -270,6 +270,30 @@ HUBS = {
    ],
    list_title="Recent scripture stories to pair with a family story",
    kw="Family history for kids"),
+ "teaching-kids-virtues.html": dict(
+   title="Teaching Kids Virtues: Scripture Stories for Kindness, Courage & More",
+   desc="How to teach kids honesty, kindness, courage, patience and 32 more virtues with short scripture stories. Find the story that fits what your child needs today, from the Virtue Library.",
+   eyebrow="TEACHING KIDS VIRTUES",
+   h1="Teaching kids virtues, one scripture story at a time",
+   lede="When your child is struggling to share, to tell the truth or to be brave, a story teaches what a lecture can't. The Virtue Library sorts every Little Scripture Travelers story by the virtue it teaches, so you can find the right one tonight.",
+   no_list=True, virtues=True,
+   body=[
+    ("How to use a story to teach a virtue",
+     "<ul><li><strong>Pick the virtue your child needs today</strong>, like patience after a hard afternoon or courage before a first day.</li>"
+     "<li><strong>Read the story at bedtime</strong>, when they are calm and listening.</li>"
+     "<li><strong>Ask one question</strong>: \"What did they do that was brave?\"</li>"
+     "<li><strong>Tell your own story</strong> of a time you needed the same virtue.</li></ul>"
+     "<p>Below are the 36 virtues in the Virtue Library, with a few of the stories that teach each one. Subscribers can search all of them by virtue, feeling or situation in the Virtue Library.</p>"),
+   ],
+   faq=[
+    ("How do I teach my child a virtue like honesty or kindness?",
+     "Show it in a story, name it out loud, ask one simple question about it, and then share a time you lived it yourself. Short, calm and often works better than a long lesson."),
+    ("What is the Virtue Library?",
+     "A searchable catalog of the virtues and principles taught in every Little Scripture Travelers story. Look up what your child needs today and find the scripture stories that teach it."),
+    ("How many stories are in the Virtue Library?", "VIRTUE_COUNT"),
+    ("How much does it cost?", FAQ_HOME[4][1]),
+   ],
+   list_title="", kw="Teaching kids virtues"),
 }
 
 # Title / description rewrites for existing pages (CTR). None = keep what is there.
@@ -297,6 +321,7 @@ META["index-july.html"] = META["index.html"]
 
 SKIP = {"googlea5f8bfd252ef63cf.html", "link-check.html", "read.html", "reset-password.html"}
 NO_SITEMAP = {"index-default.html", "index-july.html", "delete-account.html", "cancel.html", "privacy.html"}
+LIB = None
 TRAVELER = {"beau": "Beau", "scout": "Scout", "willow": "Willow", "wren": "Wren"}
 
 
@@ -312,6 +337,34 @@ def nights():
             n["_date"] = d
             out.append(n)
     return sorted(out, key=lambda n: n["_date"], reverse=True)
+
+
+def virtue_library():
+    """Read data/virtue-library.js (public catalog: titles, scriptures, virtues, notes) via node."""
+    import subprocess
+    js = "global.window=global;require('./data/virtue-library.js');process.stdout.write(JSON.stringify(LST_LIBRARY))"
+    try:
+        return json.loads(subprocess.run(["node", "-e", js], capture_output=True, text=True, timeout=60, check=True).stdout)
+    except Exception as e:
+        print("virtue library not read:", e, file=sys.stderr)
+        return None
+
+
+def virtues_html(lib):
+    if not lib:
+        return ""
+    out = []
+    for v in lib["virtues"]:
+        sts = [x for x in lib["stories"] if x.get("primaryVirtue") == v["id"]][:4]
+        if not sts:
+            continue
+        items = "".join(
+            f'<li><strong>{E(x["title"])}</strong> &middot; <span>{E(x.get("scripture",""))}</span>'
+            + (f'<br>{E(x["teachingNote"])}' if x.get("teachingNote") else "") + "</li>" for x in sts)
+        n = sum(1 for x in lib["stories"] if v["id"] in (x.get("virtues") or []))
+        out.append(f'<div class="hub-sec" id="{E(v["id"])}"><h2>{E(v["name"])}</h2>'
+                   f'<p>{E(v.get("definition",""))} <em>({n} stories)</em></p><ul class="hub-list">{items}</ul></div>')
+    return "".join(out)
 
 
 def blog_posts():
@@ -443,6 +496,7 @@ FOOTER_COL = """<!-- SEO:FOOTER -->
           <li><a href="scripture-study-for-parents.html">Scripture Study for Parents</a></li>
           <li><a href="kids-technology-by-age.html">Kids &amp; Technology by Age</a></li>
           <li><a href="family-history-for-kids.html">Family History for Kids</a></li>
+          <li><a href="teaching-kids-virtues.html">Teaching Kids Virtues</a></li>
           <li><a href="sample.html">Read a Free Story</a></li>
         </ul>
       </div>
@@ -494,7 +548,7 @@ def home_faq(s):
              '<a href="bible-stories-for-kids.html">Bible Stories for Kids</a>'
              '<a href="lds-parenting.html">LDS Parenting</a><a href="christian-parenting.html">Christian Parenting</a>'
              '<a href="homeschool-bible-stories.html">Homeschool</a><a href="scripture-study-for-parents.html">Scripture study for parents</a>'
-             '<a href="kids-technology-by-age.html">Kids &amp; technology by age</a><a href="family-history-for-kids.html">Family history for kids</a>'
+             '<a href="kids-technology-by-age.html">Kids &amp; technology by age</a><a href="family-history-for-kids.html">Family history for kids</a><a href="teaching-kids-virtues.html">Teaching kids virtues</a>'
              '<a href="sample.html">Read a free story</a></div>')
     block = "<!-- SEO:FAQ -->\n" + SEO_CSS + "\n" + faq_html(FAQ_HOME).replace("</div>\n</section>", links + "\n  </div>\n</section>") + "\n<!-- /SEO:FAQ -->\n  "
     i = s.find('<footer class="site-footer"')
@@ -527,6 +581,8 @@ def build_hub(page, h, all_nights, posts, template):
     stories = stories.replace('<ul class="hub-list"></ul>', "", 1)
 
     sections = "".join(f'<div class="hub-sec"><h2>{E(t)}</h2>{b}</div>' for t, b in h["body"])
+    if h.get("virtues"):
+        sections += virtues_html(LIB)
     blog = ""
     if h.get("blog"):
         blog = '<div class="hub-sec"><h2>Articles for parents</h2><ul class="hub-list">' + "".join(
@@ -572,6 +628,13 @@ def build_hub(page, h, all_nights, posts, template):
 
 # ---------------------------------------------------------------- main
 def main():
+    global LIB
+    LIB = virtue_library()
+    if LIB:
+        h = HUBS["teaching-kids-virtues.html"]
+        h["faq"] = [(q, (f"{len(LIB['stories'])} scripture stories so far, tagged with {len(LIB['virtues'])} virtues, and it grows every month." if a == "VIRTUE_COUNT" else a)) for q, a in h["faq"]]
+    else:
+        HUBS["teaching-kids-virtues.html"]["faq"] = [f for f in HUBS["teaching-kids-virtues.html"]["faq"] if f[1] != "VIRTUE_COUNT"]
     all_nights = nights()
     posts = blog_posts()
     template = open("bedtime-stories.html", encoding="utf-8").read()
@@ -612,7 +675,7 @@ def main():
 
     # sitemap
     pri = {"index.html": "1.0", "come-follow-me-for-kids.html": "0.9", "bible-stories-for-kids.html": "0.9",
-           "lds-parenting.html": "0.8", "christian-parenting.html": "0.8", "homeschool-bible-stories.html": "0.8", "scripture-study-for-parents.html": "0.8", "kids-technology-by-age.html": "0.8", "family-history-for-kids.html": "0.8", "subscribe.html": "0.8", "sample.html": "0.8"}
+           "lds-parenting.html": "0.8", "christian-parenting.html": "0.8", "homeschool-bible-stories.html": "0.8", "scripture-study-for-parents.html": "0.8", "kids-technology-by-age.html": "0.8", "family-history-for-kids.html": "0.8", "teaching-kids-virtues.html": "0.9", "subscribe.html": "0.8", "sample.html": "0.8"}
     urls = []
     for p in sorted(set(indexable), key=lambda p: (p != "index.html", p)):
         loc = SITE + "/" if p == "index.html" else SITE + "/" + p
@@ -653,6 +716,7 @@ Made by Little Scripture Travelers Bedtime Stories, LLC (founder Levi Lewis, Mon
 - [Scripture study for parents]({SITE}/scripture-study-for-parents.html): the Morning Lantern, a daily devotional for moms and dads (Quick, Medium or Deep)
 - [Kids and technology by age]({SITE}/kids-technology-by-age.html): a parent guide to screens at every age, based on AAP and WHO guidance
 - [Family history and journaling for kids]({SITE}/family-history-for-kids.html): sharing family stories and keeping a journal with young children
+- [Teaching kids virtues]({SITE}/teaching-kids-virtues.html): 36 virtues (honesty, kindness, courage, patience…) with the scripture stories that teach each
 - [Free sample story]({SITE}/sample.html): a whole night free, nothing to join
 - [Plans and free trial]({SITE}/subscribe.html)
 - [Meet the Travelers]({SITE}/travelers.html): Beau the Brave, Scout the Seeker, Willow the Warm, Wren the Wonderer
