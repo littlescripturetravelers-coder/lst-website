@@ -45,6 +45,30 @@
   .hub-list{list-style:none;padding:0;margin:0}
   .hub-list li{border-bottom:1px solid var(--edge-12);padding:.65rem 0;color:var(--ink-85)}
   .hub-list strong{color:var(--ink)} .hub-list span{color:var(--teal-ink);font-size:.85rem;font-weight:700}
+  .hub-offer{list-style:none;padding:0;margin:1.1rem auto 0;display:flex;flex-wrap:wrap;gap:.4rem .9rem;justify-content:center;max-width:40rem}
+  .hub-offer li{color:var(--ink);font-weight:700;font-size:.9rem}
+  .mp-hero .hub-cta{justify-content:center;flex-direction:column;align-items:center;margin:1.2rem 0 .4rem}
+  .hub-go{font-size:1.08rem;padding:.95rem 1.8rem;border-radius:999px;text-decoration:none;display:inline-block}
+  .hub-alt{color:var(--gold-ink);font-weight:700;text-decoration:none;font-size:.95rem}
+  .hub-shots{display:flex;gap:.7rem;justify-content:center;margin:1.6rem auto 0;max-width:40rem}
+  .hub-shot{margin:0;flex:1;max-width:11rem}
+  .hub-shot img{width:100%;height:auto;border-radius:18px;border:2px solid var(--edge-12);box-shadow:0 10px 28px rgba(0,0,0,.25)}
+  .hub-shot figcaption{font-size:.78rem;color:var(--ink-78);margin-top:.35rem;font-weight:700}
+  .hub-proof{background:var(--fill-06);border:1px solid var(--edge-12);border-radius:16px;padding:1rem 1.2rem;margin:0 0 2rem}
+  .hub-stars{margin:0 0 .5rem;color:var(--ink)} .hub-stars span{color:#F5C518;letter-spacing:.08em}
+  .hub-stars a{color:var(--gold-ink)}
+  .hub-quote{margin:.6rem 0 0;color:var(--ink-85);font-style:italic;line-height:1.6}
+  .hub-quote cite{display:block;font-style:normal;font-size:.82rem;color:var(--ink-55);margin-top:.2rem}
+  .hub-app{font-size:.9rem;color:var(--ink-78);margin:0 0 2rem} .hub-app a{color:var(--gold-ink);font-weight:700}
+  .hub-end{text-align:center;background:var(--fill-06);border:1px solid var(--edge-12);border-radius:18px;padding:1.6rem 1rem;margin:1rem 0 1.5rem}
+  .hub-end h2{font-family:var(--font-display);color:var(--ink);margin:0}
+  .hub-end .hub-cta{flex-direction:column;align-items:center;margin:1rem 0 0}
+  .hub-sticky{position:fixed;left:0;right:0;bottom:0;z-index:900;display:flex;gap:.8rem;align-items:center;justify-content:space-between;
+    padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom));background:rgba(7,17,46,.96);border-top:1px solid rgba(245,197,24,.4);
+    transform:translateY(110%);transition:transform .25s ease}
+  .hub-sticky.on{transform:none} .hub-sticky span{color:#fff;font-weight:700;font-size:.9rem}
+  .hub-sticky .mp-btn{text-decoration:none;white-space:nowrap}
+  @media (min-width:900px){.hub-sticky{display:none}}
   .hub-month{font-family:var(--font-accent);letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;color:var(--gold-ink);margin:1.4rem 0 .3rem}
 </style>
 </head></head>
@@ -360,16 +384,19 @@
       <span class="mp-eyebrow">&#10022; FEELINGS &amp; EMOTIONAL REGULATION</span>
       <h1>Teaching little kids to handle big feelings, one bedtime story at a time</h1>
       <p>Every Little Scripture Travelers story has a Feeling Moment. Inside it, your child walks the same five small steps every night, the Five Stones, until handling a big feeling becomes a habit.</p>
+      <ul class="hub-offer"><li>&#10003; 7 days free, cancel anytime</li><li>&#10003; $6.99/mo or $49/yr after</li><li>&#10003; Ages 1&ndash;5, about 10 minutes a night</li><li>&#10003; Latter-day Saint &amp; Christian editions</li></ul>
+      <div class="hub-cta"><a class="mp-btn mp-btn-gold hub-go" href="/subscribe.html#plans" onclick="return openTrialSignup()">Start your 7 free days</a><a class="hub-alt" href="sample.html">or read a whole night free, nothing to join &rarr;</a></div>
+      <div class="hub-shots"><figure class="hub-shot"><img src="images/app/app-story.jpg" alt="Tonight&#x27;s story in the Little Scripture Travelers app" width="390" height="844" loading="eager"><figcaption>Tonight&#x27;s story</figcaption></figure><figure class="hub-shot"><img src="images/app/app-lantern.jpg" alt="The Morning Lantern in the Little Scripture Travelers app" width="390" height="844" loading="lazy"><figcaption>The Morning Lantern</figcaption></figure><figure class="hub-shot"><img src="images/app/app-journal.jpg" alt="The Journal in the Little Scripture Travelers app" width="390" height="844" loading="lazy"><figcaption>The Journal</figcaption></figure></div>
     </div>
   </header>
 
   <section class="mp-body">
     <div class="mp-in">
-      <div class="hub-cta"><a class="mp-btn mp-btn-gold" href="/subscribe.html#plans" onclick="return openTrialSignup()">Try the First 7 Days Free</a><a class="mp-btn" href="sample.html">Read a whole night free</a><a class="mp-btn" href="https://apps.apple.com/us/app/little-scripture-travelers/id6793999173" rel="noopener">Get the iPhone app</a></div>
+      <div class="hub-proof" id="hub-proof" hidden></div><p class="hub-app">Prefer your phone? <a href="https://apps.apple.com/us/app/little-scripture-travelers/id6793999173" rel="noopener">Get the iPhone app</a></p>
       <div class="hub-sec"><h2>The Five Stones</h2><ol><li><strong>Spot</strong>: notice the feeling in the story's character first: their face, their body. It is easier to see a feeling in someone else before you see it in yourself.</li><li><strong>Name</strong>: give it a plain word, like happy, sad, mad, scared, worried or frustrated, and notice where it shows up in the body.</li><li><strong>Find</strong>: your child looks inward: Have I felt that? Where do I feel it?</li><li><strong>Fork</strong>: a feeling is a fork in the road. It can grab the wheel, or we can hold it and choose the wise path anyway. The story shows which way the character went.</li><li><strong>Calm</strong>: borrow one small calm-down tool together, like a slow breath, a hug or a prayer, and end with one slow breath.</li></ol><p>It is short on purpose. Little ones learn by repetition, not lectures, and walking the same path every night is what makes it stick.</p></div><div class="hub-sec"><h2>Why scripture stories work so well</h2><p>The people of the scriptures felt afraid, sad, jealous and brave, just like our children. Seeing a feeling in Esther, Daniel or Ruth first, and then in a Traveler living the same thing at home, gives a child a safe picture of what to do with their own. Read the full idea in our article "The Feeling Path."</p></div>
       
       
-      <div class="hub-cta"><a class="mp-btn mp-btn-gold" href="/subscribe.html#plans" onclick="return openTrialSignup()">Try the First 7 Days Free</a><a class="mp-btn" href="sample.html">Read a whole night free</a><a class="mp-btn" href="https://apps.apple.com/us/app/little-scripture-travelers/id6793999173" rel="noopener">Get the iPhone app</a></div>
+      <div class="hub-end"><h2>Start tonight</h2><ul class="hub-offer"><li>&#10003; 7 days free, cancel anytime</li><li>&#10003; $6.99/mo or $49/yr after</li><li>&#10003; Ages 1&ndash;5, about 10 minutes a night</li><li>&#10003; Latter-day Saint &amp; Christian editions</li></ul><div class="hub-cta"><a class="mp-btn mp-btn-gold hub-go" href="/subscribe.html#plans" onclick="return openTrialSignup()">Start your 7 free days</a><a class="hub-alt" href="sample.html">or read a whole night free, nothing to join &rarr;</a></div></div>
       <p style="color:var(--ink-55);font-size:.9rem">Also see: <a href="come-follow-me-for-kids.html">Come, Follow Me for kids</a> &middot; <a href="bible-stories-for-kids.html">Bible stories for kids</a> &middot; <a href="lds-parenting.html">LDS parenting</a> &middot; <a href="christian-parenting.html">Christian parenting</a> &middot; <a href="homeschool-bible-stories.html">Homeschool Bible stories</a> &middot; <a href="scripture-study-for-parents.html">Scripture study for parents</a> &middot; <a href="kids-technology-by-age.html">Kids and technology by age</a> &middot; <a href="family-history-for-kids.html">Family history for kids</a> &middot; <a href="teaching-kids-virtues.html">Teaching kids virtues</a> &middot; <a href="bible-coloring-pages-for-kids.html">Bible coloring pages</a> &middot; <a href="come-follow-me-printables.html">Come, Follow Me printables</a> &middot; <a href="bible-quiz-and-flashcards.html">Bible quiz and flashcards</a> &middot; <a href="family-scrapbook.html">Family scrapbook</a></p>
     </div>
   </section>
@@ -481,8 +508,38 @@
       </div><p class="only-christian" style="margin:0;">Little Scripture Travelers Bedtime Stories, LLC is an independent creative endeavor. It is not affiliated with, sponsored by, or endorsed by any church or denomination. All stories, illustrations, characters, lullabies, and opinions are solely those of Little Scripture Travelers.</p><p class="lst-edition-switch" style="margin:0.6rem 0 0;">Reading as <a href="#" data-set-edition="lds">The Church of Jesus Christ of Latter-day Saints</a> &middot; <a href="#" data-set-edition="christian">Christian</a></p></div>
     </div>
   </footer>
+  <div class="hub-sticky" id="hub-sticky" aria-hidden="true"><span>7 days free &middot; cancel anytime</span><a class="mp-btn mp-btn-gold" href="/subscribe.html#plans" onclick="return openTrialSignup()">Start free</a></div>
+  <script>
+  /* Hub pages: real App Store rating + two real reviews (data/app-store-reviews.js, refreshed daily),
+     and a sticky "Start free" bar on phones once the first button scrolls away. */
+  function LSTHub(){
+    try {
+      var d = window.LST_APP_STORE, box = document.getElementById('hub-proof');
+      if (d && box && d.count > 0) {
+        var esc = function(t){ return String(t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+        var cut = function(t){ t = String(t); return t.length > 190 ? t.slice(0, 185).replace(/\s+\S*$/, '') + '…' : t; };
+        var rs = (d.reviews || []).filter(function(r){ return r.stars >= 4 && r.text; }).slice(0, 2);
+        var h = '<p class="hub-stars"><span aria-hidden="true">★★★★★</span> <b>' + Number(d.rating).toFixed(1) +
+                '</b> on the App Store &middot; <a href="' + esc(d.reviewsUrl || d.url) + '" rel="noopener">' + d.count + ' reviews</a></p>';
+        rs.forEach(function(r){ h += '<blockquote class="hub-quote">“' + esc(cut(r.text)) + '”<cite>— ' + esc(r.author) + ', App Store</cite></blockquote>'; });
+        box.innerHTML = h; box.hidden = false;
+      }
+    } catch (e) {}
+    var bar = document.getElementById('hub-sticky'), first = document.querySelector('.hub-go');
+    if (!bar || !first || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function(es){
+      var gone = !es[0].isIntersecting && es[0].boundingClientRect.top < 0;
+      bar.classList.toggle('on', gone); bar.setAttribute('aria-hidden', gone ? 'false' : 'true');
+    }).observe(first);
+  }
+  </script>
   <script src="main.js"></script>
+  <script src="js/vendor/supabase.js"></script>
+  <script src="data/faiths.js"></script>
+  <script src="data/app-store-reviews.js"></script>
+  <script src="js/lst-auth.js"></script>
   <script src="js/lst-signup.js"></script>
   <script src="js/lst-signed-in.js"></script>
+  <script>LSTHub()</script>
 </body>
 </html>

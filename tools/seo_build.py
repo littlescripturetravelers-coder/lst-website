@@ -450,6 +450,25 @@ META["index-july.html"] = META["index.html"]
 
 SKIP = {"googlea5f8bfd252ef63cf.html", "link-check.html", "read.html", "reset-password.html"}
 NO_SITEMAP = {"index-default.html", "index-july.html", "delete-account.html", "cancel.html", "privacy.html"}
+SHOTS = {
+ "come-follow-me-for-kids.html": ["story","lantern","lullaby"],
+ "bible-stories-for-kids.html": ["story","library","lullaby"],
+ "lds-parenting.html": ["lantern","family-stories","story"],
+ "christian-parenting.html": ["lantern","story","journal"],
+ "homeschool-bible-stories.html": ["story","timeline","coloring"],
+ "scripture-study-for-parents.html": ["lantern","library","journal"],
+ "kids-technology-by-age.html": ["story","lantern","family-plan"],
+ "family-history-for-kids.html": ["family-stories","scrapbook","journal"],
+ "teaching-kids-virtues.html": ["library","story","lantern"],
+ "bible-coloring-pages-for-kids.html": ["coloring","story","library"],
+ "come-follow-me-printables.html": ["coloring","story","songs"],
+ "bible-quiz-and-flashcards.html": ["timeline","library","story"],
+ "emotional-regulation-for-kids.html": ["story","lantern","journal"],
+ "family-scrapbook.html": ["scrapbook","family-stories","journal"],
+}
+SHOT_CAP = {"story":"Tonight's story","lantern":"The Morning Lantern","lullaby":"The lullaby","library":"The Virtue Library",
+ "family-stories":"Family Stories","journal":"The Journal","timeline":"Sacred World Timeline","coloring":"Coloring pages",
+ "family-plan":"One plan, whole family","scrapbook":"Scrapbook & family books","songs":"Songs to sing"}
 LIB = None
 TRAVELER = {"beau": "Beau", "scout": "Scout", "willow": "Willow", "wren": "Wren"}
 
@@ -658,6 +677,32 @@ def faq_html(faq, heading="Questions parents ask"):
 </section>"""
 
 
+HUB_JS = """
+  <script>
+  /* Hub pages: real App Store rating + two real reviews (data/app-store-reviews.js, refreshed daily),
+     and a sticky "Start free" bar on phones once the first button scrolls away. */
+  function LSTHub(){
+    try {
+      var d = window.LST_APP_STORE, box = document.getElementById('hub-proof');
+      if (d && box && d.count > 0) {
+        var esc = function(t){ return String(t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+        var cut = function(t){ t = String(t); return t.length > 190 ? t.slice(0, 185).replace(/\\s+\\S*$/, '') + '\u2026' : t; };
+        var rs = (d.reviews || []).filter(function(r){ return r.stars >= 4 && r.text; }).slice(0, 2);
+        var h = '<p class="hub-stars"><span aria-hidden="true">\u2605\u2605\u2605\u2605\u2605</span> <b>' + Number(d.rating).toFixed(1) +
+                '</b> on the App Store &middot; <a href="' + esc(d.reviewsUrl || d.url) + '" rel="noopener">' + d.count + ' reviews</a></p>';
+        rs.forEach(function(r){ h += '<blockquote class="hub-quote">\u201c' + esc(cut(r.text)) + '\u201d<cite>\u2014 ' + esc(r.author) + ', App Store</cite></blockquote>'; });
+        box.innerHTML = h; box.hidden = false;
+      }
+    } catch (e) {}
+    var bar = document.getElementById('hub-sticky'), first = document.querySelector('.hub-go');
+    if (!bar || !first || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function(es){
+      var gone = !es[0].isIntersecting && es[0].boundingClientRect.top < 0;
+      bar.classList.toggle('on', gone); bar.setAttribute('aria-hidden', gone ? 'false' : 'true');
+    }).observe(first);
+  }
+  </script>"""
+
 SEO_CSS = """<style>
   .seo-faq{background:linear-gradient(160deg,var(--page-2),var(--page));padding:3.5rem 1.25rem}
   .seo-faq-in{max-width:46rem;margin:0 auto}
@@ -673,6 +718,30 @@ SEO_CSS = """<style>
   .hub-list{list-style:none;padding:0;margin:0}
   .hub-list li{border-bottom:1px solid var(--edge-12);padding:.65rem 0;color:var(--ink-85)}
   .hub-list strong{color:var(--ink)} .hub-list span{color:var(--teal-ink);font-size:.85rem;font-weight:700}
+  .hub-offer{list-style:none;padding:0;margin:1.1rem auto 0;display:flex;flex-wrap:wrap;gap:.4rem .9rem;justify-content:center;max-width:40rem}
+  .hub-offer li{color:var(--ink);font-weight:700;font-size:.9rem}
+  .mp-hero .hub-cta{justify-content:center;flex-direction:column;align-items:center;margin:1.2rem 0 .4rem}
+  .hub-go{font-size:1.08rem;padding:.95rem 1.8rem;border-radius:999px;text-decoration:none;display:inline-block}
+  .hub-alt{color:var(--gold-ink);font-weight:700;text-decoration:none;font-size:.95rem}
+  .hub-shots{display:flex;gap:.7rem;justify-content:center;margin:1.6rem auto 0;max-width:40rem}
+  .hub-shot{margin:0;flex:1;max-width:11rem}
+  .hub-shot img{width:100%;height:auto;border-radius:18px;border:2px solid var(--edge-12);box-shadow:0 10px 28px rgba(0,0,0,.25)}
+  .hub-shot figcaption{font-size:.78rem;color:var(--ink-78);margin-top:.35rem;font-weight:700}
+  .hub-proof{background:var(--fill-06);border:1px solid var(--edge-12);border-radius:16px;padding:1rem 1.2rem;margin:0 0 2rem}
+  .hub-stars{margin:0 0 .5rem;color:var(--ink)} .hub-stars span{color:#F5C518;letter-spacing:.08em}
+  .hub-stars a{color:var(--gold-ink)}
+  .hub-quote{margin:.6rem 0 0;color:var(--ink-85);font-style:italic;line-height:1.6}
+  .hub-quote cite{display:block;font-style:normal;font-size:.82rem;color:var(--ink-55);margin-top:.2rem}
+  .hub-app{font-size:.9rem;color:var(--ink-78);margin:0 0 2rem} .hub-app a{color:var(--gold-ink);font-weight:700}
+  .hub-end{text-align:center;background:var(--fill-06);border:1px solid var(--edge-12);border-radius:18px;padding:1.6rem 1rem;margin:1rem 0 1.5rem}
+  .hub-end h2{font-family:var(--font-display);color:var(--ink);margin:0}
+  .hub-end .hub-cta{flex-direction:column;align-items:center;margin:1rem 0 0}
+  .hub-sticky{position:fixed;left:0;right:0;bottom:0;z-index:900;display:flex;gap:.8rem;align-items:center;justify-content:space-between;
+    padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom));background:rgba(7,17,46,.96);border-top:1px solid rgba(245,197,24,.4);
+    transform:translateY(110%);transition:transform .25s ease}
+  .hub-sticky.on{transform:none} .hub-sticky span{color:#fff;font-weight:700;font-size:.9rem}
+  .hub-sticky .mp-btn{text-decoration:none;white-space:nowrap}
+  @media (min-width:900px){.hub-sticky{display:none}}
   .hub-month{font-family:var(--font-accent);letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;color:var(--gold-ink);margin:1.4rem 0 .3rem}
 </style>"""
 
@@ -724,9 +793,16 @@ def build_hub(page, h, all_nights, posts, template):
     if h.get("blog"):
         blog = '<div class="hub-sec"><h2>Articles for parents</h2><ul class="hub-list">' + "".join(
             f'<li><a href="{f}"><strong>{E(t)}</strong></a>' + (f"<br>{E(d)}" if d else "") + "</li>" for f, t, d in posts) + "</ul></div>"
-    cta = ('<div class="hub-cta"><a class="mp-btn mp-btn-gold" href="/subscribe.html#plans" onclick="return openTrialSignup()">Try the First 7 Days Free</a>'
-           '<a class="mp-btn" href="sample.html">Read a whole night free</a>'
-           f'<a class="mp-btn" href="{APP_URL}" rel="noopener">Get the iPhone app</a></div>')
+    cta = ('<div class="hub-cta"><a class="mp-btn mp-btn-gold hub-go" href="/subscribe.html#plans" onclick="return openTrialSignup()">Start your 7 free days</a>'
+           '<a class="hub-alt" href="sample.html">or read a whole night free, nothing to join &rarr;</a></div>')
+    offer = ('<ul class="hub-offer"><li>&#10003; 7 days free, cancel anytime</li><li>&#10003; $6.99/mo or $49/yr after</li>'
+             '<li>&#10003; Ages 1&ndash;5, about 10 minutes a night</li><li>&#10003; Latter-day Saint &amp; Christian editions</li></ul>')
+    shots = "".join(
+        f'<figure class="hub-shot"><img src="images/app/app-{k}.jpg" alt="{E(SHOT_CAP.get(k,k))} in the Little Scripture Travelers app" width="390" height="844" loading="{"eager" if i==0 else "lazy"}"><figcaption>{E(SHOT_CAP.get(k,k))}</figcaption></figure>'
+        for i, k in enumerate(SHOTS.get(page, ["story","lantern","library"])))
+    shots = f'<div class="hub-shots">{shots}</div>'
+    proof = ('<div class="hub-proof" id="hub-proof" hidden></div>'
+             '<p class="hub-app">Prefer your phone? <a href="' + APP_URL + '" rel="noopener">Get the iPhone app</a></p>')
     stories_block = "" if h.get("no_list") else f'''<div class="hub-sec"><h2>{E(h['list_title'])}</h2>
         <p>{len(all_nights)} nights so far, newest first, and a new one every morning by 5 AM Mountain Time. Each one has the story, its lullaby and the Morning Lantern.</p>
         {stories}
@@ -738,16 +814,19 @@ def build_hub(page, h, all_nights, posts, template):
       <span class="mp-eyebrow">&#10022; {E(h['eyebrow'])}</span>
       <h1>{E(h['h1'])}</h1>
       <p>{E(h['lede'])}</p>
+      {offer}
+      {cta}
+      {shots}
     </div>
   </header>
 
   <section class="mp-body">
     <div class="mp-in">
-      {cta}
+      {proof}
       {sections}
       {blog}
       {stories_block}
-      {cta}
+      <div class="hub-end"><h2>Start tonight</h2>{offer}{cta}</div>
       <p style="color:var(--ink-55);font-size:.9rem">Also see: {others}</p>
     </div>
   </section>
@@ -758,7 +837,12 @@ def build_hub(page, h, all_nights, posts, template):
     head = set_title_desc(strip_tags_in_head(head), h["title"], h["desc"])
     head = head.replace("</head>", "")
     head += head_block(page, h["title"], h["desc"], page_ld(page, h["title"], h["desc"])) + SEO_CSS + "\n"
-    scripts = '\n  <script src="main.js"></script>\n  <script src="js/lst-signup.js"></script>\n  <script src="js/lst-signed-in.js"></script>\n</body>\n</html>\n'
+    sticky = ('\n  <div class="hub-sticky" id="hub-sticky" aria-hidden="true"><span>7 days free &middot; cancel anytime</span>'
+              '<a class="mp-btn mp-btn-gold" href="/subscribe.html#plans" onclick="return openTrialSignup()">Start free</a></div>')
+    scripts = (sticky + HUB_JS +
+        '\n  <script src="main.js"></script>\n  <script src="js/vendor/supabase.js"></script>\n  <script src="data/faiths.js"></script>'
+        '\n  <script src="data/app-store-reviews.js"></script>\n  <script src="js/lst-auth.js"></script>'
+        '\n  <script src="js/lst-signup.js"></script>\n  <script src="js/lst-signed-in.js"></script>\n  <script>LSTHub()</script>\n</body>\n</html>\n')
     out = head + "</head>" + top + main + add_footer(footer) + scripts
     open(page, "w", encoding="utf-8").write(out)
 

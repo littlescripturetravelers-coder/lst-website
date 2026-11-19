@@ -2044,3 +2044,15 @@ Rules:
   point to his own articles; they do not teach doctrine.
 - Don't add `lantern/*` pages to the sitemap (paid content).
 - A new blog post shows up on the parenting pages by itself on the next run.
+
+### 41b. The topic pages convert, not just rank (19 Nov 2026)
+Levi asked whether a parent who lands from a search can see what they get and subscribe easily.
+Found: the topic pages' "Try free" button skipped the signup popup (they never loaded
+`js/vendor/supabase.js`, so `openTrialSignup` fell through to subscribe.html — one extra page), the
+first screen had only words, and three equal buttons competed. Now every topic page has, above the
+fold on a phone: the offer (7 days free, prices, ages, editions), ONE gold button that opens the
+signup popup in place, a quieter "read a whole night free" link, and three real app screenshots
+(`SHOTS` in seo_build.py). Below: the real App Store rating and two real reviews, read from
+`data/app-store-reviews.js` (refreshed daily by app-store-reviews.yml — never type reviews by hand),
+a closing "Start tonight" box, and on phones a sticky "Start free" bar once the first button scrolls
+away. ⚠️ Never add made-up testimonials; the proof block hides itself when there are no reviews.
