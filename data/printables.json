@@ -1,7 +1,66 @@
 {
- "updated": "2026-11-19T22:16:41.862Z",
+ "updated": "2026-11-19T22:51:54.311Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
+  {
+   "id": "story-cords-of-love",
+   "type": "story",
+   "title": "Cords of Love",
+   "nightLabel": "Week 4 · Night 2",
+   "download": "OldTestament_Story_CordsOfLove_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 23,
+   "date": "2026-11-20",
+   "story": "cords-of-love",
+   "ref": "Hosea 11:4",
+   "storyId": "ot-b11-w4n2",
+   "files": {
+    "lds": {
+     "url": "/lantern/cords-of-love/printables/story.pdf?v=1b2b67c392",
+     "pages": 5,
+     "bytes": 1064071
+    },
+    "christian": {
+     "url": "/lantern/cords-of-love/printables/story-christian.pdf?v=1b2b67c392",
+     "pages": 5,
+     "bytes": 1063949
+    }
+   },
+   "thumb": "/lantern/cords-of-love/printables/story.jpg?v=1b2b67c392",
+   "src": "1b2b67c392352beb2bb7776284a20ec3f550a062b903e99ed905a75cc40512cd",
+   "updated": "2026-11-19",
+   "created": "2026-11-19"
+  },
+  {
+   "id": "song-cords-of-love",
+   "type": "song",
+   "title": "Soft Ropes of Love",
+   "storyTitle": "Cords of Love",
+   "download": "OldTestament_Song_SoftRopesOfLove_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 23,
+   "date": "2026-11-20",
+   "story": "cords-of-love",
+   "ref": "Hosea 11:4",
+   "storyId": "ot-b11-w4n2",
+   "files": {
+    "lds": {
+     "url": "/lantern/cords-of-love/printables/song.pdf?v=f980150517",
+     "pages": 1,
+     "bytes": 105830
+    }
+   },
+   "thumb": "/lantern/cords-of-love/printables/song.jpg?v=f980150517",
+   "src": "f9801505178ab224a46b4a4350e5e560b09147d7509faa66d5818fb346c7de92",
+   "updated": "2026-11-19",
+   "created": "2026-11-19"
+  },
   {
    "id": "story-he-taught-me-how-to-walk",
    "type": "story",
