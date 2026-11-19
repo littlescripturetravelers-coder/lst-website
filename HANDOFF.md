@@ -2022,10 +2022,10 @@ is replaced, never stacked. `.github/workflows/seo-refresh.yml` runs it every da
 and commits only if something changed.
 
 It makes / maintains:
-- **Nine topic pages** (generated — edit the `HUBS` dict, not the .html):
+- **Twelve topic pages** (generated — edit the `HUBS` dict, not the .html):
   `come-follow-me-for-kids.html`, `bible-stories-for-kids.html`, `lds-parenting.html`,
   `christian-parenting.html`, `homeschool-bible-stories.html`, `scripture-study-for-parents.html`,
-  `kids-technology-by-age.html` (AAP 5 Cs + WHO, sources linked on the page), `family-history-for-kids.html`, `teaching-kids-virtues.html` (36 virtues from data/virtue-library.js, read with node — public catalog only). The story lists
+  `kids-technology-by-age.html` (AAP 5 Cs + WHO, sources linked on the page), `family-history-for-kids.html`, `teaching-kids-virtues.html` (36 virtues from data/virtue-library.js, read with node — public catalog only), and the three tool pages `bible-coloring-pages-for-kids.html`, `come-follow-me-printables.html`, `bible-quiz-and-flashcards.html` — public front doors for the members-only coloring-books / printables / study pages, which stay noindex. Their feature wording was checked against the app's js/printables.js, js/study.js and js/scriptures.js on 19 Nov 2026; if those features change, change the page text. The story lists
   come from `lantern/*/night.json`, only nights dated today or earlier — titles + scripture only,
   the stories themselves stay behind the trial.
 - **Every public page's head:** canonical (www), Open Graph + Twitter with absolute image, the iPhone

@@ -56,6 +56,8 @@ FAQ_HOME = [
      "About ten quiet minutes. There is nothing to prepare and nothing to look up."),
     ("How much does it cost?",
      "The first 7 days are free. After that it is $6.99 a month or $49 a year, and you can cancel anytime."),
+    ("What else comes with the subscription?",
+     "Coloring pages you can color online or print, printables (story book pages, crossword puzzles, quizzes, history tests and weekly charts), Quizlet-style flashcards and tests, the scriptures with chapter summaries and study guides, the Virtue Library, Family Stories, a Journal and the Sacred World Timeline."),
     ("Can I read a story before I sign up?",
      "Yes. A whole night is free to read with nothing to join, on the free sample page."),
 ]
@@ -294,6 +296,82 @@ HUBS = {
     ("How much does it cost?", FAQ_HOME[4][1]),
    ],
    list_title="", kw="Teaching kids virtues"),
+ "bible-coloring-pages-for-kids.html": dict(
+   title="Bible Coloring Pages for Kids — Color Online or Print the Book",
+   desc="Scripture and Bible coloring pages for kids: every night's story picture as a coloring page. Color online with a bucket, pencil, brush and crayons, or print the month's coloring book.",
+   eyebrow="BIBLE COLORING PAGES",
+   h1="Bible coloring pages for kids, a new picture every night",
+   lede="Every night's Little Scripture Travelers story comes with its picture as a coloring page. Color it right on the screen, or print the whole month's coloring book and color at the kitchen table.",
+   body=[
+    ("Two ways to color",
+     "<ul><li><strong>Color online</strong> on the website or in the app, with a paint bucket, a pencil, a brush and crayons.</li>"
+     "<li><strong>Print the month's coloring book</strong>: every picture from the month, ready to print on Letter paper.</li></ul>"
+     "<p>Because each page is the picture from that night's scripture story, coloring becomes a way to talk about the story again: who was in it, what they did, and how it felt.</p>"),
+    ("Made for little hands",
+     "<p>The stories are written for children ages one to five, and the pictures are simple and friendly, with our four Travelers (Beau, Scout, Willow and Wren) beside the people of the scriptures.</p>"),
+   ],
+   faq=[
+    ("Can my child color the pages online?", "Yes. Color online with a bucket, pencil, brush and crayons, on the website or in the app."),
+    ("Can I print the coloring pages?", "Yes. Each month's coloring book is one printable PDF with every picture."),
+    ("Is there a version for LDS and other Christian families?", FAQ_HOME[1][1]),
+    ("How much does it cost?", FAQ_HOME[4][1]),
+   ],
+   list_title="Every night's coloring page so far",
+   kw="Bible coloring pages"),
+ "come-follow-me-printables.html": dict(
+   title="Come Follow Me & Bible Printables for Kids — Crosswords, Quizzes, Tests",
+   desc="Printable Come, Follow Me and Bible activities for kids: story book pages, crossword puzzles, multiple choice quizzes, history tests, weekly charts, song words and coloring books, all as Letter PDFs.",
+   eyebrow="PRINTABLES",
+   h1="Come, Follow Me and Bible printables for kids and families",
+   lede="Every night's scripture story comes with things to print: the story book pages, the song words, crossword puzzles, quizzes and tests, ready on Letter paper with the answers on the last page.",
+   no_list=True,
+   body=[
+    ("What you can print",
+     "<ul><li><strong>Story book pages</strong>: the month's book, page for page, one PDF per night.</li>"
+     "<li><strong>Crossword puzzles</strong>, with the answers on the last page.</li>"
+     "<li><strong>Multiple choice quizzes</strong>, with the answers on the last page.</li>"
+     "<li><strong>History tests</strong> for each period of the Sacred World Timeline: twenty questions, answers on the last page.</li>"
+     "<li><strong>Weekly charts</strong>: each story, its scripture, its Traveler and the main lesson.</li>"
+     "<li><strong>Song words</strong>, verse by verse, for singing together, and the Lantern Lullaby.</li>"
+     "<li><strong>The month's coloring book</strong>, every picture ready to print.</li>"
+     "<li><strong>Primary song sheets</strong> in the Latter-day Saint edition.</li></ul>"),
+    ("Two editions",
+     "<p>The Latter-day Saint edition follows Come, Follow Me. The Christian edition is written for Christian families of any church, so its printables read \"God\" where the Latter-day Saint edition reads \"Heavenly Father.\"</p>"),
+    ("Great for homeschool and Primary",
+     "<p>Crosswords, quizzes and history tests make an easy review for homeschool families, and the weekly chart keeps the week's stories in one place on the fridge.</p>"),
+   ],
+   faq=[
+    ("Do the crossword puzzles and quizzes have answer keys?", "Yes. Crosswords, quizzes and history tests all have the answers on the last page."),
+    ("What paper size are the printables?", "US Letter."),
+    ("Are there Come, Follow Me printables for LDS families?", "Yes. The Latter-day Saint edition follows Come, Follow Me and includes Primary song sheets."),
+    ("How much does it cost?", FAQ_HOME[4][1]),
+   ],
+   list_title="", kw="Come, Follow Me printables"),
+ "bible-quiz-and-flashcards.html": dict(
+   title="Bible Quiz & Flashcards for Kids — Like Quizlet, for Scripture",
+   desc="Bible and scripture flashcards, quizzes and tests for kids and homeschool families: Flashcards, Learn, Match and a graded Test for each story month and history period. Make your own sets and print.",
+   eyebrow="BIBLE QUIZZES & FLASHCARDS",
+   h1="Bible quizzes and flashcards, like Quizlet for your family's scripture study",
+   lede="Study & Tests turns the month's scripture stories and every period of the Sacred World Timeline into flashcards, games and tests, and keeps track of each person's progress.",
+   no_list=True,
+   body=[
+    ("Four ways to study",
+     "<ul><li><strong>Flashcards</strong>: tap to flip, then sort each card into \"Know it\" or \"Still learning.\"</li>"
+     "<li><strong>Learn</strong>: multiple-choice questions. Missed cards come back until each one is answered right twice.</li>"
+     "<li><strong>Match</strong>: a timed game. Tap a name, then what goes with it.</li>"
+     "<li><strong>Test</strong>: ten graded questions with a score, stars and a list of what to review.</li></ul>"),
+    ("Make your own, and print",
+     "<p>Make your own flashcard sets, edit them any time, and print the flashcards to cut out or print a test with the answers on the last page. Stars, best scores and progress follow each person between the website and the app.</p>"),
+    ("Scripture memorization",
+     "<p>In the Scriptures, select the words of any verse and tap <strong>Study</strong>. It becomes a first-letter flashcard: the first letter of each word on the front, the words and the reference on the back, added to your Study &amp; Tests. A short \"How to learn it\" guide walks your family through memorizing a verse: read it aloud, learn it in phrases, and practice over several days.</p>"),
+   ],
+   faq=[
+    ("Is this like Quizlet?", "Yes, for scripture and history: Flashcards, Learn, Match and Test, plus your own flashcard sets."),
+    ("Can I make my own flashcards?", "Yes. Make, edit and delete your own sets, and print them to cut out."),
+    ("How can my child memorize a scripture?", "Select the verse's words in the Scriptures and tap Study to make a first-letter flashcard, then practice it in phrases over several days."),
+    ("How much does it cost?", FAQ_HOME[4][1]),
+   ],
+   list_title="", kw="Bible quiz and flashcards"),
 }
 
 # Title / description rewrites for existing pages (CTR). None = keep what is there.
@@ -497,6 +575,9 @@ FOOTER_COL = """<!-- SEO:FOOTER -->
           <li><a href="kids-technology-by-age.html">Kids &amp; Technology by Age</a></li>
           <li><a href="family-history-for-kids.html">Family History for Kids</a></li>
           <li><a href="teaching-kids-virtues.html">Teaching Kids Virtues</a></li>
+          <li><a href="bible-coloring-pages-for-kids.html">Bible Coloring Pages</a></li>
+          <li><a href="come-follow-me-printables.html">Printables &amp; Crosswords</a></li>
+          <li><a href="bible-quiz-and-flashcards.html">Quizzes &amp; Flashcards</a></li>
           <li><a href="sample.html">Read a Free Story</a></li>
         </ul>
       </div>
@@ -549,6 +630,7 @@ def home_faq(s):
              '<a href="lds-parenting.html">LDS Parenting</a><a href="christian-parenting.html">Christian Parenting</a>'
              '<a href="homeschool-bible-stories.html">Homeschool</a><a href="scripture-study-for-parents.html">Scripture study for parents</a>'
              '<a href="kids-technology-by-age.html">Kids &amp; technology by age</a><a href="family-history-for-kids.html">Family history for kids</a><a href="teaching-kids-virtues.html">Teaching kids virtues</a>'
+             '<a href="bible-coloring-pages-for-kids.html">Coloring pages</a><a href="come-follow-me-printables.html">Printables</a><a href="bible-quiz-and-flashcards.html">Quizzes &amp; flashcards</a>'
              '<a href="sample.html">Read a free story</a></div>')
     block = "<!-- SEO:FAQ -->\n" + SEO_CSS + "\n" + faq_html(FAQ_HOME).replace("</div>\n</section>", links + "\n  </div>\n</section>") + "\n<!-- /SEO:FAQ -->\n  "
     i = s.find('<footer class="site-footer"')
@@ -675,7 +757,7 @@ def main():
 
     # sitemap
     pri = {"index.html": "1.0", "come-follow-me-for-kids.html": "0.9", "bible-stories-for-kids.html": "0.9",
-           "lds-parenting.html": "0.8", "christian-parenting.html": "0.8", "homeschool-bible-stories.html": "0.8", "scripture-study-for-parents.html": "0.8", "kids-technology-by-age.html": "0.8", "family-history-for-kids.html": "0.8", "teaching-kids-virtues.html": "0.9", "subscribe.html": "0.8", "sample.html": "0.8"}
+           "lds-parenting.html": "0.8", "christian-parenting.html": "0.8", "homeschool-bible-stories.html": "0.8", "scripture-study-for-parents.html": "0.8", "kids-technology-by-age.html": "0.8", "family-history-for-kids.html": "0.8", "teaching-kids-virtues.html": "0.9", "bible-coloring-pages-for-kids.html": "0.9", "come-follow-me-printables.html": "0.9", "bible-quiz-and-flashcards.html": "0.9", "subscribe.html": "0.8", "sample.html": "0.8"}
     urls = []
     for p in sorted(set(indexable), key=lambda p: (p != "index.html", p)):
         loc = SITE + "/" if p == "index.html" else SITE + "/" + p
@@ -717,6 +799,9 @@ Made by Little Scripture Travelers Bedtime Stories, LLC (founder Levi Lewis, Mon
 - [Kids and technology by age]({SITE}/kids-technology-by-age.html): a parent guide to screens at every age, based on AAP and WHO guidance
 - [Family history and journaling for kids]({SITE}/family-history-for-kids.html): sharing family stories and keeping a journal with young children
 - [Teaching kids virtues]({SITE}/teaching-kids-virtues.html): 36 virtues (honesty, kindness, courage, patience…) with the scripture stories that teach each
+- [Bible coloring pages]({SITE}/bible-coloring-pages-for-kids.html): every night's story picture as a coloring page, online or printed
+- [Come, Follow Me and Bible printables]({SITE}/come-follow-me-printables.html): story pages, crosswords, quizzes, history tests, weekly charts
+- [Bible quizzes and flashcards]({SITE}/bible-quiz-and-flashcards.html): Quizlet-style Flashcards, Learn, Match, Test, own sets, scripture memorization
 - [Free sample story]({SITE}/sample.html): a whole night free, nothing to join
 - [Plans and free trial]({SITE}/subscribe.html)
 - [Meet the Travelers]({SITE}/travelers.html): Beau the Brave, Scout the Seeker, Willow the Warm, Wren the Wonderer
