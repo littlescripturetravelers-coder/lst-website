@@ -28,7 +28,7 @@ h1{font-family:Fredoka;font-weight:700;color:#14275C;font-size:31pt;letter-spaci
 .rule{position:relative;width:46%;margin:6px auto 0;border-top:2px solid #E3A82B}
 .rule:after{content:'';position:absolute;left:50%;top:-4px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#F2BE2A}
 .ver{font-family:Fredoka;font-weight:600;color:var(--accent);font-size:14pt;margin-top:6px}
-.body{flex:1;min-height:0;margin-top:10px;column-count:3;column-gap:18px;column-rule:1px solid rgba(227,168,43,.55);column-fill:balance}
+.body{flex:1;min-height:0;margin-top:10px;column-count:3;width:100%;column-gap:18px;column-rule:1px solid rgba(227,168,43,.55);column-fill:balance}
 h2{font-family:Nunito;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#14275C;font-size:var(--h);margin:0 0 .3em;break-after:avoid}
 .sec{break-inside:avoid-column}
 .sec+.sec,.stz+h2{margin-top:.75em}
@@ -37,7 +37,7 @@ h2{font-family:Nunito;font-weight:800;text-transform:uppercase;letter-spacing:.0
 .stz+.stz{margin-top:.5em}
 .ref .stz{font-style:italic;color:#4C6C93}
 .mo{font-style:italic}
-.foot{flex:none;text-align:center;margin-top:8px}
+.foot{flex:none;text-align:center;margin-top:auto;padding-top:8px}
 .foot .line{width:80%;margin:0 auto 9px;border-top:2px solid #E3A82B}
 .dots{display:flex;gap:9px;justify-content:center;margin-bottom:5px}
 .dots i{width:12px;height:12px;border-radius:50%;display:block}
@@ -61,12 +61,12 @@ h2{font-family:Nunito;font-weight:800;text-transform:uppercase;letter-spacing:.0
     const D = window.DOC, L = D.lullaby, T = D.theme || {};
     const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
     // the lyrics carry a little markup of their own (the Travelers' mottos are <i class="quote">…</i>): keep the italics, drop the rest
-    const line = l => { const raw = String(l), mo = /<i\b[^>]*>/i.test(raw) || /^["“].*["”]\s*$/.test(raw.trim());
+    const line = l => { const raw = String(l), mo = /<i\b[^>]*>/i.test(raw) || (D.kind !== 'song' && /^["“].*["”]\s*$/.test(raw.trim()));
       const txt = esc(raw.replace(/<[^>]*>/g, ''));
       return '<span class="ln' + (mo ? ' mo' : '') + '">' + txt + '</span>'; };
     document.documentElement.style.setProperty('--accent', T.accent || '#2E9E52');
     document.getElementById('title').textContent = L.title;
-    document.getElementById('ver').textContent = (T.label || '') + ' Version';
+    document.getElementById('ver').textContent = L.subtitle || ((T.label || '') + ' Version');
     const body = document.getElementById('body');
     body.innerHTML = (L.parts || []).map(p => {
       const ref = p.kind === 'chorus' || /goodnight, friends/i.test(p.label || '');
@@ -74,17 +74,28 @@ h2{font-family:Nunito;font-weight:800;text-transform:uppercase;letter-spacing:.0
       return '<div class="sec' + (ref ? ' ref' : '') + '"><h2>' + esc(p.label) + '</h2>' + stz + '</div>';
     }).join('');
     await document.fonts.ready;
-    // shrink the type until the whole song fits on the one page
+    // choose the columns and the type size: the biggest type that fits on the one page with no line
+    // wrapping, in 1, 2 or 3 columns (a short nightly song gets fewer, larger columns; the long
+    // Lantern Lullaby gets three). Ties go to fewer columns. Capped so a short song is not shouting.
     const lns = Array.from(body.querySelectorAll('.ln'));
     const fits = () => body.scrollHeight <= body.clientHeight + 1 && body.scrollWidth <= body.clientWidth + 1
       && lns.every(n => n.scrollWidth <= n.clientWidth + 0.5);   // no line may wrap or be cut: every line whole, like Levi's sheet
-    let f = 11.5, overflow = 0;
-    for (; f >= 7; f -= 0.1) {
-      body.style.setProperty('--f', f.toFixed(2) + 'pt'); body.style.setProperty('--h', (f * 1.02).toFixed(2) + 'pt');
-      if (fits()) break;
-    }
-    if (!fits()) overflow = 1;
-    window.RESULT = { pages: 1, overflow, font: +f.toFixed(2) };
+    const setF = f => { body.style.setProperty('--f', f.toFixed(2) + 'pt'); body.style.setProperty('--h', (f * 1.02).toFixed(2) + 'pt'); };
+    const MAX = 15, MIN = 7;
+    const best = c => { body.style.columnCount = c; body.style.columnRule = c > 1 ? '' : 'none';
+      for (let f = MAX; f >= MIN; f -= 0.1) { setF(f); if (fits()) return f; } return 0; };
+    let pick = { c: 3, f: 0 };
+    for (const c of [1, 2, 3]) { const f = best(c); if (f > pick.f + 0.4) pick = { c, f }; }
+    let f = pick.f || MIN, overflow = pick.f ? 0 : 1;
+    body.style.columnCount = pick.c; body.style.columnRule = pick.c > 1 ? '' : 'none'; setF(f);
+    // one column: keep the lines a readable width and the song in the middle of the frame
+    if (pick.c === 1) { body.style.width = 'auto'; body.style.alignSelf = 'center'; body.style.display = 'block';
+      body.style.maxWidth = Math.ceil(Math.max(...lns.map(n => n.scrollWidth)) + 4) + 'px'; body.style.margin = '14px auto 0'; }
+    // a short song sits in the middle of the page, not at the top
+    if (pick.c <= 2) { body.style.flex = 'none'; body.style.height = 'auto';
+      const free = document.querySelector('.frame').clientHeight - 40 - document.querySelector('.head').offsetHeight - document.querySelector('.foot').offsetHeight - body.offsetHeight;
+      if (free > 40) body.style.marginTop = Math.min(free / 2, 160) + 'px'; }
+    window.RESULT = { pages: 1, overflow, font: +f.toFixed(2), columns: pick.c };
   } catch (e) { window.RESULT = { error: String(e && e.stack || e) }; }
   window.READY = true;
 })();

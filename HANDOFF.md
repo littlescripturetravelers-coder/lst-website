@@ -2069,3 +2069,11 @@ volume's accent colour under a gold rule, the whole song in three columns with g
 "~ Beau, Scout, Willow, & Wren ~". The page shrinks the type until everything fits on one page AND no
 line wraps (his sheet never wraps a line). The nightly Story and Song printables are unchanged.
 Rebuild locally: `CHROME=/usr/bin/google-chrome PLAYWRIGHT=<path> node lantern/builder/printables/make.js --only lullaby`.
+**Every night's Song printable uses the same design** (Levi, 19 Nov 2026: "every days lullaby should be
+in that same format but in a regular page print size and in however columns it needs"). `make.js` sends
+each night's `lullaby.json` to `lullaby.html` as {title, subtitle "<scripture> · Tonight's Lullaby",
+parts}. The page tries 1, 2 and 3 columns and keeps whichever gives the biggest type with every line
+whole on one page (short nightly songs come out in two columns; the Lantern Lullaby in three), and
+centres a short song in the frame. A bare [Chorus] repeats the first chorus's words. In songs only
+`<i>` markup is italic — quoted speech is not. The Lantern sync Action runs make.js, so new nights get
+this look on their own. (Song-leader sheets and Primary songs are PDFs Levi adds; they are not drawn here.)

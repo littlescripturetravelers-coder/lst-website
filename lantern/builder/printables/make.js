@@ -80,7 +80,8 @@ async function render(browser, doc, pdfOut, thumbOut, page) {
 (async () => {
   const args = process.argv.slice(2), all = args.includes('--all');
   const only = (args[args.indexOf('--only') + 1] && args.includes('--only')) ? args[args.indexOf('--only') + 1].split(',') : null;
-  const tpl = sha(fs.readFileSync(PAGE, 'utf8') + VERSION).slice(0, 12);   // the look; raise VERSION when make.js changes what goes on a page
+  const tpl = sha(fs.readFileSync(PAGE, 'utf8') + VERSION).slice(0, 12);
+  const ltpl = sha(fs.readFileSync(LULLABY_PAGE, 'utf8')).slice(0, 12);   // the lullaby look: the Lantern Lullaby AND every night's song   // the look; raise VERSION when make.js changes what goes on a page
   let index = { items: [] }; try { index = JSON.parse(fs.readFileSync(OUT_INDEX, 'utf8')); } catch (e) {}
   const prev = new Map((index.items || []).map(x => [x.id, x]));
   const items = [], warnings = [];
@@ -130,15 +131,18 @@ async function render(browser, doc, pdfOut, thumbOut, page) {
     const lj = path.join(LAN, n.dir, 'lullaby.json');
     if (fs.existsSync(lj)) { const L = JSON.parse(fs.readFileSync(lj, 'utf8')); const secs = songOf(L.lyrics);
       if (secs.length) { const rel = `lantern/${n.dir}/printables/`;
-        const r = await one('song-' + n.dir, sha(tpl + JSON.stringify([L.title, L.lyrics, n.scripture])), [rel + 'song.pdf', rel + 'song.jpg'], () =>
-          [{ ed: 'lds', doc: { kind: 'song', theme: T, song: { title: L.title, reference: n.scripture, sections: secs } }, pdf: rel + 'song.pdf', thumb: rel + 'song.jpg' }]);
+        /* every night's song in the Lantern Lullaby's own design (Levi, 19 Nov 2026: "every days lullaby should be
+           in that same format but in a regular page print size and in however columns it needs") */
+        const firstChorus = (secs.find(x => x.chorus && x.lines.length) || {}).lines || [];
+        const parts = secs.map(x => ({ label: x.label, kind: x.chorus ? 'chorus' : 'verse', stanzas: [(x.lines.length ? x.lines : firstChorus).join('\n')] }));
+        const r = await one('song-' + n.dir, sha(ltpl + JSON.stringify([L.title, L.lyrics, n.scripture])), [rel + 'song.pdf', rel + 'song.jpg'], () =>
+          [{ ed: 'lds', doc: { kind: 'song', theme: T, lullaby: { title: L.title, subtitle: (n.scripture ? n.scripture + ' · ' : '') + 'Tonight\u2019s Lullaby', parts } }, pdf: rel + 'song.pdf', thumb: rel + 'song.jpg', page: LULLABY_PAGE }]);
         items.push(Object.assign({ id: 'song-' + n.dir, type: 'song', title: L.title, storyTitle: n.title, download: `${T.file}_Song_${fileTitle(L.title)}_Letter.pdf` }, base, r)); } }
   }
   // the Lantern Lullaby, each Testament
   for (const [vol, file, key] of [['ot', 'lantern-lullaby.js', 'LST_LANTERN_LULLABY'], ['nt', 'lantern-lullaby-nt.js', 'LST_LANTERN_LULLABY_NT']]) {
     if (only && !only.includes('lullaby')) { const x = prev.get('lullaby-' + vol); if (x) items.push(x); continue; }
     const L = loadLullaby(file, key); if (!L) continue; const T = THEMES[vol];
-    const ltpl = sha(fs.readFileSync(LULLABY_PAGE, 'utf8')).slice(0, 12);
     const r = await one('lullaby-' + vol, sha(ltpl + JSON.stringify(L.parts) + (L.chorus || '') + L.title), [`print/lullaby-${vol}.pdf`, `print/lullaby-${vol}.jpg`], () =>
       [{ ed: 'lds', doc: { kind: 'lullaby', theme: T, lullaby: { title: L.title, parts: L.parts.map(p => Object.assign({}, p, { stanzas: (p.stanzas || []).map(x => x === 'CHORUS' ? (L.chorus || '') : x) })) } }, pdf: `print/lullaby-${vol}.pdf`, thumb: `print/lullaby-${vol}.jpg`, page: LULLABY_PAGE }]);
     items.push(Object.assign({ id: 'lullaby-' + vol, type: 'lullaby', title: L.title + (vol === 'nt' ? ' (New Testament)' : ' (Old Testament)'), volume: vol, volumeLabel: T.label, download: `${T.file}_Lullaby_LittleTravelersLullaby_Letter.pdf` }, r));
