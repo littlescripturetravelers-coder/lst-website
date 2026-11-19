@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T22:51:54.311Z",
+ "updated": "2026-11-19T23:18:06.791Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
   {
@@ -8559,13 +8559,13 @@
    "download": "NewTestament_Lullaby_LittleTravelersLullaby_Letter.pdf",
    "files": {
     "lds": {
-     "url": "/print/lullaby-nt.pdf?v=1b3fa198a1",
-     "pages": 4,
-     "bytes": 387223
+     "url": "/print/lullaby-nt.pdf?v=8d4078c75a",
+     "pages": 1,
+     "bytes": 40442
     }
    },
-   "thumb": "/print/lullaby-nt.jpg?v=1b3fa198a1",
-   "src": "1b3fa198a17da3b84120fe75cf75f8c0f60d2236fda46159bbd1d0e00abe7d3a",
+   "thumb": "/print/lullaby-nt.jpg?v=8d4078c75a",
+   "src": "8d4078c75a65bdf70c059ec1062899d542398e136a39d3ac0575fb9a697ca2e4",
    "updated": "2026-11-19",
    "created": "2026-11-19"
   },
@@ -8578,13 +8578,13 @@
    "download": "OldTestament_Lullaby_LittleTravelersLullaby_Letter.pdf",
    "files": {
     "lds": {
-     "url": "/print/lullaby-ot.pdf?v=759dfab524",
-     "pages": 4,
-     "bytes": 386900
+     "url": "/print/lullaby-ot.pdf?v=12b7676c74",
+     "pages": 1,
+     "bytes": 39993
     }
    },
-   "thumb": "/print/lullaby-ot.jpg?v=759dfab524",
-   "src": "759dfab5243c775cee419df891aeccaeeaa4b0338fdb2770a82a5df520693e38",
+   "thumb": "/print/lullaby-ot.jpg?v=12b7676c74",
+   "src": "12b7676c74407139f609af45450f87e10bcbcc9fcb04ebc8ee5126a9784acb35",
    "updated": "2026-11-19",
    "created": "2026-11-19"
   }

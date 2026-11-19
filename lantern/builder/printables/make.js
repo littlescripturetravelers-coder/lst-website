@@ -20,6 +20,7 @@ const fs = require('fs'), path = require('path'), crypto = require('crypto');
 const ROOT = path.resolve(__dirname, '..', '..', '..');
 const LAN = path.join(ROOT, 'lantern'), OUT_INDEX = path.join(ROOT, 'data', 'printables.json');
 const PAGE = path.join(__dirname, 'page.html');
+const LULLABY_PAGE = path.join(__dirname, 'lullaby.html');   // the Lantern Lullaby's own one-page design (Levi's Canva sheet, 19 Nov 2026)
 const VERSION = '1';   // raise to make every printable again after a design change
 
 function playwright() { for (const t of [process.env.PLAYWRIGHT, 'playwright', '/opt/node22/lib/node_modules/playwright'].filter(Boolean)) { try { return require(t); } catch (e) {} } throw new Error('Playwright is not installed'); }
@@ -61,11 +62,11 @@ function songOf(lyrics) {   // "[Verse 1]\n...\n\n[Chorus]\n..." into sections; 
 }
 function loadLullaby(file, key) { const w = {}; new Function('window', fs.readFileSync(path.join(ROOT, 'data', file), 'utf8'))(w); return w[key]; }
 
-async function render(browser, doc, pdfOut, thumbOut) {
+async function render(browser, doc, pdfOut, thumbOut, page) {
   const ctx = await browser.newContext({ viewport: { width: 816, height: 1056 }, deviceScaleFactor: 0.75 });
   const pg = await ctx.newPage();
   await pg.addInitScript(d => { window.DOC = d; }, doc);
-  await pg.goto('file://' + PAGE, { waitUntil: 'load' });
+  await pg.goto('file://' + (page || PAGE), { waitUntil: 'load' });
   await pg.waitForFunction(() => window.READY === true, null, { timeout: 120000 });
   const res = await pg.evaluate(() => window.RESULT);
   if (res.error) { await ctx.close(); throw new Error(res.error); }
@@ -94,7 +95,7 @@ async function render(browser, doc, pdfOut, thumbOut) {
     if (fresh && !all) { kept++; return p; }
     const jobs = build(); const out = { files: {} };
     for (const j of jobs) { fs.mkdirSync(path.dirname(path.join(ROOT, j.pdf)), { recursive: true });
-      const r = await render(browser, j.doc, path.join(ROOT, j.pdf), j.thumb ? path.join(ROOT, j.thumb) : null);
+      const r = await render(browser, j.doc, path.join(ROOT, j.pdf), j.thumb ? path.join(ROOT, j.thumb) : null, j.page);
       out.files[j.ed] = { url: '/' + j.pdf + '?v=' + srcKey.slice(0, 10), pages: r.pages, bytes: fs.statSync(path.join(ROOT, j.pdf)).size };
       if (r.overflow) console.log(`    ! ${id} (${j.ed}): ${r.overflow} page(s) still too full`);
       if (j.thumb) out.thumb = '/' + j.thumb + '?v=' + srcKey.slice(0, 10); }
@@ -137,8 +138,9 @@ async function render(browser, doc, pdfOut, thumbOut) {
   for (const [vol, file, key] of [['ot', 'lantern-lullaby.js', 'LST_LANTERN_LULLABY'], ['nt', 'lantern-lullaby-nt.js', 'LST_LANTERN_LULLABY_NT']]) {
     if (only && !only.includes('lullaby')) { const x = prev.get('lullaby-' + vol); if (x) items.push(x); continue; }
     const L = loadLullaby(file, key); if (!L) continue; const T = THEMES[vol];
-    const r = await one('lullaby-' + vol, sha(tpl + JSON.stringify(L.parts) + (L.chorus || '') + L.title), [`print/lullaby-${vol}.pdf`, `print/lullaby-${vol}.jpg`], () =>
-      [{ ed: 'lds', doc: { kind: 'lullaby', theme: T, lullaby: { title: L.title, parts: L.parts.map(p => Object.assign({}, p, { stanzas: (p.stanzas || []).map(x => x === 'CHORUS' ? (L.chorus || '') : x) })) } }, pdf: `print/lullaby-${vol}.pdf`, thumb: `print/lullaby-${vol}.jpg` }]);
+    const ltpl = sha(fs.readFileSync(LULLABY_PAGE, 'utf8')).slice(0, 12);
+    const r = await one('lullaby-' + vol, sha(ltpl + JSON.stringify(L.parts) + (L.chorus || '') + L.title), [`print/lullaby-${vol}.pdf`, `print/lullaby-${vol}.jpg`], () =>
+      [{ ed: 'lds', doc: { kind: 'lullaby', theme: T, lullaby: { title: L.title, parts: L.parts.map(p => Object.assign({}, p, { stanzas: (p.stanzas || []).map(x => x === 'CHORUS' ? (L.chorus || '') : x) })) } }, pdf: `print/lullaby-${vol}.pdf`, thumb: `print/lullaby-${vol}.jpg`, page: LULLABY_PAGE }]);
     items.push(Object.assign({ id: 'lullaby-' + vol, type: 'lullaby', title: L.title + (vol === 'nt' ? ' (New Testament)' : ' (Old Testament)'), volume: vol, volumeLabel: T.label, download: `${T.file}_Lullaby_LittleTravelersLullaby_Letter.pdf` }, r));
   }
   await browser.close();

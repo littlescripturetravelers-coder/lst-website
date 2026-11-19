@@ -1,0 +1,92 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- THE LANTERN LULLABY PRINTABLE (Levi, 19 Nov 2026: "not the way I want them at all. I want them like
+     the upload" — his Canva sheet LST_Lullaby_OldTestament_1page). ONE page: cream paper, a rounded gold
+     frame, the moon and stars over the title, the Testament under a gold rule, the whole song in three
+     columns with thin gold lines between, the "Goodnight, Friends" refrain in blue italics, and the four
+     Travelers' dots over "~ Beau, Scout, Willow, & Wren ~". US Letter so it prints at home.
+     make.js fills window.DOC = {lullaby:{title,parts}, theme}; this page shrinks the type until the
+     whole song fits on the one page, then sets window.READY. -->
+<style>
+@font-face{font-family:Fredoka;font-weight:600;src:url(fonts/fredoka-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Fredoka;font-weight:700;src:url(fonts/fredoka-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:Nunito;font-weight:400;font-style:normal;src:url(fonts/nunito-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Nunito;font-weight:800;font-style:normal;src:url(fonts/nunito-latin-800-normal.woff2) format('woff2')}
+@font-face{font-family:Nunito;font-weight:400;font-style:italic;src:url(fonts/nunito-latin-400-italic.woff2) format('woff2')}
+@page{size:8.5in 11in;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:8.5in;height:11in;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#F3F1E7;font-family:Nunito,sans-serif;color:#22345E}
+.page{position:relative;width:8.5in;height:11in;padding:.28in;background:#F3F1E7;overflow:hidden}
+.frame{position:relative;height:100%;border:3.5px solid #E3A82B;border-radius:34px;background:#EFEFE6;
+  padding:.3in .24in .22in;display:flex;flex-direction:column}
+.head{text-align:center;flex:none}
+.sky{position:relative;height:30px;width:120px;margin:0 auto -6px}
+.moon{position:absolute;left:28px;top:0;width:30px;height:30px;border-radius:50%;box-shadow:-6px 3px 0 0 var(--accent);transform:translateX(6px)}
+.star{position:absolute;color:#F2BE2A;line-height:1}
+h1{font-family:Fredoka;font-weight:700;color:#14275C;font-size:31pt;letter-spacing:.2px;line-height:1.1}
+.rule{position:relative;width:46%;margin:6px auto 0;border-top:2px solid #E3A82B}
+.rule:after{content:'';position:absolute;left:50%;top:-4px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#F2BE2A}
+.ver{font-family:Fredoka;font-weight:600;color:var(--accent);font-size:14pt;margin-top:6px}
+.body{flex:1;min-height:0;margin-top:10px;column-count:3;column-gap:18px;column-rule:1px solid rgba(227,168,43,.55);column-fill:balance}
+h2{font-family:Nunito;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#14275C;font-size:var(--h);margin:0 0 .3em;break-after:avoid}
+.sec{break-inside:avoid-column}
+.sec+.sec,.stz+h2{margin-top:.75em}
+.stz{break-inside:avoid;font-size:var(--f);line-height:1.34}
+.ln{display:block;white-space:nowrap;overflow:hidden}
+.stz+.stz{margin-top:.5em}
+.ref .stz{font-style:italic;color:#4C6C93}
+.mo{font-style:italic}
+.foot{flex:none;text-align:center;margin-top:8px}
+.foot .line{width:80%;margin:0 auto 9px;border-top:2px solid #E3A82B}
+.dots{display:flex;gap:9px;justify-content:center;margin-bottom:5px}
+.dots i{width:12px;height:12px;border-radius:50%;display:block}
+.names{color:#3AA9B8;font-size:13pt;letter-spacing:.02em}
+</style></head><body>
+<div class="page"><div class="frame">
+  <div class="head">
+    <div class="sky"><div class="moon"></div><span class="star" style="left:68px;top:-2px;font-size:17px">&#9733;</span><span class="star" style="left:86px;top:14px;font-size:11px">&#9733;</span></div>
+    <h1 id="title"></h1>
+    <div class="rule"></div>
+    <div class="ver" id="ver"></div>
+  </div>
+  <div class="body" id="body"></div>
+  <div class="foot"><div class="line"></div>
+    <div class="dots"><i style="background:#8B5A3C"></i><i style="background:#2E9E52"></i><i style="background:#9C6FB6"></i><i style="background:#E2574C"></i></div>
+    <div class="names">~ Beau, Scout, Willow, &amp; Wren ~</div></div>
+</div></div>
+<script>
+(async function(){
+  try {
+    const D = window.DOC, L = D.lullaby, T = D.theme || {};
+    const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+    // the lyrics carry a little markup of their own (the Travelers' mottos are <i class="quote">…</i>): keep the italics, drop the rest
+    const line = l => { const raw = String(l), mo = /<i\b[^>]*>/i.test(raw) || /^["“].*["”]\s*$/.test(raw.trim());
+      const txt = esc(raw.replace(/<[^>]*>/g, ''));
+      return '<span class="ln' + (mo ? ' mo' : '') + '">' + txt + '</span>'; };
+    document.documentElement.style.setProperty('--accent', T.accent || '#2E9E52');
+    document.getElementById('title').textContent = L.title;
+    document.getElementById('ver').textContent = (T.label || '') + ' Version';
+    const body = document.getElementById('body');
+    body.innerHTML = (L.parts || []).map(p => {
+      const ref = p.kind === 'chorus' || /goodnight, friends/i.test(p.label || '');
+      const stz = (p.stanzas || []).map(s => '<div class="stz">' + String(s).split('\n').map(line).join('') + '</div>').join('');
+      return '<div class="sec' + (ref ? ' ref' : '') + '"><h2>' + esc(p.label) + '</h2>' + stz + '</div>';
+    }).join('');
+    await document.fonts.ready;
+    // shrink the type until the whole song fits on the one page
+    const lns = Array.from(body.querySelectorAll('.ln'));
+    const fits = () => body.scrollHeight <= body.clientHeight + 1 && body.scrollWidth <= body.clientWidth + 1
+      && lns.every(n => n.scrollWidth <= n.clientWidth + 0.5);   // no line may wrap or be cut: every line whole, like Levi's sheet
+    let f = 11.5, overflow = 0;
+    for (; f >= 7; f -= 0.1) {
+      body.style.setProperty('--f', f.toFixed(2) + 'pt'); body.style.setProperty('--h', (f * 1.02).toFixed(2) + 'pt');
+      if (fits()) break;
+    }
+    if (!fits()) overflow = 1;
+    window.RESULT = { pages: 1, overflow, font: +f.toFixed(2) };
+  } catch (e) { window.RESULT = { error: String(e && e.stack || e) }; }
+  window.READY = true;
+})();
+</script>
+</body></html>

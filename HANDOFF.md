@@ -2056,3 +2056,16 @@ signup popup in place, a quieter "read a whole night free" link, and three real 
 `data/app-store-reviews.js` (refreshed daily by app-store-reviews.yml — never type reviews by hand),
 a closing "Start tonight" box, and on phones a sticky "Start free" bar once the first button scrolls
 away. ⚠️ Never add made-up testimonials; the proof block hides itself when there are no reviews.
+
+### The Lantern Lullaby printable is ONE page, Levi's design (19 Nov 2026)
+> "I checked out the lullaby printables and they are not the way I want them at all. I want them
+> like the upload." (his Canva sheet LST_Lullaby_OldTestament_1page)
+
+`print/lullaby-ot.pdf` and `print/lullaby-nt.pdf` are no longer drawn by `page.html` (that made 4 pages
+of boxes). `make.js` now renders them with **`lantern/builder/printables/lullaby.html`**: one US Letter
+page, cream paper, rounded gold frame, moon and stars over the title, "<Testament> Version" in the
+volume's accent colour under a gold rule, the whole song in three columns with gold rules between,
+"Goodnight, Friends" in blue italics, the Travelers' mottos italic, the four Traveler dots over
+"~ Beau, Scout, Willow, & Wren ~". The page shrinks the type until everything fits on one page AND no
+line wraps (his sheet never wraps a line). The nightly Story and Song printables are unchanged.
+Rebuild locally: `CHROME=/usr/bin/google-chrome PLAYWRIGHT=<path> node lantern/builder/printables/make.js --only lullaby`.
