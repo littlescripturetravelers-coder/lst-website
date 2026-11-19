@@ -1,0 +1,54 @@
+# Keeps the search pages fresh.
+#
+# WHAT IT DOES
+# Once a day, after the night's story is published, it runs tools/seo_build.py.
+# That adds the newest night to the topic pages (Come, Follow Me for Kids,
+# Bible Stories for Kids, LDS/Christian Parenting, Homeschool, Scripture Study
+# for Parents), refreshes sitemap.xml and llms.txt, and re-checks every page's
+# search tags. If nothing changed, it commits nothing.
+#
+# It needs no password or API key. GITHUB_TOKEN is provided by GitHub.
+
+name: SEO refresh
+
+on:
+  schedule:
+    - cron: '23 12 * * *'     # 5:23 AM Mountain (MST) — after the night is live
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: seo-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Rebuild search pages, sitemap and llms.txt
+        run: python3 tools/seo_build.py
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name "Morning Lantern"
+          git config user.email "lantern-bot@users.noreply.github.com"
+          for f in *.html sitemap.xml robots.txt llms.txt; do
+            if [ -e "$f" ]; then git add "$f"; fi
+          done
+          if git diff --cached --quiet; then
+            echo "Nothing new today."
+            exit 0
+          fi
+          git commit -m "SEO refresh: newest nights on topic pages, sitemap, llms.txt"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 10
+          done
+          exit 1

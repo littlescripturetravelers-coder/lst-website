@@ -2005,3 +2005,42 @@ Levi, 20 Oct 2026: "I have to be the number one trustworthy source for parents t
 Child-checked words written ahead of a night live in `lantern/child-stories/<slug>.json` (p1 three paragraphs, p2 two); the nightly build uses them verbatim when the file exists. October nights 21-28 are there (20 Oct 2026).
 
 THE GUARD RAIL (20 Oct 2026): before a night goes into the account, `publish_to_supabase.py` asks the app's `story-guard` function to rate its story book 1-10 on the Child's Story Rule; under 9 the rewrite it returns is put into the book and both editions' story card, written back to the night's files (the Action commits them), and the score goes into `daily_content.story_score`. `LANTERN_GUARD=0` turns it off. The master prompt and rubric: the app repo's docs/STORY-PROMPT.md. The Five Stones' NAME stone now names the feeling, what the mind may think and what the body may feel. A night already in the account from before the guard (its `.published.json` has no `"guarded": true`, date on or after `LANTERN_GUARD_FROM`, default 2026-10-01) is rated once exactly as a new night is when the publisher finds it unchanged: under 9 the rewrite goes into the files and the account, the voices are recorded again (`narrate` with `force`, since the words changed), and the marker gets `guarded` so it is never rated again. The first scores (20 Oct 2026) were 6-8 for every October night, so October was rewritten by the guard that morning.
+
+## 41. Search & AI-answer visibility — SEO / AEO / GEO / CTR / CRO (18 Nov 2026)
+
+> Levi: "I want to be one of the top websites for Come Follow Me for kids, LDS kids, Christian kids,
+> Bible stories for kids, Christian parenting, LDS parenting… homeschooling… scripture study for
+> grown-ups… technology education for parents by age."
+
+**What we found:** no robots.txt, no sitemap, no canonical tags, no structured data anywhere, a
+relative og:image, titles that never said what people search for, and a search for the exact brand
+name returned none of our pages.
+
+**One script does all of it — `tools/seo_build.py`.** Safe to run any number of times: everything
+it writes sits between `<!-- SEO:HEAD -->`, `<!-- SEO:FOOTER -->`, `<!-- SEO:FAQ -->` markers and
+is replaced, never stacked. `.github/workflows/seo-refresh.yml` runs it every day at 5:23 AM MST
+and commits only if something changed.
+
+It makes / maintains:
+- **Seven topic pages** (generated — edit the `HUBS` dict, not the .html):
+  `come-follow-me-for-kids.html`, `bible-stories-for-kids.html`, `lds-parenting.html`,
+  `christian-parenting.html`, `homeschool-bible-stories.html`, `scripture-study-for-parents.html`,
+  `kids-technology-by-age.html` (AAP 5 Cs + WHO, sources linked on the page). The story lists
+  come from `lantern/*/night.json`, only nights dated today or earlier — titles + scripture only,
+  the stories themselves stay behind the trial.
+- **Every public page's head:** canonical (www), Open Graph + Twitter with absolute image, the iPhone
+  Smart App Banner (`apple-itunes-app`, app id 6793999173), JSON-LD (home: Organization, WebSite,
+  MobileApplication, Product with both prices, FAQPage; blog posts: BlogPosting; topic pages:
+  CollectionPage + Breadcrumb + FAQPage). noindex pages get only the app banner.
+- **Titles/descriptions** for the key pages (`META` dict) — written to win the click.
+- **"Questions parents ask"** on all three home files (visible FAQ + the same FAQ in JSON-LD).
+- **"For Families" footer column** on every page — internal links to the topic pages.
+- **`sitemap.xml`, `robots.txt` (AI crawlers welcome), `llms.txt`** (the summary AI assistants read).
+
+Rules:
+- ⚠️ FAQ answers must stay TRUE: prices, trial, ages 1–5, 5 AM, two editions. If a price or the
+  trial changes (§18), change `FAQ_HOME` too, or Google and ChatGPT will repeat the old one.
+- Anything that teaches doctrine needs Levi's approval — the topic pages describe the product and
+  point to his own articles; they do not teach doctrine.
+- Don't add `lantern/*` pages to the sitemap (paid content).
+- A new blog post shows up on the parenting pages by itself on the next run.
