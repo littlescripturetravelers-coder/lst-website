@@ -335,12 +335,12 @@
       var a = e.target && e.target.closest ? e.target.closest("a,[role=button]") : null;
       if (!a) return;
       if (a.id === "backLink" || a.classList.contains("back")) {
-        e.preventDefault(); e.stopPropagation(); go("tonight.html" + q); return;
+        e.preventDefault(); e.stopPropagation(); go(n.backUrl || ("tonight.html" + q)); return;
       }
       var href = a.getAttribute && (a.getAttribute("href") || "");
       if (!href) return;
       if (a.classList.contains("songlink") || /-lullaby\.html?([?#]|$)/i.test(href)) {
-        e.preventDefault(); e.stopPropagation(); go("lullaby.html" + q); return;
+        e.preventDefault(); e.stopPropagation(); go(n.songUrl || ("lullaby.html" + q)); return;
       }
       if (/^(#|javascript:)/i.test(href)) return;
       e.preventDefault(); e.stopPropagation();
@@ -354,7 +354,7 @@
     if (!d || d.type !== "lst:back") return;
     var f = document.getElementById("lst-book");
     if (!f || e.source !== f.contentWindow) return;
-    window.location.href = "tonight.html" + nightQuery(night);
+    window.location.href = (night && night.backUrl) || ("tonight.html" + nightQuery(night));
   });
   window.addEventListener("resize", function () {
     if (document.body.classList.contains("lst-book-open")) bookChrome(true);
@@ -467,7 +467,23 @@
     });
   }
 
+  /* THE FREE STORY, AS THE MORNING LANTERN SHOWS IT (Levi, 20 Nov 2026: "when they look at the free version of the
+     scripture story it is in the old format. It needs to be in the exact same format as the little scripture
+     travelers morning lantern is each day on the website"): sample.html hands over one published night's own
+     picture book (a public page of this site) and it opens full screen, exactly as story.html opens tonight's,
+     with the corner headphones; no sign-in. o = { date, title, book, back, song } */
+  function sample(o) {
+    root.innerHTML = '<p class="mp-note">Opening&hellip;</p>';
+    fetch(o.book).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) {
+      if (!t) { root.innerHTML = '<p class="mp-note mp-note-warn">The story could not be opened. Try again in a moment.</p>'; return; }
+      night = { date: o.date, title: o.title, bookHtml: t, backUrl: o.back || "index.html", songUrl: o.song || "" };
+      loaded = true; bookChrome(true); root.innerHTML = bookFrameView(night); writeBookFrame(night);
+      if (window.LSTStoryVoice && o.date) window.LSTStoryVoice.mount({ story: o.date, title: o.title });
+    }).catch(function () { root.innerHTML = '<p class="mp-note mp-note-warn">The story could not be opened. Try again in a moment.</p>'; });
+  }
+
   window.LSTOpen = {
+    sample: function (elm, o) { root = typeof elm === "string" ? document.getElementById(elm) : elm; if (root) sample(o || {}); },
     mount: function (elm, which) {
       root = typeof elm === "string" ? document.getElementById(elm) : elm;
       kind = which === "song" ? "song" : "book";
