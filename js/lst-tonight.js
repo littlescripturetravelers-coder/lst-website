@@ -27,6 +27,7 @@
 */
 (function () {
   var root = null, night = null, loaded = false, loadError = "";
+  function param(k) { try { return new URLSearchParams(location.search).get(k) || ""; } catch (e) { return ""; } }
   /* which reading depth of the night is showing. KEPT (Levi, 26 Oct 2026: "when I click on story of the night
      and I have chosen deep read it should stay deep read ... and save the spot on the webpage you had left"):
      the depth chosen stays chosen on this device, and the spot on the page is kept per night for the way back. */
@@ -134,7 +135,9 @@
     if (!window.LSTData || !auth() || !auth().signedIn()) {
       night = null; loaded = true; return Promise.resolve();
     }
-    return window.LSTData.archive.tonight()
+    /* a past day's devotional, opened from the Lantern Archive (tonight.html?date=YYYY-MM-DD) */
+    var date = /^\d{4}-\d{2}-\d{2}$/.test(param("date")) ? param("date") : "";
+    return (date ? window.LSTData.archive.full(date) : window.LSTData.archive.tonight())
       .then(function (n) { loaded = true; loadError = ""; night = n; })
       .catch(function (e) {
         loaded = true; night = null;

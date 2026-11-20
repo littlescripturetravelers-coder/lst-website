@@ -82,7 +82,8 @@
       "</div>" +
       '<p class="mp-meta">' + esc(prettyDate(r.date)) +
         (r.scripture ? " &middot; " + sref(r.scripture) : "") + "</p>" +
-      (virtueChips(r) ? '<div style="margin:.6rem 0 1.2rem;">' + virtueChips(r) + "</div>" : "");
+      (virtueChips(r) ? '<div style="margin:.6rem 0 1.2rem;">' + virtueChips(r) + "</div>" : "") +
+      doors(r);
 
     if (opening) {
       return '<article class="mp-card">' + head +
@@ -154,12 +155,29 @@
       .map(function (p) { return "<p>" + esc(p.trim()) + "</p>"; }).join("");
   }
 
+  /* THE NIGHT'S THREE DOORS (Levi, 20 Nov 2026: "for the Lantern archive on the website ... three buttons. One for
+     the song or lullaby of the night, one for the scripture story of the night, and one for the morning lantern
+     devotional for that day ... the exact same functionality as the app"): each opens that very thing for that
+     night - lullaby.html, story.html (the picture book, full screen) and tonight.html, each with ?date=. */
+  function doors(r) {
+    if (!r || !r.date) return "";
+    var d = encodeURIComponent(r.date);
+    var b = function (href, icon, label) {
+      return '<a class="mp-btn' + (label === "Morning Lantern" ? " mp-btn-gold" : "") + ' lst-door" href="' + href + '" ' +
+        'style="text-decoration:none;display:inline-flex;align-items:center;gap:.35rem;margin:.25rem .35rem .25rem 0;">' + icon + " " + label + "</a>";
+    };
+    return '<div class="lst-doors" style="display:flex;flex-wrap:wrap;margin:.6rem 0 .2rem;">' +
+      b("tonight.html?date=" + d, "&#128367;&#65039;", "Morning Lantern") +
+      b("story.html?date=" + d, "&#128214;", "Scripture Story") +
+      b("lullaby.html?date=" + d, "&#127925;", "Song of the Night") + "</div>";
+  }
   function rowView(r) {
     return '' +
       '<article class="mp-card" style="cursor:pointer;" data-open="' + esc(r.id) + '">' +
         '<div class="mp-card-head"><h3>' + esc(r.title || "Untitled") + "</h3></div>" +
         '<p class="mp-meta">' + esc(prettyDate(r.date)) +
           (r.scripture ? " &middot; " + esc(r.scripture) : "") + "</p>" +
+        doors(r) +
       "</article>";
   }
 
@@ -229,7 +247,8 @@
     });
 
     root.querySelectorAll("[data-open]").forEach(function (b) {
-      b.addEventListener("click", function () {
+      b.addEventListener("click", function (ev) {
+        if (ev && ev.target && ev.target.closest && ev.target.closest(".lst-door")) return;   /* a door opens its own page */
         var id = this.getAttribute("data-open");
         for (var i = 0; i < rows.length; i++) {
           if (String(rows[i].id) === id) { open = rows[i]; break; }
