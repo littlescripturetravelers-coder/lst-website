@@ -400,6 +400,42 @@ HUBS = {
     ("How much does it cost?", FAQ_HOME[4][1]),
    ],
    list_title="", kw="Emotional regulation for kids"),
+ "read-along-bible-stories.html": dict(
+   title="Read-Along Bible Stories for Kids — Hear Every Word, See Every Word",
+   desc="Scripture bedtime stories read aloud in a warm voice while each word lights up as it is spoken, so young children hear the word and see the word. Slow it to half speed for beginning readers.",
+   eyebrow="READ-ALONG STORIES",
+   h1="Hear the word, see the word: read-along scripture stories",
+   lede="Tap the headphones on any Little Scripture Travelers story and a warm voice reads it to your child, one page at a time. As each word is said, that one word lights up gold and is underlined, so little eyes follow the words, not only the pictures.",
+   no_list=True,
+   body=[
+    ("How it works",
+     "<ul><li><strong>Every story, read aloud</strong> in a real recorded voice (Eli or Hannah), every page, and the book turns its own pages with the voice.</li>"
+     "<li><strong>One word at a time</strong>: the word being spoken lights up gold and is underlined, on the picture book's page and in the transcript.</li>"
+     "<li><strong>Slow it down</strong>: speeds from 0.5&times; to 2&times;, so a beginning reader can keep up.</li>"
+     "<li><strong>Tap a sentence</strong> in the transcript to hear it again, and turn the word highlight off whenever you like.</li>"
+     "<li>On the iPhone app and right here on the website.</li></ul>"),
+    ("What the research says",
+     "<p>Young children listening to a story look almost only at the pictures. Studies that track children&rsquo;s eyes have found that when the words are highlighted as they are read, preschoolers look at the print noticeably longer (Skibbe and colleagues, 2018), and that children look at print far more when a grown-up points it out (Justice, Pullen &amp; Pence, 2008). A review of 43 studies of narrated storybooks found a small extra boost to story understanding and vocabulary, as long as the books avoided distracting games and pop-ups (Takacs, Swart &amp; Bus, 2015). Children who are beginning to read have recognized more words after watching captioned stories (Linebarger, 2001).</p>"
+     "<p>What it is <em>not</em>: highlighting on its own does not teach a three-year-old to read. The gains in the research come from hearing stories again and again, and most of all from a grown-up reading along. So think of it as a helper for reading together, not a replacement for it. That is why our stories have no games or pop-ups, just the story, the pictures and a calm voice.</p>"),
+    ("Make it work best",
+     "<ol><li>Sit together and, now and then, run your finger under the glowing word.</li>"
+     "<li>Read favorite stories again. Repetition is where the learning happens.</li>"
+     "<li>For beginners, slow the voice to 0.75&times; or 0.5&times;.</li>"
+     "<li>Pause and let your child say a word they know, or find a little word like <em>God</em> or <em>Jesus</em> on the page.</li></ol>"),
+    ("Sources",
+     "<ul><li>Takacs, Swart &amp; Bus (2015), <a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC4647204\" rel=\"noopener\">Benefits and pitfalls of multimedia and interactive features in technology-enhanced storybooks: a meta-analysis</a>, Review of Educational Research.</li>"
+     "<li>Skibbe, Thompson &amp; Plavnick (2018), <a href=\"https://doi.org/10.1007/s10643-017-0876-4\" rel=\"noopener\">preschoolers&rsquo; visual attention during electronic storybook reading</a>, Early Childhood Education Journal.</li>"
+     "<li>Justice, Pullen &amp; Pence (2008), <a href=\"https://pubs.asha.org/doi/10.1044/0161-1461(2008/07-0098)\" rel=\"noopener\">influence of verbal and nonverbal references to print on preschoolers&rsquo; visual attention to print</a>.</li>"
+     "<li>Linebarger (2001), learning to read from television: the effects of using captions and narration, Journal of Educational Psychology.</li></ul>"),
+   ],
+   faq=[
+    ("Will this teach my child to read?", "On its own, no app teaches a young child to read. Research shows highlighting the words as they are read helps children look at the words, and narrated stories can give a small boost to understanding and vocabulary, especially when a grown-up reads along and stories are heard again and again."),
+    ("Can I slow the voice down?", "Yes. The reading speed goes from 0.5x to 2x, and the highlighted word keeps pace."),
+    ("Can I turn the highlighting off?", "Yes. Light up each word can be switched on or off, and the story still turns its pages with the voice."),
+    ("What ages is it for?", FAQ_HOME[2][1]),
+    ("How much does it cost?", FAQ_HOME[4][1]),
+   ],
+   list_title="", kw="Read-along Bible stories for kids"),
  "family-scrapbook.html": dict(
    title="Digital Family Scrapbook — Turn Handwriting Into a Font & Print Family Books",
    desc="A digital family scrapbook for faith-filled families: make memories from your photos, turn a loved one's handwriting into a font with Handwriting Twin, and gather it into real printed family books.",
@@ -465,6 +501,7 @@ SHOTS = {
  "bible-quiz-and-flashcards.html": ["timeline","library","story"],
  "emotional-regulation-for-kids.html": ["story","lantern","journal"],
  "family-scrapbook.html": ["scrapbook","family-stories","journal"],
+ "read-along-bible-stories.html": ["story","lullaby","library"],
 }
 SHOT_CAP = {"story":"Tonight's story","lantern":"The Morning Lantern","lullaby":"The lullaby","library":"The Virtue Library",
  "family-stories":"Family Stories","journal":"The Journal","timeline":"Sacred World Timeline","coloring":"Coloring pages",
@@ -651,6 +688,7 @@ FOOTER_COL = """<!-- SEO:FOOTER -->
           <li><a href="timeline.html">Free Bible Timeline</a></li>
           <li><a href="emotional-regulation-for-kids.html">Big Feelings: The Five Stones</a></li>
           <li><a href="family-scrapbook.html">Family Scrapbook</a></li>
+          <li><a href="read-along-bible-stories.html">Read-Along Stories</a></li>
           <li><a href="sample.html">Read a Free Story</a></li>
         </ul>
       </div>
@@ -754,7 +792,7 @@ def home_faq(s):
              '<a href="homeschool-bible-stories.html">Homeschool</a><a href="scripture-study-for-parents.html">Scripture study for parents</a>'
              '<a href="kids-technology-by-age.html">Kids &amp; technology by age</a><a href="family-history-for-kids.html">Family history for kids</a><a href="teaching-kids-virtues.html">Teaching kids virtues</a>'
              '<a href="bible-coloring-pages-for-kids.html">Coloring pages</a><a href="come-follow-me-printables.html">Printables</a><a href="bible-quiz-and-flashcards.html">Quizzes &amp; flashcards</a>'
-             '<a href="timeline.html">Free Bible timeline</a><a href="emotional-regulation-for-kids.html">Big feelings</a><a href="family-scrapbook.html">Family scrapbook</a>'
+             '<a href="timeline.html">Free Bible timeline</a><a href="emotional-regulation-for-kids.html">Big feelings</a><a href="family-scrapbook.html">Family scrapbook</a><a href="read-along-bible-stories.html">Read-along stories</a>'
              '<a href="sample.html">Read a free story</a></div>')
     block = "<!-- SEO:FAQ -->\n" + SEO_CSS + "\n" + faq_html(FAQ_HOME).replace("</div>\n</section>", links + "\n  </div>\n</section>") + "\n<!-- /SEO:FAQ -->\n  "
     i = s.find('<footer class="site-footer"')
@@ -896,7 +934,7 @@ def main():
 
     # sitemap
     pri = {"index.html": "1.0", "come-follow-me-for-kids.html": "0.9", "bible-stories-for-kids.html": "0.9",
-           "lds-parenting.html": "0.8", "christian-parenting.html": "0.8", "homeschool-bible-stories.html": "0.8", "scripture-study-for-parents.html": "0.8", "kids-technology-by-age.html": "0.8", "family-history-for-kids.html": "0.8", "teaching-kids-virtues.html": "0.9", "bible-coloring-pages-for-kids.html": "0.9", "come-follow-me-printables.html": "0.9", "bible-quiz-and-flashcards.html": "0.9", "emotional-regulation-for-kids.html": "0.9", "family-scrapbook.html": "0.8", "timeline.html": "0.9", "subscribe.html": "0.8", "sample.html": "0.8"}
+           "lds-parenting.html": "0.8", "christian-parenting.html": "0.8", "homeschool-bible-stories.html": "0.8", "scripture-study-for-parents.html": "0.8", "kids-technology-by-age.html": "0.8", "family-history-for-kids.html": "0.8", "teaching-kids-virtues.html": "0.9", "bible-coloring-pages-for-kids.html": "0.9", "come-follow-me-printables.html": "0.9", "bible-quiz-and-flashcards.html": "0.9", "emotional-regulation-for-kids.html": "0.9", "family-scrapbook.html": "0.8", "read-along-bible-stories.html": "0.9", "timeline.html": "0.9", "subscribe.html": "0.8", "sample.html": "0.8"}
     urls = []
     for p in sorted(set(indexable), key=lambda p: (p != "index.html", p)):
         loc = SITE + "/" if p == "index.html" else SITE + "/" + p
@@ -943,6 +981,7 @@ Made by Little Scripture Travelers Bedtime Stories, LLC (founder Levi Lewis, Mon
 - [Bible quizzes and flashcards]({SITE}/bible-quiz-and-flashcards.html): Quizlet-style Flashcards, Learn, Match, Test, own sets, scripture memorization
 - [Free Bible timeline]({SITE}/timeline.html): free interactive Bible and world history timeline with maps; add your own family history
 - [Emotional regulation for kids]({SITE}/emotional-regulation-for-kids.html): the Five Stones (Spot, Name, Find, Fork, Calm) in every nightly story
+- [Read-along Bible stories]({SITE}/read-along-bible-stories.html): every story read aloud with each word lit as it is spoken, 0.5x to 2x, and what the research says
 - [Family scrapbook]({SITE}/family-scrapbook.html): photo memories, Handwriting Twin (your handwriting as a font), printed family books
 - [Free sample story]({SITE}/sample.html): a whole night free, nothing to join
 - [Plans and free trial]({SITE}/subscribe.html)
