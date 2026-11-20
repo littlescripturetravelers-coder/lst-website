@@ -21,7 +21,7 @@ that make the night actually happen.
   read of a few minutes through to a full study with word studies, historical
   background, General Conference talks and commentary.
 - **The bedtime story** — a short illustrated scripture story, written for
-  ages 1–5, with a Feeling Moment, a Remember This, and a parent prompt.
+  ages 3–8, with a Feeling Moment, a Remember This, and a parent prompt.
 - **A lullaby** for that night, with words and music, plus one signature
   lullaby that is always there.
 - **Narration** for the nights when reading aloud is too much.

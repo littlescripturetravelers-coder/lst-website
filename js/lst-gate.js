@@ -70,7 +70,7 @@
         "<h2>" + (cfg.title ? esc(cfg.title) : "Keep going &mdash; the first week is free") + "</h2>" +
         "<p>" + (cfg.blurb ||
           "Little Scripture Travelers sends one short scripture story every night, " +
-          "written for ages 1&ndash;5. Start tonight; you are not charged for seven days.") + "</p>" +
+          "written for ages 3&ndash;8. Start tonight; you are not charged for seven days.") + "</p>" +
         (lines ? '<ul class="lg-list">' + lines + "</ul>" : "") +
         '<a class="lg-cta" href="subscribe.html#plans" id="lg-go">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
         '<p class="lg-fine">Cancel any time in two clicks &mdash; ' +

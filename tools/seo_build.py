@@ -51,7 +51,7 @@ FAQ_HOME = [
     ("Is it for Latter-day Saint (LDS) families or other Christian families?",
      "Both. There are two editions: one for members of The Church of Jesus Christ of Latter-day Saints that follows the Come, Follow Me reading schedule, and one for Christian families of any church."),
     ("What ages is it for?",
-     "The stories are written for children ages one to five, in the smallest words that still carry the meaning."),
+     "The stories are written for children ages three to eight, in the smallest words that still carry the meaning."),
     ("How long does a bedtime story take?",
      "About ten quiet minutes. There is nothing to prepare and nothing to look up."),
     ("How much does it cost?",
@@ -88,10 +88,10 @@ HUBS = {
    kw="Come, Follow Me for kids"),
  "bible-stories-for-kids.html": dict(
    title="Bible Stories for Kids — A New Bedtime Bible Story Every Night",
-   desc="Short Bible stories for kids ages 1–5, told gently for bedtime: Psalms, Isaiah, Esther, Daniel, Ruth and more. A new story, lullaby and parent guide every night. Try 7 days free.",
+   desc="Short Bible stories for kids ages 3–8, told gently for bedtime: Psalms, Isaiah, Esther, Daniel, Ruth and more. A new story, lullaby and parent guide every night. Try 7 days free.",
    eyebrow="BIBLE STORIES FOR KIDS",
    h1="Bible stories for kids, told softly enough for bedtime",
-   lede="One short Bible story every night, in the smallest words that still carry the meaning. Written for children ages one to five, with a lullaby to sing and a few questions to talk about.",
+   lede="One short Bible story every night, in the smallest words that still carry the meaning. Written for children ages three to eight, with a lullaby to sing and a few questions to talk about.",
    body=[
     ("Bible stories for little children, not a lecture",
      "<p>Children learn far more from a story than from being told what to do. So every night tells one Bible moment, like Esther finding her courage, Daniel praying anyway, or Ruth choosing to stay, and then shows one of our four Travelers living the same lesson the next day at home or at school.</p>"
@@ -158,7 +158,7 @@ HUBS = {
    lede="Homeschool families already know the best lessons start with a story. Little Scripture Travelers gives you one every day, ready by 5 AM, for morning time, quiet time or bedtime.",
    body=[
     ("Scripture time without the prep",
-     "<p>Each day's night has a short scripture story for children ages one to five, a lullaby written for it, and a Morning Lantern study for the parent. Use the story at morning basket or circle time, sing the lullaby at nap, and read it again at bedtime. Little ones love hearing the same story twice.</p>"
+     "<p>Each day's night has a short scripture story for children ages three to eight, a lullaby written for it, and a Morning Lantern study for the parent. Use the story at morning basket or circle time, sing the lullaby at nap, and read it again at bedtime. Little ones love hearing the same story twice.</p>"
      "<p>Inside the subscription are Printables (the story's real book pages), Study &amp; Tests pages, the Virtue Library (every story searchable by what it teaches, like courage, kindness or honesty) and the Sacred World Timeline that places each story in history.</p>"),
     ("Character first",
      "<p>Every story is tagged with the virtues it teaches, and our four Travelers (Beau, Scout, Willow and Wren) show what that virtue looks like in a child's ordinary day. It is an easy, faith-centered way to teach character alongside reading and history.</p>"),
@@ -311,7 +311,7 @@ HUBS = {
      "<li><strong>Print the month's coloring book</strong>: every picture from the month, ready to print on Letter paper.</li></ul>"
      "<p>Because each page is the picture from that night's scripture story, coloring becomes a way to talk about the story again: who was in it, what they did, and how it felt.</p>"),
     ("Made for little hands",
-     "<p>The stories are written for children ages one to five, and the pictures are simple and friendly, with our four Travelers (Beau, Scout, Willow and Wren) beside the people of the scriptures.</p>"),
+     "<p>The stories are written for children ages three to eight, and the pictures are simple and friendly, with our four Travelers (Beau, Scout, Willow and Wren) beside the people of the scriptures.</p>"),
    ],
    faq=[
     ("Can my child color the pages online?", "Yes. Color online with a bucket, pencil, brush and crayons, on the website or in the app."),
@@ -462,10 +462,10 @@ HUBS = {
 # Title / description rewrites for existing pages (CTR). None = keep what is there.
 META = {
  "index.html": ("Scripture Bedtime Stories for Kids | Little Scripture Travelers",
-   "A new scripture bedtime story, lullaby and parent study every night. Come, Follow Me (LDS) and Christian editions, for kids ages 1–5. Try 7 days free."),
+   "A new scripture bedtime story, lullaby and parent study every night. Come, Follow Me (LDS) and Christian editions, for kids ages 3–8. Try 7 days free."),
  "subscribe.html": ("Plans & Free Trial — $6.99/mo or $49/yr | Little Scripture Travelers",
    "Start with 7 days free. Then $6.99 a month or $49 a year for a new scripture bedtime story, lullaby and Morning Lantern every night. Cancel anytime."),
- "bible-bedtime-stories.html": ("Bedtime Bible Stories for Little Children (Ages 1–5)",
+ "bible-bedtime-stories.html": ("Bedtime Bible Stories for Little Children (Ages 3–8)",
    None),
  "bedtime-stories.html": ("Every Scripture Bedtime Story, Book by Book | Little Scripture Travelers", None),
  "books.html": ("Illustrated Scripture Story Books for Kids | Little Scripture Travelers",
@@ -834,7 +834,7 @@ def build_hub(page, h, all_nights, posts, template):
     cta = ('<div class="hub-cta"><a class="mp-btn mp-btn-gold hub-go" href="/subscribe.html#plans" onclick="return openTrialSignup()">Start your 7 free days</a>'
            '<a class="hub-alt" href="sample.html">or read a whole night free, nothing to join &rarr;</a></div>')
     offer = ('<ul class="hub-offer"><li>&#10003; 7 days free, cancel anytime</li><li>&#10003; $6.99/mo or $49/yr after</li>'
-             '<li>&#10003; Ages 1&ndash;5, about 10 minutes a night</li><li>&#10003; Latter-day Saint &amp; Christian editions</li></ul>')
+             '<li>&#10003; Ages 3&ndash;8, about 10 minutes a night</li><li>&#10003; Latter-day Saint &amp; Christian editions</li></ul>')
     shots = "".join(
         f'<figure class="hub-shot"><img src="images/app/app-{k}.jpg" alt="{E(SHOT_CAP.get(k,k))} in the Little Scripture Travelers app" width="390" height="844" loading="{"eager" if i==0 else "lazy"}"><figcaption>{E(SHOT_CAP.get(k,k))}</figcaption></figure>'
         for i, k in enumerate(SHOTS.get(page, ["story","lantern","library"])))
@@ -961,14 +961,14 @@ Sitemap: {SITE}/sitemap.xml
     faq_txt = "\n".join(f"### {q}\n{a}\n" for q, a in FAQ_HOME)
     open("llms.txt", "w", encoding="utf-8").write(f"""# Little Scripture Travelers
 
-> Nightly scripture bedtime stories for young children (ages 1–5), with a lullaby and a short parent study called the Morning Lantern. Two editions: Latter-day Saint (LDS), which follows the Come, Follow Me reading schedule, and Christian, for families of any church. New night every morning by 5 AM Mountain Time on the website and iPhone app. First 7 days free, then $6.99/month or $49/year.
+> Nightly scripture bedtime stories for young children (ages 3–8), with a lullaby and a short parent study called the Morning Lantern. Two editions: Latter-day Saint (LDS), which follows the Come, Follow Me reading schedule, and Christian, for families of any church. New night every morning by 5 AM Mountain Time on the website and iPhone app. First 7 days free, then $6.99/month or $49/year.
 
 Made by Little Scripture Travelers Bedtime Stories, LLC (founder Levi Lewis, Monticello, Utah). Not an official product of The Church of Jesus Christ of Latter-day Saints.
 
 ## Main pages
 - [Home]({SITE}/): what it is and how it works
 - [Come, Follow Me for Kids]({SITE}/come-follow-me-for-kids.html): nightly Come, Follow Me bedtime stories for Latter-day Saint children
-- [Bible Stories for Kids]({SITE}/bible-stories-for-kids.html): short Bible bedtime stories for ages 1–5
+- [Bible Stories for Kids]({SITE}/bible-stories-for-kids.html): short Bible bedtime stories for ages 3–8
 - [LDS Parenting]({SITE}/lds-parenting.html): teaching little children the gospel at bedtime
 - [Christian Parenting]({SITE}/christian-parenting.html): raising children who love God's Word
 - [Homeschool Bible stories]({SITE}/homeschool-bible-stories.html): a daily scripture story, printables and study pages for homeschool families
