@@ -194,6 +194,35 @@
       var c = client(); if (!c || !uid()) return Promise.resolve(null);
       return c.rpc("printable_nights", { d0: d0, d1: d1 }).then(function (r) { return r.error ? null : (r.data || []); }, function () { return null; });
     },
+    /* one family's own copy of a printable from the app's `printable` edge function (Levi, 19 Nov 2026): a free one
+       for anyone, any other for a family the account lets in (paid, the free week, a gift code), stamped with their
+       name. {url}, {locked, reason:'signin'|'subscribe'} or {error}. */
+    printableBlob: function (id, ed) {
+      var SUPA = "https://rdbvktqgrwhjucocobua.supabase.co";
+      var ANON = (window.LST_SUPA_ANON || "");
+      var c = client();
+      var tok = c ? c.auth.getSession().then(function (r) { return (r && r.data && r.data.session && r.data.session.access_token) || ""; }, function () { return ""; }) : Promise.resolve("");
+      return tok.then(function (t) {
+        var h = {}; if (t || ANON) h.Authorization = "Bearer " + (t || ANON); if (ANON) h.apikey = ANON;
+        return fetch(SUPA + "/functions/v1/printable?id=" + encodeURIComponent(id) + "&ed=" + (ed === "christian" ? "christian" : "lds"), { headers: h });
+      }).then(function (r) {
+        if (r.ok) return r.blob().then(function (b) { return { url: URL.createObjectURL(b) }; });
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          return { locked: !!j.locked, reason: j.reason || "", error: j.locked ? "" : (j.error || "That printable could not be opened. Please try again.") };
+        });
+      });
+    },
+    /* someone without the free week asked for one that comes with it: sign in, or start the free week */
+    askToJoin: function (reason, title) {
+      var a = auth();
+      if (reason === "signin" && a && a.openSignIn && !a.signedIn()) {
+        if (typeof window.openTrialSignup === "function") { window.openTrialSignup("annual"); return; }
+        a.openSignIn("Sign in to print " + (title || "this printable") + ".");
+        return;
+      }
+      if (typeof window.openTrialSignup === "function") window.openTrialSignup("annual");
+      else location.href = "/subscribe.html#plans";
+    },
     printableFiles: function () {
       var c = client(); if (!c || !uid()) return Promise.resolve([]);
       return c.from("printable_files").select("id,kind,title,note,path,edition,created_at").order("created_at", { ascending: false })
