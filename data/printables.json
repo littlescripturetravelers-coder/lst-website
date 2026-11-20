@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T00:12:59.177Z",
+ "updated": "2026-11-20T02:21:51.540Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
   {
@@ -6883,6 +6883,39 @@
    "stored": "51a282b3a24b47dfe7e7776a3f625eda4981d33bb2969d874495a0ee9ba6f869"
   },
   {
+   "id": "story-jul-28-come-celebrate-with-god",
+   "type": "story",
+   "title": "Come Celebrate with God",
+   "nightLabel": "Week 4 · Night 7",
+   "download": "OldTestament_Story_ComeCelebrateWithGod_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 4,
+   "night": 7,
+   "date": "2026-07-26",
+   "story": "jul-28-come-celebrate-with-god",
+   "ref": "2 Chronicles 30:9",
+   "storyId": "ot-b07-w4n7",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-28-come-celebrate-with-god/printables/story.pdf?v=b5bfd99f8d",
+     "pages": 4,
+     "bytes": 687954
+    },
+    "christian": {
+     "url": "/lantern/jul-28-come-celebrate-with-god/printables/story-christian.pdf?v=b5bfd99f8d",
+     "pages": 4,
+     "bytes": 687983
+    }
+   },
+   "thumb": "/lantern/jul-28-come-celebrate-with-god/printables/story.jpg?v=b5bfd99f8d",
+   "src": "b5bfd99f8d6150e72c2b78ecb3ce2b88e27131e6bec85ea8fa93c34516ae0550",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "b5bfd99f8d6150e72c2b78ecb3ce2b88e27131e6bec85ea8fa93c34516ae0550"
+  },
+  {
    "id": "song-jul-28-come-celebrate-with-god",
    "type": "song",
    "title": "An Invitation to Come Home",
@@ -6911,6 +6944,39 @@
    "stored": "1c02976707d4a846743c01ff6ab32c2b9cb24b45411719d50e2f9c9f526e1ab5"
   },
   {
+   "id": "story-jul-27-the-king-who-forgot-to-stay-humble",
+   "type": "story",
+   "title": "The King Who Forgot to Stay Humble",
+   "nightLabel": "Week 4 · Night 6",
+   "download": "OldTestament_Story_TheKingWhoForgotToStayHumble_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 4,
+   "night": 6,
+   "date": "2026-07-25",
+   "story": "jul-27-the-king-who-forgot-to-stay-humble",
+   "ref": "2 Chronicles 26:16",
+   "storyId": "ot-b07-w4n6",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-27-the-king-who-forgot-to-stay-humble/printables/story.pdf?v=d53ab1e88f",
+     "pages": 4,
+     "bytes": 641309
+    },
+    "christian": {
+     "url": "/lantern/jul-27-the-king-who-forgot-to-stay-humble/printables/story-christian.pdf?v=d53ab1e88f",
+     "pages": 4,
+     "bytes": 640838
+    }
+   },
+   "thumb": "/lantern/jul-27-the-king-who-forgot-to-stay-humble/printables/story.jpg?v=d53ab1e88f",
+   "src": "d53ab1e88f06181edb8b3ed17f676671d0bce89e0d1784c598d9705c505f3865",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "d53ab1e88f06181edb8b3ed17f676671d0bce89e0d1784c598d9705c505f3865"
+  },
+  {
    "id": "song-jul-27-the-king-who-forgot-to-stay-humble",
    "type": "song",
    "title": "A Humble Heart Says Thank You",
@@ -6937,6 +7003,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "d8a018d7bb1caf0c0cf6c8a3500733b5fc4daf908608179fa6e5c9ac91767377"
+  },
+  {
+   "id": "story-jul-26-our-eyes-are-upon-thee",
+   "type": "story",
+   "title": "Our Eyes Are upon Thee",
+   "nightLabel": "Week 4 · Night 5",
+   "download": "OldTestament_Story_OurEyesAreUponThee_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 4,
+   "night": 5,
+   "date": "2026-07-24",
+   "story": "jul-26-our-eyes-are-upon-thee",
+   "ref": "2 Chronicles 20:12",
+   "storyId": "ot-b07-w4n5",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-26-our-eyes-are-upon-thee/printables/story.pdf?v=499e75837b",
+     "pages": 4,
+     "bytes": 690701
+    },
+    "christian": {
+     "url": "/lantern/jul-26-our-eyes-are-upon-thee/printables/story-christian.pdf?v=499e75837b",
+     "pages": 4,
+     "bytes": 690508
+    }
+   },
+   "thumb": "/lantern/jul-26-our-eyes-are-upon-thee/printables/story.jpg?v=499e75837b",
+   "src": "499e75837b3d661611371c389ff421ddf1d82874855bbec158983e3c92feca93",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "499e75837b3d661611371c389ff421ddf1d82874855bbec158983e3c92feca93"
   },
   {
    "id": "song-jul-26-our-eyes-are-upon-thee",
@@ -7028,6 +7127,39 @@
    "stored": "803add255ca326a4b5e5b4b59262b4487934d926e307e03cc8992ec079d0fe57"
   },
   {
+   "id": "story-jul-24-when-asa-forgot-to-trust",
+   "type": "story",
+   "title": "When Asa Forgot to Trust",
+   "nightLabel": "Week 4 · Night 3",
+   "download": "OldTestament_Story_WhenAsaForgotToTrust_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 4,
+   "night": 3,
+   "date": "2026-07-22",
+   "story": "jul-24-when-asa-forgot-to-trust",
+   "ref": "2 Chronicles 16:9",
+   "storyId": "ot-b07-w4n3",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-24-when-asa-forgot-to-trust/printables/story.pdf?v=3326f53bc8",
+     "pages": 4,
+     "bytes": 681906
+    },
+    "christian": {
+     "url": "/lantern/jul-24-when-asa-forgot-to-trust/printables/story-christian.pdf?v=3326f53bc8",
+     "pages": 4,
+     "bytes": 681729
+    }
+   },
+   "thumb": "/lantern/jul-24-when-asa-forgot-to-trust/printables/story.jpg?v=3326f53bc8",
+   "src": "3326f53bc860b607b2764203732cef23dfba991fc98a58e9a95f0888c3f6c305",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "3326f53bc860b607b2764203732cef23dfba991fc98a58e9a95f0888c3f6c305"
+  },
+  {
    "id": "song-jul-24-when-asa-forgot-to-trust",
    "type": "song",
    "title": "God’s Eyes Look Everywhere",
@@ -7115,6 +7247,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "0f12f42af1240bf4fd8e8e10f292ae750978e21d72f5c01554c30a8020b893a9"
+  },
+  {
+   "id": "story-jul-22-king-asa-calls-on-god",
+   "type": "story",
+   "title": "King Asa Calls on God",
+   "nightLabel": "Week 4 · Night 1",
+   "download": "OldTestament_Story_KingAsaCallsOnGod_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 4,
+   "night": 1,
+   "date": "2026-07-20",
+   "story": "jul-22-king-asa-calls-on-god",
+   "ref": "2 Chronicles 14:11",
+   "storyId": "ot-b07-w4n1",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-22-king-asa-calls-on-god/printables/story.pdf?v=f94d2b0612",
+     "pages": 4,
+     "bytes": 703221
+    },
+    "christian": {
+     "url": "/lantern/jul-22-king-asa-calls-on-god/printables/story-christian.pdf?v=f94d2b0612",
+     "pages": 4,
+     "bytes": 702836
+    }
+   },
+   "thumb": "/lantern/jul-22-king-asa-calls-on-god/printables/story.jpg?v=f94d2b0612",
+   "src": "f94d2b061209116e4db7f64fbce71bd038ad08dd1a3c6872bd3acd8a3d1b5702",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "f94d2b061209116e4db7f64fbce71bd038ad08dd1a3c6872bd3acd8a3d1b5702"
   },
   {
    "id": "song-jul-22-king-asa-calls-on-god",
@@ -7267,6 +7432,39 @@
    "stored": "5726647d3bc8c74e6adc3f0d76e8d0663c8ae7f3333580d193af4ea375295903"
   },
   {
+   "id": "story-jul-19-the-lost-book-is-found",
+   "type": "story",
+   "title": "The Lost Book Is Found",
+   "nightLabel": "Week 3 · Night 5",
+   "download": "OldTestament_Story_TheLostBookIsFound_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 3,
+   "night": 5,
+   "date": "2026-07-17",
+   "story": "jul-19-the-lost-book-is-found",
+   "ref": "2 Kings 22:8",
+   "storyId": "ot-b07-w3n5",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-19-the-lost-book-is-found/printables/story.pdf?v=81ebd0913e",
+     "pages": 4,
+     "bytes": 785809
+    },
+    "christian": {
+     "url": "/lantern/jul-19-the-lost-book-is-found/printables/story-christian.pdf?v=81ebd0913e",
+     "pages": 4,
+     "bytes": 785797
+    }
+   },
+   "thumb": "/lantern/jul-19-the-lost-book-is-found/printables/story.jpg?v=81ebd0913e",
+   "src": "81ebd0913eace55a7d7cb192fd5dbd4729c26634a577ed3697437ad6b1526784",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "81ebd0913eace55a7d7cb192fd5dbd4729c26634a577ed3697437ad6b1526784"
+  },
+  {
    "id": "song-jul-19-the-lost-book-is-found",
    "type": "song",
    "title": "The Treasure in the Temple",
@@ -7356,6 +7554,39 @@
    "stored": "a1deeff8a872bd6096b738bf371613f5d7381da138c843862606a76f11963009"
   },
   {
+   "id": "story-jul-17-god-gives-hezekiah-more-days",
+   "type": "story",
+   "title": "God Gives Hezekiah More Days",
+   "nightLabel": "Week 3 · Night 3",
+   "download": "OldTestament_Story_GodGivesHezekiahMoreDays_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 3,
+   "night": 3,
+   "date": "2026-07-15",
+   "story": "jul-17-god-gives-hezekiah-more-days",
+   "ref": "2 Kings 20:5",
+   "storyId": "ot-b07-w3n3",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-17-god-gives-hezekiah-more-days/printables/story.pdf?v=088a35d685",
+     "pages": 4,
+     "bytes": 664910
+    },
+    "christian": {
+     "url": "/lantern/jul-17-god-gives-hezekiah-more-days/printables/story-christian.pdf?v=088a35d685",
+     "pages": 4,
+     "bytes": 664663
+    }
+   },
+   "thumb": "/lantern/jul-17-god-gives-hezekiah-more-days/printables/story.jpg?v=088a35d685",
+   "src": "088a35d68506c8f631012e9ef57cd7b2702ec493c76f536cdfb9717d6cdb7113",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "088a35d68506c8f631012e9ef57cd7b2702ec493c76f536cdfb9717d6cdb7113"
+  },
+  {
    "id": "song-jul-17-god-gives-hezekiah-more-days",
    "type": "song",
    "title": "The Shadow That Went Backward",
@@ -7384,6 +7615,39 @@
    "stored": "e1deb6714e9093f0d01ea86bd0f24c08769aa71ba6c141c7345b57aebfa0fe6d"
   },
   {
+   "id": "story-jul-16-hezekiah-shows-god-the-letter",
+   "type": "story",
+   "title": "Hezekiah Shows God the Letter",
+   "nightLabel": "Week 3 · Night 2",
+   "download": "OldTestament_Story_HezekiahShowsGodTheLetter_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 3,
+   "night": 2,
+   "date": "2026-07-14",
+   "story": "jul-16-hezekiah-shows-god-the-letter",
+   "ref": "2 Kings 19:14",
+   "storyId": "ot-b07-w3n2",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-16-hezekiah-shows-god-the-letter/printables/story.pdf?v=34aeb35b7f",
+     "pages": 4,
+     "bytes": 742694
+    },
+    "christian": {
+     "url": "/lantern/jul-16-hezekiah-shows-god-the-letter/printables/story-christian.pdf?v=34aeb35b7f",
+     "pages": 4,
+     "bytes": 742357
+    }
+   },
+   "thumb": "/lantern/jul-16-hezekiah-shows-god-the-letter/printables/story.jpg?v=34aeb35b7f",
+   "src": "34aeb35b7f6fbfef5c875f7487604939dcced85711d351fbc8c1e9f3842aa7e8",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "34aeb35b7f6fbfef5c875f7487604939dcced85711d351fbc8c1e9f3842aa7e8"
+  },
+  {
    "id": "song-jul-16-hezekiah-shows-god-the-letter",
    "type": "song",
    "title": "The Letter Spread Before God",
@@ -7410,6 +7674,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "39f9d7848b454dc53113b8e0053767a240a92c30a2a5f6c50a7ca3d1dd3d53f0"
+  },
+  {
+   "id": "story-jul-15-good-king-hezekiah-trusts-god",
+   "type": "story",
+   "title": "Good King Hezekiah Trusts God",
+   "nightLabel": "Week 3 · Night 1",
+   "download": "OldTestament_Story_GoodKingHezekiahTrustsGod_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 3,
+   "night": 1,
+   "date": "2026-07-13",
+   "story": "jul-15-good-king-hezekiah-trusts-god",
+   "ref": "2 Kings 18:5",
+   "storyId": "ot-b07-w3n1",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-15-good-king-hezekiah-trusts-god/printables/story.pdf?v=3ce88b90c6",
+     "pages": 4,
+     "bytes": 645991
+    },
+    "christian": {
+     "url": "/lantern/jul-15-good-king-hezekiah-trusts-god/printables/story-christian.pdf?v=3ce88b90c6",
+     "pages": 4,
+     "bytes": 645798
+    }
+   },
+   "thumb": "/lantern/jul-15-good-king-hezekiah-trusts-god/printables/story.jpg?v=3ce88b90c6",
+   "src": "3ce88b90c62843c791e2a80638edd6b6a21e3b3203e4343e1e353b278f2efe75",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "3ce88b90c62843c791e2a80638edd6b6a21e3b3203e4343e1e353b278f2efe75"
   },
   {
    "id": "song-jul-15-good-king-hezekiah-trusts-god",
@@ -7501,6 +7798,39 @@
    "stored": "287b9da96f150dbf62309f3d1f708db997e671145aaa48df4003e4859dd8028f"
   },
   {
+   "id": "story-jul-13-horses-of-fire-all-around",
+   "type": "story",
+   "title": "Horses of Fire All Around",
+   "nightLabel": "Week 2 · Night 6",
+   "download": "OldTestament_Story_HorsesOfFireAllAround_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 2,
+   "night": 6,
+   "date": "2026-07-11",
+   "story": "jul-13-horses-of-fire-all-around",
+   "ref": "2 Kings 6:17",
+   "storyId": "ot-b07-w2n6",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-13-horses-of-fire-all-around/printables/story.pdf?v=bd81579307",
+     "pages": 4,
+     "bytes": 690113
+    },
+    "christian": {
+     "url": "/lantern/jul-13-horses-of-fire-all-around/printables/story-christian.pdf?v=bd81579307",
+     "pages": 4,
+     "bytes": 689853
+    }
+   },
+   "thumb": "/lantern/jul-13-horses-of-fire-all-around/printables/story.jpg?v=bd81579307",
+   "src": "bd81579307bf5242a6d34f7e3c189d3b6939f048e0f2e774b99fe2e27fb08437",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "bd81579307bf5242a6d34f7e3c189d3b6939f048e0f2e774b99fe2e27fb08437"
+  },
+  {
    "id": "song-jul-13-horses-of-fire-all-around",
    "type": "song",
    "title": "More With Us Than With Them",
@@ -7527,6 +7857,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "9cbcdf2b72f145caf530a1e90a6b0b440b7d20664a26d53f1d24ee99debd66ca"
+  },
+  {
+   "id": "story-jul-12-the-floating-axe-head",
+   "type": "story",
+   "title": "The Floating Axe Head",
+   "nightLabel": "Week 2 · Night 5",
+   "download": "OldTestament_Story_TheFloatingAxeHead_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 2,
+   "night": 5,
+   "date": "2026-07-10",
+   "story": "jul-12-the-floating-axe-head",
+   "ref": "2 Kings 6:6",
+   "storyId": "ot-b07-w2n5",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-12-the-floating-axe-head/printables/story.pdf?v=aca9562f9d",
+     "pages": 4,
+     "bytes": 690120
+    },
+    "christian": {
+     "url": "/lantern/jul-12-the-floating-axe-head/printables/story-christian.pdf?v=aca9562f9d",
+     "pages": 4,
+     "bytes": 689989
+    }
+   },
+   "thumb": "/lantern/jul-12-the-floating-axe-head/printables/story.jpg?v=aca9562f9d",
+   "src": "aca9562f9d697057fcf55417c138364b5e75de3510ca7e9eca0c2793cd1141df",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "aca9562f9d697057fcf55417c138364b5e75de3510ca7e9eca0c2793cd1141df"
   },
   {
    "id": "song-jul-12-the-floating-axe-head",
@@ -7557,6 +7920,39 @@
    "stored": "1d1a74ccdc9ed0441a2ca638320197264930d281f70831d13bbdf739bf734242"
   },
   {
+   "id": "story-jul-11-naaman-washes-seven-times",
+   "type": "story",
+   "title": "Naaman Washes Seven Times",
+   "nightLabel": "Week 2 · Night 4",
+   "download": "OldTestament_Story_NaamanWashesSevenTimes_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 2,
+   "night": 4,
+   "date": "2026-07-09",
+   "story": "jul-11-naaman-washes-seven-times",
+   "ref": "2 Kings 5:14",
+   "storyId": "ot-b07-w2n4",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-11-naaman-washes-seven-times/printables/story.pdf?v=39449dbce5",
+     "pages": 4,
+     "bytes": 674188
+    },
+    "christian": {
+     "url": "/lantern/jul-11-naaman-washes-seven-times/printables/story-christian.pdf?v=39449dbce5",
+     "pages": 4,
+     "bytes": 674125
+    }
+   },
+   "thumb": "/lantern/jul-11-naaman-washes-seven-times/printables/story.jpg?v=39449dbce5",
+   "src": "39449dbce501671199ae1722a5df0674ab48ed9e926433cb2c9a43c726b98f1f",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "39449dbce501671199ae1722a5df0674ab48ed9e926433cb2c9a43c726b98f1f"
+  },
+  {
    "id": "song-jul-11-naaman-washes-seven-times",
    "type": "song",
    "title": "Seven Dips in the River",
@@ -7583,6 +7979,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "8ed1c28d76060cd5fa0904e3fe534d2577d334f82c7ae5c0a4f2cc38b9ab1bae"
+  },
+  {
+   "id": "story-jul-10-a-special-room-for-the-prophet",
+   "type": "story",
+   "title": "A Special Room for the Prophet",
+   "nightLabel": "Week 2 · Night 3",
+   "download": "OldTestament_Story_ASpecialRoomForTheProphet_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 2,
+   "night": 3,
+   "date": "2026-07-08",
+   "story": "jul-10-a-special-room-for-the-prophet",
+   "ref": "2 Kings 4:10",
+   "storyId": "ot-b07-w2n3",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-10-a-special-room-for-the-prophet/printables/story.pdf?v=3a5ee45439",
+     "pages": 4,
+     "bytes": 726440
+    },
+    "christian": {
+     "url": "/lantern/jul-10-a-special-room-for-the-prophet/printables/story-christian.pdf?v=3a5ee45439",
+     "pages": 4,
+     "bytes": 726182
+    }
+   },
+   "thumb": "/lantern/jul-10-a-special-room-for-the-prophet/printables/story.jpg?v=3a5ee45439",
+   "src": "3a5ee454390e4f88a17ad3215e17b0fdb7a564dc05d2176163bbcbd68e8fd1e8",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "3a5ee454390e4f88a17ad3215e17b0fdb7a564dc05d2176163bbcbd68e8fd1e8"
   },
   {
    "id": "song-jul-10-a-special-room-for-the-prophet",
@@ -7613,6 +8042,39 @@
    "stored": "4122db1856d9bb924554b77c4168f22c02688661e4a4e29c047bd67dfc3e8edb"
   },
   {
+   "id": "story-jul-09-the-widows-oil",
+   "type": "story",
+   "title": "The Widow’s Oil",
+   "nightLabel": "Week 2 · Night 2",
+   "download": "OldTestament_Story_TheWidowsOil_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 2,
+   "night": 2,
+   "date": "2026-07-07",
+   "story": "jul-09-the-widows-oil",
+   "ref": "2 Kings 4:6",
+   "storyId": "ot-b07-w2n2",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-09-the-widows-oil/printables/story.pdf?v=2bb8961cd1",
+     "pages": 4,
+     "bytes": 684146
+    },
+    "christian": {
+     "url": "/lantern/jul-09-the-widows-oil/printables/story-christian.pdf?v=2bb8961cd1",
+     "pages": 4,
+     "bytes": 683904
+    }
+   },
+   "thumb": "/lantern/jul-09-the-widows-oil/printables/story.jpg?v=2bb8961cd1",
+   "src": "2bb8961cd1c9135bf93df77e97f276132fb7780d67b68be7c9ff1dfc6418a790",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "2bb8961cd1c9135bf93df77e97f276132fb7780d67b68be7c9ff1dfc6418a790"
+  },
+  {
    "id": "song-jul-09-the-widows-oil",
    "type": "song",
    "title": "Jars and Jars and Jars",
@@ -7639,6 +8101,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "9bc37e9b630c13e415b1a22175451476427742b631e4f8aaec05e1960df323e2"
+  },
+  {
+   "id": "story-jul-08-elijah-goes-up-to-heaven",
+   "type": "story",
+   "title": "Elijah Goes Up to Heaven",
+   "nightLabel": "Week 2 · Night 1",
+   "download": "OldTestament_Story_ElijahGoesUpToHeaven_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 2,
+   "night": 1,
+   "date": "2026-07-06",
+   "story": "jul-08-elijah-goes-up-to-heaven",
+   "ref": "2 Kings 2:11",
+   "storyId": "ot-b07-w2n1",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-08-elijah-goes-up-to-heaven/printables/story.pdf?v=aa0f12395e",
+     "pages": 4,
+     "bytes": 710404
+    },
+    "christian": {
+     "url": "/lantern/jul-08-elijah-goes-up-to-heaven/printables/story-christian.pdf?v=aa0f12395e",
+     "pages": 4,
+     "bytes": 710237
+    }
+   },
+   "thumb": "/lantern/jul-08-elijah-goes-up-to-heaven/printables/story.jpg?v=aa0f12395e",
+   "src": "aa0f12395e3e19b8eb90d21264ccab0a35bc163139185ec4c483f3a56dd5af0c",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "aa0f12395e3e19b8eb90d21264ccab0a35bc163139185ec4c483f3a56dd5af0c"
   },
   {
    "id": "song-jul-08-elijah-goes-up-to-heaven",
@@ -7732,6 +8227,39 @@
    "stored": "ae99e53f5e39ae58ac8ed2db0b8e5d3c0d024043b397eab271d4d87dad9e89e8"
   },
   {
+   "id": "story-jul-06-the-still-small-voice",
+   "type": "story",
+   "title": "The Still, Small Voice",
+   "nightLabel": "Week 1 · Night 6",
+   "download": "OldTestament_Story_TheStillSmallVoice_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 1,
+   "night": 6,
+   "date": "2026-07-04",
+   "story": "jul-06-the-still-small-voice",
+   "ref": "1 Kings 19:12",
+   "storyId": "ot-b07-w1n6",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-06-the-still-small-voice/printables/story.pdf?v=b5690dbbf6",
+     "pages": 4,
+     "bytes": 704301
+    },
+    "christian": {
+     "url": "/lantern/jul-06-the-still-small-voice/printables/story-christian.pdf?v=b5690dbbf6",
+     "pages": 4,
+     "bytes": 704126
+    }
+   },
+   "thumb": "/lantern/jul-06-the-still-small-voice/printables/story.jpg?v=b5690dbbf6",
+   "src": "b5690dbbf6be78176a81601c13b5acfbda61ffe10fb4253b668a1e5d85f6057d",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "b5690dbbf6be78176a81601c13b5acfbda61ffe10fb4253b668a1e5d85f6057d"
+  },
+  {
    "id": "song-jul-06-the-still-small-voice",
    "type": "song",
    "title": "After the Wind, a Whisper",
@@ -7758,6 +8286,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "e72025cd1def82be2dca5e6f907320d86bac968e7558d4f2411935ca263a502e"
+  },
+  {
+   "id": "story-jul-05-fire-from-heaven",
+   "type": "story",
+   "title": "Fire from Heaven",
+   "nightLabel": "Week 1 · Night 5",
+   "download": "OldTestament_Story_FireFromHeaven_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 1,
+   "night": 5,
+   "date": "2026-07-03",
+   "story": "jul-05-fire-from-heaven",
+   "ref": "1 Kings 18:39",
+   "storyId": "ot-b07-w1n5",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-05-fire-from-heaven/printables/story.pdf?v=ee11426460",
+     "pages": 4,
+     "bytes": 683485
+    },
+    "christian": {
+     "url": "/lantern/jul-05-fire-from-heaven/printables/story-christian.pdf?v=ee11426460",
+     "pages": 4,
+     "bytes": 683320
+    }
+   },
+   "thumb": "/lantern/jul-05-fire-from-heaven/printables/story.jpg?v=ee11426460",
+   "src": "ee1142646000eb1220a354d2af97d35a33b57b895fcb7d62da2e9f0d7ce63246",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "ee1142646000eb1220a354d2af97d35a33b57b895fcb7d62da2e9f0d7ce63246"
   },
   {
    "id": "song-jul-05-fire-from-heaven",
@@ -7788,6 +8349,39 @@
    "stored": "f9b7043afd873aa0c9e4e7d9f70c7e0b67c7cd74f99c3f2af3182e2d18b0a0f2"
   },
   {
+   "id": "story-jul-04-elijah-prays-for-the-little-boy",
+   "type": "story",
+   "title": "Elijah Prays for the Little Boy",
+   "nightLabel": "Week 1 · Night 4",
+   "download": "OldTestament_Story_ElijahPraysForTheLittleBoy_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 1,
+   "night": 4,
+   "date": "2026-07-02",
+   "story": "jul-04-elijah-prays-for-the-little-boy",
+   "ref": "1 Kings 17:22",
+   "storyId": "ot-b07-w1n4",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-04-elijah-prays-for-the-little-boy/printables/story.pdf?v=8484f432e6",
+     "pages": 4,
+     "bytes": 645485
+    },
+    "christian": {
+     "url": "/lantern/jul-04-elijah-prays-for-the-little-boy/printables/story-christian.pdf?v=8484f432e6",
+     "pages": 4,
+     "bytes": 645393
+    }
+   },
+   "thumb": "/lantern/jul-04-elijah-prays-for-the-little-boy/printables/story.jpg?v=8484f432e6",
+   "src": "8484f432e6e14b3c1cf1f9f92ef175a65b9fb33f8a0c9ca5b0927329f934276c",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "8484f432e6e14b3c1cf1f9f92ef175a65b9fb33f8a0c9ca5b0927329f934276c"
+  },
+  {
    "id": "song-jul-04-elijah-prays-for-the-little-boy",
    "type": "song",
    "title": "The Boy Who Breathed Again",
@@ -7816,6 +8410,39 @@
    "stored": "dea6076737b2233c85dd62baca3f449fca24eb20da4782c0e94f8d0d7369bc37"
   },
   {
+   "id": "story-jul-03-the-jar-that-never-ran-out",
+   "type": "story",
+   "title": "The Jar That Never Ran Out",
+   "nightLabel": "Week 1 · Night 3",
+   "download": "OldTestament_Story_TheJarThatNeverRanOut_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 1,
+   "night": 3,
+   "date": "2026-07-01",
+   "story": "jul-03-the-jar-that-never-ran-out",
+   "ref": "1 Kings 17:16",
+   "storyId": "ot-b07-w1n3",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-03-the-jar-that-never-ran-out/printables/story.pdf?v=93982c14f6",
+     "pages": 4,
+     "bytes": 642092
+    },
+    "christian": {
+     "url": "/lantern/jul-03-the-jar-that-never-ran-out/printables/story-christian.pdf?v=93982c14f6",
+     "pages": 4,
+     "bytes": 641971
+    }
+   },
+   "thumb": "/lantern/jul-03-the-jar-that-never-ran-out/printables/story.jpg?v=93982c14f6",
+   "src": "93982c14f68d7b5edefddd6018a0ad7496b32a52eb5d7e3f5d9c26086758a30c",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "93982c14f68d7b5edefddd6018a0ad7496b32a52eb5d7e3f5d9c26086758a30c"
+  },
+  {
    "id": "song-jul-03-the-jar-that-never-ran-out",
    "type": "song",
    "title": "A Little Flour, Always Enough",
@@ -7842,6 +8469,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "5797bbb31b4ae3b7b6586d37de828e22d5e76a303643b6c116fe5b2cae398c81"
+  },
+  {
+   "id": "story-jul-02-the-ravens-feed-elijah",
+   "type": "story",
+   "title": "The Ravens Feed Elijah",
+   "nightLabel": "Week 1 · Night 2",
+   "download": "OldTestament_Story_TheRavensFeedElijah_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 7,
+   "week": 1,
+   "night": 2,
+   "date": "2026-06-30",
+   "story": "jul-02-the-ravens-feed-elijah",
+   "ref": "1 Kings 17:6",
+   "storyId": "ot-b07-w1n2",
+   "files": {
+    "lds": {
+     "url": "/lantern/jul-02-the-ravens-feed-elijah/printables/story.pdf?v=d2f2850ec3",
+     "pages": 4,
+     "bytes": 695660
+    },
+    "christian": {
+     "url": "/lantern/jul-02-the-ravens-feed-elijah/printables/story-christian.pdf?v=d2f2850ec3",
+     "pages": 4,
+     "bytes": 695777
+    }
+   },
+   "thumb": "/lantern/jul-02-the-ravens-feed-elijah/printables/story.jpg?v=d2f2850ec3",
+   "src": "d2f2850ec3510d85ca14d974787b6bc8e02a02d1fd4068e34a97f7a45ccc38b1",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "d2f2850ec3510d85ca14d974787b6bc8e02a02d1fd4068e34a97f7a45ccc38b1"
   },
   {
    "id": "song-jul-02-the-ravens-feed-elijah",
@@ -7933,6 +8593,39 @@
    "stored": "a92e027fc7912093bf40151606a855d998d952359d1fb3aa487534e3c151c4e4"
   },
   {
+   "id": "story-jun-28-keep-your-heart-close-to-god",
+   "type": "story",
+   "title": "Keep Your Heart Close to God",
+   "nightLabel": "Week 4 · Night 7",
+   "download": "OldTestament_Story_KeepYourHeartCloseToGod_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 4,
+   "night": 7,
+   "date": "2026-06-28",
+   "story": "jun-28-keep-your-heart-close-to-god",
+   "ref": "1 Kings 11:4",
+   "storyId": "ot-b06-w4n7",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-28-keep-your-heart-close-to-god/printables/story.pdf?v=7e707b49fb",
+     "pages": 4,
+     "bytes": 663510
+    },
+    "christian": {
+     "url": "/lantern/jun-28-keep-your-heart-close-to-god/printables/story-christian.pdf?v=7e707b49fb",
+     "pages": 4,
+     "bytes": 663164
+    }
+   },
+   "thumb": "/lantern/jun-28-keep-your-heart-close-to-god/printables/story.jpg?v=7e707b49fb",
+   "src": "7e707b49fb596166941ab2334fb0879bd964d7fc0d59c2d401d66a5593895dae",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "7e707b49fb596166941ab2334fb0879bd964d7fc0d59c2d401d66a5593895dae"
+  },
+  {
    "id": "song-jun-28-keep-your-heart-close-to-god",
    "type": "song",
    "title": "Every Day, Your Whole Life Long",
@@ -7959,6 +8652,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "f8a28e44d24958357219366921f39670ebb91e7d14abb5a1941fc8501e24e2ad"
+  },
+  {
+   "id": "story-jun-27-solomons-prayer-at-the-temple",
+   "type": "story",
+   "title": "Solomon’s Prayer at the Temple",
+   "nightLabel": "Week 4 · Night 6",
+   "download": "OldTestament_Story_SolomonsPrayerAtTheTemple_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 4,
+   "night": 6,
+   "date": "2026-06-27",
+   "story": "jun-27-solomons-prayer-at-the-temple",
+   "ref": "1 Kings 8:30",
+   "storyId": "ot-b06-w4n6",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-27-solomons-prayer-at-the-temple/printables/story.pdf?v=26e63c1881",
+     "pages": 4,
+     "bytes": 666035
+    },
+    "christian": {
+     "url": "/lantern/jun-27-solomons-prayer-at-the-temple/printables/story-christian.pdf?v=26e63c1881",
+     "pages": 4,
+     "bytes": 665755
+    }
+   },
+   "thumb": "/lantern/jun-27-solomons-prayer-at-the-temple/printables/story.jpg?v=26e63c1881",
+   "src": "26e63c188117ef638b2912070c68392e78dbb1738a1d65fe23842c33b79fca17",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "26e63c188117ef638b2912070c68392e78dbb1738a1d65fe23842c33b79fca17"
   },
   {
    "id": "song-jun-27-solomons-prayer-at-the-temple",
@@ -7989,6 +8715,39 @@
    "stored": "dcc232088ddd85a813659da54125814f06ffd0c96619b66d5d1350aeebf1a911"
   },
   {
+   "id": "story-jun-26-building-the-temple",
+   "type": "story",
+   "title": "Building the Temple",
+   "nightLabel": "Week 4 · Night 5",
+   "download": "OldTestament_Story_BuildingTheTemple_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 4,
+   "night": 5,
+   "date": "2026-06-26",
+   "story": "jun-26-building-the-temple",
+   "ref": "1 Kings 6:7",
+   "storyId": "ot-b06-w4n5",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-26-building-the-temple/printables/story.pdf?v=3a04f7345b",
+     "pages": 4,
+     "bytes": 726913
+    },
+    "christian": {
+     "url": "/lantern/jun-26-building-the-temple/printables/story-christian.pdf?v=3a04f7345b",
+     "pages": 4,
+     "bytes": 713143
+    }
+   },
+   "thumb": "/lantern/jun-26-building-the-temple/printables/story.jpg?v=3a04f7345b",
+   "src": "3a04f7345bbeed5f30463f87e00f82e69d262f36b5b58a0cd9fe8bc167644e9e",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "3a04f7345bbeed5f30463f87e00f82e69d262f36b5b58a0cd9fe8bc167644e9e"
+  },
+  {
    "id": "song-jun-26-building-the-temple",
    "type": "song",
    "title": "Stones Laid Without a Sound",
@@ -8015,6 +8774,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "238ed9d7d2f44579dc31c35f85b93ffe12db6c7eb3fe4955df65a44ab14746e1"
+  },
+  {
+   "id": "story-jun-25-two-mothers-and-one-baby",
+   "type": "story",
+   "title": "Two Mothers and One Baby",
+   "nightLabel": "Week 4 · Night 4",
+   "download": "OldTestament_Story_TwoMothersAndOneBaby_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 4,
+   "night": 4,
+   "date": "2026-06-25",
+   "story": "jun-25-two-mothers-and-one-baby",
+   "ref": "1 Kings 3:28",
+   "storyId": "ot-b06-w4n4",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-25-two-mothers-and-one-baby/printables/story.pdf?v=e00dcce685",
+     "pages": 4,
+     "bytes": 691898
+    },
+    "christian": {
+     "url": "/lantern/jun-25-two-mothers-and-one-baby/printables/story-christian.pdf?v=e00dcce685",
+     "pages": 4,
+     "bytes": 691962
+    }
+   },
+   "thumb": "/lantern/jun-25-two-mothers-and-one-baby/printables/story.jpg?v=e00dcce685",
+   "src": "e00dcce685af38566a5ec2f06cd420cd7e57e8c145c7973800e92d7e1cbc02ed",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "e00dcce685af38566a5ec2f06cd420cd7e57e8c145c7973800e92d7e1cbc02ed"
   },
   {
    "id": "song-jun-25-two-mothers-and-one-baby",
@@ -8045,6 +8837,39 @@
    "stored": "52a7bdf04389fa0c1809028ced6e238c9dbb62195f4db28f894035a26985109c"
   },
   {
+   "id": "story-jun-24-solomon-asks-for-wisdom",
+   "type": "story",
+   "title": "Solomon Asks for Wisdom",
+   "nightLabel": "Week 4 · Night 3",
+   "download": "OldTestament_Story_SolomonAsksForWisdom_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 4,
+   "night": 3,
+   "date": "2026-06-24",
+   "story": "jun-24-solomon-asks-for-wisdom",
+   "ref": "1 Kings 3:9",
+   "storyId": "ot-b06-w4n3",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-24-solomon-asks-for-wisdom/printables/story.pdf?v=28f11f1b7c",
+     "pages": 4,
+     "bytes": 672546
+    },
+    "christian": {
+     "url": "/lantern/jun-24-solomon-asks-for-wisdom/printables/story-christian.pdf?v=28f11f1b7c",
+     "pages": 4,
+     "bytes": 685637
+    }
+   },
+   "thumb": "/lantern/jun-24-solomon-asks-for-wisdom/printables/story.jpg?v=28f11f1b7c",
+   "src": "28f11f1b7cda31259aed63b8f6436a4b8b7194fd9274e6a142192523d3e047ec",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "28f11f1b7cda31259aed63b8f6436a4b8b7194fd9274e6a142192523d3e047ec"
+  },
+  {
    "id": "song-jun-24-solomon-asks-for-wisdom",
    "type": "song",
    "title": "A Dream and One Wise Wish",
@@ -8071,6 +8896,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "6591f8007887f81d1af37c77567c5ffd269c6fdde3c5add4a8637407436ff2cb"
+  },
+  {
+   "id": "story-jun-23-david-says-sorry",
+   "type": "story",
+   "title": "David Says Sorry",
+   "nightLabel": "Week 4 · Night 2",
+   "download": "OldTestament_Story_DavidSaysSorry_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 4,
+   "night": 2,
+   "date": "2026-06-23",
+   "story": "jun-23-david-says-sorry",
+   "ref": "2 Samuel 12:13",
+   "storyId": "ot-b06-w4n2",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-23-david-says-sorry/printables/story.pdf?v=e19d433e92",
+     "pages": 4,
+     "bytes": 627561
+    },
+    "christian": {
+     "url": "/lantern/jun-23-david-says-sorry/printables/story-christian.pdf?v=e19d433e92",
+     "pages": 4,
+     "bytes": 627564
+    }
+   },
+   "thumb": "/lantern/jun-23-david-says-sorry/printables/story.jpg?v=e19d433e92",
+   "src": "e19d433e927473a5bbd9d14dd049743bb0493c241bc4e9d95581e32bf0f7b4a6",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "e19d433e927473a5bbd9d14dd049743bb0493c241bc4e9d95581e32bf0f7b4a6"
   },
   {
    "id": "song-jun-23-david-says-sorry",
@@ -8162,6 +9020,39 @@
    "stored": "bf9fe5d7f30aa3044698cf3e6561e23146dea0b216b47633e92873d9450621d5"
   },
   {
+   "id": "story-jun-21-david-dances-before-the-lord",
+   "type": "story",
+   "title": "David Dances Before the Lord",
+   "nightLabel": "Week 3 · Night 7",
+   "download": "OldTestament_Story_DavidDancesBeforeTheLord_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 3,
+   "night": 7,
+   "date": "2026-06-21",
+   "story": "jun-21-david-dances-before-the-lord",
+   "ref": "2 Samuel 6:14",
+   "storyId": "ot-b06-w3n7",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-21-david-dances-before-the-lord/printables/story.pdf?v=cbad089e43",
+     "pages": 4,
+     "bytes": 710005
+    },
+    "christian": {
+     "url": "/lantern/jun-21-david-dances-before-the-lord/printables/story-christian.pdf?v=cbad089e43",
+     "pages": 4,
+     "bytes": 709672
+    }
+   },
+   "thumb": "/lantern/jun-21-david-dances-before-the-lord/printables/story.jpg?v=cbad089e43",
+   "src": "cbad089e43f7903dd76613b8e8f10193c06849a796a28d5a9e4ea0e8e40f6238",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "cbad089e43f7903dd76613b8e8f10193c06849a796a28d5a9e4ea0e8e40f6238"
+  },
+  {
    "id": "song-jun-21-david-dances-before-the-lord",
    "type": "song",
    "title": "Dancing With All His Might",
@@ -8251,6 +9142,39 @@
    "stored": "edd647b3ce91b84873893d15ff1da6726c0cf574259f4084ff4e73488a409c0c"
   },
   {
+   "id": "story-jun-19-wise-abigail-stops-trouble",
+   "type": "story",
+   "title": "Wise Abigail Stops Trouble",
+   "nightLabel": "Week 3 · Night 5",
+   "download": "OldTestament_Story_WiseAbigailStopsTrouble_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 3,
+   "night": 5,
+   "date": "2026-06-19",
+   "story": "jun-19-wise-abigail-stops-trouble",
+   "ref": "1 Samuel 25:33",
+   "storyId": "ot-b06-w3n5",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-19-wise-abigail-stops-trouble/printables/story.pdf?v=c8b7bae9aa",
+     "pages": 4,
+     "bytes": 668520
+    },
+    "christian": {
+     "url": "/lantern/jun-19-wise-abigail-stops-trouble/printables/story-christian.pdf?v=c8b7bae9aa",
+     "pages": 4,
+     "bytes": 668591
+    }
+   },
+   "thumb": "/lantern/jun-19-wise-abigail-stops-trouble/printables/story.jpg?v=c8b7bae9aa",
+   "src": "c8b7bae9aa0a6dd37be760dab0c5420810dce5eb29deedaf71f3fd2bee98c37e",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "c8b7bae9aa0a6dd37be760dab0c5420810dce5eb29deedaf71f3fd2bee98c37e"
+  },
+  {
    "id": "song-jun-19-wise-abigail-stops-trouble",
    "type": "song",
    "title": "Abigail Rides Out with Bread",
@@ -8277,6 +9201,40 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "566d3355f8dd2564a35e3395a6dcf7fc30fbc53cf67e97dd8aeea46b5ff8cebe"
+  },
+  {
+   "id": "story-jun-18-david-forgives-saul-in-the-cave",
+   "type": "story",
+   "title": "David Forgives Saul in the Cave",
+   "nightLabel": "Week 3 · Night 4",
+   "download": "OldTestament_Story_DavidForgivesSaulInTheCave_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 3,
+   "night": 4,
+   "date": "2026-06-18",
+   "story": "jun-18-david-forgives-saul-in-the-cave",
+   "ref": "1 Samuel 24:12",
+   "storyId": "ot-b06-w3n4",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-18-david-forgives-saul-in-the-cave/printables/story.pdf?v=ba6306e903",
+     "pages": 4,
+     "bytes": 663490
+    },
+    "christian": {
+     "url": "/lantern/jun-18-david-forgives-saul-in-the-cave/printables/story-christian.pdf?v=ba6306e903",
+     "pages": 4,
+     "bytes": 663492
+    }
+   },
+   "thumb": "/lantern/jun-18-david-forgives-saul-in-the-cave/printables/story.jpg?v=ba6306e903",
+   "src": "ba6306e90381bb7e7ca6fb53ebcfb23804a7301dd00f4fe3e239cb6d82ef4787",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "free": true,
+   "stored": "ba6306e90381bb7e7ca6fb53ebcfb23804a7301dd00f4fe3e239cb6d82ef4787"
   },
   {
    "id": "song-jun-18-david-forgives-saul-in-the-cave",
@@ -8369,6 +9327,39 @@
    "stored": "d438dee8ad8b24b4adf6882aafa1c55e4ec6d2130a38b5d67de6eff2b197d8fe"
   },
   {
+   "id": "story-jun-16-david-and-jonathan-are-best-friends",
+   "type": "story",
+   "title": "David and Jonathan Are Best Friends",
+   "nightLabel": "Week 3 · Night 2",
+   "download": "OldTestament_Story_DavidAndJonathanAreBestFriends_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 3,
+   "night": 2,
+   "date": "2026-06-16",
+   "story": "jun-16-david-and-jonathan-are-best-friends",
+   "ref": "1 Samuel 18:3",
+   "storyId": "ot-b06-w3n2",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-16-david-and-jonathan-are-best-friends/printables/story.pdf?v=5cfaab1119",
+     "pages": 4,
+     "bytes": 648321
+    },
+    "christian": {
+     "url": "/lantern/jun-16-david-and-jonathan-are-best-friends/printables/story-christian.pdf?v=5cfaab1119",
+     "pages": 4,
+     "bytes": 648240
+    }
+   },
+   "thumb": "/lantern/jun-16-david-and-jonathan-are-best-friends/printables/story.jpg?v=5cfaab1119",
+   "src": "5cfaab1119f855ebedb99fd776bd163caf059e6c726e7f0360358dc9397ccaf8",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "5cfaab1119f855ebedb99fd776bd163caf059e6c726e7f0360358dc9397ccaf8"
+  },
+  {
    "id": "song-jun-16-david-and-jonathan-are-best-friends",
    "type": "song",
    "title": "A Prince Gives Away His Robe",
@@ -8395,6 +9386,40 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "8b29315327110b147373d8536f1c010d48ec2f1371f99fa1a30fc3248c6488bd"
+  },
+  {
+   "id": "story-jun-15-david-and-goliath",
+   "type": "story",
+   "title": "David and Goliath",
+   "nightLabel": "Week 3 · Night 1",
+   "download": "OldTestament_Story_DavidAndGoliath_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 3,
+   "night": 1,
+   "date": "2026-06-15",
+   "story": "jun-15-david-and-goliath",
+   "ref": "1 Samuel 17:45",
+   "storyId": "ot-b06-w3n1",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-15-david-and-goliath/printables/story.pdf?v=15bf721793",
+     "pages": 4,
+     "bytes": 618247
+    },
+    "christian": {
+     "url": "/lantern/jun-15-david-and-goliath/printables/story-christian.pdf?v=15bf721793",
+     "pages": 4,
+     "bytes": 618048
+    }
+   },
+   "thumb": "/lantern/jun-15-david-and-goliath/printables/story.jpg?v=15bf721793",
+   "src": "15bf7217936c41a9e4baa5e99c9e4acde78a36967a47bb2ef9844d047baddfab",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "free": true,
+   "stored": "15bf7217936c41a9e4baa5e99c9e4acde78a36967a47bb2ef9844d047baddfab"
   },
   {
    "id": "song-jun-15-david-and-goliath",
@@ -8426,6 +9451,39 @@
    "stored": "c80559c0ac2782d192c69cbf92c711242eefd1a17d6b1e648adcf66b3a830382"
   },
   {
+   "id": "story-jun-14-david-plays-music-for-saul",
+   "type": "story",
+   "title": "David Plays Music for Saul",
+   "nightLabel": "Week 2 · Night 7",
+   "download": "OldTestament_Story_DavidPlaysMusicForSaul_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 2,
+   "night": 7,
+   "date": "2026-06-14",
+   "story": "jun-14-david-plays-music-for-saul",
+   "ref": "1 Samuel 16:23",
+   "storyId": "ot-b06-w2n7",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-14-david-plays-music-for-saul/printables/story.pdf?v=4a8a7a2295",
+     "pages": 4,
+     "bytes": 642047
+    },
+    "christian": {
+     "url": "/lantern/jun-14-david-plays-music-for-saul/printables/story-christian.pdf?v=4a8a7a2295",
+     "pages": 4,
+     "bytes": 641987
+    }
+   },
+   "thumb": "/lantern/jun-14-david-plays-music-for-saul/printables/story.jpg?v=4a8a7a2295",
+   "src": "4a8a7a22953d98cc50baa99a69db11281b19c84e51908c015ca0a545ae2645f8",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "4a8a7a22953d98cc50baa99a69db11281b19c84e51908c015ca0a545ae2645f8"
+  },
+  {
    "id": "song-jun-14-david-plays-music-for-saul",
    "type": "song",
    "title": "A Harp Song for the King",
@@ -8452,6 +9510,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "81dce10e81cdcac985b6c286d05e8cd7487b4602b2209253c483efc3e2caf524"
+  },
+  {
+   "id": "story-jun-13-god-chooses-david",
+   "type": "story",
+   "title": "God Chooses David",
+   "nightLabel": "Week 2 · Night 6",
+   "download": "OldTestament_Story_GodChoosesDavid_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 2,
+   "night": 6,
+   "date": "2026-06-13",
+   "story": "jun-13-god-chooses-david",
+   "ref": "1 Samuel 16:7",
+   "storyId": "ot-b06-w2n6",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-13-god-chooses-david/printables/story.pdf?v=8498549565",
+     "pages": 4,
+     "bytes": 625968
+    },
+    "christian": {
+     "url": "/lantern/jun-13-god-chooses-david/printables/story-christian.pdf?v=8498549565",
+     "pages": 4,
+     "bytes": 625780
+    }
+   },
+   "thumb": "/lantern/jun-13-god-chooses-david/printables/story.jpg?v=8498549565",
+   "src": "8498549565e62d31339a1b352b04ffb53ecf58d7af37b844ba10073f2dcde2c7",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "8498549565e62d31339a1b352b04ffb53ecf58d7af37b844ba10073f2dcde2c7"
   },
   {
    "id": "song-jun-13-god-chooses-david",
@@ -8482,6 +9573,39 @@
    "stored": "2b771208118bf7bd9aebfbc59ad40427e66536f141d98b90d4e8cbc0d0818ff0"
   },
   {
+   "id": "story-jun-12-obey-is-better-than-sacrifice",
+   "type": "story",
+   "title": "Obey is Better Than Sacrifice",
+   "nightLabel": "Week 2 · Night 5",
+   "download": "OldTestament_Story_ObeyIsBetterThanSacrifice_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 2,
+   "night": 5,
+   "date": "2026-06-12",
+   "story": "jun-12-obey-is-better-than-sacrifice",
+   "ref": "1 Samuel 15:22",
+   "storyId": "ot-b06-w2n5",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-12-obey-is-better-than-sacrifice/printables/story.pdf?v=8d21ccfed5",
+     "pages": 4,
+     "bytes": 676471
+    },
+    "christian": {
+     "url": "/lantern/jun-12-obey-is-better-than-sacrifice/printables/story-christian.pdf?v=8d21ccfed5",
+     "pages": 4,
+     "bytes": 662544
+    }
+   },
+   "thumb": "/lantern/jun-12-obey-is-better-than-sacrifice/printables/story.jpg?v=8d21ccfed5",
+   "src": "8d21ccfed5ac55e1f7ba820d1a5fe27bdf49a4c8d5ea9db56bea30dde97d53db",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "8d21ccfed5ac55e1f7ba820d1a5fe27bdf49a4c8d5ea9db56bea30dde97d53db"
+  },
+  {
    "id": "song-jun-12-obey-is-better-than-sacrifice",
    "type": "song",
    "title": "Obey All the Way",
@@ -8508,6 +9632,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "61dda01b26e0f3e1dc3763b19e4e0d76586cc028edda78ff50f21e09ad484e49"
+  },
+  {
+   "id": "story-jun-11-saul-doesnt-wait",
+   "type": "story",
+   "title": "Saul Doesn’t Wait",
+   "nightLabel": "Week 2 · Night 4",
+   "download": "OldTestament_Story_SaulDoesntWait_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 2,
+   "night": 4,
+   "date": "2026-06-11",
+   "story": "jun-11-saul-doesnt-wait",
+   "ref": "1 Samuel 13:8",
+   "storyId": "ot-b06-w2n4",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-11-saul-doesnt-wait/printables/story.pdf?v=e03c76065b",
+     "pages": 4,
+     "bytes": 621435
+    },
+    "christian": {
+     "url": "/lantern/jun-11-saul-doesnt-wait/printables/story-christian.pdf?v=e03c76065b",
+     "pages": 4,
+     "bytes": 621425
+    }
+   },
+   "thumb": "/lantern/jun-11-saul-doesnt-wait/printables/story.jpg?v=e03c76065b",
+   "src": "e03c76065b5357d68002c38359a2b86a5daab4ae8dc8deac4e7406b063887473",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "e03c76065b5357d68002c38359a2b86a5daab4ae8dc8deac4e7406b063887473"
   },
   {
    "id": "song-jun-11-saul-doesnt-wait",
@@ -8538,6 +9695,39 @@
    "stored": "91e0f53ade05996f54c285504a856e73ea2394c7fdf0e87a0ac7d1be1c8954e3"
   },
   {
+   "id": "story-jun-10-saul-is-anointed-king",
+   "type": "story",
+   "title": "Saul is Anointed King",
+   "nightLabel": "Week 2 · Night 3",
+   "download": "OldTestament_Story_SaulIsAnointedKing_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 2,
+   "night": 3,
+   "date": "2026-06-10",
+   "story": "jun-10-saul-is-anointed-king",
+   "ref": "1 Samuel 10:9",
+   "storyId": "ot-b06-w2n3",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-10-saul-is-anointed-king/printables/story.pdf?v=30cab9aba3",
+     "pages": 4,
+     "bytes": 697914
+    },
+    "christian": {
+     "url": "/lantern/jun-10-saul-is-anointed-king/printables/story-christian.pdf?v=30cab9aba3",
+     "pages": 4,
+     "bytes": 711405
+    }
+   },
+   "thumb": "/lantern/jun-10-saul-is-anointed-king/printables/story.jpg?v=30cab9aba3",
+   "src": "30cab9aba3304d0c666d7a4c9ddce5042965b547c6c279cd703a0afa6f5023a1",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "30cab9aba3304d0c666d7a4c9ddce5042965b547c6c279cd703a0afa6f5023a1"
+  },
+  {
    "id": "song-jun-10-saul-is-anointed-king",
    "type": "song",
    "title": "Hiding Among the Baggage",
@@ -8566,6 +9756,39 @@
    "stored": "18d625678c518d98fdc9b6e4280ff81a4641755bb869092651415ccbcf9d7fb8"
   },
   {
+   "id": "story-jun-09-saul-looks-for-donkeys",
+   "type": "story",
+   "title": "Saul Looks for Donkeys",
+   "nightLabel": "Week 2 · Night 2",
+   "download": "OldTestament_Story_SaulLooksForDonkeys_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 2,
+   "night": 2,
+   "date": "2026-06-09",
+   "story": "jun-09-saul-looks-for-donkeys",
+   "ref": "1 Samuel 9:17",
+   "storyId": "ot-b06-w2n2",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-09-saul-looks-for-donkeys/printables/story.pdf?v=f21838a3cf",
+     "pages": 4,
+     "bytes": 694175
+    },
+    "christian": {
+     "url": "/lantern/jun-09-saul-looks-for-donkeys/printables/story-christian.pdf?v=f21838a3cf",
+     "pages": 4,
+     "bytes": 694019
+    }
+   },
+   "thumb": "/lantern/jun-09-saul-looks-for-donkeys/printables/story.jpg?v=f21838a3cf",
+   "src": "f21838a3cf03de604fd1f5642fc79bcfd86178de05e7ae0e0141a31507da67b1",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "f21838a3cf03de604fd1f5642fc79bcfd86178de05e7ae0e0141a31507da67b1"
+  },
+  {
    "id": "song-jun-09-saul-looks-for-donkeys",
    "type": "song",
    "title": "Lost Donkeys and God's Plan",
@@ -8592,6 +9815,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "046836e6eeede07267dcefc557218ad7f887e723b9316cf7c36a665fbb60a911"
+  },
+  {
+   "id": "story-jun-08-israel-wants-a-king",
+   "type": "story",
+   "title": "Israel Wants a King",
+   "nightLabel": "Week 2 · Night 1",
+   "download": "OldTestament_Story_IsraelWantsAKing_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 2,
+   "night": 1,
+   "date": "2026-06-08",
+   "story": "jun-08-israel-wants-a-king",
+   "ref": "1 Samuel 8:7",
+   "storyId": "ot-b06-w2n1",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-08-israel-wants-a-king/printables/story.pdf?v=808570343e",
+     "pages": 4,
+     "bytes": 699347
+    },
+    "christian": {
+     "url": "/lantern/jun-08-israel-wants-a-king/printables/story-christian.pdf?v=808570343e",
+     "pages": 4,
+     "bytes": 699316
+    }
+   },
+   "thumb": "/lantern/jun-08-israel-wants-a-king/printables/story.jpg?v=808570343e",
+   "src": "808570343e80fe7e0d447476daeffbf010e1038a689dca3acf2c975761e68990",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "808570343e80fe7e0d447476daeffbf010e1038a689dca3acf2c975761e68990"
   },
   {
    "id": "song-jun-08-israel-wants-a-king",
@@ -8683,6 +9939,39 @@
    "stored": "9c75626adb11dea9458f9cb0731fd1d750d2201ac18a83a193427251d4821ba2"
   },
   {
+   "id": "story-jun-06-the-lord-calls-samuel",
+   "type": "story",
+   "title": "The Lord Calls Samuel",
+   "nightLabel": "Week 1 · Night 6",
+   "download": "OldTestament_Story_TheLordCallsSamuel_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 1,
+   "night": 6,
+   "date": "2026-06-06",
+   "story": "jun-06-the-lord-calls-samuel",
+   "ref": "1 Samuel 3:10",
+   "storyId": "ot-b06-w1n6",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-06-the-lord-calls-samuel/printables/story.pdf?v=cfbbf97540",
+     "pages": 4,
+     "bytes": 610173
+    },
+    "christian": {
+     "url": "/lantern/jun-06-the-lord-calls-samuel/printables/story-christian.pdf?v=cfbbf97540",
+     "pages": 4,
+     "bytes": 623627
+    }
+   },
+   "thumb": "/lantern/jun-06-the-lord-calls-samuel/printables/story.jpg?v=cfbbf97540",
+   "src": "cfbbf9754015e311e9c7e966eb5d62bf46ea279759bc1a94c562274c56783fec",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "cfbbf9754015e311e9c7e966eb5d62bf46ea279759bc1a94c562274c56783fec"
+  },
+  {
    "id": "song-jun-06-the-lord-calls-samuel",
    "type": "song",
    "title": "Speak, Lord, I Am Listening",
@@ -8709,6 +9998,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "03b3023f331ed15a162b13d17eb7c49b5bdf77708eca0d9db2491d009a741228"
+  },
+  {
+   "id": "story-jun-05-samuel-goes-to-the-temple",
+   "type": "story",
+   "title": "Samuel Goes to the Temple",
+   "nightLabel": "Week 1 · Night 5",
+   "download": "OldTestament_Story_SamuelGoesToTheTemple_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 1,
+   "night": 5,
+   "date": "2026-06-05",
+   "story": "jun-05-samuel-goes-to-the-temple",
+   "ref": "1 Samuel 2:26",
+   "storyId": "ot-b06-w1n5",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-05-samuel-goes-to-the-temple/printables/story.pdf?v=7bd9da32f6",
+     "pages": 4,
+     "bytes": 620091
+    },
+    "christian": {
+     "url": "/lantern/jun-05-samuel-goes-to-the-temple/printables/story-christian.pdf?v=7bd9da32f6",
+     "pages": 4,
+     "bytes": 619965
+    }
+   },
+   "thumb": "/lantern/jun-05-samuel-goes-to-the-temple/printables/story.jpg?v=7bd9da32f6",
+   "src": "7bd9da32f6906441bdb5ebac6e85de14e5aefa15590513d25574eed3d645abd9",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "7bd9da32f6906441bdb5ebac6e85de14e5aefa15590513d25574eed3d645abd9"
   },
   {
    "id": "song-jun-05-samuel-goes-to-the-temple",
@@ -8739,6 +10061,39 @@
    "stored": "163b7ac923042be47c56151f6492551bc63a8c852368a68f4bd267d56584e40a"
   },
   {
+   "id": "story-jun-04-hannah-prays-for-a-baby",
+   "type": "story",
+   "title": "Hannah Prays for a Baby",
+   "nightLabel": "Week 1 · Night 4",
+   "download": "OldTestament_Story_HannahPraysForABaby_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 1,
+   "night": 4,
+   "date": "2026-06-04",
+   "story": "jun-04-hannah-prays-for-a-baby",
+   "ref": "1 Samuel 1:27",
+   "storyId": "ot-b06-w1n4",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-04-hannah-prays-for-a-baby/printables/story.pdf?v=7a11607d0d",
+     "pages": 4,
+     "bytes": 609158
+    },
+    "christian": {
+     "url": "/lantern/jun-04-hannah-prays-for-a-baby/printables/story-christian.pdf?v=7a11607d0d",
+     "pages": 4,
+     "bytes": 608969
+    }
+   },
+   "thumb": "/lantern/jun-04-hannah-prays-for-a-baby/printables/story.jpg?v=7a11607d0d",
+   "src": "7a11607d0d4ee1f6dece9d16c4dee0deafb2f908374a2e186d6210f510fa5e21",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "7a11607d0d4ee1f6dece9d16c4dee0deafb2f908374a2e186d6210f510fa5e21"
+  },
+  {
    "id": "song-jun-04-hannah-prays-for-a-baby",
    "type": "song",
    "title": "A Prayer with All Her Heart",
@@ -8765,6 +10120,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "48ba6b8dcbb9192a0e35fd34e7a25683c603ac9117b42dd1e7a8f0b80dc92425"
+  },
+  {
+   "id": "story-jun-03-boaz-marries-ruth",
+   "type": "story",
+   "title": "Boaz Marries Ruth",
+   "nightLabel": "Week 1 · Night 3",
+   "download": "OldTestament_Story_BoazMarriesRuth_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 1,
+   "night": 3,
+   "date": "2026-06-03",
+   "story": "jun-03-boaz-marries-ruth",
+   "ref": "Ruth 4:14",
+   "storyId": "ot-b06-w1n3",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-03-boaz-marries-ruth/printables/story.pdf?v=205c78a828",
+     "pages": 4,
+     "bytes": 613863
+    },
+    "christian": {
+     "url": "/lantern/jun-03-boaz-marries-ruth/printables/story-christian.pdf?v=205c78a828",
+     "pages": 4,
+     "bytes": 627493
+    }
+   },
+   "thumb": "/lantern/jun-03-boaz-marries-ruth/printables/story.jpg?v=205c78a828",
+   "src": "205c78a828df15b8c818c822cc29864b60e8ae252e47dfe7f1676f1029cae659",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "205c78a828df15b8c818c822cc29864b60e8ae252e47dfe7f1676f1029cae659"
   },
   {
    "id": "song-jun-03-boaz-marries-ruth",
@@ -8795,6 +10183,39 @@
    "stored": "ca24347f6e3329a9598bc0135da75dc5c304236ce77194bdb271bff23f63dd14"
   },
   {
+   "id": "story-jun-02-ruth-works-in-the-field",
+   "type": "story",
+   "title": "Ruth Works in the Field",
+   "nightLabel": "Week 1 · Night 2",
+   "download": "OldTestament_Story_RuthWorksInTheField_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 1,
+   "night": 2,
+   "date": "2026-06-02",
+   "story": "jun-02-ruth-works-in-the-field",
+   "ref": "Ruth 2:12",
+   "storyId": "ot-b06-w1n2",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-02-ruth-works-in-the-field/printables/story.pdf?v=d840cf6b41",
+     "pages": 4,
+     "bytes": 648489
+    },
+    "christian": {
+     "url": "/lantern/jun-02-ruth-works-in-the-field/printables/story-christian.pdf?v=d840cf6b41",
+     "pages": 4,
+     "bytes": 648543
+    }
+   },
+   "thumb": "/lantern/jun-02-ruth-works-in-the-field/printables/story.jpg?v=d840cf6b41",
+   "src": "d840cf6b416a2d9b6c66c27e502672a4a844a34ba26cc5a6a5d528374ba3cc5f",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "d840cf6b416a2d9b6c66c27e502672a4a844a34ba26cc5a6a5d528374ba3cc5f"
+  },
+  {
    "id": "song-jun-02-ruth-works-in-the-field",
    "type": "song",
    "title": "Extra Grain for Ruth",
@@ -8821,6 +10242,39 @@
    "updated": "2026-11-19",
    "created": "2026-11-19",
    "stored": "87bd0bcc90ec3c9f93fa2131001e37a03e3e555a8494f834e85e4fcac55938ca"
+  },
+  {
+   "id": "story-jun-01-ruth-stays-with-naomi",
+   "type": "story",
+   "title": "Ruth Stays with Naomi",
+   "nightLabel": "Week 1 · Night 1",
+   "download": "OldTestament_Story_RuthStaysWithNaomi_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 6,
+   "week": 1,
+   "night": 1,
+   "date": "2026-06-01",
+   "story": "jun-01-ruth-stays-with-naomi",
+   "ref": "Ruth 1:16",
+   "storyId": "ot-b06-w1n1",
+   "files": {
+    "lds": {
+     "url": "/lantern/jun-01-ruth-stays-with-naomi/printables/story.pdf?v=8e17aaecad",
+     "pages": 4,
+     "bytes": 572041
+    },
+    "christian": {
+     "url": "/lantern/jun-01-ruth-stays-with-naomi/printables/story-christian.pdf?v=8e17aaecad",
+     "pages": 4,
+     "bytes": 571921
+    }
+   },
+   "thumb": "/lantern/jun-01-ruth-stays-with-naomi/printables/story.jpg?v=8e17aaecad",
+   "src": "8e17aaecade1364fb59d96a0e1e636de2d95a7bd22211239bdc7c2e88cbe0228",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "8e17aaecade1364fb59d96a0e1e636de2d95a7bd22211239bdc7c2e88cbe0228"
   },
   {
    "id": "song-jun-01-ruth-stays-with-naomi",
@@ -8893,226 +10347,5 @@
    "stored": "59b34810b789fabefaddbc3147fcdef4e42efc457acd4ff9c9660292d0510d57"
   }
  ],
- "warnings": [
-  {
-   "story": "jun-01-ruth-stays-with-naomi",
-   "date": "2026-06-01",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-02-ruth-works-in-the-field",
-   "date": "2026-06-02",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-03-boaz-marries-ruth",
-   "date": "2026-06-03",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-04-hannah-prays-for-a-baby",
-   "date": "2026-06-04",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-05-samuel-goes-to-the-temple",
-   "date": "2026-06-05",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-06-the-lord-calls-samuel",
-   "date": "2026-06-06",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-08-israel-wants-a-king",
-   "date": "2026-06-08",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-09-saul-looks-for-donkeys",
-   "date": "2026-06-09",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-10-saul-is-anointed-king",
-   "date": "2026-06-10",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-11-saul-doesnt-wait",
-   "date": "2026-06-11",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-12-obey-is-better-than-sacrifice",
-   "date": "2026-06-12",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-13-god-chooses-david",
-   "date": "2026-06-13",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-14-david-plays-music-for-saul",
-   "date": "2026-06-14",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-15-david-and-goliath",
-   "date": "2026-06-15",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-16-david-and-jonathan-are-best-friends",
-   "date": "2026-06-16",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-18-david-forgives-saul-in-the-cave",
-   "date": "2026-06-18",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-19-wise-abigail-stops-trouble",
-   "date": "2026-06-19",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-21-david-dances-before-the-lord",
-   "date": "2026-06-21",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-23-david-says-sorry",
-   "date": "2026-06-23",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-24-solomon-asks-for-wisdom",
-   "date": "2026-06-24",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-25-two-mothers-and-one-baby",
-   "date": "2026-06-25",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-26-building-the-temple",
-   "date": "2026-06-26",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-27-solomons-prayer-at-the-temple",
-   "date": "2026-06-27",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jun-28-keep-your-heart-close-to-god",
-   "date": "2026-06-28",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-02-the-ravens-feed-elijah",
-   "date": "2026-06-30",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-03-the-jar-that-never-ran-out",
-   "date": "2026-07-01",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-04-elijah-prays-for-the-little-boy",
-   "date": "2026-07-02",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-05-fire-from-heaven",
-   "date": "2026-07-03",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-06-the-still-small-voice",
-   "date": "2026-07-04",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-08-elijah-goes-up-to-heaven",
-   "date": "2026-07-06",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-09-the-widows-oil",
-   "date": "2026-07-07",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-10-a-special-room-for-the-prophet",
-   "date": "2026-07-08",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-11-naaman-washes-seven-times",
-   "date": "2026-07-09",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-12-the-floating-axe-head",
-   "date": "2026-07-10",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-13-horses-of-fire-all-around",
-   "date": "2026-07-11",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-15-good-king-hezekiah-trusts-god",
-   "date": "2026-07-13",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-16-hezekiah-shows-god-the-letter",
-   "date": "2026-07-14",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-17-god-gives-hezekiah-more-days",
-   "date": "2026-07-15",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-19-the-lost-book-is-found",
-   "date": "2026-07-17",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-22-king-asa-calls-on-god",
-   "date": "2026-07-20",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-24-when-asa-forgot-to-trust",
-   "date": "2026-07-22",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-26-our-eyes-are-upon-thee",
-   "date": "2026-07-24",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-27-the-king-who-forgot-to-stay-humble",
-   "date": "2026-07-25",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  },
-  {
-   "story": "jul-28-come-celebrate-with-god",
-   "date": "2026-07-26",
-   "why": "its Five Stones are missing, so its Story printable was not made"
-  }
- ]
+ "warnings": []
 }
