@@ -95,6 +95,30 @@
   },
   "redirects": [
     {
+      "source": "/lantern/:slug/printables/:file(story|story-christian)\\.pdf",
+      "missing": [
+        {
+          "type": "header",
+          "key": "origin",
+          "value": "^(capacitor|ionic)://localhost$|^https?://localhost$"
+        }
+      ],
+      "destination": "/printables.html?open=story-:slug",
+      "permanent": false
+    },
+    {
+      "source": "/lantern/:slug/printables/song.pdf",
+      "missing": [
+        {
+          "type": "header",
+          "key": "origin",
+          "value": "^(capacitor|ionic)://localhost$|^https?://localhost$"
+        }
+      ],
+      "destination": "/printables.html?open=song-:slug",
+      "permanent": false
+    },
+    {
       "source": "/store",
       "destination": "https://app.littlescripturetravelers.com/store/",
       "permanent": false
