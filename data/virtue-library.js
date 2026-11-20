@@ -98,7 +98,7 @@ window.LST_LIBRARY = {
   "updated": "October 2026",
   "plannedTotal": 1440,
   "storyCount": 728,
-  "note": "Old Testament, ages 1-5. Stages beyond preschool are planned, not yet written.",
+  "note": "Old Testament, ages 3-8. Stages beyond preschool are planned, not yet written.",
   "gated": true,
   "freeStoryIds": [
    "b6-w3-n1",

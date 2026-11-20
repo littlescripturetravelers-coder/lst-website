@@ -7,6 +7,11 @@
 # for Parents), refreshes sitemap.xml and llms.txt, and re-checks every page's
 # search tags. If nothing changed, it commits nothing.
 #
+# Then it tells Bing (and the other IndexNow search engines) which pages exist, so new
+# pages show up fast in Bing, ChatGPT search and Microsoft Copilot, which read Bing.
+# The IndexNow key file (e0eb3f41924ec03c3a48d178dc735e8f.txt at the site root) is public on purpose; it only
+# proves the site is ours.
+#
 # It needs no password or API key. GITHUB_TOKEN is provided by GitHub.
 
 name: SEO refresh
@@ -52,3 +57,24 @@ jobs:
             sleep 10
           done
           exit 1
+
+  indexnow:
+    needs: refresh
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main, fetch-depth: 1 }
+      - name: Tell Bing and IndexNow every page
+        run: |
+          python3 - <<'PY'
+          import json, re, urllib.request
+          urls = re.findall(r"<loc>(.*?)</loc>", open("sitemap.xml").read())
+          body = json.dumps({"host": "www.littlescripturetravelers.com", "key": "e0eb3f41924ec03c3a48d178dc735e8f",
+                             "keyLocation": "https://www.littlescripturetravelers.com/e0eb3f41924ec03c3a48d178dc735e8f.txt", "urlList": urls}).encode()
+          req = urllib.request.Request("https://api.indexnow.org/indexnow", body, {"Content-Type": "application/json; charset=utf-8"})
+          try:
+              print(len(urls), "pages sent:", urllib.request.urlopen(req, timeout=30).status)
+          except Exception as e:
+              print("IndexNow did not answer (tries again tomorrow):", e)
+          PY
