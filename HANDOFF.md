@@ -2077,3 +2077,37 @@ whole on one page (short nightly songs come out in two columns; the Lantern Lull
 centres a short song in the frame. A bare [Chorus] repeats the first chorus's words. In songs only
 `<i>` markup is italic — quoted speech is not. The Lantern sync Action runs make.js, so new nights get
 this look on their own. (Song-leader sheets and Primary songs are PDFs Levi adds; they are not drawn here.)
+
+## 42. The printables are locked, and every family's copy carries their name (19 Nov 2026)
+> "if they choose to continue looking even after the payment thing comes up they can click off of it and
+> then open up the different songs and stories and save and print" ... "I want them to be able download and
+> keep a pdf in a folder if they have payed for it but I don't want them to be able to share that pdf" ...
+> "the free samples they can print" ... "the people with the 7 day free trial ... do all those things as well
+> but once the 7 day trial is up and if they don't pay they are locked out."
+
+**How it works now**
+- The master PDFs live in the PRIVATE Supabase bucket `printables-locked` (lst-app migration 0049). `make.js`
+  uploads every new or changed one (`storeMasters`, needs SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY — the
+  lantern-sync "Make the printables" step has both) and marks it `stored` in data/printables.json.
+- The app's edge function `printable` (lst-app supabase/functions/printable, verify_jwt off on purpose — it
+  checks the caller itself) hands out one copy: a `free: true` printable to anyone; any other only to a
+  signed-in person `lst_is_subscriber()` lets in (paid, the free week, gift code, household, owner — the same
+  rule as the stories; a trial gets 2 days' grace after it ends so a payment still on its way never locks a
+  family out). Their copy has "Printed for <first name> (<email>) - For your family's use only - Please do
+  not share" on every page and their user id in the PDF's keywords. The unstamped master never leaves the server.
+- FREE (`FREE_NIGHTS` in make.js + both Lantern Lullabies): Children Are a Gift (the sample night), Micaiah
+  Tells the Truth, the songs of David and Goliath and David Forgives Saul. They sit at the top of Printables
+  under "Free to print, no account needed" with a FREE badge (lst-app js/printables.js).
+- The app's js/printables.js asks `LST.printableBlob(id, ed)` (app: www/js/backend.js; website:
+  js/lst-app-pages.js); a locked answer opens the free-week signup on the website (`LST.askToJoin`), sign in
+  or Plans in the app.
+- vercel.json redirects the old public addresses `/lantern/<slug>/printables/story*.pdf|song.pdf` to
+  `printables.html?open=<id>` — EXCEPT for requests whose Origin is the installed app (capacitor:// / ionic://
+  / http(s)://localhost), because the App Store build 1.0.8 and older still open those addresses directly.
+  ⚠️ **Once an iPhone (and Android) build made from lst-app master 87d7499 or later is live in the stores,
+  delete the `missing` exception** so the old addresses close for everyone, then take the PDFs out of this
+  public repo (`git rm --cached` + .gitignore `lantern/*/printables/*.pdf`; make.js still writes them for
+  the upload). The repo is public, so until then the PDFs can also be found on GitHub by someone who digs.
+- NOT locked yet: the night folders themselves (`lantern/<slug>/<slug>.html` picture book and the Morning
+  Lantern editions) are plain public files in this public repo. Locking those means moving them out of the
+  public repo — a bigger change to the nightly pipeline; ask Levi before doing it.
