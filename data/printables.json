@@ -1,7 +1,68 @@
 {
- "updated": "2026-11-20T11:22:27.424Z",
+ "updated": "2026-11-20T19:25:45.575Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
+  {
+   "id": "story-sure-as-the-morning",
+   "type": "story",
+   "title": "Sure as the Morning",
+   "nightLabel": "Week 4 · Night 3",
+   "download": "OldTestament_Story_SureAsTheMorning_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 24,
+   "date": "2026-11-21",
+   "story": "sure-as-the-morning",
+   "ref": "Hosea 6:1–3",
+   "storyId": "ot-b11-w4n3",
+   "files": {
+    "lds": {
+     "url": "/lantern/sure-as-the-morning/printables/story.pdf?v=96984caaae",
+     "pages": 5,
+     "bytes": 1024527
+    },
+    "christian": {
+     "url": "/lantern/sure-as-the-morning/printables/story-christian.pdf?v=96984caaae",
+     "pages": 5,
+     "bytes": 1024154
+    }
+   },
+   "thumb": "/lantern/sure-as-the-morning/printables/story.jpg?v=96984caaae",
+   "src": "96984caaae3f92662e420a56678dfb3afd60b3079e1aaa0f3e06a545cab4ce0a",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "96984caaae3f92662e420a56678dfb3afd60b3079e1aaa0f3e06a545cab4ce0a"
+  },
+  {
+   "id": "song-sure-as-the-morning",
+   "type": "song",
+   "title": "Morning Keeps Its Promise",
+   "storyTitle": "Sure as the Morning",
+   "download": "OldTestament_Song_MorningKeepsItsPromise_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 24,
+   "date": "2026-11-21",
+   "story": "sure-as-the-morning",
+   "ref": "Hosea 6:1–3",
+   "storyId": "ot-b11-w4n3",
+   "files": {
+    "lds": {
+     "url": "/lantern/sure-as-the-morning/printables/song.pdf?v=3a63459a5e",
+     "pages": 1,
+     "bytes": 35459
+    }
+   },
+   "thumb": "/lantern/sure-as-the-morning/printables/song.jpg?v=3a63459a5e",
+   "src": "3a63459a5e2aa1b28b8505c30de4ed5a8804d51fb7479e3064de7104f0db4bfe",
+   "updated": "2026-11-20",
+   "created": "2026-11-20",
+   "stored": "3a63459a5e2aa1b28b8505c30de4ed5a8804d51fb7479e3064de7104f0db4bfe"
+  },
   {
    "id": "story-cords-of-love",
    "type": "story",
