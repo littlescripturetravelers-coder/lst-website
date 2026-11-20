@@ -73,6 +73,7 @@
     if (document.body) start(); else document.addEventListener("DOMContentLoaded", start);
   })();
   var SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkYnZrdHFncndoanVjb2NvYnVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwNDAwMzEsImV4cCI6MjEwMTYxNjAzMX0.1PJVCfeK6dIFWeBvdsC13HPQ8173BHEok0Qq6l7mfC4";
+  window.LST_SUPA_ANON = SUPA_KEY;   // the public anon key, for the printable edge function (js/lst-app-pages.js)
 
   /* Statuses that mean "let them read". Payhip's 7-day trial lands as
      `trialing`, so a family in their free week gets the full library. */
