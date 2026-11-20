@@ -631,6 +631,20 @@
       var words = (b.text || []).map(function (t) {
         return String(t == null ? "" : t).trim() ? "<p>" + text(t) + "</p>" : "";
       }).join("");
+      /* THE FIVE STONES ON EVERY STORY (Levi, 20 Nov 2026: "Every single scripture story on the website needs
+         to have the 5 stones"): SPOT, NAME, FIND, FORK, CALM, each in its colour, as the app's book shows them;
+         and the Parent Experience's numbered questions. */
+      var STONE = { SPOT: "#2E86AB", NAME: "#B8860B", FIND: "#4F7A3A", FORK: "#D4623C", CALM: "#9C6FB6" };
+      if (b.stones && b.stones.length) {
+        words += '<p class="rd-eyebrow" style="margin-top:1rem;">The Five Stones</p><ul class="rd-stones" style="list-style:none;padding:0;margin:.4rem 0 0;">' +
+          b.stones.map(function (x) {
+            var k = String((x && x[0]) || "").toUpperCase();
+            return '<li style="margin:.45rem 0;"><b style="color:' + (STONE[k] || "inherit") + ';letter-spacing:.04em;">' + esc(k) + "</b> &nbsp;" + text((x && x[1]) || "") + "</li>";
+          }).join("") + "</ul>";
+      }
+      if (b.list && b.list.length) {
+        words += '<ol class="rd-list">' + b.list.map(function (t) { return "<li>" + text(t) + "</li>"; }).join("") + "</ol>";
+      }
 
       /* A beat with no words and no picture draws an empty card with a heading
          over nothing, which reads as a fault rather than as a quiet moment. The

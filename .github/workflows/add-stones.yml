@@ -1,0 +1,26 @@
+# THE FIVE STONES ON EVERY STORY (Levi, 20 Nov 2026: "Every single scripture story on the website needs to have the
+# 5 stones"). Run by hand: gives each published night whose picture book has no Five Stones the stones of the book
+# story it tells (lantern/builder/add_stones.py), then saves; the push lets Lantern sync publish them to the account.
+name: Add the Five Stones
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stones:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add the stones
+        env:
+          SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python3 lantern/builder/add_stones.py
+      - name: Save
+        if: always()
+        run: |
+          git config user.name "lantern-bot"; git config user.email "lantern-bot@users.noreply.github.com"
+          git add lantern
+          git diff --cached --quiet && exit 0
+          git commit -m "The Five Stones on every story: June and July nights take their book story's stones"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q && exit 0; sleep 10; done; exit 1
