@@ -12,14 +12,23 @@
   "Jesus is Heavenly Father’s Lamb, sent to save us. Tonight, rest snug and safe, like a little lamb."
  ],
  "p1": [
+  "Long ago, Abraham trusted that God would provide a lamb. Later, the Lord asked His people to choose a perfect lamb for a sacred offering. Those lambs helped point their hearts toward Jesus, the perfect Son of Heavenly Father.",
+  "On the night Jesus was born, shepherds watched their sheep in the fields near Bethlehem. The night was quiet until a bright light suddenly shone around them."
+ ],
+ "p2": [
+  "An angel appeared, and the shepherds were afraid. But the angel brought wonderful news: do not fear! The Savior had been born. They could go and find Him.",
+  "Years later, John the Baptist pointed to Jesus and called Him 'the Lamb of God.' Jesus came to save us through His loving sacrifice. He is Heavenly Father's perfect Lamb. Tonight, rest as snug as a little lamb and remember how much the Savior loves you."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Long ago, Abraham told Isaac that Heavenly Father would give a lamb. Later, Heavenly Father asked His people for perfect lambs.",
   "Those lambs were a picture. They pointed to Jesus, Heavenly Father’s perfect Son.",
   "The night Jesus was born, shepherds near Bethlehem were keeping their sheep safe."
  ],
- "p2": [
+ "rewrite_p2": [
   "Suddenly an angel came, and bright light shone all around. The shepherds were afraid. The angel said, “Fear not! I bring you good news of great joy. A Savior is born!” Years later, John the Baptist said of Jesus, “Look, the Lamb of God!”",
   "Jesus is Heavenly Father’s Lamb, sent to save us. When you feel afraid, remember: “Fear not!” Rest snug and safe, like a little lamb."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

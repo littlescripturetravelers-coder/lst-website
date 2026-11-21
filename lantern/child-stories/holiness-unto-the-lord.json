@@ -12,14 +12,23 @@
   "Your everyday things can be used for the Lord too. Tonight, look around your room and think of one thing you can use for Him tomorrow."
  ],
  "p1": [
+  "Zechariah told of a wonderful day when the Lord would be King over all the earth. On that day, even the little bells on horses would carry words of love and honor for Him: 'Holiness unto the Lord.'",
+  "The people might have expected only the temple to be holy. But Zechariah's picture reached right out into the busy streets and ordinary homes."
+ ],
+ "p2": [
+  "Even the pots used for everyday cooking would be set apart for the Lord. Bells, bowls, and cooking pots could all remind people to honor Him.",
+  "Our own ordinary things can be used for good too. We can carry a bag for someone, stir soup for a neighbor, or share what we have. Look around your room tonight. Is there something you can use to show love for Jesus tomorrow?"
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Zechariah told about the day Jesus comes again as King. “The Lord shall be king over all the earth,” he said.",
   "Even the horses’ bells will say, “Holiness unto the Lord.” Something holy belongs to Heavenly Father and is special to Him.",
   "Even the cooking pots will be holy, like the bowls at the Lord’s house."
  ],
- "p2": [
+ "rewrite_p2": [
   "Why bells and pots? People used them every day. Zechariah was teaching that everyday things can be holy too.",
   "A spoon stirring soup for a sick friend is for the Lord too. Tonight, pick one thing in your room to use for Him tomorrow."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

@@ -12,14 +12,23 @@
   "When we are sorry and try again, Jesus helps us start fresh. His love can make your heart clean and shining too."
  ],
  "p1": [
+  "Have you ever seen silver shine? Long ago, a worker would heat silver until it melted. He watched it carefully as dark bits rose to the top. Little by little, he took them away. Soon the silver was clean and bright.",
+  "Malachi taught that the Lord would be like a careful worker with silver. Jesus does not give up on us when we need help growing better."
+ ],
+ "p2": [
+  "Malachi also spoke of strong soap that could wash wool clean. Both pictures helped people understand the Savior's love. He can help us change when we make wrong choices.",
+  "We do not need to stay the same forever. As we repent, say sorry, and keep trying, Jesus helps our hearts become cleaner and brighter. Tonight, imagine a little silver spoon catching the lamplight. Think of the gentle ways Jesus is helping you grow."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Malachi’s people had stopped following the Lord’s ways. So the Lord called to them, “Return unto me.”",
   "Malachi said the Lord would be “like a refiner’s fire.” The refiner heated silver in his fire until it melted.",
   "Then the dirty bits came up, and he took them away. The silver was left clean and shiny. Malachi was talking about Jesus, who makes us clean."
  ],
- "p2": [
+ "rewrite_p2": [
   "The Lord would also be like “fullers’ soap.” The fuller scrubbed cloth with strong soap until it was white.",
   "When we are sorry and try again, Jesus helps us start fresh. His love can make your heart clean and shining too. Tonight, tell Heavenly Father you will try again."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

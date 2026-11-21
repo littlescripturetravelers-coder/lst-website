@@ -12,14 +12,23 @@
   "Jesus helps us feel better and glad inside. Tonight, wiggle your toes like a happy calf, then lie still in His warm love."
  ],
  "p1": [
+  "Have you ever watched the morning sun rise? First a thin line of gold appears. Then warm light spreads across the sky and wakes the world.",
+  "Malachi promised that the 'Sun of righteousness' would rise with healing in His wings. He was speaking about Jesus Christ. Like sunlight reaching across a chilly field, the Savior brings hope, light, and healing to His children."
+ ],
+ "p2": [
+  "Malachi pictured little calves being let out of their stalls. Imagine them springing into the sunshine, kicking up their heels and racing through the grass. What joy!",
+  "Jesus can bring that kind of hope to our hearts. Sometimes healing takes time, and sometimes hard things stay with us. Still, He loves us and can give us strength and peace. Tonight, wiggle your feet like a happy little calf, then rest in the Savior's love."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Malachi had a happy promise for the people who loved the Lord.",
   "The “Sun of righteousness” would rise, the One who is always good and right. Malachi was talking about Jesus.",
   "Like the morning sun, Jesus brings light and warmth to the whole world. He would come “with healing in his wings,” like warm sunbeams spreading wide."
  ],
- "p2": [
+ "rewrite_p2": [
   "Then the people would “grow up as calves of the stall.” Baby cows wait inside a barn stall. When they are let out, they run and jump in the sunshine!",
   "Jesus helps us feel better and glad inside. Tonight, wiggle your toes like a happy calf. Then rest in His warm love."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

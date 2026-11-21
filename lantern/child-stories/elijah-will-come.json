@@ -12,18 +12,46 @@
   "Your family can be together forever too. Tonight, as you snuggle in, think of everyone in your family, and your grandparents too."
  ],
  "p1": [
+  "At the end of his book, Malachi shared a promise from the Lord. Before a great day to come, Elijah the prophet would return. He would help turn the hearts of children toward their fathers and mothers, and the hearts of families toward one another.",
+  "It was a promise about love stretching across generations: from grandparents to parents, from parents to children, and even to family members who lived long ago."
+ ],
+ "p2": [
+  "Many years later, in 1836, Elijah appeared to Joseph Smith and Oliver Cowdery in the Kirtland Temple. He restored sacred priesthood keys so families could be sealed together in the Lord's temples.",
+  "Because of Jesus Christ and His restored priesthood, families can be joined for eternity. Tonight, picture the faces of your parents, grandparents, and people you love. Heavenly Father's plan gives families a wonderful reason to hope."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "At the end of his book, Malachi wrote a promise. The Lord said, “I will send you Elijah the prophet.”",
   "Elijah had taught Heavenly Father’s words long before. Then he was taken up to heaven.",
   "Elijah would “turn the heart of the fathers to the children.” Children’s hearts would turn to their fathers too. Families now would love their families from long ago."
  ],
- "p2": [
+ "rewrite_p2": [
   "In 1836, Elijah came! He stood before Joseph Smith and Oliver Cowdery in the Kirtland Temple. He gave them Heavenly Father’s power to join families together forever in temples.",
   "Your family can be together forever too. Tonight, as you snuggle in, think of your family, even great-grandparents long ago."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them. p2_christian: the Christian edition's second story page (this night's p2 is Latter-day Saint teaching).",
+ "rewrite_p2_christian": [
+  "Later, an angel spoke of John the Baptist. John would come “in the spirit and power of Elias.” Elias is Elijah. John would turn fathers’ hearts to their children. He helped people get ready for Jesus.",
+  "Heavenly Father wants families to love each other. Tonight, as you snuggle in, think of your family, even great-grandparents long ago."
+ ],
  "p2_christian": [
   "Later, an angel spoke of John the Baptist. John would come “in the spirit and power of Elias.” Elias is Elijah. John would turn fathers’ hearts to their children. He helped people get ready for Jesus.",
   "Heavenly Father wants families to love each other. Tonight, as you snuggle in, think of your family, even great-grandparents long ago."
- ]
+ ],
+ "from": "printed book",
+ "christian_parts": {
+  "_why": "The printed night is Latter-day Saint teaching (Elijah at the Kirtland Temple, families forever). The Christian edition uses these in place of the printed lines it names, from Malachi 4:5-6 and Luke 1:17; every other line is as printed (God for Heavenly Father).",
+  "stones": {
+   "SPOT": "Malachi promised that Elijah would come and turn families' hearts toward each other, and they would feel full of love.",
+   "FORK": "John the Baptist could keep quiet, or help people get ready for Jesus. He came in the spirit of Elijah and turned hearts toward each other.",
+   "CALM": "Hug your pillow like a family hug. Whisper, “God, thank You for my family.”"
+  },
+  "remember": "God turns families' hearts toward each other!",
+  "questions": {
+   "2": "“Who came in the spirit of Elijah to get people ready for Jesus?”"
+  },
+  "testimony": {
+   "1": "When have you felt God help our family love each other more?"
+  }
+ }
 }

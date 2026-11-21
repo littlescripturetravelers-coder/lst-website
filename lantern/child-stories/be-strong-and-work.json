@@ -12,14 +12,23 @@
   "When a job feels too big, the Lord is with you too. Tonight, make strong arms. You can be brave, because the Lord is with you."
  ],
  "p1": [
+  "The people worked hard to rebuild the Lord's temple. Some of the older people remembered the first temple, with all its beauty. When they looked at the new building, it seemed so small. Was their work even enough?",
+  "The Lord knew their hearts. Through the prophet Haggai, He gave them courage: 'Be strong ... and work: for I am with you.'"
+ ],
+ "p2": [
+  "The temple was not finished yet. There were still stones to lift and work to do. But the builders were not alone. The Lord promised His Spirit would stay with them, and He promised peace.",
+  "Maybe you have a big job that looks hard at first. You can begin with one little part, then another. Heavenly Father can help you be brave and keep going. Tonight, stretch your arms strong, then rest. He is with you."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "The people were building the Lord’s house again. Some old people remembered the first one, so big and beautiful.",
   "“How does this house look to you now?” the Lord asked. “Like nothing?” Next to the first one, it looked so small.",
   "So Heavenly Father sent Haggai with a message. “Be strong, all you people, and work,” said the Lord. “For I am with you.”"
  ],
- "p2": [
+ "rewrite_p2": [
   "The Lord said, “My Spirit stays with you. Fear not.” He promised this house would be even greater than the first. “In this place I will give peace.”",
   "When a job feels too big, the Lord is with you too. Tonight, make strong arms and say, “I can keep going!”"
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

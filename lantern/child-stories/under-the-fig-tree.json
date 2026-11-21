@@ -12,14 +12,23 @@
   "Your bed can be your cozy fig tree tonight. Snuggle in and feel safe. Heavenly Father is watching over you."
  ],
  "p1": [
+  "Imagine a quiet afternoon under a wide, leafy fig tree. Grapes grow nearby, and a family rests in the cool shade. No one is hurrying. No one is afraid.",
+  "Long ago, the prophet Micah shared this peaceful picture of a day to come. Every family would have a place to rest, with food to eat and room to feel at home."
+ ],
+ "p2": [
+  "Micah promised that no one would make them afraid. The people would walk with the Lord and follow His ways.",
+  "What a beautiful promise! The Lord wants His children to know His peace. As you curl up in bed tonight, imagine the soft leaves of that fig tree rustling overhead. You can pray to Heavenly Father and feel His love close to you, right where you are."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Micah told the people what Heavenly Father said. He lived long ago, in the same years as Isaiah.",
   "In his day there was fighting, and the people felt worried. So Micah told them about a happy day to come. Nobody would fight anymore!",
   "Each family would sit under its own grapevine and fig tree. Fig trees have big, wide leaves that make cool shade."
  ],
- "p2": [
+ "rewrite_p2": [
   "Sitting under your own tree meant being home and safe. Micah said, “None shall make them afraid.” Micah chose to follow the Lord. He said, “We will walk in the name of the Lord.”",
   "Your bed can be your cozy fig tree tonight. Snuggle in and feel safe. Heavenly Father is watching over you."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

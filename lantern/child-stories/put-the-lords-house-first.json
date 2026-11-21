@@ -12,14 +12,23 @@
   "You can put the Lord first too. Tonight, think of one way to put Him first tomorrow. Then snuggle down and smile."
  ],
  "p1": [
+  "After many years away, the people of Jerusalem had finally come home. They were busy fixing roofs and building houses. But the Lord's temple still stood unfinished.",
+  "The prophet Haggai asked the people to stop and think. They had made time for their own homes. Could they make time for the Lord's house too? It was time to put Him first."
+ ],
+ "p2": [
+  "The Lord told them to go to the mountains, bring wood, and build His house. This time the people listened. They gathered what they needed and got to work. Then the Lord gave them a wonderful promise: 'I am with you.'",
+  "You can make room for Heavenly Father in your day too. Before toys, games, or busy plans, you can pause to pray. Even a small choice to put the Lord first can bring peace to your heart."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "The people had come home to Jerusalem from far away. They built nice houses for themselves. But the Lord’s house was still not built.",
   "“It is not time yet,” they said. So Heavenly Father sent Haggai. “Is it time for nice houses,” the Lord asked, “while My house lies broken?”",
   "The people worked hard, but they never had enough. “Consider your ways,” said the Lord. Stop and think: what should come first?"
  ],
- "p2": [
+ "rewrite_p2": [
   "“Go up to the mountain, bring wood, and build the house,” said the Lord. The people obeyed. “I am with you,” the Lord said through Haggai. Everyone went to work!",
   "You can put Heavenly Father first too, like praying before you play. Tonight, think of one way to put Him first tomorrow."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

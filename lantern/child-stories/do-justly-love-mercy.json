@@ -12,14 +12,23 @@
   "Tonight, think of one kind thing to do tomorrow. Heavenly Father can help you be fair and kind."
  ],
  "p1": [
+  "What would make the Lord happy? Long ago, Micah asked the people to think about that question. Some people brought animals as gifts to the Lord. Would a young calf be enough? Would thousands of sheep be enough?",
+  "Micah wanted them to understand something even more important. The Lord was looking for goodness in their hearts, not just something they could carry in their hands."
+ ],
+ "p2": [
+  "Micah taught the people to do what is right, to be fair, to show mercy, and to walk humbly with God. That means choosing kindness, forgiving others, and listening when Heavenly Father guides us.",
+  "Think of a friend who needs a turn, or someone who needs a gentle word. One small, kind choice can show love for the Lord. Tonight, choose one kind thing you can do tomorrow. Heavenly Father will help you."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Micah asked a big question: “What can I bring to the Lord?” In those days, people gave animals to the Lord as gifts.",
   "Should he bring young calves? Thousands of sheep? Some people brought big gifts but were unkind to others.",
   "So Micah said the Lord has already shown us what is good. He wants kind hearts even more than gifts."
  ],
- "p2": [
+ "rewrite_p2": [
   "The Lord wants us “to do justly,” being fair and doing what is right. He wants us “to love mercy,” being kind and forgiving. And He wants us “to walk humbly” with Heavenly Father. That is like holding His hand, knowing we need His help.",
   "Tonight, think of one fair, kind thing to do tomorrow. Maybe say “It’s okay” when someone is sorry."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

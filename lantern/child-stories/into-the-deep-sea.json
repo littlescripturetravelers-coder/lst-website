@@ -12,14 +12,23 @@
   "Tonight, pretend to toss a wrong choice far away. When you are sorry, Jesus forgives you too."
  ],
  "p1": [
+  "Sometimes people make choices that hurt themselves or others. Micah knew that. He also knew something wonderful about the Lord: He loves to forgive.",
+  "Micah told the people that the Lord delights in mercy. When someone turns back to Him with a sorry heart, He welcomes them with love. Micah wanted everyone to remember that the Lord has compassion for His children, even when they have made mistakes."
+ ],
+ "p2": [
+  "Then Micah gave them a beautiful picture. He said the Lord would cast their sins into the depths of the sea. Imagine a little stone dropping into deep blue water. Down, down, down it goes, far beneath the waves.",
+  "Through Jesus Christ, we can repent, make things right, and be forgiven. We do not have to carry every wrong choice forever. Tonight, open your hands and let them rest. Jesus can help you begin again."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Micah told the people what Heavenly Father said. The people had made many wrong choices, called sins.",
   "But Micah knew something wonderful. He said the Lord “delighteth in mercy.” The Lord is glad to forgive!",
   "Micah said the Lord “will have compassion upon us.” He loves us and wants to help, like a mom hugging her crying child."
  ],
- "p2": [
+ "rewrite_p2": [
   "Micah said the Lord will throw our sins “into the depths of the sea.” The sea was the deepest place people knew. Things thrown there were never found again! When we are sorry, Jesus forgives us, and our sins are gone.",
   "Tonight, pretend to toss a wrong choice far, far away. When you are sorry, Jesus forgives you too."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

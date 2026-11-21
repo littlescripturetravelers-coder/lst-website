@@ -12,18 +12,27 @@
   "Jesus wants to be close to you too. Tonight, snuggle in and feel happy. Jesus wants to be near you!"
  ],
  "p1": [
+  "One day, the prophet Zechariah saw a man carrying a long measuring line. 'Where are you going?' Zechariah asked. The man was going to measure Jerusalem.",
+  "In those days, people built walls around their cities to keep danger away. Zechariah might have expected another high stone wall. But the Lord had something more wonderful to promise His people."
+ ],
+ "p2": [
+  "The Lord said He would be like a wall of fire around Jerusalem, protecting His people with His own power. He promised to be with them and invited them to sing for joy.",
+  "We look forward to the day Jesus Christ comes again, just as the prophets teach. While we wait, we can draw close to Him by following His ways. Tonight, think of His bright, protecting love and let your heart be glad."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Zechariah shared Heavenly Father’s words. The people were home in Jerusalem again. But the walls that kept them safe were still broken.",
   "Zechariah saw a man with a long rope for measuring. “Where are you going?” he asked. “To measure Jerusalem,” the man said.",
   "So many people would live there, they would spread past any wall. “I will be a wall of fire all around her,” said the Lord."
  ],
- "p2": [
+ "rewrite_p2": [
   "A wall of fire glows bright and keeps danger away. “Sing and be happy!” the Lord said. “For I come, and I will live with you.” The Lord who said this is Jesus.",
   "When you wonder, you can ask, just like Zechariah. Tonight, hum a happy song. Jesus loves to be near you."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them. p2_christian: the Christian edition's second story page (this night's p2 is Latter-day Saint teaching).",
- "p2_christian": [
+ "rewrite_p2_christian": [
   "A wall of fire glows bright and keeps danger away. “Sing and be happy!” the Lord said. “For I come, and I will live with you.” Years later, Jesus came to live with His people.",
   "When you wonder, you can ask, just like Zechariah. Tonight, hum a happy song. Jesus loves to be near you."
- ]
+ ],
+ "from": "printed book"
 }

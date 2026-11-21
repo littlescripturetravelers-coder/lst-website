@@ -12,14 +12,23 @@
   "Tonight, lie very still. Jesus, the Prince of Peace, can fill your heart with peace."
  ],
  "p1": [
+  "Long before the first Christmas, Isaiah promised that a special child would be born. One of His beautiful names would be the Prince of Peace. Isaiah was telling the people about Jesus.",
+  "Then came the night of His birth. An angel told shepherds the joyful news: the Savior had been born in Bethlehem. Before they could even finish wondering, something wonderful happened in the sky."
+ ],
+ "p2": [
+  "Suddenly, many angels praised Heavenly Father together. They praised God and spoke of peace on earth. The heavens seemed full of joy!",
+  "Jesus came to show us the way of love and peace. When we follow Him, we can choose gentle words, forgive, and help others feel welcome. Tonight, take one slow breath and rest your hands. The Prince of Peace can bring peace to your heart, even when the world feels busy."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Long before Jesus was born, Isaiah said a special child would come. He would be called the Prince of Peace.",
   "The night Jesus was born, an angel told the shepherds the happy news.",
   "Suddenly, many, many angels were there with him! They were praising Heavenly Father, telling how great and good He is."
  ],
- "p2": [
+ "rewrite_p2": [
   "The angels said, “Glory to Heavenly Father in the highest!” They said, “On earth peace, good will toward men.” Jesus came to bring peace, a calm, safe feeling deep inside. He came to teach kindness to everyone, too.",
   "Kind words help bring peace. Tonight, lie very still and feel calm inside. Tomorrow, share a kind word, just like the angels shared good news."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

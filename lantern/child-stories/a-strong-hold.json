@@ -12,14 +12,23 @@
   "When you feel worried, the Lord is your safe place. Tonight, wrap your blanket around you like strong walls. You can trust Him."
  ],
  "p1": [
+  "Long ago, when danger came near a town, families could hurry into a strong stone tower. Inside its thick walls, they had a safe place to wait until the trouble passed.",
+  "The prophet Nahum used that picture to teach a wonderful truth. 'The Lord is good,' he said. The Lord is like a strong hold in a hard time. He is someone we can trust when things feel frightening."
+ ],
+ "p2": [
+  "Nahum also promised that the Lord knows those who trust Him. He knows each one by name. He knows you too.",
+  "Hard days may still come, but you never need to face them without Heavenly Father's love. You can whisper a prayer when you are worried, scared, or sad. Tonight, tuck your blanket around your shoulders like the walls of a strong tower. Think of the Lord's goodness and rest."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Nahum told the people of Judah what Heavenly Father said. A big, proud city called Nineveh had made trouble for them.",
   "Nahum wrote, “The Lord is good, a strong hold in the day of trouble.”",
   "Long ago, when trouble came, families hurried into a strong hold. It was a tall tower with thick stone walls. The walls kept them safe until the trouble was over."
  ],
- "p2": [
+ "rewrite_p2": [
   "Nahum said the Lord is like that safe place. He also said, “He knoweth them that trust in him.” The Lord knows each person who trusts Him to help. He knows you!",
   "When you feel worried, run to the Lord, like running into a hug. Tonight, wrap your blanket around you like strong walls. You can trust Him."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

@@ -12,14 +12,27 @@
   "You do not have to be big and strong. Tonight, think of a big job for tomorrow, and remember that the Lord’s Spirit will help you."
  ],
  "p1": [
+  "Zechariah saw a golden lampstand shining with seven little lights. Two olive trees stood beside it, sending oil through golden pipes to keep the lamps burning. What an amazing sight!",
+  "Zechariah wondered what it meant. The Lord had a message for Zerubbabel, the man helping to rebuild the temple. The work was big, and the people needed help."
+ ],
+ "p2": [
+  "The Lord's message was simple and strong: 'Not by might, nor by power, but by my spirit.' The temple would be finished through the Lord's help, not by strength alone.",
+  "You may be small, and some days your job may seem very big. But Heavenly Father has not asked you to do everything alone. You can pray, listen for the Holy Ghost, and take one good step at a time. His Spirit can help you do big things."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "An angel woke Zechariah. “What do you see?” he asked. Zechariah saw a golden lampstand with seven little lamps.",
   "Two olive trees stood beside it. Back then, lamps burned olive oil to make light. “What are these?” Zechariah asked.",
   "The angel gave a message for Zerubbabel, who was building the Lord’s house. “Not by might, nor by power, but by my spirit,” said the Lord."
  ],
- "p2": [
+ "rewrite_p2": [
   "Zerubbabel did not have to be big and strong. The Lord’s Spirit would help him finish the Lord’s house!",
   "You do not have to be big and strong either. Tonight, think of a big job for tomorrow. Say a prayer, and the Lord’s Spirit will help you."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "p2_christian": [
+  "The Lord's message was simple and strong: 'Not by might, nor by power, but by my spirit.' The temple would be finished through the Lord's help, not by strength alone.",
+  "You may be small, and some days your job may seem very big. But Heavenly Father has not asked you to do everything alone. You can pray, listen for the Holy Spirit, and take one good step at a time. His Spirit can help you do big things."
+ ],
+ "from": "printed book"
 }

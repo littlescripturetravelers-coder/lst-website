@@ -12,14 +12,23 @@
   "Tonight, hug yourself tight. Jesus is Heavenly Father’s gift to you, because He loves you so."
  ],
  "p1": [
+  "Long before the first Christmas, Isaiah looked toward the coming Savior. He pictured the happy words people would say: 'We have waited for him, and he will save us.'",
+  "Then, one wonderful night, angels told shepherds that Jesus had been born. When the angels left, the shepherds hurried toward Bethlehem. They could hardly wait to see the baby the Lord had promised."
+ ],
+ "p2": [
+  "They found Mary and Joseph, and baby Jesus lying in a manger. The shepherds were so happy that they told others what they had heard. Everyone marveled at their news. Mary held these precious moments close in her heart.",
+  "Heavenly Father loved the world so much that He gave us His Son. Jesus came to save us. Tonight, snuggle under your blanket and remember the best Christmas gift of all: our Savior, Jesus Christ."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Long ago, Isaiah told what Heavenly Father said. One day people would say, “This is the Lord; we have waited for Him.” They would say, “He will save us!”",
   "The night Jesus was born, the angels went back into heaven. The shepherds said, “Let us go to Bethlehem and see!”",
   "They hurried and found Mary, Joseph, and the baby lying in a manger. The One they had waited for was here!"
  ],
- "p2": [
+ "rewrite_p2": [
   "The shepherds told everyone about the baby, and all who heard were amazed. Mary kept these things in her heart. The shepherds went back praising Heavenly Father.",
   "Jesus came because Heavenly Father loved the world so much, He gave His Son. Good news is for sharing! Tomorrow, tell someone, “Jesus is born!”"
  ],
- "score": 10,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

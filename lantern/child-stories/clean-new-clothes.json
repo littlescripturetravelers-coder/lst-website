@@ -12,14 +12,23 @@
   "When we are sorry, Jesus helps us feel clean and new inside. He can do that for you too, like fresh new clothes."
  ],
  "p1": [
+  "The Lord showed Zechariah a remarkable picture. Joshua, the high priest, stood before an angel wearing dirty clothes. They looked so stained and worn.",
+  "Then the angel gave a command. The dirty clothes were taken away, and Joshua was dressed in clean ones. What a change! The Lord was showing that He could take away sin and help His people become clean again."
+ ],
+ "p2": [
+  "The Lord also promised that someone special would come, like a fresh green branch growing from an old tree. That promised Branch pointed to Jesus Christ.",
+  "Because of Jesus, we can turn away from wrong choices and begin again. We can say sorry, try to make things right, and ask for His help. Imagine slipping into soft, clean clothes after a muddy day. Jesus can help your heart feel clean and new too."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "The Lord showed Zechariah a picture. Joshua, the leader of the priests at the Lord’s house, stood before an angel.",
   "Joshua’s clothes were dirty, a picture of the wrong things he had done.",
   "“Take away the dirty clothes,” the angel said. He told Joshua, “I have taken your wrong things away.” They dressed him in clean clothes and a clean hat!"
  ],
- "p2": [
+ "rewrite_p2": [
   "Then the Lord promised to send “the Branch.” A branch is new green growth from an old tree. Jesus would come from King David’s family, like a new branch. The Branch is Jesus!",
   "When we are sorry, Jesus makes us clean and new inside. Tonight, tell Heavenly Father one thing you are sorry for. Then feel brand new!"
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

@@ -12,14 +12,23 @@
   "The Lord loves you that much! Tonight, as you close your eyes, picture Him smiling over you with joy."
  ],
  "p1": [
+  "The prophet Zephaniah shared a promise of a joyful day when the Lord would be with His people. He told them to sing with all their hearts. They would not need to be afraid, because the Lord would be near.",
+  "Imagine a whole city singing together! Children laugh, families smile, and the air fills with happy voices. Zephaniah wanted the people to look forward to the Lord's love and goodness."
+ ],
+ "p2": [
+  "Then he shared the sweetest part. The Lord would rejoice over His people with singing! It is a little like a mother singing a soft song to the baby she loves.",
+  "That is how tenderly the Lord loves His children. He is not far away or too busy to care. He knows you, and you matter to Him. As you close your eyes tonight, imagine a loving song surrounding you like a warm blanket."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Zephaniah told the people what Heavenly Father said. Many people had turned away from the Lord, and hard days were coming.",
   "But Zephaniah told of a happy day to come. He said, “Be glad and rejoice with all the heart.” The Lord would be “in the midst of thee,” right there with them.",
   "Zephaniah was talking about Jesus! He said, “Fear thou not.” No one needs to be afraid when Jesus is near."
  ],
- "p2": [
+ "rewrite_p2": [
   "Zephaniah said the Lord “will rejoice over thee with joy.” He said the Lord “will joy over thee with singing”! He is so happy with His children, like a mom singing over her baby.",
   "The Lord loves you that much! Tonight, as you snuggle down, picture Him smiling over you with joy."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

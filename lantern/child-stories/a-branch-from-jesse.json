@@ -12,14 +12,23 @@
   "Jesus is that little Branch, and He grew up to be our King. Heavenly Father sent Him because He loves you."
  ],
  "p1": [
+  "Imagine an old tree stump standing quietly in a field. Its tall branches are gone. It looks as though nothing new could ever grow there. But one morning, a tiny green shoot pushes up beside it. New life!",
+  "Long before Jesus was born, the prophet Isaiah used a picture like this. He promised that a special Branch would grow from the family of Jesse, the father of King David."
+ ],
+ "p2": [
+  "Isaiah said the Spirit of the Lord would rest upon that promised King. He would have wisdom and understanding.",
+  "Many years later, an angel came to Mary with amazing news. She would have a son named Jesus, and He would be the promised King from David's family. The little Branch Isaiah spoke about pointed to our Savior. Heavenly Father had not forgotten His promise. He sent Jesus because He loves us."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Long before Jesus was born, Isaiah told what Heavenly Father showed him. He talked about an old tree stump.",
   "A stump looks all done. But Isaiah said a little new branch would grow out of its roots!",
   "The stump was a picture of Jesse’s family. Jesse was King David’s father. Someone special would grow from their family, like that new branch."
  ],
- "p2": [
+ "rewrite_p2": [
   "Isaiah said the Spirit of the Lord would rest on Him, making Him wise. Years later, an angel told Mary, “You will have a son. Call Him Jesus.” The angel said He would be King, like David. Isaiah was talking about Jesus!",
   "Jesus is that little Branch. Tonight, think of a tiny green shoot. With Jesus, good things can always grow again."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

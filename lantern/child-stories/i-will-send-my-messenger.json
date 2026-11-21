@@ -12,14 +12,23 @@
   "You can get ready for Jesus too, by being kind like Him. Tonight, think of one kind thing you will do tomorrow."
  ],
  "p1": [
+  "Long before Jesus was born, the Lord gave Malachi an exciting promise. He would send a messenger to help the people get ready for Him.",
+  "Imagine tidying a path before a very special guest arrives. The messenger's work would be a little like that. He would call people to turn their hearts toward God, so they would be ready to welcome the Savior."
+ ],
+ "p2": [
+  "Many years later, John the Baptist stood beside the Jordan River, teaching people to repent and follow the Lord. He baptized those who were ready to make a covenant with God. John helped prepare the way for Jesus, just as Malachi had promised.",
+  "You can get ready to follow Jesus too. You can pray, choose what is right, and show love to others. Tonight, think of one kind thing you will do when morning comes."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Long before Jesus was born, the Lord gave Malachi a happy promise. He said, “I will send my messenger.”",
   "This helper would be sent ahead to “prepare the way.” He would help people get ready, like tidying up before a special guest comes.",
   "Then the Lord Himself would come to His temple. Malachi was talking about Jesus."
  ],
- "p2": [
+ "rewrite_p2": [
   "Many years later, John the Baptist came. He helped people get ready for Jesus and baptized them in the Jordan River. Jesus said John was the messenger Malachi wrote about.",
   "You can get ready for Jesus too, by being kind like Him. Tonight, think of one kind thing you will do tomorrow."
  ],
- "score": 10,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

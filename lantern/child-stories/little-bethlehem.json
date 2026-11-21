@@ -12,14 +12,23 @@
   "Little things can be great to Heavenly Father, and so can little you! Tonight, hold up one little finger and think of baby Jesus."
  ],
  "p1": [
+  "Bethlehem was a little town nestled among the hills. Sheep wandered in the fields, and families lived in simple homes. It did not look like the place where a great King would be born.",
+  "But long before the first Christmas, the prophet Micah told the people to watch that little town. One day, a wonderful ruler would come from Bethlehem. Micah was telling them about Jesus."
+ ],
+ "p2": [
+  "Years and years passed. Then a bright star appeared, and wise men traveled to find the newborn King. When they asked where He would be born, the teachers remembered Micah's words: Bethlehem!",
+  "And that is where baby Jesus had been born. The little town was part of Heavenly Father's great plan. Tonight, hold up one little finger and smile. You may be little, but you matter very much to Heavenly Father too."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Long before Jesus was born, Micah told the people what Heavenly Father said. He told them a great King would come one day.",
   "Micah did not name a big, busy city. He said, “Bethlehem, though thou be little.” Bethlehem was a small town on the hills, with sheep fields nearby.",
   "Out of little Bethlehem would come a ruler to lead Heavenly Father’s people. Micah was talking about Jesus!"
  ],
- "p2": [
+ "rewrite_p2": [
   "Many years later, wise men came to Jerusalem looking for the new King. The teachers there remembered Micah’s words. They said, “In Bethlehem!” And that is just where Jesus was born.",
   "Little things can be great to Heavenly Father, and so can little you! Tonight, hold up one little finger and think of baby Jesus."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }

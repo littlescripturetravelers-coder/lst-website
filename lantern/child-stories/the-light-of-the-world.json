@@ -12,14 +12,23 @@
   "Tonight, look at one little light. Jesus can shine in your heart too."
  ],
  "p1": [
+  "Long before Jesus was born, Isaiah promised that people walking in darkness would see a great light. He was looking forward to the Savior.",
+  "Then, on the night Jesus was born, shepherds watched their sheep beneath the dark sky. Suddenly, the glory of the Lord shone around them. Heaven's bright message had come: the promised Savior was here!"
+ ],
+ "p2": [
+  "When Jesus grew up, He told the people, 'I am the light of the world.' Those who follow Him do not need to walk without hope. His love can guide us like a lamp on a dark path.",
+  "At Christmas, tiny lights glow in windows and twinkle on trees. Each one can remind us of Jesus. Tonight, look at one little light and remember that the Savior can help your heart shine too."
+ ],
+ "score": 9,
+ "note": "Levi, 20 Nov 2026 (\"Match up the story lantern stories with the published book\"): p1 and p2 are the story words AS PRINTED in the published December book (We Have Waited for Him, on Amazon), first and second story page, word for word, so the Lantern, the app's Books page and the book a family bought read the same. The Christian edition reads God for Heavenly Father; p2_christian only where the printed words are Latter-day Saint teaching. The 29 Oct picture-book rewrite is kept as rewrite_p1/rewrite_p2.",
+ "rewrite_p1": [
   "Long before Jesus was born, Isaiah told what Heavenly Father said. “The people who walked in darkness have seen a great light.”",
   "Many people felt sad and lost then, like walking in the dark. Isaiah promised that a great light would come to them.",
   "The night Jesus was born, a bright light shone around the shepherds. It was the Lord’s own shining glory."
  ],
- "p2": [
+ "rewrite_p2": [
   "When Jesus grew up, He said, “I am the light of the world.” He said whoever follows Him will not walk in darkness. Isaiah was talking about Jesus!",
   "A light shows us the way, and so does Jesus. Tonight, look at one little light and remember Jesus."
  ],
- "score": 9,
- "note": "Levi, 29 Oct 2026: the December stories (Book 12, We Have Waited for Him) rewritten for 3-5 year olds the picture-book way (easy words instead of definitions, the meaning tucked into the sentence, at most one definition and only when the word is the lesson), straight from the KJV, rated 9-10 on docs/STORY-PROMPT.md by a reviewer that did not write them. These paragraphs replace the PDF's story paragraphs in the story book and both editions (the Christian edition reads God for Heavenly Father). The Traveler paragraph, Feeling Moment, Remember This and questions stay as the PDF has them."
+ "from": "printed book"
 }
