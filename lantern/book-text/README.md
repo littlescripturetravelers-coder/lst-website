@@ -13,3 +13,7 @@ The same nights as PDFs are in lst-app www/stories/pdf/<mon>/ (served at
 app.littlescripturetravelers.com/stories/pdf/<mon>/).
 
 November 2026 (Morning by Morning, 35 nights) was added on 21 Oct 2026.
+
+December 2026 (We Have Waited for Him, 28 nights) was added on 20 Nov 2026 from Levi's final KDP interior,
+the words as printed (the same as the app's www/stories/dec-NN-*.html and www/stories/pdf/dec/). Its
+index rows carry `Slug`, the app page's slug.

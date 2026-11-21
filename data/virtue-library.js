@@ -1049,7 +1049,8 @@ window.LST_LIBRARY = {
   {
    "book": 12,
    "month": "December",
-   "title": "We Have Waited for Him"
+   "title": "We Have Waited for Him",
+   "amazon": "https://www.amazon.com/dp/B0HRZHFKQ1"
   },
   {
    "book": 13,
@@ -9892,8 +9893,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "trust-in-god",
    "teachingNote": "Reach for this when your child feels unsafe or afraid at bedtime and needs to picture resting under their own fig tree.",
-   "teaser": "Micah told the people what Heavenly Father said. He lived long ago, in the same years as Isaiah. In his day there was fighting, and the people felt worried. So Micah told them about a happy day to come. Nobody would…",
-   "wordCount": 118
+   "teaser": "Imagine a quiet afternoon under a wide, leafy fig tree. Grapes grow nearby, and a family rests in the cool shade. No one is hurrying. No one is afraid. Long ago, the prophet Micah shared this peaceful picture…",
+   "wordCount": 128
   },
   {
    "id": "b12-w1-n2",
@@ -9918,8 +9919,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "hope",
    "teachingNote": "Reach for this when your child thinks small things do not matter and needs to know the Lord chose little Bethlehem.",
-   "teaser": "Long before Jesus was born, Micah told the people what Heavenly Father said. He told them a great King would come one day. Micah did not name a big, busy city. He said, “Bethlehem, though thou be little.” Bethlehem…",
-   "wordCount": 123
+   "teaser": "Bethlehem was a little town nestled among the hills. Sheep wandered in the fields, and families lived in simple homes. It did not look like the place where a great King would be born. But long before the first…",
+   "wordCount": 138
   },
   {
    "id": "b12-w1-n3",
@@ -9944,8 +9945,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "kindness",
    "teachingNote": "Reach for this when your child wonders what Heavenly Father really wants and needs three simple things to do.",
-   "teaser": "Micah asked a big question: “What can I bring to the Lord?” In those days, people gave animals to the Lord as gifts. Should he bring young calves? Thousands of sheep? Some people brought big gifts but were unkind to…",
-   "wordCount": 124
+   "teaser": "What would make the Lord happy? Long ago, Micah asked the people to think about that question. Some people brought animals as gifts to the Lord. Would a young calf be enough? Would thousands of sheep be…",
+   "wordCount": 138
   },
   {
    "id": "b12-w1-n4",
@@ -9970,8 +9971,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "repentance",
    "teachingNote": "Reach for this when your child feels sorry about a mistake and needs the picture of sins thrown into the deep sea.",
-   "teaser": "Micah told the people what Heavenly Father said. The people had made many wrong choices, called sins. But Micah knew something wonderful. He said the Lord “delighteth in mercy.” The Lord is glad to forgive! Micah…",
-   "wordCount": 117
+   "teaser": "Sometimes people make choices that hurt themselves or others. Micah knew that. He also knew something wonderful about the Lord: He loves to forgive. Micah told the people that the Lord delights in mercy. When…",
+   "wordCount": 143
   },
   {
    "id": "b12-w1-n5",
@@ -9996,8 +9997,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "trust-in-god",
    "teachingNote": "Reach for this when your child feels frightened and needs to know the Lord is a strong tower to run to.",
-   "teaser": "Nahum told the people of Judah what Heavenly Father said. A big, proud city called Nineveh had made trouble for them. Nahum wrote, “The Lord is good, a strong hold in the day of trouble.” Long ago, when trouble…",
-   "wordCount": 123
+   "teaser": "Long ago, when danger came near a town, families could hurry into a strong stone tower. Inside its thick walls, they had a safe place to wait until the trouble passed. The prophet Nahum used that picture to…",
+   "wordCount": 139
   },
   {
    "id": "b12-w1-n6",
@@ -10022,8 +10023,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "hope",
    "teachingNote": "Reach for this when your child is having a hard time and needs to learn they can still be glad, like a deer on high places.",
-   "teaser": "Habakkuk told the people what Heavenly Father said. He knew hard times were coming to his land. So Habakkuk sang a prayer. Maybe the fig trees would not bloom. Maybe no grapes would grow, and the sheep would be…",
-   "wordCount": 124
+   "teaser": "Habakkuk looked ahead and knew hard days might come. What if the fig trees had no fruit? What if no grapes grew? What if the sheep were gone and the fields were empty? Even then, Habakkuk made a brave choice.…",
+   "wordCount": 142
   },
   {
    "id": "b12-w1-n7",
@@ -10048,8 +10049,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "identity",
    "teachingNote": "Reach for this when your child doubts they are loved and needs to hear that the Lord sings over them.",
-   "teaser": "Zephaniah told the people what Heavenly Father said. Many people had turned away from the Lord, and hard days were coming. But Zephaniah told of a happy day to come. He said, “Be glad and rejoice with all the…",
-   "wordCount": 125
+   "teaser": "The prophet Zephaniah shared a promise of a joyful day when the Lord would be with His people. He told them to sing with all their hearts. They would not need to be afraid, because the Lord would be near.…",
+   "wordCount": 144
   },
   {
    "id": "b12-w2-n1",
@@ -10074,8 +10075,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "diligence",
    "teachingNote": "Reach for this when your child is busy with their own things and needs to stop and think what to put first.",
-   "teaser": "The people had come home to Jerusalem from far away. They built nice houses for themselves. But the Lord’s house was still not built. “It is not time yet,” they said. So Heavenly Father sent Haggai. “Is it time for…",
-   "wordCount": 124
+   "teaser": "After many years away, the people of Jerusalem had finally come home. They were busy fixing roofs and building houses. But the Lord's temple still stood unfinished. The prophet Haggai asked the people to stop…",
+   "wordCount": 139
   },
   {
    "id": "b12-w2-n2",
@@ -10100,8 +10101,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "perseverance",
    "teachingNote": "Reach for this when your child wants to quit a big, hard job and needs to hear the Lord is with them.",
-   "teaser": "The people were building the Lord’s house again. Some old people remembered the first one, so big and beautiful. “How does this house look to you now?” the Lord asked. “Like nothing?” Next to the first one, it…",
-   "wordCount": 114
+   "teaser": "The people worked hard to rebuild the Lord's temple. Some of the older people remembered the first temple, with all its beauty. When they looked at the new building, it seemed so small. Was their work even…",
+   "wordCount": 137
   },
   {
    "id": "b12-w2-n3",
@@ -10126,8 +10127,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "hope",
    "teachingNote": "Reach for this when your child is waiting for something good and needs a reason to sing while they wait.",
-   "teaser": "Zechariah shared Heavenly Father’s words. The people were home in Jerusalem again. But the walls that kept them safe were still broken. Zechariah saw a man with a long rope for measuring. “Where are you going?” he…",
-   "wordCount": 122
+   "teaser": "One day, the prophet Zechariah saw a man carrying a long measuring line. 'Where are you going?' Zechariah asked. The man was going to measure Jerusalem. In those days, people built walls around their cities to…",
+   "wordCount": 132
   },
   {
    "id": "b12-w2-n4",
@@ -10152,8 +10153,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "repentance",
    "teachingNote": "Reach for this when your child feels dirty or ashamed inside and needs the picture of clean new clothes.",
-   "teaser": "The Lord showed Zechariah a picture. Joshua, the leader of the priests at the Lord’s house, stood before an angel. Joshua’s clothes were dirty, a picture of the wrong things he had done. “Take away the dirty…",
-   "wordCount": 119
+   "teaser": "The Lord showed Zechariah a remarkable picture. Joshua, the high priest, stood before an angel wearing dirty clothes. They looked so stained and worn. Then the angel gave a command. The dirty clothes were…",
+   "wordCount": 136
   },
   {
    "id": "b12-w2-n5",
@@ -10178,8 +10179,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "trust-in-god",
    "teachingNote": "Reach for this when your child feels too small for a big job and needs to know the Lord's Spirit helps.",
-   "teaser": "An angel woke Zechariah. “What do you see?” he asked. Zechariah saw a golden lampstand with seven little lamps. Two olive trees stood beside it. Back then, lamps burned olive oil to make light. “What are these?”…",
-   "wordCount": 112
+   "teaser": "Zechariah saw a golden lampstand shining with seven little lights. Two olive trees stood beside it, sending oil through golden pipes to keep the lamps burning. What an amazing sight! Zechariah wondered what it…",
+   "wordCount": 136
   },
   {
    "id": "b12-w2-n6",
@@ -10204,8 +10205,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "family-love",
    "teachingNote": "Reach for this when your child feels left out and needs the picture of a city full of children playing safely.",
-   "teaser": "Many people had lived far away from Jerusalem. Now some had come home. Zechariah told them about a happy day to come. “I will come back and live in Jerusalem,” said the Lord. It would be a city of truth. His…",
-   "wordCount": 116
+   "teaser": "Once, Jerusalem had been broken, and many families had gone far away. But the Lord gave Zechariah a picture of happier days ahead. Imagine the streets filled with neighbors again. Grandmothers and grandfathers…",
+   "wordCount": 133
   },
   {
    "id": "b12-w2-n7",
@@ -10230,8 +10231,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "reverence",
    "teachingNote": "Reach for this when your child thinks ordinary things are not special and needs to see everyday work can be holy.",
-   "teaser": "Zechariah told about the day Jesus comes again as King. “The Lord shall be king over all the earth,” he said. Even the horses’ bells will say, “Holiness unto the Lord.” Something holy belongs to Heavenly Father and…",
-   "wordCount": 100
+   "teaser": "Zechariah told of a wonderful day when the Lord would be King over all the earth. On that day, even the little bells on horses would carry words of love and honor for Him: 'Holiness unto the Lord.' The people…",
+   "wordCount": 132
   },
   {
    "id": "b12-w3-n1",
@@ -10256,8 +10257,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "identity",
    "teachingNote": "Reach for this when your child asks if they are really loved and needs to hear the Lord loves them all day long.",
-   "teaser": "Long before Jesus was born, Heavenly Father’s people came home to Jerusalem. But many had stopped thinking about the Lord. So the Lord gave Malachi a message to share. It began with four warm words: “I have loved…",
-   "wordCount": 124
+   "teaser": "The people in Malachi's day had forgotten how much the Lord loved them. Some had stopped thinking about Him at all. Then the Lord sent Malachi with a gentle, powerful message: 'I have loved you.' The people…",
+   "wordCount": 138
   },
   {
    "id": "b12-w3-n2",
@@ -10282,8 +10283,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "pondering",
    "teachingNote": "Reach for this when your child is waiting for a special day and needs to learn how to get ready.",
-   "teaser": "Long before Jesus was born, the Lord gave Malachi a happy promise. He said, “I will send my messenger.” This helper would be sent ahead to “prepare the way.” He would help people get ready, like tidying up before a…",
-   "wordCount": 109
+   "teaser": "Long before Jesus was born, the Lord gave Malachi an exciting promise. He would send a messenger to help the people get ready for Him. Imagine tidying a path before a very special guest arrives. The…",
+   "wordCount": 138
   },
   {
    "id": "b12-w3-n3",
@@ -10308,8 +10309,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "repentance",
    "teachingNote": "Reach for this when your child wants a fresh start and needs the picture of silver made clean and shining.",
-   "teaser": "Malachi’s people had stopped following the Lord’s ways. So the Lord called to them, “Return unto me.” Malachi said the Lord would be “like a refiner’s fire.” The refiner heated silver in his fire until it melted…",
-   "wordCount": 113
+   "teaser": "Have you ever seen silver shine? Long ago, a worker would heat silver until it melted. He watched it carefully as dark bits rose to the top. Little by little, he took them away. Soon the silver was clean and…",
+   "wordCount": 140
   },
   {
    "id": "b12-w3-n4",
@@ -10334,8 +10335,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "generosity",
    "teachingNote": "Reach for this when your child is learning to give and needs to see how the Lord blesses those who give.",
-   "teaser": "In Malachi’s day, people grew their own food. The Lord asked them to pay tithing: one part of every ten, given back. They brought it to the storehouse, a room for food at the Lord’s house. But many people had…",
-   "wordCount": 118
+   "teaser": "In Malachi's day, families grew much of their own food. They gathered grain and other good things from their fields. The Lord asked them to give Him one part out of every ten. That gift was called tithing. The…",
+   "wordCount": 144
   },
   {
    "id": "b12-w3-n5",
@@ -10360,8 +10361,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "identity",
    "teachingNote": "Reach for this when your child feels ordinary and needs to hear they are one of the Lord's treasured jewels.",
-   "teaser": "In Malachi’s day, many people forgot the Lord. But some loved Him. They talked together often, and they thought about Him. The Lord listened, and He heard every word. So a book was written for them. It was called a…",
-   "wordCount": 98
+   "teaser": "In Malachi's day, some people loved the Lord and talked about Him together. They remembered His goodness, even when others had forgotten. The Lord listened to their words. A special book of remembrance was…",
+   "wordCount": 140
   },
   {
    "id": "b12-w3-n6",
@@ -10386,8 +10387,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "hope",
    "teachingNote": "Reach for this when your child is sick or sad and needs the picture of warm sunshine with healing in it.",
-   "teaser": "Malachi had a happy promise for the people who loved the Lord. The “Sun of righteousness” would rise, the One who is always good and right. Malachi was talking about Jesus. Like the morning sun, Jesus brings light…",
-   "wordCount": 109
+   "teaser": "Have you ever watched the morning sun rise? First a thin line of gold appears. Then warm light spreads across the sky and wakes the world. Malachi promised that the 'Sun of righteousness' would rise with…",
+   "wordCount": 137
   },
   {
    "id": "b12-w3-n7",
@@ -10412,8 +10413,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "family-love",
    "teachingNote": "Reach for this when your child misses someone or worries about family and needs to know hearts can turn toward each other.",
-   "teaser": "At the end of his book, Malachi wrote a promise. The Lord said, “I will send you Elijah the prophet.” Elijah had taught Heavenly Father’s words long before. Then he was taken up to heaven. Elijah would “turn the…",
-   "wordCount": 112
+   "teaser": "At the end of his book, Malachi shared a promise from the Lord. Before a great day to come, Elijah the prophet would return. He would help turn the hearts of children toward their fathers and mothers, and the…",
+   "wordCount": 139
   },
   {
    "id": "b12-w4-n1",
@@ -10438,8 +10439,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "curiosity",
    "teachingNote": "Reach for this when your child is searching for answers and needs the picture of wise travelers who followed a star to Jesus.",
-   "teaser": "Long ago, Heavenly Father helped a man named Balaam see far ahead. Balaam said, “There shall come a Star out of Jacob.” Jacob’s family was Israel, Heavenly Father’s people. A star shows travelers the way. Balaam was…",
-   "wordCount": 120
+   "teaser": "Long before Jesus came to earth, a man named Balaam spoke of a star that would rise from Jacob's family. His words pointed toward a coming King. Then, when Jesus was born, wise men far to the east saw a…",
+   "wordCount": 139
   },
   {
    "id": "b12-w4-n2",
@@ -10464,8 +10465,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "hope",
    "teachingNote": "Reach for this when your child is waiting for a promise and needs the picture of a little branch growing from an old stump.",
-   "teaser": "Long before Jesus was born, Isaiah told what Heavenly Father showed him. He talked about an old tree stump. A stump looks all done. But Isaiah said a little new branch would grow out of its roots! The stump was a…",
-   "wordCount": 123
+   "teaser": "Imagine an old tree stump standing quietly in a field. Its tall branches are gone. It looks as though nothing new could ever grow there. But one morning, a tiny green shoot pushes up beside it. New life! Long…",
+   "wordCount": 140
   },
   {
    "id": "b12-w4-n3",
@@ -10490,8 +10491,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "humility",
    "teachingNote": "Reach for this when your child feels like there is no room for them and needs to know there is always room for Jesus in their heart.",
-   "teaser": "Long ago, Micah told the people what Heavenly Father said. Bethlehem was a little town, but Micah said it would be special. A great Ruler would come from Bethlehem, King David’s town. Micah was talking about Jesus…",
-   "wordCount": 121
+   "teaser": "Long before the first Christmas, Micah promised that a great ruler would come from little Bethlehem. Many years later, Mary and Joseph traveled to that very town. They had come because the ruler of Rome wanted…",
+   "wordCount": 146
   },
   {
    "id": "b12-w4-n4",
@@ -10516,8 +10517,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "trust-in-god",
    "teachingNote": "Reach for this when your child feels afraid and needs to know Heavenly Father sent Jesus, His perfect Lamb, to save us.",
-   "teaser": "Long ago, Abraham told Isaac that Heavenly Father would give a lamb. Later, Heavenly Father asked His people for perfect lambs. Those lambs were a picture. They pointed to Jesus, Heavenly Father’s perfect Son. The…",
-   "wordCount": 115
+   "teaser": "Long ago, Abraham trusted that God would provide a lamb. Later, the Lord asked His people to choose a perfect lamb for a sacred offering. Those lambs helped point their hearts toward Jesus, the perfect Son of…",
+   "wordCount": 140
   },
   {
    "id": "b12-w4-n5",
@@ -10542,8 +10543,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "wonder",
    "teachingNote": "Reach for this when your child sees Christmas lights and needs help connecting them to Jesus, the Light of the World.",
-   "teaser": "Long before Jesus was born, Isaiah told what Heavenly Father said. “The people who walked in darkness have seen a great light.” Many people felt sad and lost then, like walking in the dark. Isaiah promised that a…",
-   "wordCount": 110
+   "teaser": "Long before Jesus was born, Isaiah promised that people walking in darkness would see a great light. He was looking forward to the Savior. Then, on the night Jesus was born, shepherds watched their sheep…",
+   "wordCount": 131
   },
   {
    "id": "b12-w4-n6",
@@ -10568,8 +10569,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "peacemaking",
    "teachingNote": "Reach for this when your home feels loud or upset and your child needs to know Jesus brings peace.",
-   "teaser": "Long before Jesus was born, Isaiah said a special child would come. He would be called the Prince of Peace. The night Jesus was born, an angel told the shepherds the happy news. Suddenly, many, many angels were…",
-   "wordCount": 116
+   "teaser": "Long before the first Christmas, Isaiah promised that a special child would be born. One of His beautiful names would be the Prince of Peace. Isaiah was telling the people about Jesus. Then came the night of…",
+   "wordCount": 138
   },
   {
    "id": "b12-w4-n7",
@@ -10594,8 +10595,8 @@ window.LST_LIBRARY = {
    ],
    "primaryVirtue": "gratitude",
    "teachingNote": "Reach for this when your child is bursting with Christmas excitement and needs to know the best gift is Jesus.",
-   "teaser": "Long ago, Isaiah told what Heavenly Father said. One day people would say, “This is the Lord; we have waited for Him.” They would say, “He will save us!” The night Jesus was born, the angels went back into heaven…",
-   "wordCount": 123
+   "teaser": "Long before the first Christmas, Isaiah looked toward the coming Savior. He pictured the happy words people would say: 'We have waited for him, and he will save us.' Then, one wonderful night, angels told…",
+   "wordCount": 136
   },
   {
    "id": "b13-w1-n1",
