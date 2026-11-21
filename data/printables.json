@@ -1,7 +1,68 @@
 {
- "updated": "2026-11-21T19:07:03.725Z",
+ "updated": "2026-11-21T19:25:49.640Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
+  {
+   "id": "story-break-up-the-hard-ground",
+   "type": "story",
+   "title": "Break Up the Hard Ground",
+   "nightLabel": "Week 4 · Night 4",
+   "download": "OldTestament_Story_BreakUpTheHardGround_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 25,
+   "date": "2026-11-22",
+   "story": "break-up-the-hard-ground",
+   "ref": "Hosea 10:12",
+   "storyId": "ot-b11-w4n4",
+   "files": {
+    "lds": {
+     "url": "/lantern/break-up-the-hard-ground/printables/story.pdf?v=28680cba27",
+     "pages": 5,
+     "bytes": 1044587
+    },
+    "christian": {
+     "url": "/lantern/break-up-the-hard-ground/printables/story-christian.pdf?v=28680cba27",
+     "pages": 5,
+     "bytes": 1044303
+    }
+   },
+   "thumb": "/lantern/break-up-the-hard-ground/printables/story.jpg?v=28680cba27",
+   "src": "28680cba27e2c390dcd71858ff60477fcea354b5d83797bb8d3670933155132b",
+   "updated": "2026-11-21",
+   "created": "2026-11-21",
+   "stored": "28680cba27e2c390dcd71858ff60477fcea354b5d83797bb8d3670933155132b"
+  },
+  {
+   "id": "song-break-up-the-hard-ground",
+   "type": "song",
+   "title": "Dig It Soft",
+   "storyTitle": "Break Up the Hard Ground",
+   "download": "OldTestament_Song_DigItSoft_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 25,
+   "date": "2026-11-22",
+   "story": "break-up-the-hard-ground",
+   "ref": "Hosea 10:12",
+   "storyId": "ot-b11-w4n4",
+   "files": {
+    "lds": {
+     "url": "/lantern/break-up-the-hard-ground/printables/song.pdf?v=9473e09a5a",
+     "pages": 1,
+     "bytes": 35016
+    }
+   },
+   "thumb": "/lantern/break-up-the-hard-ground/printables/song.jpg?v=9473e09a5a",
+   "src": "9473e09a5ae2c3f959a65b869b9c91a213f254a53e81a1ce0ee9371b6944676e",
+   "updated": "2026-11-21",
+   "created": "2026-11-21",
+   "stored": "9473e09a5ae2c3f959a65b869b9c91a213f254a53e81a1ce0ee9371b6944676e"
+  },
   {
    "id": "story-sure-as-the-morning",
    "type": "story",
