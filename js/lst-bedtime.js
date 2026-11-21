@@ -142,7 +142,7 @@
     september: "images/book-cover-september.jpg",
     october: "images/book-cover-october.jpg",
     november: "images/book-cover-november.jpg?v=2",
-    december: "images/book-cover-december.jpg"
+    december: "images/book-cover-december.jpg?v=2"
   };
   var VOLUME_ART = {
     ot: "images/cover-ot.jpg",
