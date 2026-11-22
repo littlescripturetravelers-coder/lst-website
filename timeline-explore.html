@@ -2359,6 +2359,7 @@ function goTonight(){
   var cy=laneY("lstbook")+(cl.slot||0)*laneStep("lstbook")*laneDir("lstbook");
   if(curView==="v"){ tx=st.clientWidth/2+cy*sc; ty=st.clientHeight/2-cl.x*sc; }   /* the world is turned on its side */
   else { tx=-(cl.x*sc-st.clientWidth/2); ty=-(cy*sc-st.clientHeight*.5); }
+  window._tonightAt=[tx,ty,sc];
   applyT(true);
 }
 
@@ -5087,6 +5088,8 @@ function buildTL(){
       if(cl.tonight){
         /* the first time tonight's story is drawn, the view flies to it */
         if(!window._flewTonight){ window._flewTonight=true; setTimeout(goTonight,450); }
+        /* drawn again when newer data arrives and lanes above grow: while the view is still where the fly-in left it, fly again (app watch, 22 Nov 2026) */
+        else if(window._tonightAt && tx===window._tonightAt[0] && ty===window._tonightAt[1] && sc===window._tonightAt[2]) setTimeout(goTonight,0);
         /* the open box: tonight's story, named, sitting right over its marker */
         var box=document.createElement("div"); box.className="tonight-box";
         box.innerHTML="<div class='k'>&#10022; TONIGHT'S STORY</div><div class='t'></div><div class='s'>Tap to open it</div>";
