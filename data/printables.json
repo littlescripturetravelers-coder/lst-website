@@ -1,7 +1,68 @@
 {
- "updated": "2026-11-22T11:06:12.470Z",
+ "updated": "2026-11-22T19:21:02.535Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
+  {
+   "id": "story-i-will-love-them-freely",
+   "type": "story",
+   "title": "I Will Love Them Freely",
+   "nightLabel": "Week 4 · Night 5",
+   "download": "OldTestament_Story_IWillLoveThemFreely_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 26,
+   "date": "2026-11-23",
+   "story": "i-will-love-them-freely",
+   "ref": "Hosea 14:4–7",
+   "storyId": "ot-b11-w4n5",
+   "files": {
+    "lds": {
+     "url": "/lantern/i-will-love-them-freely/printables/story.pdf?v=cc840ee57d",
+     "pages": 5,
+     "bytes": 1024699
+    },
+    "christian": {
+     "url": "/lantern/i-will-love-them-freely/printables/story-christian.pdf?v=cc840ee57d",
+     "pages": 5,
+     "bytes": 1024625
+    }
+   },
+   "thumb": "/lantern/i-will-love-them-freely/printables/story.jpg?v=cc840ee57d",
+   "src": "cc840ee57d9dedee9519e58352262317d70e66103d3686976e26cef989547052",
+   "updated": "2026-11-22",
+   "created": "2026-11-22",
+   "stored": "cc840ee57d9dedee9519e58352262317d70e66103d3686976e26cef989547052"
+  },
+  {
+   "id": "song-i-will-love-them-freely",
+   "type": "song",
+   "title": "Dew on the Morning Grass",
+   "storyTitle": "I Will Love Them Freely",
+   "download": "OldTestament_Song_DewOnTheMorningGrass_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 26,
+   "date": "2026-11-23",
+   "story": "i-will-love-them-freely",
+   "ref": "Hosea 14:4–7",
+   "storyId": "ot-b11-w4n5",
+   "files": {
+    "lds": {
+     "url": "/lantern/i-will-love-them-freely/printables/song.pdf?v=54564a8323",
+     "pages": 1,
+     "bytes": 35610
+    }
+   },
+   "thumb": "/lantern/i-will-love-them-freely/printables/song.jpg?v=54564a8323",
+   "src": "54564a83232702d0bf147c53615b40156f00a9f9720dd598747cfcc45cddffb2",
+   "updated": "2026-11-22",
+   "created": "2026-11-22",
+   "stored": "54564a83232702d0bf147c53615b40156f00a9f9720dd598747cfcc45cddffb2"
+  },
   {
    "id": "story-break-up-the-hard-ground",
    "type": "story",
