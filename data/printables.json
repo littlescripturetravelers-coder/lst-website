@@ -1,7 +1,68 @@
 {
- "updated": "2026-11-23T12:22:28.822Z",
+ "updated": "2026-11-23T19:31:04.715Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
+  {
+   "id": "story-slow-to-anger-great-in-kindness",
+   "type": "story",
+   "title": "Slow to Anger, Great in Kindness",
+   "nightLabel": "Week 4 · Night 6",
+   "download": "OldTestament_Story_SlowToAngerGreatInKindness_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 27,
+   "date": "2026-11-24",
+   "story": "slow-to-anger-great-in-kindness",
+   "ref": "Joel 2:12–13",
+   "storyId": "ot-b11-w4n6",
+   "files": {
+    "lds": {
+     "url": "/lantern/slow-to-anger-great-in-kindness/printables/story.pdf?v=f5d3e57fd9",
+     "pages": 5,
+     "bytes": 1008627
+    },
+    "christian": {
+     "url": "/lantern/slow-to-anger-great-in-kindness/printables/story-christian.pdf?v=f5d3e57fd9",
+     "pages": 5,
+     "bytes": 1008333
+    }
+   },
+   "thumb": "/lantern/slow-to-anger-great-in-kindness/printables/story.jpg?v=f5d3e57fd9",
+   "src": "f5d3e57fd982d4b9bac82c87569dbea41501d5c5b052f7634dff43ec0bcaebf1",
+   "updated": "2026-11-23",
+   "created": "2026-11-23",
+   "stored": "f5d3e57fd982d4b9bac82c87569dbea41501d5c5b052f7634dff43ec0bcaebf1"
+  },
+  {
+   "id": "song-slow-to-anger-great-in-kindness",
+   "type": "song",
+   "title": "Turn Around, Come Back",
+   "storyTitle": "Slow to Anger, Great in Kindness",
+   "download": "OldTestament_Song_TurnAroundComeBack_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 27,
+   "date": "2026-11-24",
+   "story": "slow-to-anger-great-in-kindness",
+   "ref": "Joel 2:12–13",
+   "storyId": "ot-b11-w4n6",
+   "files": {
+    "lds": {
+     "url": "/lantern/slow-to-anger-great-in-kindness/printables/song.pdf?v=c1260e47b9",
+     "pages": 1,
+     "bytes": 36076
+    }
+   },
+   "thumb": "/lantern/slow-to-anger-great-in-kindness/printables/song.jpg?v=c1260e47b9",
+   "src": "c1260e47b9863851d4570c3cee81de24861f5af314b2070e89f00b8073e97768",
+   "updated": "2026-11-23",
+   "created": "2026-11-23",
+   "stored": "c1260e47b9863851d4570c3cee81de24861f5af314b2070e89f00b8073e97768"
+  },
   {
    "id": "story-i-will-love-them-freely",
    "type": "story",
