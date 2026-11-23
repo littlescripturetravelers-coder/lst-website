@@ -1,0 +1,32 @@
+# TONIGHT'S ANIMAL STORY (Levi, 23 Nov 2026): asks supabase/functions/night-tale (in lst-app) to write a night's animal
+# story and record it in Levi's voice. The nightly publisher does this by itself; this is for one night by hand
+# (a first try, or "write it again" with force). Spends a little Anthropic and ElevenLabs credit each time.
+name: Animal story
+on:
+  workflow_dispatch:
+    inputs:
+      date: { description: "Night (YYYY-MM-DD); empty = today in Denver", required: false, default: "" }
+      force: { description: "Write and record it again even if it is there", type: boolean, default: false }
+jobs:
+  tale:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Ask for the story and wait for it
+        env:
+          SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
+          KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          DATE: ${{ inputs.date }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          D="${DATE:-$(TZ=America/Denver date +%F)}"
+          echo "night $D"
+          curl -sS -X POST "$SUPABASE_URL/functions/v1/night-tale" -H "Authorization: Bearer $KEY" -H "Content-Type: application/json" \
+            -d "{\"date\":\"$D\",\"force\":$FORCE}"; echo
+          for i in $(seq 1 60); do
+            sleep 10
+            R=$(curl -sS "$SUPABASE_URL/rest/v1/night_tales?publish_date=eq.$D&select=status,title,animal,hero,score,chars,seconds,error" -H "apikey: $KEY" -H "Authorization: Bearer $KEY")
+            echo "$R"
+            case "$R" in *'"ready"'*) echo "ready"; exit 0;; *'"failed"'*) echo "failed"; exit 1;; esac
+          done
+          echo "still not done after 10 minutes"; exit 1

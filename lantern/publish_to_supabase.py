@@ -337,6 +337,15 @@ def narrate(date, edition=None, force=False):
             pass
     return status, resp[:300]
 
+# TONIGHT'S ANIMAL STORY (Levi, 23 Nov 2026: "a symbol/narnia type story that goes with every nights scripture
+# story ... with my voice narrating it"): night-tale (lst-app supabase/functions) writes it with Claude, rates it,
+# and records it in Levi's voice in the background; it answers at once. LANTERN_TALE=0 leaves it out.
+TALE = os.environ.get("LANTERN_TALE", "1") != "0"
+def tale(date):
+    hdr = {"Authorization": "Bearer " + KEY, "Content-Type": "application/json"}
+    status, resp = http("POST", URL + "/functions/v1/night-tale", {"date": date}, hdr, timeout=60)
+    return status, resp[:300]
+
 # THE MARKETING RULE. The moment a night is in the account, its marketing is
 # drafted from it - one piece each for Instagram, Facebook, TikTok, Pinterest,
 # YouTube and email, written from the night's story and its Morning Lantern
@@ -613,6 +622,10 @@ def main():
                 status, body = narrate(date, "christian", force=guarded)
                 if status == 200: print(f"    Christian narration: recorded")
                 else:             print(f"    Christian narration: not recorded ({status}) {body}")
+
+        if TALE and live_night(date):
+            status, body = tale(date)
+            print("    animal story: " + ("asked for (written and recorded in the background)" if status == 200 else f"not asked ({status}) {body}"))
 
         if MARKET and live_night(date):
             status, body = market(date)
