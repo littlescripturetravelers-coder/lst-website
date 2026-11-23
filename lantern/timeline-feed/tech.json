@@ -1615,15 +1615,21 @@
     },
     {
      "on": "2026-10-10",
+     "url": "https://www.ncsl.org/health/youth-mental-health-in-a-digital-age-state-policy-trends-on-social-media-and-emerging-technologies",
      "note": "The National Conference of State Legislatures reported that states are implementing policies to address the mental health impacts of social media and emerging technologies on youth, including AI safeguards and digital literacy efforts.",
-     "source": "NCSL.org",
-     "url": "https://www.ncsl.org/health/youth-mental-health-in-a-digital-age-state-policy-trends-on-social-media-and-emerging-technologies"
+     "source": "NCSL.org"
     },
     {
      "on": "2026-10-10",
+     "url": "https://www-cdn.abcnews.com/amp/US/new-report-screen-time-limits-children-longer/story?id=129368332",
      "note": "The American Academy of Pediatrics emphasized that screen time limits alone are insufficient, advocating for a comprehensive approach to digital media use that considers content quality and context.",
-     "source": "ABC News",
-     "url": "https://www-cdn.abcnews.com/amp/US/new-report-screen-time-limits-children-longer/story?id=129368332"
+     "source": "ABC News"
+    },
+    {
+     "on": "2026-11-23",
+     "note": "In the UK, the Wellcome Trust gave £9.3 million to ten research teams. They will study how new limits on social media for young people affect the wellbeing of more than 300,000 children and teens. That means families will soon have much better answers, not just guesses, about what really helps.",
+     "source": "CASRAI, reporting on the Wellcome Trust announcement (November 18, 2026)",
+     "url": "https://casrai.org/news/wellcome-9-3-million-uk-youth-social-media-restrictions-research-2026"
     }
    ]
   },
@@ -2120,15 +2126,27 @@
     },
     {
      "on": "2026-10-10",
+     "url": "https://www.eurekalert.org/news-releases/1142300",
      "note": "The American Psychological Association warned that while educational technology can engage students, it doesn't always lead to actual learning, especially with generative AI tools that may improve immediate performance without building underlying knowledge.",
-     "source": "EurekAlert!",
-     "url": "https://www.eurekalert.org/news-releases/1142300"
+     "source": "EurekAlert!"
     },
     {
      "on": "2026-10-10",
+     "url": "https://www.healthychildren.org/English/family-life/Media/Pages/how-will-artificial-intelligence-AI-affect-children.aspx?form=XCXCUUZZ",
      "note": "The American Academy of Pediatrics highlighted potential dangers of AI for children, including privacy erosion and exposure to biased or harmful content, urging for cautious integration of AI in children's lives.",
-     "source": "HealthyChildren.org",
-     "url": "https://www.healthychildren.org/English/family-life/Media/Pages/how-will-artificial-intelligence-AI-affect-children.aspx?form=XCXCUUZZ"
+     "source": "HealthyChildren.org"
+    },
+    {
+     "on": "2026-11-23",
+     "note": "New York passed a new law to keep children safer when they talk with AI chatbots. Starting January 1, 2027, chatbot companies may not give children in New York unsafe 'AI companion' features, and they will have to check users' ages. This is a good time to talk together about which helpers in your home can talk back.",
+     "source": "Holland & Knight, 'New York Enacts AI Chatbot Safeguards for Minors' (November 5, 2026)",
+     "url": "https://www.hklaw.com/en/insights/publications/2026/11/new-york-enacts-ai-chatbot-safeguards-for-minors"
+    },
+    {
+     "on": "2026-11-23",
+     "note": "The American Psychological Association looked at the new toys that talk using AI. Experts worry these toys can make little children feel too attached to them. The toys also don't teach the things a real person does, like sharing and taking turns. For very young children, real people still matter most: a parent, a grandparent, a friend.",
+     "source": "American Psychological Association, Monitor on Psychology, 'Chatbots in the crib' (November 1, 2026)",
+     "url": "https://www.apa.org/monitor/2026/11-12/ai-chatbot-toys-early-development"
     }
    ]
   },
@@ -2248,8 +2266,8 @@
    ]
   }
  ],
- "updated": "2026-10-10",
- "version": 11,
+ "updated": "2026-11-23",
+ "version": 12,
  "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage: Babies & Toddlers, then the same six stages the Morning Lantern uses. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
  "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next.",
