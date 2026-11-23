@@ -1730,6 +1730,11 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
       <span class="sm-txt"><b style="color:#A78BFA">Prophecy Tracker</b>
         <em>Prophecies given and fulfilled, each labelled by strength of evidence</em></span>
       <span class="sm-arr">&#8250;</span></div>
+    <div class="sm-item" onclick="smGo('signs')">
+      <span class="sm-ico" style="color:#A78BFA"><i data-lli=clock></i></span>
+      <span class="sm-txt"><b style="color:#A78BFA">Signs of the Times</b>
+        <em>The signs the scriptures name before Jesus Christ comes again, and what is happening now, each with its source; a new look every month. Ready, not afraid</em></span>
+      <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('quad')">
       <span class="sm-ico" style="color:#FDBA74">&#9878;</span>
       <span class="sm-txt"><b style="color:#FDBA74">Faith &amp; Freedom</b>
@@ -12043,6 +12048,7 @@ function smGo(which){
       if(which==="study")       openStudy();
       else if(which==="compare")openCompare();
       else if(which==="proph")  openProphTracker();
+      else if(which==="signs")  openSigns();
       else if(which==="quad")   openQuad();
       else if(which==="family") openFamilyHistory();
       else if(which==="systems") openSystems();
@@ -12443,6 +12449,7 @@ setTimeout(chFetch,1200);
 #tech-panel{display:none;position:fixed;top:var(--safet);left:0;right:0;bottom:var(--safeb);z-index:600;background:rgba(2,5,15,.97);flex-direction:column;animation:mopen .22s ease;}
 #tech-panel.open{display:flex;}
 /* the same panel is two rooms. In the evidence room the technology tabs are gone and the colour is the digs' amber. */
+#tech-panel.signs #tg-tabs{display:none;} #tech-panel.signs #tg-title{color:#A78BFA;} #tech-panel.signs .tg-card.open{border-color:rgba(167,139,250,.5);} #tech-panel.signs .tg-em{background:rgba(167,139,250,.14);color:#A78BFA;} #tech-panel.signs .tg-chev{color:#A78BFA;}
 #tech-panel.finds #tg-tabs{display:none;} #tech-panel:not(.finds) #tg-tab-finds{display:none;}
 #tech-panel.finds #tg-hdr{border-bottom-color:rgba(217,123,74,.4);} #tech-panel.finds #tg-title{color:#D97B4A;}
 #tech-panel.finds .tg-card.open{border-color:rgba(217,123,74,.5);} #tech-panel.finds .tg-em{background:rgba(217,123,74,.14);} #tech-panel.finds .tg-chev{color:#D97B4A;}
@@ -12530,6 +12537,13 @@ function tgMerge(){
     if(!ev){ for(var k2=0;k2<EVS.length;k2++) if(EVS[k2].id==="tech-"+it.id){ ev=EVS[k2]; break; } }
     if(!ev){ ev={id:"tech-"+it.id,l:"invent",y:Number(it.y)||0,em:tgEm(it.em),t:tgEsc(it.name),date:tgEsc(it.date||""),conf:"confirmed",loc:tgEsc(it.loc||""),lat:it.lat,lng:it.lng,de:tgEsc(it.what||""),gospel:tgEsc(it.why||"")}; EVS.push(ev); }
     ev.tech=it.id;
+    /* THE MILESTONES the daily scan finds (Levi, 23 Nov 2026: "whenever their is new tech coming out or a new milestone with AI
+       that it is added to the timeline"): each its own dated event on the Inventions lane, opening its technology's card */
+    (it.milestones||[]).forEach(function(m,mi){ if(!m||!m.t||!/^\d{4}/.test(String(m.on||""))) return; var mid="tech-"+it.id+"-m-"+String(m.on).replace(/-/g,"")+"-"+mi, have=false;
+      for(var k4=0;k4<EVS.length;k4++) if(EVS[k4].id===mid){ have=true; break; }
+      if(have) return; var u=String(m.url||"");
+      EVS.push({id:mid,l:"invent",y:Number(String(m.on).slice(0,4)),em:tgEm(it.em),t:tgEsc(m.t),date:tgEsc(m.on),conf:"confirmed",loc:tgEsc(it.loc||""),lat:it.lat,lng:it.lng,
+        de:tgEsc(m.de||"")+(m.source?" ("+tgEsc(m.source)+")":""),gospel:tgEsc(it.why||""),tech:it.id,src:/^https?:\/\//.test(u)?u:undefined}); });
   }
   var finds=TG.finds.items||[];
   for(i=0;i<finds.length;i++){ it=finds[i]; if(!it||!it.id) continue;
@@ -12543,6 +12557,44 @@ function tgFetch(){
 }
 
 /* ── the panel ── */
+
+/* ── SIGNS OF THE TIMES (Levi, 23 Nov 2026: "there is a Signs of the Time tracker and that always needs to be updated and
+   current"). The signs the scriptures name before Jesus Christ comes again, in the scriptures' own words, what each means
+   in plain words, and what is happening now, each note dated with its source; the monthly scan (lst-website
+   timeline_watch.py, job signs) adds the notes to the account. Loaded only when it is opened (data/signs.js), so the
+   timeline opens no slower. The Christian edition shows the signs every Christian reads; the Latter-day Saint edition adds
+   the Restoration, Elijah, temples, the gathering of Israel and Zion. Nothing here predicts a date. */
+var SIGNS=null;
+function openSigns(){
+  var go=function(){ TG.tab="signs"; document.getElementById("tech-panel").classList.add("open"); tgRender(); signsFeed(); };
+  if(SIGNS){ go(); return; }
+  var take=function(){ SIGNS=window.LST_SIGNS||{signs:[]}; try{ var c=JSON.parse(localStorage.getItem("lst_timeline_signs")||"null"); if(c&&c.signs&&Number(c.version||0)>Number(SIGNS.version||0)) SIGNS=c; }catch(e){} go(); };
+  if(window.LST_SIGNS){ take(); return; }
+  var sc=document.createElement("script"); sc.src="data/signs.js"; sc.onload=take; sc.onerror=function(){ SIGNS={signs:[]}; go(); }; document.head.appendChild(sc);
+}
+function signsFeed(){ if(signsFeed.done) return; signsFeed.done=1;
+  try{ slfRows(["signs"],function(rows){ var b=rows&&rows[0]&&rows[0].body;
+    if(b&&b.signs&&b.signs.length&&Number(b.version||0)>Number((SIGNS||{}).version||0)){ SIGNS=b; try{ localStorage.setItem("lst_timeline_signs",JSON.stringify(b)); }catch(e){}
+      if(TG.tab==="signs"&&document.getElementById("tech-panel").classList.contains("open")) tgRender(); } }); }catch(e){} }
+function signsHtml(){
+  var chr=(typeof tlChristian==="function"&&tlChristian()), S2=SIGNS||{signs:[]};
+  var T=function(x){ x=String(x==null?"":x); try{ if(chr&&typeof tlCleanText==="function") x=tlCleanText(x); }catch(e){} return tgEsc(x); };
+  var list=(S2.signs||[]).filter(function(s){ return s&&(!chr||!s.lds); });
+  var h="<div class='tg-fresh'>"+list.length+" signs &#183; updated "+tgEsc(S2.updated||"")+" &#183; a new look on the 3rd of every month</div>";
+  h+="<div class='tg-sec tg-why' style='margin:0 0 8px'><div class='tg-p'>"+T(S2.intro)+"</div></div>";
+  list.forEach(function(s){ var open=TG.open==="sg-"+s.id, notes=(s.now||[]).slice().sort(function(a,b){ return String(b.on||"").localeCompare(String(a.on||"")); });
+    h+="<div class='tg-card"+(open?" open":"")+"' id='tg-sg-"+tgEsc(s.id)+"'>"
+      +"<div class='tg-head' onclick=\"tgToggle('sg-"+tgEsc(s.id)+"')\"><div class='tg-em'><i data-lli=clock></i></div><div><div class='tg-name'>"+T(s.t)+"</div><div class='tg-when'>"+T((s.refs||[]).join("; "))+"</div></div><div class='tg-chev'>&#8250;</div></div>"
+      +"<div class='tg-detail'>"
+      +"<div class='tg-sec tg-why'><div class='tg-lab' style='color:#F5C518'>What the scriptures say</div><div class='tg-p'>"+T(s.said)+"</div></div>"
+      +"<div class='tg-sec'><div class='tg-lab'>What it means</div><div class='tg-p'>"+T(s.means)+"</div></div>"
+      +(s.watch===false?"<div class='tg-sec tg-learn'><div class='tg-lab'>What is happening now</div><div class='tg-p'>This is still to come. No one can say when, and we do not guess.</div></div>"
+        :"<div class='tg-sec tg-learn'><div class='tg-lab'>What is happening now</div>"+tgNotes(notes.map(function(n){ return {on:n.on,note:chr&&typeof tlCleanText==="function"?tlCleanText(n.note||""):n.note,source:n.source,url:n.url}; }))+"</div>")
+      +"</div></div>"; });
+  h+="<div class='tg-sec tg-kids' style='margin-top:10px'><div class='tg-lab'>Ready, not afraid</div><div class='tg-p'>"+T(S2.ready)+"</div>"+(!chr&&S2.readyLds?"<div class='tg-p' style='margin-top:6px'>"+tgEsc(S2.readyLds)+"</div>":"")+"</div>";
+  if(S2.rule) h+="<div class='tg-p' style='margin:8px 2px;color:rgba(255,255,255,.55);font-size:12px'>"+T(S2.rule)+"</div>";
+  return h;
+}
 function openTechGuide(tab,focus){
   TG.tab=tab||"tech"; TG.open=focus||TG.open;
   document.getElementById("tech-panel").classList.add("open"); tgRender();
@@ -12604,6 +12656,9 @@ function tgFindCard(it){
 function tgRender(){
   ["tech","ages","learn","finds"].forEach(function(t){ var b=document.getElementById("tg-tab-"+t); if(b) b.classList.toggle("on",TG.tab===t); });
   var finds=(TG.tab==="finds"), panel=document.getElementById("tech-panel"); panel.classList.toggle("finds",finds);
+  var signs=(TG.tab==="signs"); panel.classList.toggle("signs",signs);
+  if(signs){ document.getElementById("tg-title").innerHTML="&#128336; Signs of the Times"; document.getElementById("tg-intro").textContent="The signs the scriptures name before Jesus Christ comes again, and what is happening now. Ready, not afraid.";
+    document.getElementById("tg-body").innerHTML=signsHtml(); try{ if(window.lstLineFill) lstLineFill(document.getElementById("tg-body")); }catch(e){} return; }
   document.getElementById("tg-title").innerHTML=finds?"&#127963; Evidence &amp; Discoveries":"&#128161; Technology for Good";
   document.getElementById("tg-intro").textContent=decodeT(finds
     ?"Finds from digs, libraries and laboratories that bear on the Bible, the Book of Mormon and Jesus Christ. Each carries its source and an honest label: confirmed, believed, or debated. A new search runs on the first of every month."

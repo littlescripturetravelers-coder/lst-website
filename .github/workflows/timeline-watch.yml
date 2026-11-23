@@ -17,12 +17,14 @@ on:
     - cron: '23 10 1 * *'    # the first of every month at 10:23 UTC
     - cron: '47 14 * * *'   # once a day (was four; GitHub free minutes, 18 Oct 2026): the in-depth studies, until every event has one
     - cron: '31 6 * * 0,3'   # Sundays and Wednesdays at 06:31 UTC: the Native peoples, until every one has its study
+    - cron: '43 12 * * *'   # every day at 12:43 UTC: two technology cards' parent guide, by stage, with studies and experts (deep)
+    - cron: '29 11 3 * *'   # the 3rd of every month at 11:29 UTC: the Signs of the Times (signs)
   workflow_dispatch:
     inputs:
       job:
         description: 'Which search to run'
         type: choice
-        options: [tech, discoveries, studies, regions, tribes]
+        options: [tech, deep, signs, discoveries, studies, regions, tribes]
         default: tech
 
 permissions:
@@ -45,6 +47,8 @@ jobs:
           elif [ "${{ github.event.schedule }}" = "23 10 1 * *" ]; then echo "job=discoveries" >> "$GITHUB_OUTPUT";
           elif [ "${{ github.event.schedule }}" = "47 14 * * *" ]; then echo "job=studies" >> "$GITHUB_OUTPUT";
           elif [ "${{ github.event.schedule }}" = "31 6 * * 0,3" ]; then echo "job=tribes" >> "$GITHUB_OUTPUT";
+          elif [ "${{ github.event.schedule }}" = "43 12 * * *" ]; then echo "job=deep" >> "$GITHUB_OUTPUT";
+          elif [ "${{ github.event.schedule }}" = "29 11 3 * *" ]; then echo "job=signs" >> "$GITHUB_OUTPUT";
           else echo "job=tech" >> "$GITHUB_OUTPUT"; fi
 
       - name: Search, check, and write it to the account

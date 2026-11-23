@@ -1,0 +1,198 @@
+{
+ "version": 1,
+ "updated": "2026-11-23",
+ "intro": "These are the signs the scriptures say will come before Jesus Christ comes again. Jesus taught that no one knows the day or the hour (Matthew 24:36), and He told His disciples, \"see that ye be not troubled\" (Matthew 24:6). We watch the signs to be ready, not to be afraid. Each sign below shows what the scriptures say and, where it can be seen in the world, what is happening now, with its source. A new look runs every month.",
+ "ready": "\"Watch therefore: for ye know not what hour your Lord doth come\" (Matthew 24:42). \"When these things begin to come to pass, then look up, and lift up your heads; for your redemption draweth nigh\" (Luke 21:28).",
+ "readyLds": "\"If ye are prepared ye shall not fear\" (Doctrine and Covenants 38:30). Prophets have taught that the best preparation is to follow Jesus Christ every day: prayer, scripture study, keeping covenants, serving others and gathering Israel on both sides of the veil.",
+ "rule": "Nothing here predicts a date, and not every hard thing in the news is a sign. Notes come only from trusted sources and are told calmly.",
+ "signs": [
+  {
+   "id": "gospel-world",
+   "t": "The gospel preached in all the world",
+   "refs": [
+    "Matthew 24:14",
+    "Revelation 14:6"
+   ],
+   "said": "\"This gospel of the kingdom shall be preached in all the world for a witness unto all nations; and then shall the end come.\"",
+   "means": "Before the Savior comes, people of every nation will have the chance to hear about Him. Bible translators, missionaries and new technology are carrying His word farther than ever.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "wars",
+   "t": "Wars and rumors of wars",
+   "refs": [
+    "Matthew 24:6-7",
+    "Doctrine and Covenants 45:26"
+   ],
+   "said": "\"Ye shall hear of wars and rumours of wars: see that ye be not troubled ... For nation shall rise against nation, and kingdom against kingdom.\"",
+   "means": "Jesus said there would be wars, and He also said not to be troubled. Peace begins in families and hearts that follow Him.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "earth",
+   "t": "Earthquakes, famines and pestilences in many places",
+   "refs": [
+    "Matthew 24:7",
+    "Luke 21:11",
+    "Doctrine and Covenants 88:89-90"
+   ],
+   "said": "\"There shall be famines, and pestilences, and earthquakes, in divers places.\"",
+   "means": "Hard things will happen in nature. When they do, followers of Jesus help: they give, serve and pray for those who suffer.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "deceived",
+   "t": "Many will try to deceive",
+   "refs": [
+    "Matthew 24:4-5",
+    "Matthew 24:11",
+    "Matthew 24:24"
+   ],
+   "said": "\"Take heed that no man deceive you. For many shall come in my name ... and many false prophets shall rise, and shall deceive many.\"",
+   "means": "Jesus warned that there would be false voices. Prayer, the scriptures and the Holy Spirit help us tell what is true.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "love-cold",
+   "t": "The love of many will grow cold",
+   "refs": [
+    "Matthew 24:12"
+   ],
+   "said": "\"Because iniquity shall abound, the love of many shall wax cold.\"",
+   "means": "When people stop caring about God and each other, love can grow cold. We can keep it warm by loving as Jesus loves.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "perilous",
+   "t": "Perilous times",
+   "refs": [
+    "2 Timothy 3:1-5"
+   ],
+   "said": "\"In the last days perilous times shall come. For men shall be lovers of their own selves ... disobedient to parents, unthankful, unholy ... lovers of pleasures more than lovers of God.\"",
+   "means": "Paul described a world that loves itself more than God. Families who pray, give thanks and honor one another are the answer to it.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "knowledge",
+   "t": "Knowledge increased, people running to and fro",
+   "refs": [
+    "Daniel 12:4"
+   ],
+   "said": "\"Many shall run to and fro, and knowledge shall be increased.\"",
+   "means": "In the last days people would travel and learn as never before. That knowledge can bless the world when it is used for good.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "israel-land",
+   "t": "The children of Israel gathered to their land",
+   "refs": [
+    "Isaiah 11:11-12",
+    "Ezekiel 37:21",
+    "Jeremiah 16:14-15"
+   ],
+   "said": "\"I will take the children of Israel from among the heathen ... and will gather them on every side, and bring them into their own land.\"",
+   "means": "The prophets saw the Jewish people coming home to the land of their fathers. It is one of the great gatherings the Lord promised.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "spirit",
+   "t": "The Spirit poured out on all flesh",
+   "refs": [
+    "Joel 2:28-29",
+    "Acts 2:17-18"
+   ],
+   "said": "\"I will pour out my spirit upon all flesh; and your sons and your daughters shall prophesy, your old men shall dream dreams, your young men shall see visions.\"",
+   "means": "God promised to pour out His Spirit on many people, young and old. Hearts are being touched all over the world.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "heavens",
+   "t": "Signs in the heavens",
+   "refs": [
+    "Joel 2:30-31",
+    "Matthew 24:29-30"
+   ],
+   "said": "\"The sun shall be turned into darkness, and the moon into blood, before the great and the terrible day of the Lord come.\"",
+   "means": "The scriptures say the heavens themselves will show signs just before the Savior comes. These are still to come; no one can say when.",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "restoration",
+   "lds": true,
+   "t": "The gospel restored and the Book of Mormon brought forth",
+   "refs": [
+    "Isaiah 29:4",
+    "Isaiah 29:11-14",
+    "Revelation 14:6",
+    "Joseph Smith—History 1:17"
+   ],
+   "said": "\"I saw another angel fly in the midst of heaven, having the everlasting gospel to preach unto them that dwell on the earth, and to every nation, and kindred, and tongue, and people.\"",
+   "means": "Latter-day Saints believe this happened when the gospel was restored through Joseph Smith and the Book of Mormon came forth. It is now read in more languages every year.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "elijah",
+   "lds": true,
+   "t": "Elijah's coming: hearts turned to the fathers",
+   "refs": [
+    "Malachi 4:5-6",
+    "Doctrine and Covenants 110:13-16"
+   ],
+   "said": "\"He shall turn the heart of the fathers to the children, and the heart of the children to their fathers.\"",
+   "means": "Elijah came to the Kirtland Temple in 1836. Since then, family history and temple work have grown all over the world, joining families forever.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "temples",
+   "lds": true,
+   "t": "The house of the Lord in the tops of the mountains",
+   "refs": [
+    "Isaiah 2:2-3",
+    "Micah 4:1-2"
+   ],
+   "said": "\"The mountain of the Lord's house shall be established in the top of the mountains ... and all nations shall flow unto it.\"",
+   "means": "Temples are being built across the earth so that more of God's children can make covenants with Him.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "gathering",
+   "lds": true,
+   "t": "The gathering of Israel",
+   "refs": [
+    "1 Nephi 22:25",
+    "Doctrine and Covenants 29:7-8",
+    "Articles of Faith 1:10"
+   ],
+   "said": "\"We believe in the literal gathering of Israel and in the restoration of the Ten Tribes.\"",
+   "means": "President Russell M. Nelson has taught that the gathering of Israel on both sides of the veil is the most important thing happening on earth today. Missionary work and temple work gather Israel.",
+   "watch": true,
+   "now": []
+  },
+  {
+   "id": "zion",
+   "lds": true,
+   "t": "Zion built and the Savior reigning on the earth",
+   "refs": [
+    "Articles of Faith 1:10",
+    "Doctrine and Covenants 45:66-71"
+   ],
+   "said": "\"Zion (the New Jerusalem) will be built upon the American continent; ... Christ will reign personally upon the earth.\"",
+   "means": "This is still to come. The Lord will build His Zion, and He Himself will reign in peace.",
+   "watch": false,
+   "now": []
+  }
+ ]
+}

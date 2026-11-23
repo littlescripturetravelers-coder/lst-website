@@ -602,6 +602,46 @@ def run_tribes(body):
     print("tribes: %d written this run" % written)
     return written
 
+# ── signs: the Signs of the Times, once a month ────────────────────────────
+def run_signs(body):
+    """For each sign the scriptures name that can be seen in the world (watch), what has happened lately, calmly and
+    with a trusted source (Levi, 23 Nov 2026). Never a date, never a guess, never every bad thing in the news."""
+    signs = [s for s in body.get("signs", []) if isinstance(s, dict) and s.get("watch") is not False]
+    instructions = ("You keep a family page called Signs of the Times for Christian and Latter-day Saint families with children. " + TEXT_RULES +
+        " Rules for this page: never predict a date or say the end is near; Jesus said no one knows the day or the hour. Never alarm. "
+        "Not every war, storm or crime is a sign; give only significant, well-documented developments or measured trends (from bodies such as "
+        "the United Nations, the U.S. Geological Survey, the World Health Organization, Bible translation agencies such as Wycliffe or United "
+        "Bible Societies, Pew Research, reputable news, and for Latter-day Saint signs the Church's own newsroom, churchofjesuschrist.org or "
+        "FamilySearch). Keep politics out: report facts plainly, never take a side between nations. Prefer hopeful facts where they are true "
+        "(the scriptures translated into more languages, more temples, more people serving).")
+    added = 0
+    for i in range(0, len(signs), 5):
+        batch = signs[i:i + 5]
+        listing = "\n".join("- %s: %s (%s). Last note: %s" % (sg["id"], sg.get("t"), "; ".join(sg.get("refs") or []),
+                   max([n.get("on", "") for n in sg.get("now", [])] or ["none yet"])) for sg in batch)
+        prompt = ("Today is %s. For each sign below, using web search, find what has happened or been measured in roughly the last 60 days "
+            "that bears on it (or, if nothing is noted yet, the best current measure of it). At most 2 notes per sign, each 1-2 plain sentences, "
+            "each with a real source and URL. If nothing credible and significant, give none for that sign.\n%s\n\n"
+            "Answer with JSON only: {\"notes\":[{\"sign\":\"id\",\"on\":\"YYYY-MM-DD\",\"note\":\"...\",\"source\":\"...\",\"url\":\"https://...\"}]}") % (TODAY, listing)
+        try:
+            ans = ask(instructions, prompt, searches=8)
+        except NoCredits:
+            raise
+        except Exception as e:
+            print("signs: batch skipped:", e); continue
+        for n in [x for x in (ans.get("notes") or []) if isinstance(x, dict)][:10]:
+            sg = next((x for x in batch if x["id"] == str(n.get("sign", ""))), None)
+            note = clean_str(n.get("note"), 500); url = scrub_url(clean_str(n.get("url"), 300))
+            if not sg or not note or not re.match(r"^https?://", url): continue
+            have = sg.setdefault("now", [])
+            if any(x.get("url") == url or x.get("note") == note for x in have): continue
+            on = clean_str(n.get("on"), 10)
+            have.append({"on": on if re.match(r"^\d{4}-\d{2}-\d{2}$", on) else TODAY, "note": note, "source": clean_str(n.get("source"), 120) or "source", "url": url, "added": TODAY})
+            have.sort(key=lambda x: x.get("on", ""), reverse=True); del have[6:]
+            added += 1
+    print("signs: %d notes" % added)
+    return added
+
 # ── run ─────────────────────────────────────────────────────────────────────
 body = read_row()
 seeded = body.pop("_seed_merged", None) is not None
