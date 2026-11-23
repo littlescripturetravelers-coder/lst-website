@@ -10628,7 +10628,10 @@ function slfAdopt(kind,feed){
     if(n>0) slfChristian(t); return n>0;
   }
   if(!Array.isArray(feed.items)||fv<=tv) return false;
+  /* an older age guide in the account never replaces a newer one on the page (agesVersion) */
+  var oldAges=(Number(feed.agesVersion)||0)<(Number(t.agesVersion)||0);
   for(var key in feed){ if(!feed.hasOwnProperty(key)||key==="items"||key==="version") continue;
+    if(oldAges&&(key==="ages"||key==="agesNote"||key==="agesVersion")) continue;
     var tv2=feed[key]; if(tv2==null||tv2===""||(Array.isArray(tv2)&&!tv2.length)) continue; t[key]=tv2; }
   var byId={}; t.items.forEach(function(it){ if(it&&it.id) byId[it.id]=it; });
   feed.items.forEach(function(it){ if(!it||typeof it!=="object"||!it.id) return; var mine=byId[it.id];
@@ -11100,6 +11103,23 @@ function slNotes(arr){ if(!Array.isArray(arr)||!arr.length) return "<p class='sl
   return arr.slice().sort(function(a,b){ return String(b.on||"").localeCompare(String(a.on||"")); }).map(function(n){ if(!n) return "";
     var u=slfUrl(n.url), src=slfEsc(n.source||"source");
     return "<div class='sl-note'><b>"+slfEsc(n.on||"")+"</b><span>"+slfEsc(n.note||"")+"</span>"+(u?"<a href='"+slfEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+src+"</a>":(n.source?"<small>"+src+"</small>":""))+"</div>"; }).join(""); }
+/* A CARD'S AGES, IN THE GUIDE'S SEVEN STAGES (Levi, 23 Nov 2026, chosen: Babies & Toddlers plus the Lantern's six):
+   the card's own `stages` once the scan has written them, else its older bands laid on the nearest new stage */
+function slTechAges(tg){ if(!tg) return {}; if(tg.stages&&typeof tg.stages==="object") return tg.stages; var a=tg.ages||{};
+  return {"0-2":a["0-2"],"3-5":a["3-5"],"6-8":a["6-8"]||a["6-9"],"9-11":a["9-11"]||a["10-12"]||a["6-9"],"12-14":a["12-14"]||a["13-15"],"15-17":a["15-17"]||a["16+"]||a["13-15"],"18+":a["18+"]||a["16+"]}; }
+/* the newer parts of a card (the scan writes them, with their sources): what studies show works best, what experts say
+   could happen, the skills a child will need as an adult, how it helps the Lord's work go forward, and (Latter-day Saint
+   edition) family history, temples and preparing for the Savior's coming */
+function slCite(x,txt){ if(!x) return ""; var u=slfUrl(x.url), src=slfEsc(x.source||x.who||"");
+  return "<li>"+slfEsc(txt||"")+(u?" <a href='"+slfEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+(src||"source")+"</a>":(src?" <small>("+src+")</small>":""))+"</li>"; }
+function slTechMore(tg,sec){ var h="", chr=(typeof tlChristian==="function"&&tlChristian());
+  var st=(tg.studies||[]).filter(function(x){ return x&&x.finding; }), ex=(tg.experts||[]).filter(function(x){ return x&&x.say; });
+  if(st.length) h+=sec("sl-teal","What the studies show works best","<ul class='sl-ul'>"+st.map(function(x){ return slCite(x,x.finding); }).join("")+"</ul>");
+  if(ex.length) h+=sec("sl-amber","What experts say could happen","<ul class='sl-ul'>"+ex.map(function(x){ return slCite(x,x.say); }).join("")+"</ul>");
+  h+=sec("sl-green","Skills they will need as adults",slList(tg.future));
+  h+=sec("sl-gold","How it helps "+(chr?"God":"Heavenly Father")+"&#39;s work go forward",slList(tg.work));
+  if(!chr) h+=sec("sl-gold","Family history, temples and preparing for the Savior&#39;s Second Coming",slList(tg.ldsWork));
+  return h; }
 function slTechHtml(it){
   var tg=it.tech, h="", names=function(ids){ return (ids||[]).map(function(id){ var b=slfTechById(id); return b?"<span class='sl-tag teal'>"+slfEm(b.em)+" "+slfEsc(b.name)+"</span>":""; }).join(""); };
   var made=SLF.tech.items.filter(function(o){ return o&&(o.builtOn||[]).indexOf(tg.id)>=0; }).map(function(o){ return o.id; });
@@ -11112,7 +11132,8 @@ function slTechHtml(it){
   h+=slSec("sl-red","What it can do to a child",slList(tg.harm));
   h+=slSec("sl-amber","What to stay away from",slList(tg.avoid));
   h+=slSec("sl-gold","Bless others with it: Heavenly Father&#39;s purposes",slList(tg.bless));
-  var al=slAgeLines(tg.ages); if(al) h+=slSec("sl-teal","Age by age: what fits, by how a child grows",al+"<p class='sl-dim'>The Age Guide at the top of this topic explains each stage.</p>");
+  var al=slAgeLines(slTechAges(tg)); if(al) h+=slSec("sl-teal","Age by age: what fits, by how a child grows",al+"<p class='sl-dim'>The Age Guide at the top of this topic explains each stage.</p>");
+  h+=slTechMore(tg,slSec);
   h+=slSec("sl-teal","What we are learning",slNotes(tg.learned));
   h+=slSec("sl-gold","Three rules for kids",slList(tg.kids));
   if(tg.talk) h+=slSec("sl-teal","Talk about it tonight","<p class='sl-quote'>&ldquo;"+slfEsc(tg.talk)+"&rdquo;</p>");
@@ -11130,7 +11151,7 @@ function slAgesHtml(it){
     if((s.rules||[]).length) inner+="<div class='sl-st-sub'>Rules for this age</div>"+slList(s.rules);
     if((s.watch||[]).length) inner+="<div class='sl-st-sub'>Watch for</div>"+slList(s.watch);
     if((s.bless||[]).length) inner+="<div class='sl-st-sub'>Ways to bless others at this age</div>"+slList(s.bless);
-    var lines=""; SLF.tech.items.forEach(function(tg){ var t=tg&&tg.ages&&(tg.ages[String(s.years||"").replace(" to ","-").replace(" and up","+")]||tg.ages[s.years]||tg.ages[s.id]); if(t) lines+="<div class='sl-age'><b>"+slfEm(tg.em)+" "+slfEsc(tg.name)+"</b><span>"+slfEsc(t)+"</span></div>"; });
+    var lines=""; SLF.tech.items.forEach(function(tg){ var ta=slTechAges(tg), t=ta[String(s.years||"").replace(" to ","-").replace(" and up","+")]||ta[s.years]||ta[s.id]; if(t) lines+="<div class='sl-age'><b>"+slfEm(tg.em)+" "+slfEsc(tg.name)+"</b><span>"+slfEsc(t)+"</span></div>"; });
     if(lines) inner+="<div class='sl-st-sub'>Technology by technology</div>"+lines;
     h+="<div class='sl-st sl-teal sl-stage'><div class='sl-st-h'>"+slfEsc(s.label)+" <span class='sl-yrs'>"+slfEsc(s.years)+"</span></div>"+inner+"</div>"; });
   h+=slSources(it);
@@ -12557,7 +12578,8 @@ function tgCard(it){
     +((it.harm||[]).length?"<div class='tg-sec tg-bad'><div class='tg-lab'>What it can do to a child</div>"+tgList(it.harm)+"</div>":"")
     +((it.avoid||[]).length?"<div class='tg-sec tg-danger'><div class='tg-lab'>What to stay away from</div>"+tgList(it.avoid)+"</div>":"")
     +((it.bless||[]).length?"<div class='tg-sec tg-kids'><div class='tg-lab'>Bless others with it</div>"+tgList(it.bless)+"</div>":"")
-    +(slAgeLines(it.ages)?"<div class='tg-sec tg-talk'><div class='tg-lab'>Age by age</div>"+slAgeLines(it.ages)+"</div>":"")
+    +(slAgeLines(slTechAges(it))?"<div class='tg-sec tg-talk'><div class='tg-lab'>Age by age</div>"+slAgeLines(slTechAges(it))+"</div>":"")
+    +slTechMore(it,function(cls,head,inner){ return inner?"<div class='tg-sec tg-learn'><div class='tg-lab'>"+head+"</div>"+inner+"</div>":""; })
     +"<div class='tg-sec tg-learn'><div class='tg-lab'>What we are learning</div>"+tgNotes(it.learned)+"</div>"
     +"<div class='tg-sec tg-kids'><div class='tg-lab'>Three rules for kids</div>"+tgList(it.kids)+"</div>"
     +(it.talk?"<div class='tg-sec tg-talk'><div class='tg-lab'>Talk about it tonight</div><div class='tg-p'>&ldquo;"+tgEsc(it.talk)+"&rdquo;</div></div>":"")

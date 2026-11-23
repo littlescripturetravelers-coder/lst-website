@@ -1472,11 +1472,11 @@ window.TECH_GUIDE = {
    "modern": true
   }
  ],
- "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
+ "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage: Babies & Toddlers, then the same six stages the Morning Lantern uses. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
  "ages": [
   {
    "id": "baby",
-   "label": "Babies and toddlers",
+   "label": "Babies & Toddlers",
    "years": "0 to 2",
    "growing": "Attachment, trust, first words and walking. A baby learns language from a face that answers back, not from a screen; this is the age when the brain wires itself fastest around real people.",
    "fits": [
@@ -1500,7 +1500,7 @@ window.TECH_GUIDE = {
   },
   {
    "id": "little",
-   "label": "Little ones",
+   "label": "Early Years",
    "years": "3 to 5",
    "growing": "Imagination, language, self-control, and the first sense of right and wrong. They copy everything, cannot yet tell a story from an advertisement, and feel a sudden stop like a loss.",
    "fits": [
@@ -1525,8 +1525,8 @@ window.TECH_GUIDE = {
   },
   {
    "id": "early",
-   "label": "Early school years",
-   "years": "6 to 9",
+   "label": "Early Elementary",
+   "years": "6 to 8",
    "growing": "Reading, friendship, fairness, and a conscience that can be taught. They believe what they see. They want to belong, and they still tell you everything if you make it safe to.",
    "fits": [
     "Learning apps and reading apps, with the settings you chose.",
@@ -1545,26 +1545,26 @@ window.TECH_GUIDE = {
    ],
    "bless": [
     "Video-call an older relative and ask them a family-history question; record the answer.",
-    "Type a thank-you note to a teacher or a bishop."
+    "Type a thank-you note to a teacher or a church leader."
    ]
   },
   {
-   "id": "tween",
-   "label": "Tweens",
-   "years": "10 to 12",
-   "growing": "Identity, puberty, and the pull of friends. Curiosity is strong and the brakes are not built yet: the part of the brain that weighs consequences finishes growing in the mid-twenties. Most children first meet pornography by accident at about this age, so the talk comes before the device.",
+   "id": "late",
+   "label": "Late Elementary",
+   "years": "9 to 11",
+   "growing": "Competence, rules and fairness, and friends who start to matter as much as family. Curiosity is strong and the brakes are not built yet. Many children first meet pornography by accident around the end of this stage, so the talk comes before the device.",
    "fits": [
-    "A basic phone or a watch that calls and texts, only if the family truly needs it; a smartphone can wait.",
-    "Homework online in a family room, with filters and history visible.",
-    "Creating: coding, music, film-making, photography, with the results shared inside the family."
+    "Homework and learning online in a family room, with filters and history visible.",
+    "Creating: coding, music, film-making, photography, with the results shared inside the family.",
+    "A watch or basic phone that calls and texts, only if the family truly needs it; a smartphone can wait."
    ],
    "rules": [
-    "No social media (the law sets 13 as the floor; the Surgeon General warns it is not proof of safety).",
+    "No social media (the law sets 13 as the floor for most apps).",
     "No devices in bedrooms overnight; they charge in the kitchen.",
     "A family rule that a secret online is never kept from parents, and that closing a bad page and telling is always the right move, never punished."
    ],
    "watch": [
-    "Withdrawal, secrecy, a phone that is always face-down.",
+    "Withdrawal, secrecy, a screen that is always turned away.",
     "Sleep loss, and mood that tracks the screen.",
     "Anyone online who wants to move the talk to a private app."
    ],
@@ -1575,55 +1575,81 @@ window.TECH_GUIDE = {
    ]
   },
   {
-   "id": "teen",
-   "label": "Young teens",
-   "years": "13 to 15",
-   "growing": "Abstract thinking, the need to be their own person, and a hunger for approval that social media is built to exploit. Risk feels smaller than it is. Faith becomes their own here, or does not.",
+   "id": "tween",
+   "label": "Early Adolescence",
+   "years": "12 to 14",
+   "growing": "Identity, puberty, the pull of friends, and a hunger for approval that social media is built to exploit. The part of the brain that weighs consequences is still growing until the mid-twenties. Faith begins to become their own here.",
    "fits": [
-    "A smartphone with a written family agreement, filters, and a parent who knows every account and password.",
+    "A first phone with a written family agreement, filters, and a parent who knows every account and password.",
     "Tools to create and serve: editing, design, coding, music, a family history project.",
     "Scripture and hymn apps, and talks they choose to listen to."
    ],
    "rules": [
-    "Delay social media as long as you can; if it is used, accounts are private, parents follow, notifications are off, and there is a daily limit.",
-    "Phones out of bedrooms at night and off the table at meals; the Surgeon General links heavy use to anxiety, depression and lost sleep.",
+    "Delay social media as long as you can (13 is the legal floor, and the U.S. Surgeon General warns it is not proof of safety); if it is used, accounts are private, parents follow, notifications are off, and there is a daily limit.",
+    "Phones out of bedrooms at night and off the table at meals.",
     "Talk plainly about pornography, sextortion, bullying and AI 'companions' before they meet them; agree what they will do when they do."
    ],
    "watch": [
-    "Three hours a day or more on social media doubles the risk of anxiety and depression symptoms (Surgeon General, 2023).",
+    "Three hours a day or more on social media doubles the risk of anxiety and depression symptoms (U.S. Surgeon General, 2023).",
     "A sudden new 'friend' who sends gifts or asks for pictures.",
     "Comparing their body or their life to a feed."
    ],
    "bless": [
-    "Share a testimony, a scripture or a kindness online on purpose, not by accident.",
+    "Share a kindness, a scripture or a testimony online on purpose, not by accident.",
     "Organize a service project with friends through the group chat.",
     "Record grandparents' stories and put them on the family timeline."
    ]
   },
   {
-   "id": "older",
-   "label": "Older teens",
-   "years": "16 and up",
-   "growing": "Preparing to govern themselves: college, missions, work, marriage. The rules now move from yours to theirs, one at a time, while they are still home to talk about it.",
+   "id": "teen",
+   "label": "Teen",
+   "years": "15 to 17",
+   "growing": "Abstract thinking, the need to be their own person, and the first practice at governing themselves: driving, work, money, choices about what to watch and who to follow. Risk still feels smaller than it is.",
    "fits": [
     "Their own limits, written by them and reviewed with you.",
-    "AI, design, code and media as tools for real work and real service.",
+    "AI, design, code and media as tools for real work, school and service.",
     "Teaching the younger ones what they have learned."
    ],
    "rules": [
-    "A weekly screen sabbath, and phones away when people are present.",
-    "Learn to tell truth from propaganda: check who made it, who paid for it, and what it wants you to feel.",
-    "Keep the standards in For the Strength of Youth as their own, not yours."
+    "Phones away at meals and when people are present, and out of the bedroom at night.",
+    "A weekly time away from screens, together as a family.",
+    "Learn to tell truth from propaganda: check who made it, who paid for it, and what it wants you to feel."
    ],
    "watch": [
     "Driving with a phone in hand.",
     "Gambling built into games and apps.",
-    "Letting an AI do the thinking, or the feeling."
+    "Letting an AI do the thinking, the writing, or the feeling."
    ],
    "bless": [
-    "Lead the family history work; build the family's timeline.",
+    "Lead a family history project; build the family's timeline.",
     "Create something that lifts: music, a short film, a page that helps someone.",
-    "Use the tools the way the Lord's work uses them: to reach, to teach, to gather."
+    "Use the tools to reach, to teach and to serve."
+   ]
+  },
+  {
+   "id": "adult",
+   "label": "Young Adult",
+   "years": "18 and up",
+   "growing": "Governing themselves fully: college, missions and service, work, marriage. The rules are now theirs; a parent becomes a counselor they come back to.",
+   "fits": [
+    "Every tool their schooling, work and service need, used on purpose.",
+    "Their own standards, kept because they chose them.",
+    "Mentoring younger brothers, sisters and cousins."
+   ],
+   "rules": [
+    "Choose your own limits, write them down, and keep them.",
+    "Guard sleep, real friendships and time with God from the feed.",
+    "Keep the standards of your faith as your own."
+   ],
+   "watch": [
+    "Hours lost to endless feeds and games.",
+    "Online debt, gambling and scams.",
+    "An AI that does the work you were meant to learn."
+   ],
+   "bless": [
+    "Lead the family history and temple work, or the family's record keeping.",
+    "Use AI, design, code and media for real service.",
+    "Reach, teach and gather: use the tools the way the Lord's work uses them."
    ]
   }
  ],
@@ -1657,5 +1683,6 @@ window.TECH_GUIDE = {
    "url": "https://www.commonsensemedia.org/"
   }
  ],
- "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next."
+ "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next.",
+ "agesVersion": 2
 };

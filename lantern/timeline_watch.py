@@ -10,6 +10,14 @@ Three jobs, one script (JOB=tech, JOB=discoveries or JOB=studies):
                and look for any new technology families should know about, and
                add a full card for it. Nothing is ever removed.
 
+  deep         every day: the two technology cards whose parent's guide is oldest (never written first) are
+               researched again with web search (Levi, 23 Nov 2026: "by developmental stages ... what experts say could
+               happen ... from studies what is the best way to use it for kids at different development stages ... tools
+               kids will need to know how to use when they are adults ... how this will help heavenly fathers work go
+               forward ... Geneology and Family History Work and Temple Work ... prepare the world for our Savior Jesus
+               Christ Second Coming"): stages (Babies & Toddlers 0-2 and the Lantern's six), studies, experts, future,
+               work, ldsWork, each with sources; a card is looked at again after 45 days.
+
   discoveries  once a month: look for new archaeological, historical and
                scientific finds that bear on the Bible, the Book of Mormon and
                Christ, published recently, each with its source and an honest
@@ -43,7 +51,7 @@ SB_KEY     = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
 OA_KEY     = os.environ.get("OPENAI_API_KEY", "").strip()
 HERE       = os.path.dirname(os.path.abspath(__file__))
 FEED_DIR   = os.path.join(HERE, "timeline-feed")
-ROW        = {"tech": "tech", "discoveries": "discoveries", "studies": "studies", "regions": "regions", "tribes": "tribes"}[JOB]
+ROW        = {"tech": "tech", "deep": "tech", "signs": "signs", "discoveries": "discoveries", "studies": "studies", "regions": "regions", "tribes": "tribes"}[JOB]
 REGIONS_FILE = os.path.join(HERE, "..", "data", "regions.js")
 TRIBES_FILE  = os.path.join(HERE, "..", "data", "tribes.js")
 TRIBES_PER   = int(os.environ.get("TRIBES_PER_RUN") or "10")
@@ -85,6 +93,11 @@ def merge_seed(body):
     except Exception:
         return False
     changed = False
+    # a newer age guide in the seed (agesVersion; 23 Nov 2026: Babies & Toddlers plus the six Lantern stages) replaces the account's
+    if int(seed.get("agesVersion") or 0) > int(body.get("agesVersion") or 0):
+        for k in ("ages", "agesNote", "agesVersion"):
+            if k in seed: body[k] = seed[k]
+        changed = True
     for k, v in seed.items():
         if k in ("items", "version", "updated") or k in body: continue
         body[k] = v; changed = True
@@ -181,9 +194,13 @@ def run_tech(body):
               "date (text), loc, lat, lng, em (a single emoji as an HTML numeric entity like &#128241;), what (one line), "
               "why (the deeper purpose, 2 sentences), builtOn (ids from the list above that had to exist first, 1-4), good (3), "
               "bad (2-3), dangers (2-3), kids (3 short rules), talk (one question for a parent to ask tonight), "
-              "learned (one note with on, note, source, url). If nothing truly new, new_items is [].\n\n"
+              "learned (one note with on, note, source, url). If nothing truly new, new_items is [].\n"
+              "3. MILESTONES: the most important new milestones in roughly the last 30 days for any technology in the list, above all "
+              "AI (a major new model or ability, a first in law or regulation, a new risk for children, a big adoption in schools or homes). "
+              "At most 3, each a real dated event with a source: tech (id from the list), on (YYYY-MM-DD), t (a short title), de (1-2 plain "
+              "sentences), source, url. If none, milestones is [].\n\n"
               "Answer with JSON only, exactly: {\"notes\":[{\"tech\":\"id\",\"on\":\"YYYY-MM-DD\",\"note\":\"...\",\"source\":\"...\",\"url\":\"https://...\"}],"
-              "\"new_items\":[{...}]}") % (TODAY, listing)
+              "\"new_items\":[{...}],\"milestones\":[{\"tech\":\"id\",\"on\":\"YYYY-MM-DD\",\"t\":\"...\",\"de\":\"...\",\"source\":\"...\",\"url\":\"https://...\"}]}") % (TODAY, listing)
     ans = ask(instructions, prompt)
     added_notes = 0; added_items = 0
     for n in [x for x in (ans.get("notes") or []) if isinstance(x, dict)][:5]:
@@ -211,8 +228,70 @@ def run_tech(body):
             if re.match(r"^https?://", url): card["learned"].append({"on": TODAY, "note": clean_str(n.get("note"), 500), "source": clean_str(n.get("source"), 120) or "source", "url": url})
         if card["what"] and card["good"] and card["dangers"]:
             items.append(card); ids.append(nid); added_items += 1
-    print("tech: %d notes, %d new technologies" % (added_notes, added_items))
-    return added_notes + added_items
+    added_ms = 0
+    for m in [x for x in (ans.get("milestones") or []) if isinstance(x, dict)][:3]:
+        it = next((x for x in items if x["id"] == str(m.get("tech", ""))), None)
+        url = clean_str(m.get("url"), 300); t = clean_str(m.get("t"), 90); on = clean_str(m.get("on"), 10)
+        if not it or not t or not re.match(r"^https?://", url) or not re.match(r"^\d{4}-\d{2}-\d{2}$", on): continue
+        if any(x.get("url") == url or x.get("t") == t for x in it.get("milestones", [])): continue
+        it.setdefault("milestones", []).append({"on": on, "t": t, "de": clean_str(m.get("de"), 400), "source": clean_str(m.get("source"), 120) or "source", "url": url, "added": TODAY})
+        added_ms += 1
+    print("tech: %d notes, %d new technologies, %d milestones" % (added_notes, added_items, added_ms))
+    return added_notes + added_items + added_ms
+
+# ── deep: a card's parent guide, by stage, with studies and experts ─────────
+STAGE_KEYS = ["0-2", "3-5", "6-8", "9-11", "12-14", "15-17", "18+"]
+DEEP_PER_RUN = int(os.environ.get("DEEP_PER_RUN") or "2")
+def run_deep(body):
+    items = [x for x in body.get("items", []) if isinstance(x, dict) and x.get("id")]
+    due = sorted([x for x in items if not x.get("deep_on") or x.get("deep_on") < (datetime.date.today() - datetime.timedelta(days=45)).isoformat()],
+                 key=lambda x: (x.get("deep_on") or "", -int(bool(x.get("modern")))))[:DEEP_PER_RUN]
+    instructions = ("You write the parent's guide in a family guide called Technology for Good, for parents raising children in faith. " + TEXT_RULES +
+        " Be accurate and current: rest every claim about effects on children on research or on the guidance of bodies such as the American "
+        "Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General, the American Psychological Association, peer-reviewed "
+        "studies and reputable reporting on them, and say plainly when research is early or mixed. Name the real risks without alarm, and the "
+        "real goods without hype; many of these tools are ones children will need as adults to do well.")
+    done = 0
+    for it in due:
+        prompt = ("Today is %s. The technology: %s (%s). What it is: %s\nWhat the guide already says it can do to a child: %s\n\n"
+            "Using web search, write the parent's guide for it, current as of today. Fields:\n"
+            "- stages: an object with exactly these keys %s (babies and toddlers 0-2, early years 3-5, early elementary 6-8, late elementary "
+            "9-11, early adolescence 12-14, teen 15-17, young adult 18+). Each 1-2 plain sentences: whether and how a child of that stage should "
+            "use it, with what limits, and why (how a child that age grows).\n"
+            "- studies: 2-5 findings from studies or official guidance about the best way for children to use it (or not), each {finding, source, url, on: YYYY-MM-DD or YYYY}.\n"
+            "- experts: 2-4 things credible experts say could happen as it spreads, good or worrying, each {say, who, source, url}.\n"
+            "- future: 2-4 skills with this technology a child will need as an adult to do well in work and life.\n"
+            "- work: 2-4 ways this technology helps Heavenly Father's work go forward - spreading the gospel of Jesus Christ, the scriptures in "
+            "every language, serving the poor and the sick, strengthening families. Words every Christian family could use.\n"
+            "- ldsWork: 2-3 ways it helps, as members of The Church of Jesus Christ of Latter-day Saints understand it, family history work, temple "
+            "work, the gathering of Israel and preparing the world for the Second Coming of the Savior. Only what Church leaders have taught (cite "
+            "churchofjesuschrist.org or FamilySearch when you can); never predict dates.\n"
+            "Answer with JSON only: {\"stages\":{...},\"studies\":[...],\"experts\":[...],\"future\":[...],\"work\":[...],\"ldsWork\":[...]}") % (
+            TODAY, it.get("name"), it.get("date", ""), it.get("what", ""), "; ".join(it.get("harm") or it.get("dangers") or []), ", ".join(STAGE_KEYS))
+        try:
+            ans = ask(instructions, prompt, searches=6)
+        except NoCredits:
+            raise
+        except Exception as e:
+            print("deep:", it["id"], "skipped:", e); continue
+        st = ans.get("stages") if isinstance(ans.get("stages"), dict) else {}
+        stages = {k: clean_str(st.get(k), 400) for k in STAGE_KEYS if clean_str(st.get(k), 400)}
+        studies = []
+        for x in (ans.get("studies") or [])[:5]:
+            if isinstance(x, dict) and clean_str(x.get("finding")) and re.match(r"^https?://", clean_str(x.get("url"), 300)):
+                studies.append({"finding": clean_str(x.get("finding"), 400), "source": clean_str(x.get("source"), 120) or "source", "url": scrub_url(clean_str(x.get("url"), 300)), "on": clean_str(x.get("on"), 10)})
+        experts = []
+        for x in (ans.get("experts") or [])[:4]:
+            if isinstance(x, dict) and clean_str(x.get("say")) and re.match(r"^https?://", clean_str(x.get("url"), 300)):
+                experts.append({"say": clean_str(x.get("say"), 400), "who": clean_str(x.get("who"), 120), "source": clean_str(x.get("source"), 120) or clean_str(x.get("who"), 120), "url": scrub_url(clean_str(x.get("url"), 300))})
+        if len(stages) < 5 or not studies:
+            print("deep:", it["id"], "answer too thin, kept the old guide"); continue
+        it["stages"] = stages; it["studies"] = studies; it["experts"] = experts
+        it["future"] = clean_list(ans.get("future"), 4, 220); it["work"] = clean_list(ans.get("work"), 4, 260); it["ldsWork"] = clean_list(ans.get("ldsWork"), 3, 260)
+        it["deep_on"] = TODAY; done += 1
+        print("deep:", it["id"], "written:", len(stages), "stages,", len(studies), "studies,", len(experts), "experts")
+    print("deep: %d cards" % done)
+    return done
 
 # ── discoveries ─────────────────────────────────────────────────────────────
 def run_discoveries(body):
@@ -527,7 +606,7 @@ def run_tribes(body):
 body = read_row()
 seeded = body.pop("_seed_merged", None) is not None
 try:
-    changed = run_tech(body) if JOB == "tech" else run_studies(body) if JOB == "studies" else run_regions(body) if JOB == "regions" else run_tribes(body) if JOB == "tribes" else run_discoveries(body)
+    changed = run_tech(body) if JOB == "tech" else run_deep(body) if JOB == "deep" else run_signs(body) if JOB == "signs" else run_studies(body) if JOB == "studies" else run_regions(body) if JOB == "regions" else run_tribes(body) if JOB == "tribes" else run_discoveries(body)
 except NoCredits as e:
     print("timeline-watch: STOPPED. " + str(e), file=sys.stderr)
     print("timeline-watch: STOPPED. " + str(e))
