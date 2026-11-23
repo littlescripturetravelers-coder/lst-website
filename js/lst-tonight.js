@@ -45,10 +45,17 @@
     try { var k = JSON.parse(localStorage.getItem(SPOT) || "null"); localStorage.removeItem(SPOT);
       if (k && k.d === (night.date || "") && Date.now() - k.at < 2 * 3600 * 1000) y = k.y || 0; } catch (e) {}
     if (!y) return;
-    /* the page grows as its pictures and fonts arrive: put the spot back now and again as it settles */
-    [0, 120, 400, 900, 1600].forEach(function (ms) { setTimeout(function () {
+    /* the page grows as its pictures, fonts and the account's answer arrive: keep the spot while it settles
+       (up to four seconds, and whenever the page changes size), and let go the moment the reader touches or scrolls */
+    var until = Date.now() + 4000, mine = false;
+    function letGo() { mine = true; }
+    ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (ev) { window.addEventListener(ev, letGo, { once: true, passive: true }); });
+    function put() {
+      if (mine || Date.now() > until) return;
       if (Math.abs(window.scrollY - y) > 4 && document.documentElement.scrollHeight > y) window.scrollTo(0, y);
-    }, ms); });
+    }
+    [0, 120, 400, 900, 1600, 2400, 3200, 4000].forEach(function (ms) { setTimeout(put, ms); });
+    try { if (window.ResizeObserver) { var ro = new ResizeObserver(put); ro.observe(document.body); setTimeout(function () { ro.disconnect(); }, 4200); } } catch (e) {}
   }
 
   /* Text size, remembered on this device. The app has the same idea in its
