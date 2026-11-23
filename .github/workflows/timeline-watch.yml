@@ -43,7 +43,7 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then echo "job=${{ inputs.job }}" >> "$GITHUB_OUTPUT";
           elif [ "${{ github.event.schedule }}" = "23 10 1 * *" ]; then echo "job=discoveries" >> "$GITHUB_OUTPUT";
-          elif [ "${{ github.event.schedule }}" = "47 2,8,14,20 * * *" ]; then echo "job=studies" >> "$GITHUB_OUTPUT";
+          elif [ "${{ github.event.schedule }}" = "47 14 * * *" ]; then echo "job=studies" >> "$GITHUB_OUTPUT";
           elif [ "${{ github.event.schedule }}" = "31 6 * * 0,3" ]; then echo "job=tribes" >> "$GITHUB_OUTPUT";
           else echo "job=tech" >> "$GITHUB_OUTPUT"; fi
 
@@ -52,7 +52,6 @@ jobs:
           JOB: ${{ steps.which.outputs.job }}
           SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python3 lantern/timeline_watch.py
 
       - name: Keep the history in this repo

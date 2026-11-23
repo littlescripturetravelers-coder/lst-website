@@ -31,7 +31,8 @@ model is asked - with web search - for additions only, the additions are
 checked and merged, the version is bumped, and the result is written back to
 the account and into lantern/timeline-feed/ in this repo (its history).
 
-Secrets: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, OPENAI_API_KEY.
+Secrets: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY. The model is Claude, asked through the app's `research`
+function (lst-app supabase/functions/research), which holds the Claude key.
 """
 import json, os, re, sys, time, datetime, html, subprocess, urllib.request, urllib.error
 
@@ -109,45 +110,41 @@ def write_row(body):
     with open(SEED_FILE, "w", encoding="utf-8") as f: json.dump(body, f, indent=1, ensure_ascii=False)
 
 # ── the model, with web search ──────────────────────────────────────────────
-def ask(instructions, prompt):
-    if not OA_KEY: die("OPENAI_API_KEY is missing")
-    body = {"model": MODEL, "tools": [{"type": "web_search_preview"}], "instructions": instructions, "input": prompt,
-            "max_output_tokens": 6000}
+def ask(instructions, prompt, searches=5):
+    """Claude with web search, through the app's own `research` function (supabase/functions/research in lst-app),
+    which holds the Claude key (Levi, 23 Nov 2026, chosen: "Claude, via the app"; the OpenAI key was refused from
+    31 Oct 2026). Answers the first complete JSON object the model wrote."""
+    if not (SB_URL and SB_KEY): die("SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY missing")
+    body = {"instructions": instructions, "prompt": prompt, "max_searches": searches, "effort": "medium"}
     last = None
     for attempt in range(3):
         try:
-            st, txt = http("https://api.openai.com/v1/responses", method="POST", body=body,
-                           headers={"Authorization": "Bearer " + OA_KEY}, timeout=300)
-            res = json.loads(txt)
-            out = res.get("output_text")
-            if not out:
-                parts = []
-                for item in res.get("output", []):
-                    if item.get("type") == "message":
-                        for c in item.get("content", []):
-                            if c.get("type") == "output_text": parts.append(c.get("text", ""))
-                out = "\n".join(parts)
+            st, txt = http(SB_URL + "/functions/v1/research", method="POST", body=body,
+                           headers={"Authorization": "Bearer " + SB_KEY, "apikey": SB_KEY}, timeout=420)
+            res = json.loads(txt or "{}")
+            if st != 200:
+                if res.get("reason") == "no_credit":
+                    raise NoCredits("Claude answered: no credit left. Add credit at console.anthropic.com (Billing) and run this job again.")
+                if res.get("reason") == "key":
+                    raise NoCredits("Claude refused the key (ANTHROPIC_API_KEY in the Supabase Edge Function secrets).")
+                raise ValueError("research answered HTTP %s: %s" % (st, (res.get("error") or txt)[:300]))
+            print("  research: %s searches, %s in / %s out tokens" % (res.get("searches"), (res.get("usage") or {}).get("input_tokens"), (res.get("usage") or {}).get("output_tokens")))
+            out = res.get("text") or ""
             # the first complete JSON object in the answer; anything the model wrote after it is ignored
-            out = re.sub(r"^\s*```(?:json)?|```\s*$", "", (out or "").strip())
+            out = re.sub(r"^\s*```(?:json)?|```\s*$", "", out.strip())
             start = out.find("{")
             if start < 0: raise ValueError("no JSON in the answer: " + out[:300])
             obj, _end = json.JSONDecoder().raw_decode(out[start:])
             if not isinstance(obj, dict): raise ValueError("the answer is not an object")
             return obj
-        except urllib.error.HTTPError as e:
-            detail = ""
-            try: detail = e.read().decode("utf-8", "replace")[:400]
-            except Exception: pass
-            # no credit left is not a bad answer to retry: every further ask would fail the same way
-            if e.code == 429 and ("insufficient_quota" in detail or "credit_balance_exhausted" in detail or "no credits remaining" in detail.lower()):
-                raise NoCredits("OpenAI answered: no credits remaining. Add credits at platform.openai.com (Settings, Billing) and run this job again.")
-            last = e; print("attempt", attempt + 1, "failed:", e, detail[:160]); time.sleep(20 * (attempt + 1))
+        except NoCredits:
+            raise
         except Exception as e:
             last = e; print("attempt", attempt + 1, "failed:", e); time.sleep(20 * (attempt + 1))
     raise RuntimeError("the model did not answer usably: %s" % last)   # one bad answer must not end a whole run
 
 class NoCredits(Exception):
-    """The OpenAI account has no credit left: the whole run stops, plainly, rather than
+    """The Claude account has no credit left (or its key is refused): the whole run stops, plainly, rather than
     asking hundreds of times more. Whatever was written before is already in the account."""
 
 TEXT_RULES = ("Write in plain, warm words a child of eight could follow, and a parent would trust. No hype, no fear-mongering, "
