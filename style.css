@@ -3875,3 +3875,6 @@ html[data-theme="light"] .lav-modalhost .modal { background: #ffffff; }
   .lav-hero.mp-hero p { font-size: .95rem; line-height: 1.6; }
   .lav-page .mp-body { padding-top: 1.2rem; }
 }
+
+/* the brand icons before js/line-icons.js fills them (Levi, 23 Nov 2026): the room they take, so nothing moves */
+i[data-lli]{display:inline-block;width:1.2em;height:1.2em;vertical-align:-.24em}

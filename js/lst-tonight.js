@@ -269,11 +269,8 @@
               n.night ? "Night " + n.night : "", n.title]
              .filter(Boolean).map(esc).join(" &middot; ") });
     }
-    /* just the narration, without the picture book (Levi, 3 Nov 2026), in the site's story player */
-    if (n.bookHtml && n.date && window.LSTStoryVoice) {
-      items.push({ ico: "&#127911;", listen: n.date, title: "Listen to Tonight&rsquo;s Story",
-        sub: "Read aloud by Eli or Hannah &middot; just the narration", plain: n.title || "Tonight\u2019s story" });
-    }
+    /* No "Listen to Tonight's Story" here (Levi, 23 Nov 2026: "remove listen to tonight's story button in the
+       morning lantern on the website"): the picture book above has its own headphones. */
     if (n.songHtml || n.songAudio) {
       items.push({ ico: "&#127925;", href: "lullaby.html" + d,
         title: "Tonight&rsquo;s Lullaby &mdash; Lyrics &amp; Music",

@@ -1534,10 +1534,10 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
 
 <div id="tl-fab">
   <a class="tlf" href="index.html" aria-label="Back to Little Scripture Travelers" title="Back to Little Scripture Travelers" style="text-decoration:none;font-size:19px;line-height:1;">&#8592;</a>
-  <button class="tlf" id="tlf-search" onclick="tlSheet('search')" aria-label="Search the timeline" title="Search">&#128269;</button>
-  <button class="tlf" id="tlf-views" onclick="tlSheet('views')" aria-label="Views and direction" title="Views">&#128065;</button>
-  <button class="tlf" id="tlf-layers" onclick="tlSheet('layers')" aria-label="Layers to show or hide" title="Layers">&#9776;</button>
-  <button class="tlf" id="tlf-globe" onclick="openGlobe()" aria-label="The world, place by place" title="The world">&#127757;</button>
+  <button class="tlf" id="tlf-search" onclick="tlSheet('search')" aria-label="Search the timeline" title="Search"><i data-lli=search></i></button>
+  <button class="tlf" id="tlf-views" onclick="tlSheet('views')" aria-label="Views and direction" title="Views"><i data-lli=eye></i></button>
+  <button class="tlf" id="tlf-layers" onclick="tlSheet('layers')" aria-label="Layers to show or hide" title="Layers"><i data-lli=layers></i></button>
+  <button class="tlf" id="tlf-globe" onclick="openGlobe()" aria-label="The world, place by place" title="The world"><i data-lli=globe></i></button>
 </div>
 <div id="tl-sheet">
   <div id="tl-sheet-hd"><span id="tl-sheet-t"></span>
@@ -1550,72 +1550,73 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
   <div style="flex-shrink:0"><div class="htitle">&#10022; Little Scripture Travelers</div><div class="hsub">Sacred World Timeline</div></div>
   <input type="text" id="srch" placeholder="Search...">
   <div class="vg"><button class="vb on" id="vbh" onclick="sv('h')">&#8596;</button><button class="vb" id="vbv" onclick="sv('v')">&#8597;</button></div>
-  <button onclick="togglePanel()" style="background:rgba(255,255,255,.07);border:1px solid rgba(245,197,24,.2);color:#F5C518;border-radius:8px;padding:4px 9px;font-size:9px;font-weight:800;cursor:pointer;flex-shrink:0;">&#9776; Layers</button>
+  <button onclick="togglePanel()" style="background:rgba(255,255,255,.07);border:1px solid rgba(245,197,24,.2);color:#F5C518;border-radius:8px;padding:4px 9px;font-size:9px;font-weight:800;cursor:pointer;flex-shrink:0;"><i data-lli=layers></i> Layers</button>
 </div>
 <div id="hdr2">
   <div id="hdr2-scroll">
     <div class="hdr2-group">
       <span class="hdr2-label">VIEWS</span>
-      <button id="hand-btn" class="hchip hchip-gold" onclick="toggleHand()">&#9770; Hand</button>
-      <button id="proph-btn" class="hchip hchip-purple" onclick="toggleProphecy()">&#128336; Prophecy</button>
-      <button id="seeds-btn" class="hchip hchip-green" onclick="toggleSeeds()">&#127807; Seeds</button>
+      <button id="hand-btn" class="hchip hchip-gold" onclick="toggleHand()"><i data-lli=hand></i> Hand</button>
+      <button id="proph-btn" class="hchip hchip-purple" onclick="toggleProphecy()"><i data-lli=clock></i> Prophecy</button>
+      <button id="seeds-btn" class="hchip hchip-green" onclick="toggleSeeds()"><i data-lli=seed></i> Seeds</button>
       <button id="chain-btn" class="hchip hchip-gold" onclick="toggleChain()">&#9654; Chain</button>
-      <button id="narrate-btn" class="hchip hchip-teal" onclick="toggleNarrate()">&#127908; Narrate</button>
+      <button id="narrate-btn" class="hchip hchip-teal" onclick="toggleNarrate()"><i data-lli=mic></i> Narrate</button>
     </div>
     <div class="hdr2-sep"></div>
     <div class="hdr2-group">
       <span class="hdr2-label">SCRIPTURE</span>
       <button class="hchip hchip-gold lchip on" onclick="tgl('gospel')" id="lc-gospel">&#10022; Gospel</button>
-      <button class="hchip hchip-green lchip on" onclick="tgl('bom')" id="lc-bom">&#127795; Book of Mormon</button>
-      <button class="hchip hchip-purple lchip on" onclick="tgl('church')" id="lc-church">&#9728; Church Hist.</button>
-      <button class="hchip hchip-amber lchip on" onclick="tgl('temples')" id="lc-temples">&#9962; Temples</button>
-      <button class="hchip hchip-teal lchip on" onclick="tgl('missions')" id="lc-missions">&#128694; Missionary Work</button>
-      <button class="hchip hchip-blue lchip on" onclick="tgl('xian')" id="lc-xian">&#9768; Christian Hist.</button>
+      <button class="hchip hchip-green lchip on" onclick="tgl('bom')" id="lc-bom"><i data-lli=scroll></i> Book of Mormon</button>
+      <button class="hchip hchip-purple lchip on" onclick="tgl('church')" id="lc-church"><i data-lli=sun></i> Church Hist.</button>
+      <button class="hchip hchip-amber lchip on" onclick="tgl('temples')" id="lc-temples"><i data-lli=temple></i> Temples</button>
+      <button class="hchip hchip-teal lchip on" onclick="tgl('missions')" id="lc-missions"><i data-lli=walk></i> Missionary Work</button>
+      <button class="hchip hchip-blue lchip on" onclick="tgl('xian')" id="lc-xian"><i data-lli=cross></i> Christian Hist.</button>
     </div>
     <div class="hdr2-sep"></div>
     <div class="hdr2-group">
       <span class="hdr2-label">WORLD</span>
-      <button class="hchip hchip-amber lchip on" onclick="tgl('empire')" id="lc-empire">&#127963; Empires</button>
-      <button class="hchip hchip-red lchip on" onclick="tgl('war')" id="lc-war">&#9876; Wars</button>
-      <button class="hchip hchip-blue lchip on" onclick="tgl('trade')" id="lc-trade">&#128246; Trade</button>
-      <button class="hchip hchip-purple lchip on" onclick="tgl('migrate')" id="lc-migrate">&#128246; Migration</button>
-      <button class="hchip hchip-green lchip on" onclick="tgl('explore')" id="lc-explore">&#128506; Explore</button>
-      <button class="hchip hchip-gold lchip on" onclick="tgl('famous')" id="lc-famous">&#128100; Famous</button>
+      <button class="hchip hchip-amber lchip on" onclick="tgl('empire')" id="lc-empire"><i data-lli=columns></i> Empires</button>
+      <button class="hchip hchip-teal lchip on" onclick="tgl('world')" id="lc-world"><i data-lli=city></i> Civilizations</button>
+      <button class="hchip hchip-red lchip on" onclick="tgl('war')" id="lc-war"><i data-lli=swords></i> Wars</button>
+      <button class="hchip hchip-blue lchip on" onclick="tgl('trade')" id="lc-trade"><i data-lli=ship></i> Trade</button>
+      <button class="hchip hchip-purple lchip on" onclick="tgl('migrate')" id="lc-migrate"><i data-lli=arrows></i> Migration</button>
+      <button class="hchip hchip-green lchip on" onclick="tgl('explore')" id="lc-explore"><i data-lli=map></i> Explore</button>
+      <button class="hchip hchip-gold lchip on" onclick="tgl('famous')" id="lc-famous"><i data-lli=person></i> Famous</button>
     </div>
     <div class="hdr2-sep"></div>
     <div class="hdr2-group">
       <span class="hdr2-label">EVENTS</span>
-      <button class="hchip hchip-teal lchip on" onclick="tgl('invent')" id="lc-invent">&#128161; Inventions &amp; Tech</button>
-      <button class="hchip hchip-gold lchip on" onclick="tgl('world')" id="lc-world">&#127760; World Faiths</button>
-      <button class="hchip hchip-amber lchip on" onclick="tgl('freedom')" id="lc-freedom">&#127775; Freedom</button>
-      <button class="hchip hchip-teal lchip on" onclick="tgl('arch')" id="lc-arch">&#128270; Archaeology</button>
-      <button class="hchip hchip-red lchip off" onclick="tgl('counter')" id="lc-counter">&#9940; Counterfeits</button>
-      <button class="hchip hchip-red lchip on" onclick="tgl('disaster')" id="lc-disaster">&#127754; Disasters</button>
+      <button class="hchip hchip-teal lchip on" onclick="tgl('invent')" id="lc-invent"><i data-lli=bulb></i> Inventions &amp; Tech</button>
+      <button class="hchip hchip-gold lchip on" onclick="tgl('faith')" id="lc-faith"><i data-lli=hands></i> World Faiths</button>
+      <button class="hchip hchip-amber lchip on" onclick="tgl('freedom')" id="lc-freedom"><i data-lli=star></i> Freedom</button>
+      <button class="hchip hchip-teal lchip on" onclick="tgl('arch')" id="lc-arch"><i data-lli=trowel></i> Archaeology</button>
+      <button class="hchip hchip-red lchip off" onclick="tgl('counter')" id="lc-counter"><i data-lli=stop></i> Counterfeits</button>
+      <button class="hchip hchip-red lchip on" onclick="tgl('disaster')" id="lc-disaster"><i data-lli=wave></i> Disasters</button>
     </div>
     <div class="hdr2-sep"></div>
     <div class="hdr2-group">
       <span class="hdr2-label">CULTURE</span>
-      <button class="hchip hchip-amber lchip on" onclick="tgl('lang')" id="lc-lang">&#127758; Languages</button>
-      <button class="hchip hchip-green lchip on" onclick="tgl('pop')" id="lc-pop">&#128100; Population</button>
-      <button class="hchip hchip-pink lchip on" onclick="tgl('city')" id="lc-city">&#127963; Cities</button>
-      <button class="hchip hchip-pink lchip on" onclick="tgl('family')" id="lc-family">&#128106; Family</button>
-      <button class="hchip hchip-pink lchip on" onclick="tgl('socfam')" id="lc-socfam">&#9878; Family &amp; Society</button>
-      <button class="hchip hchip-amber lchip on" onclick="tgl('faithfree')" id="lc-faithfree">&#9878; Faith &amp; Freedom</button>
-      <button class="hchip hchip-purple lchip on" onclick="tgl('drugs')" id="lc-drugs">&#9760; Drugs &amp; Cartels</button>
-      <button class="hchip hchip-blue lchip on" onclick="tgl('work')" id="lc-work">&#127981; Property &amp; Work</button>
-      <button class="hchip hchip-red lchip on" onclick="tgl('slave')" id="lc-slave">&#9939; Slavery &amp; Abolition</button>
-      <button class="hchip hchip-green lchip on" onclick="tgl('escape')" id="lc-escape">&#128200; The Great Escape</button>
-      <button class="hchip hchip-teal lchip on" onclick="tgl('scifaith')" id="lc-scifaith">&#128301; Faith &amp; Science</button>
-      <button class="hchip hchip-pink lchip on" onclick="tgl('health')" id="lc-health">&#10010; Health &amp; Healing</button>
-      <button class="hchip hchip-purple lchip on" onclick="tgl('socio')" id="lc-socio">&#128202; Study of Society</button>
-      <button class="hchip hchip-gold lchip on" onclick="tgl('child')" id="lc-child">&#128118; Childhood &amp; Learning</button>
-      <button class="hchip hchip-pink lchip on" onclick="tgl('prop')" id="lc-prop">&#128226; Truth &amp; Propaganda</button>
+      <button class="hchip hchip-amber lchip on" onclick="tgl('lang')" id="lc-lang"><i data-lli=speech></i> Languages</button>
+      <button class="hchip hchip-green lchip on" onclick="tgl('pop')" id="lc-pop"><i data-lli=people></i> Population</button>
+      <button class="hchip hchip-pink lchip on" onclick="tgl('city')" id="lc-city"><i data-lli=city></i> Cities</button>
+      <button class="hchip hchip-pink lchip on" onclick="tgl('family')" id="lc-family"><i data-lli=family></i> Family</button>
+      <button class="hchip hchip-pink lchip on" onclick="tgl('socfam')" id="lc-socfam"><i data-lli=scales></i> Family &amp; Society</button>
+      <button class="hchip hchip-amber lchip on" onclick="tgl('faithfree')" id="lc-faithfree"><i data-lli=scales></i> Faith &amp; Freedom</button>
+      <button class="hchip hchip-purple lchip on" onclick="tgl('drugs')" id="lc-drugs"><i data-lli=skull></i> Drugs &amp; Cartels</button>
+      <button class="hchip hchip-blue lchip on" onclick="tgl('work')" id="lc-work"><i data-lli=factory></i> Property &amp; Work</button>
+      <button class="hchip hchip-red lchip on" onclick="tgl('slave')" id="lc-slave"><i data-lli=chain></i> Slavery &amp; Abolition</button>
+      <button class="hchip hchip-green lchip on" onclick="tgl('escape')" id="lc-escape"><i data-lli=chart></i> The Great Escape</button>
+      <button class="hchip hchip-teal lchip on" onclick="tgl('scifaith')" id="lc-scifaith"><i data-lli=telescope></i> Faith &amp; Science</button>
+      <button class="hchip hchip-pink lchip on" onclick="tgl('health')" id="lc-health"><i data-lli=health></i> Health &amp; Healing</button>
+      <button class="hchip hchip-purple lchip on" onclick="tgl('socio')" id="lc-socio"><i data-lli=bars></i> Study of Society</button>
+      <button class="hchip hchip-gold lchip on" onclick="tgl('child')" id="lc-child"><i data-lli=child></i> Childhood &amp; Learning</button>
+      <button class="hchip hchip-pink lchip on" onclick="tgl('prop')" id="lc-prop"><i data-lli=megaphone></i> Truth &amp; Propaganda</button>
     </div>
     <div class="hdr2-sep"></div>
     <div class="hdr2-group">
       <span class="hdr2-label">LST</span>
       <button class="hchip hchip-gold lchip on" onclick="tgl('lstbook')" id="lc-lstbook">&#10022; My Books</button>
-      <button class="hchip hchip-gold" onclick="openBooks()">&#128218; Book Library</button>
+      <button class="hchip hchip-gold" onclick="openBooks()"><i data-lli=books></i> Book Library</button>
     </div>
   </div>
 </div>
@@ -1625,56 +1626,56 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
   <div class="lp-all"><button type="button" id="lp-selall" onclick="tglAll(true)">Select all</button><button type="button" id="lp-unselall" onclick="tglAll(false)">Unselect all</button></div>
   <div class="lp-section">Gospel Layers</div>
   <div class="lp-row" onclick="tgl('gospel')"><div class="lp-dot" style="background:#F5C518"></div><span class="lp-name" style="color:#F5C518">&#10022; Gospel Stories</span><div class="lp-toggle on" id="tog-gospel"></div></div>
-  <div class="lp-row" onclick="tgl('bom')"><div class="lp-dot" style="background:#7BC67E"></div><span class="lp-name" style="color:#7BC67E">&#128220; Book of Mormon</span><div class="lp-toggle on" id="tog-bom"></div></div>
-  <div class="lp-row" onclick="tgl('church')"><div class="lp-dot" style="background:#C084FC"></div><span class="lp-name" style="color:#C084FC">&#9962; Church History</span><div class="lp-toggle on" id="tog-church"></div></div>
-  <div class="lp-row" onclick="tgl('temples')"><div class="lp-dot" style="background:#D9A227"></div><span class="lp-name" style="color:#D9A227">&#9962; Temples</span><div class="lp-toggle on" id="tog-temples"></div></div>
-  <div class="lp-row" onclick="tgl('missions')"><div class="lp-dot" style="background:#5BD3DC"></div><span class="lp-name" style="color:#5BD3DC">&#128694; Missionary Work</span><div class="lp-toggle on" id="tog-missions"></div></div>
+  <div class="lp-row" onclick="tgl('bom')"><div class="lp-dot" style="background:#7BC67E"></div><span class="lp-name" style="color:#7BC67E"><i data-lli=scroll></i> Book of Mormon</span><div class="lp-toggle on" id="tog-bom"></div></div>
+  <div class="lp-row" onclick="tgl('church')"><div class="lp-dot" style="background:#C084FC"></div><span class="lp-name" style="color:#C084FC"><i data-lli=sun></i> Church History</span><div class="lp-toggle on" id="tog-church"></div></div>
+  <div class="lp-row" onclick="tgl('temples')"><div class="lp-dot" style="background:#D9A227"></div><span class="lp-name" style="color:#D9A227"><i data-lli=temple></i> Temples</span><div class="lp-toggle on" id="tog-temples"></div></div>
+  <div class="lp-row" onclick="tgl('missions')"><div class="lp-dot" style="background:#5BD3DC"></div><span class="lp-name" style="color:#5BD3DC"><i data-lli=walk></i> Missionary Work</span><div class="lp-toggle on" id="tog-missions"></div></div>
   <div class="lp-div"></div>
   <div class="lp-section">World History</div>
-  <div class="lp-row" onclick="tgl('empire')"><div class="lp-dot" style="background:#E8C547"></div><span class="lp-name" style="color:#E8C547">&#127981; Empires</span><div class="lp-toggle on" id="tog-empire"></div></div>
-  <div class="lp-row" onclick="tgl('world')"><div class="lp-dot" style="background:#5BD3DC"></div><span class="lp-name" style="color:#5BD3DC">&#127757; Civilizations</span><div class="lp-toggle on" id="tog-world"></div></div>
-  <div class="lp-row" onclick="tgl('war')"><div class="lp-dot" style="background:#94A3B8"></div><span class="lp-name" style="color:#94A3B8">&#9876; Wars</span><div class="lp-toggle on" id="tog-war"></div></div>
-  <div class="lp-row" onclick="tgl('trade')"><div class="lp-dot" style="background:#60A5FA"></div><span class="lp-name" style="color:#60A5FA">&#128674; Trade Routes</span><div class="lp-toggle on" id="tog-trade"></div></div>
-  <div class="lp-row" onclick="tgl('famous')"><div class="lp-dot" style="background:#FBBF24"></div><span class="lp-name" style="color:#FBBF24">&#11088; Famous People</span><div class="lp-toggle on" id="tog-famous"></div></div>
-  <div class="lp-row" onclick="tgl('disaster')"><div class="lp-dot" style="background:#F87171"></div><span class="lp-name" style="color:#F87171">&#127755; Natural Disasters</span><div class="lp-toggle on" id="tog-disaster"></div></div>
+  <div class="lp-row" onclick="tgl('empire')"><div class="lp-dot" style="background:#E8C547"></div><span class="lp-name" style="color:#E8C547"><i data-lli=columns></i> Empires</span><div class="lp-toggle on" id="tog-empire"></div></div>
+  <div class="lp-row" onclick="tgl('world')"><div class="lp-dot" style="background:#5BD3DC"></div><span class="lp-name" style="color:#5BD3DC"><i data-lli=globe></i> Civilizations</span><div class="lp-toggle on" id="tog-world"></div></div>
+  <div class="lp-row" onclick="tgl('war')"><div class="lp-dot" style="background:#94A3B8"></div><span class="lp-name" style="color:#94A3B8"><i data-lli=swords></i> Wars</span><div class="lp-toggle on" id="tog-war"></div></div>
+  <div class="lp-row" onclick="tgl('trade')"><div class="lp-dot" style="background:#60A5FA"></div><span class="lp-name" style="color:#60A5FA"><i data-lli=ship></i> Trade Routes</span><div class="lp-toggle on" id="tog-trade"></div></div>
+  <div class="lp-row" onclick="tgl('famous')"><div class="lp-dot" style="background:#FBBF24"></div><span class="lp-name" style="color:#FBBF24"><i data-lli=person></i> Famous People</span><div class="lp-toggle on" id="tog-famous"></div></div>
+  <div class="lp-row" onclick="tgl('disaster')"><div class="lp-dot" style="background:#F87171"></div><span class="lp-name" style="color:#F87171"><i data-lli=volcano></i> Natural Disasters</span><div class="lp-toggle on" id="tog-disaster"></div></div>
   <div class="lp-div"></div>
   <div class="lp-section">Knowledge</div>
-  <div class="lp-row" onclick="tgl('invent')"><div class="lp-dot" style="background:#FB923C"></div><span class="lp-name" style="color:#FB923C">&#128161; Inventions &amp; Tech</span><div class="lp-toggle on" id="tog-invent"></div></div>
-  <div class="lp-row" onclick="tgl('faith')"><div class="lp-dot" style="background:#E879F9"></div><span class="lp-name" style="color:#E879F9">&#128591; World Faiths</span><div class="lp-toggle on" id="tog-faith"></div></div>
-  <div class="lp-row" onclick="tgl('freedom')"><div class="lp-dot" style="background:#34D399"></div><span class="lp-name" style="color:#34D399">&#128509; Freedom</span><div class="lp-toggle on" id="tog-freedom"></div></div>
+  <div class="lp-row" onclick="tgl('invent')"><div class="lp-dot" style="background:#FB923C"></div><span class="lp-name" style="color:#FB923C"><i data-lli=bulb></i> Inventions &amp; Tech</span><div class="lp-toggle on" id="tog-invent"></div></div>
+  <div class="lp-row" onclick="tgl('faith')"><div class="lp-dot" style="background:#E879F9"></div><span class="lp-name" style="color:#E879F9"><i data-lli=hands></i> World Faiths</span><div class="lp-toggle on" id="tog-faith"></div></div>
+  <div class="lp-row" onclick="tgl('freedom')"><div class="lp-dot" style="background:#34D399"></div><span class="lp-name" style="color:#34D399"><i data-lli=star></i> Freedom</span><div class="lp-toggle on" id="tog-freedom"></div></div>
   <div class="lp-div"></div>
   <div class="lp-section">Evidence</div>
-  <div class="lp-row" onclick="tgl('arch')"><div class="lp-dot" style="background:#D97B4A"></div><span class="lp-name" style="color:#D97B4A">&#128374; Archaeology</span><div class="lp-toggle on" id="tog-arch"></div></div>
+  <div class="lp-row" onclick="tgl('arch')"><div class="lp-dot" style="background:#D97B4A"></div><span class="lp-name" style="color:#D97B4A"><i data-lli=trowel></i> Archaeology</span><div class="lp-toggle on" id="tog-arch"></div></div>
   <div class="lp-div"></div>
   <div class="lp-section">Family &amp; Other</div>
-  <div class="lp-row" onclick="tgl('family')"><div class="lp-dot" style="background:#F472B6"></div><span class="lp-name" style="color:#F472B6">&#128106; Family Stories</span><div class="lp-toggle on" id="tog-family"></div></div>
-  <div class="lp-row" onclick="tgl('counter')"><div class="lp-dot" style="background:#EF4444"></div><span class="lp-name" style="color:#EF4444">&#9940; Counterfeits</span><div class="lp-toggle" id="tog-counter"></div></div>
+  <div class="lp-row" onclick="tgl('family')"><div class="lp-dot" style="background:#F472B6"></div><span class="lp-name" style="color:#F472B6"><i data-lli=family></i> Family Stories</span><div class="lp-toggle on" id="tog-family"></div></div>
+  <div class="lp-row" onclick="tgl('counter')"><div class="lp-dot" style="background:#EF4444"></div><span class="lp-name" style="color:#EF4444"><i data-lli=stop></i> Counterfeits</span><div class="lp-toggle" id="tog-counter"></div></div>
   <div class="lp-div"></div>
   <div class="lp-section">Christian History</div>
-  <div class="lp-row" onclick="tgl('xian')"><div class="lp-dot" style="background:#60A5FA"></div><span class="lp-name" style="color:#60A5FA">&#9768; Christian History</span><div class="lp-toggle on" id="tog-xian"></div></div>
+  <div class="lp-row" onclick="tgl('xian')"><div class="lp-dot" style="background:#60A5FA"></div><span class="lp-name" style="color:#60A5FA"><i data-lli=cross></i> Christian History</span><div class="lp-toggle on" id="tog-xian"></div></div>
   <div class="lp-div"></div>
   <div class="lp-section">Culture &amp; Society</div>
-  <div class="lp-row" onclick="tgl('lang')"><div class="lp-dot" style="background:#F59E0B"></div><span class="lp-name" style="color:#F59E0B">&#127758; Languages</span><div class="lp-toggle on" id="tog-lang"></div></div>
-  <div class="lp-row" onclick="tgl('pop')"><div class="lp-dot" style="background:#34D399"></div><span class="lp-name" style="color:#34D399">&#128106; Population</span><div class="lp-toggle on" id="tog-pop"></div></div>
-  <div class="lp-row" onclick="tgl('city')"><div class="lp-dot" style="background:#E879F9"></div><span class="lp-name" style="color:#E879F9">&#127963; Great Cities</span><div class="lp-toggle on" id="tog-city"></div></div>
-  <div class="lp-row" onclick="tgl('socfam')"><div class="lp-dot" style="background:#FDA4AF"></div><span class="lp-name" style="color:#FDA4AF">&#128106; Family &amp; Society</span><div class="lp-toggle on" id="tog-socfam"></div></div>
-  <div class="lp-row" onclick="tgl('faithfree')"><div class="lp-dot" style="background:#FDBA74"></div><span class="lp-name" style="color:#FDBA74">&#9878; Faith &amp; Freedom</span><div class="lp-toggle on" id="tog-faithfree"></div></div>
-  <div class="lp-row" onclick="tgl('drugs')"><div class="lp-dot" style="background:#C084FC"></div><span class="lp-name" style="color:#C084FC">&#9760; Drugs &amp; Cartels</span><div class="lp-toggle on" id="tog-drugs"></div></div>
-  <div class="lp-row" onclick="tgl('work')"><div class="lp-dot" style="background:#38BDF8"></div><span class="lp-name" style="color:#38BDF8">&#127981; Property &amp; Work</span><div class="lp-toggle on" id="tog-work"></div></div>
-  <div class="lp-row" onclick="tgl('slave')"><div class="lp-dot" style="background:#FB7185"></div><span class="lp-name" style="color:#FB7185">&#9939; Slavery &amp; Abolition</span><div class="lp-toggle on" id="tog-slave"></div></div>
-  <div class="lp-row" onclick="tgl('escape')"><div class="lp-dot" style="background:#4ADE80"></div><span class="lp-name" style="color:#4ADE80">&#128200; The Great Escape</span><div class="lp-toggle on" id="tog-escape"></div></div>
-  <div class="lp-row" onclick="tgl('scifaith')"><div class="lp-dot" style="background:#22D3EE"></div><span class="lp-name" style="color:#22D3EE">&#128301; Faith &amp; Science</span><div class="lp-toggle on" id="tog-scifaith"></div></div>
-  <div class="lp-row" onclick="tgl('health')"><div class="lp-dot" style="background:#F9A8D4"></div><span class="lp-name" style="color:#F9A8D4">&#10010; Health &amp; Healing</span><div class="lp-toggle on" id="tog-health"></div></div>
-  <div class="lp-row" onclick="tgl('socio')"><div class="lp-dot" style="background:#818CF8"></div><span class="lp-name" style="color:#818CF8">&#128202; Study of Society</span><div class="lp-toggle on" id="tog-socio"></div></div>
-  <div class="lp-row" onclick="tgl('child')"><div class="lp-dot" style="background:#FCD34D"></div><span class="lp-name" style="color:#FCD34D">&#128118; Childhood &amp; Learning</span><div class="lp-toggle on" id="tog-child"></div></div>
-  <div class="lp-row" onclick="tgl('prop')"><div class="lp-dot" style="background:#F472B6"></div><span class="lp-name" style="color:#F472B6">&#128226; Truth &amp; Propaganda</span><div class="lp-toggle on" id="tog-prop"></div></div>
+  <div class="lp-row" onclick="tgl('lang')"><div class="lp-dot" style="background:#F59E0B"></div><span class="lp-name" style="color:#F59E0B"><i data-lli=speech></i> Languages</span><div class="lp-toggle on" id="tog-lang"></div></div>
+  <div class="lp-row" onclick="tgl('pop')"><div class="lp-dot" style="background:#34D399"></div><span class="lp-name" style="color:#34D399"><i data-lli=people></i> Population</span><div class="lp-toggle on" id="tog-pop"></div></div>
+  <div class="lp-row" onclick="tgl('city')"><div class="lp-dot" style="background:#E879F9"></div><span class="lp-name" style="color:#E879F9"><i data-lli=city></i> Great Cities</span><div class="lp-toggle on" id="tog-city"></div></div>
+  <div class="lp-row" onclick="tgl('socfam')"><div class="lp-dot" style="background:#FDA4AF"></div><span class="lp-name" style="color:#FDA4AF"><i data-lli=family></i> Family &amp; Society</span><div class="lp-toggle on" id="tog-socfam"></div></div>
+  <div class="lp-row" onclick="tgl('faithfree')"><div class="lp-dot" style="background:#FDBA74"></div><span class="lp-name" style="color:#FDBA74"><i data-lli=scales></i> Faith &amp; Freedom</span><div class="lp-toggle on" id="tog-faithfree"></div></div>
+  <div class="lp-row" onclick="tgl('drugs')"><div class="lp-dot" style="background:#C084FC"></div><span class="lp-name" style="color:#C084FC"><i data-lli=skull></i> Drugs &amp; Cartels</span><div class="lp-toggle on" id="tog-drugs"></div></div>
+  <div class="lp-row" onclick="tgl('work')"><div class="lp-dot" style="background:#38BDF8"></div><span class="lp-name" style="color:#38BDF8"><i data-lli=factory></i> Property &amp; Work</span><div class="lp-toggle on" id="tog-work"></div></div>
+  <div class="lp-row" onclick="tgl('slave')"><div class="lp-dot" style="background:#FB7185"></div><span class="lp-name" style="color:#FB7185"><i data-lli=chain></i> Slavery &amp; Abolition</span><div class="lp-toggle on" id="tog-slave"></div></div>
+  <div class="lp-row" onclick="tgl('escape')"><div class="lp-dot" style="background:#4ADE80"></div><span class="lp-name" style="color:#4ADE80"><i data-lli=chart></i> The Great Escape</span><div class="lp-toggle on" id="tog-escape"></div></div>
+  <div class="lp-row" onclick="tgl('scifaith')"><div class="lp-dot" style="background:#22D3EE"></div><span class="lp-name" style="color:#22D3EE"><i data-lli=telescope></i> Faith &amp; Science</span><div class="lp-toggle on" id="tog-scifaith"></div></div>
+  <div class="lp-row" onclick="tgl('health')"><div class="lp-dot" style="background:#F9A8D4"></div><span class="lp-name" style="color:#F9A8D4"><i data-lli=health></i> Health &amp; Healing</span><div class="lp-toggle on" id="tog-health"></div></div>
+  <div class="lp-row" onclick="tgl('socio')"><div class="lp-dot" style="background:#818CF8"></div><span class="lp-name" style="color:#818CF8"><i data-lli=bars></i> Study of Society</span><div class="lp-toggle on" id="tog-socio"></div></div>
+  <div class="lp-row" onclick="tgl('child')"><div class="lp-dot" style="background:#FCD34D"></div><span class="lp-name" style="color:#FCD34D"><i data-lli=child></i> Childhood &amp; Learning</span><div class="lp-toggle on" id="tog-child"></div></div>
+  <div class="lp-row" onclick="tgl('prop')"><div class="lp-dot" style="background:#F472B6"></div><span class="lp-name" style="color:#F472B6"><i data-lli=megaphone></i> Truth &amp; Propaganda</span><div class="lp-toggle on" id="tog-prop"></div></div>
   <div class="lp-div"></div>
   <div class="lp-section">Little Scripture Travelers</div>
   <div class="lp-row" onclick="tgl('lstbook')"><div class="lp-dot" style="background:#F5C518"></div><span class="lp-name" style="color:#F5C518">&#10022; LST Books</span><div class="lp-toggle on" id="tog-lstbook"></div></div>
   <div class="lp-div"></div>
   <div class="lp-section">Movement &amp; Discovery</div>
-  <div class="lp-row" onclick="tgl('migrate')"><div class="lp-dot" style="background:#A78BFA"></div><span class="lp-name" style="color:#A78BFA">&#128246; Migrations</span><div class="lp-toggle on" id="tog-migrate"></div></div>
-  <div class="lp-row" onclick="tgl('explore')"><div class="lp-dot" style="background:#34D399"></div><span class="lp-name" style="color:#34D399">&#9741; Exploration</span><div class="lp-toggle on" id="tog-explore"></div></div>
+  <div class="lp-row" onclick="tgl('migrate')"><div class="lp-dot" style="background:#A78BFA"></div><span class="lp-name" style="color:#A78BFA"><i data-lli=arrows></i> Migrations</span><div class="lp-toggle on" id="tog-migrate"></div></div>
+  <div class="lp-row" onclick="tgl('explore')"><div class="lp-dot" style="background:#34D399"></div><span class="lp-name" style="color:#34D399"><i data-lli=map></i> Exploration</span><div class="lp-toggle on" id="tog-explore"></div></div>
 </div>
 
 <div id="stage"><div id="world"><div id="spine" style="pointer-events:none;z-index:50;"><div class="spine-line"></div></div></div></div>
@@ -1700,7 +1701,7 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
   <button class="ej" onclick="je(2010)">Today</button>
 </div>
 <div id="chain-progress"></div>
-<button id="studies-btn" onclick="toggleStudies()">&#128218; Studies</button>
+<button id="studies-btn" onclick="toggleStudies()"><i data-lli=books></i> Studies</button>
 <div id="studies-menu">
   <div id="sm-hdr">
     <div>
@@ -1711,22 +1712,22 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
   </div>
   <div id="sm-list">
     <div class="sm-item" onclick="smGo('atonement')">
-      <span class="sm-ico" style="color:#F5C518">&#10013;</span>
+      <span class="sm-ico" style="color:#F5C518"><i data-lli=cross></i></span>
       <span class="sm-txt"><b style="color:#F5C518">Jesus Christ and His Atonement</b>
         <em>Gethsemane, the cross, the tomb and the Resurrection: what He suffered, every scripture of the Atonement, and all the evidence of His life, death and rising, graded honestly</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('study')">
-      <span class="sm-ico" style="color:#F5C518">&#128214;</span>
+      <span class="sm-ico" style="color:#F5C518"><i data-lli=book></i></span>
       <span class="sm-txt"><b style="color:#F5C518">The Study Library</b>
         <em>Every event on the timeline, gathered to read and compare</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('compare')">
-      <span class="sm-ico" style="color:#E879F9">&#127760;</span>
+      <span class="sm-ico" style="color:#E879F9"><i data-lli=hands></i></span>
       <span class="sm-txt"><b style="color:#E879F9">World Faiths Chart</b>
         <em>Every tradition in its own words, on the three questions of the soul</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('proph')">
-      <span class="sm-ico" style="color:#A78BFA">&#128336;</span>
+      <span class="sm-ico" style="color:#A78BFA"><i data-lli=clock></i></span>
       <span class="sm-txt"><b style="color:#A78BFA">Prophecy Tracker</b>
         <em>Prophecies given and fulfilled, each labelled by strength of evidence</em></span>
       <span class="sm-arr">&#8250;</span></div>
@@ -1736,42 +1737,42 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
         <em>The signs the scriptures name before Jesus Christ comes again, and what is happening now, each with its source; a new look every month. Ready, not afraid</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('quad')">
-      <span class="sm-ico" style="color:#FDBA74">&#9878;</span>
+      <span class="sm-ico" style="color:#FDBA74"><i data-lli=scales></i></span>
       <span class="sm-txt"><b style="color:#FDBA74">Faith &amp; Freedom</b>
         <em>Four patterns in history, and how strong the evidence is for each</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('systems')">
-      <span class="sm-ico" style="color:#34D399">&#127968;</span>
+      <span class="sm-ico" style="color:#34D399"><i data-lli=home></i></span>
       <span class="sm-txt"><b style="color:#34D399">Two Ways to Build a Society</b>
         <em>The person and the family, or the class and the collective: what each did to families and to prosperity</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('tribes')">
-      <span class="sm-ico" style="color:#D9A227">&#129718;</span>
+      <span class="sm-ico" style="color:#D9A227"><i data-lli=feather></i></span>
       <span class="sm-txt"><b style="color:#D9A227">The Native Peoples and the Book of Mormon</b>
         <em>Every people of the Americas: how they lived and what they believed, and, only where it is recorded, their connection with Israel, the Book of Mormon or a teacher who came among them, graded honestly</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('temples')">
-      <span class="sm-ico" style="color:#D9A227">&#9962;</span>
+      <span class="sm-ico" style="color:#D9A227"><i data-lli=temple></i></span>
       <span class="sm-txt"><b style="color:#D9A227">Temples of the Lord</b>
         <em>Every temple of The Church of Jesus Christ of Latter-day Saints: when it was announced, begun and dedicated, and little facts about each; new temples join on their own</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('missions')">
-      <span class="sm-ico" style="color:#5BD3DC">&#127758;</span>
+      <span class="sm-ico" style="color:#5BD3DC"><i data-lli=globe></i></span>
       <span class="sm-txt"><b style="color:#5BD3DC">Missionary Work Around the World</b>
         <em>When missionaries first came to each country and state, the Church's history and members there, the areas of the world, and the places with no missionaries yet</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('family')">
-      <span class="sm-ico" style="color:#F472B6">&#128106;</span>
+      <span class="sm-ico" style="color:#F472B6"><i data-lli=family></i></span>
       <span class="sm-txt"><b style="color:#F472B6">My Family History</b>
         <em>Add your own family to the timeline</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('tech')">
-      <span class="sm-ico" style="color:#22D3EE">&#128161;</span>
+      <span class="sm-ico" style="color:#22D3EE"><i data-lli=bulb></i></span>
       <span class="sm-txt"><b style="color:#22D3EE">Technology for Good</b>
         <em>The tools of today, from the Internet on: what they can do to a child, what to stay away from, blessing others, and what fits at each age</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('finds')">
-      <span class="sm-ico" style="color:#D97B4A">&#127963;</span>
+      <span class="sm-ico" style="color:#D97B4A"><i data-lli=columns></i></span>
       <span class="sm-txt"><b style="color:#D97B4A">Evidence &amp; Discoveries</b>
         <em>Finds that bear on the Bible, the Book of Mormon and Jesus Christ, each with its source and an honest label; new ones every month</em></span>
       <span class="sm-arr">&#8250;</span></div>
@@ -1788,7 +1789,7 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
     <div id="narrate-gospel"></div>
     <div id="narrate-controls">
       <button class="nc-btn nc-prev" onclick="narrateGo(-1)">&#8592; Prev</button>
-      <button class="nc-listen" id="nc-listen" onclick="narrListen()">&#128266; Listen</button>
+      <button class="nc-listen" id="nc-listen" onclick="narrListen()"><i data-lli=headphones></i> Listen</button>
       <button class="nc-gospel-btn" onclick="toggleNarrateGospel()">&#10022; Gospel</button>
       <button class="nc-btn nc-next" onclick="narrateGo(1)">Next &#8594;</button>
       <button class="nc-close" onclick="closeNarrate()">&#10005;</button>
@@ -1848,7 +1849,7 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
       <button class="sl-tool" onclick="slAll(true)">Select All</button>
       <button class="sl-tool" onclick="slAll(false)">Clear</button>
       <span class="sl-seg-label">View:</span>
-      <span class="sl-seg"><button class="sl-segb on" id="sl-sort-cat" onclick="slSort('cat')">&#128218; By Topic</button><button class="sl-segb" id="sl-sort-time" onclick="slSort('time')">&#8986; Time Order</button></span>
+      <span class="sl-seg"><button class="sl-segb on" id="sl-sort-cat" onclick="slSort('cat')"><i data-lli=books></i> By Topic</button><button class="sl-segb" id="sl-sort-time" onclick="slSort('time')"><i data-lli=clock></i> Time Order</button></span>
       <span id="sl-count"></span>
     </div>
   </div>
@@ -1938,7 +1939,7 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
     <div id="gl-stage"><canvas id="gl-canvas"></canvas>
       <div id="gl-zoom"><button class="gl-zb" onclick="glZoom(1.5)" aria-label="Zoom in">+</button><span id="gl-zoom-lbl">1.0&#215;</span><button class="gl-zb" onclick="glZoom(1/1.5)" aria-label="Zoom out">&#8722;</button></div></div>
     <div id="gl-hint">Drag to turn the world &#183; tap a land to open its history</div>
-    <div id="gl-modes"><button class="gl-mode on" id="gl-mode-lands" onclick="glMode('lands')">&#127757; The lands and their history</button><button class="gl-mode" id="gl-mode-peoples" onclick="glMode('peoples')">&#129718; The peoples about 1500</button></div>
+    <div id="gl-modes"><button class="gl-mode on" id="gl-mode-lands" onclick="glMode('lands')"><i data-lli=globe></i> The lands and their history</button><button class="gl-mode" id="gl-mode-peoples" onclick="glMode('peoples')"><i data-lli=feather></i> The peoples about 1500</button></div>
     <div id="gl-chips"></div>
     <div id="gl-land"></div>
   </div>
@@ -1973,9 +1974,9 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
   </div>
  </div>
  <div id="map-btns">
-  <button class="mopen-btn" onclick="openAppleMaps()" style="border-color:rgba(245,197,24,.3);color:#F5C518;background:rgba(245,197,24,.06);">&#127760; Apple Maps</button>
-  <button class="mopen-btn" onclick="openGoogleMaps()" style="border-color:rgba(52,211,153,.3);color:#34D399;background:rgba(52,211,153,.06);">&#128205; Google Maps</button>
-  <button class="mopen-btn" id="map-sv" onclick="openStreetView()" style="display:none;border-color:rgba(91,211,220,.35);color:#5BD3DC;background:rgba(91,211,220,.07);">&#128064; Street View</button>
+  <button class="mopen-btn" onclick="openAppleMaps()" style="border-color:rgba(245,197,24,.3);color:#F5C518;background:rgba(245,197,24,.06);"><i data-lli=map></i> Apple Maps</button>
+  <button class="mopen-btn" onclick="openGoogleMaps()" style="border-color:rgba(52,211,153,.3);color:#34D399;background:rgba(52,211,153,.06);"><i data-lli=pin></i> Google Maps</button>
+  <button class="mopen-btn" id="map-sv" onclick="openStreetView()" style="display:none;border-color:rgba(91,211,220,.35);color:#5BD3DC;background:rgba(91,211,220,.07);"><i data-lli=eye></i> Street View</button>
  </div>
 </div>
 
@@ -7444,7 +7445,7 @@ function init(){
   setTimeout(function(){
     /* the Studies menu opened first: the hint would sit on its last row */
     var sm=document.getElementById("studies-menu"); if(sm&&sm.classList.contains("open")) return;
-    toast("&#10022; Tap &#9776; for layers &nbsp;|&nbsp; Tap any event for details &nbsp;|&nbsp; Pinch to zoom");
+    toast("&#10022; Tap <i data-lli=layers></i> for layers &nbsp;|&nbsp; Tap any event for details &nbsp;|&nbsp; Pinch to zoom");
   },1200);
 }
 init();
@@ -7996,7 +7997,7 @@ function fhAddrRow(card,ev){
   var row=document.createElement("div"); row.className="fh-addr-row";
   function show(){
     row.innerHTML=(ev.addr?"<div class='fh-addr-t'>&#128205; "+fhEsc(ev.addr)+"</div>":"")
-      +"<div class='fh-addr-btns'>"+(mapHas(ev)?"<button class='fh-addr-b fh-addr-see'>&#128205; See where this happened</button>":"")
+      +"<div class='fh-addr-btns'>"+(mapHas(ev)?"<button class='fh-addr-b fh-addr-see'><i data-lli=pin></i> See where this happened</button>":"")
       +"<button class='fh-addr-b fh-addr-edit'>"+(ev.addr?"Change address":"&#43; Add an address")+"</button></div>";
     var see=row.querySelector(".fh-addr-see"); if(see) see.onclick=function(){ openMapFor(ev); };
     row.querySelector(".fh-addr-edit").onclick=edit;
@@ -8409,7 +8410,7 @@ function narrUrl(tour,stop){ var c=window.LST_CONFIG||{}, base=c.SUPABASE_URL||"
 var NARR={audio:null,on:false};
 function narrButton(state){ var b=document.getElementById("nc-listen"); if(!b) return;
   b.disabled=(state==="none"); b.classList.toggle("on",state==="playing");
-  b.innerHTML=state==="playing"?"&#10074;&#10074; Pause":state==="loading"?"&#8230; Listen":state==="none"?"&#128263; Not recorded yet":"&#128266; Listen"; }
+  b.innerHTML=state==="playing"?"&#10074;&#10074; Pause":state==="loading"?"&#8230; Listen":state==="none"?"&#128263; Not recorded yet":"<i data-lli=headphones></i> Listen"; }
 function narrStop(){ if(NARR.audio){ try{ NARR.audio.pause(); }catch(e){} } }
 function narrPlay(){
   if(!activeTour) return; var stop=activeTour.stops[narrateStepIndex]; if(!stop) return;
@@ -11089,8 +11090,8 @@ function slStudyHtml(it,st){
   try{ h+=mwHtml(n.y,"lstbook",n.t); }catch(e){}
   h+="<div class='sl-blk sl-blk-gospel'><b>Read It Together:</b> "+slEsc(n.ref)+" &#183; then Week "+n.wk+", Night "+n.nt+" in "+slEsc(bk.t)+" (the "+slEsc(bk.month)+" book).</div>";
   for(var b=0;b<it.blocks.length;b++){ var bl=it.blocks[b]; h+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+slLink(bl.t)+"</div>"; }
-  if(slInApp()) h+="<button class='sl-open' onclick=\"slOpenBook('"+nightId(bk,n)+"')\">&#128214; Open the picture book</button>";
-  if(typeof n.lat==="number") h+="<button class='sl-open sl-map' onclick=\"slMapNight('"+bk.id+"',"+n.wk+","+n.nt+")\">&#128205; See it on the map</button>";
+  if(slInApp()) h+="<button class='sl-open' onclick=\"slOpenBook('"+nightId(bk,n)+"')\"><i data-lli=book></i> Open the picture book</button>";
+  if(typeof n.lat==="number") h+="<button class='sl-open sl-map' onclick=\"slMapNight('"+bk.id+"',"+n.wk+","+n.nt+")\"><i data-lli=pin></i> See it on the map</button>";
   h+=slSources(it);
   return h;
 }
@@ -11142,7 +11143,7 @@ function slTechHtml(it){
   h+=slSec("sl-teal","What we are learning",slNotes(tg.learned));
   h+=slSec("sl-gold","Three rules for kids",slList(tg.kids));
   if(tg.talk) h+=slSec("sl-teal","Talk about it tonight","<p class='sl-quote'>&ldquo;"+slfEsc(tg.talk)+"&rdquo;</p>");
-  if(typeof openTechGuide==="function") h+="<button class='sl-open' onclick=\"closeStudy();openTechGuide('tech','"+slfEsc(tg.id)+"')\">&#128161; Open it in the Technology guide</button>";
+  if(typeof openTechGuide==="function") h+="<button class='sl-open' onclick=\"closeStudy();openTechGuide('tech','"+slfEsc(tg.id)+"')\"><i data-lli=bulb></i> Open it in the Technology guide</button>";
   h+=slSources(it);
   return h;
 }
@@ -11176,7 +11177,7 @@ function slFindHtml(it){
   var sh=""; srcs.forEach(function(s){ if(!s) return; var u=slfUrl(s.url); sh+=u?"<a class='sl-src-l' href='"+slfEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+slfEsc(s.name||u)+"</a>":(s.name?"<div class='sl-src-n'>"+slfEsc(s.name)+"</div>":""); });
   if(sh) h+="<div class='sl-src'><div class='sl-src-t'>Sources: open and read them</div>"+sh+"</div>";
   try{ h+=atnStudyHtml(it); }catch(e){}
-  if(EVS.some(function(e){ return e.id==="find-"+f.id; })) h+="<button class='sl-open' onclick=\"atnToTimeline('find-"+slfEsc(f.id)+"')\">&#128506; Find it on the timeline</button>";
+  if(EVS.some(function(e){ return e.id==="find-"+f.id; })) h+="<button class='sl-open' onclick=\"atnToTimeline('find-"+slfEsc(f.id)+"')\"><i data-lli=map></i> Find it on the timeline</button>";
   return h;
 }
 /* ── THE IN-DEPTH STUDY OF ANY OTHER EVENT ──
@@ -11686,7 +11687,7 @@ function glRow(i){
   if(it.de) h+="<div class='gl-de'>"+it.de+"</div>";
   (it.blocks||[]).forEach(function(bl){ h+="<div class='sl-blk sl-blk-"+bl.k+"'><b>"+bl.l+":</b> "+bl.t+"</div>"; });
   var ah=""; try{ if(!it.find) ah=atnStudyHtml(it,"gl-btn atn-gl"); }catch(e){}
-  h+="<div class='gl-btns'>"+ah+"<button class='gl-btn gold' onclick=\"glDeep("+i+")\">&#128214; The full study</button><button class='gl-btn' onclick=\"tlStepAside();mwOpen(GL.rows["+i+"])\">&#128506; Open it on the timeline</button></div><div class='gl-deep' id='gl-deep-"+i+"'></div>";
+  h+="<div class='gl-btns'>"+ah+"<button class='gl-btn gold' onclick=\"glDeep("+i+")\"><i data-lli=book></i> The full study</button><button class='gl-btn' onclick=\"tlStepAside();mwOpen(GL.rows["+i+"])\"><i data-lli=map></i> Open it on the timeline</button></div><div class='gl-deep' id='gl-deep-"+i+"'></div>";
   det.innerHTML=h;
 }
 function glDeep(i){
@@ -11780,7 +11781,7 @@ function trbRender(){
   var d=trbData(); if(!d) return; var D=d.D, body=document.getElementById("trb-body"); var top=body.scrollTop;
   var h="<div class='trb-rule'>&#10022; "+slfEsc(D.rule||"")+"</div><div class='trb-box'><p>"+slfEsc(D.intro||"")+"</p></div>";
   h+="<div class='trb-grades'>"+(D.grades||[]).map(function(g){ return "<div class='trb-gl'>"+trbGrade(g.g)+"<span>"+slfEsc(g.x)+"</span></div>"; }).join("")+"</div>";
-  h+="<div class='trb-tools'><button class='trb-btn' onclick='trbToGlobe()'>&#127758; See where they lived, about 1500</button></div>";
+  h+="<div class='trb-tools'><button class='trb-btn' onclick='trbToGlobe()'><i data-lli=globe></i> See where they lived, about 1500</button></div>";
   /* the teacher who came (the Latter-day Saint timeline only: the Christian one has no teacher or Israel sections) */
   var T=D.teacher||{};
   if(D.teacher){
@@ -11830,7 +11831,7 @@ function trbCardHtml(p,it){ /* (the See-where button is styled with .trb-see, se
     if(p.rites) h+="<span class='trb-k'>Ceremonies</span><p>"+slfEsc(p.rites)+"</p>";
     if(p.known) h+="<span class='trb-k'>Their history</span><p>"+slfEsc(p.known)+"</p>";
     if(p.today) h+="<span class='trb-k'>Today</span><p>"+slfEsc(p.today)+"</p>";
-    if(p.where) h+="<button class='trb-see' onclick=\"event.stopPropagation();trbSee('"+slfEsc(p.id)+"')\">&#128205; See where they lived</button>";
+    if(p.where) h+="<button class='trb-see' onclick=\"event.stopPropagation();trbSee('"+slfEsc(p.id)+"')\"><i data-lli=pin></i> See where they lived</button>";
     if(p.links&&p.links.length) h+="<span class='trb-k lds'>The connection, and where it comes from</span>";
     (p.links||[]).forEach(function(l){ h+="<div class='trb-link "+slfEsc(l.kind)+"'><span class='trb-kind "+slfEsc(l.kind)+"'>"+trbKind(l.kind)+"</span> "+trbGrade(l.grade)+"<p>"+slfEsc(l.claim)+"</p><p class='trb-note'>"+slfEsc(l.note)+"</p></div>"; });
     var st=it&&it.study;
@@ -11838,7 +11839,7 @@ function trbCardHtml(p,it){ /* (the See-where button is styled with .trb-see, se
     else h+="<div class='trb-wait'>&#10022; The account's full, sourced study of this people is still being written; the words above are the study for now.</div>";
     var src=""; ((st&&st.sources)||p.sources||[]).forEach(function(s){ var u=slfUrl(s.url); if(u) src+="<a class='sl-src-l' href='"+slfEsc(u)+"' target='_blank' rel='noopener' onclick='event.stopPropagation()'>&#128279; "+slfEsc(s.name||u)+"</a>"; });
     if(src) h+="<div class='sl-src'><div class='sl-src-t'>Sources: open and read them</div>"+src+"</div>";
-    h+="<div class='trb-tools' style='margin-top:8px'><button class='trb-btn' onclick=\"event.stopPropagation();trbToGlobe('"+slfEsc(p.id)+"')\">&#127758; On the globe</button><button class='trb-btn' onclick=\"event.stopPropagation();TRB.open=null;trbRender()\">Close</button></div>";
+    h+="<div class='trb-tools' style='margin-top:8px'><button class='trb-btn' onclick=\"event.stopPropagation();trbToGlobe('"+slfEsc(p.id)+"')\"><i data-lli=globe></i> On the globe</button><button class='trb-btn' onclick=\"event.stopPropagation();TRB.open=null;trbRender()\">Close</button></div>";
     h+="</div>";
   }
   return h+"</div>";
@@ -11883,7 +11884,7 @@ function trbGlobeCaption(p,a){
   var el=document.getElementById("gl-land"); if(!el) return;
   var h="<div class='gl-cap'><b>The peoples, where they lived about 1500</b>, when Europeans first came. Borders were never lines: the colours are the culture areas historians use, and each dot is a people's homeland then. A dot with a gold ring is a people whose traditions or history have been connected with Israel, the Book of Mormon or a visiting teacher; a hollow dot is a people known from ruins. Tap a dot to name it, then open its study. Zoom in with the buttons or a pinch to read the map's own names.</div>";
   if(a) h+="<div class='gl-cap'><b>"+slfEsc(a.name)+"</b> &#183; "+slfEsc(a.where||"")+" "+slfEsc(a.note||"")+"</div>";
-  if(p){ var ar=trbArea(p.area)||{color:"#fff",name:""}; h+="<div class='trb-card open' style='cursor:default'><h3>"+slfEsc(p.name)+(p.also?"<small>"+slfEsc(p.also)+"</small>":"")+"</h3><div class='trb-where' style='color:"+ar.color+"'>"+slfEsc(ar.name)+" &#183; "+slfEsc(p.where||"")+"</div><div class='trb-detail'><p>"+slfEsc(p.believed||"")+"</p></div><div class='trb-tools' style='margin-top:8px'><button class='trb-btn' onclick=\"openTribes('"+slfEsc(p.id)+"')\">&#129718; Open its study</button></div></div>"; }
+  if(p){ var ar=trbArea(p.area)||{color:"#fff",name:""}; h+="<div class='trb-card open' style='cursor:default'><h3>"+slfEsc(p.name)+(p.also?"<small>"+slfEsc(p.also)+"</small>":"")+"</h3><div class='trb-where' style='color:"+ar.color+"'>"+slfEsc(ar.name)+" &#183; "+slfEsc(p.where||"")+"</div><div class='trb-detail'><p>"+slfEsc(p.believed||"")+"</p></div><div class='trb-tools' style='margin-top:8px'><button class='trb-btn' onclick=\"openTribes('"+slfEsc(p.id)+"')\"><i data-lli=feather></i> Open its study</button></div></div>"; }
   el.innerHTML=h;
 }
 function glMode(m){
@@ -11938,7 +11939,7 @@ function atnRender(){
   var A=atnData(); if(!A) return; ATN.built=true;
   document.getElementById("atn-intro").textContent=A.intro;
   var nav=""; A.parts.forEach(function(pt){ nav+="<button class='atn-chip' onclick=\"atnGo('atn-part-"+atnEsc(pt.id)+"')\">"+slfEm(pt.em)+" "+atnEsc(pt.title)+"</button>"; });
-  nav+="<button class='atn-chip ev' onclick=\"atnGo('atn-evidence')\">&#127963; All the evidence ("+atnFinds().length+")</button><button class='atn-chip sc' onclick=\"atnGo('atn-gather')\">&#128214; Every scripture</button>";
+  nav+="<button class='atn-chip ev' onclick=\"atnGo('atn-evidence')\"><i data-lli=columns></i> All the evidence ("+atnFinds().length+")</button><button class='atn-chip sc' onclick=\"atnGo('atn-gather')\"><i data-lli=book></i> Every scripture</button>";
   document.getElementById("atn-nav").innerHTML=nav;
   var h="<div class='atn-rule'>&#10022; Everything here is written to be accurate. The study is what the scriptures and the prophets teach; the evidence carries the timeline's honest label on every piece: <b>Confirmed</b> (the evidence agrees), <b>Believed</b> (good evidence, not settled) or <b>Debated</b> (scholars disagree), with its sources to open and read. Faith does not need the facts bent; where a claim is weak, it says so.</div>";
   h+="<div class='atn-h'>The study</div>";
@@ -11978,8 +11979,8 @@ function atnRenderEvidence(){
       var sh=""; (Array.isArray(f.sources)?f.sources:[]).forEach(function(s){ if(!s) return; var u=slfUrl(s.url); sh+=u?"<a class='sl-src-l' href='"+atnEsc(u)+"' target='_blank' rel='noopener'>&#128279; "+atnEsc(s.name||u)+"</a>":""; });
       if(sh) h+="<div class='sl-src'><div class='sl-src-t'>Sources: open and read them</div>"+sh+"</div>";
       if(pt) h+="<button class='atn-btn soft' onclick=\"atnGo('atn-part-"+atnEsc(pt.id)+"')\">&#8679; Read the part of the study it belongs to: "+atnEsc(pt.title)+"</button>";
-      if(f.lat!=null) h+="<button class='atn-btn' onclick=\"atnSee('"+atnEsc(f.id)+"')\">&#128205; See where this happened</button>";
-      h+="<button class='atn-btn' onclick=\"atnToTimeline('find-"+atnEsc(f.id)+"')\">&#128506; Find it on the timeline</button>";
+      if(f.lat!=null) h+="<button class='atn-btn' onclick=\"atnSee('"+atnEsc(f.id)+"')\"><i data-lli=pin></i> See where this happened</button>";
+      h+="<button class='atn-btn' onclick=\"atnToTimeline('find-"+atnEsc(f.id)+"')\"><i data-lli=map></i> Find it on the timeline</button>";
       h+="<button class='atn-btn soft' onclick=\"atnShow('"+atnEsc(f.id)+"')\">Close</button></div>"; }
     h+="</div>"; });
   list.innerHTML=h||"<div class='sl-wait'>Nothing under this label.</div>";
@@ -12162,12 +12163,12 @@ function smGo(which){
     <button id="ch-close" onclick="closeChurchGuide()" aria-label="Close">&#10005;</button>
   </div>
   <div id="ch-tabs">
-    <button class="ch-tab" id="ch-tab-temples" onclick="chTab('temples')">&#9962; Temples</button>
-    <button class="ch-tab" id="ch-tab-world" onclick="chTab('world')">&#127758; Around the world</button>
-    <button class="ch-tab" id="ch-tab-places" onclick="chTab('places')">&#128205; Country by country</button>
-    <button class="ch-tab" id="ch-tab-states" onclick="chTab('states')">&#127482;&#127480; State by state</button>
-    <button class="ch-tab" id="ch-tab-none" onclick="chTab('none')">&#128367; Not yet</button>
-    <button class="ch-tab" id="ch-tab-news" onclick="chTab('news')">&#128276; What changed</button>
+    <button class="ch-tab" id="ch-tab-temples" onclick="chTab('temples')"><i data-lli=temple></i> Temples</button>
+    <button class="ch-tab" id="ch-tab-world" onclick="chTab('world')"><i data-lli=globe></i> Around the world</button>
+    <button class="ch-tab" id="ch-tab-places" onclick="chTab('places')"><i data-lli=pin></i> Country by country</button>
+    <button class="ch-tab" id="ch-tab-states" onclick="chTab('states')"><i data-lli=flag></i> State by state</button>
+    <button class="ch-tab" id="ch-tab-none" onclick="chTab('none')"><i data-lli=candle></i> Not yet</button>
+    <button class="ch-tab" id="ch-tab-news" onclick="chTab('news')"><i data-lli=bell></i> What changed</button>
   </div>
   <div id="ch-body"></div>
 </div>
@@ -12308,9 +12309,9 @@ function chTempleCard(t){
     +((t.facts||[]).length?"<div class='ch-sec'><div class='ch-lab'>Little facts</div><ul class='ch-list'>"+t.facts.map(function(f){ return "<li>"+chEsc(f)+"</li>"; }).join("")+"</ul></div>":"")
     +(ms.length?"<div class='ch-sec'><div class='ch-lab'>Its history</div><ul class='ch-list'>"+ms.map(function(m){ return "<li><b>"+chEsc(m.what)+"</b> &#183; "+chEsc(m.date||chDate(m.iso))+"</li>"; }).join("")+"</ul></div>":"")
     +((t.history||[]).length?"<div class='ch-sec ch-why'><div class='ch-lab' style='color:#F5C518'>&#10022; Remember</div>"+t.history.map(function(h){ var u=chUrl(h.url); return "<div class='ch-p'>"+chEsc(h.said)+(u?" <a href='"+chEsc(u)+"' target='_blank' rel='noopener' style='color:#5BD3DC'>Read it</a>":"")+"</div>"; }).join("")+"</div>":"")
-    +"<button class='ch-btn ch-see' onclick=\"chSeeTemple('"+chEsc(t.id)+"')\">&#128205; See where this temple is</button>"
+    +"<button class='ch-btn ch-see' onclick=\"chSeeTemple('"+chEsc(t.id)+"')\"><i data-lli=pin></i> See where this temple is</button>"
     +chSrc(t.url,t.status==="HISTORICAL"?"The Church's history and scriptures":"The Church's page for this temple")
-    +(ev?"<button class='ch-btn' onclick=\"chToTimeline('"+chEsc(ev)+"')\">&#128506; Find it on the timeline</button>":"")
+    +(ev?"<button class='ch-btn' onclick=\"chToTimeline('"+chEsc(ev)+"')\"><i data-lli=map></i> Find it on the timeline</button>":"")
     +"</div></div>";
 }
 function chFig(p){
@@ -12336,9 +12337,9 @@ function chPlaceCard(p){
     +(fm&&fm.said?"<div class='ch-sec ch-why'><div class='ch-lab' style='color:#F5C518'>&#128694; The first missionaries</div><div class='ch-p'>"+chEsc(fm.said)+"</div></div>":"")
     +((p.summary||[]).length?"<div class='ch-sec'><div class='ch-lab'>The Church in "+chEsc(p.name)+"</div>"+p.summary.map(function(x){ return "<div class='ch-p'>"+chEsc(x)+"</div>"; }).join("")+"</div>":"")
     +((p.history||[]).length?"<div class='ch-sec'><div class='ch-lab'>Its history</div>"+p.history.map(function(x){ return "<div class='ch-p'>"+chEsc(x)+"</div>"; }).join("")+"</div>":"")
-    +"<button class='ch-btn ch-see' onclick=\"chSeePlace('"+chEsc(p.id)+"')\">&#128205; See where "+chEsc(p.name)+" is</button>"
+    +"<button class='ch-btn ch-see' onclick=\"chSeePlace('"+chEsc(p.id)+"')\"><i data-lli=pin></i> See where "+chEsc(p.name)+" is</button>"
     +chSrc(p.source,"The Church's facts and statistics for "+p.name)
-    +(ev?"<button class='ch-btn' onclick=\"chToTimeline('"+chEsc(ev)+"')\">&#128506; Find it on the timeline</button>":"")
+    +(ev?"<button class='ch-btn' onclick=\"chToTimeline('"+chEsc(ev)+"')\"><i data-lli=map></i> Find it on the timeline</button>":"")
     +"</div></div>";
 }
 function chMatch(s){ return !CH.q||String(s||"").toLowerCase().indexOf(CH.q)>=0; }
@@ -12509,10 +12510,10 @@ setTimeout(chFetch,1200);
     <button id="tg-close" onclick="closeTechGuide()">&#10005;</button>
   </div>
   <div id="tg-tabs">
-    <button class="tg-tab on" id="tg-tab-tech" onclick="tgTab('tech')">&#128161; Technology</button>
-    <button class="tg-tab" id="tg-tab-ages" onclick="tgTab('ages')">&#128106; By age</button>
-    <button class="tg-tab" id="tg-tab-learn" onclick="tgTab('learn')">&#128300; What we are learning</button>
-    <button class="tg-tab" id="tg-tab-finds" onclick="tgTab('finds')">&#127963; New Discoveries</button>
+    <button class="tg-tab on" id="tg-tab-tech" onclick="tgTab('tech')"><i data-lli=bulb></i> Technology</button>
+    <button class="tg-tab" id="tg-tab-ages" onclick="tgTab('ages')"><i data-lli=family></i> By age</button>
+    <button class="tg-tab" id="tg-tab-learn" onclick="tgTab('learn')"><i data-lli=microscope></i> What we are learning</button>
+    <button class="tg-tab" id="tg-tab-finds" onclick="tgTab('finds')"><i data-lli=columns></i> New Discoveries</button>
   </div>
   <div id="tg-body"></div>
 </div>
@@ -12635,8 +12636,8 @@ function tgCard(it){
     +"<div class='tg-sec tg-learn'><div class='tg-lab'>What we are learning</div>"+tgNotes(it.learned)+"</div>"
     +"<div class='tg-sec tg-kids'><div class='tg-lab'>Three rules for kids</div>"+tgList(it.kids)+"</div>"
     +(it.talk?"<div class='tg-sec tg-talk'><div class='tg-lab'>Talk about it tonight</div><div class='tg-p'>&ldquo;"+tgEsc(it.talk)+"&rdquo;</div></div>":"")
-    +(it.lat!=null?"<button class='tg-btn tg-see' onclick=\"tgSee('tech','"+tgEsc(it.id)+"')\">&#128205; See where this happened</button>":"")
-    +"<button class='tg-btn' onclick=\"tgToTimeline('"+tgEsc(evId)+"')\">&#128506; Find it on the timeline</button>"
+    +(it.lat!=null?"<button class='tg-btn tg-see' onclick=\"tgSee('tech','"+tgEsc(it.id)+"')\"><i data-lli=pin></i> See where this happened</button>":"")
+    +"<button class='tg-btn' onclick=\"tgToTimeline('"+tgEsc(evId)+"')\"><i data-lli=map></i> Find it on the timeline</button>"
     +"</div></div>";
 }
 function tgFindCard(it){
@@ -12649,8 +12650,8 @@ function tgFindCard(it){
     +(it.gospel?"<div class='tg-sec tg-why'><div class='tg-lab' style='color:#F5C518'>&#10022; Why it matters</div><div class='tg-p'>"+tgEsc(it.gospel)+"</div></div>":"")
     +(it.forkids?"<div class='tg-sec tg-kids'><div class='tg-lab'>For a child</div><div class='tg-p'>"+tgEsc(it.forkids)+"</div></div>":"")
     +(src?"<div class='tg-sec'><div class='tg-lab' style='color:#22D3EE'>Source</div><div class='tg-p'>"+src+"</div></div>":"")
-    +(it.lat!=null?"<button class='tg-btn tg-see' onclick=\"tgSee('finds','"+tgEsc(it.id)+"')\">&#128205; See where this happened</button>":"")
-    +"<button class='tg-btn' onclick=\"tgToTimeline('find-"+tgEsc(it.id)+"')\">&#128506; Find it on the timeline</button>"
+    +(it.lat!=null?"<button class='tg-btn tg-see' onclick=\"tgSee('finds','"+tgEsc(it.id)+"')\"><i data-lli=pin></i> See where this happened</button>":"")
+    +"<button class='tg-btn' onclick=\"tgToTimeline('find-"+tgEsc(it.id)+"')\"><i data-lli=map></i> Find it on the timeline</button>"
     +"</div></div>";
 }
 function tgRender(){
@@ -12930,5 +12931,6 @@ setTimeout(tgFetch,900);
 })();
 </script>
 
+<script src="js/line-icons.js"></script>
 </body>
 </html>
