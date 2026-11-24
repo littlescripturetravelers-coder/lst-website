@@ -1,7 +1,68 @@
 {
- "updated": "2026-11-24T13:33:16.544Z",
+ "updated": "2026-11-24T19:26:57.963Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
+  {
+   "id": "story-the-years-given-back",
+   "type": "story",
+   "title": "The Years Given Back",
+   "nightLabel": "Week 4 · Night 7",
+   "download": "OldTestament_Story_TheYearsGivenBack_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 28,
+   "date": "2026-11-25",
+   "story": "the-years-given-back",
+   "ref": "Joel 2:21–28",
+   "storyId": "ot-b11-w4n7",
+   "files": {
+    "lds": {
+     "url": "/lantern/the-years-given-back/printables/story.pdf?v=1d93aba3f3",
+     "pages": 5,
+     "bytes": 1053370
+    },
+    "christian": {
+     "url": "/lantern/the-years-given-back/printables/story-christian.pdf?v=1d93aba3f3",
+     "pages": 5,
+     "bytes": 1052881
+    }
+   },
+   "thumb": "/lantern/the-years-given-back/printables/story.jpg?v=1d93aba3f3",
+   "src": "1d93aba3f3b01ed13d2e8b71fa57db4cd6ffdd2642291453996e80020663bf0b",
+   "updated": "2026-11-24",
+   "created": "2026-11-24",
+   "stored": "1d93aba3f3b01ed13d2e8b71fa57db4cd6ffdd2642291453996e80020663bf0b"
+  },
+  {
+   "id": "song-the-years-given-back",
+   "type": "song",
+   "title": "Green Will Come Again",
+   "storyTitle": "The Years Given Back",
+   "download": "OldTestament_Song_GreenWillComeAgain_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 4,
+   "night": 28,
+   "date": "2026-11-25",
+   "story": "the-years-given-back",
+   "ref": "Joel 2:21–28",
+   "storyId": "ot-b11-w4n7",
+   "files": {
+    "lds": {
+     "url": "/lantern/the-years-given-back/printables/song.pdf?v=6d69794132",
+     "pages": 1,
+     "bytes": 35930
+    }
+   },
+   "thumb": "/lantern/the-years-given-back/printables/song.jpg?v=6d69794132",
+   "src": "6d69794132562fbab52f636f83c57af15d1349f19dd7944f7f1ffdb324159f0a",
+   "updated": "2026-11-24",
+   "created": "2026-11-24",
+   "stored": "6d69794132562fbab52f636f83c57af15d1349f19dd7944f7f1ffdb324159f0a"
+  },
   {
    "id": "story-slow-to-anger-great-in-kindness",
    "type": "story",
