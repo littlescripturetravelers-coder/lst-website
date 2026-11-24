@@ -2,14 +2,16 @@
  "ages": [
   {
    "id": "baby",
-   "label": "Babies & Toddlers",
-   "years": "0 to 2",
-   "growing": "Attachment, trust, first words and walking. A baby learns language from a face that answers back, not from a screen; this is the age when the brain wires itself fastest around real people.",
    "fits": [
     "Video calls with grandparents and family far away, with a parent holding the phone.",
     "Music, lullabies and scripture stories played aloud while you hold them.",
     "A parent's phone camera, to keep the memories."
    ],
+   "bless": [
+    "Let them see grandma's face and hear her voice every week.",
+    "Sing the same lullaby every night; it becomes home to them."
+   ],
+   "label": "Babies & Toddlers",
    "rules": [
     "No screen time except video chat with family (American Academy of Pediatrics).",
     "No screens in the room where they sleep.",
@@ -19,21 +21,21 @@
     "A baby who stops looking up at faces, or whose words come late, when screens are on a lot.",
     "Background television: it cuts the number of words a baby hears from you."
    ],
-   "bless": [
-    "Let them see grandma's face and hear her voice every week.",
-    "Sing the same lullaby every night; it becomes home to them."
-   ]
+   "years": "0 to 2",
+   "growing": "Attachment, trust, first words and walking. A baby learns language from a face that answers back, not from a screen; this is the age when the brain wires itself fastest around real people."
   },
   {
    "id": "little",
-   "label": "Early Years",
-   "years": "3 to 5",
-   "growing": "Imagination, language, self-control, and the first sense of right and wrong. They copy everything, cannot yet tell a story from an advertisement, and feel a sudden stop like a loss.",
    "fits": [
     "Picture books and scripture stories on a screen, read together, the way you would read a book.",
     "Children's music and hymns.",
     "Drawing and building apps, for short spells, beside you."
    ],
+   "bless": [
+    "Record a message or a song for someone who is sick or far away.",
+    "Make a card on the tablet and print it for a neighbor."
+   ],
+   "label": "Early Years",
    "rules": [
     "About an hour a day at most, of good content, watched with a parent (American Academy of Pediatrics); the WHO says an hour or less for this age too.",
     "No screens at meals, in the car for short trips, or in the hour before bed.",
@@ -44,21 +46,21 @@
     "Fast, flashing cartoons; they train a short attention span.",
     "Advertisements aimed at them; explain what an ad is."
    ],
-   "bless": [
-    "Record a message or a song for someone who is sick or far away.",
-    "Make a card on the tablet and print it for a neighbor."
-   ]
+   "years": "3 to 5",
+   "growing": "Imagination, language, self-control, and the first sense of right and wrong. They copy everything, cannot yet tell a story from an advertisement, and feel a sudden stop like a loss."
   },
   {
    "id": "early",
-   "label": "Early Elementary",
-   "years": "6 to 8",
-   "growing": "Reading, friendship, fairness, and a conscience that can be taught. They believe what they see. They want to belong, and they still tell you everything if you make it safe to.",
    "fits": [
     "Learning apps and reading apps, with the settings you chose.",
     "Family video calls, family movie night, uplifting shows chosen together.",
     "Simple creation: drawing, music, photos of family, a first typed story."
    ],
+   "bless": [
+    "Video-call an older relative and ask them a family-history question; record the answer.",
+    "Type a thank-you note to a teacher or a church leader."
+   ],
+   "label": "Early Elementary",
    "rules": [
     "Consistent daily limits, written down as a family media plan; screens live in family rooms, never bedrooms.",
     "No personal smartphone, no social media, no online games with strangers' chat.",
@@ -69,21 +71,22 @@
     "Sneaking screens, or lying about time.",
     "Comparing themselves with children on a screen."
    ],
-   "bless": [
-    "Video-call an older relative and ask them a family-history question; record the answer.",
-    "Type a thank-you note to a teacher or a church leader."
-   ]
+   "years": "6 to 8",
+   "growing": "Reading, friendship, fairness, and a conscience that can be taught. They believe what they see. They want to belong, and they still tell you everything if you make it safe to."
   },
   {
    "id": "late",
-   "label": "Late Elementary",
-   "years": "9 to 11",
-   "growing": "Competence, rules and fairness, and friends who start to matter as much as family. Curiosity is strong and the brakes are not built yet. Many children first meet pornography by accident around the end of this stage, so the talk comes before the device.",
    "fits": [
     "Homework and learning online in a family room, with filters and history visible.",
     "Creating: coding, music, film-making, photography, with the results shared inside the family.",
     "A watch or basic phone that calls and texts, only if the family truly needs it; a smartphone can wait."
    ],
+   "bless": [
+    "Teach a younger sibling something on the tablet.",
+    "Help a grandparent with their phone; that is service too.",
+    "Make a family video for a birthday or a farewell."
+   ],
+   "label": "Late Elementary",
    "rules": [
     "No social media (the law sets 13 as the floor for most apps).",
     "No devices in bedrooms overnight; they charge in the kitchen.",
@@ -94,22 +97,22 @@
     "Sleep loss, and mood that tracks the screen.",
     "Anyone online who wants to move the talk to a private app."
    ],
-   "bless": [
-    "Teach a younger sibling something on the tablet.",
-    "Help a grandparent with their phone; that is service too.",
-    "Make a family video for a birthday or a farewell."
-   ]
+   "years": "9 to 11",
+   "growing": "Competence, rules and fairness, and friends who start to matter as much as family. Curiosity is strong and the brakes are not built yet. Many children first meet pornography by accident around the end of this stage, so the talk comes before the device."
   },
   {
    "id": "tween",
-   "label": "Early Adolescence",
-   "years": "12 to 14",
-   "growing": "Identity, puberty, the pull of friends, and a hunger for approval that social media is built to exploit. The part of the brain that weighs consequences is still growing until the mid-twenties. Faith begins to become their own here.",
    "fits": [
     "A first phone with a written family agreement, filters, and a parent who knows every account and password.",
     "Tools to create and serve: editing, design, coding, music, a family history project.",
     "Scripture and hymn apps, and talks they choose to listen to."
    ],
+   "bless": [
+    "Share a kindness, a scripture or a testimony online on purpose, not by accident.",
+    "Organize a service project with friends through the group chat.",
+    "Record grandparents' stories and put them on the family timeline."
+   ],
+   "label": "Early Adolescence",
    "rules": [
     "Delay social media as long as you can (13 is the legal floor, and the U.S. Surgeon General warns it is not proof of safety); if it is used, accounts are private, parents follow, notifications are off, and there is a daily limit.",
     "Phones out of bedrooms at night and off the table at meals.",
@@ -120,22 +123,22 @@
     "A sudden new 'friend' who sends gifts or asks for pictures.",
     "Comparing their body or their life to a feed."
    ],
-   "bless": [
-    "Share a kindness, a scripture or a testimony online on purpose, not by accident.",
-    "Organize a service project with friends through the group chat.",
-    "Record grandparents' stories and put them on the family timeline."
-   ]
+   "years": "12 to 14",
+   "growing": "Identity, puberty, the pull of friends, and a hunger for approval that social media is built to exploit. The part of the brain that weighs consequences is still growing until the mid-twenties. Faith begins to become their own here."
   },
   {
    "id": "teen",
-   "label": "Teen",
-   "years": "15 to 17",
-   "growing": "Abstract thinking, the need to be their own person, and the first practice at governing themselves: driving, work, money, choices about what to watch and who to follow. Risk still feels smaller than it is.",
    "fits": [
     "Their own limits, written by them and reviewed with you.",
     "AI, design, code and media as tools for real work, school and service.",
     "Teaching the younger ones what they have learned."
    ],
+   "bless": [
+    "Lead a family history project; build the family's timeline.",
+    "Create something that lifts: music, a short film, a page that helps someone.",
+    "Use the tools to reach, to teach and to serve."
+   ],
+   "label": "Teen",
    "rules": [
     "Phones away at meals and when people are present, and out of the bedroom at night.",
     "A weekly time away from screens, together as a family.",
@@ -146,22 +149,22 @@
     "Gambling built into games and apps.",
     "Letting an AI do the thinking, the writing, or the feeling."
    ],
-   "bless": [
-    "Lead a family history project; build the family's timeline.",
-    "Create something that lifts: music, a short film, a page that helps someone.",
-    "Use the tools to reach, to teach and to serve."
-   ]
+   "years": "15 to 17",
+   "growing": "Abstract thinking, the need to be their own person, and the first practice at governing themselves: driving, work, money, choices about what to watch and who to follow. Risk still feels smaller than it is."
   },
   {
    "id": "adult",
-   "label": "Young Adult",
-   "years": "18 and up",
-   "growing": "Governing themselves fully: college, missions and service, work, marriage. The rules are now theirs; a parent becomes a counselor they come back to.",
    "fits": [
     "Every tool their schooling, work and service need, used on purpose.",
     "Their own standards, kept because they chose them.",
     "Mentoring younger brothers, sisters and cousins."
    ],
+   "bless": [
+    "Lead the family history and temple work, or the family's record keeping.",
+    "Use AI, design, code and media for real service.",
+    "Reach, teach and gather: use the tools the way the Lord's work uses them."
+   ],
+   "label": "Young Adult",
    "rules": [
     "Choose your own limits, write them down, and keep them.",
     "Guard sleep, real friendships and time with God from the feed.",
@@ -172,11 +175,8 @@
     "Online debt, gambling and scams.",
     "An AI that does the work you were meant to learn."
    ],
-   "bless": [
-    "Lead the family history and temple work, or the family's record keeping.",
-    "Use AI, design, code and media for real service.",
-    "Reach, teach and gather: use the tools the way the Lord's work uses them."
-   ]
+   "years": "18 and up",
+   "growing": "Governing themselves fully: college, missions and service, work, marriage. The rules are now theirs; a parent becomes a counselor they come back to."
   }
  ],
  "items": [
@@ -1358,6 +1358,12 @@
    "name": "The Internet and the Web",
    "talk": "What is the best thing the internet has brought into our home? What is the worst?",
    "what": "Every computer in the world able to talk to every other one. The web put pages on it that anyone can read.",
+   "work": [
+    "The scriptures and the good news of Jesus Christ can now be read and heard for free, in many languages, by people almost anywhere in the world.",
+    "Families far apart can pray, talk and see each other by video, which keeps love strong across miles.",
+    "People who serve the poor and the sick can share needs, gather help and send aid quickly when disaster strikes.",
+    "Good music, uplifting talks and kind messages can reach someone who is lonely or searching, right when they need it."
+   ],
    "avoid": [
     "Unfiltered browsing anywhere, on any device, including a friend's.",
     "Searching alone before they know what to do with what appears.",
@@ -1369,7 +1375,22 @@
     "Find a scripture, a talk, a hymn in seconds and share it.",
     "Serve: find who needs help, and organize the helpers."
    ],
+   "future": [
+    "Telling true from false: checking who wrote something, comparing sources, and spotting fake pictures, AI-made content and scams.",
+    "Searching and learning well: finding good information fast, and using online courses and tools to keep learning for life.",
+    "Working with people online: writing kind, clear messages, sharing files and working on teams by video and chat.",
+    "Staying safe and in charge: protecting passwords and privacy, and choosing when to put the screen down so the tool serves you and doesn't rule you."
+   ],
    "modern": true,
+   "stages": {
+    "0-2": "Babies and toddlers learn by touching, moving and hearing a loving voice. The World Health Organization advises no screens before age one and very little after that, so keep the internet for short video calls with grandparents while you hold your child.",
+    "18+": "Young adults will use the internet for work, school, faith and friendship every day. Help them keep healthy habits they choose for themselves: a plan for their own time, care about what is true, and turning away from what harms the spirit.",
+    "3-5": "Young children can't yet tell a real thing from an ad, or a safe page from a scary one. Use the internet together for less than an hour a day, on a shared device in a family room, and choose good shows and calls with family.",
+    "6-8": "Children this age are learning to read and ask big questions, and they trust whatever they see. Let them explore a few chosen sites or apps on a shared family tablet with parental controls on, and teach them one rule: if anything makes you feel bad or confused, tell me, and you won't be in trouble.",
+    "9-11": "Children now do schoolwork online and want more freedom, but the parts of the brain that slow us down and keep us safe are still growing. Keep devices out of bedrooms at night, keep filters on, and talk calmly about pornography and strangers before they run into them. Most children first see pornography by accident, around age twelve.",
+    "12-14": "Early teens care deeply about friends and fitting in, so mean comments, scams and pressure can hurt them more. Make a family media plan together, wait on social media, check in often about what they see, and keep phones charging outside the bedroom.",
+    "15-17": "Teens are practising for adult life and need room to make choices, with a parent still close by. Slowly give them more trust as they show good judgment, keep talking about what's true online and what love really is, and protect their sleep."
+   },
    "builtOn": [
     "pc",
     "telephone",
@@ -1379,6 +1400,38 @@
     "The average child first sees pornography online around age 12, often by accident.",
     "Everything posted can be copied and kept forever.",
     "A screen with no limits is a river with no banks."
+   ],
+   "deep_on": "2026-11-23",
+   "experts": [
+    {
+     "say": "The AAP says to think about more than minutes on a screen. Parents can ask what the child is watching, whether they use it to calm down, and what it 'crowds out', like sleep, play and family time.",
+     "url": "https://publications.aap.org/aapnews/news/34088/Beyond-screen-time-Policy-discusses-how-to",
+     "who": "American Academy of Pediatrics, Council on Communications and Media",
+     "source": "AAP News, 'Beyond screen time: Policy discusses how to approach immersive digital ecosystem'"
+    },
+    {
+     "say": "As AI tools spread online, more children are coming across fake, computer-made sexual images, mostly without looking for them. This makes it even more important for parents to start the conversation early.",
+     "url": "https://www.commonsensemedia.org/sites/default/files/research/report/commonsensemedia_teensaipornographysexualcontent_2026_0.pdf",
+     "who": "Common Sense Media researchers",
+     "source": "Teens in the AI Era: Pornography and Sexual Content (2026)"
+    },
+    {
+     "say": "Some good news: pediatricians and tech companies are starting to work together. The AAP's Family Media Plan helped shape new parental controls, so families have easier tools to balance screens with sleep, exercise, schoolwork and time together.",
+     "url": "https://publications.aap.org/aapnews/news/36279/AAP-Apple-release-guide-to-help-build-healthy",
+     "who": "American Academy of Pediatrics",
+     "source": "AAP News, 'AAP, Apple release guide to help build healthy digital habits'"
+    },
+    {
+     "say": "The Surgeon General asked lawmakers and companies, not only parents, to make online spaces safer for children, because families shouldn't have to carry this alone.",
+     "url": "https://www.schoolsafety.gov/resource/social-media-and-youth-mental-health-us-surgeon-generals-advisory",
+     "who": "U.S. Surgeon General",
+     "source": "Social Media and Youth Mental Health advisory"
+    }
+   ],
+   "ldsWork": [
+    "Through FamilySearch, a free service of the Church, members can find their ancestors in records from around the world and prepare their names for temple ordinances. Church leaders have taught that this is part of gathering Israel on both sides of the veil.",
+    "The Gospel Library app and churchofjesuschrist.org put the scriptures, general conference talks and Come, Follow Me lessons in many languages, helping families learn of the Savior at home.",
+    "Church leaders, including Elder David A. Bednar in 'To Sweep the Earth as with a Flood', have invited members to use the internet and social media to share uplifting messages about Jesus Christ, helping prepare the world for His Second Coming."
    ],
    "learned": [
     {
@@ -1391,6 +1444,32 @@
      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304387826001264",
      "note": "A study in the Journal of Development Economics found that early exposure to high-speed internet may negatively impact children's communication and social skills, highlighting the need for mindful internet use.",
      "source": "Journal of Development Economics"
+    }
+   ],
+   "studies": [
+    {
+     "on": "2026",
+     "url": "https://publications.aap.org/pediatrics/article/157/2/e2025075320/206129/Digital-Ecosystems-Children-and-Adolescents-Policy",
+     "source": "American Academy of Pediatrics, 'Digital Ecosystems, Children, and Adolescents' policy statement, Pediatrics",
+     "finding": "The American Academy of Pediatrics no longer gives one screen-time number for every child. It asks families to make a Family Media Plan together, set parental controls, keep screen-free family time, keep devices out of bedrooms, and stop screens an hour before bed. As a rough guide, it suggests under an hour a day for toddlers and preschoolers and about one to two hours of fun (not school) screen "
+    },
+    {
+     "on": "2026",
+     "url": "https://www.commonsensemedia.org/sites/default/files/research/report/commonsensemedia_teensaipornographysexualcontent_2026_0.pdf",
+     "source": "Common Sense Media, 'Teens in the AI Era: Pornography and Sexual Content'",
+     "finding": "74% of U.S. teens say they have seen online pornography, and 52% saw it by age 12, often by accident. 44% have seen AI-made sexual content. This is a survey, so it shows how common this is but doesn't prove what causes it. It is a strong reason to talk with children early and calmly."
+    },
+    {
+     "on": "2019-04-24",
+     "url": "https://www.aoa.org/news/clinical-eye-care/public-health/screen-time-for-children-under-5",
+     "source": "World Health Organization guidelines, as reported by the American Optometric Association",
+     "finding": "For children under five, the World Health Organization advises no screen time under age one and no more than one hour a day for ages two to four, and less is better. It wants that time spent on active play, sleep, and reading and talking together."
+    },
+    {
+     "on": "2023-05-23",
+     "url": "https://www.schoolsafety.gov/resource/social-media-and-youth-mental-health-us-surgeon-generals-advisory",
+     "source": "U.S. Surgeon General's Advisory on Social Media and Youth Mental Health (U.S. Department of Health and Human Services)",
+     "finding": "The U.S. Surgeon General's advisory found that we can't yet say social media is safe enough for children and teens, and it urged families and companies to act now. The research is still growing and the findings are mixed: the internet helps some young people connect, while others are harmed."
     }
    ]
   },
@@ -1433,6 +1512,12 @@
    "name": "The Mobile Phone",
    "talk": "When is a phone a helper, and when is it a wall between us?",
    "what": "A telephone with no wire, small enough to carry. Anyone could be reached anywhere.",
+   "work": [
+    "Scriptures in your pocket: the Bible and other holy books can be read and heard on a phone in many languages, so people almost anywhere can learn about Jesus Christ.",
+    "Staying close as a family: calls, texts and video chats help parents, children and grandparents far apart pray together, share news and lift each other up.",
+    "Serving others: a quick call or message lets us check on a lonely neighbor, plan meals for a sick friend, or call for help in an emergency.",
+    "Sharing good news gently: a kind message, a verse of scripture or an invitation to church can reach a friend at just the right moment."
+   ],
    "avoid": [
     "A phone in the bedroom overnight.",
     "Group chats a parent does not know about.",
@@ -1443,7 +1528,22 @@
     "Call the person, not just the text.",
     "Coordinate service: rides, meals, visits."
    ],
+   "future": [
+    "Self-control with a phone: choosing when to put it away, turning off alerts, and protecting sleep, prayer, study and time with people.",
+    "Clear, kind and careful communication: writing messages, emails and calls that are polite, honest and right for work, school and family.",
+    "Staying safe online: spotting scams and strangers, keeping private information private, using strong passwords, and knowing when to ask for help.",
+    "Using a phone as a tool for learning and work: finding true information, managing a calendar, using maps, banking and work apps, and checking whether a source can be trusted."
+   ],
    "modern": true,
+   "stages": {
+    "0-2": "Babies and toddlers should not have their own phone. They learn by looking at faces, hearing voices and playing with real things. A short video call with a grandparent while you hold them is a good use, and it is best when you stay close and talk with them about who they see.",
+    "18+": "Young adults choose for themselves now. Parents can still show by example and talk openly about using the phone to learn, work, serve and stay close to family, without letting it rule their time, sleep or peace.",
+    "3-5": "Young children still do not need a phone of their own. If they use yours, keep it short, sit with them, and use it for good things like calling family. They grow best through play, talk, sleep and time outdoors.",
+    "6-8": "Children this age do not need their own phone yet. Teach them how to call you or 911 on a family phone in an emergency, and tell them never to answer messages from people they do not know. They are learning right from wrong and still need a grown-up close by.",
+    "9-11": "Many families choose to wait. Some give a simple phone that only calls and texts, or a watch phone, so a child can reach home. In one large 2025 study, the younger children were when they got a smartphone, the more likely they were to be short on sleep and overweight by age 12. So keep phones out of the bedroom at night and make rules together.",
+    "12-14": "If you give a smartphone at this age, give it slowly and stay close. Start with a few apps, keep it in shared rooms, put it outside the bedroom at night, and keep talking. Young teens feel friends' opinions strongly and are still learning to stop themselves, so they need a parent's steady help.",
+    "15-17": "Teens can carry more of the load: making their own plan for school, sleep, church and family time, with parents checking in instead of watching every step. Keep the phone out of the bedroom overnight, because teens need 8 to 10 hours of sleep and late-night phone use often cuts into it."
+   },
    "builtOn": [
     "telephone",
     "radio",
@@ -1452,6 +1552,38 @@
    "dangers": [
     "Distracted driving kills thousands a year; a text can wait.",
     "A phone that is always on you means work and worry are always on you too."
+   ],
+   "deep_on": "2026-11-23",
+   "experts": [
+    {
+     "say": "As almost every child gets a phone by early high school, children's health can be affected even when their use does not look like a 'problem.' The researchers are not asking for bans. They want more research on the best age to get a phone, what kind of phone, and what it is used for.",
+     "url": "https://publications.aap.org/aapnews/news/33881/Study-Early-adolescent-smartphone-use-linked-to",
+     "who": "Authors of the 2025 Pediatrics smartphone study",
+     "source": "AAP News"
+    },
+    {
+     "say": "Many children use their phones between midnight and 5 a.m. on school nights. Getting devices physically out of the bedroom at bedtime may be the single most important screen rule for protecting sleep.",
+     "url": "https://ifstudies.org/blog/the-most-important-screen-time-rule-no-devices-in-the-bedroom",
+     "who": "Jean Twenge, psychologist, San Diego State University",
+     "source": "Institute for Family Studies (excerpt from '10 Rules for Raising Kids in a High-Tech World', 2025)"
+    },
+    {
+     "say": "School phone bans alone may not improve children's mental health if their phone use outside school stays the same. Even so, bans may still help students focus and take part in school.",
+     "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11850730/",
+     "who": "Helen Weiss and Chris Bonell, London School of Hygiene & Tropical Medicine",
+     "source": "The Lancet Regional Health – Europe (commentary)"
+    },
+    {
+     "say": "Phones may bring real benefits to children's wellbeing, but public posting and phones in bed bring risks. Long-term research that follows children over many years is needed to learn how to keep the good and reduce the harm.",
+     "url": "https://www.stpetersburg.usf.edu/news/2025/results-from-usf-study-on-kids-digital-media-use-reveal-benefits-of-smartphones.aspx",
+     "who": "Chighaf Bakour and colleagues, University of South Florida College of Public Health",
+     "source": "University of South Florida"
+    }
+   ],
+   "ldsWork": [
+    "Family history in your hand: with the free FamilySearch Tree and Memories apps, families can find ancestors, add photos and stories, and prepare names for temple ordinances anywhere (familysearch.org).",
+    "Gospel Library: the Gospel Library app puts the scriptures, Come, Follow Me and general conference messages in many languages on a phone, so families can study together at home (churchofjesuschrist.org).",
+    "Helping gather Israel on both sides of the veil: President Russell M. Nelson taught that the gathering of Israel is the most important work on earth. Phones help members share the gospel with friends and do family history and temple work for those who have die"
    ],
    "learned": [
     {
@@ -1512,6 +1644,38 @@
      "url": "https://arxiv.org/abs/2508.10062",
      "note": "A study found that excessive screen time in children is associated with mental health issues and ADHD, mediated by reduced physical activity and irregular sleep patterns.",
      "source": "arXiv Study"
+    }
+   ],
+   "studies": [
+    {
+     "on": "2025-12-01",
+     "url": "https://publications.aap.org/aapnews/news/33881/Study-Early-adolescent-smartphone-use-linked-to",
+     "source": "Pediatrics (American Academy of Pediatrics), reported in AAP News",
+     "finding": "In a large U.S. study, 12-year-olds who owned a smartphone had about 30% higher odds of depression, 40% higher odds of obesity and 60% higher odds of not getting enough sleep than children without one. Children who got phones younger had higher odds of poor sleep and obesity. The study could not prove the phone caused these problems, and the authors said phones need 'dedicated oversight' rather th"
+    },
+    {
+     "on": "2025-09-06",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12414006/",
+     "source": "Peer-reviewed study on parental evening screen rules and teen sleep (PubMed Central)",
+     "finding": "Teens whose parents made them leave their phones outside the bedroom at night slept about 33 minutes longer on average. Only this strict rule, keeping the phone out of the room, was clearly linked to more sleep."
+    },
+    {
+     "on": "2025-02-08",
+     "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11850730/",
+     "source": "The Lancet Regional Health – Europe (Goodyear et al., SMART Schools), with commentary by Weiss and Bonell",
+     "finding": "A study of about 1,200 students aged 12 to 15 in 30 UK schools found that phone bans during the school day were not linked to better mental wellbeing, sleep or grades, because students did not use their phones less overall. Experts said phone use at home and in the evening may matter more. Other researchers have questioned this study's methods, so the research is still mixed."
+    },
+    {
+     "on": "2025-03-25",
+     "url": "https://www.stpetersburg.usf.edu/news/2025/results-from-usf-study-on-kids-digital-media-use-reveal-benefits-of-smartphones.aspx",
+     "source": "University of South Florida College of Public Health",
+     "finding": "A University of South Florida survey found that children with their own smartphones did better than those without on most of the wellbeing measures it looked at, while posting publicly on social media was linked to harm. One in four children slept with a phone in their hand or bed, and they got less sleep than children whose phones stayed in another room (8.6 vs. 9.3 hours). This shows the researc"
+    },
+    {
+     "on": "2024",
+     "url": "https://publications.aap.org/pediatrics/article/154/6/e2024067417/199968/The-Family-Media-Plan",
+     "source": "Pediatrics (American Academy of Pediatrics), 'The Family Media Plan'",
+     "finding": "The American Academy of Pediatrics offers a free Family Media Plan. It helps families choose their own rules, such as screen-free places in the home, where phones go at night, and protecting sleep and at least one hour of physical activity each day."
     }
    ]
   },
@@ -1627,9 +1791,15 @@
     },
     {
      "on": "2026-11-23",
+     "url": "https://casrai.org/news/wellcome-9-3-million-uk-youth-social-media-restrictions-research-2026",
      "note": "In the UK, the Wellcome Trust gave £9.3 million to ten research teams. They will study how new limits on social media for young people affect the wellbeing of more than 300,000 children and teens. That means families will soon have much better answers, not just guesses, about what really helps.",
-     "source": "CASRAI, reporting on the Wellcome Trust announcement (November 18, 2026)",
-     "url": "https://casrai.org/news/wellcome-9-3-million-uk-youth-social-media-restrictions-research-2026"
+     "source": "CASRAI, reporting on the Wellcome Trust announcement (November 18, 2026)"
+    },
+    {
+     "on": "2026-11-23",
+     "note": "Australia doesn't let children under 16 use social media. In court, the government defended the ban by saying social media can bring children worry, sadness and worse. The government also admitted that many children still find ways around the age checks.",
+     "source": "Al Jazeera",
+     "url": "https://www.aljazeera.com/news/2026/11/4/australian-government-defends-social-media-ban-for-under-16s-in-court"
     }
    ]
   },
@@ -1872,6 +2042,12 @@
      "url": "https://www.apa.org/news/press/releases/2026/09/education-technology-engagement",
      "note": "The APA warns that engagement with educational technology, such as tablets, does not necessarily equate to learning, urging scrutiny of EdTech claims.",
      "source": "American Psychological Association"
+    },
+    {
+     "on": "2026-11-23",
+     "note": "Scientists in Finland followed children for eight years. They were surprised to find that kids who spent more time with screens tended to think and process information a little better as teenagers. This study shows a link, but it doesn't prove that screens caused it. So it is a gentle reminder that what we do with a screen can matter as much as how long we use it.",
+     "source": "ScienceDaily",
+     "url": "https://www.sciencedaily.com/releases/2026/11/261116014725.htm"
     }
    ]
   },
@@ -2138,15 +2314,41 @@
     },
     {
      "on": "2026-11-23",
+     "url": "https://www.hklaw.com/en/insights/publications/2026/11/new-york-enacts-ai-chatbot-safeguards-for-minors",
      "note": "New York passed a new law to keep children safer when they talk with AI chatbots. Starting January 1, 2027, chatbot companies may not give children in New York unsafe 'AI companion' features, and they will have to check users' ages. This is a good time to talk together about which helpers in your home can talk back.",
-     "source": "Holland & Knight, 'New York Enacts AI Chatbot Safeguards for Minors' (November 5, 2026)",
-     "url": "https://www.hklaw.com/en/insights/publications/2026/11/new-york-enacts-ai-chatbot-safeguards-for-minors"
+     "source": "Holland & Knight, 'New York Enacts AI Chatbot Safeguards for Minors' (November 5, 2026)"
     },
     {
      "on": "2026-11-23",
+     "url": "https://www.apa.org/monitor/2026/11-12/ai-chatbot-toys-early-development",
      "note": "The American Psychological Association looked at the new toys that talk using AI. Experts worry these toys can make little children feel too attached to them. The toys also don't teach the things a real person does, like sharing and taking turns. For very young children, real people still matter most: a parent, a grandparent, a friend.",
-     "source": "American Psychological Association, Monitor on Psychology, 'Chatbots in the crib' (November 1, 2026)",
-     "url": "https://www.apa.org/monitor/2026/11-12/ai-chatbot-toys-early-development"
+     "source": "American Psychological Association, Monitor on Psychology, 'Chatbots in the crib' (November 1, 2026)"
+    }
+   ],
+   "milestones": [
+    {
+     "on": "2026-10-28",
+     "t": "New York limits AI companions for children",
+     "de": "New York signed a law that starts on January 1, 2027. It says AI chatbots must not use unsafe 'companion' features with children, such as pretending to be a human or to have real feelings. Companies will also have to check users' ages.",
+     "source": "Holland & Knight",
+     "url": "https://www.hklaw.com/en/insights/publications/2026/11/new-york-enacts-ai-chatbot-safeguards-for-minors",
+     "added": "2026-11-23"
+    },
+    {
+     "on": "2026-11-17",
+     "t": "Oregon sues a chatbot maker over child safety",
+     "de": "Oregon's Attorney General started a 'Keeping Kids Safe' program and sued OpenAI for about $2 billion. The state says the company's ChatGPT chatbot put children in danger and misled parents about how safe it is. The state also asked parents to talk with their children about which AI chatbots they use and what they say to them.",
+     "source": "Oregon Department of Justice",
+     "url": "https://www.doj.state.or.us/media-home/news-media-releases/ag-rayfield-files-2b-lawsuit-against-open-ai-launches-keeping-kids-safe-initiative/",
+     "added": "2026-11-23"
+    },
+    {
+     "on": "2026-11-17",
+     "t": "New AI models from OpenAI and Google",
+     "de": "In one busy week, OpenAI released new GPT-6.2 models and Google released Gemini 4 models. Talking AI keeps changing quickly, so families may want to look at their safety settings again.",
+     "source": "LLM Gateway release timeline",
+     "url": "https://llmgateway.io/timeline",
+     "added": "2026-11-23"
     }
    ]
   },
@@ -2262,12 +2464,18 @@
      "url": "https://www.globenewswire.com/news-release/2026/01/28/3227793/0/en/nori-introduces-the-world-s-first-family-brain-bringing-ai-into-the-center-of-modern-family-life.html",
      "note": "Nori, the world's first Family AI, was launched to assist families in managing daily schedules and tasks.",
      "source": "GlobeNewswire"
+    },
+    {
+     "on": "2026-11-23",
+     "note": "Toys with AI chatbots inside are showing up in stores fast, and child experts writing for the American Psychological Association say these toys don't help little ones learn to share or take turns the way a real person does. Experts are asking toy makers to add stronger safety checks, privacy protections and parent controls. They also don't want toys designed to make children feel too attached to them.",
+     "source": "American Psychological Association, Monitor on Psychology",
+     "url": "https://www.apa.org/monitor/2026/11-12/ai-chatbot-toys-early-development"
     }
    ]
   }
  ],
  "updated": "2026-11-23",
- "version": 12,
+ "version": 14,
  "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage: Babies & Toddlers, then the same six stages the Morning Lantern uses. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
  "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next.",
