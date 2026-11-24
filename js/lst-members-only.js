@@ -52,6 +52,7 @@
           "Your first seven days are free.") + "</p>" +
         (lines ? '<ul class="mo-list">' + lines + "</ul>" : "") +
         '<a class="mo-cta" href="subscribe.html#plans" id="mo-go">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
+        (auth() && auth().giftFormHtml ? auth().giftFormHtml("mo-gift") : "") +
         '<p class="mo-fine">' + (window.LST_FREE_FOR_NOW ? "Already have an account? " : "Already a subscriber? ") +
           '<button type="button" id="mo-in">Sign in</button><br>' +
           '<a href="' + esc(cfg.back || "index.html") + '">' +
@@ -66,6 +67,7 @@
     function decide() {
       var already = document.getElementById("lst-members-only");
       if (paying()) {
+        if (already && window.__lstGiftJust && Date.now() - window.__lstGiftJust < 60000) return;   /* the "you're in" message first */
         if (already) already.remove();
         document.documentElement.classList.remove("mo-shut");
         return;
@@ -83,6 +85,7 @@
           window.openTrialSignup();
         }
       });
+      if (auth() && auth().giftWire) auth().giftWire(screen, "mo-gift", function () { screen.remove(); document.documentElement.classList.remove("mo-shut"); });
       screen.querySelector("#mo-in").addEventListener("click", function () {
         if (auth()) auth().openSignIn("Sign in to open " + (cfg.what || "this") + ".");
       });

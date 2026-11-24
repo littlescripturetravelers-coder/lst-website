@@ -182,26 +182,42 @@
     }).catch(function () { return { ok: false, error: "Something went wrong. Please try again." }; });
   }
 
+  /* WHO IS SUBSCRIBED IS THE DATABASE'S ANSWER (Levi, 24 Nov 2026: "the paywall has [not] been put up on my website for
+     those that already have accounts"): the site read any subscriptions row whose status was "trialing" as paid, so the
+     99 families who signed up for the free week and never paid (plan "trial") were waved past the paywall here while the
+     database, rightly, sent them nothing. Now the site asks lst_is_subscriber() - the same rule the app and every locked
+     table use (paid, a store purchase, a real trial still running, a gift code, a family member's subscription, the
+     owner). Only if that question cannot be asked does it read the rows itself, by the same rule. */
+  function rowsSay(rows) {
+    if (!rows || !rows.length) return "free";
+    var now = Date.now();
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i], st = String(r.status || "").toLowerCase(), plan = String(r.plan || "").toLowerCase(), src = String(r.source || "payhip").toLowerCase();
+      if (/^(apple|google|store)$/.test(src)) {
+        if ((st === "active" || st === "past_due") && (!r.current_period_end || new Date(r.current_period_end).getTime() > now - 864e5)) return "subscriber";
+        continue;
+      }
+      if (st === "active" || st === "past_due" || st === "grandfathered") return "subscriber";
+      if ((st === "trialing" || st === "trial") && plan !== "trial") {
+        var end = r.trial_end || r.current_period_end;
+        if (!end || new Date(end).getTime() + 2 * 864e5 > now) return "subscriber";
+      }
+    }
+    return "free";
+  }
   function lookupTier() {
     if (!sb || !user) { tier = null; admin = false; return Promise.resolve(null); }
-
-    function readRows(res) {
-      if (res.error || !res.data || !res.data.length) return null;
-      for (var i = 0; i < res.data.length; i++) {
-        var st = String(res.data[i].status || "").toLowerCase();
-        if (OPEN_STATUSES.indexOf(st) !== -1) return "subscriber";
-      }
-      return "free";
+    var cols = "status,plan,source,trial_end,current_period_end";
+    function fromRows() {
+      return sb.from("subscriptions").select(cols).eq("user_id", user.id).then(function (res) {
+        var rows = (!res.error && res.data) || [];
+        if (rows.length || !user.email) return rowsSay(rows);
+        return sb.from("subscriptions").select(cols).eq("email", user.email).then(function (r2) { return rowsSay((!r2.error && r2.data) || []); });
+      });
     }
-
-    return sb.from("subscriptions").select("status").eq("user_id", user.id)
-      .then(function (res) {
-        var t = readRows(res);
-        if (t) return t;
-        if (!user.email) return "free";
-        return sb.from("subscriptions").select("status").eq("email", user.email)
-          .then(function (r2) { return readRows(r2) || "free"; });
-      })
+    return sb.rpc("lst_is_subscriber")
+      .then(function (res) { return (res && !res.error && typeof res.data === "boolean") ? (res.data ? "subscriber" : "free") : fromRows(); },
+            function () { return fromRows(); })
       .then(function (t) {
         return lookupGift().then(function () { return lookupAdmin(); }).then(function (isAdmin) {
           tier = (isAdmin || FREE_FOR_NOW || gift) ? "subscriber" : t;
@@ -209,6 +225,52 @@
         });
       })
       .catch(function () { tier = "free"; return tier; });
+  }
+
+  /* THE GIFT CODE ON THE PAYWALL (Levi, 24 Nov 2026: "it has where you can place the code in and get in ... So then they
+     can go to the app and log in"): the paywall boxes (lst-gate.js, lst-members-only.js) carry this little form. Signed
+     out, the code is kept and used the moment they sign in. Once it works, everything opens here and they are told to
+     sign in to the app with the same email. */
+  var GIFT_KEEP = "lst:giftcode";
+  function giftFormHtml(id) {
+    return '<form class="lgc" id="' + id + '" autocomplete="off" style="margin:14px 0 4px;text-align:left">' +
+      '<label for="' + id + '-in" style="display:block;font-weight:800;font-size:.9rem;margin:0 0 6px">Have a gift code?</label>' +
+      '<div style="display:flex;gap:8px"><input id="' + id + '-in" type="text" inputmode="text" autocapitalize="characters" spellcheck="false" placeholder="Type your code" ' +
+      'style="flex:1;min-width:0;padding:11px 14px;border-radius:12px;border:1.5px solid rgba(27,45,95,.25);font:700 1rem var(--font-body,Nunito,sans-serif);text-transform:uppercase;letter-spacing:.06em">' +
+      '<button type="submit" style="flex:none;border:0;border-radius:12px;padding:0 16px;background:#5BD3DC;color:#1B2D5F;font:800 .95rem var(--font-body,Nunito,sans-serif);cursor:pointer">Use it</button></div>' +
+      '<p class="lgc-msg" role="status" style="margin:8px 0 0;font-size:.9rem;line-height:1.5"></p></form>';
+  }
+  function giftDone(msg) {
+    var e = user && user.email ? user.email : "the same email";
+    msg.innerHTML = '<b style="color:#1a7f37">You\u2019re in! Everything is open.</b><br>On your phone, open the Little Scripture Travelers app and sign in with <b>' +
+      String(e).replace(/[&<>"']/g, "") + '</b> and the same password. It opens there too.';
+  }
+  function giftWire(root, id, onOpen) {
+    var f = root && root.querySelector("#" + id); if (!f) return;
+    var inp = f.querySelector("#" + id + "-in"), msg = f.querySelector(".lgc-msg");
+    function use(code) {
+      msg.textContent = "Checking\u2026"; window.__lstGiftJust = Date.now();
+      redeemGift(code).then(function (r) {
+        if (r && r.ok && API.isSubscriber()) { try { sessionStorage.removeItem(GIFT_KEEP); } catch (e) {} giftDone(msg);
+          var go = document.createElement("button"); go.type = "button"; go.textContent = "Start reading";
+          go.style.cssText = "margin-top:10px;border:0;border-radius:999px;padding:11px 20px;background:#F5C518;color:#1B2D5F;font:800 1rem var(--font-body,Nunito,sans-serif);cursor:pointer";
+          go.addEventListener("click", function () { window.__lstGiftJust = 0; onOpen && onOpen(); }); msg.appendChild(go); }
+        else msg.textContent = (r && r.error) ? r.error : "That code did not work. Check it and try again.";
+      });
+    }
+    f.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var code = String(inp.value || "").trim(); if (!code) { msg.textContent = "Type the code first."; return; }
+      if (!user) {
+        try { sessionStorage.setItem(GIFT_KEEP, code); } catch (e) {}
+        msg.textContent = "Sign in first (or make your account), and your code is used right after.";
+        API.openSignIn("Sign in, and your gift code is used right after.");
+        return;
+      }
+      use(code);
+    });
+    var kept = ""; try { kept = sessionStorage.getItem(GIFT_KEEP) || ""; } catch (e) {}
+    if (kept) { inp.value = kept; if (user) use(kept); else API.onChange(function once() { if (user && kept) { var k = kept; kept = ""; use(k); } }); }
   }
 
   function setUser(session) {
@@ -326,6 +388,8 @@
     isAdmin: function () { return admin; },
     hasGift: function () { return gift; },
     redeemGift: function (code) { return redeemGift(code); },
+    giftFormHtml: function (id) { return giftFormHtml(id); },
+    giftWire: function (root, id, onOpen) { return giftWire(root, id, onOpen); },
     tier: function () { return tier; },
     resolved: function () { return resolved; },
 

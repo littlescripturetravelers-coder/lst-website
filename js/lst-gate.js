@@ -73,6 +73,7 @@
           "written for ages 3&ndash;8. Start tonight; you are not charged for seven days.") + "</p>" +
         (lines ? '<ul class="lg-list">' + lines + "</ul>" : "") +
         '<a class="lg-cta" href="subscribe.html#plans" id="lg-go">' + (window.LST_FREE_FOR_NOW ? "Create a free account" : "Start the free week") + '</a>' +
+        (auth() && auth().giftFormHtml ? auth().giftFormHtml("lg-gift") : "") +
         '<p class="lg-fine">Cancel any time in two clicks &mdash; ' +
           '<a href="cancel.html" style="color:var(--ink-62);">here is how</a>.<br>' +
           (window.LST_FREE_FOR_NOW ? "Already have an account? " : "Already a subscriber? ") + '<button type="button" id="lg-in">Sign in</button>' +
@@ -88,8 +89,8 @@
     shown = false;
   }
 
-  function show() {
-    if (shown || done || paying()) return;
+  function show(force) {
+    if (shown || (done && !force) || paying()) return;
     shown = true; done = true; armed = false;
     rememberShown();
 
@@ -114,6 +115,7 @@
       if (auth()) auth().openSignIn("Sign in to pick up where you left off.");
     });
 
+    if (auth() && auth().giftWire) auth().giftWire(veil, "lg-gift", close);
     veil.querySelector("#lg-x").addEventListener("click", close);
     veil.querySelector("#lg-later").addEventListener("click", close);
     veil.addEventListener("click", function (e) { if (e.target === veil) close(); });
@@ -152,7 +154,7 @@
 
   function arm(options) {
     cfg = options || {};
-    if (done || alreadyShownThisSession()) { done = true; return; }
+    var seen = done || alreadyShownThisSession();
 
     function settle() {
       /* ⚠️ If we could not reach the account service we do not know who this
@@ -164,13 +166,18 @@
       if (a && a.offline && a.offline()) { armed = false; listen(false); return; }
 
       if (paying()) { armed = false; listen(false); return; }
+      /* THE PAYWALL FOR ACCOUNTS THAT HAVE NOT SUBSCRIBED (Levi, 24 Nov 2026): signed in but not paying, it comes up
+         at once, with the gift-code box, every time the page opens. A visitor who is not signed in still gets the
+         invitation once, when they try to use the page. */
+      if (a && a.signedIn && a.signedIn()) { armed = false; listen(false); show(true); return; }
+      if (seen) { done = true; return; }
       if (!armed) { armed = true; listen(true); }
     }
 
     if (auth()) {
       auth().ready(settle);
       auth().onChange(function () {
-        if (paying()) { armed = false; listen(false); close(); }
+        if (paying()) { armed = false; listen(false); if (!(window.__lstGiftJust && Date.now() - window.__lstGiftJust < 60000)) close(); }
         else settle();
       });
     } else {
