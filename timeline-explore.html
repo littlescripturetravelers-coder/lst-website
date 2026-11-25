@@ -1734,7 +1734,7 @@ html.tl-hdr-min .tl-fold-title{white-space:nowrap;overflow:hidden;text-overflow:
     <div class="sm-item" onclick="smGo('signs')">
       <span class="sm-ico" style="color:#A78BFA"><i data-lli=clock></i></span>
       <span class="sm-txt"><b style="color:#A78BFA">Signs of the Times</b>
-        <em>The signs the scriptures name before Jesus Christ comes again, and what is happening now, each with its source; a new look every month. Ready, not afraid</em></span>
+        <em>The signs the scriptures name before Jesus Christ comes again and what is happening now, each with its source; then the prophecies still to come, in America and in all the world. Ready, not afraid</em></span>
       <span class="sm-arr">&#8250;</span></div>
     <div class="sm-item" onclick="smGo('quad')">
       <span class="sm-ico" style="color:#FDBA74"><i data-lli=scales></i></span>
@@ -12565,33 +12565,61 @@ function tgFetch(){
    timeline_watch.py, job signs) adds the notes to the account. Loaded only when it is opened (data/signs.js), so the
    timeline opens no slower. The Christian edition shows the signs every Christian reads; the Latter-day Saint edition adds
    the Restoration, Elijah, temples, the gathering of Israel and Zion. Nothing here predicts a date. */
-var SIGNS=null;
+var SIGNS=null, SIGNS_BASE=null;
+/* the app's copy holds every sign and prophecy; the account's copy adds the monthly notes. They are merged by id, so a
+   prophecy added here is never lost under an older account copy, and a note the scan wrote is never lost either. */
+function signsMerge(base,feed){
+  if(!feed||!feed.signs||!feed.signs.length) return base;
+  if(!base||!base.signs||!base.signs.length) return feed;
+  var out=JSON.parse(JSON.stringify(base)), byId={};
+  out.signs.forEach(function(s){ byId[s.id]=s; });
+  feed.signs.forEach(function(f){ if(!f||!f.id) return; var s=byId[f.id];
+    if(s){ if(f.now&&f.now.length) s.now=f.now; } else { var c=JSON.parse(JSON.stringify(f)); c.grp=c.grp||"now"; out.signs.push(c); } });
+  out.version=Math.max(Number(base.version||0),Number(feed.version||0));
+  if(String(feed.updated||"")>String(out.updated||"")) out.updated=feed.updated;
+  return out;
+}
 function openSigns(){
   var go=function(){ TG.tab="signs"; document.getElementById("tech-panel").classList.add("open"); tgRender(); signsFeed(); };
   if(SIGNS){ go(); return; }
-  var take=function(){ SIGNS=window.LST_SIGNS||{signs:[]}; try{ var c=JSON.parse(localStorage.getItem("lst_timeline_signs")||"null"); if(c&&c.signs&&Number(c.version||0)>Number(SIGNS.version||0)) SIGNS=c; }catch(e){} go(); };
+  var take=function(){ SIGNS_BASE=window.LST_SIGNS||{signs:[]}; SIGNS=SIGNS_BASE; try{ var c=JSON.parse(localStorage.getItem("lst_timeline_signs")||"null"); if(c&&c.signs) SIGNS=signsMerge(SIGNS_BASE,c); }catch(e){} go(); };
   if(window.LST_SIGNS){ take(); return; }
   var sc=document.createElement("script"); sc.src="data/signs.js"; sc.onload=take; sc.onerror=function(){ SIGNS={signs:[]}; go(); }; document.head.appendChild(sc);
 }
 function signsFeed(){ if(signsFeed.done) return; signsFeed.done=1;
   try{ slfRows(["signs"],function(rows){ var b=rows&&rows[0]&&rows[0].body;
-    if(b&&b.signs&&b.signs.length&&Number(b.version||0)>Number((SIGNS||{}).version||0)){ SIGNS=b; try{ localStorage.setItem("lst_timeline_signs",JSON.stringify(b)); }catch(e){}
+    if(b&&b.signs&&b.signs.length){ SIGNS=signsMerge(SIGNS_BASE||SIGNS,b); try{ localStorage.setItem("lst_timeline_signs",JSON.stringify(b)); }catch(e){}
       if(TG.tab==="signs"&&document.getElementById("tech-panel").classList.contains("open")) tgRender(); } }); }catch(e){} }
+/* STILL TO COME (Levi, 25 Nov 2026: "all the prophecies for the future as far as America in the whole world that still haven't
+   been fulfilled"): the signs come in three groups, Signs we can see now (grp now, scanned every month), Still to come in America
+   (grp america: the Book of Mormon's and the Doctrine and Covenants' promises for this land, so the Latter-day Saint edition
+   only; the Bible names no prophecy of America) and Still to come in all the world (grp world, in the scriptures' own order,
+   by stage). A sign's refsLds and meansLds are read in the Latter-day Saint edition only; the Christian edition's words say
+   where Christians read a prophecy in different ways. Nothing still to come is scanned, so it spends nothing. */
 function signsHtml(){
   var chr=(typeof tlChristian==="function"&&tlChristian()), S2=SIGNS||{signs:[]};
   var T=function(x){ x=String(x==null?"":x); try{ if(chr&&typeof tlCleanText==="function") x=tlCleanText(x); }catch(e){} return tgEsc(x); };
   var list=(S2.signs||[]).filter(function(s){ return s&&(!chr||!s.lds); });
-  var h="<div class='tg-fresh'>"+list.length+" signs &#183; updated "+tgEsc(S2.updated||"")+" &#183; a new look on the 3rd of every month</div>";
-  h+="<div class='tg-sec tg-why' style='margin:0 0 8px'><div class='tg-p'>"+T(S2.intro)+"</div></div>";
-  list.forEach(function(s){ var open=TG.open==="sg-"+s.id, notes=(s.now||[]).slice().sort(function(a,b){ return String(b.on||"").localeCompare(String(a.on||"")); });
-    h+="<div class='tg-card"+(open?" open":"")+"' id='tg-sg-"+tgEsc(s.id)+"'>"
-      +"<div class='tg-head' onclick=\"tgToggle('sg-"+tgEsc(s.id)+"')\"><div class='tg-em'><i data-lli=clock></i></div><div><div class='tg-name'>"+T(s.t)+"</div><div class='tg-when'>"+T((s.refs||[]).join("; "))+"</div></div><div class='tg-chev'>&#8250;</div></div>"
+  var card=function(s){ var open=TG.open==="sg-"+s.id, notes=(s.now||[]).slice().sort(function(a,b){ return String(b.on||"").localeCompare(String(a.on||"")); });
+    var refs=(s.refs||[]).concat(chr?[]:(s.refsLds||[])), means=(!chr&&s.meansLds)?s.means+" "+s.meansLds:s.means;
+    return "<div class='tg-card"+(open?" open":"")+"' id='tg-sg-"+tgEsc(s.id)+"'>"
+      +"<div class='tg-head' onclick=\"tgToggle('sg-"+tgEsc(s.id)+"')\"><div class='tg-em'><i data-lli="+(s.watch===false?"star":"clock")+"></i></div><div><div class='tg-name'>"+T(s.t)+"</div><div class='tg-when'>"+T(refs.join("; "))+"</div></div><div class='tg-chev'>&#8250;</div></div>"
       +"<div class='tg-detail'>"
       +"<div class='tg-sec tg-why'><div class='tg-lab' style='color:#F5C518'>What the scriptures say</div><div class='tg-p'>"+T(s.said)+"</div></div>"
-      +"<div class='tg-sec'><div class='tg-lab'>What it means</div><div class='tg-p'>"+T(s.means)+"</div></div>"
+      +"<div class='tg-sec'><div class='tg-lab'>What it means</div><div class='tg-p'>"+T(means)+"</div></div>"
       +(s.watch===false?"<div class='tg-sec tg-learn'><div class='tg-lab'>What is happening now</div><div class='tg-p'>This is still to come. No one can say when, and we do not guess.</div></div>"
         :"<div class='tg-sec tg-learn'><div class='tg-lab'>What is happening now</div>"+tgNotes(notes.map(function(n){ return {on:n.on,note:chr&&typeof tlCleanText==="function"?tlCleanText(n.note||""):n.note,source:n.source,url:n.url}; }))+"</div>")
-      +"</div></div>"; });
+      +"</div></div>"; };
+  var grp=function(s){ return s.grp||(s.watch===false?"world":"now"); };
+  var now=list.filter(function(s){ return grp(s)==="now"; }), am=list.filter(function(s){ return grp(s)==="america"; }), wo=list.filter(function(s){ return grp(s)==="world"; });
+  var head=function(t,n,sub){ return "<div class='sg-grp'><div class='sg-grp-t'>"+tgEsc(t)+" <span>"+n+"</span></div>"+(sub?"<div class='tg-p sg-grp-sub'>"+T(sub)+"</div>":"")+"</div>"; };
+  var h="<style>.sg-grp{margin:16px 2px 8px}.sg-grp-t{font-family:'Fredoka',sans-serif;font-weight:600;font-size:17px;color:#F5C518}.sg-grp-t span{font-family:'Nunito',sans-serif;font-size:12px;color:rgba(255,255,255,.55);font-weight:700}.sg-grp-sub{margin-top:4px;color:rgba(255,255,255,.7);font-size:13px}.sg-stage{margin:12px 2px 6px;font-family:'Anton',sans-serif;letter-spacing:.06em;text-transform:uppercase;font-size:12px;color:#5BD3DC}</style>";
+  h+="<div class='tg-fresh'>"+list.length+" signs and prophecies &#183; updated "+tgEsc(S2.updated||"")+" &#183; a new look on the 3rd of every month</div>";
+  h+="<div class='tg-sec tg-why' style='margin:0 0 8px'><div class='tg-p'>"+T(S2.intro)+"</div></div>";
+  if(now.length){ h+=head("Signs we can see now",now.length,"What the scriptures say, and what is happening in the world, each note with its source."); now.forEach(function(s){ h+=card(s); }); }
+  if(am.length){ h+=head("Still to come in America",am.length,S2.introLds||""); am.forEach(function(s){ h+=card(s); }); }
+  if(wo.length){ h+=head("Still to come in all the world",wo.length,"Prophecies not yet fulfilled, in the order the scriptures give them."); var st=null;
+    wo.forEach(function(s){ if(s.stage&&s.stage!==st){ st=s.stage; h+="<div class='sg-stage'>"+tgEsc(st)+"</div>"; } h+=card(s); }); }
   h+="<div class='tg-sec tg-kids' style='margin-top:10px'><div class='tg-lab'>Ready, not afraid</div><div class='tg-p'>"+T(S2.ready)+"</div>"+(!chr&&S2.readyLds?"<div class='tg-p' style='margin-top:6px'>"+tgEsc(S2.readyLds)+"</div>":"")+"</div>";
   if(S2.rule) h+="<div class='tg-p' style='margin:8px 2px;color:rgba(255,255,255,.55);font-size:12px'>"+T(S2.rule)+"</div>";
   return h;
@@ -12658,7 +12686,7 @@ function tgRender(){
   ["tech","ages","learn","finds"].forEach(function(t){ var b=document.getElementById("tg-tab-"+t); if(b) b.classList.toggle("on",TG.tab===t); });
   var finds=(TG.tab==="finds"), panel=document.getElementById("tech-panel"); panel.classList.toggle("finds",finds);
   var signs=(TG.tab==="signs"); panel.classList.toggle("signs",signs);
-  if(signs){ document.getElementById("tg-title").innerHTML="&#128336; Signs of the Times"; document.getElementById("tg-intro").textContent="The signs the scriptures name before Jesus Christ comes again, and what is happening now. Ready, not afraid.";
+  if(signs){ document.getElementById("tg-title").innerHTML="&#128336; Signs of the Times"; document.getElementById("tg-intro").textContent="The signs the scriptures name before Jesus Christ comes again, what is happening now, and the prophecies still to come. Ready, not afraid.";
     document.getElementById("tg-body").innerHTML=signsHtml(); try{ if(window.lstLineFill) lstLineFill(document.getElementById("tg-body")); }catch(e){} return; }
   document.getElementById("tg-title").innerHTML=finds?"&#127963; Evidence &amp; Discoveries":"&#128161; Technology for Good";
   document.getElementById("tg-intro").textContent=decodeT(finds

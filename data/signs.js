@@ -4,9 +4,9 @@
    account (timeline_feed row 'signs'); the timeline uses whichever copy is newer. Signs marked lds show in the Latter-day
    Saint edition only. Nothing here predicts a date. */
 window.LST_SIGNS = {
- "version": 1,
- "updated": "2026-11-23",
- "intro": "These are the signs the scriptures say will come before Jesus Christ comes again. Jesus taught that no one knows the day or the hour (Matthew 24:36), and He told His disciples, \"see that ye be not troubled\" (Matthew 24:6). We watch the signs to be ready, not to be afraid. Each sign below shows what the scriptures say and, where it can be seen in the world, what is happening now, with its source. A new look runs every month.",
+ "version": 3,
+ "updated": "2026-11-25",
+ "intro": "These are the signs the scriptures say will come before Jesus Christ comes again, and the promises still to come after. Jesus taught that no one knows the day or the hour (Matthew 24:36), and He told His disciples, \"see that ye be not troubled\" (Matthew 24:6). We watch the signs to be ready, not to be afraid. Signs we can see now show what is happening in the world, with its source; a new look runs every month. Still to come are the prophecies not yet fulfilled, in the order the scriptures give them.",
  "ready": "\"Watch therefore: for ye know not what hour your Lord doth come\" (Matthew 24:42). \"When these things begin to come to pass, then look up, and lift up your heads; for your redemption draweth nigh\" (Luke 21:28).",
  "readyLds": "\"If ye are prepared ye shall not fear\" (Doctrine and Covenants 38:30). Prophets have taught that the best preparation is to follow Jesus Christ every day: prayer, scripture study, keeping covenants, serving others and gathering Israel on both sides of the veil.",
  "rule": "Nothing here predicts a date, and not every hard thing in the news is a sign. Notes come only from trusted sources and are told calmly.",
@@ -21,7 +21,8 @@ window.LST_SIGNS = {
    "said": "\"This gospel of the kingdom shall be preached in all the world for a witness unto all nations; and then shall the end come.\"",
    "means": "Before the Savior comes, people of every nation will have the chance to hear about Him. Bible translators, missionaries and new technology are carrying His word farther than ever.",
    "watch": true,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "wars",
@@ -33,7 +34,8 @@ window.LST_SIGNS = {
    "said": "\"Ye shall hear of wars and rumours of wars: see that ye be not troubled ... For nation shall rise against nation, and kingdom against kingdom.\"",
    "means": "Jesus said there would be wars, and He also said not to be troubled. Peace begins in families and hearts that follow Him.",
    "watch": true,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "earth",
@@ -46,7 +48,8 @@ window.LST_SIGNS = {
    "said": "\"There shall be famines, and pestilences, and earthquakes, in divers places.\"",
    "means": "Hard things will happen in nature. When they do, followers of Jesus help: they give, serve and pray for those who suffer.",
    "watch": true,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "deceived",
@@ -59,7 +62,8 @@ window.LST_SIGNS = {
    "said": "\"Take heed that no man deceive you. For many shall come in my name ... and many false prophets shall rise, and shall deceive many.\"",
    "means": "Jesus warned that there would be false voices. Prayer, the scriptures and the Holy Spirit help us tell what is true.",
    "watch": true,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "love-cold",
@@ -70,7 +74,8 @@ window.LST_SIGNS = {
    "said": "\"Because iniquity shall abound, the love of many shall wax cold.\"",
    "means": "When people stop caring about God and each other, love can grow cold. We can keep it warm by loving as Jesus loves.",
    "watch": true,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "perilous",
@@ -81,7 +86,8 @@ window.LST_SIGNS = {
    "said": "\"In the last days perilous times shall come. For men shall be lovers of their own selves ... disobedient to parents, unthankful, unholy ... lovers of pleasures more than lovers of God.\"",
    "means": "Paul described a world that loves itself more than God. Families who pray, give thanks and honor one another are the answer to it.",
    "watch": true,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "knowledge",
@@ -92,7 +98,8 @@ window.LST_SIGNS = {
    "said": "\"Many shall run to and fro, and knowledge shall be increased.\"",
    "means": "In the last days people would travel and learn as never before. That knowledge can bless the world when it is used for good.",
    "watch": true,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "israel-land",
@@ -105,7 +112,8 @@ window.LST_SIGNS = {
    "said": "\"I will take the children of Israel from among the heathen ... and will gather them on every side, and bring them into their own land.\"",
    "means": "The prophets saw the Jewish people coming home to the land of their fathers. It is one of the great gatherings the Lord promised.",
    "watch": true,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "spirit",
@@ -117,19 +125,8 @@ window.LST_SIGNS = {
    "said": "\"I will pour out my spirit upon all flesh; and your sons and your daughters shall prophesy, your old men shall dream dreams, your young men shall see visions.\"",
    "means": "God promised to pour out His Spirit on many people, young and old. Hearts are being touched all over the world.",
    "watch": true,
-   "now": []
-  },
-  {
-   "id": "heavens",
-   "t": "Signs in the heavens",
-   "refs": [
-    "Joel 2:30-31",
-    "Matthew 24:29-30"
-   ],
-   "said": "\"The sun shall be turned into darkness, and the moon into blood, before the great and the terrible day of the Lord come.\"",
-   "means": "The scriptures say the heavens themselves will show signs just before the Savior comes. These are still to come; no one can say when.",
-   "watch": false,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "restoration",
@@ -144,7 +141,8 @@ window.LST_SIGNS = {
    "said": "\"I saw another angel fly in the midst of heaven, having the everlasting gospel to preach unto them that dwell on the earth, and to every nation, and kindred, and tongue, and people.\"",
    "means": "Latter-day Saints believe this happened when the gospel was restored through Joseph Smith and the Book of Mormon came forth. It is now read in more languages every year.",
    "watch": true,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "elijah",
@@ -157,7 +155,8 @@ window.LST_SIGNS = {
    "said": "\"He shall turn the heart of the fathers to the children, and the heart of the children to their fathers.\"",
    "means": "Elijah came to the Kirtland Temple in 1836. Since then, family history and temple work have grown all over the world, joining families forever.",
    "watch": true,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "temples",
@@ -170,7 +169,8 @@ window.LST_SIGNS = {
    "said": "\"The mountain of the Lord's house shall be established in the top of the mountains ... and all nations shall flow unto it.\"",
    "means": "Temples are being built across the earth so that more of God's children can make covenants with Him.",
    "watch": true,
-   "now": []
+   "now": [],
+   "grp": "now"
   },
   {
    "id": "gathering",
@@ -184,20 +184,402 @@ window.LST_SIGNS = {
    "said": "\"We believe in the literal gathering of Israel and in the restoration of the Ten Tribes.\"",
    "means": "President Russell M. Nelson has taught that the gathering of Israel on both sides of the veil is the most important thing happening on earth today. Missionary work and temple work gather Israel.",
    "watch": true,
+   "now": [],
+   "grp": "now"
+  },
+  {
+   "id": "land-promise",
+   "lds": true,
+   "grp": "america",
+   "t": "A land of liberty, as long as its people serve God",
+   "refs": [
+    "Ether 2:12",
+    "2 Nephi 1:7"
+   ],
+   "said": "\"This is a choice land, and whatsoever nation shall possess it shall be free from bondage ... if they will but serve the God of the land, who is Jesus Christ.\"",
+   "means": "The Book of Mormon promises that this land stays free as long as its people serve Jesus Christ. It is a promise with a condition, so every family that follows Him helps keep it.",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "constitution",
+   "lds": true,
+   "grp": "america",
+   "t": "The inspired Constitution kept",
+   "refs": [
+    "Doctrine and Covenants 101:77-80"
+   ],
+   "said": "\"For this purpose have I established the Constitution of this land, by the hands of wise men whom I raised up unto this very purpose.\"",
+   "means": "The Lord says He raised up wise men to write the Constitution so every person can choose for themselves. Those who heard Joseph Smith remembered him saying a day would come when it would hang, as it were, by a thread, and good people would help save it. Those words are not in the scriptures, and no one knows how or when; leaders teach that we help keep it by choosing well and being good citizens.",
+   "watch": false,
    "now": []
   },
   {
    "id": "zion",
    "lds": true,
-   "t": "Zion built and the Savior reigning on the earth",
+   "grp": "america",
+   "t": "The New Jerusalem built in America",
    "refs": [
     "Articles of Faith 1:10",
-    "Doctrine and Covenants 45:66-71"
+    "Ether 13:3-6",
+    "3 Nephi 21:23-24",
+    "Doctrine and Covenants 57:2-3"
    ],
-   "said": "\"Zion (the New Jerusalem) will be built upon the American continent; ... Christ will reign personally upon the earth.\"",
-   "means": "This is still to come. The Lord will build His Zion, and He Himself will reign in peace.",
+   "said": "\"Zion (the New Jerusalem) will be built upon the American continent.\" \"The place which is now called Independence is the center place.\"",
+   "means": "The Lord's people will gather and build a holy city in America called Zion, the New Jerusalem, with its center in Independence, Missouri. It is still to come; the Lord will say when.",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "zion-temple",
+   "lds": true,
+   "grp": "america",
+   "t": "A temple in Zion filled with the Lord's glory",
+   "refs": [
+    "Doctrine and Covenants 84:2-5",
+    "Doctrine and Covenants 36:8",
+    "Malachi 3:1"
+   ],
+   "said": "\"The city New Jerusalem shall be built by the gathering of the saints, beginning at this place, even the place of the temple ... and a cloud shall rest upon it, which cloud shall be even the glory of the Lord.\"",
+   "means": "The New Jerusalem will begin with a temple, and the Lord's glory will rest on it like a cloud. Jesus said, \"I will suddenly come to my temple.\"",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "zion-refuge",
+   "lds": true,
+   "grp": "america",
+   "t": "Zion, a land of peace when the world is at war",
+   "refs": [
+    "Doctrine and Covenants 45:66-70"
+   ],
+   "said": "\"It shall be called the New Jerusalem, a land of peace, a city of refuge, a place of safety for the saints of the Most High God ... the only people that shall not be at war one with another.\"",
+   "means": "People from every nation will come to Zion to be safe. While others fight, the people of Zion will live in peace, because they follow the Prince of Peace.",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "adam-ondi-ahman",
+   "lds": true,
+   "grp": "america",
+   "t": "The great gathering at Adam-ondi-Ahman",
+   "refs": [
+    "Doctrine and Covenants 116:1",
+    "Doctrine and Covenants 107:53-56",
+    "Daniel 7:13-14"
+   ],
+   "said": "\"Adam-ondi-Ahman ... is the place where Adam shall come to visit his people, or the Ancient of Days shall sit, as spoken of by Daniel the prophet.\"",
+   "means": "In a valley in Missouri, Adam will meet with his righteous children, and Jesus Christ will come there and receive His kingdom, as Daniel saw. It will be a quiet, holy gathering before the whole world sees Him.",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "enoch-city",
+   "lds": true,
+   "grp": "america",
+   "t": "The City of Enoch comes back to meet Zion",
+   "refs": [
+    "Moses 7:62-64"
+   ],
+   "said": "\"Then shalt thou and all thy city meet them there, and we will receive them into our bosom ... and for the space of a thousand years the earth shall rest.\"",
+   "means": "Long ago Enoch's righteous city was taken up to heaven. The Lord promised it will come back and meet the New Jerusalem, and the people will hug like a family coming home.",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "heavens",
+   "t": "Signs in the heavens",
+   "refs": [
+    "Joel 2:30-31",
+    "Matthew 24:29-30"
+   ],
+   "said": "\"The sun shall be turned into darkness, and the moon into blood, before the great and the terrible day of the Lord come.\"",
+   "means": "The scriptures say the heavens themselves will show signs just before the Savior comes. These are still to come; no one can say when.",
+   "watch": false,
+   "now": [],
+   "grp": "world",
+   "stage": "Before He comes"
+  },
+  {
+   "id": "two-witnesses",
+   "grp": "world",
+   "t": "Two prophets in Jerusalem",
+   "refs": [
+    "Revelation 11:3-12"
+   ],
+   "refsLds": [
+    "Doctrine and Covenants 77:15"
+   ],
+   "said": "\"I will give power unto my two witnesses, and they shall prophesy a thousand two hundred and threescore days.\"",
+   "means": "John saw two witnesses who will teach God's word in Jerusalem for about three and a half years. Christians understand this in different ways; all agree that God always sends His word to His people.",
+   "meansLds": "The Doctrine and Covenants says they are two prophets who will be raised up to the Jewish people after they have gathered and built up Jerusalem. They will teach for about three and a half years.",
+   "stage": "Before He comes",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "armageddon",
+   "grp": "world",
+   "t": "The great battle called Armageddon",
+   "refs": [
+    "Revelation 16:14-16",
+    "Zechariah 14:2-3",
+    "Ezekiel 38:22-23"
+   ],
+   "said": "\"He gathered them together into a place called in the Hebrew tongue Armageddon.\" \"Then shall the Lord go forth, and fight against those nations.\"",
+   "means": "The scriptures say many nations will gather to fight near Jerusalem, and the Lord Himself will stand up for His people. Jesus wins, and evil does not.",
+   "meansLds": "Latter-day Saints read Ezekiel's war of Gog and Magog and the battle of Armageddon as this same great war before the Savior comes. The Lord will fight for His people, and He wins.",
+   "stage": "Before He comes",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "olives",
+   "grp": "world",
+   "t": "The Mount of Olives splits and the Lord stands on it",
+   "refs": [
+    "Zechariah 14:4",
+    "Zechariah 13:6"
+   ],
+   "refsLds": [
+    "Doctrine and Covenants 45:48-53"
+   ],
+   "said": "\"His feet shall stand in that day upon the mount of Olives ... and the mount of Olives shall cleave in the midst thereof.\" \"What are these wounds in thine hands?\"",
+   "means": "Zechariah saw the Lord standing on the Mount of Olives near Jerusalem as it splits in two, making a way of escape. People will ask Him about the wounds in His hands.",
+   "meansLds": "The Savior will save the Jews at Jerusalem. They will look upon Him and ask, \"What are these wounds in thine hands and in thy feet?\" and He will say, \"I am Jesus that was crucified. I am the Son of God.\"",
+   "stage": "Before He comes",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "babylon",
+   "grp": "world",
+   "t": "Babylon the great falls",
+   "refs": [
+    "Revelation 18:2-4"
+   ],
+   "refsLds": [
+    "Doctrine and Covenants 1:16",
+    "Doctrine and Covenants 133:14"
+   ],
+   "said": "\"Babylon the great is fallen, is fallen ... Come out of her, my people.\"",
+   "means": "In the scriptures Babylon is a picture of a world that loves money and pride more than God. It will fall, and God calls His people to come away from it now.",
+   "stage": "Before He comes",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "jerusalem-holy",
+   "lds": true,
+   "grp": "world",
+   "t": "Jerusalem built again, and healing waters",
+   "refs": [
+    "Ether 13:5",
+    "Ezekiel 47:1",
+    "Ezekiel 47:8-9"
+   ],
+   "said": "\"After it should be destroyed it should be built up again, a holy city unto the Lord.\" \"Waters issued out from under the threshold of the house ... the waters shall be healed.\"",
+   "means": "The Book of Mormon says old Jerusalem will be a holy city of the Lord again. Ezekiel saw water flowing out from the house of the Lord into the Dead Sea and making it fresh and full of fish.",
+   "stage": "Before He comes",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "ten-tribes",
+   "lds": true,
+   "grp": "world",
+   "t": "The lost tribes of Israel come home",
+   "refs": [
+    "Doctrine and Covenants 133:26-32",
+    "Articles of Faith 1:10"
+   ],
+   "said": "\"They who are in the north countries shall come in remembrance before the Lord; and their prophets shall hear his voice.\"",
+   "means": "Ten of Israel's tribes were lost long ago. The Lord has not forgotten them. Their prophets will hear His voice, and they will come home to receive their blessings.",
+   "stage": "Before He comes",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "son-of-man",
+   "grp": "world",
+   "t": "The sign of the Son of Man in heaven",
+   "refs": [
+    "Matthew 24:30"
+   ],
+   "refsLds": [
+    "Doctrine and Covenants 88:93"
+   ],
+   "said": "\"Then shall appear the sign of the Son of man in heaven ... and they shall see the Son of man coming in the clouds of heaven with power and great glory.\"",
+   "means": "Jesus said one great sign will appear in the sky just before He comes, and the whole world will see it.",
+   "stage": "When He comes",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "every-eye",
+   "grp": "world",
+   "t": "Jesus comes in glory and every eye sees Him",
+   "refs": [
+    "Acts 1:11",
+    "Revelation 1:7",
+    "Matthew 25:31-32"
+   ],
+   "refsLds": [
+    "Doctrine and Covenants 101:23"
+   ],
+   "said": "\"This same Jesus, which is taken up from you into heaven, shall so come in like manner as ye have seen him go into heaven.\" \"Behold, he cometh with clouds; and every eye shall see him.\"",
+   "means": "Jesus went up into heaven, and He will come back the same way, in the clouds, with all His holy angels. No one will miss it: every eye will see Him.",
+   "stage": "When He comes",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "caught-up",
+   "grp": "world",
+   "t": "The faithful rise to meet Him",
+   "refs": [
+    "1 Thessalonians 4:16-17"
+   ],
+   "refsLds": [
+    "Doctrine and Covenants 88:96-98"
+   ],
+   "said": "\"The dead in Christ shall rise first: Then we which are alive and remain shall be caught up together with them in the clouds, to meet the Lord in the air: and so shall we ever be with the Lord.\"",
+   "means": "When Jesus comes, the faithful who have died will rise, and the faithful who are alive will be caught up to meet Him. Families who love Him will be with Him.",
+   "stage": "When He comes",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "satan-bound",
+   "grp": "world",
+   "t": "Satan bound for a thousand years",
+   "refs": [
+    "Revelation 20:1-3"
+   ],
+   "refsLds": [
+    "Doctrine and Covenants 88:110",
+    "Doctrine and Covenants 45:55"
+   ],
+   "said": "\"He laid hold on the dragon, that old serpent, which is the Devil, and Satan, and bound him a thousand years ... that he should deceive the nations no more.\"",
+   "means": "John saw Satan tied up so he could not trick anyone. Christians understand the thousand years in different ways; all agree that Jesus is stronger than the devil.",
+   "meansLds": "During the Millennium, the thousand years of peace, Satan will be bound and will have no power to tempt anyone, and Christ will reign personally on the earth.",
+   "stage": "The thousand years",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "wolf-lamb",
+   "grp": "world",
+   "t": "The wolf and the lamb together",
+   "refs": [
+    "Isaiah 11:6-9",
+    "Isaiah 65:25"
+   ],
+   "refsLds": [
+    "Doctrine and Covenants 101:26"
+   ],
+   "said": "\"The wolf also shall dwell with the lamb, and the leopard shall lie down with the kid ... and a little child shall lead them. ... For the earth shall be full of the knowledge of the LORD, as the waters cover the sea.\"",
+   "means": "Animals that now fight will live together in peace, and a little child will lead them. Everyone on earth will know the Lord.",
+   "stage": "The thousand years",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "plowshares",
+   "grp": "world",
+   "t": "Swords made into plows: no more war",
+   "refs": [
+    "Isaiah 2:4",
+    "Micah 4:3"
+   ],
+   "said": "\"They shall beat their swords into plowshares, and their spears into pruninghooks: nation shall not lift up sword against nation, neither shall they learn war any more.\"",
+   "means": "One day nations will stop fighting. They will turn their weapons into tools for growing food, and no one will even learn how to make war.",
+   "stage": "The thousand years",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "every-knee",
+   "grp": "world",
+   "t": "Every knee bows to Jesus",
+   "refs": [
+    "Philippians 2:10-11",
+    "Isaiah 45:23"
+   ],
+   "refsLds": [
+    "Mosiah 27:31"
+   ],
+   "said": "\"At the name of Jesus every knee should bow ... And that every tongue should confess that Jesus Christ is Lord, to the glory of God the Father.\"",
+   "means": "One day every person who has ever lived will know that Jesus Christ is Lord and will bow before Him.",
+   "stage": "The thousand years",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "last-battle",
+   "grp": "world",
+   "t": "Satan loosed for a little season, then the last battle",
+   "refs": [
+    "Revelation 20:7-10"
+   ],
+   "refsLds": [
+    "Doctrine and Covenants 88:111-115"
+   ],
+   "said": "\"When the thousand years are expired, Satan shall be loosed out of his prison, And shall go out to deceive the nations ... and fire came down from God out of heaven, and devoured them.\"",
+   "means": "After the thousand years Satan will be let go for a short time and try one last time to fight God's people. He will lose forever.",
+   "stage": "At the end",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "resurrection",
+   "grp": "world",
+   "t": "Everyone raised from the dead",
+   "refs": [
+    "John 5:28-29",
+    "1 Corinthians 15:22"
+   ],
+   "refsLds": [
+    "Alma 11:43"
+   ],
+   "said": "\"The hour is coming, in the which all that are in the graves shall hear his voice, And shall come forth.\" \"For as in Adam all die, even so in Christ shall all be made alive.\"",
+   "means": "Because Jesus rose from the dead, everyone who has ever lived will be raised and live again, body and spirit together.",
+   "stage": "At the end",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "judgment",
+   "grp": "world",
+   "t": "The last judgment",
+   "refs": [
+    "Revelation 20:12",
+    "Matthew 25:31-46"
+   ],
+   "said": "\"I saw the dead, small and great, stand before God; and the books were opened ... and the dead were judged out of those things which were written in the books.\"",
+   "means": "Everyone will stand before God, and Jesus, who loves us and knows our hearts, will be our judge. Choosing Him every day gets us ready.",
+   "stage": "At the end",
+   "watch": false,
+   "now": []
+  },
+  {
+   "id": "new-earth",
+   "grp": "world",
+   "t": "A new heaven and a new earth",
+   "refs": [
+    "Revelation 21:1-4"
+   ],
+   "refsLds": [
+    "Articles of Faith 1:10",
+    "Doctrine and Covenants 88:17-20"
+   ],
+   "said": "\"I saw a new heaven and a new earth ... And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain.\"",
+   "means": "At the very end God will make all things new. There will be no more crying, no more hurting and no more death, and God will live with His people.",
+   "meansLds": "The earth itself will be made new and receive its paradise glory, and it will become a celestial home for those who follow Jesus Christ, with God the Father and His Son.",
+   "stage": "At the end",
    "watch": false,
    "now": []
   }
- ]
+ ],
+ "introLds": "Still to come in America are the promises the Book of Mormon and the Doctrine and Covenants give for this land: Zion, the New Jerusalem, and the Lord's temple there."
 };
