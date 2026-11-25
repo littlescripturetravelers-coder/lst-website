@@ -1,7 +1,68 @@
 {
- "updated": "2026-11-25T19:11:04.561Z",
+ "updated": "2026-11-25T19:27:36.166Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
+  {
+   "id": "story-the-shepherd-who-looked-up",
+   "type": "story",
+   "title": "The Shepherd Who Looked Up",
+   "nightLabel": "Week 5 · Night 1",
+   "download": "OldTestament_Story_TheShepherdWhoLookedUp_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 5,
+   "night": 29,
+   "date": "2026-11-26",
+   "story": "the-shepherd-who-looked-up",
+   "ref": "Amos 5:4, 8; 7:14–15",
+   "storyId": "ot-b11-w5n1",
+   "files": {
+    "lds": {
+     "url": "/lantern/the-shepherd-who-looked-up/printables/story.pdf?v=d18203e8c9",
+     "pages": 5,
+     "bytes": 1064706
+    },
+    "christian": {
+     "url": "/lantern/the-shepherd-who-looked-up/printables/story-christian.pdf?v=d18203e8c9",
+     "pages": 5,
+     "bytes": 1064324
+    }
+   },
+   "thumb": "/lantern/the-shepherd-who-looked-up/printables/story.jpg?v=d18203e8c9",
+   "src": "d18203e8c980802b4a383504a062c72d080e645fc211e739b009b91fe244f539",
+   "updated": "2026-11-25",
+   "created": "2026-11-25",
+   "stored": "d18203e8c980802b4a383504a062c72d080e645fc211e739b009b91fe244f539"
+  },
+  {
+   "id": "song-the-shepherd-who-looked-up",
+   "type": "song",
+   "title": "Look Up and Seek Him",
+   "storyTitle": "The Shepherd Who Looked Up",
+   "download": "OldTestament_Song_LookUpAndSeekHim_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 5,
+   "night": 29,
+   "date": "2026-11-26",
+   "story": "the-shepherd-who-looked-up",
+   "ref": "Amos 5:4, 8; 7:14–15",
+   "storyId": "ot-b11-w5n1",
+   "files": {
+    "lds": {
+     "url": "/lantern/the-shepherd-who-looked-up/printables/song.pdf?v=ddaaf139be",
+     "pages": 1,
+     "bytes": 36222
+    }
+   },
+   "thumb": "/lantern/the-shepherd-who-looked-up/printables/song.jpg?v=ddaaf139be",
+   "src": "ddaaf139becd6e19c108593d2d7a0b4a981382caf666f14b2828990ad87aee14",
+   "updated": "2026-11-25",
+   "created": "2026-11-25",
+   "stored": "ddaaf139becd6e19c108593d2d7a0b4a981382caf666f14b2828990ad87aee14"
+  },
   {
    "id": "story-the-years-given-back",
    "type": "story",
