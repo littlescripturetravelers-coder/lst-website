@@ -1859,6 +1859,12 @@
      "url": "https://techcrunch.com/2026/11/24/pinterest-will-now-let-parents-limit-the-ai-generated-content-their-teens-see/",
      "note": "Pinterest added a new parental control that lets parents choose how much AI-made content shows up in their teen's feed. It is one of the first big social apps to give families this choice.",
      "source": "TechCrunch"
+    },
+    {
+     "on": "2026-11-25",
+     "note": "Boys & Girls Clubs of America says half of teens now spend four hours a day on social media. That time can push out time with friends and family in person. Talking it over helps: after one of the Clubs' programs for teen girls, 61% of them cut their social media to less than two hours a day.",
+     "source": "Boys & Girls Clubs of America",
+     "url": "https://www.bgca.org/news-stories/2026/November/5-trends-affecting-kids-teens-in-the-2026-27-school-year/"
     }
    ],
    "studies": [
@@ -1879,6 +1885,16 @@
      "url": "https://www.engadget.com/2227908/australia-social-media-ban-for-kids-under-16-impact-so-far/",
      "source": "Engadget, reporting on Australia's eSafety Commissioner evaluation",
      "finding": "Australia banned social media for children under 16 starting December 10, 2025. In early results from a two-year government study following more than 4,100 children and families, the share of under-16s with an account on a banned app fell only from 52.4% to 42.1%. Laws help a little, but what happens at home still matters most. This research is early, and the full study is not finished."
+    }
+   ],
+   "milestones": [
+    {
+     "on": "2026-11-09",
+     "t": "Instagram uses AI to spot teens worldwide",
+     "de": "Meta said it is now using AI around the world to guess when someone on Instagram is a teen, even if they typed a false birthday, and then give them safer teen settings. Parents in the United States will also start seeing a short video in their feeds that explains how it works.",
+     "source": "Fox News",
+     "url": "https://www.foxnews.com/tech/instagrams-ai-may-catch-teens-lying-about-age",
+     "added": "2026-11-25"
     }
    ]
   },
@@ -2097,6 +2113,12 @@
    "name": "Streaming Video",
    "talk": "What have you learned from a video that you could teach us?",
    "what": "Any video, any time, on any screen. YouTube, then Netflix and the rest. The next one starts by itself.",
+   "work": [
+    "Sermons, hymns, Bible stories and testimonies can reach people in their own language, in places no missionary or church building has reached yet.",
+    "People who are sick, homebound or far away can still join worship services and devotionals by watching them live.",
+    "Families can watch good, uplifting videos together, such as Bible stories, and talk about them, turning screen time into time together that teaches faith.",
+    "Free video lessons on health, farming, first aid and job skills can help serve the poor and lift people in need."
+   ],
    "avoid": [
     "Autoplay left on.",
     "Unrated or mature titles, and a child's profile without a parental lock.",
@@ -2107,7 +2129,22 @@
     "A family series, one episode a week, with popcorn and a rule.",
     "Turn it off and act the story out instead."
    ],
+   "future": [
+    "Choosing on purpose: deciding what to watch and when to stop, and turning off autoplay instead of letting an app decide.",
+    "Learning from video: using online lessons and talks to learn new skills for school, work and everyday life.",
+    "Judging what is true and good: spotting ads, low-quality content and false claims in videos, and finding trustworthy sources.",
+    "Making and sharing good video: recording and editing clear, kind videos to teach, serve, or share the good news with others."
+   ],
    "modern": true,
+   "stages": {
+    "0-2": "Babies and toddlers learn words, feelings and trust from real faces, voices and play, so keep streaming video out of their day. Video chats with grandparents are fine. If a two-year-old watches at all, keep it short, pick slow and gentle shows, and watch together. Don't leave the TV playing in the background.",
+    "18+": "Young adults choose for themselves. Encourage them to watch on purpose, not by default: turn off autoplay, guard their sleep, and keep Sabbath and people ahead of screens. Watching good things with others can be a real joy.",
+    "3-5": "Keep watching to less than one hour a day. Choose calm, good shows before you press play, and watch with your child. Turn off autoplay so one show ends with a 'the end', because young children can't yet stop themselves. Their growing minds need play, books and people far more than screens.",
+    "6-8": "Pick shows together, watch in shared rooms of the home, and set a firm stopping point before you start, like 'two episodes, then outside.' Keep autoplay off and use a kids' profile. Kids' profiles still miss things, so stay nearby and talk about what your child sees.",
+    "9-11": "This is a good age for your child to start choosing shows, with you checking in often. Keep a set time limit, keep autoplay off, and stop screens an hour before bed. Help your child notice how apps are built to say 'one more,' so they learn to say 'not now' for themselves.",
+    "12-14": "Young teens are building self-control, but the part of the brain that stops 'one more video' is still growing. Keep phones, tablets and TVs out of bedrooms at night and set family screen-free times. Keep talking openly about what they watch and how it makes them feel.",
+    "15-17": "Give your teen more freedom, and ask them to make their own viewing plan that protects sleep, school, faith and friends. Binge-watching late at night is the main risk to watch for. Stay close and keep talking about what they watch, without spying."
+   },
    "builtOn": [
     "internet",
     "tv",
@@ -2116,6 +2153,38 @@
    "dangers": [
     "Recommendation feeds can lead a child from cartoons to something harmful in a few clicks.",
     "Some 'kids' videos are made by machines to catch attention, not to teach."
+   ],
+   "deep_on": "2026-11-24",
+   "experts": [
+    {
+     "say": "Because of how they make money, video and media platforms are often built to keep children watching as long as possible, not to do what is best for them. So parental controls, time limits and a close parent-child relationship matter.",
+     "url": "https://publications.aap.org/aapnews/news/34088/Beyond-screen-time-Policy-discusses-how-to",
+     "who": "American Academy of Pediatrics, Council on Communications and Media",
+     "source": "AAP News"
+    },
+    {
+     "say": "Research in South Korea linked children's videos showing 'negative interactions' (characters treating each other badly) to more anxiety in children. The researchers say more study is needed, and they did not find every effect they looked for.",
+     "url": "https://www.tubefilter.com/2025/04/22/youtube-kids-videos-research-study-negative-interactions-mental-health/",
+     "who": "Researchers studying children's YouTube content in South Korea",
+     "source": "Tubefilter"
+    },
+    {
+     "say": "Media can have a good place in family life when parents think about the 5 Cs: the Child, the Content, whether media is used to Calm, whether it Crowds out other activities, and open Communication. The focus is on what children watch and why, not just how long.",
+     "url": "https://www.aap.org/en/patient-care/media-and-children/center-of-excellence-on-social-media-and-youth-mental-health/5cs-of-media-use/",
+     "who": "American Academy of Pediatrics",
+     "source": "AAP, The 5 Cs of Media Use"
+    },
+    {
+     "say": "Researchers studying young teens and YouTube are looking at both sides: some kids use it to calm hard feelings, but it can also cost them sleep. They found many families watch YouTube together. Researchers say knowing why children watch matters as much as counting the minutes.",
+     "url": "https://www.mdpi.com/2076-328X/15/6/805",
+     "who": "Researchers in Behavioral Sciences (peer-reviewed qualitative study)",
+     "source": "Behavioral Sciences (MDPI)"
+    }
+   ],
+   "ldsWork": [
+    "General conference and other messages from living prophets and apostles are streamed and offered in many languages, so people around the world can hear the Lord's servants for themselves.",
+    "FamilySearch shares free video lessons and online events, such as RootsTech, that teach families how to find their ancestors and prepare names for temple work.",
+    "Church leaders have encouraged members to use technology wisely to share the restored gospel and help gather scattered Israel on both sides of the veil. Uplifting videos can be part of that work, especially when families also guard their time and their homes."
    ],
    "learned": [
     {
@@ -2136,85 +2205,32 @@
      "source": "APA Report"
     }
    ],
-   "stages": {
-    "0-2": "Babies and toddlers learn words, feelings and trust from real faces, voices and play, so keep streaming video out of their day. Video chats with grandparents are fine. If a two-year-old watches at all, keep it short, pick slow and gentle shows, and watch together. Don't leave the TV playing in the background.",
-    "3-5": "Keep watching to less than one hour a day. Choose calm, good shows before you press play, and watch with your child. Turn off autoplay so one show ends with a 'the end', because young children can't yet stop themselves. Their growing minds need play, books and people far more than screens.",
-    "6-8": "Pick shows together, watch in shared rooms of the home, and set a firm stopping point before you start, like 'two episodes, then outside.' Keep autoplay off and use a kids' profile. Kids' profiles still miss things, so stay nearby and talk about what your child sees.",
-    "9-11": "This is a good age for your child to start choosing shows, with you checking in often. Keep a set time limit, keep autoplay off, and stop screens an hour before bed. Help your child notice how apps are built to say 'one more,' so they learn to say 'not now' for themselves.",
-    "12-14": "Young teens are building self-control, but the part of the brain that stops 'one more video' is still growing. Keep phones, tablets and TVs out of bedrooms at night and set family screen-free times. Keep talking openly about what they watch and how it makes them feel.",
-    "15-17": "Give your teen more freedom, and ask them to make their own viewing plan that protects sleep, school, faith and friends. Binge-watching late at night is the main risk to watch for. Stay close and keep talking about what they watch, without spying.",
-    "18+": "Young adults choose for themselves. Encourage them to watch on purpose, not by default: turn off autoplay, guard their sleep, and keep Sabbath and people ahead of screens. Watching good things with others can be a real joy."
-   },
    "studies": [
     {
-     "finding": "The American Academy of Pediatrics says video platforms often use autoplay and endless scrolling that can make it harder for children to stop. It advises families to set time boundaries: less than about one hour a day for toddlers and preschoolers, and around one to two hours a day of entertainment media for school-age children and teens. Families should keep screen-free time for sleep, play, read",
-     "source": "American Academy of Pediatrics policy statement, Digital Ecosystems, Children and Adolescents (Pediatrics)",
+     "on": "2026",
      "url": "https://publications.aap.org/pediatrics/article/157/2/e2025075320/206129/Digital-Ecosystems-Children-and-Adolescents-Policy",
-     "on": "2026"
+     "source": "American Academy of Pediatrics policy statement, Digital Ecosystems, Children and Adolescents (Pediatrics)",
+     "finding": "The American Academy of Pediatrics says video platforms often use autoplay and endless scrolling that can make it harder for children to stop. It advises families to set time boundaries: less than about one hour a day for toddlers and preschoolers, and around one to two hours a day of entertainment media for school-age children and teens. Families should keep screen-free time for sleep, play, read"
     },
     {
-     "finding": "The World Health Organization advises no screen time for babies under 1. For ages 2 to 4, it advises no more than one hour of sitting screen time a day, and says less is better, so young children can sit less, play more and sleep well.",
-     "source": "World Health Organization guidelines on physical activity, sedentary behaviour and sleep for children under 5 (reported ",
+     "on": "2019-04-24",
      "url": "https://abcnews.com/Health/children-hour-screen-time-guidelines/story?id=62598974",
-     "on": "2019-04-24"
+     "source": "World Health Organization guidelines on physical activity, sedentary behaviour and sleep for children under 5 (reported ",
+     "finding": "The World Health Organization advises no screen time for babies under 1. For ages 2 to 4, it advises no more than one hour of sitting screen time a day, and says less is better, so young children can sit less, play more and sleep well."
     },
     {
-     "finding": "A study of toddlers who watched YouTube found that much of what they watched was low quality. The researchers note that watching on the main YouTube site, instead of YouTube Kids, exposes young children to unsuitable content. Many parents in the study did not know YouTube Kids existed. Choosing shows ahead of time and using kids' settings helps, but those settings are not perfect.",
-     "source": "YouTube Viewing and Content Quality in Toddlers (peer-reviewed study, PubMed Central)",
+     "on": "2026",
      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13002997/",
-     "on": "2026"
+     "source": "YouTube Viewing and Content Quality in Toddlers (peer-reviewed study, PubMed Central)",
+     "finding": "A study of toddlers who watched YouTube found that much of what they watched was low quality. The researchers note that watching on the main YouTube site, instead of YouTube Kids, exposes young children to unsuitable content. Many parents in the study did not know YouTube Kids existed. Choosing shows ahead of time and using kids' settings helps, but those settings are not perfect."
     },
     {
-     "finding": "A study of children and teens in Hong Kong found binge-watching was common. It was linked to poorer sleep in boys and to other problems. The study only shows a link, not that binge-watching causes these problems, and the authors say research on children is still limited.",
-     "source": "Binge-watching and gender-specific effects on academic, social, and mental well-being in children and adolescents (PLOS ",
+     "on": "2025",
      "url": "https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0329655",
-     "on": "2025"
+     "source": "Binge-watching and gender-specific effects on academic, social, and mental well-being in children and adolescents (PLOS ",
+     "finding": "A study of children and teens in Hong Kong found binge-watching was common. It was linked to poorer sleep in boys and to other problems. The study only shows a link, not that binge-watching causes these problems, and the authors say research on children is still limited."
     }
-   ],
-   "experts": [
-    {
-     "say": "Because of how they make money, video and media platforms are often built to keep children watching as long as possible, not to do what is best for them. So parental controls, time limits and a close parent-child relationship matter.",
-     "who": "American Academy of Pediatrics, Council on Communications and Media",
-     "source": "AAP News",
-     "url": "https://publications.aap.org/aapnews/news/34088/Beyond-screen-time-Policy-discusses-how-to"
-    },
-    {
-     "say": "Research in South Korea linked children's videos showing 'negative interactions' (characters treating each other badly) to more anxiety in children. The researchers say more study is needed, and they did not find every effect they looked for.",
-     "who": "Researchers studying children's YouTube content in South Korea",
-     "source": "Tubefilter",
-     "url": "https://www.tubefilter.com/2025/04/22/youtube-kids-videos-research-study-negative-interactions-mental-health/"
-    },
-    {
-     "say": "Media can have a good place in family life when parents think about the 5 Cs: the Child, the Content, whether media is used to Calm, whether it Crowds out other activities, and open Communication. The focus is on what children watch and why, not just how long.",
-     "who": "American Academy of Pediatrics",
-     "source": "AAP, The 5 Cs of Media Use",
-     "url": "https://www.aap.org/en/patient-care/media-and-children/center-of-excellence-on-social-media-and-youth-mental-health/5cs-of-media-use/"
-    },
-    {
-     "say": "Researchers studying young teens and YouTube are looking at both sides: some kids use it to calm hard feelings, but it can also cost them sleep. They found many families watch YouTube together. Researchers say knowing why children watch matters as much as counting the minutes.",
-     "who": "Researchers in Behavioral Sciences (peer-reviewed qualitative study)",
-     "source": "Behavioral Sciences (MDPI)",
-     "url": "https://www.mdpi.com/2076-328X/15/6/805"
-    }
-   ],
-   "future": [
-    "Choosing on purpose: deciding what to watch and when to stop, and turning off autoplay instead of letting an app decide.",
-    "Learning from video: using online lessons and talks to learn new skills for school, work and everyday life.",
-    "Judging what is true and good: spotting ads, low-quality content and false claims in videos, and finding trustworthy sources.",
-    "Making and sharing good video: recording and editing clear, kind videos to teach, serve, or share the good news with others."
-   ],
-   "work": [
-    "Sermons, hymns, Bible stories and testimonies can reach people in their own language, in places no missionary or church building has reached yet.",
-    "People who are sick, homebound or far away can still join worship services and devotionals by watching them live.",
-    "Families can watch good, uplifting videos together, such as Bible stories, and talk about them, turning screen time into time together that teaches faith.",
-    "Free video lessons on health, farming, first aid and job skills can help serve the poor and lift people in need."
-   ],
-   "ldsWork": [
-    "General conference and other messages from living prophets and apostles are streamed and offered in many languages, so people around the world can hear the Lord's servants for themselves.",
-    "FamilySearch shares free video lessons and online events, such as RootsTech, that teach families how to find their ancestors and prepare names for temple work.",
-    "Church leaders have encouraged members to use technology wisely to share the restored gospel and help gather scattered Israel on both sides of the veil. Uplifting videos can be part of that work, especially when families also guard their time and their homes."
-   ],
-   "deep_on": "2026-11-24"
+   ]
   },
   {
    "y": 2010,
@@ -2255,6 +2271,12 @@
    "name": "Tablets",
    "talk": "What is your favourite thing we do on the tablet together? What is your favourite thing we do with no screen at all?",
    "what": "A big touch screen with no keyboard. Easy enough for a toddler to use, which is the point and the problem.",
+   "work": [
+    "One tablet can hold the Bible in thousands of languages, in text and often in audio, so people can read and hear God's word in their own tongue (https://www.wycliffe.org/digital-bible-resources).",
+    "Families can read scriptures, sing hymns and pray together using a shared tablet, even when they live far apart, through video calls with grandparents, missionaries and loved ones.",
+    "A tablet can help people who serve the sick, the poor and the lonely to keep in touch, plan visits and share stories of hope and comfort.",
+    "Used together, a family tablet can bring parents and children closer through stories, pictures and shared learning, so they aren't each alone with a screen."
+   ],
    "avoid": [
     "Tablet at meals, in the car for short trips, and at bedtime.",
     "A tablet as a way to stop crying or fill every wait.",
@@ -2265,7 +2287,22 @@
     "Draw a picture for someone and send it.",
     "Video-call a grandparent and show them the drawing."
    ],
+   "future": [
+    "Using a touch screen to make things, like writing, drawing, recording and organizing, and not only to watch.",
+    "Choosing good apps and good information, and knowing which ones really help and which only grab your attention.",
+    "Self-control with devices: putting the tablet down when it's time, and calming down without a screen.",
+    "Using a tablet to learn, work and keep in touch with family, church and coworkers from anywhere."
+   ],
    "modern": true,
+   "stages": {
+    "0-2": "For babies under about 18 months, the American Academy of Pediatrics still says to avoid screen media, so keep the tablet away and use your lap, your voice and real toys. Babies learn words and feelings from faces, and a screen can't answer back the way you do.",
+    "18+": "Young adults choose for themselves. A tablet can be a good tool for study, work, scripture reading and family history. Habits like Sabbath rest from screens and putting devices away at meals and with people can help them stay in charge of the tool.",
+    "3-5": "Use the tablet a little, and best of all together, with a few good learning apps for letters and numbers. Don't use it to calm big feelings. Little children are just learning how to handle being upset, and they learn that best with your help, not a screen's.",
+    "6-8": "A shared family tablet in a room where everyone is, with apps and times you choose together, works better than giving the child one of their own. Children this age are building reading, friendships and play outside, so make sure the tablet doesn't crowd those out.",
+    "9-11": "Let the tablet help with schoolwork, making things and family history, and keep simple rules about where and when it gets used, with no tablets in bedrooms at night. Children this age can start helping write the family's media plan, which teaches them to make good choices for themselves.",
+    "12-14": "Before a young teen gets their own tablet, set clear limits on apps, chatting and night-time use, and check in often with kind, open talks. Young teens want to belong and are easily pulled in by what's on the screen, so they still need a parent nearby to guide them.",
+    "15-17": "Give teens more freedom step by step as they show they can use the tablet well for school, creating and serving others, and keep talking about sleep, friends and what they see. These years are practice for running their own lives, so the goal is good judgment, not just following rules."
+   },
    "builtOn": [
     "smartphone",
     "pc"
@@ -2273,6 +2310,38 @@
    "dangers": [
     "Under two, screens teach almost nothing and take time from what does: faces, voices, play.",
     "Small children cannot tell an ad from a game."
+   ],
+   "deep_on": "2026-11-24",
+   "experts": [
+    {
+     "say": "If a child is always handed a tablet when upset, they may miss the chance to have their feelings noticed and to learn, with a parent's help, how to work through big feelings.",
+     "url": "https://www.thebump.com/news/screen-time-kids-report",
+     "who": "Jennifer Cross, MD, pediatric behavior and development expert at NewYork-Presbyterian",
+     "source": "The Bump"
+    },
+    {
+     "say": "Because tablet use can feed a cycle of trouble handling feelings, the researchers think parents should wait before introducing young children to screens.",
+     "url": "https://washingtonparent.mydigitalpublication.com/articles/excessive-screen-time-leads-to-more-anger-outbursts-for-preschoolers",
+     "who": "Caroline Garon-Carrier, lead researcher on the JAMA Pediatrics tablet study",
+     "source": "Washington Parent"
+    },
+    {
+     "say": "The main lesson for families is not just how to limit screen time, but how to use screens well together as a family.",
+     "url": "https://www.edsurge.com/news/2026-02-05-new-aap-screen-time-recommendations-focus-less-on-screens-more-on-family-time",
+     "who": "Milkovich, speaking to EdSurge about the new AAP guidance",
+     "source": "EdSurge"
+    },
+    {
+     "say": "Research on children and screens has become more detailed, and advice is moving away from treating every screen the same. The question now is what each child needs and what screens might be crowding out.",
+     "url": "https://theconversation.com/screen-time-guidelines-for-kids-and-adolescents-have-shifted-as-research-paints-a-more-nuanced-picture-281300",
+     "who": "The authors writing about the AAP's 2026 policy",
+     "source": "The Conversation"
+    }
+   ],
+   "ldsWork": [
+    "President Howard W. Hunter taught in 1994 that the Church had 'begun using information technology to hasten the sacred work of providing ordinances for the deceased.' Elder Quentin L. Cook added in 2014 that family history centers are 'now in our homes,' so a ",
+    "President Gordon B. Hinckley taught that the Lord inspired people to develop new technologies to move this sacred work forward. Children can use a tablet with their parents to find ancestors and hear their stories (https://www.churchofjesuschrist.org/study/gen",
+    "President Russell M. Nelson taught that 'the Lord is hastening His work to gather Israel.' Family history, temple work and missionary work are partners in that gathering, and a tablet can help with all three (https://www.churchofjesuschrist.org/study/liahona/2"
    ],
    "learned": [
     {
@@ -2299,91 +2368,38 @@
      "source": "ScienceDaily"
     }
    ],
-   "stages": {
-    "0-2": "For babies under about 18 months, the American Academy of Pediatrics still says to avoid screen media, so keep the tablet away and use your lap, your voice and real toys. Babies learn words and feelings from faces, and a screen can't answer back the way you do.",
-    "3-5": "Use the tablet a little, and best of all together, with a few good learning apps for letters and numbers. Don't use it to calm big feelings. Little children are just learning how to handle being upset, and they learn that best with your help, not a screen's.",
-    "6-8": "A shared family tablet in a room where everyone is, with apps and times you choose together, works better than giving the child one of their own. Children this age are building reading, friendships and play outside, so make sure the tablet doesn't crowd those out.",
-    "9-11": "Let the tablet help with schoolwork, making things and family history, and keep simple rules about where and when it gets used, with no tablets in bedrooms at night. Children this age can start helping write the family's media plan, which teaches them to make good choices for themselves.",
-    "12-14": "Before a young teen gets their own tablet, set clear limits on apps, chatting and night-time use, and check in often with kind, open talks. Young teens want to belong and are easily pulled in by what's on the screen, so they still need a parent nearby to guide them.",
-    "15-17": "Give teens more freedom step by step as they show they can use the tablet well for school, creating and serving others, and keep talking about sleep, friends and what they see. These years are practice for running their own lives, so the goal is good judgment, not just following rules.",
-    "18+": "Young adults choose for themselves. A tablet can be a good tool for study, work, scripture reading and family history. Habits like Sabbath rest from screens and putting devices away at meals and with people can help them stay in charge of the tool."
-   },
    "studies": [
     {
-     "finding": "In January 2026 the American Academy of Pediatrics dropped its old hour limits on screen time. It now asks parents to look at what screens are pushing out of a child's day. It still says to avoid screen media for children under 18 months, and for ages 2 to 5 it favors high-quality media built to teach math and reading.",
-     "source": "The Conversation, reporting on the American Academy of Pediatrics' 2026 policy statement",
+     "on": "2026",
      "url": "https://theconversation.com/screen-time-guidelines-for-kids-and-adolescents-have-shifted-as-research-paints-a-more-nuanced-picture-281300",
-     "on": "2026"
+     "source": "The Conversation, reporting on the American Academy of Pediatrics' 2026 policy statement",
+     "finding": "In January 2026 the American Academy of Pediatrics dropped its old hour limits on screen time. It now asks parents to look at what screens are pushing out of a child's day. It still says to avoid screen media for children under 18 months, and for ages 2 to 5 it favors high-quality media built to teach math and reading."
     },
     {
-     "finding": "The 2026 AAP guidance suggests a shared family tablet instead of giving a child their own. It also suggests offering other activities in place of screen time, finding other ways to help children calm down, and making a family media plan together.",
-     "source": "EdSurge, on the new AAP recommendations",
+     "on": "2026-02-05",
      "url": "https://www.edsurge.com/news/2026-02-05-new-aap-screen-time-recommendations-focus-less-on-screens-more-on-family-time",
-     "on": "2026-02-05"
+     "source": "EdSurge, on the new AAP recommendations",
+     "finding": "The 2026 AAP guidance suggests a shared family tablet instead of giving a child their own. It also suggests offering other activities in place of screen time, finding other ways to help children calm down, and making a family media plan together."
     },
     {
-     "finding": "A Canadian study in JAMA Pediatrics found that more tablet use at age 3½ was linked to more anger and frustration by age 4½. Children who got frustrated more easily then used tablets more later, which looks like a cycle. This kind of study shows a link but can't fully prove the tablet caused it.",
-     "source": "HealthDay News, on a study in JAMA Pediatrics",
+     "on": "2024-08-12",
      "url": "https://www.healthday.com/health-news/child-health/more-toddler-screen-time-brings-more-tantrums-study-finds",
-     "on": "2024-08-12"
+     "source": "HealthDay News, on a study in JAMA Pediatrics",
+     "finding": "A Canadian study in JAMA Pediatrics found that more tablet use at age 3½ was linked to more anger and frustration by age 4½. Children who got frustrated more easily then used tablets more later, which looks like a cycle. This kind of study shows a link but can't fully prove the tablet caused it."
     },
     {
-     "finding": "A Harvard-led review of 36 studies found that, on average, math and reading apps helped children ages 3 to 9 learn. But results ranged from slightly harmful to very helpful depending on the app, so which app you pick matters a lot. This review is a few years old.",
-     "source": "Jimmy Kim and Josh Gilbert, writing about their meta-analysis",
+     "on": "2021",
      "url": "https://rickhess99.medium.com/do-educational-apps-actually-help-kids-learn-79565419c0b4",
-     "on": "2021"
+     "source": "Jimmy Kim and Josh Gilbert, writing about their meta-analysis",
+     "finding": "A Harvard-led review of 36 studies found that, on average, math and reading apps helped children ages 3 to 9 learn. But results ranged from slightly harmful to very helpful depending on the app, so which app you pick matters a lot. This review is a few years old."
     },
     {
-     "finding": "Common Sense Media's 2025 survey found that 40% of children have their own tablet by age 2 and 60% by age 4, even though most parents say they are worried about screens.",
-     "source": "The Bump, on Common Sense Media's 2025 Census on Media Use by Kids Ages 0-8",
+     "on": "2025",
      "url": "https://www.thebump.com/news/screen-time-kids-report",
-     "on": "2025"
+     "source": "The Bump, on Common Sense Media's 2025 Census on Media Use by Kids Ages 0-8",
+     "finding": "Common Sense Media's 2025 survey found that 40% of children have their own tablet by age 2 and 60% by age 4, even though most parents say they are worried about screens."
     }
-   ],
-   "experts": [
-    {
-     "say": "If a child is always handed a tablet when upset, they may miss the chance to have their feelings noticed and to learn, with a parent's help, how to work through big feelings.",
-     "who": "Jennifer Cross, MD, pediatric behavior and development expert at NewYork-Presbyterian",
-     "source": "The Bump",
-     "url": "https://www.thebump.com/news/screen-time-kids-report"
-    },
-    {
-     "say": "Because tablet use can feed a cycle of trouble handling feelings, the researchers think parents should wait before introducing young children to screens.",
-     "who": "Caroline Garon-Carrier, lead researcher on the JAMA Pediatrics tablet study",
-     "source": "Washington Parent",
-     "url": "https://washingtonparent.mydigitalpublication.com/articles/excessive-screen-time-leads-to-more-anger-outbursts-for-preschoolers"
-    },
-    {
-     "say": "The main lesson for families is not just how to limit screen time, but how to use screens well together as a family.",
-     "who": "Milkovich, speaking to EdSurge about the new AAP guidance",
-     "source": "EdSurge",
-     "url": "https://www.edsurge.com/news/2026-02-05-new-aap-screen-time-recommendations-focus-less-on-screens-more-on-family-time"
-    },
-    {
-     "say": "Research on children and screens has become more detailed, and advice is moving away from treating every screen the same. The question now is what each child needs and what screens might be crowding out.",
-     "who": "The authors writing about the AAP's 2026 policy",
-     "source": "The Conversation",
-     "url": "https://theconversation.com/screen-time-guidelines-for-kids-and-adolescents-have-shifted-as-research-paints-a-more-nuanced-picture-281300"
-    }
-   ],
-   "future": [
-    "Using a touch screen to make things, like writing, drawing, recording and organizing, and not only to watch.",
-    "Choosing good apps and good information, and knowing which ones really help and which only grab your attention.",
-    "Self-control with devices: putting the tablet down when it's time, and calming down without a screen.",
-    "Using a tablet to learn, work and keep in touch with family, church and coworkers from anywhere."
-   ],
-   "work": [
-    "One tablet can hold the Bible in thousands of languages, in text and often in audio, so people can read and hear God's word in their own tongue (https://www.wycliffe.org/digital-bible-resources).",
-    "Families can read scriptures, sing hymns and pray together using a shared tablet, even when they live far apart, through video calls with grandparents, missionaries and loved ones.",
-    "A tablet can help people who serve the sick, the poor and the lonely to keep in touch, plan visits and share stories of hope and comfort.",
-    "Used together, a family tablet can bring parents and children closer through stories, pictures and shared learning, so they aren't each alone with a screen."
-   ],
-   "ldsWork": [
-    "President Howard W. Hunter taught in 1994 that the Church had 'begun using information technology to hasten the sacred work of providing ordinances for the deceased.' Elder Quentin L. Cook added in 2014 that family history centers are 'now in our homes,' so a ",
-    "President Gordon B. Hinckley taught that the Lord inspired people to develop new technologies to move this sacred work forward. Children can use a tablet with their parents to find ancestors and hear their stories (https://www.churchofjesuschrist.org/study/gen",
-    "President Russell M. Nelson taught that 'the Lord is hastening His work to gather Israel.' Family history, temple work and missionary work are partners in that gathering, and a tablet can help with all three (https://www.churchofjesuschrist.org/study/liahona/2"
-   ],
-   "deep_on": "2026-11-24"
+   ]
   },
   {
    "y": 2014,
@@ -2669,6 +2685,12 @@
      "url": "https://www.manilatimes.net/2026/11/20/world/un-news/losing-the-battle-ai-hands-predators-new-ways-to-target-children/2474704",
      "note": "United Nations child-protection leaders warned that bad people are using AI in new ways to trick and harm children online, and that protections are not keeping up. Children are safest when they know they can always tell a trusted grown-up if something online feels wrong.",
      "source": "The Manila Times (UN News)"
+    },
+    {
+     "on": "2026-11-25",
+     "note": "Boys & Girls Clubs of America also says more teens are turning to AI chatbots when they need someone to talk to. A chatbot can be a handy helper, but it cannot love you the way your family and friends do. When your heart feels heavy, talk to a real person first.",
+     "source": "Boys & Girls Clubs of America",
+     "url": "https://www.bgca.org/news-stories/2026/November/5-trends-affecting-kids-teens-in-the-2026-27-school-year/"
     }
    ],
    "milestones": [
@@ -2719,6 +2741,14 @@
      "url": "https://cbs6albany.com/newsletter-daily/gov-hochul-signs-five-year-ban-on-ai-chatbot-toys-in-new-york-chatgpt-child-safety-law-attorney-general-letitia-james-minors-foster-emotional-dependency-s9408a/a11144b-legislation-animals-hold-conversations-dangerous-cbs6-wrgb",
      "added": "2026-11-24",
      "source": "CBS 6 Albany (WRGB)"
+    },
+    {
+     "on": "2026-11-24",
+     "t": "New York pauses AI chatbot toys",
+     "de": "New York's governor signed a law that stops toys with built-in AI chatbots, like talking stuffed animals, dolls and robots, from being sold for five years. California recently did something similar, and Pennsylvania is thinking about it too.",
+     "source": "WRVO Public Media (NPR)",
+     "url": "https://www.wrvo.org/2026-11-24/new-york-bans-ai-chatbot-toys",
+     "added": "2026-11-25"
     }
    ]
   },
@@ -2840,12 +2870,18 @@
      "url": "https://www.apa.org/monitor/2026/11-12/ai-chatbot-toys-early-development",
      "note": "Toys with AI chatbots inside are showing up in stores fast, and child experts writing for the American Psychological Association say these toys don't help little ones learn to share or take turns the way a real person does. Experts are asking toy makers to add stronger safety checks, privacy protections and parent controls. They also don't want toys designed to make children feel too attached to them.",
      "source": "American Psychological Association, Monitor on Psychology"
+    },
+    {
+     "on": "2026-11-25",
+     "note": "Groups that look out for children wrote an open letter asking big online shops to stop selling talking AI toys before the holidays. They found 28 of these toys for sale, and more than half cost less than £50. They also pointed to a test that found more than a quarter of the toys' answers were not right for children. A cuddly toy should be a friend you can trust, so ask a grown-up before you bring one home that talks back.",
+     "source": "Fairplay, Alliance 4 Children and Set@16 (open letter to online marketplaces)",
+     "url": "https://fairplayforkids.org/wp-content/uploads/2026/11/Amazon-eBay-AI-Toys-Open-Letter.pdf"
     }
    ]
   }
  ],
- "updated": "2026-11-24",
- "version": 17,
+ "updated": "2026-11-25",
+ "version": 18,
  "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage: Babies & Toddlers, then the same six stages the Morning Lantern uses. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
  "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next.",
