@@ -1,7 +1,68 @@
 {
- "updated": "2026-11-26T16:47:06.372Z",
+ "updated": "2026-11-26T19:22:56.984Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
+  {
+   "id": "story-the-nest-among-the-stars",
+   "type": "story",
+   "title": "The Nest Among the Stars",
+   "nightLabel": "Week 5 · Night 2",
+   "download": "OldTestament_Story_TheNestAmongTheStars_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 5,
+   "night": 30,
+   "date": "2026-11-27",
+   "story": "the-nest-among-the-stars",
+   "ref": "Obadiah 1:3–4",
+   "storyId": "ot-b11-w5n2",
+   "files": {
+    "lds": {
+     "url": "/lantern/the-nest-among-the-stars/printables/story.pdf?v=70d4d46775",
+     "pages": 5,
+     "bytes": 1026304
+    },
+    "christian": {
+     "url": "/lantern/the-nest-among-the-stars/printables/story-christian.pdf?v=70d4d46775",
+     "pages": 5,
+     "bytes": 1026302
+    }
+   },
+   "thumb": "/lantern/the-nest-among-the-stars/printables/story.jpg?v=70d4d46775",
+   "src": "70d4d46775d70e0b17321bce7afaa6c23d745fd75e26e2a0367c579fd9e793e8",
+   "updated": "2026-11-26",
+   "created": "2026-11-26",
+   "stored": "70d4d46775d70e0b17321bce7afaa6c23d745fd75e26e2a0367c579fd9e793e8"
+  },
+  {
+   "id": "song-the-nest-among-the-stars",
+   "type": "song",
+   "title": "Come Down Close",
+   "storyTitle": "The Nest Among the Stars",
+   "download": "OldTestament_Song_ComeDownClose_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 5,
+   "night": 30,
+   "date": "2026-11-27",
+   "story": "the-nest-among-the-stars",
+   "ref": "Obadiah 1:3–4",
+   "storyId": "ot-b11-w5n2",
+   "files": {
+    "lds": {
+     "url": "/lantern/the-nest-among-the-stars/printables/song.pdf?v=8feb1b3ba0",
+     "pages": 1,
+     "bytes": 35458
+    }
+   },
+   "thumb": "/lantern/the-nest-among-the-stars/printables/song.jpg?v=8feb1b3ba0",
+   "src": "8feb1b3ba0a87daeb3d0ebbf507bcf8cbc92899cb850187617658fbdbadc6c92",
+   "updated": "2026-11-26",
+   "created": "2026-11-26",
+   "stored": "8feb1b3ba0a87daeb3d0ebbf507bcf8cbc92899cb850187617658fbdbadc6c92"
+  },
   {
    "id": "story-the-shepherd-who-looked-up",
    "type": "story",
