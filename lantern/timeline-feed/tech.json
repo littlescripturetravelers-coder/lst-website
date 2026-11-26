@@ -1868,9 +1868,9 @@
     },
     {
      "on": "2026-11-26",
+     "url": "https://www.business-humanrights.org/en/latest-news/usa-google-meta-and-tiktok-challenge-state-laws-targeting-social-media-addiction-among-children/",
      "note": "Google, Meta and TikTok went to court to stop a new California law. The law would stop apps from using features like autoplay and personalized suggestions for children under 16, and it is due to start on January 1, 2027. Families will want to see what the courts decide.",
-     "source": "Business & Human Rights Resource Centre",
-     "url": "https://www.business-humanrights.org/en/latest-news/usa-google-meta-and-tiktok-challenge-state-laws-targeting-social-media-addiction-among-children/"
+     "source": "Business & Human Rights Resource Centre"
     }
    ],
    "studies": [
@@ -1903,12 +1903,12 @@
      "source": "Fox News"
     },
     {
-     "on": "2026-11-01",
      "t": "Türkiye's social media rules for children start",
      "de": "A new law in Türkiye took effect with rules for social media companies about users under 15. It is one of a growing number of countries setting age limits for social media.",
-     "source": "Digital Policy Alert",
+     "on": "2026-11-01",
      "url": "https://digitalpolicyalert.org/change/17981-omnibus-bill-including-social-media-regulation-for-children-under-15",
-     "added": "2026-11-26"
+     "added": "2026-11-26",
+     "source": "Digital Policy Alert"
     }
    ]
   },
@@ -2087,12 +2087,12 @@
    ],
    "milestones": [
     {
-     "on": "2026-11-17",
      "t": "First nationwide study of school phone bans",
      "de": "Researchers from Harvard, Dartmouth and NWEA looked at students in about 4,600 U.S. schools and found that students learned a little more after phones were kept out of school. Schools that locked phones in pouches gained about 1 to 2 extra weeks of learning each year.",
-     "source": "Harvard Center for Education Policy Research",
+     "on": "2026-11-17",
      "url": "https://cepr.harvard.edu/news/2026/11/phone-bans-improve-learning-study-finds-so-far-only-slightly",
-     "added": "2026-11-26"
+     "added": "2026-11-26",
+     "source": "Harvard Center for Education Policy Research"
     }
    ]
   },
@@ -2870,15 +2870,15 @@
     },
     {
      "on": "2026-11-26",
+     "url": "https://www.advanced-television.com/2026/11/24/ofcom-8-in-10-uk-children-using-ai-chatbots/",
      "note": "Ofcom, which looks after TV and the internet in the UK, found that about 8 in 10 UK children are now using AI chatbots, and some use them for company. Most parents like that chatbots help children learn and do homework. About half worry that children might let the chatbot do their thinking for them.",
-     "source": "Advanced Television (reporting Ofcom research)",
-     "url": "https://www.advanced-television.com/2026/11/24/ofcom-8-in-10-uk-children-using-ai-chatbots/"
+     "source": "Advanced Television (reporting Ofcom research)"
     },
     {
      "on": "2026-11-26",
+     "url": "https://news.harvard.edu/gazette/story/2026/11/mental-health-chatbots-for-kids-parents-narrow-eyes/",
      "note": "A study from Harvard and Boston Children's Hospital, published in JAMA Pediatrics, asked parents about using AI chatbots to help children with their feelings and mental health. About 3 in 4 parents said they were not comfortable with it. The same report says some young people already ask chatbots for this kind of help without telling their parents.",
-     "source": "Harvard Gazette",
-     "url": "https://news.harvard.edu/gazette/story/2026/11/mental-health-chatbots-for-kids-parents-narrow-eyes/"
+     "source": "Harvard Gazette"
     }
    ],
    "milestones": [
@@ -2938,7 +2938,71 @@
      "added": "2026-11-25",
      "source": "WRVO Public Media (NPR)"
     }
-   ]
+   ],
+   "stages": {
+    "0-2": "Babies and toddlers should not use talking AI. They learn words, feelings and trust from real faces and voices, so their time is best spent with you, being held, talked to and played with.",
+    "3-5": "Young children should not use AI chatbots on their own. They often believe a talking machine is alive or is their friend. If a parent uses AI to answer a question together, sit side by side and say plainly, \"This is a computer program, not a person.\"",
+    "6-8": "If your child uses AI at this age, it should be rare and done together with you, for things like looking up a fact and then checking it in a book. Children this age are just learning to read, write and work out problems themselves, and that hard work is what grows their minds.",
+    "9-11": "Children this age can use AI with an adult nearby and with clear rules: no secrets, no sharing names, photos or where they live, and do your own homework first. This is a good age to teach them that AI can be wrong while sounding sure, so they learn to check what it says.",
+    "12-14": "Young teens can use AI for school when a teacher or parent allows it, but should stay away from AI 'companion' or 'friend' apps. A large 2025 survey found that younger teens trust AI advice more than older teens do. Keep devices in shared rooms, and talk often about what they are asking it.",
+    "15-17": "Older teens can use AI as a helper for brainstorming, practicing and explaining things, but not to do their thinking or their friendships for them. Help them learn to use it well and honestly, because they will need these skills at work, and ask them to come to you, not a chatbot, with big worries.",
+    "18+": "Young adults choose for themselves, but they still do well with family values to steer by: use AI as a tool, check what it says, keep real friendships first, and stay honest about what is your own work. Keep talking with them about it as equals."
+   },
+   "studies": [
+    {
+     "finding": "In a small study of 54 adults writing essays, the people who used ChatGPT showed less brain engagement than those who wrote on their own, and most of them could not correctly quote what they had just written. This is early research. It has not yet been fully peer-reviewed, and it studied adults, not children, but it suggests that letting AI do the writing can mean we learn less.",
+     "source": "MIT Media Lab, \"Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task\"",
+     "url": "https://www.media.mit.edu/publications/your-brain-on-chatgpt/",
+     "on": "2025"
+    },
+    {
+     "finding": "A nationally representative survey of 1,060 U.S. teens aged 13 to 17 found that 72% had used an AI companion at least once and 52% used one a few times a month. Younger teens (13 to 14) were more likely than older teens to trust advice from these systems.",
+     "source": "Common Sense Media survey, reported by ScienceAlert",
+     "url": "https://www.sciencealert.com/almost-75-of-american-teens-have-used-ai-companions-study-finds",
+     "on": "2025"
+    },
+    {
+     "finding": "The American Psychological Association advises that AI tools for teenagers should be built differently from those for adults. It also advises that teens need protection from AI that pretends to be a human friend, and that parents, schools and companies all share the job of keeping teens safe.",
+     "source": "American Psychological Association, Health Advisory: Artificial Intelligence and Adolescent Well-being",
+     "url": "https://www.apa.org/topics/artificial-intelligence-machine-learning/health-advisory-ai-adolescent-well-being",
+     "on": "2025"
+    },
+    {
+     "finding": "The APA says that knowing how AI works, along with what it is good for, what it gets wrong and its risks, has become an essential skill for teens. It encourages teaching this 'AI literacy' at home and at school.",
+     "source": "American Psychological Association, \"AI literacy: Why every teen needs to learn this essential skill\"",
+     "url": "https://www.apa.org/topics/artificial-intelligence-machine-learning/ai-literacy-teens",
+     "on": "2025"
+    }
+   ],
+   "experts": [
+    {
+     "say": "AI made to act like a person can blur the line between a real friend and a machine. Teens may find this harder to see than adults do, so healthy limits on these 'relationships' matter.",
+     "who": "American Psychological Association",
+     "source": "Health Advisory: Artificial Intelligence and Adolescent Well-being",
+     "url": "https://www.apa.org/topics/artificial-intelligence-machine-learning/health-advisory-ai-adolescent-well-being"
+    },
+    {
+     "say": "If people lean on AI to think and write for them, they may build up a kind of 'cognitive debt': the work gets done, but less learning stays with them. The researchers say more study is needed.",
+     "who": "Researchers at the MIT Media Lab",
+     "source": "Your Brain on ChatGPT (MIT Media Lab)",
+     "url": "https://www.media.mit.edu/publications/your-brain-on-chatgpt/"
+    },
+    {
+     "say": "There is a good side too. Teens who understand how AI works, and where it falls short, are better prepared to use it wisely and safely in school, work and life.",
+     "who": "American Psychological Association",
+     "source": "AI literacy: Why every teen needs to learn this essential skill",
+     "url": "https://www.apa.org/topics/artificial-intelligence-machine-learning/ai-literacy-teens"
+    }
+   ],
+   "future": [
+    "Checking AI's answers: knowing it can be wrong while sounding sure, and checking facts against trusted sources before believing or sharing them.",
+    "Asking clear, good questions and giving clear directions, so AI becomes a useful helper and not a crutch.",
+    "Thinking and writing for yourself first, then using AI to improve your work, while staying honest about what is yours.",
+    "Guarding your privacy and your face and voice online, and spotting fakes made by AI."
+   ],
+   "work": [],
+   "ldsWork": [],
+   "deep_on": "2026-11-26"
   },
   {
    "y": 2024,
@@ -3007,7 +3071,73 @@
      "note": "Self-driving taxis now run in several cities with fewer crashes than human drivers in those same streets, and the arguments about who is responsible when one fails are just beginning.",
      "source": "Transport safety reports, summarised"
     }
-   ]
+   ],
+   "stages": {
+    "0-2": "Babies and toddlers should not ride in or play near robots or self-driving machines unless a grown-up is holding them or has them safely buckled in a car seat. Little ones move fast and don't understand danger yet, and a moving machine may not see or stop for someone so small.",
+    "3-5": "Young children can watch robots and self-driving cars from a safe place with a parent, and they can learn one rule: a machine is not a friend that will always stop for them. At this age children learn safety by doing the same thing every day, like holding hands near streets and keeping away from robot mowers and vacuums while they are running.",
+    "6-8": "Children this age can learn how robots work by playing with simple robot kits and coding toys while a grown-up is close by. Keep teaching them to cross the street with care, because even a careful robotaxi has struck a child near a school.",
+    "9-11": "Older children can build and program small robots at school or at home, which grows their curiosity, patience and problem-solving. Help them see that a machine only follows the rules people give it, so they always need to look, listen and use their own judgment near cars and moving machines.",
+    "12-14": "Young teens can enjoy robotics clubs, and where a parent allows it they may ride a robotaxi made for teens, such as Waymo's teen accounts, which need a parent's permission. They are starting to think about their future, so talk calmly about worries over robots taking jobs, and remind them that God gives each person gifts and that new work comes along with new tools.",
+    "15-17": "Teens learning to drive should know that features like lane-keeping and cruise control do not drive the car by themselves, and that the driver must stay awake, watch the road and keep phones put away. Talk with them about the careers that robots open up, and help them build skills and good character so they can face the future with hope instead of fear.",
+    "18+": "Young adults can use self-driving rides and robots wisely and should learn to work alongside them in school and at work. As adults they carry the full duty to watch the road, keep others safe and use these tools to bless the people around them."
+   },
+   "studies": [
+    {
+     "finding": "When the Insurance Institute for Highway Safety tested 14 partial driving automation systems, only one earned an 'acceptable' rating for its safeguards. The tests showed these systems do not do enough to keep drivers watching the road and ready to take over, and IIHS notes that cars with these features are not self-driving.",
+     "source": "Insurance Institute for Highway Safety (IIHS) ratings, as reported by Repairer Driven News",
+     "url": "https://www.repairerdrivennews.com/2024/03/19/new-iihs-test-one-out-of-14-partial-automated-driving-systems-tested-rate-acceptable/",
+     "on": "2024-03-19"
+    },
+    {
+     "finding": "A Waymo robotaxi struck a child near an elementary school during morning drop-off and caused minor injuries, even though it braked hard from 17 mph to under 6 mph. The U.S. traffic safety agency (NHTSA) opened an investigation into whether the car took enough care near the school and around young walkers. The lesson for families is that even well-built self-driving cars can make mistakes around ch",
+     "source": "Automotive World, reporting on a U.S. National Highway Traffic Safety Administration investigation",
+     "url": "https://www.automotiveworld.com/news/waymo-robotaxi-hits-child-near-school-nhtsa-opens-probe/",
+     "on": "2026"
+    },
+    {
+     "finding": "Waymo lets teens ride its driverless cars on their own only with a parent's or guardian's permission, through accounts linked to the parent's account. Teen riders must follow the same rider rules as adults. This means parents decide whether their teen is ready.",
+     "source": "Waymo teen accounts (company guidance); CNBC",
+     "url": "https://waymo.com/teens/",
+     "on": "2025"
+    }
+   ],
+   "experts": [
+    {
+     "say": "Researchers who study car safety warn that people rely too much on partial automation. For these systems to earn a good rating, they must make sure drivers are looking at the road and have their hands ready to take control if the technology makes a mistake.",
+     "who": "David Kidd, researcher at the Insurance Institute for Highway Safety",
+     "source": "IEEE Spectrum",
+     "url": "https://spectrum.ieee.org/partial-vehicle-autonomy-risk"
+    },
+    {
+     "say": "The U.S. traffic safety agency is checking whether a robotaxi took enough care near an elementary school at drop-off time, given how many young walkers were nearby. The concern is that school zones need extra caution from self-driving cars.",
+     "who": "U.S. National Highway Traffic Safety Administration (NHTSA)",
+     "source": "Automotive World",
+     "url": "https://www.automotiveworld.com/news/waymo-robotaxi-hits-child-near-school-nhtsa-opens-probe/"
+    },
+    {
+     "say": "Waymo said its computer tests showed that a fully attentive human driver would have hit the child at about 14 mph, much faster than its robotaxi did. This is the hope for self-driving cars: that they react faster than people. But it is the company's own claim, and the government is still reviewing it.",
+     "who": "Waymo, as reported to NHTSA",
+     "source": "Automotive World",
+     "url": "https://www.automotiveworld.com/news/waymo-robotaxi-hits-child-near-school-nhtsa-opens-probe/"
+    }
+   ],
+   "future": [
+    "Knowing what a machine can and cannot do, so you stay alert and ready to take over instead of trusting it blindly.",
+    "Working side by side with robots by setting them up, checking their work, fixing them and keeping people safe around them.",
+    "Basic coding and problem-solving, so robots feel like tools you understand and not mysteries you fear.",
+    "The human gifts machines lack: kindness, honesty, teamwork and good judgment about what is right."
+   ],
+   "work": [
+    "Self-driving rides and delivery robots can help older people, people with disabilities and others who cannot drive get to church, to the doctor and to the people they love.",
+    "Robots that carry heavy loads and deliver supplies can speed up help to the hungry, the sick and families hit by disaster.",
+    "When machines take on dangerous or tiring work, people have more time and strength to love their neighbors, serve and be with family.",
+    "Building and fixing robots can be a way for young people to use their God-given talents to serve others and support a family."
+   ],
+   "ldsWork": [
+    "Church leaders have taught that technology is a gift from God to help His work go forward, including gathering family names for temple work. Members can use new tools with gratitude, as long as they follow the Church's guidance to use AI honestly and never in ",
+    "Members can use the time and help that new machines give them for family history and temple service, which Church leaders have called a key part of the gathering of Israel on both sides of the veil."
+   ],
+   "deep_on": "2026-11-26"
   },
   {
    "y": 2026,
@@ -3069,7 +3199,7 @@
   }
  ],
  "updated": "2026-11-26",
- "version": 20,
+ "version": 21,
  "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage: Babies & Toddlers, then the same six stages the Morning Lantern uses. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
  "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next.",
