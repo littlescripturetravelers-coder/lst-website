@@ -39,6 +39,7 @@ NAMES = {
     "Abednego": "Uh-bed-nee-go", "Nineveh": "Nin-uh-vuh",
     "Zacchaeus": "Zak-ee-us", "Bartimaeus": "Bar-tih-mee-us",
     "Jairus": "Jye-rus", "Gethsemane": "Geth-sem-uh-nee", "Golgotha": "Gol-guh-thuh", "Capernaum": "Kuh-per-nay-um",
+    "Edom": "Ee-dum", "Obadiah": "Oh-buh-dye-uh",
 }
 
 _TOKEN = re.compile(r"[A-Za-z][A-Za-z'’-]*|[^A-Za-z]+")
@@ -107,6 +108,8 @@ def _test():
         ("Come close! Her fear had passed.", "Come close! Her fear had passed."),
         ("And He will dry your tears.", "And He will dry your tears."),
         ("Isaiah came with happy news", "Isaiah came with happy news"),
+        ("The people up in Edom said,", "The people up in Ee-dum said,"),
+        ("Obadiah told them so.", "Oh-buh-dye-uh told them so."),
     ]
     bad = 0
     for a, want in cases:
