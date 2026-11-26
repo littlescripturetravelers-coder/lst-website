@@ -1865,6 +1865,12 @@
      "url": "https://www.bgca.org/news-stories/2026/November/5-trends-affecting-kids-teens-in-the-2026-27-school-year/",
      "note": "Boys & Girls Clubs of America says half of teens now spend four hours a day on social media. That time can push out time with friends and family in person. Talking it over helps: after one of the Clubs' programs for teen girls, 61% of them cut their social media to less than two hours a day.",
      "source": "Boys & Girls Clubs of America"
+    },
+    {
+     "on": "2026-11-26",
+     "note": "Google, Meta and TikTok went to court to stop a new California law. The law would stop apps from using features like autoplay and personalized suggestions for children under 16, and it is due to start on January 1, 2027. Families will want to see what the courts decide.",
+     "source": "Business & Human Rights Resource Centre",
+     "url": "https://www.business-humanrights.org/en/latest-news/usa-google-meta-and-tiktok-challenge-state-laws-targeting-social-media-addiction-among-children/"
     }
    ],
    "studies": [
@@ -1895,6 +1901,14 @@
      "url": "https://www.foxnews.com/tech/instagrams-ai-may-catch-teens-lying-about-age",
      "added": "2026-11-25",
      "source": "Fox News"
+    },
+    {
+     "on": "2026-11-01",
+     "t": "Türkiye's social media rules for children start",
+     "de": "A new law in Türkiye took effect with rules for social media companies about users under 15. It is one of a growing number of countries setting age limits for social media.",
+     "source": "Digital Policy Alert",
+     "url": "https://digitalpolicyalert.org/change/17981-omnibus-bill-including-social-media-regulation-for-children-under-15",
+     "added": "2026-11-26"
     }
    ]
   },
@@ -2069,6 +2083,16 @@
      "url": "https://www.pewresearch.org/wp-content/uploads/sites/20/2025/04/PI_2025.04.22_teens-social-media-mental-health_REPORT.pdf",
      "source": "Pew Research Center, 'Teens, Social Media and Mental Health'",
      "finding": "In a 2025 survey, 45% of U.S. teens said they spend too much time on social media, and 44% said they had cut back on their phone and social media use. Many teens see the pull of the phone themselves and want help with it."
+    }
+   ],
+   "milestones": [
+    {
+     "on": "2026-11-17",
+     "t": "First nationwide study of school phone bans",
+     "de": "Researchers from Harvard, Dartmouth and NWEA looked at students in about 4,600 U.S. schools and found that students learned a little more after phones were kept out of school. Schools that locked phones in pouches gained about 1 to 2 extra weeks of learning each year.",
+     "source": "Harvard Center for Education Policy Research",
+     "url": "https://cepr.harvard.edu/news/2026/11/phone-bans-improve-learning-study-finds-so-far-only-slightly",
+     "added": "2026-11-26"
     }
    ]
   },
@@ -2441,6 +2465,12 @@
    "name": "Voice Assistants",
    "talk": "If our speaker could only do one thing for our family, what should it be?",
    "what": "A speaker you talk to. Alexa, Siri and Google answer questions, play music and set timers.",
+   "work": [
+    "Families can listen to the scriptures and hymns aloud at home, while cooking, driving or getting ready for bed, so God's word fills the day",
+    "Voice tools help people who cannot see well, cannot read yet, or cannot use their hands easily to hear the word and stay connected",
+    "Reminders and timers can help families keep regular times for prayer, scripture study and serving others",
+    "Children with speech difficulties may practice speaking with patient, judgment-free help, which blesses those who struggle"
+   ],
    "avoid": [
     "Purchases left enabled.",
     "A speaker in a child's bedroom.",
@@ -2451,7 +2481,22 @@
     "Timers for chores and for screens.",
     "A voice for someone who cannot see or type."
    ],
+   "future": [
+    "Giving clear, precise spoken instructions to voice and AI tools to get work done",
+    "Checking a machine's confident answer against trusted sources before acting on it",
+    "Managing privacy settings and knowing what is recorded, stored and shared",
+    "Using voice tools to organize time, reminders and tasks while staying in charge of their own attention"
+   ],
    "modern": true,
+   "stages": {
+    "0-2": "Babies and toddlers learn words from real faces and voices, so a talking speaker should not stand in for a parent. If one plays music or a lullaby while you hold and sing to your child, that is fine.",
+    "18+": "Young adults choose for themselves. Encourage them to use these tools on purpose to serve, learn and work well, to protect their privacy, and to keep real people at the center of their lives.",
+    "3-5": "Young children often think the speaker is a kind of person and can grow attached to it. Use it together for songs, stories and timers, and gently explain that it is a machine. Keep it in a shared room, not in the child's bedroom.",
+    "6-8": "Children this age believe confident answers easily. Let them ask it questions with you nearby, and check some of the answers together in a book or with a grown-up. Teach them to speak kindly, because the habits they practice on a machine are the habits they practice in their hearts.",
+    "9-11": "Older children can use it for homework facts, spelling and reminders. Teach them that it can be wrong, that an honest \"I don't know\" is a good answer, and that the microphone can save what they say.",
+    "12-14": "Young teens can learn to manage the privacy settings themselves, such as reviewing and deleting recordings. As newer assistants become chatty AI, talk openly about not turning to a machine for comfort or secrets that belong with family and trusted people.",
+    "15-17": "Teens can use voice tools to plan their time, study and build skills they will need at work. Keep talking with them about where their words and data go and about checking facts before they trust them."
+   },
    "builtOn": [
     "smartphone",
     "computer",
@@ -2461,6 +2506,37 @@
     "It is always listening for its name; treat it as a microphone in the room.",
     "Children can ask it anything, and it will answer."
    ],
+   "deep_on": "2026-11-25",
+   "experts": [
+    {
+     "say": "Amazon agreed to pay $25 million to settle U.S. government claims that Alexa kept children's voice recordings and location data, and sometimes ignored parents' requests to delete them. Parents should check and delete stored recordings.",
+     "url": "https://www.foxbusiness.com/technology/amazon-agrees-25m-settlement-alexa-unlawfully-storing-childrens-voice-recordings-location-data",
+     "who": "U.S. Federal Trade Commission and Department of Justice",
+     "source": "Fox Business"
+    },
+    {
+     "say": "As talking AI spreads, many teens turn to chatbots for friendship and emotional support. Experts recommend that parents make it normal to talk about this, because children may be shy to admit it.",
+     "url": "https://www.apa.org/monitor/2025/10/technology-youth-friendships",
+     "who": "American Psychological Association",
+     "source": "APA Monitor on Psychology, October 2025"
+    },
+    {
+     "say": "People, and especially children who are still learning how to talk with others, often treat voice assistants like social beings. Researchers worry that talking to them harshly again and again could shape communication habits, and they are studying this over years.",
+     "url": "https://www.tandfonline.com/doi/full/10.1080/0144929X.2025.2533352",
+     "who": "Researchers publishing in Behaviour & Information Technology",
+     "source": "'Alexa, shut up!' A 2.5-year study of communication with voice assistants in the family home"
+    },
+    {
+     "say": "Children ages 5 to 7 often gave smart speakers human-like qualities and formed emotional attachments to them, while parents saw them as tools. Families need to talk about what these devices really are.",
+     "url": "https://www.researchgate.net/publication/339688118_He_Is_Just_Like_Me_A_Study_of_the_Long-Term_Use_of_Smart_Speakers_by_Parents_and_Children",
+     "who": "Researchers in a long-term study of parents and children using smart speakers",
+     "source": "\"He Is Just Like Me\": A Study of the Long-Term Use of Smart Speakers by Parents and Children"
+    }
+   ],
+   "ldsWork": [
+    "The Church offers Gospel Voice, an official skill for Alexa and Google Assistant speakers. Families can listen to the scriptures, Come, Follow Me, general conference and Church music at home, which supports home-centered gospel learning.",
+    "The Church introduced Gospel Voice as part of its \"Hear Him\" emphasis. Families can use it to fill their homes with the words of prophets and the scriptures, so children can learn to hear the Savior's voice."
+   ],
    "learned": [
     {
      "on": "2026-09-27",
@@ -2468,84 +2544,32 @@
      "source": "The Little Scripture Travelers team"
     }
    ],
-   "stages": {
-    "0-2": "Babies and toddlers learn words from real faces and voices, so a talking speaker should not stand in for a parent. If one plays music or a lullaby while you hold and sing to your child, that is fine.",
-    "3-5": "Young children often think the speaker is a kind of person and can grow attached to it. Use it together for songs, stories and timers, and gently explain that it is a machine. Keep it in a shared room, not in the child's bedroom.",
-    "6-8": "Children this age believe confident answers easily. Let them ask it questions with you nearby, and check some of the answers together in a book or with a grown-up. Teach them to speak kindly, because the habits they practice on a machine are the habits they practice in their hearts.",
-    "9-11": "Older children can use it for homework facts, spelling and reminders. Teach them that it can be wrong, that an honest \"I don't know\" is a good answer, and that the microphone can save what they say.",
-    "12-14": "Young teens can learn to manage the privacy settings themselves, such as reviewing and deleting recordings. As newer assistants become chatty AI, talk openly about not turning to a machine for comfort or secrets that belong with family and trusted people.",
-    "15-17": "Teens can use voice tools to plan their time, study and build skills they will need at work. Keep talking with them about where their words and data go and about checking facts before they trust them.",
-    "18+": "Young adults choose for themselves. Encourage them to use these tools on purpose to serve, learn and work well, to protect their privacy, and to keep real people at the center of their lives."
-   },
    "studies": [
     {
-     "finding": "Children are not easily fooled by a confident machine as they grow. As they get older, children (like adults) increasingly judge a smart speaker that honestly says it cannot know something as more trustworthy than one that gives an exact answer to an unknowable question. Teaching children to value honest answers matters.",
-     "source": "Is it OK if Alexa doesn't know? Children and adults' beliefs about smart speaker virtuous ignorance (Proceedings of the ",
+     "on": "2025",
      "url": "https://escholarship.org/uc/item/4kj5f4ff",
-     "on": "2025"
+     "source": "Is it OK if Alexa doesn't know? Children and adults' beliefs about smart speaker virtuous ignorance (Proceedings of the ",
+     "finding": "Children are not easily fooled by a confident machine as they grow. As they get older, children (like adults) increasingly judge a smart speaker that honestly says it cannot know something as more trustworthy than one that gives an exact answer to an unknowable question. Teaching children to value honest answers matters."
     },
     {
-     "finding": "Children ages 6 to 10 did not simply treat voice assistants as people. How much they trusted and learned from the device changed with age, so grown-up guidance should fit the child's age.",
-     "source": "Children's Trust in and Learning From Voice Assistants (peer-reviewed study)",
+     "on": "2022",
      "url": "https://www.researchgate.net/publication/359544774_Children's_trust_in_and_learning_from_voice-assistants",
-     "on": "2022"
+     "source": "Children's Trust in and Learning From Voice Assistants (peer-reviewed study)",
+     "finding": "Children ages 6 to 10 did not simply treat voice assistants as people. How much they trusted and learned from the device changed with age, so grown-up guidance should fit the child's age."
     },
     {
-     "finding": "In a 2024 survey by Boston Children's Hospital's Digital Wellness Lab, most parents said their children often or always say \"please\" and \"thank you\" to voice assistants. Researchers who followed families for two and a half years are still studying whether rude talk to a device carries over to how children treat people. The research is early.",
-     "source": "Digital Wellness Lab, Key Takeaways from Our 2024 Pulse Survey on Voice Assistants & GenAI; Behaviour & Information Tech",
+     "on": "2025",
      "url": "https://digitalwellnesslab.org/articles/key-findings-voice-assistants-and-generative-ai/",
-     "on": "2025"
+     "source": "Digital Wellness Lab, Key Takeaways from Our 2024 Pulse Survey on Voice Assistants & GenAI; Behaviour & Information Tech",
+     "finding": "In a 2024 survey by Boston Children's Hospital's Digital Wellness Lab, most parents said their children often or always say \"please\" and \"thank you\" to voice assistants. Researchers who followed families for two and a half years are still studying whether rude talk to a device carries over to how children treat people. The research is early."
     },
     {
-     "finding": "A small study found smart speakers were an acceptable and workable speech-practice tool for children with speech difficulties. It may help through spaced practice, quick feedback and less fear of being judged. The evidence is still early.",
-     "source": "Smart speakers are an acceptable and feasible speech practice tool for children with speech difficulties (Disability and",
+     "on": "2025",
      "url": "https://dx.doi.org/10.1080/17483107.2025.2491636",
-     "on": "2025"
+     "source": "Smart speakers are an acceptable and feasible speech practice tool for children with speech difficulties (Disability and",
+     "finding": "A small study found smart speakers were an acceptable and workable speech-practice tool for children with speech difficulties. It may help through spaced practice, quick feedback and less fear of being judged. The evidence is still early."
     }
-   ],
-   "experts": [
-    {
-     "say": "Amazon agreed to pay $25 million to settle U.S. government claims that Alexa kept children's voice recordings and location data, and sometimes ignored parents' requests to delete them. Parents should check and delete stored recordings.",
-     "who": "U.S. Federal Trade Commission and Department of Justice",
-     "source": "Fox Business",
-     "url": "https://www.foxbusiness.com/technology/amazon-agrees-25m-settlement-alexa-unlawfully-storing-childrens-voice-recordings-location-data"
-    },
-    {
-     "say": "As talking AI spreads, many teens turn to chatbots for friendship and emotional support. Experts recommend that parents make it normal to talk about this, because children may be shy to admit it.",
-     "who": "American Psychological Association",
-     "source": "APA Monitor on Psychology, October 2025",
-     "url": "https://www.apa.org/monitor/2025/10/technology-youth-friendships"
-    },
-    {
-     "say": "People, and especially children who are still learning how to talk with others, often treat voice assistants like social beings. Researchers worry that talking to them harshly again and again could shape communication habits, and they are studying this over years.",
-     "who": "Researchers publishing in Behaviour & Information Technology",
-     "source": "'Alexa, shut up!' A 2.5-year study of communication with voice assistants in the family home",
-     "url": "https://www.tandfonline.com/doi/full/10.1080/0144929X.2025.2533352"
-    },
-    {
-     "say": "Children ages 5 to 7 often gave smart speakers human-like qualities and formed emotional attachments to them, while parents saw them as tools. Families need to talk about what these devices really are.",
-     "who": "Researchers in a long-term study of parents and children using smart speakers",
-     "source": "\"He Is Just Like Me\": A Study of the Long-Term Use of Smart Speakers by Parents and Children",
-     "url": "https://www.researchgate.net/publication/339688118_He_Is_Just_Like_Me_A_Study_of_the_Long-Term_Use_of_Smart_Speakers_by_Parents_and_Children"
-    }
-   ],
-   "future": [
-    "Giving clear, precise spoken instructions to voice and AI tools to get work done",
-    "Checking a machine's confident answer against trusted sources before acting on it",
-    "Managing privacy settings and knowing what is recorded, stored and shared",
-    "Using voice tools to organize time, reminders and tasks while staying in charge of their own attention"
-   ],
-   "work": [
-    "Families can listen to the scriptures and hymns aloud at home, while cooking, driving or getting ready for bed, so God's word fills the day",
-    "Voice tools help people who cannot see well, cannot read yet, or cannot use their hands easily to hear the word and stay connected",
-    "Reminders and timers can help families keep regular times for prayer, scripture study and serving others",
-    "Children with speech difficulties may practice speaking with patient, judgment-free help, which blesses those who struggle"
-   ],
-   "ldsWork": [
-    "The Church offers Gospel Voice, an official skill for Alexa and Google Assistant speakers. Families can listen to the scriptures, Come, Follow Me, general conference and Church music at home, which supports home-centered gospel learning.",
-    "The Church introduced Gospel Voice as part of its \"Hear Him\" emphasis. Families can use it to fill their homes with the words of prophets and the scriptures, so children can learn to hear the Savior's voice."
-   ],
-   "deep_on": "2026-11-25"
+   ]
   },
   {
    "y": 2016,
@@ -2587,6 +2611,11 @@
    "name": "Virtual Reality",
    "talk": "If you could stand in one scripture story for five minutes, which one would it be?",
    "what": "A headset that covers your eyes and puts you inside a picture. You look around and it looks back.",
+   "work": [
+    "Serving the sick: hospitals use VR to teach children how to stay safe while they are patients, a small way to care for those who are hurting.",
+    "Protecting children: VR lessons can let children practice water safety, earthquake safety and staying safe from harm in a place where mistakes don't hurt anyone.",
+    "Strengthening families: used together in the family room, for short turns, with a parent close by, VR can be something to share and talk about instead of something that shuts family out."
+   ],
    "avoid": [
     "A headset under the maker's minimum age, and under 12 in most homes.",
     "Social VR rooms with strangers.",
@@ -2597,7 +2626,22 @@
     "Visit the town a great-grandparent came from.",
     "Learn a skill safely: surgery, flying, repair."
    ],
+   "future": [
+    "Learning and training in VR. Doctors, nurses, pilots, builders and safety workers already practice hard or dangerous tasks in VR before doing them for real.",
+    "Knowing your own limits: noticing tired eyes, dizziness or lost time, then taking off the headset and coming back to the real room.",
+    "Staying safe and kind in shared virtual spaces: using privacy, block and report tools, protecting personal information, and treating people there as real people.",
+    "Telling real from made: understanding that a world that feels real was built by someone, and asking who made it and why."
+   ],
    "modern": true,
+   "stages": {
+    "0-2": "No headset at all. Babies and toddlers learn to see, reach and balance in the real world and from real faces. Headset makers don't allow children this young.",
+    "18+": "Young adults choose for themselves. Encourage them to use VR as a tool for learning, work and serving others, and not to let it crowd out sleep, real friends, family and worship.",
+    "3-5": "Not yet. Little children are still learning what is real and what is pretend, and the headset's maker does not allow use under age 10. Real blocks, books and laps are better.",
+    "6-8": "Wait. Popular headsets like Meta Quest are not made for children under 10. If your child is curious, let them watch you try it, or look at a 3D picture together on a flat screen.",
+    "9-11": "From age 10, use only a parent-managed account. Keep it to short turns in a shared family room, choose calm learning apps, and turn off chatting with strangers. One small study found no harm to eyes or balance from about an hour a day in children aged 10 to 12, but the research is still early.",
+    "12-14": "Still use parent supervision and short turns, with breaks to rest the eyes and body. Stay out of open social worlds where adults can talk to children. At this age, children want to belong, and strangers can take advantage of that.",
+    "15-17": "Teens can use VR more on their own, with family rules about time, place and privacy settings. Talk openly about who they meet in VR and what to do if someone makes them uneasy. Point them to VR that builds skills, like science, design, safety and job training."
+   },
    "builtOn": [
     "tv",
     "games",
@@ -2607,6 +2651,34 @@
     "Headsets are not recommended for young children's eyes and balance.",
     "In a virtual room, a stranger can stand right next to your child."
    ],
+   "deep_on": "2026-11-25",
+   "experts": [
+    {
+     "say": "Former Meta workers say the company held back its own research about risks to children in VR. One example: a teen said his 10-year-old brother was sexually propositioned in Horizon Worlds. Meta denies the claims. Either way, parents should not count on the company alone to keep children safe in social VR.",
+     "url": "https://www.gamedeveloper.com/extended-reality/former-meta-employees-allege-company-squashed-research-into-vr-child-abuse",
+     "who": "Former Meta VR researchers (whistleblowers); Meta's denial",
+     "source": "Game Developer, 'Former Meta employees allege company squashed research into VR child abuse' (September 10, 2025)"
+    },
+    {
+     "say": "The children's advocacy group Fairplay filed a complaint with the U.S. Federal Trade Commission. It says Meta's VR world Horizon Worlds is full of children under 13, many using adult accounts, where they can meet harassment.",
+     "url": "https://fairplayforkids.org/wp-content/uploads/2025/04/Fairplay-MHW-RFI-Final-Redacted-04.10.25.pdf",
+     "who": "Fairplay (children's advocacy group)",
+     "source": "Fairplay request for investigation to the Federal Trade Commission (April 10, 2025)"
+    },
+    {
+     "say": "The researchers who tested 10- to 12-year-olds say moderate VR use may be fairly low-risk for children that age. They also say more study is needed.",
+     "url": "https://www.exponent.com/article/virtual-reality-safe-children",
+     "who": "Karol Silva, Nichole Breeland, Ashley Clark, Ilke Öztekin and Rachel Kelly, study authors",
+     "source": "Exponent, 'Is Virtual Reality Safe for Children?'"
+    },
+    {
+     "say": "Stanford researchers who worked with Common Sense Media warned that VR is likely to affect children powerfully, because the body and mind can react to it almost as if it were real. That is why they advised short sessions. This report is older (2018), but its main caution still holds.",
+     "url": "https://www.uploadvr.com/common-sense-report-vr-risk-kids/",
+     "who": "Stanford University researchers with Common Sense Media",
+     "source": "UploadVR, 'Report Outlines Potential Risks With Use Of VR By Kids'"
+    }
+   ],
+   "ldsWork": [],
    "learned": [
     {
      "on": "2026-09-27",
@@ -2614,80 +2686,32 @@
      "source": "Manufacturer guidance and safety reports, summarised"
     }
    ],
-   "stages": {
-    "0-2": "No headset at all. Babies and toddlers learn to see, reach and balance in the real world and from real faces. Headset makers don't allow children this young.",
-    "3-5": "Not yet. Little children are still learning what is real and what is pretend, and the headset's maker does not allow use under age 10. Real blocks, books and laps are better.",
-    "6-8": "Wait. Popular headsets like Meta Quest are not made for children under 10. If your child is curious, let them watch you try it, or look at a 3D picture together on a flat screen.",
-    "9-11": "From age 10, use only a parent-managed account. Keep it to short turns in a shared family room, choose calm learning apps, and turn off chatting with strangers. One small study found no harm to eyes or balance from about an hour a day in children aged 10 to 12, but the research is still early.",
-    "12-14": "Still use parent supervision and short turns, with breaks to rest the eyes and body. Stay out of open social worlds where adults can talk to children. At this age, children want to belong, and strangers can take advantage of that.",
-    "15-17": "Teens can use VR more on their own, with family rules about time, place and privacy settings. Talk openly about who they meet in VR and what to do if someone makes them uneasy. Point them to VR that builds skills, like science, design, safety and job training.",
-    "18+": "Young adults choose for themselves. Encourage them to use VR as a tool for learning, work and serving others, and not to let it crowd out sleep, real friends, family and worship."
-   },
    "studies": [
     {
-     "finding": "Children aged 10 to 12 used VR for 60 minutes a day for four days in a row. Researchers found no harm to their eyesight, balance, hand-eye coordination or self-control, though a few children felt mildly sick, as with motion sickness. The study was small and short, and it was run by scientists at a consulting firm, so the research is still early.",
-     "source": "Silva, Breeland, Clark, Öztekin & Kelly, 'Effects of virtual reality use in children aged 10 to 12 years,' Frontiers in ",
+     "on": "2025",
      "url": "https://www.frontiersin.org/journals/virtual-reality/articles/10.3389/frvir.2025.1547198/full",
-     "on": "2025"
+     "source": "Silva, Breeland, Clark, Öztekin & Kelly, 'Effects of virtual reality use in children aged 10 to 12 years,' Frontiers in ",
+     "finding": "Children aged 10 to 12 used VR for 60 minutes a day for four days in a row. Researchers found no harm to their eyesight, balance, hand-eye coordination or self-control, though a few children felt mildly sick, as with motion sickness. The study was small and short, and it was run by scientists at a consulting firm, so the research is still early."
     },
     {
-     "finding": "A review of many studies found that VR is a promising way to teach children safety, such as water safety, earthquake safety and preventing violence. The reviewers also looked at how safe the headsets are for children. Results are encouraging, but there are still only a few studies on each topic.",
-     "source": "Liao, Kamsin & Mohd Noor, 'The efficacy and safety of immersive virtual reality in children's safety training: a systema",
+     "on": "2025-08-06",
      "url": "https://www.tandfonline.com/doi/full/10.1080/10494820.2025.2542898",
-     "on": "2025-08-06"
+     "source": "Liao, Kamsin & Mohd Noor, 'The efficacy and safety of immersive virtual reality in children's safety training: a systema",
+     "finding": "A review of many studies found that VR is a promising way to teach children safety, such as water safety, earthquake safety and preventing violence. The reviewers also looked at how safe the headsets are for children. Results are encouraging, but there are still only a few studies on each topic."
     },
     {
-     "finding": "Nurses built and tested a VR lesson that teaches children in the hospital how to avoid accidents there, such as falls. This shows VR used for a short time, with a clear purpose and an adult nearby.",
-     "source": "Hyeon et al., 'Virtual reality education for preventing safety incidents in pediatric hospital settings,' Journal of Ped",
+     "on": "2025",
      "url": "https://pubmed.ncbi.nlm.nih.gov/39561626/",
-     "on": "2025"
+     "source": "Hyeon et al., 'Virtual reality education for preventing safety incidents in pediatric hospital settings,' Journal of Ped",
+     "finding": "Nurses built and tested a VR lesson that teaches children in the hospital how to avoid accidents there, such as falls. This shows VR used for a short time, with a clear purpose and an adult nearby."
     },
     {
-     "finding": "The maker of the most popular headsets says children under 10 cannot use Meta Quest 2 and 3. A parent must create and manage the account for a child aged 10 to 12. Ages may differ by country.",
-     "source": "Meta, 'Meta Quest Safety Information for Parents and Pre-teens'",
+     "on": "2026",
      "url": "https://www.meta.com/quest/parent-info/",
-     "on": "2026"
+     "source": "Meta, 'Meta Quest Safety Information for Parents and Pre-teens'",
+     "finding": "The maker of the most popular headsets says children under 10 cannot use Meta Quest 2 and 3. A parent must create and manage the account for a child aged 10 to 12. Ages may differ by country."
     }
-   ],
-   "experts": [
-    {
-     "say": "Former Meta workers say the company held back its own research about risks to children in VR. One example: a teen said his 10-year-old brother was sexually propositioned in Horizon Worlds. Meta denies the claims. Either way, parents should not count on the company alone to keep children safe in social VR.",
-     "who": "Former Meta VR researchers (whistleblowers); Meta's denial",
-     "source": "Game Developer, 'Former Meta employees allege company squashed research into VR child abuse' (September 10, 2025)",
-     "url": "https://www.gamedeveloper.com/extended-reality/former-meta-employees-allege-company-squashed-research-into-vr-child-abuse"
-    },
-    {
-     "say": "The children's advocacy group Fairplay filed a complaint with the U.S. Federal Trade Commission. It says Meta's VR world Horizon Worlds is full of children under 13, many using adult accounts, where they can meet harassment.",
-     "who": "Fairplay (children's advocacy group)",
-     "source": "Fairplay request for investigation to the Federal Trade Commission (April 10, 2025)",
-     "url": "https://fairplayforkids.org/wp-content/uploads/2025/04/Fairplay-MHW-RFI-Final-Redacted-04.10.25.pdf"
-    },
-    {
-     "say": "The researchers who tested 10- to 12-year-olds say moderate VR use may be fairly low-risk for children that age. They also say more study is needed.",
-     "who": "Karol Silva, Nichole Breeland, Ashley Clark, Ilke Öztekin and Rachel Kelly, study authors",
-     "source": "Exponent, 'Is Virtual Reality Safe for Children?'",
-     "url": "https://www.exponent.com/article/virtual-reality-safe-children"
-    },
-    {
-     "say": "Stanford researchers who worked with Common Sense Media warned that VR is likely to affect children powerfully, because the body and mind can react to it almost as if it were real. That is why they advised short sessions. This report is older (2018), but its main caution still holds.",
-     "who": "Stanford University researchers with Common Sense Media",
-     "source": "UploadVR, 'Report Outlines Potential Risks With Use Of VR By Kids'",
-     "url": "https://www.uploadvr.com/common-sense-report-vr-risk-kids/"
-    }
-   ],
-   "future": [
-    "Learning and training in VR. Doctors, nurses, pilots, builders and safety workers already practice hard or dangerous tasks in VR before doing them for real.",
-    "Knowing your own limits: noticing tired eyes, dizziness or lost time, then taking off the headset and coming back to the real room.",
-    "Staying safe and kind in shared virtual spaces: using privacy, block and report tools, protecting personal information, and treating people there as real people.",
-    "Telling real from made: understanding that a world that feels real was built by someone, and asking who made it and why."
-   ],
-   "work": [
-    "Serving the sick: hospitals use VR to teach children how to stay safe while they are patients, a small way to care for those who are hurting.",
-    "Protecting children: VR lessons can let children practice water safety, earthquake safety and staying safe from harm in a place where mistakes don't hurt anyone.",
-    "Strengthening families: used together in the family room, for short turns, with a parent close by, VR can be something to share and talk about instead of something that shuts family out."
-   ],
-   "ldsWork": [],
-   "deep_on": "2026-11-25"
+   ]
   },
   {
    "y": 2022,
@@ -2843,6 +2867,18 @@
      "url": "https://www.bgca.org/news-stories/2026/November/5-trends-affecting-kids-teens-in-the-2026-27-school-year/",
      "note": "Boys & Girls Clubs of America also says more teens are turning to AI chatbots when they need someone to talk to. A chatbot can be a handy helper, but it cannot love you the way your family and friends do. When your heart feels heavy, talk to a real person first.",
      "source": "Boys & Girls Clubs of America"
+    },
+    {
+     "on": "2026-11-26",
+     "note": "Ofcom, which looks after TV and the internet in the UK, found that about 8 in 10 UK children are now using AI chatbots, and some use them for company. Most parents like that chatbots help children learn and do homework. About half worry that children might let the chatbot do their thinking for them.",
+     "source": "Advanced Television (reporting Ofcom research)",
+     "url": "https://www.advanced-television.com/2026/11/24/ofcom-8-in-10-uk-children-using-ai-chatbots/"
+    },
+    {
+     "on": "2026-11-26",
+     "note": "A study from Harvard and Boston Children's Hospital, published in JAMA Pediatrics, asked parents about using AI chatbots to help children with their feelings and mental health. About 3 in 4 parents said they were not comfortable with it. The same report says some young people already ask chatbots for this kind of help without telling their parents.",
+     "source": "Harvard Gazette",
+     "url": "https://news.harvard.edu/gazette/story/2026/11/mental-health-chatbots-for-kids-parents-narrow-eyes/"
     }
    ],
    "milestones": [
@@ -3032,8 +3068,8 @@
    ]
   }
  ],
- "updated": "2026-11-25",
- "version": 19,
+ "updated": "2026-11-26",
+ "version": 20,
  "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage: Babies & Toddlers, then the same six stages the Morning Lantern uses. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
  "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next.",
