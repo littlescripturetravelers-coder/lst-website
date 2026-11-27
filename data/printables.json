@@ -1,7 +1,68 @@
 {
- "updated": "2026-11-27T12:02:43.421Z",
+ "updated": "2026-11-27T19:26:05.792Z",
  "base": "https://littlescripturetravelers.com",
  "items": [
+  {
+   "id": "story-the-ship-going-the-other-way",
+   "type": "story",
+   "title": "The Ship Going the Other Way",
+   "nightLabel": "Week 5 · Night 3",
+   "download": "OldTestament_Story_TheShipGoingTheOtherWay_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 5,
+   "night": 31,
+   "date": "2026-11-28",
+   "story": "the-ship-going-the-other-way",
+   "ref": "Jonah 1:1–6",
+   "storyId": "ot-b11-w5n3",
+   "files": {
+    "lds": {
+     "url": "/lantern/the-ship-going-the-other-way/printables/story.pdf?v=74c39cdef2",
+     "pages": 5,
+     "bytes": 995134
+    },
+    "christian": {
+     "url": "/lantern/the-ship-going-the-other-way/printables/story-christian.pdf?v=74c39cdef2",
+     "pages": 5,
+     "bytes": 994895
+    }
+   },
+   "thumb": "/lantern/the-ship-going-the-other-way/printables/story.jpg?v=74c39cdef2",
+   "src": "74c39cdef295ff3946ee6972943fc232bf461aacc44056073054dfdd33d72bca",
+   "updated": "2026-11-27",
+   "created": "2026-11-27",
+   "stored": "74c39cdef295ff3946ee6972943fc232bf461aacc44056073054dfdd33d72bca"
+  },
+  {
+   "id": "song-the-ship-going-the-other-way",
+   "type": "song",
+   "title": "Turn the Ship Around",
+   "storyTitle": "The Ship Going the Other Way",
+   "download": "OldTestament_Song_TurnTheShipAround_Letter.pdf",
+   "volume": "ot",
+   "volumeLabel": "Old Testament",
+   "book": 11,
+   "week": 5,
+   "night": 31,
+   "date": "2026-11-28",
+   "story": "the-ship-going-the-other-way",
+   "ref": "Jonah 1:1–6",
+   "storyId": "ot-b11-w5n3",
+   "files": {
+    "lds": {
+     "url": "/lantern/the-ship-going-the-other-way/printables/song.pdf?v=c50b00d720",
+     "pages": 1,
+     "bytes": 35275
+    }
+   },
+   "thumb": "/lantern/the-ship-going-the-other-way/printables/song.jpg?v=c50b00d720",
+   "src": "c50b00d7208781fa6ec2f30ffcf53ff16a45c8bf61118df1db00b767a7e374aa",
+   "updated": "2026-11-27",
+   "created": "2026-11-27",
+   "stored": "c50b00d7208781fa6ec2f30ffcf53ff16a45c8bf61118df1db00b767a7e374aa"
+  },
   {
    "id": "story-the-nest-among-the-stars",
    "type": "story",
