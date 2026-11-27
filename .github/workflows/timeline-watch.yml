@@ -26,6 +26,10 @@ on:
         type: choice
         options: [tech, deep, signs, discoveries, studies, regions, tribes]
         default: tech
+      count:
+        description: 'deep only: how many technology cards this run (Levi, 27 Nov 2026: finish them all at once)'
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -54,6 +58,7 @@ jobs:
       - name: Search, check, and write it to the account
         env:
           JOB: ${{ steps.which.outputs.job }}
+          DEEP_PER_RUN: ${{ inputs.count }}
           SUPABASE_URL: https://rdbvktqgrwhjucocobua.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: python3 lantern/timeline_watch.py
