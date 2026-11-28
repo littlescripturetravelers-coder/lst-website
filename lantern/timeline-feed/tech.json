@@ -2919,6 +2919,12 @@
      "url": "https://arxiv.org/abs/2508.10062",
      "note": "A study found that excessive screen time in children is associated with mental health issues and ADHD, mediated by reduced physical activity and irregular sleep patterns.",
      "source": "arXiv Study"
+    },
+    {
+     "on": "2026-11-28",
+     "note": "Researchers at Harvard studied about 3.3 million students in 4,600 American schools. When phones were kept away during school, students learned a little more, about one extra week of learning each year. It is a small gain, but it is real, and it helps to put phones away while you learn.",
+     "source": "Harvard Center for Education Policy Research",
+     "url": "https://cepr.harvard.edu/news/2026/11/phone-bans-improve-learning-study-finds-so-far-only-slightly"
     }
    ],
    "studies": [
@@ -3146,6 +3152,12 @@
      "url": "https://www.business-humanrights.org/en/latest-news/usa-google-meta-and-tiktok-challenge-state-laws-targeting-social-media-addiction-among-children/",
      "note": "Google, Meta and TikTok went to court to stop a new California law. The law would stop apps from using features like autoplay and personalized suggestions for children under 16, and it is due to start on January 1, 2027. Families will want to see what the courts decide.",
      "source": "Business & Human Rights Resource Centre"
+    },
+    {
+     "on": "2026-11-28",
+     "note": "Lawmakers in the United Kingdom met to talk about a petition asking for a social media ban for children under 16. The UK government had already said in June 2026 that it plans to ban social media use for children under 16.",
+     "source": "UK Parliament, Hansard",
+     "url": "https://hansard.parliament.uk/Commons/2026-11-02/debates/CBE0092E-4F0B-4B55-A2D4-BBE6980198AE/SocialMediaBanForUnder-16S"
     }
    ],
    "studies": [
@@ -3186,12 +3198,12 @@
      "source": "Digital Policy Alert"
     },
     {
-     "on": "2026-11-25",
      "t": "Australia passes a Digital Duty of Care law",
      "de": "Australia passed a law saying that online services people use every day, including games, apps and social media, must take more responsibility for keeping users safe. Companies will have to look for harms ahead of time, before people get hurt.",
-     "source": "Australian Government, Department of Infrastructure",
+     "on": "2026-11-25",
      "url": "https://www.infrastructure.gov.au/media-communications/internet/online-safety/digital-duty-care",
-     "added": "2026-11-27"
+     "added": "2026-11-27",
+     "source": "Australian Government, Department of Infrastructure"
     }
    ]
   },
@@ -3334,6 +3346,12 @@
      "url": "https://www.medscape.com/viewarticle/nighttime-smartphone-and-social-media-use-linked-later-2026a10018xl",
      "note": "A US study in the Journal of Adolescent Health found that teens who spent more time on their phones late at night, especially on social media, fell asleep later and slept less. Teens who used social media at night also said their sleep was worse. Leaving the phone outside the bedroom at night is a simple way to protect sleep.",
      "source": "Medscape, reporting on a study in the Journal of Adolescent Health"
+    },
+    {
+     "on": "2026-11-28",
+     "note": "A new study from Stony Brook University measured how much teens really used their smartphones instead of just asking them. Teens who used their phones more tended to sleep worse. Leaving the phone outside the bedroom at night is a simple way to protect sleep.",
+     "source": "Journal of Adolescent Health (via PubMed)",
+     "url": "https://pubmed.ncbi.nlm.nih.gov/42998067/"
     }
    ],
    "studies": [
@@ -4203,9 +4221,9 @@
     },
     {
      "on": "2026-11-27",
+     "url": "https://www.digitaltrends.com/computing/apple-removes-talkie-ai-chatbot-child-safety/",
      "note": "Apple took a chatbot app called Talkie off its App Store after reporters found it had sent unkind and grown-up messages to children. In one chat, a character told a 12-year-old girl she was worthless. Some chat apps are not made for kids, so it's wise for a grown-up to check an app before a child uses it.",
-     "source": "Digital Trends",
-     "url": "https://www.digitaltrends.com/computing/apple-removes-talkie-ai-chatbot-child-safety/"
+     "source": "Digital Trends"
     }
    ],
    "studies": [
@@ -4292,12 +4310,20 @@
      "source": "WRVO Public Media (NPR)"
     },
     {
-     "on": "2026-11-24",
      "t": "New York pauses sales of AI chatbot toys",
      "de": "New York's governor signed a law that stops toys with built-in AI chatbots from being made or sold in the state for five years. It begins 90 days after signing, so it does not cover this Christmas, and parents are asked to think carefully before buying these toys now.",
-     "source": "Office of the Governor of New York",
+     "on": "2026-11-24",
      "url": "https://www.governor.ny.gov/news/consumers-begin-their-holiday-shopping-season-governor-hochul-signs-five-year-ban-ai-chatbot",
-     "added": "2026-11-27"
+     "added": "2026-11-27",
+     "source": "Office of the Governor of New York"
+    },
+    {
+     "on": "2026-11-24",
+     "t": "New York pauses AI chatbot toys for five years",
+     "de": "New York signed a law that stops AI chatbot toys from being made, shipped or sold to children in the state for five years. Testers found the toys had few parent controls, their safety rules got weaker the longer a child talked, and some could record a child's voice or scan their face.",
+     "source": "Quartz",
+     "url": "https://qz.com/new-york-ai-chatbot-toys-ban-five-year-112526",
+     "added": "2026-11-28"
     }
    ]
   },
@@ -4547,9 +4573,15 @@
     },
     {
      "on": "2026-11-27",
+     "url": "https://www.dataprivacyandsecurityinsider.com/2026/11/ai-toys-face-growing-scrutiny-over-child-safety/",
      "note": "More than 150 children's safety groups and experts have asked Amazon and eBay to stop selling toys with talking AI built in, and to warn shoppers about the risks. New research from Common Sense Media found some of these toys said things that were not right for children. They may also affect how children grow in their feelings.",
-     "source": "Data Privacy + Security Insider; TechCrunch",
-     "url": "https://www.dataprivacyandsecurityinsider.com/2026/11/ai-toys-face-growing-scrutiny-over-child-safety/"
+     "source": "Data Privacy + Security Insider; TechCrunch"
+    },
+    {
+     "on": "2026-11-28",
+     "note": "A consumer safety group called U.S. PIRG tested seven toys that use AI chatbots. Some of the toys said things that weren't safe or right for young children, and some stores have taken products off their shelves. If you're thinking about a talking toy as a gift this season, check it carefully first.",
+     "source": "WWMT News",
+     "url": "https://wwmt.com/news/local/a-i-toys-experts-warn-parents-dangerous-conversations-kids-sexually-explicit-content-guidance-harmful-objects-artificial-intelligence-dangersus-public-interest-research-group"
     }
    ],
    "studies": [
@@ -4574,8 +4606,8 @@
    ]
   }
  ],
- "updated": "2026-11-27",
- "version": 23,
+ "updated": "2026-11-28",
+ "version": 24,
  "agesNote": "Children do not grow all at once. What a two-year-old needs from a screen (almost nothing) and what a sixteen-year-old needs (practice governing themselves) are different, so this guide is written by stage: Babies & Toddlers, then the same six stages the Morning Lantern uses. The stages follow how a child's mind, body and conscience develop, and lean on the American Academy of Pediatrics, the World Health Organization, the U.S. Surgeon General and the American Psychological Association, and on the counsel in For the Strength of Youth. Every line is a starting point for a family's own rules, not a substitute for them.",
  "principle": "Light and knowledge build on light and knowledge. Nothing is invented alone: every new thing stands on something that came before it, and Heavenly Father gives it so His work can go forward. The same tool can bless a family or hurt one. Knowing which is which is the whole lesson.",
  "modernNote": "The parent's guide - what it can do to a child, what to stay away from, blessing others, and what fits at each age - is written for the tools of today, from the Internet on. The older technologies are here for the story of how one light led to the next.",
